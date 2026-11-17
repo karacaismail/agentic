@@ -1,0 +1,344 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-66",
+    "ad": "Veri kalitesi doğrulama ve uzlaştırma",
+    "grup": "Doğrulama ve kalite",
+    "cozdugu_sorun": "Veri sözleşmelerinin üretimde sürekli doğrulanamaması, sapma tespiti, karantina ve yetkili kaynakla uzlaştırmanın yapılamaması.",
+    "ne_zaman_zorunlu": "Kalıcı veri taşıyan veya ekipler arası veri akışı olan hizmetlerde."
+  },
+  "arac_sayisi": 18,
+  "tur_dagilimi": {
+    "acik-cekirdek": 5,
+    "acik-kaynak": 4,
+    "protokol-standart": 1,
+    "ticari-saas": 6,
+    "kutuphane": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-1116",
+      "ad": "Great Expectations (GX Core)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://greatexpectations.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri için beklenti (expectation) tabanlı testler: şema, benzersizlik, aralık, referans bütünlüğü kontrolleri; doğrulama sonuçlarını doküman olarak üretir, göç sonrası veri bütünlüğünü denetler.",
+      "sinirlar": "Sahiplik/marka yapısı değişmiş görünüyor (depo Fivetran altında); yol haritası takip edilmeli.",
+      "ihtiyaclar": [
+        "N-K05-020",
+        "N-K05-024",
+        "N-K06-009",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-1117",
+      "ad": "Soda Core",
+      "tur": "acik-cekirdek",
+      "lisans": "Elastic License 2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.soda.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML tabanlı veri kalitesi kontrolleri (satır sayısı, eksik değer, tazelik, şema) ile veri hattında geçer/kalır kapısı.",
+      "sinirlar": "Güncel sürüm Elastic License 2.0 ile lisanslı (OSI açık kaynak değil); gelişmiş özellikler Soda Cloud'da.",
+      "ihtiyaclar": [
+        "N-K05-024",
+        "N-K06-009",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-1118",
+      "ad": "reladiff",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://reladiff.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı veya aynı veritabanlarındaki tabloları hash tabanlı ikiye bölme ile verimli karşılaştırıp satır farklarını bulur; göç ve kopyalama doğrulamasında diferansiyel oracle sağlar.",
+      "sinirlar": "Arşivlenen Datafold data-diff'in topluluk çatalı; tek geliştirici ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-024",
+        "N-K06-009",
+        "N-K33-011",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-1354",
+      "ad": "lakeFS",
+      "tur": "acik-cekirdek",
+      "lisans": "BSL-1.1",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://lakefs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nesne deposu üzerinde Git benzeri dal/commit ile veri anlık görüntüsü; bir koşunun girdilerini sabit bir commit'e bağlayarak yeniden üretilebilirlik.",
+      "sinirlar": "BSL: değiştirilmiş sürümün üretimde kullanımı kısıtlı; veri gölü odaklı.",
+      "ihtiyaclar": [
+        "N-K13-011",
+        "N-K19-004",
+        "N-K19-005",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-1751",
+      "ad": "Open Data Contract Standard (ODCS)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://bitol.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veri ürünleri için şema, kalite kuralları, hizmet seviyeleri ve sahiplik alanlarını YAML ile tanımlayan veri sözleşmesi standardı; üretici ve tüketicinin iki tarafta aynı sözleşmeyi doğrulamasına temel olur.",
+      "sinirlar": "Veri kümelerine yöneliktir; API sözleşmeleri için OpenAPI/AsyncAPI gerekir.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K03-011",
+        "N-K03-012",
+        "N-K05-024",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-3313",
+      "ad": "dbt Core",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://getdbt.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "SQL dönüşümlerini sürümlü kod olarak yöneten; veri testleri, sözleşmeler, soy (lineage) grafiği ve dokümantasyon üreten veri mühendisliği aracı.",
+      "sinirlar": "Analitik ambar odaklı; işlemsel uygulama veritabanları için tasarlanmadı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K05-024",
+        "N-K07-001",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-3981",
+      "ad": "Recce",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://datarecce.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "dbt değişikliklerinde geliştirme ortamı verisini üretimle karşılaştırır (satır sayısı, profil, değer ve sorgu farkı) ve sonuçları PR incelemesine kontrol listesi olarak ekler.",
+      "sinirlar": "dbt ekosistemine bağlı; ekrandaki içeriği değil veri modelini doğrular.",
+      "ihtiyaclar": [
+        "N-K05-020",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-3982",
+      "ad": "Datafold",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datafold.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanları ve ortamlar arasında (dev/prod, kaynak/hedef) satır düzeyinde veri farkı çıkarır, dbt CI'de değişiklik etkisini ve göç doğrulamasını raporlar—yetkili kayıt sistemi ile türetilmiş veri arasındaki eşlemeyi doğrulamaya uygundur.",
+      "sinirlar": "Açık kaynak data-diff 2024'te arşivlendi; ürün ticari SaaS; hassas veri için dağıtım seçenekleri kontrol edilmeli.",
+      "ihtiyaclar": [
+        "N-K05-020",
+        "N-K33-011",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-3984",
+      "ad": "Deequ",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/awslabs/deequ",
+      "olgunluk": "olgun",
+      "ne_saglar": "Apache Spark üzerinde 'veri için birim testi': kısıt tanımları, metrik hesaplama, kısıt önerisi ve metrik geçmişine dayalı anomali tespiti; veri hattında kritik alanların beklenen kurallara uymadığında yayını durdurmak için kullanılabilir.",
+      "sinirlar": "Spark gerektirir; iki sistem arası kayıt eşlemesini değil tek veri kümesinin kalitesini ölçer.",
+      "ihtiyaclar": [
+        "N-K05-020",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4272",
+      "ad": "Data Contract CLI",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/datacontract/datacontract-cli",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ODCS biçimli veri sözleşmelerini doğrular, sözleşmeyi gerçek veri kaynaklarına (ör. Postgres, Snowflake, BigQuery, Kafka, S3) karşı şema ve kalite testleriyle sınar, sürümler arası kırıcı değişiklikleri raporlar ve farklı şema biçimlerine dışa aktarır.",
+      "sinirlar": "Sürekli üretim izleyicisi değil, CI/zamanlanmış çalıştırılan komut satırı aracıdır; karantina mekanizması sağlamaz.",
+      "ihtiyaclar": [
+        "N-K03-012",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4273",
+      "ad": "Elementary",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.elementary-data.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "dbt projelerine gömülü veri gözlemlenebilirliği: hacim, tazelik, dağılım ve şema değişikliği anormallik testleri, test sonuçlarının raporlanması ve uyarı; bulut sürümünde soy ağacı ve olay yönetimi.",
+      "sinirlar": "dbt'ye bağımlı; akış (olay) verileri için doğrudan kullanılmaz, gelişmiş özellikler ticari bulutta.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4274",
+      "ad": "dbt-expectations",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/metaplane/dbt-expectations",
+      "olgunluk": "olgun",
+      "ne_saglar": "Great Expectations tarzı veri doğrulamalarını (aralık, benzersizlik, satır sayısı, düzenli ifade, dağılım) dbt makroları olarak sağlar; veri sözleşmesi kurallarının dönüşüm hattında test olarak koşmasını kolaylaştırır.",
+      "sinirlar": "Yalnız dbt; anormallik tespiti ve karantina içermez.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4275",
+      "ad": "SQLMesh",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/SQLMesh/sqlmesh",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri dönüşümlerinde değişiklik planı çıkarır: değişikliği kırıcı/kırıcı olmayan olarak sınıflar, etkilenen modelleri ve geri doldurulacak zaman aralıklarını uygulamadan önce gösterir, sanal ortamlarda önizleme ve denetim (audit) testleri koşturur.",
+      "sinirlar": "Operasyonel veri tabanlarındaki satır düzeyi düzeltmeleri değil analitik dönüşümleri kapsar.",
+      "ihtiyaclar": [
+        "N-K33-011",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-4276",
+      "ad": "Gable",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.gable.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veri sözleşmelerini üretici kod tabanına taşır: kod düzeyinde veri akışı soy ağacıyla uygulama kodundaki değişikliklerin aşağı akış veri tüketicilerini kırıp kırmadığını çekme isteği aşamasında tespit eder.",
+      "sinirlar": "Ticari ve genç ürün; dil ve veri kaynağı kapsamı satıcı dokümanına bağlı.",
+      "ihtiyaclar": [
+        "N-K03-012",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4277",
+      "ad": "Monte Carlo (veri ve yapay zekâ gözlemlenebilirliği)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://montecarlo.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri ambarı ve hatlarında tazelik, hacim, şema ve dağılım anormalliklerini otomatik izler, soy ağacıyla etkiyi gösterir ve veri olaylarını yönetir.",
+      "sinirlar": "Ticari SaaS; kural tabanlı sözleşme doğrulama ve yetkili kaynakla uzlaştırma ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4278",
+      "ad": "Bigeye",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.bigeye.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tablo ve sütun düzeyinde veri kalitesi metrikleri, otomatik eşikli anormallik tespiti, soy ağacı tabanlı etki analizi ve veri olay yönetimi sağlar.",
+      "sinirlar": "Ticari SaaS; akış verisi ve uygulama içi sözleşmeler için sınırlı.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4279",
+      "ad": "Anomalo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.anomalo.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tablolardaki beklenmedik değişiklikleri denetimsiz makine öğrenmesiyle bulur, kural tabanlı doğrulamalar ve kök neden ipuçları sunar.",
+      "sinirlar": "Ticari; ML tabanlı tespitin yanlış pozitif yönetimi kurum ayarı ister.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4280",
+      "ad": "Sifflet",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.siffletdata.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri gözlemlenebilirliği: izleyiciler, anormallik tespiti, alan düzeyi soy ağacı ve veri olaylarının iş etkisine göre önceliklendirilmesi.",
+      "sinirlar": "Ticari SaaS; uzlaştırma ve karantina akışları kurum hattıyla kurulmalı.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K03",
+    "ad": "Kod tabanı bağlamı ve mimari sınırlar",
+    "alan": "A-deger-akisi",
+    "amac": "Her değişikliğin etki alanının, mimari sınırlarının ve hedef olgunluk düzeyinin bilinerek yapılması.",
+    "kapsam": [
+      "uygulama ve modül ilişki haritası",
+      "etki analizi",
+      "görev tipi ve kural seti seçimi",
+      "ön yüz–arka uç sözleşmesi",
+      "olgunluk seviyesi",
+      "teknoloji sınırı",
+      "mimari karar kayıtlarına erişim",
+      "şema ve arayüz evrimi"
+    ],
+    "kapsam_disi": [
+      "kod üretimi (K04)",
+      "karar kaydı yaşam döngüsü (K07)"
+    ],
+    "komsu_kumeler": [
+      "K02",
+      "K04",
+      "K07",
+      "K14"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K03-001",
+      "baslik": "Uygulama geneli ilişki ve bağımlılık haritası",
+      "ihtiyac": "Modül, servis, arayüz, veri modeli ve görevler arasındaki ilişkilerin tek bir haritada sorgulanabilir olması; her görevin etkilediği alanın bu haritadan çıkarılması.",
+      "cozulecek_sorun": "Etki alanı bilinmeden yapılan değişiklik bağımlı modülleri kırıyor.",
+      "yetenek_siniflari": [
+        "Y-14"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Çok depolu ve çok ekipli yapıda harita ekip sahipliği bilgisini de taşımalı.",
+      "kabul_olcutleri": [
+        "Her görev için etkilenen modül/servis/arayüz/veri modeli listesi üretiliyor.",
+        "Kaçan etki (sonradan kırılan bağımlılık) sayısı ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-051",
+          "S-030",
+          "S-043"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K03-002",
+      "baslik": "İlişki haritasının koddan üretilmesi ve güncelliği",
+      "ihtiyac": "Haritanın kod tabanından otomatik üretilmesi, değişiklikten sonra belirli sürede yenilenmesi ve güncelliğinin ölçülmesi; haritayı kimin işlettiğinin tanımlanması.",
+      "cozulecek_sorun": "Elle tutulan harita bayatlıyor; kaynaklar haritanın varlığını varsayıyor ama üretimini ve güncelliğini tanımlamıyor.",
+      "yetenek_siniflari": [
+        "Y-14"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kod değişikliği ile harita güncellemesi arasındaki gecikme ölçülüyor ve eşiği tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-051"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-014"
+      ],
+      "bagimliliklar": [
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "N-K03-003",
+      "baslik": "Modül düzeyinde etki analizi",
+      "ihtiyac": "Üst/alt iş ilişkileri, bağımlı modüller, önkoşul işler ve etkilenecek aşağı akış bileşenlerinin çıkarılması; eksik bağımlılık tamamlanmadan geliştirmeye başlanmaması.",
+      "cozulecek_sorun": "Eksik bağımlılıkla başlanan iş yarıda kalıyor veya başka modülü bozuyor.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-13"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Önkoşulu tamamlanmamış iş başlatılamaz.",
+        "Belirsiz ilişki en fazla 2 döngüde netleşir ya da engel olur."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-043"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "N-K03-004",
+      "baslik": "Bağımlılık zincirinin üç noktada doğrulanması",
+      "ihtiyac": "Bağımlılık zincirinin görev başında, geliştirme sırasında ve tamamlanırken doğrulanması; kırılacak bağımlılık varken işin bitti sayılmaması.",
+      "cozulecek_sorun": "Değişiklik sırasında oluşan yeni bağımlılık kırılması teslimde fark ediliyor.",
+      "yetenek_siniflari": [
+        "Y-14"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Üç kontrol noktası da kayıtlı.",
+        "Kırılan bağımlılığı olan iş bitti durumuna geçemez."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-051",
+          "S-030"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "N-K03-005",
+      "baslik": "Görev tipine göre kural seti etkinleştirme",
+      "ihtiyac": "Görevin ön yüz, arka uç, tam yığın, veritabanı, altyapı veya ortak tipinde sınıflanması ve her tipin kural setinin (ön yüzde deneyim/erişilebilirlik/mobil; arka uçta güvenlik/veri/arayüz) etkinleştirilmesi.",
+      "cozulecek_sorun": "Yanlış veya eksik kural uygulanıyor. Veritabanı, altyapı ve ortak tiplerin kural setleri kaynaklarda boş; tip listesi kaynaklar arasında farklı (3 veya 6 tip).",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-08"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Altı tipin her biri için içerikli kural seti var.",
+        "Her görevde tip ve etkin kural setleri kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-042",
+          "S-018",
+          "S-028"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-017",
+        "D-007",
+        "G-030"
+      ]
+    },
+    {
+      "id": "N-K03-006",
+      "baslik": "Ön yüz–arka uç sözleşmesinin önceden yazılması ve iki tarafta doğrulanması",
+      "ihtiyac": "Ekranın sunucudan ne isteyeceğinin ve sunucunun ne döneceğinin kodlamadan önce yazılması; paralel çalışan iki tarafın aynı sözleşmeyle doğrulanması; birleşimden sonra gerçek entegrasyon testi.",
+      "cozulecek_sorun": "İki taraf paralel çalışınca arayüz uyuşmazlığı son aşamada ortaya çıkıyor.",
+      "yetenek_siniflari": [
+        "Y-20"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tam yığın işlerde sözleşme dosyası kodlamadan önce var.",
+        "Sözleşme testi iki tarafta da geçiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-042",
+          "S-018"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K03-007",
+      "baslik": "Olgunluk seviyesinin belirlenmesi ve kapsamın ona göre sınırlanması",
+      "ihtiyac": "Çözümün hedef olgunluk seviyesinin belirlenmesi, seviye dışı kapsamın engellenmesi ve bir sonraki seviyeye geçişi engelleyecek teknik borcun işaretlenmesi; seviye kriterlerinin ve seviyeyi kimin belirlediğinin tanımlanması.",
+      "cozulecek_sorun": "Deneme aşamasında kurumsal karmaşıklık kuruluyor ya da tersine kurumsal üründe geçici çözüm bırakılıyor. Seviye listesi kaynaklar arasında farklı (3 ve 4 seviye); seviyeyi kimin belirlediği yazılmamış.",
+      "yetenek_siniflari": [
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her görevde seviye etiketi ve teknik borç kaydı var.",
+        "Seviye tanımları ve geçiş kriterleri tek ve yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-039",
+          "S-018",
+          "S-028"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-016",
+        "D-008",
+        "G-030",
+        "Q-022"
+      ]
+    },
+    {
+      "id": "N-K03-008",
+      "baslik": "Teknoloji sınırı kapısı",
+      "ihtiyac": "Yeni teknoloji, çerçeve, paket veya kalıp eklemeden önce mevcut çözümün, kod tabanı uyumunun, yeterliliğin ve gerekçenin kontrol edilmesi; çözülmüş problem için ikinci teknoloji eklenmemesi; onaylayan rolün tanımlanması.",
+      "cozulecek_sorun": "Teknoloji yığını şişiyor; aynı problem için iki çözüm oluşuyor. Kaynakta gerekçe belgesini kimin onaylayacağı yazmıyor.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-21"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Gerekçe belgesi ve onayı olmayan bağımlılık eklenemez.",
+        "Aynı işlevi gören yinelenen bağımlılık sayısı 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-040",
+          "S-022"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-023"
+      ]
+    },
+    {
+      "id": "N-K03-009",
+      "baslik": "Mimari kararlara ajan erişimi",
+      "ihtiyac": "Geçerli mimari karar kayıtlarının, arayüz sözleşmelerinin ve tasarım sisteminin ajanların görev bağlamında bulunabilmesi.",
+      "cozulecek_sorun": "Ajan kurum standardını ve geçmiş kararları bilmeden, onlarla çelişen çözüm üretiyor.",
+      "yetenek_siniflari": [
+        "Y-37",
+        "Y-15"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Görev bağlamında ilgili karar kayıtları listeleniyor.",
+        "Karar kaydıyla çelişen değişiklik işaretleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-053",
+          "S-038",
+          "S-103"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K03-010",
+      "baslik": "Kod tabanının mevcut paradigmasına uyum",
+      "ihtiyac": "Kod tabanının paradigmasının ve konvansiyonlarının tespit edilip uyulması; paradigma dışı kalıpların zorlanmaması.",
+      "cozulecek_sorun": "Ajan, kod tabanına yabancı kalıplar getiriyor ve tutarsız bir yapı oluşuyor.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-08"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Paradigma tespiti görev kaydında yer alıyor.",
+        "Konvansiyon ihlali bulguları raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-047"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K03-011",
+      "baslik": "Arayüz sürümleme, geriye uyumluluk ve veri şeması evrimi",
+      "ihtiyac": "Arayüzlerin sürümlenmesi, geriye uyumluluk kuralı ve veri şeması değişikliklerinin göç (migration) planıyla tasarlanması.",
+      "cozulecek_sorun": "Kaynaklar göçü yalnız doküman ve boşluk alanı olarak anıyor; şema evrimi ve geriye uyumluluk sahipsiz.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-34"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Arayüz değişikliğinde uyumluluk etkisi kayıtlı.",
+        "Şema değişikliği göç ve geri alma planıyla birlikte geliyor."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-032",
+          "S-038"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K03-012",
+      "baslik": "Ekipler arası tüketici odaklı sözleşmeler ve kullanımdan kaldırma politikası",
+      "ihtiyac": "Ekiplerin sunduğu arayüz ve olay şemaları için tüketicilerin beklentilerini ifade eden sözleşme testlerinin sağlayıcının hattında engelleyici olarak koşması; olay şemaları için ileri ve geri uyumluluk kuralı ve merkezi şema kaydı; kullanımdan kaldırma politikası (duyuru, geçiş süresi, kullanım ölçümü, kapanış); belgelenmemiş ama gözlenebilir davranış değişikliklerinin (sıralama, hata metni, zamanlama) tüketiciler için risk olarak işaretlenmesi.",
+      "cozulecek_sorun": "Anlamsal sürümlemeye rağmen küçük sürüm yükseltmelerinin önemli bir kısmı kırıcıdır ve tüketiciler belgelenmemiş davranışa da bağımlıdır. Ajanlar 'iyileştirme' yaparken gözlenebilir davranışı değiştirip başka ekibi kırabilir. K03-006 tek işteki ön yüz–arka uç sözleşmesini, K03-011 genel sürümlemeyi kapsar.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-34",
+        "Y-37"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Tüketici sayısı arttıkça kırıcı değişikliğin etki alanı büyür; 10+ ekipte merkezi şema kaydı olmadan uyumluluk izlenemez.",
+      "kabul_olcutleri": [
+        "Ekipler arası her arayüzde tüketici sözleşme testi sağlayıcı hattında engelleyici.",
+        "Olay şeması değişiklikleri uyumluluk kontrolünden geçmeden yayımlanamıyor.",
+        "Kullanımdan kaldırılan her arayüz için kalan tüketici sayısı ölçülüyor ve kapanış tarihi var.",
+        "Ortak sözleşme, terim veya varsayım değiştiğinde etkilenebilecek tüketiciler ve geçersizleşebilecek kabul kanıtları listeleniyor; bir ekibin yerel 'bitti' durumu birleşik ürün kabulü sayılmıyor.",
+        "Karşı ekibin yanıt vermemesi yeni sözleşmenin kabulü sayılmıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-366",
+          "S-368",
+          "S-369",
+          "S-361",
+          "S-095",
+          "S-388"
+        ],
+        "not": "Büyük sürüm dışı yükseltmelerin %20,1'i kırıcı değişiklik içeriyor. 2024 küresel olayında şablonun tanımladığı 21 alan ile tüketici kodun sağladığı 20 alan arasındaki uyuşmazlık, sözleşme uyumsuzluğunun etkisini gösteriyor. Benzer mevcut ihtiyaç: N-K03-011; fark: K03-011 sürümleme ve geriye uyumluluk kuralını genel olarak ister; ekipler arası tüketici sözleşmesi, olay şeması uyumluluğu ve kullanımdan kaldırma yaşam döngüsü tanımlı değil."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "2+ ekip",
+      "bagimliliklar": [
+        "N-K03-011"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T09; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/02_insan_ekip_ve_yonetisim.json#I02-02",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://scrumguides.org/scrum-guide.html"
+      ],
+      "ice_aktarilan": "E1 karşılaştırması: son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-388 eklendi; mevcut metin değiştirilmedi."
+    }
+  ]
+}

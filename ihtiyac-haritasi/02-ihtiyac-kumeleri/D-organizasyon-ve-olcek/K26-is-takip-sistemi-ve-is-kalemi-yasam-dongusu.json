@@ -1,0 +1,209 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K26",
+    "ad": "İş takip sistemi ve iş kalemi yaşam döngüsü",
+    "alan": "D-organizasyon-ve-olcek",
+    "amac": "İş kalemlerinin tek bir yaşam döngüsü ve durum modeliyle yönetilmesi; iş takip sisteminin ajan hattıyla tutarlı ama yetkisi sınırlı bir yansıma olması.",
+    "kapsam": [
+      "iş kalemi şeması",
+      "durum modeli ve pano eşlemesi",
+      "komutla başlatma",
+      "iki yönlü eşleme ve yazma yetkisi",
+      "sonuç ve kanıtın iş kalemine yazılması",
+      "toplu içe aktarma"
+    ],
+    "kapsam_disi": [
+      "görev içeriğinin kalitesi (K01)"
+    ],
+    "komsu_kumeler": [
+      "K01",
+      "K02",
+      "K12",
+      "K13",
+      "K17"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K26-001",
+      "baslik": "Tek durum modeli ve pano eşlemesi",
+      "ihtiyac": "Ara durumlarla zengin bir durum modelinin (çalışıyor, doğrulanıyor, ürün sahibi bekleniyor, kalite bekleniyor, altyapı engeli, test engeli, yayına hazır, hata, bitti) tanımlanması ve iş takip panosunun sütunlarına eşlenmesi; 'neden durdu' alanı.",
+      "cozulecek_sorun": "Panoda 5 sütun var, akışlar en az 8–10 durum kullanıyor; eşleme yok; neden durduğu görünmüyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her ara durumun pano karşılığı ve neden alanı tanımlı.",
+        "Girişte kabul edilmeyen talepler gerekçesiyle ayrı bir 'reddedilenler arşivi' durumunda tutuluyor ve kendiliğinden yeniden akışa girmiyor.",
+        "Teknik tamamlanma (incelemeye/yayına hazır) ile insan kabulü (bitti) ayrı durumlar; otomatik 'bitti' insan kabul testi yapılmadan iş kabulü gibi gösterilmiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-006",
+          "S-007",
+          "S-054",
+          "S-062",
+          "S-096"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-011",
+        "D-009",
+        "G-010",
+        "H-06",
+        "Q-009"
+      ],
+      "bagimliliklar": [
+        "N-K10-003"
+      ],
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F03,F07",
+      "dogrulama": "dogrulandi",
+      "ice_aktarilan": "E1 karşılaştırması: son 2 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K26-002",
+      "baslik": "Komutla başlatma",
+      "ihtiyac": "İşin iş takip sisteminden bir komutla (yorum veya olay) başlatılması; komut adı ve biçiminin tek olması; yetki ve tekilleştirme kontrolü.",
+      "cozulecek_sorun": "Kaynaklarda iki farklı komut adı var; yetkisiz veya çift başlatma riski.",
+      "yetenek_siniflari": [
+        "Y-11",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tek komut biçimi yazılı; komutlar yetki ve tekilleştirme kontrolünden geçiyor.",
+        "Başlatma, yetkili kişinin iş kalemini tanımlı başlatma durumuna taşımasıyla da tetiklenebiliyor; ajanlar yalnız bu durumdaki kalemleri iş kuyruğuna çekiyor; aynı durumun tekrar okunması yeni koşu başlatmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-030",
+          "S-096"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "A-002",
+        "C-013",
+        "Q-009"
+      ],
+      "bagimliliklar": [
+        "N-K13-012"
+      ],
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F05",
+      "dogrulama": "dogrulandi",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K26-003",
+      "baslik": "İş takip sisteminin yetkisi sınırlı yansıma olması",
+      "ihtiyac": "İş takip sisteminin talep, kapsam, kriter kimlikleri, sprint/atama, insan kararı girişi ve görünür durumun kaynağı olması; yaşam döngüsünün sahibi olmaması; ajanın durumu doğrudan değiştirmemesi.",
+      "cozulecek_sorun": "İki sistem durumu yazınca tutarsızlık oluşuyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Durum geçişlerini yalnız orkestrasyon yazıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "D-019",
+        "Q-041",
+        "R-035"
+      ],
+      "bagimliliklar": [
+        "N-K12-004"
+      ]
+    },
+    {
+      "id": "N-K26-004",
+      "baslik": "Sonuç ve kanıtın iş kalemine yazılması",
+      "ihtiyac": "Tamamlanan işin rapor, değişiklik bağlantısı, kanıt paketi ve açık soruların iş kalemine yazılması; çözülemeyen sorunun gerekçesiyle kaydı.",
+      "cozulecek_sorun": "İzlenebilirlik kopuyor; insan neyin neden durduğunu göremiyor.",
+      "yetenek_siniflari": [
+        "Y-11",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her kapanışta kanıt bağlantısı var; her engelde gerekçe var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-018",
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K26-005",
+      "baslik": "Toplu içe aktarma ve şema sürümü",
+      "ihtiyac": "Mevcut kayıtların iş takip sistemine şema sürümüyle içe aktarılması; kaynak kaydın izinin korunması.",
+      "cozulecek_sorun": "Toplu dönüşümde kaynak kayıtla ilişki kayboluyor.",
+      "yetenek_siniflari": [
+        "Y-32"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Her dönüştürülmüş kayıt kaynak kaydına bağlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-030",
+          "S-054"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "yüksek hacim",
+      "bagimliliklar": [
+        "N-K02-001"
+      ]
+    },
+    {
+      "id": "N-K26-006",
+      "baslik": "Sprint ve program görünürlüğü",
+      "ihtiyac": "Ürün backlog'u, sprint backlog'u ve program görünümünün ajan işlerini ve bekleme durumlarını ayrı gösterebilmesi.",
+      "cozulecek_sorun": "Ajan işi ile insan işi aynı sütunda karışıyor; bekleme nedenleri görünmüyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Panolarda ajan/insan/bekleme ayrımı yapılabiliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-030"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "3+ ekip"
+    }
+  ]
+}

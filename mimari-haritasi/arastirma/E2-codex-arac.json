@@ -1,0 +1,972 @@
+{
+  "meta": {
+    "gorev": "E2 — Araç haritası: Codex karşılaştırması ve içe aktarma",
+    "tarih": "2026-09-27",
+    "codex_dizini": "/Users/w6x/Documents/otomasyon coding 2 (salt okunur; yazma/çalıştırma yapılmadı)",
+    "karsilastirilan": {
+      "codex": [
+        "arac-katalogu/ (00_harita, 01_yontem_ve_okuma, 02_ihtiyac_tabani, arastirma-donguleri 00–12, kaynaklar, kumeler/*/araclar.json + arac-setleri.json, analiz/01–04, sema, 99_dogrulama)",
+        "tmp/arac-arastirmasi/ (ham araştırma, ~14 MB)"
+      ],
+      "biz": "arac-haritasi/ (00-harita.json, donguler D00–D14-C, kumeler K01–K35, yetenekler Y-01–Y-67)"
+    },
+    "yontem": [
+      "Eşleme betikle: kanonik ad (parantezli ve parantezsiz) → GitHub depo owner/name → resmî alan adı; ad/alan adı çakışan 15 kayıt elle doğrulandı (scratchpad/e2/eslestir.py → eslesme.json).",
+      "Ham araştırma: tmp/arac-arastirmasi/*.json içindeki başlık/URL çiftleri ve URL'ler anahtara (depo veya alan adı) indirgendi; nihai katalog tohumları ve adresleri çıkarıldı; kalan anahtarlar bizimle eşlendi (ham_cikar.py → ham_katalog_disi.json).",
+      "Doğrulama yalnız bizde olmayanlar için, ≤25'lik partilerle: gh api repos/{owner}/{repo} (lisans, archived, pushed_at, yıldız, yönlendirme) ve resmî site/belge HTTP+içerik kontrolü; ara sonuçlar scratchpad/e2/parti*.jsonl.",
+      "Harita bizim şemayla yeniden üretildi: calisma-arsivi/.../arac/birlestir.py mantığının arac-haritasi'nin kendi içeriğinden çalışan kopyası (yeniden_uret.py); önce değişikliksiz yeniden üretimin mevcut 127 dosyayla anlamsal olarak birebir aynı olduğu doğrulandı, sonra D15 yamaları uygulandı ve yalnız değişen dosyalar kopyalandı; son durumdan yeniden üretim 128 dosyada 0 fark verdi."
+    ],
+    "sayilar": {
+      "codex_katalog_arac": 271,
+      "bizimle_eslesen": 254,
+      "bizde_olmayan_codex_katalog": 17,
+      "eklenen_codex_katalog": 17,
+      "ham_arastirma_anahtar": 440,
+      "ham_arastirma_katalog_disi": 103,
+      "ham_katalog_disi_bizde_var": 34,
+      "eklenen_ham_arastirma": 5,
+      "toplam_eklenen_arac": 22,
+      "duzeltilen_mevcut_kayit": 1,
+      "arac_sayisi_once_sonra": [
+        4382,
+        4404
+      ],
+      "dongu_sayisi_once_sonra": [
+        24,
+        25
+      ],
+      "lisans_celiskisi": 0
+    },
+    "uyarilar": [
+      "calisma-arsivi/2026-09-27-oturum/arac/birlestir.py ham döngü dosyalarından arac-haritasi'ni SİLİP yeniden üretir; ham klasörde D15 ve Harbor düzeltmesi olmadığından o betik yeniden çalıştırılırsa bu E2 eklemeleri kaybolur. Bu nedenle o betik çalıştırılmadı (hedef alan dışında ve girdi dosyaları bizim yetki alanımız dışında).",
+      "Aynı betiğin norm_name işlevi parantez içini silerek farklı araçları birleştirebiliyor: Harbor (düzeltildi); Glean (Meta kod bilgisi sistemi + kurumsal arama) ve Faker (Python + JS) da aynı hatayla birleşmiş görünüyor — Codex kapsamı dışında olduğu için düzeltilmedi, ayrı iş olarak önerilir.",
+      "İhtiyaç eşlemeleri (N-Kxx) analist çıkarımıdır; araçların kurulumu, entegrasyonu veya ihtiyacı tam karşıladığı doğrulanmadı."
+    ]
+  },
+  "codex_fazlasi_eklenenler": [
+    {
+      "ne": "AR-4383 Dovetail",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K02-backlog-ayristirma-bagimlilik-ve-onceliklendirme.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K08-geri-bildirim-isletim-ve-surekli-iyilestirme.json",
+        "arac-haritasi/yetenekler/Y-37-bilgi-tabani-dokumantasyon-ve-karar-kayd.json",
+        "arac-haritasi/yetenekler/Y-45-backlog-zekasi-semantik-tekillestirme-ku.json"
+      ],
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K08-001"
+      ],
+      "yetenek_siniflari": [
+        "Y-37",
+        "Y-45"
+      ],
+      "lisans": "ticari",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/01_amac_ve_ortak_anlayis/01_deger_ve_kapsam/araclar.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Resmî site 200 ('Customer Intelligence Platform'); özellik ayrıntısı ve fiyat doğrulanmadı.",
+      "kaynak_url": [
+        "https://dovetail.com/"
+      ]
+    },
+    {
+      "ne": "AR-4384 Matomo",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K08-geri-bildirim-isletim-ve-surekli-iyilestirme.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K22-uyum-hukuk-ve-lisans.json",
+        "arac-haritasi/yetenekler/Y-27-gozlemlenebilirlik-dagitik-iz-log-metrik.json"
+      ],
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K22-005"
+      ],
+      "yetenek_siniflari": [
+        "Y-27"
+      ],
+      "lisans": "GPL-3.0",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/01_amac_ve_ortak_anlayis/01_deger_ve_kapsam/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: matomo-org/matomo, GPL-3.0, arşivli değil, son push 2026-09-27, ~21.9k yıldız; resmî rehber sayfası 200.",
+      "kaynak_url": [
+        "https://matomo.org/guides/",
+        "https://github.com/matomo-org/matomo"
+      ]
+    },
+    {
+      "ne": "AR-4385 Sim",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K10-ajan-calisma-cercevesi.json",
+        "arac-haritasi/yetenekler/Y-05-ajan-calisma-cercevesi-arac-kullanan-don.json",
+        "arac-haritasi/yetenekler/Y-12-dayanikli-is-akisi-orkestrasyonu-tek-dur.json"
+      ],
+      "ihtiyaclar": [
+        "N-K10-001"
+      ],
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-12"
+      ],
+      "lisans": "Apache-2.0",
+      "olgunluk": "gelisen",
+      "codex_kaynagi": "arac-katalogu/kumeler/02_ajan_bilgi_ve_etkilesim/05_ajan_ve_model/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: simstudioai/sim, Apache-2.0, arşivli değil, son push 2026-09-27, ~29.7k yıldız; README self-host/Docker içeriyor.",
+      "kaynak_url": [
+        "https://github.com/simstudioai/sim",
+        "https://www.sim.ai"
+      ]
+    },
+    {
+      "ne": "AR-4386 LangChain",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K09-model-erisimi-secimi-ve-barindirma.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K10-ajan-calisma-cercevesi.json",
+        "arac-haritasi/yetenekler/Y-05-ajan-calisma-cercevesi-arac-kullanan-don.json",
+        "arac-haritasi/yetenekler/Y-06-semali-karar-uretimi-ve-cikti-dogrulama.json"
+      ],
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003"
+      ],
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-06"
+      ],
+      "lisans": "MIT",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/02_ajan_bilgi_ve_etkilesim/05_ajan_ve_model/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: langchain-ai/langchain, MIT, arşivli değil, son push 2026-09-27, ~147k yıldız; resmî belge create_agent/middleware/LangGraph içeriyor. JS sürümü ayrı kayıt (LangChain.js).",
+      "kaynak_url": [
+        "https://docs.langchain.com/oss/python/langchain/overview",
+        "https://github.com/langchain-ai/langchain"
+      ]
+    },
+    {
+      "ne": "AR-4387 Prompt flow",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K11-yetenek-paketleri-kurallar-ve-talimat-yonetimi.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+        "arac-haritasi/yetenekler/Y-29-degerlendirme-eval-altyapisi-kurum-gorev.json"
+      ],
+      "ihtiyaclar": [
+        "N-K11-004",
+        "N-K23-010"
+      ],
+      "yetenek_siniflari": [
+        "Y-29"
+      ],
+      "lisans": "MIT",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/02_ajan_bilgi_ve_etkilesim/06_skills_ve_kurallar/araclar.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "gh api: microsoft/promptflow, MIT, arşivli değil, son push 2026-08-26, ~11.2k yıldız; README'de kullanımdan kaldırma notu yok; uzun vadeli destek doğrulanmadı.",
+      "kaynak_url": [
+        "https://microsoft.github.io/promptflow/",
+        "https://github.com/microsoft/promptflow"
+      ]
+    },
+    {
+      "ne": "AR-4388 Neo4j",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K03-kod-tabani-baglami-ve-mimari-sinirlar.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K14-baglam-bilgi-erisimi-ve-bellek.json",
+        "arac-haritasi/yetenekler/Y-15-semantik-arama-ve-bilgi-erisimi.json",
+        "arac-haritasi/yetenekler/Y-16-ajan-bellegi-ve-baglam-penceresi-yonetim.json"
+      ],
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-006"
+      ],
+      "yetenek_siniflari": [
+        "Y-15",
+        "Y-16"
+      ],
+      "lisans": "GPL-3.0 (Community Edition); Enterprise sürümü ticari",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/02_ajan_bilgi_ve_etkilesim/07_bilgi_baglam_ve_bellek/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: neo4j/neo4j, GPL-3.0, arşivli değil, son push 2026-09-22, ~17.3k yıldız; resmî hukuki koşullar sayfası Community/Enterprise ayrımını içeriyor.",
+      "kaynak_url": [
+        "https://neo4j.com/docs/",
+        "https://github.com/neo4j/neo4j",
+        "https://neo4j.com/legal-terms/"
+      ]
+    },
+    {
+      "ne": "AR-4389 Gravitee API Management",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K12-arac-ve-baglam-erisim-protokolu-entegrasyonlar.json",
+        "arac-haritasi/yetenekler/Y-10-standart-arac-ve-baglam-erisim-protokolu.json",
+        "arac-haritasi/yetenekler/Y-25-kimlik-erisim-ve-gizli-bilgi-yonetimi-in.json"
+      ],
+      "ihtiyaclar": [
+        "N-K12-002"
+      ],
+      "yetenek_siniflari": [
+        "Y-10",
+        "Y-25"
+      ],
+      "lisans": "Apache-2.0 (APIM çekirdeği); Enterprise özellikleri ticari",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/02_ajan_bilgi_ve_etkilesim/08_sistemler_arasi_etkilesim/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: gravitee-io/gravitee-api-management, Apache-2.0, arşivli değil, son push 2026-09-27; resmî belge 'API Management', 'MCP', 'Enterprise' içeriyor.",
+      "kaynak_url": [
+        "https://documentation.gravitee.io/apim",
+        "https://github.com/gravitee-io/gravitee-api-management"
+      ]
+    },
+    {
+      "ne": "AR-4390 Redpanda Connect",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K12-arac-ve-baglam-erisim-protokolu-entegrasyonlar.json",
+        "arac-haritasi/yetenekler/Y-11-sistem-baglayicilari-is-takip-surum-kont.json"
+      ],
+      "ihtiyaclar": [
+        "N-K12-003"
+      ],
+      "yetenek_siniflari": [
+        "Y-11"
+      ],
+      "lisans": "Apache-2.0 (bağlayıcıların çoğu) + Redpanda Community License (kurumsal özellikler)",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/02_ajan_bilgi_ve_etkilesim/08_sistemler_arasi_etkilesim/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: redpanda-data/connect, arşivli değil, son push 2026-09-27, ~8.8k yıldız; licenses/README.md: Apache-2.0 + RCL.",
+      "kaynak_url": [
+        "https://docs.redpanda.com/connect/home/",
+        "https://docs.redpanda.com/connect/get-started/licensing/",
+        "https://github.com/redpanda-data/connect"
+      ]
+    },
+    {
+      "ne": "AR-4391 XState",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+        "arac-haritasi/yetenekler/Y-12-dayanikli-is-akisi-orkestrasyonu-tek-dur.json"
+      ],
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-013"
+      ],
+      "yetenek_siniflari": [
+        "Y-12"
+      ],
+      "lisans": "MIT",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/03_guvenli_ve_tutarli_yurutme/09_orkestrasyon_ve_durum/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: statelyai/xstate, MIT, arşivli değil, son push 2026-09-27, ~30.2k yıldız; resmî belge state machine/statechart/actor.",
+      "kaynak_url": [
+        "https://stately.ai/docs",
+        "https://github.com/statelyai/xstate"
+      ]
+    },
+    {
+      "ne": "AR-4392 Node-RED",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K12-arac-ve-baglam-erisim-protokolu-entegrasyonlar.json",
+        "arac-haritasi/yetenekler/Y-11-sistem-baglayicilari-is-takip-surum-kont.json",
+        "arac-haritasi/yetenekler/Y-12-dayanikli-is-akisi-orkestrasyonu-tek-dur.json"
+      ],
+      "ihtiyaclar": [
+        "N-K12-003"
+      ],
+      "yetenek_siniflari": [
+        "Y-11",
+        "Y-12"
+      ],
+      "lisans": "Apache-2.0",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/03_guvenli_ve_tutarli_yurutme/09_orkestrasyon_ve_durum/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: node-red/node-red, Apache-2.0, arşivli değil, son push 2026-09-18, ~23.7k yıldız.",
+      "kaynak_url": [
+        "https://nodered.org/docs/",
+        "https://github.com/node-red/node-red"
+      ]
+    },
+    {
+      "ne": "AR-4393 Colima",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K15-calisma-ortami-izolasyon-ve-kapasite.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K18-guvenlik-yetkilendirme-ve-gizlilik.json",
+        "arac-haritasi/yetenekler/Y-18-izole-yurutme-ortami-ve-gorev-basina-cal.json"
+      ],
+      "ihtiyaclar": [
+        "N-K15-007",
+        "N-K18-013"
+      ],
+      "yetenek_siniflari": [
+        "Y-18"
+      ],
+      "lisans": "MIT",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/03_guvenli_ve_tutarli_yurutme/10_guvenlik_yetki_ve_guven/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: abiosoft/colima, MIT, arşivli değil, son push 2026-09-23, ~31k yıldız; resmî site Docker/containerd/Kubernetes/macOS.",
+      "kaynak_url": [
+        "https://colima.run/",
+        "https://github.com/abiosoft/colima"
+      ]
+    },
+    {
+      "ne": "AR-4394 Harbor Registry (CNCF)",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K06-entegrasyon-surum-kontrolu-ve-yayin.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K18-guvenlik-yetkilendirme-ve-gizlilik.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K19-izlenebilirlik-gozlemlenebilirlik-ve-denetim.json",
+        "arac-haritasi/yetenekler/Y-28-degistirilemez-denetim-kaydi-ve-kanit-ar.json",
+        "arac-haritasi/yetenekler/Y-41-tedarik-zinciri-butunlugu-bagimlilik-var.json"
+      ],
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K13-011",
+        "N-K18-008",
+        "N-K19-004"
+      ],
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-41"
+      ],
+      "lisans": "Apache-2.0",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/03_guvenli_ve_tutarli_yurutme/14_degisiklik_ve_teslim/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: goharbor/harbor, Apache-2.0, arşivli değil, son push 2026-09-25, ~29.5k yıldız ('stores, signs, and scans content'); resmî belge v2.15.0. Önceki D01-G8 kaydı ad normalizasyonu hatasıyla AR-0167'ye karışmıştı; bu kayıt onu ayırır.",
+      "kaynak_url": [
+        "https://goharbor.io/docs/2.15.0/",
+        "https://github.com/goharbor/harbor"
+      ]
+    },
+    {
+      "ne": "AR-4395 Penpot",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K04-uygulama-ve-tasarim-kalitesi.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+        "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json"
+      ],
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ],
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "lisans": "MPL-2.0",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/04_dogruluk_ve_urun_nitelikleri/12_kullanici_deneyimi/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: penpot/penpot, MPL-2.0, arşivli değil, son push 2026-09-26, ~60.4k yıldız; yardım merkezi 200.",
+      "kaynak_url": [
+        "https://help.penpot.app/",
+        "https://github.com/penpot/penpot"
+      ]
+    },
+    {
+      "ne": "AR-4396 Figma",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K04-uygulama-ve-tasarim-kalitesi.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+        "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json"
+      ],
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ],
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "lisans": "ticari",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/04_dogruluk_ve_urun_nitelikleri/12_kullanici_deneyimi/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "Resmî ürün sayfası 200 ('design', 'prototype', 'Dev Mode' içeriyor).",
+      "kaynak_url": [
+        "https://www.figma.com/design/",
+        "https://help.figma.com/hc/en-us"
+      ]
+    },
+    {
+      "ne": "AR-4397 NVDA",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+        "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json"
+      ],
+      "ihtiyaclar": [
+        "N-K05-019"
+      ],
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "lisans": "GPL-2.0",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/04_dogruluk_ve_urun_nitelikleri/12_kullanici_deneyimi/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: nvaccess/nvda, arşivli değil, son push 2026-09-22; copying.txt GNU GPL v2.",
+      "kaynak_url": [
+        "https://www.nvaccess.org/about-nvda/",
+        "https://github.com/nvaccess/nvda",
+        "https://raw.githubusercontent.com/nvaccess/nvda/master/copying.txt"
+      ]
+    },
+    {
+      "ne": "AR-4398 VoiceOver",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+        "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json"
+      ],
+      "ihtiyaclar": [
+        "N-K05-019"
+      ],
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "lisans": "ticari (işletim sistemiyle birlikte gelir)",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/04_dogruluk_ve_urun_nitelikleri/12_kullanici_deneyimi/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "Resmî Apple destek kılavuzu 200 ('VoiceOver User Guide for Mac').",
+      "kaynak_url": [
+        "https://support.apple.com/guide/voiceover/welcome/mac"
+      ]
+    },
+    {
+      "ne": "AR-4399 Debezium",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K12-arac-ve-baglam-erisim-protokolu-entegrasyonlar.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+        "arac-haritasi/yetenekler/Y-11-sistem-baglayicilari-is-takip-surum-kont.json",
+        "arac-haritasi/yetenekler/Y-12-dayanikli-is-akisi-orkestrasyonu-tek-dur.json"
+      ],
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K13-004"
+      ],
+      "yetenek_siniflari": [
+        "Y-11",
+        "Y-12"
+      ],
+      "lisans": "Apache-2.0",
+      "olgunluk": "olgun",
+      "codex_kaynagi": "arac-katalogu/kumeler/04_dogruluk_ve_urun_nitelikleri/13_veri_butunlugu/araclar.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: debezium/debezium, Apache-2.0, arşivli değil, son push 2026-09-26, ~13.2k yıldız; resmî belge Kafka Connect/Debezium Server/outbox içeriyor.",
+      "kaynak_url": [
+        "https://debezium.io/documentation/reference/stable/index.html",
+        "https://github.com/debezium/debezium"
+      ]
+    },
+    {
+      "ne": "AR-4400 ACCESSIBILITY.md",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K11-yetenek-paketleri-kurallar-ve-talimat-yonetimi.json",
+        "arac-haritasi/yetenekler/Y-08-yeniden-kullanilabilir-yetenek-paketleri.json",
+        "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json"
+      ],
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K11-005"
+      ],
+      "yetenek_siniflari": [
+        "Y-08",
+        "Y-23"
+      ],
+      "lisans": "MIT",
+      "olgunluk": "erken",
+      "codex_kaynagi": "tmp/arac-arastirmasi/round-10-search.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: mgifford/ACCESSIBILITY.md, MIT, arşivli değil, son push 2026-09-03.",
+      "kaynak_url": [
+        "https://mgifford.github.io/ACCESSIBILITY.md",
+        "https://github.com/mgifford/ACCESSIBILITY.md"
+      ]
+    },
+    {
+      "ne": "AR-4401 accessibility-skills",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K11-yetenek-paketleri-kurallar-ve-talimat-yonetimi.json",
+        "arac-haritasi/yetenekler/Y-08-yeniden-kullanilabilir-yetenek-paketleri.json",
+        "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json"
+      ],
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K11-005"
+      ],
+      "yetenek_siniflari": [
+        "Y-08",
+        "Y-23"
+      ],
+      "lisans": "AGPL-3.0",
+      "olgunluk": "erken",
+      "codex_kaynagi": "tmp/arac-arastirmasi/round-10-search.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: mgifford/accessibility-skills, AGPL-3.0, arşivli değil, son push 2026-09-15.",
+      "kaynak_url": [
+        "https://github.com/mgifford/accessibility-skills"
+      ]
+    },
+    {
+      "ne": "AR-4402 LiteParse",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K09-model-erisimi-secimi-ve-barindirma.json",
+        "arac-haritasi/kumeler/B-ajan-platformu/K14-baglam-bilgi-erisimi-ve-bellek.json",
+        "arac-haritasi/yetenekler/Y-04-yardimci-modeller-gomme-yeniden-siralama.json"
+      ],
+      "ihtiyaclar": [
+        "N-K09-008",
+        "N-K14-002"
+      ],
+      "yetenek_siniflari": [
+        "Y-04"
+      ],
+      "lisans": "Apache-2.0",
+      "olgunluk": "gelisen",
+      "codex_kaynagi": "tmp/arac-arastirmasi/round-00-fetch.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: run-llama/liteparse, Apache-2.0, arşivli değil, son push 2026-09-22, ~12.7k yıldız.",
+      "kaynak_url": [
+        "https://developers.llamaindex.ai/liteparse/",
+        "https://github.com/run-llama/liteparse"
+      ]
+    },
+    {
+      "ne": "AR-4403 Portkey Models (fiyat ve yapılandırma verisi)",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K20-butce-maliyet-ve-deneme-politikasi.json",
+        "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+        "arac-haritasi/yetenekler/Y-30-maliyet-olcumu-butce-ve-kota-yonetimi.json"
+      ],
+      "ihtiyaclar": [
+        "N-K20-007",
+        "N-K23-007"
+      ],
+      "yetenek_siniflari": [
+        "Y-30"
+      ],
+      "lisans": "MIT",
+      "olgunluk": "gelisen",
+      "codex_kaynagi": "tmp/arac-arastirmasi/round-12-fetch.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "gh api: Portkey-AI/models, MIT, arşivli değil, son push 2026-09-27; README '2,000+ models across 40+ providers. Free API'.",
+      "kaynak_url": [
+        "https://github.com/Portkey-AI/models",
+        "https://portkey.ai/models"
+      ]
+    },
+    {
+      "ne": "AR-4404 Code Wiki",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (araclar, ihtiyac_arac, yetenek_arac)",
+        "arac-haritasi/donguler/D15.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K03-kod-tabani-baglami-ve-mimari-sinirlar.json",
+        "arac-haritasi/kumeler/A-deger-akisi/K07-dokumantasyon-ve-kurumsal-bilgi.json",
+        "arac-haritasi/yetenekler/Y-14-kod-tabani-indeksleme-statik-analiz-ve-k.json",
+        "arac-haritasi/yetenekler/Y-37-bilgi-tabani-dokumantasyon-ve-karar-kayd.json"
+      ],
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K07-001"
+      ],
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-37"
+      ],
+      "lisans": "ticari (Google hizmeti)",
+      "olgunluk": "erken",
+      "codex_kaynagi": "tmp/arac-arastirmasi/round-01-fetch.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Resmî site 200 (başlık 'Code Wiki'); meta açıklama otomatik güncel kod dokümantasyonu, API referansı ve mimari genel bakış diyor; fiyat/erişim koşulları doğrulanmadı.",
+      "kaynak_url": [
+        "https://codewiki.google/"
+      ]
+    },
+    {
+      "ne": "AR-0167 Harbor düzeltmesi (goharbor ayrıldı)",
+      "nereye_eklendi": [
+        "arac-haritasi/00-harita.json (AR-0167 duzeltme_notu)",
+        "ilgili kumeler/ ve yetenekler/ (Y-28, Y-41) dosyaları"
+      ],
+      "codex_kaynagi": "arac-katalogu/kumeler/03_guvenli_ve_tutarli_yurutme/14_degisiklik_ve_teslim/araclar.json (A-harbor)",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://github.com/goharbor/harbor",
+        "https://github.com/harbor-framework/harbor"
+      ]
+    }
+  ],
+  "elle_dogrulanan_eslesmeler": [
+    {
+      "codex": "A-conductor",
+      "biz": "AR-0014 Conductor OSS (Orkes Conductor)",
+      "not": "Adla eşleme bizde AR-0486 Conductor (conductor.build) veriyordu; Codex kaydı conductor-oss."
+    },
+    {
+      "codex": "A-mcp-registry",
+      "biz": "AR-0628 Official MCP Registry",
+      "not": ""
+    },
+    {
+      "codex": "A-vault",
+      "biz": "AR-1216 HashiCorp Vault",
+      "not": ""
+    },
+    {
+      "codex": "A-camunda",
+      "biz": "AR-0518 Camunda 8",
+      "not": ""
+    },
+    {
+      "codex": "A-huggingface-inference",
+      "biz": "AR-0266 Hugging Face Inference Providers ve Inference Endpoints",
+      "not": ""
+    },
+    {
+      "codex": "A-gemini-api",
+      "biz": "AR-0253 Vertex AI / Gemini API",
+      "not": "Bizde Vertex ile birleşik kayıt; ai.google.dev ayrı yüzey ama aynı model ailesi."
+    },
+    {
+      "codex": "A-kong",
+      "biz": "AR-0291 Kong AI Gateway",
+      "not": "Kong Gateway çekirdeği (github Kong/kong) aynı kayıtta kanıt."
+    },
+    {
+      "codex": "A-pipedream",
+      "biz": "AR-0673 Pipedream Connect (MCP)",
+      "not": ""
+    },
+    {
+      "codex": "A-a2a",
+      "biz": "AR-0185 Agent2Agent (A2A)",
+      "not": "Codex SDK bileşenini ayrı sayıyor; biz protokol kaydında tutuyoruz."
+    },
+    {
+      "codex": "A-skills-ref",
+      "biz": "AR-0187 Agent Skills",
+      "not": "Codex'e göre de bileşen (ust_bilesen_ref=A-agent-skills)."
+    },
+    {
+      "codex": "A-xstate",
+      "biz": "YOK → AR-4391 XState eklendi",
+      "not": "Bizdeki AR-0431 Stately Agent ayrı paket."
+    },
+    {
+      "codex": "A-colima",
+      "biz": "YOK → AR-4393 Colima eklendi",
+      "not": "Bizde yalnız Lima (AR-1718) vardı."
+    },
+    {
+      "codex": "A-langchain",
+      "biz": "YOK → AR-4386 LangChain eklendi",
+      "not": "Bizde LangChain.js, Deep Agents, LangGraph vardı; Python çekirdeği yoktu."
+    },
+    {
+      "codex": "A-neo4j",
+      "biz": "YOK → AR-4388 Neo4j eklendi",
+      "not": "Bizde yalnız Neo4j GDS, Agent Memory, MCP vardı."
+    },
+    {
+      "codex": "A-figma",
+      "biz": "YOK → AR-4396 Figma eklendi",
+      "not": "Bizde yalnız Figma MCP Server vardı."
+    },
+    {
+      "codex": "A-harbor",
+      "biz": "YOK → AR-4394 Harbor Registry (CNCF) eklendi",
+      "not": "Bizdeki AR-0167 Harbor farklı ürün (harbor-framework)."
+    }
+  ],
+  "eklenmeyenler": [
+    {
+      "ne": "Codex 48 alternatif araç seti (kumeler/*/arac-setleri.json)",
+      "neden": "Codex'in kendisi entegrasyon_durumu='bu_bilesimde_dogrulanmadi' ve secim_yapildi=false diyor; birlikte çalışma doğrulanamaz, bizim şemada set kavramı yok (harita öneri/seçim yapmaz)."
+    },
+    {
+      "ne": "Codex 106 araç ailesi (analiz/04_arac_aileleri.json)",
+      "neden": "Bizim 67 yetenek sınıfı aynı sınıflama işini görüyor; aile→yetenek sınıfı eşlemesi bu görevde doğrulanmadı."
+    },
+    {
+      "ne": "Codex kaynak kayıtları (kaynaklar/00–12, 827 URL, hash/erişim durumu)",
+      "neden": "Bizde araç başına kanit_url ve url_kontrol var; Codex'in kaynak kaydı şeması bizde yok. Eklenen araçların birincil kaynakları yeniden doğrulandı."
+    },
+    {
+      "ne": "Codex kritik boşluklar (analiz/03: 16 küme için 'araçla kapanmayan' konular, 10 kesişim boşluğu, 5 bilinmeyen yüzeyi)",
+      "neden": "İhtiyaç düzeyi bulgular; arac-haritasi kapsamı dışında (ihtiyaç haritası işi). Kesişim boşlukları örn.: ajan ile iş orkestratörü arasında tek durum sahibi; insan onayı ile gerçek dış işlemin hedef/sürüm eşleşmesi; kimlik iptalinin alt ajan/bağlayıcı/belleğe yayılması; bellek silmenin embedding/graf/yedek/loglara etkisi; üretici ve hakem modelin ortak hatası."
+    },
+    {
+      "ne": "Codex yaşam döngüsü notları: dbt dal ayrımı, Flyte açık backend kapsamı",
+      "neden": "Diğer 12 not bizde zaten var. dbt: depo dbt-labs/dbt-core → dbt-labs/dbt yeniden adlandırılmış (gh api), bizim URL getdbt.com etkilenmiyor; Flyte 'coming soon' notu bu görevde doğrulanmadı."
+    },
+    {
+      "ne": "Codex secim_oncesi_ortak_sorular (D01–D08) ve dogrulama_sorusu alanları",
+      "neden": "Bizde her ihtiyacın secim_olcutleri alanı aynı işlevi görüyor; soru kimlikleri (D01…) bizim döngü kimlikleriyle çakışıyor."
+    },
+    {
+      "ne": "Ham araştırma: gh:pydantic/pydantic-ai-harness",
+      "neden": "Pydantic AI deposuna birleştiriliyor ve arşivlenecek (README); AR-0030 Pydantic AI kapsamında"
+    },
+    {
+      "ne": "Ham araştırma: gh:datalab-to/chandra",
+      "neden": "OCR modeli; kod Apache-2.0 ama model ağırlığı lisansı doğrulanmadı; Marker (AR-0346) aynı rolü kapsıyor"
+    },
+    {
+      "ne": "Ham araştırma: gh:lobehub/lobe-chat",
+      "neden": "Sohbet arayüzü (LobeHub); ihtiyaç bağı zayıf"
+    },
+    {
+      "ne": "Ham araştırma: gh:chatgptnextweb/chatgpt-next-web",
+      "neden": "Sohbet arayüzü (NextChat); ihtiyaç bağı zayıf"
+    },
+    {
+      "ne": "Ham araştırma: dom:lobehub.com",
+      "neden": "LobeHub belge sayfası; ihtiyaç bağı zayıf"
+    },
+    {
+      "ne": "Ham araştırma: dom:nextchat.dev",
+      "neden": "NextChat belge sayfası; ihtiyaç bağı zayıf"
+    },
+    {
+      "ne": "Ham araştırma: dom:gurubase.io",
+      "neden": "Açık kaynak belgeleri için yapay zekâ soru-cevap hizmeti; ihtiyaç bağı zayıf"
+    },
+    {
+      "ne": "Ham araştırma: gh:clickhouse/clickhouse",
+      "neden": "Genel analitik veritabanı; ihtiyaç bağı dolaylı (ClickStack AR-1332 ve ClickHouse MCP AR-3435 mevcut)"
+    },
+    {
+      "ne": "Ham araştırma: gh:mem0ai/memory-benchmarks",
+      "neden": "Küçük (≈116 yıldız) bellek değerlendirme paketi; ihtiyaç bağı dolaylı"
+    },
+    {
+      "ne": "Ham araştırma: dom:parsebench.ai",
+      "neden": "Belge ayrıştırma kıyaslaması; ihtiyaç bağı dolaylı"
+    },
+    {
+      "ne": "Ham araştırma: dom:extractbench.ai",
+      "neden": "Şema güdümlü çıkarım kıyaslaması; ihtiyaç bağı dolaylı"
+    },
+    {
+      "ne": "Ham araştırma: gh:beyondtrust/pbis-open",
+      "neden": "Depo bulunamadı (404), 2019'dan eski"
+    },
+    {
+      "ne": "Ham araştırma: gh:w3c/w3c-waet",
+      "neden": "Arşivli (2019) W3C belge deposu"
+    },
+    {
+      "ne": "Ham araştırma: gh:openhands/agent-canvas",
+      "neden": "OpenHands bileşeni (AR-0056 kapsamında)"
+    },
+    {
+      "ne": "Ham araştırma: gh:apache/apisix-ingress-controller",
+      "neden": "APISIX bileşeni (AR-0292 kapsamında)"
+    },
+    {
+      "ne": "Ham araştırma: gh:all-hands-ai/agent-sdk",
+      "neden": "OpenHands SDK eski depo adı (AR-0057 kapsamında)"
+    },
+    {
+      "ne": "Ham araştırma: gh:portkey-ai/gateway",
+      "neden": "AR-0278 kapsamında"
+    }
+  ],
+  "ham_arastirmada_kalan": {
+    "aciklama": "tmp/arac-arastirmasi içinde geçen ama nihai Codex kataloğuna girmeyen anahtarlar (depo veya alan adı)",
+    "katalog_disi_toplam": 103,
+    "bizde_zaten_var": 34,
+    "eklenen": 5,
+    "kalan": 64,
+    "kalan_siniflama": {
+      "gurultu_rozet_gorsel_yerel_veya_yan_hizmet": 29,
+      "degerlendirildi_elendi": 16,
+      "belge_blog_standart_ornek_veya_bilesen_sayfasi": 19
+    },
+    "not": "Kalanların çoğu rozet/görsel/yerel adres, blog/belge sayfası, örnek depo veya zaten kayıtlı araçların bileşenidir; ayrıntı scratchpad/e2/ham_katalog_disi.json."
+  },
+  "bizde_olup_codexte_olmayan": [
+    {
+      "ozet": "Codex kataloğuyla eşleşmeyen 4.129 aracımız (tür: açık kaynak 1882, ticari SaaS 707, kütüphane 349, protokol/standart 285, bulut hizmeti 207, ticari yazılım 206, açık çekirdek 193, model 124, çerçeve 102, platform 63)."
+    },
+    {
+      "ozet": "Codex'te hiç aracı olmayan 11 yetenek sınıfımız: Y-50 inceleme ergonomisi, Y-51 dikkat/bildirim, Y-54 parça düzeyinde katkı kökeni, Y-56 iş üstlenme/niyet koordinasyonu, Y-57 gizlilik korumalı ekip sağlığı ölçümü, Y-58 çalışma sistemi deposu, Y-59 çalışan verisine amaç bağlı erişim, Y-60 SLO/hata bütçesi, Y-63 olay sonrası öğrenme, Y-64 tehdit/gizlilik modelleme, Y-67 biçimsel doğrulama."
+    },
+    {
+      "ozet": "Çok zayıf kapsanan sınıflar (Codex/biz): Y-49 devir sözleşmesi 1/14, Y-46 kod sağlığı 1/86, Y-19 geçici test ortamı ve test verisi 1/89, Y-53 yetkinlik 2/45, Y-42 acil durdurma ve kademeli otonomi 3/54."
+    },
+    {
+      "ozet": "Şema farkları: bizde 388 ihtiyaca doğrudan eşleme (Codex 112 ihtiyaç), olgunluk etiketi (arsiv-terk dahil 77 araç), barındırma, bölge/veri yerleşimi notu, URL erişim kontrolü, 124 açık/ticari model kaydı, egemen/Türkiye (D05), Asya (D06), akademik prototip (D07) ve derin güvenlik/uyum (D12) döngüleri, hedefli kapsama değerlendirmesi (171 ihtiyaç)."
+    }
+  ],
+  "celiskiler": [
+    {
+      "konu": "Harbor kimliği",
+      "codex": "A-harbor = goharbor/harbor (CNCF OCI kayıt defteri), ayrı araç",
+      "biz": "AR-0167 'Harbor' kaydında harbor-framework ile goharbor birleşmişti (goharbor kanıt URL'si, Y-28/Y-41, N-K06-005/N-K13-011/N-K19-004, OCI sınır cümlesi)",
+      "dogru_olan": "Codex; bizde düzeltildi (AR-0167 ayrıldı, AR-4394 eklendi)",
+      "kanit": [
+        "gh api goharbor/harbor: 'trusted cloud native registry… stores, signs, and scans content'",
+        "gh api harbor-framework/harbor: 'Framework for evaluating and improving agents'",
+        "calisma-arsivi/…/arac/raw/D01-G8.json: iki ayrı Harbor kaydı; birlestir.py norm_name parantez içini siliyor"
+      ]
+    },
+    {
+      "konu": "AutoGen durumu",
+      "codex": "bakim_gecis (bakım modu, MAF'e geçiş)",
+      "biz": "olgunluk 'arsiv-terk'; sınırlar alanında bakım modu yazıyor",
+      "dogru_olan": "Codex etiketi daha kesin: depo arşivli değil, topluluk bakımlı bakım modunda; bizim 'arsiv-terk' etiketi şemamızda 'bakım' değeri olmadığı için kaba ama sınırlar metni doğru. Değiştirilmedi.",
+      "kanit": [
+        "gh api microsoft/autogen: archived=false, pushed_at=2026-04-15",
+        "README 'AutoGen is now in maintenance mode… community managed'"
+      ]
+    },
+    {
+      "konu": "goose deposu",
+      "codex": "depo_adresi github.com/block/goose",
+      "biz": "AAIF'e taşındı (Nisan 2026) notu, goose-docs.ai",
+      "dogru_olan": "Biz; block/goose aaif-goose/goose'a yönleniyor",
+      "kanit": [
+        "gh api repos/block/goose → full_name aaif-goose/goose"
+      ]
+    },
+    {
+      "konu": "Agent Router / Envoy AI Gateway deposu",
+      "codex": "ad değişikliği doğru; depo_adresi envoyproxy/ai-gateway",
+      "biz": "AR-0280 'Agent Router (eski adı Envoy AI Gateway)'",
+      "dogru_olan": "İkisi de ad değişikliğinde doğru; Codex depo adresi eski (theagentrouter/agent-router'a yönleniyor)",
+      "kanit": [
+        "gh api repos/envoyproxy/ai-gateway → theagentrouter/agent-router"
+      ]
+    },
+    {
+      "konu": "'Conductor' adı",
+      "codex": "Conductor = conductor-oss (dayanıklı iş akışı)",
+      "biz": "'Conductor' adı AR-0486 conductor.build (paralel kodlama ajanı arayüzü); conductor-oss AR-0014",
+      "dogru_olan": "İkisi de doğru; ad belirsizliği. Codex kaydı AR-0014 ile eşlendi",
+      "kanit": [
+        "docs.conductor-oss.org",
+        "github.com/conductor-oss/conductor"
+      ]
+    },
+    {
+      "konu": "Lisanslar",
+      "codex": "193 araçta lisans metni işaretleri",
+      "biz": "Eşleşen araçların lisans alanları",
+      "dogru_olan": "Çelişki yok (yalnız 'ELv2' ↔ 'Elastic License 2.0' yazım farkı: Nango, Soda, Phoenix)",
+      "kanit": [
+        "scratchpad/e2 eşleme betiği karşılaştırması"
+      ]
+    }
+  ],
+  "degisen_dosyalar": [
+    "arac-haritasi/00-harita.json",
+    "arac-haritasi/donguler/D15.json (yeni)",
+    "arac-haritasi/kumeler/A-deger-akisi/K01-talep-gorev-tanimi-ve-hazir-olma.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K02-backlog-ayristirma-bagimlilik-ve-onceliklendirme.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K03-kod-tabani-baglami-ve-mimari-sinirlar.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K04-uygulama-ve-tasarim-kalitesi.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K06-entegrasyon-surum-kontrolu-ve-yayin.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K07-dokumantasyon-ve-kurumsal-bilgi.json",
+    "arac-haritasi/kumeler/A-deger-akisi/K08-geri-bildirim-isletim-ve-surekli-iyilestirme.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K09-model-erisimi-secimi-ve-barindirma.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K10-ajan-calisma-cercevesi.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K11-yetenek-paketleri-kurallar-ve-talimat-yonetimi.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K12-arac-ve-baglam-erisim-protokolu-entegrasyonlar.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K14-baglam-bilgi-erisimi-ve-bellek.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K15-calisma-ortami-izolasyon-ve-kapasite.json",
+    "arac-haritasi/kumeler/B-ajan-platformu/K16-ajan-platformunun-isletimi-ve-surdurulebilirligi.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K17-insan-gozetimi-onay-ve-eskalasyon.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K18-guvenlik-yetkilendirme-ve-gizlilik.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K19-izlenebilirlik-gozlemlenebilirlik-ve-denetim.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K20-butce-maliyet-ve-deneme-politikasi.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K21-risk-yonetimi.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K22-uyum-hukuk-ve-lisans.json",
+    "arac-haritasi/kumeler/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+    "arac-haritasi/kumeler/D-organizasyon-ve-olcek/K24-olcekli-cevik-koordinasyon.json",
+    "arac-haritasi/kumeler/D-organizasyon-ve-olcek/K25-roller-yetkinlik-ve-degisim-yonetimi.json",
+    "arac-haritasi/kumeler/D-organizasyon-ve-olcek/K26-is-takip-sistemi-ve-is-kalemi-yasam-dongusu.json",
+    "arac-haritasi/kumeler/D-organizasyon-ve-olcek/K30-ekip-calisma-sistemi-anlasmalar-ritimler-ve.json",
+    "arac-haritasi/kumeler/D-organizasyon-ve-olcek/K31-ekipler-arasi-is-birligi-sahiplik-ve-sosyo.json",
+    "arac-haritasi/kumeler/D-organizasyon-ve-olcek/K32-calisan-haklari-is-guvencesi-ve-insan.json",
+    "arac-haritasi/kumeler/E-insan-ajan-birlikte-calisma/K27-insanajan-is-birligi-modeli-yetki-devri-ve-is.json",
+    "arac-haritasi/kumeler/E-insan-ajan-birlikte-calisma/K28-ortak-baglam-yonlendirme-ve-inceleme-ergonomisi.json",
+    "arac-haritasi/kumeler/E-insan-ajan-birlikte-calisma/K29-karsilikli-ogrenme-ve-insan-yetkinliginin.json",
+    "arac-haritasi/kumeler/F-guvenilir-yazilim/K33-urun-guvenilirlik-muhendisligi-ve.json",
+    "arac-haritasi/kumeler/F-guvenilir-yazilim/K34-guvenli-ve-gizlilik-odakli-urun-tasarimi.json",
+    "arac-haritasi/kumeler/F-guvenilir-yazilim/K35-mimari-uygunluk-ve-surdurulebilir-kod-sagligi.json",
+    "arac-haritasi/yetenekler/Y-04-yardimci-modeller-gomme-yeniden-siralama.json",
+    "arac-haritasi/yetenekler/Y-05-ajan-calisma-cercevesi-arac-kullanan-don.json",
+    "arac-haritasi/yetenekler/Y-06-semali-karar-uretimi-ve-cikti-dogrulama.json",
+    "arac-haritasi/yetenekler/Y-08-yeniden-kullanilabilir-yetenek-paketleri.json",
+    "arac-haritasi/yetenekler/Y-10-standart-arac-ve-baglam-erisim-protokolu.json",
+    "arac-haritasi/yetenekler/Y-11-sistem-baglayicilari-is-takip-surum-kont.json",
+    "arac-haritasi/yetenekler/Y-12-dayanikli-is-akisi-orkestrasyonu-tek-dur.json",
+    "arac-haritasi/yetenekler/Y-14-kod-tabani-indeksleme-statik-analiz-ve-k.json",
+    "arac-haritasi/yetenekler/Y-15-semantik-arama-ve-bilgi-erisimi.json",
+    "arac-haritasi/yetenekler/Y-16-ajan-bellegi-ve-baglam-penceresi-yonetim.json",
+    "arac-haritasi/yetenekler/Y-18-izole-yurutme-ortami-ve-gorev-basina-cal.json",
+    "arac-haritasi/yetenekler/Y-23-arayuz-dogrulama-gorsel-referans-karsila.json",
+    "arac-haritasi/yetenekler/Y-25-kimlik-erisim-ve-gizli-bilgi-yonetimi-in.json",
+    "arac-haritasi/yetenekler/Y-27-gozlemlenebilirlik-dagitik-iz-log-metrik.json",
+    "arac-haritasi/yetenekler/Y-28-degistirilemez-denetim-kaydi-ve-kanit-ar.json",
+    "arac-haritasi/yetenekler/Y-29-degerlendirme-eval-altyapisi-kurum-gorev.json",
+    "arac-haritasi/yetenekler/Y-30-maliyet-olcumu-butce-ve-kota-yonetimi.json",
+    "arac-haritasi/yetenekler/Y-37-bilgi-tabani-dokumantasyon-ve-karar-kayd.json",
+    "arac-haritasi/yetenekler/Y-40-kontrollu-ogrenme-hatti-izlerden-aday-iy.json",
+    "arac-haritasi/yetenekler/Y-41-tedarik-zinciri-butunlugu-bagimlilik-var.json",
+    "arac-haritasi/yetenekler/Y-45-backlog-zekasi-semantik-tekillestirme-ku.json",
+    "mimari-haritasi/arastirma/E2-codex-arac.json (yeni)",
+    "mimari-haritasi/arastirma/E2-ozet.md (yeni)"
+  ]
+}

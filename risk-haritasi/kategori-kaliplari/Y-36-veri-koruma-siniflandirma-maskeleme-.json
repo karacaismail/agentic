@@ -1,0 +1,165 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-36",
+    "ad": "Veri koruma (sınıflandırma, maskeleme, veri yerelliği denetimi, saklama ve silme)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-194",
+      "yetenek_sinifi": "Y-36",
+      "kalip": "KVKK md. 9 yurt dışı aktarım yükümlülükleri",
+      "aciklama": "7499 sayılı Kanunla değişen KVKK md. 9, yurt dışı aktarımı yeterlilik kararı, uygun güvenceler (standart sözleşme, bağlayıcı şirket kuralları, taahhütname) veya arızi hallere bağlar; standart sözleşme imzadan itibaren beş iş günü içinde Kuruma bildirilmelidir.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-04"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model API'leri, gözlem, eval ve cihaz bulutu gibi her SaaS bileşeni ayrı bir yurt dışı aktarım akışıdır; biri bile sözleşmesiz kalırsa idari para cezası ve itibar riski doğar.",
+        "Alt işleyici (sağlayıcının kullandığı bulut) değişiklikleri takip edilmezse aktarım zinciri belgesiz kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-005",
+        "N-K18-010",
+        "N-K09-009",
+        "N-K22-008"
+      ],
+      "ornek_araclar": [
+        "Tüm yurt dışı barındırılan LLM ve SaaS araçları"
+      ],
+      "erken_sinyal": "Araç envanterinde veri akışı ve aktarım dayanağı alanı boş kayıtlar.",
+      "azaltma": "Her araç için veri akışı haritası ve aktarım dayanağı, standart sözleşme takibi, kişisel veri içeren işlerin yerel modele yönlendirilmesi."
+    },
+    {
+      "id": "RK-195",
+      "yetenek_sinifi": "Y-36",
+      "kalip": "Kişisel veri tespit araçlarının Türkçe kapsamı",
+      "aciklama": "Microsoft Presidio varsayılan yapılandırmada İngilizce tanıyıcı ve modellerle gelir; Türkçe için T.C. kimlik numarası ve plaka tanıyıcıları ancak Nisan 2026'da eklendi. Ad, adres gibi varlıkların Türkçe tespiti için ayrı NLP modeli ve Türkçe bağlam sözcükleri gerekir.",
+      "risk_turleri": [
+        "RT-15",
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/microsoft/presidio/blob/main/docs/analyzer/languages.md",
+        "https://github.com/microsoft/presidio/tree/main/presidio-analyzer/presidio_analyzer/predefined_recognizers/country_specific/turkey"
+      ],
+      "yasatacagi_sorunlar": [
+        "İz ve istem maskelemesi varsayılan ayarlarla kurulursa Türkçe ad-soyad, adres ve IBAN gibi veriler maskelenmeden model sağlayıcısına ve günlüklere gider.",
+        "Maskeleme başarımı ölçülmediği için KVKK uyum raporu yanlış güvence verir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-011",
+        "N-K18-010",
+        "N-K15-003"
+      ],
+      "ornek_araclar": [
+        "Microsoft Presidio",
+        "AWS Comprehend PII",
+        "Google Cloud DLP",
+        "spaCy NER"
+      ],
+      "erken_sinyal": "Türkçe örnek setinde maskeleme geri çağırma oranının düşük olması.",
+      "azaltma": "Türkçe NER modeli ve Türkiye'ye özgü tanıyıcılar (TCKN, VKN, IBAN, telefon), kurum Türkçe PII test seti, maskeleme başarımının düzenli ölçümü."
+    },
+    {
+      "id": "RK-196",
+      "yetenek_sinifi": "Y-36",
+      "kalip": "Silme talebinin türev kopyalara ulaşmaması",
+      "aciklama": "Kişisel veri, ajan hattında gömme vektörlerine, önbelleklere, izlere, değerlendirme setlerine ve yedeklere kopyalanır; gömmelerden metin geri elde edilebildiği gösterilmiştir. Bu türev kopyalar silme akışına dahil edilmezse KVKK md. 7 kapsamındaki silme yükümlülüğü karşılanamaz.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://arxiv.org/abs/2310.06816",
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir vatandaşın silme talebi iş takip sisteminde yerine getirilir ama aynı veri vektör deposu, iz arşivi ve eval setinde kalır.",
+        "Model sağlayıcının saklama süresi kurum kontrolünde değildir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-009",
+        "N-K19-004",
+        "N-K14-007"
+      ],
+      "ornek_araclar": [
+        "Vektör veritabanları",
+        "LLM gözlem araçları",
+        "Eval veri setleri",
+        "Yedekleme sistemleri"
+      ],
+      "erken_sinyal": "Veri envanterinde türev kopyaların listelenmemesi; silme sonrası aramada kişisel verinin bulunması.",
+      "azaltma": "Kişisel veriye köken etiketi, tüm türev depoları kapsayan silme iş akışı, saklama süresi politikası ve kripto-silme."
+    },
+    {
+      "id": "RK-197",
+      "yetenek_sinifi": "Y-36",
+      "kalip": "Tüketici hesaplarıyla gölge kullanım ve eğitimde kullanım",
+      "aciklama": "Anthropic tüketici planlarında kullanıcı izin verirse sohbet ve kodlama oturumlarının model eğitiminde kullanılacağını ve saklama süresinin beş yıla çıkacağını, ticari koşullardaki hizmetlerin bu değişiklikten muaf olduğunu duyurdu.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.anthropic.com/news/updates-to-our-consumer-terms"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumsal lisans yetersiz kaldığında geliştiriciler kişisel hesaplarla çalışırsa kurum kodu ve iş kalemleri eğitim verisine girebilir ve yıllarca saklanır.",
+        "Gölge kullanım kurumun denetim kaydında görünmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K22-005"
+      ],
+      "ornek_araclar": [
+        "Claude.ai tüketici planları",
+        "ChatGPT tüketici planları",
+        "Gemini tüketici uygulaması"
+      ],
+      "erken_sinyal": "Ağ trafiğinde tüketici uç noktalarına kurum makinelerinden erişim; kurumsal lisans kullanım oranının düşük olması.",
+      "azaltma": "Yeterli kurumsal lisans ve kolay erişim, tüketici uç noktalarının kurum ağında kısıtlanması, yapay zekâ kullanım politikası ve eğitim."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 72,
+    "dusuk": 81,
+    "yuksek": 10,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 13,
+    "RT-15": 6,
+    "RT-14": 6,
+    "RT-07": 6,
+    "RT-01": 6,
+    "RT-03": 5,
+    "RT-16": 4,
+    "RT-11": 4,
+    "RT-06": 4,
+    "RT-10": 3,
+    "RT-12": 2,
+    "RT-05": 2,
+    "RT-02": 2,
+    "RT-17": 2,
+    "RT-04": 1,
+    "RT-09": 1,
+    "RT-13": 1
+  }
+}

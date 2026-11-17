@@ -1,0 +1,134 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-14",
+    "ad": "Kod tabanı indeksleme, statik analiz ve kod grafiği",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-116",
+      "yetenek_sinifi": "Y-14",
+      "kalip": "Dinamik dillerde eksik çağrı grafiği ve etki analizi",
+      "aciklama": "Statik çağrı grafiği üreticileri Python gibi dinamik dillerde yansıma, dinamik içe aktarma ve metaprogramlama nedeniyle eksik kenar üretir; PyCG çalışması bu sınırları ve pratik ödünleşimleri belgeler.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2103.00587"
+      ],
+      "yasatacagi_sorunlar": [
+        "Etki analizi 'değişiklik yalnız bu modülü etkiler' der; eklenti veya yapılandırma üzerinden çağrılan kod test edilmeden kalır.",
+        "Ajan ilgili kodu bulamadığında yinelenen işlev yazar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-003",
+        "N-K03-001",
+        "N-K03-004",
+        "N-K14-001"
+      ],
+      "ornek_araclar": [
+        "Sourcegraph",
+        "tree-sitter tabanlı indeksleyiciler",
+        "CodeQL",
+        "SCIP indeksleyicileri"
+      ],
+      "erken_sinyal": "Etki analizinin kapsamadığı modüllerde regresyon; dinamik çağrı içeren dosyaların oranı.",
+      "azaltma": "Statik analizi çalışma zamanı izleriyle (test kapsamı, trace) tamamlama, dinamik çağrı noktalarını açıkça işaretleme, etki analizine güven seviyesi ekleme."
+    },
+    {
+      "id": "RK-117",
+      "yetenek_sinifi": "Y-14",
+      "kalip": "Kod ve bağlamın satıcı arka ucundan geçmesi",
+      "aciklama": "Yapay zekâ destekli kod editörlerinde istemler kendi API anahtarınız kullanılsa bile satıcının arka ucundan geçebilir. Cursor veri kullanımı sayfası, gizlilik modu kapalıyken kod tabanı verisi ve istemlerin model eğitimi için kullanılabileceğini, kötüye kullanım sınıflandırıcıları tetiklenirse verinin inceleme için saklanabileceğini belirtir.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-07"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://cursor.com/data-use"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gizlilik modu merkezî olarak zorunlu kılınmayan ekiplerde kamu kurumunun kaynak kodu ve iş kalemi içeriği yurt dışında işlenir ve eğitim verisine girebilir.",
+        "Kendi model anahtarını kullanmak veri akışını kurum kontrolüne aldığı izlenimini verir ama trafik yine satıcıdan geçer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-001",
+        "N-K22-005",
+        "N-K18-010",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "Cursor",
+        "Windsurf",
+        "GitHub Copilot",
+        "Sourcegraph Cody"
+      ],
+      "erken_sinyal": "Kurum hesaplarında gizlilik modunun kapalı olduğu kullanıcılar; kişisel hesaplarla kullanım.",
+      "azaltma": "Kurumsal sözleşmede sıfır saklama ve eğitimde kullanmama şartı, gizlilik modunun yönetici düzeyinde zorlanması, hassas depolar için yerel indeksleme."
+    },
+    {
+      "id": "RK-118",
+      "yetenek_sinifi": "Y-14",
+      "kalip": "Kod arama platformunun açık kaynaktan çekilmesi",
+      "aciklama": "Sourcegraph ana deposu artık herkese açık değil; herkese açık anlık görüntü deposu Eylül 2024'ten beri arşivde ve lisansı standart açık kaynak olarak tanımlı değil.",
+      "risk_turleri": [
+        "RT-06",
+        "RT-04",
+        "RT-07"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/sourcegraph/sourcegraph-public-snapshot"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kod grafiği ve arama altyapısı bu tür bir platforma bağlanırsa, lisans veya fiyat değişikliğinde kendi barındırılan kurulum güncelleme alamaz.",
+        "İndeks biçimi platforma özgü kalırsa geçişte etki analizi yeteneği kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-001",
+        "N-K16-006",
+        "N-K03-002"
+      ],
+      "ornek_araclar": [
+        "Sourcegraph",
+        "OpenGrok",
+        "Zoekt",
+        "SCIP"
+      ],
+      "erken_sinyal": "Depo görünürlüğünün değişmesi, lisans dosyası güncellemesi, topluluk sürümünün özellik kaybı.",
+      "azaltma": "Açık indeks biçimleri (SCIP/LSIF) ve değiştirilebilir arama motoru, bileşen bakım durumu takibi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 41,
+    "dusuk": 144,
+    "yuksek": 7
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 20,
+    "RT-08": 16,
+    "RT-14": 10,
+    "RT-15": 10,
+    "RT-05": 9,
+    "RT-06": 9,
+    "RT-07": 7,
+    "RT-03": 6,
+    "RT-04": 6,
+    "RT-01": 6,
+    "RT-10": 5,
+    "RT-16": 4,
+    "RT-13": 4,
+    "RT-02": 2,
+    "RT-12": 2,
+    "RT-17": 1
+  }
+}

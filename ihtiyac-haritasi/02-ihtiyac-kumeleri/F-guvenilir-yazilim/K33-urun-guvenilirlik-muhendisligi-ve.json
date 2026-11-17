@@ -1,0 +1,655 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K33",
+    "ad": "Ürün güvenilirlik mühendisliği ve işletilebilirlik",
+    "alan": "F-guvenilir-yazilim",
+    "amac": "İnsan ve ajanların birlikte ürettiği yazılımın üretimde ölçülebilir hedeflere göre güvenilir çalışması; güvenilirlik durumunun değişiklik hızını ve ajan otonomisini yönetmesi.",
+    "kapsam": [
+      "hizmet ve bileşen kritiklik kademeleri",
+      "kullanıcı yolculuğuna dayalı SLI/SLO kataloğu",
+      "hata bütçesi politikası ve bütçe–otonomi–hız bağı",
+      "yapılandırma, bayrak ve veri düzlemi değişikliği güvencesi",
+      "üretime hazırlık ve işletilebilirlik incelemesi",
+      "tasarımdan gözlemlenebilirlik ve belirti temelli uyarı",
+      "ürün dayanıklılık deneyleri ve oyun günleri",
+      "ürün için geri yükleme ve felaket kurtarma",
+      "veri sözleşmeleri, üretim veri kalitesi ve veri onarımı",
+      "dış ve ekipler arası hizmet bağımlılıklarının güvenilirliği",
+      "ekipler arası ortak güvenilirlik standardı",
+      "program düzeyinde hız–istikrar karar kuralı",
+      "işletim sahipliği ve anlaşılabilirlik"
+    ],
+    "kapsam_disi": [
+      "ajan hattının kendi hizmet hedefleri ve işletimi (K16)",
+      "olaylardan öğrenme süreci ve geri besleme (K08)",
+      "yayın hattının mekaniği ve ortam terfisi (K06)",
+      "tedarikçi sözleşmeleri (K22)",
+      "ürün güvenlik ve gizlilik tasarımı (E2)",
+      "mimari uygunluk ve kod sağlığı (E3)"
+    ],
+    "komsu_kumeler": [
+      "K06",
+      "K08",
+      "K16",
+      "K17",
+      "K21",
+      "K23",
+      "K24"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K33-001",
+      "baslik": "Hizmet ve bileşen kritiklik kademeleri",
+      "ihtiyac": "Ürün hizmetlerinin ve paylaşılan kritik bileşenlerin kullanıcı etkisi, para ve güvenlik etkisi, veri hassasiyeti, düzenleme kapsamı ve bağımlı sayısına göre az sayıda kritiklik kademesine ayrılması; kademenin SLO hedefini, üretime hazırlık incelemesinin derinliğini, dayanıklılık deneyi sıklığını, tehdit modeli derinliğini, biçimsel yöntem gereksinimini ve o hizmete dokunan ajan işlerinin otonomi tavanını belirleyen tek anahtar olması.",
+      "cozulecek_sorun": "Tüm hizmetlere aynı güvence düzeyi uygulanırsa kritik hizmette güvence yetersiz, düşük riskli işte gereksiz yavaşlık oluşur. Mevcut risk sınıflaması (K21) değişikliğin türünü sınıflar; değişikliğin dokunduğu hizmetin kritikliğini ve bundan türeyen zorunlu güvence paketini sınıflamaz.",
+      "yetenek_siniflari": [
+        "Y-62",
+        "Y-09",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Tek ekipte basit bir liste yeterlidir; 10+ ekipte kademe tablosu ekipler arası ortak güvence dili ve denetim anahtarı olur.",
+      "kabul_olcutleri": [
+        "Her üretim hizmeti ve paylaşılan bileşen kayıtta bir kritiklik kademesine ve bir insan sahibine sahip.",
+        "Kademe → zorunlu uygulamalar tablosu sürümlü politikada tanımlı ve her değişikliğin risk sınıflamasına girdi olarak akıyor.",
+        "Kademesi atanmamış hizmete ajan değişikliği otomatik birleştirilemiyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-316",
+          "S-318",
+          "S-342",
+          "S-372"
+        ],
+        "not": "Hazırlık incelemesi ve güvenlik doğrulama standartları güvence derinliğini hizmetin kritikliğine göre ayarlar; kademenin otonomi tavanını da belirlemesi çıkarımdır. Benzer mevcut ihtiyaç: N-K21-002; fark: K21-002 değişiklik risk kategorilerini tanımlar; hizmetin kendisinin kritikliğini ve kademeye bağlı zorunlu güvence paketini tanımlamaz. Bu anahtar olmadan E1, E2 ve E3'teki ihtiyaçların hangi hizmette ne derinlikte uygulanacağı belirlenemez."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ],
+      "bagimliliklar": [
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "N-K33-002",
+      "baslik": "Kullanıcı yolculuğuna dayalı SLI/SLO kataloğu",
+      "ihtiyac": "Her ürün hizmeti için kritik kullanıcı yolculuklarından türetilmiş hizmet düzeyi göstergelerinin (başarı oranı, gecikme, veri tazeliği, doğruluk), hedef değerlerinin, ölçüm penceresinin, ölçüm noktasının ve sahibinin sürümlü bir katalogda tutulması; hedefin %100 olmaması, ürün sahibiyle birlikte belirlenmesi ve dönemsel gözden geçirilmesi.",
+      "cozulecek_sorun": "Hedef tanımlı değilse 'yeterince güvenilir' tartışması öznel kalır; ajan hızının üretime etkisi ölçülemez, hata bütçesi hesaplanamaz. Mevcut K16-001 yalnız ajan hattının kendi hizmet hedeflerini kapsar, ürettiği yazılımı değil.",
+      "yetenek_siniflari": [
+        "Y-60",
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "10+ ekipte katalog, hizmet zincirindeki hedeflerin birbirini tutması ve ekipler arası karşılaştırma için ortak kaynak olur.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlerin %100'ünde en az bir yolculuk temelli SLI ve onaylı SLO var.",
+        "SLI ölçümü kullanıcıya en yakın noktadan yapılıyor ve ölçüm tanımı kodla birlikte sürümlü.",
+        "SLO'lar en az çeyrekte bir gözden geçiriliyor; her değişiklik gerekçesiyle kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-310",
+          "S-313",
+          "S-311"
+        ],
+        "not": "Yerleşik güvenilirlik mühendisliği rehberleri SLO'yu kullanıcı deneyiminden türetmeyi ve %100 hedeften kaçınmayı önerir. Benzer mevcut ihtiyaç: N-K16-001; fark: K16-001 hattın hedeflerini tanımlar; ürün hizmetlerinin kullanıcı odaklı güvenilirlik hedefleri haritada yok. Ürünlerde bugün SLO olgunluğunun ne olduğu bilinmediği için belirsizlik orta."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ],
+      "bagimliliklar": [
+        "N-K16-001"
+      ]
+    },
+    {
+      "id": "N-K33-003",
+      "baslik": "Onaylı hata bütçesi politikası",
+      "ihtiyac": "SLO'dan türeyen hata bütçesinin ürün, mühendislik ve işletim tarafından önceden onaylanmış yazılı bir politikaya bağlanması: bütçe tükenince hangi değişikliklerin durduğu (ör. yalnız güvenlik ve kritik düzeltmeler geçer), hangi istisnaların geçerli olduğu (dış neden, kapsam dışı kullanıcı, yanlış sınıflanmış hata), bütçenin belirli bir oranını tek başına tüketen olay için zorunlu olay sonrası analiz ve anlaşmazlıkta son karar sahibi.",
+      "cozulecek_sorun": "Politikasız hata bütçesi yalnız bir göstergedir; teslim baskısında istisnalarla delinir ve hız–güvenilirlik kararı her seferinde yeniden pazarlık konusu olur.",
+      "yetenek_siniflari": [
+        "Y-60",
+        "Y-09",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Çok ekipli yapıda paylaşılan bağımlılığın bütçeyi tüketmesi sık görülür; dış neden istisnası ve atıf kuralı olmadan politika uygulanamaz.",
+      "kabul_olcutleri": [
+        "Politika sürümlü, onaylı ve tetiklediği eylemler makinece okunabilir biçimde politika deposunda.",
+        "Bütçesi tükenmiş hizmette politika dışı yayın sayısı 0; her istisna gerekçe ve onaylayanla kayıtlı.",
+        "Bütçenin tanımlı oranını (ör. %20) tek başına tüketen her olay için olay sonrası analiz açılıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-312",
+          "S-311"
+        ],
+        "not": "Yayımlanmış örnek politika, bütçe aşımında P0 ve güvenlik dışı yayınların durdurulmasını, istisna sınıflarını ve anlaşmazlıkta üst yönetime eskalasyonu tanımlar."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ]
+    },
+    {
+      "id": "N-K33-004",
+      "baslik": "Hata bütçesi durumunun ajan otonomisine ve değişiklik hızına bağlanması",
+      "ihtiyac": "Hizmetin hata bütçesi durumunun (sağlıklı, eriyor, tükendi) o hizmete dokunan ajan işlerinin otonomi kademesini, eşzamanlı açık ajan değişikliği sınırını, değişiklik boyutu tavanını ve otomatik birleştirme hakkını politika motoru üzerinden belirlemesi; bütçe eridikçe otonominin otomatik daralması, iyileşme ölçülünce insan onayıyla geri açılması; bütçenin değişikliğin kaynağına bakmadan tüketilmesi ama kısıtın öncelikle ajan hızına uygulanması.",
+      "cozulecek_sorun": "Kademeli otonomi (K17-007) test ve inceleme sinyallerine dayanır, üretim sinyaline bağlı değildir; ajanlar istikrarı bozulmuş bir hizmete aynı hızla değişiklik göndermeye devam edebilir. Sektör araştırmaları yapay zekâ benimsemesinin teslim istikrarıyla olumsuz ilişkili olduğunu iki yıl üst üste raporluyor.",
+      "yetenek_siniflari": [
+        "Y-60",
+        "Y-42",
+        "Y-09",
+        "Y-31"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ajan değişikliklerinin üretime aktığı andan itibaren zorunlu; paylaşılan hizmetlerde kısıt ekip düzeyinde değil hizmet düzeyinde uygulanmalı.",
+      "kabul_olcutleri": [
+        "Bütçesi tükenmiş hizmete ajan kaynaklı otomatik birleştirme sayısı 0.",
+        "Bütçe durumu → otonomi kademesi eşlemesi sürümlü politikada ve koşu başında sabitleniyor.",
+        "Otonomi daraltma ve geri açma olayları denetim kaydında; geri açma insan onaylı ve iyileşme ölçümüne bağlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-312",
+          "S-319",
+          "S-102",
+          "S-320"
+        ],
+        "not": "Bütçe tükenince yayını dondurmak yerleşik uygulamadır; bütçe durumunu ajan otonomi kademesine eşlemek bu uygulamanın çıkarımsal uzantısıdır. 2024 sektör raporu benimsemedeki her %25 artışta istikrarda yaklaşık %7,2 düşüş raporladı; 2025 raporu hızla olumlu, istikrarla olumsuz ilişkinin sürdüğünü belirtiyor. Benzer mevcut ihtiyaç: N-K17-007; fark: K17-007 güven skorunu test/inceleme verisine dayandırır; üretimdeki güvenilirlik durumunu otonomiye ve hıza bağlayan bir mekanizma yok."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ],
+      "bagimliliklar": [
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "N-K33-005",
+      "baslik": "Yapılandırma, bayrak ve veri düzlemi değişikliklerinin güvencesi",
+      "ihtiyac": "Çalışma zamanı yapılandırması, özellik bayrağı, politika ve kota tanımı, kural ve referans veri dosyası gibi kod dışı değişikliklerin de sürümlü, şema doğrulamalı, boyut ve alan sınırı denetimli, kademeli yayılan, hızlı geri alınabilen ve öldürme anahtarı olan bir değişiklik sınıfı olarak ele alınması; sistemin kendi ürettiği yapılandırma dosyalarının da dış girdi gibi doğrulanması; ajanların bu değişiklikleri kod değişikliğiyle aynı risk sınıflamasından geçirmesi.",
+      "cozulecek_sorun": "Son yılların büyük kesintilerinin önemli bir kısmı kod değil yapılandırma, politika veya içerik verisi değişikliğinden çıktı ve saniyeler içinde tüm filoya yayıldı. Kod için kurulan kapılar bu yolu kapsamazsa ajanlar kapıların dışından üretimi etkileyebilir.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-09",
+        "Y-35",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Paylaşılan yapılandırma ve bayrak sistemleri çok ekipli yapıda ortak kesinti noktasıdır; bir ekibin değişikliği tüm ekipleri etkileyebilir.",
+      "kabul_olcutleri": [
+        "Üretimi etkileyen her yapılandırma/veri değişikliği sürümlü, şemaya karşı doğrulanmış ve kademeli yayılıyor; anlık küresel yayılım yalnız tanımlı acil durum prosedürüyle.",
+        "Yeni kod yolları bayrak arkasında yayılıyor ve bayrak kapalıyken varsayılan davranış test edilmiş.",
+        "Yapılandırma/veri değişikliği kaynaklı olay oranı ayrı izleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-360",
+          "S-361",
+          "S-362",
+          "S-363"
+        ],
+        "not": "Olay raporları: 2025 sonunda bir içerik dağıtım sağlayıcısında veritabanı yetki değişikliği kendi ürettiği özellik dosyasını iki katına çıkarıp küresel kesinti yarattı; 2024'te bir güvenlik ürününde içerik güncellemesindeki alan sayısı uyuşmazlığı küresel çökme yarattı ve kademeli yayılım sonradan eklendi; 2025'te bir bulut sağlayıcısında boş alanlı politika verisi bayraksız yeni kod yolunu tetikledi. Otomatik kanarya analizi yapılandırma ve veri seti değişikliklerini de kapsar. Benzer mevcut ihtiyaç: N-K06-008; fark: K06-008 ajan kaynaklı kod değişikliğinin kademeli açılmasını kapsar; kod dışı değişikliklerin doğrulanması ve kademeli yayılımı tanımlı değil. Mevcut yayın hattının yeniden tasarımı bilinçli kapsam dışıdır; bu ihtiyaç hattı değil değişiklik sınıfını tanımlar."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ],
+      "bagimliliklar": [
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "N-K33-006",
+      "baslik": "Üretime hazırlık ve işletilebilirlik incelemesi",
+      "ihtiyac": "Yeni hizmet, büyük özellik veya mimari değişiklik genel kullanıma açılmadan önce kritiklik kademesine göre derinleşen bir hazırlık incelemesi: SLO ve panolar, uyarılar ve bağlı işletim dokümanları, nöbet sahibi, kapasite ve yük sınırı, bağımlılık ve bozulmuş mod analizi, geri yükleme ve geri alma tatbikatı, güvenlik ve gizlilik değerlendirmesi sonuçları, veri saklama; kontrol listesinin kurumun kendi olay ve ramak kala analizlerinden beslenmesi ve incelemenin periyodik tekrarlanması.",
+      "cozulecek_sorun": "DoD tek bir işin bittiğini denetler; bir hizmetin üretimde işletilebilir olup olmadığını denetlemez. Ajanlar işlevsel olarak doğru ama izlenemeyen, geri alınamayan veya nöbetçinin anlamadığı sistemler üretebilir.",
+      "yetenek_siniflari": [
+        "Y-62",
+        "Y-31",
+        "Y-37",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Çok ekipte ortak kontrol listesi ve ekip/ürün ekleri (katmanlı) gerekir; inceleme kapasitesi yeni bir darboğaz olabilir, kademeye göre derinlik bunu sınırlar.",
+      "kabul_olcutleri": [
+        "Kademe 0–1'de hazırlık incelemesi tamamlanmadan genel kullanıma açılış yok.",
+        "Kontrol listesinin her maddesi en az bir geçmiş olaya, ramak kalaya veya bilinen arıza moduna bağlı.",
+        "İnceleme kademe 0 için en az yılda bir tekrarlanıyor; sapmalar iş kalemine dönüşüyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-316",
+          "S-318"
+        ],
+        "not": "Hazırlık incelemesi tasarım ve bağımlılıklar, izleme, kriz müdahalesi, kapasite, dağıtım ve performansı kapsar; işletim hazırlık incelemesi kontrol listesini kurumun kendi olay analizlerinden türetmeyi ve dönemsel tekrarı önerir. Benzer mevcut ihtiyaç: N-K05-027; fark: DoD ve teslim öncesi boşluk analizi iş kalemi düzeyindedir; hizmet düzeyinde işletilebilirlik kapısı haritada yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ],
+      "bagimliliklar": [
+        "N-K05-027"
+      ]
+    },
+    {
+      "id": "N-K33-007",
+      "baslik": "Tasarımdan gözlemlenebilirlik",
+      "ihtiyac": "Her davranış için telemetri gereksiniminin (SLI'ya katkı, yapılandırılmış log olayları, iz yayılımı ve korelasyon kimliği, iş olayı metrikleri, hata sinyalleri) kabul kriteri ve DoD'nin parçası olarak yazılması; gözlemlenebilirliğin enjekte edilen arızalarla doğrulanması (arıza tetiklendiğinde izleme sinyalinin görünür olup olmadığı); log ve iz standardının talimatla değil deterministik kapıyla denetlenmesi.",
+      "cozulecek_sorun": "Ajan üretimi sistemler işlevsel olarak doğru olsa da arızaların küçük bir kısmında teşhis sinyali üretiyor; ajanlar log talimatlarına çoğunlukla uymuyor ve onarım işi kayıt dışı biçimde insanlara kalıyor. Bu, tespit ve kurtarma süresini uzatır.",
+      "yetenek_siniflari": [
+        "Y-27",
+        "Y-20",
+        "Y-61"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekipler arası ortak telemetri sözlüğü ve iz yayılımı olmazsa hizmetler arası olaylar birleştirilemez; 10+ ekipte zorunlu ortak standart gerekir.",
+      "kabul_olcutleri": [
+        "Davranış üreten her iş kaleminde telemetri gereksinimi alanı dolu ve doğrulama yöntemine bağlı.",
+        "Kritik yolculuklarda arıza enjeksiyonu testinde enjekte edilen arızaların hedef oranı (ör. ≥%90) izleme sinyaliyle tespit ediliyor.",
+        "Log/iz şeması ve korelasyon kimliği ihlali birleştirmeyi engelliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-323",
+          "S-324",
+          "S-315"
+        ],
+        "not": "2026 çalışması: ajan üretimi mikro servislerde enjekte edilen arızaların en fazla %13,99'u izleme sinyaliyle görünür oldu. Başka bir 2026 çalışması: 4.550 ajan değişikliğinde açık log talimatı %4,7 oranında veriliyor, ajanlar yapıcı taleplerin %67'sine uymuyor, sonradan log onarımlarının %72,5'ini insanlar yapıyor; yazarlar deterministik korkuluk öneriyor. Benzer mevcut ihtiyaç: N-K05-021; fark: K05-021 test sırasında örtük hataları yakalar; üretimde teşhis edilebilirliği tasarım gereksinimi yapmaz. K19 ajan hattının izini kapsar, ürünün telemetrisini değil."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ],
+      "bagimliliklar": [
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "N-K33-008",
+      "baslik": "Belirti temelli ve bütçe yanma hızına dayalı uyarı",
+      "ihtiyac": "Ürün uyarılarının neden temelli (işlemci, tekil hata) yerine kullanıcı belirtisi ve hata bütçesi yanma hızı (çoklu pencere, çoklu hız) üzerine kurulması; her uyarının sahibi, işletim dokümanı ve eylem yolu olması; uyarı kalitesinin (eylemsiz uyarı, uyarısız fark edilen olay) ölçülmesi.",
+      "cozulecek_sorun": "Ajan hızıyla artan değişiklik hacmi gürültülü uyarıları çoğaltır; nöbetçi yorgunluğu gerçek olayların kaçırılmasına ve tükenmişliğe yol açar.",
+      "yetenek_siniflari": [
+        "Y-60",
+        "Y-27"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Hizmet ve ekip sayısı arttıkça uyarı gürültüsü doğrusal değil çarpımsal büyür; ortak uyarı standardı gerekir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlerde her SLO için yanma hızı uyarısı tanımlı.",
+        "Eylemsiz kapanan uyarı oranı ve uyarısız (müşteri bildirimiyle) fark edilen olay oranı ölçülüyor ve hedefi var.",
+        "Her uyarı bir işletim dokümanına ve sahibine bağlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-314",
+          "S-315"
+        ],
+        "not": "Rehber, SLO savunması için çoklu pencere ve çoklu yanma hızı tekniğini en uygun yaklaşım olarak önerir."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "G-035",
+        "H-14"
+      ]
+    },
+    {
+      "id": "N-K33-009",
+      "baslik": "Ürün dayanıklılık deneyleri ve oyun günleri",
+      "ihtiyac": "Kritik hizmetlerde kararlı durum hipotezi (SLI) üzerine kurulu, patlama yarıçapı sınırlı, otomatik durdurma koşulu tanımlı dayanıklılık deneylerinin (bağımlılık kesintisi, gecikme, kaynak tükenmesi, örnek/bölge kaybı, bozuk yanıt) önce üretim öncesinde, olgunlaştıkça kontrollü üretimde düzenli koşturulması; ajanın yazdığı yeniden deneme, zaman aşımı, devre kesici ve idempotency kodunun bu deneylerle doğrulanması; ekipler arası oyun günleri.",
+      "cozulecek_sorun": "Dayanıklılık tasarımı (K04-011) yazılı olsa da gerçek arızada davranış doğrulanmadıkça varsayım olarak kalır; yeniden deneme fırtınası, zincirleme arıza ve toparlanmada sürü etkisi birim testinde görünmez.",
+      "yetenek_siniflari": [
+        "Y-61",
+        "Y-19",
+        "Y-27"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Çok ekipli hizmet zincirlerinde tek ekip deneyleri zincir davranışını göstermez; ekipler arası oyun günü gerekir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlerde her çeyrekte en az bir deney kayıtlı; hipotez, sonuç ve bulgular iş kalemine bağlı.",
+        "Her deneyin patlama yarıçapı ve otomatik durdurma koşulu önceden onaylı.",
+        "Deney bulgularının kapanma oranı izleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-325",
+          "S-326",
+          "S-327",
+          "S-328",
+          "S-362"
+        ],
+        "not": "Kaos mühendisliği ilkeleri kararlı durum hipotezi, gerçek olayların çeşitlenmesi, üretimde deney ve patlama yarıçapının küçültülmesini içerir; 2025 çalışması 50 sektör kaynağında uygulamanın dağıtım hatlarına yerleştiğini raporlar. 2025 bulut olayında toparlanmadaki sürü etkisi kesintiyi uzattı. Benzer mevcut ihtiyaç: N-K16-009; fark: K16-009 ajan hattının arıza senaryolarını, K04-011 dayanıklılık gereksinimlerinin yazılmasını kapsar; ürünün gerçek arıza davranışını deneyle doğrulayan ihtiyaç yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "G-035"
+      ],
+      "bagimliliklar": [
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "N-K33-010",
+      "baslik": "Ürün için geri yükleme ve felaket kurtarma hedefleri",
+      "ihtiyac": "Kademe bazında kurtarma süresi ve kabul edilebilir veri kaybı hedeflerinin tanımlanması; yedeğin değil geri yüklemenin düzenli ve otomatik doğrulanması; silme işlemlerinde yumuşak silme ve gecikmeli yok etme; ajanın erişebildiği ortamlarda yedeklerin ajan kimliklerinin silme yetkisi dışında tutulması.",
+      "cozulecek_sorun": "Yedekler çoğu zaman gerçek bir geri yükleme denenene kadar çalışmıyor çıkar; ajanın yıkıcı eylemine karşı son savunma geri yüklemedir. K16-004 yalnız ajan platformunun durum ve kanıt depolarını kapsar.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-36",
+        "Y-61"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip sayısı arttıkça veri deposu sayısı artar; merkezi tatbikat takvimi ve kanıt kaydı gerekir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 veri depolarında geri yükleme tatbikatı periyodu tanımlı ve son tatbikat hedef süre içinde başarılı.",
+        "Kurtarma hedefini aşan tatbikat bulgusu engelleyici iş kalemine dönüşüyor.",
+        "Yedekler ve yumuşak silinmiş veriler ajan kimliklerinin yazma/silme yetkisi dışında."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-317",
+          "S-359",
+          "S-149"
+        ],
+        "not": "Rehberin ana tezi: istenen yedek değil geri yüklemedir; yumuşak silme, katmanlı yedek ve bant dışı doğrulama birlikte kullanılır. 2017 olay raporunda birden çok yedek mekanizmasının çalışmadığı ancak olayda anlaşıldı; 2025'te bir ajan kod dondurma sırasında üretim veritabanını sildi ve kurtarma yolu yetersizdi. Benzer mevcut ihtiyaç: N-K16-004; fark: K16-004 ajan platformunun kendi depolarını kapsar; üretilen ürünün veri kurtarma hedefleri ve tatbikatı haritada yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-035"
+      ],
+      "bagimliliklar": [
+        "N-K16-004"
+      ]
+    },
+    {
+      "id": "N-K33-011",
+      "baslik": "Veri sözleşmeleri ve üretim veri kalitesi denetimi",
+      "ihtiyac": "Hizmetler ve ekipler arasında akan veri (olay, tablo, dosya, dışa aktarım) için üretici–tüketici veri sözleşmesi (şema, anlam, birim, geçerli aralık, tamlık, tazelik, benzersizlik); bu sözleşmelerin yalnız testte değil üretimde sürekli doğrulanması, zaman dilimleri arası sapma tespiti, kritik kayıtların yetkili kaynakla periyodik uzlaştırılması ve ihlalde tüketiciyi koruyan karantina.",
+      "cozulecek_sorun": "Testler geçse de üretimde bozuk, eksik veya anlamı kaymış veri sessizce yayılır; ajan üretimi dönüşüm ve entegrasyon kodu ince anlam hataları taşıyabilir. K05-020 ve K05-024 doğruluğu test anında denetler, üretimde sürekli denetlemez.",
+      "yetenek_siniflari": [
+        "Y-66",
+        "Y-27",
+        "Y-20"
+      ],
+      "zorunluluk": "kosullu",
+      "olcek_etkisi": "Ekipler arası veri akışları arttıkça sözleşmesiz değişiklik kırılmaları çoğalır; 3+ ekipte merkezi sözleşme kaydı gerekir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 veri akışlarının %100'ünde sürümlü veri sözleşmesi ve sahibi var.",
+        "Sözleşme ihlali üretimde tanımlı süre içinde tespit edilip tüketiciye yayılmadan karantinaya alınıyor.",
+        "Kritik alanlarda periyodik uzlaştırma raporu ve uyuşmazlık oranı hedefi var."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-356",
+          "S-357",
+          "S-358",
+          "S-360"
+        ],
+        "not": "Bildirimsel veri 'birim testleri' ile büyük ölçekli veri kalitesi doğrulaması ve üretim hatlarında zaman dilimi özeti karşılaştırması yayımlanmış yöntemlerdir; veri kalitesi modeli doğruluk, tamlık, tutarlılık, güncellik gibi nitelikleri tanımlar. Benzer mevcut ihtiyaç: N-K05-024; fark: K05-024 veri bütünlüğünü test kapsamında ister; üretimde sürekli veri kalitesi denetimi, sözleşme ve uzlaştırma ihtiyacı yok. Koşul: kalıcı veri taşıyan veya ekipler arası veri akışı olan hizmetler."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-035"
+      ],
+      "bagimliliklar": [
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "N-K33-012",
+      "baslik": "Veri onarımı ve toplu veri düzeltmesinin güvenli yürütülmesi",
+      "ihtiyac": "Şema göçü dışındaki veri düzeltme, geri doldurma ve toplu güncelleme işlemlerinin ayrı bir değişiklik türü olarak ele alınması: etkilenecek kayıt kümesinin önceden sayılması, deneme çalıştırması, örneklem doğrulaması, önce/sonra uzlaştırma, geri alma verisinin saklanması, kademeli uygulama ve insan onayı; ajanın düzeltme betiği yazabilmesi ama üretimde yürütememesi.",
+      "cozulecek_sorun": "Veri düzeltmeleri çoğu zaman sürüm kontrolü ve test dışında, elle ve geri dönüşsüz yapılır; ajan yazımı düzeltmedeki kapsam hatası doğrudan müşteri verisini bozar.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-09",
+        "Y-66",
+        "Y-28"
+      ],
+      "zorunluluk": "kosullu",
+      "olcek_etkisi": "Ekip sayısıyla birlikte ortak veri depolarına dokunan düzeltmeler ekipler arası etki yaratır.",
+      "kabul_olcutleri": [
+        "Üretim verisine dokunan her düzeltmede tahmini ve gerçekleşen etkilenen kayıt sayısı kayıtlı; eşik farkı işlemi durduruyor.",
+        "Geri alma verisi olmadan düzeltme yürütülemiyor.",
+        "Düzeltme betiği sürümlü, iş kalemine bağlı ve bağımsız çalıştırıcıdan yürütülüyor."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-094",
+          "S-149",
+          "S-317"
+        ],
+        "not": "Ayrı değişiklik türü önerisi çıkarımdır; ajan kaynaklı üretim veri kaybı olayı ve veri bütünlüğü rehberi dayanağıdır. Benzer mevcut ihtiyaç: N-K06-009; fark: K06-009 şema göçünü, K18-007 yıkıcı eylem iznini kapsar; veri içeriği düzeltmesinin doğruluk güvencesi tanımlı değil. Koşul: kalıcı veri taşıyan hizmetler."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-035"
+      ],
+      "bagimliliklar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "N-K33-013",
+      "baslik": "Dış hizmet ve tedarikçi bağımlılıklarının çalışma zamanı güvenilirliği",
+      "ihtiyac": "Ürünün çalışma zamanında bağımlı olduğu dış hizmetlerin (bulut bölgesi, ödeme, kimlik, mesajlaşma, içerik dağıtımı, dış arayüzler) envanteri: kritiklik, taahhüt edilen ve gerçekleşen hizmet düzeyi, arıza modu, zaman aşımı ve yeniden deneme bütçesi, bozulmuş mod ve yedek, yoğunlaşma riski (aynı sağlayıcı veya bölgede toplanma) ve çıkış stratejisi; sağlayıcı olaylarının hizmetin SLO'suna etkisinin ölçülmesi.",
+      "cozulecek_sorun": "Bir hizmet ancak kritik bağımlılıklarının bileşimi kadar erişilebilir; tek bir sağlayıcı olayı çok sayıda ürünü aynı anda düşürebilir. Harita tedarikçiyi sözleşme (K22-008), güvenlik (K18-008) ve platform bileşeni (K16-006) açısından ele alıyor; ürünün çalışma zamanı güvenilirliği açısından değil.",
+      "yetenek_siniflari": [
+        "Y-62",
+        "Y-27",
+        "Y-61"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekipler bağımsız kararlarla aynı sağlayıcıya yığılabilir; portföy düzeyinde görünürlük olmadan yoğunlaşma fark edilmez. Düzenlemeye tabi sektörlerde üçüncü taraf risk kaydı yasal gereksinim olabilir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlerin her kritik dış bağımlılığı için arıza modu ve bozulmuş mod davranışı yazılı ve dayanıklılık deneyinde doğrulanmış.",
+        "Hizmetin SLO'su bağımlılıkların taahhüt ve gerçekleşen değerleriyle tutarlılık kontrolünden geçmiş.",
+        "Yoğunlaşma raporu (aynı sağlayıcıya/bölgeye bağımlı kritik hizmet sayısı) periyodik üretiliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-364",
+          "S-355",
+          "S-361",
+          "S-365"
+        ],
+        "not": "Hizmetin erişilebilirliğinin bağımlılıklarıyla sınırlı olduğu yayımlanmış bir analizdir. 2025'te bir bulut bölgesindeki yarış durumu yaklaşık 15 saatlik zincirleme kesinti yarattı. Finans sektörü için AB operasyonel dayanıklılık tüzüğü üçüncü taraf bilgi ve iletişim teknolojisi riskinin kaydını zorunlu kılar. Benzer mevcut ihtiyaç: N-K22-008; fark: K22-008 sözleşme taahhütlerini yönetir; bağımlılığın hizmet tasarımına ve SLO'ya etkisini, bozulmuş modunu ve yoğunlaşmasını yönetmez."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "N-K33-014",
+      "baslik": "Ekipler arası iç hizmet sözleşmeleri ve bağımlılık SLO bileşimi",
+      "ihtiyac": "Ekiplerin birbirine sunduğu hizmetler için iç hizmet düzeyi anlaşmaları (sağlayıcı ekibin SLO'su, tüketicinin beklentisi, kota ve sınırlama, değişiklik bildirim süresi) ve tüketici hizmetin SLO'sunun bağımlılık zincirinden hesaplanabilir olması; bir ekibin hata bütçesi tüketiminin başka ekibe atfının kurala bağlanması.",
+      "cozulecek_sorun": "Çok ekipli yapıda bir ekibin hizmeti diğerinin kritik bağımlılığıdır; yazılı iç sözleşme yoksa hata bütçesi atfı ve önceliklendirme ekipler arası çatışmaya döner.",
+      "yetenek_siniflari": [
+        "Y-62",
+        "Y-60",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "İki ekipte sözlü anlaşma yetebilir; 10+ ekipte bağımlılık zinciri insan belleğinde tutulamaz.",
+      "kabul_olcutleri": [
+        "Ekipler arası her kritik çağrı ilişkisi için iç sözleşme kaydı var.",
+        "Hizmet kataloğundan bağımlılık zinciri ve bileşik erişilebilirlik tahmini üretilebiliyor.",
+        "Bütçe atfı anlaşmazlıklarının karar sahibi ve süresi tanımlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-364",
+          "S-312"
+        ],
+        "not": "Örnek hata bütçesi politikası başka ekibin hizmet kesintisini istisna sınıfı olarak ele alır; bağımlılık bileşimi analizi yayımlanmıştır. Benzer mevcut ihtiyaç: N-K24-003; fark: K24-003 planlama bağımlılıklarını (iş) ele alır; bu ihtiyaç çalışma zamanı bağımlılıklarını (hizmet) ve güvenilirlik taahhütlerini ele alır."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "bagimliliklar": [
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "N-K33-015",
+      "baslik": "Ekipler arası ortak güvenilirlik standardı",
+      "ihtiyac": "Kritiklik kademesine göre asgari güvenilirlik gereksinimlerini (SLO zorunluluğu, hazırlık incelemesi, gözlemlenebilirlik, geri yükleme, dayanıklılık deneyi sıklığı, tehdit modeli derinliği, mimari kurallar, bağımlılık yönetimi) tek, sürümlü bir standartta toplayan; her maddeyi bir doğrulama yöntemine bağlayan; ekip ve hizmet bazında uyumu panoda gösteren; istisnaları süreli ve sahipli tutan ortak standart ve bunun portföy/ART/ekip katmanlarına yerleşimi.",
+      "cozulecek_sorun": "Ekipler farklı güvence düzeyleriyle çalıştığında ajanlar da ekipten ekibe farklı kalitede yazılım üretir; 'güvenilir' kavramı ekipler arasında karşılaştırılamaz. Çerçeve işlevsel olmayan gereksinimleri tüm backlog düzeylerinde kısıt olarak konumlar ama içeriğini kurum tanımlamalıdır.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-09",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "10+ ekipte standart yoksa ekipler arası güvence farkı sistemik riske dönüşür; standardın kendisi de ekip ekleriyle katmanlanmalıdır.",
+      "kabul_olcutleri": [
+        "Standart sürümlü ve her maddesi bir doğrulama yöntemine (otomatik kapı veya inceleme) bağlı.",
+        "Ekip ve hizmet bazında uyum oranı panoda; süresi dolmuş istisna 0.",
+        "Standart değişiklikleri duyuruluyor ve geçiş süresiyle yürürlüğe giriyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-371",
+          "S-372",
+          "S-318"
+        ],
+        "not": "Kalite modeli güvenilirliği hatasızlık, erişilebilirlik, hata toleransı ve kurtarılabilirlik alt nitelikleriyle tanımlar; çerçeve işlevsel olmayan gereksinimleri her düzeyde DoD'nin parçası sayar. Benzer mevcut ihtiyaç: N-K24-007; fark: K24-007 hangi kuralın hangi katmanda tutulacağını tanımlar; güvenilirliğin asgari içeriğini ve ekipler arası uyum ölçümünü tanımlamaz."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "N-K33-016",
+      "baslik": "Program düzeyinde hız–istikrar dengesi karar kuralı",
+      "ihtiyac": "Teslim hızı göstergeleriyle (değişiklik sıklığı, teslim süresi) istikrar göstergelerinin (değişiklik başarısızlık oranı, geri alma, kurtarma süresi, SLO ihlali, olay sayısı) değişiklik kaynağına (ajan/insan/karma) göre ayrışmış olarak birlikte izlenmesi ve önceden kararlaştırılmış bir karar kuralının (ör. ajan kaynaklı değişiklik başarısızlık oranı eşiği aşarsa ilgili ekip veya hizmet sınıfında otonomi bir kademe düşer; iyileşme ölçülünce geri açılır) program düzeyinde uygulanması.",
+      "cozulecek_sorun": "Nedensel çalışmalar hız kazancının geçici, karmaşıklık ve uyarı artışının kalıcı olabildiğini; sektör raporları benimsemenin istikrarla olumsuz ilişkisini gösteriyor. Ölçüm ihtiyaçları (K08-005, K23-006) var ama ölçümden eyleme giden kural yok.",
+      "yetenek_siniflari": [
+        "Y-39",
+        "Y-42",
+        "Y-60"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı arttıkça tek ekip ölçümleri gürültülüdür; kural hizmet sınıfı veya ekip grubu düzeyinde uygulanmalı ve ekipler birbirleriyle değil kendi zaman serileriyle karşılaştırılmalı.",
+      "kabul_olcutleri": [
+        "Hız ve istikrar göstergeleri aynı panoda ve aynı zaman penceresinde raporlanıyor; yalnız hız içeren rapor yayımlanmıyor.",
+        "Karar kuralı yazılı, eşikleri sürümlü; tetiklenme durumları ve alınan eylem kayıtlı.",
+        "Kural en az yılda bir kalibre ediliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-319",
+          "S-102",
+          "S-320",
+          "S-321",
+          "S-104",
+          "S-177"
+        ],
+        "not": "Bir nedensel çalışmada ajan benimsemesiyle statik analiz uyarıları yaklaşık %18, bilişsel karmaşıklık yaklaşık %39 arttı; bir randomize deneyde deneyimli geliştiriciler yapay zekâ araçlarıyla %19 daha yavaş çalıştı. Benzer mevcut ihtiyaç: N-K08-005; fark: K08-005 ajan/insan kaynağına göre üretim metriklerini ayrıştırır, K23-006 teslim metriklerini tanımlar; ikisi de ölçümden otonomi ve hız kararına giden kuralı tanımlamaz."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "bagimliliklar": [
+        "N-K08-005"
+      ]
+    },
+    {
+      "id": "N-K33-017",
+      "baslik": "Ajan üretimi bileşenlerin işletim sahipliği ve anlaşılabilirliği",
+      "ihtiyac": "Üretimdeki her hizmet ve kritik bileşen için nöbet tutan bir insan sahibi ekibin bulunması; ajan ağırlıklı üretilmiş kritik bileşenlerde sahibin arıza modlarını, bağımlılıkları ve geri alma yolunu ajan desteği olmadan açıklayabildiğinin hazırlık incelemesinde doğrulanması; işletim dokümanlarının ajan tarafından taslaklanıp insan tarafından tatbikatla doğrulanması.",
+      "cozulecek_sorun": "Ajan üretimi dosyalarda bakım işinin büyük çoğunluğunu insanlar yapıyor; kimsenin tam anlamadığı kod olayda teşhisi uzatır ve 'ajan yaptı' sorumluluk belirsizliğini doğurur. K25-004 onay sorumluluğunu, K25-006 beceri korumasını kapsar, işletim sahipliğini değil.",
+      "yetenek_siniflari": [
+        "Y-31",
+        "Y-37",
+        "Y-62"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ajan hacmi arttıkça kişi başına sahip olunan kod büyür; sahiplik yükü ölçülmezse nöbet ekipleri aşırı yüklenir.",
+      "kabul_olcutleri": [
+        "Sahibi ve nöbet rotası olmayan hizmet üretime açılamıyor.",
+        "Kademe 0–1 bileşenlerde 'açıklama tatbikatı' hazırlık incelemesinin maddesi ve sonucu kayıtlı.",
+        "İşletim dokümanları son tatbikat tarihiyle tutuluyor; tatbikatı geçmiş doküman işaretli."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-322",
+          "S-324",
+          "S-373"
+        ],
+        "not": "2026 çalışması: ajan üretimi dosyalardaki bakım işinin büyük çoğunluğunu insanlar yapıyor. Açıklama tatbikatı önerisi çıkarımdır. 2025 sonundaki bir bulut hizmeti kesintisinin ajan aracıyla ilişkisi ikincil kaynaklarda raporlandı; şirket 'yanlış yapılandırılmış erişim, kullanıcı hatası' açıklaması yaptı, birincil rapor doğrulanmadı. Benzer mevcut ihtiyaç: N-K25-004; fark: K25-004 her ajan çıktısının bir onaylayan insanı olmasını ister; üretimde işletme, nöbet ve anlama yükümlülüğünü tanımlamaz."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K25-004"
+      ]
+    }
+  ]
+}

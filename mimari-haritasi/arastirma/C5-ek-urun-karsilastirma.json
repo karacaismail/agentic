@@ -1,0 +1,852 @@
+{
+  "meta": {
+    "tarih": "2026-09-27",
+    "durum": "tamamlandı",
+    "yontem": "Resmi sayfa/dokuman/GitHub API; dogrulanamayan iddialar 'doğrulanamadı' olarak isaretli",
+    "kapsam_disi": [
+      "Paraşüt, Univera, Mikrogrup: bütçe nedeniyle incelenmedi (doğrulanamadı)"
+    ]
+  },
+  "urunler": [
+    {
+      "urun": "Odoo HR (Community + Enterprise)",
+      "lisans": "Community: LGPL-3 (odoo/odoo); Enterprise: ticari abonelik (OEEL). OCA/payroll: AGPL-3.",
+      "ce_vs_ee_notu": "odoo.com/page/editions tablosu (HTML ikonlari parse edildi): Community'de VAR -> Employees, Recruitment, Time Off, Fleet, Expenses, eLearning, Timesheet (temel), Project, Surveys, Calendar. SADECE Enterprise -> Payroll, Referrals, Appraisals, Planning, Helpdesk, Approvals, Documents, Sign, Field Service, Knowledge, Studio, IoT, Mobile uygulama, Timesheet grid/timer/onay. Attendances tabloda yok; ancak hr_attendance modulu odoo/odoo (Community) deposunda 18.0 ve 19.0 dallarinda mevcut. Community icin bordro alternatifi: OCA/payroll (AGPL-3, aktif; 13.0-19.0 dallari; 19.0 dalinda sadece 'payroll' cekirdek modulu port edilmis, 18.0 dalinda payroll, payroll_account, payroll_contract_advantages, payroll_hr_public_holidays, payroll_rule_time_parameter, hr_payroll_document).",
+      "moduller_var": [
+        "Çalışanlar (hr) + Organizasyon şeması (hr_org_chart) + Yetkinlik/beceri (hr_skills)",
+        "Sözleşme/ücret bilgisi: 18.0'da ayrı hr_contract modülü; 19.0 addons listesinde hr_contract yok (sözleşme alanları çalışan formunun Payroll sekmesine taşınmış görünüyor - Türkiye bordro dokümanında 'Payroll tab > Contract overview')",
+        "İzinler (hr_holidays / Time Off) - CE",
+        "PDKS/Devam (hr_attendance, kiosk dahil) - CE",
+        "Çalışma girişleri (hr_work_entry) - bordroya puantaj kaynağı: Working Schedule / Attendances / Planning",
+        "Vardiya planlama (Planning) - sadece EE",
+        "Zaman çizelgesi (hr_timesheet) - CE temel, onay/grid EE",
+        "Bordro (hr_payroll) - sadece EE; maaş yapısı, maaş kuralları, kural parametreleri, net->brüt",
+        "İşe Alım (hr_recruitment) - CE; Referrals - EE",
+        "Performans (Appraisals) - EE",
+        "Eğitim: eLearning (website_slides) + hr_skills_slides - CE",
+        "Masraflar (hr_expense) - CE; masrafın bordroyla ödenmesi EE",
+        "Filo (fleet/hr_fleet) - CE",
+        "HR vakaları/yardım masası: Helpdesk - EE (HR'a özel değil, genel)",
+        "Onaylar (Approvals) - EE",
+        "Belgeler (Documents) ve e-imza (Sign) - EE",
+        "Çok şirketli yapı: bordro dokümanında her şirket/şube ayrı şirket olarak tanımlanır",
+        "Bordro-muhasebe entegrasyonu (hr_payroll_account; TR için l10n_tr_hr_payroll_account) - EE"
+      ],
+      "turkiye_ozel": [
+        "Enterprise'da 'Türkiye - Payroll' (l10n_tr_hr_payroll) ve 'Türkiye - Payroll with Accounting' (l10n_tr_hr_payroll_account) modülleri resmi dokümanda listeleniyor (Odoo 19.0 docs).",
+        "Kapsam (dokümana göre): SGK işçi %14 / işveren %15, işsizlik işçi %1 / işveren %2, SGK tavanı (SSI Base Amount Ceiling), kümülatif matrahla artan oranlı gelir vergisi (2025 dilimleri %15-%40), asgari ücret gelir vergisi istisnası, damga vergisi %0,759 ve istisnası, net->brüt / brüt->net, maaş kuralı parametreleri (asgari ücret vb.), bordro muhasebe fişi.",
+        "Dokümanda SGK e-Bildirge / APHB, MUHSGK beyannamesi, teşvik (5510/6111 vb.) hesaplama, kıdem/ihbar tazminatı, BES, icra kesintisi, banka talimat dosyası formatı GEÇMİYOR -> doğrulanamadı / muhtemelen yok.",
+        "Community tarafında Türkiye bordrosu yok: OCA/l10n-turkey deposu 8.0-19.0 dallarında modül içermiyor (16.0'da yalnızca 'setup', 17.0/18.0/19.0'da yalnızca '.github'); OCA/payroll'da TR modülü yok.",
+        "odoo/odoo Community'de l10n_tr, l10n_tr_nilvera (e-Fatura/e-İrsaliye - Nilvera entegrasyonu) var; bunlar HR değil muhasebe/e-belge.",
+        "GitHub'da topluluk denemeleri: karatasibrahim/l10n_tr_hr_payroll (son push 2024-10-18) ve volknakkurt/l10n_tr_hr_payroll (son push 2024-08-14); lisans belirtilmemiş, 0 yıldız, Odoo modül iskeleti (models/views/report) - bakım/kapsam doğrulanamadı."
+      ],
+      "eksik_veya_yok": [
+        "Community'de bordro yok (yalnızca OCA/payroll ile, TR yerelleştirmesi olmadan)",
+        "Community'de performans değerlendirme, vardiya planlama, helpdesk, onay akışları, belge yönetimi yok",
+        "Resmi dokümanda TR için e-Bildirge/MUHSGK/teşvik/kıdem-ihbar/BES/icra: doğrulanamadı",
+        "Ayrı 'Transfer/Terfi' modülü yok; çalışan kaydı ve sözleşme değişikliğiyle yapılıyor (doğrulanamadı - ayrı özellik sayfası kontrol edilmedi)",
+        "Onboarding/Offboarding: ayrı modül değil, çalışan üzerinde plan/aktivite şablonları (doğrulanamadı - bu çalışmada kaynak açılmadı)"
+      ],
+      "kaynaklar": [
+        "https://www.odoo.com/page/editions",
+        "https://www.odoo.com/documentation/19.0/applications/hr/payroll/payroll_localizations.html",
+        "https://www.odoo.com/documentation/19.0/applications/hr/payroll/payroll_localizations/turkey.html",
+        "https://github.com/odoo/odoo/tree/19.0/addons",
+        "https://github.com/odoo/odoo/tree/18.0/addons/hr_attendance",
+        "https://github.com/OCA/payroll",
+        "https://github.com/OCA/l10n-turkey",
+        "https://github.com/karatasibrahim/l10n_tr_hr_payroll",
+        "https://github.com/volknakkurt/l10n_tr_hr_payroll"
+      ]
+    },
+    {
+      "urun": "Frappe HR / HRMS (frappe/hrms)",
+      "lisans": "GPL-3.0 (GitHub API: license=GPL-3.0; varsayılan dal develop, son push 2026-09-27). Frappe Framework + ERPNext üzerinde çalışır (v14'ten itibaren ERPNext'ten ayrı ürün).",
+      "ce_vs_ee_notu": "Tek sürüm, tamamı açık kaynak; ücretli kısım yalnızca Frappe Cloud barındırma/destek. hrms/modules.txt: HR Setup, Tenure, Recruitment, Shift and Attendance, Leaves, Expenses, Performance, Payroll, Tax and Benefits, HR.",
+      "moduller_var": [
+        "Çalışanlar: Employee (ERPNext/Frappe setup), Employee Grade, Employment Type, Designation Skill, Employee Property History, Identification Document Type",
+        "Organizasyon/kadro planı: Staffing Plan, Job Requisition, Department Approver (Company/Department/Designation ERPNext çekirdeğinde)",
+        "Çalışan yaşam döngüsü: Employee Onboarding (+Template, Boarding Activity), Employee Transfer, Employee Promotion, Employee Separation (+Template), Exit Interview, Full and Final Statement (ibra/son hesap), Appointment Letter",
+        "İzinler: Leave Type, Leave Policy (+Assignment), Leave Allocation, Leave Application, Leave Period, Leave Ledger Entry, Leave Encashment, Compensatory Leave Request, Earned Leave Schedule, Leave Block List, Leave Adjustment, Leave Control Panel",
+        "Takvim: Holiday List (ERPNext) + Holiday List Assignment; README: 'pull regional holidays with a click'",
+        "Vardiya: Shift Type, Shift Assignment (+Tool), Shift Request, Shift Schedule (+Assignment), Shift Location",
+        "PDKS/Devam: Employee Checkin (cihaz/biyometrik entegrasyon için API ile beslenen check-in kaydı), Attendance, Attendance Request, Employee Attendance Tool; README: geolocation ile check-in/out",
+        "Fazla mesai: Overtime Type, Overtime Slip, Overtime Details, Overtime Salary Component",
+        "Bordro: Salary Component, Salary Structure, Salary Structure Assignment (+Bulk), Payroll Period, Payroll Entry (toplu bordro), Salary Slip, Additional Salary (değişken ödeme/kesinti), Arrear, Payroll Correction, Salary Withholding, Retention Bonus, Employee Incentive, Salary Slip Timesheet, Salary Slip Loan",
+        "Vergi/yan haklar: Income Tax Slab, Taxable Salary Slab, Employee Tax Exemption Declaration/Proof, Employee Benefit Application/Claim/Ledger, Employee Other Income, Gratuity (+Rule, +Slab) - kıdem benzeri tazminat kural motoru",
+        "Muhasebe: Salary Component Account, Employee Cost Center; README: ERPNext muhasebe ile entegrasyon",
+        "İşe Alım: Job Opening (+Template), Job Applicant (+Source), Interview (+Type, Feedback, Interviewer), Job Offer (+Term Template), Employee Referral",
+        "Performans: Appraisal Cycle, Appraisal Template, Appraisal, Goal, KRA, Employee Performance Feedback",
+        "Eğitim: Training Program, Training Event, Training Feedback, Training Result; Skill, Skill Assessment, Employee Skill Map",
+        "HR vakaları: Employee Grievance, Grievance Type (disiplin/şikâyet kaydı)",
+        "Masraf/Avans/Seyahat: Expense Claim (+Type, Advance), Employee Advance, Travel Request, Vehicle Log",
+        "Self-servis: Frappe HR Mobile App/PWA (izin başvuru-onay, check-in/out, profil) - README",
+        "Çok şirketli yapı: ERPNext Company çok-şirket desteği (HRMS doctype'ları company alanına bağlı) - README'de ayrıca belirtilmedi, doğrulanamadı"
+      ],
+      "turkiye_ozel": [
+        "Resmi Türkiye yerelleştirmesi YOK: hrms/regional klasöründe yalnızca india ve united_arab_emirates var.",
+        "Arayüz çevirisi var: hrms/locale/tr.po mevcut.",
+        "Topluluk: UfukTogay/erpnext_turkiye (MIT, 0 yıldız, son push 2025-01-14; README yalnızca başlıktan ibaret, bordro içeriği doğrulanamadı).",
+        "SGK/e-Bildirge/MUHSGK/teşvik/BES/icra: yok (kaynakta bulunmadı). Gratuity kural motoru kıdem tazminatı için uyarlanabilir (uyarlanabilirlik doğrulanamadı)."
+      ],
+      "eksik_veya_yok": [
+        "Türkiye bordro kuralları, SGK bildirgeleri, muhtasar beyanname, teşvik hesaplama yok",
+        "Banka talimat dosyası (TR banka formatları) yok; bordro ödemesi ERPNext yevmiye/ödeme kaydı ile (TR format doğrulanamadı)",
+        "Kredi/avans kesintisi: Salary Slip Loan doctype var; kredi yönetimi ayrı Frappe Lending uygulamasında (doğrulanamadı)",
+        "PDKS cihaz sürücüsü çekirdekte yok; cihazlar Employee Checkin API'sine veri basar (harici biometric sync aracı - doğrulanamadı)"
+      ],
+      "kaynaklar": [
+        "https://github.com/frappe/hrms",
+        "https://github.com/frappe/hrms/blob/develop/hrms/modules.txt",
+        "https://github.com/frappe/hrms/tree/develop/hrms/hr/doctype",
+        "https://github.com/frappe/hrms/tree/develop/hrms/payroll/doctype",
+        "https://github.com/frappe/hrms/tree/develop/hrms/regional",
+        "https://docs.frappe.io/hr/introduction",
+        "https://github.com/UfukTogay/erpnext_turkiye"
+      ]
+    },
+    {
+      "urun": "Horilla HRMS",
+      "lisans": "LGPL-2.1 (GitHub API). Depo horilla-opensource/horilla -> horilla/horilla-hr adresine taşınmış; varsayılan dal 2.0, son push 2026-09-26, ~1437 yıldız. Django/Python.",
+      "ce_vs_ee_notu": "Tek açık kaynak sürüm; README'de ücretli/kapalı sürüm ayrımı belirtilmiyor (ticari destek/barındırma doğrulanamadı).",
+      "moduller_var": [
+        "Çalışanlar (employee): Employee, EmployeeWorkInformation, EmployeeBankDetails, Policy (şirket politikaları), EmployeeNote, ProfileEditFeature (self-servis profil düzenleme), LDAP entegrasyonu (horilla_ldap)",
+        "Organizasyon (base): Company (çok şirket), CompanyGroupAssignment, Department, JobPosition, JobRole, EmployeeType",
+        "Vardiya (base): EmployeeShift, EmployeeShiftSchedule, RotatingShift (+Assign), Roster (+PublishLog), ShiftRequest, WorkType/RotatingWorkType/WorkTypeRequest",
+        "Takvim: Holidays, CompanyLeaves (şirket geneli tatil günleri)",
+        "PDKS: biometric app - cihaz tipleri ZKTeco/eSSL, Anviz, Matrix COSEC, Dahua, e-Time Office; ayrıca facedetection, geofencing, AttendanceAllowedIP",
+        "Devam/Puantaj: Attendance, BatchAttendance, AttendanceActivity, AttendanceValidationCondition, GraceTime, AttendanceLateComeEarlyOut, AttendanceConflictResolution, AttendanceDailyHours/SummaryHours, WorkRecords",
+        "Fazla mesai: AttendanceOverTime",
+        "İzinler: leave app (politika, onay, bakiye - README)",
+        "Bordro: Contract, Allowance, Deduction, SalaryStructure, Payslip, PayslipAutoGenerate, LoanAccount (avans/borç), Reimbursement, TaxBracket, FilingStatus, EncashmentGeneralSettings (izin paraya çevirme)",
+        "İşe Alım (recruitment), Onboarding, Offboarding (OffboardingStage, ResignationLetter, ExitReason, OffboardingTask)",
+        "Performans (pms): OKR - Objective, KeyResult, Period, 360 Feedback, AnonymousFeedback, Meetings (1:1), BonusPoint",
+        "HR Vakaları: helpdesk app (Ticket, TicketType, ClaimRequest, FAQ) + employee.DisciplinaryAction",
+        "Belgeler: horilla_documents; Varlık/zimmet: asset",
+        "Duyurular (Announcement), Çok seviyeli onay (MultipleApprovalCondition/Managers), otomasyonlar (horilla_automations), denetim izi (horilla_audit), REST API (horilla_api), yedekleme (horilla_backup, pg_backup), raporlar (report)",
+        "Proje/zaman takibi: project app"
+      ],
+      "turkiye_ozel": [
+        "Arayüz çevirisi: Türkçe (tr) locale mevcut (horilla/locale).",
+        "Türkiye bordrosu/SGK/e-Bildirge/MUHSGK/teşvik/kıdem-ihbar/BES/icra: yok (kaynak kodda bulunmadı). Bordro jenerik: TaxBracket + FilingStatus (ABD tarzı beyan statüsü) + Allowance/Deduction koşul motoru."
+      ],
+      "eksik_veya_yok": [
+        "Eğitim/LMS modülü yok (depo app listesinde training yok)",
+        "Ayrı Transfer/Terfi belge akışı yok (vardiya/iş tipi talebi var; terfi için özel model bulunamadı)",
+        "Muhasebe entegrasyonu/yevmiye fişi yok (doğrulanamadı; payroll modelinde hesap planı bağlantısı görülmedi)",
+        "Banka talimat dosyası TR formatları yok",
+        "Resmi beyanname/bildirge üretimi yok"
+      ],
+      "kaynaklar": [
+        "https://github.com/horilla/horilla-hr",
+        "https://github.com/horilla-opensource/horilla",
+        "https://github.com/horilla/horilla-hr/blob/2.0/biometric/models.py",
+        "https://github.com/horilla/horilla-hr/blob/2.0/payroll/models/models.py",
+        "https://github.com/horilla/horilla-hr/blob/2.0/base/models.py",
+        "https://github.com/horilla/horilla-hr/blob/2.0/employee/models.py",
+        "https://github.com/horilla/horilla-hr/blob/2.0/helpdesk/models.py"
+      ]
+    },
+    {
+      "urun": "OrangeHRM (Starter/Open Source + Advanced)",
+      "lisans": "Starter: GPL-3.0 (github.com/orangehrm/orangehrm, PHP/Symfony + Vue; son push 2026-06-28). Advanced: ticari SaaS/abonelik.",
+      "ce_vs_ee_notu": "orangehrm.com 'Upgrade to Advanced' sayfasındaki plan kartları HTML'den parse edildi. Starter VAR: HR Administration, Employee Management, PTO/Leave Management, Reporting & Analytics, Performance Management, Recruitment, Time Tracking, Mobile App. Starter YOK (yalnız Advanced): On/Offboarding, Request Desk, Career Development, Training, Roster, Surveys, Employee Voice, Discipline. Açık kaynak depo eklentileri bununla uyumlu: Admin, PIM, Leave, Time, Attendance, Recruitment, Performance, Claim, Buzz, Dashboard, Corporate Directory, Mobile, LDAP/OpenID/OAuth, Maintenance (GDPR tipi veri temizleme), I18N.",
+      "moduller_var": [
+        "Çalışanlar: PIM (kişisel bilgi, iş, maaş, raporlama zinciri, nitelikler, belgeler/ekler) - Starter",
+        "Organizasyon: Admin > Organization (genel bilgi, lokasyonlar, organizasyon yapısı), Job titles, Pay grades - Starter (orangehrmAdminPlugin)",
+        "İzinler: Leave (izin tipleri, hakediş, tatil günleri, çalışma haftası) - Starter",
+        "Puantaj/Zaman: Time (timesheet, proje/müşteri) - Starter; Attendance (punch in/out) - Starter",
+        "İşe Alım: Recruitment (ATS) - Starter",
+        "Performans: Performance (KPI, değerlendirme) - Starter",
+        "Masraf: Claim - Starter",
+        "Self-servis: ESS rolleri + Mobile App - Starter; Corporate Directory, Buzz (iç sosyal akış)",
+        "Raporlar: Reporting & Analytics - Starter",
+        "Onboarding/Offboarding, Request Desk (çalışan talep/yardım masası), Discipline (disiplin), Employee Voice (şikâyet), Training, Career Development, Roster (vardiya), Surveys - yalnız Advanced",
+        "Bordro: yerleşik bordro motoru yok; 'Payroll connector' ile üçüncü taraf bordro sağlayıcılarına entegrasyon (Advanced)"
+      ],
+      "turkiye_ozel": [
+        "Türkiye bordrosu/SGK/e-Bildirge/MUHSGK: yok (yerleşik bordro zaten yok).",
+        "Türkçe arayüz dili: doğrulanamadı (I18N eklentisi var, TR dil paketi kontrol edilmedi)."
+      ],
+      "eksik_veya_yok": [
+        "Bordro hesaplama motoru yok (yalnız connector)",
+        "Starter'da Onboarding/Offboarding, eğitim, vardiya planlama (Roster), disiplin, talep masası yok",
+        "Transfer/Terfi için ayrı iş akışı yok (PIM'de iş bilgisi geçmişi düzenlenir - doğrulanamadı)",
+        "PDKS cihaz entegrasyonu: yerleşik sürücü doğrulanamadı",
+        "Muhasebe/banka dosyası yok"
+      ],
+      "kaynaklar": [
+        "https://github.com/orangehrm/orangehrm",
+        "https://github.com/orangehrm/orangehrm/tree/main/src/plugins",
+        "https://orangehrm.com/open-source/upgrade-to-advanced",
+        "https://www.orangehrm.com/en/solutions/compensation/payroll-connector",
+        "https://www.orangehrm.com/en/open-source"
+      ]
+    },
+    {
+      "urun": "Logo Yazılım: Logo Edge HR (eski adı Logo j-HR) + Logo Bordro Plus (+ SaaS 'Logo Payroll')",
+      "lisans": "Ticari, kapalı kaynak. Edge HR/j-HR: web tabanlı (orta-büyük ölçek); Bordro Plus: on-premise masaüstü; ayrıca SaaS bordro çözümü (Logo arama sonuç özeti, sayfa açılmadı).",
+      "ce_vs_ee_notu": "Açık kaynak/topluluk sürümü yok. logo.com.tr/urun/logo-edge-hr sayfa başlığı 'J-HR: İnsan Kaynakları Programı' -> j-HR ürünü Edge HR adıyla sunuluyor.",
+      "moduller_var": [
+        "Edge HR: uçtan uca İK (işe alım -> bordro, eğitim, performans) - resmi sayfa",
+        "Edge HR: Bordro, ücretlendirme, personel borç-alacak takibi",
+        "Edge HR: Time Management (izin, fazla mesai, raporlar, aktivite logları) + Attendance Data Management (PDKS verisi izlenir, düzenlenir, onaylanır, puantaja/scorecard'a aktarılır)",
+        "Edge HR: Recruitment Portal (iç/dış işe alım, kadro talebi, başvuru, mülakat takibi)",
+        "Edge HR: Onboarding/Offboarding modülü (giriş-çıkış iş akışları, görev atama)",
+        "Edge HR: Performans (hedef/yetkinlik, üst-eş-ast 360), Kariyer yönetimi, Eğitim ve Gelişim Yönetimi (eğitim-performans ilişkilendirme)",
+        "Edge HR: Çalışan Portalı (İK self servis + intranet: kişisel bilgi, izin/avans/mesai talebi, eğitim bilgisi, duyurular) + mobil uygulama; Öneri & Geri bildirim (şikâyet dahil)",
+        "Edge HR: Yetkilendirme ve denetim (değişiklik raporlama), ERP entegrasyonu, çok dilli",
+        "Bordro Plus: Sicil Yönetimi, Bordro Yönetimi, Zaman İzli Kayıtlar (geriye dönük raporlama), İş Akış Yönetimi, Tablolama Aracı ile puantaj aktarımı, izin, avans",
+        "Bordro Plus: Ücret Simülasyonu (zam/bütçe simülasyonu)",
+        "Bordro Plus: çok işyeri (SSS: 'kaç işyeri tanımlayabilirim?'), aynı ayda birden fazla ödeme (SSS)",
+        "Bordro Plus: dil paketleri TR/EN standart + Arapça, Farsça, Rusça, Azerice"
+      ],
+      "turkiye_ozel": [
+        "SGK: Aylık prim ve hizmet belgesi, işe giriş-çıkış bildirgeleri, e-Bildirge hazırlama ve SGK'ya gönderim (Bordro Plus); 'e-SGK Integration' (payroll kategori sayfası)",
+        "Teşvik: 'İstihdam teşvik ve destekleri otomatik hesaplanır' (Edge HR); Bordro Plus SSS 'Programda hangi teşvikler hesaplanabiliyor?' (liste sayfada açılmadı)",
+        "Yasal parametre güncelleme: My Logo entegrasyonuyla asgari ücret, vergi dilimleri (Edge HR), kıdem tavanı (Bordro Plus SSS) çevrim içi güncellenir",
+        "Kıdem/ihbar: j-HR dokümantasyonunda 'Kıdem/İhbar Tazminatı Grupları' tanımı (docs.logo.com.tr, arama özetinden; sayfa açılmadı - kısmen doğrulandı)",
+        "BES: 'BES Otomatik Katılım' işlemleri (Bordro Plus)",
+        "İcra/nafaka: özel kesinti tanımı; avans ve personel borç ödeme planı (Bordro Plus)",
+        "Şifreli e-posta ile bordro zarfı gönderimi (Bordro Plus)",
+        "MUHSGK beyannamesi: ürün sayfalarında açıkça geçmiyor -> doğrulanamadı (payroll kategori sayfası 'Tax returns' diyor)",
+        "e-imza/e-arşiv bordro: Edge HR sayfasında 'e-Arşiv' kelimesi geçiyor ancak bağlamı bordro değil/doğrulanamadı",
+        "Banka talimat dosyası: doğrulanamadı"
+      ],
+      "eksik_veya_yok": [
+        "Vardiya planlama: sayfalarda açık vardiya planlama/rotasyon ifadesi bulunamadı (doğrulanamadı)",
+        "HR vakaları/disiplin: yalnızca 'Öneri & Geri Bildirim' var; disiplin süreci doğrulanamadı",
+        "Transfer/Terfi: ayrı modül ifadesi bulunamadı (doğrulanamadı)"
+      ],
+      "kaynaklar": [
+        "https://www.logo.com.tr/urun/logo-edge-hr",
+        "https://www.logo.com.tr/en/product/logo-j-hr",
+        "https://www.logo.com.tr/urun/logo-bordro-plus",
+        "https://www.logo.com.tr/en/category/payroll-management",
+        "https://docs.logo.com.tr/pages/viewpage.action?pageId=50679864"
+      ]
+    },
+    {
+      "urun": "Mikro Yazılım: Personel Yönetimi (Mikro Jump) / İnsan Kaynakları Yönetimi (Mikro Fly) + e-Bordro",
+      "lisans": "Ticari, kapalı kaynak. Ürün aileleri: Mikro Jump (KOBİ), Mikro Fly (50+ çalışan / büyük işletme); Run ürünü bordro sayfasında geçmiyor.",
+      "ce_vs_ee_notu": "Açık kaynak sürüm yok. İK kapsamı pakete göre değişir: Jump -> Personel Yönetimi (sicil, puantaj, bordro, e-Bildirge); Fly -> İnsan Kaynakları Yönetimi modülü (işe alımdan ayrılışa, izin, performans, kariyer, eğitim).",
+      "moduller_var": [
+        "Özlük/Sicil: sicil kartları, özlük bilgileri, özgeçmiş, iletişim, sertifika vb. evrak kaydı",
+        "Puantaj: puantaj işlemleri, maaş hakediş hesaplama",
+        "İzin kartları, izin ve mesai yönetimi; fazla mesai kaydı",
+        "Bordro: bordro takibi; bordroyu çalışan ve mali müşavirle paylaşma",
+        "Borç ve devir tanımlamaları, harcama ve avans takibi",
+        "Zimmet yönetimi",
+        "Performans yönetimi, kariyer, eğitim takibi (Fly İK modülü)",
+        "İşe alım: 'işe alımdan işten ayrılana dek' takip ifadesi (Fly) - ayrı ATS detayı doğrulanamadı",
+        "Muhasebe entegrasyonu",
+        "Personel devam sayfası: çalışma saatleri, yemek, ulaşım bilgisi takibi",
+        "Çok işyeri: Fly 'SGK'ya bağlı iş yerlerinizin ve statüsü ne olursa olsun tüm çalışanlarınızın' takibi"
+      ],
+      "turkiye_ozel": [
+        "SGK e-Bildirge'yi program üzerinden doğrudan SGK sistemine gönderme (Jump ve Fly Personel Yönetimi)",
+        "e-Bordro: bordroların imza gerekmeden KEP (Kayıtlı Elektronik Posta) ile tek tuşla elektronik gönderimi (e-Dönüşüm ürünü)",
+        "MUHSGK, teşvik hesaplama, kıdem/ihbar, BES, icra, banka talimat dosyası: incelenen resmi sayfalarda geçmiyor -> doğrulanamadı",
+        "PDKS cihaz entegrasyonu: 'Personel Devam Programı' sayfasında cihaz/kart okuyucu entegrasyonu ifadesi yok -> doğrulanamadı"
+      ],
+      "eksik_veya_yok": [
+        "Vardiya planlama: sayfalarda geçmiyor (doğrulanamadı)",
+        "Çalışan self-servis portalı: sayfalarda geçmiyor (doğrulanamadı)",
+        "Onboarding/Offboarding iş akışı, HR vakaları/disiplin: doğrulanamadı"
+      ],
+      "kaynaklar": [
+        "https://www.mikro.com.tr/bordro-programi/",
+        "https://www.mikro.com.tr/ik-programi/",
+        "https://www.mikro.com.tr/personel-devam-programi/",
+        "https://www.mikro.com.tr/e-bordro/"
+      ]
+    },
+    {
+      "urun": "Kolay İK (Personel Yönetimi + Kolay Bordro + PDKS)",
+      "lisans": "Ticari SaaS (bulut, abonelik, taahhütsüz; 15 gün deneme). Kapalı kaynak.",
+      "ce_vs_ee_notu": "Açık kaynak sürüm yok. Ana sayfa sekmeleri: Personel, Bordro, Performans, Aday Takip, Vardiya, İK Analitiği, Ücret. Ek hizmet: 'Bordro ve Teşvik Danışmanlığı' / outsource bordro (yazılım değil, hizmet).",
+      "moduller_var": [
+        "Personel/Özlük yönetimi, zimmet yönetimi",
+        "İzin yönetimi; avans, harcama, fazla mesai taleplerinin onayı (yönetici)",
+        "Puantaj + PDKS: QR kod tabanlı, bulut, mobil cihazdan giriş-çıkış + konum doğrulama; turnike/kart okuyucu/ek cihaz gerektirmez; hareketler puantaja, oradan bordroya otomatik aktarılır; 'biyometrik veri toplamadan' konumlandırma",
+        "Vardiya (ana sayfa sekmesi; arama sonucu özetine göre vardiya ve mola planları - resmi sayfada detay açılmadı)",
+        "Bordro: bordro icmal raporu, MUHSGK raporu, puantaj raporu, çalışan ücret pusulası, çarşaf bordro; ücret pusulalarının çalışan hesabına otomatik yüklenmesi; toplu işlemler",
+        "Performans, Aday Takip (işe alım), Ücret yönetimi, İK Analitiği",
+        "Web + mobil erişim (çalışan self-servis: izin/avans/harcama talebi - ana sayfa)",
+        "Entegrasyon: muhasebe yazılımları, ERP, e-posta araçları (SSS)"
+      ],
+      "turkiye_ozel": [
+        "Vergi, teşvik ve SGK mevzuat değişikliklerinin otomatik güncellenmesi (bordro sayfası)",
+        "SGK işe giriş / işten çıkış işlemlerini uygulamadan tamamlama (bordro sayfası)",
+        "MUHSGK raporu (bordro sayfası rapor listesi)",
+        "Teşvik detaylarının toplu işlemlerle yönetimi (bordro sayfası); teşvik hesaplama motorunun kapsamı doğrulanamadı",
+        "Outsource bordro HİZMETİ kapsamında (yazılım özelliği olarak değil): banka ödeme listeleri, tazminat hesaplamaları, icra/BES bordrolaştırma, SGK giriş-çıkış, iş göremezlik raporları, İŞKUR kayıtları, muhtasar ve hizmet beyannameleri, Ar-Ge/teknopark istisnalı bordrolar",
+        "KVKK: veri işleyen sıfatı ve biyometrik veri toplamama vurgusu (PDKS sayfası)",
+        "e-Bildirge doğrudan gönderim, e-imzalı/e-arşiv bordro: doğrulanamadı"
+      ],
+      "eksik_veya_yok": [
+        "Eğitim/LMS modülü: resmi sayfalarda ürün olarak geçmiyor ('Akademi' kullanıcı eğitim içeriği) -> doğrulanamadı",
+        "Onboarding/Offboarding iş akışı: doğrulanamadı",
+        "Organizasyon şeması: doğrulanamadı",
+        "Fiziksel PDKS cihaz (turnike/kart) entegrasyonu: ürün cihazsız QR modeline odaklı; cihaz entegrasyonu doğrulanamadı",
+        "HR vakaları/disiplin: doğrulanamadı"
+      ],
+      "kaynaklar": [
+        "https://kolayik.com/",
+        "https://kolayik.com/bordro-yazilimi",
+        "https://kolayik.com/pdks",
+        "https://kolayik.com/bordro-ve-tesvik-danismanligi"
+      ]
+    },
+    {
+      "urun": "Luca (Luca Mali Müşavir Paketi - bordro/personel bileşeni + ROTA teşvik uygulaması)",
+      "lisans": "Ticari, web tabanlı merkezi muhasebe sistemi (TÜRMOB ile ilişkili; sayfada 'Türkiye'nin ilk ... web tabanlı merkezi muhasebe sistemi'). Kapalı kaynak.",
+      "ce_vs_ee_notu": "Açık kaynak sürüm yok. Ürün bir HRMS değil; mali müşavirlere yönelik muhasebe paketinin bordro/personel bileşeni. Kurumsal İK modülleri (işe alım, performans, eğitim) ürün sayfalarında geçmiyor.",
+      "moduller_var": [
+        "Bordro ve Personel Yönetimi: bordro süreç takibi, maaş hesaplama, izinler, primler",
+        "Toplu personel bordro gider/gelir (muhasebe) kayıtları; bordro -> yevmiye/beyanname entegrasyonu",
+        "Toplu personel kartı işlemleri (kanun no, ücret, işten çıkış)",
+        "Mobil erişim, kurum entegrasyonları (GİB, SGK, banka, TÜİK vb.)"
+      ],
+      "turkiye_ozel": [
+        "e-Beyanname ve e-Bildirge işlemleri; e-Devlet entegrasyonu ile e-İşe Giriş / e-İşten Çıkış otomasyonu (Ürün Bulucu sayfası)",
+        "SGK veya gelir vergisi istisnası içeren farklı kanun numaralarının geçerlilik tarihine göre doğru istisna tutarlarıyla bordroya aktarılması; işyeri borçlu olduğu aylarda bordroyu teşviksiz hesaplama",
+        "Luca ROTA uygulaması: geriye dönük ve cari dönem istihdam teşviki sorgulama/hesaplama, personel bazında teşvik kazancı raporu",
+        "Kıdem tazminatı, ihbar tazminatı, huzur hakkı gibi ek kazançların Muhtasar beyanname işçilik kartlarına otomatik/toplu yansıtılması",
+        "BES takibi (katılımcı ve ödemeler)",
+        "Puantaj, PDKS, icra, e-bordro: doğrulanamadı"
+      ],
+      "eksik_veya_yok": [
+        "İşe alım, performans, eğitim, onboarding/offboarding, self-servis portal: ürün sayfalarında yok (doğrulanamadı)",
+        "Vardiya/PDKS: doğrulanamadı"
+      ],
+      "kaynaklar": [
+        "https://www.luca.com.tr/Sayfa/UrunBulucu/89",
+        "https://www.luca.com.tr/Products/Index/5",
+        "https://www.luca.com.tr/Sayfa/luca-bes-sistemi-hakkinda-sikca-sorulan-sorular/50"
+      ]
+    },
+    {
+      "urun": "Logo Netsis 3 Bordro (+ Logo Netsis HR)",
+      "lisans": "Ticari, kapalı kaynak. 'Çalışan ve Modül Bazlı' lisans; ana paket 100 çalışan (Entegre: 10 kullanıcı, Standard/Enterprise: 20 kullanıcı); LEM yıllık bakım aboneliği (fiyat listesi 6 Temmuz 2024).",
+      "ce_vs_ee_notu": "Açık kaynak yok. Netsis 3 Entegre / Standard / Enterprise ve Netsis Wings ailelerine opsiyon ya da tek başına kurulabilir; eLogo İSG çözümü ile entegre çalışabilir. docs.logo.com.tr'de ayrıca 'Logo Netsis HR Bilgi Deposu' mevcut (online bordro zarfı) - HR ürün kapsamı doğrulanamadı.",
+      "moduller_var": [
+        "Sicil yönetimi, bordro, borç-avans yönetimi (fiyat listesi 'Açıklamalar' md.1)",
+        "Personel devir bilgileri (docs başlığı)",
+        "Bordro zarfı basımı; şifreli PDF bordro zarfının e-posta ile gönderimi (docs başlığı); fiziksel cepli/cepsiz/şifreli bordro zarfı sarf malzemesi",
+        "TR/EN standart dil; Arapça, Farsça, Rusça, Azerice ek dil paketleri",
+        "Netsis ERP (muhasebe) ile entegre çalışma"
+      ],
+      "turkiye_ozel": [
+        "BES Otomatik Katılım Entegrasyon Modülü (ücretli opsiyon) - AvivaSA, Anadolu Hayat Emeklilik, Allianz Yaşam ve Emeklilik ile entegre (fiyat listesi)",
+        "e-Bildirge: 'e-Bildirge Basımında Meslek Kodlarının Desteklenmesi' doküman sayfası (docs başlığı; içerik JS nedeniyle okunamadı); arama özetine göre MUHSGK içindeki SGK bilgilerinin Bordro/İşlemler/E-Bildirge menüsünden text formatta alınması - kısmen doğrulandı",
+        "KVKK: arama özetine göre veri alanı bazında rıza takibi ve rıza süresi dolan alanların anonimleştirilmesi (sürüm notu 9.26 Şubat 2020; sayfa içeriği okunamadı) - doğrulanamadı",
+        "eLogo İSG entegrasyonu (fiyat listesi)",
+        "Teşvik, kıdem/ihbar, icra, banka talimat dosyası, PDKS: doğrulanamadı"
+      ],
+      "eksik_veya_yok": [
+        "Fiyat listesine göre ürün kapsamı 'sicil + bordro + borç/avans' ile sınırlı: işe alım, performans, eğitim, vardiya, self-servis portal bu üründe yok (Netsis HR ayrı ürün, kapsamı doğrulanamadı)"
+      ],
+      "kaynaklar": [
+        "https://cdn.logo.com.tr/files/logocomtr/Uploads/Documents/logo-netsis-3-bordro-fiyat-listesi.pdf",
+        "https://docs.logo.com.tr/pages/viewpage.action?pageId=50680497",
+        "https://docs.logo.com.tr/pages/viewpage.action?pageId=47081981",
+        "https://docs.logo.com.tr/pages/viewpage.action?pageId=66252894",
+        "https://docs.logo.com.tr/pages/viewpage.action?pageId=66252925"
+      ]
+    },
+    {
+      "urun": "Workcube HR (Workcube ERP'nin İK bileşeni)",
+      "lisans": "Ticari ERP (Workcube). Lisans modeli / açık kaynak durumu bu çalışmada doğrulanamadı.",
+      "ce_vs_ee_notu": "Sürüm ayrımı doğrulanamadı. Ürün sayfası ölçek segmentleri: startup/küçük, orta, büyük işletmeler, holdingler ve grup şirketleri. Ayrıca bulut bordrolama hizmeti (WRK İK) ve teşvik danışmanlığı hizmeti var (arama sonuçları).",
+      "moduller_var": [
+        "Modül listesi (resmi İK sayfası): Çalışan Bilgileri, İşe Alım, Bordro ve Puantaj, Bordro Kuralları, Ücret Yönetimi ve Özlük, Organizasyon Planlama, Rol Planlama, Performans, Disiplin ve Diğer İşlemler, Devam ve Kontrol, Sağlık ve Güvenlik İşlemleri, Bildirgeler, Şemalar",
+        "Çok katmanlı ve çok lokasyonlu organizasyon, rol ve pozisyon planlama (koltuk/yetki/sorumluluk)",
+        "Yetkinlik bazlı seçme-yerleştirme, işe başlatma (onboarding), hedef/yetkinlik bazlı performans, kariyer planlama",
+        "Ücret yönetimi: kademe/derece, farklı ödeme bileşenleri, değişken tazminat planları ve yardımlar içeren ödenek sistemi",
+        "PDKS Raporlama Sistemi: devam kontrolü, maaşın PDKS verisine göre otomatik hesaplanması",
+        "Vardiya tanımı (şube bazında, ücret kartı ile ilişkilendirme) - arama sonucu özeti; resmi İK sayfasında 'vardiya' kelimesi bulunamadı -> kısmen doğrulandı",
+        "Self-servis fonksiyonlar (çalışan-İK/idari işler iletişimi)",
+        "İSG (Sağlık ve Güvenlik İşlemleri)",
+        "Memur işe başlatma ve bordrosu (wiki sayfa başlığı) - kamu personeli desteği, doğrulanamadı"
+      ],
+      "turkiye_ozel": [
+        "Yasa, yönetmelik, tebliğ ve genelge parametreleriyle desteklenen ücret sistemi; işe giriş, işten çıkış, yasal bildirimler; 'Bildirgeler' modülü (resmi İK sayfası)",
+        "Teşvik danışmanlığı hizmeti (arama sonucu özeti) - yazılımda teşvik hesaplama doğrulanamadı",
+        "MUHSGK, kıdem/ihbar, BES, icra, banka talimat dosyası, e-bordro: resmi İK sayfasında geçmiyor -> doğrulanamadı"
+      ],
+      "eksik_veya_yok": [
+        "Eğitim/LMS: 'Holistic Digital Academy' Workcube'ün kendi akademisi; ürün içi eğitim yönetimi modülü doğrulanamadı",
+        "Offboarding iş akışı: doğrulanamadı"
+      ],
+      "kaynaklar": [
+        "https://www.workcube.com/tr/insan-kaynaklari-ik",
+        "https://www.workcube.com/tr/insan-kaynaklari-bordro-kurallari",
+        "https://www.workcube.com/urunler/ikpdks-raporlama-sistemi",
+        "https://www.workcube.com/tr/hr-ik-bulut-bordro-cozumu",
+        "https://wiki.workcube.com/tr/detail/11216"
+      ]
+    }
+  ],
+  "tam_hrms_icin_ortak_minimum": [
+    "Çalışan ana kaydı: kimlik, iletişim, iş bilgisi, banka hesabı, belge ekleri; efektif tarihli değişiklik geçmişi (Frappe Employee Property History, Logo 'Zaman İzli Kayıtlar')",
+    "Organizasyon: şirket -> şube/işyeri -> departman -> pozisyon/unvan; kadro planı ve kadro talebi (Frappe Staffing Plan/Job Requisition, Workcube Organizasyon/Rol Planlama); organizasyon şeması",
+    "İzin: izin tipi, politika/hakediş (tahakkuk), izin defteri (ledger), bakiye, çok seviyeli onay, izin paraya çevirme, resmi tatil takvimi ve takvim atama",
+    "Devam/PDKS: check-in/out olayı (cihaz, kiosk, mobil, QR, geofence/IP kısıtı), ham olaydan devam kaydı üretimi, geç kalma/erken çıkma kuralları, düzeltme talebi ve onayı",
+    "Vardiya: vardiya tipi, atama, rotasyon, vardiya/iş tipi değişiklik talebi, roster yayınlama",
+    "Puantaj: devam + izin + vardiya verisinden dönemsel çalışma girişleri (Odoo work entry kaynakları: çalışma takvimi / attendance / planning) ve onaylı puantajın bordroya aktarımı",
+    "Fazla mesai: tip/oran tanımı, hesaplama, onay, bordro bileşenine bağlama (Frappe Overtime Slip, Horilla AttendanceOverTime)",
+    "Bordro motoru: ücret bileşenleri (kazanç/kesinti), maaş yapısı ve atama, tarih geçerlilikli kural parametreleri, toplu bordro çalıştırma (payroll run), ek/değişken ödeme ve kesinti, geriye dönük fark (arrear) ve bordro düzeltme, net->brüt, avans/borç/kredi taksiti, bordro zarfı dağıtımı",
+    "Muhasebe entegrasyonu: bordro -> yevmiye fişi, masraf merkezi dağılımı",
+    "Masraf ve avans talepleri (onaylı), bordroyla geri ödeme",
+    "İşe alım (ATS): açık pozisyon, aday, kaynak, mülakat ve geri bildirim, teklif, referans",
+    "Yaşam döngüsü: onboarding ve offboarding şablonlu görev listeleri, transfer, terfi, çıkış görüşmesi, son hesap/ibra (Frappe'de hepsi ayrı doctype)",
+    "Performans: dönem/döngü, hedef (OKR/KRA), yetkinlik, 360/çok yönlü geri bildirim, 1:1 toplantı",
+    "Eğitim ve beceri: eğitim programı/etkinliği, katılım, sonuç, beceri matrisi",
+    "Çalışan talepleri/yardım masası + şikâyet + disiplin kaydı (Horilla helpdesk + DisciplinaryAction, OrangeHRM Advanced Request Desk/Discipline/Employee Voice, Frappe Employee Grievance)",
+    "Self-servis portal ve mobil uygulama: profil, izin/avans/masraf/mesai talebi, bordro görüntüleme, duyurular; yönetici onay kutusu",
+    "Çok şirketli yapı ve şirket bazlı veri ayrımı",
+    "Raporlama/analitik, denetim izi, rol-yetki, REST API, LDAP/SSO"
+  ],
+  "turkiye_farki": [
+    "Bordro hesap çekirdeği: SGK işçi/işveren ve işsizlik primi, SGK tavanı, kümülatif matrahla artan oranlı gelir vergisi, asgari ücret GV ve damga vergisi istisnası, damga vergisi (Odoo EE l10n_tr_hr_payroll dokümanı bunları kapsıyor)",
+    "Yasal parametrelerin tarihli tabloda tutulması ve çevrim içi güncellenmesi: asgari ücret, vergi dilimleri, kıdem tavanı (Logo My Logo, Kolay İK otomatik güncelleme, Odoo Rule Parameters)",
+    "SGK bildirimleri: işe giriş/işten çıkış bildirgesi, aylık prim ve hizmet belgesi, e-Bildirge'nin sistemden gönderimi (Logo Bordro Plus, Mikro, Luca, Workcube)",
+    "MUHSGK (muhtasar ve prim hizmet beyannamesi) üretimi; kıdem/ihbar/huzur hakkı gibi ek kazançların muhtasar işçilik kartlarına yansıtılması (Luca, Kolay İK MUHSGK raporu, Netsis e-Bildirge text çıktısı)",
+    "Teşvik: kanun numarası bazlı SGK/GV teşvikleri, geçerlilik tarihine göre istisna, işyerinin borçlu olduğu aylarda teşviksiz hesaplama, geriye dönük teşvik sorgulama (Luca ROTA), Ar-Ge/teknopark istisnaları (Kolay İK, Logo Edge HR)",
+    "Kıdem ve ihbar tazminatı hesaplama + kıdem/ihbar grupları (sendikalı/yabancı mevzuat için - Logo j-HR dokümantasyonu, kısmen doğrulandı)",
+    "BES otomatik katılım kesintisi ve emeklilik şirketi entegrasyonu (Netsis: AvivaSA, Anadolu Hayat, Allianz; Logo Bordro Plus; Luca BES takibi)",
+    "İcra ve nafaka kesintileri, personel borç ödeme planları (Logo Bordro Plus)",
+    "Bordro dağıtımı: KEP ile e-Bordro (Mikro), şifreli e-posta/PDF bordro zarfı (Logo Bordro Plus, Netsis)",
+    "PDKS: fiziksel cihaz (kart/biyometrik) verisinin izlenip düzeltilip onaylanarak puantaja aktarımı (Logo Edge HR) veya cihazsız QR+konum modeli ve 'biyometrik veri toplamama' KVKK vurgusu (Kolay İK)",
+    "KVKK: veri alanı bazında rıza takibi ve süresi dolan verilerin anonimleştirilmesi (Netsis sürüm notu - doğrulanamadı)",
+    "İSG entegrasyonu (Netsis + eLogo İSG; Workcube Sağlık ve Güvenlik İşlemleri); iş göremezlik raporları ve İŞKUR kayıtları (Kolay İK hizmet kapsamı)",
+    "Çok işyeri (SGK işyeri sicili) bazında bordro ve bildirge; aynı ayda birden fazla ödeme (Logo Bordro Plus SSS)",
+    "Kamu personeli (memur) bordrosu (Workcube wiki başlığı - doğrulanamadı)",
+    "Yabancı çalışanlar için ek dil paketleri: Arapça, Farsça, Rusça, Azerice (Logo Bordro Plus, Netsis)",
+    "Banka talimat/ödeme listesi dosyası: yalnızca Kolay İK outsource hizmet kapsamında açıkça geçiyor; yazılım özelliği olarak hiçbir TR ürününde doğrulanamadı"
+  ],
+  "notlar": [
+    "Açık kaynak dünyasında Türkiye bordrosu boşluğu: Frappe HRMS (regional: yalnız india, united_arab_emirates), Horilla, OrangeHRM, OCA/payroll ve OCA/l10n-turkey'de TR bordro modülü yok. Resmi tek seçenek Odoo Enterprise'daki l10n_tr_hr_payroll (ücretli). GitHub'daki l10n_tr_hr_payroll topluluk depoları 0 yıldızlı, lisanssız, 2024'ten beri güncellenmemiş.",
+    "Odoo EE Türkiye bordro dokümanında e-Bildirge, MUHSGK, teşvik, kıdem/ihbar, BES, icra geçmiyor; dokümanda 'federal and state regulations' gibi başka ülkeden kopyalanmış kalıp ifade var -> TR kapsamı yüzeysel olabilir (çıkarım, doğrulanmadı).",
+    "Referans mimari için en zengin açık kaynak veri modeli Frappe HRMS: onboarding/transfer/promotion/separation/full-and-final, payroll correction/arrear/withholding, gratuity kural motoru, leave ledger ayrı doctype'lar. Lisans GPL-3 (kod kopyalanırsa türev GPL olur; yalnızca kavramsal referans önerilir).",
+    "Horilla LGPL-2.1 ve Django tabanlı; PDKS cihaz sürücüleri (ZKTeco/eSSL, Anviz, Matrix COSEC, Dahua, e-Time Office) ile en somut cihaz entegrasyonu örneği.",
+    "OrangeHRM'de yerleşik bordro yok; Starter'da onboarding/offboarding, eğitim, vardiya, disiplin, talep masası yok (Advanced'e özel).",
+    "TR ticari ürünler iki kümeye ayrılıyor: (a) bordro/sicil odaklı (Netsis 3 Bordro, Luca, Logo Bordro Plus, Mikro Jump) ve (b) uçtan uca İK (Logo Edge HR, Mikro Fly, Kolay İK, Workcube). Tam HRMS için (b) kapsamı + (a)'nın mevzuat derinliği gerekiyor.",
+    "Yöntem: Odoo edition tablosu ve OrangeHRM plan kartları, küçük model özetleri hatalı çıktığı için ham HTML'deki ikon sınıflarından (fa-check/fa-times, feature disabled) parse edildi. GitHub verileri gh/GitHub API ile (depo içerik listeleri) alındı.",
+    "Kolay İK sayfalarının HTML'inde yayına sızmış görünen iç notlar/parametre adları (ör. kidemTavanlari, sgk.tesvik*) görüldü; kanıt olarak kullanılmadı.",
+    "docs.logo.com.tr (Confluence) sayfaları JS/oturum nedeniyle içerik vermedi; bu kaynaktan gelen iddialar yalnızca sayfa başlıkları ve arama özetlerine dayanıyor ve 'kısmen doğrulandı/doğrulanamadı' olarak işaretlendi.",
+    "Paraşüt, Univera, Mikrogrup bütçe nedeniyle incelenmedi."
+  ],
+  "kapsama_matrisi": {
+    "aciklama": "V=resmi kaynakta var; K=kısmen/ücretli sürümde/hizmet olarak/jenerik; Y=yok (kaynakta yok veya sürüm tablosunda hayır); ?=doğrulanamadı. Detay ve kaynaklar ilgili ürün kaydında.",
+    "sutunlar": [
+      "odoo_ce",
+      "odoo_ee",
+      "frappe",
+      "horilla",
+      "ohrm_starter",
+      "ohrm_adv",
+      "logo_edgehr_bordroplus",
+      "mikro",
+      "kolayik",
+      "luca",
+      "netsis_bordro",
+      "workcube"
+    ],
+    "satirlar": {
+      "Çalışanlar/Özlük": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "V",
+        "netsis_bordro": "V",
+        "workcube": "V"
+      },
+      "Organizasyon/Pozisyon": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "?",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "Belgeler (DMS)": {
+        "odoo_ce": "Y",
+        "odoo_ee": "V",
+        "frappe": "?",
+        "horilla": "V",
+        "ohrm_starter": "?",
+        "ohrm_adv": "?",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "V",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "İzinler": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "V",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "Takvim (resmi tatil)": {
+        "odoo_ce": "?",
+        "odoo_ee": "?",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "?",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "?"
+      },
+      "Vardiyalar": {
+        "odoo_ce": "Y",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "?",
+        "kolayik": "K",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "K"
+      },
+      "PDKS (cihaz/mobil check-in)": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "V",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "Puantaj/çalışma girişi": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "Fazla Mesai": {
+        "odoo_ce": "?",
+        "odoo_ee": "?",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "?",
+        "ohrm_adv": "?",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "Bordro motoru": {
+        "odoo_ce": "K",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "K",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "V",
+        "netsis_bordro": "V",
+        "workcube": "V"
+      },
+      "TR bordro (SGK+GV+DV)": {
+        "odoo_ce": "Y",
+        "odoo_ee": "V",
+        "frappe": "Y",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "V",
+        "netsis_bordro": "V",
+        "workcube": "V"
+      },
+      "SGK bildirge/e-Bildirge": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "Y",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "K",
+        "luca": "V",
+        "netsis_bordro": "K",
+        "workcube": "V"
+      },
+      "MUHSGK": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "Y",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "?",
+        "kolayik": "V",
+        "luca": "V",
+        "netsis_bordro": "K",
+        "workcube": "?"
+      },
+      "Teşvik hesaplama": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "Y",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "K",
+        "luca": "V",
+        "netsis_bordro": "?",
+        "workcube": "?"
+      },
+      "Kıdem/İhbar": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "K",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "K",
+        "mikro": "?",
+        "kolayik": "K",
+        "luca": "V",
+        "netsis_bordro": "?",
+        "workcube": "?"
+      },
+      "BES otomatik katılım": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "Y",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "K",
+        "luca": "V",
+        "netsis_bordro": "V",
+        "workcube": "?"
+      },
+      "İcra/nafaka kesintisi": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "Y",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "K",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "?"
+      },
+      "Banka ödeme dosyası": {
+        "odoo_ce": "Y",
+        "odoo_ee": "?",
+        "frappe": "?",
+        "horilla": "?",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "?",
+        "kolayik": "K",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "?"
+      },
+      "Muhasebe fişi": {
+        "odoo_ce": "Y",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "?",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "Y",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "V",
+        "netsis_bordro": "V",
+        "workcube": "?"
+      },
+      "Onboarding": {
+        "odoo_ce": "?",
+        "odoo_ee": "?",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "V"
+      },
+      "Transfer/Terfi": {
+        "odoo_ce": "?",
+        "odoo_ee": "?",
+        "frappe": "V",
+        "horilla": "Y",
+        "ohrm_starter": "?",
+        "ohrm_adv": "?",
+        "logo_edgehr_bordroplus": "?",
+        "mikro": "?",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "?"
+      },
+      "Offboarding": {
+        "odoo_ce": "?",
+        "odoo_ee": "?",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "?"
+      },
+      "İşe Alım": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "K",
+        "kolayik": "V",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "V"
+      },
+      "Performans": {
+        "odoo_ce": "Y",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "V",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "V"
+      },
+      "Eğitim": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "Y",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "?"
+      },
+      "HR Vakaları/Disiplin/Talep": {
+        "odoo_ce": "Y",
+        "odoo_ee": "K",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "Y",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "K",
+        "mikro": "?",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "Y",
+        "workcube": "V"
+      },
+      "Self-servis/Mobil": {
+        "odoo_ce": "K",
+        "odoo_ee": "V",
+        "frappe": "V",
+        "horilla": "V",
+        "ohrm_starter": "V",
+        "ohrm_adv": "V",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "?",
+        "kolayik": "V",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "V"
+      },
+      "Çok şirket/işyeri": {
+        "odoo_ce": "V",
+        "odoo_ee": "V",
+        "frappe": "?",
+        "horilla": "V",
+        "ohrm_starter": "?",
+        "ohrm_adv": "?",
+        "logo_edgehr_bordroplus": "V",
+        "mikro": "V",
+        "kolayik": "?",
+        "luca": "?",
+        "netsis_bordro": "?",
+        "workcube": "K"
+      }
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K21",
+    "ad": "Risk yönetimi",
+    "alan": "C-guvence-ve-yonetisim",
+    "amac": "Değişikliklerin ve programın risklerinin ortak bir ölçekle sınıflanması ve risk seviyesinin otomasyon düzeyini belirlemesi.",
+    "kapsam": [
+      "risk ölçeği tanımı",
+      "risk kategorileri",
+      "seviye → eylem eşlemesi",
+      "yasaklı değişiklik sınıfı",
+      "risk kaydı",
+      "riske göre doğrulama derinliği",
+      "program düzeyi risk"
+    ],
+    "kapsam_disi": [
+      "tek tek risk kayıtları (03-analizler/risk-kaydi.json)"
+    ],
+    "komsu_kumeler": [
+      "K05",
+      "K17",
+      "K22",
+      "K24"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K21-001",
+      "baslik": "Tek risk ölçeği tanımı",
+      "ihtiyac": "Olasılık ve etki için tek bir ölçeğin (seviye sayısı, her seviyenin takvim/maliyet/performans/güvenlik/veri boyutlarında tanımı, olasılık bantları) seçilmesi ve tüm akışlarda kullanılması.",
+      "cozulecek_sorun": "Kaynaklarda 3, 4 ve 5 seviyeli farklı risk modelleri ve 3×3, 5×5, 10×10 referans matrisler var; aynı değişiklik farklı akışta farklı riskli sayılıyor.",
+      "yetenek_siniflari": [
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tek ölçek ve seviye tanımları yazılı; tüm akışlar aynı ölçeği kullanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-013",
+          "S-053",
+          "S-057",
+          "S-058",
+          "S-059",
+          "S-060"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-010",
+        "D-004",
+        "G-018",
+        "H-06",
+        "Q-018"
+      ]
+    },
+    {
+      "id": "N-K21-002",
+      "baslik": "Risk kategorileri",
+      "ihtiyac": "Değişiklik risk kategorilerinin (işlev ve iş kuralları, güvenlik ve gizlilik, güvenilirlik ve kurtarma, performans ve verimlilik, deneyim ve erişilebilirlik, veri ve sözleşmeler, kod/mimari/işletim) tanımlanması ve her değişikliğin her kategori için 'etkilenir/etkilenmez' kararı alması.",
+      "cozulecek_sorun": "Fonksiyon dışı gereksinimler atlanıyor.",
+      "yetenek_siniflari": [
+        "Y-06",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her değişiklikte kategori bazında etkilenme kararı kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-053"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K21-003",
+      "baslik": "Risk seviyesi → eylem eşlemesi",
+      "ihtiyac": "Her risk seviyesinin otomasyon düzeyini belirlemesi (ör. yasaklı → dur ve geri al; yüksek → insan onayı; orta/düşük → otomatik), eşlemenin tek biçimde tanımlanması.",
+      "cozulecek_sorun": "Kaynaklar çelişiyor: bir akışta düşük risk de aksiyon planı döngüsüne giriyor, diğerinde düşük/orta doğrudan geçiyor; risk adımının akıştaki yeri de farklı.",
+      "yetenek_siniflari": [
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Seviye → eylem tablosu tek ve yazılı; akışta riskin değerlendirildiği nokta tek."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-013",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-010",
+        "D-004",
+        "G-018",
+        "Q-018"
+      ],
+      "bagimliliklar": [
+        "N-K21-001"
+      ]
+    },
+    {
+      "id": "N-K21-004",
+      "baslik": "Yasaklı değişiklik sınıfı",
+      "ihtiyac": "Hangi değişikliklerin ajan tarafından hiç yapılamayacağının (yasaklı) listelenmesi; yasaklı sınıfın normal onayla açılamaması, politika değişikliği gerektirmesi.",
+      "cozulecek_sorun": "Yasaklı değişikliğin otomatik düzeltme döngüsüne girmesi.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-42"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Yasaklı sınıfta otomatik düzeltme 0.",
+        "Yasaklı değişiklik listesi yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "Q-018"
+      ]
+    },
+    {
+      "id": "N-K21-005",
+      "baslik": "Program risk kaydı",
+      "ihtiyac": "Programın kendi risklerinin (model kayması, sağlayıcı kesintisi, regülasyon takvimi, kapasite, beceri körelmesi vb.) tek bir kayıtta sahip, olasılık, etki ve izleme sinyaliyle tutulması; program artımı planlamasında risk ele alma yöntemiyle ilişkilendirilmesi.",
+      "cozulecek_sorun": "Program riskleri değişiklik risklerinden ayrılmamış; ajan özgü riskler planlamaya girmiyor.",
+      "yetenek_siniflari": [
+        "Y-39"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Program risk kaydı var ve periyodik gözden geçiriliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-153",
+          "S-171"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K21-006",
+      "baslik": "Risk aksiyon planı döngüsünün tanımı",
+      "ihtiyac": "Ana süreçteki 'aksiyon planı yarat, en fazla 12 kez çözüm dene, aşarsa hata' döngüsünün neyi saydığının ve 'devam' sonrası akışın nereye gittiğinin tanımlanması.",
+      "cozulecek_sorun": "Döngünün sayacı ve çıkışı tanımsız; görev toplam deneme sınırıyla karışıyor.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Döngünün sayacı, çıkışı ve görev bütçesiyle ilişkisi yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "C-001",
+        "G-003",
+        "Q-019"
+      ],
+      "bagimliliklar": [
+        "N-K20-001"
+      ]
+    },
+    {
+      "id": "N-K21-007",
+      "baslik": "Yapay zekâ etki değerlendirmesi",
+      "ihtiyac": "Geliştirilen ürün yüksek riskli bir alanda ise (ör. kredi skorlama, işe alım, kamu hizmeti) yapay zekâ destekli geliştirme sürecinin kanıtlarının etki değerlendirmesine ve teknik dokümantasyona girmesi.",
+      "cozulecek_sorun": "Ürünün risk sınıfı bilinmeden geliştirme sürecinin kanıt yükümlülüğü bilinemiyor.",
+      "yetenek_siniflari": [
+        "Y-28"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Her ürünün yapay zekâ düzenlemesi açısından risk sınıfı kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-158",
+          "S-156"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "Q-030",
+        "R-023"
+      ],
+      "bagimliliklar": [
+        "N-K22-006"
+      ]
+    }
+  ]
+}

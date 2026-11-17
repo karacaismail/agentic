@@ -1,0 +1,165 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-29",
+    "ad": "Değerlendirme (eval) altyapısı (kurum görev seti, k koşu, kalibrasyon, regresyon, hile dedektörü)",
+    "grup": "Değerlendirme ve öğrenme"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-171",
+      "yetenek_sinifi": "Y-29",
+      "kalip": "LLM hakeminde konum, uzunluk ve kendini kayırma yanlılığı",
+      "aciklama": "MT-Bench çalışması LLM hakemlerinde konum, ayrıntı (uzunluk) ve kendini kayırma yanlılıklarını belgeledi; 'Large Language Models are not Fair Evaluators' çalışması yalnız aday sırasını değiştirerek sıralamanın manipüle edilebildiğini gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2306.05685",
+        "https://arxiv.org/abs/2305.17926"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model veya kural seçimi karşılaştırmalı LLM hakemiyle yapılırsa uzun ve kendi ailesinden çıktılar kayrılır; yanlış model üretime alınır.",
+        "Hakem eşiği kalibre edilmezse ekipler arası kalite skorları karşılaştırılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-016",
+        "N-K23-002",
+        "N-K23-005"
+      ],
+      "ornek_araclar": [
+        "promptfoo",
+        "DeepEval",
+        "Ragas",
+        "OpenAI Evals"
+      ],
+      "erken_sinyal": "Aday sırası değiştirildiğinde hakem kararının değişmesi; uzunlukla skor arasında korelasyon.",
+      "azaltma": "Sıra değiştirerek çift değerlendirme, uzunluk normalizasyonu, farklı aileden hakem, insan etiketli kalibrasyon seti."
+    },
+    {
+      "id": "RK-172",
+      "yetenek_sinifi": "Y-29",
+      "kalip": "Hakemin yüzeysel girdiyle kandırılması",
+      "aciklama": "'One Token to Fool LLM-as-a-Judge' çalışması, ':' veya '.' gibi sembollerin ya da 'Düşünce süreci:' gibi genel açılışların, içerik olmadan hakemlerden sistematik yanlış pozitif ödül aldığını; bunun GPT-o1 ve Claude-4 gibi önde gelen sistemleri etkilediğini gösterdi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2507.08794"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan çıktılarını değerlendiren hakem, içerik yerine kalıba ödül verir; kontrollü öğrenme hattı bu kalıbı 'iyileşme' olarak öğrenebilir.",
+        "Hakem tabanlı kalite kapısı düşük maliyetle atlatılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-011",
+        "N-K05-016",
+        "N-K11-009"
+      ],
+      "ornek_araclar": [
+        "LLM-as-judge kapıları",
+        "Ödül modelleri",
+        "promptfoo llm-rubric"
+      ],
+      "erken_sinyal": "Boş veya kısa yanıtların hakemden yüksek skor alması (negatif kontrol testi).",
+      "azaltma": "Hakem setine negatif kontroller eklemek, referans tabanlı deterministik kontrollerle birleştirmek, hakemi düzenli adversarial test etmek."
+    },
+    {
+      "id": "RK-173",
+      "yetenek_sinifi": "Y-29",
+      "kalip": "Kıyaslama kirlenmesi ve ezber",
+      "aciklama": "'SWE-Bench Illusion' çalışması, güncel modellerin yalnız issue açıklamasından hatalı dosya yolunu %76'ya varan doğrulukla bulabildiğini ve SWE-Bench Verified kazanımlarının kısmen ezberden kaynaklanabileceğini gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2506.12286"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model/ajan seçimi kamuya açık kıyaslama puanına göre yapılırsa kurumun kapalı kod tabanında aynı başarı görülmez.",
+        "Kurum görev seti sızarsa (paylaşılan depo, sağlayıcı eğitimi) o da zamanla kirlenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-013"
+      ],
+      "ornek_araclar": [
+        "SWE-bench",
+        "HumanEval",
+        "Aider Polyglot",
+        "LiveCodeBench"
+      ],
+      "erken_sinyal": "Kamu kıyaslaması ile kurum görev seti arasındaki başarı farkının büyük olması.",
+      "azaltma": "Kurumun kendi kapalı görev seti, düzenli yenilenen gizli görevler, sağlayıcılarla eğitimde kullanmama sözleşmesi."
+    },
+    {
+      "id": "RK-174",
+      "yetenek_sinifi": "Y-29",
+      "kalip": "Tek koşuyla karar ve belirlenimsizlik",
+      "aciklama": "Anthropic'in 'Adding Error Bars to Evals' çalışması eval sonuçlarının istatistiksel belirsizlikle raporlanması gerektiğini gösterdi; Thinking Machines, sıcaklık 0'da bile LLM API'lerinin toplu işleme (batch) değişkenliği nedeniyle deterministik olmadığını açıkladı.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2411.00640",
+        "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek koşuda görülen birkaç puanlık fark 'model yükseltmesi başarılı' kararına dönüşür; bir sonraki koşuda tersine döner.",
+        "Regresyon kapısı eşikleri güven aralığı olmadan konursa sürekli yanlış alarm veya kaçan gerileme olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-003",
+        "N-K23-010",
+        "N-K19-005"
+      ],
+      "ornek_araclar": [
+        "promptfoo",
+        "Inspect AI",
+        "lm-evaluation-harness",
+        "Braintrust"
+      ],
+      "erken_sinyal": "Aynı eval'in tekrarında skorların eşik üstünde dalgalanması.",
+      "azaltma": "k koşu ve güven aralığı zorunluluğu, eşleştirilmiş karşılaştırma, yeniden üretilebilirlik için model/sağlayıcı/tohum kaydı."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 35,
+    "orta": 147,
+    "dusuk": 172,
+    "kritik": 2
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 62,
+    "RT-11": 43,
+    "RT-10": 26,
+    "RT-06": 23,
+    "RT-03": 21,
+    "RT-01": 18,
+    "RT-17": 18,
+    "RT-14": 18,
+    "RT-16": 17,
+    "RT-15": 17,
+    "RT-07": 13,
+    "RT-05": 13,
+    "RT-04": 12,
+    "RT-02": 10,
+    "RT-13": 10,
+    "RT-12": 5,
+    "RT-09": 2
+  }
+}

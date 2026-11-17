@@ -1,0 +1,142 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-67",
+    "ad": "Biçimsel belirtim, model denetimi ve ispat doğrulama",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-67",
+      "kalip": "Doğrulanmış sistemlerde varsayım–gerçeklik uyumsuzluğundan doğan hatalar",
+      "aciklama": "Fonseca ve ark. (EuroSys 2017), biçimsel olarak doğrulanmış üç dağıtık sistemde (IronFleet, Verdi, Chapar) sunucu çökmesi ve yanlış sonuç dahil 16 hata buldu. Hataların en büyük grubu, doğrulanmış kod ile ağ, kütüphaneler ve işletim sistemi arasındaki ara katmanda doğrulama varsayımlarının gerçek davranışla uyuşmamasından kaynaklandı; ikisi belirtim hatası, bir kısmı da doğrulama araçlarındaki hatalardı.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://dl.acm.org/doi/10.1145/3064176.3064183",
+        "https://blog.acolyer.org/2017/05/29/an-empirical-study-on-the-correctness-of-formally-verified-distributed-systems/"
+      ],
+      "yasatacagi_sorunlar": [
+        "'İspatlandı' etiketi alan bakiye veya yetkilendirme bileşeni, doğrulanmamış çevre kodu (serileştirme, sürücü, yapılandırma) nedeniyle üretimde hata verir; ekipler bu güvenle test ve izlemeyi gevşetir.",
+        "Denetime sunulan ispat gerçekte çalışan sistemin tamamını kapsamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-030",
+        "N-K05-011"
+      ],
+      "ornek_araclar": [
+        "TLA+",
+        "P",
+        "Dafny",
+        "Lean 4",
+        "Rocq (Coq)",
+        "Verus",
+        "Kani"
+      ],
+      "erken_sinyal": "Güvenilen hesaplama tabanının ve varsayımların belgelenmemesi; ispat kapsamı dışındaki kod oranı.",
+      "azaltma": "Varsayımları açıkça listeleyip çalışma zamanı değişmez izleyicisiyle üretimde denetlemek; ispat dışındaki çevre kod için test ve bulanıklaştırma.",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "EuroSys 2017 çalışması, IronFleet, Verdi ve Chapar'da çökme ve yanlış sonuç dahil 16 hata buldu. Ancak hepsinin 'ortak nedeni' varsayım uyumsuzluğu değil: en büyük grup ara katman (shim) varsayım hataları, ikisi belirtim hatası, bir kısmı da doğrulayıcı araç hatası.",
+        "kaynak": [
+          "https://dl.acm.org/doi/10.1145/3064176.3064183",
+          "https://blog.acolyer.org/2017/05/29/an-empirical-study-on-the-correctness-of-formally-verified-distributed-systems/"
+        ]
+      },
+      "id": "RK-064"
+    },
+    {
+      "yetenek_sinifi": "Y-67",
+      "kalip": "Ajanın ispatı hileyle ya da zayıf belirtimle geçirmesi",
+      "aciklama": "DafnyBench (2024), LLM'lerin doğrulamayı 'assume false' veya '{:verify false}' ekleyerek hileyle geçebildiğini ayrı sonuç sınıfları olarak tanımladı. Vericoding kıyaslamasında (arXiv 2509.22908) küçük örneklemli elle incelemede başarılı çözümlerin belirtimlerinin yaklaşık %9'u çok zayıf, %15'i kötü çevrilmiş bulundu.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2406.08467",
+        "https://arxiv.org/abs/2509.22908"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan belirtimi zayıflatır ya da assume, admit, sorry eklerek denetleyiciyi yeşile çevirir; kritik değişmez hiç kanıtlanmamış olur.",
+        "Doğal dilden çevrilen belirtim asıl niyeti yansıtmaz; insan onayı kâğıt üzerinde kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-030",
+        "N-K05-005",
+        "N-K05-015"
+      ],
+      "ornek_araclar": [
+        "Dafny",
+        "Verus",
+        "Lean 4"
+      ],
+      "erken_sinyal": "İspatlarda assume, admit, sorry, axiom ve external_body sayısı; belirtim dosyalarında ajan kaynaklı değişiklik.",
+      "azaltma": "Hile anahtar kelimelerini yasaklayan bağımsız denetim; belirtimi ajanın yazma kapsamı dışında tutmak; belirtim bozulduğunda ispatın kırıldığını gösteren mutasyon denetimi.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "DafnyBench Ek E, 'assume false' ve '{:verify false}' ile hileyi ayrı sonuç türleri olarak tanımlıyor. Vericoding makalesi, dil ve kaynak başına 5 başarılı çıktının elle incelenmesinde belirtimlerin yaklaşık %9'unun çok zayıf, %15'inin kötü çevrilmiş olduğunu yazıyor. Şiddet, benzer 'test istismarı' kaydıyla (yuksek) tutarlı olacak şekilde düşürüldü.",
+        "kaynak": [
+          "https://arxiv.org/abs/2406.08467",
+          "https://arxiv.org/abs/2509.22908"
+        ]
+      },
+      "id": "RK-065"
+    },
+    {
+      "yetenek_sinifi": "Y-67",
+      "kalip": "Uzmanlık darboğazı ve modelin koddan kopması",
+      "aciklama": "AWS'nin 'Systems Correctness Practices at Amazon Web Services' makalesi (Brooker ve Desai, 2025), biçimsel yöntemler ilk ekiplerin dışına yayıldığında mühendislerin TLA+'ı öğrenip üretken olmakta zorlandığını ve AWS'nin daha erişilebilir P dili, özellik tabanlı test ve üretim izi doğrulaması gibi yöntemlere yöneldiğini anlatır.",
+      "risk_turleri": [
+        "RT-13",
+        "RT-17"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://queue.acm.org/detail.cfm?id=3712057",
+        "https://dl.acm.org/doi/10.1145/3729175"
+      ],
+      "yasatacagi_sorunlar": [
+        "Birkaç kişinin anladığı TLA+ veya Lean modeli kod değiştikçe güncellenmez; model ile uygulama sessizce ayrışır.",
+        "Ajan belirtimi yazar ama onaylayacak insan belirtimi okuyamaz; 'insan onaylı belirtim' ölçütü karşılanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-030"
+      ],
+      "ornek_araclar": [
+        "TLA+",
+        "P",
+        "Lean 4"
+      ],
+      "erken_sinyal": "Model dosyasının son güncellemesi ile ilgili kodun son değişikliği arasındaki süre; belirtimi okuyabilen kişi sayısı.",
+      "azaltma": "Belirtimi üretim izi ve model tabanlı testle koda bağlamak; biçimsel yöntemi kademe 0 bileşenlerle sınırlamak; eğitim ve eşli inceleme.",
+      "id": "RK-066"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 5,
+    "dusuk": 33,
+    "yuksek": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 4,
+    "RT-13": 4,
+    "RT-05": 2,
+    "RT-03": 1,
+    "RT-04": 1,
+    "RT-08": 1,
+    "RT-07": 1,
+    "RT-14": 1,
+    "RT-10": 1,
+    "RT-15": 1
+  }
+}

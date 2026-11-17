@@ -1,0 +1,1229 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-45",
+    "ad": "Backlog zekâsı (semantik tekilleştirme, kümeleme, eskime tespiti, ajana uygunluk sınıflandırması)",
+    "grup": "Gereksinim ve backlog zekâsı",
+    "cozdugu_sorun": "Binlerce kayıtta tekrar, eskime ve yanlış işin ajana verilmesi.",
+    "ne_zaman_zorunlu": "~1–2 binden fazla kayıtta."
+  },
+  "arac_sayisi": 65,
+  "tur_dagilimi": {
+    "ticari-saas": 12,
+    "model": 5,
+    "kutuphane": 15,
+    "acik-kaynak": 28,
+    "acik-cekirdek": 3,
+    "ticari-yazilim": 1,
+    "protokol-standart": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0115",
+      "ad": "Jev (TypeSafe AI)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.typesafe.ai/introduction",
+      "olgunluk": "erken",
+      "ne_saglar": "Metin yerine tipli karar döndüren barındırılan model API'si: Choice (seçenek + olasılık + güven), Score (ölçek puanı), Noul (önermenin 0–1 doğruluk değeri); sorular paralel ve yalıtılmış değerlendirilir. Kaynakta router, olgunluk seviyesi ve 12.000 görevlik triyaj için aday.",
+      "sinirlar": "Kapalı barındırılan servis, görev metni dışarı çıkar; 'sıfır halüsinasyon' yalnız çıktının etiket kümesinde kalmasıdır; kalibrasyon iddiaları kurum etiketlerinde ölçülmedi; jevtypesafeai.com TypeSafe AI ile bağlantısız olduğunu söylüyor.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-001",
+        "N-K02-010",
+        "N-K03-005",
+        "N-K03-007",
+        "N-K09-003",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0244",
+      "ad": "BGE-M3",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/BAAI/bge-m3",
+      "olgunluk": "olgun",
+      "ne_saglar": "100'den fazla dili destekleyen, yoğun + seyrek + çok vektörlü gömmeyi tek modelde veren açık ağırlıklı gömme modeli; Türkçe iş kalemleri ile İngilizce doküman/kod arasında diller arası benzerlik ve kopya tespiti için uygun.",
+      "sinirlar": "Yeni gömme modelleriyle kurum derleminde karşılaştırılmalı (kaynak). Alan-özel Türkçe terimlerde kalibrasyon/ince ayar gerekebilir; GPU ile daha verimli çalışır.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K03-009",
+        "N-K07-007",
+        "N-K08-004",
+        "N-K09-014",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0338",
+      "ad": "Sentence Transformers",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/huggingface/sentence-transformers",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin gömme, çapraz kodlayıcı (reranker) ve seyrek gömme modellerini eğitme/kullanma kütüphanesi; paraphrase mining ve anlamsal arama yardımcılarıyla yinelenen iş kalemi adaylarını bulmanın temel yapı taşı.",
+      "sinirlar": "Sunucu değil kütüphane; üretim sunumu için TEI/Infinity gibi katman gerekir. Kalite model seçimine bağlıdır; büyük koleksiyonda ayrıca vektör indeksi gerekir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K03-009",
+        "N-K08-004",
+        "N-K09-014",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0405",
+      "ad": "BERTurk",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/dbmdz/bert-base-turkish-cased",
+      "olgunluk": "olgun",
+      "ne_saglar": "Türkçe metin üzerinde önceden eğitilmiş BERT modeli; iş kalemi türü ve ajana uygunluk sınıflandırıcısı gibi görevler için ince ayar tabanı.",
+      "sinirlar": "Eski nesil (2020); anlamsal arama için doğrudan değil ince ayarla kullanılmalı. Kodlayıcı model; doğrudan cümle benzerliği için ek ince ayar (NLI/STS) gerekir, yeni nesil çok dilli modellere göre eski.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-003",
+        "N-K02-010",
+        "N-K07-007",
+        "N-K09-014",
+        "N-K23-009"
+      ]
+    },
+    {
+      "id": "AR-0500",
+      "ad": "Task Master",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (Commons Clause'lu özel metin)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tryhamster.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PRD dokümanını ayrıştırıp bağımlılıklı, karmaşıklık puanlı görev listesine çeviren; görev genişletme, 'sıradaki görev' ve durum yönetimini CLI ve MCP sunucusu üzerinden kodlama ajanlarına açan araç.",
+      "sinirlar": "Lisans metni standart MIT değil (ek kısıtlar içerir); depo etkinliği Nisan 2026'dan beri düşük. Commons Clause nedeniyle barındırılmış hizmet olarak sunulamaz (OSI onaylı değil); bağımlılık ve karmaşıklık analizi LLM tabanlıdır, deterministik değildir; son push Nisan 2026.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K02-004",
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K02-013"
+      ]
+    },
+    {
+      "id": "AR-0563",
+      "ad": "Jira Product Discovery",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.atlassian.com/software/jira/product-discovery",
+      "olgunluk": "olgun",
+      "ne_saglar": "Fikir/talep toplama, özel alan ve formüllerle tutarlı puanlama (etki, efor vb.), yol haritası yayınlama ve fikirleri Jira teslim işlerine bağlama; Product Collection ile geri bildirimi yapay zekâyla düzenleyip önceliklendirmeye bağlar.",
+      "sinirlar": "Yalnız Cloud; puanlama formülleri insan girdisine dayanır, otomatik tekilleştirme sınırlı. Yalnız bulut; gecikme maliyeti/WSJF gibi modeller özel alan ve formül kurgusu ister.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-009",
+        "N-K24-002",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-0593",
+      "ad": "airfocus",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://airfocus.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "RICE, WSJF, MoSCoW, ICE, değer-efor ve özel ağırlıklı puanlama çerçeveleri; paydaşların bağımsız puan verdiği Priority Poker; geri bildirimi fırsatlara bağlayan Insights ajanı; Jira, Azure DevOps ve Linear senkronu.",
+      "sinirlar": "Puanlar insan girdisine dayanır; bağımlılık sırasıyla birleştirme manuel. SaaS; barındırma bölgesi kaynakta belirtilmemiş.",
+      "ihtiyaclar": [
+        "N-K02-008",
+        "N-K02-009",
+        "N-K24-002",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0594",
+      "ad": "Productboard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.productboard.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Müşteri geri bildirimindeki içgörüleri yapay zekâyla tespit edip özellik fikirlerine bağlayan, kaynak alıntılı eğilim analizi ve Spark ajanıyla fikirden teslime hazır spesifikasyon üretimi sunan ürün yönetimi platformu.",
+      "sinirlar": "Ürün keşfi odaklı; teslim hattı ve SAFe hiyerarşisi için ek entegrasyon gerekir. SaaS; geliştirme backlog'undan çok ürün keşfi katmanına odaklı.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K02-003",
+        "N-K02-009",
+        "N-K24-002"
+      ]
+    },
+    {
+      "id": "AR-0595",
+      "ad": "Aha! Roadmaps",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.aha.io/roadmaps/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Strateji, yol haritası ve fikir portalı; fikirleri oylama/puanlama ile önceliklendirir, özellikleri geliştirme araçlarına (45+ entegrasyon) bağlar.",
+      "sinirlar": "Yalnız SaaS; teslim verisi için Jira/ADO entegrasyonu gerekir. SaaS; ekip düzeyi teslimden çok ürün/portföy düzeyine odaklı.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-009",
+        "N-K24-002",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0865",
+      "ad": "SemHash",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/MinishLab/semhash",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Hafif statik gömmeler (Model2Vec) ve yaklaşık en yakın komşu aramasıyla metin kayıtlarında anlamsal tekilleştirme, aykırı değer ve filtreleme yapan kütüphane; hangi kaydın hangisiyle eşleştiğini açıklayan çıktı verir, insan kararına sunulacak kopya adayları listesi için uygundur.",
+      "sinirlar": "Eşik değeri veri setine göre kalibrasyon ister; Türkçe başarımı seçilen gömme modeline bağlıdır.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-002",
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-0866",
+      "ad": "BERTopic",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/MaartenGr/BERTopic",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gömme + UMAP + HDBSCAN + c-TF-IDF ile büyük metin koleksiyonlarında konu kümeleri çıkaran; LLM ile küme etiketleme, zaman içinde konu değişimi ve hiyerarşik konu analizi sunan kütüphane; ~12.000 kayıtlık backlog'u tema/bileşen kümelerine ayırmada kullanılabilir.",
+      "sinirlar": "Kümeler stokastik olabilir; tekrar üretilebilirlik için tohum ve parametre sabitleme gerekir.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-003",
+        "N-K02-009",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0867",
+      "ad": "SetFit",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/huggingface/setfit",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sentence Transformers üzerine birkaç düzine etiketli örnekle metin sınıflandırıcı eğiten az örnekli öğrenme kütüphanesi; iş türü (özellik, hata, yeniden düzenleme…) ve ajana uygunluk sınıflandırıcıları için LLM'den ucuz ve deterministik bir seçenek.",
+      "sinirlar": "Etiketli örnek ve periyodik yeniden eğitim gerektirir; Türkçe başarımı çok dilli taban model seçimine bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-001",
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0868",
+      "ad": "dedupe",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/dedupeio/dedupe",
+      "olgunluk": "olgun",
+      "ne_saglar": "Etkin öğrenme (insanın etiketlediği birkaç örnek çift) ile alan bazlı bulanık kayıt eşleştirme ve tekilleştirme yapan Python kütüphanesi; başlık, bileşen, tarih gibi alanları birlikte değerlendirir.",
+      "sinirlar": "Anlamsal benzerlik için kendi başına gömme kullanmaz; son push 2025 ortası.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-003",
+        "N-K26-005"
+      ]
+    },
+    {
+      "id": "AR-0869",
+      "ad": "Splink",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/moj-analytical-services/splink",
+      "olgunluk": "olgun",
+      "ne_saglar": "Fellegi-Sunter olasılıksal kayıt bağlama modeli; DuckDB, Spark veya Athena üzerinde milyonlarca kayıtta tekilleştirme ve açıklanabilir eşleşme olasılığı üretir.",
+      "sinirlar": "Yapılandırılmış alanlar için güçlüdür; serbest metin anlamsal eşleşme için gömme ile birleştirilmelidir.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-003",
+        "N-K26-005"
+      ]
+    },
+    {
+      "id": "AR-0870",
+      "ad": "Zingg",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/zinggAI/zingg",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Spark üzerinde etkin öğrenmeli varlık çözümleme ve tekilleştirme; eşleşen kayıtları küme kimliğiyle işaretler.",
+      "sinirlar": "AGPL; Spark altyapısı gerektirir, küçük hacimler için ağırdır.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K26-005"
+      ]
+    },
+    {
+      "id": "AR-0871",
+      "ad": "datasketch",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ekzhu/datasketch",
+      "olgunluk": "olgun",
+      "ne_saglar": "MinHash, LSH, LSH Forest gibi olasılıksal veri yapılarıyla büyük metin kümelerinde hızlı yakın-kopya adayı üretimi; anlamsal karşılaştırmadan önce ucuz ön eleme katmanı.",
+      "sinirlar": "Sözcüksel benzerlik ölçer; anlamca aynı ama farklı yazılmış kayıtları kaçırır.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-0872",
+      "ad": "text-dedup",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ChenghaoMou/text-dedup",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MinHash, SimHash, suffix array, Bloom filter gibi metin tekilleştirme yöntemlerini tek yerde toplayan betik/kütüphane.",
+      "sinirlar": "Veri seti temizliği odaklı; iş kalemi alanlarına özgü birleştirme mantığı yoktur.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-003"
+      ]
+    },
+    {
+      "id": "AR-0873",
+      "ad": "Argilla",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/argilla-io/argilla",
+      "olgunluk": "olgun",
+      "ne_saglar": "Alan uzmanlarının model önerilerini (etiket, eşleşme, sınıf, yeniden yazım) gözden geçirip düzelttiği işbirlikçi veri etiketleme ve geri bildirim aracı; toplu dönüşümde örneklem/risk tabanlı insan inceleme kuyruğu kurmaya uygundur.",
+      "sinirlar": "İş takip sistemine doğrudan bağlanmaz; entegrasyon kodu gerekir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-002",
+        "N-K02-003",
+        "N-K02-010",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0874",
+      "ad": "Label Studio",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community) / ticari (Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/HumanSignal/label-studio",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin sınıflandırma, eşleşme ve serbest yanıt dahil çok tipli etiketleme arayüzü; ML arka ucuyla ön-etiketleme ve etkin öğrenme; sınıflandırıcı eğitim verisi ve insan inceleme örneklemi için.",
+      "sinirlar": "Gelişmiş rol/erişim ve denetim özellikleri ticari Enterprise sürümündedir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-002",
+        "N-K02-010",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0875",
+      "ad": "GLiClass",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Knowledgator/GLiClass",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sıfır/az örnekli metin sınıflandırma için hafif kodlayıcı model ailesi; etiketler çalışma anında verilerek iş kalemleri türe ve akışa göre ayrılabilir, LLM çağrısına göre ucuz ve hızlıdır.",
+      "sinirlar": "Türkçe başarımı doğrulanmalı; çok dilli sürüm seçimi gerekir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0876",
+      "ad": "actions/stale",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://github.com/actions/stale",
+      "olgunluk": "olgun",
+      "ne_saglar": "Belirli süre etkileşim görmeyen issue ve PR'ları etiketleyen, uyaran ve isteğe bağlı kapatan GitHub Action; eskime kuralını kod olarak tanımlar.",
+      "sinirlar": "Yalnız zaman tabanlıdır; anlamsal eskimeyi tespit etmez, yanlış kapatma riski vardır.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-011"
+      ]
+    },
+    {
+      "id": "AR-0877",
+      "ad": "actions/ai-inference",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://github.com/actions/ai-inference",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Actions iş akışından GitHub Models üzerinden LLM çağırarak issue sınıflandırma, etiketleme ve özetleme gibi triyaj adımlarını otomatikleştiren eylem.",
+      "sinirlar": "GitHub ve GitHub Models kotalarına bağlıdır; model çağrıları GitHub/Microsoft altyapısında işlenir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0878",
+      "ad": "github/issue-labeler",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://github.com/github/issue-labeler",
+      "olgunluk": "olgun",
+      "ne_saglar": "Issue başlığı/gövdesindeki düzenli ifade eşleşmelerine göre otomatik etiket atayan GitHub Action; iki kapılı sınıflandırmada kural tabanlı ilk kapı.",
+      "sinirlar": "Yalnız regex; anlamsal sınıflandırma yapmaz.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0879",
+      "ad": "Linear Triage Intelligence",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://linear.app/docs/triage",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Triyaj kuyruğuna gelen her yeni issue'yu mevcut kayıtlarla karşılaştırıp olası kopya ve ilişkili işleri, etiket ve atanan önerilerini sunan yerleşik ajan özelliği.",
+      "sinirlar": "Yalnız Business/Enterprise planlarında; model ve veri işleme ayrıntısı dokümanda yok; SaaS.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-003",
+        "N-K08-001",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-0880",
+      "ad": "Canny",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://canny.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Geri bildirim portalı; Autopilot yapay zekâsı farklı kanallardan gelen istekleri yakalayıp düzenler ve yinelenen istekleri önler; talepleri gelir etkisi ve talep yoğunluğuna göre önceliklendirir.",
+      "sinirlar": "Yalnız SaaS; müşteri geri bildirimi için tasarlanmış, iç backlog normalizasyonu için değil.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-001",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-0881",
+      "ad": "Zemberek-NLP",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ahmetaa/zemberek-nlp",
+      "olgunluk": "olgun",
+      "ne_saglar": "Türkçe biçimbilimsel çözümleme, kök bulma, normalizasyon, cümle/sözcük ayırma ve dil tanıma sunan Java NLP kütüphanesi; Türkçe gereksinim metinlerinde kural tabanlı belirsiz ifade denetimi, kanonik terim eşlemesi ve tekilleştirme öncesi normalizasyon için temel.",
+      "sinirlar": "Anlamsal değil biçimbilimsel/kural tabanlı araçlar sunar; Java çalışma zamanı gerekir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K02-003",
+        "N-K07-006",
+        "N-K07-007"
+      ]
+    },
+    {
+      "id": "AR-0937",
+      "ad": "Fider",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://fider.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Geri bildirim ve özellik isteklerini toplayıp oylama ile önceliklendiren açık kaynak portal; ekiplerin hat değişikliklerine (kural, model, kapı eşiği) yönelik öneri ve itirazlarını toplamak için self-host edilebilir.",
+      "sinirlar": "Yinelenen istek birleştirme manueldir; yapay zekâ desteği yoktur.",
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K08-001",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-1507",
+      "ad": "doccano",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/doccano/doccano",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin sınıflandırma, dizi etiketleme ve seq2seq için açık kaynak etiketleme aracı; toplu dönüştürülen backlog kalemlerinin örneklem üzerinde insanlarca işaretlenmesi ve ajana uygunluk etiket setinin oluşturulması için kullanılabilir.",
+      "sinirlar": "Etiketleyiciler arası uyum ölçümü ve aktif öğrenme yerleşik değildir; geliştirme temposu yavaşlamıştır.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K02-010",
+        "N-K09-014",
+        "N-K11-011"
+      ]
+    },
+    {
+      "id": "AR-1508",
+      "ad": "cleanlab",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cleanlab.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Güvenli öğrenme (confident learning) ile veri setlerinde muhtemel yanlış etiketleri, aykırı ve yinelenen örnekleri tespit eden Python kütüphanesi; insan incelemesini en şüpheli kayıtlara yönlendirmek için kullanılabilir.",
+      "sinirlar": "Model olasılık çıktıları gerektirir; ticari Cleanlab Studio ayrı üründür.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K02-003",
+        "N-K02-010",
+        "N-K23-005"
+      ]
+    },
+    {
+      "id": "AR-1509",
+      "ad": "Snorkel",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/snorkel-team/snorkel",
+      "olgunluk": "olgun",
+      "ne_saglar": "Etiketleme fonksiyonlarıyla (kural, sezgi, dış kaynak) programatik zayıf denetim yapıp çelişen etiketleri olasılıksal modelle birleştiren kütüphane; büyük backlog'un kural+model ile toplu sınıflandırılmasına uygundur.",
+      "sinirlar": "Açık kaynak kütüphanenin gelişimi yavaştır; şirketin odağı ticari Snorkel Flow platformudur.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-010",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-1510",
+      "ad": "pyJedAI",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pyjedai.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bloklama, eşleştirme ve kümeleme adımlarıyla uçtan uca varlık çözümleme (entity resolution) hattı kuran Python kütüphanesi; gömme tabanlı benzerlikle yinelenen iş kalemlerini bulmak için kullanılabilir.",
+      "sinirlar": "Akademik proje; topluluk küçük, üretim işletimi için ek mühendislik gerekir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-1511",
+      "ad": "HDBSCAN",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://hdbscan.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yoğunluk tabanlı hiyerarşik kümeleme; küme sayısı vermeden gömme vektörlerinden yakın-yinelenen ve ilişkili iş kalemi kümelerini ve gürültüyü ayırır.",
+      "sinirlar": "Yüksek boyutlu vektörlerde boyut indirgeme (ör. UMAP) gerektirir; sonuçlar parametre seçimine duyarlıdır.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-005",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-1616",
+      "ad": "Kiln",
+      "tur": "acik-cekirdek",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://kiln.tech",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Değerlendirme (hakem–insan uyum ölçümü dahil), sentetik veri üretimi, insan etiketleme/puanlama, ince ayar ve RAG'i tek masaüstü uygulaması ve Python kütüphanesinde birleştiren araç.",
+      "sinirlar": "Masaüstü uygulamasının lisansı kütüphaneden farklıdır (GitHub: NOASSERTION); çok kullanıcılı sunucu modu sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K09-011",
+        "N-K11-004",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-1800",
+      "ad": "Apache Solr",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://solr.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Lucene tabanlı arama sunucusu: yoğun vektör (kNN) ve hibrit arama, 'More Like This' ile benzer kayıt bulma, Türkçe dil analizörü; backlog ve doküman aramasında yakın tekrar adaylarını çıkarmaya uygun.",
+      "sinirlar": "İşletim ve şema ayarı uzmanlık ister; gömme üretimi dışarıda yapılmalı.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004",
+        "N-K09-014",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-1903",
+      "ad": "OpenRefine",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openrefine.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Büyük tablo verisini fasetleme, kümeleme (anahtar çarpışması, en yakın komşu) ile yakın tekrarları birleştirme ve toplu dönüşümle temizleyen araç; yapılan her işlem JSON geçmişi olarak kaydedilip başka veri kümesine yeniden oynatılabilir, insan gözden geçirmeli toplu dönüşüme uygun.",
+      "sinirlar": "Masaüstü/tek kullanıcı; çok büyük veri kümelerinde bellek sınırı; LLM entegrasyonu yok.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-002",
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-2082",
+      "ad": "ServiceNow Predictive Intelligence",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.servicenow.com/products/predictive-intelligence.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kayıtlar üzerinde sınıflandırma, benzerlik ve kümeleme çerçeveleri: yeni kayıt geldiğinde benzer açık/çözülmüş kayıtları bulur, kopya işleri işaretler, trend kümeleri çıkarır ve atama/kategori önerir.",
+      "sinirlar": "ServiceNow tablolarıyla sınırlı; Türkçe metin başarımı eğitim verisine bağlı.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-010",
+        "N-K08-001",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-2084",
+      "ad": "Atlassian Rovo (Rovo Agents, Search, Chat, Studio)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.atlassian.com/software/rovo",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Jira, Confluence ve bağlı üçüncü taraf kaynaklarda (Teamwork Graph) erişim denetimli kurumsal arama, sohbet ve özel ajanlar; iş kalemlerini toplu düzenleme, özetleme ve benzer kayıtları bulma gibi görevler.",
+      "sinirlar": "Atlassian Cloud'a bağlı; ajan çıktıları insan gözden geçirmesi gerektirir; Türkçe başarımı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-003",
+        "N-K03-009",
+        "N-K07-004",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-2231",
+      "ad": "EuroBERT",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/EuroBERT",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Türkçe dahil 15 dili kapsayan 210M, 610M ve 2.1B boyutlu çok dilli kodlayıcı (encoder) modeller; gömme, sınıflandırma ve yeniden sıralama modellerine ince ayar için temel sağlar.",
+      "sinirlar": "Doğrudan kullanıma hazır gömme modeli değil; tekilleştirme/arama için kurum verisiyle ince ayar gerekir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004",
+        "N-K09-014",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-2240",
+      "ad": "Turkish ColBERT ve ModernBERT-TR (YTÜ COSMOS)",
+      "tur": "model",
+      "lisans": "MIT / Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/ytu-ce-cosmos/turkish-colbert",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Türkçe late-interaction arama modeli (turkish-colbert) ve Türkçe ModernBERT kodlayıcı; Türkçe backlog ve doküman araması ile benzer/kopya kayıt tespitine temel oluşturur.",
+      "sinirlar": "Akademik grup bakımında, kurumsal destek yok; alan verisiyle ince ayar gerekebilir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004",
+        "N-K09-014",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-2246",
+      "ad": "spaCy",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://spacy.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Endüstriyel NLP kütüphanesi: tokenizasyon, NER, kural tabanlı eşleştiriciler (Matcher/EntityRuler), metin sınıflandırma ve spacy-llm ile LLM entegrasyonu; kural + model iki kapılı metin analizi için temel sağlar.",
+      "sinirlar": "Türkçe hazır boru hattı resmî değil, topluluk modelleri gerekir; semantik tekilleştirme için ek gömme modeli gerekir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K07-006",
+        "N-K09-014",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2449",
+      "ad": "Data-Juicer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://datajuicer.github.io/data-juicer/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Temel modeller için veri işleme sistemi: yüzlerce operatörle filtreleme, MinHash tabanlı tekilleştirme, kalite puanlama ve kişisel bilgi temizleme gibi adımları yapılandırma dosyasıyla zincirler.",
+      "sinirlar": "Eğitim verisi odaklı; backlog kayıtlarında kullanım için özel operatör/uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-006",
+        "N-K11-009",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2566",
+      "ad": "kouchou-ai (広聴AI)",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/digitaldemocracy2030/kouchou-ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çok sayıda serbest metin görüşü (anket, yorum) LLM ile kümeleyip özetleyen ve etkileşimli rapor üreten 'geniş dinleme' aracı; yöntem değişikliklerine ekiplerin geri bildirimini toplamak için kullanılabilir.",
+      "sinirlar": "Kamu katılımı için tasarlandı; LLM özetlerinin yanlılığı ve kişisel veri maskeleme kullanıcıya kalır.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K11-011",
+        "N-K25-008",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2567",
+      "ad": "Talk to the City",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://talktothe.city",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Toplu görüş ve tartışmaları LLM ile konu-alt konu hiyerarşisine ayıran, alıntıları kaynağına bağlayan analiz aracı; Tayvan ve Japonya'daki kamusal müzakere süreçlerinde kullanıldı.",
+      "sinirlar": "Özet kalitesi modele bağlı; eski depo arşivlendi, yeni 'light' sürüm küçük ekip tarafından sürdürülüyor.",
+      "ihtiyaclar": [
+        "N-K11-011",
+        "N-K25-008",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2750",
+      "ad": "Ticket Tagger",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/rafaelkallis/ticket-tagger",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub issue'larını fastText modeliyle hata, geliştirme veya soru olarak otomatik etiketleyen GitHub uygulaması; kendi sunucunuzda çalıştırılabilir.",
+      "sinirlar": "Yalnız üç sınıf ve GitHub; Jira için uyarlama gerekir, AGPL lisanslı.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-2751",
+      "ad": "NLBSE Issue Report Classification kıyası",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0 / bilinmiyor (yıla göre)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/nlbse2024/issue-report-classification",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "GitHub issue'larının hata/özellik/soru sınıflandırması için yıllık araç yarışması veri setleri, temel modeller ve değerlendirme betikleri.",
+      "sinirlar": "Yarışma depoları arşivlendi; kurum etiket şemasına göre yeniden eğitim gerekir.",
+      "ihtiyaclar": [
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-2752",
+      "ad": "CUPID",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/soarsmu/CUPID",
+      "olgunluk": "erken",
+      "ne_saglar": "Hata raporlarından ChatGPT ile anahtar bilgiyi çıkarıp geleneksel yinelenen hata raporu tespit yöntemine (REP) besleyerek daha isabetli kopya tespiti yapan yaklaşımın kodu.",
+      "sinirlar": "Çoğaltma paketi; lisans beyanı yok ve 2024'ten beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-2753",
+      "ad": "DBRD kıyası (Duplicate Bug Report Detection: How Far Are We?)",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/soarsmu/TOSEM-DBRD",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Eclipse, Mozilla, Hadoop, Spark, Kibana, VSCode gibi projelerden güncel hata raporları ve birden çok kopya tespit yönteminin (REP, Siamese, DC-CNN, arama motoru tabanlı) karşılaştırmalı uygulamaları.",
+      "sinirlar": "Lisans beyanı yok; 2023'ten beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004",
+        "N-K23-002"
+      ]
+    },
+    {
+      "id": "AR-2754",
+      "ad": "GitBugs",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/av9ash/gitbugs",
+      "olgunluk": "erken",
+      "ne_saglar": "GitHub, Bugzilla ve Jira'dan derlenmiş hata raporlarını standart alanlar ve hazır eğitim/test bölmeleriyle kopya tespiti, RAG ve triyaj deneyleri için sunan veri seti.",
+      "sinirlar": "Küçük ekip tarafından sürdürülüyor; veri seti kıyaslama amaçlı.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-001",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-2755",
+      "ad": "The Public Jira Dataset",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://zenodo.org/records/15719919",
+      "olgunluk": "olgun",
+      "ne_saglar": "16 kamuya açık Jira örneğinden 2,7 milyon issue, 32 milyon değişiklik kaydı, yorum ve issue bağlantısını içeren MongoDB dökümü; kopya bağlantıları, iş akışı ve backlog analizi deneyleri için kullanılır.",
+      "sinirlar": "Açık kaynak projelerin Jira'ları; kurum içi SAFe hiyerarşisini ve alan dilini temsil etmez.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-003",
+        "N-K23-001",
+        "N-K26-005"
+      ]
+    },
+    {
+      "id": "AR-2756",
+      "ad": "TAWOS veri seti",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/SOLAR-group/TAWOS",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "13 açık kaynak Jira deposundaki 44 çevik projeden 450 bini aşkın issue'yu hikâye puanı, sprint ve bağlantılarıyla sunan veri seti; efor tahmini ve backlog analitiği için kullanılır.",
+      "sinirlar": "Lisans açıkça belirtilmemiş; 2022'den beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-009",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2757",
+      "ad": "GPT2SP",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/awsm-research/gpt2sp",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Kullanıcı hikâyesi metninden dönüştürücü modelle çevik hikâye puanı tahmini yapan ve kelime düzeyi açıklama üreten yaklaşımın kodu.",
+      "sinirlar": "2022'den beri güncellenmiyor; proje içi eğitim verisi gerektirir.",
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K02-013"
+      ]
+    },
+    {
+      "id": "AR-2760",
+      "ad": "TraceBERT",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/jinfenglin/TraceBERT",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Issue ile commit arasındaki izlenebilirlik bağlantılarını önceden eğitilmiş BERT modelleriyle kurtaran yöntemin kodu.",
+      "sinirlar": "Lisans beyanı yok; eski model mimarisi ve proje bazlı eğitim gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K19-003",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-2772",
+      "ad": "YAKE!",
+      "tur": "kutuphane",
+      "lisans": "Özel lisans (YAKE! License Agreement)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/INESCTEC/yake",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek belge üzerinden, eğitim verisi gerektirmeden istatistiksel özelliklerle dil bağımsız anahtar sözcük çıkarımı yapar; backlog ve belgelerden aday terim listesi üretmeye yarar.",
+      "sinirlar": "Özel lisans koşulları ticari kullanım öncesi incelenmeli; anlamsal eşanlamlıları birleştirmez.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K07-006"
+      ]
+    },
+    {
+      "id": "AR-2798",
+      "ad": "POTATO (Portable Text Annotation Tool)",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/davidjurgens/potato",
+      "olgunluk": "gelisen",
+      "ne_saglar": "YAML ile hızla yapılandırılan, yerelde çalışan web tabanlı metin etiketleme aracı; ikili karşılaştırma, çoklu seçim, Likert gibi şemalarla toplu LLM çıktılarının veya dönüştürülmüş iş kalemlerinin insan değerlendirmesini düzenler.",
+      "sinirlar": "Kimlik ve yetki yönetimi basit; kurumsal ölçekte kullanım için ek sertleştirme gerekir.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-2843",
+      "ad": "issue-graph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://issue-graph.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Bağlantılı GitHub issue ve PR'larını izleyerek işe başlamadan önce ilişkili işleri, rakip değişiklikleri ve çözülmemiş takipleri bulur; kopya işi önlemeye yardım eder.",
+      "sinirlar": "Yalnız GitHub; Jira/Azure Boards desteklemez.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-3005",
+      "ad": "wshm",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://wshm.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "AI kod incelemesi, birleştirme kuyruğu, issue otomatik düzeltme, iş akışı otomasyonu ve triyajı tek self-host Rust ikilisinde toplar; GitHub, GitLab, Gitea ve Azure DevOps ile yerel Ollama dahil model seçenekleri.",
+      "sinirlar": "Beş işlevi tek araçta toplar; her biri için derinlik sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-002",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-3491",
+      "ad": "Find Duplicates for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1212706/find-duplicates-detect-similar-issues-find-related-issues",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yeni iş kalemi oluşturulurken yazdıkça benzer kayıtları gösterir; mevcut kopyaları iş kalemi panelinde listeler; proje/bileşen/tür bazında sınırlandırılabilir.",
+      "sinirlar": "Metin benzerliği tabanlı; anlamsal tekilleştirme için yeterli olmayabilir. Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3528",
+      "ad": "craft.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://craft.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ürün yönetimi platformu: geri bildirim toplama, önceliklendirme modelleri (değer/efor puanlama), yol haritası ve Jira/Azure DevOps eşlemesi.",
+      "sinirlar": "Önceliklendirme puanları kullanıcı girdisine dayanır; büyük backlog'u otomatik temizlemez.",
+      "ihtiyaclar": [
+        "N-K02-004",
+        "N-K02-009",
+        "N-K24-002"
+      ]
+    },
+    {
+      "id": "AR-3990",
+      "ad": "Bugsink",
+      "tur": "acik-cekirdek",
+      "lisans": "PolyForm Shield 1.0.0 (kaynak erişimli)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.bugsink.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sentry SDK uyumlu, kendi barındırılan hata izleme; olayları parmak izine göre tek bir 'issue' altında toplar, çözülmüş hatanın yeniden ortaya çıkmasını aynı kayda regresyon olarak bağlar—aynı hatadan kopya iş açılmasını kaynağında azaltır.",
+      "sinirlar": "PolyForm Shield lisansı OSI onaylı açık kaynak değildir (rakip ürün kısıtı); ölçek/özellik Sentry'nin alt kümesi.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3991",
+      "ad": "Exceptionless",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://exceptionless.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hata ve olayları imzaya göre 'stack'lerde toplar; düzeltildi işaretlenen stack tekrar oluşursa regresyon olarak yeniden açar, böylece aynı hata için tek kayıt korunur.",
+      "sinirlar": ".NET ve JS ağırlıklı istemciler; self-host için Elasticsearch işletimi gerekir.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3992",
+      "ad": "GlitchTip",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://glitchtip.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık kaynak, Sentry API uyumlu hata izleme ve çalışırlık izleme; olayları parmak izine göre issue'larda gruplar, self-host kurulumla veriyi kurum içinde tutar.",
+      "sinirlar": "Sentry'nin gelişmiş gruplama/benzerlik ve AI özelliklerinin alt kümesi.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3993",
+      "ad": "Raygun",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://raygun.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hata raporlama, gerçek kullanıcı izleme ve APM; hataları gruplama kurallarıyla tek grupta toplar ve özel gruplama anahtarları tanımlanabilir.",
+      "sinirlar": "SaaS; iş takip sistemine kopya kontrolüyle bağlamak entegrasyon ister.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3994",
+      "ad": "bugbug",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/mozilla/bugbug",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mozilla'nın hata kaydı ve kod değişikliği verisi üzerinde ML platformu: hata/özellik ayrımı, hata tipi, bileşen, önem, regresyon, regresyona yol açan değişiklik, test hatası ve test seçimi modelleri—kusurların sınıflanıp uygun doğrulayıcıya yönlendirilmesi için örnek üretim sistemi.",
+      "sinirlar": "Bugzilla/Phabricator veri modeline sıkı bağlı; başka iş takip sistemine uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K05-022"
+      ]
+    },
+    {
+      "id": "AR-4014",
+      "ad": "ISO 2859-1:2026 (Nitelik muayenesi için örnekleme prosedürleri)",
+      "tur": "protokol-standart",
+      "lisans": "ticari (ücretli standart)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.iso.org/standard/85464.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "AQL indeksli kabul örnekleme şemaları: parti büyüklüğüne göre örneklem boyutu, kabul/ret sayıları, normal/sıkılaştırılmış/azaltılmış muayene geçiş kuralları ve yeni sürümde atlamalı parti örneklemesi. Toplu dönüştürülen backlog kayıtlarında insan incelemesinin örneklem planını ve kapasitesini tanımlamak için doğrudan kullanılabilir.",
+      "sinirlar": "Ücretli standart; 'uygunsuzluk' tanımı ve risk sınıfına göre AQL seçimi kurumca yapılmalı.",
+      "ihtiyaclar": [
+        "N-K02-002"
+      ]
+    },
+    {
+      "id": "AR-4383",
+      "ad": "Dovetail",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://dovetail.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanıcı görüşmesi, araştırma notu ve geri bildirimleri tek depoda toplayıp etiketleme, tema ve içgörü çıkarma ile kanıta bağlı paylaşım sağlayan müşteri içgörüsü (araştırma deposu) platformu.",
+      "sinirlar": "Değer ve öncelik kararını vermez, yalnız kanıtı düzenler; kapalı SaaS; ham görüşme kaydı kişisel veri içerir.",
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K08-001"
+      ]
+    }
+  ]
+}

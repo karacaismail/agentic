@@ -1,0 +1,147 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-55",
+    "ad": "Yazılım varlık ve sahiplik kataloğu",
+    "grup": "Teslim hattı ve iş yönetimi"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-55",
+      "kalip": "Sahiplik verisinin bayatlaması ve sessizce geçersizleşen sahiplik kuralları",
+      "aciklama": "GitHub belgelerine göre CODEOWNERS'ta sözdizimi hatalı satırlar atlanır; var olmayan ya da yazma yetkisi olmayan kullanıcı veya ekip belirtilirse sahip atanmaz. Port'un 2025 raporuna göre ekiplerin %50'si merkezi meta veri deposunun kalitesine güvenmiyor, %53'ü yazılım varlığı meta verisini en fazla haftada bir güncelliyor.",
+      "risk_turleri": [
+        "RT-16",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+        "https://www.port.io/state-of-internal-developer-portals"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip yeniden yapılanınca ayrılan kişiye veya kaldırılan ekibe işaret eden satırlar sessizce etkisizleşir; ajan değişiklikleri sahipsiz alanlarda sahip onayı olmadan birleşir.",
+        "'Alanın kuralı geçerlidir' ilkesi yanlış ekibin kuralını uygular."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-001",
+        "N-K31-003",
+        "N-K24-008"
+      ],
+      "ornek_araclar": [
+        "GitHub CODEOWNERS",
+        "GitLab Code Owners",
+        "Backstage Software Catalog",
+        "Port",
+        "Cortex",
+        "OpsLevel"
+      ],
+      "erken_sinyal": "Sahibi olmayan veya aktif olmayan kişiye işaret eden yol oranı; son 90 günde değişip sahip onayı almamış dosya sayısı.",
+      "azaltma": "Sahiplik dosyasını CI'da doğrulamak (geçersiz satır derlemeyi durdurur); kurum dizini değişikliklerini kataloğa olay olarak bağlamak; periyodik sahip teyidi.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GitHub belgesi geçersiz sözdizimli satırların atlandığını, var olmayan ya da yetkisiz kullanıcı veya ekip için sahip atanmadığını söylüyor. Port 2025 raporundaki %50 (veriye güvenmeme) ve %53 (en fazla haftada bir güncelleme) oranları sayfada geçiyor.",
+        "kaynak": [
+          "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+          "https://www.port.io/state-of-internal-developer-portals"
+        ]
+      },
+      "id": "RK-025"
+    },
+    {
+      "yetenek_sinifi": "Y-55",
+      "kalip": "Ajanların sahiplik sınırlarını aşan küçük katkılarıyla kusur artışı",
+      "aciklama": "Bird ve ark. (ESEC/FSE 2011) Windows Vista ve 7'de bir bileşene ara sıra küçük katkı yapan kişi sayısının yayın öncesi hata ve yayın sonrası arızalarla izlenen metriklerin neredeyse tamamından güçlü ilişkili olduğunu buldu. Nagappan ve ark. (ICSE 2008) örgütsel yapı metriklerinin Windows Vista'da arıza eğilimini anlamlı biçimde öngördüğünü gösterdi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/bird2011dtm.pdf",
+        "https://www.cs.umd.edu/~basili/publications/proceedings/P125.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip A'nın ajanı ekip B'nin modülünde kolay görünen değişiklikler yapar; B'nin örtük bilgisi olmadığı için hata üretimde ortaya çıkar.",
+        "Sahiplik oranı düşen bileşenlerde işletim sahipliği belirsizleşir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-003",
+        "N-K31-008",
+        "N-K33-017",
+        "N-K31-001"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Bileşen başına sahip dışı (özellikle ajan kaynaklı) değişiklik oranı ve bu değişikliklerin geri alınma oranı.",
+      "azaltma": "Sınır aşan ajan değişikliğini sahip ekip onayına ve alan kuralına bağlamak; sahip dışı katkı oranını metrik olarak izlemek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Bird ve ark., Vista'da (ve Windows 7 yayın öncesinde) 'Minor' metriğinin Microsoft'un topladığı diğer tüm metriklerden daha yüksek korelasyon gösterdiğini yazıyor. Nagappan ve ark. örgütsel metriklerin Vista'da anlamlı öngörücü olduğunu gösteriyor.",
+        "kaynak": [
+          "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/bird2011dtm.pdf",
+          "https://www.cs.umd.edu/~basili/publications/proceedings/P125.pdf"
+        ]
+      },
+      "id": "RK-026"
+    },
+    {
+      "yetenek_sinifi": "Y-55",
+      "kalip": "Kataloğun benimsenmemesi ve yüksek işletim yükü",
+      "aciklama": "Spotify yetkilileri Backstage'in dış kurumlardaki ortalama benimsenme oranının yaklaşık %10 olduğunu açıkladı (TechTarget, Kasım 2023). Port'un 2025 raporundaki güven ve güncellik bulguları da kataloğun kurulmasının kullanılmasını garanti etmediğini gösteriyor.",
+      "risk_turleri": [
+        "RT-13",
+        "RT-17"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.techtarget.com/searchitoperations/news/366558592/Behind-the-scenes-Spotify-Backstage-a-work-in-progress",
+        "https://www.port.io/state-of-internal-developer-portals"
+      ],
+      "yasatacagi_sorunlar": [
+        "Katalog kurulur ama ekipler güncellemez; ajan inceleme yönlendirmesi ve sınır onayı eksik veriyle çalışır.",
+        "Platform ekibi eklenti yükseltmeleri ve özelleştirmelerle uğraşır; katalog başlı başına bakım isteyen bir ürüne dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-001",
+        "N-K31-006",
+        "N-K24-004"
+      ],
+      "ornek_araclar": [
+        "Backstage",
+        "Port",
+        "Cortex",
+        "OpsLevel"
+      ],
+      "erken_sinyal": "Aktif kullanıcı oranı; katalog kayıtlarının son güncelleme yaşı.",
+      "azaltma": "Katalog verisini depo, dağıtım hattı ve kurum dizininden otomatik türetmek; elle girilen alanları en aza indirmek.",
+      "id": "RK-027"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 2,
+    "orta": 14,
+    "dusuk": 10
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 7,
+    "RT-03": 7,
+    "RT-14": 5,
+    "RT-15": 4,
+    "RT-05": 4,
+    "RT-07": 4,
+    "RT-11": 4,
+    "RT-13": 4,
+    "RT-01": 3,
+    "RT-06": 3,
+    "RT-16": 2,
+    "RT-17": 1,
+    "RT-02": 1,
+    "RT-04": 1
+  }
+}

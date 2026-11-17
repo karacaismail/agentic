@@ -1,0 +1,136 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-37",
+    "ad": "Bilgi tabanı, dokümantasyon ve karar kaydı deposu (tazelik denetimiyle)",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-198",
+      "yetenek_sinifi": "Y-37",
+      "kalip": "Eskimiş dokümanın ajanı yanıltması",
+      "aciklama": "3.000'den fazla GitHub projesinin incelendiği çalışma, projelerin çoğunun geçmişinin bir noktasında koddan silinmiş öğelere referans veren güncel olmayan doküman içerdiğini buldu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2212.01479"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan, kodda artık olmayan bir API veya mimari kararı dokümandan okuyup uygular; hata derlemede değil çalışma zamanında çıkar.",
+        "Karar kayıtlarının 'geçersiz' durumu işaretlenmezse eski kararlar yeni işlerde yeniden uygulanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-009",
+        "N-K07-001",
+        "N-K07-003",
+        "N-K07-002"
+      ],
+      "ornek_araclar": [
+        "Confluence",
+        "Backstage TechDocs",
+        "MkDocs",
+        "ADR araçları"
+      ],
+      "erken_sinyal": "Dokümanda referans verilen sembollerin kodda bulunmaması; son güncelleme tarihi ile ilgili kodun değişim tarihi arasındaki fark.",
+      "azaltma": "Doküman–kod referans denetimi CI'da, karar kayıtlarında durum alanı ve tazelik tarihi, ajanın yalnız geçerli kararları getirmesi."
+    },
+    {
+      "id": "RK-199",
+      "yetenek_sinifi": "Y-37",
+      "kalip": "Kurum içi wiki sunucusunda aktif istismar edilen açıklar",
+      "aciklama": "Confluence Data Center/Server'da erişim denetimi açığı (CVE-2023-22515, CVSS 9,8) ve şablon enjeksiyonuyla kimlik doğrulamasız uzaktan kod çalıştırma (CVE-2023-22527, CVSS 9,8) aktif istismar edilenler kataloğuna girdi; ürünün kurum içi sürümü 2029'da ömrünü tamamlıyor.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-06"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-22515",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-22527",
+        "https://www.atlassian.com/licensing/data-center-end-of-life"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların okuduğu bilgi tabanı sunucusu ele geçirilirse içerik değiştirilerek tüm ajanlara zehirli bilgi dağıtılabilir.",
+        "Ömür sonu yaklaşan sürümde yama desteği bittiğinde açıklar kapanmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K07-001",
+        "N-K03-009",
+        "N-K14-009"
+      ],
+      "ornek_araclar": [
+        "Confluence Data Center",
+        "MediaWiki",
+        "BookStack",
+        "Wiki.js"
+      ],
+      "erken_sinyal": "Wiki sunucusu için KEV kaydı; yetkisiz yönetici hesabı oluşturulması.",
+      "azaltma": "Hızlı yama, wiki'nin internetten erişilemez olması, içerik değişikliği denetimi ve ajan erişiminin salt okunur olması."
+    },
+    {
+      "id": "RK-200",
+      "yetenek_sinifi": "Y-37",
+      "kalip": "Aşırı paylaşımın yapay zekâ ile görünür hale gelmesi",
+      "aciklama": "Microsoft, Copilot dağıtımından önce kuruluşların aşırı paylaşılmış içeriği temizlemesi gerektiğini ayrı bir dağıtım planıyla belgeledi; yapay zekâ asistanları kullanıcının teknik olarak erişebildiği ama bilmediği içeriği yüzeye çıkarır.",
+      "risk_turleri": [
+        "RT-16",
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-blueprint-oversharing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yıllardır 'herkes okuyabilir' bırakılmış Confluence alanları ajan araması ile tüm ekiplerin ajanlarına açılır; kişisel veri veya gizli sözleşmeler ilgisiz görevlerde bağlama girer.",
+        "İndeksleme ajan hizmet hesabıyla yapılırsa kullanıcı yetkisi hiç uygulanmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-009",
+        "N-K14-007",
+        "N-K14-002"
+      ],
+      "ornek_araclar": [
+        "Confluence",
+        "SharePoint",
+        "Microsoft 365 Copilot",
+        "Glean"
+      ],
+      "erken_sinyal": "Ajan arama sonuçlarında erişim kısıtlı olması beklenen belgeler.",
+      "azaltma": "İndeksleme öncesi erişim denetimi temizliği, sorgu zamanında kullanıcı yetkisiyle filtreleme, hassas alanların indeks dışında tutulması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 151,
+    "dusuk": 204,
+    "kritik": 2,
+    "yuksek": 6
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 31,
+    "RT-11": 23,
+    "RT-15": 22,
+    "RT-06": 16,
+    "RT-14": 12,
+    "RT-05": 11,
+    "RT-01": 9,
+    "RT-07": 9,
+    "RT-03": 7,
+    "RT-17": 7,
+    "RT-13": 5,
+    "RT-16": 4,
+    "RT-10": 4,
+    "RT-02": 3,
+    "RT-04": 3,
+    "RT-09": 1,
+    "RT-12": 1
+  }
+}

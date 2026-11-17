@@ -1,0 +1,131 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-31",
+    "ad": "İnsan onay, bildirim ve iş kuyruğu yüzeyi (risk tabanlı yönlendirme dahil)",
+    "grup": "Teslim hattı ve iş yönetimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-179",
+      "yetenek_sinifi": "Y-31",
+      "kalip": "Onay yorgunluğu ve otomasyon yanlılığı",
+      "aciklama": "Anthropic, sürekli 'onayla' tıklamanın kullanıcıların neyi onayladığına dikkat etmediği bir 'onay yorgunluğu'na yol açtığını belirtti ve sandbox ile izin istemlerini iç kullanımda %84 azalttığını açıkladı.",
+      "risk_turleri": [
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.anthropic.com/engineering/claude-code-sandboxing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Her ajan adımı için onay isteyen tasarımda geliştiriciler onayları okumadan geçer; insan onayı denetim kaydında var ama gerçekte etkisizdir.",
+        "Riskli ve risksiz onaylar aynı yüzeyde sunulduğunda kritik kararlar kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K17-006",
+        "N-K17-001",
+        "N-K17-005"
+      ],
+      "ornek_araclar": [
+        "Claude Code izin istemleri",
+        "Cursor onayları",
+        "GitHub PR onayları",
+        "Slack onay botları"
+      ],
+      "erken_sinyal": "Onay süresinin birkaç saniyeye düşmesi; ret oranının sıfıra yaklaşması.",
+      "azaltma": "Onayları risk tabanlı azaltma, yalnız yüksek riskli eylemlerde onay, onay ekranında fark ve gerekçe gösterme, rastgele denetim."
+    },
+    {
+      "id": "RK-180",
+      "yetenek_sinifi": "Y-31",
+      "kalip": "Onay diyaloğunun sahtelenmesi (Lies-in-the-Loop)",
+      "aciklama": "Checkmarx, bağlama enjekte edilen içerikle ajanın insan onayı diyaloğunu zararsız gösterecek biçimde ürettirilebildiğini, tehlikeli komutların görünür alanın dışına itilebildiğini ve bunun Claude Code üzerinde çalıştığını gösterdi.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-17"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://checkmarx.com/zero-post/bypassing-ai-agent-defenses-with-lies-in-the-loop/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onaylayan kişi ajanın yazdığı özete güvenir; gerçekte çalışacak komut veya değişiklik farklıdır ve kayıtta 'insan onayladı' görünür.",
+        "Sorumluluk matrisi insan onayına dayandığı için olay sonrası sorumluluk yanlış kişiye yüklenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K17-002",
+        "N-K17-006",
+        "N-K18-007"
+      ],
+      "ornek_araclar": [
+        "Claude Code",
+        "Microsoft Copilot Chat",
+        "Ajan onay arayüzleri"
+      ],
+      "erken_sinyal": "Onay metninde uzun dolgu, gizlenmiş satırlar; onay sonrası çalışan komutun özetle uyuşmaması.",
+      "azaltma": "Onay ekranında ajan özeti yerine ham komut/farkın deterministik gösterimi, onaylanan içeriğin özetinin kayda bağlanması."
+    },
+    {
+      "id": "RK-181",
+      "yetenek_sinifi": "Y-31",
+      "kalip": "Onay kapısının teknik olarak atlanması",
+      "aciklama": "n8n'de sohbet WebSocket'i üzerinden yeniden kullanılan resumeToken ile kimliksiz olarak onay kapısının atlanabilmesi kaydedildi (CVE-2026-86077).",
+      "risk_turleri": [
+        "RT-01",
+        "RT-16"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-35jj-42hp-8gmq"
+      ],
+      "yasatacagi_sorunlar": [
+        "İnsan bekleme adımı olan iş akışlarında devam belirteci tahmin edilir veya yeniden kullanılırsa onay beklemeden yayın veya birleştirme gerçekleşir.",
+        "Onay kaydı kimliksiz olduğu için denetimde kim onayladı sorusu yanıtsız kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K17-002",
+        "N-K13-003",
+        "N-K17-004"
+      ],
+      "ornek_araclar": [
+        "n8n",
+        "Temporal sinyalleri",
+        "Slack/Teams onay entegrasyonları"
+      ],
+      "erken_sinyal": "Onay kaydında kimliksiz veya aynı belirteçle birden çok devam.",
+      "azaltma": "Tek kullanımlık, kimliğe ve içeriğe bağlı onay belirteçleri, onayın ayrı kimlik doğrulamalı kanaldan alınması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 6,
+    "orta": 96,
+    "dusuk": 88,
+    "yuksek": 29
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 37,
+    "RT-01": 27,
+    "RT-15": 25,
+    "RT-16": 22,
+    "RT-13": 22,
+    "RT-03": 20,
+    "RT-05": 20,
+    "RT-07": 16,
+    "RT-14": 16,
+    "RT-10": 14,
+    "RT-12": 12,
+    "RT-06": 12,
+    "RT-04": 11,
+    "RT-11": 5,
+    "RT-02": 4,
+    "RT-09": 3,
+    "RT-17": 3
+  }
+}

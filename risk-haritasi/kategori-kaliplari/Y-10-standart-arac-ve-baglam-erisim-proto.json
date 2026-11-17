@@ -1,0 +1,174 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-10",
+    "ad": "Standart araç ve bağlam erişim protokolü + onaylı araç kataloğu",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-102",
+      "yetenek_sinifi": "Y-10",
+      "kalip": "Araç açıklaması zehirlenmesi",
+      "aciklama": "Invariant Labs, MCP araç açıklamalarına gizlenen talimatların kullanıcıya görünmeden modele ulaştığını ve SSH anahtarı gibi dosyaları sızdırtabildiğini gösterdi (Nisan 2025). Araç tanımı, ajan için güvenilir bağlam gibi işlenir.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onaylı katalogdaki bir MCP sunucusunun açıklaması, başka bir güvenilir sunucunun davranışını ele geçirebilir (gölgeleme); tek zayıf sunucu tüm oturumu etkiler.",
+        "Kullanıcı arayüzü açıklamanın tamamını göstermediği için insan onayı anlamsızlaşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-002",
+        "N-K12-001",
+        "N-K18-005"
+      ],
+      "ornek_araclar": [
+        "MCP sunucuları",
+        "Claude Desktop/Code",
+        "Cursor",
+        "VS Code MCP"
+      ],
+      "erken_sinyal": "Araç açıklamalarında talimat kalıpları, alışılmadık uzunluk, diğer araçlara referans.",
+      "azaltma": "Katalogdaki araç tanımlarının özet değerle sabitlenmesi ve farkta yeniden onay, açıklama taraması, oturum başına yalnız gerekli araçların yüklenmesi."
+    },
+    {
+      "id": "RK-103",
+      "yetenek_sinifi": "Y-10",
+      "kalip": "Onay sonrası araç tanımı değişimi (rug pull)",
+      "aciklama": "Check Point'in bildirdiği Cursor açığında (CVE-2025-54136), bir kez onaylanan MCP yapılandırması sonradan değiştirildiğinde yeniden onay istenmiyor ve kalıcı uzaktan kod çalıştırma sağlanıyordu.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-01"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-54136",
+        "https://research.checkpoint.com/2025/cursor-vulnerability-mcpoison/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Paylaşılan depodaki MCP yapılandırmasını değiştirebilen herhangi bir katkıcı, daha önce onay vermiş tüm geliştiricilerin makinesinde kod çalıştırabilir.",
+        "Onaylı katalog 'bir kez incele' mantığıyla işletilirse sonraki sürümler denetimsiz kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-002",
+        "N-K11-008",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "Cursor",
+        "Claude Code",
+        "VS Code MCP",
+        "Windsurf"
+      ],
+      "erken_sinyal": "MCP yapılandırma dosyalarında onay sonrası değişiklik; sunucu sürümünün katalogdakiyle uyuşmaması.",
+      "azaltma": "Araç tanımı ve sunucu sürümünün özetle sabitlenmesi, değişiklikte zorunlu yeniden onay, yapılandırma dosyalarının kod sahipliği korumasında tutulması."
+    },
+    {
+      "id": "RK-104",
+      "yetenek_sinifi": "Y-10",
+      "kalip": "Token geçirme ve karışık yetki (confused deputy)",
+      "aciklama": "MCP güvenlik en iyi uygulamaları, istemciden gelen token'ın sunucu tarafından doğrulanmadan aşağı akış API'ye aktarılmasını (token passthrough) açıkça yasaklar ve karışık yetki saldırısını tanımlar. LiteLLM'de 'OAuth2 passthrough fallback' üzerinden MCP kimlik doğrulama atlaması (CVE-2026-59822) bu kalıbın gerçek bir örneğidir.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-16"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://modelcontextprotocol.io/specification/draft/basic/security_best_practices",
+        "https://github.com/advisories/GHSA-7488-6r32-c95q"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın geliştiricinin geniş kapsamlı token'ıyla iş takip veya sürüm kontrol sistemine erişmesi, ajan eylemlerinin insan eylemi gibi kaydedilmesine ve en az yetki ilkesinin kırılmasına yol açar.",
+        "Hedef kitlesi doğrulanmayan token'lar başka MCP sunucularında yeniden kullanılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003",
+        "N-K17-002",
+        "N-K22-004"
+      ],
+      "ornek_araclar": [
+        "MCP ağ geçitleri",
+        "LiteLLM MCP vekili",
+        "Atlassian MCP",
+        "GitHub MCP"
+      ],
+      "erken_sinyal": "MCP sunucusunun kullanıcı token'ını değiştirmeden aşağı aktarması; denetim kaydında ajan ile insan ayırt edilememesi.",
+      "azaltma": "Token değişimi (RFC 8693) ile göreve ve hedefe özel kısa ömürlü token, audience doğrulaması, ajan kimliğinin ayrı hizmet hesabı olması."
+    },
+    {
+      "id": "RK-105",
+      "yetenek_sinifi": "Y-10",
+      "kalip": "MCP bileşenlerinde uzaktan kod çalıştırma ve kötü amaçlı sunucu",
+      "aciklama": "mcp-remote'ta kötü amaçlı sunucunun authorization_endpoint değeriyle işletim sistemi komutu çalıştırma (CVE-2025-6514, CVSS 9,6); MCP Inspector'da kimlik doğrulamasız vekil (CVE-2025-49596, kritik); resmî filesystem sunucusunda yol doğrulama atlamaları (CVE-2025-53109/53110) yayımlandı. npm'deki postmark-mcp paketi 1.0.16 sürümünde e-postaları gizli BCC ile sızdırmaya başladı (MAL-2025-47604).",
+      "risk_turleri": [
+        "RT-01",
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-6xpm-ggf7-wc3p",
+        "https://github.com/advisories/GHSA-7f8r-222p-6f5g",
+        "https://github.com/advisories/GHSA-q66q-fx2p-7w4m",
+        "https://osv.dev/vulnerability/MAL-2025-47604",
+        "https://jfrog.com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Güvenilmeyen uzak MCP sunucusuna bağlanan bir geliştirici makinesi ele geçirilebilir; güvenilir görünen bir paket bir sürüm sonra kötü amaçlı hale gelebilir.",
+        "Yerel MCP sunucuları npx ile her çalıştırmada son sürümü çekiyorsa sürüm sabitleme fiilen yoktur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002",
+        "N-K18-008",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "mcp-remote",
+        "MCP Inspector",
+        "@modelcontextprotocol/server-filesystem",
+        "npm MCP paketleri"
+      ],
+      "erken_sinyal": "MCP paketlerinde bakımcı değişimi veya ani sürüm; sunucudan beklenmeyen giden bağlantı.",
+      "azaltma": "MCP sunucularını sürüm ve özetle sabitlenmiş iç aynadan çalıştırma, sunucuları konteyner içinde ağ izin listesiyle yalıtma, uzak sunucular için izin listesi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 2,
+    "yuksek": 20,
+    "orta": 86,
+    "dusuk": 159
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 35,
+    "RT-08": 25,
+    "RT-01": 19,
+    "RT-14": 15,
+    "RT-10": 13,
+    "RT-06": 7,
+    "RT-04": 6,
+    "RT-12": 6,
+    "RT-11": 6,
+    "RT-16": 6,
+    "RT-07": 6,
+    "RT-02": 5,
+    "RT-05": 5,
+    "RT-17": 1,
+    "RT-15": 1,
+    "RT-13": 1
+  }
+}

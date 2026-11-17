@@ -1,0 +1,2825 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-01",
+    "ad": "Büyük dil modeli (LLM) çıkarım erişim katmanı",
+    "grup": "Model erişimi ve ekonomisi",
+    "cozdugu_sorun": "Ajanların dil anlama, planlama ve kod üretimi için modele tutarlı, merkezi politikayla erişememesi; dağınık erişim anahtarları.",
+    "ne_zaman_zorunlu": "İlk günden."
+  },
+  "arac_sayisi": 134,
+  "tur_dagilimi": {
+    "kutuphane": 12,
+    "acik-kaynak": 13,
+    "acik-cekirdek": 2,
+    "ticari-saas": 3,
+    "model": 56,
+    "bulut-hizmeti": 34,
+    "platform": 4,
+    "cerceve": 4,
+    "protokol-standart": 1,
+    "ticari-yazilim": 5
+  },
+  "araclar": [
+    {
+      "id": "AR-0051",
+      "ad": "Vercel AI SDK",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ai-sdk.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript için sağlayıcıdan bağımsız model erişimi, araç döngüsü (agent) ve Zod/JSON Schema ile tipli nesne üretimi (structured output) sunar.",
+      "sinirlar": "Orkestrasyon sağlamaz (kaynak). Uygulama/UI odaklıdır; kodlama ajanı için izin modeli, sandbox ve çok ajanlı koordinasyon hazır gelmez.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0059",
+      "ad": "OpenCode",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://opencode.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terminal odaklı açık kaynak kodlama ajanı: ajan başına istem, model ve araç izni tanımı; yerel model servislerine özel sağlayıcı (baseURL); çok sağlayıcı. Kurum panolarında Dagu + OpenCode ajan çalıştırıcı olarak seçilmiş ve adil karşılaştırmada sabit çalıştırıcı olarak öneriliyor.",
+      "sinirlar": "Yerel modellerde API uyumluluğu yetmez; tool_calls ve reasoning alanlarının model biçimine uygunluğu model başına doğrulanmalı (kaynak); depo sst/opencode'dan anomalyco/opencode'a taşındı. Hızlı gelişim temposu; kurumsal destek ve güvenlik denetimi kurumun sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K09-001",
+        "N-K09-010",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-004",
+        "N-K10-007",
+        "N-K10-008",
+        "N-K23-002"
+      ]
+    },
+    {
+      "id": "AR-0188",
+      "ad": "LiteLLM",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (enterprise dizini hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.litellm.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "100+ sağlayıcıya OpenAI uyumlu tek geçit; sanal anahtar, ekip ve kullanıcı bazında bütçe/hız sınırı, model erişim grupları, yedek model zinciri, harcama logları ve model fiyat haritası.",
+      "sinirlar": "Kritik yolda ek servis, sürümü sabitlenmeli (kaynak); bazı kurumsal özellikler enterprise lisansında. Mart 2026'da PyPI sürümleri 1.82.7/1.82.8 tedarik zinciri saldırısıyla ele geçirildi; sürüm sabitleme ve imza/özet doğrulaması şart; bütçeler veritabanı olmadan çalışmaz.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-004",
+        "N-K09-012",
+        "N-K15-006",
+        "N-K16-007",
+        "N-K18-010",
+        "N-K20-001",
+        "N-K20-005",
+        "N-K20-007",
+        "N-K23-007",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-0189",
+      "ad": "OpenRouter",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://openrouter.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüzlerce modele tek OpenAI uyumlu uç nokta; sağlayıcılar arası otomatik yedekleme, fiyat/verim/gecikmeye göre sıralama, max_price tavanı, veri toplamayan veya sıfır saklamalı (ZDR) sağlayıcılarla sınırlama.",
+      "sinirlar": "Veri üçüncü taraftan geçer (kaynak); sağlayıcı yönlendirmesi veri politikasıyla sınırlanmalı. Ek bir aracı işleyici katmanıdır; bölge içi (AB/ABD) yönlendirme yalnız kurumsal müşterilere sunuluyor.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K16-007",
+        "N-K18-010",
+        "N-K20-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0193",
+      "ad": "GooseAI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://goose.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eski açık modelleri (GPT-J, GPT-NeoX vb.) API ile sunan çıkarım hizmeti.",
+      "sinirlar": "Eski nesil modeller; goose ajanıyla ilgisi yok, adı karışıyor; fiyat ve hizmet kalitesi ölçülmedi, bakım durumu bilinmiyor (kaynak).",
+      "ihtiyaclar": [
+        "N-K09-002"
+      ]
+    },
+    {
+      "id": "AR-0201",
+      "ad": "GLM-5.3",
+      "tur": "model",
+      "lisans": "GLM-5.3 License (özel; HF: other)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/zai-org/GLM-5.3-BF16",
+      "olgunluk": "gelisen",
+      "ne_saglar": "1M bağlamlı metin modeli; uzun yazılım görevleri, araç kullanımı ve kod düzenleme. Kaynakta backend kodlama, performans, yetki ve git-scenario ajanlarının birinci adayı; AA v4.3 genel indeks 45, üretici Terminal-Bench 2.1 puanı 88,2.",
+      "sinirlar": "Özel lisans hukukça incelenmeli; BF16 ağırlıklar büyük GPU kümesi ister, resmî SGLang/vLLM reçetesi gerekir; üretici puanları bağımsız yerelde doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0202",
+      "ad": "Kimi K3",
+      "tur": "model",
+      "lisans": "Kimi K3 License (özel; HF: other)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://huggingface.co/moonshotai/Kimi-K3",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel, 1M bağlam; uzun belgeleri birlikte değerlendirme, planlama ve muhakeme. Kaynakta planlayıcı, test, R&D, unknown-unknown ve frontend ajanlarının birinci adayı; AA genel indeks 44, uzun bağlam (AA-LCR) 89.",
+      "sinirlar": "Kodlama liderliği varsayılmamalı: AA terminal görevinde 13 ile GLM'nin gerisinde; kendi mesaj şablonuyla servis edilmeli; özel lisans. Özel lisans: model-hizmet (MaaS) geliri yıllık 20 milyon doları aşan kuruluşlar ayrı anlaşma yapmalı; kurum içi sunum için çok büyük donanım.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0203",
+      "ad": "Qwen3.8-2.4T-A95B",
+      "tur": "model",
+      "lisans": "qwen3.8-max lisansı (özel; HF: other)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "2,4T toplam / 95B etkin parametreli açık ağırlıklı model; yerel sürüm yalnız metin, 262K (uzatmayla ~1M). Kaynakta mimari, bağımsız kontrol ve OOP/SOLID incelemesi için aday.",
+      "sinirlar": "İndirilen model, görsel ve ek araçları olan Qwen3.8-Max API ile aynı ürün değil; çok büyük boyut ciddi GPU kapasitesi ister; özel lisans.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0204",
+      "ad": "DeepSeek-V4.1-Flash",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+      "olgunluk": "erken",
+      "ne_saglar": "Metin + görsel, 1M bağlam; kodlama, terminal ve çok adımlı görevler. 10 Eylül 2026 yayını; kaynakta GLM alternatifi, hata analizi ve ikinci kontrol için yeni aday.",
+      "sinirlar": "Standart Jinja yerine resmî deepseek-recipe mesaj kodlayıcısı gerekir; aynı model DeepSWE 1.1'de OpenCode ile 65,5, mini-SWE-agent ile 74,2 aldı — çalıştırıcı etkisi büyük; yerel karşılaştırma yapılmadı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0205",
+      "ad": "DeepSeek-V4-Pro-0813",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uzun bağlamlı muhakeme ve yazım modeli; kaynakta plan ve kodlama için sürümü sabit alternatif.",
+      "sinirlar": "Ağustos 2026 sürümü; daha yeni V4.1 ile kurum işlerinde karşılaştırılmalı; kendi şablonu gerekir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K09-013",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0206",
+      "ad": "Qwen3.8-Flash-Next",
+      "tur": "model",
+      "lisans": "Qwen Community License 1.0 (HF: other)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel; araç kullanımı, kodlama ve görsel görevler. Kaynakta mobile-first ajanı ve görsel kontrol için birinci aday; AA genel indeks 40.",
+      "sinirlar": "MoE ve n-gram mimarisi için resmî sunum reçetesi şart; API ölçümü yerel kurulum garantisi değildir; topluluk lisansı koşulları incelenmeli.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0207",
+      "ad": "Qwen3.8-27B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel/video, 256K; küçük boyutta muhakeme ve görsel değerlendirme. Kaynakta router, olgunluk seviyesi, DoR, rules.master, rapor ve dependency-priority ajanlarının birinci adayı.",
+      "sinirlar": "AA ölçümü xhigh düşünme ayarında (indeks 34); düşük ayarlarda puan farklı, karmaşık işler büyük modele yükseltilmeli.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-010",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-006",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0208",
+      "ad": "Qwen3-Coder-Next",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "olgunluk": "gelisen",
+      "ne_saglar": "80B toplam / 3B etkin, 256K bağlamlı, düşünme üretmeyen kod uzmanı; depo üzerinde araçla çalışma. Kaynakta test kodu yardımcısı ve git-scenario alternatifi.",
+      "sinirlar": "Qwen3.8 ailesinden eski; ana kodlayıcı değil, alt işler için ayrı uzman aday.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0209",
+      "ad": "gpt-oss-120b",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/openai/gpt-oss-120b",
+      "olgunluk": "olgun",
+      "ne_saglar": "128K bağlamlı açık ağırlıklı muhakeme ve araç çağrısı modeli; kaynakta rapor, sınıflandırma ve sınırlı inceleme için alternatif yardımcı.",
+      "sinirlar": "Harmony mesaj biçimi gerekir; 2026 zor terminal/otomasyon ölçümlerinde zayıf (AA indeks 12), tek ana kodlayıcı olarak önerilmiyor.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-006",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0210",
+      "ad": "gpt-oss-20b",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/openai/gpt-oss-20b",
+      "olgunluk": "olgun",
+      "ne_saglar": "128K bağlamlı kompakt muhakeme ve araç çağrısı modeli; kaynakta iş sınıflandırma, kısa özet ve kural raporu için.",
+      "sinirlar": "Harmony biçimi gerekir; kabul kararını tek başına vermemeli; NVIDIA tablosunda Terminal-Bench 2.1 puanı 15,17.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0211",
+      "ad": "MiniMax-M3",
+      "tur": "model",
+      "lisans": "MiniMax Community License (HF: other)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel/video, 1M bağlam; uzun bağlam ve çok kipli işler. Kaynakta araştırma, görsel inceleme ve alternatif kodlama adayı.",
+      "sinirlar": "Üretici SWE-bench Verified 80,5 puanı AA terminal sonucu (2) ile tek puana indirgenmemeli; topluluk lisansı koşulları incelenmeli. Lisanslar standart değil (değiştirilmiş MIT / topluluk lisansı); ticari koşullar metinden kontrol edilmeli.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0212",
+      "ad": "MiMo-V2.5-Pro",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
+      "olgunluk": "gelisen",
+      "ne_saglar": "1M bağlamlı uzun görev muhakemesi ve kodlama modeli; kaynakta uzun doküman ve ikinci görüş için alternatif.",
+      "sinirlar": "AA v4.3 zor otomasyon sonuçları liderlerden düşük (indeks 26); büyük boyut.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0213",
+      "ad": "Hy4-preview",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/tencent/Hy4-preview",
+      "olgunluk": "erken",
+      "ne_saglar": "1M bağlamda araç kullanımı ve yazılım işleri; üretici Terminal-Bench 2.1 puanı 85,4. Kaynakta kodlama ve teknik araştırma için yeni aday.",
+      "sinirlar": "Önizleme (preview) sürümü; resmî SGLang/vLLM reçetesiyle kurum görevlerinde sınanmalı; DeepSWE sürüm eşitliği teyit edilmeden sıralama yapılmamalı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0214",
+      "ad": "Hy3",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/tencent/Hy3",
+      "olgunluk": "gelisen",
+      "ne_saglar": "256K bağlamlı genel muhakeme ve araçlı görev modeli; kaynakta raporlama, araştırma ve kod inceleme alternatifi.",
+      "sinirlar": "Hy4 öncesi sürüm; aynı ailenin iki sürümü bağımsız çeşitlilik sayılmamalı.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0215",
+      "ad": "Mistral Medium 3.5",
+      "tur": "model",
+      "lisans": "Modified MIT (HF: other)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "128B yoğun (dense) model; 256K + görsel; genel kod işleri, görsel anlama. Kaynakta doküman, küçük geliştirme ve görsel kontrol alternatifi.",
+      "sinirlar": "Modified MIT, düz MIT gibi etiketlenmemeli; bu sürüm zor ajan testlerinde lider değil (AA indeks 15).",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0216",
+      "ad": "Mistral Small 4",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+      "olgunluk": "gelisen",
+      "ne_saglar": "119B toplam / 6.5B etkin MoE; 256K + görsel; düşünme/normal mod, araç çağrısı, JSON çıktı. Kaynakta doküman, yönlendirme ve görsel açıklama yardımcısı.",
+      "sinirlar": "Adı 'Small' olsa da ağırlık boyutu büyük; kurulum kapasitesi buna göre planlanmalı.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-006",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0217",
+      "ad": "Devstral 2",
+      "tur": "model",
+      "lisans": "özel lisans (HF: other; LICENSE dosyası esas)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+      "olgunluk": "gelisen",
+      "ne_saglar": "123B, 256K bağlamlı kod uzmanı; birden çok dosyayı inceleme ve düzenleme; üretici SWE-bench Verified 72,2. Mistral Vibe örnekleri mevcut.",
+      "sinirlar": "Lisans 'other' — ticari kullanım koşulları LICENSE dosyasından doğrulanmalı; Terminal-Bench 2/2.1/3/4 sonuçları karşılaştırılamaz.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0218",
+      "ad": "Devstral Small 2",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512",
+      "olgunluk": "gelisen",
+      "ne_saglar": "24B, 256K + görsel kod uzmanı; sınırlı düzeltme, frontend ve test dosyası; üretici SWE-bench Verified 68.",
+      "sinirlar": "Kod uzmanlığı genel planlama üstünlüğü anlamına gelmez (kaynak).",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0219",
+      "ad": "Gemma 4 31B IT",
+      "tur": "model",
+      "lisans": "Apache-2.0 (Gemma 4 lisans sayfası)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/google/gemma-4-31B-it",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel, 256K; görsel muhakeme, belge anlama, çok dil; LiveCodeBench v6 80. Kaynakta mobile-first alternatifi, görsel QA ve doküman.",
+      "sinirlar": "Instruction-tuned '-it' sürümü kullanılmalı; görsel girdiyi modele ileten araç zinciri gerekir.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K04-010",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0220",
+      "ad": "Gemma 4 26B A4B IT",
+      "tur": "model",
+      "lisans": "Apache-2.0 (Gemma 4 lisans sayfası)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/google/gemma-4-26B-A4B-it",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MoE (26B toplam / ~4B etkin), metin + görsel, 256K; görsel yardımcı, doküman ve rapor.",
+      "sinirlar": "31B dense modelden ayrı mimari; aynı ailedeki boyutlar bağımsız çeşitlilik sayılmamalı.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0221",
+      "ad": "Gemma 4 12B IT",
+      "tur": "model",
+      "lisans": "Apache-2.0 (Gemma 4 lisans sayfası)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/google/gemma-4-12B-it",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel + ses/video girdisi, 256K; birleşik çok kipli algılama; ekran/video açıklama ve doküman.",
+      "sinirlar": "Ses/video alır, metin üretir; ses üretim modeli değildir.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0222",
+      "ad": "NVIDIA Nemotron 3 Ultra",
+      "tur": "model",
+      "lisans": "OpenMDW-1.1",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "olgunluk": "gelisen",
+      "ne_saglar": "550B / 55B etkin, 1M bağlam; kodlama, muhakeme ve araçlı işler; NVIDIA kartında OpenCode örneği; üretici SWE-bench Verified 70,7.",
+      "sinirlar": "AA tablosunda GLM/Kimi seviyesinde değil (indeks 23); çok büyük sunum kapasitesi.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0223",
+      "ad": "NVIDIA Nemotron 3 Super",
+      "tur": "model",
+      "lisans": "NVIDIA Nemotron Open Model License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+      "olgunluk": "gelisen",
+      "ne_saglar": "120B / 12B etkin, 1M; uzun metin ve araçlı muhakeme. Kaynakta DoR, doküman ve ek teknik kontrol için yardımcı.",
+      "sinirlar": "Ultra/Lightning ile aynı lisansta değil; performans çalıştırıcıya göre değişiyor (aynı model 59,2 ve 63,08).",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0224",
+      "ad": "NVIDIA Nemotron 3.5 Lightning",
+      "tur": "model",
+      "lisans": "OpenMDW-1.1",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+      "olgunluk": "gelisen",
+      "ne_saglar": "30B / 3B etkin, 1M; hızlı yardımcı rol: yönlendirme, rapor, kısa kural kontrolü; kaynakta router ve rapor ajanlarının alternatifi.",
+      "sinirlar": "Kritik test kapsamı veya birleştirme kararını tek başına belirlememeli; genel kaliteyi yalnız hızda karşılar (AA indeks 14).",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-010",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0225",
+      "ad": "IBM Granite 4.2 30B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/ibm-granite/granite-4.2-30b",
+      "olgunluk": "gelisen",
+      "ne_saglar": "128K (512K'ya uzatılabilir) kurumsal yardımcı model; talimat takibi, muhakeme, araç çağrısı; kartta OpenCode/Pi/OpenHands yapılandırmaları; kaynakta DoR, olgunluk ve rules.master alternatifi.",
+      "sinirlar": "Büyük kodlama liderlerinin yerine otomatik seçilmez; üretici SWE-bench Verified 57.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0226",
+      "ad": "IBM Granite 4.2 8B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/ibm-granite/granite-4.2-8b",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kompakt muhakeme ve araç çağrısı; rapor, sınıflandırma ve küçük kontroller.",
+      "sinirlar": "30B kadar güçlü değil; belirsizlikte güçlü modele aktarmalı.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-010",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0227",
+      "ad": "IBM Granite 4.2 3B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kompakt talimat ve metin işleme; etiketleme, biçimleme ve kısa özet.",
+      "sinirlar": "Karttaki SWE puanı yok; 8B/30B sonuçları bu modele genellenmemeli.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0228",
+      "ad": "Olmo 3.1 32B Think",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/allenai/Olmo-3.1-32B-Think",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Eğitim verisi ve süreci açık yaklaşımla yayımlanan muhakeme modeli; kaynakta alan uyarlama ve deney için.",
+      "sinirlar": "LiveCodeBench v3 sonucu (83,3) v6 sonuçlarıyla aynı sıralamaya girmez.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K11-009",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0229",
+      "ad": "SERA-32B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/allenai/SERA-32B",
+      "olgunluk": "erken",
+      "ne_saglar": "Depo görevlerine uyarlanmış 32B, 32K kodlama ajan modeli; SWE-bench Verified 49,5 (3 seed); kaynakta Python düzeltmeleri ve özel ajan eğitimi için.",
+      "sinirlar": "Yalnız Python depolarında doğrulanmış; sera-cli uyarlaması gerekebilir, OpenCode'da submit aracı varsayılan değil.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K11-009",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0230",
+      "ad": "Hermes 4.3 36B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/NousResearch/Hermes-4.3-36B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Seed-OSS tabanlı türev; yapılandırılmış çıktı, araç çağrısı, hibrit düşünme; kaynakta yönlendirme, kurallı rapor ve sınıflandırma.",
+      "sinirlar": "Genel kullanım yeteneği SWE üstünlüğü anlamına gelmez; Seed-OSS ile aynı temel aile (çeşitlilik sayılmamalı).",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K10-003",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0231",
+      "ad": "Seed-OSS 36B Instruct",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/ByteDance-Seed/Seed-OSS-36B-Instruct",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğal 512K bağlam ve ayarlanabilir düşünme bütçesi; uzun belge, doküman ve araştırma.",
+      "sinirlar": "Kendi araç/düşünme ayrıştırıcısı kullanılmalı; türev Hermes ile aynı temel aile.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-006",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0232",
+      "ad": "Trinity Large Thinking",
+      "tur": "model",
+      "lisans": "OpenMDW-1.1",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+      "olgunluk": "gelisen",
+      "ne_saglar": "398B / 13B etkin, 512K'ya uzatılabilir; muhakeme ve araçlı görevler; üretici SWE-bench Verified 63,2; kaynakta plan alternatifi ve ikinci inceleme.",
+      "sinirlar": "Çok turlu araç kullanımında reasoning_content alanının korunması gerekiyor; şablon hatası sonuçları bozar.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0233",
+      "ad": "North Mini Code 1.0",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/CohereLabs/North-Mini-Code-1.0",
+      "olgunluk": "erken",
+      "ne_saglar": "30B / 3B etkin, 64K→256K kod ve terminal modeli; OpenCode örneği var; kaynakta test kodu ve sınırlı düzeltme için.",
+      "sinirlar": "Araştırma yayını; iç içe düşünme alanının korunması gerekiyor.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0234",
+      "ad": "Command A+",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel, 128K; kaynak gösteren (grounded) yanıtlar. Mayıs 2026 BF16 sürümü; kaynakta documentation ajanının birinci, R&D ve web-research ajanlarının alternatif adayı.",
+      "sinirlar": "Eski Command modellerinin lisansı bu sürüme genellenmemeli; kaynak gösterme iddiaların doğru olduğunu garanti etmez.",
+      "ihtiyaclar": [
+        "N-K07-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K14-003",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0235",
+      "ad": "Llama 4 Maverick",
+      "tur": "model",
+      "lisans": "Llama 4 Community License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin + görsel genel asistan, çok kipli anlama; kaynakta eski nesil görsel/doküman alternatifi.",
+      "sinirlar": "İndirme koşul kabulü (gated) gerektirir; desteklenen 12 dil arasında Türkçe yok — Türkçe ayrıca ölçülmeli; eski nesil.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-014",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0236",
+      "ad": "Llama 4 Scout",
+      "tur": "model",
+      "lisans": "Llama 4 Community License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uzun girdili metin + görsel genel asistan; kaynakta uzun belge ve görsel alternatifi.",
+      "sinirlar": "Uzun pencere bağlamı hatasız kullanma garantisi değil; gated; Türkçe desteklenen diller arasında değil; güncel adaylardan önce seçilmemeli (kaynak).",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-014",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0249",
+      "ad": "Claude Fable 5.1",
+      "tur": "model",
+      "lisans": "ticari (kapalı API)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://artificialanalysis.ai/models/comparisons/claude-fable-5-1-vs-glm-5-3",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Anthropic'in Eylül 2026 kapalı modeli; 1M bağlam; kaynaktaki AA v4.3 tablosunda genel indeks 53 ile en yüksek; kaynakta kapalı referans ve yedek (fallback) olarak konumlanıyor.",
+      "sinirlar": "Sunucuya kurulamaz; 1M token başına 10 $ girdi / 50 $ çıktı (AA); kod ve istemler sağlayıcıya gider.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K16-007",
+        "N-K18-010",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0250",
+      "ad": "Qwen3.8 Max (API)",
+      "tur": "model",
+      "lisans": "ticari (kapalı API)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://artificialanalysis.ai/models/comparisons/claude-fable-5-1-vs-qwen3-8-max",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Alibaba'nın kapalı API modeli (Eylül 2026 sürümü 0902); ~984K bağlam, metin + görsel girdi, akıl yürütme; 1M token başına 2 $ girdi / 6 $ çıktı (AA).",
+      "sinirlar": "Yerel Qwen3.8-2.4T-A95B'nin birebir ölçümü değildir (kaynak); veri sağlayıcıya gider.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0251",
+      "ad": "Claude Developer Platform (Claude API)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://platform.claude.com/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Claude model ailesine Messages API ile erişim; araç kullanımı, yapılandırılmış çıktı, istem önbellekleme, toplu işlem, bilgisayar kullanımı aracı ve tarihli model kimlikleriyle sürüm sabitleme; emeklilik takvimi resmî sayfada yayımlanıyor.",
+      "sinirlar": "Tek model ailesi; kullanım raporundaki çıkarım coğrafyası değerleri yalnız 'us' ve 'global', yani Türkiye/AB içinde işleme seçeneği belgelenmemiş.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-006",
+        "N-K09-008",
+        "N-K09-013",
+        "N-K14-008",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0252",
+      "ad": "OpenAI API",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://developers.openai.com/api/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "GPT model ailesine Responses/Chat Completions API ile erişim; akıl yürütme seviyesi parametresi, araç çağrısı, yapılandırılmış çıktı ve bilgisayar kullanımı aracı; emeklilik (deprecation) sayfası sürüm takibine kaynak olur.",
+      "sinirlar": "Kapalı model; takma adlı (alias) model adları sessizce güncellenebildiğinden tarihli anlık görüntü (snapshot) kimliği kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-005",
+        "N-K09-006",
+        "N-K09-008",
+        "N-K09-013",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0253",
+      "ad": "Vertex AI / Gemini API",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://cloud.google.com/vertex-ai/generative-ai/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gemini ailesi ve Model Garden üzerinden üçüncü taraf/açık modellere bölgesel uç noktalarla erişim; model sürümleri ve yaşam döngüsü sayfası; önizleme aşamasındaki Computer Use aracı (tarayıcı, mobil, masaüstü).",
+      "sinirlar": "Computer Use hâlâ önizleme ve Google bunu hata/güvenlik açığı içerebilir diye belirtiyor; GCP bulut kilidi.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-005",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-013",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0254",
+      "ad": "Amazon Bedrock",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/bedrock/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birden çok sağlayıcının modellerine tek AWS API'si; bölgeler arası çıkarım profilleri ve aynı aile içinde yanıt kalitesi tahminine göre ucuz/güçlü model arasında seçim yapan Intelligent Prompt Routing.",
+      "sinirlar": "Prompt Routing aynı aileden tam iki modelle çalışır, yalnız İngilizce istemler için optimize edilmiştir ve uygulamaya özgü başarı verisiyle ayarlanamaz; AWS kilidi.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K16-007",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0255",
+      "ad": "Microsoft Foundry (Azure AI Foundry / Azure OpenAI)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/ai-foundry/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenAI ve diğer sağlayıcıların modellerini Azure aboneliği içinde bölgesel dağıtım, sağlanmış verim (PTU) ve kurumsal kimlik (managed identity) ile sunar.",
+      "sinirlar": "Azure kilidi; model dağıtımlarının sürüm yükseltme politikaları ayrıca yönetilmeli.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0256",
+      "ad": "Mistral AI API (La Plateforme)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://docs.mistral.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mistral model ailesine (Devstral, Magistral, Codestral vb.) API erişimi; birçok modelin açık ağırlıklı sürümü de olduğundan aynı ailenin kurum içi ve hizmet sürümü karşılaştırılabilir.",
+      "sinirlar": "Kapalı hizmet sürümü ile indirilebilir sürüm aynı ürün değildir; bazı büyük modeller kısıtlı (değiştirilmiş MIT) lisanslıdır.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0258",
+      "ad": "Cohere Platform (Embed v4, Rerank 4, Command)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://docs.cohere.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok dilli ve çok kipli Embed v4 (Matryoshka boyutları) ile 100+ dili kapsayan, 32K bağlamlı Rerank 4 (pro/fast) modelleri; Bedrock, Azure ve OCI üzerinden de sunuluyor.",
+      "sinirlar": "Kapalı ağırlık; Türkçe arama kalitesi kurum derleminde ayrıca ölçülmeli; kullanım başı ücret.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K09-008",
+        "N-K09-014",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0259",
+      "ad": "Together AI",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://www.together.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık ağırlıklı model ailelerine (Qwen, DeepSeek, GLM, Kimi, gpt-oss vb.) sunucusuz ve ayrılmış uç nokta ile OpenAI uyumlu erişim; ince ayar ve GPU kümeleri.",
+      "sinirlar": "Aynı model sağlayıcılar arasında farklı nicemleme/şablonla sunulabilir; çıktı eşdeğerliği test edilmeli.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-0260",
+      "ad": "Fireworks AI",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://fireworks.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık ağırlıklı modeller için düşük gecikmeli sunucusuz ve ayrılmış dağıtım; ince ayarlı modelleri barındırma.",
+      "sinirlar": "Sağlayıcıya özgü nicemleme ve sunum ayarları kalite farkı yaratabilir; kapasite ABD odaklı.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-0261",
+      "ad": "DeepInfra",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://deepinfra.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık ağırlıklı dil, gömme ve yeniden sıralama modellerine token başı düşük fiyatlı OpenAI uyumlu erişim.",
+      "sinirlar": "Kurumsal SLA ve veri işleme ayrıntıları sözleşmeyle netleştirilmeli.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K16-007",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-0262",
+      "ad": "Cerebras Inference",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://www.cerebras.ai/inference",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Wafer ölçekli çiplerde açık ağırlıklı modellerin çok yüksek çıktı hızıyla sunumu; hız gerektiren kısa döngülü ajan adımları için seçenek.",
+      "sinirlar": "Model kataloğu dar; bağlam penceresi ve kota sınırları model başına değişiyor.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-0263",
+      "ad": "GroqCloud",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://groq.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LPU donanımında açık ağırlıklı modellerin düşük gecikmeli OpenAI uyumlu sunumu.",
+      "sinirlar": "Model kataloğu sınırlı; şirketin NVIDIA ile teknoloji iş birliği sonrası ürün yol haritası izlenmeli.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-0265",
+      "ad": "Replicate",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://replicate.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Binlerce modeli API ile çalıştırma; açık kaynak Cog ile özel modeli konteynerleyip otomatik ölçeklenen uç noktaya dönüştürme.",
+      "sinirlar": "Ağırlık görsel/çok kipli modellerde; kurumsal LLM ajan yükü için birincil tercih değil.",
+      "ihtiyaclar": [
+        "N-K09-008",
+        "N-K09-010"
+      ]
+    },
+    {
+      "id": "AR-0266",
+      "ad": "Hugging Face Inference Providers ve Inference Endpoints",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://huggingface.co/docs/inference-providers/index",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hub'daki modellere birden çok çıkarım sağlayıcısı üzerinden tek istemciyle erişim; Inference Endpoints ile seçilen bulut/bölgede vLLM veya SGLang motorlu ayrılmış uç nokta.",
+      "sinirlar": "Inference Endpoints'te TGI motoru arşivlendi; vLLM/SGLang'e geçiş gerekiyor.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010"
+      ]
+    },
+    {
+      "id": "AR-0267",
+      "ad": "NVIDIA NIM",
+      "tur": "platform",
+      "lisans": "ticari (geliştirme için ücretsiz erişim; üretim NVIDIA AI Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.nvidia.com/nim/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Modele göre optimize edilmiş (TensorRT-LLM/vLLM) hazır çıkarım konteynerleri; standart API, sağlık uçları ve Helm/Operator ile Kubernetes dağıtımı; build.nvidia.com'da deneme API'si.",
+      "sinirlar": "Üretim kullanımı ücretli kurumsal lisans ister; NVIDIA GPU bağımlılığı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0268",
+      "ad": "Cloudflare Workers AI",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://developers.cloudflare.com/workers-ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Cloudflare ağında sunucusuz açık model çıkarımı (dil, gömme, görsel); AI Gateway ile birlikte kullanılabilir.",
+      "sinirlar": "Büyük öncü modeller sınırlı; kota ve bağlam sınırları model başına değişir.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005"
+      ]
+    },
+    {
+      "id": "AR-0269",
+      "ad": "GitHub Models",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.github.com/en/github-models",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub hesabıyla birden çok sağlayıcının modellerini deneme, istem karşılaştırma ve Actions içinden çağırma.",
+      "sinirlar": "Ücretsiz katman hız sınırlı; üretim ajan yükü için değil prototip ve değerlendirme için uygun.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-005"
+      ]
+    },
+    {
+      "id": "AR-0270",
+      "ad": "DeepSeek API",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://api-docs.deepseek.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "DeepSeek V4 ailesine düşük fiyatlı OpenAI ve Anthropic uyumlu API erişimi.",
+      "sinirlar": "Veri Çin'de işlenir; kurumsal veri için yüksek aktarım riski.",
+      "ihtiyaclar": [
+        "N-K09-005",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0271",
+      "ad": "Alibaba Cloud Model Studio (Qwen API)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://www.alibabacloud.com/help/en/model-studio/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Qwen ailesinin (açık ve kapalı Max/Plus sürümleri) uluslararası bölgelerden API ile sunumu.",
+      "sinirlar": "Kapalı Max/Plus sürümleri indirilebilir sürümlerle aynı ürün değil.",
+      "ihtiyaclar": [
+        "N-K09-005",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0272",
+      "ad": "IBM watsonx.ai",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/watsonx-ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Granite ve üçüncü taraf modellere erişim, istem ve ince ayar araçları; SaaS ya da OpenShift üzerinde yazılım olarak kurum içi kurulum seçeneği.",
+      "sinirlar": "Lisans maliyeti ve OpenShift bağımlılığı; model kataloğu hiper ölçekleyicilerden dar.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-0273",
+      "ad": "OVHcloud AI Endpoints",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "20'den fazla açık ağırlıklı model (LLM, gömme, ses, belge) için sunucusuz, OpenAI uyumlu API; yaklaşık %50 indirimli Batch API.",
+      "sinirlar": "Katalog öncü kapalı modelleri içermez; kalite açık modellerle sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-010",
+        "N-K20-008",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0274",
+      "ad": "Scaleway Generative APIs",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://www.scaleway.com/en/docs/generative-apis/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dil, akıl yürütme, görsel, gömme, kod, ses ve yeniden sıralama modelleri için OpenAI uyumlu sunucusuz ve ayrılmış dağıtım; model yaşam döngüsü sayfası.",
+      "sinirlar": "Açık modellerle sınırlı katalog; kapasite tek sağlayıcıya bağlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K14-002",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0275",
+      "ad": "IONOS AI Model Hub",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://cloud.ionos.com/managed/ai-model-hub",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık kaynak LLM, görsel-dil OCR, gömme ve kod modellerine OpenAI uyumlu REST API; token başı ücret.",
+      "sinirlar": "Model seçimi açık modellerle sınırlı; öncü kapalı modeller yok.",
+      "ihtiyaclar": [
+        "N-K09-008",
+        "N-K09-009",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0276",
+      "ad": "STACKIT AI Model Serving",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://stackit.com/en/products/data-ai/stackit-ai-model-serving",
+      "olgunluk": "erken",
+      "ne_saglar": "Egemen STACKIT bulutunda açık LLM'lere API erişimi; sorguların saklanmadığı ve eğitimde kullanılmadığı belirtiliyor.",
+      "sinirlar": "Model kataloğu dar ve dokümanda tam listelenmemiş; OpenAI uyumluluğu açıkça belirtilmemiş.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0277",
+      "ad": "Nebius Token Factory",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://dev.nebius.com/token-factory",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık modeller için OpenAI uyumlu çıkarım; ayrılmış uç noktalar, toplu çıkarım, eğitim sonrası özelleştirme ve özel model dağıtımı.",
+      "sinirlar": "Model listesi ve bölge/saklama koşulları dokümandan ayrıca teyit edilmeli.",
+      "ihtiyaclar": [
+        "N-K09-005",
+        "N-K09-009",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-0296",
+      "ad": "any-llm",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mozilla-ai/any-llm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı LLM sağlayıcılarıyla tek Python arayüzü üzerinden, sağlayıcının resmî SDK'sını kullanarak konuşmayı sağlayan hafif soyutlama.",
+      "sinirlar": "Geçit değil; bütçe, kota ve merkezi politika sağlamaz.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-001"
+      ]
+    },
+    {
+      "id": "AR-0297",
+      "ad": "AI SDK (Vercel)",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/vercel/ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript için sağlayıcıdan bağımsız model arayüzü; akış, araç çağrısı, yapılandırılmış çıktı ve çok kipli girdi soyutlaması.",
+      "sinirlar": "Yalnız TypeScript/JavaScript; merkezi bütçe ve politika için ayrı geçit gerekir.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-001",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-0367",
+      "ad": "Qwen model ailesi (Qwen3.5, Qwen3-Coder)",
+      "tur": "model",
+      "lisans": "Apache-2.0 (çoğu açık sürüm); bazı Max sürümleri özel lisans",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/QwenLM/Qwen3",
+      "olgunluk": "olgun",
+      "ne_saglar": "0.8B'den 397B MoE'ye uzanan, yerel görsel-dil yetenekli genel modeller ve ajan tabanlı kodlama için Qwen3-Coder; araç çağrısı ve uzun bağlam desteği.",
+      "sinirlar": "Sürüm başına lisans farklı (bazı Max sürümleri özel lisans); aynı adı taşıyan kapalı Plus/Max hizmetleri indirilebilir sürümle aynı değil.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0368",
+      "ad": "DeepSeek V4 (V4-Pro, V4-Flash)",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MIT lisanslı MoE modeller: V4-Pro (1.6T toplam/49B etkin) ve V4-Flash (284B/13B), 1M token bağlam; kodlama ve ajan görevlerinde güçlü açık seçenek.",
+      "sinirlar": "V4-Pro çok düğümlü GPU kümesi ister; sürüm kontrol noktaları (checkpoint) güncellendiği için sabitleme gerekir.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0369",
+      "ad": "GLM-5 ailesi (GLM-5.2, GLM-5.3)",
+      "tur": "model",
+      "lisans": "MIT (GLM-5.2); GLM-5.3 özel lisans",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/zai-org/GLM-5",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan tabanlı mühendislik ve depo ölçeğinde kodlama için 744B MoE modeller; GLM-5.2 MIT lisanslı açık ağırlık.",
+      "sinirlar": "GLM-5.3 özel lisansla yayımlandı; 8×H100 sınıfı donanım gerekir.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0370",
+      "ad": "gpt-oss (gpt-oss-120b, gpt-oss-20b)",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/openai/gpt-oss",
+      "olgunluk": "olgun",
+      "ne_saglar": "Apache-2.0 lisanslı akıl yürütme modelleri; 120B sürüm (5.1B etkin) tek 80 GB GPU'da çalışır, ayarlanabilir akıl yürütme seviyesi ve araç çağrısı.",
+      "sinirlar": "Yalnız 'harmony' mesaj biçimiyle doğru çalışır; yanlış sohbet şablonu araç çağrısını bozar.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0371",
+      "ad": "Devstral 2 ve Devstral Small 2",
+      "tur": "model",
+      "lisans": "Değiştirilmiş MIT (123B), Apache-2.0 (24B)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mistral.ai/news/devstral-2-vibe-cli/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yazılım mühendisliği ajanları için kodlama modelleri; 24B sürüm tek GPU'da çalışabilir ve Apache-2.0 lisanslı; Mistral Vibe CLI ile birlikte sunuluyor.",
+      "sinirlar": "123B sürümün lisansı gelir temelli kısıt içeriyor; Mistral'in resmî mistral-inference kütüphanesi Haziran 2026'da arşivlendi. Genç proje; başsız mod ve yapılandırılmış sonuç olgunluğu doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K04-013",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K10-001",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0372",
+      "ad": "Gemma 4",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "2B uç sürümünden 31B yoğun modele dört boyutta, akıl yürütme ve ajan iş akışları için açık modeller; önceki Gemma sürümlerinden farklı olarak Apache-2.0 lisanslı.",
+      "sinirlar": "Öncü büyük modellerin gerisinde; küçük sürümlerde Türkçe kalite ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0373",
+      "ad": "IBM Granite 4",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ibm-granite/granite-4.0-language-models",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumsal kullanım için hibrit mimarili, küçük/orta boyutlu (ör. 8B, 30B) Apache-2.0 modeller; GGUF sürümleri ve watsonx desteği.",
+      "sinirlar": "Karmaşık kodlama ajan görevlerinde öncü modellerin gerisinde.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K09-005",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0374",
+      "ad": "OLMo",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/allenai/OLMo-core",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Eğitim verisi, kodu ve ara kontrol noktalarıyla tamamen açık dil modeli ailesi; köken ve lisans denetimi en şeffaf seçenek.",
+      "sinirlar": "Kodlama ve ajan başarımı öncü açık modellerin gerisinde.",
+      "ihtiyaclar": [
+        "N-K09-005",
+        "N-K09-009",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-0401",
+      "ad": "Kumru LLM",
+      "tur": "model",
+      "lisans": "Apache-2.0 (Kumru-2B)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/vngrs/Kumru-2B",
+      "olgunluk": "erken",
+      "ne_saglar": "Türkçe için sıfırdan eğitilmiş, Türkçeye özel ayrıştırıcılı (daha az token) ve 8K bağlamlı açık 2B model; dil bilgisi düzeltme, özetleme gibi Türkçe metin işlerinde hafif seçenek.",
+      "sinirlar": "Açık sürüm 2B ile sınırlı (7B sürümü herkese açık değil); kod ve ajan görevleri için uygun değil.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-014",
+        "N-K22-005",
+        "N-K23-009"
+      ]
+    },
+    {
+      "id": "AR-0402",
+      "ad": "Trendyol LLM",
+      "tur": "model",
+      "lisans": "Apache-2.0 (Trendyol-LLM-8B-T1)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/Trendyol",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Qwen3-8B üzerine Türkçe e-ticaret verisiyle eğitilmiş akıl yürütme modeli (8B-T1) ve Gemma 3-12B tabanlı çok kipli Asure-12B.",
+      "sinirlar": "Alan (e-ticaret) odaklı; genel yazılım mühendisliği ajan görevlerinde sınırlı; temel model lisansları da geçerli.",
+      "ihtiyaclar": [
+        "N-K09-014",
+        "N-K22-005",
+        "N-K23-009"
+      ]
+    },
+    {
+      "id": "AR-0403",
+      "ad": "Turkish-Gemma-9b (YTÜ COSMOS)",
+      "tur": "model",
+      "lisans": "Gemma kullanım koşulları",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/ytu-ce-cosmos",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gemma-2-9b üzerine Türkçe sürekli ön eğitim, SFT ve DPO ile geliştirilmiş model ve Türkçe çok adımlı akıl yürütme için T1 sürümü; GGUF sürümleri mevcut.",
+      "sinirlar": "Gemma lisansı kısıtları; akademik ekip bakımında, kurumsal destek yok.",
+      "ihtiyaclar": [
+        "N-K09-014",
+        "N-K22-005",
+        "N-K23-009"
+      ]
+    },
+    {
+      "id": "AR-1621",
+      "ad": "LLM (simonw/llm)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://llm.datasette.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok sayıda model sağlayıcısına ve yerel modellere eklentilerle erişen CLI ve Python kütüphanesi; tüm istem/yanıtları SQLite'a kaydeder, şemalı çıktı ve araç çağrısı destekler.",
+      "sinirlar": "Kişisel/geliştirici aracıdır; merkezi politika, kota ve kimlik yönetimi sağlamaz.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1622",
+      "ad": "aisuite",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/andrewyng/aisuite",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birden çok LLM sağlayıcısına OpenAI benzeri tek arayüzle erişen hafif Python kütüphanesi; sağlayıcı değiştirmek için yalnız model dizesini değiştirmek yeterlidir.",
+      "sinirlar": "Yönlendirme, yedekleme, kota ve gözlemlenebilirlik sunmaz.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-002"
+      ]
+    },
+    {
+      "id": "AR-1635",
+      "ad": "Atmosphere",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/Atmosphere/atmosphere",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JVM için taşınabilir ajan çalışma zamanı: tek @Agent sınıfı Spring AI, LangChain4j, Anthropic ve diğer arka uçlarda değiştirilebilir biçimde çalışır; gerçek zamanlı iletim altyapısı üzerine kuruludur.",
+      "sinirlar": "Ajan katmanı yeni; köklü WebSocket çerçevesinin evrimidir, kurumsal kullanım örnekleri sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002"
+      ]
+    },
+    {
+      "id": "AR-1827",
+      "ad": "OGX (eski adı Llama Stack)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ogx-ai.github.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenAI uyumlu (Chat Completions, Responses, Embeddings) açık kaynak ajan API sunucusu; farklı model sağlayıcılarını, vektör depolarını, dosya aramasını ve araç çağırmayı tek API arkasında toplar, uygulama kodunu değiştirmeden model değiştirmeyi sağlar.",
+      "sinirlar": "Llama Stack'ten OGX'e yeniden adlandırma sonrası API ve dağıtımlar değişiyor; hızlı gelişim.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K10-002",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-1828",
+      "ad": "Open Responses",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.openresponses.org/",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenAI Responses API'sinden esinlenen, çok sağlayıcılı ve birlikte çalışabilir LLM arayüzü şartnamesi: öğe (item) tabanlı bağlam, ajan döngüsü, araç çağrıları ve anlamsal akış olayları; uyumluluk testleri içerir.",
+      "sinirlar": "Genç şartname; sağlayıcı desteği ve yönetişim modeli henüz olgunlaşıyor.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-002",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-1981",
+      "ad": "Amazon Nova (model ailesi)",
+      "tur": "model",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/nova/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Amazon'un Bedrock üzerinden sunulan metin, çok kipli, gömme ve konuşma modelleri; farklı maliyet/yetenek kademeleri inceleme için model ailesi çeşitliliği sağlar.",
+      "sinirlar": "Kapalı ağırlık; yalnız Bedrock üzerinden; Türkçe ve kod yeteneği kurum görev setinde ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-005",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-2009",
+      "ad": "Foundry Local",
+      "tur": "platform",
+      "lisans": "ticari (Foundry Local lisans şartları)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/Foundry-Local",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık ağırlıklı modelleri Windows/macOS cihazlarında ONNX Runtime ile donanıma göre optimize edip OpenAI uyumlu yerel uç noktadan sunar; veri cihazdan çıkmaz.",
+      "sinirlar": "Tek makine/uç cihaz odaklı; çok kullanıcılı sunum için uygun değil; lisans açık kaynak değil.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2045",
+      "ad": "OCI Generative AI (OCI Enterprise AI)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.oracle.com/artificial-intelligence/enterprise-ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Cohere, Meta Llama, xAI, OpenAI gpt-oss ve Google Gemini gibi modellere OpenAI Responses uyumlu birleşik API; adanmış yapay zekâ kümelerinde özel barındırma ve ince ayar.",
+      "sinirlar": "Model kataloğu bölgeye göre değişir; kurum içi için Dedicated Region gerekir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-009",
+        "N-K09-012",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2068",
+      "ad": "SAP Generative AI Hub (SAP AI Core)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birden çok sağlayıcının modellerine (OpenAI, Anthropic, Google, Mistral, açık modeller) tek erişim; orkestrasyon hizmetiyle şablonlama, içerik filtreleme, veri maskeleme (anonimleştirme) ve grounding.",
+      "sinirlar": "SAP BTP aboneliği gerektirir; SAP dışı teslim hatlarında maliyet/karmaşıklık yüksek.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2077",
+      "ad": "Heroku Managed Inference and Agents",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.heroku.com/ai/managed-inference-and-agents/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Heroku uygulamalarına eklenti olarak model çıkarımı (Claude, açık modeller vb.), ajan uç noktası ve Heroku'da barındırılan MCP sunucularını araç olarak bağlama.",
+      "sinirlar": "Model kataloğu sınırlı; Heroku bölgeleriyle kısıtlı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-2090",
+      "ad": "JetBrains AI Assistant",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.jetbrains.com/ai-ides/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JetBrains IDE'lerinde çok modelli sohbet, düzenleme ve kod tamamlama; kendi anahtarını getir (BYOK) ve yerel modeller (Ollama/LM Studio) ile çevrimdışı mod; ACP ile harici ajanları IDE'ye bağlama.",
+      "sinirlar": "Bulut özellikleri JetBrains AI hizmetine veri gönderir; kurumsal denetim için IDE Services gerekir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2192",
+      "ad": "Huawei Cloud ModelArts",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.huaweicloud.com/intl/en-us/product/modelarts.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ geliştirme ve model barındırma platformu; MaaS ile açık modelleri (ör. DeepSeek, Qwen) çıkarım hizmeti olarak sunma ve Ascend donanımında ince ayar.",
+      "sinirlar": "Ascend donanım ekosistemi; bazı model/hizmetlerin bölgesel bulunabilirliği sınırlı; tedarikçi riskleri ayrıca değerlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2212",
+      "ad": "Snowflake Cortex AI",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.snowflake.com/en/product/features/cortex/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Snowflake verisinin yanında LLM fonksiyonları, Cortex Search (hibrit arama) ve Cortex Agents; bölgeler arası çıkarımın açılıp kapatılabilmesiyle verinin hangi bölgede işleneceği denetlenir.",
+      "sinirlar": "Snowflake'e bağlı; model seçimi bölgeye göre değişir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K14-002",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-2226",
+      "ad": "EuroLLM (EuroLLM-9B/22B, EuroMoE)",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://eurollm.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AB dillerinin tamamı ve Türkçe dahil 35 dilde eğitilmiş 9B ve 22B parametreli açık ağırlıklı temel/talimat modelleri ile küçük EuroMoE modeli; vLLM, llama.cpp gibi sunucularla kurum içinde çalıştırılabilir.",
+      "sinirlar": "Kodlama ve araç kullanan ajan görevlerinde öncü modellerin gerisinde; Türkçe gereksinim anlama kalitesi kurum görev setiyle ayrıca ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-014",
+        "N-K22-001",
+        "N-K22-005",
+        "N-K23-009"
+      ]
+    },
+    {
+      "id": "AR-2227",
+      "ad": "Apertus (Swiss AI)",
+      "tur": "model",
+      "lisans": "Apache-2.0 (Hugging Face erişiminde kullanım şartı onayı)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.swiss-ai.org/apertus",
+      "olgunluk": "gelisen",
+      "ne_saglar": "8B ve 70B boyutlarında, eğitim verisi, eğitim tarifleri ve ara kontrol noktaları dahil tamamen açık yayımlanan çok dilli LLM ailesi; v1.5 sürümleri görsel girdi de kabul ediyor.",
+      "sinirlar": "Kodlama/ajan performansı en iyi açık modellerin gerisinde kalabilir; Türkçe performansı kurumca ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-014",
+        "N-K22-001",
+        "N-K22-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2232",
+      "ad": "Mellum ve Mellum2 (JetBrains kod modelleri)",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/JetBrains",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tamamlama için eğitilmiş 4B Mellum ve 12B-A2.5B MoE Mellum2 (base, instruct, thinking) açık ağırlıklı kod modelleri; düşük gecikmeli, rol başına küçük model kullanımına uygun.",
+      "sinirlar": "İngilizce/kod odaklı; uzun ajan görevleri için değil, tamamlama ve küçük görevler için tasarlanmış.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010"
+      ]
+    },
+    {
+      "id": "AR-2236",
+      "ad": "Mistral Vibe (Mistral Code)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://mistral.ai/products/mistral-code",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Terminal (CLI), VS Code/JetBrains/Zed eklentileri ve web arayüzüyle çalışan ajan tabanlı kodlama aracı; Codestral, Devstral 2 ve Mistral Medium modellerini kullanır, kurum içi kurulumu destekler.",
+      "sinirlar": "Kurumsal ve self-host sürüm ticari sözleşme gerektirir; Mistral model ailesine bağlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-001",
+        "N-K18-013",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2249",
+      "ad": "Aleph Alpha",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://aleph-alpha.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumlara özel alan dili modelleri (SLLM) tasarlayıp Avrupa altyapısında işleten Alman sağlayıcı; tokenizer'sız (T-Free/HAT) araştırma modellerini açık ağırlıkla yayımlıyor.",
+      "sinirlar": "Ürün odağı zaman içinde değişti; güncel paket ve fiyatlar kamuya açık değil, genel amaçlı kodlama ajanı sunmuyor.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2250",
+      "ad": "Langdock",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.langdock.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışanlara modelden bağımsız sohbet, özel ajanlar, iş akışları ve API sunan kurumsal yapay zekâ platformu; birden çok model sağlayıcısını tek politika altında toplar.",
+      "sinirlar": "Ticari; ajanlar yazılım teslim hattından çok genel verimlilik için tasarlanmış.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2253",
+      "ad": "Infomaniak AI Services",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.infomaniak.com/en/hosting/ai-services",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık kaynak LLM, konuşma tanıma ve görüntü üretim modellerini OpenAI uyumlu API ile kullanım başı ücretle sunan İsviçre barındırmalı hizmet.",
+      "sinirlar": "Model yelpazesi açık modellerle sınırlı; öncü kapalı modeller yok.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2254",
+      "ad": "T-Systems AI Foundation Services (LLM Hub)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.llmhub.t-systems.net/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Open Telekom Cloud üzerinde 30'dan fazla açık ve kapalı modeli (Llama, Mistral, Qwen, gömme modelleri vb.) tek OpenAI uyumlu API ile sunan kurumsal LLM hizmeti.",
+      "sinirlar": "Kapalı modeller seçildiğinde işleme konumu ayrıca incelenmeli; ticari.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2258",
+      "ad": "baykAI",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.bayk.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Türkiye'deki veri merkezlerinde GPU bulutu (B200, H100, A100), LLM API'si, ince ayar ve gömme altyapısı sunan yerli hizmet; istekleri saklamama (sıfır veri saklama) iddiası.",
+      "sinirlar": "Genç ve küçük sağlayıcı; bağımsız referans ve SLA bilgisi sınırlı, sağlayıcı değerlendirmesi yapılmalı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2259",
+      "ad": "Google Distributed Cloud air-gapped",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cloud.google.com/distributed-cloud-air-gapped",
+      "olgunluk": "olgun",
+      "ne_saglar": "Google tarafından sağlanan donanım üzerinde internetten tamamen kopuk çalışan yönetilen bulut; Gemini modellerinin kurum veri merkezinde çalıştırılması genel kullanıma açık.",
+      "sinirlar": "Google donanımı ve yüksek maliyet gerektirir; üretici kilidi yüksek, küçük ölçekli kurumlara uygun değil.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2266",
+      "ad": "GitLab Duo Self-Hosted",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.gitlab.com/administration/gitlab_duo_self_hosted/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitLab Self-Managed kurulumunda Duo yapay zekâ özelliklerini (kod önerisi, sohbet, ajanlar) kurumun kendi barındırdığı modellere yönlendirme; özellik başına model seçimi.",
+      "sinirlar": "Ultimate ve Duo lisansı gerektirir; desteklenen model listesi sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2267",
+      "ad": "Open WebUI",
+      "tur": "acik-kaynak",
+      "lisans": "Open WebUI License (BSD-3 türevi, marka koşullu)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/open-webui/open-webui",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ollama ve OpenAI uyumlu uç noktalara bağlanan; RBAC, model erişim kısıtları, RAG, araç/MCP ve boru hattı eklentileri sunan self-host sohbet arayüzü.",
+      "sinirlar": "Lisans BSD-3'ten marka koşullu özel lisansa geçti; belirli ölçeğin üzerinde marka kaldırmak kurumsal lisans ister.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-009",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-2268",
+      "ad": "LibreChat",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.librechat.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birden çok model sağlayıcısını ve yerel modelleri tek arayüzde toplayan; ajanlar, MCP sunucu desteği, kod yorumlayıcı, çok kullanıcılı kimlik doğrulama ve kullanım limitleri sunan self-host sohbet platformu.",
+      "sinirlar": "Merkezi politika ve denetim yetenekleri sınırlı; MongoDB vb. bileşenlerin işletilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-009",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-2269",
+      "ad": "PrivateGPT",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/zylon-ai/private-gpt",
+      "olgunluk": "olgun",
+      "ne_saglar": "Belgeleri içe alıp yerel LLM ve gömme modelleriyle internetsiz soru-cevap yapan, OpenAI uyumlu API sunan RAG uygulaması; üreticisi Zylon kurumsal sürüm sunar.",
+      "sinirlar": "Tek uygulama odaklı; çok kiracılı yetkilendirme ve ölçek sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K14-002",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2314",
+      "ad": "Nextcloud Assistant",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://nextcloud.com/assistant/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Nextcloud Hub'a gömülü, yerel açık kaynak LLM'lerle özetleme, belgeler üzerinde bağlamsal sohbet (Context Chat/RAG), çeviri, transkripsiyon ve eylem yapan ajan özellikleri; her entegrasyon için Etik Yapay Zekâ derecelendirmesi yayımlar.",
+      "sinirlar": "Tam özellik seti Ultimate abonelikte; yerel modellerin performansı donanıma bağlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K14-002",
+        "N-K14-007",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2414",
+      "ad": "Kimi-Dev-72B",
+      "tur": "model",
+      "lisans": "MIT (Qwen License koşullarına tabi)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/MoonshotAI/Kimi-Dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yazılım mühendisliği görevleri (hata yerelleştirme + düzeltme) için RL ile eğitilmiş açık kodlama modeli; kurum içinde SWE ajanlarının arka ucu olabilir.",
+      "sinirlar": "Qwen2.5-72B tabanlı olduğu için Qwen lisans koşulları geçerli; 2025 ortası modeli, yeni modellere göre geride kalabilir.",
+      "ihtiyaclar": [
+        "N-K09-005",
+        "N-K09-009",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2431",
+      "ad": "SiliconFlow",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.siliconflow.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık ağırlıklı modeller (DeepSeek, Qwen, GLM, Kimi vb.) için OpenAI uyumlu çıkarım bulutu; özel uç nokta ve ince ayar hizmetleri.",
+      "sinirlar": "Hizmet seviyesi ve veri işleme yeri sözleşmeye bağlı; model sürüm sabitleme garantisi incelenmeli.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K09-009",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2432",
+      "ad": "BytePlus ModelArk (Volcengine Ark)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://www.byteplus.com/en/product/modelark",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doubao/Seed ve üçüncü taraf modelleri (ör. DeepSeek) API olarak sunan model hizmeti; uluslararası sürümü BytePlus ModelArk, Çin sürümü Volcengine Ark.",
+      "sinirlar": "Kapalı modellerin sürüm/emeklilik politikası sağlayıcıya bağlı; kurum içi barındırma yok.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K20-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2433",
+      "ad": "Baidu AI Cloud Qianfan (千帆)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://cloud.baidu.com/product-s/qianfan_home",
+      "olgunluk": "olgun",
+      "ne_saglar": "Baidu'nun kurumsal model platformu: ERNIE ve üçüncü taraf model API'leri, veri yönetimi, ince ayar, değerlendirme ve AppBuilder ile ajan uygulama geliştirme (SDK açık kaynak).",
+      "sinirlar": "Çin pazarına odaklı; uluslararası erişim ve İngilizce dokümantasyon sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K11-009",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2568",
+      "ad": "New API",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.newapi.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birleşik model geçidi: OpenAI/Anthropic/Gemini protokolleri arası dönüşüm, kanal ve model yönetimi, kullanıcı/grup kotaları, abonelik, kullanım günlüğü, önbellek muhasebesi ve ifade tabanlı fiyatlandırma.",
+      "sinirlar": "AGPL-3.0; proje açıkça yalnız yasal ve yetkili kullanım uyarısı taşır, kurumsal SSO/denetim entegrasyonu sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K20-002",
+        "N-K20-003",
+        "N-K20-005",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-2569",
+      "ad": "One API",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://oneapi.justsong.cn/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM API yönetim ve dağıtım sistemi: çok sağlayıcıyı OpenAI biçiminde sunar, anahtar (token) başına kota, kullanıcı grupları, kanal önceliği ve yük dengeleme/yeniden deneme.",
+      "sinirlar": "Geliştirme yavaşladı (son sürüm 2026 başı); çatalı New API daha aktif.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K20-003",
+        "N-K20-005",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-2570",
+      "ad": "APIPark",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://apipark.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ve API geçidi + geliştirici portalı: 100+ model bağlantısı, istemleri API olarak paketleme, çok kiracılı yönetim ve API aboneliklerinde onay süreci.",
+      "sinirlar": "Topluluk küçük; gelişmiş kurumsal özellikler ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K12-001",
+        "N-K12-002",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-2571",
+      "ad": "TrueFoundry AI Gateway",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.truefoundry.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurumsal yapay zekâ geçidi ve MCP geçidi: model yönlendirme/yedekleme, bütçe ve hız sınırları, araç erişim yetkileri; modelleri kurumun kendi bulutunda/kümesinde dağıtma.",
+      "sinirlar": "Kapalı ticari ürün; fiyat ve özellik kapsamı plana bağlı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-009",
+        "N-K12-002",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-2997",
+      "ad": "GoModel",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://gomodel.enterpilot.io/",
+      "olgunluk": "erken",
+      "ne_saglar": "Go ile yazılmış AI ağ geçidi: tek OpenAI/Anthropic uyumlu API, yanıt önbelleği, harcama izleme, istem sıkıştırma ve akıllı yönlendirme.",
+      "sinirlar": "Performans iddiaları üreticinin kıyaslamaları; genç proje.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-2999",
+      "ad": "AISIX AI Gateway",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://api7.ai/ai-gateway",
+      "olgunluk": "erken",
+      "ne_saglar": "Apache APISIX'in kurucularından, Rust ile yazılmış tek statik ikili, OpenAI uyumlu AI ağ geçidi; LLM ve ajan trafiğini yönlendirme, yönetişim, güvenlik, önbellek ve gözlem.",
+      "sinirlar": "Nisan 2026'da çıktı; ticari API7 ürünleriyle konumlanmış.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-3000",
+      "ad": "Ferro Labs AI Gateway",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.ferrolabs.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "30 LLM sağlayıcısına tek OpenAI uyumlu API ile yönlendiren, önbellek, guardrail ve A/B testi sunan yüksek başarımlı Go ağ geçidi.",
+      "sinirlar": "Küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-3039",
+      "ad": "LangChain.js",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/langchain-ai/langchainjs",
+      "olgunluk": "olgun",
+      "ne_saglar": "LangChain'in TypeScript/JavaScript uygulaması; model sağlayıcı soyutlaması, araç çağırma, yapılandırılmış çıktı ve ajan yapı taşları sunar.",
+      "sinirlar": "Soyutlama katmanı sık değişir; büyük sürüm geçişlerinde kırılmalar yaşanabilir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-002"
+      ]
+    },
+    {
+      "id": "AR-3040",
+      "ad": "LangChainGo",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tmc/langchaingo",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go için LangChain benzeri LLM uygulama kütüphanesi; birçok model sağlayıcısı, zincirler, araçlar ve vektör deposu bağlayıcıları sağlar.",
+      "sinirlar": "Resmî LangChain ürünü değil; depodaki son etkinlik Ocak 2026, bakım hızı düşmüş olabilir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001"
+      ]
+    },
+    {
+      "id": "AR-3041",
+      "ad": "Langchain.rb",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/patterns-ai-core/langchainrb",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ruby için LLM ve ajan kütüphanesi; model sağlayıcı soyutlaması, araçlar, RAG ve vektör deposu bağlayıcıları sunar.",
+      "sinirlar": "Topluluk projesi; kurumsal destek yok.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001"
+      ]
+    },
+    {
+      "id": "AR-3042",
+      "ad": "RubyLLM",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/crmne/ruby_llm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ruby/Rails için tek API ile çok sağlayıcılı sohbet, araç çağırma, yapılandırılmış çıktı ve ajan yetenekleri sunan kütüphane.",
+      "sinirlar": "Tek geliştirici ağırlıklı topluluk projesi; kurumsal SLA yok.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-3043",
+      "ad": "Symfony AI",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/symfony/ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PHP uygulamalarına model platformu soyutlaması, ajan, vektör deposu ve MCP entegrasyonu getiren Symfony bileşen seti.",
+      "sinirlar": "Görece yeni bileşenler; API kararlılığı Symfony'nin ana bileşenleri kadar olgun değil.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-3045",
+      "ad": "Prism PHP (Laravel LLM paketi)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/prism-php/prism",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Laravel için birleşik LLM arayüzü; farklı sağlayıcılarda metin üretimi, araç çağırma ve yapılandırılmış çıktıyı tek API ile sunar.",
+      "sinirlar": "Laravel'e bağlı; depodaki son etkinlik Mart 2026.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-3046",
+      "ad": "Microsoft.Extensions.AI",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET için model sağlayıcıdan bağımsız IChatClient/IEmbeddingGenerator soyutlamaları; önbellekleme, telemetri ve fonksiyon çağırma ara katmanlarıyla birleştirilebilir.",
+      "sinirlar": "Soyutlama katmanıdır; yönlendirme, kota ve politika ayrı bileşen gerektirir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-006",
+        "N-K10-002"
+      ]
+    },
+    {
+      "id": "AR-3048",
+      "ad": "Apple Foundation Models framework",
+      "tur": "cerceve",
+      "lisans": "ticari (Apple SDK)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developer.apple.com/documentation/foundationmodels",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Apple cihazlarındaki cihaz üstü dil modeline Swift API'siyle erişim; yönlendirilmiş (guided) yapılandırılmış üretim ve araç çağırma sağlar.",
+      "sinirlar": "Yalnız Apple Intelligence destekli cihaz ve işletim sistemi sürümlerinde çalışır; küçük model ve sınırlı bağlam ağır kod görevleri için yetersiz.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3049",
+      "ad": "Anthropic Java SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/anthropic-sdk-java",
+      "olgunluk": "olgun",
+      "ne_saglar": "Claude API'sine JVM'den tipli erişim sağlayan resmî Java/Kotlin istemcisi; akış, araç kullanımı ve toplu işlem uçlarını kapsar.",
+      "sinirlar": "Yalnız istemci kütüphanesidir; ajan döngüsü, bütçe ve politika uygulama tarafında yazılmalı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-3050",
+      "ad": "Anthropic Go SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/anthropic-sdk-go",
+      "olgunluk": "olgun",
+      "ne_saglar": "Claude API'si için resmî Go istemcisi; mesajlar, akış, araç kullanımı ve toplu işlem uçlarına tipli erişim sağlar.",
+      "sinirlar": "Yalnız istemci; yönlendirme ve maliyet kontrolü ayrı katman ister.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001"
+      ]
+    },
+    {
+      "id": "AR-3051",
+      "ad": "Anthropic C# SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/anthropic-sdk-csharp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude API'si için resmî .NET istemcisi; Microsoft.Extensions.AI soyutlamalarıyla birlikte kullanılabilir.",
+      "sinirlar": "Görece yeni resmî SDK; sürüm değişiklikleri izlenmeli.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001"
+      ]
+    },
+    {
+      "id": "AR-4116",
+      "ad": "LearnLM",
+      "tur": "model",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/solutions/learnlm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Öğrenme bilimi ilkeleriyle (aktif öğrenme, bilişsel yük yönetimi, merak) ayarlanmış, Gemini'ye entegre edilen öğretim odaklı model ailesi; öğrenme kipi davranışı için model tarafı seçenek.",
+      "sinirlar": "Genel eğitim odaklı; kodlama ajanı içinde hazır öğrenme kipi ürünü değil.",
+      "ihtiyaclar": [
+        "N-K29-004"
+      ]
+    },
+    {
+      "id": "AR-4362",
+      "ad": "DeepSeek-Prover-V2",
+      "tur": "model",
+      "lisans": "DeepSeek model lisansı",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/deepseek-ai/DeepSeek-Prover-V2",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Lean 4 ispatları üreten açık ağırlıklı dil modeli ailesi (7B ve 671B); kurum içinde barındırılarak ispat taslağı üretimi için kullanılabilir, çıktılar Lean çekirdeğinde doğrulanır.",
+      "sinirlar": "Matematik yarışma verisine odaklı; yazılım doğrulama görevlerinde başarımı sınırlı ve büyük sürüm yüksek donanım ister.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4405",
+      "ad": "Pi",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pi.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Terminal kodlama ajanı ve ajan araç takımı: etkileşimli arayüz; print, JSON olay akışı ve RPC (stdin/stdout JSONL) kipleriyle başsız çalışma; TypeScript SDK; çok sağlayıcılı LLM katmanı (pi-ai); ağaç yapılı JSONL oturumlar, çalışma sırasında yönlendirme mesajları ve otomatik bağlam sıkıştırma; Agent Skills uyumlu skill'ler, AGENTS.md/CLAUDE.md bağlam dosyaları, istem şablonları ve TypeScript eklentileri (araç, komut, olay kancası; tool_call kancasıyla araç engelleme). OpenClaw bu bileşenler üzerine kurulu.",
+      "sinirlar": "Yerleşik izin sistemi ve sandbox yok: başlatan kullanıcının yetkileriyle çalışır, her araç çağrısından önce onay istemez; yalıtım için Docker, Docker Sandboxes, OpenShell ve Gondolin belgelenmiş. MCP desteği bilinçli olarak yok. Sürüm 1.0'ın altında (0.87.1), çok hızlı sürüm temposu. Mayıs 2026'da depo earendil-works'e taşındı, npm paketi @earendil-works kapsamına geçti; eski @mariozechner paketi 0.73.1'de kaldı ve yamasız. Haziran 2026'da 4 CVE (1 yüksek).",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K09-001",
+        "N-K09-010",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-007",
+        "N-K10-009",
+        "N-K11-005",
+        "N-K14-008",
+        "N-K28-002"
+      ]
+    }
+  ]
+}

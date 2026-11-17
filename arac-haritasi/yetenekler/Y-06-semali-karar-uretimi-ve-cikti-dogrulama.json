@@ -1,0 +1,1836 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-06",
+    "ad": "Şemalı karar üretimi ve çıktı doğrulama",
+    "grup": "Ajan çalışma çerçevesi ve koordinasyon",
+    "cozdugu_sorun": "Kısa kararların (DoR, sınıflandırma, yönlendirme, onay/ret) serbest metinle verilmesi; model çıktısının doğrudan çalıştırılması.",
+    "ne_zaman_zorunlu": "Her zaman."
+  },
+  "arac_sayisi": 88,
+  "tur_dagilimi": {
+    "cerceve": 16,
+    "kutuphane": 31,
+    "acik-kaynak": 19,
+    "ticari-saas": 7,
+    "ticari-yazilim": 1,
+    "model": 4,
+    "protokol-standart": 6,
+    "bulut-hizmeti": 3,
+    "acik-cekirdek": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0030",
+      "ad": "Pydantic AI",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ai.pydantic.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tipli Python ajan çerçevesi: Pydantic şemalı yapılandırılmış çıktı ve doğrulama, çok sağlayıcılı model erişimi, araç tanımı; Temporal, DBOS, Prefect ve Restate ile resmî dayanıklı yürütme entegrasyonu. Kaynakta sınıflandırıcı, DoR, boşluk analizi gibi şemalı kararlar için ana seçim.",
+      "sinirlar": "Uzun kodlama işi için değil, o iş çalıştırıcının (kaynak); şema doğrulaması içeriğin doğruluğunu garanti etmez. Çok ajanlı koordinasyon desenleri LangGraph/ADK kadar hazır değil; dayanıklılık için harici motor (Temporal/DBOS vb.) gerekir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K02-010",
+        "N-K04-006",
+        "N-K05-028",
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-010",
+        "N-K13-002",
+        "N-K13-013",
+        "N-K17-009",
+        "N-K18-006",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0031",
+      "ad": "OpenAI Agents SDK",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://openai.github.io/openai-agents-python/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Agent + Runner soyutlamasıyla araç döngüsü, ajanlar arası devir (handoff), ajanı araç olarak kullanma, girdi/çıktı korumaları (guardrails), oturum belleği, izleme ve Pydantic/Zod tipli çıktı sağlar.",
+      "sinirlar": "Varsayılan izleme OpenAI arka ucuna gönderilir, kapatılması ya da yönlendirilmesi gerekir; iki kütüphaneyi birden standart yapmamak önerilir (kaynak). Varsayılan olarak OpenAI Responses API'ye göre tasarlanmıştır (başka modeller adaptörle); dayanıklı iş akışı (kesintiden devam) için Temporal gibi harici motor gerekir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K04-006",
+        "N-K05-006",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-006",
+        "N-K10-008",
+        "N-K12-001",
+        "N-K13-002",
+        "N-K18-006",
+        "N-K19-001",
+        "N-K27-004",
+        "N-K27-005",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-0032",
+      "ad": "Claude Agent SDK",
+      "tur": "cerceve",
+      "lisans": "MIT (SDK); Claude Code çalışma zamanı Anthropic ticari şartları",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://code.claude.com/docs/en/agent-sdk/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Claude Code'un ajan döngüsünü Python/TypeScript kütüphanesi olarak sunar: araç kullanımı, izin geri çağrıları (araç onayı), kancalar, alt ajanlar, MCP, oturum devamı (resume) ve JSON şemalı yapılandırılmış çıktı.",
+      "sinirlar": "Anthropic modellerine bağlı; kod bağlamı sağlayıcıya gider. Yalnız Claude modelleriyle (Anthropic API, Bedrock, Vertex, Foundry) çalışır; kullanım Anthropic ticari şartlarına tabidir ve farklı model ailesi gerektiren denetçi rolü için tek başına yetmez.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K04-013",
+        "N-K05-007",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-007",
+        "N-K10-008",
+        "N-K10-009",
+        "N-K10-010",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0035",
+      "ad": "Microsoft Agent Framework",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/agent-framework",
+      "olgunluk": "olgun",
+      "ne_saglar": "AutoGen ve Semantic Kernel'in halefi; .NET ve Python'da ajan oluşturma, graf tabanlı iş akışları (checkpoint, insan-döngüde), ara katman, telemetri ve A2A/AG-UI/MCP birlikte çalışabilirliği sağlar; 1.0 sürümü Nisan 2026'da uzun süreli destekle yayımlandı.",
+      "sinirlar": "Temporal'ın yanında ikinci durum sahibi olur, ajan katmanı olarak kullanılmalı; Python ekibi için Pydantic AI'ye göre ek değeri sınırlı (kaynak). Yeni bir birleşik API olduğundan AutoGen/SK'den göç maliyeti vardır; Azure/Foundry entegrasyonları en olgun yol, diğer bulutlarda ek iş gerekebilir.",
+      "ihtiyaclar": [
+        "N-K05-006",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-006",
+        "N-K10-008",
+        "N-K12-006",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-0038",
+      "ad": "CrewAI",
+      "tur": "cerceve",
+      "lisans": "MIT (çekirdek); AMP ticari",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.crewai.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rol/hedef/geçmiş tanımlı ajanlardan 'crew' ve olay güdümlü 'Flows' kurarak sıralı veya hiyerarşik çok ajanlı süreçler çalıştırır; görev çıktıları Pydantic modeliyle tipli alınabilir.",
+      "sinirlar": "Crews'ta akış sırasını ajanlar belirler, deterministik kapıları garanti etmek zor; Flows Temporal ile çakışır; yönetişim özellikleri ticari AMP'de (kaynak). Rol-yapma soyutlaması ölçümsüz çok ajan kurmaya teşvik edebilir; kurumsal kontrol düzlemi (AMP) ticari üründür.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-006",
+        "N-K10-003",
+        "N-K10-004",
+        "N-K10-006",
+        "N-K13-002"
+      ]
+    },
+    {
+      "id": "AR-0040",
+      "ad": "Google Agent Development Kit (ADK)",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://adk.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod öncelikli ajan çerçevesi: LLM ajanları, sıralı/paralel/döngü iş akışı ajanları, graf tabanlı yürütme, alt ajanlara yapılandırılmış devir, insan onayı, oturum/durum yönetimi, değerlendirme ve A2A desteği; Python, Go, Java, TypeScript sürümleri var.",
+      "sinirlar": "Gemini/GCP ekosistemine yakın; bu hatta ek değeri sınırlı (kaynak). Gemini ve Google Cloud dağıtımı için optimize; diğer modeller LiteLLM vb. ile bağlanır ve bazı özellikler (yönetilen oturum/bellek) Google Cloud'a bağımlıdır.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-007",
+        "N-K10-001",
+        "N-K10-004",
+        "N-K10-006",
+        "N-K10-007",
+        "N-K12-006",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-0045",
+      "ad": "Semantic Kernel",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://learn.microsoft.com/en-us/semantic-kernel/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurumsal uygulamalara LLM entegrasyonu için eklenti/fonksiyon çağırma, ajan soyutlamaları, süreç (process) çerçevesi ve yapılandırılmış çıktı desteği sunan SDK.",
+      "sinirlar": "Microsoft Agent Framework'e birleşti; yeni projede doğrudan MAF kullanılmalı (kaynak). Ajan geliştirmede Microsoft'un yeni yönü Agent Framework; SK aktif ama yeni ajan özellikleri oraya taşınıyor.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K13-003"
+      ]
+    },
+    {
+      "id": "AR-0047",
+      "ad": "BeeAI Framework",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://framework.beeai.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python ve TypeScript'te kural/kısıt tanımlı 'requirement agent', araç kullanımı, bellek ve A2A/MCP entegrasyonlu üretim odaklı ajan çerçevesi.",
+      "sinirlar": "Bu hatta Pydantic AI ile örtüşür (kaynak). Topluluğu büyük çerçevelere göre küçük; ekosistem entegrasyonları sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-005",
+        "N-K10-006",
+        "N-K10-008",
+        "N-K12-006"
+      ]
+    },
+    {
+      "id": "AR-0049",
+      "ad": "DSPy",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://dspy.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "İstem yazmak yerine modül ve metrik tanımlayıp istemleri/örnekleri otomatik optimize eden bildirimsel çerçeve; etiketli örnekle sınıflandırıcı derlemeye uygun (kaynakta Jev alternatifi).",
+      "sinirlar": "Ölçülebilir metrik ve etiketli örnek ister; model değişince yeniden derleme gerekir. Optimizasyon için etiketli değerlendirme seti gerekir; uzun süreli kodlama ajanı koşumu sağlamaz. DSPy programlama modeline uyum gerekir; optimize edilmiş çıktının gizli sette doğrulanması ve onaylı yayını ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K05-016",
+        "N-K08-006",
+        "N-K09-003",
+        "N-K10-003",
+        "N-K11-004",
+        "N-K11-009",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0051",
+      "ad": "Vercel AI SDK",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ai-sdk.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript için sağlayıcıdan bağımsız model erişimi, araç döngüsü (agent) ve Zod/JSON Schema ile tipli nesne üretimi (structured output) sunar.",
+      "sinirlar": "Orkestrasyon sağlamaz (kaynak). Uygulama/UI odaklıdır; kodlama ajanı için izin modeli, sandbox ve çok ajanlı koordinasyon hazır gelmez.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0055",
+      "ad": "Codex CLI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/openai/codex",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust ile yazılmış terminal kodlama ajanı; 'codex exec' ile etkileşimsiz çalışma, --json JSONL olay akışı, --output-schema ile JSON şemalı son yanıt, onay politikaları ve işletim sistemi sandbox modları (salt okunur/çalışma alanı yazma).",
+      "sinirlar": "OpenAI hesabı ve modelleri merkezli (kaynak); diğer sağlayıcılar yapılandırma gerektirir. Varsayılan olarak OpenAI modelleri; masaüstü uygulaması kapalı kaynak; sandbox kapsamı platforma göre değişir.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K12-001",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0069",
+      "ad": "Devin",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://devin.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Barındırılan otonom yazılım ajanı; REST API ile oturum açma ve yapılandırılmış çıktı alma, tekrarlanan işler için 'playbook'lar, paralel oturumlar ve PR üretimi.",
+      "sinirlar": "Kurumun kendi hattının dışında çalışır; bütçe, kapı ve kanıt kurallarını kurum kontrol edemez (kaynak). Kapalı ve pahalı; iç işleyiş opak; kalite iddiaları bağımsız ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K11-005",
+        "N-K13-012",
+        "N-K15-001",
+        "N-K28-001",
+        "N-K28-002"
+      ]
+    },
+    {
+      "id": "AR-0073",
+      "ad": "Factory (Droids)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://factory.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanı CLI'si ve barındırılan 'Droid'lar; 'droid exec' başsız mod, --auto low/medium/high kademeli otonomi, json/stream-json/stream-jsonrpc çıktı biçimleri.",
+      "sinirlar": "Kurumun hattının dışında çalışır; bütçe, kapı ve kanıt kuralları kontrol edilemez (kaynak). Kapalı kaynak; kademeli otonomi komut risk sınıflandırmasına dayanır, bağımsız doğrulama gerekir.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-0099",
+      "ad": "GitHub Spec Kit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.github.com/spec-kit/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Specify CLI ile depoya spesifikasyon güdümlü geliştirme iskeleti kurar; ilke (constitution) → specify → plan → tasks → implement adımlarını 30+ kodlama ajanı için komut ve şablon olarak sağlar; tüm artefaktlar sürüm kontrolünde düz Markdown olarak kalır.",
+      "sinirlar": "Bir süreç iskeleti; kapı ve bütçe getirmez (kaynak). Belge üretir; spesifikasyon sürümleme onayı ve kabul testinin bağımsız doğrulanması hattın geri kalanına kalır. Şablon/komut düzeyinde kalır; onay kilidi, sürüm sabitleme ve zorlayıcı kapı sağlamaz. Şablon/istem seti düzeyindedir; spesifikasyon şemasını makinece doğrulayan kapı ya da iş takip sistemiyle çift yönlü senkron sunmaz, çıktı kalitesi kullanılan modele bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K01-003",
+        "N-K01-004",
+        "N-K01-006",
+        "N-K01-010",
+        "N-K01-013",
+        "N-K02-004",
+        "N-K05-001",
+        "N-K05-028",
+        "N-K11-001",
+        "N-K11-005",
+        "N-K11-010",
+        "N-K28-001",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0100",
+      "ad": "Kiro",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://kiro.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Özellik isteğinden EARS kalıbında requirements.md, ardından design.md ve tasks.md üreten spesifikasyon güdümlü ajan IDE'si; gereksinim-önce/tasarım-önce akışları, hata düzeltmeye özel 'bugfix spec' ve dosya kaydı/commit gibi olaylarla tetiklenen ajan kancaları (ör. doküman güncelleme) sunar.",
+      "sinirlar": "Kredi tabanlı ticari hizmet; kod ve spesifikasyon sağlayıcıya gider; kaynak IDE olduğu için başsız hatta kullanılamayacağını söylüyordu, güncel sitede başsız CLI var. Spec iş akışı IDE'ye özgü, CLI'da yok; kapalı kaynak ve AWS hesabı/kredi modeline bağlı. Model çağrıları AWS bulut hizmeti üzerinden yapılır; tamamen kurum içi çalıştırma yoktur, iş akışı IDE'ye bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-009",
+        "N-K01-012",
+        "N-K02-004",
+        "N-K03-005",
+        "N-K05-001",
+        "N-K05-011",
+        "N-K07-001",
+        "N-K10-001",
+        "N-K10-008",
+        "N-K28-001",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0101",
+      "ad": "BMAD-METHOD",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Analist, ürün yöneticisi, mimar, scrum ustası, geliştirici, QA gibi uzman rol ajanlarıyla PRD → mimari → hikâye parçalama → uygulama akışı tanımlayan açık yöntem ve ajan/iş akışı paketi; işin büyüklüğüne göre planlama derinliğini ayarlar.",
+      "sinirlar": "Kurumun kendi kural ve ajan setiyle örtüşür; ikisi birlikte yürütülmemeli (kaynak). İstem/şablon tabanlı yöntemdir; rol sayısı arttıkça ölçümsüz karmaşıklık riski. Yöntem ve istem paketi düzeyindedir; kurumsal onay, sürüm kilidi ve denetim kaydı sağlamaz, rol ajanı çıktılarının doğrulanması kullanıcıya kalır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-010",
+        "N-K01-012",
+        "N-K02-004",
+        "N-K10-004",
+        "N-K10-006",
+        "N-K11-005",
+        "N-K25-001",
+        "N-K25-003"
+      ]
+    },
+    {
+      "id": "AR-0103",
+      "ad": "OpenSpec",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openspec.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Her değişiklik için ayrı klasörde öneri (proposal), spesifikasyon farkı, tasarım ve görev listesi üreten hafif SDD katmanı; insan ve ajan kod yazılmadan önce aynı planı gözden geçirir, onaylanan spesifikasyonlar git'te tek doğruluk kaynağında birleşir.",
+      "sinirlar": "Olgunluk ve ekip alışkanlığı açısından erken (kaynak). Süreç disiplini ekibe bağlı; otomatik kalite kapısı sağlamaz. İnsan onayı ve sürüm kilidi git/PR süreçlerine bağlı; kurumsal şema doğrulaması yok. Paylaşımlı 'Stores' özelliği beta; kabul kriterlerinin ölçülebilirliğini denetleyen kural motoru ve kimlikli onay kaydı yoktur.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-009",
+        "N-K01-010",
+        "N-K01-013",
+        "N-K02-004",
+        "N-K05-001",
+        "N-K05-028",
+        "N-K11-001",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0113",
+      "ad": "Guardrails AI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.guardrailsai.com/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğrulayıcı merkezinden (hub) alınan kurallarla LLM girdi/çıktısını doğrular, yapılandırılmış çıktı üretir, başarısızlıkta düzeltme/yeniden sorma uygular; sunucu modu vardır.",
+      "sinirlar": "Tek başına yeterli değil (kaynak); doğrulayıcı kalitesi değişken. Doğrulayıcı kalitesi hub bileşenlerine göre değişir; bazı doğrulayıcılar ek model çağrısı yapar. Hub doğrulayıcılarının bir kısmı ek model/hizmet çağrısı yapar ve gecikme ekler. Doğrulayıcı kalitesi değişken; bazı doğrulayıcılar dış API kullanır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K04-006",
+        "N-K05-012",
+        "N-K10-003",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-0115",
+      "ad": "Jev (TypeSafe AI)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.typesafe.ai/introduction",
+      "olgunluk": "erken",
+      "ne_saglar": "Metin yerine tipli karar döndüren barındırılan model API'si: Choice (seçenek + olasılık + güven), Score (ölçek puanı), Noul (önermenin 0–1 doğruluk değeri); sorular paralel ve yalıtılmış değerlendirilir. Kaynakta router, olgunluk seviyesi ve 12.000 görevlik triyaj için aday.",
+      "sinirlar": "Kapalı barındırılan servis, görev metni dışarı çıkar; 'sıfır halüsinasyon' yalnız çıktının etiket kümesinde kalmasıdır; kalibrasyon iddiaları kurum etiketlerinde ölçülmedi; jevtypesafeai.com TypeSafe AI ile bağlantısız olduğunu söylüyor.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-001",
+        "N-K02-010",
+        "N-K03-005",
+        "N-K03-007",
+        "N-K09-003",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0207",
+      "ad": "Qwen3.8-27B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin + görsel/video, 256K; küçük boyutta muhakeme ve görsel değerlendirme. Kaynakta router, olgunluk seviyesi, DoR, rules.master, rapor ve dependency-priority ajanlarının birinci adayı.",
+      "sinirlar": "AA ölçümü xhigh düşünme ayarında (indeks 34); düşük ayarlarda puan farklı, karmaşık işler büyük modele yükseltilmeli.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-010",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-006",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0216",
+      "ad": "Mistral Small 4",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+      "olgunluk": "gelisen",
+      "ne_saglar": "119B toplam / 6.5B etkin MoE; 256K + görsel; düşünme/normal mod, araç çağrısı, JSON çıktı. Kaynakta doküman, yönlendirme ve görsel açıklama yardımcısı.",
+      "sinirlar": "Adı 'Small' olsa da ağırlık boyutu büyük; kurulum kapasitesi buna göre planlanmalı.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-006",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0230",
+      "ad": "Hermes 4.3 36B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/NousResearch/Hermes-4.3-36B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Seed-OSS tabanlı türev; yapılandırılmış çıktı, araç çağrısı, hibrit düşünme; kaynakta yönlendirme, kurallı rapor ve sınıflandırma.",
+      "sinirlar": "Genel kullanım yeteneği SWE üstünlüğü anlamına gelmez; Seed-OSS ile aynı temel aile (çeşitlilik sayılmamalı).",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K10-003",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0413",
+      "ad": "Genkit",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://genkit.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JS/Go/Python/Dart için şemalı (Zod/JSON Schema) çıktı, araç çağırma ve 'flow' tanımları sunan uygulama çerçevesi; yerel geliştirici arayüzü ile izleme.",
+      "sinirlar": "Uygulama geliştirme odaklıdır; çok ajanlı kodlama koordinasyonu için sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K10-001",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0415",
+      "ad": "Marvin",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://marvin.mintlify.app",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tipli sınıflandırma, çıkarım ve görev (task) tabanlı ajan iş akışları için kütüphane; arşivlenen ControlFlow'un yaklaşımını devralmıştır.",
+      "sinirlar": "Kapsamı dar; ControlFlow Ağustos 2025'te arşivlendi, bu hat üzerindeki uzun vadeli yatırım belirsiz.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K10-003",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0416",
+      "ad": "Atomic Agents",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://eigenwise.github.io/atomic-agents/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Her ajanın girdi/çıktısını Pydantic şemalarıyla tanımlayan, Instructor üzerine kurulu modüler ve öngörülebilir ajan kütüphanesi.",
+      "sinirlar": "Küçük topluluk; çok ajanlı koordinasyon ve sandbox özellikleri kullanıcıya bırakılır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K04-006",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0417",
+      "ad": "Langroid",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://langroid.github.io/langroid/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar arası mesajlaşma ve hiyerarşik görev delegasyonu ile çok ajanlı programlama; araç/yapılandırılmış mesajlar Pydantic ile tanımlanır.",
+      "sinirlar": "Akademik kökenli, küçük ekip tarafından geliştiriliyor.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K10-003",
+        "N-K10-006"
+      ]
+    },
+    {
+      "id": "AR-0418",
+      "ad": "Spring AI",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://spring.io/projects/spring-ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java/Spring uygulamalarına model erişimi, araç çağırma, yapılandırılmış çıktı dönüştürücüleri, danışman (advisor) zinciri ve MCP desteği ekler.",
+      "sinirlar": "Ajan desenleri temel düzeyde; kodlama ajanı koşumu değil, uygulama çerçevesidir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K10-001",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0419",
+      "ad": "LangChain4j",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.langchain4j.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java için AI Services (arayüzden tipli çıktı), araç çağırma ve ajan modülü ile sıralı/paralel/süpervizör iş akışları sunar.",
+      "sinirlar": "Ajan modülü çekirdeğe göre daha yeni; JVM dışı ekiplere uygun değil.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K10-003",
+        "N-K10-006"
+      ]
+    },
+    {
+      "id": "AR-0420",
+      "ad": "Embabel Agent Framework",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://hub.embabel.com",
+      "olgunluk": "erken",
+      "ne_saglar": "JVM (Kotlin/Java) için hedef odaklı eylem planlama (GOAP) ile deterministik plan üreten, tipli alan nesneleriyle çalışan ajan çerçevesi.",
+      "sinirlar": "Genç proje; topluluk ve üretim referansları sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K10-003",
+        "N-K10-005"
+      ]
+    },
+    {
+      "id": "AR-0425",
+      "ad": "Rig",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://rig.rs",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust için modüler LLM uygulama kütüphanesi; ajanlar, araç çağırma ve tipli yapılandırılmış veri çıkarımı (extractor) sağlar.",
+      "sinirlar": "Çok ajanlı koordinasyon ve insan onayı gibi üst katmanlar kullanıcıya bırakılır.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0429",
+      "ad": "Agent Squad",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://2fastlabs.github.io/agent-squad/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sınıflandırıcı ile gelen isteği uygun ajana yönlendiren, süpervizör ajanı destekleyen çok ajanlı yönlendirme kütüphanesi (Python/TypeScript).",
+      "sinirlar": "Depo AWS Labs'tan ayrı bir organizasyona taşındı; uzun vadeli sahiplik değişmiş olabilir, doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K10-005",
+        "N-K10-006"
+      ]
+    },
+    {
+      "id": "AR-0431",
+      "ad": "Stately Agent (XState)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/statelyai/agent",
+      "olgunluk": "erken",
+      "ne_saglar": "XState durum makineleri içinde LLM kararları üreten ajanlar; ajanın seçebileceği olaylar durum makinesiyle sınırlandırılır.",
+      "sinirlar": "Küçük proje; kalıcılık ve dağıtık yürütme XState/uygulama katmanına kalır.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K10-006",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0434",
+      "ad": "OpenAI Codex SDK",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://learn.chatgpt.com/docs/codex-sdk",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Codex ajanını TypeScript'ten programatik kontrol eder: iş parçacığı (thread) başlatma/sürdürme, olay akışı ve şemaya uygun son yanıt alma.",
+      "sinirlar": "OpenAI modelleri ve Codex çalışma zamanına bağlıdır.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0463",
+      "ad": "Instructor",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://python.useinstructor.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Pydantic/Zod modelleriyle LLM çıktısını şemaya zorlayan, doğrulama hatasında hatayı modele geri verip otomatik yeniden deneyen çok dilli (Python, TypeScript, Go, Ruby) yapılandırılmış çıktı kütüphanesi; görev spesifikasyonu ve iş türü sınıflandırması üretiminde ilk kapı.",
+      "sinirlar": "Kısıtlı çözümleme (constrained decoding) değil sonradan doğrulamadır; yeniden denemeler maliyet artırır. Biçimi garanti eder, içeriğin doğruluğunu değil; ikinci kapı (kural motoru/insan) gerekir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-012",
+        "N-K02-010",
+        "N-K04-006",
+        "N-K10-003",
+        "N-K18-006",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0464",
+      "ad": "Outlines",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://dottxt-ai.github.io/outlines/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık ağırlıklı modellerde JSON Schema, düzenli ifade veya dilbilgisine göre kısıtlı çözümleme (constrained decoding) yaparak çıktının şemaya birebir uymasını sağlayan kütüphane.",
+      "sinirlar": "Kısıtlı çözümleme yalnız logit erişimi olan (kendi barındırılan) modellerde tam etkilidir. Tam kısıtlama için yerel/uyumlu çıkarım motoru gerekir; kapalı API'lerde sağlayıcının desteğiyle sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-012",
+        "N-K02-010",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0465",
+      "ad": "Guidance",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/guidance-ai/guidance",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Üretim ile kontrol akışını ve dilbilgisi kısıtlarını (regex, JSON, seçimler) iç içe yazdıran LLM programlama dili.",
+      "sinirlar": "Depo etkinliği 2026'da yavaşladı; asıl kısıt motoru llguidance'a taşındı.",
+      "ihtiyaclar": [
+        "N-K02-010",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0466",
+      "ad": "llguidance",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/guidance-ai/llguidance",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust ile yazılmış çok hızlı kısıtlı çözümleme motoru; JSON Schema, regex ve bağlamdan bağımsız dilbilgilerini token maskesine çevirir, çıkarım motorlarına gömülür.",
+      "sinirlar": "Düşük seviyeli bileşen; doğrudan uygulama API'si değil, model sunucusu entegrasyonu gerektirir.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0467",
+      "ad": "XGrammar",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://xgrammar.mlc.ai/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Verimli, taşınabilir yapılandırılmış üretim motoru; JSON Schema/EBNF kısıtlarını düşük gecikmeyle uygular ve yaygın açık kaynak çıkarım sunucularında arka uç olarak kullanılır.",
+      "sinirlar": "Model sunucusu düzeyinde çalışır; kapalı API'lerde kullanılamaz.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0468",
+      "ad": "BAML",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://boundaryml.com/explore",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM fonksiyonlarını tipli şemalarla tanımlayan alan-özel dil; çoklu dil istemci kodu üretir, bozuk/eksik JSON'u şemaya göre toleranslı ayrıştırır ve istem testleri için oyun alanı sunar; şema sürümlerini kodla birlikte tutmayı kolaylaştırır.",
+      "sinirlar": "Ayrı bir DSL ve kod üretim adımı öğrenme maliyeti getirir. Yeni bir DSL ve kod üretim adımı gerektirir; ekosistem görece genç.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-013",
+        "N-K02-010",
+        "N-K04-006",
+        "N-K05-028",
+        "N-K10-003",
+        "N-K17-009",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0469",
+      "ad": "LM Format Enforcer",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/noamgat/lm-format-enforcer",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Token filtreleme ile JSON Schema ve regex biçimini zorlayan kütüphane; transformers ve çeşitli çıkarım motorlarıyla entegre.",
+      "sinirlar": "Tek geliştirici ağırlıklı; XGrammar/llguidance gibi daha hızlı motorlar öne geçti.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0470",
+      "ad": "TypeChat",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/TypeChat/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Beklenen yanıtı TypeScript/Python/C# tipleriyle tanımlayıp model çıktısını bu şemaya göre doğrulayan ve hata mesajıyla onarım isteyen kütüphane.",
+      "sinirlar": "Kapsamı dar ve gelişim yavaş; sağlayıcıların yerel yapılandırılmış çıktı özellikleri onu kısmen gereksiz kıldı.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0471",
+      "ad": "Mirascope",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mirascope.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sağlayıcıdan bağımsız, hafif ('anti-framework') LLM kütüphanesi; tipli yanıt modelleri, araç çağırma ve akış.",
+      "sinirlar": "Küçük ekip; ajan koşumu ve koordinasyon içermez.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0472",
+      "ad": "magentic",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://magentic.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "@prompt dekoratörüyle LLM çağrılarını dönüş tipi Pydantic modeli olan Python fonksiyonlarına çevirir.",
+      "sinirlar": "Tek geliştiricili proje; güncelleme sıklığı düşük (son itme Mart 2026).",
+      "ihtiyaclar": [
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0473",
+      "ad": "Pydantic",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pydantic.dev/docs/validation",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python tip ipuçlarıyla veri doğrulama ve JSON Schema üretimi; ajan sonuç zarflarının ve karar şemalarının kanonik tanımı ve çalışma anı doğrulaması için temel yapı taşı.",
+      "sinirlar": "Yalnız doğrulama yapar; model çağrısı ve yeniden deneme mantığı üst kütüphanelere kalır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K05-028",
+        "N-K10-003",
+        "N-K10-004",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0474",
+      "ad": "Zod",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://zod.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript öncelikli şema doğrulama kütüphanesi; statik tip çıkarımı ve JSON Schema dönüşümüyle ajan çıktı şemalarını tanımlamada fiilî standart.",
+      "sinirlar": "Yalnız doğrulama; çok büyük şemalarda tip derleme süresi uzayabilir.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K10-004",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0475",
+      "ad": "Ajv",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ajv.js.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "JSON Schema draft-04'ten 2020-12'ye kadar destekleyen hızlı JSON Schema doğrulayıcısı; dil bağımsız sonuç zarfının hat içinde deterministik doğrulanması için uygundur.",
+      "sinirlar": "Yalnız JavaScript çalışma zamanında; anlamsal doğruluk denetlemez.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0476",
+      "ad": "JSON Schema",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://json-schema.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş kalemi ve görev spesifikasyonu şemasını makinece doğrulanabilir ve sürümlenebilir biçimde tanımlamaya yarayan standart; tüm büyük dillerde doğrulayıcıları ve LLM yapılandırılmış çıktı API'lerinde doğrudan desteği vardır.",
+      "sinirlar": "Sağlayıcılar standardın yalnız bir alt kümesini destekler; taslak sürüm farkları uyumsuzluk yaratabilir. Taslak sürümleri arası uyumsuzluklar; şema evrimi/göç kuralları standart dışı. Anlamsal kuralları (ör. kabul kriteri ölçülebilir mi) ifade edemez; taslak sürümleri arasında uyumsuzluklar bulunur.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K01-013",
+        "N-K09-012",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-004",
+        "N-K18-006",
+        "N-K26-005",
+        "N-K33-005",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-0477",
+      "ad": "OpenAI Structured Outputs",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "olgunluk": "olgun",
+      "ne_saglar": "API düzeyinde model yanıtının verilen JSON Schema'ya uymasını garanti eden kısıtlı çözümleme özelliği; araç argümanlarında da kullanılabilir.",
+      "sinirlar": "JSON Schema'nın alt kümesiyle sınırlıdır; biçimsel uyum anlamsal doğruluğu garanti etmez.",
+      "ihtiyaclar": [
+        "N-K01-006",
+        "N-K01-012",
+        "N-K02-010",
+        "N-K10-003",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0478",
+      "ad": "Claude Structured Outputs",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Claude API'de yanıtların JSON Schema'ya uymasını ve katı araç girdi şemalarını sağlayan yapılandırılmış çıktı özelliği.",
+      "sinirlar": "Desteklenen şema özellikleri sınırlıdır; farklı model ailesiyle çapraz denetim ihtiyacını gidermez.",
+      "ihtiyaclar": [
+        "N-K01-006",
+        "N-K01-012",
+        "N-K02-010",
+        "N-K10-003",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-0479",
+      "ad": "Gemini API Structured Output",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://ai.google.dev/gemini-api/docs/structured-output",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gemini yanıtlarını response schema (JSON Schema/OpenAPI alt kümesi) ile kısıtlayan API özelliği.",
+      "sinirlar": "Şema desteği sınırlı alt kümedir; karmaşık iç içe şemalarda davranış test edilmeli.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0499",
+      "ad": "Agent OS",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://buildermethods.com/agent-os",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tabanındaki standartları keşfedip ajan talimatlarına enjekte eden ve spesifikasyon şekillendirme/yazma komutları sunan standart ve istem paketi; Claude Code, Cursor ve benzeri ajanlarla çalışır.",
+      "sinirlar": "Tek yazar ağırlıklı; kurumsal kural yönetimi ve sürüm sabitleme sınırlı. Tek ekip/geliştirici ölçeğinde yöntem paketi; merkezi yönetişim, sürüm kilidi ve doğrulama kapısı yoktur.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K02-004",
+        "N-K03-010",
+        "N-K07-004",
+        "N-K11-001",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0500",
+      "ad": "Task Master",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (Commons Clause'lu özel metin)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tryhamster.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PRD dokümanını ayrıştırıp bağımlılıklı, karmaşıklık puanlı görev listesine çeviren; görev genişletme, 'sıradaki görev' ve durum yönetimini CLI ve MCP sunucusu üzerinden kodlama ajanlarına açan araç.",
+      "sinirlar": "Lisans metni standart MIT değil (ek kısıtlar içerir); depo etkinliği Nisan 2026'dan beri düşük. Commons Clause nedeniyle barındırılmış hizmet olarak sunulamaz (OSI onaylı değil); bağımlılık ve karmaşıklık analizi LLM tabanlıdır, deterministik değildir; son push Nisan 2026.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K02-004",
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K02-013"
+      ]
+    },
+    {
+      "id": "AR-0501",
+      "ad": "cc-sdd",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/gotalab/cc-sdd",
+      "olgunluk": "erken",
+      "ne_saglar": "Kiro tarzı gereksinim → tasarım → görev akışını Claude Code, Codex, Cursor gibi ajanlara komut seti olarak kuran ve onaylı spesifikasyondan uzun soluklu otonom uygulamaya geçişi yöneten minimal SDD aracı.",
+      "sinirlar": "Küçük topluluk projesi; kurumsal destek yok. Küçük topluluk projesi; kurumsal onay, iş takip entegrasyonu ve denetim kaydı sunmaz.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-009",
+        "N-K01-010",
+        "N-K02-004",
+        "N-K05-001"
+      ]
+    },
+    {
+      "id": "AR-0502",
+      "ad": "Traycer",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://traycer.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Spesifikasyon öncelikli planlama: niyeti ürün spesifikasyonu ve uygulama biletlerine böler, planı onaya sunar, Claude Code/Cursor/Codex gibi ajanlara devreder ve çıktıyı doğrular.",
+      "sinirlar": "Kapalı SaaS; ajanlar arası paylaşılan bağlamın veri akışı değerlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-010",
+        "N-K02-004",
+        "N-K05-015",
+        "N-K10-006",
+        "N-K28-001"
+      ]
+    },
+    {
+      "id": "AR-0821",
+      "ad": "Userdoc",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://userdoc.fyi/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tabanı, doküman ve ekip bilgisinden yapay zekâyla kullanıcı hikâyesi, epik, kabul kriteri, persona, yolculuk haritası ve teknik spesifikasyon üreten; koddan (ön yüz, arka uç, API, veritabanı) işlevsel spesifikasyon çıkaran ve gereksinim değişiklik geçmişini tutan platform.",
+      "sinirlar": "Yalnız SaaS; veri yerelliği ve iş takip entegrasyon ayrıntıları kaynakta açık değil.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K02-001",
+        "N-K07-004"
+      ]
+    },
+    {
+      "id": "AR-0822",
+      "ad": "ChatPRD",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.chatprd.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ürün yöneticileri için PRD taslaklama, iyileştirme ve strateji gözden geçirmesi yapan; ürün bağlamını MCP ile kodlama ajanlarına aktaran yapay zekâ ürün yönetimi platformu.",
+      "sinirlar": "SaaS-yalnız; kurum şemasına göre makinece doğrulama veya DoR kapısı sağlamaz.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-004",
+        "N-K25-003"
+      ]
+    },
+    {
+      "id": "AR-0824",
+      "ad": "Pydantic ve Pydantic AI",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pydantic.dev/docs/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python tip ipuçlarıyla veri modeli tanımlama ve doğrulama, modelden JSON Schema üretme; Pydantic AI ile tipli ve doğrulanmış çıktı döndüren ajan çerçevesi.",
+      "sinirlar": "Python'a özgüdür; iş kuralı doğrulayıcılarını kurumun yazması gerekir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-013",
+        "N-K04-006",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-0833",
+      "ad": "Copilot4DevOps",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.modernrequirements.com/copilot4devops/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Azure DevOps içine gömülü yapay zekâ asistanı: gereksinim çıkarma (elicit), analiz, iş kalemi üretimi ve dönüştürme, etki değerlendirmesi, boşluk analizi ve test durumu üretimi; BYOLLM eki ile kurum dokümanları/wiki üzerinde özelleştirme.",
+      "sinirlar": "Yalnız Azure DevOps ekosistemi; Azure DevOps Server (kurum içi) desteği kaynakta belirtilmemiş.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-004",
+        "N-K01-009",
+        "N-K02-001",
+        "N-K05-028"
+      ]
+    },
+    {
+      "id": "AR-0867",
+      "ad": "SetFit",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/huggingface/setfit",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sentence Transformers üzerine birkaç düzine etiketli örnekle metin sınıflandırıcı eğiten az örnekli öğrenme kütüphanesi; iş türü (özellik, hata, yeniden düzenleme…) ve ajana uygunluk sınıflandırıcıları için LLM'den ucuz ve deterministik bir seçenek.",
+      "sinirlar": "Etiketli örnek ve periyodik yeniden eğitim gerektirir; Türkçe başarımı çok dilli taban model seçimine bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-001",
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0877",
+      "ad": "actions/ai-inference",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://github.com/actions/ai-inference",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Actions iş akışından GitHub Models üzerinden LLM çağırarak issue sınıflandırma, etiketleme ve özetleme gibi triyaj adımlarını otomatikleştiren eylem.",
+      "sinirlar": "GitHub ve GitHub Models kotalarına bağlıdır; model çağrıları GitHub/Microsoft altyapısında işlenir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-010",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-1242",
+      "ad": "gpt-oss-safeguard",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/openai/gpt-oss-safeguard",
+      "olgunluk": "erken",
+      "ne_saglar": "Geliştiricinin yazdığı politikayı çıkarım anında uygulayan, gerekçesini gösteren muhakemeli güvenlik sınıflandırıcısıdır (20b/120b); politika yeniden eğitim olmadan değiştirilebilir.",
+      "sinirlar": "Araştırma önizlemesi; büyük model gecikme ve donanım maliyeti.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1458",
+      "ad": "LLM Council (karpathy/llm-council)",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/karpathy/llm-council",
+      "olgunluk": "erken",
+      "ne_saglar": "Aynı soruyu birden çok modele sorup yanıtları anonimleştirerek modellere çapraz puanlatan ve bir 'başkan' modelle sentezleyen küçük yerel web uygulaması; onay öncesi karşı görüş ve model ailesi çeşitliliği kalıbını gösterir.",
+      "sinirlar": "Depoda lisans dosyası yok ve yazar bakım yapmayacağını belirtiyor; üretim aracı değil, referans uygulamadır.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K09-005",
+        "N-K17-009",
+        "N-K27-011"
+      ]
+    },
+    {
+      "id": "AR-1459",
+      "ad": "Council of High Intelligence",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/0xNyk/council-of-high-intelligence",
+      "olgunluk": "erken",
+      "ne_saglar": "Zor kararlar için çok perspektifli yapılandırılmış müzakere (tam konsey, üçlü, ikili münazara) yürüten ajan yeteneği/iş akışı; onaydan önce karşı gerekçe üretmeyi sistematikleştirir.",
+      "sinirlar": "Yeni ve topluluk kaynaklı; çıktı kalitesi kullanılan modellere bağlıdır, kurumsal denetim izi sağlamaz.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K09-005",
+        "N-K17-009"
+      ]
+    },
+    {
+      "id": "AR-1496",
+      "ad": "Nickel",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://nickel-lang.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sözleşmeler (contracts) ve kademeli tiplerle doğrulanan, birleştirilebilir yapılandırma dili; JSON/YAML/TOML üretir ve katmanlı yapılandırmada hatayı kaynağında yakalar.",
+      "sinirlar": "Ekosistemi CUE/Jsonnet'e göre küçük; ekiplerin yeni dil öğrenmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K01-013",
+        "N-K05-023",
+        "N-K11-001",
+        "N-K11-003"
+      ]
+    },
+    {
+      "id": "AR-1577",
+      "ad": "hypothesis-jsonschema",
+      "tur": "kutuphane",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/python-jsonschema/hypothesis-jsonschema",
+      "olgunluk": "olgun",
+      "ne_saglar": "JSON Schema tanımlarından Hypothesis stratejileri üreterek şemaya uyan (ve sınır) örnekleri otomatik oluşturan kütüphane; şemalı ajan çıktıları ve API sözleşmeleri için özellik testleri yazmayı kolaylaştırır.",
+      "sinirlar": "Karmaşık şema anahtar kelimelerinde üretim yavaşlayabilir; bakım düşük tempoludur.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-010",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-1636",
+      "ad": "json_repair",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mangiucugna.github.io/json_repair/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM'lerin ürettiği bozuk JSON'u (eksik tırnak/parantez, yorumlar, kesik çıktı) onarıp ayrıştıran Python kütüphanesi; şema doğrulamasından önce toleranslı ayrıştırma sağlar.",
+      "sinirlar": "Onarım anlamı değiştirebilir; mutlaka şema doğrulamasıyla birlikte kullanılmalıdır.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1637",
+      "ad": "check-jsonschema",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://check-jsonschema.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML/JSON/TOML dosyalarını JSON Schema'ya karşı doğrulayan CLI ve pre-commit kancası; iş kalemi şablonu, ajan yapılandırması ve CI dosyaları için deterministik şema kapısı kurar.",
+      "sinirlar": "Yalnız şema doğrulaması yapar; anlamsal kontrol sağlamaz.",
+      "ihtiyaclar": [
+        "N-K01-002",
+        "N-K01-013",
+        "N-K05-012",
+        "N-K11-001"
+      ]
+    },
+    {
+      "id": "AR-1751",
+      "ad": "Open Data Contract Standard (ODCS)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://bitol.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veri ürünleri için şema, kalite kuralları, hizmet seviyeleri ve sahiplik alanlarını YAML ile tanımlayan veri sözleşmesi standardı; üretici ve tüketicinin iki tarafta aynı sözleşmeyi doğrulamasına temel olur.",
+      "sinirlar": "Veri kümelerine yöneliktir; API sözleşmeleri için OpenAPI/AsyncAPI gerekir.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K03-011",
+        "N-K03-012",
+        "N-K05-024",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-1831",
+      "ad": "Quarkus LangChain4j",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Quarkus'ta bildirimsel AI servisleri, araç çağırma, yapılandırılmış çıktı, girdi/çıktı guardrail'leri, MCP istemcisi ve OpenTelemetry izleri; Java tabanlı ajan servislerini yerel derlemeyle çalıştırır.",
+      "sinirlar": "Quarkus'a bağlı; LangChain4j sürüm hızına bağımlı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1851",
+      "ad": "OpenAPI Specification",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://spec.openapis.org/oas/latest.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP API'lerini makinece okunur şekilde tanımlayan standart (3.1/3.2); sözleşme-önce geliştirme, istemci/sunucu kodu ve test üretimi, ajan araç tanımlarına dönüştürme için temel.",
+      "sinirlar": "Davranışsal semantiği tam ifade etmez; sözleşme testleri ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K03-011",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-1860",
+      "ad": "OMG SACM (Structured Assurance Case Metamodel)",
+      "tur": "protokol-standart",
+      "lisans": "OMG şartname lisansı",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.omg.org/spec/SACM/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Güvence vakalarının (iddia–gerekçe–kanıt) ve kanıt artefaktlarının metamodeli; karşı iddia ve itiraz ilişkileri dahil, bir değişikliğin neden güvenli olduğunu makinece işlenebilir biçimde kaydeder.",
+      "sinirlar": "Araç ekosistemi dar ve çoğunlukla ticari; öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K05-026",
+        "N-K17-009",
+        "N-K21-007"
+      ]
+    },
+    {
+      "id": "AR-1861",
+      "ad": "GSN (Goal Structuring Notation) Community Standard",
+      "tur": "protokol-standart",
+      "lisans": "SCSC topluluk standardı (ücretsiz)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://scsc.uk/gsn",
+      "olgunluk": "olgun",
+      "ne_saglar": "Güvence argümanlarını hedef, strateji, bağlam ve kanıt düğümlerinden oluşan grafik olarak gösteren notasyon standardı (v3); onay öncesi karşı-gerekçe ve güven argümanı desenlerini yapılandırmaya uygun.",
+      "sinirlar": "Notasyondur; açık kaynak araç desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-026",
+        "N-K17-009",
+        "N-K21-007"
+      ]
+    },
+    {
+      "id": "AR-1879",
+      "ad": "RFC 9457 (Problem Details for HTTP APIs)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rfc-editor.org/rfc/rfc9457",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP API hataları için type, title, status, detail ve genişletme alanlı makinece okunur hata gövdesi standardı; ajan/araç başarısızlık türlerini (ör. 'açıklama gerekli', 'görev imkânsız') tipli URI'lerle sınıflandırmaya uygun.",
+      "sinirlar": "Yalnız biçim tanımlar; hata türü kataloğunu kurum belirlemelidir.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K10-010"
+      ]
+    },
+    {
+      "id": "AR-1923",
+      "ad": "Argdown",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://argdown.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Argümanları, öncül–sonuç yapısını ve destek/itiraz ilişkilerini Markdown benzeri sözdizimiyle yazıp argüman haritasına dönüştüren araç (VS Code eklentisi, CLI); onay öncesi karşı-gerekçelerin yapılandırılmış kaydı için.",
+      "sinirlar": "Niş araç; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K07-003",
+        "N-K17-009"
+      ]
+    },
+    {
+      "id": "AR-2061",
+      "ad": "Mellea",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/generative-computing/mellea",
+      "olgunluk": "erken",
+      "ne_saglar": "'Üretken programlar' yazmak için kütüphane: talimat–doğrula–onar (instruct-validate-repair) döngüsü, gereksinim tabanlı çıktı doğrulama, örnekleme stratejileri ve yapılandırılmış çıktı.",
+      "sinirlar": "Yeni proje; API değişkenliği olabilir.",
+      "ihtiyaclar": [
+        "N-K05-028",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-2375",
+      "ad": "Qwen-Agent",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/QwenLM/Qwen-Agent",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Qwen modelleri için ajan çerçevesi: fonksiyon çağırma, MCP istemcisi, kod yorumlayıcı, RAG ve uzun belge işleme bileşenleri; kendi barındırılan Qwen uç noktalarıyla çalışır.",
+      "sinirlar": "Qwen ailesine göre optimize; diğer modellerde araç çağırma kalitesi değişebilir, son sürüm aktivitesi 2026 başında yavaşladı.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-2471",
+      "ad": "ChatEval",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/thunlp/ChatEval",
+      "olgunluk": "erken",
+      "ne_saglar": "Birden çok LLM 'hakem'in farklı rollerle tartışarak (multi-agent debate) değerlendirme kararı verdiği araştırma çerçevesi; onay öncesi karşı gerekçe üretme kalıbına örnek.",
+      "sinirlar": "Araştırma kodu (2024); üretim için yeniden uygulanmalı, maliyet çok çağrılı.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K05-016",
+        "N-K17-009",
+        "N-K27-011"
+      ]
+    },
+    {
+      "id": "AR-2472",
+      "ad": "Multi-Agents-Debate (MAD)",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Skytliang/Multi-Agents-Debate",
+      "olgunluk": "erken",
+      "ne_saglar": "'Şeytanın avukatı' rolünde karşı argüman üreten ajan ile savunan ajanın tartışmasını bir yargıç ajanın sonuçlandırdığı çoklu ajan tartışma çerçevesi.",
+      "sinirlar": "Araştırma prototipi; GPL-3.0, sonuçların kalibrasyonu ve maliyet kontrolü gerekir.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K09-005",
+        "N-K17-009",
+        "N-K27-011"
+      ]
+    },
+    {
+      "id": "AR-2572",
+      "ad": "Unstract",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 + ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://unstract.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM ile yapılandırılmamış belgelerden şemalı JSON çıkarımı: Prompt Studio ile alan tanımı, iki model çapraz doğrulaması (LLMChallenge), API ve ETL boru hattı olarak toplu çalıştırma.",
+      "sinirlar": "AGPL-3.0; belge odaklı, backlog kayıtları için alan şablonu uyarlanmalı.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K02-001",
+        "N-K09-008",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-2771",
+      "ad": "OntoGPT (SPIRES)",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/monarch-initiative/ontogpt",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM ile serbest metinden LinkML şemasına uygun yapılandırılmış bilgi çıkarıp varlıkları ontoloji terimlerine eşleyen (SPIRES) araç; terim sözlüğü ve alan modeli çıkarımına uyarlanabilir.",
+      "sinirlar": "Biyomedikal odaklı şablonlar; kurum alanı için şema yazmak gerekir.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K07-006"
+      ]
+    },
+    {
+      "id": "AR-2885",
+      "ad": "hoyeon",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/team-attention/hoyeon",
+      "olgunluk": "erken",
+      "ne_saglar": "Niyetten gereksinimleri türeten, her türetmeyi doğrulayan ve izlenebilir kod teslim eden Claude Code eklentisi; kısa taleplerin arkasındaki gizli kararları açığa çıkarır.",
+      "sinirlar": "Claude Code'a bağlı; son etkinlik Mayıs 2026.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-004",
+        "N-K01-008",
+        "N-K20-009"
+      ]
+    },
+    {
+      "id": "AR-3048",
+      "ad": "Apple Foundation Models framework",
+      "tur": "cerceve",
+      "lisans": "ticari (Apple SDK)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developer.apple.com/documentation/foundationmodels",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Apple cihazlarındaki cihaz üstü dil modeline Swift API'siyle erişim; yönlendirilmiş (guided) yapılandırılmış üretim ve araç çağırma sağlar.",
+      "sinirlar": "Yalnız Apple Intelligence destekli cihaz ve işletim sistemi sürümlerinde çalışır; küçük model ve sınırlı bağlam ağır kod görevleri için yetersiz.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3286",
+      "ad": "Valibot",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://valibot.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Modüler, ağaç sarsılabilir TypeScript şema doğrulama kütüphanesi; model çıktısını ve dış veriyi tipli doğrulamak için kullanılır.",
+      "sinirlar": "Zod'a göre ekosistem entegrasyonu daha dar.",
+      "ihtiyaclar": [
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-3287",
+      "ad": "TypeBox",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://sinclairzx81.github.io/typebox/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Statik TypeScript tipleriyle eşleşen JSON Schema üreten tip oluşturucu; aynı şema hem derleme zamanı tipi hem çalışma zamanı doğrulaması olur.",
+      "sinirlar": "Paket adı sürüm 1 ile değişti (@sinclair/typebox → typebox); geçiş planı gerekir.",
+      "ihtiyaclar": [
+        "N-K01-013",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-3288",
+      "ad": "ArkType",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://arktype.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TypeScript tip sözdizimine yakın tanımlarla çalışma zamanı doğrulayıcısı ve JSON Schema üreten kütüphane.",
+      "sinirlar": "Küçük bakım ekibi.",
+      "ihtiyaclar": [
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-3963",
+      "ad": "Grove",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/alxshelepenok/grove",
+      "olgunluk": "erken",
+      "ne_saglar": "Uzun soluklu ajan işi için makine-zorlamalı iş akışı protokolü: hedef, karar, görev, soru ve varsayımları kalıcı geçmiş grafiğinde tutar; kuralları sağlama toplamlı tek kilit dosyasında değişmezler olarak zorlar—ajan yanlışlanabilir kanıt olmadan işi bitti ilan edemez, hazır olmayan görevi başlatamaz. CLI, MCP sunucusu ve ajan yetenek paketi içerir.",
+      "sinirlar": "AGPL-3.0 (kurum içi değişiklik dağıtımında yükümlülük); çok yeni (Mayıs 2026), masaüstü uygulaması deneysel.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K05-027",
+        "N-K05-028",
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-4075",
+      "ad": "UQLM",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cvs-health.github.io/uqlm/latest/index.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM yanıtları için siyah kutu (örnekler arası tutarlılık), beyaz kutu (token olasılığı), LLM-yargıç ve topluluk tabanlı belirsizlik/güven skorları üreten Python paketi; halüsinasyon tespiti ve güven eşiğiyle yönlendirme.",
+      "sinirlar": "Ek model çağrıları maliyet ve gecikme getirir; skorların kurum verisiyle kalibre edilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K28-006",
+        "N-K28-011"
+      ]
+    },
+    {
+      "id": "AR-4386",
+      "ad": "LangChain",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.langchain.com/oss/python/langchain/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "create_agent ile LangGraph üzerinde çalışan ajan kurma, sağlayıcıdan bağımsız model arayüzü, araç çağırma, yapılandırılmış çıktı ve middleware ile ajan döngüsünü özelleştirme sağlayan açık kaynak çerçeve.",
+      "sinirlar": "Dayanıklı durum ve insan beklemesi için LangGraph katmanına dayanır; soyutlama katmanları sürümler arasında sık değişir, sürüm sabitleme gerekir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003"
+      ]
+    }
+  ]
+}

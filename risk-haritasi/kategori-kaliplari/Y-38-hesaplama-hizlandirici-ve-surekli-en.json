@@ -1,0 +1,163 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-38",
+    "ad": "Hesaplama, hızlandırıcı ve sürekli entegrasyon kapasite yönetimi",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-201",
+      "yetenek_sinifi": "Y-38",
+      "kalip": "CI platform fiyat modelinin değişmesi",
+      "aciklama": "GitHub, Aralık 2025'te Mart 2026'dan itibaren kendi barındırılan çalıştırıcılar için dakika başı 0,002 dolar platform ücreti getireceğini duyurdu; topluluk tepkisi sonrası bu değişiklik ertelendi.",
+      "risk_turleri": [
+        "RT-14",
+        "RT-06"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.blog/changelog/2025-12-16-coming-soon-simpler-pricing-and-a-better-experience-for-github-actions/",
+        "https://github.com/orgs/community/discussions/182089"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlarla katlanan CI dakikaları kendi donanımında çalışsa bile platform ücretine tabi olabilir; maliyet planı yıl içinde değişir.",
+        "Ertelenen fiyat değişikliği ileride kısa bildirimle geri gelebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K20-007",
+        "N-K15-006"
+      ],
+      "ornek_araclar": [
+        "GitHub Actions",
+        "GitLab CI",
+        "CircleCI",
+        "Buildkite"
+      ],
+      "erken_sinyal": "Satıcı değişiklik günlüğünde fiyat duyurusu.",
+      "azaltma": "CI dakikalarının ekip bazında ölçülmesi, platform bağımsız iş tanımları, maliyet duyarlı kapı sıralaması."
+    },
+    {
+      "id": "RK-202",
+      "yetenek_sinifi": "Y-38",
+      "kalip": "CI eşzamanlılık ve kuyruk sınırları",
+      "aciklama": "GitHub Actions'ta eşzamanlı iş sınırı plana göre değişir (ör. standart çalıştırıcıda Free 20, Pro 40, Team 60, Enterprise 500); depo başına 10 saniyede 500 iş akışı kuyruğa alınabilir, üstü engellenir; bir iş akışı en fazla 50 kez yeniden çalıştırılabilir.",
+      "risk_turleri": [
+        "RT-12"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/actions/reference/limits"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onlarca ajan aynı anda PR açtığında CI kuyruğu doyar; geri bildirim süresi uzadıkça ajanlar bekler veya zaman aşımına düşer.",
+        "Tek monorepo'da olay tabanlı tetikleme sınırı aşılırsa bazı iş akışları hiç başlamaz ve kalite kapısı sessizce atlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K02-012",
+        "N-K06-002",
+        "N-K15-006"
+      ],
+      "ornek_araclar": [
+        "GitHub Actions",
+        "GitLab CI",
+        "Jenkins",
+        "Buildkite"
+      ],
+      "erken_sinyal": "Kuyruk bekleme süresi ve 'queued' iş sayısında artış; tetiklenmeyen iş akışları.",
+      "azaltma": "Ekip başına adil paylaşım ve öncelik, ajan PR'ları için toplu doğrulama, kapasite planı ve kendi çalıştırıcı havuzları."
+    },
+    {
+      "id": "RK-203",
+      "yetenek_sinifi": "Y-38",
+      "kalip": "Hızlandırıcı erişiminde ihracat kontrolü belirsizliği",
+      "aciklama": "ABD'nin Ocak 2025 tarihli 'AI Diffusion' çerçevesi, gelişmiş çiplere kolay erişimi 18 ülke ve ABD ile sınırlarken Türkiye bu listede yer almadı; kural sonradan geri çekilse de ülke bazlı hesaplama kısıtı politikası oynaklığını koruyor.",
+      "risk_turleri": [
+        "RT-09"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.federalregister.gov/d/2025-00636"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi model barındırma için planlanan GPU alımları lisans veya kota nedeniyle gecikebilir; kapasite planı ihracat politikasına bağlı kalır.",
+        "Bulut GPU kapasitesinin bölgesel kısıtlanması, kurum içi model stratejisini etkileyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K09-009",
+        "N-K15-005"
+      ],
+      "ornek_araclar": [
+        "NVIDIA veri merkezi GPU'ları",
+        "Bulut GPU örnekleri"
+      ],
+      "erken_sinyal": "BIS/ABD Ticaret Bakanlığı duyuruları; tedarikçiden teslim süresi ve lisans şartı bildirimleri.",
+      "azaltma": "Çoklu donanım/tedarikçi seçeneği, daha küçük modellere uygun sunum reçeteleri, kapasite planında politika senaryoları."
+    },
+    {
+      "id": "RK-204",
+      "yetenek_sinifi": "Y-38",
+      "kalip": "Kalıcı kendi barındırılan çalıştırıcı ile kalıcılık",
+      "aciklama": "PyTorch'a yönelik gösterimde, kalıcı (ephemeral olmayan) kendi barındırılan GitHub çalıştırıcılarında işin bitiminden sonra süren arka plan süreçleri ve değiştirilen dosyalarla sonraki iş akışlarının ele geçirilebildiği gösterildi.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan PR'larının çalıştığı kalıcı çalıştırıcılar bir görevden diğerine kirlenme taşır; güvenilmeyen katkı sonraki yayın işinin sırlarını çalabilir.",
+        "Maliyet için çalıştırıcıları yeniden kullanmak görev başına izole ortam ilkesini bozar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-007",
+        "N-K15-001",
+        "N-K05-029"
+      ],
+      "ornek_araclar": [
+        "GitHub Actions self-hosted runners",
+        "GitLab Runner",
+        "Jenkins agents"
+      ],
+      "erken_sinyal": "Çalıştırıcılarda iş bitiminde kalan süreçler; aynı çalıştırıcının farklı güven seviyesindeki işlerde kullanılması.",
+      "azaltma": "Tek kullanımlık (ephemeral) çalıştırıcılar, güvenilmeyen PR'lar için ayrı havuz, dış katkılarda onaylı çalıştırma."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 14,
+    "orta": 27,
+    "dusuk": 73,
+    "kritik": 4
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 15,
+    "RT-02": 13,
+    "RT-08": 12,
+    "RT-10": 12,
+    "RT-03": 12,
+    "RT-13": 11,
+    "RT-12": 10,
+    "RT-14": 8,
+    "RT-16": 7,
+    "RT-11": 5,
+    "RT-04": 3,
+    "RT-15": 3,
+    "RT-07": 3,
+    "RT-05": 3,
+    "RT-06": 2,
+    "RT-17": 1
+  }
+}

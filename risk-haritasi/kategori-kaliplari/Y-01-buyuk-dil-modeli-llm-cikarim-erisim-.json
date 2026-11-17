@@ -1,0 +1,138 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-01",
+    "ad": "Büyük dil modeli (LLM) çıkarım erişim katmanı",
+    "grup": "Model erişimi ve ekonomisi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-067",
+      "yetenek_sinifi": "Y-01",
+      "kalip": "Sağlayıcı altyapı hatasıyla sessiz kalite düşüşü",
+      "aciklama": "Barındırılan model API'lerinde model sürümü değişmeden altyapı hataları yanıt kalitesini düşürebiliyor. Anthropic, Ağustos–Eylül 2025 arasında üç altyapı hatasının Claude yanıtlarını aralıklı bozduğunu, bağlam penceresi yönlendirme hatasının başta Sonnet 4 isteklerinin %0,8'ini etkilediğini ve tespitin geciktiğini yayımladı.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues"
+      ],
+      "yasatacagi_sorunlar": [
+        "Aynı model kimliği ve istemle çalışan ajanların başarı oranı haftalar içinde açıklanamayan biçimde düşer; ekipler hatayı kendi kural/yetenek paketlerinde arar ve yanlış düzeltmeler yayar.",
+        "Kalibrasyonu yapılmış hakem eşikleri ve maliyet tahminleri geçersizleşir; denetimde 'hangi sürümle üretildi' sorusu yanıtsız kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-006",
+        "N-K09-013",
+        "N-K23-010"
+      ],
+      "ornek_araclar": [
+        "Anthropic API",
+        "OpenAI API",
+        "Azure OpenAI",
+        "Amazon Bedrock",
+        "Google Vertex AI"
+      ],
+      "erken_sinyal": "Sabit kanarya değerlendirme setinde günlük skor düşüşü; aynı görev tipinde yeniden deneme ve insan düzeltme oranının artması.",
+      "azaltma": "Sürekli çalışan küçük bir kanarya eval seti, sağlayıcı durum sayfası aboneliği, ikinci sağlayıcıyla periyodik çapraz karşılaştırma ve her çağrıda model/uç nokta kimliğinin iz kaydına yazılması."
+    },
+    {
+      "id": "RK-068",
+      "yetenek_sinifi": "Y-01",
+      "kalip": "Merkezî erişim anahtarlarının çalınması (LLMjacking)",
+      "aciklama": "Model erişim anahtarları ve bulut kimlik bilgileri, çalındığında doğrudan faturalanabilir kaynak olduğu için saldırganların hedefindedir. Sysdig, çalınan bulut kimlik bilgileriyle LLM hizmetlerinin kötüye kullanıldığını ve kurban için günlük 46.000 doları aşabilecek maliyet doğabileceğini raporladı; Wiz, DeepSeek'e ait kimlik doğrulamasız bir veritabanında API sırları ve sohbet geçmişi buldu.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-14",
+        "RT-01"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://sysdig.com/blog/llmjacking-stolen-cloud-credentials-used-in-new-ai-attack/",
+        "https://www.wiz.io/blog/wiz-research-uncovers-exposed-deepseek-database-leak"
+      ],
+      "yasatacagi_sorunlar": [
+        "Merkezî anahtar ajan çalışma ortamına veya CI loguna düşerse tüm ekiplerin aylık model bütçesi birkaç gün içinde tüketilebilir ve hat kota nedeniyle durur.",
+        "Kurum adına üretilmiş istem içerikleri (kod, iş kalemleri) üçüncü tarafça okunabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-001",
+        "N-K18-003",
+        "N-K18-004",
+        "N-K20-005"
+      ],
+      "ornek_araclar": [
+        "Anthropic API",
+        "OpenAI API",
+        "Amazon Bedrock",
+        "Azure OpenAI"
+      ],
+      "erken_sinyal": "Mesai dışı saatlerde ya da tanımsız model/bölgede ani token tüketimi; bilinmeyen IP'lerden gelen çağrılar.",
+      "azaltma": "Ajanlara uzun ömürlü sağlayıcı anahtarı verilmemesi; kısa ömürlü, göreve özel kimlikle geçit üzerinden erişim; harcama anomali alarmı ve anahtar rotasyonu."
+    },
+    {
+      "id": "RK-069",
+      "yetenek_sinifi": "Y-01",
+      "kalip": "Sağlayıcı hız, ivmelenme ve aylık kullanım sınırları",
+      "aciklama": "Barındırılan API'ler model sınıfı başına istek ve token/dakika sınırları uygular; ani artışlarda ivmelenme sınırı nedeniyle 429 döner ve aylık kullanım eşiği aşılınca API ay başına kadar durdurulabilir.",
+      "risk_turleri": [
+        "RT-12",
+        "RT-14"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.anthropic.com/en/api/rate-limits"
+      ],
+      "yasatacagi_sorunlar": [
+        "Program artımı (PI) sonunda veya 12.000 kayıtlık toplu backlog dönüşümünde eşzamanlı ajan sayısı birden arttığında istekler 429 ile reddedilir; kritik yol üzerindeki kod ajanları da aynı kotayı paylaştığı için yavaşlar.",
+        "Aylık eşik aşıldığında hat ay sonuna kadar fiilen durabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-002",
+        "N-K15-006",
+        "N-K20-008",
+        "N-K16-007"
+      ],
+      "ornek_araclar": [
+        "Anthropic API",
+        "OpenAI API",
+        "Azure OpenAI",
+        "Google Vertex AI"
+      ],
+      "erken_sinyal": "429 oranında ve retry-after bekleme süresinde artış; kuyruktaki ajan görevlerinin bekleme süresinin uzaması.",
+      "azaltma": "Toplu işler için ayrı anahtar/kota ve düşük öncelik sınıfı, kademeli trafik artışı, kota kullanımının izlenmesi ve önceden kota artış talebi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 66,
+    "kritik": 4,
+    "yuksek": 21,
+    "dusuk": 43
+  },
+  "sinif_bulgu_turleri": {
+    "RT-15": 35,
+    "RT-11": 32,
+    "RT-04": 20,
+    "RT-12": 17,
+    "RT-10": 14,
+    "RT-05": 12,
+    "RT-02": 12,
+    "RT-03": 11,
+    "RT-09": 10,
+    "RT-01": 10,
+    "RT-08": 9,
+    "RT-14": 5,
+    "RT-07": 4,
+    "RT-06": 3,
+    "RT-13": 2
+  }
+}

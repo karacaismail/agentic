@@ -1,0 +1,1825 @@
+{
+  "sema": "mimari-haritasi/codex-eklemeleri@1",
+  "tarih": "2026-09-27",
+  "amac": "Codex'in agentic-sistem paketinde olup mimari haritamızda yeri olmayan yapılar: durum otoriteleri, kontrol kümesi eşlemesi, bileşen düzeyinde dürüst durum ayrımı, sözleşme özetleri, yaşam döngüsü, gözetim/toparlanma, havuz, adaptör yuvaları, evrilebilirlik ve doğrulanmış olgu notları.",
+  "kaynak_dizin": "/Users/w6x/Documents/otomasyon coding 2/ (salt okunur; yollar bu dizine göredir)",
+  "kayit": "arastirma/E4-codex-mimari.json",
+  "not": "Her bölüm codex_kaynagi ve dogrulama taşır. Codex'in tasarım önerileri uygulanmış ya da canlı sınanmış sayılmaz.",
+  "yetki_ve_durum_otoriteleri": {
+    "codex_kaynagi": "agentic-sistem/data/02_mimari/03_yetki_ve_durum_otoriteleri.json",
+    "dogrulama": "kismen",
+    "kayitlar": [
+      {
+        "otorite": "Plane",
+        "sahip_oldugu": "İnsan talebi, görev/proje ve çıktı görünümü",
+        "sahip_olmadigi": "İç faaliyet durumu",
+        "bizde": "M-B01, M-B02"
+      },
+      {
+        "otorite": "Kabul ve etki defteri",
+        "sahip_oldugu": "Görev/nesil/girdi özeti kabulü, tekrar/güncel nesil, kök bütçe, etki niyet/makbuz",
+        "sahip_olmadigi": "İş akışının anlık iç durumu (ikinci durum makinesi değil)",
+        "bizde": "M-B15 (önerildi); bugün olay tablosu + görev defteri"
+      },
+      {
+        "otorite": "Temporal geçmişi",
+        "sahip_oldugu": "Koşu ilerlemesi, faaliyet sonuçları, zamanlayıcı/sinyal/iptal/yeniden oynatma",
+        "sahip_olmadigi": "Dış push/dağıtımın tam bir kez olduğu garantisi",
+        "bizde": "M-B03"
+      },
+      {
+        "otorite": "GitHub",
+        "sahip_oldugu": "Commit/ağaç/PR/check gerçeği",
+        "sahip_olmadigi": "Ajanın yerel test beyanı uzak CI geçişi değildir",
+        "bizde": "M-B07"
+      },
+      {
+        "otorite": "Alpha yayın makbuzu",
+        "sahip_oldugu": "Artefakt özeti, yayındaki SHA, ortam, doğrulanmış sağlık/yolculuk",
+        "sahip_olmadigi": "Ortak alan adı değişmez teslim kimliği değildir",
+        "bizde": "M-B08 (/_surum)"
+      },
+      {
+        "otorite": "İç yetenek sicili",
+        "sahip_oldugu": "İzinli yetenek sürümü/özeti/izni/eval/geri çekme",
+        "sahip_olmadigi": "Pazar keşfi güven onayı değildir",
+        "bizde": "M-B12, M-B18"
+      }
+    ],
+    "degismezler": [
+      "Sorun başına tek kabul edilmiş güncel nesil; aynı In Progress yoklaması yeni iş açmaz",
+      "Terminal hata In Progress'te kalmakla ya da yeniden girmekle yeniden başlamaz",
+      "Açık yeniden deneme yetkisi güncel nesil, kaynak ve sözleşmeye bağlıdır, kök harcamayı korur",
+      "Kontrol katmanı iptali gördükten sonra iptal edilen nesil yayın yapamaz",
+      "Makbuzsuz niyet dış durum uzlaştırması ister, kör yeniden deneme değil",
+      "Kod işçileri kontrol politikası, kanonik kabul, iş akışı tanımı, sicil güveni ve kimlik bilgisi yazamaz",
+      "CI kanıtı tam aday/taban SHA'ya, yayın kanıtı tam artefakt özetine bağlıdır",
+      "Ready for review insan kabulü ya da üretim onayı değildir"
+    ]
+  },
+  "kontrol_kumesi_esleme": {
+    "codex_kaynagi": "agentic-sistem/data/02_mimari/01_kontrol_kumeleri.json",
+    "dogrulama": "kismen",
+    "aciklama": "Codex'in 26 kontrol kümesinin bizim bileşenlere eşlemesi. 'bizde' değeri bileşenin mimaride karşılığı olup olmadığıdır; canlı sınama anlamına gelmez. C13 ve C21 için bizde yalnız hedef depo skill'i (veritabani-gocu) ve AGENTS.md yaklaşımı var; C24 için yalnız temizlik görevi; C26 karşılığı agentic-fabrika/docs/OLGUNLUK.md S0–S4.",
+    "kayitlar": [
+      {
+        "kontrol": "C01",
+        "baslik": "Sürümlü görev ve proje sözleşmesi",
+        "bilesenler": [
+          "M-B01",
+          "M-B15"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C02",
+        "baslik": "Giriş alımı ve iş sahipliği",
+        "bilesenler": [
+          "M-B02",
+          "M-B15"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C03",
+        "baslik": "Dayanıklı orkestrasyon ve iç durum",
+        "bilesenler": [
+          "M-B03"
+        ],
+        "bizde": "var"
+      },
+      {
+        "kontrol": "C04",
+        "baslik": "SAFe koordinasyonu ve adil ekip yönlendirmesi",
+        "bilesenler": [
+          "M-B13",
+          "M-B17"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C05",
+        "baslik": "Kod ve bağımlılık keşfi",
+        "bilesenler": [
+          "M-B04"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C06",
+        "baslik": "Bağımsız kabul ve oracle paketi",
+        "bilesenler": [
+          "M-B06",
+          "M-B04"
+        ],
+        "bizde": "var"
+      },
+      {
+        "kontrol": "C07",
+        "baslik": "Sonlu kodlama ve düzeltme",
+        "bilesenler": [
+          "M-B10",
+          "M-B14"
+        ],
+        "bizde": "var"
+      },
+      {
+        "kontrol": "C08",
+        "baslik": "Kısıtlı çalışma alanı ve etkiler",
+        "bilesenler": [
+          "M-B05"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C09",
+        "baslik": "Skills, yönerge ve yetenek sicili",
+        "bilesenler": [
+          "M-B12",
+          "M-B18"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C10",
+        "baslik": "MCP ve dış işlem aracılığı",
+        "bilesenler": [
+          "M-B12",
+          "M-B15",
+          "M-B20"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C11",
+        "baslik": "CI ve uygun test kapıları",
+        "bilesenler": [
+          "M-B06",
+          "M-B07"
+        ],
+        "bizde": "var"
+      },
+      {
+        "kontrol": "C12",
+        "baslik": "Tarayıcı, yolculuk ve rastgele test",
+        "bilesenler": [
+          "M-B09"
+        ],
+        "bizde": "eksik"
+      },
+      {
+        "kontrol": "C13",
+        "baslik": "Veri doğruluğu ve geçiş",
+        "bilesenler": [],
+        "bizde": "eksik"
+      },
+      {
+        "kontrol": "C14",
+        "baslik": "Git bütünlüğü ve seri yayın",
+        "bilesenler": [
+          "M-B07",
+          "M-B21"
+        ],
+        "bizde": "var"
+      },
+      {
+        "kontrol": "C15",
+        "baslik": "Kimliği sabit alpha önizleme",
+        "bilesenler": [
+          "M-B08"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C16",
+        "baslik": "Çıktı paketi ve insan kabulü",
+        "bilesenler": [
+          "M-B09"
+        ],
+        "bizde": "var"
+      },
+      {
+        "kontrol": "C17",
+        "baslik": "İptal, hata ve dış etki mutabakatı",
+        "bilesenler": [
+          "M-B09",
+          "M-B15",
+          "M-B16"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C18",
+        "baslik": "Kanıt, telemetri ve maliyet",
+        "bilesenler": [
+          "M-B11"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C19",
+        "baslik": "Kurtarma ve operasyon",
+        "bilesenler": [
+          "M-B16"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C20",
+        "baslik": "OODA ve kontrollü Kaizen",
+        "bilesenler": [
+          "M-B11"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C21",
+        "baslik": "Bellek kökeni ve sınırları",
+        "bilesenler": [],
+        "bizde": "eksik"
+      },
+      {
+        "kontrol": "C22",
+        "baslik": "Ölçek ve kapasite deneyi",
+        "bilesenler": [
+          "M-B13",
+          "M-B17"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C23",
+        "baslik": "Uyarlanabilirlik ve sürüm geçişi",
+        "bilesenler": [
+          "M-B19",
+          "M-B03"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C24",
+        "baslik": "Kaynak hakları ve yaşam sonu",
+        "bilesenler": [],
+        "bizde": "eksik"
+      },
+      {
+        "kontrol": "C25",
+        "baslik": "Ürün kalitesi ve risk politikası",
+        "bilesenler": [
+          "M-B06",
+          "M-B09"
+        ],
+        "bizde": "kismen"
+      },
+      {
+        "kontrol": "C26",
+        "baslik": "Olgunluk geçiş kapıları",
+        "bilesenler": [],
+        "bizde": "kismen"
+      }
+    ]
+  },
+  "codex_113_ihtiyac_eslemesi_ozeti": {
+    "codex_kaynagi": "agentic-sistem/data/03_izlenebilirlik/01_113_ihtiyac_mimari_esleme.json",
+    "dogrulama": "dogrulandi",
+    "sayilar": {
+      "kayit": 113,
+      "mimaride_ele_alindi": 113,
+      "uygulandi": 0,
+      "tested_live": 0
+    },
+    "kimlik_bicimi": "I<küme>-<sıra> (Codex ihtiyac-kumeleri); bizim N-Kxx-nnn kimlikleriyle birebir çapraz eşleme bu görevde yapılmadı",
+    "not": "Codex'in eşlemesi her ihtiyacı en az bir kontrol kümesine bağlar ve kapanışı 'kontrole_eslendi_uygulama_kapanisi_degil' diye işaretler. Bizim izlenebilirliğimiz bileşen başına karsilanan_ihtiyaclar (N-K kimlikleri) üzerinden."
+  },
+  "bilesen_durum_ayrimi": {
+    "karar": "M-K23",
+    "codex_kaynagi": "agentic-sistem/uygulama/status.json",
+    "dogrulama": "dogrulandi",
+    "kayitlar": [
+      {
+        "bilesen": "M-B01",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B02",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B03",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B04",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B05",
+        "mimaride_ele_alindi": true,
+        "uygulandi": "kismen",
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json); gerçek Docker/git entegrasyon testleri; çıkış vekili elle doğrulandı",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B06",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B07",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B08",
+        "mimaride_ele_alindi": true,
+        "uygulandi": "sablon",
+        "denendi": "şablon; e2e'de /_surum denetimi sahte ortamda",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B09",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B10",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B11",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B12",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B13",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B14",
+        "mimaride_ele_alindi": true,
+        "uygulandi": true,
+        "denendi": "sahte Plane/GitHub/model ile uçtan uca senaryo ve iş akışı/birim testleri (dogrulama.json)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B15",
+        "mimaride_ele_alindi": true,
+        "uygulandi": false,
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B16",
+        "mimaride_ele_alindi": true,
+        "uygulandi": "kismen",
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B17",
+        "mimaride_ele_alindi": true,
+        "uygulandi": "kismen",
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B18",
+        "mimaride_ele_alindi": true,
+        "uygulandi": false,
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B19",
+        "mimaride_ele_alindi": true,
+        "uygulandi": false,
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B20",
+        "mimaride_ele_alindi": true,
+        "uygulandi": false,
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      },
+      {
+        "bilesen": "M-B21",
+        "mimaride_ele_alindi": true,
+        "uygulandi": "kismen",
+        "denendi": "bizde denenmedi; Codex tasarımı/deneyi (bkz. bileşenin dogrulama_notu)",
+        "canlida_sinandi": false
+      }
+    ]
+  },
+  "sozlesme_ozetleri": {
+    "girdi": {
+      "codex_kaynagi": "agentic-sistem/data/04_sozlesmeler/01_gorev_formu_ve_proje_profili.json",
+      "dogrulama": "kismen",
+      "ilke": "İnsan bütün teknik alanları her görevde doldurmaz. Kısa form + sürümlü proje profili + sistemin doğruladığı envelope birleşir. Eksik kritik bilgi needs_input; düşük etkili varsayım açık kaydedilerek izinli keşif sürer.",
+      "insan_zorunlu": [
+        "project_id",
+        "title",
+        "problem_and_beneficiary",
+        "current_behavior",
+        "desired_behavior",
+        "acceptance_examples",
+        "scope_and_non_goals",
+        "references",
+        "known_unknowns",
+        "priority_reason"
+      ],
+      "insan_kosullu": [
+        "reproduction",
+        "journeys",
+        "design_target",
+        "business_rules",
+        "data_examples",
+        "dependencies",
+        "migration_expectations",
+        "external_effects",
+        "quality_exceptions_requested",
+        "deadline_context",
+        "feedback_on_previous_run",
+        "task_specific_budget"
+      ],
+      "proje_profili": [
+        "project_profile_version",
+        "purpose_domain_glossary",
+        "alpha_repository",
+        "base_branch",
+        "preview_target",
+        "commands",
+        "architecture_constraints",
+        "quality_profile",
+        "acceptance_authority",
+        "allowed_operations",
+        "prohibited_operations",
+        "identity_and_authorship",
+        "data_policy",
+        "secret_refs",
+        "resource_budget",
+        "retry_policy",
+        "cancel_policy",
+        "knowledge_refs",
+        "catalog_snapshot",
+        "team_routing",
+        "rollback_policy",
+        "retention_policy",
+        "human_output_test",
+        "observability_and_recovery"
+      ],
+      "makine_zarfi": [
+        "plane_workspace_id",
+        "plane_project_id",
+        "plane_issue_id",
+        "intake_revision",
+        "source_state_id",
+        "requested_by",
+        "observed_at",
+        "run_id",
+        "idempotency_key",
+        "lease_generation",
+        "repo_id",
+        "base_sha",
+        "policy_digest",
+        "profile_digest",
+        "acceptance_digest",
+        "catalog_digest",
+        "team_id",
+        "allowed_resource_refs",
+        "budget_remaining",
+        "parent_and_dependency_refs",
+        "trace_id",
+        "authorization_state",
+        "submission_kind"
+      ],
+      "bizde": "fabrika/form.py açıklamadaki başlıklı bölümlerden form okur (Plane CE özel alan yok); proje profili config/projeler.yaml + politika.yaml; makine zarfının nesil, girdi özeti, lease_generation, policy/profile/acceptance/catalog özeti, authorization_state, submission_kind alanları yok.",
+      "not": "Codex'te bütün alanlar 'target_contract_not_all_fields_enforced_by_starter'; uygulanan çekirdek alt küme: task_id, project_key, generation, title, acceptance, input_digest, max_repairs, max_agent_calls, mapping_version, budget_root"
+    },
+    "cikti": {
+      "codex_kaynagi": "agentic-sistem/data/04_sozlesmeler/02_cikti_sozlesmesi.json",
+      "dogrulama": "kismen",
+      "sonuclar": [
+        "ready_for_review",
+        "needs_input",
+        "policy_blocked",
+        "failed",
+        "cancelled",
+        "unknown_effect"
+      ],
+      "zorunlu_alanlar": [
+        "schema_version",
+        "task_run_identity",
+        "outcome",
+        "summary",
+        "delivered_change",
+        "preview",
+        "acceptance_matrix",
+        "test_manifest",
+        "journey_and_monkey_evidence",
+        "review_findings",
+        "changed_behavior_and_invariants",
+        "data_effects",
+        "limitations_and_unknowns",
+        "stop_or_failure_detail",
+        "requested_input",
+        "cost_and_resource_usage",
+        "human_review_steps",
+        "rollback_and_cleanup",
+        "provenance_and_integrity",
+        "next_action"
+      ],
+      "basari_kosullari": [
+        "PR/merge ve deploy kanıtı gerçekten oluşmuş olmalı; sahte URL/SHA üretilmez.",
+        "Tüm zorunlu kabul/CI checkleri aynı teslim SHA/artifact için geçerli; geçersizleşenler rerun.",
+        "Preview health ve smoke test gerçek deploy kimliğini doğrular.",
+        "İnsan output incelemesinden önce automated success yalnız ready_for_review sayılır.",
+        "MVP alpha dışında prod etkisi, gerçek müşteri bildirimi/ödeme veya kontrollü olmayan marketplace kurulumu otomatik yapılmaz."
+      ],
+      "basarisizlik_kosullari": [
+        "Eksik input sonucu somut alan ve karar ihtiyacı taşır; geliştirici ara-run sohbeti yönetmek zorunda kalmaz.",
+        "Timeout/cancel dış etki olmadı diye raporlanmaz; reconciliation sonucu veya belirsiz etki belirtilir.",
+        "Mevcut başarılı ara artifactler final output manifestinde bulunabilir ama başarısız iş done olmaz."
+      ],
+      "bizde": "Human Test paketi ve Error paketi (fabrika/akis/gorev_akisi.py _insan_test_paketi, _eskale); kabul matrisi (her KT → kanıt) gözden geçirici çıktısında var; unknown_effect, data_effects, rollback_and_cleanup ve provenance alanları yok."
+    },
+    "anahtarlar_ve_zarf": {
+      "codex_kaynagi": "agentic-sistem/data/02_mimari/05_kontrat_kilitleri_ve_github.json",
+      "dogrulama": "kismen",
+      "task_key": [
+        "workspace_id",
+        "project_id",
+        "issue_id"
+      ],
+      "run_key": [
+        "issue_id",
+        "generation"
+      ],
+      "input_digest": "sha256 of normalized semantic acceptance form; exclude automation comments/status/ordering",
+      "idempotency": {
+        "plane_v2_event": "workspace_id:event_id",
+        "admission": "issue_id:generation:input_digest",
+        "stage_effect": "run_id:stage:effect_kind:desired_content_digest",
+        "deploy": "environment:artifact_digest:promotion_generation"
+      },
+      "zarf_alanlari": [
+        "task_key",
+        "run_key",
+        "input_digest",
+        "mapping_version",
+        "policy_version",
+        "base_sha",
+        "registry_lock_digest",
+        "budget_root_id",
+        "environment"
+      ],
+      "ic_durumlar": [
+        "ADMISSION_PENDING",
+        "QUEUED",
+        "VALIDATING",
+        "PLANNING",
+        "IMPLEMENTING",
+        "VERIFYING",
+        "REPAIRING",
+        "PR_READY",
+        "CI_WAIT",
+        "INTEGRATION_WAIT",
+        "ALPHA_DEPLOYING",
+        "ALPHA_VERIFYING",
+        "READY_FOR_REVIEW",
+        "BLOCKED_OUTPUT",
+        "CANCEL_REQUESTED",
+        "CANCELLED",
+        "SUPERSEDED",
+        "UNKNOWN_EFFECT"
+      ],
+      "bizde": "iş akışı kimliği gorev-<plane_is_id> (USE_EXISTING + ALLOW_DUPLICATE), birleştirme beklenen SHA; nesil/girdi özeti yok (M-K15)."
+    }
+  },
+  "yasam_dongusu": {
+    "codex_kaynagi": "agentic-sistem/data/02_mimari/04_yasam_dongusu.json",
+    "dogrulama": "kismen",
+    "cekirdek_sira": [
+      "validate_intake",
+      "plan",
+      "implement",
+      "independent_verify",
+      "publish_intent",
+      "ci_wait",
+      "alpha_smoke",
+      "ready_for_review"
+    ],
+    "onarim_dongusu": {
+      "from": "independent_verify",
+      "to": "implement",
+      "max_repairs": "intake.max_repairs",
+      "aggregate_budget": "budget_root",
+      "gate": "aynı immutable acceptance ve current generation"
+    },
+    "terminal_sonuclar": [
+      "ready_for_review",
+      "needs_input",
+      "failed",
+      "policy_blocked",
+      "cancelled",
+      "unknown_effect"
+    ],
+    "plane_yansimasi": {
+      "todo": "henüz çalışma yetkisi yok",
+      "in_progress": "onaylı yeni generation kabul edilebilir; run geçerliyken devam eder",
+      "review": "ready_for_review için önerilen projection; exact state ID manifestten",
+      "done": "yalnız insan çıktı kabulü",
+      "error": "failed/needs_input/policy_blocked/unknown_effect nedeni structured outputta"
+    },
+    "yayin_tasarimi": [
+      "intent",
+      "idempotent_effect",
+      "receipt_or_reconcile",
+      "current_sha_ci",
+      "immutable_alpha_artifact",
+      "alpha_smoke",
+      "output_manifest"
+    ],
+    "ooda": {
+      "kind": "bounded_per_run_control_design",
+      "steps": [
+        "Observe: commit/CI/test kanıtı",
+        "Orient: kabul sözleşmesi ve bağımlılık",
+        "Decide: izinli sonraki aksiyon",
+        "Act: sınırlı capability"
+      ],
+      "stop_on": [
+        "budget_exhausted",
+        "repeated_failure",
+        "missing_acceptance_evidence",
+        "revoked_authority"
+      ]
+    },
+    "kaizen": {
+      "kind": "separate_versioned_improvement_design",
+      "steps": [
+        "koşu verisini sınıflandır",
+        "hipotez",
+        "ayrılmış örneklerle dene",
+        "bağımsız eval",
+        "canary",
+        "terfi veya rollback"
+      ],
+      "forbidden": [
+        "testi geçmek için ölçüt düşürme",
+        "canlı self-modifying policy",
+        "tek görevden doğrulanmamış genel hafıza"
+      ]
+    },
+    "icerde_rutin_insan_kapisi": 0,
+    "bizde": "Hazırlık → Plan → Parça → RED → GREEN → İnceleme → PR/CI → Sıra → Entegrasyon → Alpha → Human Test (docs/MIMARI.md §2). Codex'te RED/GREEN ayrı aşama değil, birleştirme kuyruğu ve Rejected → geri alma yok; bizde publish_intent/unknown_effect ayrımı yok."
+  },
+  "gozetim_ve_toparlanma": {
+    "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/03_gozetim_ve_kurtarma.json; agentic-sistem/data/10_tikaniklik_ve_toparlanma/04_kaynak_ve_alt_gorevler.json",
+    "dogrulama": "kismen",
+    "yetenekler": [
+      {
+        "id": "SUP-01",
+        "ad": "Progress observer",
+        "ihtiyac": "Distinguish liveness from approved evidence toward task acceptance",
+        "codex_durumu": "policy experiment only"
+      },
+      {
+        "id": "SUP-02",
+        "ad": "Typed blocker diagnosis",
+        "ihtiyac": "Separate worker loss, semantic loops, rate limits, missing spec, context, OOM, CI wait and platform bugs",
+        "codex_durumu": "policy experiment only"
+      },
+      {
+        "id": "SUP-03",
+        "ad": "Bounded recovery controller",
+        "ihtiyac": "Changed strategy and authorized resource/profile adjustments under root budgets, deadlines and fences",
+        "codex_durumu": "policy experiment only"
+      },
+      {
+        "id": "SUP-04",
+        "ad": "Independent platform observer",
+        "ihtiyac": "Detect workflow task error loops and queue starvation outside the failing task",
+        "codex_durumu": false
+      },
+      {
+        "id": "SUP-05",
+        "ad": "Transactional recovery dispatcher",
+        "ihtiyac": "Persist decision identity/claim/receipt and revalidate generation, lease and side-effect status before dispatch",
+        "codex_durumu": false
+      }
+    ],
+    "toparlanma_merdiveni": [
+      "observe trusted telemetry",
+      "classify blocker",
+      "collect bounded diagnostics",
+      "conditionally retry known transient safe action",
+      "checkpoint and change strategy with independent review",
+      "request fenced scheduler-approved profile or decomposition",
+      "typed bounded output if impossible/uncertain"
+    ],
+    "kisitlar": [
+      "Heartbeat/log/hash churn is not objective progress",
+      "An agent role name is not an unblocker implementation",
+      "Root budget is shared by all children",
+      "Fixed deadline is not extended by retries/new attempts",
+      "137 alone does not prove OOM",
+      "Unknown side effect cannot be blindly retried",
+      "Confirmed receipt invalidates older pending retry proposal",
+      "Control loop requires reserved resources and cannot exist solely in stalled worker",
+      "Decision repetition does not guarantee exactly-once dispatch"
+    ],
+    "katman_ayrimi": {
+      "run_owner": "Revision, durum, bütçe, child kayıtları ve terminal sonuç tek kanonik otoritede.",
+      "inner_execution": "Model ve araçlar işi üretir; kendi kabul otoritesi değildir.",
+      "resource_admission": "CPU/RAM/IO/provider/CI rezervleri başlamadan denetlenir.",
+      "progress_observer": "Heartbeat, faydalı kanıt, kaynak, bağımlılık ve engine hatasını ayırır.",
+      "recovery_dispatcher": "Kararı yeniden yetki/bütçe/nesil/etki kontrolüyle uygular.",
+      "acceptance": "Korunan kabul ve birleşik exact candidate kanıtı."
+    },
+    "tipli_engel_alanlari": [
+      "kind",
+      "root_run_id",
+      "task_id",
+      "generation",
+      "attempt_id",
+      "phase",
+      "last_accepted_progress_at",
+      "evidence_refs",
+      "dependency_or_provider_ref",
+      "failed_hypotheses",
+      "safe_next_action",
+      "remaining_root_budget",
+      "deadline",
+      "external_effect_status"
+    ],
+    "terminal_esleme": {
+      "missing_required_input": "needs_input",
+      "forbidden_or_missing_permission": "policy_blocked",
+      "exhausted_or_unrecoverable": "failed",
+      "revoked_with_known_effects": "cancelled",
+      "unresolved_external_effect": "unknown_effect",
+      "accepted_product_candidate": "ready_for_review",
+      "platform_incident": "İç blocker_reason; sınır sonunda mevcut failed/unknown_effect çıktı zarfı."
+    },
+    "olcum_sozlesmesi": [
+      {
+        "id": "RM01",
+        "kategori": "identity",
+        "alanlar": "run_id, root_id, parent_id, attempt_id, generation, task/spec digest, source SHA, sandbox/cgroup ID, model/harness/tool versions"
+      },
+      {
+        "id": "RM02",
+        "kategori": "limits",
+        "alanlar": "effective memory.max/high/swap.max; cpuset/cpu.max; disk/inode quota; pids.max; runtime configuration digest"
+      },
+      {
+        "id": "RM03",
+        "kategori": "memory",
+        "alanlar": "memory.current, memory.peak, memory.events ve events.local deltas, memory.stat; runtime sonlanma nedeni; saat eşleşen kernel OOM kaydı"
+      },
+      {
+        "id": "RM04",
+        "kategori": "pressure",
+        "alanlar": "host+cgroup memory/cpu/io PSI, cpu.stat throttled time, disk latency/free/inodes; baseline ve peak"
+      },
+      {
+        "id": "RM05",
+        "kategori": "process_tree",
+        "alanlar": "ana süreç ve alt süreçler, child exit/signal, command start/end, bounded stdout/stderr offsets, orphan list"
+      },
+      {
+        "id": "RM06",
+        "kategori": "provider",
+        "alanlar": "request ID, request start/last response, streaming bytes, HTTP/error type, retry-after, rate/quota/budget"
+      },
+      {
+        "id": "RM07",
+        "kategori": "progress",
+        "alanlar": "kabul maddesine bağlı yeni doğrulanmış artifact, test-case sonuç farkı, diff digest, çözülen blocker ve bağımsız verifier sonucu"
+      },
+      {
+        "id": "RM08",
+        "kategori": "waiting",
+        "alanlar": "dependency ID/state, lock owner+expiry, queue age, next wake/deadline, expected external callback"
+      },
+      {
+        "id": "RM09",
+        "kategori": "authority",
+        "alanlar": "lease/fencing generation, revocation timestamp, effect intent+receipt, root resource/token/time spent+reserved"
+      },
+      {
+        "id": "RM10",
+        "kategori": "collection",
+        "alanlar": "worker cgroup dışında sınırlı kaynaklı collector; monoton zaman+UTC; kill öncesi/sonrası örnek; eksik telemetry bayrağı"
+      }
+    ],
+    "kapasite_formulu": "memory_slots = floor(max(0, measured_allocatable_RAM - protected_service_reserve - recovery_margin) / measured_profile_reservation). Admission also obeys CPU, IO, disk, PIDs, provider quotas, cost, test environment and review capacity.",
+    "karar_eylemleri": [
+      {
+        "id": "RA01",
+        "eylem": "Bellek profilini bir üst doğrulanmış sınıra taşı",
+        "on_kosul": "Tek işin ölçülmüş çalışma kümesi mevcut limite sığmıyor; kök bütçe ve host rezervi yeterli; kaçak belirtisi yok.",
+        "durma": "Yeni limitin de aynı belirtiyi üretmesi, bütçe eşiği veya sistem baskısı artışı."
+      },
+      {
+        "id": "RA02",
+        "eylem": "Eşzamanlı işi veya ağır test alt süreçlerini azalt",
+        "on_kosul": "İşler tek başına geçiyor, birlikte kaynak baskısı oluşuyor veya derleyici kendi içinde çok worker açıyor.",
+        "durma": "Sıralı tek işte de sorun sürerse bu açıklama yetersiz."
+      },
+      {
+        "id": "RA03",
+        "eylem": "İşi kanıtlanabilir bağımsız alt görevlere böl",
+        "on_kosul": "Ayrı teslimler ve kabul kanıtları; arayüzler sabit; bağımlılıklar acyclic; birleşim sahibi; toplam kaynak bütçesi mevcut.",
+        "durma": "Aynı dosya/karar sürekli çakışırsa, bağımlılık döngüsü veya entegrasyon maliyeti kazancı aşarsa."
+      },
+      {
+        "id": "RA04",
+        "eylem": "Daha küçük aşamaları sıralı yürüt",
+        "on_kosul": "İş bölünebilir ama paralel kaynak yok veya bağımlılık sıralı.",
+        "durma": "Bölünmeyen tek derleme yine limite çarpıyorsa yüksek bellek sınıfı gerekir."
+      },
+      {
+        "id": "RA05",
+        "eylem": "Kaçağı veya araç/harness hatasını düzelt",
+        "on_kosul": "Tekrarlı aynı aşamada artan footprint, orphan süreç, sınırsız log/çıktı birikimi veya bozulan cache kanıtı var.",
+        "durma": "Kök neden desteklenmiyorsa genel yeniden yazım veya sınırsız debug başlatma."
+      },
+      {
+        "id": "RA06",
+        "eylem": "Ağır işi uygun ayrı worker/hosta taşı",
+        "on_kosul": "Tek aşama bölünemiyor veya host I/O/CPU/yerel bellek sınırı var; uzaktaki kaynak/yetki/maliyet profili doğrulanmış.",
+        "durma": "Uzak ortam doğrulanmamış veya transfer+run kök bütçeyi aşıyor."
+      },
+      {
+        "id": "RA07",
+        "eylem": "API/kilit/bağımlılık sorununu çöz",
+        "on_kosul": "Bellek kanıtı yerine provider quota, retry-after, held lock, missing callback veya bozuk görev kaydı saptandı.",
+        "durma": "Dış etki belirsizse yeniden yazma yok; unknown_effect veya açıklanmış blocked çıktı."
+      },
+      {
+        "id": "RA08",
+        "eylem": "Yeni context ile sınırlı yeniden planla",
+        "on_kosul": "Tekrarlayan aynı deneme/hata/diff veya erken bitti beyanı var; kaynaklar sağlıklı; gerekli kanıt ve spec sabit.",
+        "durma": "Strateji değişmediğinde veya ortak recovery bütçesi bittiğinde açıklanmış terminal çıktı."
+      }
+    ],
+    "alt_is_dag_zorunlu_alanlari": [
+      "root_task_id",
+      "parent_task_id",
+      "spec_digest",
+      "acceptance_subset",
+      "input_artifact_digests",
+      "base_sha",
+      "owned_paths_or_interfaces",
+      "depends_on",
+      "deliverable_contract",
+      "verification_contract",
+      "resource_profile",
+      "budget_reservation",
+      "deadline",
+      "generation",
+      "integration_owner",
+      "handoff"
+    ],
+    "sinirli_cogaltma_sinirlari": [
+      "max_active_children",
+      "max_total_children",
+      "max_depth",
+      "max_total_attempts",
+      "deadline_utc",
+      "token_cost_budget",
+      "memory_cpu_io_reservation",
+      "max_artifact_bytes",
+      "max_log_bytes",
+      "max_replans",
+      "max_recovery_actions"
+    ],
+    "worktree_saglamadiklari": [
+      "ayrı RAM kotası",
+      "ayrı CPU/I/O kaynağı",
+      "ayrı port/network namespace",
+      "ayrı DB/schema/test fixture",
+      "secret veya OS kullanıcı yetkisi sınırı",
+      "repo config/refs için tam ayrılık",
+      "otomatik bağımlılık sıralaması",
+      "otomatik doğru merge veya entegrasyon testleri"
+    ],
+    "bizde": "M-B14 çözücü (strateji/güçlü model/bölme/soru/ortam, görev başına en çok 2), OOM profil merdiveni 6→12→16 GB, atama+hatırlatma+48 sa RTE, günlük gözcü. Bizde yok: iş akışı dışı gözlemci süreci, kalıcı toparlanma kararı kimliği/CAS, PSI ölçümü, telemetri-kaybı durumu, alt iş DAG'ı (bilinçli: M-K11 sıralı parçalar)."
+  },
+  "havuzlar": {
+    "codex_kaynagi": "agentic-sistem/data/05_havuzlar/",
+    "dogrulama": "kismen",
+    "roller": [
+      {
+        "id": "AR01",
+        "ad": "İş sözleşmesi yorumlayıcısı",
+        "evre": "mvp",
+        "bizde": "hazırlık (DoR) + planlayıcı"
+      },
+      {
+        "id": "AR02",
+        "ad": "Sınırlandırılmış planlayıcı",
+        "evre": "mvp",
+        "bizde": "planlayıcı"
+      },
+      {
+        "id": "AR03",
+        "ad": "Uygulayıcı",
+        "evre": "mvp",
+        "bizde": "uygulayıcı"
+      },
+      {
+        "id": "AR04",
+        "ad": "Bağımsız kabul doğrulayıcısı",
+        "evre": "mvp",
+        "bizde": "test yazarı + deterministik kapılar + CI (kabul doğrulayıcı ayrı ajan değil)"
+      },
+      {
+        "id": "AR05",
+        "ad": "Bağımsız değişiklik inceleyicisi",
+        "evre": "mvp",
+        "bizde": "bağımsız gözden geçirici"
+      },
+      {
+        "id": "AR06",
+        "ad": "UX ve erişilebilirlik uzmanı",
+        "evre": "conditional",
+        "bizde": "insan UX; S2 görsel regresyon"
+      },
+      {
+        "id": "AR07",
+        "ad": "Güvenlik uzmanı",
+        "evre": "conditional",
+        "bizde": "gözden geçirici güvenlik incelemesi (orta/yüksek risk) + gitleaks"
+      },
+      {
+        "id": "AR08",
+        "ad": "Veri değişikliği uzmanı",
+        "evre": "conditional",
+        "bizde": "hedef depo skill'i veritabani-gocu"
+      },
+      {
+        "id": "AR09",
+        "ad": "Bağımlılık ve entegrasyon analisti",
+        "evre": "conditional",
+        "bizde": "yok (SAFe katmanı insan)"
+      },
+      {
+        "id": "AR10",
+        "ad": "Kaynak araştırmacısı",
+        "evre": "conditional",
+        "bizde": "yok (sandbox'ta WebSearch/WebFetch kapalı)"
+      },
+      {
+        "id": "AR11",
+        "ad": "Hata teşhisçisi",
+        "evre": "conditional",
+        "bizde": "çözücü"
+      },
+      {
+        "id": "AR12",
+        "ad": "İyileştirme deneycisi",
+        "evre": "post_mvp",
+        "bizde": "yok (Kaizen insan + kaizen.py raporu)"
+      }
+    ],
+    "yetenek_yasam_dongusu": {
+      "durumlar": [
+        "discovered",
+        "quarantined",
+        "reviewed",
+        "contract_tested",
+        "approved",
+        "leased",
+        "revoked",
+        "retired"
+      ],
+      "manifest_alanlari": [
+        "id",
+        "type",
+        "version",
+        "digest",
+        "source_url",
+        "license",
+        "owner",
+        "review_status",
+        "risk_class",
+        "input_schema",
+        "output_schema",
+        "compatibility",
+        "allowed_operations",
+        "allowed_network",
+        "secret_references",
+        "resource_profile",
+        "eval_evidence",
+        "reviewed_at",
+        "revoked_at",
+        "replacement_id"
+      ],
+      "kiralama_alanlari": [
+        "run_id",
+        "principal_id",
+        "agent_role_id",
+        "capability_digest",
+        "repo_id",
+        "branch_scope",
+        "environment_scope",
+        "operations",
+        "expires_at",
+        "budget",
+        "revocation_generation"
+      ],
+      "terfi_kosullari": [
+        "kaynak ve digest",
+        "license uygulanabilirliği",
+        "dar input/output ve yetki sözleşmesi",
+        "bağımsız eval",
+        "izolasyon ve revoke testi",
+        "canary ve rollback"
+      ],
+      "bilesen": "M-B18"
+    },
+    "baglanti_siniflari": [
+      {
+        "id": "CO01",
+        "yetenek": "Plane görev okuma/durum uzlaştırma",
+        "varsayilan": "deterministic_api",
+        "mcp": "optional_read_view"
+      },
+      {
+        "id": "CO02",
+        "yetenek": "GitHub repo/PR/check bilgisi",
+        "varsayilan": "scoped_api_adapter",
+        "mcp": "optional_agent_read_view"
+      },
+      {
+        "id": "CO03",
+        "yetenek": "GitHub publish ve alpha deploy",
+        "varsayilan": "policy_guarded_service",
+        "mcp": "do_not_expose_admin_to_coder"
+      },
+      {
+        "id": "CO04",
+        "yetenek": "Tarayıcı testleri",
+        "varsayilan": "isolated_browser",
+        "mcp": "optional_with_session_scope"
+      },
+      {
+        "id": "CO05",
+        "yetenek": "Onaylı dokümantasyon ve kaynak arama",
+        "varsayilan": "allowlisted_fetch",
+        "mcp": "optional_curated_provider"
+      },
+      {
+        "id": "CO06",
+        "yetenek": "Kanıt deposu",
+        "varsayilan": "typed_append_api",
+        "mcp": "optional_read_and_scoped_append"
+      },
+      {
+        "id": "CO07",
+        "yetenek": "Çalışma metrikleri ve loglar",
+        "varsayilan": "read_only_adapter",
+        "mcp": "optional_read_only"
+      },
+      {
+        "id": "CO08",
+        "yetenek": "Sandbox dosya/komut yürütme",
+        "varsayilan": "isolated_execution_api",
+        "mcp": "optional_never_host_admin"
+      }
+    ],
+    "skill_karsilastirmasi": {
+      "codex": "21 SKILL.md (skills/SK01–SK21, toplam 420 satır), hepsi 'taslak ve etkin değil', aynı kalıp metin, 3 adım; dizin adları büyük harf (SK08) ve name alanı küçük harf (sk08): Agent Skills belirtimi adın küçük harf olmasını ve üst dizin adıyla aynı olmasını ister → uyumsuz; description alanları 'ne zaman kullanılır' bilgisi taşımıyor.",
+      "bizde": "4 odaklı skill (sablonlar/hedef-repo/.claude/skills: kabul-testi, veritabani-gocu, guvenlik-denetimi, gozlemlenebilirlik); dizin ve name uyumlu. ROLLER-VE-HAVUZLAR.md: skill sayısı 20–30'u geçince seçim doğruluğu düşer.",
+      "sonuc": "Codex'in 21 skill'i rol adım kartı olarak okunabilir; skill havuzu olarak içe alınmadı.",
+      "kaynak": "https://agentskills.io/specification",
+      "dogrulama": "dogrulandi"
+    }
+  },
+  "adaptor_yuvalari": {
+    "codex_kaynagi": "agentic-sistem/data/12_fabrika_cercevesi/03_adaptor_sozlesmeleri.json",
+    "dogrulama": "kismen",
+    "bilesen": "M-B19",
+    "yuvalar": [
+      {
+        "id": "tracker",
+        "ad": "İş kaynağı",
+        "islemler": [
+          "read_revision",
+          "subscribe_or_poll",
+          "write_outcome",
+          "relate_feedback"
+        ],
+        "sozlesme_alanlari": [
+          "external_event_id",
+          "issue_revision",
+          "goal_id"
+        ]
+      },
+      {
+        "id": "coordinator",
+        "ad": "Koordinasyon ve iş sahibi",
+        "islemler": [
+          "claim",
+          "schedule",
+          "signal",
+          "cancel",
+          "reconcile"
+        ],
+        "sozlesme_alanlari": [
+          "run_id",
+          "generation",
+          "state_version",
+          "budget_root"
+        ]
+      },
+      {
+        "id": "harness",
+        "ad": "Ajan çalıştırıcısı",
+        "islemler": [
+          "start",
+          "observe",
+          "interrupt",
+          "export_evidence",
+          "declare_resume_support"
+        ],
+        "sozlesme_alanlari": [
+          "task_contract",
+          "agent_profile_digest",
+          "attempt_id"
+        ]
+      },
+      {
+        "id": "model",
+        "ad": "Model çağrı hizmeti",
+        "islemler": [
+          "infer",
+          "declare_context_tool_limits",
+          "report_usage"
+        ],
+        "sozlesme_alanlari": [
+          "model_version",
+          "request_id",
+          "tool_schema_version",
+          "usage_receipt"
+        ]
+      },
+      {
+        "id": "runner",
+        "ad": "Yalıtılmış kod ortamı",
+        "islemler": [
+          "provision",
+          "exec",
+          "measure",
+          "checkpoint_if_supported",
+          "terminate",
+          "reap"
+        ],
+        "sozlesme_alanlari": [
+          "sandbox_id",
+          "image_digest",
+          "resource_profile",
+          "workspace_ref"
+        ]
+      },
+      {
+        "id": "repository",
+        "ad": "Kod deposu ve bütünleştirme",
+        "islemler": [
+          "fetch_exact",
+          "create_candidate",
+          "get_checks",
+          "promote_if_current",
+          "reconcile_effect"
+        ],
+        "sozlesme_alanlari": [
+          "repo_id",
+          "base_sha",
+          "head_sha",
+          "integration_ref",
+          "effect_key"
+        ]
+      },
+      {
+        "id": "verification",
+        "ad": "Test ve kabul",
+        "islemler": [
+          "execute_suite",
+          "return_inventory",
+          "return_results",
+          "attest_artifact"
+        ],
+        "sozlesme_alanlari": [
+          "acceptance_digest",
+          "suite_version",
+          "artifact_sha",
+          "test_report_digest"
+        ]
+      },
+      {
+        "id": "deployment",
+        "ad": "Uzak yayın",
+        "islemler": [
+          "deploy_digest",
+          "query_effect",
+          "health_check",
+          "rollback_if_supported"
+        ],
+        "sozlesme_alanlari": [
+          "release_id",
+          "environment_id",
+          "artifact_digest",
+          "deployment_receipt",
+          "review_url"
+        ]
+      },
+      {
+        "id": "capability_registry",
+        "ad": "Skill/araç/MCP kataloğu",
+        "islemler": [
+          "discover",
+          "resolve_pinned",
+          "verify_policy",
+          "revoke"
+        ],
+        "sozlesme_alanlari": [
+          "capability_id",
+          "version",
+          "digest",
+          "permissions",
+          "compatibility_report"
+        ]
+      }
+    ],
+    "ortak_sozlesme": {
+      "identity": [
+        "goal_id",
+        "work_item_id",
+        "issue_revision",
+        "train_id",
+        "team_id",
+        "run_id",
+        "parent_run_id",
+        "generation",
+        "attempt_id",
+        "effect_key",
+        "correlation_id"
+      ],
+      "compatibility": [
+        "contract_version",
+        "adapter_version",
+        "capabilities",
+        "supported_model_and_runner_profiles",
+        "artifact_schema",
+        "deprecation_policy"
+      ],
+      "authority": [
+        "principal",
+        "permission_scope",
+        "policy_digest",
+        "lease_id",
+        "lease_expires_at"
+      ],
+      "bounds": [
+        "deadline",
+        "retry_budget",
+        "root_cost_budget",
+        "max_children",
+        "resource_reservation",
+        "provider_quota"
+      ],
+      "progress": [
+        "phase",
+        "liveness_at",
+        "verified_milestone",
+        "evidence_ref",
+        "wait_reason",
+        "wait_until"
+      ],
+      "checkpoint": [
+        "format",
+        "version",
+        "integrity_digest",
+        "compatible_adapters",
+        "code_base_head",
+        "acceptance_digest",
+        "external_effects_reconciled"
+      ],
+      "result": [
+        "outcome",
+        "artifact_refs",
+        "usage_receipt",
+        "external_effect_receipts",
+        "uncertainty",
+        "cleanup_receipt"
+      ],
+      "errors": [
+        "retryable_transient",
+        "input_invalid",
+        "policy_denied",
+        "resource_exhausted",
+        "incompatible_contract",
+        "cancelled",
+        "unknown_effect"
+      ],
+      "semantics": [
+        "Aynı effect_key aynı niyettir; farklı payload aynı key ile validation error.",
+        "Cancel requested, stopped ve external effect reconciled ayrı durumlardır.",
+        "Checkpoint desteği isteğe bağlı; desteklenmiyorsa açık unsupported.",
+        "İmza/protokol uyumu davranış veya güvenlik doğruluğu kanıtı değildir."
+      ]
+    },
+    "entegrasyon_akisi": [
+      "authenticated_intake",
+      "revision_and_dedupe",
+      "goal_and_dependency_contract",
+      "fair_resource_admission",
+      "run_owned_execution",
+      "independent_verification",
+      "current_base_candidate_verification",
+      "serialized_ref_promotion",
+      "immutable_artifact_deployment",
+      "remote_alpha_verification",
+      "human_review",
+      "feedback_issue_reentry"
+    ],
+    "not": "Hiçbir yuva için uygulama seçilmedi; yerel uyumluluk testi yok. Yuvalar evrensel tasnif değildir (EV05)."
+  },
+  "evrilebilirlik": {
+    "karar": "M-K19",
+    "codex_kaynagi": "agentic-sistem/data/13_evrilebilirlik/; agentic-sistem/raporlar/05-evrilebilir-fabrika.md",
+    "dogrulama": "kismen",
+    "tanim": "Teknoloji, iş ve dünya koşulları değiştiğinde sistemin kabul edilmiş amaç, veri anlamı ve kanıtını koruyarak parçalarını ve çalışma biçimini ölçülebilir maliyetle değiştirebilmesi.",
+    "degisim_alanlari": [
+      {
+        "id": "EV01",
+        "ad": "Amaç ve iş kuralları",
+        "mekanizma": "Amaç, kural ve kabul sürümünü işle ilişkilendir; değişim yetkisini açık tut. Geçmiş sonucu yeni kuralla sessizce yeniden yorumlama.",
+        "kabul": "Yeni kuralın hangi işe ne zamandan itibaren uygulandığı ve önceki kabulün bağlamı izlenebilir."
+      },
+      {
+        "id": "EV02",
+        "ad": "İş akışı ve organizasyon",
+        "mekanizma": "Süreç tanımı, sorumluluk ve bağımlılıkları sürümle. Takım adıyla kapasiteyi veya yazma yetkisini özdeşleştirme.",
+        "kabul": "Atama değişirken iş kaybı, çift sahiplik veya eski nesilden yayın oluşmaz."
+      },
+      {
+        "id": "EV03",
+        "ad": "Ajanlar ve çalışma yöntemi",
+        "mekanizma": "Amaç, değişiklikler, kanıt ve kalan işi dışa aktar; özel konuşma durumunun taşınabildiğini varsayma.",
+        "kabul": "Yeni yöntem aynı kabul hedefinde sınanabilir; desteklenmeyen devam özelliği açıkça bildirilir."
+      },
+      {
+        "id": "EV04",
+        "ad": "Orkestrasyon ve durum yönetimi",
+        "mekanizma": "İş sözleşmesi ile motorun özel geçmişini ayır. Açık işler için bitirme, kontrollü taşıma veya yeniden başlatma seç.",
+        "kabul": "Aynı iş sürümünde iki motor aynı dış etkiyi bağımsız yetkilendiremez; belirsiz sonuçlar uzlaştırılır."
+      },
+      {
+        "id": "EV05",
+        "ad": "Skill, araç ve bağlantı yetenekleri",
+        "mekanizma": "Yetenek, izin, uyumluluk ve sürüm bildirimi kullan. Gerekirse sınırları böl veya birleştir; her şeyi ortak en küçük API'ye indirgeme.",
+        "kabul": "Yeni yetenek ilgisiz modülleri değiştirmeden eklenebilir veya gereken çekirdek değişikliği açık maliyetle önerilir."
+      },
+      {
+        "id": "EV06",
+        "ad": "Bilgi, hafıza ve öğrenme",
+        "mekanizma": "Kaynakları, anlamı, erişim ve saklama sınırlarını koru; türetilmiş indeksleri yeniden üretilebilir tut.",
+        "kabul": "Yetkili dışa aktarma ve yeni ortamda yeniden kurma provası yapılır; bilgi kaybı ve kalite farkı ölçülür."
+      },
+      {
+        "id": "EV07",
+        "ad": "Veri ve alan modeli",
+        "mekanizma": "Alan bazında sürümlü sözleşmeler ve veri sahipliği tanımla; evrensel tek şema dayatma. Dönüşüm ve mutabakatı ayrıca doğrula.",
+        "kabul": "Geçmiş bordro, şirket sınırı ve kimlik bağları dönüşüm sonrası korunur; kayıplı eşleme kabul edilmeden geçiş olmaz."
+      },
+      {
+        "id": "EV08",
+        "ad": "Altyapı ve kaynak düzeni",
+        "mekanizma": "İş yükü kaynak profilini ve ortam gereksinimini bildir; gerçek ortamda yeniden ölç. Kontrol ve kurtarma için kaynak payı ayır.",
+        "kabul": "İş kaybı, kaçak süreç, yetki artışı ve kontrolsüz maliyet olmadan hedef yük sınırı gösterilir."
+      },
+      {
+        "id": "EV09",
+        "ad": "Doğrulama ve güven modeli",
+        "mekanizma": "Kabul referansı ve değerlendirme setlerini sürümle; yeni öğrenmeyi gerekçeli değişiklik olarak incele. Eski ölçüte kör bağlılık da hatadır.",
+        "kabul": "Kodu üreten süreç kabul hedefini sessizce gevşetemez; referans düzeltmesi eski kanıtları gerektiğinde geçersiz kılar."
+      },
+      {
+        "id": "EV10",
+        "ad": "Tedarikçi ve ekosistem koşulları",
+        "mekanizma": "Bağımlılık ve çıkış envanteri, yasal veri dışa aktarma, kimlik devri ve alternatif deneme yolu tut.",
+        "kabul": "Bir sağlayıcı olmadan devam edebilme veya kontrollü durma provası vardır; yalnız ikinci ürünün adını bilmek yeterli sayılmaz."
+      }
+    ],
+    "ilkeler": [
+      "Kullanıcının gereksinimi sistemin evrilebilirliğidir; görsel akış editörü veya belirli bir platform zorunluluğu değildir.",
+      "Dokuz adaptör yuvası ilk kesittir; bütün gelecek için sabit sınıflandırma değildir. Çekirdek ve sözleşmeler de sürümlenerek değişebilir.",
+      "Korunacak özellikleri açıkça tanımla: amaç ve kanıt izi, yetki sınırı, dış işlem tutarlılığı ve işin kaybolmaması. İş kuralları ve kabul ölçütleri yetkili, izlenebilir kararla değişebilir.",
+      "Veriyi ve karar bağlamını tek satıcının özel oturumunda hapsetme; ham sırları veya saklanması yasak veriyi taşınabilirlik adına kopyalama.",
+      "Arayüz uyumu, davranış uyumu veya anlam eşdeğerliği değildir. Bir bileşeni sökmek için verisini ve açık işlerini de ele al.",
+      "Soyutlama sınırında anlam dönüşümü yap; iş politikası ve bütün orkestrasyonu adaptöre gömme. Her sınır ayrı mikroservis olmak zorunda değildir.",
+      "Değişim yeni, sınırlı ve sürümlü bir iştir. Çalışan ajan kendi geçiş yetkisini veya kabul eşiğini sessizce genişletemez.",
+      "Hiçbir çatı tüm gelecek araçları sıfır maliyetle taşıyamaz. Eşdeğer olmayan yetenekte yeniden tasarım veya kontrollü kesinti dürüstçe belirtilir."
+    ],
+    "gecis_yollari": [
+      {
+        "id": "new_jobs",
+        "ad": "Yeni işlerde yeni sürüm",
+        "ne_zaman": "Açık iş eski sürümde güvenle tamamlanabiliyorsa.",
+        "kural": "Yeni işler yeni sürüme gider; mevcut işler sürümüne bağlı kalır. Eski sürümün bekleyen işleri için süre ve kapanış koşulu tanımlanır."
+      },
+      {
+        "id": "verified_handoff",
+        "ad": "Doğrulanmış devir",
+        "ne_zaman": "İki tarafın devam kaydı ve davranış uyumu kanıtlanmışsa.",
+        "kural": "Eski sahip yeni iş yetkisini bırakır; kayıt ve dış etkiler uzlaştırılır; yeni nesil tek sahip olarak devralır. Motor geçmişinin birebir taşınması varsayılmaz."
+      },
+      {
+        "id": "reconcile_restart",
+        "ad": "Uzlaştır ve yeniden başlat",
+        "ne_zaman": "Oturum taşınamıyor fakat görev ve güvenli çıktılar yeniden kurulabiliyorsa.",
+        "kural": "Eski deneme durdurulur veya yetkisi kesilir; belirsiz etkiler çözülür; kabul sürümü ve doğrulanmış çıktılardan yeni deneme açılır. Tamamlanmış ödeme/yayın tekrar edilmez."
+      },
+      {
+        "id": "planned_pause",
+        "ad": "Planlı duraklama ve dönüşüm",
+        "ne_zaman": "Şema, yetki veya anlam değişimi birlikte çalışmayı desteklemiyorsa.",
+        "kural": "Kabul edilen kesintiyle yazmalar durur; yedek ve dönüşüm doğrulanır. Kodu geri almak veri ve dış etkileri geri almış sayılmaz."
+      },
+      {
+        "id": "reject_or_defer",
+        "ad": "Geçişi reddet veya ertele",
+        "ne_zaman": "Gerekli yetenek, doğru sonuç referansı, süre veya çıkış kanıtı eksikse.",
+        "kural": "Aday canlı trafiğe alınmaz. Eski sürüm güvensizse onunla devam da varsayılan değildir; kontrollü durma veya başka doğrulanmış yol gerekir."
+      }
+    ],
+    "asamalar": [
+      {
+        "sira": 1,
+        "ad": "Değişim gerekçesi ve başlangıç ölçümü",
+        "kanit": "Çözülen ihtiyaç, mevcut kalite/maliyet, etkilenen tüketiciler, veri, işler ve bağımlılıklar.",
+        "durma": "Ölçülebilir fayda veya zorunluluk yoksa sırf yeni olduğu için değişim yapma."
+      },
+      {
+        "sira": 2,
+        "ad": "Anlam ve yetenek karşılaştırması",
+        "kanit": "Eski/yeni sürüm davranış farkları, desteklenmeyen işlemler, izinler ve kabul referansı.",
+        "durma": "Eksik davranışı sessizce varsayılan değerle karşılanmış sayma."
+      },
+      {
+        "sira": 3,
+        "ad": "Geçiş ve toparlanma sözleşmesi",
+        "kanit": "Her açık iş sınıfına geçiş yöntemi, tek yazıcı devri, veri dönüşümü, son tarih ve geri dönüş/ileri düzeltme sınırı.",
+        "durma": "Geri döndürülemez adıma çıkış ve etki onayı olmadan geçme."
+      },
+      {
+        "sira": 4,
+        "ad": "Yalıtılmış prova",
+        "kanit": "Temsili görevler, hata enjeksiyonu, bağımsız kabul ve veri mutabakatı.",
+        "durma": "Gölge denemede gerçek repo/banka/ortama ikinci yazma yaptırma; yan etkileri engelle veya test alıcısına yönelt."
+      },
+      {
+        "sira": 5,
+        "ad": "Sınırlı geçiş",
+        "kanit": "Küçük iş grubu için kalite, süre, maliyet, kaynak ve belirsiz etki ölçümleri; uzun işlerin sonuçlanmasını kapsayan gözlem.",
+        "durma": "Salt eski sürümle eşitlik yetmez; mutlak kabul sınırları da sağlanmalı."
+      },
+      {
+        "sira": 6,
+        "ad": "Kademeli yaygınlaştırma",
+        "kanit": "Uyumlu tüketici sürümleri, atama kaydı, tek otorite ve tamamlanmış iş kanıtı.",
+        "durma": "Başarısız ölçütte durdur, yönlendirmeyi geri al veya önceden tanımlı ileri düzeltmeyi uygula."
+      },
+      {
+        "sira": 7,
+        "ad": "Eski bağımlılığı kapatma",
+        "kanit": "Açık iş/okuyucu kalmadığı, saklanacak kayıtların erişimi, kimlik iptali ve kalan geçici köprülerin listesi.",
+        "durma": "Geçici uyumluluk katmanını sahipsiz kalıcı bağımlılığa dönüştürme."
+      }
+    ],
+    "sozlesme_alanlari": [
+      "change_id",
+      "reason",
+      "capability_boundary_versions",
+      "affected_goals_and_consumers",
+      "old_and_new_implementation_digests",
+      "semantic_diff",
+      "data_mapping_and_loss_report",
+      "inflight_work_inventory",
+      "transfer_mode_by_work_class",
+      "writer_handoff_and_fencing",
+      "external_effect_reconciliation",
+      "acceptance_and_oracle_versions",
+      "policy_and_permission_diff",
+      "time_cost_resource_budgets",
+      "absolute_stop_thresholds",
+      "rollback_or_forward_recovery",
+      "point_of_no_return",
+      "retirement_owner_and_deadline",
+      "evidence_and_decision_receipts"
+    ],
+    "kabul_deneyleri": [
+      {
+        "id": "ET01",
+        "ad": "Çalıştırma yaklaşımını değiştir",
+        "gecme_kosulu": "Bağımsız kabul aynı iş sonucunu doğrular; özel sohbetin taşınamaması kayıtlıdır.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET02",
+        "ad": "Uzun süren işi başka motora geçir",
+        "gecme_kosulu": "Eski ve yeni motor çift işlem üretemez; belirsizlik çözülmeden bitti denmez.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET03",
+        "ad": "Ekip ve akış sınırını değiştir",
+        "gecme_kosulu": "Tek atama otoritesi, kök bütçe ve bağımlılıklar korunur; sahipsiz iş kalmaz.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET04",
+        "ad": "Yeni yetenek sınıfı ekle",
+        "gecme_kosulu": "İlgisiz modüllere yayılmayan değişiklik veya gerekli sınır revizyonunun açık etki analizi vardır; taklit genel API ile özellik kaybı gizlenmez.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET05",
+        "ad": "Hafızayı ve aramayı yeniden kur",
+        "gecme_kosulu": "İzin ve kaynak izi korunur; bilinen bilgi sorularındaki kalite farkı ölçülür; veri kaybı açıklanır.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET06",
+        "ad": "Alan verisini dönüştür",
+        "gecme_kosulu": "Kimlik, tarih, para ve şirket yetkileri mutabıktır; kayıplı dönüşüm bloke edilir veya yetkili açık karar taşır.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET07",
+        "ad": "Altyapıyı böl ve geri dön",
+        "gecme_kosulu": "Kabul edilmiş toparlanma hedefleri ölçülür; iş kaybı/çift yayın yok; yeni ortamın gerçek kaynak kullanımı kaydedilir.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET08",
+        "ad": "Kuralı ve yanlış oracle'ı düzelt",
+        "gecme_kosulu": "Gerekçe ve yetkili karar kayıtlıdır; ilgili eski kanıtlar tekrar değerlendirilir; ajan hedefi gizlice gevşetemez.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET09",
+        "ad": "Tedarikçi olmadan devam et",
+        "gecme_kosulu": "Saklama/izin koşulları korunur; kabul edilen süre/maliyet içinde devam veya kontrollü eksik çıktı mümkündür.",
+        "durum": "not_run"
+      },
+      {
+        "id": "ET10",
+        "ad": "Değişimi durdur ve eskiyi kaldır",
+        "gecme_kosulu": "Kötü geçiş durur; geri alınamayan veri/dış etki açıkça ele alınır. Başarılı geçişte açık işler ve eski kimlikler temizlenir.",
+        "durum": "not_run"
+      }
+    ],
+    "olcutler": [
+      {
+        "id": "EM1",
+        "ad": "Değişim için gereken insan/ajan eforu ve takvim süresi",
+        "hedef": null,
+        "gozlenen": null
+      },
+      {
+        "id": "EM2",
+        "ad": "Değişen ilgisiz modül ve tüketici sayısı",
+        "hedef": null,
+        "gozlenen": null
+      },
+      {
+        "id": "EM3",
+        "ad": "Kesinti ve toparlanma süresi",
+        "hedef": null,
+        "gozlenen": null
+      },
+      {
+        "id": "EM4",
+        "ad": "Kaybolan/çift iş, belirsiz dış etki ve veri mutabakat farkı",
+        "hedef": null,
+        "gozlenen": null
+      },
+      {
+        "id": "EM5",
+        "ad": "Bağımsız kabul başarısı ve kapsam dışında kalan davranış",
+        "hedef": null,
+        "gozlenen": null
+      },
+      {
+        "id": "EM6",
+        "ad": "Eski/yeni çalışma maliyeti ve kaynak kullanımı",
+        "hedef": null,
+        "gozlenen": null
+      },
+      {
+        "id": "EM7",
+        "ad": "Geçici köprülerin sayısı, sahibi ve kaldırılma süresi",
+        "hedef": null,
+        "gozlenen": null
+      }
+    ],
+    "simdi_asgari": [
+      "Alan sözleşmeleri ile araç ayrımını koru; gerçek ilk değişimde işe yarayan sınırlar oluştur.",
+      "İş, veri, kabul, yapılandırma ve bağımlılık sürümlerini kaydet; sırları sürüm dosyasına koyma.",
+      "Açık işi bitirme/durdurma ve dış etkiyi uzlaştırma yolunu tanımla.",
+      "Yedek, dışa aktarma ve yeniden kurma için en az bir gerçek prova planla.",
+      "Somut ikinci kullanım ihtiyacı veya ölçülen değişim baskısı geldiğinde gerekli adaptörü uygula."
+    ],
+    "ertelenen": [
+      "Bilinmeyen tüm gelecek araçlar için evrensel adaptör motoru.",
+      "Sırf tak-çıkar için her rolü ayrı mikroservise dönüştürmek.",
+      "Her açık işi her motora sıfır kesintiyle taşıma vaadi.",
+      "Görev ajanının canlı kontrol katmanını ve kendi kabul politikasını sınırsız değiştirmesi.",
+      "Geri dönüşü olmayan veri dönüşümlerini yalnız feature flag ile güvenli saymak."
+    ],
+    "bizde": "Kısmen: iş akışı sürümleme (workflow.patched + kayıtlı geçmişlerin CI'da yeniden oynatılması), değiştirilebilir ajan komut şablonu, katalog sha256 sabitleme. Açık işin motor değişimi, veri dönüşümü, tedarikçi çıkış provası yok."
+  },
+  "olgunluk_esleme": {
+    "codex_kaynagi": "agentic-sistem/data/07_olgunluk/01_mvp_post_mvp_olgunluk.json",
+    "dogrulama": "kismen",
+    "kayitlar": [
+      {
+        "codex": "L0 Yerel doğrulama (fikstür + gerçek motor, durum/yeniden oynatma/arıza)",
+        "bizde": "S0 öncesi: e2e/calistir.sh (gerçek Temporal/Postgres/Docker/git, sahte Plane/GitHub/model)"
+      },
+      {
+        "codex": "L1 Sınırlı alpha MVP (bir gerçek repo+alpha; normal/hata/kesinti/iptal/yeniden deneme)",
+        "bizde": "S0 Temel + S1 MVP"
+      },
+      {
+        "codex": "L2 Çok proje ve ekip (adil kuyruk, repo/ortam kilidi, onaylı yetenek, kaynak sınıfları)",
+        "bizde": "S1–S2"
+      },
+      {
+        "codex": "L3 Dağıtık yürütme (çok düğüm, kontrol/çalıştırıcı fiziksel ayrımı, geçici çalıştırıcı)",
+        "bizde": "S3"
+      },
+      {
+        "codex": "L4 Kontrollü iyileştirme (eval/canary/rollback, skill/istem/hafıza yaşam döngüsü)",
+        "bizde": "S4"
+      },
+      {
+        "codex": "L5 Bağımsız fabrika hücreleri, felaket kurtarma, kiracı yalıtımı",
+        "bizde": "yok"
+      }
+    ],
+    "codex_fazlasi": "Her düzeyde açık geri düşme koşulu: kabul/yetki/yalıtım/kanıt gerilemesi ya da açıklanamayan dış etki → önceki yetenek ve kapsam sınırına daral. Daha büyük RAM hiçbir düzeyi geçirmez."
+  },
+  "codex_sinirlari_ve_bizdeki_karsiliklar": {
+    "codex_kaynagi": "agentic-sistem/uygulama/evidence/qualification.json (limits); agentic-sistem/uygulama/status.json (pending)",
+    "dogrulama": "dogrulandi",
+    "kayitlar": [
+      {
+        "codex_siniri": "Canlı model/GitHub/alpha dağıtımı yok",
+        "bizde": "Aynı: e2e'de Plane, GitHub API ve model sahte; fakat sandbox konteynerleri, git, Temporal ve Postgres gerçek."
+      },
+      {
+        "codex_siniri": "PostgreSQL üretim defteri yok (SQLite fikstür)",
+        "bizde": "Postgres olay tablosu ve görev defteri var; etki niyet/makbuz defteri yok (M-B15)."
+      },
+      {
+        "codex_siniri": "Saldırgan sandbox nitelendirmesi yok",
+        "bizde": "Kısmen: cap-drop ALL, no-new-privileges, .git salt okunur, internal ağ + Squid izin listesi elle doğrulandı; gVisor S1'de; saldırgan test paketi yok."
+      },
+      {
+        "codex_siniri": "Sunucu çökmesi / dağıtık filo yük testi yok",
+        "bizde": "Aynı: 12 eşzamanlı görev yük testi yapılmadı; yedekten dönüş tatbikatı yapılmadı."
+      },
+      {
+        "codex_siniri": "Gerçek Plane aktör yetkisi ve sözleşme nitelendirmesi yok",
+        "bizde": "Aynı ve daha zayıf: aktör denetimi yok (yalnız 'ajan' etiketi), Plane 1.4.2 davranışı gerçek sürümde sınanmadı (AK-25)."
+      },
+      {
+        "codex_siniri": "Üretim iş akışı adaptör bağlantısı yok (adaptörler iş akışına bağlı değil)",
+        "bizde": "Bizde bağlı: giriş → GorevAkisi → sandbox/depo/github faaliyetleri tek akışta çalışıyor."
+      },
+      {
+        "codex_siniri": "Aracı alt süreç ağacı temizliği ve kesin stdout bellek sınırı yok",
+        "bizde": "Kısmen: zaman aşımında docker rm -f, PID sınırı, sahipsiz konteyner temizliği; stdout bellek sınırı yok (communicate tümünü okur)."
+      },
+      {
+        "codex_siniri": "Gerçek sağlayıcı kota/token/maliyet ölçümü yok",
+        "bizde": "Kısmen: ajan JSON çıktısındaki total_cost_usd olay kaydına yazılıyor; gerçek sağlayıcıyla doğrulanmadı."
+      },
+      {
+        "codex_siniri": "Dağıtık lease çiti, adillik ve 12 ekip zamanlayıcı yok",
+        "bizde": "Kısmen: ekip başına Temporal kuyruğu, ART WIP/bütçe politikası, host bellek bütçesi; nesil çiti yok."
+      },
+      {
+        "codex_siniri": "Tam gerekli-CI sayfalama/sonuç doğrulaması ve tam-SHA terfi geçidi yok",
+        "bizde": "Kısmen: CI sonucu ve beklenen SHA ile hızlı ileri birleştirme var; check sayfalama ayrıntısı bu incelemede denetlenmedi."
+      }
+    ]
+  },
+  "dogrulanmis_olgular": {
+    "dogrulama": "dogrulandi",
+    "kayitlar": [
+      {
+        "olgu": "Temporal Python: düz Python istisnası Workflow Task hatasına dönüşür ve süresiz yeniden denenir; iş akışı açık kalır. Faaliyetlerin varsayılan yeniden deneme politikası sınırsız deneme.",
+        "kaynak": "https://docs.temporal.io/develop/python/best-practices/error-handling",
+        "kullanildigi": [
+          "M-K18",
+          "M-K20"
+        ]
+      },
+      {
+        "olgu": "cgroup v2 memory.events oom_kill: cgroup'a ait süreçlerden herhangi bir OOM öldürücüsünce sonlandırılanların sayısı; memory.peak cgroup ve alt öğelerinin tepe kullanımı. Exit 137 yalnız SIGKILL'i gösterir.",
+        "kaynak": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+        "kullanildigi": [
+          "M-K17",
+          "M-D05"
+        ]
+      },
+      {
+        "olgu": "GITHUB_TOKEN ile tetiklenen olaylar (workflow_dispatch, repository_dispatch hariç) yeni iş akışı koşusu üretmez; App kurulum jetonu ya da PAT gerekir.",
+        "kaynak": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow",
+        "kullanildigi": [
+          "M-B07"
+        ]
+      },
+      {
+        "olgu": "n8n GHSA-v4pr-fm98-w9pg / CVE-2026-21858: kimlik doğrulamasız dosya erişimi (webhook istek işleme), kritik, CVSS 10, etkilenen >=1.65.0 <1.121.0, yayım 2026-01-07.",
+        "kaynak": "gh api /advisories?cve_id=CVE-2026-21858",
+        "kullanildigi": [
+          "M-K10",
+          "M-K20"
+        ]
+      },
+      {
+        "olgu": "Plane açık kaynak webhook: v1 gövde, X-Plane-Signature = HMAC-SHA256 hex; yalnız ağ hatasında 5 yeniden deneme (600 sn), 5xx yeniden denenmez, 5 başarısızlıkta webhook devre dışı.",
+        "kaynak": "https://github.com/makeplane/plane/blob/preview/apps/api/plane/bgtasks/webhook_task.py",
+        "kullanildigi": [
+          "M-K25",
+          "M-D23",
+          "M-D24"
+        ]
+      },
+      {
+        "olgu": "GitHub'da depo adı sahip başına tekildir (aktarımda hedef hesapta aynı adlı depo olamaz; REST {owner}/{repo}).",
+        "kaynak": "https://docs.github.com/en/repositories/creating-and-managing-repositories/transferring-a-repository",
+        "kullanildigi": [
+          "M-K24"
+        ]
+      },
+      {
+        "olgu": "Linux execve: tek argv dizgisi en çok 32 sayfa (MAX_ARG_STRLEN, ~131072 bayt); aşılırsa E2BIG.",
+        "kaynak": "https://man7.org/linux/man-pages/man2/execve.2.html",
+        "kullanildigi": [
+          "M-K22",
+          "M-D25"
+        ]
+      },
+      {
+        "olgu": "Agent Skills belirtimi: name küçük harf/rakam/tire, üst dizin adıyla aynı olmalı; allowed-tools deneysel ve uygulamaya göre değişir.",
+        "kaynak": "https://agentskills.io/specification",
+        "kullanildigi": [
+          "havuzlar.skill_karsilastirmasi"
+        ]
+      }
+    ]
+  }
+}

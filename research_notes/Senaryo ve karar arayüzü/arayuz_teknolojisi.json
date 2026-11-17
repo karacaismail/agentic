@@ -1,0 +1,517 @@
+{
+  "schema_version": "1.0",
+  "title": "Senaryo ve karar arayüzü: UI, diyagram ve PDF kararı",
+  "researched_at": "2026-09-27",
+  "status": "research_complete_implementation_not_requested",
+  "scope": {
+    "read_only_roots": [
+      "/Users/w6x/Documents/otomasyon coding 2",
+      "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi"
+    ],
+    "write_allowlist": [
+      "/Users/w6x/Documents/otomasyon coding/research_notes/Senaryo ve karar arayüzü/arayuz_teknolojisi.md",
+      "/Users/w6x/Documents/otomasyon coding/research_notes/Senaryo ve karar arayüzü/arayuz_teknolojisi.json"
+    ],
+    "source_count": 10,
+    "local_inspection": "Statik kaynak okuma; build, kaynak script, tarayıcı testi, PDF üretimi veya kurulum yapılmadı.",
+    "read_only_claim_limit": "Yalnız bu alt görevin eylemleri hakkında beyan; başka ajanların eşzamanlı eylemlerini kapsamaz."
+  },
+  "decision": {
+    "recommended": "Mevcut React + Mantine + TypeScript/SCSS; tek sürümlü senaryo modeli; Mermaid SVG ve nicel görünümler için ECharts SVG; ayrı ve hazır olma kapısı olan rapor görünümü.",
+    "why": "Form ve sonuç odaklı karar arayüzü var; yeni CSS/diyagram yığınına geçişin kullanıcı yararı henüz kanıtlanmadı. Veri doğruluğu, erişilebilir grup bağlamı, export tutarlılığı ve görünür karar etkisi daha somut eksikler.",
+    "avoid": [
+      "Mevcut appı kopyalayıp yeni fabrika kodu yazmak",
+      "Aynı sayfada iki tam UI kütüphanesi yüklemek",
+      "Tek dev diyagramı tüm ürünü anlatan tek görünüm yapmak",
+      "Seçili kontrolü uygulanmış/doğrulanmış saymak",
+      "D2 browser destekli diye offline tek dosyayı sınamadan başarılı saymak",
+      "SVG veya tagged PDF bulundu diye otomatik erişilebilirlik sertifikası vermek"
+    ],
+    "d2_gate": "Yalnız okunabilirlik/export karşılaştırmasında gerçek fayda ve offline paket testi gösterilirse değiştirilebilir renderer adapteri; kanonik veri biçimi D2 DSL değil JSON kalır.",
+    "implementation_status": "not_started"
+  },
+  "comparison": [
+    {
+      "candidate": "Mantine",
+      "fit": "Mevcut React karar formu için önerilen",
+      "tradeoff": "Bileşen ve React bağımlılığı; doğru etiket ve uygulama düzeyi erişilebilirlik yine gerekir.",
+      "source_ids": [
+        "S01"
+      ]
+    },
+    {
+      "candidate": "Tailwind + daisyUI",
+      "fit": "Statik, framework bağımsız veya çok küçük sıfırdan arayüzde geçerli alternatif",
+      "tradeoff": "CSS bileşenleri state/JSON doğrulama/export semantiğini çözmez. Burada göç için ölçülmüş kazanım yok.",
+      "source_ids": [
+        "S02",
+        "S03"
+      ]
+    },
+    {
+      "candidate": "Mermaid",
+      "fit": "Mevcut flow/state/sequence görünümlerinde varsayılan SVG renderer",
+      "tradeoff": "Büyük grafiği sadeleştirmek gerekir; strict içinde click davranışı kapalıdır; ayrı metinli gezinme kullanılır.",
+      "source_ids": [
+        "S04",
+        "S05"
+      ]
+    },
+    {
+      "candidate": "D2",
+      "fit": "Koşullu alternatif diyagram renderer veya önceden üretilmiş yayın görseli",
+      "tradeoff": "WASM tarayıcı desteği var; singlefile/file offline entegrasyonu sınanmadı. Binlerce düğüm için test garantisi yok; CLI PDF raster diagram içerir.",
+      "source_ids": [
+        "S06",
+        "S07"
+      ]
+    },
+    {
+      "candidate": "ECharts SVG",
+      "fit": "Az/orta miktarda karşılaştırmalı nicel özet, risk/kapsam dağılımı",
+      "tradeoff": "Büyük veri ve animasyon için renderer yeniden ölçülür. Veri tablosu alternatifi gerekir.",
+      "source_ids": [
+        "S08"
+      ]
+    },
+    {
+      "candidate": "Ayrı rapor DOM + browser print",
+      "fit": "Tek HTMLden kullanıcı PDFsi için ilk yol",
+      "tradeoff": "Tarayıcı farkları, yazdırma ayarları, görünürlük/font ve taşmalar gerçek PDFde denetlenir.",
+      "source_ids": [
+        "S09",
+        "S10"
+      ]
+    }
+  ],
+  "local_versions": {
+    "@mantine/core": "8.3.18",
+    "@mantine/hooks": "8.3.18",
+    "@mantine/spotlight": "8.3.18",
+    "@tabler/icons-react": "3.48.0",
+    "echarts": "6.1.0",
+    "mermaid": "11.17.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "local_evidence_manifest": [
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/package.json",
+      "sha256": "7a57cdfb1d90aa70a0d6d0ae6926e1683072c65135c166df74fb0cf3d81b2506",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/vite.config.ts",
+      "sha256": "d6c12a96e0b7092d0f0a5cfc76669ccc01f5a5af28e9d90cd4530691e084f817",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/bilesenler/KararPaneli.tsx",
+      "sha256": "c0bf6d2a538eed1f2b10203b061fba7c7b094a9a47aba3b34bd5c3723042f074",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/depo.tsx",
+      "sha256": "71a0a71cb6572345242d558b2050b728a3929bfc050b848435379ebf86bee837",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/diyagram/mermaid.ts",
+      "sha256": "f51437817c6e57dc1a4ac15464709e16209413ba4465d59a90a45e31a76e2aba",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/diyagram/MermaidGorunum.tsx",
+      "sha256": "e7281f871b4e2620efaa3dfa7cf624c81d5fca52659c0af3a4cd89403b247f8f",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/grafik/EGrafik.tsx",
+      "sha256": "a8a59005dd8c38dca8e030d51a45cf5ea352ec859f7c7a79f4a40df8c644b9cd",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/sayfalar/Rapor.tsx",
+      "sha256": "87955f7f059ee1e69b3488e61234e6faf37c63ae156a39869f1c3d9bd25f45ef",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/stiller/genel.scss",
+      "sha256": "e3879812202a440a29230ea38c2977bd67b9d444aa39f9840c9abf6d458667c7",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/App.tsx",
+      "sha256": "54a0a14a81b7173efd5319b1501f5d3db0d5685ccaccf30fb67c557f1ea82b69",
+      "inspection": "static_read_only"
+    },
+    {
+      "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/tipler.ts",
+      "sha256": "01446aa7f51372204be1ca6c530d3bf2c3fe150ce4b3572b33ea421162fed0dc",
+      "inspection": "static_read_only"
+    }
+  ],
+  "local_findings": [
+    {
+      "id": "UI-01",
+      "title": "Çizim tamamlanmadan PDF alınabilen iki yol",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/sayfalar/Rapor.tsx",
+          "lines": [
+            23,
+            40
+          ],
+          "sha256": "87955f7f059ee1e69b3488e61234e6faf37c63ae156a39869f1c3d9bd25f45ef"
+        },
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/sayfalar/Rapor.tsx",
+          "lines": [
+            54,
+            59
+          ],
+          "sha256": "87955f7f059ee1e69b3488e61234e6faf37c63ae156a39869f1c3d9bd25f45ef"
+        }
+      ],
+      "observed": "Otomatik yolda 8 saniyelik yedek print çağrısı, manuel düğmede doğrudan window.print var. Tamamlanma Set sayısı senaryo digestine bağlanmıyor.",
+      "risk_inference": "Yavaş veya hatalı çizimde eksik/stale PDF; bu statik çıkarım yeniden üretilmiş hata değildir.",
+      "recommendation": "Rapor snapshot digestine bağlı tüm çizimlerin success olması, font/image/layout hazırlığı ve hata dökümüyle print kilidi. Timeout print başarısı değil açık hata üretmeli.",
+      "test_ids": [
+        "T03",
+        "T04",
+        "T05"
+      ]
+    },
+    {
+      "id": "UI-02",
+      "title": "Senaryo JSON doğrulaması üst düzey şekille sınırlı",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/depo.tsx",
+          "lines": [
+            115,
+            129
+          ],
+          "sha256": "71a0a71cb6572345242d558b2050b728a3929bfc050b848435379ebf86bee837"
+        }
+      ],
+      "observed": "version, bilinen senaryo, iki object ve bir array kontrolü var; kayıt içi değer/ref/enum sınamaları burada yok.",
+      "risk_inference": "İçe alınan geçersiz state ekranda tutarsız seçim, çözümlenemeyen bağ veya yanıltıcı rapora dönüşebilir.",
+      "recommendation": "Sürümlü tam şema, enum/id/ref kontrolü, boyut sınırları, açık göç kaydı; import önce doğrulama özeti sonra atomik geçiş. Bozuk dosyada mevcut state korunur.",
+      "test_ids": [
+        "T02"
+      ]
+    },
+    {
+      "id": "UI-03",
+      "title": "Uzun diyagramın tek A4 sayfasına sığması okunabilirlik kanıtı değil",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/stiller/genel.scss",
+          "lines": [
+            104,
+            115
+          ],
+          "sha256": "e3879812202a440a29230ea38c2977bd67b9d444aa39f9840c9abf6d458667c7"
+        },
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/diyagram/MermaidGorunum.tsx",
+          "lines": [
+            17,
+            24
+          ],
+          "sha256": "e7281f871b4e2620efaa3dfa7cf624c81d5fca52659c0af3a4cd89403b247f8f"
+        }
+      ],
+      "observed": "figure için break-inside avoid, SVG için max-height 250mm var; render height kaldırılıyor.",
+      "risk_inference": "Uzun grafik okunamayacak kadar küçülebilir veya sınıra taşabilir; CSS tek başına çıktının okunabilirliğini ispatlamaz.",
+      "recommendation": "Özet→alt süreç→istisna katmanları, sayfa profili ve her diyagramın okunabilirlik sınırı; gerektiğinde yatay sayfa, SVG eki ve bölünmüş detay sayfaları.",
+      "test_ids": [
+        "T05",
+        "T06"
+      ]
+    },
+    {
+      "id": "UI-04",
+      "title": "Karar grubunun görsel başlığı ile programatik etiketi ayrı",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/bilesenler/KararPaneli.tsx",
+          "lines": [
+            16,
+            39
+          ],
+          "sha256": "c0bf6d2a538eed1f2b10203b061fba7c7b094a9a47aba3b34bd5c3723042f074"
+        }
+      ],
+      "observed": "Bireysel Radio ve Checkbox label alıyor. Grup başlığı ayrı Text, Radio.Group ve Checkbox.Group için burada label/aria-labelledby bağlantısı görünmüyor.",
+      "risk_inference": "Ekran okuyucuda seçenekler anlaşılır olsa da sorunun/grubun bağlamı eksik sunulabilir; gerçek erişilebilir ağaç testi yapılmadı.",
+      "recommendation": "Her karar bir fieldset/legend veya etiketli grup; hata/açıklama ID bağlantısı; odağı koruyan sonuç duyurusu.",
+      "test_ids": [
+        "T01"
+      ]
+    },
+    {
+      "id": "UI-05",
+      "title": "Tasarım tercihi sessiz yan etkiyle başka kararları değiştirebiliyor",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/depo.tsx",
+          "lines": [
+            80,
+            100
+          ],
+          "sha256": "71a0a71cb6572345242d558b2050b728a3929bfc050b848435379ebf86bee837"
+        }
+      ],
+      "observed": "Faz değişimi kural seçimlerini tekrar atıyor; küme silme aşamaları ilk kalan kümeye taşıyor; ekleme 8 küme ile sınırlı.",
+      "risk_inference": "Kullanıcı işaretlediği senaryoyu koruduğunu sanarken sorumluluk veya kural kararı değişebilir. 8 sınırı teknik arayüz limiti iken mimari limit gibi algılanabilir.",
+      "recommendation": "Görünür etki önizlemesi ve geri al; otomatik öneri ile kullanıcı kararı ayrı. Küme sınırını mimari kapasite kanıtı yapma, veri modelinde organizasyon ve görsel grubu ayır.",
+      "test_ids": [
+        "T07"
+      ]
+    },
+    {
+      "id": "UI-06",
+      "title": "Çizim hatası önceki görselle birlikte kalabilir",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/diyagram/MermaidGorunum.tsx",
+          "lines": [
+            13,
+            29
+          ],
+          "sha256": "e7281f871b4e2620efaa3dfa7cf624c81d5fca52659c0af3a4cd89403b247f8f"
+        }
+      ],
+      "observed": "Başarılı render container içini değiştiriyor; hata yolu önceki SVGyi temizlemiyor veya sürüm damgasıyla stale işaretlemiyor.",
+      "risk_inference": "Yeni seçimde eski diyagram yeni senaryoya aitmiş gibi yorumlanabilir.",
+      "recommendation": "Diyagram revision ve render status taşır; hata anında eski görsel açıkça önceki sürüm olarak işaretlenir, PDF’ye başarı diye giremez.",
+      "test_ids": [
+        "T03"
+      ]
+    },
+    {
+      "id": "UI-07",
+      "title": "Kapsam oranı uygulama doğruluğu veya risk çözümüyle karıştırılabilir",
+      "evidence": [
+        {
+          "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/sayfalar/Rapor.tsx",
+          "lines": [
+            48,
+            65
+          ],
+          "sha256": "87955f7f059ee1e69b3488e61234e6faf37c63ae156a39869f1c3d9bd25f45ef"
+        }
+      ],
+      "observed": "Türetilen kapsanan/toplam oranı Sorun kapsamı olarak renkli rozetle gösteriliyor. Bu görünüm tek başına çalışma zamanı test kanıtı içermiyor.",
+      "risk_inference": "Kural seçilmesi, kontrolün uygulanması ve başarıyla sınanması aynı sonuç sanılabilir.",
+      "recommendation": "Seçili kontrollerin belge kapsamı, uygulanma durumu ve doğrulanmış test kanıtı ayrı gösterilir; bilinmeyen/not_run paydayı veya başarıyı sessizce iyileştirmez.",
+      "test_ids": [
+        "T08"
+      ]
+    }
+  ],
+  "scenario_contract": {
+    "authority": "Şeması doğrulanmış senaryo JSON tek doğruluk kaynağı; tablo, diyagram, gezinme ve PDF aynı normalize snapshotı tüketir.",
+    "fields": [
+      "schema_version",
+      "scenario_id",
+      "revision",
+      "catalog_revision",
+      "source_manifest_digest",
+      "selection_records[{decision_id,value,status,origin,reason,evidence_refs}]",
+      "constraints",
+      "derived_impacts",
+      "unresolved_questions",
+      "view_state",
+      "export_manifest"
+    ],
+    "status_separation": {
+      "selection_status": [
+        "unanswered",
+        "defaulted",
+        "chosen",
+        "not_applicable"
+      ],
+      "verification_status": [
+        "not_run",
+        "failed",
+        "passed",
+        "unknown"
+      ],
+      "note": "Bu iki eksen birbirine dönüşmez; chosen test passed değildir."
+    },
+    "exports": [
+      "Yeniden içe alınabilir JSON",
+      "Snapshot kimliği ve kaynak referanslı PDF",
+      "Gerekirse ilgili görünümün SVG eki"
+    ],
+    "view_layers": [
+      "Amaç ve senaryo seçimi",
+      "Kararlar ve etkileri",
+      "Ana akış ve alt süreçler",
+      "Açık kararlar ve kanıt",
+      "Rapor ve dışa aktarım"
+    ],
+    "controls": {
+      "radio": "Birbirini dışlayan karar; açık bilinmiyor/karar verilmedi seçeneği gerekiyorsa veri modelinde bulunur.",
+      "checkbox": "Birlikte seçilebilen bağımsız yetenekler.",
+      "switch": "Anında etkisi anlaşılır aç/kapat ayarı; kritik mimari onay veya belirsizlik için zorunlu iki değerli switch kullanılmaz."
+    },
+    "navigation": "URL/hash yalnız görünüm ve seçili kayıt kimliğini taşır; state authority olmaz. Ekranda geri/ileri, odak korunması, metinli aşama listesi ve diyagramla eşzamanlı seçili detay bulunur.",
+    "export_readiness": [
+      "snapshot_digest sabit",
+      "beklenen tüm diagram_id için aynı digeste ait render_success",
+      "fontlar ve görseller hazır",
+      "animasyon kapalı veya tamam",
+      "print ölçülerinde yeniden yerleşim tamam",
+      "render/validation hatası yok"
+    ]
+  },
+  "proposed_tests": [
+    {
+      "id": "T01",
+      "title": "Erişilebilir karar akışı",
+      "procedure_and_acceptance": "Yalnız klavye ile senaryo seç, tekli ve çoklu seçimleri değiştir, switch kullan, hata ve sonuç bölgesine git. VoiceOver ile grup sorusu, seçenek, seçili durum ve açıklama duyulmalı; odak çizimle sıfırlanmamalı. 200% zoom ve dar ekran denenmeli.",
+      "status": "not_run"
+    },
+    {
+      "id": "T02",
+      "title": "JSON round-trip ve negatif import",
+      "procedure_and_acceptance": "Kaydet→yeniden yükle aynı normalize digest üretmeli. Eksik/yanlış enum, yabancı ID, null object, döngüsüz ref ihlali, eski sürüm, aşırı uzun etiket/büyük dosya ve bozuk JSON mevcut senaryoyu değiştirmeden açıklamalı hata vermeli. Göç sonucu görünür olmalı.",
+      "status": "not_run"
+    },
+    {
+      "id": "T03",
+      "title": "Yavaş ve bozuk render",
+      "procedure_and_acceptance": "Bir çizimi 9 saniyeden uzun geciktir veya kontrollü render hatası ver. Otomatik/manuel export hazır olmamalı; önceki SVG yeni sürüm diye gösterilmemeli. Hata hangi diyagramı etkilediğini söylemeli.",
+      "status": "not_run"
+    },
+    {
+      "id": "T04",
+      "title": "Senaryo/PDF sürüm tutarlılığı",
+      "procedure_and_acceptance": "Çizimler tamamlanırken seçimi değiştir. Rapor içeriği, karar listesi, SVGler ve indirilen JSON tek snapshot digest taşımalı; eski onSvg tamamlanmaları yeni raporu hazır yapmamalı.",
+      "status": "not_run"
+    },
+    {
+      "id": "T05",
+      "title": "Gerçek PDF çıktı incelemesi",
+      "procedure_and_acceptance": "Chromium tabanlı otomatik page.pdf ile printBackground ve preferCSSPageSize belirlenerek üret; tüm sayfaları görüntüye çevir ve incele, PDF metninde Türkçe etiketleri ve beklenen bölüm/IDleri denetle. Gizli sekmeler rapor DOMunda bulunmalı. Font bekleme, uzun etiket, geniş tablo, notlar ve kenar okları kırpılmamalı.",
+      "status": "not_run"
+    },
+    {
+      "id": "T06",
+      "title": "Offline ve motor karşılaştırması",
+      "procedure_and_acceptance": "Tek HTMLyi ağ tamamen kapalıyken file:// aç; seçim, JSON import/export ve SVG üret çalışmalı, harici istek olmamalı. Mermaid ve koşullu D2 adayını aynı küçük/orta/uzun test senaryolarıyla ölç: dosya boyutu, ilk çizim, seçimden çizime süre, heap, düğüm/kenar bütünlüğü. WASM/worker/font yükü ayrıca izlenir; bu tur koşulmadı.",
+      "status": "not_run"
+    },
+    {
+      "id": "T07",
+      "title": "Karar değişikliğinin anlamı",
+      "procedure_and_acceptance": "Faz değiştir, küme sil, geri al ve yeni küme ekle. Sessiz sorumluluk taşıma/kural sıfırlama olmamalı; etkiler yeni kararların listesinde görünmeli. Önceki kullanıcı seçimi ile varsayılan ayrı korunmalı.",
+      "status": "not_run"
+    },
+    {
+      "id": "T08",
+      "title": "Yanıltıcı tamamlama negatif deneyi",
+      "procedure_and_acceptance": "Tüm kontrolleri seç fakat test kanıtlarını not_run tut. UI riskler çözüldü, fabrika hazır veya yüzde100 doğrulandı dememeli. Aynı ayrım PDF ve JSONda korunmalı.",
+      "status": "not_run"
+    },
+    {
+      "id": "T09",
+      "title": "Safari ve kullanıcı PDF kabulü",
+      "procedure_and_acceptance": "Mac Safari ve Chromium tarayıcı yazdırma önizlemesini ayrı dene; gerçek kaydedilmiş PDFde sayfa, Türkçe font, keskinlik ve linkleri kontrol et. Tagged PDF üretme seçeneği tek başına ekran okuyucu uyumunun geçtiği sayılmaz.",
+      "status": "not_run"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Mantine 8 Radio",
+      "url": "https://v8.mantine.dev/core/radio/",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "v8.3.18 başlığı; input radio, label, Radio.Group, Card ve yalnız görsel Indicator ayrımı."
+    },
+    {
+      "id": "S02",
+      "title": "Tailwind utility classes",
+      "url": "https://tailwindcss.com/docs/styling-with-utility-classes",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "Sunum için utility sınıfları; karar modeli veya uygulama state motoru iddiası yok."
+    },
+    {
+      "id": "S03",
+      "title": "daisyUI introduction",
+      "url": "https://daisyui.com/docs/intro/",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "CSS bileşen sınıfları; Tailwind ile veya kendi layout CSS ile; framework bağımsız."
+    },
+    {
+      "id": "S04",
+      "title": "Mermaid accessibility",
+      "url": "https://mermaid.js.org/config/accessibility",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "accTitle/accDescr ve SVG erişilebilir açıklaması; güncel belge üst sürüm olabilir."
+    },
+    {
+      "id": "S05",
+      "title": "Mermaid security level",
+      "url": "https://mermaid.js.org/config/schema-docs/config-properties-securitylevel.html",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "strict varsayılan; click kapalı, HTML kodlanır; güvenlik gevşetilmeden ayrı UI navigasyonu önerilir."
+    },
+    {
+      "id": "S06",
+      "title": "D2 FAQ",
+      "url": "https://d2lang.com/tour/faq/",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "Tarayıcıda WASM ve D2.js var. Binlerce düğüm test edilmediği açıkça yazıyor. Browser offline tek dosya garantisi vermiyor."
+    },
+    {
+      "id": "S07",
+      "title": "D2 exports",
+      "url": "https://www.d2lang.com/tour/exports/",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "SVG varsayılan; görüntüleyiciler font/CSS farklı davranabilir; PDF PNG çıktılarının PDF sayfalarına konmasıyla oluşur."
+    },
+    {
+      "id": "S08",
+      "title": "ECharts Canvas versus SVG",
+      "url": "https://echarts.apache.org/handbook/en/best-practices/canvas-vs-svg/",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "SVG yakınlaştırmada keskin; yüksek eleman sayısında Canvas düşünülebilir, eşik evrensel garanti değil."
+    },
+    {
+      "id": "S09",
+      "title": "MDN printing",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "print media, @page ve beforeprint/afterprint olayları."
+    },
+    {
+      "id": "S10",
+      "title": "Playwright Page PDF",
+      "url": "https://playwright.dev/docs/api/class-page#page-pdf",
+      "accessed_at": "2026-09-27",
+      "type": "primary_documentation",
+      "supported_claim": "print CSS, preferCSSPageSize, printBackground, tagged/outline seçenekleri; test yaklaşımı için API kanıtı."
+    }
+  ],
+  "gaps": [
+    "D2.js paketinin WASM/worker gömme ve CSP davranışı kaynak kod düzeyinde bu dar turda incelenmedi; FAQ browser desteğini doğrular, tek dosya offlineı doğrulamaz.",
+    "Uygulama gerçek tarayıcıda çalıştırılmadı; bulgular statik gözlem ve ayrı işaretli çıkarımdır.",
+    "PDF üretilmedi; clipping veya stale render senaryoları yeniden üretilmedi.",
+    "Mantine v8 resmi belge tam mevcut 8.3.18 ile örtüşüyor; Mermaid güncel doküman sayfası mevcut yerel 11.17.2den üst sürümü gösteriyor, ayrıntıların yerel sürüm uyumluluğu uygulama testinde sabitlenmeli.",
+    "Yığınların performans/HTML boyutu karşılaştırmalı ölçülmedi; göç önerilmemesi mevcut ihtiyaç ve iş yükü değerlendirmesidir."
+  ]
+}

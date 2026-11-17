@@ -1,0 +1,670 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-67",
+    "ad": "Biçimsel belirtim, model denetimi ve ispat doğrulama",
+    "grup": "Doğrulama ve kalite",
+    "cozdugu_sorun": "Kritik bileşenlerde belirtimin yazılması, model denetimi, ajan ispatının bağımsız denetleyicide doğrulanması ve çalışma zamanı değişmez izlemenin yapılamaması.",
+    "ne_zaman_zorunlu": "Kademe 0 kritik algoritma veya dağıtık koordinasyon içeren ürünlerde."
+  },
+  "arac_sayisi": 39,
+  "tur_dagilimi": {
+    "acik-kaynak": 32,
+    "kutuphane": 4,
+    "ticari-saas": 2,
+    "model": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-1014",
+      "ad": "Kani",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://model-checking.github.io/kani",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust için bit düzeyinde model denetleyici; ispat koşum (harness) fonksiyonlarıyla panik, taşma ve kullanıcı doğrulamalarının tüm girdiler için geçerliliğini kanıtlar.",
+      "sinirlar": "Döngü/sınır açma nedeniyle büyük kodda ölçeklenme sınırlı; uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-2312",
+      "ad": "Frama-C",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://frama-c.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "C kodu için soyut yorumlama (Eva) ve ACSL sözleşmeleriyle tümdengelimli doğrulama (WP) sunan biçimsel analiz platformu; kanıtlanabilir değişmez ve sözleşme tabanlı oracle sağlar.",
+      "sinirlar": "Yalnız C; ACSL sözleşmesi yazmak uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-009",
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-2788",
+      "ad": "Alloy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://alloytools.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapıları ve davranışı ilişkisel mantıkla tanımlayıp SAT tabanlı sınırlı kapsamlı denetimle karşı örnek bulan hafif biçimsel modelleme aracı; durum makineleri ve yetki modellerinde değişmezleri doğrulamaya yarar.",
+      "sinirlar": "Sınırlı kapsam denetimi kanıt değildir; modelleme eğitimi gerekir.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-011",
+        "N-K05-030",
+        "N-K13-001"
+      ]
+    },
+    {
+      "id": "AR-2789",
+      "ad": "TLA+ araçları (TLC, Apalache)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tlaplus/tlaplus",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eşzamanlı ve dağıtık algoritmaları TLA+ ile tanımlayıp TLC model denetleyicisiyle güvenlik/canlılık değişmezlerini doğrular; iş akışı durum sahipliği, idempotency ve yarış koşulu tasarımlarında kullanılır.",
+      "sinirlar": "Öğrenme eğrisi dik; kod ile model arasındaki uyum ayrıca sağlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-030",
+        "N-K13-001",
+        "N-K13-004",
+        "N-K13-005"
+      ]
+    },
+    {
+      "id": "AR-2792",
+      "ad": "AutoVerus (verus-proof-synthesis)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/verus-proof-synthesis",
+      "olgunluk": "erken",
+      "ne_saglar": "Rust için Verus doğrulayıcısına yönelik kanıt ve değişmezleri LLM ajanlarıyla (üretim, iyileştirme, hata tabanlı onarım) otomatik sentezleyen sistem ve Verus-Bench.",
+      "sinirlar": "Verus/Rust'a özgü araştırma kodu.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-3192",
+      "ad": "Loom",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tokio-rs/loom",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eşzamanlı Rust kodunda olası iş parçacığı serpiştirmelerini sistematik olarak deneyerek yarış koşullarını deterministik test eden araç.",
+      "sinirlar": "Durum uzayı büyür; yalnız küçük eşzamanlı birimler için pratik.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-013",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-3193",
+      "ad": "Verus",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/verus-lang/verus",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust kodu için ön/son koşul ve değişmezlerin SMT çözücüyle biçimsel olarak doğrulandığı doğrulama aracı.",
+      "sinirlar": "Uzmanlık gerektirir; Rust'ın tüm özelliklerini desteklemez.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4262",
+      "ad": "Jepsen",
+      "tur": "acik-kaynak",
+      "lisans": "EPL-1.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://jepsen.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık sistemlere ağ bölünmesi, süreç çökmesi, saat kayması gibi arızalar enjekte ederken istemci işlemlerinin geçmişini kaydeder ve doğrusallaştırılabilirlik ile işlem yalıtımı gibi tutarlılık özelliklerini denetleyicilerle doğrular; yayımlanmış analizleri ders kaynağıdır.",
+      "sinirlar": "Kurulum ve test yazımı Clojure bilgisi ister; ürün ekibi için öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-4263",
+      "ad": "Elle",
+      "tur": "kutuphane",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/jepsen-io/elle",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşlem geçmişlerinden bağımlılık grafiği kurup döngü tespitiyle kara kutu biçiminde işlem yalıtımı anormalliklerini (ör. kayıp güncelleme, G2) bulur; çift işlem ve sıralama gibi kritik değişmezlerin kanıta dayalı denetimini sağlar.",
+      "sinirlar": "Belirli geçmiş biçimleri ister; üretim trafiğinde sürekli izleyici olarak değil test geçmişlerinde kullanılır.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4264",
+      "ad": "Antithesis",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://antithesis.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Konteynerlerde çalışan sistemi deterministik hipervizörde çalıştırıp ağ, zamanlama ve arıza enjeksiyonunu otonom keşifle uygular; yazılım içine gömülen her zaman/bazen doğrulamalarıyla değişmez ihlallerini yeniden üretilebilir biçimde bulur.",
+      "sinirlar": "Ticari ve bulutta çalışır; kodun ve imajların sağlayıcıya gönderilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-4265",
+      "ad": "Shuttle",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/awslabs/shuttle",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eşzamanlı Rust kodunu kontrollü zamanlayıcıyla rastgele ve PCT gibi stratejilerle çalıştırarak yarış ve kilitlenme hatalarını yeniden üretilebilir tohumlarla bulur.",
+      "sinirlar": "Yalnız Rust; tam kapsam garantisi vermez, olasılıksal keşif yapar.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4355",
+      "ad": "Quint",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://quint.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TLA+ zamansal mantığına dayanan, programcı dostu sözdizimli yürütülebilir belirtim dili; tip denetimi, REPL, rastgele simülasyon ve Apalache/TLC ile model denetimi sağlayarak durum makineleri ve değişmezlerin doğrulanmasına olanak tanır.",
+      "sinirlar": "Model denetimi durum uzayıyla sınırlı; kod ile belirtim arasındaki uyum ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4356",
+      "ad": "FizzBee",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://fizzbee.io/",
+      "olgunluk": "erken",
+      "ne_saglar": "Python benzeri (Starlark) sözdizimiyle dağıtık sistem tasarımlarını modelleyip güvenlik ve canlılık özelliklerini model denetimiyle doğrulayan biçimsel yöntem dili; olasılıksal performans modelleme de sunar.",
+      "sinirlar": "Genç proje; büyük modellerde durum patlaması.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4357",
+      "ad": "P dili ve PObserve",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://p-org.github.io/P/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık protokolleri olay güdümlü durum makineleri olarak modelleyip sistematik test (model denetimi benzeri keşif) ile güvenlik ve canlılık özelliklerini doğrular; PObserve üretim ve test loglarını P belirtimlerine karşı denetleyerek belirtimin çalışma zamanı izleyicisine dönüşmesini sağlar.",
+      "sinirlar": "Uygulama kodu ile P modeli ayrı; PObserve için log ayrıştırıcı yazılması gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4358",
+      "ad": "Dafny",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://dafny.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ön/son koşul, döngü değişmezi ve lemmalarla yazılan doğrulama odaklı programlama dili; SMT tabanlı otomatik doğrulayıcıyla ispatları derleme sırasında denetler, doğrulanmış kodu C#, Java, Go, Python ve JavaScript'e derler.",
+      "sinirlar": "SMT zaman aşımı ve kararsız doğrulama (brittleness) yaşanabilir; ekip yetkinliği gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4359",
+      "ad": "Lean 4",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://lean-lang.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağımlı tip kuramına dayalı etkileşimli teorem kanıtlayıcı ve programlama dili; küçük güvenilir çekirdeği ispatları denetler; yapay zekâ ispat üreticilerinin hedef dili olduğundan ajan ispatlarının makinece denetlenmesine uygundur.",
+      "sinirlar": "Yazılım doğrulaması için model/çeviri katmanı gerekir; yetkinlik eşiği yüksek.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4360",
+      "ad": "Comparator (Lean ispat hakemi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/leanprover/comparator",
+      "olgunluk": "erken",
+      "ne_saglar": "Güvenilmeyen tarafın (ör. yapay zekâ ajanı) sunduğu Lean ispatını, sabit tutulan teorem ifadesi ve izinli aksiyom listesiyle kum havuzunda yeniden derleyip Lean çekirdeği (isteğe bağlı nanoda ikinci çekirdeği) ile denetler; ispatın hedef teoremi değiştirmeden verildiğini doğrular.",
+      "sinirlar": "Genç araç; landrun kum havuzu ve lean4export gerektirir, belirtimin anlamlı olup olmadığını denetlemez.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4361",
+      "ad": "Aristotle (Harmonic)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://aristotle.harmonic.fun/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Lean 4 ile makinece doğrulanmış ispat üreten yapay zekâ ajanı; sorry içeren Lean dosyalarını tamamlama ve yazılım doğruluğu ispatları için API ve Python SDK (aristotlelib) sunar.",
+      "sinirlar": "Ticari SaaS; üretilen ispat bağımsız Lean çekirdeğinde (ör. Comparator) yeniden denetlenmeli, belirtimin doğruluğu insan onayı ister.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4362",
+      "ad": "DeepSeek-Prover-V2",
+      "tur": "model",
+      "lisans": "DeepSeek model lisansı",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/deepseek-ai/DeepSeek-Prover-V2",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Lean 4 ispatları üreten açık ağırlıklı dil modeli ailesi (7B ve 671B); kurum içinde barındırılarak ispat taslağı üretimi için kullanılabilir, çıktılar Lean çekirdeğinde doğrulanır.",
+      "sinirlar": "Matematik yarışma verisine odaklı; yazılım doğrulama görevlerinde başarımı sınırlı ve büyük sürüm yüksek donanım ister.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4363",
+      "ad": "Rocq Prover (eski adıyla Coq)",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://rocq-prover.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Endüktif yapılar kalkülüsüne dayalı etkileşimli ispat yardımcısı; doğrulanmış derleyici ve kriptografi gibi projelerde kullanılır, ispatlar küçük çekirdekte denetlenir ve koddan çıkarım (extraction) desteklenir.",
+      "sinirlar": "Yüksek yetkinlik eşiği; ürün kodunun doğrudan doğrulanması için çeviri araçları gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4364",
+      "ad": "Isabelle",
+      "tur": "acik-kaynak",
+      "lisans": "BSD tarzı",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://isabelle.in.tum.de/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüksek mertebe mantıkta (Isabelle/HOL) etkileşimli teorem kanıtlayıcı; Sledgehammer ile dış otomatik kanıtlayıcılardan ispat bulup çekirdekte yeniden denetler; seL4 gibi büyük doğrulama projelerinde kullanılmıştır.",
+      "sinirlar": "Öğrenme eğrisi yüksek; ürün koduna bağlama ek araç ister.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4365",
+      "ad": "Prusti",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/prusti/prusti",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust kodunu Viper doğrulama altyapısı üzerinden ön/son koşul ve değişmezlere göre statik doğrular; panik yokluğu ve taşma yokluğu gibi özellikleri ispatlar.",
+      "sinirlar": "Rust dil özelliklerinin tamamını desteklemez; araştırma kökenli.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4366",
+      "ad": "Creusot",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/creusot-rs/creusot",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust programlarını Why3 üzerinden tümdengelimli doğrulamayla ispatlayan araç; sözleşme notasyonuyla ön/son koşul ve değişmez yazılır, SMT çözücülerle denetlenir.",
+      "sinirlar": "Araştırma olgunluğunda; güvensiz (unsafe) kod desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4367",
+      "ad": "CBMC",
+      "tur": "acik-kaynak",
+      "lisans": "BSD tarzı (4 maddeli)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.cprover.org/cbmc/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C/C++ programları için sınırlı model denetleyici: bellek güvenliği, dizi sınırı, taşma ve kullanıcı doğrulamalarını belirli döngü açılım sınırına kadar ispatlar veya karşı örnek verir; CI'da koşturulabilir.",
+      "sinirlar": "Sınırlı açılım nedeniyle tam ispat için döngü sözleşmeleri gerekir; büyük kodda ölçek sorunu.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4368",
+      "ad": "ESBMC",
+      "tur": "acik-kaynak",
+      "lisans": "karma (COPYING dosyasına bakınız)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://esbmc.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SMT tabanlı bağlam sınırlı model denetleyici; C, C++ ve bazı diğer diller için bellek güvenliği, taşma ve eşzamanlılık hatalarını doğrular ya da karşı örnek üretir.",
+      "sinirlar": "Lisans durumu bağlı çözücülere göre karmaşık; ölçek sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4369",
+      "ad": "Why3",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://why3.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tümdengelimli program doğrulama platformu: WhyML ile yazılan program ve belirtimlerden doğrulama koşulları üretir, birden çok SMT çözücüsü ve etkileşimli kanıtlayıcıya dağıtır; Creusot ve SPARK gibi araçların arka ucudur.",
+      "sinirlar": "Doğrudan ürün diline değil ara dile dayanır.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4370",
+      "ad": "F*",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://fstar-lang.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağımlı ve iyileştirme tipleriyle ispat odaklı programlama dili; doğrulanmış kodu C (KaRaMeL), OCaml ve F#'a çıkarır; HACL* gibi üretimde kullanılan doğrulanmış kriptografi kütüphanelerinin temelidir.",
+      "sinirlar": "Uzmanlık eşiği yüksek; genel iş uygulamaları için ağır.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4371",
+      "ad": "Liquid Haskell",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ucsd-progsys/liquidhaskell",
+      "olgunluk": "olgun",
+      "ne_saglar": "Haskell koduna iyileştirme tipleri ekleyerek değişmezleri ve ön/son koşulları SMT çözücüyle derleme zamanında doğrular; GHC eklentisi olarak çalışır.",
+      "sinirlar": "Yalnız Haskell.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4372",
+      "ad": "Stateright",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/stateright/stateright",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust ile yazılan aktör tabanlı dağıtık sistemler için gömülü model denetleyici; aynı kodun hem model denetimi hem gerçek çalıştırılması, doğrusallaştırılabilirlik denetleyicisi ve durum uzayı gezgini sağlar.",
+      "sinirlar": "Yalnız Rust ve aktör modeli; 2025'ten beri güncelleme yavaş.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4373",
+      "ad": "SPIN",
+      "tur": "acik-kaynak",
+      "lisans": "BSD tarzı",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://spinroot.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Promela ile modellenen eşzamanlı protokolleri açık durum model denetimiyle LTL özelliklerine karşı doğrulayan klasik model denetleyici.",
+      "sinirlar": "Model ile gerçek kod ayrı; modern dil entegrasyonu yok.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4374",
+      "ad": "mCRL2",
+      "tur": "acik-kaynak",
+      "lisans": "BSL-1.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.mcrl2.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Süreç cebiri tabanlı modelleme dili ve araç seti; eşzamanlı sistemlerin davranışını durum uzayı üretimi, mu-kalkülüs özellik denetimi ve denklik denetimiyle doğrular.",
+      "sinirlar": "Akademik araç; öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4375",
+      "ad": "Z3",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Z3Prover/z3",
+      "olgunluk": "olgun",
+      "ne_saglar": "SMT çözücü; Dafny, Kani, Verus gibi doğrulayıcıların ve yetkilendirme politikası analizlerinin arka ucudur; Python, Java, .NET ve diğer dillerden doğrudan kısıt çözümü sağlar.",
+      "sinirlar": "Tek başına belirtim aracı değil; karmaşık niceleyicilerde zaman aşımı.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4376",
+      "ad": "cvc5",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cvc5.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SMT çözücü; sonuçlarına ait ispat sertifikalarını bağımsız denetleyicilerde doğrulanabilir biçimlerde üretebilir; böylece çözücü sonucunun ikinci bir denetleyicide yeniden doğrulanmasına olanak tanır.",
+      "sinirlar": "İspat üretimi performans maliyeti getirir; tüm teoriler için ispat desteği eşit değil.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4377",
+      "ad": "Aeneas",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/AeneasVerif/aeneas",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Güvenli Rust kodunu işlevsel modele çevirip Lean (ve diğer kanıtlayıcılar) içinde doğrulamaya olanak tanıyan araç zinciri; kritik algoritmaların ispatını ürün koduna bağlar.",
+      "sinirlar": "Rust alt kümesiyle sınırlı; araştırma olgunluğunda.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4378",
+      "ad": "hax",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cryspen/hax",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust kodunu F*, Rocq ve Lean gibi doğrulama arka uçlarına çeviren doğrulama araç zinciri; kriptografik ve protokol kodunun doğruluk ve güvenlik ispatlarında kullanılır.",
+      "sinirlar": "Rust alt kümesi; arka uçlarda uzmanlık gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4379",
+      "ad": "Gobra",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/viperproject/gobra",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go programları için Viper tabanlı modüler doğrulayıcı; ön/son koşul, değişmez ve eşzamanlılık özelliklerini (ayırma mantığıyla) doğrular.",
+      "sinirlar": "Go dil özelliklerinin tamamını desteklemez; araştırma kökenli.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4380",
+      "ad": "VeriFast",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/verifast/verifast",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C, Rust ve Java programlarını ayırma mantığı temelli modüler doğrulamayla bellek güvenliği ve işlevsel doğruluk açısından denetler; Rust standart kütüphanesi doğrulama çalışmalarında kullanılır.",
+      "sinirlar": "Araştırma prototipi; ek açıklama yükü yüksek.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4381",
+      "ad": "Copilot (NASA çalışma zamanı doğrulama dili)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://copilot-language.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Akış tabanlı çalışma zamanı doğrulama dili; Haskell'e gömülü belirtimlerden sert gerçek zamanlı, sabit bellekli C izleyicileri üretir; kritik değişmezlerin üretimde sürekli izlenmesi için kullanılabilir.",
+      "sinirlar": "Gömülü ve gerçek zamanlı sistemlere odaklı; iş uygulamalarında kullanım için uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4382",
+      "ad": "SAW (Software Analysis Workbench)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/GaloisInc/saw-script",
+      "olgunluk": "olgun",
+      "ne_saglar": "C/C++ (LLVM), Java (JVM) ve Rust (MIR) kodunun Cryptol belirtimlerine eşdeğer olduğunu sembolik yürütme ve SMT ile ispatlar; kriptografi ve kritik algoritma doğrulamasında kullanılır.",
+      "sinirlar": "Uzmanlık gerektirir; genel iş mantığı için ağır.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    }
+  ]
+}

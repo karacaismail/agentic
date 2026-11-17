@@ -1,0 +1,125 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-17",
+    "ad": "Güncel dış bilgi ve sürüme özgü doküman erişimi (kaynak hiyerarşisiyle)",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-127",
+      "yetenek_sinifi": "Y-17",
+      "kalip": "Kullanımdan kalkmış API önerisi",
+      "aciklama": "Yedi LLM, sekiz Python kütüphanesi ve 28.125 tamamlama istemiyle yapılan çalışma, LLM tabanlı kod tamamlamada kullanımdan kalkmış API kullanımının yaygın olduğunu ve kütüphane evriminin modelleri geride bıraktığını gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2406.09834"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan, kurumun kullandığı çerçeve sürümünde kaldırılmış API'lerle kod yazar; derleme geçse bile uyarı ve güvenlik yamaları kaçırılır.",
+        "Sürüme özgü doküman erişimi yoksa ajan eğitim verisindeki eski örnekleri 'doğru' kabul eder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-004",
+        "N-K14-003",
+        "N-K01-008"
+      ],
+      "ornek_araclar": [
+        "Context7",
+        "DevDocs MCP",
+        "Web arama araçları",
+        "Kütüphane dokümantasyon sunucuları"
+      ],
+      "erken_sinyal": "Statik analizde 'deprecated' uyarılarının ajan kaynaklı değişikliklerde artması.",
+      "azaltma": "Bağımlılık kilit dosyasındaki sürüme göre doküman getirme, deprecation uyarılarını kalite kapısında hata sayma."
+    },
+    {
+      "id": "RK-128",
+      "yetenek_sinifi": "Y-17",
+      "kalip": "Web ve doküman getirmede dolaylı istem enjeksiyonu",
+      "aciklama": "Greshake ve arkadaşlarının çalışması, LLM'lerin getirdiği web içeriğine gömülü talimatlarla uygulamaların uzaktan ele geçirilebildiğini gösterdi; OWASP LLM01:2025 dolaylı istem enjeksiyonunu birinci risk olarak listeler.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2302.12173",
+        "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Güncel doküman için web'e çıkan ajan, arama sonucundaki bir sayfadan aldığı talimatla bağımlılık ekleyebilir veya sırları dış adrese gönderebilir.",
+        "Kaynak hiyerarşisi yoksa rastgele blog içeriği resmî dokümanla aynı güvenle kullanılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-003",
+        "N-K18-005",
+        "N-K14-005"
+      ],
+      "ornek_araclar": [
+        "Web arama MCP'leri",
+        "Context7",
+        "Perplexity API",
+        "Tavily"
+      ],
+      "erken_sinyal": "Getirilen içerikte talimat kalıpları; getirmeden sonra ajan eylemlerinde görev dışı değişim.",
+      "azaltma": "Resmî kaynak izin listesi, getirilen içeriğin güvenilmeyen olarak etiketlenmesi, web okuyan ajanda yazma ve ağ yetkisinin kısıtlanması."
+    },
+    {
+      "id": "RK-129",
+      "yetenek_sinifi": "Y-17",
+      "kalip": "İzinli alan adları üzerinden veri sızdırma",
+      "aciklama": "Ajanların web getirme araçlarında önceden onaylı alan adları sızdırma kanalı olabilir: Claude Code'da önceden onaylı HuggingFace alanı üzerinden bant dışı veri sızdırma (CVE-2026-54316), alan adı doğrulama atlaması (CVE-2026-24052) ve izin verici varsayılan izin listesiyle dosya okuyup ağdan sızdırma (CVE-2025-55284) kaydedildi.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-fg94-h982-f3mm",
+        "https://github.com/advisories/GHSA-vhw5-3g5m-8ggf",
+        "https://github.com/advisories/GHSA-x5gv-jw7f-j6xj"
+      ],
+      "yasatacagi_sorunlar": [
+        "Doküman erişimi için açılan 'güvenilir' alan adları, kod ve sırların kullanıcı içerik barındıran bu platformlara yazılmasına izin verir.",
+        "İzin listesi alan adı düzeyinde olduğunda yol ve yöntem kısıtı olmadığı için yazma da mümkündür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-003",
+        "N-K18-005",
+        "N-K15-002"
+      ],
+      "ornek_araclar": [
+        "Claude Code WebFetch",
+        "Codex web erişimi",
+        "Cursor web araçları"
+      ],
+      "erken_sinyal": "Web araçlarında GET dışı istekler veya uzun sorgu parametreleri; kullanıcı içerik barındıran alanlara çıkış.",
+      "azaltma": "Yalnız okuma amaçlı vekil üzerinden getirme, yol düzeyinde izin listesi, içerik barındırma platformlarının varsayılan izin listesinden çıkarılması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 23,
+    "dusuk": 28,
+    "yuksek": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-07": 2,
+    "RT-10": 2,
+    "RT-11": 2,
+    "RT-08": 2,
+    "RT-12": 2,
+    "RT-02": 1,
+    "RT-03": 1,
+    "RT-04": 1,
+    "RT-15": 1
+  }
+}

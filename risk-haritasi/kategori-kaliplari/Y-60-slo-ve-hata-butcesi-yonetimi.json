@@ -1,0 +1,154 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-60",
+    "ad": "SLO ve hata bütçesi yönetimi",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-60",
+      "kalip": "SLO temelli kanaryanın yapılandırma, içerik ve veri değişikliklerini kapsamaması",
+      "aciklama": "CrowdStrike'ın Temmuz 2024 kök neden analizi, hatalı 'Rapid Response Content' güncellemesinin yazılım güncellemeleriyle aynı test ve aşamalı dağıtımdan geçmeden tüm sensörlere gittiğini gösterdi. Google Cloud'un 12 Haziran 2025 olayında özellik bayrağıyla korunmayan kodu tetikleyen boş alanlı politika verisi saniyeler içinde küresel olarak çoğaltıldı.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-16"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.crowdstrike.com/wp-content/uploads/2024/08/Channel-File-291-Incident-Root-Cause-Analysis-08.06.2024.pdf",
+        "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+      ],
+      "yasatacagi_sorunlar": [
+        "SLO ve kanarya kapısı yalnız kod dağıtımına bağlanırsa ajanın değiştirdiği yapılandırma, özellik bayrağı veya politika verisi kapıyı atlayıp bütün üretime yayılır.",
+        "Bütçe sağlıklı görünürken tek bir veri düzlemi değişikliği bütçenin tamamını dakikalar içinde tüketir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-010",
+        "N-K33-004",
+        "N-K33-005",
+        "N-K33-003"
+      ],
+      "ornek_araclar": [
+        "Argo Rollouts",
+        "Flagger",
+        "Kayenta",
+        "LaunchDarkly",
+        "Nobl9"
+      ],
+      "erken_sinyal": "Kanarya kapısından geçmeyen değişiklik türlerinin (yapılandırma, bayrak, veri) oranı.",
+      "azaltma": "Kod, yapılandırma, bayrak ve veri değişikliklerini aynı aşamalı yayın ve SLO kapısına bağlamak; küresel çoğaltmayı da aşamalandırmak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "CrowdStrike RCA, şablon örneklerinin aşamalı dağıtılmadığını ve bunun düzeltme olarak eklendiğini gösteriyor. Google Cloud raporu, özellik bayrağıyla korunmayan koda boş alanlı politika verisinin saniyeler içinde küresel çoğaltıldığını doğruluyor.",
+        "kaynak": [
+          "https://www.crowdstrike.com/wp-content/uploads/2024/08/Channel-File-291-Incident-Root-Cause-Analysis-08.06.2024.pdf",
+          "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+        ]
+      },
+      "id": "RK-041"
+    },
+    {
+      "yetenek_sinifi": "Y-60",
+      "kalip": "Bağımlılık zincirinde SLO hedeflerinin matematiksel olarak tutarsız olması",
+      "aciklama": "Google'ın 'The Calculus of Service Availability' makalesi (2017), bir hizmetin kritik bağımlılıklarının ortak erişilebilirliğinden daha erişilebilir olamayacağını ve kritik bağımlılıkların hizmetten bir '9' fazla erişilebilirlik sunması gerektiğini belirtir.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-12"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://research.google/pubs/the-calculus-of-service-availability/",
+        "https://queue.acm.org/detail.cfm?id=3096459"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler SLO'larını birbirinden bağımsız belirler; %99,9 hedefli ürün hizmeti yine %99,9 hedefli üç iç hizmete seri bağlıysa hedef tutmaz, bütçe sürekli tükenir ve ajan otonomisi gereksiz yere kısılır.",
+        "Program düzeyindeki hız–istikrar kararları yanlış bütçe verisine dayanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-014",
+        "N-K33-002",
+        "N-K33-016",
+        "N-K33-004"
+      ],
+      "ornek_araclar": [
+        "Nobl9",
+        "OpenSLO",
+        "Sloth",
+        "Datadog SLOs"
+      ],
+      "erken_sinyal": "Bağımlılıklardan hesaplanan bileşik erişilebilirliğin ürün SLO'sunun altında kalması; bütçe tüketiminde bağımlılık payı.",
+      "azaltma": "Bağımlılık SLO bileşimini katalogdan otomatik hesaplamak; iç hizmet sözleşmelerinde 'ek 9' kuralı ya da önbellek ve tamponla ayrıştırma.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Treynor ve ark., ACM Queue 2017: bir hizmet kritik bağımlılıklarının kesişiminden daha erişilebilir olamaz; 'fazladan 9' kuralı. ACM sayfası 403 verdi, içerik arama ve Google Research kaydıyla doğrulandı.",
+        "kaynak": [
+          "https://research.google/pubs/the-calculus-of-service-availability/",
+          "https://queue.acm.org/detail.cfm?id=3096459",
+          "https://sre.google/static/pdf/calculus_of.pdf"
+        ]
+      },
+      "id": "RK-042"
+    },
+    {
+      "yetenek_sinifi": "Y-60",
+      "kalip": "Bütçe durumu ile otonomi bağının güvenlik yamasını durdurması veya istisna etiketiyle delinmesi",
+      "aciklama": "Google SRE çalışma kitabındaki örnek hata bütçesi politikası, bütçe aşıldığında P0 sorunları ve güvenlik düzeltmeleri dışındaki tüm değişikliklerin durdurulmasını öngörür. Bu istisna otomatik politikaya doğru kodlanmazsa donma güvenlik yamasını da bloklar; gevşek kodlanırsa istisna etiketi kaçış yoluna döner (çıkarım).",
+      "risk_turleri": [
+        "RT-16",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://sre.google/workbook/error-budget-policy/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bütçe durumu ajan otonomisine bağlandığında otomatik politika acil güvenlik yamasını durdurur ya da ajan değişiklikleri 'güvenlik düzeltmesi' etiketiyle dondurmayı aşar.",
+        "Bütçe dolu olduğunda otonominin otomatik artması riskli değişikliklerin yığılmasına yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-003",
+        "N-K33-004",
+        "N-K33-016"
+      ],
+      "ornek_araclar": [
+        "Open Policy Agent",
+        "Nobl9"
+      ],
+      "erken_sinyal": "Donma dönemlerinde istisna etiketiyle geçen değişiklik sayısı; bütçe dolu dönemlerde değişiklik hacminde sıçrama.",
+      "azaltma": "İstisnaları insan onaylı ve kayıtlı yapmak; otonomi artışını yalnız bütçe durumuna değil ayrıca ölçülen başarıya bağlamak; bütçe–otonomi eşlemesine gecikme payı (histerezis) koymak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "SRE çalışma kitabındaki örnek politika, bütçe aşıldığında P0 sorunları ve güvenlik düzeltmeleri dışındaki tüm değişikliklerin durdurulacağını söylüyor. Politikaya kodlama riski kayıtta belirtildiği gibi bir çıkarım.",
+        "kaynak": [
+          "https://sre.google/workbook/error-budget-policy/"
+        ]
+      },
+      "id": "RK-043"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 12,
+    "orta": 7,
+    "yuksek": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 4,
+    "RT-07": 4,
+    "RT-14": 4,
+    "RT-01": 3,
+    "RT-11": 2,
+    "RT-02": 2,
+    "RT-12": 2,
+    "RT-06": 1,
+    "RT-03": 1,
+    "RT-05": 1,
+    "RT-13": 1
+  }
+}

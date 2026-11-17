@@ -1,0 +1,293 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-49",
+    "ad": "Devir sözleşmesi ve devir paketi şeması",
+    "grup": "İnsan–ajan iş birliği",
+    "cozdugu_sorun": "İnsan↔ajan ve ajan↔ajan devirlerinde bağlam, varsayım, belirsizlik ve taahhütlerin kaybolması.",
+    "ne_zaman_zorunlu": "Birden fazla rol veya ajan ve insan bekleme durumu olduğunda (ilk günden)."
+  },
+  "arac_sayisi": 14,
+  "tur_dagilimi": {
+    "cerceve": 2,
+    "acik-kaynak": 6,
+    "protokol-standart": 6
+  },
+  "araclar": [
+    {
+      "id": "AR-0031",
+      "ad": "OpenAI Agents SDK",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://openai.github.io/openai-agents-python/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Agent + Runner soyutlamasıyla araç döngüsü, ajanlar arası devir (handoff), ajanı araç olarak kullanma, girdi/çıktı korumaları (guardrails), oturum belleği, izleme ve Pydantic/Zod tipli çıktı sağlar.",
+      "sinirlar": "Varsayılan izleme OpenAI arka ucuna gönderilir, kapatılması ya da yönlendirilmesi gerekir; iki kütüphaneyi birden standart yapmamak önerilir (kaynak). Varsayılan olarak OpenAI Responses API'ye göre tasarlanmıştır (başka modeller adaptörle); dayanıklı iş akışı (kesintiden devam) için Temporal gibi harici motor gerekir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K04-006",
+        "N-K05-006",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-006",
+        "N-K10-008",
+        "N-K12-001",
+        "N-K13-002",
+        "N-K18-006",
+        "N-K19-001",
+        "N-K27-004",
+        "N-K27-005",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-0481",
+      "ad": "Beads",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://beads.gascity.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için git ile saklanan, bağımlılık farkındalıklı hafif iş/issue defteri; ajanların oturumlar arası iş durumunu ve hazır işleri sorgulamasını sağlar.",
+      "sinirlar": "Kurumsal iş takip sisteminin yerini tutmaz; durum sahipliği orkestrasyonla çakışabilir.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K10-009",
+        "N-K14-006",
+        "N-K27-006"
+      ]
+    },
+    {
+      "id": "AR-0503",
+      "ad": "A2A (Agent2Agent) Protocol",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://a2a-protocol.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı çerçeve ve kurumlardaki ajanların Agent Card ile yetenek keşfi, görev (task) yaşam döngüsü, akış ve asenkron bildirimle birbirine iş ve sonuç aktarmasını sağlayan açık protokol; IBM ACP bu projeye katıldı.",
+      "sinirlar": "Kimlik/yetki ve güven modeli uygulayıcıya kalır; sürüm evrimi sürüyor.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K10-003",
+        "N-K12-006",
+        "N-K13-003",
+        "N-K27-004",
+        "N-K27-005"
+      ]
+    },
+    {
+      "id": "AR-2810",
+      "ad": "Entire CLI",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://entire.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Git akışına kancalanarak ajan oturumlarını (istem/yanıt, dokunulan dosyalar) commit'lerle ilişkili ve aranabilir biçimde kaydeder; ajan saptığında bilinen iyi noktaya dönmeyi sağlar ve ajan bağlamını dal geçmişinin dışında tutar.",
+      "sinirlar": "Kayıtlar istem içeriği taşıdığı için sır/kişisel veri maskelemesi ve saklama politikası ayrıca kurulmalıdır.",
+      "ihtiyaclar": [
+        "N-K17-008",
+        "N-K19-001",
+        "N-K19-005",
+        "N-K19-006",
+        "N-K22-003",
+        "N-K27-006",
+        "N-K28-004",
+        "N-K29-009"
+      ]
+    },
+    {
+      "id": "AR-2945",
+      "ad": "CHAP (Collaborative Human-Agent Protocol)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://chap.brightbeam.works/",
+      "olgunluk": "erken",
+      "ne_saglar": "Onay, geçersiz kılma, devir ve eskalasyonları MCP ve A2A üzerinde ortak, denetlenebilir bir biçime sokan açık protokol; insanın düzenlemesi diff, gerekçe ve etiketle yapılandırılmış kayıt olur.",
+      "sinirlar": "Mayıs 2026'da çıktı; benimsenme düşük.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K17-002",
+        "N-K19-006",
+        "N-K27-004",
+        "N-K27-007",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-4042",
+      "ad": "Cloudflare Agents SDK",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://developers.cloudflare.com/agents/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Workers üzerinde durum tutan ajanlar için waitForApproval ile aylarca sürebilen dayanıklı onay kapısı, approve/reject API'leri, bekleyen onayların ajan durumunda kalıcı tutulması, schedule() ile hatırlatma ve belirli süre sonra yöneticiye eskalasyon, MCP elicitation ile yapılandırılmış insan girdisi ve kod modunda requiresApproval.",
+      "sinirlar": "Cloudflare platformuna bağlıdır (bulut kilidi); onay arayüzü ve etkileşim sözleşmesi şeması uygulamaca kurulur.",
+      "ihtiyaclar": [
+        "N-K27-003",
+        "N-K27-007",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-4043",
+      "ad": "OpenAI Symphony",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/openai/symphony",
+      "olgunluk": "erken",
+      "ne_saglar": "İş takipçisindeki (ör. Linear) görevleri izleyip her biri için izole, otonom uygulama koşusu başlatan orkestrasyon belirtimi ve Elixir referans uygulaması; ajan işi CI durumu, PR inceleme geri bildirimi, karmaşıklık analizi ve anlatım videosu gibi 'iş kanıtı' paketiyle insana teslim eder, insan onayından sonra PR'ı birleştirir. 'Ajan önde–insan gözden geçirir' modunun somut örneği.",
+      "sinirlar": "Kendi ifadesiyle güvenilir ortamlarda denenecek düşük profilli mühendislik önizlemesi; Codex odaklı; devir paketi şeması alıcı teyidi içermez.",
+      "ihtiyaclar": [
+        "N-K27-001",
+        "N-K27-004",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-4044",
+      "ad": "12-Factor Agents",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0 (kod) / CC BY-SA 4.0 (içerik)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/humanlayer/12-factor-agents",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretim kalitesinde LLM ajanları için 12 ilkelik yöntem rehberi: insanla temasın yapılandırılmış araç çağrısı olarak modellenmesi, basit başlat/duraklat/devam API'leri, yürütme durumunun iş durumuyla birleştirilmesi, hataların bağlama sıkıştırılması, küçük odaklı ajanlar.",
+      "sinirlar": "Yöntem rehberidir, yazılım değil; uygulama ve şema tasarımı ekibe kalır.",
+      "ihtiyaclar": [
+        "N-K27-003",
+        "N-K28-002",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-4058",
+      "ad": "MCP Agent Mail",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (OpenAI/Anthropic ekli)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Dicklesworthstone/mcp_agent_mail",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için kimlik, gelen kutusu, aranabilir yazışma dizileri ve dosya glob'ları üzerinde süreli (TTL) münhasır/paylaşımlı danışma kiralamaları sağlayan MCP sunucusu; isteğe bağlı pre-commit korumasıyla kalem sahibi olmayanın yazmasını engelleme.",
+      "sinirlar": "Kiralamalar danışma niteliğinde ve atlatılabilir; lisans standart MIT değil (OpenAI/Anthropic eki) — hukuk incelemesi gerekir; tek geliştiricili proje.",
+      "ihtiyaclar": [
+        "N-K27-006",
+        "N-K27-008",
+        "N-K30-010",
+        "N-K31-005",
+        "N-K31-011"
+      ]
+    },
+    {
+      "id": "AR-4059",
+      "ad": "Agent Toolkit (session-handoff skill)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/softaworks/agent-toolkit",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için skill koleksiyonu; session-handoff skill'i bağlamı, alınan kararları ve güncel durumu içeren yapılandırılmış devir belgesi üretir ve yeni bir ajanın işi kaldığı yerden sürdürmesini sağlar.",
+      "sinirlar": "Şema topluluk önerisidir; zorunlu alan denetimi ve alıcı teyidi yok.",
+      "ihtiyaclar": [
+        "N-K27-004",
+        "N-K27-006"
+      ]
+    },
+    {
+      "id": "AR-4060",
+      "ad": "Continuous-Claude v3",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/parcadei/Continuous-Claude-v3",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code için kancalarla sürekli durum defteri (ledger) ve devir belgeleri tutan, bağlam temizlendikten sonra işi kaldığı yerden sürdüren bağlam yönetimi ve ajan orkestrasyon düzeneği.",
+      "sinirlar": "Son commit Ocak 2026; tek geliştirici; Claude Code'a bağlı.",
+      "ihtiyaclar": [
+        "N-K27-006"
+      ]
+    },
+    {
+      "id": "AR-4061",
+      "ad": "Agent File (.af)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/letta-ai/agent-file",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Durumlu ajanları (bellek blokları, sistem istemi, araç tanımları, mesaj geçmişi) tek dosyada serileştiren açık biçim; ajanın checkpoint'lenmesi, sürümlenmesi ve başka ortamda devralınması için.",
+      "sinirlar": "Letta ekosistemi odaklı; belirsizlik, doğrulanmamış iddia ve taahhüt alanları tanımlı değil.",
+      "ihtiyaclar": [
+        "N-K27-005",
+        "N-K27-006"
+      ]
+    },
+    {
+      "id": "AR-4123",
+      "ad": "Linear Agent Interaction Guidelines (AIG)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://linear.app/developers/aig",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İş takip ortamında ajan davranış ilkeleri: ajan olduğunu açıkça belirtme, anında geri bildirim, iç durumunu (düşünüyor, girdi bekliyor, yürütüyor, tamamlandı) şeffaf gösterme, geri çekilme isteğine uyma ve sorumluluğun insanda kalması.",
+      "sinirlar": "İlke belgesi; yaptırım ve şema içermez.",
+      "ihtiyaclar": [
+        "N-K27-001",
+        "N-K27-004",
+        "N-K28-004"
+      ]
+    },
+    {
+      "id": "AR-4124",
+      "ad": "I-PASS Devir Yöntemi",
+      "tur": "protokol-standart",
+      "lisans": "ticari (tescilli program)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ipassinstitute.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Klinik vardiya devrinde tıbbi hataları azalttığı gösterilmiş yapılandırılmış devir yöntemi: durum ciddiyeti, özet, eylem listesi, durum farkındalığı ve olasılık planı, alıcının kendi sözleriyle sentezi (teyit); ajan→insan devir paketi ve alıcı teyidi için model.",
+      "sinirlar": "Sağlık alanına özgü; yazılım bağlamına uyarlanmalı; resmî eğitim programı ticari.",
+      "ihtiyaclar": [
+        "N-K27-004",
+        "N-K27-007"
+      ]
+    }
+  ]
+}

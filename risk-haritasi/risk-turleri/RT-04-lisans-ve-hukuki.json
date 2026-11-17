@@ -1,0 +1,3661 @@
+{
+  "sema": "risk-haritasi/risk-turu@1",
+  "risk_turu": {
+    "id": "RT-04",
+    "ad": "Lisans ve hukuki",
+    "tanim": "Kaynak-erişilebilir, güçlü copyleft, ticari olmayan lisanslar; lisans değişikliği; model kullanım politikası; fikri mülkiyet."
+  },
+  "ozet": {
+    "bulgu": 105,
+    "siddet": {
+      "kritik": 4,
+      "yuksek": 18,
+      "orta": 60,
+      "dusuk": 23
+    },
+    "arac": 104,
+    "kategori_kalibi": 18,
+    "olay": 38,
+    "senaryo": 9,
+    "otomatik_sinyalli_arac": 211
+  },
+  "en_cok_etkilenen_ihtiyaclar": [
+    [
+      "N-K22-002",
+      49
+    ],
+    [
+      "N-K22-001",
+      26
+    ],
+    [
+      "N-K22-008",
+      19
+    ],
+    [
+      "N-K22-003",
+      9
+    ],
+    [
+      "N-K18-009",
+      3
+    ],
+    [
+      "N-K19-002",
+      3
+    ],
+    [
+      "N-K18-003",
+      3
+    ],
+    [
+      "N-K22-006",
+      3
+    ],
+    [
+      "N-K01-004",
+      3
+    ],
+    [
+      "N-K24-002",
+      2
+    ],
+    [
+      "N-K02-004",
+      2
+    ],
+    [
+      "N-K13-013",
+      2
+    ],
+    [
+      "N-K15-004",
+      2
+    ],
+    [
+      "N-K02-003",
+      2
+    ],
+    [
+      "N-K22-009",
+      2
+    ],
+    [
+      "N-K18-011",
+      2
+    ],
+    [
+      "N-K25-007",
+      2
+    ],
+    [
+      "N-K25-003",
+      2
+    ],
+    [
+      "N-K23-001",
+      2
+    ],
+    [
+      "N-K01-001",
+      2
+    ],
+    [
+      "N-K35-007",
+      2
+    ],
+    [
+      "N-K15-001",
+      1
+    ],
+    [
+      "N-K15-002",
+      1
+    ],
+    [
+      "N-K13-006",
+      1
+    ],
+    [
+      "N-K16-006",
+      1
+    ]
+  ],
+  "bulgular": [
+    {
+      "arac_id": "AR-0131",
+      "arac": "CodeQL",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "CodeQL CLI lisansı özel kodda ve CI'da ücretsiz kullanıma izin vermiyor",
+      "aciklama": "GitHub CodeQL Şartları; açık kaynak olmayan kod tabanlarında (ör. özel depo) ve açık kaynak dışı otomatik analiz/CI'da kullanımı yasaklıyor. Bu kısıtlar yalnız ücretli GitHub Advanced Security lisansıyla kalkıyor.",
+      "tarih": "",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/github/codeql-cli-binaries/blob/main/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun özel kodunu CodeQL CLI ile yerel/CI'da taramak lisanssız kullanım olur; kamu kurumunda denetim bulgusu doğurur.",
+        "Sorguların MIT olması, motorun kullanım hakkı vermez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K18-009"
+      ],
+      "erken_sinyal": "CI'da codeql CLI çağrısı olup GHAS/Code Security lisansı olmaması.",
+      "azaltma": "Code Security lisansı alın veya özel kod için lisansı uygun başka bir SAST motoru seçin.",
+      "id": "BL-00331",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE.md'ye göre CI/otomatik analizde ve açık kaynak olmayan kod tabanlarında kullanım yalnız ücretli GitHub Advanced Security lisansıyla serbest.",
+        "kaynak": [
+          "https://github.com/github/codeql-cli-binaries/blob/main/LICENSE.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0175",
+      "arac": "Daytona",
+      "gorev": "R-G05",
+      "tur": "RT-04",
+      "baslik": "Açık depo Haziran 2026'da bakımdan çıktı; çekirdek kapalı koda taşındı",
+      "aciklama": "README: 'Haziran 2026 itibarıyla çekirdek geliştirme özel kod tabanına taşındı; bu depo güncelleme, düzeltme veya sürüm almayacak.' Ana daldaki lisans dosyası kaldırılmış olup son açık sürüm v0.190.0 (23 Haziran 2026) AGPL-3.0'dır.",
+      "tarih": "2026-06",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/daytonaio/daytona",
+        "https://github.com/daytonaio/daytona/blob/v0.190.0/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Self-host Daytona kuran kurum bundan sonra güvenlik yaması alamaz; sandbox kaçışı veya çok kiracılık açığı çıkarsa düzeltmeyi kendi ekibi yapmak zorunda kalır.",
+        "Yalnız SaaS'a geçmek, kodun ve sırların yurt dışındaki kapalı bir platformda çalışmasını zorunlu kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K13-006"
+      ],
+      "erken_sinyal": "Açık depoda commit/sürüm olmaması; güvenlik bildirimlerinin yalnız ticari sürüm için yayımlanması.",
+      "azaltma": "Self-host yolu için bakımı üstlenecek iç ekip ya da açık alternatif (mikroVM/gVisor tabanlı) seçmek; SaaS kullanımı için veri sınıfı kısıtı koymak.",
+      "id": "BL-00465",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README 'Haziran 2026 itibarıyla çekirdek geliştirme özel koda taşındı; güncelleme yok' diyor. Ana dalda LICENSE yok (404), v0.190.0 (2026-06-23) etiketinde AGPL-3.0.",
+        "kaynak": [
+          "https://github.com/daytonaio/daytona",
+          "https://github.com/daytonaio/daytona/blob/v0.190.0/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0215",
+      "arac": "Mistral Medium 3.5",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Modified MIT: şirketin aylık cirosu 20 M$'ı aşarsa hiçbir hak kullanılamıyor",
+      "aciklama": "Mistral Medium 3.5 lisansı, Devstral 2 123B ile aynı 'Modified MIT' metnini kullanıyor: şirketinizin veya işvereninizin küresel konsolide aylık geliri önceki ay 20 M$'ı aşıyorsa lisans kapsamındaki hiçbir hak kullanılamıyor; kısıt türevleri ve üçüncü taraf barındırmayı da kapsıyor.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Büyük bir kurumda modeli kurum içinde çalıştırmak doğrudan lisans ihlalidir; 'düz MIT' sanılarak envantere alınırsa hukuki risk oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "Envanterde 'MIT' olarak etiketlenmiş Mistral Medium.",
+      "azaltma": "Kullanmama veya Mistral'den yazılı ticari lisans.",
+      "id": "BL-00580",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE 'Modified MIT': aylık konsolide gelir 20 M$'ı aşarsa hiçbir hak kullanılamıyor, kısıt türevleri ve üçüncü taraf sağlayıcıları kapsıyor; metin Devstral-2-123B-Instruct-2512 ile yıl dışında aynı.",
+        "kaynak": [
+          "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/main/LICENSE",
+          "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512/blob/main/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0371",
+      "arac": "Devstral 2 ve Devstral Small 2",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "123B sürüm: şirketin (veya işverenin) aylık cirosu 20 M$'ı aşarsa hiçbir hak kullanılamıyor",
+      "aciklama": "Devstral 2 123B'nin 'Modified MIT' lisansına göre, şirketinizin veya işvereninizin küresel konsolide aylık geliri önceki ay 20 milyon doları aşıyorsa lisans kapsamındaki hiçbir hak kullanılamıyor; kısıt türevleri ve üçüncü taraflarca sunulan kopyaları da kapsıyor. Ticari lisans Mistral'in takdirine bağlı. 24B sürüm Apache-2.0.",
+      "tarih": "2025-12",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512/blob/main/LICENSE",
+        "https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512"
+      ],
+      "yasatacagi_sorunlar": [
+        "Aylık cirosu 20 M$ üstünde bir kurumda 123B modelin kurum içinde çalıştırılması doğrudan lisans ihlalidir; üçüncü taraf barındırma da kısıtı ortadan kaldırmaz.",
+        "Kamu kurumunda 'gelir' tanımı belirsiz olduğundan hukuk görüşü alınmadan kullanım hukuki risk taşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-003",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Model envanterinde 123B sürümün görülmesi.",
+      "azaltma": "Yalnız Apache-2.0 lisanslı 24B sürümü kullanma; 123B için Mistral'den yazılı ticari lisans.",
+      "id": "BL-00690",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE aylık 20 M$ gelir eşiğini aşan şirket/işveren için hiçbir hak tanımıyor, türevleri ve üçüncü taraf sunumları da kapsıyor. 24B model apache-2.0.",
+        "kaynak": [
+          "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512/blob/main/LICENSE",
+          "https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0194",
+      "arac": "Plane",
+      "gorev": "R-G09",
+      "tur": "RT-04",
+      "baslik": "Açık çekirdek ayrımı: Epik ve OIDC topluluk sürümünde yok",
+      "aciklama": "Community Edition AGPL-3.0, Commercial Edition kapalı kaynaklıdır. Plane belgesine göre ücretli plana geçmek için önce Commercial Edition'a geçmek gerekir. Bakımcı, Epik'lerin Community'de olmayacağını issue #8085'te teyit etti. v2 ile OIDC'nin ücretli katmana taşındığı şikâyeti (#8047) açık duruyor. Fiyat sayfasına göre Initiatives Pro ve üstünde; öz-barındırmada SAML/OIDC Pro ve üstünde; LDAP ve API ile erişilen denetim kaydı yalnız Enterprise Grid'de. Community sürümün kullanıcı sınırı resmî belgelerde çelişkili yazılmış (#9086).",
+      "tarih": "2025-11",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developers.plane.so/self-hosting/editions-and-versions",
+        "https://plane.so/pricing",
+        "https://github.com/makeplane/plane/issues/8085",
+        "https://github.com/makeplane/plane/issues/8047",
+        "https://github.com/makeplane/plane/issues/9086"
+      ],
+      "yasatacagi_sorunlar": [
+        "SAFe portföy katmanı (Epik/Initiative) için açık kaynak sürüm yetmez; kapalı kaynak Commercial Edition'a ve kullanıcı başı ücrete geçmek gerekir. 'Kurum içi açık kaynak' gerekçesi zayıflar.",
+        "Kurumsal kimlik sağlayıcısıyla (OIDC/SAML/LDAP) tek oturum ve grup eşitleme ücretli katmana bağlıdır. Ücretsiz sürümde yerel parola ya da sihirli kod girişiyle kalınır.",
+        "Bir özellik sonradan ücretli katmana taşınırsa, sürüm yükseltmesi kurulu hattı kırar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-002",
+        "N-K02-004",
+        "N-K19-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Sürüm notlarında özelliklerin Pro/Business etiketiyle görünmesi; Community sürüme yeni özellik gelmemesi; issue'larda ücret duvarı şikâyetleri.",
+      "azaltma": "Karar öncesinde gereken özellikleri sürüm ve plan bazında yazılı olarak teyit edin; çok yıllık fiyat kilidi ve özellik korunumu maddesi isteyin; SAFe katmanını ayrı tutup Plane'i ekip düzeyinde sınırlamayı değerlendirin.",
+      "id": "BL-00509",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Editions belgesi Community için AGPL-3.0 ve kapalı kaynak Commercial ayrımını, ücretli plana geçmeden önce Commercial'a geçme şartını doğruluyor. #8085 Plane ekibinden vihar tarafından Epik reddiyle kapatılmış; #8047 (OIDC) ve #9086 (kullanıcı sınırı çelişkisi) açık. Fiyat sayfası verisi Initiatives'in Pro ve üstünde, öz-barındırmada SAML/OIDC'nin Pro ve üstünde, LDAP ile API denetim kaydının yalnız Enterprise'da olduğunu gösteriyor.",
+        "kaynak": [
+          "https://developers.plane.so/self-hosting/editions-and-versions",
+          "https://plane.so/pricing",
+          "https://api.github.com/repos/makeplane/plane/issues/8085",
+          "https://api.github.com/repos/makeplane/plane/issues/8047",
+          "https://api.github.com/repos/makeplane/plane/issues/9086"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0211",
+      "arac": "MiniMax-M3",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Topluluk lisansı: temel izin ticari olmayan kullanım; ticari kullanımda bildirim/izin ve askerî kullanım yasağı",
+      "aciklama": "MiniMax Community License temel izni 'ticari olmayan amaçlar' için veriyor; ticari kullanımda 'Built with MiniMax M3' ibaresi ve yıllık gelir 20 M$ üstündeyse önceden yazılı izin, altındaysa tek seferlik bildirim gerekiyor. İnce ayar yapılmış sürümlerin ticari dağıtımı da ticari kullanım sayılıyor. Ek'te herhangi bir askerî amaca yardım yasaklanıyor.",
+      "tarih": "2026-06",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Büyük bir kurumun yazılım üretiminde kullanımı 'ticari avantaj' sayılabilir ve yazılı izin gerektirebilir; izin alınmadan kullanım lisans ihlalidir.",
+        "Kurum savunma veya kritik altyapı alanında çalışıyorsa askerî amaç yasağı kullanımı tamamen engelleyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-003",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Hukuk incelemesinin tamamlanmaması; MiniMax'tan izin yanıtı gelmemesi.",
+      "azaltma": "Kullanımdan önce MiniMax'tan yazılı izin veya hukuk görüşü; savunma ile ilgili işlerde kullanmama.",
+      "id": "BL-00564",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE: temel izin ticari olmayan amaçlar için; ticari kullanımda 'Built with MiniMax M3', 20 M$ üstünde yazılı izin, altında tek seferlik bildirim; ince ayarlı sürümlerin ticari kullanımı kapsamda; askerî amaç yasak.",
+        "kaynak": [
+          "https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/main/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0291",
+      "arac": "Kong AI Gateway",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Açık kaynak dağıtım 3.9 hattında donduruldu; 3.10 ve sonrası yalnız Enterprise",
+      "aciklama": "Kong/kong deposunda en son açık kaynak etiketi 3.9.3 (Haziran 2026); 3.10 ve sonrası sürümler (ilki Mart 2025) yalnız Enterprise olarak yayımlandı. Topluluk tartışmasında 3.10 OSS imajı soruları Kong ekibinden yanıtsız kaldı; ikincil analizlere göre 3.10+ Enterprise imajı lisanssız çalıştırıldığında süresi dolmuş Enterprise lisansı gibi davranıyor.",
+      "tarih": "2025-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Kong/kong/tags",
+        "https://github.com/Kong/kong/discussions/14405",
+        "https://konghq.com/blog/product-releases/kong-gateway-3-10",
+        "https://tasrieit.com/blog/migrate-kong-oss-to-envoy-gateway-complete-guide"
+      ],
+      "yasatacagi_sorunlar": [
+        "Açık kaynak sürümle başlanırsa yeni AI/MCP özellikleri hiç gelmeyebilir; kurum ya ücretli lisansa geçmek ya da geçidi değiştirmek zorunda kalır.",
+        "3.9 hattında kalmak, bakım bitiminden sonra yamasız bir API geçidi işletmek anlamına gelebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K16-006",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kong/kong deposunda yeni OSS etiketi çıkmaması; Docker Hub'da yalnız 3.9 etiketlerinin güncellenmesi.",
+      "azaltma": "Kong'u yalnız Enterprise sözleşmesiyle değerlendirme ya da açık kaynak bir alternatifle çıkış planı hazırlama.",
+      "id": "BL-00678",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kong/kong'da son etiket 3.9.3 (2026-06-17). 3.10 Mart 2025'te Enterprise olarak çıktı; #14405 'Unanswered' durumda. İkincil kaynak lisanssız 3.10+ imajının süresi dolmuş lisans gibi davrandığını yazıyor.",
+        "kaynak": [
+          "https://github.com/Kong/kong/tags",
+          "https://github.com/Kong/kong/discussions/14405",
+          "https://konghq.com/blog/product-releases/kong-gateway-3-10",
+          "https://tasrieit.com/blog/migrate-kong-oss-to-envoy-gateway-complete-guide"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0518",
+      "arac": "Camunda 8",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "8.6 ile üretimde ticari lisans zorunluluğu",
+      "aciklama": "8 Ekim 2024'te 8.6 ile Camunda 8 Self-Managed tüm bileşenleri Camunda License 1.0'a geçti; üretimde kullanım için Enterprise lisansı gerekiyor, ücretsiz kullanım yalnız geliştirme/test.",
+      "tarih": "2024-10",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://camunda.com/blog/2024/10/camunda-licensing-what-you-need-to-know/",
+        "https://docs.camunda.io/docs/reference/licenses/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ücretsiz sanılarak kurulan orkestrasyon katmanı üretime alınırken lisans engeline takılır; hattın durum sahibi bileşeni yeniden seçilmek zorunda kalabilir.",
+        "8.5 ve altında kalmak güvenlik yamalarından mahrum kalmak demektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-013",
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Üretim ortamında lisans anahtarı olmadan çalışan 8.6+ kurulum; satın alma sürecinin başlamaması.",
+      "azaltma": "Lisans maliyetini mimari karardan önce netleştirin; alternatif dayanıklı yürütme motorlarını değerlendirin.",
+      "id": "BL-00822",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Camunda blogu (8 Ekim 2024) 8.6 ile tüm bileşenlerin Camunda License 1.0 altında 'yalnız geliştirme için ücretsiz, üretimde lisans gerekli' olduğunu yazıyor.",
+        "kaynak": [
+          "https://camunda.com/blog/2024/10/camunda-licensing-what-you-need-to-know/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1063",
+      "arac": "Atlas",
+      "gorev": "R-G06b",
+      "tur": "RT-04",
+      "baslik": "Asıl özellikler açık kaynak sürümde yok",
+      "aciklama": "Apache-2.0 lisanslı Community Edition; migration lint'i, testi, göç öncesi kontrolleri, geri almayı, drift tespitini, view, trigger ve function nesnelerini ve SQL Server, Oracle, ClickHouse gibi sürücüleri içermiyor. Standart ikili dosya 'Atlas MSA' altında dağıtılıyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://atlasgo.io/community-edition"
+      ],
+      "yasatacagi_sorunlar": [
+        "Güvenli şema göçü kapısı (N-K06-009) için gereken lint ve drift özellikleri açık kaynak olmayan lisansa bağlı kalır.",
+        "Açık kaynak sanılarak kurulan standart ikili dosya, sözleşme şartlarını (MSA) kabul etmek anlamına gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-009",
+        "N-K03-011"
+      ],
+      "erken_sinyal": "Kullanılan ikili dosyanın Community mi standart mı olduğunun bilinmemesi.",
+      "azaltma": "Hangi dağıtımın kullanıldığını envantere yazın, MSA'yı hukuka inceletin, gerekli özellikler için lisans bütçesi ayırın.",
+      "id": "BL-01307",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Resmî karşılaştırma tablosu Apache 2.0 Community Edition'da lint, test, pre-migration check, down (geri alma), drift tespiti, view/trigger/function ve SQL Server/Oracle/ClickHouse vb. sürücülerin olmadığını, standart dağıtımın 'Atlas MSA' altında olduğunu gösteriyor. Pro özellikleri 30 günlük denemeden sonra lisans istiyor.",
+        "kaynak": [
+          "https://atlasgo.io/community-edition"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1222",
+      "arac": "Teleport",
+      "gorev": "R-G05",
+      "tur": "RT-04",
+      "baslik": "Community Edition ikilileri 100 çalışan ve 10 milyon USD gelir sınırına bağlı",
+      "aciklama": "Community Edition ikili lisansı ticari kullanımı yalnız 100'den az çalışanı ve 10 milyon USD'den az yıllık geliri olan kuruluşlara izin veriyor; kaynak AGPL-3.0.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/gravitational/teleport/blob/master/build.assets/LICENSE-community",
+        "https://github.com/gravitational/teleport"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bu ölçekteki kurum hazır Community ikililerini lisans ihlali olmadan kullanamaz; ya AGPL kaynaktan kendisi derleyip bakımını üstlenir ya da Enterprise satın alır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "Hazır ikili ile kurulum; lisans taramasında bulgu.",
+      "azaltma": "Kurulum öncesi lisans kararı; Enterprise veya kaynaktan derleme hattı.",
+      "id": "BL-01402",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE-community: 100 çalışan ve 10 milyon USD yıllık gelir altı sınırı; depo lisansı AGPL-3.0.",
+        "kaynak": [
+          "https://github.com/gravitational/teleport/blob/master/build.assets/LICENSE-community"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2064",
+      "arac": "HashiCorp Terraform (HCP Terraform / Terraform Enterprise)",
+      "gorev": "R-G05",
+      "tur": "RT-04",
+      "baslik": "BUSL-1.1 lisansı; açık kaynak çatal OpenTofu ile ekosistem bölünmesi",
+      "aciklama": "HashiCorp 10 Ağustos 2023'te gelecekteki tüm ürün sürümlerini MPL 2.0'dan BUSL 1.1'e geçirdi; rakip hizmetlerde kullanım kısıtlandı. Topluluk OpenTofu çatalını oluşturdu.",
+      "tarih": "2023-08",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license",
+        "https://github.com/hashicorp/terraform"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum altyapı otomasyonunu başka kurumlara hizmet olarak sunarsa lisans riski oluşur; açık kaynak politikası olan kamu projelerinde uyumsuzluk bulgusu çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K13-010"
+      ],
+      "erken_sinyal": "Lisans taramasında BUSL bulgusu.",
+      "azaltma": "Kullanım modelini hukuken değerlendirmek; OpenTofu uyumluluğunu korumak.",
+      "id": "BL-01799",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "hashicorp/terraform LICENSE dosyası BUSL 1.1. 10 Ağustos 2023 duyurusu ve OpenTofu çatalı yaygın olarak belgeli; HashiCorp blog sayfası 429 döndürdüğü için açılamadı.",
+        "kaynak": [
+          "https://github.com/hashicorp/terraform/blob/main/LICENSE",
+          "https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2271",
+      "arac": "ClearML",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "Sunucu bileşeni SSPL lisanslı ve ayrıca ClearML Kullanım Şartları'na bağlı",
+      "aciklama": "clearml-server deposu Apache-2.0 değil, Server Side Public License v1.0 ile lisanslı (OSI onaylı değil). 2026-03-24'te README'ye, sunucu kullanımının ClearML Kullanım Şartları ve Gizlilik Politikası'na tabi olduğu eklendi (#312). Açık kaynak şartlarının yürürlük tarihi 2026-02-01; New York hukuku geçerli ve ABD/İngiltere/AB ihracat kontrolü ile yaptırım uyumu isteniyor.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/clearml/clearml-server/blob/master/LICENSE",
+        "https://github.com/clearml/clearml-server/pull/312",
+        "https://clear.ml/legal/open-source/terms"
+      ],
+      "yasatacagi_sorunlar": [
+        "Araç haritasında 'Apache-2.0' diye kayıtlı olduğundan lisans uyum incelemesi atlanabilir. Kurum ClearML sunucusunu başka kamu kurumlarına veya iştiraklere hizmet olarak açarsa, SSPL'in hizmet kaynağını açma yükümlülüğü gündeme gelir.",
+        "Kurum içi kurulum bile yabancı hukuka tabi kullanım şartlarına bağlanır; hukuk birimi onayı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008",
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Lisans taramasında clearml-server için 'Other/SSPL' sonucu; kullanım şartlarında yeni tarihli değişiklik.",
+      "azaltma": "Lisansı SDK/agent (Apache-2.0) ve server (SSPL) olarak ayrı envantere yaz. Hizmet olarak sunma senaryosunu hukuk birimiyle netleştir.",
+      "id": "BL-01958",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE dosyası SSPL v1. PR #312 ('Update legal information') 2026-03-24'te birleşti. Şartların yürürlük tarihi 1 Şubat 2026, New York hukuku ve ihracat/yaptırım maddesi var.",
+        "kaynak": [
+          "https://raw.githubusercontent.com/clearml/clearml-server/master/LICENSE",
+          "https://github.com/clearml/clearml-server/pull/312",
+          "https://clear.ml/legal/open-source/terms"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2752",
+      "arac": "CUPID",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Depoda lisans yok",
+      "aciklama": "GitHub API depo için lisans bilgisi döndürmüyor; lisans beyanı olmayan kod varsayılan olarak tüm hakları saklıdır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/soarsmu/CUPID"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kodu kurum hattına almak ya da değiştirmek hukuken izinsiz kullanım olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004"
+      ],
+      "erken_sinyal": "Lisans taramasında 'bilinmiyor' sonucu.",
+      "azaltma": "Yalnız makaledeki yöntemi referans alıp bağımsız uygulayın veya yazarlardan lisans isteyin.",
+      "id": "BL-02069",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GitHub API soarsmu/CUPID için license=null döndürüyor.",
+        "kaynak": [
+          "https://api.github.com/repos/soarsmu/CUPID"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0039",
+      "arac": "Mastra",
+      "gorev": "R-G02",
+      "tur": "RT-04",
+      "baslik": "Kurumsal özellikler kaynak-erişilebilir: üretimde lisanssız kullanım yasak",
+      "aciklama": "Mastra Enterprise Edition License v2.0 (22 Eylül 2026) 'ee/' dizinlerindeki özelliklerin açık kaynak olmadığını, okunup test edilebileceğini ama üretim kullanımı ve yeniden dağıtıma izin vermediğini belirtiyor; @mastra/core/auth/ee ve agent-builder/ee gibi çekirdek paket içindeki yollar kapsamda.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mastra-ai/mastra/blob/main/ee/LICENSE",
+        "https://github.com/mastra-ai/mastra/blob/main/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştiriciler çekirdek paketin içindeki ee/ auth özelliğini üretimde kullanırsa lisans ihlali oluşur; lisans tarayıcıları paket düzeyinde Apache-2.0 gösterdiği için fark etmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "Kodda '/ee' yolundan içe aktarma.",
+      "azaltma": "Lint kuralıyla ee/ içe aktarımlarını engelleyin veya lisans satın alın.",
+      "id": "BL-00103",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "ee/LICENSE 'Version 2.0 | Effective September 22nd, 2026' başlıklı; kaynak-erişilebilir, açık kaynak değil, üretim kullanımı ve yeniden dağıtım yasak. LICENSE.md @mastra/core/auth/ee ve agent-builder/ee yollarını kapsamda sayıyor.",
+        "kaynak": [
+          "https://github.com/mastra-ai/mastra/blob/main/ee/LICENSE",
+          "https://github.com/mastra-ai/mastra/blob/main/LICENSE.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0235",
+      "arac": "Llama 4 Maverick",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Kullanım politikası kritik altyapı işletimi ve askerî kullanımı yasaklıyor; AB'deki şirketlere çok kipli hak verilmiyor",
+      "aciklama": "Llama 4 Kabul Edilebilir Kullanım Politikası, ölüm veya bedensel zarar riski taşıyan faaliyetler kapsamında 'kritik altyapı, ulaşım teknolojileri veya ağır makine işletimi' ile askerî/nükleer kullanımı yasaklıyor. Çok kipli Llama 4 modellerinde lisans hakları, ana iş yeri AB'de olan şirketlere verilmiyor. Dağıtımda 'Built with Llama' ibaresi ve 700 milyon aylık kullanıcı eşiği var.",
+      "tarih": "2025-04",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/USE_POLICY.md",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum kritik altyapı işletmecisiyse, bu altyapıyı yöneten yazılımların üretiminde kullanım politika ihlali olarak yorumlanabilir.",
+        "Kurumun AB'de yerleşik bir iştiraki modeli kullanamaz; çok ülkeli ekiplerde tutarsız uygulama doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-006",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde politika maddelerine takılma.",
+      "azaltma": "Kritik altyapı ile ilişkili işlerde kullanmama; lisans envanterinde kullanım alanı kısıtını işaretleme.",
+      "id": "BL-00642",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "USE_POLICY: askerî/nükleer ve 'Operation of critical infrastructure, transportation technologies, or heavy machinery' yasak; çok kipli modellerde AB'de ana iş yeri olan şirketlere hak verilmiyor. LICENSE'da 'Built with Llama' ve 700M MAU şartı var.",
+        "kaynak": [
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/USE_POLICY.md",
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0236",
+      "arac": "Llama 4 Scout",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Kullanım politikası kritik altyapı işletimi ve askerî kullanımı yasaklıyor; AB'deki şirketlere çok kipli hak verilmiyor",
+      "aciklama": "Llama 4 Kabul Edilebilir Kullanım Politikası, ölüm veya bedensel zarar riski taşıyan faaliyetler kapsamında 'kritik altyapı, ulaşım teknolojileri veya ağır makine işletimi' ile askerî/nükleer kullanımı yasaklıyor. Çok kipli Llama 4 modellerinde lisans hakları, ana iş yeri AB'de olan şirketlere verilmiyor. Dağıtımda 'Built with Llama' ibaresi ve 700 milyon aylık kullanıcı eşiği var.",
+      "tarih": "2025-04",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/USE_POLICY.md",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum kritik altyapı işletmecisiyse, bu altyapıyı yöneten yazılımların üretiminde kullanım politika ihlali olarak yorumlanabilir.",
+        "Kurumun AB'de yerleşik bir iştiraki modeli kullanamaz; çok ülkeli ekiplerde tutarsız uygulama doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-006",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde politika maddelerine takılma.",
+      "azaltma": "Kritik altyapı ile ilişkili işlerde kullanmama; lisans envanterinde kullanım alanı kısıtını işaretleme.",
+      "id": "BL-00647",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "AUP askerî/nükleer ve kritik altyapı/ulaşım/ağır makine işletimini yasaklıyor. Çok kipli modellerde AB merkezli şirketlere hak verilmiyor (son kullanıcılar hariç). Lisansta 'Built with Llama' ve 700M MAU şartı var.",
+        "kaynak": [
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/USE_POLICY.md",
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1339",
+      "arac": "immudb",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "Apache-2.0'dan BSL-1.1'e lisans değişikliği",
+      "aciklama": "LICENSE dosyası 2023-12-19'da güncellendi. immudb 1.9DOM.2 ve sonrası Business Source License 1.1 ile lisanslı. Ek kullanım izni, Codenotary'nin ücretli sürümüyle rekabet eden barındırılan veya gömülü teklifi yasaklıyor; iç kullanım serbest. Her sürüm dört yıl sonra açık lisansa dönüşüyor.",
+      "tarih": "2023-12",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/codenotary/immudb/blob/master/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum denetim kaydı hizmetini iştiraklere veya başka kamu kurumlarına ücretli paylaşılan hizmet olarak sunarsa 'rekabet eden teklif' tanımına girip girmediği hukuki belirsizlik yaratır.",
+        "OSI onaylı olmayan lisans kurumun açık kaynak politikasında istisna onayı gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K19-002"
+      ],
+      "erken_sinyal": "Lisans metninde yeni kısıtlar; ek kullanım izninin daralması.",
+      "azaltma": "Hukuk görüşü almak; kullanım modelini iç kullanım olarak sınırlamak; Apache-2.0 son sürüme dönüş veya alternatif planı tutmak.",
+      "id": "BL-01474",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE 2023-12-19'da güncellendi: BSL 1.1, 1.9DOM.2 ve sonrası, rakip hosted/embedded teklif yasağı ve dört yıl sonra Apache 2.0.",
+        "kaynak": [
+          "https://github.com/codenotary/immudb/blob/master/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1346",
+      "arac": "Amazon S3 Object Lock",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "KVKK imha yükümlülüğü ile WORM saklama çatışması",
+      "aciklama": "Compliance modunda kilitli nesne süre dolana kadar kimse tarafından silinemez; bu, KVKK md.7'deki amaç ortadan kalkınca silme/anonimleştirme yükümlülüğüyle çatışabilir. Governance modu ve legal hold, yetkili kullanıcıların silmesine izin verdiği için daha esnektir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kişisel veri içeren ajan izleri kilitlenirse ilgili kişinin silme talebi karşılanamaz; Kurul denetiminde ihlal sayılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-009",
+        "N-K22-005",
+        "N-K18-011"
+      ],
+      "erken_sinyal": "WORM kovasına maskelenmemiş iz veya log yazılması.",
+      "azaltma": "WORM'a yalnız maskelenmiş, takma adlı veri veya özet yazmak; saklama sürelerini imha politikasıyla eşlemek.",
+      "id": "BL-01478",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Compliance modunda süre dolmadan silme imkânsız; ancak Governance modunda özel izinli kullanıcılar kilidi atlayıp silebilir, legal hold da kaldırılabilir. Çatışma yalnız Compliance modunda tam geçerli.",
+        "kaynak": [
+          "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1347",
+      "arac": "Google Cloud Storage Bucket Lock",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "KVKK imha yükümlülüğü ile çatışma",
+      "aciklama": "Kilitli kovada nesneler süre dolmadan silinemiyor. Kişisel veri içeren kayıtlar için silme talebi karşılanamıyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.cloud.google.com/storage/docs/bucket-lock"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan izlerinde kalan müşteri kişisel verisi silinemez; imha politikası ihlal edilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-009",
+        "N-K18-011"
+      ],
+      "erken_sinyal": "Kilitli kovaya maskelenmemiş veri yazılması.",
+      "azaltma": "Kilitli kovaya yalnız maskelenmiş ve özet veri yazmak.",
+      "id": "BL-01482",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belgeye göre kilitli politikada nesneler süre dolmadan silinemez. KVKK çatışması çıkarım: yasal saklama yükümlülüğü varsa silmemek meşru olabilir, bu nedenle kişisel veri bu kovaya konmamalı.",
+        "kaynak": [
+          "https://docs.cloud.google.com/storage/docs/bucket-lock"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1478",
+      "arac": "Viewflow",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 ve ticari PRO lisansı",
+      "aciklama": "Açık kaynak sürüm AGPL-3.0; özel çatal ve değişikliklere ticari PRO lisansı izin veriyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/viewflow/viewflow",
+        "https://pypi.org/project/django-viewflow/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onay uygulaması Viewflow üzerine değiştirilerek ağda sunulursa AGPL kapsamında tüm uygulama kaynağının paylaşılması tartışması çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kurum içi Viewflow değişiklikleri.",
+      "azaltma": "PRO lisansı veya değiştirmeden kullanım; hukuk onayı.",
+      "id": "BL-01581",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Depo ve PyPI lisansı AGPL-3.0; README PRO'nun ticari lisansla özel çatal ve değişikliklere izin verdiğini söylüyor.",
+        "kaynak": [
+          "https://github.com/viewflow/viewflow",
+          "https://pypi.org/project/django-viewflow/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3539",
+      "arac": "Betterworks",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Performans kararlarında yapay zekâ: yüksek riskli kullanım",
+      "aciklama": "Betterworks performans ve yetenek kararlarında 'AI for HR' özellikleri sunuyor. Çalışan performansı değerlendirmesinde yapay zekâ AB YZ Yasası Ek III-4(b) kapsamında yüksek risklidir; KVKK md.11 otomatik işleme itiraz hakkı verir.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.betterworks.com/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yapay zekâ kullanım metrikleri performans değerlendirmesine karışırsa ayrımcılık ve itiraz riski doğar; kamu kurumunda disiplin süreçlerine konu olabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-002",
+        "N-K25-007",
+        "N-K25-003"
+      ],
+      "erken_sinyal": "Performans formlarında yapay zekâ kullanım metriği alanı.",
+      "azaltma": "Yapay zekâ özelliklerini karar değil taslak desteği olarak sınırlamak; insan onayı ve itiraz süreci.",
+      "id": "BL-02201",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Betterworks ana sayfası 'AI for HR' ile performans ve yetenek kararlarında YZ özetleri, kanıta dayalı değerlendirme ve öneriler sunduğunu belirtiyor; Ek III-4(b) performans ve davranış değerlendirmesini açıkça yüksek riskli sayıyor. KVKK md.11(1)(g) münhasıran otomatik analiz sonucuna itiraz hakkını düzenliyor.",
+        "kaynak": [
+          "https://www.betterworks.com/",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4058",
+      "arac": "MCP Agent Mail",
+      "gorev": "R-G11",
+      "tur": "RT-04",
+      "baslik": "MIT'ye eklenen OpenAI/Anthropic kısıtlaması ve otomatik fesih maddesi",
+      "aciklama": "Lisans 22 Şubat 2026'da düz MIT'den 'MIT + OpenAI/Anthropic Rider' biçimine çevrildi. Ek madde bu şirketlere ve onlar adına ya da yararına hareket eden herkese (yüklenici, hizmet sağlayıcı dahil) hak tanımıyor, yazılımın onlara 'erişilebilir kılınmasını' yasaklıyor ve ihlalde lisansı kendiliğinden sona erdiriyor. Lisans OSI onaylı değil; GitHub lisansı NOASSERTION olarak görüyor.",
+      "tarih": "2026-02",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/LICENSE",
+        "https://github.com/Dicklesworthstone/mcp_agent_mail/commit/7c1fe5b0"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum ajan olarak Claude Code ya da Codex kullanıyorsa, yazılımın kodu veya türevleri ajan bağlamı üzerinden Anthropic/OpenAI'ye gidebilir. Bu 'erişilebilir kılma' sayılabilir; hukuk birimi belirsizlik nedeniyle kullanımı durdurabilir.",
+        "Kuruma hizmet veren yüklenici aynı zamanda OpenAI/Anthropic için de çalışıyorsa 'onlar adına hareket eden' tanımına girebilir; bu durumda lisans kendiliğinden düşer ve kurulu sistem lisanssız kalır.",
+        "Kurum içi çatal ya da türev dağıtılırken ek madde değiştirilmeden taşınmak zorunda. Açık kaynak lisans envanterinde standart dışı bir istisna açmak gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-001",
+        "N-K27-008"
+      ],
+      "erken_sinyal": "Lisans taramasında NOASSERTION ya da standart dışı lisans uyarısı; LICENSE dosyasında yeni değişiklik commit'i.",
+      "azaltma": "Hukuk görüşü alınmadan üretimde kullanmamak. Gerekirse ek madde öncesi (Şubat 2026 öncesi, düz MIT) sürümü sabitlemek ya da eşdeğer lisanslı bir alternatife geçmek. Lisans değişikliğini otomatik izlemek.",
+      "id": "BL-02353",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "7c1fe5b0 commit'i 2026-02-22'de LICENSE'ı 'MIT with OpenAI/Anthropic Rider' yaptı; önceki hali 2026-01-22 tarihli düz MIT. Rider yüklenici ve hizmet sağlayıcıları kapsıyor, 'make available' yasağı ve otomatik fesih içeriyor. GitHub spdx NOASSERTION.",
+        "kaynak": [
+          "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/LICENSE",
+          "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail/commits/7c1fe5b0",
+          "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0019",
+      "arac": "n8n",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "Sustainable Use License: OSI açık kaynak değil, kurumsal dosyalar ayrı lisanslı",
+      "aciklama": "Lisans yalnız 'kendi iç iş amaçları' için kullanım ve değişikliğe izin veriyor; '.ee.' içeren dosyalar Enterprise lisansı olmadan kullanılamaz.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/n8n-io/n8n/blob/master/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hattın bir parçası iştiraklere veya kamu kurumlarına hizmet olarak sunulursa lisans ihlali tartışması doğar.",
+        "SSO, gelişmiş RBAC, log streaming gibi kurumsal özellikler .ee koduna bağlı olduğundan ücretli lisans kaçınılmazdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde 'iç iş amacı' tanımının sorgulanması; .ee özellik gereksinimi.",
+      "azaltma": "Kullanım senaryosunu hukukla yazılı teyit edin; kurumsal özellikler için lisans maliyetini baştan bütçeleyin.",
+      "id": "BL-00070",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0032",
+      "arac": "Claude Agent SDK",
+      "gorev": "R-G02",
+      "tur": "RT-04",
+      "baslik": "TypeScript SDK açık kaynak değil",
+      "aciklama": "Katalogda 'MIT (SDK)' yazmasına rağmen claude-agent-sdk-typescript LICENSE.md dosyası '© Anthropic PBC. All rights reserved' ve Anthropic Ticari Hizmet Şartları'na tabi olduğunu belirtiyor; npm paketi de 'SEE LICENSE IN README.md' gösteriyor. Yalnız Python SDK MIT.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/anthropics/claude-agent-sdk-typescript/blob/main/LICENSE.md",
+        "https://github.com/anthropics/claude-agent-sdk-python"
+      ],
+      "yasatacagi_sorunlar": [
+        "TS tabanlı orkestratörü çatallamak, değiştirmek veya kurum içi dağıtmak ticari şartlara bağlıdır; hukuk incelemesi yapılmadan açık kaynak varsayılırsa uyum sorunu çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-001",
+        "N-K10-002"
+      ],
+      "erken_sinyal": "Lisans taramasında 'SEE LICENSE IN' uyarısı.",
+      "azaltma": "Lisans envanterinde TS SDK'yı ticari bileşen olarak kaydedin; Python SDK veya kendi adaptörünüzü tercih edin.",
+      "id": "BL-00085",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0114",
+      "arac": "LlamaFirewall (PurpleLlama)",
+      "gorev": "R-G05",
+      "tur": "RT-04",
+      "baslik": "Karışık lisans: Llama topluluk lisansı",
+      "aciklama": "PurpleLlama deposunun kök LICENSE dosyası Llama 3.2 Community License; Prompt Guard ağırlıkları Llama lisans koşullarına (kabul edilebilir kullanım politikası, atıf, büyük kullanıcı eşiği) tabi.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/meta-llama/PurpleLlama/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kamu kurumunda model ağırlıklarının kullanımı için hukuk onayı ve model lisans envanterine kayıt gerekir; açık kaynak politikasıyla çelişebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Model envanterinde lisans alanının boş olması.",
+      "azaltma": "Bileşen bazında lisans incelemesi ve model lisans envanteri.",
+      "id": "BL-00288",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0130",
+      "arac": "Semgrep",
+      "gorev": "R-G06",
+      "tur": "RT-04",
+      "baslik": "Kural lisansı değişti, bazı özellikler topluluk sürümünden çıkarıldı",
+      "aciklama": "Aralık 2024'te Semgrep, açık kaynak sürümün adını Community Edition olarak değiştirdi ve Semgrep Rules License'ı getirdi. Bu lisans, bakımı Semgrep'te olan kuralların ticari, SaaS ya da rakip üründe kullanımını kısıtlıyor. Bazı özellikler (ör. ignore takibi, parmak izi) ücretli platforma taşındı. Buna tepki olarak Ocak 2025'te Opengrep çatallaması başladı.",
+      "tarih": "2024-12",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://socket.dev/blog/opengrep-forks-semgrep",
+        "https://www.thestack.technology/semgrep-fork-opengrep/",
+        "https://docs.semgrep.dev/faq/comparisons/opengrep"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum, Semgrep kayıt kurallarını iç geliştirici platformuna ya da ajanlara hizmet olarak sunarsa lisans ihlali riski doğar.",
+        "Bulgu parmak izi gibi alanlar topluluk sürümünde olmadığı için PR'lar arasında aynı bulgunun takibi ve bastırılması zorlaşır; aynı bulgular tekrar tekrar açılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K18-009",
+        "N-K05-012"
+      ],
+      "erken_sinyal": "Semgrep'in lisans ya da CE değişiklik günlüğünde yeni kısıtlamalar; kural kayıt dosyalarında lisans başlığının değişmesi.",
+      "azaltma": "Kurum kurallarını kendi deposunda ve kendi lisansıyla tut. Motoru soyutla (Semgrep CE ile Opengrep aynı kural sözdizimini kullanır). Kayıt kurallarını dağıtmadan önce hukuk incelemesinden geçir.",
+      "id": "BL-00329",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0391",
+      "arac": "lm-evaluation-harness",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Türkçe görev setlerinde belirsiz lisans",
+      "aciklama": "Harness'taki turkishmmlu görevinin HF veri setinde lisans bildirimi yok ve erişim e-postayla isteniyor; araç kaydında Türkçe kanıt olarak geçen KUIS-AI/cetvel deposunda LICENSE dosyası yok (GitHub lisans API'si 404). Lisanssız içerik varsayılan olarak tüm hakları saklıdır.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/datasets/AYueksel/TurkishMMLU",
+        "https://github.com/KUIS-AI/cetvel",
+        "https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/turkishmmlu"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Türkçe yetkinlik ölçümünü bu setlere dayandırıp sonuçları sözleşme/ihale belgesinde kullanırsa telif ve kullanım hakkı itirazına açık kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-009",
+        "N-K09-014"
+      ],
+      "erken_sinyal": "Veri seti sahibinden lisans yanıtı alınamaması.",
+      "azaltma": "Kullanım iznini yazılı almak veya kuruma ait Türkçe görev seti üretmek.",
+      "id": "BL-00717",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0536",
+      "arac": "BullMQ",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "Redis lisans değişiklikleri",
+      "aciklama": "Redis Mart 2024'te SSPL/RSAL çift kaynak-erişilebilir lisansa geçti; Mayıs 2025'te Redis 8 ile AGPLv3 seçeneği eklendi.",
+      "tarih": "2025-05",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://redis.io/blog/agplv3/",
+        "https://redis.io/blog/redis-adopts-dual-source-available-licensing/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Redis sürümünü veya Valkey gibi çatalı seçmek için lisans değerlendirmesi yapmak zorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kurulu Redis sürümünün lisans değişikliği sonrası olması.",
+      "azaltma": "Lisans envanterinde Redis'i ayrı kalem olarak izlemek; uyumlu çatal kullanmak.",
+      "id": "BL-00856",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1616",
+      "arac": "Kiln",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Masaüstü uygulaması açık kaynak değil; geri alınabilir EULA",
+      "aciklama": "Python kütüphanesi ve REST sunucusu MIT; masaüstü uygulaması 'fair-code' kaynağı görünür EULA ile dağıtılıyor. EULA lisansın geri alınabilir olduğunu, lisans verenin koşulları değiştirebileceğini, yeniden dağıtımın yasak olduğunu, bakım/destek yükümlülüğü bulunmadığını ve sorumluluğun 50 $ ile sınırlı olduğunu; uygulamanın sektörel düzenlemelere uyum için tasarlanmadığını belirtiyor.",
+      "tarih": "2025-01",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Kiln-AI/Kiln/blob/main/LICENSE.txt",
+        "https://github.com/Kiln-AI/Kiln/blob/main/app/EULA.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uzman ve QA ekiplerinin etiketleme için kullandığı masaüstü uygulamasının lisansı tek taraflı değişebilir; kurum içi dağıtım (yazılım deposu, imaj) EULA'ya aykırı olabilir.",
+        "Kamu/kritik altyapı uyum gereksinimleri için satıcı güvencesi yoktur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-002",
+        "N-K23-001",
+        "N-K11-004"
+      ],
+      "erken_sinyal": "EULA 'Last updated' tarihinin değişmesi.",
+      "azaltma": "Kurumsal kullanım için yazılı lisans/sözleşme almak veya yalnız MIT kütüphanesini kullanmak.",
+      "id": "BL-01623",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE.txt kütüphane/sunucu için MIT, masaüstü için EULA diyor; README masaüstünü 'source-available, fair-code' olarak tanımlıyor. EULA: 'revocable' lisans, koşulları değiştirme hakkı, yeniden dağıtım yasağı, bakım/destek yükümlülüğü yok, sorumluluk 50 $ (veya son 12 ay ödemesi) ile sınırlı, HIPAA/FISMA gibi düzenlemelere uygun değil; son EULA değişikliği 28.01.2025.",
+        "kaynak": [
+          "https://github.com/Kiln-AI/Kiln/blob/main/LICENSE.txt",
+          "https://github.com/Kiln-AI/Kiln/blob/main/app/EULA.md",
+          "https://raw.githubusercontent.com/Kiln-AI/Kiln/main/README.md",
+          "https://api.github.com/repos/Kiln-AI/Kiln/commits?path=app/EULA.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1911",
+      "arac": "OpenRewrite",
+      "gorev": "R-G03b",
+      "tur": "RT-04",
+      "baslik": "Aralık 2024 lisans değişikliği: tariflerin önemli kısmı Apache-2.0 dışına çıktı",
+      "aciklama": "13 Aralık 2024'te birçok OpenRewrite tarifinin lisansı Apache-2.0'dan Moderne Source Available License'a (MSAL) ya da Moderne Proprietary License'a geçti; örneğin rewrite-spring MSAL'a taşındı. Resmî lisans sayfasına göre çekirdek ve özgün dil bağlamaları (Java, Groovy, Kotlin, XML, YAML vb.), yapı taşı tarifleri ve topluluk katkısı ağırlıklı tarif modülleri Apache-2.0'da kalıyor; Moderne katkısı ağırlıklı tarifler ile yeni dil modülleri (JavaScript/TypeScript, C#, Python, Go, Ruby, Scala, Android) MSAL altında. MSAL kurumun kendi kodunda kullanmasına izin veriyor, ancak ticarileştirmeyi ya da yönetilen hizmet olarak sunmayı yasaklıyor. Güncel Spring Boot yükseltmeleri gibi tarifler Moderne Proprietary lisansında.",
+      "tarih": "2024-12",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.openrewrite.org/licensing/openrewrite-licensing",
+        "https://github.com/spring-projects/spring-tools/issues/1443"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum, dış yüklenici ya da danışmanlık firması üzerinden tarifleri 'hizmet olarak' çalıştırırsa MSAL ihlali riski doğar.",
+        "Açık kaynak lisans uyum taraması Apache-2.0 bekleyip MSAL/proprietary modülleri yakalamazsa lisans envanteri yanlış olur.",
+        "Java dışındaki dillerde (TS, Python, Go) modernizasyon tarifleri açık kaynak değil."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008",
+        "N-K23-014"
+      ],
+      "erken_sinyal": "Tarif bağımlılıklarında MSAL/Moderne Proprietary lisans başlıkları; BOM yükseltmesinde lisans değişikliği.",
+      "azaltma": "Kullanılan her tarif modülünün lisansını SBOM'a ekleyin. Yüklenici sözleşmelerinde MSAL kısıtını belirtin. Yalnız Apache-2.0 çekirdek ve tariflerle çalışacak bir izin listesi oluşturun.",
+      "id": "BL-01645",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "13 Aralık 2024 değişikliği ve rewrite-spring'in MSAL'a geçişi doğru (spring-tools #1443, rewrite-spring LICENSE.md). Ancak resmî sayfa topluluk katkısı ağırlıklı tarif modüllerinin ve yapı taşı tariflerinin Apache-2.0 kaldığını söylüyor; MSAL, Moderne ağırlıklı tarifler ve yeni dil modülleri için. MSAL şirket içi kullanıma izin veriyor.",
+        "kaynak": [
+          "https://docs.openrewrite.org/licensing/openrewrite-licensing",
+          "https://github.com/spring-projects/spring-tools/issues/1443",
+          "https://api.github.com/repos/openrewrite/rewrite-spring/contents/LICENSE.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2529",
+      "arac": "Bytebase",
+      "gorev": "R-G09",
+      "tur": "RT-04",
+      "baslik": "Açık çekirdek lisansı: özellik/izin kodu ticari lisansta",
+      "aciklama": "LICENSE dosyasına göre adında 'enterprise' geçen dizinler ile 'özellik, izin, rol ve plan etkinleştirmeyi kontrol eden her kod' Enterprise lisansına tabi; bu kodlar üretimde yalnız geçerli abonelikle kullanılabilir, kullanıcının yaptığı değişikliklerin hakları bile Bytebase'e ait. Geri kalanı MIT. GitHub lisansı 'NOASSERTION' olarak görüyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/bytebase/bytebase/blob/main/LICENSE",
+        "https://github.com/bytebase/bytebase/blob/main/LICENSE.enterprise"
+      ],
+      "yasatacagi_sorunlar": [
+        "Topluluk sürümü çatallanıp onay/maskeleme özellikleri açılırsa lisans ihlali olur; kurumun kendi yamaları bile abonelik olmadan üretimde kullanılamaz.",
+        "'Kaynak açık' algısıyla seçilen araç sonradan lisans bütçesi gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kullanılan özelliklerin plan etkinleştirme koduna bağlı olduğu fark edildiğinde.",
+      "azaltma": "Lisans incelemesini seçimden önce yapmak, gerekli özellikleri Enterprise sözleşmesiyle almak.",
+      "id": "BL-02031",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2580",
+      "arac": "Model AI Governance Framework for Agentic AI (IMDA)",
+      "gorev": "R-G03b",
+      "tur": "RT-04",
+      "baslik": "Singapur'a ait rehber niteliğinde çerçeve; Türk mevzuatı karşısında bağlayıcılığı ve uyum kanıtı değeri yok",
+      "aciklama": "IMDA, 22 Ocak 2026'da Davos'ta yayımladığı çerçevenin kuruluşlara ajanları sorumlu biçimde dağıtmaları için 'rehberlik' sağladığını belirtiyor. Çerçeve dört boyut içeriyor: riskleri baştan değerlendirme ve sınırlama, insanları anlamlı biçimde hesap verebilir kılma, teknik kontroller, son kullanıcı sorumluluğu. Çerçeve Singapur'un AI yönetişim yaklaşımının parçası.",
+      "tarih": "2026-01",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/press-releases/2026/new-model-ai-governance-framework-for-agentic-ai"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum bu çerçeveye uyumu KVKK, Türk kamu mevzuatı ya da AB Yapay Zekâ Yasası (AB'li iş ortakları için) karşısında yeterli kanıt sayarsa yasal yükümlülükler eksik kalır.",
+        "Denetçiler Singapur çerçevesine atıfı yerel yükümlülükleri karşılama kanıtı olarak kabul etmeyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-006",
+        "N-K22-010",
+        "N-K21-007"
+      ],
+      "erken_sinyal": "Uyum raporlarında yalnız IMDA çerçevesine atıf yapılması.",
+      "azaltma": "Çerçeveyi iyi uygulama kaynağı olarak kullanın; yasal uyum için KVKK ve ilgili mevzuata ayrı bir eşleme yapın.",
+      "id": "BL-02057",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2761",
+      "arac": "NLP4RE Tools kataloğu",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Erişilebilir araçların %44,6'sında lisans yok",
+      "aciklama": "Erişilebilir 65 aracın 29'unda lisans belirtilmemiş.",
+      "tarih": "2024-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/html/2403.06685"
+      ],
+      "yasatacagi_sorunlar": [
+        "Seçilen araç hukuken yeniden kullanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-004"
+      ],
+      "erken_sinyal": "Lisans taramasında 'bilinmiyor'.",
+      "azaltma": "Lisanssız araçları eleyin.",
+      "id": "BL-02077",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2953",
+      "arac": "brain0",
+      "gorev": "R-G12",
+      "tur": "RT-04",
+      "baslik": "Açık çekirdek: ekip/sunucu özellikleri AGPLv3 + ticari depoda",
+      "aciklama": "Açık depo Apache-2.0; ancak PostgreSQL arka ucu, satır düzeyi güvenlik, çok kiracılı sunucu ve imzalı yetkiler ayrı 'brain0-enterprise' deposunda AGPLv3 + ticari lisansla sunuluyor.",
+      "tarih": "2026-07",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Brain0-ai/brain0#readme",
+        "https://github.com/Brain0-ai/brain0/blob/main/docs/open-core.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip için merkezî karar grafiği istenirse AGPL ağ üzerinden sunum yükümlülüğü ya da ticari lisans gerekir; açık sürüm yalnız tek kullanıcılı yerel SQLite ile sınırlı kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K31-005"
+      ],
+      "erken_sinyal": "Pilotun 'ekip görünümü' ihtiyacına genişlemesi.",
+      "azaltma": "Merkezî kullanım öncesi lisans değerlendirmesi yapın; yerel kullanımda bırakın veya ticari lisansı bütçeleyin.",
+      "id": "BL-02096",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3112",
+      "arac": "Tuist",
+      "gorev": "R-G03b",
+      "tur": "RT-04",
+      "baslik": "Çelişkili ve karma lisanslar: MIT, MPL-2.0, FCL-1.0-MIT ve AGPL-3.0",
+      "aciklama": "Kök LICENSE.md, server/, kura/ ve atlas/ dizinlerinin MPL-2.0 olduğunu söylüyor. Oysa server/LICENSE.md 'Fair Core License 1.0 (FCL-1.0-MIT)'. Bu lisans rekabet eden kullanımı yasaklıyor ve 'lisans anahtarı işlevini değiştirme ya da atlatma' yasağı içeriyor. kura/LICENSE.md ise AGPL-3.0. Kök dosya 2026-09'da güncellendi, server lisans dosyası 2025-07'den beri aynı.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/tuist/tuist/blob/main/LICENSE.md",
+        "https://github.com/tuist/tuist/blob/main/server/LICENSE.md",
+        "https://github.com/tuist/tuist/blob/main/kura/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum self-host sunucuyu çalıştırırsa hangi lisansın bağlayıcı olduğu belirsiz kalır; FCL'nin lisans anahtarı kısıtları ve AGPL'nin ağ üzerinden kaynak sunma yükümlülüğü hukuk incelemesi gerektirir.",
+        "Açık kaynak lisans uyum envanteri tek bir SPDX kimliğiyle doğru tutulamaz (GitHub 'NOASSERTION' gösteriyor)."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Lisans dosyalarında değişiklik commit'leri; lisans tarayıcısında 'NOASSERTION' sonucu.",
+      "azaltma": "Kullanılacak bileşenleri (yalnız MIT istemci ya da sunucu) ayırıp hukuk görüşü alın. Sürüm bazında lisans dosyalarını arşivleyin.",
+      "id": "BL-02107",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Kök LICENSE.md girişte server/kura/atlas için MPL-2.0 diyor, aynı dosyanın alt bölümleri ve dizin dosyaları server=FCL-1.0-MIT (rekabet eden kullanım ve lisans anahtarı atlatma yasağı), kura=AGPL-3.0, atlas=MPL-2.0 gösteriyor. Kök dosya 2026-09-16'da, server lisansı 2025-07-08'de değişmiş. Dahili kullanım FCL'de izinli olduğundan sorun hukuki incelemeyle aşılabilir; şiddet orta.",
+        "kaynak": [
+          "https://github.com/tuist/tuist/blob/main/LICENSE.md",
+          "https://github.com/tuist/tuist/blob/main/server/LICENSE.md",
+          "https://github.com/tuist/tuist/blob/main/kura/LICENSE.md",
+          "https://api.github.com/repos/tuist/tuist/contents/atlas/LICENSE.md",
+          "https://api.github.com/repos/tuist/tuist/commits?path=LICENSE.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4407",
+      "arac": "Yaak",
+      "gorev": "D17-api",
+      "tur": "RT-04",
+      "baslik": "Kaynak MIT, işte kullanım ücretli lisans istiyor",
+      "aciklama": "Resmî fiyat sayfasına göre Yaak kişisel kullanımda ücretsiz; iş ya da gelir getiren kullanımda lisans gerekiyor: bireysel 79$/yıl ya da 399$ ömür boyu, işletme kullanıcı başına 149$/yıl. Aynı sayfa kaynak kodun MIT lisanslı olduğunu yazıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://yaak.app/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipte iş için kullanan her kişi lisans kapsamına girer; lisans takibi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kurum içinde lisanssız kullanım.",
+      "azaltma": "Belgelenen yol: işletme lisansı.",
+      "id": "BL-02532",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Fiyat sayfası 28.09.2026'da okundu.",
+        "kaynak": [
+          "https://yaak.app/pricing"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0003",
+      "arac": "Restate",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "Sunucu BUSL-1.1: açık kaynak değil, kullanım kısıtlı",
+      "aciklama": "Sunucu Business Source License 1.1 ile lisanslı; ek kullanım izni kurum içi üretim kullanımına ve kurum içi yönetilen platforma izin verir, fakat üçüncü tarafların kendi servislerini kaydedip çağırabildiği 'Public Restate Platform Service' yasaktır. Her sürüm 4 yıl sonra Apache-2.0'a döner.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/restatedev/restate/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hat ileride iştiraklere, başka kamu kurumlarına veya yüklenicilere ortak hizmet olarak açılırsa lisans ihlali tartışması doğar.",
+        "Kurumun açık kaynak politikası OSI onaylı lisans şartı koyuyorsa bileşen onaydan geçmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008",
+        "N-K13-013"
+      ],
+      "erken_sinyal": "Platformun kurum dışı kullanıcılara açılma talebi; hukuk biriminden lisans sorusu.",
+      "azaltma": "Kullanım senaryosunu lisansın izin verilen örnekleriyle yazılı eşlemek; gerekirse ticari lisans almak.",
+      "id": "BL-00010",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0005",
+      "arac": "Inngest",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "Sunucu SSPL-1.0 (3 yıl sonra Apache-2.0)",
+      "aciklama": "Sunucu Server Side Public License 1.0 ile lisanslı; her sürüm yayımlanmasının üçüncü yıl dönümünde Apache-2.0'a döner. SSPL OSI onaylı değildir; hizmet olarak sunma durumunda tüm hizmet yığınının kaynağını açma yükümlülüğü getirir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/inngest/inngest/blob/main/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum politikası SSPL'yi yasaklıyorsa güncel sürümler kullanılamaz; yalnız 3 yıllık eski (Apache-2.0'a dönmüş) sürümler kalır.",
+        "Hat başka kurumlara hizmet olarak açılırsa SSPL md. 13 yükümlülükleri tartışma yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Lisans tarama aracında SSPL uyarısı.",
+      "azaltma": "Hukuk onayını kullanım senaryosuyla almak; yalnız kurum içi kullanımda tutmak.",
+      "id": "BL-00016",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0018",
+      "arac": "Windmill",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 ve tescilli kurumsal dosyaların karışık lisansı",
+      "aciklama": "Depo lisansı dosya bazında AGPL-3.0/Apache-2.0 ve tescilli EE koddan oluşuyor (GitHub 'NOASSERTION' gösteriyor).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/windmill-labs/windmill"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Windmill'i değiştirip iştiraklere ağ üzerinden sunarsa AGPL kaynak paylaşım yükümlülüğü doğar.",
+        "EE kodunun lisanssız etkinleştirilmesi hukuki risk yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde AGPL bileşenlerin değiştirilmiş hâlde dağıtılması.",
+      "azaltma": "Değiştirmeden kullanın veya değişiklikleri AGPL uyumlu yayımlayın; EE özellikleri için lisans alın.",
+      "id": "BL-00064",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0063",
+      "arac": "Google Antigravity (Antigravity CLI)",
+      "gorev": "R-G02",
+      "tur": "RT-04",
+      "baslik": "Hizmet şartları: üçüncü taraf kullanımda hesap askıya alma ve kota değişimleri",
+      "aciklama": "Eylül 2026'da Antigravity hizmet şartlarının üçüncü taraf kullanımda Google hesabının askıya alınabileceğini öngördüğü gündeme geldi; Nisan 2026'da Antigravity/Gemini CLI nedeniyle hesap askıya alınması issue'su açıldı, Mart 2026'da kota değişiklikleri tartışıldı.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://news.ycombinator.com/item?id=49548452",
+        "https://github.com/google-gemini/gemini-cli/issues/25743",
+        "https://old.reddit.com/r/google_antigravity/comments/1rr7vr4/did_the_quotas_change_again/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomasyon/proxy ile kullanılan hesabın askıya alınması kurumsal Google hesabının diğer hizmetlerini de etkileyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Hesap uyarıları, kota düşüşleri.",
+      "azaltma": "Kurumsal lisans ve API anahtarı kanalını kullanın; tüketici hesaplarını otomasyonda kullanmayın.",
+      "id": "BL-00175",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0094",
+      "arac": "Claude Squad",
+      "gorev": "R-G02",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 güçlü copyleft",
+      "aciklama": "Proje AGPL-3.0 lisanslı; değiştirilip ağ üzerinden hizmet olarak sunulursa kaynak kodu paylaşma yükümlülüğü doğar.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/smtg-ai/claude-squad/blob/main/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum aracı değiştirip iç platformda çok kullanıcılı servis olarak sunarsa lisans yükümlülükleri tetiklenebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Değiştirilmiş sürümün servis olarak sunulması.",
+      "azaltma": "Değiştirmeden yerel CLI olarak kullanın; hukuk onayı alın.",
+      "id": "BL-00223",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0152",
+      "arac": "Arize Phoenix",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "Elastic License 2.0: OSI açık kaynak değil, yönetilen hizmet olarak sunma yasak",
+      "aciklama": "Depodaki LICENSE dosyası ELv2'dir. Yazılımı 'üçüncü taraflara barındırılan veya yönetilen hizmet olarak' sunmak yasaktır ve lisans anahtarı işlevselliği atlatılamaz. Denetim kaydı, kurumsal SSO ve self-host AX gibi ölçekli kurumsal özellikler ticari Arize AX Enterprise katmanında yer alıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Arize-ai/phoenix/blob/main/LICENSE",
+        "https://arize.com/pricing/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum ya da bağlı BT şirketi Phoenix'i bağlı kuruluşlara veya diğer kamu birimlerine 'izleme hizmeti' olarak sunmak isterse ELv2 ihlali riski doğar ve hukuk görüşü gerekir.",
+        "Açık kaynak lisans envanterinde Phoenix 'açık kaynak' diye sınıflanırsa lisans uyum raporu yanlış olur. Katalogdaki ifade düzeltilmelidir.",
+        "Değiştirilemez denetim kaydı ve SSO gibi gereksinimler için AX Enterprise lisansı gerekebilir ve bütçe dışı bir kalem çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008",
+        "N-K19-002"
+      ],
+      "erken_sinyal": "Hizmet kataloğunda Phoenix'in başka kurumlara 'paylaşımlı hizmet' olarak açılması teklif edilir; lisans taramasında ELv2 bayrağı çıkar.",
+      "azaltma": "Kullanımı yalnız kurum içi tüketime sınırlayın. Lisans envanterinde ELv2'yi 'kaynak erişilebilir' diye sınıflayın. Kurumsal özellik ihtiyacını satın alma öncesinde yazılı olarak netleştirin.",
+      "id": "BL-00391",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0158",
+      "arac": "AgentOps",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "Platform (app/) Elastic License 2.0 ile dağıtılıyor; yalnız SDK MIT",
+      "aciklama": "Depo kökündeki LICENSE MIT, ancak app/LICENSE dosyası Elastic License 2.0. app/README de ELv2 rozeti taşıyor. Yani 'açık kaynaklandı' denen sunucu tarafı OSI açık kaynak değil ve yönetilen hizmet olarak sunulamaz.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/AgentOps-AI/agentops/blob/main/app/LICENSE",
+        "https://github.com/AgentOps-AI/agentops/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Katalogda 'MIT' diye geçen araç self-host edildiğinde ELv2 yükümlülükleri doğar. Bağlı kuruluşlara hizmet olarak sunulursa lisans ihlali riski oluşur ve lisans envanteri yanlış kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Lisans taramasında aynı depoda iki farklı lisans çıkar.",
+      "azaltma": "SDK ve platform lisanslarını envanterde ayrı kaydedin; self-host kararını hukuk onayına bağlayın.",
+      "id": "BL-00417",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0168",
+      "arac": "LiveCodeBench",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Yarışma sitelerinden derlenen problemler; belirsiz veri lisansı",
+      "aciklama": "Problemler LeetCode, AtCoder ve Codeforces'tan toplanıyor; HF veri kartında lisans yalnız 'cc' olarak belirtilmiş (hangi CC sürümü olduğu belirsiz). Kaynak sitelerin kullanım koşulları ayrıca geçerli olabilir.",
+      "tarih": "2025-07",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/datasets/livecodebench/code_generation_lite"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sonuçların veya problem örneklerinin kurum raporlarında/tedarik belgelerinde kullanımı telif itirazına açık kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-002"
+      ],
+      "erken_sinyal": "Kaynak sitelerden kaldırma talepleri.",
+      "azaltma": "Yalnız iç değerlendirme amaçlı kullanmak; problem metinlerini dışa yayımlamamak.",
+      "id": "BL-00458",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0206",
+      "arac": "Qwen3.8-Flash-Next",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Qwen Community License: MaaS veya 'AI Work Assistant' işi yapan kuruluş/iştirak için ayrı lisans",
+      "aciklama": "Lisansa göre lisans alan veya bağlı şirketlerinden biri model-hizmet ya da kodlama/ofis üretkenliği odaklı bağımsız bir 'AI Work Assistant' işi yürütüyorsa, ticari kullanım öncesi Qwen'den ayrı lisans alınmalı; iç kullanım, model, çıktıları veya yetenekleri üçüncü taraflara sunulmadığı sürece muaf.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun bir iştiraki kodlama asistanı ürünü sunuyorsa lisans tüm grubu bağlar.",
+        "İç kullanım muafiyeti 'çıktıların üçüncü taraflara sunulmaması' şartına bağlı; ajanların ürettiği kod dışarıya teslim edilen üründe yer alıyorsa hukuk yorumu gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "Grup şirketlerinde yapay zekâ asistanı ürünü; dış teslimat projelerinde kullanım.",
+      "azaltma": "Hukuk görüşü; lisans envanterinde iştirak koşulu.",
+      "id": "BL-00542",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0216",
+      "arac": "Mistral Small 4",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Mistral'in yeni sürümlerde gelir eşikli lisansa kayma eğilimi",
+      "aciklama": "Mistral Small 4 Apache-2.0; ancak aynı üreticinin Devstral 2 123B ve Mistral Medium 3.5 modelleri aylık 20 M$ gelir eşiğiyle hakları kaldıran 'Modified MIT' lisansıyla yayımlandı.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/main/LICENSE",
+        "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir sonraki Small sürümüne 'aynı lisans' varsayımıyla geçilirse kurum lisans ihlaline düşebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K09-013"
+      ],
+      "erken_sinyal": "Yeni sürüm kartında lisans alanının 'other' olması.",
+      "azaltma": "Her sürüm yükseltmesinde lisans kontrolünü zorunlu adım yapma.",
+      "id": "BL-00584",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0218",
+      "arac": "Devstral Small 2",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Aynı ailenin büyük sürümüyle lisans karışıklığı",
+      "aciklama": "24B sürüm Apache-2.0; ancak aynı Devstral 2 ailesinin 123B sürümü aylık 20 M$ gelir eşiğiyle hakları kaldıran lisansta. Ad benzerliği nedeniyle yanlış model çekilmesi mümkün.",
+      "tarih": "2025-12",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512",
+        "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomatik model aynalama betiği 'Devstral 2' adıyla 123B sürümü çekerse kurum farkında olmadan lisans ihlaline düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "İç kayıt defterinde 123B sürümün görülmesi.",
+      "azaltma": "Model kaydında tam depo adı ve lisans alanı; izin listesi.",
+      "id": "BL-00588",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0223",
+      "arac": "NVIDIA Nemotron 3 Super",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Ultra/Lightning'den farklı lisans: NVIDIA Nemotron Open Model License (ABD hukuku, ihracat maddesi)",
+      "aciklama": "Super, OpenMDW yerine NVIDIA Nemotron Open Model License ile yayımlandı: ABD ve Delaware hukuku, Santa Clara (Kaliforniya) mahkemeleri münhasır yetkili; EAR ve OFAC dahil ihracat/yaptırım mevzuatına uyum yükümlülüğü; model veya çıktısının ihlal ettiği iddiasıyla dava açılırsa lisans sona eriyor.",
+      "tarih": "2025-12",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-nemotron-open-model-license/",
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16"
+      ],
+      "yasatacagi_sorunlar": [
+        "Aynı ailedeki modellerin aynı lisansta olduğu varsayılırsa uyuşmazlıkta Türk kurumu ABD mahkemesine tabi bir lisansla karşılaşır.",
+        "İhracat maddesi, yaptırım listelerindeki taraflarla ortak projelerde kullanımı kısıtlar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Lisans envanterinde aile düzeyinde tek kayıt.",
+      "azaltma": "Model bazında lisans kaydı ve hukuk incelemesi.",
+      "id": "BL-00611",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0500",
+      "arac": "Task Master",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "MIT + Commons Clause: OSI onaylı açık kaynak değil",
+      "aciklama": "Lisans, yazılımın işlevinden değer alan ücretli hizmet/barındırma/danışmanlık sunumunu ('Sell') yasaklayan Commons Clause koşulunu içeriyor.",
+      "tarih": "2025",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/eyaltoledano/claude-task-master/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun entegratör/tedarikçi firmalarla ücretli hizmet kapsamında aracı işletmesi lisans ihlali sorusu doğurur; açık kaynak politikası 'OSI onaylı' şartı arıyorsa kullanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-004"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde lisansın standart dışı çıkması.",
+      "azaltma": "Hukuk görüşü alın; gerekirse OSI lisanslı alternatif seçin.",
+      "id": "BL-00791",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0515",
+      "arac": "Resonate",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "Bazı arka uçlar BUSL-1.1",
+      "aciklama": "resonate-on-nats ve resonate-on-scylladb depoları Business Source License 1.1 ile lisanslı.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/resonatehq/resonate-on-nats",
+        "https://github.com/resonatehq/resonate-on-scylladb"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ölçek için bu arka uçlar seçilirse lisans kısıtları devreye girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Arka uç seçiminde BUSL bileşeni.",
+      "azaltma": "Apache-2.0 lisanslı Postgres arka ucu ile sınırlı kalmak.",
+      "id": "BL-00814",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0516",
+      "arac": "LittleHorse",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "Lisans geçmişi: SSPL'den AGPL-3.0'a geçiş",
+      "aciklama": "Sunucu 10 Nisan 2025'te SSPL'den AGPL-3.0'a yeniden lisanslandı; AGPL ağ üzerinden sunulan değiştirilmiş sürümler için kaynak açma yükümlülüğü getirir. Lisansın tek şirket tarafından değiştirilebildiği görüldü.",
+      "tarih": "2025-04",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/littlehorse-enterprises/littlehorse/commit/717a5849",
+        "https://www.infoq.com/news/2025/04/littlehorse/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum sunucuyu değiştirip iştiraklere/başka kurumlara hizmet olarak sunarsa değişiklik kaynağını paylaşmak zorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Sunucu çekirdeğine kurum içi yama ihtiyacı.",
+      "azaltma": "Sunucuyu değiştirmeden kullanmak; lisans değişikliklerini izlemek.",
+      "id": "BL-00817",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0544",
+      "arac": "Faktory",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "Sunucu AGPL; gelişmiş özellikler Enterprise",
+      "aciklama": "Sunucu AGPL-3.0 (istemci kütüphaneleri hariç); gelişmiş özellikler ticari Enterprise sürümde.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/contribsys/faktory/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sunucu değiştirilip ağda sunulursa kaynak paylaşımı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Sunucuya kurum içi yama ihtiyacı.",
+      "azaltma": "Değiştirmeden kullanmak.",
+      "id": "BL-00868",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0624",
+      "arac": "Mattermost (Playbooks dahil)",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "AGPL kaynak ile MIT derlenmiş ikili ve ticari sürüm karışıklığı",
+      "aciklama": "Kaynak AGPL-3.0, derlenmiş Team Edition MIT, kurumsal özellikler ticari lisanslı; GitHub lisans alanı 'NOASSERTION'.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mattermost/mattermost",
+        "https://docs.mattermost.com/product-overview/editions-and-offerings"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kaynaktan değiştirerek derlenen sürümün iştiraklere sunulması AGPL yükümlülüğü doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Özel yamalı sunucu derlemeleri.",
+      "azaltma": "Resmî ikilileri kullanın; değişiklik gerekiyorsa hukuk onayı.",
+      "id": "BL-00980",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0711",
+      "arac": "GrowthBook",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Aynı depoda MIT ve ticari 'GrowthBook Enterprise License' kodu",
+      "aciklama": "LICENSE dosyasına göre back-end/front-end/shared altındaki enterprise dizinleri GrowthBook Enterprise License ile, geri kalanı MIT ile lisanslı. Çatallama veya iç geliştirme sırasında enterprise dizinlerine dokunmak lisans ihlali doğurabilir.",
+      "tarih": "2025-01",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/growthbook/growthbook/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlar depoyu çatallayıp özelleştirirken enterprise dizinindeki kodu değiştirir veya kullanırsa kurum farkında olmadan ticari lisans ihlaline düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-008"
+      ],
+      "erken_sinyal": "Çatalda enterprise dizinlerinde değişiklik.",
+      "azaltma": "Çatal politikasında enterprise dizinlerini hariç tutmak; lisans tarayıcısıyla dizin bazlı kontrol.",
+      "id": "BL-01081",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0712",
+      "arac": "Flipt",
+      "gorev": "R-G09",
+      "tur": "RT-04",
+      "baslik": "v2 sunucusu OSI onaylı olmayan Fair Core License ile; lisans anahtarı mekanizması korunuyor",
+      "aciklama": "Flipt v2 sunucusu FCL-1.0-MIT lisanslıdır: rakip kullanım (ikame eden ticari ürün/hizmet) yasaktır, lisans anahtarı işlevini taşımak, devre dışı bırakmak veya atlatmak yasaktır; her sürüm yayımından 2 yıl sonra MIT'e döner. v2.0.0 2025-08-12'de yayımlandı; v1 GPL-3.0 lisanslı main dalında kalmıştır.",
+      "tarih": "2025-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/flipt-io/flipt/blob/v2/LICENSE",
+        "https://docs.flipt.io/v2/licensing",
+        "https://github.com/flipt-io/flipt/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Flipt'i bağlı kuruluşlara veya yüklenicilere 'bayrak hizmeti' olarak sunarsa 'rakip kullanım' yorumu hukuk incelemesi gerektirir.",
+        "Açık kaynak politikası yalnız OSI lisanslarına izin veren kamu kurumlarında v2 kullanımı istisna onayı ister."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Lisans envanteri taramasında NOASSERTION/FCL tespiti.",
+      "azaltma": "Hukuk biriminden FCL için yazılı görüş alın; yalnız iç kullanımla sınırlayın; 2 yıllık MIT dönüş tarihlerini envantere işleyin.",
+      "id": "BL-01085",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0810",
+      "arac": "Doc Detective",
+      "gorev": "R-G06b",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 lisansı",
+      "aciklama": "Depo AGPL-3.0 lisanslı. Değiştirilmiş sürüm ağ üzerinden hizmet olarak sunulursa kaynak kodunun paylaşılması gerekiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/doc-detective/doc-detective"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi bir doküman doğrulama hizmetine gömülüp değiştirilirse kaynak açma yükümlülüğü doğar; hukuk onayı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K07-002"
+      ],
+      "erken_sinyal": "Aracın değiştirilip iç portalda servis olarak sunulması.",
+      "azaltma": "Değiştirmeden CLI olarak kullanın, hukuk biriminden AGPL görüşü alın.",
+      "id": "BL-01116",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0820",
+      "arac": "Spec Workflow MCP",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "GPL-3.0",
+      "aciklama": "Proje GPL-3.0 lisanslı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Pimzino/spec-workflow-mcp"
+      ],
+      "yasatacagi_sorunlar": [
+        "Değiştirilip tedarikçilere dağıtılan kurum sürümü kaynak açma yükümlülüğü doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-001"
+      ],
+      "erken_sinyal": "Lisans taramasında GPL.",
+      "azaltma": "Değiştirmeden kullanın ya da hukuk onayı alın.",
+      "id": "BL-01127",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0845",
+      "arac": "ISO/IEC/IEEE 29148:2018",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Ücretli ve telifli standart metni",
+      "aciklama": "Standart ücretli ve telif korumalı; kalite özelliklerini ve örnek kalıpları kural motoruna, ajan istemlerine veya kurum wiki'sine birebir aktarmak lisans gerektirir. Resmî sayfa bot korumalı olduğu için güncel fiyat ve revizyon durumu bu çalışmada doğrulanamadı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.iso.org/standard/72089.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Standart metni ajan bağlamına kopyalanırsa telif ihlali riski oluşur; kural setinin kaynağı denetimde gösterilemez.",
+        "Her ekip için ayrı kopya satın alınmazsa kural setine erişim birkaç kişide kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-002",
+        "N-K01-006"
+      ],
+      "erken_sinyal": "Kural setinde standarttan birebir alıntıların görülmesi; satın alma kaydında tek lisans.",
+      "azaltma": "Kuruma özgü, kendi cümleleriyle yazılmış ve standarda yalnız atıf yapan kural kataloğu oluşturun; kurumsal lisans alın.",
+      "id": "BL-01160",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0870",
+      "arac": "Zingg",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 ve ticari lisans yönlendirmesi",
+      "aciklama": "README AGPL v3.0 lisansını ve farklı lisans isteyenlerin şirkete yazmasını belirtiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/zinggAI/zingg/blob/main/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Zingg'i değiştirip ağ üzerinden iç kullanıcılara ya da tedarikçilere hizmet olarak sunmak kaynak açma yükümlülüğü doğurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde AGPL bileşen tespiti.",
+      "azaltma": "Değiştirmeden kullanın veya ticari lisans değerlendirin.",
+      "id": "BL-01192",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1005",
+      "arac": "GoReplay",
+      "gorev": "R-G06b",
+      "tur": "RT-04",
+      "baslik": "Lisans belirsizliği ve Pro ayrımı",
+      "aciklama": "GitHub lisansı 'Other' (NOASSERTION) olarak gösteriyor; envanter LGPL-3.0 ve ticari Pro diyor. Bazı özellikler ticari sürümde.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/probelabs/goreplay"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hukuk incelemesi yapılmadan dağıtıma gömülürse lisans uyumsuzluğu çıkabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-011"
+      ],
+      "erken_sinyal": "SBOM'da lisansın 'unknown' görünmesi.",
+      "azaltma": "Lisans dosyasını hukuk birimine inceletin, Pro kullanımını sözleşmeye bağlayın.",
+      "id": "BL-01253",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1035",
+      "arac": "Codecov",
+      "gorev": "R-G06",
+      "tur": "RT-04",
+      "baslik": "Kaynak 'Fair Source' (FSL) lisanslı; OSI açık kaynak değil",
+      "aciklama": "Codecov kaynağı rekabet yasağı içeren Functional Source License ile yayımlanıyor. Kod iki yıl sonra Apache ya da MIT'e dönüşüyor. Self-hosted deposunun lisansı GitHub'da NOASSERTION olarak görünüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://about.codecov.io/blog/codecov-is-now-fair-source/",
+        "https://github.com/codecov/self-hosted"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Codecov'u değiştirip iç platform olarak sunarsa rekabet yasağı maddesi hukuki inceleme gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Lisans metninde değişiklik.",
+      "azaltma": "Self-host kullanımını hukuk onayına bağla; CLI'ın (Apache-2.0) lisansını ayrıca değerlendir.",
+      "id": "BL-01289",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1099",
+      "arac": "OpenAI Evals",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Kayıt defterindeki bazı veri setleri ticari olmayan (CC BY-NC) lisanslı",
+      "aciklama": "LICENSE.md'ye göre MIT lisansı veri setleri hariç tüm depoya uygulanıyor; veri setleri arasında CC BY-NC 4.0, CC BY-SA/GFDL ve WordNet lisanslı bileşenler var ve kullanıcıdan özgün kaynağı kontrol etmesi isteniyor.",
+      "tarih": "2024-12",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/openai/evals/blob/main/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hazır eval'ler ticari bir ürünün kalite kapısında veya ücretli hizmette kullanılırsa NC lisans ihlali doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-001"
+      ],
+      "erken_sinyal": "Lisans taramasında NC etiketli veri.",
+      "azaltma": "Kullanılan her eval'in veri lisansını envantere almak; NC setleri yalnız araştırma ortamında tutmak.",
+      "id": "BL-01316",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1171",
+      "arac": "TruffleHog",
+      "gorev": "R-G06b",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 ve CLA",
+      "aciklama": "3.0 sürümünden beri TruffleHog AGPL-3.0 lisanslı; katkı için CLA isteniyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/trufflesecurity/trufflehog"
+      ],
+      "yasatacagi_sorunlar": [
+        "Değiştirilip kurum içi bir hizmet olarak sunulursa kaynak kodu paylaşma yükümlülüğü doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009"
+      ],
+      "erken_sinyal": "Aracın çatallanıp iç platforma gömülmesi.",
+      "azaltma": "Değiştirmeden CLI olarak kullanın, hukuk görüşü alın.",
+      "id": "BL-01361",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1218",
+      "arac": "Infisical",
+      "gorev": "R-G06b",
+      "tur": "RT-04",
+      "baslik": "MIT çekirdek ile lisanslı 'ee' kodu aynı depoda",
+      "aciklama": "GitHub lisansı NOASSERTION olarak gösteriyor. Fiyat sayfası MIT lisanslı çekirdeğin ücretsiz olduğunu, desteklenen ve lisanslı kurum içi kurulumun kurumsal sözleşmeyle sunulduğunu söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Infisical/infisical",
+        "https://infisical.com/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi kurulumda ee özellikleri lisanssız etkinleştirilirse sözleşme ihlali oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004"
+      ],
+      "erken_sinyal": "ee dizinindeki özelliklerin lisans anahtarı olmadan kullanılması.",
+      "azaltma": "Hangi özelliklerin lisans gerektirdiğini envantere yazın.",
+      "id": "BL-01399",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1287",
+      "arac": "CISO Assistant",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "AGPL ve ticari lisans karışık; imaj seçimi lisansı belirliyor, CLA var",
+      "aciklama": "Kod enterprise dizini dışında AGPLv3, enterprise dizini intuitem ticari lisansı altında. ghcr.io/intuitem/ciso-assistant-community/ altındaki imajlar AGPL; doğrudan ghcr.io/intuitem/ altındakiler ticari lisanslı ve sözleşme gerektiriyor. Depoda Katkıcı Lisans Sözleşmesi (CLA) var.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/intuitem/ciso-assistant-community/blob/main/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yanlış imaj yoluyla ticari sürümü sözleşmesiz çalıştırmak lisans ihlali olur.",
+        "AGPL kodu değiştirilip ağ üzerinden başka kurumlara sunulursa kaynağı açma yükümlülüğü doğar; CLA ileride lisans değişikliğini mümkün kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Dağıtım manifestlerinde ghcr.io/intuitem/ kökünden imaj çekilmesi.",
+      "azaltma": "İmaj kaynağını izin listesiyle sabitlemek; AGPL yükümlülüklerini hukuk birimine onaylatmak.",
+      "id": "BL-01436",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1329",
+      "arac": "Grafana",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 ve açık çekirdek ayrımı",
+      "aciklama": "Grafana, Loki ve Tempo 2021'de Apache-2.0'dan AGPL-3.0'a geçti. Değiştirilmiş sürümün ağ üzerinden kullanıcılara sunulması kaynak paylaşım yükümlülüğü doğurur. Raporlama, bazı kurumsal veri kaynağı eklentileri ve gelişmiş kimlik/izin özellikleri ticari Enterprise sürümündedir.",
+      "tarih": "2021-04",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://grafana.com/blog/2021/04/20/grafana-loki-tempo-relicensing-to-agplv3/",
+        "https://grafana.com/licensing/",
+        "https://github.com/grafana/grafana/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Grafana'yı çatallayıp iç geliştirici portalına gömerse veya iştiraklere hizmet olarak sunarsa AGPL kaynak açma yükümlülüğü hukuk incelemesi gerektirir; kamu alımında lisans onayı gecikir.",
+        "Portföy raporlaması ve veri kaynağı bazlı izinler Enterprise'da kalırsa ücretsiz sürümle SAFe katmanlı görünürlük eksik kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K19-007"
+      ],
+      "erken_sinyal": "Kaynak kodda Grafana değişikliği içeren iç çatal, Enterprise özelliği gerektiren gereksinim listesi.",
+      "azaltma": "Grafana'yı değiştirmeden kullanın, özelleştirmeyi eklenti/API ile yapın; açık kaynak lisans envanterinde AGPL bileşenleri ayrıca işaretleyin.",
+      "id": "BL-01460",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1463",
+      "arac": "SimpleRisk",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "MPL-2.0 çekirdek, ticari 'Extras' ve lisans denetimi",
+      "aciklama": "Çekirdek Mozilla Public License 2.0; ek modüller ticari ve kurulumda günlük lisans denetimi görevi çalışıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/simplerisk/code/blob/master/simplerisk/LICENSE",
+        "https://github.com/simplerisk/code/blob/master/simplerisk/includes/jobs/core_license_check.php"
+      ],
+      "yasatacagi_sorunlar": [
+        "Risk kaydı, kurumsal SSO veya ek çerçeveler için ücretli modüller gerekebilir; günlük lisans denetimi dış bağlantı gerektirebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K21-005"
+      ],
+      "erken_sinyal": "Kapalı ağda lisans denetimi hataları.",
+      "azaltma": "Gerekli modülleri baştan belirleyin; dış bağlantı gereksinimini satıcıyla netleştirin.",
+      "id": "BL-01567",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1465",
+      "arac": "rmToo",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Lisans GPL v3 (haritada 'bilinmiyor')",
+      "aciklama": "Depodaki COPYING dosyası malzemenin GPL v3 ile dağıtılabileceğini söylüyor; PyPI meta verisi GPL-3.0-or-later.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/florath/rmtoo/blob/master/COPYING",
+        "https://pypi.org/project/rmtoo/"
+      ],
+      "yasatacagi_sorunlar": [
+        "rmToo'yu değiştirip kurum aracına gömerek tedarikçilere dağıtmak copyleft yükümlülüğü doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-010",
+        "N-K01-013"
+      ],
+      "erken_sinyal": "Lisans taramasında GPL tespiti.",
+      "azaltma": "Değiştirmeden araç olarak kullanın; gömülü dağıtımda hukuk onayı alın.",
+      "id": "BL-01574",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1483",
+      "arac": "Infinitic",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "MIT + Commons Clause: OSI onaylı değil",
+      "aciklama": "LICENSE dosyası MIT'e 'Commons Clause' koşulu ekler; değeri yazılımdan gelen ürün/hizmeti ücret karşılığı sunmayı (barındırma, danışmanlık, destek ücretleri dahil) yasaklar.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/infiniticio/infinitic/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kuruma ücretli destek veren yüklenici veya kamu kurumları arası paylaşılan hizmet modeli lisans ihlali tartışması doğurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Yüklenici sözleşmesinde Infinitic desteği kalemi.",
+      "azaltma": "Hukuk onayı; ticari lisans görüşmesi.",
+      "id": "BL-01589",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1556",
+      "arac": "HashiCorp Boundary",
+      "gorev": "R-G05",
+      "tur": "RT-04",
+      "baslik": "BUSL-1.1 lisansı: açık kaynak değil, rakip barındırılan hizmet kısıtı",
+      "aciklama": "Boundary 0.14.0+ BUSL-1.1 ile dağıtılıyor (lisans veren IBM). Üretimde iç kullanım serbest; ürünü üçüncü taraflara rakip barındırılan veya gömülü hizmet olarak sunmak yasak; her sürüm 4 yıl sonra MPL 2.0'a dönüşüyor.",
+      "tarih": "2023-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/hashicorp/boundary/blob/main/LICENSE",
+        "https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum, ajan erişim platformunu diğer kamu kurumlarına veya iştiraklere hizmet olarak sunarsa lisans ihlali tartışması doğabilir; hukuk birimi onayı gerekir.",
+        "Açık kaynak tedarik politikası olan kamu projelerinde BUSL bileşeni uyumsuzluk bulgusu üretir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "Açık kaynak lisans taramasında BUSL bulgusu; platformun kurum dışına sunulması planı.",
+      "azaltma": "Kullanım modelini hukuken belgelemek; gerekirse ticari lisans ya da açık lisanslı alternatif değerlendirmek.",
+      "id": "BL-01610",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "LICENSE BUSL-1.1'i, rakip barındırılan/gömülü sunum kısıtını ve 4 yıl sonra MPL 2.0'a geçişi doğruluyor; lisans veren artık IBM. Ancak ek kullanım izni iç üretim kullanımına izin verdiği için risk yalnız rakip hizmet sunanlar için önemli.",
+        "kaynak": [
+          "https://github.com/hashicorp/boundary/blob/main/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1872",
+      "arac": "INCOSE Guide to Writing Requirements (GtWR)",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Tam rehber ücretli; kural setinin araçlara gömülmesi lisans sorusu",
+      "aciklama": "Tam rehber INCOSE üyelerine ücretsiz, diğerlerine ücretli; kamuya açık olan özet sayfadır. Kural metnini kurum aracına ya da ajan istemlerine gömmenin lisans koşulları bu çalışmada doğrulanamadı (INCOSE sitesi bot korumalı).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.incose.org/docs/default-source/working-groups/requirements-wg/guidetowritingrequirements/incose_rwg_gtwr_v4_summary_sheet.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kural kataloğu ajan istemine kopyalanırsa telif riski; üye olmayan ekipler kuralların gerekçesine erişemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-001"
+      ],
+      "erken_sinyal": "Kural setinin kaynağına ilişkin hukuk birimi sorusu.",
+      "azaltma": "Kurumsal üyelik/lisans alın; kuralları kurumun kendi cümleleriyle kodlayın ve atıf verin.",
+      "id": "BL-01639",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2214",
+      "arac": "Moderne",
+      "gorev": "R-G03b",
+      "tur": "RT-04",
+      "baslik": "Tarif ve platform lisansları: Moderne Proprietary ve MSAL",
+      "aciklama": "Moderne'in ticari tarifleri 'Moderne Proprietary License', topluluk tarifleri ise 'Moderne Source Available License' altında. MSAL, tariflerin ticarileştirilmesini ya da başkalarına yönetilen hizmet olarak sunulmasını yasaklıyor.",
+      "tarih": "2024-12",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.moderne.io/licensing/overview",
+        "https://docs.moderne.io/licensing/moderne-source-available-license",
+        "https://docs.openrewrite.org/licensing/openrewrite-licensing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sözleşme sona erdiğinde proprietary tariflerle yapılan dönüşümler tekrarlanamaz; iç platform ekibinin tarifleri iştiraklere 'hizmet' olarak sunması lisans sorununa yol açabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kullanılan tariflerin lisans dağılımı.",
+      "azaltma": "Kritik dönüşümleri Apache-2.0 tariflerle ya da kurum içi yazılmış tariflerle yapın. Lisans envanteri tutun.",
+      "id": "BL-01943",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2389",
+      "arac": "FastGPT",
+      "gorev": "R-G03b",
+      "tur": "RT-04",
+      "baslik": "Özel 'FastGPT Open Source License': çok kiracılı SaaS yasağı ve tek taraflı lisans değişikliği hakkı",
+      "aciklama": "Lisans Apache-2.0'a ek koşullar getiriyor: yazılı izin olmadan FastGPT benzeri çok kiracılı SaaS işletilemez, konsoldaki logo ve telif bilgisi kaldırılamaz. Katkıcılar, üreticinin açık kaynak sözleşmesini 'daha katı ya da gevşek' hâle getirebileceğini kabul ediyor. Arayüz tasarımı 'görünüm patenti' ile korunuyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/labring/FastGPT/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun iç platform ekibi FastGPT'yi birden çok birime (ART'lar, iştirakler) çok kiracılı hizmet olarak sunarsa lisans ihlali tartışması doğabilir.",
+        "Gelecek sürümlerde lisansın sıkılaştırılması hukuki olarak önceden kabul edilmiş durumda."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "LICENSE dosyasında değişiklik; ticari lisans taleplerine yönlendiren sürüm notları.",
+      "azaltma": "Hukuk biriminden çok kiracılı iç kullanım için yazılı görüş alın. Sürümü sabitleyin ve lisans değişikliğini izleyin.",
+      "id": "BL-02002",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "LICENSE dosyası Apache-2.0 + ek koşulları (yazılı izinsiz FastGPT benzeri çok kiracılı SaaS yasağı, logo/telif kaldırılamaz, katkıcı kodu için lisansı sıkılaştırma/gevşetme hakkı, görünüm patenti) aynen içeriyor. Kısıtlar yalnız çok kiracılı SaaS/beyaz etiket kullanımını bağladığından kurum içi kullanımda şiddet abartılı.",
+        "kaynak": [
+          "https://github.com/labring/FastGPT/blob/main/LICENSE"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2537",
+      "arac": "MeterSphere",
+      "gorev": "R-G06",
+      "tur": "RT-04",
+      "baslik": "GPL'e eklenen koşullar: logo kaldırma yasağı ve lisansı kısıtlama hakkı",
+      "aciklama": "LICENSE dosyası 24 Mart 2026'da katkıcı koşullarıyla revize edildi. Dosya GPLv3'e ek koşullar ekliyor. Buna göre web arayüzündeki logolar kaldırılamaz. Katkıcılar, bakımcının lisansı daha kısıtlayıcı hâle getirebileceğini ve katkılarının ticari amaçla kullanılabileceğini kabul ediyor.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/metersphere/metersphere/blob/v3.x/LICENSE",
+        "https://github.com/metersphere/metersphere"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum arayüzü kendi kimliğine uyarlayamaz. İleride lisans daraltılırsa kurumun katkıları da buna tabi olur. Bu ek koşulların GPL ile uyumu hukuki incelemeyi zorunlu kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "LICENSE dosyasında değişiklik.",
+      "azaltma": "Hukuk incelemesi yap. Kuruma özgü değişiklikleri ayrı modülde tut. Sürümü sabitle.",
+      "id": "BL-02039",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2762",
+      "arac": "Requirements Quality Factor Ontology (rqfo)",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "GPL-3.0 lisanslı veri",
+      "aciklama": "Ontoloji verisi GPL-3.0 ile lisanslı; türetilip dağıtılan kurum aracına gömülürse copyleft yükümlülükleri doğabilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/JulianFrattini/rqfo-data"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veriyi içeren iç aracın tedarikçi/iştiraklerle paylaşılması kaynak açma yükümlülüğü sorusu doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-004"
+      ],
+      "erken_sinyal": "Hukuk incelemesinde GPL bileşen tespiti.",
+      "azaltma": "Veriyi yalnız referans olarak kullanın; kendi kataloğunuzu bağımsız yazın.",
+      "id": "BL-02080",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3573",
+      "arac": "Leapsome",
+      "gorev": "R-G08",
+      "tur": "RT-04",
+      "baslik": "Performans ve yetkinlik kararlarında yapay zekâ",
+      "aciklama": "Leapsome'ın performans, hedef, yetkinlik ve öğrenme modüllerindeki yapay zekâ özellikleri, çalışanların değerlendirilmesine ya da haklarında karar verilmesine dayanak olarak kullanılırsa AB YZ Yasası Ek III-4(b) kapsamında yüksek riskli sayılabilir. Satıcıya göre yapay zekâ yalnız taslak ve özet üretiyor, kişi değerlendirmiyor ve yüksek risk kategorisi dışında kalıyor. Ek III yükümlülükleri Digital Omnibus ile 2 Aralık 2027'ye ertelendi.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.leapsome.com/ai-trust",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yapay zekâ özetli performans değerlendirmeleri itiraz ve ayrımcılık iddialarına açık olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-003",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Değerlendirme metinlerinde yapay zekâ özetlerinin doğrudan kullanılması.",
+      "azaltma": "İnsan onaylı karar ve şeffaflık bildirimi.",
+      "id": "BL-02224",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Ek III-4(b) performans değerlendirmesini kapsıyor, ama Leapsome yapay zekâsının yalnız taslak ve özet ürettiğini, kişi değerlendirmediğini ve bu yüzden yüksek risk kategorisi dışında kaldığını söylüyor. Ayrıca Digital Omnibus Ek III yükümlülüklerini 2 Aralık 2027'ye erteledi; risk kullanım biçimine bağlı ve koşullu.",
+        "kaynak": [
+          "https://www.leapsome.com/ai-trust",
+          "https://artificialintelligenceact.eu/annex/3/",
+          "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4405",
+      "arac": "Pi",
+      "gorev": "D16-pi",
+      "tur": "RT-04",
+      "baslik": "Abonelik kimlik doğrulaması sağlayıcı politikasına bağlı",
+      "aciklama": "Pi /login ile sağlayıcı aboneliği veya API anahtarı kullanabiliyor; yalıtım belgesi Claude Pro veya Max için 'claude setup-token' ile üretilen jetonun kullanımını anlatıyor. Ayarlarda, Anthropic abonelik kimlik doğrulaması ücretli ek kullanım tüketebileceğinde uyaran warnings.anthropicExtraUsage seçeneği var (varsayılan açık). Aynı haritadaki OpenCode bulgusuna göre Anthropic Ocak–Nisan 2026'da abonelik OAuth jetonlarının üçüncü taraf araçlarda kullanımını kısıtladı.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/containerization.md",
+        "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/settings.md",
+        "https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses"
+      ],
+      "yasatacagi_sorunlar": [
+        "Abonelik jetonuyla çalışan ajan koşuları, sağlayıcı politikası değişince durabilir veya ücretli ek kullanıma geçebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K20-005"
+      ],
+      "erken_sinyal": "Pi'nin ek kullanım uyarısı; sağlayıcı faturasında ek kullanım kalemi.",
+      "azaltma": "Belgelenen seçenek: ortam değişkeniyle API anahtarı (ANTHROPIC_API_KEY ve diğer sağlayıcılar).",
+      "id": "BL-02521",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Pi belgeleri birincil kaynaktan okundu; Anthropic politikası haritadaki mevcut OpenCode bulgusunun ikincil kaynağına dayanıyor, bu oturumda ayrıca doğrulanmadı.",
+        "kaynak": [
+          "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/settings.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0202",
+      "arac": "Kimi K3",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Özel lisans: model-hizmet (MaaS) işi ve 20 M$ gelir eşiğinde ayrı anlaşma; büyük üründe marka gösterimi",
+      "aciklama": "Kimi K3 lisansına göre lisans alan veya bağlı şirketleri MaaS işi yürütüyor ve toplam gelir 12 ayda 20 milyon doları aşıyorsa ticari kullanım öncesi Moonshot ile ayrı anlaşma gerekiyor; 100 milyon aylık kullanıcı veya aylık 20 M$ gelir üstü ürünlerde 'Kimi K3' ibaresi gösterilmeli. Üçüncü taraflara açılmayan iç kullanım bu şartlardan muaf.",
+      "tarih": "2026-06",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum veya bir iştiraki modeli başka kurumlara API olarak sunarsa (ör. grup şirketlerine ortak platform), lisans ihlali riski doğar.",
+        "İç kullanım muafiyeti 'çıktıların üçüncü taraflara sunulmaması' tanımına bağlı; hukuk yorumu yapılmadan dış paydaşlara açılan araçlarda kullanılmamalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "Platformun iştiraklere veya dış paydaşlara açılması planı.",
+      "azaltma": "Model lisans envanterinde MaaS/iştirak koşullarını işaretleme; dış kullanım öncesi hukuk onayı.",
+      "id": "BL-00524",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0203",
+      "arac": "Qwen3.8-2.4T-A95B",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Qwen3.8-Max lisansı: 50 M$ üstü MaaS/AI Work Assistant işinde ayrı lisans",
+      "aciklama": "Lisansa göre lisans alan veya iştirakleri MaaS ya da kodlama/ofis odaklı 'AI Work Assistant' işi yürütüyor ve 12 ayda 50 milyon doları aşan gelire sahipse ticari kullanım öncesi ayrı lisans gerekiyor; iç kullanım, çıktılar üçüncü taraflara sunulmadıkça muaf.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Grup içinde yapay zekâ asistanı ürünü sunan bir iştirak varsa lisans yükümlülüğü tüm grubu etkiler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "İştirak ürün portföyünde kodlama asistanı.",
+      "azaltma": "Hukuk görüşü ve lisans envanteri.",
+      "id": "BL-00528",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0709",
+      "arac": "Unleash",
+      "gorev": "R-G09",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 çekirdek lisansı",
+      "aciklama": "Açık kaynak sunucu AGPL-3.0 lisanslıdır; değiştirilmiş sürüm ağ üzerinden başka kullanıcılara sunulursa kaynak kodu paylaşım yükümlülüğü doğar.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Unleash/unleash/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Unleash'i değiştirip bağlı kuruluşlara veya yüklenicilere hizmet olarak açarsa, değişikliklerin kaynak kodunu paylaşma yükümlülüğü hukuk birimi onayı gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Unleash kaynak koduna kurum içi yama/çatal yapılması.",
+      "azaltma": "Değiştirilmemiş sürümü kullanın; özelleştirmeyi eklenti/API katmanında yapın; lisans envanterine AGPL notu düşün.",
+      "id": "BL-01071",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1336",
+      "arac": "Sentry",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "FSL-1.1 kaynak-erişilebilir lisans",
+      "aciklama": "Sentry Kasım 2023'te BSL'den kendi yazdığı Functional Source License'a geçti. FSL rakip ticari kullanımı yasaklar, iki yıl sonra kod Apache-2.0'a dönüşür; OSI onaylı açık kaynak değildir.",
+      "tarih": "2023-11",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://blog.sentry.io/introducing-the-functional-source-license-freedom-without-free-riding/",
+        "https://github.com/getsentry/sentry/blob/master/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Sentry'yi iştiraklere veya diğer kamu kurumlarına ücretli/hizmet olarak sunarsa 'Competing Use' tartışması doğar.",
+        "Kamu açık kaynak politikası OSI onayı arıyorsa lisans uyum kaydında istisna gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Sentry'nin kurum dışına hizmet olarak sunulması talebi, lisans envanterinde FSL işareti.",
+      "azaltma": "Yalnız iç kullanımla sınırlayın; lisans envanterinde FSL'yi kaynak-erişilebilir olarak sınıflayın ve hukuk onayı alın.",
+      "id": "BL-01471",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4057",
+      "arac": "Awesome Reviewers",
+      "gorev": "R-G11",
+      "tur": "RT-04",
+      "baslik": "Üçüncü kişilerin inceleme yorumlarından türetilen içeriğin lisansı",
+      "aciklama": "Talimatlar 246'dan fazla depodaki üçüncü kişilerin inceleme yorumlarından türetiliyor; kaynak tartışmalar (yorum metni ve kod parçası) JSON olarak yayımlanıyor. Tüm içeriğe Apache-2.0 etiketi konması, yorum sahiplerinin haklarını ve kaynak depoların lisanslarını çözmüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/baz-scm/awesome-reviewers/tree/main/_reviewers"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum bu talimatları ürün ya da iç standart olarak yeniden dağıtırsa kaynak yorumların hak sahipliği sorgulanabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K22-003"
+      ],
+      "erken_sinyal": "Kaynak depo sahiplerinden kaldırma talepleri.",
+      "azaltma": "Talimatları kurum diliyle yeniden yazmak; kaynak JSON'ları dağıtmamak.",
+      "id": "BL-02349",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0183",
+      "arac": "Model Context Protocol (MCP)",
+      "gorev": "R-G02",
+      "tur": "RT-04",
+      "baslik": "Lisans geçişi: MIT ile Apache-2.0 karışık",
+      "aciklama": "Spesifikasyon deposu MIT'ten Apache-2.0'a geçiş sürecinde; yeniden lisanslama izni vermeyen katkılar MIT altında kalıyor, dokümantasyon CC-BY-4.0. Proje Aralık 2025'te Linux Foundation bünyesindeki Agentic AI Foundation'a devredildi.",
+      "tarih": "2025-12",
+      "siddet": "dusuk",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/LICENSE",
+        "https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Lisans envanterinde karışık lisanslı bileşen olarak izlenmesi gerekir; genelde düşük hukuki etki."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "LICENSE dosyasında değişiklik.",
+      "azaltma": "Lisans taramasında hem MIT hem Apache-2.0 bildirimlerini koruyun.",
+      "id": "BL-00485",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0101",
+      "arac": "BMAD-METHOD",
+      "gorev": "R-G02",
+      "tur": "RT-04",
+      "baslik": "Ticari marka kısıtları",
+      "aciklama": "Kod MIT olsa da LICENSE dosyası BMad, BMad Method ve BMAD-METHOD dahil tüm yazılışların BMad Code, LLC'nin ticari markası olduğunu ve başka amaçla kullanım hakkı vermediğini belirtiyor.",
+      "tarih": "2025-09",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/bmad-code-org/BMAD-METHOD/blob/main/LICENSE",
+        "https://github.com/bmad-code-org/BMAD-METHOD/blob/main/TRADEMARK.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi çatallanmış sürümün veya eğitim materyallerinin 'BMAD' adıyla yayımlanması marka ihlali riski taşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kurum içi dokümanlarda marka kullanımı.",
+      "azaltma": "Çatallanan sürümü farklı adla adlandırın.",
+      "id": "BL-00251",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0101",
+      "arac": "BMAD-METHOD",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Ticari marka kısıtı",
+      "aciklama": "LICENSE dosyası MIT ile birlikte, BMad adının tüm yazımlarının BMad Code LLC markası olduğunu ve kullanım hakkı vermediğini belirtiyor.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/bmad-code-org/BMAD-METHOD/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi çatal 'BMAD' adıyla dağıtılırsa marka ihlali sorusu doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-004"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "Kurum çatalını farklı adla adlandırın.",
+      "id": "BL-00252",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0163",
+      "arac": "Artificial Analysis",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Ücretsiz API günlük 1.000 istekle sınırlı ve atıf zorunlu",
+      "aciklama": "Ücretsiz API günde 1.000 istekle sınırlı ve her kullanımda artificialanalysis.ai'ye atıf isteniyor; kapsamlı veri ayrı ticari API sözleşmesi gerektiriyor.",
+      "tarih": "2026-09",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://artificialanalysis.ai/api-reference"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model kaydının otomatik güncellenmesi için API kullanılırsa sınır aşımı veya atıf yükümlülüğü ihlali olabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-012",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "429 yanıtları; kullanım şartlarında değişiklik.",
+      "azaltma": "Veriyi önbelleğe alıp seyrek çekme; iç raporlarda atıf şablonu.",
+      "id": "BL-00443",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0212",
+      "arac": "MiMo-V2.5-Pro",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Depoda lisans dosyası yok; MIT bilgisi yalnız meta veride",
+      "aciklama": "Hugging Face deposunda LICENSE dosyası bulunmuyor; MIT lisansı yalnız meta veri etiketinde.",
+      "tarih": "2026-07",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/api/models/XiaomiMiMo/MiMo-V2.5-Pro",
+        "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro"
+      ],
+      "yasatacagi_sorunlar": [
+        "Denetimde lisans kanıtı olarak yalnız değiştirilebilir bir etiket gösterilebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Etiket değişikliği.",
+      "azaltma": "İndirme anındaki meta veriyi ve commit özetini arşivleme; üreticiden yazılı teyit.",
+      "id": "BL-00571",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0228",
+      "arac": "Olmo 3.1 32B Think",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Model kartı araştırma ve eğitim amaçlı kullanımı hedefliyor",
+      "aciklama": "Model kartına göre Apache-2.0 lisanslı ancak 'Ai2'nin Sorumlu Kullanım Yönergeleri doğrultusunda araştırma ve eğitim amaçlı kullanım için' tasarlandı.",
+      "tarih": "2026-01",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/allenai/Olmo-3.1-32B-Think",
+        "https://allenai.org/responsible-use"
+      ],
+      "yasatacagi_sorunlar": [
+        "Üretim hattında kullanılırsa üretici desteği ve üretim sertleştirmesi beklenmemeli."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K11-009"
+      ],
+      "erken_sinyal": "Modelin deney ortamı dışındaki rollerde kullanılmaya başlanması.",
+      "azaltma": "Yalnız alan uyarlama deneyleri ve kontrollü öğrenme için kullanma.",
+      "id": "BL-00624",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0230",
+      "arac": "Hermes 4.3 36B",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Depoda lisans dosyası yok; Apache-2.0 yalnız meta veride",
+      "aciklama": "Hugging Face deposunda LICENSE dosyası bulunmuyor; lisans bilgisi meta veri etiketinde. Model, Seed-OSS 36B tabanlı.",
+      "tarih": "2025-12",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/api/models/NousResearch/Hermes-4.3-36B"
+      ],
+      "yasatacagi_sorunlar": [
+        "Lisans kanıtı ve temel modelin lisans zinciri envanterde ayrıca belgelenmeli."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Meta veri lisans etiketinde değişiklik.",
+      "azaltma": "Temel model (Seed-OSS, Apache-2.0) ve türev lisansını birlikte arşivleme.",
+      "id": "BL-00633",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0234",
+      "arac": "Command A+",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Lisans yalnız model kartı meta verisinde; depoda LICENSE dosyası yok",
+      "aciklama": "Hugging Face deposunda LICENSE dosyası bulunmuyor; Apache-2.0 bilgisi yalnız kart meta verisinde ve metninde. Kaynağa göre eski Command modellerinin lisansı (ticari olmayan) bu sürüme genellenmemeli.",
+      "tarih": "2026-06",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16",
+        "https://huggingface.co/api/models/CohereLabs/command-a-plus-05-2026-bf16"
+      ],
+      "yasatacagi_sorunlar": [
+        "Lisans kanıtı yalnız değiştirilebilir kart metnine dayanıyor; denetimde lisans dosyası gösterilemez, ileride kart değişirse tartışma çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kart lisans alanında değişiklik.",
+      "azaltma": "İndirme anındaki kartı ve commit özetini lisans envanterine arşivleme.",
+      "id": "BL-00640",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1464",
+      "arac": "AI Atlas Nexus",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "Derlenen taksonomilerin kendi lisans koşulları",
+      "aciklama": "Proje birçok dış taksonomiyi (MIT AI Risk Repository, AIR 2024, Credo UCF, OWASP vb.) bir araya getiriyor; kod Apache-2.0 olsa da içerik parçaları farklı lisanslara tabi olabilir.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/IBM/ai-atlas-nexus"
+      ],
+      "yasatacagi_sorunlar": [
+        "Taksonomi içeriği kurum politikalarına kopyalanıp dağıtılırsa atıf/lisans koşulları ihlal edilebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kurum belgelerinde kaynak atfı olmadan taksonomi metni.",
+      "azaltma": "Kullanılan her taksonominin lisansını ayrı kontrol edin.",
+      "id": "BL-01572",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1836",
+      "arac": "CyberSecEval (Purple Llama)",
+      "gorev": "R-G06",
+      "tur": "RT-04",
+      "baslik": "Karma lisans: depo kökünde Llama 3.2 topluluk lisansı",
+      "aciklama": "Depo kökündeki LICENSE, Llama 3.2 Community License. README'ye göre değerlendirmeler MIT, modeller ise ilgili Llama lisanslarına tabi. GitHub lisansı NOASSERTION olarak gösteriyor.",
+      "tarih": "2026-08",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/meta-llama/PurpleLlama/blob/main/LICENSE",
+        "https://github.com/meta-llama/PurpleLlama"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum bileşenleri birlikte dağıtırsa Llama lisansının kullanım politikası yükümlülükleri devreye girebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Lisans dosyalarında değişiklik.",
+      "azaltma": "Yalnız benchmark alt dizinini kullan ve lisansını ayrıca kayda geçir.",
+      "id": "BL-01637",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0011",
+      "arac": "Dagu",
+      "gorev": "R-G04",
+      "tur": "RT-04",
+      "baslik": "GPL-3.0",
+      "aciklama": "Dagu GPL-3.0 lisanslıdır; değiştirilip dağıtılırsa kaynak paylaşımı gerekir.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/dagucloud/dagu/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Dagu'yu değiştirip başka kurumlara dağıtırsa kaynak açma yükümlülüğü doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Kurum içi çatal ihtiyacı.",
+      "azaltma": "Değiştirmeden kullanmak.",
+      "id": "BL-00039",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0067",
+      "arac": "Continue",
+      "gorev": "R-G03",
+      "tur": "RT-04",
+      "baslik": "Sahiplik zincirinin belirsizleşmesi",
+      "aciklama": "Kod Apache-2.0 ile erişilebilir kalsa da marka ve dağıtım kanalları yeni sahibin kontrolünde; ikincil kaynaklar Cursor'un da satın alındığını bildiriyor (doğrulanmadı).",
+      "tarih": "2026-06",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.bodegaone.ai/blog/cursor-acquires-continue-dev"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eklenti mağazası yayıncı hesabı el değiştirirse otomatik güncelleme kötü niyetli sürüm dağıtabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Eklenti yayıncısında veya eklenti kimliğinde değişiklik.",
+      "azaltma": "Eklentinin otomatik güncellemesini kapatın; imza/yayıncı doğrulaması.",
+      "id": "BL-00181",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0137",
+      "arac": "axe-core",
+      "gorev": "R-G06",
+      "tur": "RT-04",
+      "baslik": "MPL-2.0: değiştirilen dosyaların kaynağını paylaşma yükümlülüğü",
+      "aciklama": "axe-core MPL-2.0 lisanslı. Değiştirilen dosyalar dağıtılırsa o dosyaların kaynağı paylaşılmalı.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/dequelabs/axe-core/blob/develop/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "axe-core'u değiştirip bir ürüne gömerek dağıtmak dosya düzeyinde copyleft yükümlülüğü doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "Çatal ya da yama dosyalarının dağıtılan pakete girmesi.",
+      "azaltma": "Değişiklikleri kural yapılandırmasıyla yap, çekirdek dosyaları değiştirme.",
+      "id": "BL-00348",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0140",
+      "arac": "k6",
+      "gorev": "R-G07",
+      "tur": "RT-04",
+      "baslik": "AGPL-3.0 lisansı",
+      "aciklama": "k6 AGPL-3.0 ile lisanslıdır. Değiştirilmiş k6 ikilisinin (ör. özel uzantılı derleme) dağıtılması veya ağ üzerinden hizmet olarak sunulması kaynak paylaşım yükümlülüğü doğurabilir.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/grafana/k6/blob/master/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum özel uzantılı k6 derlemesini iştiraklere/tedarikçilere dağıtırsa AGPL kaynak paylaşımı hukuk incelemesi gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "İç derlemelerin kurum dışına dağıtılması talebi.",
+      "azaltma": "k6'yı değiştirmeden kullanın; özel uzantıları ayrı modül olarak lisans envanterine ekleyin.",
+      "id": "BL-00356",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0201",
+      "arac": "GLM-5.3",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Özel lisans: çok büyük MaaS işletmelerinde Z.ai güvenlik incelemesi şartı",
+      "aciklama": "GLM-5.3 lisansı geniş izin veriyor; yalnız MaaS işi yürüten ve 12 ayda 10 milyar doları aşan gelire sahip lisans alanlar ticari kullanım öncesi Z.ai'nin güvenlik incelemesinden geçmeli.",
+      "tarih": "2026-08",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/zai-org/GLM-5.3-BF16/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bu kurum için eşik pratikte tetiklenmez; ancak lisans standart değildir ve envanterde ayrıca kaydedilmelidir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Lisans metninde değişiklik.",
+      "azaltma": "Lisans envanteri ve sürüm bazlı arşiv.",
+      "id": "BL-00520",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0219",
+      "arac": "Gemma 4 31B IT",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Lisans temiz (Apache-2.0) ancak eski Gemma sürümlerinin şartları farklı",
+      "aciklama": "Gemma Terms of Use, Gemma 1–3n için geçerli ve Google'a kullanımı 'uzaktan veya başka şekilde' kısıtlama hakkı veriyor; Gemma 4 açıkça bu şartların dışında ve Apache-2.0. Yasaklı Kullanım Politikası sayfası hangi sürümlere uygulandığını belirtmiyor.",
+      "tarih": "2026-04",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://ai.google.dev/gemma/terms",
+        "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "https://ai.google.dev/gemma/prohibited_use_policy"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gemma 3 tabanlı türev bir modele geçilirse farklı ve kısıtlayıcı şartlar devreye girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Envanterde Gemma 3 tabanlı türevler.",
+      "azaltma": "Lisans envanterinde sürüm bazlı kayıt.",
+      "id": "BL-00595",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0220",
+      "arac": "Gemma 4 26B A4B IT",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Lisans temiz (Apache-2.0) ancak eski Gemma sürümlerinin şartları farklı",
+      "aciklama": "Gemma Terms of Use, Gemma 1–3n için geçerli ve Google'a kullanımı 'uzaktan veya başka şekilde' kısıtlama hakkı veriyor; Gemma 4 açıkça bu şartların dışında ve Apache-2.0. Yasaklı Kullanım Politikası sayfası hangi sürümlere uygulandığını belirtmiyor.",
+      "tarih": "2026-04",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://ai.google.dev/gemma/terms",
+        "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "https://ai.google.dev/gemma/prohibited_use_policy"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gemma 3 tabanlı türev bir modele geçilirse farklı ve kısıtlayıcı şartlar devreye girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Envanterde Gemma 3 tabanlı türevler.",
+      "azaltma": "Lisans envanterinde sürüm bazlı kayıt.",
+      "id": "BL-00599",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0221",
+      "arac": "Gemma 4 12B IT",
+      "gorev": "R-G01",
+      "tur": "RT-04",
+      "baslik": "Lisans temiz (Apache-2.0) ancak eski Gemma sürümlerinin şartları farklı",
+      "aciklama": "Gemma Terms of Use, Gemma 1–3n için geçerli ve Google'a kullanımı 'uzaktan veya başka şekilde' kısıtlama hakkı veriyor; Gemma 4 açıkça bu şartların dışında ve Apache-2.0. Yasaklı Kullanım Politikası sayfası hangi sürümlere uygulandığını belirtmiyor.",
+      "tarih": "2026-04",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://ai.google.dev/gemma/terms",
+        "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "https://ai.google.dev/gemma/prohibited_use_policy"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gemma 3 tabanlı türev bir modele geçilirse farklı ve kısıtlayıcı şartlar devreye girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Envanterde Gemma 3 tabanlı türevler.",
+      "azaltma": "Lisans envanterinde sürüm bazlı kayıt.",
+      "id": "BL-00603",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0846",
+      "arac": "EARS (Easy Approach to Requirements Syntax)",
+      "gorev": "R-G10",
+      "tur": "RT-04",
+      "baslik": "Kaynak içerik 'tüm hakları saklı'",
+      "aciklama": "Notasyon serbestçe kullanılıyor ancak referans sayfa 'All Rights Reserved' ibaresi taşıyor; resmî, lisanslı Türkçe kural seti yok.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://alistairmavin.com/ears/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kaynak sayfadaki örnek metinlerin kurum eğitim materyaline birebir kopyalanması telif sorusu doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K07-007"
+      ],
+      "erken_sinyal": "Eğitim materyalinde birebir alıntılar.",
+      "azaltma": "Kendi örneklerinizi yazın, kaynağa atıf yapın.",
+      "id": "BL-01166",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1164",
+      "arac": "FOSSA",
+      "gorev": "R-G06b",
+      "tur": "RT-04",
+      "baslik": "CLI MPL-2.0 lisanslı",
+      "aciklama": "fossa-cli deposunun lisansı GitHub'da NOASSERTION olarak görünüyor; envanter MPL-2.0 diyor. Değiştirilen dosyaların paylaşılması gerekiyor.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/fossas/fossa-cli"
+      ],
+      "yasatacagi_sorunlar": [
+        "CLI kurum içinde değiştirilirse değişen dosyaların kaynak kodu paylaşılmalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002"
+      ],
+      "erken_sinyal": "CLI'nin çatallanıp değiştirilmesi.",
+      "azaltma": "CLI'yi değiştirmeden kullanın.",
+      "id": "BL-01358",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4173",
+      "arac": "Mia-Platform",
+      "gorev": "R-G13",
+      "tur": "RT-04",
+      "baslik": "Katalog veri aktarım bileşenleri AGPL-3.0",
+      "aciklama": "Harici sistemlerden katalog için veri dışa aktaran 'ibdm' ve 'integration-connector-agent' depoları AGPL-3.0 lisanslı.",
+      "tarih": "2025-11",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mia-platform/ibdm",
+        "https://github.com/mia-platform/integration-connector-agent"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum bu bileşenleri değiştirip ağ üzerinden hizmet olarak sunarsa değişikliklerin kaynağını paylaşma yükümlülüğü doğabilir; hukuk onayı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-001"
+      ],
+      "erken_sinyal": "Lisans tarayıcısında AGPL bulgusu.",
+      "azaltma": "Bileşenleri değiştirmeden kullanın veya değişiklikleri üst projeye verin; hukuk birimine önceden danışın.",
+      "id": "BL-02403",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4262",
+      "arac": "Jepsen",
+      "gorev": "R-G13",
+      "tur": "RT-04",
+      "baslik": "EPL-1.0 lisansı otomatik tanınmıyor",
+      "aciklama": "project.clj dosyası Eclipse Public License 1.0'ı gösteriyor; GitHub depo lisansını otomatik algılamıyor (license alanı boş). Zayıf copyleft; test aracı olarak kullanımda genellikle sorun yok.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/jepsen-io/jepsen/blob/main/jepsen/project.clj"
+      ],
+      "yasatacagi_sorunlar": [
+        "Lisans tarayıcıları 'lisansı bilinmeyen' bulgusu üretir; hukuk onayı gecikir.",
+        "Jepsen kodu değiştirilip dağıtılırsa EPL gereği değişikliklerin kaynağı paylaşılmalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-007"
+      ],
+      "erken_sinyal": "Lisans tarayıcısında 'NOASSERTION' bulgusu.",
+      "azaltma": "Lisansı elle doğrulayıp istisna kaydına alın; Jepsen'i ürünle birlikte dağıtmayın.",
+      "id": "BL-02455",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4324",
+      "arac": "depguard",
+      "gorev": "R-G13",
+      "tur": "RT-04",
+      "baslik": "GPL-3.0 lisansı",
+      "aciklama": "depguard GPL-3.0 lisanslı. Yalnız geliştirme aracı olarak çalıştırılması ürün koduna yükümlülük getirmez; ancak kurum içi değiştirilmiş sürümün dağıtımı GPL yükümlülüğü doğurur.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/OpenPeeDeeP/depguard/blob/v2/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Lisans tarayıcıları GPL bulgusu üretir; hukuk onayı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-007"
+      ],
+      "erken_sinyal": "Lisans tarayıcısında GPL uyarısı.",
+      "azaltma": "Aracı değiştirilmeden ve yalnız CI/geliştirme ortamında kullanın; istisna kaydı açın.",
+      "id": "BL-02482",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    }
+  ],
+  "kategori_kaliplari": [
+    "RK-020",
+    "RK-021",
+    "RK-024",
+    "RK-032",
+    "RK-034",
+    "RK-037",
+    "RK-038",
+    "RK-040",
+    "RK-077",
+    "RK-112",
+    "RK-118",
+    "RK-134",
+    "RK-136",
+    "RK-142",
+    "RK-156",
+    "RK-169",
+    "RK-194",
+    "RK-207"
+  ],
+  "olaylar": [
+    "EV-001",
+    "EV-007",
+    "EV-009",
+    "EV-016",
+    "EV-020",
+    "EV-022",
+    "EV-026",
+    "EV-039",
+    "EV-040",
+    "EV-041",
+    "EV-043",
+    "EV-053",
+    "EV-056",
+    "EV-058",
+    "EV-060",
+    "EV-065",
+    "EV-067",
+    "EV-077",
+    "EV-093",
+    "EV-101",
+    "EV-103",
+    "EV-105",
+    "EV-117",
+    "EV-136",
+    "EV-152",
+    "EV-161",
+    "EV-162",
+    "EV-178",
+    "EV-193",
+    "EV-196",
+    "EV-206",
+    "EV-222",
+    "EV-230",
+    "EV-244",
+    "EV-253",
+    "EV-255",
+    "EV-289",
+    "EV-291"
+  ],
+  "senaryolar": [
+    "SS-011",
+    "SS-012",
+    "SS-017",
+    "SS-087",
+    "SS-098",
+    "SS-099",
+    "SS-108",
+    "SS-110",
+    "SS-112"
+  ],
+  "otomatik_sinyalli_araclar": [
+    "AR-0003",
+    "AR-0005",
+    "AR-0018",
+    "AR-0019",
+    "AR-0094",
+    "AR-0098",
+    "AR-0114",
+    "AR-0140",
+    "AR-0152",
+    "AR-0175",
+    "AR-0194",
+    "AR-0201",
+    "AR-0202",
+    "AR-0206",
+    "AR-0211",
+    "AR-0217",
+    "AR-0223",
+    "AR-0235",
+    "AR-0236",
+    "AR-0242",
+    "AR-0339",
+    "AR-0346",
+    "AR-0347",
+    "AR-0367",
+    "AR-0369",
+    "AR-0387",
+    "AR-0404",
+    "AR-0439",
+    "AR-0441",
+    "AR-0447",
+    "AR-0449",
+    "AR-0483",
+    "AR-0485",
+    "AR-0490",
+    "AR-0500",
+    "AR-0516",
+    "AR-0544",
+    "AR-0579",
+    "AR-0581",
+    "AR-0619",
+    "AR-0624",
+    "AR-0653",
+    "AR-0669",
+    "AR-0672",
+    "AR-0704",
+    "AR-0709",
+    "AR-0712",
+    "AR-0738",
+    "AR-0755",
+    "AR-0758",
+    "AR-0760",
+    "AR-0768",
+    "AR-0774",
+    "AR-0795",
+    "AR-0796",
+    "AR-0798",
+    "AR-0806",
+    "AR-0808",
+    "AR-0810",
+    "AR-0841",
+    "AR-0870",
+    "AR-0897",
+    "AR-0918",
+    "AR-0929",
+    "AR-0936",
+    "AR-0937",
+    "AR-0938",
+    "AR-0981",
+    "AR-0995",
+    "AR-1003",
+    "AR-1054",
+    "AR-1070",
+    "AR-1080",
+    "AR-1094",
+    "AR-1106",
+    "AR-1117",
+    "AR-1129",
+    "AR-1152",
+    "AR-1171",
+    "AR-1178",
+    "AR-1182",
+    "AR-1183",
+    "AR-1213",
+    "AR-1216",
+    "AR-1222",
+    "AR-1224",
+    "AR-1240",
+    "AR-1287",
+    "AR-1288",
+    "AR-1290",
+    "AR-1323",
+    "AR-1324",
+    "AR-1325",
+    "AR-1329",
+    "AR-1333",
+    "AR-1334",
+    "AR-1336",
+    "AR-1337",
+    "AR-1339",
+    "AR-1352",
+    "AR-1354",
+    "AR-1400",
+    "AR-1474",
+    "AR-1478",
+    "AR-1480",
+    "AR-1486",
+    "AR-1500",
+    "AR-1501",
+    "AR-1503",
+    "AR-1529",
+    "AR-1537",
+    "AR-1556",
+    "AR-1572",
+    "AR-1689",
+    "AR-1836",
+    "AR-1850",
+    "AR-1912",
+    "AR-1925",
+    "AR-2064",
+    "AR-2241",
+    "AR-2244",
+    "AR-2252",
+    "AR-2255",
+    "AR-2270",
+    "AR-2272",
+    "AR-2309",
+    "AR-2314",
+    "AR-2316",
+    "AR-2325",
+    "AR-2327",
+    "AR-2328",
+    "AR-2342",
+    "AR-2343",
+    "AR-2366",
+    "AR-2367",
+    "AR-2391",
+    "AR-2401",
+    "AR-2411",
+    "AR-2412",
+    "AR-2413",
+    "AR-2414",
+    "AR-2418",
+    "AR-2427",
+    "AR-2483",
+    "AR-2517",
+    "AR-2525",
+    "AR-2532",
+    "AR-2553",
+    "AR-2562",
+    "AR-2566",
+    "AR-2568",
+    "AR-2572",
+    "AR-2635",
+    "AR-2665",
+    "AR-2687",
+    "AR-2692",
+    "AR-2730",
+    "AR-2750",
+    "AR-2751",
+    "AR-2763",
+    "AR-2772",
+    "AR-2782",
+    "AR-2832",
+    "AR-2833",
+    "AR-2836",
+    "AR-2840",
+    "AR-2842",
+    "AR-2849",
+    "AR-2855",
+    "AR-2905",
+    "AR-2912",
+    "AR-2916",
+    "AR-2919",
+    "AR-2965",
+    "AR-2974",
+    "AR-2990",
+    "AR-3129",
+    "AR-3360",
+    "AR-3401",
+    "AR-3575",
+    "AR-3576",
+    "AR-3584",
+    "AR-3592",
+    "AR-3626",
+    "AR-3672",
+    "AR-3691",
+    "AR-3747",
+    "AR-3761",
+    "AR-3772",
+    "AR-3774",
+    "AR-3790",
+    "AR-3793",
+    "AR-3812",
+    "AR-3813",
+    "AR-3859",
+    "AR-3887",
+    "AR-3892",
+    "AR-3904",
+    "AR-3963",
+    "AR-3987",
+    "AR-3990",
+    "AR-3998",
+    "AR-4020",
+    "AR-4067",
+    "AR-4084",
+    "AR-4092",
+    "AR-4122",
+    "AR-4153",
+    "AR-4304",
+    "AR-4351",
+    "AR-4374"
+  ]
+}

@@ -1,0 +1,3786 @@
+{
+  "sema": "risk-haritasi/risk-turu@1",
+  "risk_turu": {
+    "id": "RT-02",
+    "ad": "Tedarik zinciri ve dağıtım bütünlüğü",
+    "tanim": "Ele geçirilmiş paket veya sürüm, kötü amaçlı eklenti, imzasız dağıtım."
+  },
+  "ozet": {
+    "bulgu": 89,
+    "siddet": {
+      "kritik": 22,
+      "yuksek": 35,
+      "orta": 31,
+      "dusuk": 1
+    },
+    "arac": 85,
+    "kategori_kalibi": 14,
+    "olay": 70,
+    "senaryo": 16,
+    "otomatik_sinyalli_arac": 0
+  },
+  "en_cok_etkilenen_ihtiyaclar": [
+    [
+      "N-K18-008",
+      56
+    ],
+    [
+      "N-K18-004",
+      17
+    ],
+    [
+      "N-K16-005",
+      16
+    ],
+    [
+      "N-K18-013",
+      11
+    ],
+    [
+      "N-K19-005",
+      7
+    ],
+    [
+      "N-K15-002",
+      6
+    ],
+    [
+      "N-K09-013",
+      6
+    ],
+    [
+      "N-K18-009",
+      5
+    ],
+    [
+      "N-K18-003",
+      5
+    ],
+    [
+      "N-K15-007",
+      5
+    ],
+    [
+      "N-K15-001",
+      4
+    ],
+    [
+      "N-K15-005",
+      4
+    ],
+    [
+      "N-K12-002",
+      4
+    ],
+    [
+      "N-K16-006",
+      4
+    ],
+    [
+      "N-K15-004",
+      3
+    ],
+    [
+      "N-K09-010",
+      3
+    ],
+    [
+      "N-K02-003",
+      3
+    ],
+    [
+      "N-K35-007",
+      3
+    ],
+    [
+      "N-K18-006",
+      2
+    ],
+    [
+      "N-K06-005",
+      2
+    ],
+    [
+      "N-K05-012",
+      2
+    ],
+    [
+      "N-K11-009",
+      2
+    ],
+    [
+      "N-K11-005",
+      2
+    ],
+    [
+      "N-K18-010",
+      2
+    ],
+    [
+      "N-K10-001",
+      2
+    ]
+  ],
+  "bulgular": [
+    {
+      "arac_id": "AR-0061",
+      "arac": "Cline",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "'Clinejection': issue başlığıyla CI'daki ajanın ele geçirilmesi ve npm yayın token'ının çalınması",
+      "aciklama": "Adnan Khan'ın bulduğu zincirde Cline'ın Claude tabanlı issue triage iş akışı ('allowed_non_write_users: *') issue başlığındaki talimatla zararlı paket kurdu, Actions önbelleği zehirlendi ve npm token'ı çalındı; 17 Şubat 2026'da yetkisiz cline@2.3.0, postinstall ile openclaw'ı küresel kurdu ve ~8 saatte ~4.000 kez indirildi. Cline'ın 11 Şubat'taki token rotasyonu yanlış token'ı sildiği için açık token 6 gün daha geçerli kaldı.",
+      "tarih": "2026-02",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/cline/cline/security/advisories/GHSA-9ppg-jx86-fqw7",
+        "https://adnanthekhan.com/posts/clinejection/",
+        "https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another",
+        "https://www.stepsecurity.io/blog/cline-supply-chain-attack-detected-cline-2-3-0-silently-installs-openclaw"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun kendi reposunda dış kullanıcılara açık ajan iş akışı varsa aynı zincirle yayın token'ları çalınıp kurum paketleri zehirlenebilir; Cline CLI kullanan makinelere istenmeyen yazılım kurulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-005",
+        "N-K18-004",
+        "N-K13-012"
+      ],
+      "erken_sinyal": "npm'de beklenmedik sürüm/postinstall; CI önbelleğinde anormal boyut.",
+      "azaltma": "Ajan iş akışlarını dış kullanıcılara kapatın, yayın token'ı yerine OIDC/provenance kullanın, önbellekleri iş akışları arasında ayırın, npm install betiklerini kapatın.",
+      "id": "BL-00169",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Adnan Khan yazısı (allowed_non_write_users: \"*\", issue başlığı enjeksiyonu, Cacheract ile önbellek zehirleme, NPM_RELEASE_TOKEN), GHSA-9ppg (17 Şubat 2026, ~8 saat, openclaw postinstall), StepSecurity (~4.000 indirme) ve grith.ai (yanlış token silindi, 6 gün sonra yayın) iddiaları destekliyor.",
+        "kaynak": [
+          "https://adnanthekhan.com/posts/clinejection/",
+          "https://github.com/cline/cline/security/advisories/GHSA-9ppg-jx86-fqw7",
+          "https://www.stepsecurity.io/blog/cline-supply-chain-attack-detected-cline-2-3-0-silently-installs-openclaw",
+          "https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-9ppg-jx86-fqw7",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0113",
+      "arac": "Guardrails AI",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "guardrails-ai 0.10.1 PyPI'da kötü amaçlı sürümle yayımlandı (CVE-2026-45758)",
+      "aciklama": "11 Mayıs 2026'da bir çalışanın GitHub PAT'i ele geçirildi; saldırgan 30 depoda GitHub Action tetikleyip artefaktlardan dağıtım token'larını çıkardı ve içe aktarımda uzak yük indirip çalıştıran 0.10.1'i PyPI'a yükledi. Olay, aynı gün TanStack, Mistral AI, UiPath gibi paketleri de vuran geniş bir kampanyanın parçasıydı.",
+      "tarih": "2026-05",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/guardrails-ai/guardrails/security/advisories/GHSA-xmpw-2vmm-p4p6",
+        "https://github.com/guardrails-ai/guardrails/blob/main/SECURITY_ADVISORY.md",
+        "https://safedep.io/mass-npm-supply-chain-attack-tanstack-mistral/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Guardrail katmanını kuran CI veya ajan çalışma ortamı sürüm sabitlemeden 'pip install -U' yapsaydı, import anında çalışan yük o makinedeki GitHub PAT'lerini, bulut anahtarlarını ve paket kayıt token'larını çalabilirdi.",
+        "Güvenlik için eklenen araç, hattın en ayrıcalıklı noktasında (model çıktısını işleyen servis) arka kapı olur; olay müdahalesi tüm sırların döndürülmesini gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K18-006"
+      ],
+      "erken_sinyal": "Bağımlılık kilidinde beklenmeyen yama sürümü; OSV/MAL kayıtlarında paket adı; import sonrası beklenmeyen dış bağlantı.",
+      "azaltma": "Hash sabitli kilit dosyası, iç paket aynası ve yeni sürümler için karantina gecikmesi; dağıtım ortamlarında giden ağ izin listesi.",
+      "id": "BL-00283",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-xmpw (CVE-2026-45758, kritik 9.6) ve SECURITY_ADVISORY.md şunları doğruluyor: çalışan PAT'i ele geçirildi, 30 depoda Action tetiklendi, deploy token'ı çalındı. SafeDep, içe aktarımda transformers.pyz indirip çalıştıran yükü ve TanStack/Mistral/UiPath kampanyasını belgeliyor.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-xmpw-2vmm-p4p6",
+          "https://github.com/guardrails-ai/guardrails/blob/main/SECURITY_ADVISORY.md",
+          "https://safedep.io/mass-npm-supply-chain-attack-tanstack-mistral/"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-45758",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-xmpw-2vmm-p4p6",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0127",
+      "arac": "GitHub Actions (merge queue ile)",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "Ele geçirilmiş üçüncü taraf eylemler: değiştirilebilir etiketlerin zehirlenmesi",
+      "aciklama": "tj-actions/changed-files (CVE-2025-30066) Mart 2025'te ele geçirildi ve v1–v45.0.7 etiketleri, runner belleğindeki sırları loglara döken koda yönlendirildi. 23 binden fazla depo etkilendi ve açık CISA KEV'e girdi. Mart 2026'da xygeni-action'ın v5 etiketi C2 arka kapısı içeren commit'e (3 Mart), aquasecurity/trivy-action'ın 77 etiketinden 76'sı ise kimlik bilgisi çalan zararlıya (19 Mart) zorla taşındı.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-mrrh-fwg8-r2c3",
+        "https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction",
+        "https://github.com/advisories/GHSA-69fq-xp46-6x23",
+        "https://github.com/advisories/GHSA-f8q5-h5qh-33mh"
+      ],
+      "yasatacagi_sorunlar": [
+        "Etiketle (@v4 gibi) sabitlenmiş bir tarama eylemi ele geçirilirse, aynı işteki bulut, npm ve kayıt defteri sırları dakikalar içinde çalınır; ajan hattının dağıtım kimlikleri de dahil.",
+        "Güvenlik tarayıcısının (Trivy) kendisi saldırı vektörüne dönüştüğü için 'güvenlik kapısı' hattın en riskli adımı olabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K15-004",
+        "N-K06-005",
+        "N-K18-009"
+      ],
+      "erken_sinyal": "Dependabot/GHSA bildirimleri; iş loglarında base64 blok veya beklenmedik dış bağlantı; etiketin işaret ettiği SHA'nın değişmesi.",
+      "azaltma": "Tüm eylemleri tam commit SHA'sıyla sabitleyin (Ağustos 2025'te gelen SHA zorunluluğu politikası), izinli eylem listesi tutun, sırları OIDC ile kısa ömürlü kılın.",
+      "id": "BL-00314",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "tj-actions CVE-2025-30066 (v1–v45.0.7, ~23.000 depo, 18.03.2025 CISA KEV) ve Mart 2026 olayları doğru; ancak trivy-action'ın 76/77 etiketi C2 arka kapısına değil kimlik bilgisi çalan zararlıya taşındı (19 Mart 2026); C2 arka kapısı yalnız xygeni-action v5'te (3 Mart 2026).",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-mrrh-fwg8-r2c3",
+          "https://github.com/advisories/GHSA-69fq-xp46-6x23",
+          "https://github.com/advisories/GHSA-f8q5-h5qh-33mh",
+          "https://github.com/cisagov/kev-data"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-30066",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-69fq-xp46-6x23",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-f8q5-h5qh-33mh",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        },
+        {
+          "kimlik": "GHSA-mrrh-fwg8-r2c3",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0188",
+      "arac": "LiteLLM",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "PyPI sürümleri ele geçirildi: 1.82.7/1.82.8 kimlik bilgisi çalan zararlı yazılım içerdi",
+      "aciklama": "24 Mart 2026'da iki PyPI sürümü yaklaşık 40 dakika boyunca zararlı kodla yayında kaldı; kod ortam değişkenlerini, SSH anahtarlarını, AWS/GCP/Azure kimliklerini, Kubernetes jetonlarını ve veritabanı parolalarını toplayıp resmi olmayan bir alan adına gönderdi. 1.82.8 kalıcılık için litellm_init.pth dosyası ekledi. Kök neden, CI'daki Trivy bağımlılığı üzerinden çalınan yayın kimlik bilgileri olarak açıklandı.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.litellm.ai/blog/security-update-march-2026",
+        "https://github.com/advisories/GHSA-5mg7-485q-xm76",
+        "https://github.com/BerriAI/litellm/issues/24512"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sürümü sabitlenmemiş bir CI koşucusu veya geliştirici makinesi 'pip install litellm' çalıştırırsa, o makinedeki bulut, Kubernetes ve tüm model sağlayıcı anahtarları dışarı sızabilir.",
+        ".pth dosyası Python her başladığında çalıştığı için paket kaldırılsa bile ajan çalışma ortamı kalıcı olarak ele geçirilmiş kalabilir.",
+        "Geçit tüm ekiplerin sağlayıcı anahtarlarını tuttuğu için tek bir zehirli sürüm bütün portföyün anahtarlarının döndürülmesini gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-005",
+        "N-K18-004",
+        "N-K18-013",
+        "N-K09-002"
+      ],
+      "erken_sinyal": "PyPI'da imzasız/beklenmeyen yeni sürüm, site-packages altında bilinmeyen .pth dosyası, geçit sunucusundan bilinmeyen alan adlarına giden çıkış trafiği.",
+      "azaltma": "Yalnız özet (hash) sabitlenmiş kilit dosyasıyla ve iç paket aynasından kurulum; resmi imzalı konteyner imajını kullanma; geçit sunucusunda çıkış trafiğini izin listesine bağlama; sağlayıcı anahtarlarını gizli bilgi kasasında tutup düzenli döndürme.",
+      "id": "BL-00487",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Resmî blog 1.82.7/1.82.8, 24 Mart 2026 10:39 UTC'den itibaren ~40 dk, litellm_init.pth ve Trivy kaynaklı kimlik hırsızlığını doğruluyor; GHSA-5mg7-485q-xm76 kritik.",
+        "kaynak": [
+          "https://docs.litellm.ai/blog/security-update-march-2026",
+          "https://github.com/advisories/GHSA-5mg7-485q-xm76"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-5mg7-485q-xm76",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0557",
+      "arac": "Nx",
+      "gorev": "R-G03",
+      "tur": "RT-02",
+      "baslik": "s1ngularity: ele geçirilmiş Nx sürümleri yapay zekâ CLI'larını silaha çevirdi",
+      "aciklama": "26 Ağustos 2025'te npm'e zararlı Nx sürümleri yüklendi; postinstall betiği makinedeki Claude/Gemini/Q CLI'larını --dangerously-skip-permissions/--yolo bayraklarıyla çalıştırıp sır aradı ve kurbanın GitHub hesabında açık depoya sızdırdı. Kök neden, enjeksiyona açık bir GitHub Actions iş akışıydı.",
+      "tarih": "2025-08",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/nrwl/nx/security/advisories/GHSA-cxm3-wv7p-598c",
+        "https://www.wiz.io/blog/s1ngularity-supply-chain-attack",
+        "https://snyk.io/blog/weaponizing-ai-coding-agents-for-malware-in-the-nx-malicious-package/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan çalışma ortamında veya geliştirici makinesinde sürüm sabitlenmeden 'npm install' çalışırsa GitHub/npm tokenları, SSH anahtarları ve bulut kimlikleri çalınır.",
+        "Makinede yüklü kodlama ajanı saldırganın keşif aracı olur; ajan izin atlatma bayrakları risk çarpanıdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K15-004",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "package-lock'ta beklenmeyen Nx sürümü; GitHub hesabında 's1ngularity-repository' adlı depo; postinstall sırasında ajan CLI çağrısı.",
+      "azaltma": "Kilit dosyası + iç npm aynası, postinstall betiklerini devre dışı bırakma (--ignore-scripts), ajan CLI'larında izin atlatma bayraklarını politika ile yasaklama.",
+      "id": "BL-00873",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-cxm3 (kritik, CVE-2025-10894) kötü amaçlı sürümleri, s1ngularity-repository sızıntısını ve kök nedeni (PR başlığı bash enjeksiyonu + pull_request_target) doğruluyor; AI CLI'ların kötüye kullanımı Wiz/Snyk'te belgelendi.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-cxm3-wv7p-598c",
+          "https://www.wiz.io/blog/s1ngularity-supply-chain-attack",
+          "https://nvd.nist.gov/vuln/detail/CVE-2025-10894"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-10894",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        },
+        {
+          "kimlik": "GHSA-cxm3-wv7p-598c",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1129",
+      "arac": "Coder",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Coder modül kayıt defteri Ağustos 2026'da kimlik bilgisi çalan zararlı modüller sundu",
+      "aciklama": "Kimliği belirsiz bir saldırgan Coder'ın Cloudflare altyapısına erişip modül kayıt defteri havuzuna yetkisiz IP'ler ekledi; 31 Ağustos 2026 07:35–21:45 UTC arasında registry.coder.com bazı kullanıcılara, kimlik bilgilerini toplayıp benzer adlı bir alan adına gönderen zararlı Terraform modülleri sundu (kritik).",
+      "tarih": "2026-09",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/coder/coder/security/advisories/GHSA-vx42-ghc9-gw65"
+      ],
+      "yasatacagi_sorunlar": [
+        "O zaman aralığında şablon sürümü güncelleyen ekiplerin çalışma alanlarında bulut anahtarları, Git token'ları ve ajan kimlik bilgileri çalınmış olabilir; etki kesin olarak belirlenemez.",
+        "Kayıt defterinden sürüm sabitlemeden modül çeken şablonlar, benzer bir olayda tüm ajan çalışma alanlarına zararlı kod dağıtır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-001",
+        "N-K04-005",
+        "N-K15-006"
+      ],
+      "erken_sinyal": "coder-infra[.]com gibi benzer alan adlarına giden trafik; olay aralığında oluşturulan şablon sürümleri.",
+      "azaltma": "Modülleri iç aynadan, özet/sürüm sabitli kullanmak; modül önbelleğini açık tutmak; giden trafik izin listesi.",
+      "id": "BL-01329",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-vx42-ghc9-gw65 (kritik, 2026-09-01) Cloudflare altyapısına erişimle yetkisiz IP'lerin eklendiğini, 31 Ağustos 07:35–21:45 UTC arasında kimlik bilgisi çalan modüller sunulduğunu ve benzer alan adına sızdırıldığını doğruluyor.",
+        "kaynak": [
+          "https://github.com/coder/coder/security/advisories/GHSA-vx42-ghc9-gw65"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-vx42-ghc9-gw65",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1155",
+      "arac": "Trivy",
+      "gorev": "R-G06b",
+      "tur": "RT-02",
+      "baslik": "Trivy ekosistemi ele geçirildi (CVE-2026-33634, Mart 2026)",
+      "aciklama": "19–23 Mart 2026'da saldırganlar ele geçirdikleri kimlik bilgileriyle şunları yayımladı: kötü amaçlı v0.69.4 ikili dosyaları, Docker Hub'daki 0.69.5 ve 0.69.6 imajları. trivy-action'ın 0.0.1–0.34.2 arasındaki tüm etiketleri ve setup-trivy'nin 0.2.6 öncesi sürümleri de saldırgan koduna yönlendirildi. Zararlı kod Runner.Worker belleğini okuyup SSH, bulut, Kubernetes ve .env sırlarını scan.aquasecurtiy.org'a gönderdi. Kök neden, Şubat 2026'daki önceki olaydan sonra kimlik bilgilerinin tek seferde döndürülmemesiydi.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23",
+        "https://www.sysdig.com/blog/teampcp-expands-supply-chain-compromise-spreads-from-trivy-to-checkmarx-github-actions"
+      ],
+      "yasatacagi_sorunlar": [
+        "Etiketle sabitlenmiş trivy-action kullanan her CI işi bulut, Kubernetes ve paket yayın sırlarını saldırgana verir; aynı sırlar başka tedarik zinciri saldırılarında kullanılır (Checkmarx dalgası).",
+        "Güvenlik taraması kapısı (N-K18-009) doğrudan saldırı giriş noktasına dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-009",
+        "N-K18-004",
+        "N-K05-012"
+      ],
+      "erken_sinyal": "trivy-action etiketinin gösterdiği commit'in değişmesi; runner'dan bilinmeyen alan adına trafik; GitHub organizasyonunda 'tpcp-docs' deposu.",
+      "azaltma": "Action'ları tam SHA ile sabitleyin, ikili dosya ve imajları imza ve özetle doğrulayıp iç aynadan çekin, tarama işine yayın sırrı vermeyin, runner çıkış trafiğini kısıtlayın.",
+      "id": "BL-01336",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-69fq-xp46-6x23 / CVE-2026-33634 (kritik, CVSS4 9.4) iddiayı doğruluyor: 19.03 v0.69.4, 22–23.03 Docker Hub 0.69.5/0.69.6, trivy-action 0.0.1–0.34.2, setup-trivy etiketleri, Runner.Worker belleği, scan.aquasecurtiy.org ve Şubat olayından sonra atomik olmayan kimlik bilgisi rotasyonu.",
+        "kaynak": [
+          "https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23",
+          "https://api.github.com/advisories/GHSA-69fq-xp46-6x23",
+          "https://www.sysdig.com/blog/teampcp-expands-supply-chain-compromise-spreads-from-trivy-to-checkmarx-github-actions"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-33634",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-69fq-xp46-6x23",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ],
+      "kev_durumu": [
+        {
+          "cve": "CVE-2026-33634",
+          "kev_ekleme": "2026-03-26",
+          "katalog_surumu": "2026.09.25",
+          "kaynak": "https://github.com/cisagov/kev-data/blob/main/known_exploited_vulnerabilities.json",
+          "not": "E3: CISA KEV kataloğunda; bulgu metninde KEV bilgisi yoktu (yalnız ekleme)."
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2133",
+      "arac": "Checkmarx One",
+      "gorev": "R-G06b",
+      "tur": "RT-02",
+      "baslik": "Checkmarx GitHub Action ve eklentileri ele geçirildi (TeamPCP, Mart 2026)",
+      "aciklama": "23 Mart 2026'da cx-plugins-releases servis hesabı ele geçirildi. kics-github-action'ın 35 etiketinin tümü, ast-github-action (2.3.28) ve OpenVSX'teki cx-dev-assist 1.7.0 ile ast-results 2.53.0 eklentileri kötü amaçlı koda yönlendirildi. Zararlı kod CI runner belleğinden sır çaldı, veriyi checkmarx.zone'a gönderdi ve Kubernetes'te ayrıcalıklı pod ile kalıcılık kurmaya çalıştı.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Checkmarx/kics-github-action/issues/152",
+        "https://www.wiz.io/blog/teampcp-attack-kics-github-action",
+        "https://www.sysdig.com/blog/teampcp-expands-supply-chain-compromise-spreads-from-trivy-to-checkmarx-github-actions"
+      ],
+      "yasatacagi_sorunlar": [
+        "Etiketle (@v2 gibi) sabitlenmiş Checkmarx action'ı kullanan her hat, bulut ve Kubernetes kimlik bilgilerini saldırgana verir.",
+        "Geliştiricinin IDE eklentisi otomatik güncellenirse, dizüstündeki SSH anahtarları ve .env dosyaları çalınabilir.",
+        "Güvenlik tarama kapısı (N-K18-009), saldırının giriş noktası haline gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-009",
+        "N-K05-012"
+      ],
+      "erken_sinyal": "Action etiketinin commit SHA'sının değişmesi; runner'dan bilinmeyen alan adlarına giden trafik; kurumda 'tpcp' adlı depoların belirmesi.",
+      "azaltma": "Action'ları tam commit SHA ile sabitleyin, IDE eklentilerinde otomatik güncellemeyi kapatın, runner çıkış trafiğini izin listesine bağlayın, tarama işlerine en az yetkili ve kısa ömürlü token verin.",
+      "id": "BL-01870",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Wiz ve kics-github-action #152 (2026-03-23): cx-plugins-releases hesabıyla 35 etiketin tümü zararlı commit'e yönlendirildi, ast-github-action 2.3.28 ve OpenVSX cx-dev-assist 1.7.0 / ast-results 2.53.0 etkilendi; Runner.Worker belleğinden sır çalma, checkmarx.zone'a sızdırma ve ayrıcalıklı Kubernetes pod'u ile kalıcılık doğrulanıyor.",
+        "kaynak": [
+          "https://github.com/Checkmarx/kics-github-action/issues/152",
+          "https://www.wiz.io/blog/teampcp-attack-kics-github-action"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0039",
+      "arac": "Mastra",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "npm hesabının ele geçirilmesiyle 116 kötü amaçlı paket yayımlandı (Haziran 2026)",
+      "aciklama": "Mastra'nın olay raporuna göre 16 Haziran 2026'da bir bakımcının oltalamayla ele geçirilen makinesindeki token ile 25 dakikada 116 kötü amaçlı npm paketi (çoğu @mastra/ ad alanında; ör. @mastra/core 1.42.1, @mastra/mcp 1.10.1, mastra 1.13.1) yayımlandı; postinstall betiği kimlik bilgilerini sızdırıp kendini siliyordu. MFA zorunlu olmasına rağmen token ile atlatmaya izin verildiği kabul edildi; GHSA bu sürümleri 'makine tamamen ele geçirilmiş sayılmalı' uyarısıyla işaretledi.",
+      "tarih": "2026-06",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mastra-ai/mastra/issues/18061",
+        "https://github.com/advisories/GHSA-pp62-grrw-hvfp",
+        "https://socket.dev/blog/mastra-npm-packages-compromised"
+      ],
+      "yasatacagi_sorunlar": [
+        "O saat aralığında bağımlılık güncelleyen geliştirici veya CI makinesinin tüm sırları çalınır; ajan hattının kendisi tedarik zinciri giriş noktası olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K16-005",
+        "N-K18-013"
+      ],
+      "erken_sinyal": "Yeni yayımlanmış paket sürümlerinde install betikleri; OSV'de MAL- kayıtları.",
+      "azaltma": "npm'de install betiklerini kapatın (ignore-scripts), yeni sürümler için bekleme süresi (minimum yaş) uygulayın, kilit dosyası ve kurum içi ayna kullanın.",
+      "id": "BL-00102",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Mastra olay raporu (issue #18061) 16 Haziran 2026'da 18:12–18:37 PT arasında 116 kötü amaçlı paket, oltalamayla ele geçirilen bakımcı ve MFA token bypass'ını doğruluyor; GHSA-pp62-grrw-hvfp (@mastra/core 1.42.1, kritik) ve ilgili malware GHSA'ları (@mastra/mcp 1.10.1, mastra 1.13.1) mevcut.",
+        "kaynak": [
+          "https://github.com/mastra-ai/mastra/issues/18061",
+          "https://github.com/advisories/GHSA-pp62-grrw-hvfp",
+          "https://github.com/advisories/GHSA-wfr8-6x4q-hpr3",
+          "https://github.com/advisories/GHSA-mvf4-vg87-q9vm"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-mvf4-vg87-q9vm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-pp62-grrw-hvfp",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-wfr8-6x4q-hpr3",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0049",
+      "arac": "DSPy",
+      "gorev": "R-G08",
+      "tur": "RT-02",
+      "baslik": "LiteLLM tedarik zinciri saldırısına açık bağımlılık",
+      "aciklama": "24 Mart 2026'da PyPI'da kimlik bilgisi çalan kötü amaçlı litellm 1.82.7 ve 1.82.8 yayımlandı. DSPy o tarihte litellm>=1.64.0 kısıtına sahipti; bakımcılar, pencere içinde 'pip install dspy' çalıştıran sistemlerin muhtemelen ele geçirildiğini duyurdu. Güncel 3.4.0 yine üst sınırsız litellm>=1.65.8 istiyor.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/stanfordnlp/dspy/issues/9500",
+        "https://osv.dev/vulnerability/GHSA-5mg7-485q-xm76",
+        "https://docs.litellm.ai/blog/security-update-march-2026",
+        "https://pypi.org/project/dspy/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan çalışma ortamında veya CI'da kilit dosyası olmadan DSPy kurulursa geliştirici makinesindeki bulut anahtarları, Git token'ları ve LLM API anahtarları dışarı sızdırılabilir.",
+        "Etkilenen sürüm kurulduysa yalnız güncellemek yetmez; tüm runner ve geliştirici makinelerinde sır rotasyonu gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-009",
+        "N-K05-016",
+        "N-K08-006"
+      ],
+      "erken_sinyal": "OSV/GHSA'da litellm için MAL- kaydı; DSPy deposunda '[Notice]' başlıklı sabitlenmiş issue.",
+      "azaltma": "Kilit dosyası (uv.lock/pip-tools) ve hash doğrulamalı kurulum; iç PyPI aynası ve yeni sürümler için karantina süresi; CI'da ağ çıkışını kısıtlamak.",
+      "id": "BL-00125",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "DSPy #9500 bildirimi litellm 1.82.7/1.82.8 (24 Mart 2026), litellm>=1.64.0 kısıtı ve 'muhtemelen ele geçirildi' uyarısını içeriyor; PyPI'da dspy 3.4.0 litellm>=1.65.8 (üst sınırsız) istiyor.",
+        "kaynak": [
+          "https://github.com/stanfordnlp/dspy/issues/9500",
+          "https://api.osv.dev/v1/vulns/GHSA-5mg7-485q-xm76",
+          "https://pypi.org/pypi/dspy/json"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-5mg7-485q-xm76",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0127",
+      "arac": "GitHub Actions (merge queue ile)",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "Self-hosted runner kalıcılığı: solucanın runner'ı arka kapıya çevirmesi",
+      "aciklama": "Shai-Hulud 2.0 (Kasım 2025) ele geçirdiği makineleri 'SHA1HULUD' adlı self-hosted runner olarak kaydetti. Ayrıca discussion tetikli bir iş akışıyla self-hosted runner'larda sonradan komut çalıştırılabilen bir arka kapı yerleştirdi. GitHub belgeleri de aynı iş akışındaki işlerin birbirini ele geçirebileceğini belirtiyor.",
+      "tarih": "2025-11",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.wiz.io/blog/shai-hulud-2-0-ongoing-supply-chain-attack",
+        "https://docs.github.com/en/actions/reference/security/secure-use"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hassas işler için kurulan kalıcı self-hosted runner'lar bir kez ele geçirilirse kurum iç ağına açılan kalıcı bir kod çalıştırma kapısı olur.",
+        "Ajan çalışma alanları runner ile aynı makinede tutulursa bir görevin artıkları diğer görevin sırlarına erişir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007",
+        "N-K18-008",
+        "N-K18-013"
+      ],
+      "erken_sinyal": "Organizasyonda beklenmedik runner kayıtları; .github/workflows/discussion.yaml gibi yeni dosyalar; runner makinesinden olağandışı çıkış trafiği.",
+      "azaltma": "Geçici (ephemeral) ve yalıtılmış runner kullanın, runner kaydını yalnız yöneticiye açın, runner ağ çıkışını izinli listeyle sınırlayın.",
+      "id": "BL-00315",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Wiz, Shai-Hulud 2.0'ın (24 Kasım 2025) makineleri 'SHA1HULUD' self-hosted runner olarak kaydettiğini ve discussion.yaml ile tartışma açılarak komut çalıştırılabilen arka kapı eklediğini yazıyor; GitHub belgesi işlerin birbirini etkileyebileceğini ve self-hosted runner'ların kalıcı ele geçirilebileceğini belirtiyor.",
+        "kaynak": [
+          "https://www.wiz.io/blog/shai-hulud-2-0-ongoing-supply-chain-attack",
+          "https://docs.github.com/en/actions/reference/security/secure-use"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0191",
+      "arac": "vLLM",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Model deposundaki kodun izin verilmeden çalıştırılması ve 'sabitlenmiş' dağıtımın sabit kalmaması",
+      "aciklama": "auto_map ile dinamik modül yükleme üzerinden RCE (CVE-2026-22807, CVE-2025-66448; trust_remote_code=False olsa bile), model dosyalarındaki sabit güven geçersiz kılmasıyla RCE (CVE-2026-27893) ve 'Artifact Pin Decay': sabitlenmiş dağıtımların sabitlenmemiş kod, ağırlık ve işlemcileri yükleyebilmesi (CVE-2026-47155) bildirildi.",
+      "tarih": "2026-06",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+        "https://github.com/advisories/GHSA-8fr4-5q9j-m8gm",
+        "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+        "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hugging Face'ten çekilen bir modelin (özellikle özel kodlu modeller: Kimi, MiniMax, MiMo, Nemotron Super) deposu değişir veya ele geçirilirse sunum düğümünde kod çalışır.",
+        "Model sürüm sabitleme kaydı tutulsa bile gerçekte farklı kod/ağırlık yüklenmiş olabilir; yeniden üretilebilirlik bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-013",
+        "N-K19-005",
+        "N-K09-010"
+      ],
+      "erken_sinyal": "Model deposunda yeni commit; yükleme sırasında internet erişimi deneyen sunum süreçleri.",
+      "azaltma": "Modelleri iç kayıt defterine commit özetiyle aynalayıp çevrimdışı yükleme (HF_HUB_OFFLINE); sunum düğümlerinde çıkış trafiğini kapatma; yamalı sürüm.",
+      "id": "BL-00498",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "auto_map RCE (CVE-2026-22807, CVE-2025-66448; trust_remote_code=False iken bile), sabit güven geçersiz kılma (CVE-2026-27893) ve Artifact Pin Decay (CVE-2026-47155, orta) GHSA kayıtlarıyla doğrulandı.",
+        "kaynak": [
+          "https://api.osv.dev/v1/vulns/GHSA-8fr4-5q9j-m8gm",
+          "https://api.osv.dev/v1/vulns/GHSA-2pc9-4j83-qjmr",
+          "https://api.osv.dev/v1/vulns/GHSA-7972-pg2x-xr59",
+          "https://api.osv.dev/v1/vulns/GHSA-3ww4-5jv9-j5gm"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-66448",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-22807",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-27893",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-47155",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-2pc9-4j83-qjmr",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-3ww4-5jv9-j5gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7972-pg2x-xr59",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-8fr4-5q9j-m8gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0194",
+      "arac": "Plane",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "Topluluk dağıtım manifestolarında sabit gizli anahtar",
+      "aciklama": "GHSA-cmwv-pjmw-8483 (kritik, CVSS 9.8): deployments/aio/community ve deployments/cli/community manifestoları herkesin görebildiği sabit SECRET_KEY ve LIVE_SERVER_SECRET_KEY değerleriyle geliyordu. Ortam değişkeni ile geçersiz kılınmayan kurulumlarda bu değerler üretim anahtarı oluyor, oturum sahteciliğine yol açıyordu. Yalnız setup.sh yolu anahtarı rastgele üretiyordu.",
+      "tarih": "2026-08",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/makeplane/plane/security/advisories/GHSA-cmwv-pjmw-8483",
+        "https://github.com/makeplane/plane/tree/preview/deployments"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hızlı kurulum (aio/cli) ile yapılan pilot doğrudan üretime taşınırsa, bilinen anahtarla imzalanmış oturumlar sahtelenebilir; saldırgan herhangi bir kullanıcı adına iş kalemi değiştirebilir.",
+        "Aynı manifestolar test ve felaket kurtarma ortamlarına kopyalandıkça zayıf varsayılan değer çoğalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-008",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Kurulum dosyalarında SECRET_KEY değerinin depodaki varsayılanla aynı olması; sır tarayıcısının bilinen değeri yakalaması.",
+      "azaltma": "Tüm gizli anahtarları kurulumda üretip sır kasasından verin; varsayılan değer algılanınca başlatmayı durduran bir kontrol ekleyin; aio/cli manifestolarını üretimde kullanmayın.",
+      "id": "BL-00507",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-cmwv-pjmw-8483 3 Ağustos 2026'da yayımlandı; kritik (CVSS 9.8), <=1.3.1 sürümleri etkiliyor ve 1.4.0'da düzeltildi. Bildirimin CVE kimliği yok. aio/cli community manifestolarındaki sabit SECRET_KEY ve LIVE_SERVER_SECRET_KEY değerleri, bildirimde de belirtildiği gibi oturum sahteciliğine ve live sunucu kimlik doğrulamasının atlatılmasına yol açıyor.",
+        "kaynak": [
+          "https://api.github.com/repos/makeplane/plane/security-advisories",
+          "https://github.com/makeplane/plane/security/advisories/GHSA-cmwv-pjmw-8483"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-cmwv-pjmw-8483",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1964",
+      "arac": "AWS CodePipeline",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "CodeBuild yanlış yapılandırmasıyla tedarik zinciri ele geçirme (CodeBreach, CVE-2025-8217)",
+      "aciklama": "Wiz'in CodeBreach araştırması (CVE yok), AWS'nin kendi GitHub depolarındaki CodeBuild webhook ACTOR_ID regex filtrelerinde ^ $ çapası olmadığı için güvenilmeyen PR'ların ayrıcalıklı derleme çalıştırıp aws-sdk-js-v3 dahil depoları ele geçirebildiğini gösterdi (25 Ağu 2025 bildirildi, 48 saatte düzeltildi, 15 Oca 2026 açıklandı). Temmuz 2025'te Amazon Q VS Code uzantısının CodeBuild yapılandırmasındaki aşırı yetkili GitHub belirteciyle depoya kod enjekte edildi ve 1.84.0 sürümüne girdi (CVE-2025-8217, AWS-2025-015); yük sözdizimi hatası nedeniyle çalışmadı. Sorun CodeBuild/CodePipeline servisinde değil yapılandırmada; CodePipeline'ın derleme/test aşamaları tipik olarak CodeBuild ile koştuğundan aynı yanlış yapılandırma riski taşır.",
+      "tarih": "2026-01",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.wiz.io/blog/wiz-research-codebreach-vulnerability-aws-codebuild",
+        "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+        "https://www.cve.org/CVERecord?id=CVE-2025-8217",
+        "https://thehackernews.com/2026/01/aws-codebuild-misconfiguration-exposed.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kaynak aşaması GitHub PR webhook'u ile CodeBuild tetikliyorsa, dışarıdan ya da ele geçirilmiş bir hesaptan açılan PR ayrıcalıklı derlemede çalışıp depo yazma belirtecini veya hattın AWS rol kimlik bilgilerini çalabilir.",
+        "LLM ajanlarının PR açması için derleme projesine geniş kapsamlı ve uzun ömürlü GitHub PAT verilirse, Amazon Q örneğindeki gibi ajan araçlarına yıkıcı talimat içeren kod yayın paketine girebilir.",
+        "Hattan çıkan artefakt imzalı olsa bile kaynağı zehirlenmiş olabileceğinden imza tek başına bütünlük kanıtı olmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K18-003",
+        "N-K06-007",
+        "N-K15-004"
+      ],
+      "erken_sinyal": "CodeBuild webhook filtrelerinde çapasız düzenli ifade, 'PR comment approval' kapısının kapalı olması, derleme projelerinde uzun ömürlü/geniş kapsamlı GitHub PAT bulunması.",
+      "azaltma": "PR yorumu onay kapısını açmak, filtreleri ^…$ ile çapalamak, CodeConnections/OIDC ile kısa ömürlü ve depo kapsamlı belirteç kullanmak, dış PR'ları sırsız ve ayrı hesapta derlemek, yayın öncesi kaynak-artefakt kökeni (provenance) doğrulamak.",
+      "id": "BL-01676",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Wiz CodeBreach (25 Ağu 2025 bildirildi, 27 Ağu'da çapalar eklendi, 15 Oca 2026 açıklandı) ve AWS-2025-015/CVE-2025-8217 (Amazon Q VS Code 1.84.0, aşırı yetkili GitHub belirteci) doğru. Ancak başlıktaki CVE-2025-8217 CodeBreach'e ait değil (CodeBreach'in CVE'si yok); sorun servis değil AWS'nin kendi depolarındaki yapılandırma, Amazon Q yükü sözdizimi hatası nedeniyle etkisizdi.",
+        "kaynak": [
+          "https://www.wiz.io/blog/wiz-research-codebreach-vulnerability-aws-codebuild",
+          "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+          "https://api.osv.dev/v1/vulns/CVE-2025-8217"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-8217",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1965",
+      "arac": "AWS CodeBuild",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Amazon Q Developer eklentisine CodeBuild'deki geniş kapsamlı token ile zararlı kod enjekte edildi",
+      "aciklama": "AWS-2025-015 bültenine (23 Temmuz 2025, güncelleme 25 Temmuz) göre saldırgan, Amazon Q Developer eklentisinin CodeBuild yapılandırmasındaki uygunsuz kapsamlı GitHub token'ıyla VS Code eklentisi 1.84.0'a zararlı kod ekledi. Kod sözdizimi hatası yüzünden çalışmadı; AWS 1.85.0'ı yayımladı (CVE-2025-8217).",
+      "tarih": "2025-07",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun derleme projelerinde geniş kapsamlı Git token'ları varsa, benzer şekilde yayımlanan artefaktlara (ajan eklentileri, kütüphaneler) zararlı kod eklenebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-007",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Derleme projelerinde uzun ömürlü, geniş kapsamlı token'lar.",
+      "azaltma": "OIDC federasyonlu kısa ömürlü kimlik bilgileri ve yayın öncesi imza/doğrulama.",
+      "id": "BL-01681",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "AWS-2025-015 bülteni aşırı yetkili GitHub token'ını, 1.84.0'daki zararlı kodu ve sözdizimi hatasını doğruluyor. '25 Temmuz' 1.85.0'ın yayım tarihi değil, bültenin güncellenme tarihi. GitHub'daki amazonq/v1.85.0 sürümü 19 Temmuz 2025 tarihli.",
+        "kaynak": [
+          "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+          "https://github.com/aws/aws-toolkit-vscode/releases/tag/amazonq/v1.85.0"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-8217",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1965",
+      "arac": "AWS CodeBuild",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "CodeBreach: çapasız regex webhook filtresiyle güvenilmeyen PR'ların ayrıcalıklı derleme alması",
+      "aciklama": "Wiz, ACTOR_ACCOUNT_ID webhook filtrelerinde ^ ve $ eksikliği nedeniyle kimlik doğrulamasız saldırganların derleme ortamına sızıp ayrıcalıklı kimlik bilgilerini sızdırabildiğini ve AWS JavaScript SDK gibi AWS depolarını ele geçirebileceğini gösterdi; Ağustos 2025'te bulundu, Ocak 2026'da açıklandı.",
+      "tarih": "2026-01",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.wiz.io/blog/wiz-research-codebreach-vulnerability-aws-codebuild",
+        "https://thehackernews.com/2026/01/aws-codebuild-misconfiguration-exposed.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların açtığı veya dış katkıcıların gönderdiği PR'lar yanlış filtreyle ayrıcalıklı derleme projesinde koşarsa, depo yazma token'ı çalınıp ana dala zararlı kod itilebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-007",
+        "N-K15-005",
+        "N-K02-012"
+      ],
+      "erken_sinyal": "Webhook filtrelerinde çapasız regex; PR derlemelerinde ayrıcalıklı rol.",
+      "azaltma": "Filtreleri çapalı yazmak, PR derlemelerini sırsız ayrı projede koşmak, onay kapısı.",
+      "id": "BL-01682",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Wiz (15 Ocak 2026): çapasız regex aktör filtresi kimlik doğrulamasız saldırganların derlemeye sızıp ayrıcalıklı kimlik bilgilerini sızdırmasına ve AWS JS SDK dahil depoları ele geçirmesine izin veriyordu. THN: bildirim 25 Ağustos 2025.",
+        "kaynak": [
+          "https://www.wiz.io/blog/wiz-research-codebreach-vulnerability-aws-codebuild",
+          "https://thehackernews.com/2026/01/aws-codebuild-misconfiguration-exposed.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1991",
+      "arac": "Azure Pipelines",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "Pazar yeri görev uzantıları ve bağımlılıklar üzerinden hat zehirlenmesi",
+      "aciklama": "Pipelines görevlerinin önemli kısmı üçüncü taraf uzantılardan gelir; 2022 analizinde 1.460 Pipelines uzantısının 500'den fazlasında zafiyetli bağımlılık ve 130 görevde TLS doğrulamasının kapatıldığı bulundu. Mart 2026 Axios npm ele geçirilmesinde Microsoft; kendinden barındırılan ajanları, özel betikleri ve üçüncü taraf uzantıları risk altında sayıp etkilenen işlerdeki tüm sırların 'ifşa olmuş kabul edilmesini' istedi. Loglama komutu enjeksiyonuyla hat ele geçirme (CVE-2023-21553) geçmişi de var.",
+      "tarih": "2026-04",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://devblogs.microsoft.com/devops/axios-npm-supply-chain-compromise-guidance-for-azure-pipelines-customers/",
+        "https://jessehouwing.net/security-state-of-the-azure-devops-marketplace/",
+        "https://www.techtarget.com/searchsecurity/news/365534205/Azure-Pipelines-vulnerability-spotlights-supply-chain-threats",
+        "https://www.cve.org/CVERecord?id=CVE-2023-21553"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kalıcı (yeniden kullanılan) kendinden barındırılan ajanlarda zehirlenmiş bir npm/PyPI paketi veya uzantı görevi, aynı ajanda sonraki işlerin sırlarını ve servis bağlantısı belirteçlerini çalabilir.",
+        "Ajanların commit mesajı veya değişkenlere yazdığı içerik loglama komutu sözdizimi taşırsa hat değişkenleri değiştirilip indirme adresleri zararlı betiğe yönlendirilebilir.",
+        "Bakımı bırakılmış eski Node işleyicili görevler güvenlik yaması almaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K15-002",
+        "N-K15-007",
+        "N-K18-006"
+      ],
+      "erken_sinyal": "Kurulu uzantıların son güncelleme tarihinin 12 ayı aşması; hat loglarında beklenmeyen ##vso[ komutları; kilit dosyası olmadan npm install.",
+      "azaltma": "Uzantıları onaylı katalogla sınırlamak ve sürüm sabitlemek, tek kullanımlık (ephemeral) ajanlar, npm ci/kilit dosyası zorunluluğu, görevlerde sır kapsamını daraltmak, 'settable variables' kısıtlarını açmak.",
+      "id": "BL-01710",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Houwing (Aralık 2022): 1.460 uzantının 500'den fazlasında zafiyet/zafiyetli bağımlılık, 2.833 görevin 130'unda sertifika doğrulaması kapalı. Microsoft 24.04.2026 rehberi Axios (31 Mart 2026) için özel betik, uzantı, self-hosted ajanları riskli sayıp sırların 'potansiyel olarak ifşa' kabulünü istiyor; CVE-2023-21553 loglama komutu enjeksiyonu (Legit Security, CVSS 7.5).",
+        "kaynak": [
+          "https://jessehouwing.net/security-state-of-the-azure-devops-marketplace/",
+          "https://devblogs.microsoft.com/devops/axios-npm-supply-chain-compromise-guidance-for-azure-pipelines-customers/",
+          "https://www.techtarget.com/searchsecurity/news/365534205/Azure-Pipelines-vulnerability-spotlights-supply-chain-threats"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2023-21553",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2133",
+      "arac": "Checkmarx One",
+      "gorev": "R-G06b",
+      "tur": "RT-02",
+      "baslik": "Checkmarx kaynaklı olay müşteri yayın hatlarına sıçradı (Nisan 2026)",
+      "aciklama": "CVE-2026-42994: Bitwarden CLI 2026.4.0 npm paketine 22 Nisan 2026'da yaklaşık 93 dakikalığına kötü amaçlı kod girdi. Bitwarden bunu 'daha geniş bir Checkmarx tedarik zinciri olayı' ile ilişkilendirdi. Bu, Mart olayından sonra da Checkmarx araçlarının müşteri hatlarında saldırı yolu olmaya devam ettiğini gösteriyor.",
+      "tarih": "2026-04",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-42994",
+        "https://community.bitwarden.com/t/bitwarden-statement-on-checkmarx-supply-chain-incident/96127"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun kendi paket yayın hattında Checkmarx bileşeni çalışıyorsa, kurumun yayınladığı paketler de zehirlenebilir.",
+        "Olay müdahalesinde tüm yayın sırlarının döndürülmesi hattı günlerce durdurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Yayın hattında beklenmeyen sürüm veya imza; Checkmarx güvenlik bildirimleri.",
+      "azaltma": "Yayın (publish) işlerini tarama işlerinden ayırın, yayın token'larını tarama adımına vermeyin, yayınlanan paketleri imzalayıp provenance üretin.",
+      "id": "BL-01871",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Bitwarden açıklaması 22 Nisan 2026 17:57–19:30 ET (~93 dk) @bitwarden/cli 2026.4.0 npm paketinin 'daha geniş bir Checkmarx tedarik zinciri olayı' ile bağlantılı olarak zararlı dağıtıldığını, CVE-2026-42994'ü doğruluyor; haberlere göre Bitwarden'ın deposu ele geçirilmiş checkmarx/ast-github-action'ı kullanıyordu.",
+        "kaynak": [
+          "https://community.bitwarden.com/t/bitwarden-statement-on-checkmarx-supply-chain-incident/96127",
+          "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-42994",
+          "https://thehackernews.com/2026/04/bitwarden-cli-compromised-in-ongoing.html"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-42994",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2389",
+      "arac": "FastGPT",
+      "gorev": "R-G03b",
+      "tur": "RT-02",
+      "baslik": "Proje CI'ında 'pwn request' ve güvenilmeyen PR artefaktlarının dağıtımı",
+      "aciklama": "CVE-2026-33075 (kritik, 2026-03): fastgpt-preview-image.yml iş akışı pull_request_target kullanıp dış katkıcının kodunu depo sırlarıyla çalıştırıyordu. CVE-2026-50562 (2026-05): güvenilmeyen PR artefaktları ayrıcalıklı önizleme iş akışlarıyla itilip dağıtılıyordu.",
+      "tarih": "2026-05",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/labring/FastGPT/security/advisories/GHSA-xfx8-w35j-485c",
+        "https://github.com/labring/FastGPT/security/advisories/GHSA-rvgc-2c29-g876"
+      ],
+      "yasatacagi_sorunlar": [
+        "Proje sırları ya da imaj yayınlama yetkisi ele geçirilmişse, kurumun çektiği resmî konteyner imajları kötü amaçlı kod içerebilir.",
+        "İmaj etiketiyle (latest) çekim yapan kurulumlar zehirlenmiş sürümü otomatik alır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "İmaj özetlerinin beklenmedik değişmesi; proje duyurularında sır rotasyonu.",
+      "azaltma": "İmajları özet (digest) ile sabitleyin, kendi iç kayıt defterinize yansıtın ve tarayın. Mümkünse kaynaktan kendiniz derleyin.",
+      "id": "BL-02000",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-xfx8-w35j-485c = CVE-2026-33075 (critical, 17.03.2026, fastgpt-preview-image.yml pull_request_target); GHSA-rvgc-2c29-g876 = CVE-2026-50562 (medium, 26.05.2026, güvenilmeyen PR artefaktlarının ayrıcalıklı önizleme iş akışlarıyla dağıtımı).",
+        "kaynak": [
+          "https://github.com/labring/FastGPT/security/advisories/GHSA-xfx8-w35j-485c",
+          "https://github.com/labring/FastGPT/security/advisories/GHSA-rvgc-2c29-g876"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-33075",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-50562",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-rvgc-2c29-g876",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        },
+        {
+          "kimlik": "GHSA-xfx8-w35j-485c",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-3587",
+      "arac": "PostHog",
+      "gorev": "R-G07",
+      "tur": "RT-02",
+      "baslik": "Shai-Hulud 2.0 npm solucanı PostHog SDK'larını ele geçirdi (Kasım 2025)",
+      "aciklama": "24 Kasım 2025'te posthog-node (4.18.1, 5.13.3, 5.11.3), posthog-js (1.297.3), posthog-react-native, @posthog/ai, @posthog/agent, @posthog/cli, @posthog/core, @posthog/wizard gibi paketlerin kötü amaçlı sürümleri yayımlandı. PostHog postmortem'ine göre saldırgan pull_request_target iş akışı üzerinden bir botun geniş yetkili GitHub PAT'ını çaldı, ardından npm yayın kimlik bilgilerini sızdırdı; kötü amaçlı paketler yaklaşık 5 saat yayında kaldı. Yük, Trufflehog ile kimlik bilgisi tarayıp çalıyor ve kendini kurbanın paketlerine yayıyordu.",
+      "tarih": "2025-11",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://posthog.com/blog/nov-24-shai-hulud-attack-post-mortem",
+        "https://github.com/advisories/GHSA-mjv6-3w2m-7669",
+        "https://osv.dev/vulnerability/MAL-2025-190925"
+      ],
+      "yasatacagi_sorunlar": [
+        "İç geliştirici portalına veya ajan paneline PostHog SDK'sı ^ aralığıyla eklenmişse, o saatlerde CI veya geliştirici makinesinde yapılan kurulum npm, GitHub ve bulut tokenlarını çalar.",
+        "Solucan kurumun kendi npm paketlerine yayılıp iç kayıttaki paketleri de zehirleyebilir; olay müdahalesi tüm ekiplerde token rotasyonu gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "Kilit dosyasında beklenmeyen yama sürümü, preinstall/postinstall betikleri, GitHub'da rastgele adlı depolara sır yüklenmesi.",
+      "azaltma": "Kilit dosyası ve iç ayna kaydı zorunlu kılın; kurulum betiklerini kapatın (ignore-scripts); yeni sürümler için bekleme süresi ve kötü amaçlı paket taraması uygulayın.",
+      "id": "BL-02230",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Postmortem: 24 Kasım 2025 04:11 UTC yayın, 09:30 UTC'de silinme (~5 saat), pull_request_target ile bot PAT'ının çalınması, Trufflehog'lu yük. Listelenen sürümler (posthog-node 4.18.1/5.13.3/5.11.3, posthog-js 1.297.3) doğru.",
+        "kaynak": [
+          "https://posthog.com/blog/nov-24-shai-hulud-attack-post-mortem",
+          "https://github.com/advisories/GHSA-mjv6-3w2m-7669"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-mjv6-3w2m-7669",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-3979",
+      "arac": "Bruno",
+      "gorev": "D17-api",
+      "tur": "RT-02",
+      "baslik": "CLI paketi iki npm tedarik zinciri olayından etkilendi",
+      "aciklama": "GitHub bildirimlerine göre @usebruno/cli, Kasım 2025'te geçişli @postman/tunnel-agent bağımlılığı üzerinden SHA1-Hulud tedarik zinciri saldırısından, Mart 2026'da Axios npm olayından (CVE-2026-34841, kritik, 9.8) etkilendi. Paket 21–27 Eylül 2026 haftasında 330.052 kez indirildi.",
+      "tarih": "2026-03",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/usebruno/bruno/security/advisories/GHSA-658g-p7jg-wx5g",
+        "https://github.com/usebruno/bruno/security/advisories/GHSA-246j-fv2m-6jhx"
+      ],
+      "yasatacagi_sorunlar": [
+        "CI'da sürümü sabitlenmeden kurulan CLI, ele geçirilmiş bir bağımlılığı koşu makinesinde çalıştırabilir; koşucudaki sırlar sızabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "CI'da @usebruno/cli'ın sabitlenmemiş sürümle kurulması.",
+      "azaltma": "Bildirimlerdeki yol: etkilenmeyen sürüme yükseltme.",
+      "id": "BL-02528",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GitHub güvenlik bildirimleri ve npm indirme API'si 28.09.2026'da okundu.",
+        "kaynak": [
+          "https://github.com/usebruno/bruno/security/advisories/GHSA-658g-p7jg-wx5g",
+          "https://github.com/usebruno/bruno/security/advisories/GHSA-246j-fv2m-6jhx"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-34841",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1035",
+      "arac": "Codecov",
+      "gorev": "R-G06",
+      "tur": "RT-02",
+      "baslik": "2021 Bash Uploader tedarik zinciri saldırısı",
+      "aciklama": "31 Ocak ile 1 Nisan 2021 arasında saldırganlar Codecov'un Bash Uploader betiğini değiştirdi. Değiştirilmiş betik, müşterilerin CI ortam değişkenlerini (token, anahtar) ve git uzak adreslerini dış sunuculara gönderdi. Olay, bir müşterinin betiğin sağlama toplamını karşılaştırmasıyla ortaya çıktı.",
+      "tarih": "2021-04",
+      "siddet": "kritik",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://about.codecov.io/security-update/"
+      ],
+      "yasatacagi_sorunlar": [
+        "CI'da internetten indirilip doğrudan çalıştırılan yükleyici, tüm hat sırlarının çalınması için tek bir hata noktasıdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "Yükleyici imza doğrulamasının atlanması; curl | bash kalıpları.",
+      "azaltma": "İmzalı CLI'ı sürüme sabitlenmiş olarak ve imza doğrulamasıyla kullan. Yükleme işine sır verme.",
+      "id": "BL-01288",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Codecov duyurusu betiğin değiştirildiğini, $(env) ve git remote -v verisinin dış IP'lere gönderildiğini ve 1 Nisan 2021'de fark edildiğini doğruluyor.",
+        "kaynak": [
+          "https://about.codecov.io/security-update/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0102",
+      "arac": "Tessl",
+      "gorev": "R-G03",
+      "tur": "RT-02",
+      "baslik": "Skill kayıt defterinde istem enjeksiyonu ve zararlı içerik yaygınlığı",
+      "aciklama": "Snyk'in ToxicSkills araştırması ~4.000 genel skill'in %36'sında istem enjeksiyonu tekniği buldu. Tessl kayıt defteri skill'leri yayında Snyk ile tarıyor ve yüksek/kritik bulgulu skill kurulurken uyarı kapısı gösteriyor, ancak kurulumu engellemiyor.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://tessl.io/blog/the-tessl-registry-now-has-security-scores-powered-by-snyk/",
+        "https://snyk.io/blog/snyk-tessl-partnership/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir geliştirici puanı düşük bir skill'i 'devam et' diyerek kurarsa ajan, geliştirici makinesinde sır okuyup dışarı gönderebilir.",
+        "Kurumun onaylı yetenek paketi kataloğu, genel kayıt defterinden çekilen paketlerle delinir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-008",
+        "N-K12-002"
+      ],
+      "erken_sinyal": "Kurumsal makinelerde onaylı listede olmayan skill kurulumları; güvenlik puanı düşük paketlere bağımlılık.",
+      "azaltma": "Yalnız kurum içi aynalanmış ve incelenmiş skill'lere izin verin; kurulumda puan eşiğini zorunlu engel yapın.",
+      "id": "BL-00253",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "%36 oranı Snyk ToxicSkills'in genel skill ekosistemi taramasına ait (~4.000 skill), Tessl kayıt defterine özgü değil. Tessl yayında tarıyor ve kurulumda uyarı kapısı gösteriyor; kullanıcı devam edebiliyor.",
+        "kaynak": [
+          "https://tessl.io/blog/the-tessl-registry-now-has-security-scores-powered-by-snyk/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0129",
+      "arac": "Jenkins",
+      "gorev": "R-G06",
+      "tur": "RT-02",
+      "baslik": "Eklenti ekosistemi yamaların ve kırılmaların ana kaynağı",
+      "aciklama": "Ekim 2024–Eylül 2026 arasında 24 Jenkins güvenlik duyurusu yayımlandı; yaklaşık 20'si eklentileri kapsıyor (11'i çekirdeği de içeriyor). Eklentilerin bakım durumu birbirinden çok farklı.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.jenkins.io/security/advisories/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onlarca eklentiye bağımlı bir kurulum her güvenlik duyurusunda uyumluluk testine girer. Bakımı bırakılmış eklentiler yamasız kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K15-005",
+        "N-K06-005"
+      ],
+      "erken_sinyal": "Eklenti yöneticisinde 'güvenlik uyarısı' ve 'terk edilmiş' etiketleri.",
+      "azaltma": "Eklenti izin listesi tut ve sayıyı en aza indir. Configuration-as-Code ile yeniden kurulabilir yap. Yükseltmeleri önce hazırlık ortamında dene.",
+      "id": "BL-00325",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Jenkins danışma sayfasında Ekim 2024–Eylül 2026 arasında 16 değil 24 güvenlik duyurusu var; bunların yaklaşık 20'si eklentileri, 11'i çekirdeği kapsıyor. Özü (çoğunluk eklenti) doğru.",
+        "kaynak": [
+          "https://www.jenkins.io/security/advisories/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0177",
+      "arac": "Vercel Sandbox",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Vercel Nisan 2026 güvenlik olayı: üçüncü taraf yapay zekâ aracı üzerinden iç sistemlere erişim",
+      "aciklama": "Bir Vercel çalışanının kullandığı Context.ai aracının ele geçirilmesi, çalışanın Google Workspace ve Vercel hesabına erişimle sonuçlandı; saldırgan 'sensitive' işaretli olmayan ortam değişkenlerini listeleyip çözdü. Hassas işaretli değişkenlerin etkilenmediği bildirildi.",
+      "tarih": "2026-04",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://vercel.com/kb/bulletin/vercel-april-2026-security-incident",
+        "https://www.trendmicro.com/en_us/research/26/d/vercel-breach-oauth-supply-chain.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sandbox'lara verilen API anahtarları veya veritabanı kimlik bilgileri Vercel'de hassas olarak işaretlenmeden tutulursa, sağlayıcı ihlalinde açığa çıkar ve kurumun tüm anahtarlarını döndürmesi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-001"
+      ],
+      "erken_sinyal": "Sağlayıcı güvenlik bültenleri; hesap etkinlik günlüğünde tanımadık erişimler.",
+      "azaltma": "Sandbox'a yalnız kısa ömürlü, görev kapsamlı kimlik bilgisi enjekte etmek; tüm değişkenleri hassas işaretlemek; olay bülteni aboneliği.",
+      "id": "BL-00473",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Vercel bülteni Context.ai ele geçirilmesini, Google Workspace hesabını ve 'non-sensitive' ortam değişkenlerinin listelenip çözülmesini doğruluyor. Olay Vercel platformu geneli; Sandbox'a özgü değil.",
+        "kaynak": [
+          "https://vercel.com/kb/bulletin/vercel-april-2026-security-incident",
+          "https://www.trendmicro.com/en_us/research/26/d/vercel-breach-oauth-supply-chain.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1490",
+      "arac": "FeatBit",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "Pro kurulum şablonu güncelleme almayan Bitnami Legacy imajlarını kullanıyor",
+      "aciklama": "docker-compose-pro.yml dosyası bitnamilegacy/redis:6.2.10 ve bitnamilegacy/kafka:3.5 imajlarını ve clickhouse-server:23.7'yi kullanıyor. Bitnami'nin 2025-08-28'de yürürlüğe giren katalog değişikliğine göre Bitnami Legacy deposundaki imajlar artık güncelleme, düzeltme veya destek almıyor ve yalnız geçici geçiş için kullanılmalı.",
+      "tarih": "2025-08",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/featbit/featbit/blob/main/docker-compose-pro.yml",
+        "https://github.com/bitnami/containers/issues/83267"
+      ],
+      "yasatacagi_sorunlar": [
+        "Resmî şablonla kurulan üretim ortamında Redis ve Kafka katmanı yamasız kalır; güvenlik taramasında sürekli kritik bulgu çıkar ve kurum onayı alınamaz.",
+        "Bitnami Legacy deposu kaldırılırsa imaj çekme hatasıyla yeniden kurulum yapılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-009",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "İmaj taramasında Redis/Kafka katmanında yüksek CVE'ler; bitnamilegacy imaj referansları.",
+      "azaltma": "Standart (yalnız PostgreSQL) şablonu tercih edin veya Redis/Kafka/ClickHouse'u kurumun bakımlı imajlarıyla değiştirin; imaj taramasını dağıtım kapısına ekleyin.",
+      "id": "BL-01590",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "docker-compose-pro.yml hâlâ bitnamilegacy/redis:6.2.10, bitnamilegacy/kafka:3.5 ve clickhouse-server:23.7 kullanıyor. Bitnami duyurusu Legacy deposunun güncelleme veya destek almayacağını ve yalnız geçici geçiş için kullanılması gerektiğini söylüyor.",
+        "kaynak": [
+          "https://github.com/featbit/featbit/blob/main/docker-compose-pro.yml",
+          "https://github.com/bitnami/containers/issues/83267"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2074",
+      "arac": "Agentforce Testing Center",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Bağlı üçüncü taraf uygulama token'larıyla Salesforce örneklerinden toplu veri hırsızlığı",
+      "aciklama": "UNC6395, 8–18 Ağustos 2025'te üçüncü taraf Salesloft Drift uygulamasının çalınan OAuth token'larıyla Salesforce müşteri örneklerinden SOQL ile veri ve içindeki sırları (AWS anahtarları, parolalar, Snowflake token'ları) çaldı. Açık Salesforce ya da Agentforce Testing Center'da değil; risk, aynı Salesforce örneğine bağlı üçüncü taraf uygulama token'larından kaynaklanıyor.",
+      "tarih": "2025-08",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan test ve izleme için bağlanan üçüncü taraf uygulamaların token'ları çalınırsa CRM verisi ve kayıtlara yazılmış sırlar toplu olarak dışarı çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-010",
+        "N-K19-002",
+        "N-K18-011"
+      ],
+      "erken_sinyal": "Bağlı uygulamalardan olağandışı hacimde API/SOQL sorgusu.",
+      "azaltma": "Bağlı uygulamaları en az yetkiyle sınırlamak, IP kısıtı ve token ömrü; kayıtlarda sır saklamamak.",
+      "id": "BL-01809",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "GTIG olayı (UNC6395, 8–18 Ağustos 2025, AWS/Snowflake sırları) doğru, ancak bu Salesforce ya da Agentforce Testing Center açığı değil; üçüncü taraf Salesloft Drift entegrasyonunun token'ları çalındı.",
+        "kaynak": [
+          "https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0019",
+      "arac": "n8n",
+      "gorev": "R-G03",
+      "tur": "RT-02",
+      "baslik": "Topluluk düğümü (community package) kurulumunda komut enjeksiyonu",
+      "aciklama": "Topluluk paketi kurulumunda komut enjeksiyonu (CVE-2026-21893, kritik) ve kuyruk modunda PubSub üzerinden kurulum doğrulamasının atlatılması (GHSA-fmmv-p585-7c8x) raporlandı.",
+      "tarih": "2026-02",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-7c4h-vh2m-743m",
+        "https://github.com/n8n-io/n8n/security/advisories/GHSA-fmmv-p585-7c8x"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir geliştiricinin kurduğu npm tabanlı topluluk düğümü tüm işçi süreçlerinde kod çalıştırıp sır toplayabilir.",
+        "Onaylı araç kataloğu dışına çıkan düğümler denetim dışı kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Yönetici panelinde onaysız topluluk paketi; işçi düğümlerinde beklenmeyen npm kurulumları.",
+      "azaltma": "N8N_COMMUNITY_PACKAGES_ENABLED=false yapın, yalnız iç kayıttan imzalı/önceden incelenmiş düğümlere izin verin.",
+      "id": "BL-00068",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "CVE-2026-21893 (GHSA-7c4h) GitHub'da kritik (CVSS4 9.4) ama yönetici yetkisi gerektiriyor. GHSA-fmmv OSV'de yok, n8n deposunda 2026-09-16'da yüksek (7.5) olarak yayımlanmış; Redis'e yazma erişimi gerekiyor.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-7c4h-vh2m-743m",
+          "https://github.com/n8n-io/n8n/security/advisories/GHSA-fmmv-p585-7c8x"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-21893",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7c4h-vh2m-743m",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-fmmv-p585-7c8x",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0054",
+      "arac": "Claude Code",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "Dağıtım bütünlüğü: npm'de kaynak kod sızıntısı ve AI CLI'ların kötü amaçlı yazılımca silah olarak kullanılması",
+      "aciklama": "31 Mart 2026'da Claude Code'un tüm kaynağı npm paketine giren kaynak eşlem (source map) dosyasıyla sızdı; aynı saatlerde axios'un kötü amaçlı sürümleri yayındaydı. Ağustos 2025'teki Nx 's1ngularity' saldırısında zararlı paket, makinede kurulu Claude Code'u '--dangerously-skip-permissions' ile çağırarak sır envanteri çıkardı.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.bleepingcomputer.com/news/artificial-intelligence/claude-code-source-code-accidentally-leaked-in-npm-package/",
+        "https://thehackernews.com/2025/08/malicious-nx-packages-in-s1ngularity.html",
+        "https://snyk.io/blog/weaponizing-ai-coding-agents-for-malware-in-the-nx-malicious-package/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştirici makinesinde kurulu, izin atlatma bayrağıyla çağrılabilen ajan CLI'ı, herhangi bir zararlı npm/pip paketinin dosya sistemi taramasını hızlandırır.",
+        "Kaynak kodun açığa çıkması izin denetimi mantığının saldırganlarca incelenmesini kolaylaştırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Geliştirici makinelerinde beklenmedik 'claude -p --dangerously-skip-permissions' süreçleri; npm kurulumlarında postinstall uyarıları.",
+      "azaltma": "--dangerously-skip-permissions'ı yönetilen ayarlarla yasaklayın (disableBypassPermissionsMode), ajan CLI'ını paket yöneticisi yerine imzalı yerel yükleyiciyle dağıtın, EDR'de ajan süreç zincirlerini izleyin.",
+      "id": "BL-00140",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "BleepingComputer, 31 Mart 2026'da 2.1.88 sürümündeki 60 MB'lık cli.js.map dosyasıyla kaynağın sızdığını doğruluyor. axios 1.14.1 ve 0.30.4 aynı gün 00:21-03:29 UTC arasında yayındaydı. Snyk ve THN, Nx 's1ngularity' saldırısında (26 Ağustos 2025) claude'un --dangerously-skip-permissions ile çağrılıp dosya envanteri çıkarıldığını doğruluyor.",
+        "kaynak": [
+          "https://www.bleepingcomputer.com/news/artificial-intelligence/claude-code-source-code-accidentally-leaked-in-npm-package/",
+          "https://www.microsoft.com/en-us/security/blog/2026/04/01/mitigating-the-axios-npm-supply-chain-compromise/",
+          "https://thehackernews.com/2025/08/malicious-nx-packages-in-s1ngularity.html",
+          "https://snyk.io/blog/weaponizing-ai-coding-agents-for-malware-in-the-nx-malicious-package/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0059",
+      "arac": "OpenCode",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "'opencode serve' yükseltme uç noktası üzerinden rastgele npm paketi kurdurma",
+      "aciklama": "24 Eylül 2026 tarihli bildirime göre npm/pnpm/Bun ile kurulmuş ve 'opencode serve' ile çalışan sürümlerde (≥1.14.30, 1.18.22'de düzeltildi) bir web sayfası /global/upgrade uç noktasına çapraz site isteği göndererek saldırganın paketini kurdurup yaşam döngüsü betiklerini çalıştırabiliyordu.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/anomalyco/opencode/security/advisories/GHSA-632h-h47v-g4x4",
+        "https://securitylabs.datadoghq.com/articles/opencode-upgrade-remote-code-execution/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sunucu modunda çalışan ortak ajan çalıştırıcıları (ör. Dagu + OpenCode) npm üzerinden kurulmuşsa, çalıştırıcı düğümü tamamen ele geçirilebilir ve hattın tüm işlerine erişilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K10-001",
+        "N-K15-002"
+      ],
+      "erken_sinyal": "Çalıştırıcıda beklenmeyen npm paket kurulumları; /global/upgrade çağrıları.",
+      "azaltma": "Çalıştırıcıyı sabit sürümlü ikili dağıtımla kurma, kendini güncellemeyi kapatma, serve modunu yalnız ağ politikasıyla korunan iç ağda açma.",
+      "id": "BL-00161",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Depo düzeyi bildirim GHSA-632h-h47v-g4x4 2026-09-24'te yayımlanmış (yüksek, 7.5); etkilenen >=1.14.30, düzeltme 1.18.22; yalnız npm/pnpm/Bun kurulumları ve 'opencode serve'.",
+        "kaynak": [
+          "https://github.com/anomalyco/opencode/security/advisories/GHSA-632h-h47v-g4x4",
+          "https://securitylabs.datadoghq.com/articles/opencode-upgrade-remote-code-execution/"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-632h-h47v-g4x4",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0099",
+      "arac": "GitHub Spec Kit",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Topluluk eklenti kataloğu denetimsiz",
+      "aciklama": "Eklenti belgesi, topluluk kataloğundaki eklentilerin yazarlarınca bakıldığını; bakımcıların yalnız katalog kaydının biçimini doğruladığını, eklenti kodunu incelemediğini, denetlemediğini ve desteklemediğini açıkça yazıyor. Katalogda 175 kayıt var.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/github/spec-kit/blob/main/extensions/README.md",
+        "https://github.com/github/spec-kit/blob/main/extensions/catalog.community.json"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir ekip topluluk eklentisini kurduğunda ajana yeni komut/skill ve betik eklenir; kötü amaçlı eklenti geliştirici makinesindeki sırları sızdırabilir veya onaysız komut çalıştırabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-005",
+        "N-K10-008",
+        "N-K01-001"
+      ],
+      "erken_sinyal": "Depolarda kurum kataloğunda olmayan eklenti klasörlerinin görülmesi.",
+      "azaltma": "Varsayılan boş kurum kataloğu kullanın; yalnız incelenmiş ve sürümü sabitlenmiş eklentilere izin verin.",
+      "id": "BL-00228",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README'de bakımcıların yalnız biçimi doğruladığı, kodu 'review, audit, endorse, or support' etmediği yazıyor. catalog.community.json'da 175 kayıt var.",
+        "kaynak": [
+          "https://github.com/github/spec-kit/blob/main/extensions/README.md",
+          "https://github.com/github/spec-kit/blob/main/extensions/catalog.community.json"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0134",
+      "arac": "Playwright",
+      "gorev": "R-G06",
+      "tur": "RT-02",
+      "baslik": "Tarayıcı kurulum betikleri TLS doğrulamasız indirme yapıyordu (CVE-2025-59288)",
+      "aciklama": "Playwright kurulum betikleri curl -k (--insecure) kullandığı için ortadaki adam saldırısıyla keyfî çalıştırılabilir dosya indirilebiliyordu. 1.55.1 öncesi sürümler etkileniyor; GHSA-7mvr-c777-76hp yüksek önem derecesiyle 2025-10-14'te yayımlandı.",
+      "tarih": "2025-10",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-7mvr-c777-76hp"
+      ],
+      "yasatacagi_sorunlar": [
+        "CI koşucusu ya da ajan sandbox'ı tarayıcıları doğrudan internetten indirirse, ağ yolundaki bir saldırgan kötü amaçlı ikili yükleyerek hat sırlarını çalabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K15-002"
+      ],
+      "erken_sinyal": "Eski Playwright sürümlerinin kilit dosyalarında kalması; tarayıcı indirmelerinin kurum aynası yerine doğrudan CDN'den yapılması.",
+      "azaltma": "En az 1.55.1'e yükselt. Tarayıcıları kurum içi aynadan (PLAYWRIGHT_DOWNLOAD_HOST) ve önceden hazırlanmış imajlardan al. Sağlama toplamını doğrula.",
+      "id": "BL-00341",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-7mvr (CVE-2025-59288) 2025-10-14'te yüksek olarak yayımlandı; playwright <1.55.1.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-7mvr-c777-76hp"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-59288",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7mvr-c777-76hp",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0140",
+      "arac": "k6",
+      "gorev": "R-G07",
+      "tur": "RT-02",
+      "baslik": "Otomatik uzantı çözümleme varsayılan açık: özel k6 ikilisi Grafana'nın derleme servisinden indiriliyor",
+      "aciklama": "k6 kaynak kodunda K6_AUTO_EXTENSION_RESOLUTION varsayılan true ve varsayılan derleme servisi https://ingest.k6.io/builder/api/v1 (Grafana barındırmalı). Betik bir uzantıyı içe aktardığında k6 uzantıyı içeren ikiliyi bu servisten alıp önbelleğe koyar; yalnız Official ve Community katmanı uzantılar desteklenir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/grafana/k6/blob/master/cmd/state/state.go",
+        "https://grafana.com/docs/k6/latest/extensions/run/"
+      ],
+      "yasatacagi_sorunlar": [
+        "LLM ajanının yazdığı veya değiştirdiği bir yük testi betiği bir uzantı import ederse CI ajanında onaylanmamış, dışarıda derlenmiş bir ikili CI sırlarıyla çalışır.",
+        "İnternete çıkışı olmayan kamu/kritik altyapı ağında testler uzantı gerektirdiği anda başarısız olur; dış servise hangi betik/uzantı bilgisinin gittiği denetlenmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K15-005",
+        "N-K18-010"
+      ],
+      "erken_sinyal": "CI ağ loglarında ingest.k6.io çağrıları, önbellek dizininde yeni k6 ikilileri.",
+      "azaltma": "CI'da K6_AUTO_EXTENSION_RESOLUTION=false yapın; uzantılı ikilileri kurum içinde xk6 ile derleyip imzalayın ve iç kayıttan dağıtın.",
+      "id": "BL-00353",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "state.go'da AutoExtensionResolution: true ve defaultBuildServiceURL = https://ingest.k6.io/builder/api/v1. Belge yalnız Official/Community uzantılarla çalıştığını ve env ile kapatılabildiğini söylüyor.",
+        "kaynak": [
+          "https://github.com/grafana/k6/blob/master/cmd/state/state.go",
+          "https://grafana.com/docs/k6/latest/extensions/run/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0183",
+      "arac": "Model Context Protocol (MCP)",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "Kötü amaçlı MCP sunucusu paketleri",
+      "aciklama": "npm'deki 'postmark-mcp' paketinin kötü amaçlı sürümü, gönderilen e-postaların gizli kopyasını saldırgana iletiyordu (Koi Security, Eylül 2025; OSV MAL-2025-47604).",
+      "tarih": "2025-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.koi.ai/blog/postmark-mcp-npm-malicious-backdoor-email-theft",
+        "https://osv.dev/vulnerability/MAL-2025-47604"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekiplerin topluluk MCP sunucularını 'npx' ile doğrudan çalıştırması kurum verisinin sessizce dışarı akmasına yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K12-002"
+      ],
+      "erken_sinyal": "npx ile sürümsüz MCP sunucusu çalıştırılması.",
+      "azaltma": "MCP sunucularını kurum içi kayıt/aynadan, sürüm ve hash sabitleyerek dağıtın.",
+      "id": "BL-00483",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "OSV MAL-2025-47604 (2025-09-26) postmark-mcp'nin 1.0.16'da kötü amaçlı hale gelip e-postaları BCC ile sızdırdığını doğruluyor; Koi blog adresi artık Palo Alto Networks sayfasına yönleniyor, olay THN ve Postmark'ın kendi duyurusunda da yer alıyor.",
+        "kaynak": [
+          "https://api.osv.dev/v1/vulns/MAL-2025-47604",
+          "https://thehackernews.com/2025/09/first-malicious-mcp-server-found.html",
+          "https://postmarkapp.com/blog/information-regarding-malicious-postmark-mcp-package"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0202",
+      "arac": "Kimi K3",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Model deposunda özel Python kodu; yüklemede depo kodu çalıştırılıyor",
+      "aciklama": "Hugging Face deposu özel modelleme/işleme kodu içeriyor (modeling_kimi_k3.py, encoding_k3.py, kimi_k3_vision_processing.py; depo 2 Eylül 2026'da güncellendi); transformers ile yüklemek trust_remote_code gerektiriyor. vLLM'de auto_map ve güven geçersiz kılma üzerinden, trust_remote_code kapalı olsa bile kod çalıştırma açıkları ve 'sabitleme bozulması' açığı bildirildi.",
+      "tarih": "2026-06",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/moonshotai/Kimi-K3",
+        "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+        "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+        "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kimi K3 deposundaki bir değişiklik veya hesabın ele geçirilmesi, modeli çeken GPU sunucularında kod çalıştırılmasına yol açar.",
+        "Sürüm sabitleme commit özeti ile yapılmazsa aynı model adıyla farklı kod yüklenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-013",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Depoda yeni commit; yükleme sırasında internet çağrısı yapan süreçler.",
+      "azaltma": "Depoyu commit özetiyle iç kayıt defterine aynalama ve kod incelemesi; çevrimdışı yükleme; yamalı sunum motoru.",
+      "id": "BL-00521",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "HF deposunda 8 .py dosyası ve auto_map var, son değişiklik 2026-09-02; model kartı trust_remote_code=True örneği veriyor. vLLM bildirimleri gerçek: GHSA-2pc9 ve GHSA-7972 yüksek (7972 kimi_k25.py'de sabit trust_remote_code=True), GHSA-3ww4 orta.",
+        "kaynak": [
+          "https://huggingface.co/api/models/moonshotai/Kimi-K3",
+          "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+          "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+          "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-2pc9-4j83-qjmr",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-3ww4-5jv9-j5gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7972-pg2x-xr59",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0211",
+      "arac": "MiniMax-M3",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Model deposunda özel Python kodu; yüklemede depo kodu çalıştırılıyor",
+      "aciklama": "Hugging Face deposu özel modelleme/işleme kodu içeriyor (configuration_minimax_m3_vl.py, processing_minimax.py, image/video_processor.py); transformers ile yüklemek trust_remote_code gerektiriyor. vLLM'de auto_map ve güven geçersiz kılma üzerinden, trust_remote_code kapalı olsa bile kod çalıştırma açıkları ve 'sabitleme bozulması' açığı bildirildi.",
+      "tarih": "2026-06",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+        "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+        "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+        "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+      ],
+      "yasatacagi_sorunlar": [
+        "MiniMax-M3 deposundaki bir değişiklik veya hesabın ele geçirilmesi, modeli çeken GPU sunucularında kod çalıştırılmasına yol açar.",
+        "Sürüm sabitleme commit özeti ile yapılmazsa aynı model adıyla farklı kod yüklenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-013",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Depoda yeni commit; yükleme sırasında internet çağrısı yapan süreçler.",
+      "azaltma": "Depoyu commit özetiyle iç kayıt defterine aynalama ve kod incelemesi; çevrimdışı yükleme; yamalı sunum motoru.",
+      "id": "BL-00563",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "HF deposunda configuration_minimax_m3_vl.py, processing_minimax.py, image/video_processor.py ve auto_map var. vLLM GHSA-2pc9 (auto_map RCE), GHSA-7972 (opt-out'a rağmen güven geçersiz kılma) ve GHSA-3ww4 (Artifact Pin Decay) doğru.",
+        "kaynak": [
+          "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+          "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+          "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+          "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-2pc9-4j83-qjmr",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-3ww4-5jv9-j5gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7972-pg2x-xr59",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0212",
+      "arac": "MiMo-V2.5-Pro",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Model deposunda özel Python kodu; yüklemede depo kodu çalıştırılıyor",
+      "aciklama": "Hugging Face deposu özel modelleme/işleme kodu içeriyor (configuration_mimo_v2.py, modeling_mimo_v2.py); transformers ile yüklemek trust_remote_code gerektiriyor. vLLM'de auto_map ve güven geçersiz kılma üzerinden, trust_remote_code kapalı olsa bile kod çalıştırma açıkları ve 'sabitleme bozulması' açığı bildirildi.",
+      "tarih": "2026-06",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
+        "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+        "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+        "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+      ],
+      "yasatacagi_sorunlar": [
+        "MiMo-V2.5-Pro deposundaki bir değişiklik veya hesabın ele geçirilmesi, modeli çeken GPU sunucularında kod çalıştırılmasına yol açar.",
+        "Sürüm sabitleme commit özeti ile yapılmazsa aynı model adıyla farklı kod yüklenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-013",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Depoda yeni commit; yükleme sırasında internet çağrısı yapan süreçler.",
+      "azaltma": "Depoyu commit özetiyle iç kayıt defterine aynalama ve kod incelemesi; çevrimdışı yükleme; yamalı sunum motoru.",
+      "id": "BL-00568",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "HF deposunda configuration_mimo_v2.py ve modeling_mimo_v2.py var, custom_code etiketi ve trust_remote_code=True gerekli. vLLM GHSA'ları (auto_map RCE, güven geçersiz kılma, pin decay) mevcut.",
+        "kaynak": [
+          "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
+          "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+          "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+          "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-2pc9-4j83-qjmr",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-3ww4-5jv9-j5gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7972-pg2x-xr59",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0223",
+      "arac": "NVIDIA Nemotron 3 Super",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Model deposunda özel Python kodu; yüklemede depo kodu çalıştırılıyor",
+      "aciklama": "Hugging Face deposu özel modelleme/işleme kodu içeriyor (configuration_nemotron_h.py, modeling_nemotron_h.py, super_v3_reasoning_parser.py; kart sunum örneklerinde --trust_remote_code); transformers ile yüklemek trust_remote_code gerektiriyor. vLLM'de auto_map ve güven geçersiz kılma üzerinden, trust_remote_code kapalı olsa bile kod çalıştırma açıkları ve 'sabitleme bozulması' açığı bildirildi.",
+      "tarih": "2026-06",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+        "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+        "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+        "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Nemotron 3 Super deposundaki bir değişiklik veya hesabın ele geçirilmesi, modeli çeken GPU sunucularında kod çalıştırılmasına yol açar.",
+        "Sürüm sabitleme commit özeti ile yapılmazsa aynı model adıyla farklı kod yüklenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-013",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Depoda yeni commit; yükleme sırasında internet çağrısı yapan süreçler.",
+      "azaltma": "Depoyu commit özetiyle iç kayıt defterine aynalama ve kod incelemesi; çevrimdışı yükleme; yamalı sunum motoru.",
+      "id": "BL-00609",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Depoda configuration/modeling_nemotron_h.py ve super_v3_reasoning_parser.py var, config'te auto_map var, kartta --trust-remote-code geçiyor. vLLM GHSA-2pc9 (auto_map, 8.8), GHSA-7972 (sabit güven geçersiz kılma, 8.8) ve GHSA-3ww4 (pin decay, 6.5) mevcut.",
+        "kaynak": [
+          "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+          "https://github.com/advisories/GHSA-2pc9-4j83-qjmr",
+          "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+          "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-2pc9-4j83-qjmr",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-3ww4-5jv9-j5gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7972-pg2x-xr59",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0295",
+      "arac": "MLflow (Model Registry ve AI Gateway)",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Model yüklemede pickle serileştirme ile kod çalıştırma; güvenlik anahtarının atlanması",
+      "aciklama": "Eylül 2026 bildirimi: MLFLOW_ALLOW_PICKLE_DESERIALIZATION=False güvenlik ayarı statsmodels türüyle atlanıp hazırlanmış model artefaktıyla kod çalıştırılabiliyor (2.1.0–3.15.0). 2024'te de model yükleme yollarında çok sayıda güvensiz serileştirme açığı yayımlanmıştı.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-gqvg-gmmx-x4hm",
+        "https://github.com/advisories/GHSA-76cg-cfhx-373f"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kayıt defterine başka ekipten ya da dışarıdan gelen bir model artefaktını yüklemek, değerlendirme düğümünde kod çalıştırılmasına yol açabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-012",
+        "N-K15-002"
+      ],
+      "erken_sinyal": "Kayıt defterinde kaynağı belirsiz artefaktlar; yükleme sırasında ağ bağlantısı açan süreçler.",
+      "azaltma": "Artefakt yüklemeyi yalıtılmış ortamda yapma; yalnız safetensors gibi kod çalıştırmayan biçimleri kabul etme; artefakt imzası.",
+      "id": "BL-00683",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-gqvg-gmmx-x4hm (2026-09-01, yüksek) statsmodels ile MLFLOW_ALLOW_PICKLE_DESERIALIZATION atlamasını doğruluyor. Etkilenen aralık 2.1.0 ile <3.15.0 (3.15.0'da düzeltildi); 2024 pickle açıkları (GHSA-76cg) var.",
+        "kaynak": [
+          "https://api.osv.dev/v1/vulns/GHSA-gqvg-gmmx-x4hm",
+          "https://api.osv.dev/v1/vulns/GHSA-76cg-cfhx-373f"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-76cg-cfhx-373f",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-gqvg-gmmx-x4hm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ],
+      "e3_notu": "E3 (2026-09-27): GHSA-gqvg-gmmx-x4hm depo bildirimi ilk kez 2026-07-27'de yayımlandı; GitHub global kaydı 2026-09-01 tarihlidir."
+    },
+    {
+      "arac_id": "AR-0385",
+      "arac": "OpenLIT",
+      "gorev": "R-G07",
+      "tur": "RT-02",
+      "baslik": "CI iş akışlarında kritik tedarik zinciri açığı (CVE-2026-27941) ve fiyat tablosunun main dalından çalışma anında çekilmesi",
+      "aciklama": "GHSA-9jgv-x8cq-296q (kritik): OpenLIT deposundaki GitHub Actions iş akışları pull_request_target ile fork'tan gelen kodu çalıştırıyordu. Bu kod, yazma yetkili GITHUB_TOKEN'a ve 20'yi aşkın sağlayıcı anahtarı ile GCP servis hesabına erişebiliyordu. Açık 1.37.1'de düzeltildi. SDK, pricing_json verilmediğinde fiyat tablosunu her init'te raw.githubusercontent.com/openlit/openlit/main/assets/pricing.json adresinden, sabitlenmemiş main dalından indiriyor.",
+      "tarih": "2026-02",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/openlit/openlit/security/advisories/GHSA-9jgv-x8cq-296q",
+        "https://osv.dev/vulnerability/PYSEC-2026-2246",
+        "https://github.com/openlit/openlit/blob/main/sdk/python/src/openlit/__helpers.py"
+      ],
+      "yasatacagi_sorunlar": [
+        "Projenin yayın hattı ele geçirilirse kurum, ajan çalıştırıcılarına kötü amaçlı bir SDK sürümü çekebilir. SDK, LLM API anahtarlarının bulunduğu süreçte çalıştığı için bu anahtarlar sızar.",
+        "Maliyet atfı, kurumun denetlemediği ve sürüm sabitlemesi olmayan bir uzak dosyaya bağlı kalır. Dosya değişirse ekip ve ART maliyet raporları geriye dönük olarak tutarsızlaşır. İnternetsiz ağda fiyat tablosu inmez ve maliyet alanları boş kalır (çıkarım)."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K20-007",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "OpenLIT deposunda yeni GHSA kaydı; SDK günlüklerinde fiyat tablosu indirme hatası; aynı token sayısı için farklı günlerde farklı maliyet hesaplanması.",
+      "azaltma": "SDK sürümünü hash ile sabitle ve iç aynadan kur. pricing_json'u kurum içinde sürümlenen bir dosyaya yönlendir. SBOM ve imza doğrulamasını teslim hattına ekle.",
+      "id": "BL-00700",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-9jgv depo bildirimi (kritik, 2026-02-25) 24 sırrı listeliyor; OSV'de CVE-2026-27941/PYSEC-2026-2246 olarak 1.37.1'de düzeltilmiş. __helpers.py, pricing_json verilmezse main dalındaki pricing.json'u indiriyor.",
+        "kaynak": [
+          "https://github.com/openlit/openlit/security/advisories/GHSA-9jgv-x8cq-296q",
+          "https://osv.dev/vulnerability/PYSEC-2026-2246",
+          "https://github.com/openlit/openlit/blob/main/sdk/python/src/openlit/__helpers.py"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-27941",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-9jgv-x8cq-296q",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0881",
+      "arac": "Zemberek-NLP",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Dağıtım Maven Central yerine GitHub ham deposu ve Google Drive üzerinden",
+      "aciklama": "README, Maven bağımlılığı için 'https://raw.github.com/ahmetaa/maven-repo/master' deposunu ve jar dosyaları için bir Google Drive klasörünü gösteriyor; imzalı merkezi depo yayını belgelenmemiş.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/ahmetaa/zemberek-nlp/blob/master/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Derleme hattı kişisel bir GitHub deposundan imzasız jar çeker; depo ya da Drive hesabı ele geçirilirse CI ortamında kod çalışır.",
+        "Kurum artifact proxy'si bu kaynağı yansıtmadıkça hava boşluklu ortamda derleme yapılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K07-006"
+      ],
+      "erken_sinyal": "Bağımlılık hash'lerinin değişmesi; ham GitHub URL'sine giden istekler.",
+      "azaltma": "Jar'ları bir kez doğrulayıp kurum deposuna sabitleyin; hash kilidi kullanın; mümkünse kaynaktan derleyin.",
+      "id": "BL-01208",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README raw.github.com/ahmetaa/maven-repo deposunu ve jar'lar için Google Drive sayfasını gösteriyor.",
+        "kaynak": [
+          "https://github.com/ahmetaa/zemberek-nlp/blob/master/README.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1041",
+      "arac": "SonarQube (Server, Community Build, Cloud)",
+      "gorev": "R-G06",
+      "tur": "RT-02",
+      "baslik": "SonarQube Scan GitHub Action'da komut ve argüman enjeksiyonu",
+      "aciklama": "sonarqube-scan-action 4.0.0-5.3.0 sürümlerinde, eyleme verilen argümanlar kabuk ifadesi olarak işleniyordu. Bu açık CVE-2025-58178 (yüksek, 7.8) olarak 2025-09-02'de yayımlandı ve 5.3.1'de düzeltildi. 2025-09-26'da ikinci bir argüman enjeksiyonu (CVE-2025-59844, yüksek) duyuruldu.",
+      "tarih": "2025-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-f79p-9c5r-xg88",
+        "https://github.com/advisories/GHSA-5xq9-5g24-4g6f"
+      ],
+      "yasatacagi_sorunlar": [
+        "PR başlığı ya da dal adı gibi güvenilmez girdiler tarama eylemine argüman olarak geçerse, CI koşucusunda komut çalışır. Bu yolla SONAR_TOKEN dahil hat sırları çalınabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K18-009"
+      ],
+      "erken_sinyal": "İş akışlarında @v4 ya da @v5 gibi hareketli etiketler; eylem sürüm envanterinde 5.3.1 altı.",
+      "azaltma": "Eylemi commit SHA'sına sabitle. Güvenilmez girdileri argüman olarak geçirme. Tarama işine en az yetkili token ver.",
+      "id": "BL-01303",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "CVE-2025-58178: yüksek 7.8, 2025-09-02, 4.0.0-5.3.0, 5.3.1'de düzeltildi. CVE-2025-59844: yüksek, 2025-09-26, <6.0.0.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-f79p-9c5r-xg88",
+          "https://github.com/advisories/GHSA-5xq9-5g24-4g6f"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-58178",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2025-59844",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-5xq9-5g24-4g6f",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-f79p-9c5r-xg88",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1329",
+      "arac": "Grafana",
+      "gorev": "R-G07",
+      "tur": "RT-02",
+      "baslik": "Satıcının CI/CD hattı ihlalleri: 2025 token hırsızlığı, 2026 kod tabanının indirilmesi",
+      "aciklama": "Nisan 2025'te grafana/grafana deposundaki pull_request_target iş akışındaki zafiyetle tokenlar çalındı; Grafana müşteri etkisi olmadığını açıkladı. Mayıs 2026'da saldırgan GitHub ortamına erişim sağlayan bir token ile kod tabanını (özel kısımlar dahil) indirdi ve fidye istedi; Grafana ödemeyi reddetti, müşteri verisine erişim bulunmadığını belirtti. Saldırı vektörü haberlerde farklı aktarılıyor (pwn request / TanStack npm tedarik zinciri).",
+      "tarih": "2026-05",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://grafana.com/blog/2025/04/27/grafana-security-update-no-customer-impact-from-github-workflow-vulnerability/",
+        "https://www.helpnetsecurity.com/2026/05/18/attackers-accessed-downloaded-code-from-grafana-labs-github/",
+        "https://thehackernews.com/2026/05/grafana-github-token-breach-led-to.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sızan özel kaynak kodu Enterprise/Cloud bileşenlerinde sıfır gün keşfini hızlandırabilir; kurum Enterprise kullanıyorsa yama baskısı artar.",
+        "Satıcı yayın hattının tekrar ele geçirilmesi hâlinde imza/özet doğrulaması yapmayan kurulumlar kötü amaçlı görüntü veya eklenti alabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Satıcı güvenlik blogunda yeni olay bildirimi, görüntü imzası/özetinde beklenmeyen değişiklik.",
+      "azaltma": "Görüntü ve eklentileri özet ile sabitleyip iç kayda aynalayın; satıcı olaylarını sağlayıcı risk kaydında izleyin; eklenti imza doğrulamasını zorunlu tutun.",
+      "id": "BL-01459",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Grafana blogu (Nisan 2025) iş akışı açığını ve müşteri etkisi olmadığını belirtiyor. HelpNet ve THN (Mayıs 2026) kod tabanının indirildiğini, fidyenin reddedildiğini ve müşteri verisine erişilmediğini doğruluyor.",
+        "kaynak": [
+          "https://grafana.com/blog/2025/04/27/grafana-security-update-no-customer-impact-from-github-workflow-vulnerability/",
+          "https://www.helpnetsecurity.com/2026/05/18/attackers-accessed-downloaded-code-from-grafana-labs-github/",
+          "https://thehackernews.com/2026/05/grafana-github-token-breach-led-to.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1913",
+      "arac": "Dependabot",
+      "gorev": "R-G06b",
+      "tur": "RT-02",
+      "baslik": "En yeni sürümü önermek ele geçirilmiş sürümü çekebilir",
+      "aciklama": "Dependabot sürüm güncellemelerinde varsayılan olarak 3 günlük bekleme (cooldown) uyguluyor; güvenlik güncellemeleri bu beklemeye tabi değil. 2026'daki Trivy ve Checkmarx olaylarında zararlı sürümler saatler, hatta dakikalar içinde yayımlandı.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file",
+        "https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bekleme süresi kısaltılmışsa ya da güvenlik güncellemesi kılıfında gelirse, zararlı sürüm PR'ı otomatik birleştirilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Yeni yayımlanmış bir sürüm için saatler içinde açılan ve otomatik birleşen PR.",
+      "azaltma": "Bekleme süresini artırın, otomatik birleştirmeyi imza ve provenance doğrulamasına bağlayın.",
+      "id": "BL-01651",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GitHub belgesi cooldown yapılandırılmasa bile sürüm güncellemelerine varsayılan 3 günlük bekleme uygulandığını, güvenlik güncellemelerine uygulanmadığını yazıyor; GHSA-69fq-xp46-6x23 Trivy zararlı sürümlerinin ~3–12 saat yayında kaldığını doğruluyor. Varsayılan bekleme bu tür kısa pencereli olayları sürüm güncellemelerinde büyük ölçüde karşılıyor.",
+        "kaynak": [
+          "https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file",
+          "https://api.github.com/advisories/GHSA-69fq-xp46-6x23"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-69fq-xp46-6x23",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2064",
+      "arac": "HashiCorp Terraform (HCP Terraform / Terraform Enterprise)",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Modül/sağlayıcı kayıt defterlerinden gelen zararlı kod",
+      "aciklama": "init sırasında keyfî dosya yazma (CVE-2023-4782) yayımlandı; Ağustos 2026'da Coder modül kayıt defterinin zararlı Terraform modülleri sunması, modül tedarik zincirinin gerçek bir vektör olduğunu gösterdi.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-h626-pv66-hhm7",
+        "https://github.com/coder/coder/security/advisories/GHSA-vx42-ghc9-gw65"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sürüm sabitlemeden modül çeken ajan, kimlik bilgisi çalan bir modülü altyapı hattına sokabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K13-010"
+      ],
+      "erken_sinyal": "Kilit dosyası (.terraform.lock.hcl) olmayan yapılandırmalar.",
+      "azaltma": "Modül ve sağlayıcıları iç aynadan, sürüm/özet sabitli kullanmak.",
+      "id": "BL-01798",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "CVE-2023-4782 (orta, 2023-09) Terraform init açığı. Coder GHSA-vx42 (kritik, 2026-09-01) 31 Ağustos 2026'da registry.coder.com'un kimlik bilgisi çalan Terraform modülleri sunduğunu doğruluyor; olay HashiCorp'un değil Coder'ın kayıt defterinde.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-h626-pv66-hhm7",
+          "https://github.com/coder/coder/security/advisories/GHSA-vx42-ghc9-gw65"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2023-4782",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        },
+        {
+          "kimlik": "GHSA-h626-pv66-hhm7",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-vx42-ghc9-gw65",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-3008",
+      "arac": "Agent Blame",
+      "gorev": "R-G11",
+      "tur": "RT-02",
+      "baslik": "@latest ile sabitlenmemiş çalıştırma ve GitHub belirteci saklayan tarayıcı eklentisi",
+      "aciklama": "Kurulum ve komutlar bunx ile '@mesadev/agentblame@latest' etiketini çalıştırıyor; Bun kurulumu curl|bash ile yapılıyor. Tarayıcı eklentisi, kullanıcının GitHub belirtecini saklıyor (klasik belirteçte 'repo' kapsamı).",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mesa-dot-dev/agentblame"
+      ],
+      "yasatacagi_sorunlar": [
+        "npm paketi ya da eklenti güncellemesi ele geçirilirse geliştirici makinesinde kod çalışır ve eklentideki belirteçle özel depolar okunur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Eklenti veya paket yayıncısında beklenmedik değişiklik; eklentinin yeni izin istemesi.",
+      "azaltma": "Sürüm sabitlemek; yalnız tek depoya 'contents: read' yetkili ince taneli belirteç kullanmak; eklentiyi kurum politikasıyla yönetmek.",
+      "id": "BL-02102",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README 'bunx @mesadev/agentblame@latest' ve 'curl -fsSL https://bun.sh/install | bash' komutlarını kullanıyor; eklentiye GitHub token'ı giriliyor. Önerilen fine-grained token için contents:read yeterli, klasik token 'repo' kapsamı istiyor.",
+        "kaynak": [
+          "https://github.com/mesa-dot-dev/agentblame/blob/main/README.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3126",
+      "arac": "EAS (Expo Application Services)",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "OTA güncelleme kod imzalama yalnız Production ve Enterprise planlarında",
+      "aciklama": "Uçtan uca kod imzalama yalnız EAS Production (ayda 199 USD) ve Enterprise aboneliklerinde var. İmzalama, ISS'lerin, CDN'lerin, bulut sağlayıcılarının ve EAS'in kendisinin güncellemeyi değiştirememesini sağlar; imzasız kurulumda bu güvence yoktur. Sertifikası süresi dolan ikili dosyalar yeni güncellemeleri uygulamaz.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.expo.dev/eas-update/code-signing/",
+        "https://expo.dev/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ücretsiz/Starter planda EAS veya CDN tarafında bir ele geçirme, tüm kullanıcı cihazlarına kötü amaçlı JavaScript dağıtılmasına yol açabilir.",
+        "İmzalama açık olsa bile sertifika süresi takip edilmezse acil düzeltme güncellemesi cihazlara uygulanmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K06-008",
+        "N-K16-003"
+      ],
+      "erken_sinyal": "eas.json/app yapılandırmasında codeSigningCertificate olmaması; sertifika bitiş tarihinin yaklaşması.",
+      "azaltma": "Production veya Enterprise planı ile kod imzalamayı zorunlu tutun; özel anahtarı KMS'te saklayın; sertifika bitişine takvimli rotasyon koyun.",
+      "id": "BL-02111",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belge kod imzalamanın yalnız EAS Production/Enterprise planlarında olduğunu, ISP/CDN/bulut/EAS'in güncellemeyi değiştirememesini sağladığını ve süresi dolmuş sertifikalı ikililerin güncelleme uygulamadığını yazıyor; fiyat sayfası Production'ı 199 USD/ay gösteriyor. İmzasızlık ancak tedarik zinciri/altyapı ihlalinde istismar edilebildiği için kritik abartılı.",
+        "kaynak": [
+          "https://docs.expo.dev/eas-update/code-signing/",
+          "https://expo.dev/pricing"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3415",
+      "arac": "Snyk Studio MCP Server",
+      "gorev": "R-G03b",
+      "tur": "RT-02",
+      "baslik": "Resmî kurulum komutu sabitlenmemiş en son npm sürümünü çekiyor",
+      "aciklama": "Snyk Studio belgesi MCP sunucusunu 'npx -y snyk@latest mcp -t stdio' komutuyla başlatıyor. Böylece her başlatmada npm'den onay istemeden en son sürüm çekiliyor. npm ekosisteminde 2025-09'da Shai-Hulud solucanı yüzlerce paketi ele geçirerek geliştirici sırlarını çaldı.",
+      "tarih": "2025-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.snyk.io/agent-security/agentic-security-with-snyk-studio/getting-started-with-snyk-studio",
+        "https://unit42.paloaltonetworks.com/npm-supply-chain-attack/",
+        "https://github.blog/security/supply-chain-security/our-plan-for-a-more-secure-npm-supply-chain/"
+      ],
+      "yasatacagi_sorunlar": [
+        "snyk paketi ya da bir bağımlılığı ele geçirilirse, geliştirici makinelerinde ve ajan çalışma alanlarında ajanın her başlatılışında kötü amaçlı kod çalışır ve Snyk belirteci, bulut kimlikleri ve kaynak kod çalınabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "MCP yapılandırmalarında '@latest' kullanımı; npm'de beklenmedik snyk sürümü yayımı.",
+      "azaltma": "Snyk CLI'yi iç paket yansısından sabit sürümle kurun. MCP yapılandırmasında 'npx -y ...@latest' kullanımını politika ile yasaklayın.",
+      "id": "BL-02181",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Snyk Studio başlangıç belgesi MCP yapılandırmasında 'npx -y snyk@latest mcp -t stdio' kullanıyor; Unit 42 Shai-Hulud npm solucanını (Eylül 2025, Kasım 2025'te 2.0) belgeliyor.",
+        "kaynak": [
+          "https://docs.snyk.io/agent-security/agentic-security-with-snyk-studio/getting-started-with-snyk-studio",
+          "https://unit42.paloaltonetworks.com/npm-supply-chain-attack/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4195",
+      "arac": "repo-file-sync-action",
+      "gorev": "R-G12",
+      "tur": "RT-02",
+      "baslik": "Tüm hedef depolara yazma yetkili belirteç + değişebilir etiket + güvenlik iletişimi yok",
+      "aciklama": "Eylem GH_PAT ('repoları almak ve sırları yazmak için' tanımlı) veya GitHub App belirteci istiyor; yaygın kullanım '@v1' değişebilir etiketi. Depoda güvenlik iletişimi eksikliği 2023'ten beri açık issue (#301). tj-actions/changed-files olayında (CVE-2025-30066, Mart 2025) ele geçirilen etiketler CI sırlarını sızdırdı.",
+      "tarih": "2025-03",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/BetaHuhn/repo-file-sync-action/blob/master/action.yml",
+        "https://github.com/BetaHuhn/repo-file-sync-action/issues/301",
+        "https://github.com/advisories/GHSA-mrrh-fwg8-r2c3"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bakımcı hesabı ele geçirilir ve v1 etiketi taşınırsa 10+ ekibin depolarına yazma yetkili belirteç sızar; saldırgan DoD veya CI dosyalarını değiştirebilir.",
+        "Geniş kapsamlı kişisel erişim belirteci kullanılırsa belirtecin sahibi ayrılınca senkronizasyon kırılır ve yetki denetimi zorlaşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K30-009"
+      ],
+      "erken_sinyal": "Etiketin işaret ettiği commit'in değişmesi; beklenmeyen dosya değişikliği içeren senkron PR'ları.",
+      "azaltma": "Eylemi commit SHA ile sabitleyin; yalnız gerekli depolara yetkili, kısa ömürlü GitHub App belirteci kullanın; senkron PR'larını kod sahibi onayına bağlayın.",
+      "id": "BL-02426",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "action.yml GH_PAT'ı 'get repos and write secrets' diye tanımlıyor, README '@v1' ve '@latest' öneriyor, #301 (13.3.2023) açık, SECURITY.md yok; CVE-2025-30066 (15.3.2025) tj-actions için doğru. Ancak bu eylemde gerçekleşmiş bir olay yok ve SHA sabitleme ile azaltılabilir; kritik abartılı.",
+        "kaynak": [
+          "https://github.com/BetaHuhn/repo-file-sync-action/blob/master/action.yml",
+          "https://github.com/BetaHuhn/repo-file-sync-action/issues/301",
+          "https://github.com/advisories/GHSA-mrrh-fwg8-r2c3"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-30066",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-mrrh-fwg8-r2c3",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ],
+      "kev_durumu": [
+        {
+          "cve": "CVE-2025-30066",
+          "kev_ekleme": "2025-03-18",
+          "katalog_surumu": "2026.09.25",
+          "kaynak": "https://github.com/cisagov/kev-data/blob/main/known_exploited_vulnerabilities.json",
+          "not": "E3: CISA KEV kataloğunda; bulgu metninde KEV bilgisi yoktu (yalnız ekleme)."
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0100",
+      "arac": "Kiro",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Aynı satıcının önceki ajan eklentisinde tedarik zinciri olayı",
+      "aciklama": "AWS-2025-015 / CVE-2025-8217: Amazon Q Developer VS Code eklentisinin 1.84.0 sürümüne, yanlış kapsamlı bir GitHub belirteci üzerinden kötü amaçlı kod enjekte edildi; kod sözdizimi hatası nedeniyle çalışmadı. Kiro, Amazon Q Developer kullanıcılarının yükseltildiği ürün.",
+      "tarih": "2025-07",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+        "https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/upgrade-to-kiro.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomatik güncellenen ajan istemcisine kötü amaçlı sürüm girerse tüm geliştirici makinelerinde aynı anda yıkıcı komut çalışabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-008"
+      ],
+      "erken_sinyal": "Satıcı güvenlik bülteni; beklenmeyen sürüm geri çekmesi.",
+      "azaltma": "Güncellemeleri kademeli halkalarla dağıtın; ajan istemcisini yalıtılmış kullanıcı hesabıyla çalıştırın.",
+      "id": "BL-00237",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "AWS-2025-015: yanlış kapsamlı GitHub token'ı ile 1.84.0'a kod enjekte edildi, kod sözdizimi hatası yüzünden çalışmadı (CVE-2025-8217). AWS belgesi Q Developer CLI'nin Kiro olarak yeniden markalandığını söylüyor.",
+        "kaynak": [
+          "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+          "https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/upgrade-to-kiro.html"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-8217",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0162",
+      "arac": "Prometheus",
+      "gorev": "R-G07",
+      "tur": "RT-02",
+      "baslik": "Resmî belgede listelenen exporter'larda RepoJacking riski",
+      "aciklama": "Aqua Security, Prometheus resmî belgelerinde bağlantı verilen 8 exporter deposunun (ör. Nginx VTS, AWS/Azure/Kubernetes maliyet exporter'ları) sahibi silinmiş/ad değiştirmiş GitHub hesaplarına işaret ettiğini, saldırganın aynı adı alıp kötü amaçlı sürüm yayımlayabileceğini gösterdi.",
+      "tarih": "2024-12",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.aquasec.com/blog/300000-prometheus-servers-and-exporters-exposed-to-dos-attacks/",
+        "https://www.darkreading.com/cloud-security/336k-prometheus-instances-exposed-dos-repojacking"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekiplerin veya ajanların belgeden bağlantıyı izleyip üçüncü taraf exporter'ı derleyip kurması, izleme ağında (genellikle geniş ağ erişimli) kötü amaçlı kod çalıştırır.",
+        "Maliyet exporter'ları bulut faturalama kimlik bilgileriyle çalıştığı için ele geçirilmesi bulut hesabına erişim demektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Exporter deposunun sahibinin değişmesi, yeni hesabın yakın tarihte oluşturulmuş olması, imzasız ikili.",
+      "azaltma": "Exporter'ları yalnız onaylı iç kayıttan, commit/digest sabitleyerek alın; üçüncü taraf exporter'lar için SBOM ve sahiplik kontrolü yapın.",
+      "id": "BL-00435",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Aqua (12 Aralık 2024) resmî belgelerde listelenen exporter'larda RepoJacking gösterdi; tabloda 8 exporter var (Nginx VTS, Tinyproxy, AWS/Azure/Kubernetes maliyet, Rancher, Docker Hub, Docker Cloud).",
+        "kaynak": [
+          "https://www.aquasec.com/blog/300000-prometheus-servers-and-exporters-exposed-to-dos-attacks/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0868",
+      "arac": "dedupe",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "CVE-2025-54430: CI iş akışında gizli anahtar sızdırma/depo ele geçirme açığı",
+      "aciklama": "GHSA-wrg3-xqw8-m85p (kritik, CVSS 9.1): benchmark-bot.yml iş akışı issue_comment tetikleyicisiyle PR dalını yazma yetkili GITHUB_TOKEN ile çalıştırıyordu; depo ele geçirilebilirdi. 2025-07-29'da yayımlandı ve iş akışı aynı gün güncellendi.",
+      "tarih": "2025-07",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/dedupeio/dedupe/security/advisories/GHSA-wrg3-xqw8-m85p"
+      ],
+      "yasatacagi_sorunlar": [
+        "Açık kapanmadan önce yayımlanan paketlerin bütünlüğü kanıtlanamaz; kurum bağımlılık zincirine doğrulanmamış kod girebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003"
+      ],
+      "erken_sinyal": "Paket hash'inin kilit dosyasıyla uyuşmaması; beklenmeyen yeni sürüm.",
+      "azaltma": "Hash kilitli kurulum; kurum deposunda doğrulanmış kopya; kaynak derleme.",
+      "id": "BL-01186",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-wrg3/CVE-2025-54430: kritik 9.1, 2025-07-29 yayımlandı; benchmark-bot.yml aynı gün güncellendi; issue_comment ile yazma yetkili GITHUB_TOKEN riski açıkça belirtiliyor.",
+        "kaynak": [
+          "https://github.com/dedupeio/dedupe/security/advisories/GHSA-wrg3-xqw8-m85p",
+          "https://api.osv.dev/v1/vulns/CVE-2025-54430"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-54430",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-wrg3-xqw8-m85p",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1162",
+      "arac": "Aikido Security",
+      "gorev": "R-G06",
+      "tur": "RT-02",
+      "baslik": "Tüm depolara ve bulut hesaplarına erişen SaaS tarayıcı tek hata noktası olur",
+      "aciklama": "Birleşik tarama platformları; kod barındırma, bulut ve konteyner kayıtlarına geniş okuma erişimi istiyor. CodeRabbit ve Qodo olayları, bu tür SaaS'larda yaşanan bir ihlalin müşteri depolarına kadar uzanabildiğini gösterdi.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.aikido.dev/security",
+        "https://kudelskisecurity.com/research/how-we-exploited-coderabbit-from-a-simple-pr-to-rce-and-write-access-on-1m-repositories"
+      ],
+      "yasatacagi_sorunlar": [
+        "Satıcı tarafındaki bir ihlal, kurumun bütün depolarının ve bulut envanterinin okunmasına yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Satıcı güvenlik bildirimleri; entegrasyon token'larında beklenmeyen kullanım.",
+      "azaltma": "Yalnız okuma yetkisi ver ve kapsamı depo bazında sınırla. Entegrasyon token'larını düzenli döndür.",
+      "id": "BL-01351",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Çıkarım destekleniyor: Kudelski CodeRabbit (PR'dan RCE ve 1M depoda yazma) ve Qodo (PR yorumundan RCE, AWS anahtarı sızıntısı) araştırmaları mevcut.",
+        "kaynak": [
+          "https://kudelskisecurity.com/research/how-we-exploited-coderabbit-from-a-simple-pr-to-rce-and-write-access-on-1m-repositories",
+          "https://kudelskisecurity.com/research/qodo-dynaconf-aws-admin-key-leaked-twice"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1314",
+      "arac": "Agenta",
+      "gorev": "R-G08",
+      "tur": "RT-02",
+      "baslik": "litellm bağımlılığı geniş aralıkta",
+      "aciklama": "agenta SDK'sı litellm<2,>=1 istiyor; Mart 2026'daki kötü amaçlı 1.82.7/1.82.8 bu aralığa giriyordu.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://pypi.org/project/agenta/",
+        "https://osv.dev/vulnerability/GHSA-5mg7-485q-xm76",
+        "https://docs.litellm.ai/blog/security-update-march-2026"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kilitsiz kurulumda geliştirici makinesinden kimlik bilgisi çalınabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-009"
+      ],
+      "erken_sinyal": "OSV'de yeni MAL kaydı.",
+      "azaltma": "Hash kilitli kurulum ve iç paket aynası.",
+      "id": "BL-01448",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "PyPI'de agenta 0.94.9/0.95.0 (Mart 2026) ve güncel 0.121.3 'litellm<2,>=1' istiyor; GHSA-5mg7-485q-xm76 litellm 1.82.7–1.82.8'in 24 Mart 2026'da ~40 dk yayında kalan kimlik bilgisi çalan sürümler olduğunu doğruluyor.",
+        "kaynak": [
+          "https://pypi.org/pypi/agenta/json",
+          "https://pypi.org/pypi/agenta/0.94.9/json",
+          "https://api.osv.dev/v1/vulns/GHSA-5mg7-485q-xm76",
+          "https://docs.litellm.ai/blog/security-update-march-2026"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-5mg7-485q-xm76",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2080",
+      "arac": "ServiceNow DevOps Change Velocity",
+      "gorev": "R-G09",
+      "tur": "RT-02",
+      "baslik": "CI bağlayıcı eklentilerinde kimlik bilgisi sızıntısı geçmişi",
+      "aciklama": "Jenkins Plug-in for ServiceNow DevOps 1.38.1 öncesinde CVE-2023-3442 (yüksek, eksik yetkilendirme ile hassas bilgi ifşası) ve CVE-2023-3414 (CSRF ile kimlik bilgisi sızıntısı) vardı (Temmuz 2023). Change Velocity her CI aracı için ayrı bağlayıcı (Jenkins eklentisi, GitHub eylemleri, Azure DevOps uzantısı) gerektirir; her biri ayrı tedarik zinciri halkasıdır.",
+      "tarih": "2023-07",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-cj2x-r74q-vcx9",
+        "https://github.com/advisories/GHSA-rchx-rvh2-vx5j"
+      ],
+      "yasatacagi_sorunlar": [
+        "Güncellenmeyen bir CI bağlayıcısı ServiceNow entegrasyon kimlik bilgisini düşük yetkili kullanıcılara açabilir; bu kimlikle sahte değişiklik kaydı/onay durumu yazılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-004",
+        "N-K12-003"
+      ],
+      "erken_sinyal": "Bağlayıcı sürümlerinin ServiceNow'un önerdiği sürümün gerisinde kalması.",
+      "azaltma": "Bağlayıcıları onaylı katalogda sürüm sabitleyerek yönetmek, entegrasyon kullanıcısına yalnız DevOps rolleri vermek.",
+      "id": "BL-01814",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "CVE-2023-3442 (yüksek 7.7, eksik yetkilendirme) ve CVE-2023-3414 (orta 6.1, CSRF ile kimlik bilgisi sızıntısı) Jenkins Plug-in for ServiceNow DevOps <1.38.1'de, 26 Temmuz 2023.",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-cj2x-r74q-vcx9",
+          "https://github.com/advisories/GHSA-rchx-rvh2-vx5j"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2023-3414",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2023-3442",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-cj2x-r74q-vcx9",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-rchx-rvh2-vx5j",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2171",
+      "arac": "Mend AppSec Platform (Mend SCA/SAST)",
+      "gorev": "R-G06b",
+      "tur": "RT-02",
+      "baslik": "SaaS tarayıcıların SCM'ye geniş okuma erişimi",
+      "aciklama": "Bulut tarayıcıları müşteri SCM'sine erişiyor, yani Mend kurumun depoları için token veya uygulama yetkisi tutuyor. 2026'daki Checkmarx ve Trivy olayları, güvenlik araçlarının kimlik bilgilerinin hedef alındığını gösteriyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.mend.io/platform/latest/ip-addresses-used-by-mend-io",
+        "https://www.wiz.io/blog/teampcp-attack-kics-github-action"
+      ],
+      "yasatacagi_sorunlar": [
+        "Satıcı tarafında bir ihlal, kurumun bütün depolarının okunmasına yol açabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "SCM denetim loglarında Mend uygulamasından beklenmeyen erişim.",
+      "azaltma": "Uygulama yetkisini yalnızca taranacak depolarla sınırlayın, yazma iznini kapatın, token'ları düzenli döndürün.",
+      "id": "BL-01894",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Mend IP belgesi tarayıcıların müşteri SCM'lerine (GitHub, GitLab vb.) eriştiğini söylüyor; Wiz, Mart 2026'da TeamPCP'nin Checkmarx KICS/ast GitHub Action'larını ve öncesinde Trivy'yi ele geçirip CI kimlik bilgilerini çaldığını belgeliyor. Olaylar gerçek, ancak Mend'e uygulanması çıkarım; bu olaylar SaaS tarayıcı token'ı hırsızlığı değil tedarik zinciri saldırısıydı.",
+        "kaynak": [
+          "https://docs.mend.io/platform/latest/ip-addresses-used-by-mend-io",
+          "https://www.wiz.io/blog/teampcp-attack-kics-github-action",
+          "https://www.wiz.io/blog/trivy-compromised-teampcp-supply-chain-attack"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4405",
+      "arac": "Pi",
+      "gorev": "D16-pi",
+      "tur": "RT-02",
+      "baslik": "Eklenti ve paketler Pi sürecinin içinde, aynı yetkiyle çalışır",
+      "aciklama": "Eklentiler Pi sürecine yüklenen TypeScript modülleridir; belgeye göre istemleri, araç çağrılarını, dosyaları, kimlik bilgilerini ve oturum geçmişini görebilir. Pi paketleri eklenti, skill, istem şablonu ve temaları npm veya git üzerinden dağıtır. Belge eklentileri yalnız güvenilen kaynaklardan yüklemeyi söyler; güvenlik politikası kullanıcının kurduğu eklenti ve skill davranışını güvenlik sınırı dışında sayar.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/extensions.md",
+        "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/security.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kötü amaçlı veya ele geçirilmiş bir Pi paketi, ajanın eriştiği bütün sırları ve depoları okuyabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K12-002",
+        "N-K11-005"
+      ],
+      "erken_sinyal": "Kurulu Pi paketleri arasında sürümü sabitlenmemiş veya bakımcısı bilinmeyen paketler.",
+      "azaltma": "Üreticinin kendi bağımlılıkları için uyguladığı (README): doğrudan bağımlılıkların tam sürümle sabitlenmesi, min-release-age=2, npm-shrinkwrap, --ignore-scripts ile kurulum ve zamanlanmış npm audit signatures. Bu uygulama Pi'nin kendi bağımlılıklarını kapsar, üçüncü taraf Pi paketlerini kapsamaz.",
+      "id": "BL-02517",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "docs/extensions.md, docs/security.md ve README (Supply-chain hardening) 28.09.2026'da okundu.",
+        "kaynak": [
+          "https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/extensions.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0044",
+      "arac": "LlamaIndex (Workflows / Llama Agents)",
+      "gorev": "R-G03",
+      "tur": "RT-02",
+      "baslik": "Yüzlerce entegrasyon paketinin dağınık bakımı",
+      "aciklama": "LlamaIndex çekirdek dışında çok sayıda 'llama-index-*' entegrasyon paketi yayımlar; açıkların önemli kısmı (ör. finchat, CLI) bu yan paketlerde çıktı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/run-llama/llama_index"
+      ],
+      "yasatacagi_sorunlar": [
+        "Az kullanılan bir entegrasyon paketi bakımsız kalıp hattın zayıf halkası olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Bağımlılık ağacında son sürümü yıllar önce olan llama-index paketleri.",
+      "azaltma": "Onaylı entegrasyon listesi; kullanılmayan paketleri kaldırın.",
+      "id": "BL-00117",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0078",
+      "arac": "Hermes Agent",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "curl | bash / iex ile kurulum",
+      "aciklama": "Resmî kurulum 'curl -fsSL .../install.sh | bash' ve PowerShell'de 'iex (irm .../install.ps1)' ile yapılıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/NousResearch/hermes-agent#quick-install"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurulum betiği sunucusu ele geçirilirse tüm geliştirici makineleri etkilenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Betik içeriğinde değişiklik.",
+      "azaltma": "İmzalı paket veya kurum içi aynadan kurulum.",
+      "id": "BL-00214",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0097",
+      "arac": "Agent Orchestrator",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "İmzasız/notarize edilmemiş masaüstü uygulaması ve otomatik güncelleme",
+      "aciklama": "README, macOS'ta 'geliştirici doğrulanamıyor' uyarısı çıkarsa sağ tık > Aç ile açmayı öneriyor (Gatekeeper uyarısını elle geçme alışkanlığı yaratır); uygulama electron-updater ile güncellemeleri otomatik denetleyip indiriyor. Belgeye göre resmi sürümler özel sürüm deposunda imzalanıp notarize ediliyor; imzasız olan yalnız herkese açık depodaki CI derleme çıktıları.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Untrivial-ai/agent-orchestrator#install"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştiricilere Gatekeeper'ı atlatmak öğretilir; ele geçirilmiş bir sürüm tüm ajan oturumlarına ve repolara erişen daemon'u değiştirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013"
+      ],
+      "erken_sinyal": "Gatekeeper istisnaları.",
+      "azaltma": "Yalnız imzalı sürümlere izin veren MDM politikası; kurum içi derleme.",
+      "id": "BL-00225",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "README'deki sağ tık > Aç önerisi ve otomatik güncelleme doğru; ancak resmi sürümler özel 'conductor' deposunda imzalanıp macOS'ta notarize ediliyor, yalnız herkese açık CI çıktıları imzasız. 'İmzasız/notarize edilmemiş uygulama' iddiası resmi sürümler için yanlış.",
+        "kaynak": [
+          "https://github.com/Untrivial-ai/agent-orchestrator#install",
+          "https://github.com/Untrivial-ai/agent-orchestrator/blob/main/frontend/docs/desktop-release.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0148",
+      "arac": "Testcontainers",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Testler herhangi bir kayıt defterinden imaj çeker; imaj bütünlüğü kurumca sağlanmalı",
+      "aciklama": "Kütüphane modülleri varsayılanda genel kayıt defterlerinden (ör. Docker Hub) etiketle imaj çeker; imzalama/özet sabitleme kütüphanenin sorumluluğunda değildir (çıkarım).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://java.testcontainers.org/features/configuration/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Etiketi değiştirilmiş veya ele geçirilmiş bir veritabanı imajı test sırasında CI ortamında çalışarak sır toplayabilir; Docker Hub hız limitleri hattı durdurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-003",
+        "N-K05-024",
+        "N-K05-029"
+      ],
+      "erken_sinyal": "Test günlüklerinde 'latest' etiketli imajlar; kayıt defteri hız limiti hataları.",
+      "azaltma": "İmajları iç kayıt defterine aynalayıp özetle (digest) sabitlemek; imaj ikame yapılandırması kullanmak.",
+      "id": "BL-00373",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0167",
+      "arac": "Harbor",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Ad karışıklığı: CNCF Harbor kayıt defteri ile aynı ad; PyPI paketi proje bağlantısı içermiyor",
+      "aciklama": "Araç haritasındaki kanıtlardan biri CNCF'nin goharbor/harbor kayıt yazılımıdır; PyPI'daki 'harbor' paketinin meta verisinde proje URL'si yok. Aynı adlı iki projeden dolayı yanlış paket kurulumu ve güvenlik bildirimlerinin yanlış eşlenmesi riski vardır (çıkarım).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://pypi.org/project/harbor/",
+        "https://github.com/goharbor/harbor",
+        "https://github.com/harbor-framework/harbor"
+      ],
+      "yasatacagi_sorunlar": [
+        "SCA ve SBOM araçları goharbor CVE'lerini değerlendirme çerçevesine ya da tersini eşleyerek yanlış alarm veya kaçan açık üretir.",
+        "Geliştirici yanlış ada/benzer ada sahip paketi kurabilir (typosquat yüzeyi)."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K19-004"
+      ],
+      "erken_sinyal": "Tarayıcı raporlarında 'harbor' için ilgisiz CVE'ler; farklı yayıncıdan paket kurulumu.",
+      "azaltma": "İç aynada paketi yayıncı ve özetle sabitlemek; SBOM'da purl ile tam kimlik kullanmak.",
+      "id": "BL-00454",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0181",
+      "arac": "Dev Containers (Development Containers Specification)",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "Features OCI kayıt defterlerinden çekiliyor; kurulum betikleri üçüncü taraf kodu",
+      "aciklama": "Özellikler (features) OCI kayıt defterlerinden alınan ve konteynere eklenen bileşenlerdir; içerdikleri kurulum betikleri derleme sırasında çalışır (spesifikasyondan çıkarım).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://containers.dev/implementors/json_reference/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Topluluk feature'ının ele geçirilmiş bir sürümü tüm geliştirme ortamlarına zararlı kod yerleştirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-001",
+        "N-K05-029"
+      ],
+      "erken_sinyal": "Feature referanslarında sürüm/özet sabitlemesi olmaması.",
+      "azaltma": "Feature'ları iç kayıt defterine aynalayıp özetle sabitlemek.",
+      "id": "BL-00479",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0205",
+      "arac": "DeepSeek-V4-Pro-0813",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Resmî sunum komutları --trust-remote-code içeriyor; Python kodlayıcı zorunlu",
+      "aciklama": "Model kartındaki vLLM/SGLang komutları --trust-remote-code içeriyor, Jinja şablonu yok ve mesajlar depodaki encoding_dsv4.py ile kodlanıyor. Depoda auto_map veya özel modelleme kodu olmadığından bayrak bugün kod çalıştırmıyor; risk depo değişirse ve bayrak alışkanlığı sürerse doğar.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+        "https://github.com/advisories/GHSA-7972-pg2x-xr59",
+        "https://github.com/advisories/GHSA-3ww4-5jv9-j5gm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uzak kod güveni açık bırakılarak sunulan modelde depo değişikliği GPU düğümünde kod çalıştırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-010"
+      ],
+      "erken_sinyal": "Sunum yapılandırmasında trust-remote-code bayrağı.",
+      "azaltma": "Kod incelemesi yapılmış, commit özetli iç ayna ve çevrimdışı yükleme.",
+      "id": "BL-00537",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Kartta --trust-remote-code var, Jinja şablonu yok, encoding_dsv4.py var. Ancak depoda auto_map veya modeling_*.py yok (config yalnız deepseek_v4); bayrak şu an depo kodu çalıştırmıyor. Kodlayıcı betiği kullanıcı kendisi çalıştırıyor.",
+        "kaynak": [
+          "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+          "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813/resolve/main/config.json"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-3ww4-5jv9-j5gm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7972-pg2x-xr59",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0222",
+      "arac": "NVIDIA Nemotron 3 Ultra",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Resmî TensorRT-LLM yapılandırması trust_remote_code içeriyor",
+      "aciklama": "Model kartındaki TensorRT-LLM örnek yapılandırması trust_remote_code: true içeriyor; depo akıl yürütme ayrıştırıcı Python dosyası (ultra_v3_reasoning_parser.py) barındırıyor.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+      ],
+      "yasatacagi_sorunlar": [
+        "Örnek yapılandırma olduğu gibi kullanılırsa depo kodu sunum düğümünde çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K09-010"
+      ],
+      "erken_sinyal": "Sunum yapılandırmasında trust_remote_code.",
+      "azaltma": "Ayrıştırıcıyı incelenmiş iç kopyadan yükleme; commit özetiyle sabitleme.",
+      "id": "BL-00607",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0809",
+      "arac": "Vale",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Stil paketleri ağdan indiriliyor",
+      "aciklama": "vale sync stil paketlerini dış kaynaklardan indirir; paket sürümü sabitlenmezse kural seti habersiz değişir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/vale-cli/packages"
+      ],
+      "yasatacagi_sorunlar": [
+        "CI'da kural seti değişince aynı metin farklı sonuç verir; kalite kapısı kararları tekrarlanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K07-007",
+        "N-K01-004"
+      ],
+      "erken_sinyal": "CI sonuçlarının kod değişmeden değişmesi.",
+      "azaltma": "Stil paketlerini kurum deposunda sürümleyip sabitleyin.",
+      "id": "BL-01110",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1173",
+      "arac": "GitGuardian (ggshield ve platform)",
+      "gorev": "R-G06b",
+      "tur": "RT-02",
+      "baslik": "Önerilen kurulum yöntemi curl | bash",
+      "aciklama": "README'de önerilen kurulum, raw.githubusercontent.com'dan betiği indirip doğrudan kabuğa aktarmak. 1.54 sürümüyle ikinci bir ikili dosya (ggshield-py) eklendi ve bu dosya macOS anahtar zincirindeki token'ı okuyor.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/GitGuardian/ggshield",
+        "https://github.com/GitGuardian/ggshield/blob/main/scripts/install/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurulum betiği ele geçirilirse geliştirici makinelerinde kod çalıştırılır; 2026'daki güvenlik aracı saldırıları bu vektörün gerçek olduğunu gösteriyor.",
+        "Geliştiriciler anahtar zinciri erişim uyarısını alışkanlıkla 'Always Allow' diye onaylar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "Kurulum betiğinin özetinin değişmesi.",
+      "azaltma": "Paket yöneticisinden sabit sürümle kurun, iç aynada imza ve özeti doğrulayın.",
+      "id": "BL-01364",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1511",
+      "arac": "HDBSCAN",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Yayın izlenebilirliği ve ikili uyumluluk sorunları",
+      "aciklama": "Açık issue #505: PyPI'de 0.8.27 sürümü var ama git etiketi yok. Açık issue #272 ve #600 numpy ikili uyumsuzluğu ve kurulum hatalarını raporluyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/scikit-learn-contrib/hdbscan/issues/505",
+        "https://github.com/scikit-learn-contrib/hdbscan/issues/272",
+        "https://github.com/scikit-learn-contrib/hdbscan/issues/600"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hangi kaynak koddan derlendiği gösterilemeyen sürüm SBOM denetiminde sorun çıkarır; numpy güncellemesi hattı durdurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-005"
+      ],
+      "erken_sinyal": "numpy güncellemesi sonrası 'ufunc size changed' hatası.",
+      "azaltma": "Mümkünse scikit-learn içindeki HDBSCAN'i kullanın; değilse kaynaktan derleyip hash'leyin.",
+      "id": "BL-01602",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2810",
+      "arac": "Entire CLI",
+      "gorev": "R-G11",
+      "tur": "RT-02",
+      "baslik": "İmzasız Windows ikilileri ve boru hattıyla kurulum",
+      "aciklama": "Açık sorun #1505'e göre Windows ikilileri imzasız ve Smart App Control/SmartScreen tarafından engelleniyor. Önerilen kurulum curl|bash ve irm|iex ile yapılıyor; nightly kanalı her gün yeni sürüm üretiyor.",
+      "tarih": "2026-06",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/entireio/cli/issues/1505",
+        "https://github.com/entireio/cli/blob/main/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumsal Windows uç noktalarında uygulama denetimi aracı engeller ya da kullanıcılar güvenlik uyarısını geçmeye alışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Uç nokta güvenlik ürününden imzasız ikili uyarıları.",
+      "azaltma": "Kurum içi paket deposundan, sağlama toplamı doğrulanmış kararlı sürüm dağıtmak.",
+      "id": "BL-02086",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3006",
+      "arac": "Git AI (git-ai)",
+      "gorev": "R-G11",
+      "tur": "RT-02",
+      "baslik": "Boru hattıyla kurulum ve kancaların her gün kendiliğinden güncellenmesi",
+      "aciklama": "Kurulum curl|bash ve PowerShell'de ExecutionPolicy Bypass ile yapılıyor. README'ye göre araç, ajan kancalarını her gün kendisi kontrol edip güncelliyor. Sürüm hızı yüksek (1.7.2'den 1.7.5'e beş gün).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/git-ai-project/git-ai/blob/main/README.md",
+        "https://github.com/git-ai-project/git-ai/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dağıtım alanı ya da sürüm hattı ele geçirilirse tüm geliştirici makinelerindeki ajan kancaları değişir.",
+        "Kanca yapılandırmasının habersiz değişmesi ajan davranışını etkileyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Ajan yapılandırma dosyalarında kullanıcı eylemi olmadan değişiklik.",
+      "azaltma": "Kurum içi paketle sabit sürüm dağıtmak; otomatik güncellemeyi kapatmak ya da onaya bağlamak.",
+      "id": "BL-02100",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3419",
+      "arac": "Bright Security MCP",
+      "gorev": "R-G03b",
+      "tur": "RT-02",
+      "baslik": "Uzun ömürlü API anahtarı başlığıyla uzak MCP",
+      "aciklama": "MCP kayıt defterine göre sunucu https://{instance}.brightsec.com/mcp adresinde yalnız uzak olarak çalışıyor ve 'Authorization: Api-Key' başlığıyla kimlik doğruluyor; OAuth tanımlı değil. Kayıt 2026-01-06'da 1.0.0 olarak yayımlandı.",
+      "tarih": "2026-01",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://registry.modelcontextprotocol.io/v0/servers?search=brightsec"
+      ],
+      "yasatacagi_sorunlar": [
+        "Statik API anahtarları geliştirici makinelerindeki ajan yapılandırma dosyalarında birikir; sızan anahtar kurum adına tarama başlatmak için kullanılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-013"
+      ],
+      "erken_sinyal": "Yapılandırma dosyalarında düz metin Bright anahtarı.",
+      "azaltma": "Anahtarları sır yöneticisinden enjekte edin, kısa ömürlü ve kapsamlı tutun, düzenli döndürün.",
+      "id": "BL-02186",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4058",
+      "arac": "MCP Agent Mail",
+      "gorev": "R-G11",
+      "tur": "RT-02",
+      "baslik": "Sabitlenmemiş curl|bash kurulumu ve sessiz araç değişimi",
+      "aciklama": "Önerilen kurulum, main dalındaki betiği curl ile doğrudan bash'e aktarıyor. Betik varsayılan olarak mevcut 'bd' (Beads, Go) aracını Beads Rust 'br' ile değiştiriyor, kabuk takma adı oluşturuyor ve algıladığı tüm ajan araçlarına MCP entegrasyonu ekliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştirici makinelerinde sürümü sabitlenmemiş, main dalındaki kod çalışır. Depo ya da hesap ele geçirilirse tüm kurulumlar etkilenir.",
+        "Mevcut 'bd' iş akışları haber verilmeden başka bir uygulamaya yönlenir; ajan yapılandırma dosyaları toplu olarak değişir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Kurulum sonrası kabuk profillerinde yeni takma ad; ajan yapılandırmalarında beklenmeyen MCP girdileri.",
+      "azaltma": "Kurulumu kurum içi paketle, sabit commit ve --skip-beads seçeneğiyle yapmak; yapılandırma değişikliklerini kurulumdan önce gözden geçirmek.",
+      "id": "BL-02355",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4065",
+      "arac": "Happy (Happy Coder)",
+      "gorev": "R-G11",
+      "tur": "RT-02",
+      "baslik": "Paket adı göçü ve eski paketin güncelleme almaması",
+      "aciklama": "CLI 'happy-coder' paketinden 2013'ten beri başka yazarlarca kullanılmış ve bağışlanmış 'happy' paket adına taşındı. happy-coder son olarak Mayıs 2026'da (1.1.9) güncellendi. Olumlu yan: yeni paket GitHub OIDC güvenilir yayıncı ile yayımlanıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.npmjs.com/package/happy",
+        "https://www.npmjs.com/package/happy-coder"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eski paketle kalan makineler güvenlik düzeltmesi almaz.",
+        "Ad karışıklığı yanlış ya da sahte paket kurulumuna kapı açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Envanterde happy-coder paketinin görünmesi.",
+      "azaltma": "Kurum içi paket deposunda yalnız 'happy' paketini ve doğrulanmış sürümleri izinli kılmak.",
+      "id": "BL-02359",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4172",
+      "arac": "Cycloid",
+      "gorev": "R-G13",
+      "tur": "RT-02",
+      "baslik": "Varsayılan imajlar değişebilir 'latest-public' etiketiyle çekiliyor",
+      "aciklama": "Kurum içi kurulum belgesinde Cycloid ön yüz ve arka uç imajları 'rg.fr-par.scw.cloud/cycloidio/...:latest-public' olarak tanımlı. Belgede imza veya özet (digest) doğrulamasından söz edilmiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.cycloid.io/cookbook/dedicated-platform/advanced-configurations/infrastructure/private-container-registry"
+      ],
+      "yasatacagi_sorunlar": [
+        "Aynı etiket farklı zamanda farklı içerik döndürebildiğinden kurulumlar tekrarlanamaz; kayıt defteri ele geçirilirse değiştirilmiş imaj fark edilmeden kurum içine alınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-007",
+        "N-K31-001"
+      ],
+      "erken_sinyal": "Aynı etiketle çekilen imajların özetlerinin değişmesi.",
+      "azaltma": "İmajları kurum içi kayıt defterine özetle (digest) aynalayın; satıcıdan imza ve SBOM isteyin; 'latest' etiketlerini yasaklayın.",
+      "id": "BL-02395",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4236",
+      "arac": "Google SLO Generator",
+      "gorev": "R-G13",
+      "tur": "RT-02",
+      "baslik": "Terk edilmiş ve sabitlenmiş bağımlılıklar",
+      "aciklama": "Prometheus eklentisi 'prometheus-http-client' paketine bağlı; bu paketin tek sürümü 1.0.0 ve 2018-08'de yayımlanmış. Datadog eklentisi 'retrying==1.3.4', geliştirme bağımlılıkları 'safety==2.3.5' gibi sabit sürümler içeriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://pypi.org/pypi/slo-generator/2.6.0/json",
+        "https://pypi.org/project/prometheus-http-client/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Terk edilmiş bağımlılıkta açık çıkarsa yama gelmez; kurum bağımlılık tarayıcıları kalıcı bulgu üretir ve istisna yönetimi gerekir.",
+        "Sabit sürümler kurumun diğer Python paketleriyle çözümleme çakışması yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-002",
+        "N-K35-007"
+      ],
+      "erken_sinyal": "Bağımlılık tarayıcısında slo-generator zincirinden gelen ve düzeltmesi olmayan bulgular.",
+      "azaltma": "Aracı ayrı, yalıtılmış bir konteyner imajında çalıştırın; kullanılmayan eklentileri kurmayın; SBOM çıkarıp terk edilmiş bağımlılıkları izleyin.",
+      "id": "BL-02442",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4239",
+      "arac": "Grafana SLO",
+      "gorev": "R-G13",
+      "tur": "RT-02",
+      "baslik": "Mayıs 2026'da Grafana Labs kaynak kodu çalındı",
+      "aciklama": "TanStack npm tedarik zinciri saldırısıyla (Mini Shai-Hulud) başlayan olayda döndürülmesi kaçırılan bir GitHub iş akışı token'ı kullanılarak Grafana Labs'in GitHub depoları indirildi; 16 Mayıs 2026'da fidye talebi geldi. Şirket kodun değiştirilmediğini ve müşteri üretim sistemlerinin etkilendiğine dair kanıt olmadığını açıkladı.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://grafana.com/blog/grafana-labs-security-update-latest-on-tanstack-npm-supply-chain-ransomware-incident/",
+        "https://techcrunch.com/2026/05/18/open-source-tool-maker-grafana-labs-says-hackers-stole-its-code-refuses-to-pay-ransom/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Özel kodun sızması, Cloud'a özgü bileşenlerde saldırganların açık bulmasını kolaylaştırabilir; tedarikçi risk değerlendirmesi yeniden yapılmalıdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-013",
+        "N-K16-001"
+      ],
+      "erken_sinyal": "Grafana Cloud'a özgü bileşenlerde yeni açık duyuruları; tedarikçi güvenlik bildirimleri.",
+      "azaltma": "Tedarikçi olay bildirimlerini sözleşmeye bağlayın; Grafana Cloud erişim token'larını düzenli döndürün ve en az yetkiyle sınırlayın.",
+      "id": "BL-02446",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4289",
+      "arac": "Threat Composer",
+      "gorev": "R-G13",
+      "tur": "RT-02",
+      "baslik": "AI paketi PyPI'de yok; ana daldan sabitlenmeden kuruluyor",
+      "aciklama": "Önerilen kurulum 'uv tool install --from git+https://github.com/awslabs/threat-composer.git#subdirectory=packages/threat-composer-ai' biçiminde ve ana dalın o anki halini çekiyor; 'threat-composer-ai' PyPI'de bulunmuyor (404).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/awslabs/threat-composer/blob/main/README.md",
+        "https://pypi.org/project/threat-composer-ai/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı geliştirici makineleri farklı kod sürümleri çalıştırır; depoya kötü niyetli bir değişiklik girerse sürüm/imza kontrolü olmadan tüm ajan ortamlarına yayılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K34-002",
+        "N-K35-007"
+      ],
+      "erken_sinyal": "Kurulum komutlarında commit veya etiket sabitlemesi olmaması.",
+      "azaltma": "Kurulumu belirli bir etiket veya commit özetine sabitleyin; kurum içi paket deposuna incelenmiş sürümü yükleyin.",
+      "id": "BL-02471",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0100",
+      "arac": "Kiro",
+      "gorev": "R-G02",
+      "tur": "RT-02",
+      "baslik": "AWS'nin ajan eklentisi yayın hattında ele geçirilme geçmişi",
+      "aciklama": "Amazon Q Developer for VS Code 1.84.0'a (17 Temmuz 2025), CodeBuild yapılandırmasındaki yanlış kapsamlı GitHub token'ı kullanılarak zararlı (silme amaçlı) istem içeren kod eklendi ve otomatik olarak yayımlandı; kod sözdizimi hatası nedeniyle çalışmadı (CVE-2025-8217, AWS-2025-015). 1.85.0 (19 Temmuz 2025 etiketi) ile giderildi; AWS bülteni 23 Temmuz 2025'te yayımlandı, 25 Temmuz'da güncellendi. Olay doğrudan Kiro'yu etkilemedi; Kiro aynı AWS ekosisteminin ürünü olduğu için yayın hattı riski dolaylı bir göstergedir.",
+      "tarih": "2025-07",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomatik güncellenen ajan eklentisinin zararlı sürümü tüm geliştirici makinelerine aynı gün yayılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-005",
+        "N-K18-013"
+      ],
+      "erken_sinyal": "Satıcı güvenlik bültenleri; eklenti sürümünün beklenmedik değişimi.",
+      "azaltma": "Ajan eklentilerinde otomatik güncellemeyi kademeli halka ile yönetin, sürüm allowlist'i tutun.",
+      "id": "BL-00236",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "AWS-2025-015 CodeBuild'deki yanlış kapsamlı GitHub token'ı, 1.84.0'a zararlı kod girmesini, sözdizimi hatasıyla çalışmamasını ve 1.85.0 düzeltmesini doğruluyor; CVE-2025-8217 mevcut. Ancak 1.85.0 GitHub etiketi 19.07.2025; bülten 23.07.2025'te yayımlanıp 25.07.2025'te güncellenmiş ('25 Temmuz'da giderildi' ifadesi hatalı). Olay Kiro'yu değil Amazon Q eklentisini etkiledi; Kiro bağlantısı ekosistem çıkarımı.",
+        "kaynak": [
+          "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+          "https://api.osv.dev/v1/vulns/CVE-2025-8217",
+          "https://api.github.com/repos/aws/aws-toolkit-vscode/git/refs/tags/amazonq/v1.85.0"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-8217",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0103",
+      "arac": "OpenSpec",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Dil sorunu için resmî olmayan çatal paket dolaşımda",
+      "aciklama": "#243 altındaki yorumda bir kullanıcı, SHALL/MUST denetimini gevşeten resmî olmayan bir çatalı ayrı npm paketi olarak yayımlayıp kurulmasını önerdi.",
+      "tarih": "2025-10",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Fission-AI/OpenSpec/issues/243"
+      ],
+      "yasatacagi_sorunlar": [
+        "Türkçe sorununu aşmak isteyen geliştiriciler üçüncü taraf çatal paketi kurarsa doğrulanmamış kod ajana ve geliştirici makinesine girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-001"
+      ],
+      "erken_sinyal": "Bağımlılıklarda resmî olmayan openspec paketleri.",
+      "azaltma": "npm izin listesi; yalnız resmî paket adı.",
+      "id": "BL-00257",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0120",
+      "arac": "tree-sitter",
+      "gorev": "R-G03",
+      "tur": "RT-02",
+      "baslik": "Çok sayıda üçüncü taraf dilbilgisi paketine bağımlılık",
+      "aciklama": "Her dil için ayrı paket (npm/PyPI/crates) çekilir; bunların bakımcıları ve derleme betikleri (yerel C kodu) ayrı tedarik zinciri riskidir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/tree-sitter/tree-sitter"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ele geçirilmiş bir dilbilgisi paketi kod indeksleme sunucusunda yerel kod çalıştırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Dilbilgisi paketlerinde beklenmeyen sahip değişikliği.",
+      "azaltma": "Dilbilgilerini kaynaktan derleyip iç depoda tutun; sürümleri sabitleyin.",
+      "id": "BL-00294",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0204",
+      "arac": "DeepSeek-V4.1-Flash",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Depo çalıştırılması gereken Python kodu içeriyor",
+      "aciklama": "Depoda encoding/encoding.py, inference/convert.py, generate.py gibi kurulum ve çıkarım için çalıştırılan Python dosyaları var.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+      ],
+      "yasatacagi_sorunlar": [
+        "Depo güncellemesiyle değişen bir betik, dönüştürme/sunum düğümünde doğrudan çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Depoda yeni commit.",
+      "azaltma": "Betikleri commit özetiyle aynalayıp incelemeden çalıştırmama.",
+      "id": "BL-00534",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0230",
+      "arac": "Hermes 4.3 36B",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "İnternet üzerinden merkeziyetsiz eğitim ve örnek kodda trust_remote_code",
+      "aciklama": "Kartta modelin Psyche ağı üzerinden internet üzerinde merkeziyetsiz biçimde eğitilen ilk Hermes modeli olduğu belirtiliyor; örnek yükleme kodu trust_remote_code=True kullanıyor.",
+      "tarih": "2025-12",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://huggingface.co/NousResearch/Hermes-4.3-36B",
+        "https://nousresearch.com/introducing-hermes-4-3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eğitim sürecine katılan düğümlerin bütünlüğü kurum tarafından doğrulanamaz; gizli arka kapı veya veri zehirlenmesi teorik olarak tespit edilemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K22-001"
+      ],
+      "erken_sinyal": "Tetikleyici ifadelere karşı beklenmeyen davranış.",
+      "azaltma": "Kritik rollerde kullanmama; davranış testleri ve kırmızı takım.",
+      "id": "BL-00630",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0392",
+      "arac": "Lighteval",
+      "gorev": "R-G08",
+      "tur": "RT-02",
+      "baslik": "İsteğe bağlı litellm bağımlılığı üst sınırsız",
+      "aciklama": "litellm ekstrası litellm[caching]>=1.66.0 olarak tanımlı; Mart 2026'daki kötü amaçlı 1.82.7/1.82.8 sürümleri bu aralığa giriyordu.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://pypi.org/project/lighteval/",
+        "https://osv.dev/vulnerability/GHSA-5mg7-485q-xm76",
+        "https://docs.litellm.ai/blog/security-update-march-2026"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kilit dosyasız kurulumda değerlendirme sunucusundaki kimlik bilgileri çalınabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-013"
+      ],
+      "erken_sinyal": "OSV'de litellm için yeni MAL kaydı.",
+      "azaltma": "Hash kilitli bağımlılık ve iç paket aynası.",
+      "id": "BL-00718",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "PyPI'daki lighteval 0.13.0 'litellm[caching]>=1.66.0; extra == litellm' tanımlıyor ve üst sınır yok. GHSA-5mg7-485q-xm76, litellm 1.82.7–1.82.8'in 24.03.2026'da yaklaşık 40 dakika yayında kalan kötü amaçlı sürümler olduğunu doğruluyor. Olay kapandı ve sürümler karantinada; kalan risk genel sabitlenmemiş bağımlılık riski.",
+        "kaynak": [
+          "https://pypi.org/pypi/lighteval/json",
+          "https://osv.dev/vulnerability/GHSA-5mg7-485q-xm76",
+          "https://api.osv.dev/v1/vulns/GHSA-5mg7-485q-xm76",
+          "https://docs.litellm.ai/blog/security-update-march-2026"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-5mg7-485q-xm76",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0405",
+      "arac": "BERTurk",
+      "gorev": "R-G10",
+      "tur": "RT-02",
+      "baslik": "Hugging Face deposunda pickle tabanlı ağırlık dosyası",
+      "aciklama": "Depoda safetensors ile birlikte pytorch_model.bin ve TensorFlow dosyaları bulunuyor; .bin yüklemesi pickle tabanlıdır; depo 2025-06'da değiştirilmiş.",
+      "tarih": "2025-06",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/api/models/dbmdz/bert-base-turkish-cased"
+      ],
+      "yasatacagi_sorunlar": [
+        "Revizyon sabitlenmeden indirilirse ağırlıklar habersiz değişebilir; .bin yüklemek güvensiz deserializasyon riski taşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-010"
+      ],
+      "erken_sinyal": "Model hash'inin değişmesi.",
+      "azaltma": "Yalnız safetensors kullanın; revizyon hash'ini sabitleyip kurum deposuna kopyalayın.",
+      "id": "BL-00731",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1038",
+      "arac": "Bazel",
+      "gorev": "R-G06",
+      "tur": "RT-02",
+      "baslik": "Uzak önbellek ve yürütme güven sınırı",
+      "aciklama": "Uzak önbelleğe yazma yetkisi olan her istemci, önbellekteki derleme çıktısını zehirleyebilir. Geçmişte GrpcRemoteDownloader'ın tüm alan adlarının kimlik bilgilerini uzak varlık API'sine gönderdiği bir açık (CVE-2022-3474) yaşandı.",
+      "tarih": "2022-10",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/bazelbuild/bazel/security/advisories/GHSA-mxr8-q875-rhwq"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların yerel makinelerden uzak önbelleğe yazmasına izin verilirse, zehirlenmiş bir artefakt tüm ekiplerin testlerine yayılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K19-005",
+        "N-K15-007"
+      ],
+      "erken_sinyal": "Önbellek isabetlerinde beklenmeyen çıktı farkları.",
+      "azaltma": "Önbelleğe yalnız güvenilir CI yazsın, geliştirici ve ajan makineleri yalnız okusun. Kimlik bilgilerini alan adına göre sınırla.",
+      "id": "BL-01293",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2022-3474",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-mxr8-q875-rhwq",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1302",
+      "arac": "Microsoft Agent Governance Toolkit",
+      "gorev": "R-G05",
+      "tur": "RT-02",
+      "baslik": "URL'den alınan politika manifestleri yerel yol bildirebiliyor",
+      "aciklama": "Açık issue #3947: URL kaynaklı manifestlerin yerel paket ve veri yolları bildirebildiği raporlandı (Eylül 2026).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/microsoft/agent-governance-toolkit/issues/3947"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uzak politika kaynağı ele geçirilirse politika motoru yerel dosyaları yükleyerek politika atlatılabilir veya bilgi sızabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-007",
+        "N-K21-004"
+      ],
+      "erken_sinyal": "Politika kaynaklarında uzak URL kullanımı.",
+      "azaltma": "Politikaları imzalı ve kurum deposundan yüklemek.",
+      "id": "BL-01445",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2460",
+      "arac": "EvalScope",
+      "gorev": "R-G08",
+      "tur": "RT-02",
+      "baslik": "litellm bağımlılığı geniş aralıkta",
+      "aciklama": "evalscope 1.7.0'dan (Mayıs 2026) beri çekirdek bağımlılık olarak litellm<2.0,>=1.55 istiyor. Bu geniş aralık, 24 Mart 2026'da PyPI'ye yüklenip yaklaşık 40 dakika sonra karantinaya alınan kötü amaçlı litellm 1.82.7 ve 1.82.8 sürümlerini de kapsıyor. Olay sırasında evalscope litellm'e bağımlı değildi; risk, sürüm sabitlenmediğinde gelecekteki benzer tedarik zinciri olaylarına ve ayna/önbelleklerde kalan kötü sürümlere açıklıktır.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://pypi.org/project/evalscope/",
+        "https://osv.dev/vulnerability/GHSA-5mg7-485q-xm76",
+        "https://docs.litellm.ai/blog/security-update-march-2026"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kilitsiz kurulumda değerlendirme sunucusunun kimlik bilgileri çalınabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011"
+      ],
+      "erken_sinyal": "OSV'de litellm MAL kaydı.",
+      "azaltma": "Hash kilitli kurulum.",
+      "id": "BL-02010",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Güncel evalscope (1.12.0) çekirdek bağımlılığı litellm<2.0,>=1.55 ve kötü amaçlı 1.82.7/1.82.8 bu aralıkta; ancak litellm bağımlılığı evalscope 1.7.0'da (2026-05-07) eklendi, Mart 2026 olayı sırasında (1.5.x) yoktu. Kötü sürümler 24 Mart 2026'da ~40 dk yayında kalıp PyPI'de karantinaya alındı.",
+        "kaynak": [
+          "https://pypi.org/pypi/evalscope/json",
+          "https://pypi.org/pypi/evalscope/1.5.1/json",
+          "https://pypi.org/pypi/evalscope/1.7.0/json",
+          "https://api.osv.dev/v1/vulns/GHSA-5mg7-485q-xm76",
+          "https://docs.litellm.ai/blog/security-update-march-2026"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-5mg7-485q-xm76",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-4182",
+      "arac": "GitLive",
+      "gorev": "R-G12",
+      "tur": "RT-02",
+      "baslik": "Pazar yerinde aynı adla ilgisiz eklenti",
+      "aciklama": "VS Code Marketplace'te asıl eklenti TeamHub yayıncısıyla 'GitLive' adıyla yayımlanıyor (v20.0.0, Mayıs 2026); 'gitlive' yayıncısına ait, 2022'den beri güncellenmeyen ayrı bir 'GitLive' eklentisi de listeleniyor.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://marketplace.visualstudio.com/items?itemName=TeamHub.teamhub",
+        "https://marketplace.visualstudio.com/items?itemName=gitlive.GitLive"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştirici yanlış eklentiyi kurarsa bilinmeyen yayıncıya IDE içinde kod erişimi verilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013"
+      ],
+      "erken_sinyal": "IDE eklenti envanterinde beklenmeyen yayıncı kimliği.",
+      "azaltma": "Eklentiyi yayıncı kimliğiyle izin listesine alın.",
+      "id": "BL-02418",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0229",
+      "arac": "SERA-32B",
+      "gorev": "R-G01",
+      "tur": "RT-02",
+      "baslik": "Depoda pickle biçimli eğitim artefaktı; çok düşük benimsenme",
+      "aciklama": "Depoda training_args.bin (pickle) dosyası bulunuyor; HF indirme sayısı çok düşük (139).",
+      "tarih": "2026-06",
+      "siddet": "dusuk",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/api/models/allenai/SERA-32B"
+      ],
+      "yasatacagi_sorunlar": [
+        "Artefakt torch.load ile açılırsa kod çalıştırma riski; düşük benimsenme hataların topluluk tarafından az raporlanacağı anlamına gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Yükleme betiklerinde .bin dosyalarının torch.load ile açılması.",
+      "azaltma": "Yalnız safetensors dosyalarını yükleme.",
+      "id": "BL-00627",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    }
+  ],
+  "kategori_kaliplari": [
+    "RK-070",
+    "RK-075",
+    "RK-094",
+    "RK-095",
+    "RK-096",
+    "RK-102",
+    "RK-105",
+    "RK-106",
+    "RK-140",
+    "RK-141",
+    "RK-204",
+    "RK-211",
+    "RK-212",
+    "RK-213"
+  ],
+  "olaylar": [
+    "EV-018",
+    "EV-024",
+    "EV-025",
+    "EV-035",
+    "EV-048",
+    "EV-054",
+    "EV-055",
+    "EV-059",
+    "EV-073",
+    "EV-074",
+    "EV-075",
+    "EV-080",
+    "EV-089",
+    "EV-112",
+    "EV-123",
+    "EV-124",
+    "EV-125",
+    "EV-131",
+    "EV-148",
+    "EV-150",
+    "EV-160",
+    "EV-163",
+    "EV-165",
+    "EV-166",
+    "EV-169",
+    "EV-175",
+    "EV-182",
+    "EV-187",
+    "EV-189",
+    "EV-191",
+    "EV-201",
+    "EV-213",
+    "EV-227",
+    "EV-228",
+    "EV-232",
+    "EV-234",
+    "EV-238",
+    "EV-241",
+    "EV-250",
+    "EV-251",
+    "EV-252",
+    "EV-254",
+    "EV-257",
+    "EV-260",
+    "EV-262",
+    "EV-263",
+    "EV-272",
+    "EV-274",
+    "EV-275",
+    "EV-281",
+    "EV-282",
+    "EV-283",
+    "EV-285",
+    "EV-286",
+    "EV-287",
+    "EV-288",
+    "EV-292",
+    "EV-294",
+    "EV-295",
+    "EV-297",
+    "EV-299",
+    "EV-301",
+    "EV-302",
+    "EV-306",
+    "EV-307",
+    "EV-309",
+    "EV-310",
+    "EV-312",
+    "EV-316",
+    "EV-318"
+  ],
+  "senaryolar": [
+    "SS-031",
+    "SS-032",
+    "SS-034",
+    "SS-035",
+    "SS-043",
+    "SS-046",
+    "SS-047",
+    "SS-048",
+    "SS-049",
+    "SS-050",
+    "SS-051",
+    "SS-052",
+    "SS-053",
+    "SS-054",
+    "SS-055",
+    "SS-101"
+  ],
+  "otomatik_sinyalli_araclar": []
+}

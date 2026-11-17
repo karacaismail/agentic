@@ -1,0 +1,513 @@
+{
+  "schema_version": "1.0",
+  "researched_at": "2026-09-27",
+  "purpose": "Karar arayüzü için aday kimliği/rolü kaydı; teknoloji seçimi veya uygulama kurulumu değildir.",
+  "terminology_corrections": [
+    {
+      "from": "RDD",
+      "to": "TDD",
+      "authority": "explicit_user_correction"
+    },
+    {
+      "name": "Jev",
+      "resolved_identity": "TypeSafe Jev",
+      "authority": "explicit_user_clarification_and_primary_source"
+    },
+    {
+      "name": "Laya",
+      "resolved_identity": "NandhaKishorM/laya",
+      "authority": "explicit_user_url_and_primary_source"
+    }
+  ],
+  "verification_meaning": "primary_source_reviewed: yayıncının bu yeteneği sunduğu belgelenmiş. Gerçek doğruluk, güvenlik, hız, uyumluluk veya işletim olgunluğu bağımsız doğrulanmış değildir.",
+  "candidates": [
+    {
+      "id": "jev",
+      "ad": "Jev (TypeSafe)",
+      "family": "hosted_typed_decision_model",
+      "role": "Dar semantik sorular, rota/sınıf/skor; kodlayan ajan veya kalıcı orkestratör değil.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://docs.typesafe.ai/introduction",
+      "verified_claims": [
+        {
+          "claim": "TypeSafe Jev için state ve typed questions girdisi; Choice, Score, Noul sonuçları tanımlıyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://docs.typesafe.ai/introduction"
+        },
+        {
+          "claim": "Resmî coding-agents belgesi Jev’in kod yazan LLM yerine geçmediğini açıklar.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://docs.typesafe.ai/introduction"
+        }
+      ],
+      "limits": [
+        "Şema uyumu semantik doğruluk değildir.",
+        "1.13 zayıflık belgesi sayı/tarih hesabı, dolaylı/olumsuz ifade, adversarial state, ilgisiz uzun bağlam ve bağımsız soruların tutarsızlığını kaydeder.",
+        "Choice/Score confidence dağılımdan türetilir; Noul aynı confidence alanını taşımaz. Eşikler tipler arasında otomatik taşınmamalı."
+      ],
+      "additional_primary_sources": [
+        "https://docs.typesafe.ai/introduction/coding-agents",
+        "https://docs.typesafe.ai/confidence",
+        "https://docs.typesafe.ai/model-jaggedness/jev-1.13"
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "laya",
+      "ad": "Laya",
+      "family": "encoder_typed_decision_engine",
+      "role": "Yerel typed kararlar; dil/checkpoint yönlendirmesi.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/NandhaKishorM/laya",
+      "verified_claims": [
+        {
+          "claim": "Choice, Score ve Noul soruları için non-autoregressive karar motoru ve checkpoint Router sunuyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/NandhaKishorM/laya"
+        },
+        {
+          "claim": "English, multilingual ve typed-decisions checkpoint ayrımı belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/NandhaKishorM/laya"
+        }
+      ],
+      "limits": [
+        "Kısa Latin yazılı metinde dil yanlış yönlenebilir; Türkçe iş yükü ayrıca sınanmalı.",
+        "Varsayılan bağlam sınırı uzun girdiyi kesebilir; büyük pencereyi açmak doğruluk garantisi değil.",
+        "README CUDA OOM fallback ve eşzamanlı tampon sorunlarına ilişkin düzeltmeler bildiriyor; yerel çalışma testi yok."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "von",
+      "ad": "Von",
+      "family": "encoder_typed_decision_engine",
+      "role": "Yerel süreç/HTTP üzerinden typed karar servisi.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/wfzyx/von",
+      "verified_claims": [
+        {
+          "claim": "ModernBERT tabanlı, metin üretmeden karar okuyan model ve /v1/systemone uyumluluğu README’de açıklanıyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/wfzyx/von"
+        }
+      ],
+      "limits": [
+        "Uyum ve calibration guarantee ifadeleri yayıncı iddiasıdır; gerçek eşdeğerlik, Türkçe doğruluğu ve kalibrasyon bu tur sınanmadı.",
+        "README benchmarkları farklı test kümelerine ait; tek genel üstünlük olarak birleştirilemez."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "kev",
+      "ad": "Kev",
+      "family": "fine_tuned_typed_decision_model_family",
+      "role": "Yerelde çalıştırılabilen ve alan verisiyle eğitilebilen typed model ailesi.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/jaredpalmer/kev",
+      "verified_claims": [
+        {
+          "claim": "Qwen tabanlı model ailesi, Choice/Score/Noul ve TypeSafe SDK uyumlu yerel sunucu sunuyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/jaredpalmer/kev"
+        },
+        {
+          "claim": "Checkpointlere etiketli veride fit edilen sıcaklık ve alan uyarlama akışı belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/jaredpalmer/kev"
+        }
+      ],
+      "limits": [
+        "Alan dışı/Türkçe veri için sonuç garanti değil; aynı API kalite eşdeğerliği değildir.",
+        "README Jev karşılaştırmasının kontrollü mimari karşılaştırma olmadığını belirtir; veri/protokol farkları var.",
+        "Model boyutu/quantization/backend kaynak tüketimi farklıdır; sunucu RAM’inden eşzamanlı kapasite türetilemez."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "decider",
+      "ad": "Decider",
+      "family": "fine_tuned_typed_decision_model_family",
+      "role": "Tek geçişte seçenek dağılımı veren, yerel eğitim/sunum ailesi.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/Mapika/decider",
+      "verified_claims": [
+        {
+          "claim": "Qwen tabanlı Choice/Score/Noul kararları ve eğitimli modeller belgelenmiş; TypeSafe’den bağımsız.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/Mapika/decider"
+        }
+      ],
+      "limits": [
+        "README İngilizce sınırlaması, çok adımlı aritmetik, zor örneklerde yanlış yüksek güven, seçenek adlandırma ve uzun JSON dizisi sorunlarını açıklar.",
+        "Schema cache hız için doğruluktan ödün verebilir.",
+        "GGUF dosyasını genel sohbet aracına yüklemek karar API’sini kendiliğinden sağlamaz; özel logits okuma gerekir."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "anyjev",
+      "ad": "AnyJev",
+      "family": "decision_readout_and_calibration_adapter",
+      "role": "Mevcut açık modele typed karar arayüzü/okuma ve isteğe bağlı kalibrasyon veya head ekleme.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/nokia-applied-research/AnyJev",
+      "verified_claims": [
+        {
+          "claim": "Ham/L0/L1 ve etiketli closed-form head L2 yolları belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/nokia-applied-research/AnyJev"
+        },
+        {
+          "claim": "Next-token dağılımı veya hidden-state head üzerinden serbest metin üretmeden karar alınır.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/nokia-applied-research/AnyJev"
+        }
+      ],
+      "limits": [
+        "No training başlığı tüm modlarda verisiz olduğu anlamına gelmez; L1 kalibrasyon ve L2 head etiket ister.",
+        "Seçenek sırası duyarlılığı ve ham confidence sorunları motivasyon olarak belirtiliyor; bütün modellerde giderildiği bu tur doğrulanmadı.",
+        "Taban modele erişim, backend özellikleri ve kalibrasyon verisi gerekli; servis/orkestratör değildir."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "semif",
+      "ad": "SemIf (SemIf-OpenJev)",
+      "family": "decision_readout_and_calibration_adapter",
+      "role": "Açık model logitslerinden runtime kriterlerine göre olasılıklı karar; ortak state yeniden kullanımı.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/TheoLeeCJ/SemIf-OpenJev",
+      "verified_claims": [
+        {
+          "claim": "Runtime seçenek/logit okuma, model revision/prompt hash ve workload kalibrasyonu belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/TheoLeeCJ/SemIf-OpenJev"
+        },
+        {
+          "claim": "Proje TypeSafe’den bağımsız olduğunu belirtiyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/TheoLeeCJ/SemIf-OpenJev"
+        }
+      ],
+      "limits": [
+        "Olasılıklar verilen seçeneklere koşulludur; iş yükünde etiketli kalibrasyon gerekir.",
+        "Hızlı shared-state yolları deneysel ve sayısal farklarla bazı kararları değiştirebilir.",
+        "Kod lisansı taban model lisansının yerine geçmez; upstream ağırlıklar ayrı."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "nimble",
+      "ad": "Bespoke Nimble",
+      "family": "fine_tuned_typed_decision_model_and_recipe",
+      "role": "Karar modeliyle birlikte veri kürasyonu/eğitim/değerlendirme tarifi.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/bespokelabsai/nimble",
+      "verified_claims": [
+        {
+          "claim": "Metin + schema üzerinden seçenek ve olasılık döndürür; eğitim tarifi ve yerel model kullanımı belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/bespokelabsai/nimble"
+        },
+        {
+          "claim": "README Qwen tabanı, yerel checkpoint/adapter ve platform yollarını açıklar.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/bespokelabsai/nimble"
+        }
+      ],
+      "limits": [
+        "Yayıncı erken proje ve pürüzler uyarısı yapıyor; fabrika olgunluğu kanıtı yok.",
+        "Sıcaklık değişimi seçili etiketi korusa bile Noul/Score ve aksiyon eşiklerini değiştirir; yeniden kalibrasyon gerekir.",
+        "Eski/yeni checkpointlerin bağlam ve temperature sözleşmeleri farklı; revision ve schema_config sabitlenmeli."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "gliner25-decide",
+      "ad": "GLiNER2.5-Decide",
+      "family": "encoder_schema_defined_classifier",
+      "role": "İstek anında etiket kümesiyle tekli/çoklu sınıflandırma ve dar operasyonel karar.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://huggingface.co/fastino/GLiNER2.5-Decide",
+      "verified_claims": [
+        {
+          "claim": "Resmî kart İngilizce classification checkpoint olduğunu ve serbest token üretmeden label seçtiğini bildiriyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://huggingface.co/fastino/GLiNER2.5-Decide"
+        },
+        {
+          "claim": "Tek çağrıda birden çok sınıflandırma başlığı, tekli/çoklu etiket görevleri belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://huggingface.co/fastino/GLiNER2.5-Decide"
+        }
+      ],
+      "limits": [
+        "Bu tam checkpoint İngilizce; multilingual kardeş modeli ayrı kimliktir. Türkçe başarısı varsayılamaz.",
+        "Genel açıklama, açık uçlu muhakeme veya görev tamamlama ispatı sağlamaz.",
+        "Karttaki JevK5 adı TypeSafe Jev ile özdeş kabul edilmedi; benchmark etiketinden ürün kimliği türetilmez."
+      ],
+      "additional_primary_sources": [
+        "https://huggingface.co/fastino/GLiNER2.5-Decide/raw/main/README.md",
+        "https://fastino.ai/blog/gliner-2-5-decide-open-weight-decision-model"
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "setfit",
+      "ad": "SetFit",
+      "family": "few_shot_classifier_training_framework",
+      "role": "Az etiketli veriden alan sınıflandırıcısı eğitmek.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://huggingface.co/docs/setfit/main/index",
+      "verified_claims": [
+        {
+          "claim": "Sentence Transformer fine-tuning için prompt-free few-shot çerçevesi; multilingual taban checkpoint kullanımı belgelenmiş.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://huggingface.co/docs/setfit/main/index"
+        }
+      ],
+      "limits": [
+        "Hazır evrensel Jev muadili model/API değildir.",
+        "Etiket, taban checkpoint ve sınıf tasarımı sonucu belirler; yeni domain için test ve kalibrasyon gerekir.",
+        "Main dokümanı source sürümdür; üretim deneyi sabit paket/model sürümüyle yapılmalı."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "fastfit",
+      "ad": "FastFit",
+      "family": "few_shot_classifier_training_framework",
+      "role": "Çok sınıflı metin işlerinde az örnekli sınıflandırıcı eğitmek.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://github.com/IBM/fastfit",
+      "verified_claims": [
+        {
+          "claim": "IBM projesi çok sınıflı metin sınıflandırma için eğitim/inference çerçevesi ve FastFitTrainer sunuyor.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://github.com/IBM/fastfit"
+        }
+      ],
+      "limits": [
+        "Dinamik Choice/Score/Noul API’siyle aynı ürün sınıfı değildir.",
+        "Sınıf etiketi/veri ayrımı ve seçilen encoder gereklidir; göreve özgü başarım ayrıca ölçülür.",
+        "README eğitim örneği gerçek ERP/HRMS kabul verisi değildir."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "modernbert",
+      "ad": "ModernBERT",
+      "family": "encoder_backbone_model_family",
+      "role": "Sınıflandırma, retrieval veya karar katmanı için temel encoder.",
+      "status": "primary_source_reviewed_not_tested",
+      "url": "https://huggingface.co/answerdotai/ModernBERT-base",
+      "verified_claims": [
+        {
+          "claim": "Resmî kart bidirectional encoder-only MLM modelini, İngilizce/kod ön eğitimini ve downstream fine-tuning gereğini açıklar.",
+          "evidence": "maintainer_documentation_not_independent_validation",
+          "source_url": "https://huggingface.co/answerdotai/ModernBERT-base"
+        }
+      ],
+      "limits": [
+        "Hazır karar API’si veya orkestratör değil; görev başlığı/eğitim/kalibrasyon gerekir.",
+        "İngilizce dışındaki performans daha düşük olabilir; uzun context kısa girdiyle aynı hız anlamına gelmez.",
+        "Base ile Large ve türetilmiş karar checkpointleri ayrı kimliklerdir."
+      ],
+      "additional_primary_sources": [],
+      "runtime_validation": "not_run",
+      "adoption_decision": "candidate_only"
+    },
+    {
+      "id": "rizzo-flow",
+      "ad": "Rizzo Flow",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    },
+    {
+      "id": "nanojev",
+      "ad": "NanoJev",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    },
+    {
+      "id": "open-jev",
+      "ad": "Open-Jev",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    },
+    {
+      "id": "jevk5",
+      "ad": "JevK5",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    },
+    {
+      "id": "agentjev",
+      "ad": "AgentJev",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    },
+    {
+      "id": "openthai-systemone",
+      "ad": "OpenThai-SystemOne",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    },
+    {
+      "id": "jev-style",
+      "ad": "Jev-Style",
+      "family": "unresolved_identity",
+      "role": "Kullanıcı adayı; kimlik doğrulanmadan rol atanmadı.",
+      "status": "unverified_identity",
+      "url": null,
+      "verified_claims": [],
+      "limits": [
+        "Bu tur kesin sahip/depo/model kimliği doğrulanmadı. Benzer adla veya SemIf gibi bilinen projeyle birleştirilmedi."
+      ],
+      "runtime_validation": "not_run",
+      "adoption_decision": "preserve_name_only"
+    }
+  ],
+  "benchmark_policy": {
+    "user_numbers": "Kullanıcının paylaştığı benchmark sayıları alıntı iddiası olarak kalır; doğrulanmış performans garantisi veya ortak sıralama olmaz.",
+    "new_source_numbers": "Bu not performans sayısı kopyalamaz; yayıncı ölçümlerini yeniden çalıştırmadı.",
+    "comparability_fields": [
+      "exact_model_revision",
+      "quantization",
+      "runtime",
+      "device",
+      "input_tokens",
+      "question_count",
+      "label_set",
+      "language",
+      "dataset_version",
+      "oracle_source",
+      "calibration_split",
+      "latency_scope",
+      "error_metric"
+    ],
+    "ranking": "not_computed"
+  },
+  "ui_rules": [
+    "Aynı radio grubuna tüm adaylar konmaz; önce ihtiyaç rolü seçilir: hazır karar motoru / mevcut modele karar okuma / özel sınıflandırıcı eğitme / encoder tabanı.",
+    "Birden fazla iş yükü farklı aday seçebilir; seçilmedi ve belirsiz kimlik durumları görünür kalır.",
+    "Kaynak teyitli, yerelde sınanmadı, seçildi ve kullanımda durumları ayrı tutulur.",
+    "Doğrudan deterministik kuralla çözülen hesap/yetki/invariant kararında model zorunlu olmaz."
+  ],
+  "system_boundary": [
+    "Adaylar TDD, test oracleı, DoD/AC ve ürün yükümlülüğü muhasebesinin yerine geçmez.",
+    "Modelin görevi sınırlı semantik yargıdır; görev durumu, kuyruk, bütçe, yetki ve yan etki kalıcı kontrol katmanındadır.",
+    "Belirsiz karar için ek kanıt toplama veya sınırlandırılmış ikinci değerlendirme kullanılabilir; çözülemeyenin çıktı statüsü açık kalır. İnsan girdi/çıktı hedefi gizli sürekli manuel triage kuyruğuna dönüştürülmez."
+  ],
+  "negative_acceptance_tests": [
+    {
+      "id": "DM-T01",
+      "case": "Türkçe, karışık dil, kısa Latin metin, uzun state; kesilme ve yanlış dil rotası",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-T02",
+      "case": "Doğru seçenek yok, seçenek sırası/adı değişmiş, none/unknown gerekli",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-T03",
+      "case": "Prompt injection, çifte olumsuzluk, çelişen kriter, tarih/sayı hesabı",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-T04",
+      "case": "Aynı API farklı model: olasılık/score ölçeği, kalibrasyon ve aksiyon eşiği taşınabilirliği",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-T05",
+      "case": "Aynı etiket fakat sıcaklık/quantization/revision değişti; yan etki kararı aynı mı",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-T06",
+      "case": "CPU/GPU OOM, büyük batch/context, timeout; başarısızlık pass sayılmamalı",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-T07",
+      "case": "Model complete dedi ama test/oracle/ürün yükümlülüğü eksik; teslim kapısı kapanmamalı",
+      "status": "not_run"
+    }
+  ],
+  "scope_limits": [
+    "Kaynak web belgeleri okundu; repo klonlanmadı, kod çalıştırılmadı, model indirilmedi.",
+    "Tüm kod/ağırlık lisansları ve sürüm bazlı güvenlik incelemesi bu tur yapılmadı.",
+    "Yalnız bu iki araştırma dosyası yazıldı; coding2 ve fabrika kodlarına dokunulmadı."
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-08",
+    "ad": "Yeniden kullanılabilir yetenek paketleri (skill) ve ajan talimat dosyaları",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-094",
+      "yetenek_sinifi": "Y-08",
+      "kalip": "İmzasız skill pazarında kötü amaçlı paket",
+      "aciklama": "Koi Security, ClawHub'daki 2.857 skill'i denetleyip 341'inin kötü amaçlı olduğunu, çoğunun 'ön koşul kurulumu' talimatıyla Windows'ta tuş kaydedici, macOS'ta AMOS türü hırsız yüklettiğini bildirdi (Şubat 2026).",
+      "risk_turleri": [
+        "RT-02",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.koi.ai/blog/clawhavoc-341-malicious-clawedbot-skills-found-by-the-bot-they-were-targeting",
+        "https://thehackernews.com/2026/02/researchers-find-341-malicious-clawhub.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekiplerin kamusal pazardan indirdiği bir skill, ajana 'bağımlılığı kur' talimatı vererek geliştirici makinesine zararlı yazılım kurdurabilir.",
+        "Skill'ler kod değil metin olduğu için mevcut SCA/imza denetimlerinden geçmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-008",
+        "N-K18-008",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "ClawHub",
+        "Claude Code eklenti pazarları",
+        "skills.sh benzeri dizinler",
+        "Cursor kural pazarları"
+      ],
+      "erken_sinyal": "Skill içinde dış URL'den indirip çalıştırma, base64 kodlu komut, parola korumalı arşiv talimatı.",
+      "azaltma": "Yalnız kurum iç kataloğundan, incelenmiş ve özet değeri sabitlenmiş skill kullanımı; skill içeriğinde komut/URL taraması; kamusal pazarların engellenmesi."
+    },
+    {
+      "id": "RK-095",
+      "yetenek_sinifi": "Y-08",
+      "kalip": "Kural dosyasına görünmez karakterle arka kapı",
+      "aciklama": "Pillar Security'nin 'Rules File Backdoor' çalışması, Cursor ve GitHub Copilot kural dosyalarına gizli Unicode karakterlerle yerleştirilen talimatların ajana kod incelemesinden kaçan kötü kod ürettirebildiğini gösterdi (Mart 2025).",
+      "risk_turleri": [
+        "RT-03",
+        "RT-02"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.pillar.security/blog/new-vulnerability-in-github-copilot-and-cursor-how-hackers-can-weaponize-code-agents"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler arası paylaşılan ortak kural deposuna gelen masum görünümlü bir PR tüm ekiplerin ajanlarına görünmez talimat taşıyabilir.",
+        "İnsan inceleyici görünmez karakteri fark etmediği için onay kaydı yanıltıcı olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-008",
+        "N-K11-001",
+        "N-K11-003"
+      ],
+      "ornek_araclar": [
+        "Cursor rules",
+        "GitHub Copilot instructions",
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "erken_sinyal": "Kural dosyalarında sıfır genişlikli veya yön denetimi Unicode karakterleri.",
+      "azaltma": "Talimat dosyalarında görünmez karakter reddeden ön kanca/CI kontrolü, CODEOWNERS ile zorunlu inceleme, imzalı sürüm."
+    },
+    {
+      "id": "RK-096",
+      "yetenek_sinifi": "Y-08",
+      "kalip": "Dağıtım kanalı üzerinden talimat enjeksiyonu",
+      "aciklama": "AWS, Amazon Q Developer VS Code eklentisinin 1.84 sürümüne, CodeBuild yapılandırmasındaki uygunsuz kapsamlı GitHub token'ı kullanan bir saldırganın kötü amaçlı kod eklediğini ve bunun otomatik olarak sürüme dahil edildiğini açıkladı.",
+      "risk_turleri": [
+        "RT-02",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun iç skill/talimat deposu otomatik yayın hattıyla ekiplere dağıtılıyorsa, tek bir aşırı yetkili hat token'ı tüm ajanlara yıkıcı talimat itmeye yeter.",
+        "Talimat değişikliği kod değişikliği gibi test edilmediği için etkisi ancak olay sonrası görülür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-008",
+        "N-K11-006",
+        "N-K11-007"
+      ],
+      "ornek_araclar": [
+        "Amazon Q Developer",
+        "Kurum içi skill deposu",
+        "IDE eklenti pazarları"
+      ],
+      "erken_sinyal": "Talimat paketinde onaysız birleştirme; yayın hattı token'ının kapsamının yazma+yayın olması.",
+      "azaltma": "Talimat paketleri için iki kişili onay, imzalı ve özetli sürüm, yayın hattında en az yetkili kısa ömürlü kimlik, koşu başında paket sürümünün sabitlenmesi."
+    },
+    {
+      "id": "RK-097",
+      "yetenek_sinifi": "Y-08",
+      "kalip": "Bağlam dosyalarının başarıyı artırmadan maliyeti artırması",
+      "aciklama": "AGENTS.md değerlendirmesi, depo düzeyi bağlam dosyalarının görev başarısını genelde artırmadığını ama çıkarım maliyetini ortalama %20'den fazla artırdığını; talimatların izlendiğini ama depo özetlerinin yararsız olduğunu buldu.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-14"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2602.11988"
+      ],
+      "yasatacagi_sorunlar": [
+        "Her ekip kendi uzun talimat dosyasını büyüttükçe maliyet artar, etkisi ölçülmediği için 'daha çok bilgi daha iyi' varsayımı kalıcılaşır.",
+        "Birbiriyle çelişen katmanlı talimatlar ajan davranışını tahmin edilemez kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-004",
+        "N-K11-001",
+        "N-K14-008"
+      ],
+      "ornek_araclar": [
+        "AGENTS.md",
+        "CLAUDE.md",
+        "Cursor rules",
+        "Copilot instructions"
+      ],
+      "erken_sinyal": "Talimat dosyası uzunluğu ile görev başına token'ın birlikte artması, başarı oranının değişmemesi.",
+      "azaltma": "Talimat ve skill'ler için A/B eval, kısa ve eylem odaklı talimat, depo özetlerinin kaldırılması, talimat boyut bütçesi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 1,
+    "yuksek": 7,
+    "orta": 34,
+    "dusuk": 65
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 16,
+    "RT-10": 14,
+    "RT-01": 10,
+    "RT-11": 8,
+    "RT-02": 7,
+    "RT-08": 7,
+    "RT-15": 6,
+    "RT-04": 6,
+    "RT-05": 6,
+    "RT-06": 6,
+    "RT-14": 5,
+    "RT-13": 3,
+    "RT-12": 1,
+    "RT-16": 1,
+    "RT-07": 1
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K01",
+    "ad": "Talep, görev tanımı ve hazır olma",
+    "alan": "A-deger-akisi",
+    "amac": "Her işin, ajanların ve insanların aynı şekilde anlayacağı, doğrulanabilir bir tanımla akışa girmesi.",
+    "kapsam": [
+      "talep girişi",
+      "görev spesifikasyonu",
+      "görev şablonu",
+      "negatif kapsam",
+      "kabul kriteri ve oracle alanları",
+      "hazır olma (DoR) kapısı",
+      "belirsizlik giderme",
+      "bilinmeyenlerin taranması",
+      "davranış senaryosu onayı"
+    ],
+    "kapsam_disi": [
+      "backlog'un toplu dönüşümü (K02)",
+      "doğrulamanın kendisi (K05)"
+    ],
+    "komsu_kumeler": [
+      "K02",
+      "K03",
+      "K05",
+      "K17",
+      "K26"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K01-001",
+      "baslik": "Doğal dil talebinden yapılandırılmış görev spesifikasyonu",
+      "ihtiyac": "Serbest metinle gelen talebin; kurallar, kod tabanı bulguları, dış araştırma, riskler, karar kaydı bağlantıları ve DoD ile birlikte, şeması belli bir görev spesifikasyonuna dönüştürülmesi.",
+      "cozulecek_sorun": "Serbest metin ajanlarca tutarlı uygulanamıyor; aynı talep her koşuda farklı yorumlanıyor. Çıplak kullanıcı hikâyesi ajan maliyetini de belirgin biçimde artırıyor.",
+      "yetenek_siniflari": [
+        "Y-06",
+        "Y-44"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip sayısı arttıkça ortak şema zorunlu hale gelir; ekip-özel alanlar şemanın uzantısı olmalı, çatalı olmamalı.",
+      "kabul_olcutleri": [
+        "Spesifikasyonların %100'ünde şemadaki zorunlu alanlar dolu ve her iddia bir kaynağa bağlı.",
+        "Aynı talepten iki bağımsız üretimde zorunlu alanlar anlamca uyumlu."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-013",
+          "S-030",
+          "S-041",
+          "S-018",
+          "S-124"
+        ],
+        "not": "Spesifikasyonu hangi rolün ürettiği kaynaklarda farklı adlarla geçiyor (araştırma rolü, planlayıcı, adı geçen ama tanımlanmayan bir 'spesifikasyon ajanı')."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K01-002",
+      "baslik": "Tek ve makinece doğrulanabilir iş kalemi şablonu",
+      "ihtiyac": "Kullanıcı hikâyesi, kullanıcı personası, problem tanımı, negatif kapsam, karar kaydı bağlantısı, DoD, görev açıklaması, riskler, üst iş (epik) ilişkisi ve türlerine ayrılmış kabul kriterlerini (ana akış, hata, yetki, kenar durum, korunacak mevcut davranış) içeren tek bir şema.",
+      "cozulecek_sorun": "Kaynaklarda 9 ve 10 bölümlü iki şablon var; kabul kriterleri ile DoD'nin ayrı mı aynı mı olduğu belirsiz. Şablon doğrulanamadığı için eksik iş kalemleri akışa giriyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Şema doğrulamasını geçmeyen iş kalemi 'hazır' durumuna geçemez.",
+        "Kabul kriteri ile DoD'nin ayrımı yazılı ve tüm ekiplerde aynı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-053",
+          "S-054"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-012"
+      ],
+      "bagimliliklar": [
+        "N-K01-001"
+      ]
+    },
+    {
+      "id": "N-K01-003",
+      "baslik": "Makinece denetlenebilir negatif kapsam",
+      "ihtiyac": "Yapılmayacak işlerin, dokunulmayacak dosya/modüllerin, yasak yöntemlerin ve istenmeyen yan etkilerin somut ve denetlenebilir biçimde yazılması; ihlalin otomatik tespit edilmesi.",
+      "cozulecek_sorun": "Ajanlar kapsam dışına taşıyor. Reddedilen ajan değişikliklerinin başlıca nedenlerinden biri istenmeyen özellik ve kapsam kayması.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-14"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Negatif kapsamdaki bir alana dokunan değişiklik otomatik işaretlenir ve birleştirilemez.",
+        "Negatif kapsam alanı boş olan iş kalemi oranı raporlanır."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-053",
+          "S-118"
+        ],
+        "not": "Kaynak yazım kuralını veriyor ('her madde somut ve kontrol edilebilir'); zorlama mekanizmasını vermiyor."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-015"
+      ]
+    },
+    {
+      "id": "N-K01-004",
+      "baslik": "Ölçülebilir kabul kriterleri ve kabul/ret örnekleri",
+      "ihtiyac": "'Mobilde düzgün görünmeli' gibi belirsiz ifadelerin ölçülebilir kısıtlara (genişlik aralığı, taşma yok, minimum dokunma hedefi vb.) çevrilmesi; uygulamadan önce en az bir kabul ve bir ret örneğinin onaylanması.",
+      "cozulecek_sorun": "Belirsiz kriter her koşuda farklı yorumlanıyor; ajan 'iyi'nin ne olduğunu mevcut koddan çıkarıyor.",
+      "yetenek_siniflari": [
+        "Y-44"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Öznel sıfat içeren kabul kriteri sayısı 0.",
+        "Uygulama başlamadan her kriter için onaylı kabul ve ret örneği var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003",
+          "S-010"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K01-005",
+      "baslik": "Her beklenti için zorunlu oracle alanları",
+      "ihtiyac": "Her kabul kriteri için beklenen sonuç, beklentinin kaynağı (ürün kararı, sözleşme, mevzuat, onaylı örnek), doğrulama yöntemi ve kapsam dışı kalanın yazılması.",
+      "cozulecek_sorun": "Kaynağı sorgulanmamış beklenti 'doğru' sayılıyor; test, kodun mevcut davranışını onaylıyor.",
+      "yetenek_siniflari": [
+        "Y-44",
+        "Y-22"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Oracle alanlarından biri boşsa iş kalemi hazır veya bitti durumuna geçemez.",
+        "Her testte beklentinin kaynağı izlenebilir.",
+        "Oracle alanlarında izin verilen sonuç çeşitliliği ve henüz karara bağlanmamış davranış ayrı işaretleniyor; karara bağlanmamış davranış 'bilinmiyor/karar gerekli' durumu ve kararı verecek rol sınıfıyla kayıtlı.",
+        "Zorunlu olmayan uygulama ayrıntısına bağlı testler meşru alternatif çözümü reddetmiyor; beklenti ile kontrol çeliştiğinde sonuç otomatik geçti veya kaldı sayılmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003",
+          "S-128",
+          "S-095",
+          "S-384"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K01-004"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T18; ihtiyac-kumeleri/kumeler/04_dogruluk_ve_urun_nitelikleri/01_oracle_test_ve_kanit.json#I11-01",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://arxiv.org/abs/2609.08149"
+      ],
+      "ice_aktarilan": "E1 karşılaştırması: son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-384 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K01-006",
+      "baslik": "Hazır olma (DoR) kapısı",
+      "ihtiyac": "Kodlamadan önce problem tanımı, kapsam, kabul kriterleri, bağımlılıklar, erişimler, tasarım/arayüz beklentisi, test yaklaşımı ve engel durumunun kontrol edilmesi; kritik bilgi eksikse işin hazır sayılmaması.",
+      "cozulecek_sorun": "Hazır olmayan iş kodlamaya giriyor ve yanlış hedefe emek harcanıyor.",
+      "yetenek_siniflari": [
+        "Y-06",
+        "Y-44",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Hazır onayı olmayan hiçbir iş kodlamaya girmez.",
+        "'Kritik bilgi' tanımı yazılı ve sınıflandırılmış.",
+        "DoR puanı ile görev maliyeti ve kabul oranı arasındaki ilişki raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-036",
+          "S-013",
+          "S-018",
+          "S-124",
+          "S-143"
+        ],
+        "not": "'Kritik bilgi' kaynaklarda tanımlanmamış. Dil modeli tek başına iş kalemi kusurlarını orta doğrulukla buluyor; kural tabanlı kontrolle birlikte iki kapılı yapı öneriliyor."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "U-021"
+      ],
+      "bagimliliklar": [
+        "N-K01-002"
+      ]
+    },
+    {
+      "id": "N-K01-007",
+      "baslik": "Sınırlı belirsizlik giderme ve açık sorunun sahibine yazılması",
+      "ihtiyac": "Eksik veya belirsiz bilgi için sınırlı sayıda (kaynaklarda en fazla 2) araştırma/netleştirme döngüsü; sonunda belirsizlik kalırsa açık sorunun iş kalemine yazılıp işin sahibine devredilmesi ve aynı noktadan devam edilmesi.",
+      "cozulecek_sorun": "Ajan belirsizliği varsayımla dolduruyor. Çok ajanlı sistem hatalarının önemli bir payı açıklama istememekten kaynaklanıyor.",
+      "yetenek_siniflari": [
+        "Y-31",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Döngü sınırı aşıldığında işin sahibine devir %100.",
+        "Soru, cevap ve cevabın kaynağı izlenebilir biçimde kaydedilir.",
+        "Açıklama isteme oranı ve cevap bekleme süresi ölçülür."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-013",
+          "S-030",
+          "S-041",
+          "S-006",
+          "S-113"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-020"
+      ]
+    },
+    {
+      "id": "N-K01-008",
+      "baslik": "Görevde yazmayan bilinmeyenlerin taranması",
+      "ihtiyac": "Dış servis/arayüz, eski kod davranışı, dağıtım ve veri göçü, yasal kısıt, iç entegrasyon ve bağımlılık yüzeylerinde görevde yazılmamış belirsizliklerin taranması; kritik belirsizliğin varsayıma gömülmeden risk veya engel olarak kaydedilmesi.",
+      "cozulecek_sorun": "Gizli bağımlılık, mevzuat ve eski davranış görevin sonunda ortaya çıkıyor. Kaynaktaki tetik koşulu ('harici temas var mı?') iç bilinmeyenleri (eski kod, iç entegrasyon) kapsamıyor.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-17"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kritik her belirsizlik bir risk veya engel kaydına dönüşür; belgelenmemiş varsayım sayısı 0.",
+        "Tetik koşulu iç yüzeyleri de kapsar."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-031",
+          "S-018"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-015",
+        "C-034"
+      ]
+    },
+    {
+      "id": "N-K01-009",
+      "baslik": "Okunabilir davranış senaryolarının insan onayıyla kilitlenmesi",
+      "ihtiyac": "Kabul kriterlerinin, kod bilmeyenin de okuyup onaylayabileceği davranış senaryolarına (verilen–olduğunda–o zaman) çevrilmesi, insan onayıyla kilitlenmesi ve kabul testlerinin tek beklenti kaynağı olması.",
+      "cozulecek_sorun": "'Şartname doğru mu?' sorusunu test disiplini çözemez; bu soruyu yalnız insan cevaplayabilir.",
+      "yetenek_siniflari": [
+        "Y-31",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kilitli senaryo olmadan kabul testi yazılmaz.",
+        "Kilitli senaryonun her değişikliği yeni sürüm ve onay kaydı üretir."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-010",
+          "S-013",
+          "S-002"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-014"
+      ],
+      "bagimliliklar": [
+        "N-K01-004"
+      ]
+    },
+    {
+      "id": "N-K01-010",
+      "baslik": "Kabul kriteri ve spesifikasyon sürümlemesi",
+      "ihtiyac": "Kabul kriterlerinin ve spesifikasyonun sürümlü tutulması; bir koşu süresince sabit kalması; değişikliğin yalnız yetkili onayla yeni sürüm olarak yapılması ve eski onayları geçersiz kılması.",
+      "cozulecek_sorun": "Hedef koşu sırasında sessizce kayıyor; eski onay yeni kapsamda kullanılıyor.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Koşu süresince kabul kriterlerinin özeti (hash) değişmez.",
+        "Kriter değişince önceki onaylar otomatik geçersiz olur."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K01-011",
+      "baslik": "Kabul kriterini yazma ve onaylama hakkının tanımı",
+      "ihtiyac": "Kabul kriterini kimin yazdığının, kimin onayladığının ve ajanların hangi sınırda öneri yapabileceğinin tek biçimde tanımlanması.",
+      "cozulecek_sorun": "Kaynaklar çelişiyor: bir akışta planlayıcı ajan tamamlanma koşulunu yazıyor, DoR rolü kriter uyduramıyor, bir başkasında kriterler ürün sahibinden geliyor. Sahipsiz kriter oracle problemini derinleştirir.",
+      "yetenek_siniflari": [
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her kabul kriterinin yazan ve onaylayan rolü kayıtlı.",
+        "Ajan önerisi insan onayı olmadan kriter olamaz."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-018",
+          "S-036",
+          "S-006",
+          "S-053"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-009",
+        "G-002",
+        "Q-014"
+      ]
+    },
+    {
+      "id": "N-K01-012",
+      "baslik": "İş türüne göre akış seçimi",
+      "ihtiyac": "Yeni özellik, hata düzeltme, yeniden düzenleme, doküman, altyapı, araştırma, veri ve tasarım işlerinin ayırt edilmesi; her tür için uygun akışın ve test-önce uygunluğunun belirlenmesi.",
+      "cozulecek_sorun": "Her işe aynı test-önce akışı uygulanıyor. Kod dışı işler ve testi olmayan eski kod akış dışında kalıyor; ajanların başarısı iş türüne göre çok değişiyor.",
+      "yetenek_siniflari": [
+        "Y-45",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İş türü alanı zorunlu ve her türün akışı yazılı.",
+        "Kod dışı iş türleri için de bir tamamlanma tanımı var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-008",
+          "S-009",
+          "S-117",
+          "S-118"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-007",
+        "C-006",
+        "D-020",
+        "G-020",
+        "Q-035"
+      ]
+    },
+    {
+      "id": "N-K01-013",
+      "baslik": "Görev spesifikasyonu şemasının kendi sürümlemesi",
+      "ihtiyac": "İş kalemi ve spesifikasyon şemasının sürümlenmesi, eski sürümle açılmış işlerin geçişinin tanımlanması.",
+      "cozulecek_sorun": "Şema değiştikçe açık işler ile yeni işler farklı alanlara sahip oluyor; ajanlar ve kapılar tutarsız çalışıyor.",
+      "yetenek_siniflari": [
+        "Y-35"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Her iş kalemi şema sürümünü taşır.",
+        "Şema değişikliğinin geçiş kuralı yazılı."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K01-002"
+      ]
+    },
+    {
+      "id": "N-K01-014",
+      "baslik": "Kalite özniteliği senaryoları",
+      "ihtiyac": "Epik ve özellik şablonunda güvenilirlik, güvenlik, gizlilik, gözlemlenebilirlik, bakım kolaylığı ve uyumluluk için ölçülebilir kalite özniteliği senaryolarının (uyaran, ortam, yanıt, yanıt ölçüsü) zorunlu alan olması; senaryoların kritiklik kademesinden türeyen varsayılanlarla önceden doldurulması ve DoD'de doğrulanması; işlevsel olmayan gereksinimlerin tek tek hikâyelerde kaybolmadan backlog kısıtı olarak yaşaması.",
+      "cozulecek_sorun": "Mevcut iş kalemi şablonu işlevsel davranışı, yetki ve kenar durumlarını kapsıyor; işlevsel olmayan gereksinimler yazılmazsa ajanlar onları üretmez, doğrulayıcılar denetlemez.",
+      "yetenek_siniflari": [
+        "Y-44",
+        "Y-32"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Çok ekipte kademe varsayılanları, ekiplerin aynı kalite tabanından başlamasını sağlar.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlere dokunan epiklerde kalite özniteliği senaryoları dolu ve her birinin doğrulama yöntemi var.",
+        "Öznel ifade içeren kalite gereksinimi sayısı 0.",
+        "Kalite özniteliği ihlali kanıt paketinde ayrı boyut olarak raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-371",
+          "S-372"
+        ],
+        "not": "Çerçeve işlevsel olmayan gereksinimleri tüm backlog düzeylerinde kalıcı kısıt ve DoD parçası olarak tanımlar; kalite modeli 2023 sürümünde güvenlik ve güvenilirlik alt niteliklerini günceller. Benzer mevcut ihtiyaç: N-K01-002; fark: K01-002 kabul kriterini ana akış, hata, yetki, kenar durum ve korunacak davranış türlerine ayırır; işlevsel olmayan kalite gereksinimleri tür olarak yok. K04-009 yalnız performans bütçesini kapsar."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K01-002"
+      ]
+    }
+  ]
+}

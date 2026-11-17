@@ -1,0 +1,3735 @@
+{
+  "sema": "risk-haritasi/risk-turu@1",
+  "risk_turu": {
+    "id": "RT-13",
+    "ad": "İşletim yükü ve karmaşıklık",
+    "tanim": "Kurulum, yükseltme, uzmanlık, bileşen sayısı, yedekleme/kurtarma."
+  },
+  "ozet": {
+    "bulgu": 112,
+    "siddet": {
+      "kritik": 1,
+      "yuksek": 15,
+      "orta": 90,
+      "dusuk": 6
+    },
+    "arac": 111,
+    "kategori_kalibi": 17,
+    "olay": 12,
+    "senaryo": 18,
+    "otomatik_sinyalli_arac": 0
+  },
+  "en_cok_etkilenen_ihtiyaclar": [
+    [
+      "N-K16-008",
+      34
+    ],
+    [
+      "N-K16-004",
+      27
+    ],
+    [
+      "N-K16-005",
+      18
+    ],
+    [
+      "N-K15-005",
+      10
+    ],
+    [
+      "N-K16-001",
+      9
+    ],
+    [
+      "N-K18-004",
+      8
+    ],
+    [
+      "N-K16-006",
+      8
+    ],
+    [
+      "N-K16-002",
+      7
+    ],
+    [
+      "N-K13-003",
+      6
+    ],
+    [
+      "N-K15-004",
+      6
+    ],
+    [
+      "N-K13-010",
+      5
+    ],
+    [
+      "N-K13-013",
+      5
+    ],
+    [
+      "N-K18-008",
+      5
+    ],
+    [
+      "N-K18-003",
+      4
+    ],
+    [
+      "N-K05-030",
+      4
+    ],
+    [
+      "N-K15-002",
+      3
+    ],
+    [
+      "N-K19-005",
+      3
+    ],
+    [
+      "N-K06-008",
+      3
+    ],
+    [
+      "N-K22-005",
+      3
+    ],
+    [
+      "N-K15-007",
+      3
+    ],
+    [
+      "N-K06-007",
+      3
+    ],
+    [
+      "N-K13-009",
+      2
+    ],
+    [
+      "N-K11-006",
+      2
+    ],
+    [
+      "N-K06-002",
+      2
+    ],
+    [
+      "N-K06-003",
+      2
+    ]
+  ],
+  "bulgular": [
+    {
+      "arac_id": "AR-0006",
+      "arac": "Trigger.dev",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Self-host varsayılan sırlarla kimlik doğrulamasız altyapı ele geçirme",
+      "aciklama": "hosting/docker/.env.example içindeki sabit oturum ve şifreleme sırlarıyla kurulan v4 örnekleri kimlik doğrulamasız çok aşamalı saldırıyla tamamen ele geçirilebiliyordu (GHSA-pqxw-g93w-hj9x). v4.5.6 benzersiz değer zorunluluğu getirdi ama ALLOW_INSECURE_DEFAULT_SECRETS=true kaçış anahtarı bıraktı.",
+      "tarih": "2026-07",
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x",
+        "https://trigger.dev/changelog/v4-5-6"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurulum belgedeki örnek .env ile yapılırsa hat altyapısı dışarıdan ele geçirilir, tüm görev sırları sızar.",
+        "Geçiş kolaylığı için kaçış anahtarı açık bırakılırsa açık kalıcı hale gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K16-005",
+        "N-K15-002"
+      ],
+      "erken_sinyal": "Yapılandırmada ALLOW_INSECURE_DEFAULT_SECRETS veya örnek dosyadaki değerlerin bulunması.",
+      "azaltma": "Kurulumda sırları rastgele üretmek ve sır yöneticisinde tutmak; yapılandırma taramasına örnek değer kontrolü eklemek.",
+      "id": "BL-00019",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-pqxw-g93w-hj9x .env.example'daki sabit sırlarla kimlik doğrulamasız tam ele geçirmeyi anlatıyor, <=4.5.5 etkileniyor. v4.5.6 değişiklik notu ALLOW_INSECURE_DEFAULT_SECRETS=true kaçışını doğruluyor. GHSA şiddeti 'high'.",
+        "kaynak": [
+          "https://api.github.com/repos/triggerdotdev/trigger.dev/security-advisories",
+          "https://trigger.dev/changelog/v4-5-6"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-pqxw-g93w-hj9x",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0001",
+      "arac": "Temporal",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Determinizm kuralı ve sürümleme disiplini",
+      "aciklama": "İş akışı kodu yeniden oynatmada aynı komut dizisini üretmek zorundadır; süreç kodunu değiştirmek uçuştaki yürütmelerde determinizm hatasına yol açar ve patching veya worker versioning gerektirir. Python SDK'nın sandbox'ı da ince sorunlar üretebilir (ör. açık hata: sandbox'ın annotated_types'ı yeniden içe aktarması nedeniyle pydantic kısıtlarının sessizce düşmesi).",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.temporal.io/workflow-definition",
+        "https://docs.temporal.io/worker-versioning",
+        "https://github.com/temporalio/sdk-python/issues/1897",
+        "https://github.com/temporalio/sdk-python/issues/1326"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan hattının kural/politika kodu sık değiştiği için günlerce insan onayı bekleyen koşular yeni sürüm dağıtıldığında determinizm hatasıyla takılır.",
+        "Ekipler iş akışı koduna doğrudan LLM, dosya veya saat çağrısı koyarsa yeniden oynatmada farklı karar üretilir; hata üretimde ortaya çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-010",
+        "N-K13-009",
+        "N-K11-006",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Worker günlüklerinde nondeterminism hataları; 'workflow task failed' sayısında dağıtım sonrası artış.",
+      "azaltma": "Her dağıtımdan önce üretim geçmişleriyle yeniden oynatma testi koşmak; worker versioning veya patch API'sini zorunlu kılmak; iş akışı kodunda yan etkiyi yasaklayan statik denetim eklemek.",
+      "id": "BL-00004",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Determinizm ve sürümleme gereği belgelerde var. #1897 (annotated_types, 2026-09-26) ve #1326 (Python 3.14'te sandbox kilitlenmesi) açık issue.",
+        "kaynak": [
+          "https://docs.temporal.io/workflow-definition",
+          "https://github.com/temporalio/sdk-python/issues/1897",
+          "https://github.com/temporalio/sdk-python/issues/1326"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0016",
+      "arac": "Azure Durable Functions",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Orkestratör determinizmi ve uçuştaki örneklerin sürümlenmesi",
+      "aciklama": "Orkestratör kodu her yeniden oynatmada aynı sonucu üretmelidir; tarih/saat, rastgelelik ve doğrudan G/Ç yasaktır, ihlal NonDeterministicOrchestrationException veya beklenmeyen davranışa yol açar. Orkestratör veya activity imzasındaki kırıcı değişiklik, orkestrasyon sürümleme kullanılmazsa uçuştaki örnekleri bozar.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-code-constraints",
+        "https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-orchestration-versioning"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onay bekleyen orkestrasyonlar yeni dağıtımdan sonra yeniden oynatmada çöker; iş elle yeniden başlatılmak zorunda kalır.",
+        "Eski kod yolları uçuştaki örnek varken silinirse yeniden oynatma hataları üretimde görülür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-010",
+        "N-K13-003",
+        "N-K19-005"
+      ],
+      "erken_sinyal": "Dağıtım sonrası NonDeterministicOrchestrationException artışı.",
+      "azaltma": "Orkestrasyon sürümlemeyi zorunlu kılmak; eski sürümde çalışan örnek kalmadığını doğrulamadan kod yolu silmemek; yeniden oynatma testleri.",
+      "id": "BL-00054",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kod kısıtları belgesi determinizmi ve NonDeterministicOrchestrationException'ı anlatıyor. Sürümleme belgesi imza/sıra değişikliklerinin uçuştaki orkestrasyonları bozabileceğini söylüyor.",
+        "kaynak": [
+          "https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-code-constraints",
+          "https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-orchestration-versioning"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0452",
+      "arac": "Kubernetes Agent Sandbox",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Kubernetes, güvenli çalışma zamanı ve ağ politikası uzmanlığı şart",
+      "aciklama": "README kapsamı açıkça 'sandbox orkestratörü' olarak tanımlıyor; güçlü yalıtım için gVisor/Kata, sıcak havuz, NetworkPolicy/Cilium ve özel yetkilendirici kurum tarafından kurulmalı.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/kubernetes-sigs/agent-sandbox",
+        "https://kubernetes.io/blog/2026/03/20/running-agents-on-kubernetes-with-agent-sandbox"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi yeterli değilse sandbox'lar varsayılan runc ile koşar ve izolasyon sadece konteyner düzeyinde kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-001"
+      ],
+      "erken_sinyal": "SandboxTemplate'lerde runtimeClassName boş; ağ politikası olmayan ad alanları.",
+      "azaltma": "Kabul denetleyicisiyle runtimeClassName zorunluluğu; platform ekibine eğitim ve işletim runbook'u.",
+      "id": "BL-00748",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README 'sandbox orchestrator' kapsamını ve güçlü yalıtım için gVisor/Kata gerektiğini açıkça yazıyor; Kubernetes blogu da bunu destekliyor.",
+        "kaynak": [
+          "https://github.com/kubernetes-sigs/agent-sandbox",
+          "https://kubernetes.io/blog/2026/03/20/running-agents-on-kubernetes-with-agent-sandbox/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1385",
+      "arac": "Zuul",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "Kurulum ve işletim çok karmaşık; Nodepool'dan zuul-launcher'a geçiş zorunlu",
+      "aciklama": "Envanter, kurulum ve işletimin karmaşık olduğunu söylüyor (Nodepool, Ansible tabanlı işler). 14.0.0 (Şubat 2026) ile Nodepool kullanım dışı bırakıldı ve yerine zuul-launcher geldi; Nodepool desteği ilerideki bir sürümde kaldırılacak.",
+      "tarih": "2026-02",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://zuul-ci.org/docs/zuul/latest/releasenotes.html",
+        "https://pypi.org/project/zuul/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurulum yeni yapılsa bile kısa sürede bir bileşen geçişi gerekecek; ZooKeeper, planlayıcı, yürütücü ve başlatıcı bileşenlerinin işletimi uzman ister."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-002",
+        "N-K06-003",
+        "N-K24-003"
+      ],
+      "erken_sinyal": "Nodepool desteğinin kaldırılacağı sürümün duyurulması.",
+      "azaltma": "Kuruluma doğrudan zuul-launcher ile başlayın, işletim ekibini önceden eğitin.",
+      "id": "BL-01503",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "14.0.0 (12 Şubat 2026) notları zuul-launcher'ın Nodepool'un yerini aldığını ve Nodepool kullanımının kullanım dışı bırakıldığını, desteğin 'cömert bir geçiş süresinden sonra' ileride kaldırılacağını söylüyor; geçiş şimdilik zorunlu değil, ileride zorunlu olacak.",
+        "kaynak": [
+          "https://zuul-ci.org/docs/zuul/latest/releasenotes.html",
+          "https://pypi.org/project/zuul/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1395",
+      "arac": "Harness (CD ve Feature Management)",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Tekrarlayan SaaS kesintileri teslim hattını ve geri almayı durdurabiliyor",
+      "aciklama": "14 Eylül 2026'da mTLS kullanan hesaplarda sertifika değişimi sırasında sertifika otoritesi de değiştiği için delegate'ler bağlanamadı (kritik, yaklaşık 8 saat). 20 Ağustos 2026'da GCP us-west1 olayı nedeniyle tüm üretim ortamlarında boru hatları yavaşladı veya zaman aşımıyla iptal oldu. 15 Eylül 2026'da API girişleri başarısız oldu; 23 Ağustos 2026'da FME arayüzü CDN saklama politikası yüzünden açılmadı.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://stspg.io/6mmv855y29p7",
+        "https://stspg.io/jn63dxz0f5ty",
+        "https://stspg.io/ft7mmvv8qjn8",
+        "https://stspg.io/jf7z6c8ycf22"
+      ],
+      "yasatacagi_sorunlar": [
+        "Delegate bağlantısı koptuğunda dağıtım, doğrulama ve otomatik geri alma çalışmaz; hatalı ajan değişikliği üretimde kalır.",
+        "Bayrak yönetim arayüzü açılmazsa nöbetçi, kill switch'i yalnız API ile değiştirebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-003",
+        "N-K06-008",
+        "N-K16-009"
+      ],
+      "erken_sinyal": "status.harness.io'da delegate veya boru hattı olayları; delegate bağlantı kopması alarmları.",
+      "azaltma": "Harness dışı acil geri alma runbook'u (doğrudan kubectl/helm) hazır tutun; bayrak değişikliği için API tabanlı yedek yol tanımlayın; mTLS sertifika değişim duyurularını izleyin.",
+      "id": "BL-01520",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Statuspage API: mTLS olayı 14 Eylül 2026, 'critical', 12:00–20:28 PDT (~8,5 saat); 20 Ağustos GCP us-west1 olayında 'zaman aşımıyla iptal' belirtisi; 15 Eylül API girişi (critical); 23 Ağustos FME arayüzü CDN saklama politikası.",
+        "kaynak": [
+          "https://status.harness.io/api/v2/incidents.json",
+          "https://status.harness.io/incidents/krb186nq1nwq",
+          "https://status.harness.io/incidents/fy36fxq22bw6",
+          "https://status.harness.io/incidents/b9qpv9ffc75j"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1483",
+      "arac": "Infinitic",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Apache Pulsar gereksinimi",
+      "aciklama": "README'ye göre Infinitic Apache Pulsar üzerine kuruludur (yönetilen Pulsar sağlayıcıları desteklenir).",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/infiniticio/infinitic#readme"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumda Pulsar yoksa yalnız bu motor için ağır bir mesajlaşma altyapısı işletmek gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Pulsar işletim olayları.",
+      "azaltma": "Kurumda Pulsar yoksa tercih etmemek.",
+      "id": "BL-01588",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README olay akışı platformu olarak 'currently supporting Apache Pulsar' diyor ve yönetilen sağlayıcılara yönlendiriyor.",
+        "kaynak": [
+          "https://github.com/infiniticio/infinitic#readme"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1743",
+      "arac": "Prow",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Yüksek işletim yükü: Kubernetes kümesi, cluster-admin ve geniş GitHub Uygulaması izinleri",
+      "aciklama": "Kurulum belgesi kümede cluster-admin rolü, bir GitHub Uygulaması, HMAC ve uygulama anahtarı sırları ile blob depolama (starter kurulumda 100Gi'lik iki PV) istiyor. Dal koruma otomasyonu için Administration yazma, projects eklentisi için Admin izni gerekiyor.",
+      "tarih": "2026",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/kubernetes-sigs/prow/blob/main/site/content/en/docs/getting-started-deploy.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi yalnız CI için ayrı bir Kubernetes kümesi ve Prow uzmanlığı taşımak zorunda kalır.",
+        "Geniş izinli GitHub Uygulaması anahtarı sızarsa tüm depoların dal korumaları değiştirilebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K18-004",
+        "N-K18-003",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Kurulum ve yükseltmede manuel adım sayısı; uygulama izinlerinin minimumun üstünde olması.",
+      "azaltma": "Yalnız gerekli eklentileri açın, dal koruma otomasyonunu kapatıp kural setlerini kodla yönetin, uygulama anahtarını sır yöneticisinde tutun.",
+      "id": "BL-01632",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kurulum belgesi kurulumu yapan kullanıcıya cluster-admin bağlaması, GitHub App özel anahtarı ve hmac-token sırları, starter-s3 için iki adet 100Gi PV, dal koruma otomasyonu için Administration yazma ve projects eklentisi için Admin izni istiyor.",
+        "kaynak": [
+          "https://github.com/kubernetes-sigs/prow/blob/main/site/content/en/docs/getting-started-deploy.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3126",
+      "arac": "EAS (Expo Application Services)",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "EAS kesintileri acil mobil düzeltmeyi engelleyebiliyor",
+      "aciklama": "8 Temmuz 2026'da EAS arka ucunda kritik bir kesinti yaşandı. 31 Mayıs 2026'da macOS veri merkezi sağlayıcısındaki ağ kesintisi iOS derleme/gönderim ve macOS iş akışlarını yaklaşık 7 saat durdurdu. 8 Haziran 2026'da veritabanı yükü derleme hatalarına yol açtı; Haziran 2025'teki EAS kesintisi GCP olayıyla ilişkilendirildi.",
+      "tarih": "2026-07",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://stspg.io/vhfb68p8p08x",
+        "https://stspg.io/n054rjrmwsjs",
+        "https://stspg.io/kjhfh885msgm",
+        "https://status.expo.dev/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Üretimdeki bir mobil hata için iOS düzeltme derlemesi saatlerce alınamaz; OTA güncelleme yayını da arka uç kesintisinde durur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K15-005",
+        "N-K16-004",
+        "N-K06-008"
+      ],
+      "erken_sinyal": "status.expo.dev'de derleme kuyruğu veya arka uç olayları; iş kuyruk sürelerinde artış.",
+      "azaltma": "Kurum içi macOS/Linux derleyicilerde eas build --local ile yedek yol tutun; kritik sürüm günlerini EAS olay geçmişine göre planlayın.",
+      "id": "BL-02114",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Statuspage kayıtları doğruluyor: 8 Tem 2026 'Major outage of EAS backend' (etki: critical), 31 May 2026 macOS veri merkezi ağ kesintisi (13:38–20:47 PDT, ~7 saat), 8 Haz 2026 yüksek veritabanı yükü ve derleme hataları; 12 Haz 2025 EAS kesintisi GCP olayına bağlanmış.",
+        "kaynak": [
+          "https://stspg.io/vhfb68p8p08x",
+          "https://stspg.io/n054rjrmwsjs",
+          "https://stspg.io/kjhfh885msgm",
+          "https://status.expo.dev/api/v2/incidents.json",
+          "https://status.expo.dev/incidents/fsnzjl9g6b76"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3587",
+      "arac": "PostHog",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Self-host yalnız desteksiz 'hobby' dağıtım; ücretli özellikler yalnız Cloud'da",
+      "aciklama": "PostHog kendi barındırmayı yalnız Docker Compose 'hobby' dağıtımı olarak sunuyor; Kubernetes ile yeni kurulumlar desteklenmiyor, garanti ve müşteri desteği yok, veri kaybı riskinin kabulü isteniyor; tüm ücretli plan özellikleri yalnız Cloud'da. Belge 300 bin olay, 1 bin kayıt üstünde altyapı yetkinliğinin sorgulanmasını öneriyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://posthog.com/docs/self-host"
+      ],
+      "yasatacagi_sorunlar": [
+        "KVKK nedeniyle self-host seçilirse 10+ ekip ve ajan paneli olay hacminde tek makinelik desteksiz kurulum yetersiz kalır; veri kaybı pilot kararlarını geçersiz kılar.",
+        "Deneyler ve gelişmiş özellik bayrakları gibi ücretli yetenekler için Cloud'a geçmek yurt dışı aktarım ve satıcı kilidi demektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-010",
+        "N-K23-012",
+        "N-K22-005",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Hobby kurulumda disk/ClickHouse doluluğu, olay alım gecikmesi, ücretli özellik ihtiyacı talepleri.",
+      "azaltma": "Ölçüm ihtiyacını ürün analitiği ile deney/bayrak olarak ayırın; kurum içinde tutulması gereken ölçümleri daha basit, desteklenen bileşenlerle toplayın; Cloud kullanılacaksa AB bölgesi ve veri minimizasyonu uygulayın.",
+      "id": "BL-02233",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Self-host belgesi Kubernetes ile yeni kurulumların desteklenmediğini, garanti/ücretli destek olmadığını, riskin kullanıcıda olduğunu ve 300k olay/1k kayıt eşiğini yazıyor.",
+        "kaynak": [
+          "https://posthog.com/docs/self-host"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4173",
+      "arac": "Mia-Platform",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Ağır bağımlılık yığını, dar sürüm pencereleri ve kırıcı yükseltmeler",
+      "aciklama": "Self-host gereksinimleri MongoDB (>6, ≤7), Redis (6–7), Kubernetes (>=1.32, ≤1.34), GitLab (≤18.x) veya GitHub, CI aracı, sır yöneticisi, nesne depolama ve KMS istiyor; ~500 kullanıcı için örnek mimari ayrıca 3 düğümlü MongoDB Enterprise ve GitLab sunucusu içeriyor. Console v15 kimlik doğrulamasını Keycloak'a taşıyan kırıcı bir değişiklik getiriyor; major sürümler tek tek yükseltilmek zorunda.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mia-platform/documentation/blob/main/docs/requirements/installation-guidelines/console/self-hosted/self-hosted-requirements.md",
+        "https://github.com/mia-platform/documentation/blob/main/docs/requirements/installation-guidelines/console/self-hosted/100_how-to-upgrade.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun Kubernetes veya GitLab yükseltme takvimi Mia-Platform'un desteklediği pencereyi aşarsa platform yükseltmesi durur ya da desteksiz duruma düşülür.",
+        "v15 geçişi ayrı bir Keycloak kurulumunu ve kimlik mimarisi değişikliğini zorunlu kılar; yalnız sahiplik kataloğu için bu yük orantısız olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-001",
+        "N-K31-006"
+      ],
+      "erken_sinyal": "Kubernetes veya GitLab yükseltme planında Mia-Platform uyumluluk engeli çıkması; birden fazla major geride kalınması.",
+      "azaltma": "Kurulumdan önce platform yükseltme takvimini satıcı destek matrisiyle eşleyin; yalnız katalog ihtiyacı için daha hafif bir alternatifi karşılaştırın.",
+      "id": "BL-02400",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Gereksinim tablosu MongoDB >6 ≤7, Redis 6–7, Kubernetes 1.32–1.34, GitLab ≤18.x/GitHub, sır yöneticisi, nesne depolama ve KMS listeliyor; ~500 kullanıcı örneğinde 3 düğümlü MongoDB Enterprise ve GitLab var; v15 Keycloak'a geçişi kırıcı değişiklik ve major sürümler tek tek yükseltilmeli.",
+        "kaynak": [
+          "https://github.com/mia-platform/documentation/blob/main/docs/requirements/installation-guidelines/console/self-hosted/self-hosted-requirements.md",
+          "https://github.com/mia-platform/documentation/blob/main/docs/requirements/installation-guidelines/console/self-hosted/100_how-to-upgrade.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0191",
+      "arac": "vLLM",
+      "gorev": "R-G01",
+      "tur": "RT-13",
+      "baslik": "Çok düğümlü iç kanallar kimlik doğrulamasız; GPU işletimi uzmanlık ister",
+      "aciklama": "Geçmiş açıklar (ZeroMQ, NCCL, Mooncake) çok düğümlü kurulumdaki iç kanalların kimlik doğrulamasız ve pickle tabanlı olduğunu gösterdi; ShadowMQ araştırması bu desenin projeler arası kopyalandığını belgeledi.",
+      "tarih": "2025-11",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.oligo.security/blog/shadowmq-how-code-reuse-spread-critical-vulnerabilities-across-the-ai-ecosystem",
+        "https://github.com/advisories/GHSA-9f8f-2vmf-885j"
+      ],
+      "yasatacagi_sorunlar": [
+        "Büyük modeller (GLM-5.3, Kimi K3, Qwen 2.4T) çok düğüm gerektirdiği için iç GPU ağı ayrı ve kapalı bir segment olarak tasarlanmazsa bir düğümün ele geçirilmesi tüm kümeye yayılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-002",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "GPU düğümleri arası portların kurumsal ağdan erişilebilir olması.",
+      "azaltma": "GPU küme iç ağını izole segment yapma; platform ekibinde sunum motoru uzmanlığı ve nöbet planı.",
+      "id": "BL-00501",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA-9f8f-2vmf-885j (CVE-2025-30202) çok düğümlü ZeroMQ veri açığını doğruluyor; Oligo ShadowMQ yazısı 13 Kasım 2025 tarihli ve kod kopyalamayla yayılmayı belgeliyor.",
+        "kaynak": [
+          "https://api.osv.dev/v1/vulns/GHSA-9f8f-2vmf-885j",
+          "https://www.oligo.security/blog/shadowmq-how-code-reuse-spread-critical-vulnerabilities-across-the-ai-ecosystem"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-30202",
+          "kayit": "kontrol-edilmedi",
+          "ad_eslesmesi": null
+        },
+        {
+          "kimlik": "GHSA-9f8f-2vmf-885j",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1218",
+      "arac": "Infisical",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "Sır yöneticisini kurum içinde işletmenin yükü",
+      "aciklama": "Kurum içi kurulumda yüksek erişilebilirlik, yedekleme, anahtar yönetimi ve yükseltme kurumun sorumluluğunda. Harici KMS ve HSM desteği Enterprise'da.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://infisical.com/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sır yöneticisi çökerse bütün hatlar ve ajanlar durur; yanlış yedekleme sırların kaybına yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "Kesinti sırasında CI işlerinin sır alamaması.",
+      "azaltma": "Yüksek erişilebilir kurulum, şifreli yedek ve felaket kurtarma provası yapın.",
+      "id": "BL-01397",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Fiyat sayfası External KMS & HSM desteğini ve self-hosting/dedicated altyapıyı Enterprise özellikleri arasında listeliyor; kurum içi işletim yükü (HA, yedek, anahtar, yükseltme) genel çıkarım olarak makul.",
+        "kaynak": [
+          "https://infisical.com/pricing"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1954",
+      "arac": "AWS Lambda durable functions",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Yeniden oynatmada adım dışı kodun tekrar çalışması",
+      "aciklama": "SDK yürütmeyi baştan çalıştırıp tamamlanmış işlemleri kontrol noktası sonuçlarıyla atlar; 256 KB'tan büyük bağlam sonuçları saklanmaz, yeniden oynatmada yeniden işlenerek üretilir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-sdk.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Adım dışında bırakılan LLM çağrısı veya dış API çağrısı her yeniden oynatmada tekrar yapılır; çift yan etki ve maliyet oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-004",
+        "N-K13-010",
+        "N-K20-005"
+      ],
+      "erken_sinyal": "Yeniden oynatma sayısıyla orantılı dış çağrı artışı.",
+      "azaltma": "Tüm yan etkileri adım içine almak; kod incelemesinde bunu denetlemek; idempotency anahtarı.",
+      "id": "BL-01660",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "SDK sayfası baştan yeniden oynatmayı doğruluyor. 256 KB ayrıntısı bu sayfada değil, AWS Durable Execution SDK geliştirici kılavuzunda: büyük alt bağlam sonuçları yeniden işleniyor, içteki adımlar kontrol noktasından geliyor.",
+        "kaynak": [
+          "https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-sdk.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2500",
+      "arac": "Apollo Config",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Güvenilir iç ağ varsayımı ve varsayılan portal hesabı",
+      "aciklama": "Resmî dağıtım rehberi, apollo-configservice ve apollo-adminservice'in güvenilir iç ağ için tasarlandığını ve doğrudan dışarıya açılmaması gerektiğini söylüyor. Hızlı başlangıç belgesi varsayılan portal girişini apollo/admin olarak veriyor. Ağdaki istemcilerin yapılandırma okuması için erişim anahtarı ayrıca etkinleştirilmelidir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/apolloconfig/apollo/blob/master/docs/en/deployment/distributed-deployment-guide.md",
+        "https://github.com/apolloconfig/apollo/blob/master/docs/en/deployment/quick-start.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Düz ağ yapısındaki bir kurumda, ajan çalışma alanları dahil ağa erişen her süreç üretim yapılandırmasını okuyabilir.",
+        "Varsayılan hesap değiştirilmeden bırakılırsa portal üzerinden yapılandırma yayımlanabilir; üretim davranışı anında değişir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K11-007",
+        "N-K15-002"
+      ],
+      "erken_sinyal": "Portalda apollo kullanıcısıyla başarılı giriş; Eureka/Meta Server portlarının (8080/8090) dış ağdan erişilebilir olması.",
+      "azaltma": "Varsayılan hesabı kurulumda kaldırıp SSO/LDAP bağlayın. Tüm uygulamalar için erişim anahtarını zorunlu kılın. Ajan çalışma alanlarını ConfigService ağından yalıtın.",
+      "id": "BL-02020",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Dağıtım rehberi configservice/adminservice'in güvenilir iç ağ için tasarlandığını ve doğrudan dışarı açılmaması gerektiğini, hızlı başlangıç belgesi apollo/admin varsayılan girişini yazıyor; AccessKey ayrı etkinleştiriliyor (auto-provision varsayılanı false).",
+        "kaynak": [
+          "https://github.com/apolloconfig/apollo/blob/master/docs/en/deployment/distributed-deployment-guide.md",
+          "https://github.com/apolloconfig/apollo/blob/master/docs/en/deployment/quick-start.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3929",
+      "arac": "AWS Organizations Service Control Policies (SCP)",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Yanlış SCP ile kuruluş genelinde erişim kaybı",
+      "aciklama": "AWS, SCP'lerin kapsamlı test edilmeden kuruluş köküne bağlanmamasını 'kesinlikle' öneriyor; aksi halde kullanıcılar kilit hizmetlerden dışarıda kalabilir. FullAWSAccess politikası yerine bir izin listesi konmadan kaldırılırsa üye hesaplardaki tüm AWS eylemleri başarısız olur. SCP ilke türü kapatılıp yeniden açılırsa önceki bağlamalar kaybolur ve otomatik geri gelmez.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Politikaları ajanlarla ya da otomatik PR'larla güncelleyen bir hat, tek hatalı değişiklikle 10+ ekibin tüm hesaplarında dağıtımları durdurabilir.",
+        "Geri alma, yönetim hesabı yetkisi gerektirdiği için olay süresi uzar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-003",
+        "N-K11-007",
+        "N-K06-008"
+      ],
+      "erken_sinyal": "SCP değişikliğinden sonra AccessDenied hatalarında sıçrama.",
+      "azaltma": "SCP değişikliklerini kod olarak yönetin ve önce test OU'suna uygulayın. İnsan onayını zorunlu tutun. Ajanların Organizations API'sine yazmasını engelleyin.",
+      "id": "BL-02316",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belge üç noktayı birebir içeriyor: 'AWS strongly recommends that you don't attach SCPs to the root... without thoroughly testing' uyarısı, FullAWSAccess izin listesiz kaldırılırsa tüm üye hesap eylemlerinin başarısız olacağı, ilke türü kapatılıp açılınca önceki bağlamaların kaybolup otomatik geri gelmediği.",
+        "kaynak": [
+          "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0001",
+      "arac": "Temporal",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Self-host işletim yükü ve sıralı yükseltme zorunluluğu",
+      "aciklama": "Self-host Temporal birden çok servis (frontend, history, matching, worker) ile kalıcılık ve görünürlük veritabanı ister; sunucu yalnız bir minor sürüm atlayarak sırayla yükseltilebilir ve her adımdan önce şema yükseltmesi gerekir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.temporal.io/self-hosted-guide/upgrade-server",
+        "https://docs.temporal.io/self-hosted-guide/defaults"
+      ],
+      "yasatacagi_sorunlar": [
+        "Birkaç ay yükseltme ertelenirse güvenlik yamasına ulaşmak için art arda çok sayıda şema ve sürüm yükseltmesi gerekir; bakım penceresi uzar.",
+        "Veritabanı yedeği/geri dönüşü tatbik edilmezse olay geçmişi kaybı tüm uçuştaki koşuları yok eder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-005",
+        "N-K16-008",
+        "N-K13-013"
+      ],
+      "erken_sinyal": "Kurulu sürümün en son sürümün iki minor gerisine düşmesi; şema yükseltme adımlarının biriken sayısı.",
+      "azaltma": "Platform ekibine sahiplik vermek; aylık yükseltme ritmi ve kurtarma tatbikatı; yönetilen hizmet yalnız veri yerelliği uygun ise değerlendirilmeli.",
+      "id": "BL-00005",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0003",
+      "arac": "Restate",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Çok düğümlü kümede nesne deposu zorunlu",
+      "aciklama": "Belgeler çok düğümlü kümenin her zaman S3/GCS/Azure Blob anlık görüntü deposuyla yapılandırılmasını ister; anlık görüntü olmadan kırpılan log kayıtları kalıcı kaybolur ve geride kalan düğüm kurtarılamaz.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.restate.dev/server/snapshots"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi kurulumda S3 uyumlu bir nesne deposunu (ör. MinIO) da işletmek gerekir; bileşen ve uzmanlık sayısı artar.",
+        "Anlık görüntü deposu hatalı yapılandırılırsa bir düğüm kaybı veri kaybına dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-008",
+        "N-K13-013"
+      ],
+      "erken_sinyal": "Anlık görüntü yüklemelerinin başarısız olması; düğüm geri katılımında hata.",
+      "azaltma": "Nesne deposunu kritik bileşen olarak işletim sözleşmesine eklemek; düğüm kaybı tatbikatı yapmak.",
+      "id": "BL-00011",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0005",
+      "arac": "Inngest",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Self-host ikinci sınıf: destek garantisi yok, veri temizliği elle",
+      "aciklama": "Belgelere göre destek ekibi self-host kurulumlara doğrudan destek garantisi vermez; sunucu Postgres'teki eski olay, koşu ve iz satırlarını otomatik silmez; SQLite tek düğümle sınırlı. Açık hata #3892 self-host sunucuda RSS belleğinin sürekli büyüdüğünü bildiriyor.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.inngest.com/docs/self-hosting",
+        "https://github.com/inngest/inngest/issues/3892"
+      ],
+      "yasatacagi_sorunlar": [
+        "Silme politikası kurulmazsa Postgres şişer, sorgu süresi uzar; KVKK saklama süreleri de aşılır.",
+        "Bellek sızıntısı nedeniyle sunucu periyodik yeniden başlatma ister; uzun beklemeli koşularda kesinti riski."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K22-009",
+        "N-K16-001",
+        "N-K13-003"
+      ],
+      "erken_sinyal": "Sunucu bellek kullanımının doğrusal artışı; Postgres tablo boyutlarında sınırsız büyüme.",
+      "azaltma": "Saklama/silme işini kurum tarafında zamanlamak; bellek eşiği ile otomatik yeniden başlatma; kritik yol için ticari destek değerlendirmek.",
+      "id": "BL-00017",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0012",
+      "arac": "Dapr (Dapr Workflow)",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Sidecar mimarisi ve sıralı yükseltme zorunluluğu",
+      "aciklama": "Dapr her uygulamaya sidecar ekler; yalnız güncel ve önceki iki minor sürüm desteklenir; sorunsuz yükseltme garantisi yalnız bir minor sürüm atlayarak verilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.dapr.io/operations/support/support-release-policy/",
+        "https://github.com/dapr/dapr/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "9 aylık destek penceresi kaçırılırsa ardışık yükseltmeler gerekir; sidecar ve kontrol düzlemi sürüm uyumu işletim yükü getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Kurulu sürümün destek penceresi dışına düşmesi.",
+      "azaltma": "Üç ayda bir yükseltme ritmi; platform ekibi sahipliği.",
+      "id": "BL-00041",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0013",
+      "arac": "Dapr Agents",
+      "gorev": "R-G02",
+      "tur": "RT-13",
+      "baslik": "Dapr çalışma zamanı, durum deposu ve mesajlaşma altyapısı gerektiriyor",
+      "aciklama": "Dayanıklı iş akışı ve durum için Dapr sidecar, state store ve pub/sub bileşenleri işletilmeli; ekip Kubernetes/Dapr uzmanlığına ihtiyaç duyar.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.dapr.io/developing-ai/dapr-agents/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hat ekibine ek platform bileşenleri ve yükseltme yükü gelir; yedekleme/kurtarma tatbikatları gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004",
+        "N-K13-001"
+      ],
+      "erken_sinyal": "Dapr sürüm yükseltmelerinde uyumsuzluk.",
+      "azaltma": "Dapr'ı zaten işleten platform ekibi yoksa daha basit bir motor tercih edin.",
+      "id": "BL-00044",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0019",
+      "arac": "n8n",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "Üç paralel sürüm hattı ve haftalık yama yükü",
+      "aciklama": "Aynı gün hem 2.x hem 1.x hattına güvenlik sürümü çıkıyor (ör. 2026-09-25'te n8n@2.40.7 ve n8n@1.123.82).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/n8n-io/n8n/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi her hafta yükseltme, regresyon testi ve kuyruk modu işçilerinin yeniden başlatılmasıyla uğraşır.",
+        "Bekleyen (Wait) yürütmeler yükseltme sırasında kesintiye uğrayabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K13-003"
+      ],
+      "erken_sinyal": "Sürüm farkının 2'den fazla güvenlik sürümüne çıkması; yükseltme sonrası takılı kalan yürütmeler.",
+      "azaltma": "Mavi-yeşil yükseltme, bekleyen yürütmelerin dayanıklı bir motorda tutulması ve otomatik sürüm uyarısı.",
+      "id": "BL-00071",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0078",
+      "arac": "Hermes Agent",
+      "gorev": "R-G02",
+      "tur": "RT-13",
+      "baslik": "Aşırı iş yükü: 14 bin açık issue, 30 bin açık PR",
+      "aciklama": "NousResearch/hermes-agent'ta Eylül 2026'da 14.092 açık issue ve 30.065 açık PR var; commit'lerin büyük kısmı tek geliştiriciden (teknium1 18.722).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/NousResearch/hermes-agent/issues",
+        "https://github.com/NousResearch/hermes-agent/pulls"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hata ve güvenlik bildirimleri kuyrukta kaybolur; kuruma özgü sorunlar çözülmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Issue yanıt süreleri.",
+      "azaltma": "Kritik kullanımdan kaçının; kullanılırsa kurum içi çatal ve sürüm dondurma.",
+      "id": "BL-00213",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "27.09.2026'da GitHub aramasına göre 14.093 açık issue ve 30.083 açık PR var; teknium1 18.722 commit ile ilk sırada. Toplam yaklaşık 44,7 bin commit içinde bu pay %42 civarında olduğundan 'büyük kısmı' ifadesi biraz güçlü. Depo aktif (bugün push var); bu bir bakım yükü sinyali ve doğrudan zarar doğurmuyor.",
+        "kaynak": [
+          "https://github.com/NousResearch/hermes-agent/issues",
+          "https://github.com/NousResearch/hermes-agent/pulls",
+          "https://api.github.com/search/issues?q=repo:NousResearch/hermes-agent+is:issue+is:open",
+          "https://api.github.com/search/issues?q=repo:NousResearch/hermes-agent+is:pr+is:open",
+          "https://api.github.com/repos/NousResearch/hermes-agent/contributors"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0122",
+      "arac": "OpenFGA",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "İlişki verisinin senkronizasyonu ve modelleme uzmanlığı",
+      "aciklama": "İlişki tuple'larının uygulama verisiyle senkronu uygulamanın sorumluluğunda; ABAC koşulları sınırlı, yüksek hacimde tutarlılık/önbellek ayarı gerekir (araç haritası).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/openfga/openfga"
+      ],
+      "yasatacagi_sorunlar": [
+        "Senkron gecikmesinde ayrılan bir çalışanın veya iptal edilen bir ajan kimliğinin yetkisi bir süre devam eder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-002",
+        "N-K18-001"
+      ],
+      "erken_sinyal": "Kaynak sistem ile tuple deposu arasında fark raporları.",
+      "azaltma": "Olay tabanlı senkron, düzenli mutabakat işleri ve tutarlılık belirteçleri.",
+      "id": "BL-00303",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0123",
+      "arac": "SpiceDB",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Ayrı veri deposu işletimi ve ilişki senkronu",
+      "aciklama": "SpiceDB ayrı bir veri deposu (Postgres, CockroachDB, Spanner vb.) işletimi gerektirir; ilişki verisinin senkronu kurum sorumluluğunda (araç haritası).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/authzed/spicedb"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yetki veritabanının yedeklemesi, göçü ve senkron gecikmesi platform ekibine yeni bir kritik sistem yükler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-002"
+      ],
+      "erken_sinyal": "Senkron gecikmesi metrikleri.",
+      "azaltma": "İşletim runbook'u, yedekleme ve mutabakat işleri.",
+      "id": "BL-00306",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0129",
+      "arac": "Jenkins",
+      "gorev": "R-G06",
+      "tur": "RT-13",
+      "baslik": "Haftalık sürüm ve LTS takibi işletim yükü getiriyor",
+      "aciklama": "Haftalık hatta 2.582 ve 2.583 aynı hafta içinde çıktı (2026-09). LTS hattı ayrı ilerliyor ve Java taban sürümü dönemsel olarak yükseltiliyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/jenkinsci/jenkins/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mevcut yayın hattının sahibi olan ekip yama, eklenti ve Java yükseltmeleriyle sürekli meşgul kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-002"
+      ],
+      "erken_sinyal": "Yükseltme işlerinin birikmesi.",
+      "azaltma": "Yalnız LTS hattını kullan; yükseltmeyi otomasyon ve geri dönüş planıyla yap.",
+      "id": "BL-00327",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0158",
+      "arac": "AgentOps",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Self-host yığını karmaşık: Supabase, ClickHouse, OTel Collector ve Grafana",
+      "aciklama": "app/README'ye göre platform, izler için ClickHouse, kimlik doğrulama ve birincil veritabanı için Supabase ile bir OpenTelemetry Collector kullanıyor. Örnek yapılandırmada ClickHouse varsayılan kullanıcısı düz metin parolayla tanımlanmış. Ana sayfaya göre on-prem ve self-host resmî olarak Enterprise katmanında.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/AgentOps-AI/agentops/tree/main/app",
+        "https://www.agentops.ai/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içinde kurulursa bakımı yavaşlamış bir ürün için Supabase ve ClickHouse işletimi, güvenlik sıkılaştırması ve yedekleme yükü platform ekibine kalır; örnek yapılandırma olduğu gibi kopyalanırsa zayıf parolalı bir veritabanı açıkta kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "Kurulumda compose dosyası değiştirilmeden kullanılır; ClickHouse'ta varsayılan kullanıcı açık kalır.",
+      "azaltma": "Self-host yerine, kurumda zaten işletilen bir OTel tabanlı izleme yığını tercih edin.",
+      "id": "BL-00418",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0160",
+      "arac": "Helicone",
+      "gorev": "R-G01",
+      "tur": "RT-13",
+      "baslik": "Self-host yığını çok bileşenli",
+      "aciklama": "Depo; ClickHouse, Supabase, MinIO, worker, cron ve ayrı ai-gateway bileşenlerini içeriyor; bakım modundaki bir ürün için bu yığının kurum içinde işletilmesi ağır iş yükü getirir.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Helicone/helicone/tree/main/docker"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kritik yoldaki vekil için yedekleme, yükseltme ve olay yönetimi kurumun sorumluluğuna kalır; ürün geliştirmesi durduğu için uzun vadeli yatırım boşa gider."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Bileşen sürümlerinin eskimesi; güvenlik yamalarının seyrekleşmesi.",
+      "azaltma": "Gözlemlenebilirliği OTel tabanlı ve aktif bakımlı bir araca taşımak.",
+      "id": "BL-00427",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0161",
+      "arac": "W&B Weave",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Self-managed Weave: lisans, Kubernetes ve ClickHouse kümesi gerektiriyor",
+      "aciklama": "Self-managed Weave için W&B Support'tan 'Weave-enabled license' gerekiyor. Kurulum Kubernetes, ClickHouse Keeper'lı çok replikalı ClickHouse kümesi, S3 uyumlu depolama ve Altinity ClickHouse Operator istiyor. Belge, her ortamın ayar gerektireceğini ve boyutlandırma için W&B çözüm mimarlarına danışılmasını öneriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.wandb.ai/weave/guides/platform/weave-self-managed"
+      ],
+      "yasatacagi_sorunlar": [
+        "KVKK nedeniyle self-managed zorunlu olursa, platform ekibi ClickHouse kümesi, yedekleme ve kurtarma, yükseltme ve kapasite planlaması için ayrı uzmanlık edinmek zorunda kalır.",
+        "Lisans anahtarının süresi dolarsa ya da yenilenmezse, izleme ve değerlendirme hattı durabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-008",
+        "N-K16-002"
+      ],
+      "erken_sinyal": "Kurulum tahmini birkaç haftayı aşar; ClickHouse disk ve bellek alarmları sık görülür.",
+      "azaltma": "Kurum içinde zaten işletilen bir ClickHouse ya da gözlemlenebilirlik yığını varsa onu kullanan bir alternatifle karşılaştırın. Yedekten dönüş tatbikatını kabul kriterine koyun.",
+      "id": "BL-00433",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0353",
+      "arac": "Unstructured",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "Ağır bağımlılık zinciri ve işletim yükü",
+      "aciklama": "Kütüphane OCR, PDF ve ofis biçimleri için çok sayıda sistem bağımlılığı (ör. tesseract, poppler, libreoffice) ve Python paketi çeker; sık sürüm çıkıyor (0.27.x, Eylül 2026).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/Unstructured-IO/unstructured",
+        "https://docs.unstructured.io"
+      ],
+      "yasatacagi_sorunlar": [
+        "Konteyner imajı büyür, güvenlik taramasında çok sayıda üçüncü taraf CVE çıkar ve yama yükü artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "İmaj taramasında yüksek sayıda bağımlılık CVE'si.",
+      "azaltma": "Yalnız gerekli ekstraları kurun, minimal imaj ve düzenli yeniden derleme.",
+      "id": "BL-00689",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0510",
+      "arac": "Cadence",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Şema yükseltme ve self-host işletim yükü",
+      "aciklama": "Cassandra/MySQL/Postgres ve Elasticsearch gerektirir; açık kayıtlar şema oluşturma/güncellemenin idempotent olmadığını (#4624) ve üretim için otomatik şema yükseltme desteği olmadığını (#2696) bildiriyor. Determinizm kuralları Temporal ile aynıdır.",
+      "tarih": "2021-11",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/cadence-workflow/cadence/issues/4624",
+        "https://github.com/cadence-workflow/cadence/issues/2696"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yükseltmelerde elle şema adımları hata riskini artırır; kesinti uzar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-005",
+        "N-K13-010"
+      ],
+      "erken_sinyal": "Şema sürümü uyumsuzluğu hataları.",
+      "azaltma": "Yükseltme runbook'u ve staging provası.",
+      "id": "BL-00804",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0516",
+      "arac": "LittleHorse",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Kafka'ya dayalı mimari",
+      "aciklama": "Mimari kalıcılık ve kurtarma için Apache Kafka'yı dayanıklı yazma-önce günlüğü olarak kullanır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.infoq.com/news/2025/04/littlehorse/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kafka kümesi işletimi (bölümleme, saklama, yükseltme) platform ekibine ciddi uzmanlık yükü getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004",
+        "N-K13-013"
+      ],
+      "erken_sinyal": "Kafka gecikmesi/yeniden dengeleme olaylarının iş akışı gecikmesine yansıması.",
+      "azaltma": "Kurumda hâlihazırda işletilen Kafka yoksa bu motoru tercih etmemek.",
+      "id": "BL-00816",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "InfoQ Kernel'in Kafka'yı dayanıklı WAL olarak kullandığını doğruluyor. Operasyonel bağımlılık 'aşılabilir sorun' düzeyinde.",
+        "kaynak": [
+          "https://www.infoq.com/news/2025/04/littlehorse/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0517",
+      "arac": "Dapr Workflow",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Determinizm ve uçuştaki örneklerde kod değişikliği yasağı",
+      "aciklama": "İş akışı kodu deterministik olmalıdır. Tamamlanmamış örnekler varken iş akışı/etkinlik imzasını ya da görev sayısı ve sırasını değiştirmek geçmişle uyumsuzluk yaratır; değişiklikler Dapr'ın workflow versioning/patching mekanizmasıyla yapılmalıdır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.dapr.io/developing-applications/building-blocks/workflow/workflow-features-concepts/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Politika güncellemesi (ör. yeniden deneme sayısı) günlerce bekleyen koşuları bozabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-010",
+        "N-K11-006",
+        "N-K13-009"
+      ],
+      "erken_sinyal": "Dağıtım sonrası yeniden oynatma hataları.",
+      "azaltma": "Sürümleme kılavuzunu zorunlu kılmak; yeniden oynatma testi.",
+      "id": "BL-00820",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Determinizm şartı ve tamamlanmamış örnek varken imza/görev sırası değişikliği uyarısı doğru. Ancak belge bunun için workflow versioning/patching mekanizmasını sunuyor ve 'retry politikası' açıkça sayılmıyor.",
+        "kaynak": [
+          "https://docs.dapr.io/developing-applications/building-blocks/workflow/workflow-features-concepts/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0518",
+      "arac": "Camunda 8",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "Çok bileşenli işletim",
+      "aciklama": "Self-Managed kurulum Zeebe aracıları, Operate, Tasklist, Identity (Keycloak) ve Elasticsearch/OpenSearch gibi çok sayıda bileşenden oluşur.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.camunda.io/docs/reference/licenses/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi yedekleme, sürüm uyumu ve arama kümesi işletimi için ayrı uzmanlık gerektirir; kesintiden devam senaryoları test edilmezse bekleyen onaylar kaybolabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-002",
+        "N-K16-002"
+      ],
+      "erken_sinyal": "Arama kümesinde disk/heap alarmları; bileşen sürüm uyumsuzluğu.",
+      "azaltma": "Yönetilen (SaaS) seçenek ile self-host maliyetini karşılaştırın; felaket kurtarma tatbikatı yapın.",
+      "id": "BL-00824",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0522",
+      "arac": "Argo Workflows",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Kubernetes zorunluluğu ve adım başına pod yükü",
+      "aciklama": "Her adım bir pod olarak çalışır; kısa adımlarda başlatma gecikmesi ve kaynak yükü oluşur. Uzun insan beklemeleri suspend ile mümkün olsa da tasarım toplu/CI iş yüklerine yöneliktir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://argo-workflows.readthedocs.io/en/latest/walk-through/suspending/",
+        "https://github.com/argoproj/argo-workflows"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kısa LLM çağrılarından oluşan adımlarda pod başlatma süresi toplam süreyi katlar.",
+        "Kubernetes uzmanlığı olmayan ekipler hat işletimini tek platform ekibine bağımlı hale getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-008",
+        "N-K13-003"
+      ],
+      "erken_sinyal": "Adım süresinin büyük kısmının pod kuyruğunda/başlatmada geçmesi.",
+      "azaltma": "Argo'yu yalnız toplu değerlendirme/benchmark işleri için kullanmak; etkileşimli ajan döngülerini dayanıklı yürütme motorunda tutmak.",
+      "id": "BL-00838",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0524",
+      "arac": "Flyte",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Kubernetes tabanlı çok bileşenli kurulum ve açık hatalar",
+      "aciklama": "FlyteAdmin, propeller, veritabanı ve blob deposu gerektirir. Açık hatalar: dinamik iş akışındaki görev durumlarının FlyteAdmin veritabanına yansımaması (#6476), demo kurulumunun Mac'te başarısız olması (#6138).",
+      "tarih": "2025-05",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/flyteorg/flyte/issues/6476",
+        "https://github.com/flyteorg/flyte/issues/6138"
+      ],
+      "yasatacagi_sorunlar": [
+        "Durum yansımaması hat görünürlüğünde yanlış 'çalışıyor' görüntüsü üretir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K26-001",
+        "N-K19-001"
+      ],
+      "erken_sinyal": "Arayüz durumu ile gerçek pod durumunun uyuşmaması.",
+      "azaltma": "Durumu motor dışı kaynakla uzlaştırmak.",
+      "id": "BL-00840",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0525",
+      "arac": "Maestro",
+      "gorev": "R-G06",
+      "tur": "RT-13",
+      "baslik": "Netflix'e özgü mimari; Java 21, Docker ve AWS SQS/SNS bağımlılıkları",
+      "aciklama": "README'ye göre Java 21, Gradle ve Docker gerekiyor. AWS modülü ve uzantılar SQS/SNS kullanıyor (yerelde LocalStack). Belge ve topluluk küçük.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Netflix/maestro",
+        "https://netflixtechblog.com/100x-faster-how-we-supercharged-netflix-maestros-workflow-engine-028e9637f041"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum kendi kuyruk ve veritabanı altyapısına uyarlamak için ciddi mühendislik harcar. İşletim bilgisi yalnız birkaç kişide kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K16-002",
+        "N-K13-007"
+      ],
+      "erken_sinyal": "Kurulum ve yükseltme için harcanan eforun yazılı bütçeyi aşması.",
+      "azaltma": "Seçmeden önce olgun topluluklu alternatiflerle karşılaştırmalı pilot yap. İşletim runbook'u hazırla.",
+      "id": "BL-00844",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0568",
+      "arac": "GitLab (Plan: epikler, iterasyonlar, panolar, değer akışı analitiği)",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Self-managed işletim yükü: aylık sürüm, ayda iki yama, dar geri taşıma penceresi",
+      "aciklama": "Minor sürümler her ayın üçüncü perşembesi, yama sürümleri ayda iki kez çıkıyor. Güvenlik düzeltmeleri yalnız mevcut kararlı sürüm ve önceki iki sürüme geri taşınıyor. Veri yerelliği için tek yönetilen seçenek GitLab Dedicated; Ultimate gerektiriyor, AWS bölgesinde koşuyor ve ClickHouse Cloud entegrasyonu uygun müşterilerde varsayılan açık.",
+      "tarih": "2026",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.gitlab.com/policy/maintenance/",
+        "https://docs.gitlab.com/subscriptions/gitlab_dedicated/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi zorunluluk nedeniyle self-managed seçilirse platform ekibi yılda 24'ten fazla yükseltme ve yama uygulamak zorunda kalır. Gecikme doğrudan güvenlik açığı demektir.",
+        "Dedicated seçilirse veri Türkiye dışındaki bir AWS bölgesinde tutulur ve analitik için ek alt işleyici (ClickHouse Cloud) devreye girer; bu, KVKK yurt dışı aktarım değerlendirmesi gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-008",
+        "N-K16-004",
+        "N-K22-005",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kurulu sürümün iki minor'dan fazla geride kalması; yükseltme sonrası migration hataları.",
+      "azaltma": "Hazırlık (staging) ortamında otomatik yükseltme hattı kurun, yedekten dönüş tatbikatı yapın, Dedicated seçilirse alt işleyici listesini sözleşmeye bağlayın.",
+      "id": "BL-00906",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Bakım politikası şunları doğruluyor: aylık sürüm her ayın üçüncü perşembesi, yama ayda iki kez, güvenlik düzeltmeleri mevcut sürüm ve önceki iki aylık sürüme. Dedicated belgesi Ultimate katmanı, AWS bölgesi ve uygun müşterilerde varsayılan açık ClickHouse Cloud'u doğruluyor. İşletim yükü aşılabilir bir sorun olduğundan şiddet 'orta' daha uygun.",
+        "kaynak": [
+          "https://docs.gitlab.com/policy/maintenance/",
+          "https://docs.gitlab.com/subscriptions/gitlab_dedicated/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0574",
+      "arac": "OpenProject",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Yoğun sürüm ve yama temposu; Jira içe aktarıcıda SSRF",
+      "aciklama": "Temmuz – Eylül 2026 arasında 17.6.0, 17.7.0, 17.7.1, 17.7.2 ve 17.8.0 yayımlandı. Güvenlik düzeltmeleri çoğunlukla yalnız son küçük sürümlere geri taşınıyor (ör. 17.3.3 ve 17.4.1). Jira içe aktarma özelliğinin ek indirme yolunda SSRF bulundu, 17.5.0'da düzeltildi (GHSA-x2wp-9w6m-f39m).",
+      "tarih": "2026-07",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/opf/openproject/releases",
+        "https://github.com/opf/openproject/security/advisories/GHSA-x2wp-9w6m-f39m"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıt Jira'dan eski sürümdeki içe aktarıcıyla taşınırsa, sunucunun iç ağ adreslerine istek atmasına yol açan SSRF yolu açık kalır.",
+        "Kurum içi eklenti ya da özelleştirme yapılırsa her ay yükseltme ve regresyon testi zorunlu olur; platform ekibine sürekli işletim yükü biner."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-005",
+        "N-K16-005",
+        "N-K16-008",
+        "N-K02-001"
+      ],
+      "erken_sinyal": "Kurulu sürümün son küçük sürümün iki adım gerisine düşmesi; yükseltme sonrası özelleştirmelerin bozulması.",
+      "azaltma": "Aylık yükseltme penceresi açın ve hazırlık ortamında otomatik regresyon koşun; içe aktarmayı güncel sürümle, yalıtılmış ağda ve tek seferlik yapın.",
+      "id": "BL-00917",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-x2wp-9w6m-f39m",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0624",
+      "arac": "Mattermost (Playbooks dahil)",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "ESR sonu ve zorunlu ana sürüm yükseltmeleri",
+      "aciklama": "v10.11 ESR'nin ömrü Ağustos 2026'da bitti; v12.0.0 Eylül 2026'da RC aşamasında.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://forum.mattermost.com/t/mattermost-v11-changes-in-free-offerings/25126",
+        "https://github.com/mattermost/mattermost/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum 10.x'te kalırsa güvenlik yamaları biter; v11/v12 geçişi lisans değişikliklerini de beraberinde getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Sunucunun ESR ömrü dolmuş sürümde çalışması.",
+      "azaltma": "Yükseltme takvimini ESR döngüsüne bağlayın.",
+      "id": "BL-00981",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0680",
+      "arac": "Backstage",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "Yüksek işletim ve uzmanlık yükü",
+      "aciklama": "Backstage bir çerçevedir; kurum kendi uygulamasını TypeScript monorepo olarak derleyip eklentileri ve aylık sürümleri kendisi yönetir. Aynı gün birden çok hat için yama çıkıyor (v1.55.2, v1.54.9, v1.50.7 — 2026-09-25).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/backstage/backstage/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Portal için kalıcı bir platform ekibi (frontend+backend) gerekir; bakım yapılmazsa katalog bayatlar ve ajanlar eski mimari bilgiyle çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K03-002"
+      ],
+      "erken_sinyal": "Backstage sürümünün 3+ minör geride kalması; katalog varlıklarının güncellenme tarihinin eskimesi.",
+      "azaltma": "Sahipli platform ekibi, otomatik yükseltme (backstage-cli versions:bump) ve katalog tazelik ölçütü.",
+      "id": "BL-01016",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0826",
+      "arac": "IBM Engineering Requirements Management DOORS Next",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "Karmaşık kurulum ve yama yönetimi",
+      "aciklama": "Jazz tabanlı platform; harita karmaşık kurulum ve lisansı sınırlama olarak kaydediyor; CVE'ler sürüm başına ayrı iFix düzeyleriyle düzeltiliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.ibm.com/products/requirements-management"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uzman ELM yöneticisi gerekir; yama gecikmesi güvenlik açığını uzatır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-010"
+      ],
+      "erken_sinyal": "Yama gecikmesi.",
+      "azaltma": "Yönetilen hizmet ya da uzman kadro planlayın.",
+      "id": "BL-01142",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0870",
+      "arac": "Zingg",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "Spark altyapısı gerektirir",
+      "aciklama": "Zingg Spark üzerinde çalışır; 12.000 kayıtlık backlog için ağır bir işletim yükü getirir (harita).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/zinggAI/zingg"
+      ],
+      "yasatacagi_sorunlar": [
+        "Küçük hacim için Spark kümesi kurmak, yamalamak ve izlemek gereksiz maliyet ve uzmanlık yükü yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K26-005"
+      ],
+      "erken_sinyal": "Tekilleştirme işinin altyapı kurulumu nedeniyle gecikmesi.",
+      "azaltma": "Bu hacim için DuckDB tabanlı hafif alternatifleri tercih edin.",
+      "id": "BL-01194",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0928",
+      "arac": "LimeSurvey",
+      "gorev": "R-G12",
+      "tur": "RT-13",
+      "baslik": "Çok sık sürüm ve yeni 7.x hattı: kurum içi işletim yükü",
+      "aciklama": "Depoda 6.8.2026 ile 17.9.2026 arasında 7.0.8'den 7.1.2'ye yaklaşık 12 sürüm etiketi var; 7.x hattında ardışık güvenlik düzeltmeleri yayımlanıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/LimeSurvey/LimeSurvey/tags",
+        "https://github.com/LimeSurvey/LimeSurvey/blob/master/SECURITY.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi kurulumda yama takibi ve PHP/veritabanı bağımlılık yönetimi platform ekibine sürekli iş çıkarır; geciken yama yukarıdaki açıkları açık bırakır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Kurulu sürümün son yamadan iki haftadan fazla geride kalması.",
+      "azaltma": "Yama sahibini atayın; staging'de otomatik yükseltme testi kurun; yedekten dönüş tatbikatı yapın.",
+      "id": "BL-01224",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1004",
+      "arac": "Keploy",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "eBPF ve ayrıcalıklı çalışma gereksinimi",
+      "aciklama": "Keploy trafiği ağ katmanında eBPF ile yakalıyor. Bu da Linux çekirdek desteği ve yükseltilmiş yetki gerektiriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/keploy/keploy"
+      ],
+      "yasatacagi_sorunlar": [
+        "Paylaşılan CI runner'larında ayrıcalıklı konteyner izni saldırı yüzeyini büyütür.",
+        "macOS ve Windows geliştirici makinelerinde ek sanal katman gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-003"
+      ],
+      "erken_sinyal": "CI'da privileged veya CAP_BPF isteği.",
+      "azaltma": "Keploy işlerini ayrılmış ve izole runner'larda çalıştırın.",
+      "id": "BL-01250",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1038",
+      "arac": "Bazel",
+      "gorev": "R-G06",
+      "tur": "RT-13",
+      "baslik": "Benimseme ve işletim uzmanlığı yüksek",
+      "aciklama": "Depoda 1.816 açık kayıt var. Hermetik derleme, uzak yürütme ve Starlark kuralları ayrı bir uzmanlık istiyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/bazelbuild/bazel/issues"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekibin tamamı Bazel'e geçirilirse derleme ekibi darboğaz olur ve yerel deneme hızı düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K06-002"
+      ],
+      "erken_sinyal": "Derleme hatalarında destek taleplerinin birikmesi.",
+      "azaltma": "Yalnız çok dilli monorepo gibi gerçekten gerektiği yerde kullan; platform ekibi ve eğitim bütçesi ayır.",
+      "id": "BL-01295",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1039",
+      "arac": "Teamscale",
+      "gorev": "R-G06",
+      "tur": "RT-13",
+      "baslik": "Test boşluk analizi dil başına kapsam profilleyicisi ve altyapı istiyor",
+      "aciklama": "Belgelere göre test boşluk analizi için sürüm kontrolü bağlantısına ek olarak kapsam verisi gerekiyor. Bu veri ya yüklenmeli ya da her dil için ayrı profilleyici (Java, C#, C/C++, Python, JavaScript/Node) kurulmalı. Elle yapılan testler için de ayrı kurulum gerekiyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.teamscale.com/getting-started/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çok dilli 10+ ekip için profilleyici kurulumu ve bakımı ayrı bir platform işi hâline gelir. Profilleyici eksik olan modüller 'test edilmemiş' değil 'bilinmiyor' olarak kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-003",
+        "N-K05-029",
+        "N-K06-003"
+      ],
+      "erken_sinyal": "Kapsam verisi gelmeyen modül sayısı.",
+      "azaltma": "Önce en kritik iki dilde pilot yap. Kapsam toplamayı ortak CI şablonuna göm.",
+      "id": "BL-01297",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1129",
+      "arac": "Coder",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Yoğun güvenlik sürüm temposu ve Terraform/Kubernetes işletim yükü",
+      "aciklama": "Son 24 ayda 35 güvenlik bildirimi; platform Terraform şablonları ve Kubernetes işletimi gerektirir (araç haritası).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/coder/coder/security/advisories"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi sürekli yama ve şablon bakımıyla meşgul olur; 10+ ekibin çalışma alanı şablonları sürüm kaymasına uğrar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-007",
+        "N-K15-006"
+      ],
+      "erken_sinyal": "Yama gecikmesi, şablon sürüm dağılımı.",
+      "azaltma": "Otomatik yükseltme hattı ve şablonlar için CI.",
+      "id": "BL-01330",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1197",
+      "arac": "in-toto",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Layout tasarımı ve anahtar yönetimi emek istiyor",
+      "aciklama": "Katalog kaydına göre tedarik zinciri adımlarının layout ile tanımlanması ve imzalayan anahtarların yönetimi kurumda uzmanlık ve emek gerektiriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/in-toto/in-toto",
+        "https://in-toto.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip için ayrı layout ve anahtar yönetimi, platform ekibinde darboğaz olur; layout güncellenmezse hat sürekli kırmızı kalır ya da kural gevşetilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K18-004",
+        "N-K24-004"
+      ],
+      "erken_sinyal": "Layout istisnalarının artması.",
+      "azaltma": "Ortak layout şablonları ve kısa ömürlü, iş yükü kimliğine bağlı anahtarlar kullanmak.",
+      "id": "BL-01384",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1198",
+      "arac": "Witness",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Archivista ve Rego politikaları ek işletim ve uzmanlık istiyor",
+      "aciklama": "Katalog kaydına göre kanıt depolama ve sorgu için Archivista gibi ek bir bileşen gerekiyor; politika yazımı Rego uzmanlığı istiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/in-toto/archivista",
+        "https://witness.dev/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Archivista kesilirse kanıt yüklenemez ve yayın kapısı bloke olur; yedekleme ve saklama ayrıca tasarlanmalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-004",
+        "N-K16-004",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Kanıt yükleme hataları.",
+      "azaltma": "Kanıtları ayrıca değiştirilemez nesne deposuna yazmak; Rego politikalarını sürümlü ve testli tutmak.",
+      "id": "BL-01388",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1331",
+      "arac": "SigNoz",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "ClickHouse işletim yükü ve yüksek erişilebilirlik boşlukları",
+      "aciklama": "Kendi barındırmada tüm iz, metrik ve loglar ClickHouse'ta tutulur. Açık konular: Zookeeper yerine ClickHouse Keeper kullanımı (#7002), ClickHouse'u küme olarak zorunlu kılmama (#8784), ClickHouse konteynerinde yüksek CPU (#5546) ve yüksek erişilebilirlik için uyarı değerlendirmesinin SigNoz'dan ayrıştırılması (#9067).",
+      "tarih": "2025-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/SigNoz/signoz/issues/9067",
+        "https://github.com/SigNoz/signoz/issues/7002",
+        "https://github.com/SigNoz/signoz/issues/5546",
+        "https://github.com/SigNoz/signoz/issues/8784"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekibin iz ve log hacmi ClickHouse disk, TTL ve birleştirme (merge) yönetimi uzmanlığı ister; yedekleme/geri dönüş tatbikatı ayrı iş olur.",
+        "Uyarı değerlendirmesi SigNoz sürecine bağlı olduğundan bu süreç düşerse hat SLO uyarıları da susar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-004",
+        "N-K20-006"
+      ],
+      "erken_sinyal": "ClickHouse disk doluluğu, sorgu gecikmesi, uyarıların gecikmeli tetiklenmesi.",
+      "azaltma": "ClickHouse için ayrı sahiplik ve kapasite planı oluşturun; uyarıları ikinci bir bağımsız sistemle çaprazlayın; TTL ve saklama politikalarını baştan belirleyin.",
+      "id": "BL-01465",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1336",
+      "arac": "Sentry",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Self-host kurulumun ağır işletim yükü ve SaaS'a özgü özellikler",
+      "aciklama": "Self-host Sentry en az 4 CPU, 16 GB RAM + 16 GB swap (32 GB önerilir) ister; Kafka, ClickHouse, Snuba, Redis ve Postgres'i tek makinede Docker Compose ile çalıştırır, garanti veya özel destek yoktur. Seer ve yapay zekâ özellikleri, spike protection ve harcama tahsisi self-host'ta yoktur.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://develop.sentry.dev/self-hosted/",
+        "https://github.com/getsentry/self-hosted"
+      ],
+      "yasatacagi_sorunlar": [
+        "KVKK nedeniyle self-host seçilirse AI ajan hata ayıklama (Seer) gibi özellikler kullanılamaz; ekipler gölge SaaS hesaplarına yönelir.",
+        "Aylık sürüm + kritik yama temposu ve çok bileşenli yapı, yedekten dönüş ve yükseltme tatbikatlarını ağırlaştırır; disk G/Ç yetersizse olaylar kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-005",
+        "N-K08-005"
+      ],
+      "erken_sinyal": "iowait %10 üstü, Kafka tüketici gecikmesi, yükseltme scriptinin başarısız olması.",
+      "azaltma": "Self-host için ayrı platform sahipliği ve kapasite planı belirleyin; yükseltmeyi önce hazırlık ortamında deneyin; SaaS özelliklerine ihtiyaç varsa veri minimizasyonu ile sınırlı kullanım kararı alın.",
+      "id": "BL-01472",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1437",
+      "arac": "Azure Chaos Studio",
+      "gorev": "R-G08",
+      "tur": "RT-13",
+      "baslik": "Araç desteği ve ağ gereksinimleri sınırlı",
+      "aciklama": "PowerShell ve Azure CLI modülü yok (REST kullanılmalı), Terraform modülleri resmî destekli değil, ajan tabanlı hatalar için VM'lerin Chaos Studio ajan hizmetine giden ağ erişimi gerekiyor ve ajan için hizmet etiketi yok; Private Link ile portal üzerinden ajan tabanlı deney desteklenmiyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-limitations"
+      ],
+      "yasatacagi_sorunlar": [
+        "Özel ağ ve IaC odaklı kurum mimarisinde tatbikatları otomatikleştirmek ek REST sarmalayıcı ve güvenlik duvarı istisnası gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-009"
+      ],
+      "erken_sinyal": "Tatbikat otomasyonunda IaC boşlukları.",
+      "azaltma": "REST tabanlı iç modül yazmak; ajan çıkış uç noktalarını dar izin listesiyle açmak.",
+      "id": "BL-01551",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1438",
+      "arac": "Steadybit",
+      "gorev": "R-G06",
+      "tur": "RT-13",
+      "baslik": "Kurum içi kurulum ağırlıklı olarak destekli PoC; satıcı kayıt defterine bağımlı",
+      "aciklama": "Belgelere göre kurum içi platform kurulumu esas olarak Steadybit ekibiyle birlikte yürütülen PoC'ler için sunuluyor. Kurulum için PostgreSQL 15 (pg_trgm, btree_gin), Kubernetes/Helm ve Steadybit Docker kayıt defterine ajan anahtarıyla erişim gerekiyor. Hızlı başlangıçtaki veritabanı pod'u yedeklenmiyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.steadybit.com/install-and-configure/install-on-prem-platform"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kapalı ağda kurulum için satıcının kayıt defteri aynalanmalıdır. Üretim kalitesinde kurulum için ayrı veritabanı, yedekleme ve kimlik doğrulama işi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K15-005",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Kurulum ve yükseltmenin satıcı desteği olmadan yapılamaması.",
+      "azaltma": "İmajları kurum kayıt defterine aynala; veritabanı yedekleme ve geri dönüş tatbikatını planla.",
+      "id": "BL-01555",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1465",
+      "arac": "rmToo",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "LaTeX tabanlı çıktı, modern arayüz yok",
+      "aciklama": "Harita modern web arayüzü olmadığını kaydediyor; çıktılar LaTeX/HTML ile üretiliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://rmtoo.florath.net/"
+      ],
+      "yasatacagi_sorunlar": [
+        "İş birimi paydaşları gereksinimleri inceleyip onaylayamaz; araç yalnız mühendislerde kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-011"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "Onay akışını iş takip sisteminde tutun.",
+      "id": "BL-01575",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1936",
+      "arac": "Apache Allura",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Çok bileşenli kurulum: MongoDB, Solr, görev ve e-posta servisleri",
+      "aciklama": "Allura; web sunucusu, MongoDB, Solr, görev işleyici (taskd), gelen ve giden e-posta servisleri olmak üzere birden çok konteynerle çalışır. Belgelere göre development.ini üretim için gözden geçirilmelidir; üretimde gunicorn, nginx, oturum anahtarları ve MongoDB şifreleme anahtarları ayrıca yapılandırılmalıdır. Ticari destek sağlayan bir satıcı yoktur.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://forge-allura.apache.org/docs/getting_started/installation.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi MongoDB ve Solr uzmanlığı, yedekleme ve sürüm yükseltme yükünü tek başına taşır.",
+        "Olay anında başvurulacak ticari destek yoktur; kurtarma süreleri uzar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-008",
+        "N-K16-002"
+      ],
+      "erken_sinyal": "Solr indeks tutarsızlıkları; MongoDB sürüm uyumsuzluğu nedeniyle yükseltmenin ertelenmesi.",
+      "azaltma": "Kurulumu altyapıyı kod olarak kurma yöntemiyle tanımlayın, yedekten dönüş tatbikatı yapın; ticari destek gerekiyorsa başka bir araca yönelin.",
+      "id": "BL-01657",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2158",
+      "arac": "Digital.ai Release",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Sürüm-eklenti eşleşmesi ve kısa destek bildirimi",
+      "aciklama": "Eklentilerin Release sürümüyle eşleşmesi gerekiyor ve üçüncü taraf araç güncellemeleri üzerinde Digital.ai'nin kontrolü olmadığını belirtiyor. Kurum içi sürümlerde yalnız güncel GA ana sürüm ve belgelenen sayıda önceki ana sürüm destekleniyor; destek sonu için yalnız 90 gün önceden bildirim var, sonrası SLA'sız.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.digital.ai/release/plugin-support-policy",
+        "https://digital.ai/support/support-and-maintenance/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Jenkins, Azure DevOps, ServiceNow gibi entegre araçların güncellemesi eklenti uyumsuzluğu yaratır; Release yükseltmesi eklentilerin tümünü birlikte yükseltmeyi zorunlu kılar.",
+        "Kamu değişiklik takvimi 90 günlük destek sonu bildirimine yetişmezse ürün desteksiz kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-008",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Eklenti sürüm matrisinde kullanılan eklentinin mevcut Release sürümüyle eşleşmemesi; EOL bildirimi.",
+      "azaltma": "Yılda en az bir ana sürüm yükseltmesi planı, hazırlık ortamında eklenti uyum testi, sözleşmede uzatılmış destek.",
+      "id": "BL-01893",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2271",
+      "arac": "ClearML",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Sunucu sekiz bileşenli ve görüntü etiketleri sabit değil",
+      "aciklama": "Resmî docker-compose şunları içeriyor: apiserver, fileserver, webserver, async_delete, agent-services ile Elasticsearch 8.19.9, MongoDB 8.0.15 ve Redis 8.2.3. ClearML görüntüleri ':latest' etiketiyle çekiliyor.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/clearml/clearml-server/blob/master/docker/docker-compose.yml",
+        "https://github.com/clearml/clearml-server/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yedekleme ve geri dönüşte üç ayrı veri deposunun (Elasticsearch, MongoDB, fileserver diski) tutarlı anlık görüntüsü gerekir. Tatbikat yapılmazsa deney geçmişi ve yeniden üretilebilirlik kaybolur.",
+        "':latest' etiketi, iki ortamda farklı sunucu sürümü çalışmasına ve beklenmedik şema yükseltmelerine yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-005",
+        "N-K19-005",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Elasticsearch disk dolması veya shard uyarıları; yükseltme sonrası web arayüzünde şema hataları.",
+      "azaltma": "Görüntüleri sürüm ve özetle sabitle. Üç deponun yedeğini birlikte al ve çeyreklik geri yükleme tatbikatı yap.",
+      "id": "BL-01960",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2305",
+      "arac": "CAST Imaging",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Ağır kurulum: PostgreSQL, Neo4j, Keycloak ve konteyner altyapısı",
+      "aciklama": "CAST Imaging kurulum gereksinimleri PostgreSQL, Neo4j graf veritabanı, Keycloak kimlik yönetimi ve Docker/Podman ya da Kubernetes içeriyor. Belge 'büyük uygulamaların daha fazla RAM gerektirdiğini' belirtiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://doc.castsoftware.com/imaging/install/requirements/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi kurulumda birden çok bileşenin (graf veritabanı, kimlik sağlayıcı) yedekleme, yama ve kapasite planlaması platform ekibine önemli iş yükü getirir.",
+        "Büyük eski sistemlerin analizi yüksek bellek ve depolama gerektirir; analiz süreleri uzar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Analiz sürelerinin uzaması; Neo4j bellek hataları.",
+      "azaltma": "Pilotta en büyük uygulamayla kapasite testi yapın. Bileşenleri kurumun standart yedekleme ve yama süreçlerine alın.",
+      "id": "BL-01964",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2335",
+      "arac": "SquashTM",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "Java tabanlı kurum içi kurulumun işletim yükü",
+      "aciklama": "SquashTM kurum içinde indirilip kuruluyor; veritabanı, yükseltme ve eklentiler (hata izleyici ve Jira senkronizasyonu ayrı depolarda) kurumun sorumluluğunda.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.squashtm.com/en/pricing",
+        "https://gitlab.com/henixdevelopment/open-source/squash"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sürüm yükseltmelerinde eklenti uyumsuzluğu test yönetimini günlerce kesebilir.",
+        "Yedekleme ve kurtarma planı olmazsa test kanıtları kaybolabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-001"
+      ],
+      "erken_sinyal": "Eklenti sürümlerinin çekirdekle uyumsuz kalması.",
+      "azaltma": "Hazırlık ortamında yükseltme provası yapın, veritabanını düzenli yedekleyin.",
+      "id": "BL-01986",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3524",
+      "arac": "SpiraPlan",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Kurum içi kurulum yalnız Windows Server + IIS + SQL Server",
+      "aciklama": "Kurum içi SpiraPlan yalnız Windows Server 2016/2019/2022, IIS 10, .NET Framework 4.7.2 ve Microsoft SQL Server 2016–2022 üzerinde çalışır; Linux desteklenmez.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.inflectra.com/Products/SpiraPlan/Requirements.aspx"
+      ],
+      "yasatacagi_sorunlar": [
+        "Linux/Kubernetes tabanlı platform ekibine ayrı Windows Server ve SQL Server lisansı, yama, yedekleme ve izleme süreci eklenir.",
+        "Konteynerleştirme ve altyapıyı kod olarak kurma zorlaşır; felaket kurtarma tatbikatları ayrı bir teknolojiyle yürütülür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Platform ekibinin Windows/SQL Server yamalarını geciktirmesi; yedekten dönüş tatbikatlarının atlanması.",
+      "azaltma": "Kurum içi yerine AB barındırmalı SaaS'ı değerlendirin; kurum içi seçilirse Windows katmanını ayrı sahiplikle ve otomatik yamayla yönetin.",
+      "id": "BL-02200",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3711",
+      "arac": "Netskope (GenAI kullanım görünürlüğü)",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "TLS denetimi geliştirici araçlarını ve ajan CLI'larını kırar",
+      "aciklama": "Trafik yönlendirme ve TLS denetimi gerekiyor (araç haritası); sertifika sabitleme yapan CLI'lar ve paket yöneticileri kurum kök sertifikasını tanımadığında çalışmaz (çıkarım).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.netskope.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kod ajanları, model API istemcileri ve paket yöneticileri TLS hatası verir; geliştiriciler istisna isteyerek veya denetimi atlayarak çalışır (gölge kullanım)."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-013",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "TLS hatası destek talepleri; istisna listesinin büyümesi.",
+      "azaltma": "Geliştirici araçları için yönetilen istisna listesi ve kök sertifika dağıtımı.",
+      "id": "BL-02306",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4236",
+      "arac": "Google SLO Generator",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Yalnız hesaplama yapar; uyarı, politika ve arayüz kurumda kurulmalı",
+      "aciklama": "Araç SLI, SLO, hata bütçesi ve yanma hızını hesaplayıp dışa aktarıyor; uyarı yönlendirme, onay akışı, politika uygulama ve panolar ayrı araç gerektiriyor. CLI, API veya zamanlanmış iş olarak çalıştırılması ve işletilmesi kurumun sorumluluğunda.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/google/slo-generator"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hata bütçesi politikasının ajan otonomisine bağlanması (N-K33-004) için kurum ek entegrasyon kodu yazar ve bu kodun bakımını üstlenir.",
+        "Zamanlayıcı, exporter ve uyarı katmanı arasında sahiplik belirsizliği olay anında gecikmeye yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-004",
+        "N-K33-008"
+      ],
+      "erken_sinyal": "Hesaplama işinin başarısız olduğu günlerde uyarı gelmemesi; panolarda eski tarihli veri.",
+      "azaltma": "Hesaplama işinin kendisi için 'veri tazeliği' uyarısı tanımlayın; entegrasyon kodunu platform ekibinin sahipliğine verin.",
+      "id": "BL-02444",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4262",
+      "arac": "Jepsen",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Clojure bilgisi, kontrol düğümü ve beş düğümlü test kümesi gerektiriyor",
+      "aciklama": "Bir Jepsen testi, kontrol düğümünde çalışan bir Clojure programıdır; SSH ile DB düğümlerine bağlanıp sistemi kurar, iş yükü üretir ve arıza enjekte eder. Her DB düğümünde SSH sunucusu ve sudo/root erişimi gerekir; varsayılan düğümler n1–n5.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/jepsen-io/jepsen/blob/main/README.md",
+        "https://github.com/jepsen-io/jepsen/tree/main/doc/tutorial"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ürün ekiplerinde Clojure bilgisi olmadığından testler birkaç uzmana bağımlı kalır; 10+ ekipte ölçeklenmez.",
+        "Test kümesi kurulumu ve bakımı (LXC, Docker, bulut) ayrı işletim yükü getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-009",
+        "N-K05-030"
+      ],
+      "erken_sinyal": "Testlerin yalnız bir kişi tarafından güncellenebilmesi; yeni sürümlerde testlerin haftalarca çalıştırılmaması.",
+      "azaltma": "Jepsen'i yalnız dağıtık veri deposu ve tutarlılık kritik bileşenlerde, merkezi bir güvenilirlik ekibinin sahipliğinde kullanın; test şablonları ve paylaşımlı küme sağlayın.",
+      "id": "BL-02454",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4263",
+      "arac": "Elle",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Belirli geçmiş biçimleri ve Clojure/JVM bilgisi gerekiyor",
+      "aciklama": "Elle list-append veya rw-register gibi belirli iş yükü ve geçmiş biçimleri, benzersiz yazma değerleri ve işlem (:process) alanları istiyor; #20'de bakımcı hatanın büyük olasılıkla eksik :process alanlarından kaynaklandığını ve uyarı gerekebileceğini söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/jepsen-io/elle",
+        "https://github.com/jepsen-io/elle/issues/20"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler kendi test geçmişlerini yanlış biçimde üretirse denetleyici sessizce eksik analiz yapar; sonuç yanlış güven verir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-011"
+      ],
+      "erken_sinyal": "Geçmiş dosyalarında eksik alanlar; denetleyici uyarılarının loglarda kaybolması.",
+      "azaltma": "Geçmiş üretimi için ortak bir şema ve doğrulayıcı kullanın; Elle'yi Jepsen iş yükleriyle birlikte, merkezi bir ekibin sahipliğinde çalıştırın.",
+      "id": "BL-02458",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4264",
+      "arac": "Antithesis",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Tüm sistemi hermetik ortamda kurmak ve iş yükü yazmak uzmanlık istiyor",
+      "aciklama": "Kullanım için sistemin docker-compose veya Kubernetes ile tam olarak konteynerleştirilmesi, dış bağımlılıkların sahte servislerle değiştirilmesi, iş yükü (workload) ve özellik doğrulamalarının yazılması gerekiyor; meşgul-bekleme ile saat okuyan kodlar ortamda performans sorunu yaşıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://antithesis.com/docs/configuration/the_antithesis_environment/",
+        "https://antithesis.com/docs/introduction/welcome/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Her ekibin kendi hermetik ortamını kurması tekrar eden iş ve tutarsız kapsam yaratır; platform ekibinde dağıtık sistem uzmanlığı olmadan araç atıl kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-009",
+        "N-K05-030"
+      ],
+      "erken_sinyal": "İlk 3 ayda yalnız bir-iki ekibin simülasyon çalıştırabilmesi.",
+      "azaltma": "Ortak iş yükü ve ortam şablonlarını platform ekibi üretsin; aracı yalnız dağıtık ve kritik bileşenlerle sınırlayın.",
+      "id": "BL-02462",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4290",
+      "arac": "SD Elements",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Kurum içi kurulum yalnız Enterprise'da ve işletim yükü müşteride",
+      "aciklama": "On-site deployment yalnız Enterprise müşterilere açık; yedekleme ve güvenlik/erişilebilirlik izleme müşterinin sorumluluğunda; güncellemeleri müşteri yöneticisi uygular; erişim olmadığı için teknik sorun çözümü SaaS'a göre daha uzun sürüyor ve WebEx ile yapılıyor. Resmî desteklenen Kubernetes platformları yalnız EKS ve OpenShift; PostgreSQL, Redis, RabbitMQ ve paylaşımlı nesne depolama ile en az 8 vCPU/32 GB gerekiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.sdelements.com/release/latest/guide/docs/faq/osd/",
+        "https://docs.sdelements.com/release/2025.4/sysadmin/docs/container/install-upgrade/requirements.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veri yerelliği için kurum içi kurulum seçilirse, EKS/OpenShift dışındaki Kubernetes dağıtımları 'en iyi çaba' desteğinde kalır.",
+        "Destek sürelerinin uzaması, ajan iş akışının bağımlı olduğu gereksinim servisinin kesintisini uzatır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002"
+      ],
+      "erken_sinyal": "Kurum içi sürümün SaaS sürümünün gerisinde kalması; destek biletlerinin uzun açık kalması.",
+      "azaltma": "OpenShift gibi resmî desteklenen bir platform seçin; yedekleme ve yükseltme işlerini platform ekibinin runbook'una ekleyin.",
+      "id": "BL-02477",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4382",
+      "arac": "SAW (Software Analysis Workbench)",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Uzmanlık yoğun: Cryptol, SAWScript ve SMT çözücüler",
+      "aciklama": "Kullanım Cryptol belirtimleri, SAWScript betikleri, z3/Yices/CVC5 gibi SMT çözücüler ve LLVM bitcode ya da Rust MIR üretimi gerektiriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/GaloisInc/saw-script/blob/master/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ürün ekiplerinde bu uzmanlık yok; ispatlar birkaç kişiye bağımlı kalır ve 10+ ekipte ölçeklenmez.",
+        "Kodlama ajanlarının ürettiği kodun biçimsel doğrulaması uzman darboğazına takılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-030"
+      ],
+      "erken_sinyal": "İspat betiklerinin yalnız bir kişi tarafından güncellenebilmesi.",
+      "azaltma": "Biçimsel doğrulamayı kripto ve güvenlik çekirdeği gibi az sayıda bileşene sınırlayın; dış uzman desteğini sözleşmeyle güvenceye alın.",
+      "id": "BL-02489",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0014",
+      "arac": "Conductor OSS (Orkes Conductor)",
+      "gorev": "R-G04",
+      "tur": "RT-13",
+      "baslik": "Çok bileşenli işletim ve indeksleme sorunları",
+      "aciklama": "Kuyruk (Redis), kalıcılık veritabanı ve Elasticsearch/OpenSearch indekslemesi ister. Açık hatalar: ES7 kalıcılığının sınırsız indeks üretmesi (#226), ES7 Docker yapılandırmasının başlangıç hatası (#928), alt iş akışı sonrası iş akışının takılması (#712).",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/conductor-oss/conductor/issues/226",
+        "https://github.com/conductor-oss/conductor/issues/928",
+        "https://github.com/conductor-oss/conductor/issues/712"
+      ],
+      "yasatacagi_sorunlar": [
+        "İndeks sayısı kontrolsüz artarak arama kümesini doldurur; hat görünürlüğü kaybolur.",
+        "Alt iş akışı sonrası takılan koşular elle kurtarma gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K17-008",
+        "N-K16-002",
+        "N-K13-002"
+      ],
+      "erken_sinyal": "Elasticsearch indeks sayısında sürekli artış; RUNNING durumunda ilerlemeyen koşular.",
+      "azaltma": "İndeks yaşam döngüsü politikası; takılan koşular için izleme ve runbook; pilotta alt iş akışı senaryolarının yük testi.",
+      "id": "BL-00048",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0035",
+      "arac": "Microsoft Agent Framework",
+      "gorev": "R-G02",
+      "tur": "RT-13",
+      "baslik": "Yüksek açık issue sayısı ve Azure odaklı özellikler",
+      "aciklama": "Depoda 691 açık issue/PR var; dayanıklı iş akışı, barındırma ve kimlik gibi özellikler Azure hizmetleriyle en iyi entegre.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/microsoft/agent-framework/issues"
+      ],
+      "yasatacagi_sorunlar": [
+        "Azure dışı altyapıda (yerinde) çalıştırmak ek entegrasyon işi gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-003",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Kritik hataların uzun süre açık kalması.",
+      "azaltma": "Pilot kapsamında yerinde barındırma senaryosunu test edin.",
+      "id": "BL-00097",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0041",
+      "arac": "Strands Agents",
+      "gorev": "R-G02",
+      "tur": "RT-13",
+      "baslik": "Yüksek açık issue sayısı",
+      "aciklama": "Depoda 844 açık issue/PR var; Eylül 2026'da harness lansmanı sonrası hata düzeltme talepleri açıldı (#4496).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/strands-agents/harness-sdk/issues/4496"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sorunlar çözülene kadar kurum kendi yamalarını tutmak zorunda kalabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Issue kapanma süresi.",
+      "azaltma": "Kritik yollar için alternatif çerçeve.",
+      "id": "BL-00110",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0099",
+      "arac": "GitHub Spec Kit",
+      "gorev": "R-G02",
+      "tur": "RT-13",
+      "baslik": "Resmî destek yok; bakım 'zaman el verdikçe'",
+      "aciklama": "SUPPORT.md'ye göre proje GitHub çalışanları ve topluluk tarafından sürdürülüyor, taleplere 'zaman el verdikçe' yanıt veriliyor ve destek yalnız issue/discussion kaynaklarıyla sınırlı.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/github/spec-kit/blob/main/SUPPORT.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hattın kritik bir aşaması (spesifikasyon üretimi) SLA'sız bir araca bağlanır; Windows/PowerShell gibi ortam hatalarında (#4755) çözüm kurumun omzunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K16-008",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kritik hata issue'larının haftalarca yanıtsız kalması.",
+      "azaltma": "Aracı çatallanabilir (fork) biçimde kullanın, kurum içi sahip atayın; alternatif SDD aracına geçiş planı hazırlayın.",
+      "id": "BL-00233",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0291",
+      "arac": "Kong AI Gateway",
+      "gorev": "R-G01",
+      "tur": "RT-13",
+      "baslik": "API geçidi işletim karmaşıklığı ve Kong ekosistemine bağımlılık",
+      "aciklama": "Kong Gateway, eklenti tabanlı mimarisi, veritabanı/kontrol düzlemi bileşenleri ve Konnect SaaS seçeneğiyle işletim bilgisi ister; kaynak, MCP özelliklerinin hangilerinin kurumsal lisans gerektirdiğinin sayfada net olmadığını not ediyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://developer.konghq.com/ai-gateway/",
+        "https://github.com/Kong/kong"
+      ],
+      "yasatacagi_sorunlar": [
+        "LLM trafiği için ek bir kurumsal API geçidi ekibi ve uzmanlığı gerekir; Konnect kullanılırsa kontrol düzlemi ve analitik verisi Kong bulutuna gider."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K18-010"
+      ],
+      "erken_sinyal": "Yükseltmelerde eklenti uyumsuzlukları; Konnect veri akışının sözleşmede belirsiz kalması.",
+      "azaltma": "Kurumda zaten Kong işletiliyorsa değerlendirme; aksi halde LLM'e özgü daha küçük bir geçit.",
+      "id": "BL-00680",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0450",
+      "arac": "microsandbox",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Donanım/işletim şartı ve küçük ekip bağımlılığı",
+      "aciklama": "macOS'ta yalnız Apple Silicon, Linux'ta KVM gerekir; libkrun'a dayanır. Katkıların büyük kısmı iki geliştiriciden geliyor (appcypher 514, toksdotdev 337).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/superradcompany/microsandbox",
+        "https://github.com/superradcompany/microsandbox/graphs/contributors"
+      ],
+      "yasatacagi_sorunlar": [
+        "İç içe sanallaştırma desteklemeyen CI koşucularında çalışmaz; bakımcılar ayrılırsa güvenlik yamaları durabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-007",
+        "N-K04-005"
+      ],
+      "erken_sinyal": "Koşucularda /dev/kvm yokluğu; katkı sayısında düşüş.",
+      "azaltma": "Donanım envanterini doğrulamak; bakım riskine karşı alternatif sandbox'ı hazır tutmak.",
+      "id": "BL-00740",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0457",
+      "arac": "Container Use",
+      "gorev": "R-G02",
+      "tur": "RT-13",
+      "baslik": "Dagger motoru bağımlılığı ve sürüm çakışmaları",
+      "aciklama": "Araç Dagger üzerinde çalışıyor; 'cu' ile 'dagger' arasında motor sürümü çakışması ve depo yerine küresel git yapılandırmasının kullanılması issue olarak kayıtlı.",
+      "tarih": "2025-07",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/dagger/container-use/issues?q=is%3Aissue+engine+version"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştirici makinelerinde Dagger motoru yönetimi ek işletim yükü getirir; yanlış git kimliğiyle commit'ler oluşabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K22-004"
+      ],
+      "erken_sinyal": "Motor sürüm uyumsuzluğu hataları.",
+      "azaltma": "Dagger sürümünü sabitleyin; git yapılandırmasını çalışma alanı düzeyinde zorlayın.",
+      "id": "BL-00763",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0519",
+      "arac": "Flowable",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "BPMN/CMMN motorunun işletim ve modelleme uzmanlığı",
+      "aciklama": "Uzun süreli bekleme, zamanlayıcı ve olay alt süreçleri için veritabanı ayarı, iş yürütücü (async executor) ayarı ve tarih tablolarının temizliği kurumun sorumluluğunda.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.flowable.com/open-source/docs/bpmn/ch07b-BPMN-Constructs"
+      ],
+      "yasatacagi_sorunlar": [
+        "Günlerce bekleyen onaylar ve 10+ ekibin süreçleri tarih tablolarını büyütür; performans düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-003",
+        "N-K17-004"
+      ],
+      "erken_sinyal": "ACT_HI_* tablolarının hızla büyümesi; zamanlayıcı gecikmeleri.",
+      "azaltma": "Tarih verisi saklama politikası ve kapasite testi.",
+      "id": "BL-00828",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0608",
+      "arac": "Apache DevLake",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Çok bileşenli kurulum ve bağımlılık hijyeni",
+      "aciklama": "Kurulum; arka uç, config-ui, veritabanı (MySQL/PostgreSQL), Grafana ve Python eklenti çalışma zamanından oluşuyor. pydevlake'in bir bağımlılığında (certifi) kritik CVE tespit edilmişti.",
+      "tarih": "2023-12",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/apache/incubator-devlake/issues/6508"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yükseltmelerde veritabanı göçleri ve eklenti uyumsuzluğu nedeniyle pano verisi bozulabilir; SQL uzmanlığı ister."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Konteyner taramasında yüksek önemde bağımlılık bulguları.",
+      "azaltma": "Konteyner imajlarını düzenli taramak; yükseltmeden önce veritabanı yedeği alıp göçü sınamak.",
+      "id": "BL-00957",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0754",
+      "arac": "OpenSearch",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Küme işletim yükü ve güvensiz varsayılanların mirası",
+      "aciklama": "Üretimde vm.max_map_count, swap kapatma, JVM heap (RAM'in yarısı; varsayılan -Xms1g -Xmx1g) ayarları zorunludur. 2.12'den itibaren demo yapılandırması özel admin parolası ister, ancak bu yalnız yeni kümeleri etkiler; mevcut kümeler eski yapılandırmayla kalır. Docker'da DISABLE_SECURITY_PLUGIN ile güvenlik eklentisi tamamen kapatılabilir.",
+      "tarih": "2024-02",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/opensearch-project/documentation-website/blob/main/_security/configuration/demo-configuration.md",
+        "https://github.com/opensearch-project/documentation-website/blob/main/_install-and-configure/install-opensearch/index.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekibin log/iz hacminde heap veya shard sayısı yanlış boyutlanırsa küme kırmızıya düşer, iz alımı durur ve hat SLO ölçümü kesilir.",
+        "Pilotta demo sertifikaları veya güvenlik eklentisi kapalı kurulan küme üretime taşınırsa loglar kimliksiz erişime açık kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-001",
+        "N-K14-002"
+      ],
+      "erken_sinyal": "Küme sağlığının yellow/red olması, JVM GC duraklamaları, demo sertifika CN'lerinin üretimde görülmesi.",
+      "azaltma": "Yönetilen hizmet veya ayrı bir arama/veri platformu ekibi sahipliği belirleyin; kurulum şablonunda güvenlik eklentisi ve özel sertifikaları zorunlu kılın; kapasiteyi ölçerek planlayın.",
+      "id": "BL-01102",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0873",
+      "arac": "Argilla",
+      "gorev": "R-G08",
+      "tur": "RT-13",
+      "baslik": "Arama motoru ve Redis bağımlı işletim",
+      "aciklama": "Sunucu Elasticsearch/OpenSearch ve Redis gerektiriyor (son değişikliklerden biri Redis Cluster desteği). Bakım modunda bu bileşenlerin yeni sürümleriyle uyum garanti değil.",
+      "tarih": "2025-03",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/argilla-io/argilla/commits/develop"
+      ],
+      "yasatacagi_sorunlar": [
+        "Elasticsearch/OpenSearch yükseltmesi Argilla'yı bozabilir; ekip yamasız eski arama motorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-002"
+      ],
+      "erken_sinyal": "Arama motoru güvenlik yamalarının uygulanamaması.",
+      "azaltma": "Kapsayıcı imajları sabitlemek ve ağdan izole etmek; çıkış planı.",
+      "id": "BL-01203",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1006",
+      "arac": "Speedscale (proxymock dahil)",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "Kubernetes platformunun işletim yükü",
+      "aciklama": "Platformun kurumsal kısmı Kubernetes'e entegre çalışıyor. Envanter bu kısmın ticari ve Kubernetes odaklı olduğunu söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://speedscale.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sidecar veya operatör yükseltmeleri kümedeki servisleri etkileyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K04-009"
+      ],
+      "erken_sinyal": "Operatör yükseltmesinden sonra pod yeniden başlatmaları.",
+      "azaltma": "Önce ayrı bir test kümesinde kullanın.",
+      "id": "BL-01257",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1029",
+      "arac": "Develocity",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Yükseltme riski: erişim kontrollerinin kapanabilmesi",
+      "aciklama": "2024-03 numaralı bildirim, bir yükseltmenin proje düzeyindeki erişim kontrollerini devre dışı bırakabildiğini gösteriyor. Kendi sunucusunda çalışan kurulum düzenli yükseltme ve doğrulama ister.",
+      "tarih": "2024-10",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://develocity.ai/security-advisories/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yükseltme sonrası ekipler birbirinin build verisini görebilir; kimse fark etmeden kalabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K18-003"
+      ],
+      "erken_sinyal": "Yükseltme sonrası erişim testinin başarısız olması.",
+      "azaltma": "Her yükseltmeden sonra otomatik erişim kontrolü testi koşmak.",
+      "id": "BL-01274",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1040",
+      "arac": "Tricentis SeaLights",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Test ortamına ajan (listener) ve derleme tarayıcısı eklenmesi",
+      "aciklama": "SeaLights test ve CI ortamlarında çalışan bir dinleyici kullanıyor; bu, her dil ve çalışma zamanı için ek yapılandırma ve bakım gerektiriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.sealights.io/knowledgebase/intro-to-sealights/faq"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekibin farklı dil ve çalışma zamanlarında dinleyici yapılandırması platform ekibine kalıcı iş yükü getirir; dinleyici arızası CI'ı durdurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-008",
+        "N-K05-012"
+      ],
+      "erken_sinyal": "Dinleyici kaynaklı CI hataları ve test süresi artışı.",
+      "azaltma": "Dinleyiciyi önce bir ekipte pilotlayın. Dinleyici arızasında testlerin tam koşuya düşmesini sağlayın.",
+      "id": "BL-01302",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1135",
+      "arac": "vCluster",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Kubernetes içinde Kubernetes işletim karmaşıklığı",
+      "aciklama": "Senkronizasyon katmanı, çok sayıda kontrol düzlemi ve sürüm uyumu ek işletim yükü getirir (çıkarım).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.vcluster.com/docs/vcluster/introduction/architecture/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüzlerce geçici sanal kümenin yükseltmesi ve sorun gidermesi platform ekibinin kapasitesini aşar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-007"
+      ],
+      "erken_sinyal": "Sanal küme sayısı ve başarısız senkronizasyon olayları.",
+      "azaltma": "Yaşam süresi sınırlı ortamlar ve otomatik temizleme.",
+      "id": "BL-01334",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1161",
+      "arac": "Endor Labs",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "Hava boşluklu ortam için Kubernetes tabanlı Outpost gerekiyor",
+      "aciklama": "Belgeye göre hava boşluklu ortamlarda tarama, Kubernetes kümesine kurulan Endor Outpost ile yapılıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.endorlabs.com/setup-deployment/outpost/index.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kritik altyapı ağlarında ek bir Kubernetes bileşeninin işletilmesi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009"
+      ],
+      "erken_sinyal": "Outpost sürümünün geride kalması.",
+      "azaltma": "Outpost'u ayrı bir ad alanında ve en az yetkiyle çalıştırın.",
+      "id": "BL-01350",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1192",
+      "arac": "Sigstore Cosign",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Özel Sigstore örneğinin işletim yükü",
+      "aciklama": "Katalog kaydına göre kamu altyapısına yazılan meta veri herkese açık; kurum içi kanıtlar için özel örnek gerekiyor. Özel örnek Fulcio, Rekor, TUF kökü, CT logu ve OIDC entegrasyonunu birlikte işletmeyi gerektiriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/sigstore/rekor-tiles",
+        "https://github.com/sigstore/fulcio"
+      ],
+      "yasatacagi_sorunlar": [
+        "Özel örnek kesilirse imzalama durur ve yayın hattı bloke olur; anahtar ve kök döndürme uzmanlık ister."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-004",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "İmzalama hatası nedeniyle yayınların beklemesi.",
+      "azaltma": "Özel örneği yüksek erişilebilir kurmak; imzalama kesintisi için belgelenmiş bir bozulmuş mod tanımlamak.",
+      "id": "BL-01381",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1210",
+      "arac": "Policy in Amazon Bedrock AgentCore",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Varsayılan-ret: eksik politika hattı durdurur",
+      "aciklama": "Bir Gateway'e politika bağlandığında varsayılan olarak her şey engellenir.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://aws.amazon.com/blogs/security/why-policy-in-amazon-bedrock-agentcore-chose-cedar-for-securing-agentic-workflows/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yeni bir araç eklendiğinde politika güncellenmezse ajan görevleri toplu olarak başarısız olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-002"
+      ],
+      "erken_sinyal": "Politika reddi kaynaklı görev hatalarında artış.",
+      "azaltma": "Politika değişikliklerini araç kataloğu değişiklikleriyle birlikte yayımlamak; kuru çalıştırma modu.",
+      "id": "BL-01396",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1222",
+      "arac": "Teleport",
+      "gorev": "R-G05",
+      "tur": "RT-13",
+      "baslik": "Küme işletimi ve büyük sürüm temposu",
+      "aciklama": "Teleport auth/proxy/backend bileşenleriyle ayrı bir küme işletimi gerektirir; büyük sürümler hızlı ilerliyor (v18) ve 3.000'i aşkın açık issue/PR bulunuyor (çıkarım).",
+      "tarih": "2026-07",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/gravitational/teleport/releases"
+      ],
+      "yasatacagi_sorunlar": [
+        "Büyük sürüm atlamaları ajan makine kimliği (tbot) yapılandırmalarını kırabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004"
+      ],
+      "erken_sinyal": "Desteklenen sürüm penceresinin dışına düşme.",
+      "azaltma": "Sürüm yaşam döngüsü takvimi ve hazırlık ortamı.",
+      "id": "BL-01403",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1339",
+      "arac": "immudb",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Niş veritabanı işletimi",
+      "aciklama": "immudb; yedekleme, çoğaltma ve yükseltmede kendine özgü prosedürler isteyen bir veritabanı. Kurumda uzmanlığı bulunması olası değil.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://immudb.io",
+        "https://github.com/codenotary/immudb"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurtarma tatbikatı yapılmazsa denetim kaydı kaybında kanıt zinciri kopar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Yedekten dönüş testinin yapılmamış olması.",
+      "azaltma": "Kurtarma tatbikatını takvime bağlamak; yönetilen WORM depolamayı yedek olarak kullanmak.",
+      "id": "BL-01477",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1384",
+      "arac": "Gerrit Code Review",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "İşletim: eklenti uyumluluğu, çoğaltma ve JVM tabanlı sunucu yönetimi",
+      "aciklama": "GerritForge, ömrü dolmuş eklenti derlemeleri için ayrı arşiv ve CI tutuyor; bu, sürüm–eklenti uyumunun ayrıca yönetilmesi gerektiğini gösteriyor. CVE-2026-87721/87722 de kimliksiz sorgu yüküyle sunucunun tüketilebildiğini gösterdi.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.gerritcodereview.com/support.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-87722"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eklenti bağımlılığı yükseltmeyi geciktirir, geciken yükseltme de güvenlik açığı demektir. Anonim okuma açık bırakılırsa tek bir istek sunucuyu yavaşlatabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-001",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Yükseltme sonrası eklenti yükleme hataları; arama sorgularında CPU artışı.",
+      "azaltma": "Eklenti sayısını en aza indirin, anonim okumayı kapatın, sorgu hız sınırı koyun.",
+      "id": "BL-01500",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-87721",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-87722",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1419",
+      "arac": "Kargo",
+      "gorev": "R-G07",
+      "tur": "RT-13",
+      "baslik": "Kubernetes, Argo CD ve Kargo birlikte işletilmeli",
+      "aciklama": "Kargo, Argo CD ile birlikte çalışan Kubernetes'e özgü bir kontrol düzlemi. Kurulum, CRD'ler, webhook'lar ve RBAC birlikte yönetilmeli.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/akuity/kargo"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kubernetes dışı yayın hatları olan ekipler için ikinci bir terfi mekanizması gerekir; tek terfi zinciri tanımı bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-006",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Ekiplerin Kargo dışında elle terfi yapması.",
+      "azaltma": "Platform ekibinin sahipliğini netleştirmek; Kubernetes dışı hatlar için ayrı ama eşdeğer kanıt kapıları tanımlamak.",
+      "id": "BL-01527",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1452",
+      "arac": "Policy Bot (palantir/policy-bot)",
+      "gorev": "R-G09",
+      "tur": "RT-13",
+      "baslik": "Self-host GitHub Uygulaması: tek hata noktası ve özel anahtar yönetimi",
+      "aciklama": "Policy Bot kurumun işlettiği bir GitHub Uygulaması; özel anahtarı ve webhook sırrı kurumda tutuluyor. Servis durursa zorunlu durum kontrolü gelmez ve PR'lar birleştirilemez.",
+      "tarih": "2026",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/palantir/policy-bot#deployment"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bot kapandığında tüm ekiplerin birleştirmesi durur. Uygulama anahtarı sızarsa saldırgan onay durumlarını sahteleyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-004",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Policy Bot durum kontrolünün 'expected' durumunda takılması; webhook teslim hataları.",
+      "azaltma": "Yüksek erişilebilirlikli dağıtım kurun, anahtarı HSM ya da sır yöneticisinde tutun, kesinti prosedürü yazın.",
+      "id": "BL-01559",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1527",
+      "arac": "Chainloop",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "Çok bileşenli kontrol düzlemi",
+      "aciklama": "Self-host kurulum kontrol düzlemi, artefakt CAS'ı, veritabanı ve sır/anahtar yönetimi gerektirir; politika motoru (Rego/CUE) DoS açıkları da raporlandı.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.chainloop.dev",
+        "https://github.com/chainloop-dev/chainloop/security/advisories/GHSA-vm9j-jr3m-xmvm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Platform ekibi yeni bir kritik hizmet işletir; kesintide yayın hattı kanıt üretemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-004"
+      ],
+      "erken_sinyal": "Kontrol düzleminde CPU tükenmesi; CAS bağlantı hataları.",
+      "azaltma": "Yönetilen seçenekle karşılaştırın; felaket kurtarma ve kapasite testleri.",
+      "id": "BL-01608",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-vm9j-jr3m-xmvm",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2171",
+      "arac": "Mend AppSec Platform (Mend SCA/SAST)",
+      "gorev": "R-G06b",
+      "tur": "RT-13",
+      "baslik": "Kurum içi seçenek sınırlı",
+      "aciklama": "Envanter, kurum içi seçeneğin sınırlı olduğunu yazıyor. Hava boşluklu (air-gapped) kritik altyapı ortamlarında platformun tamamı kullanılamıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.mend.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kritik altyapı kapsamındaki depolar için ikinci bir SCA aracı gerekir; bulgular iki sisteme bölünür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K18-009"
+      ],
+      "erken_sinyal": "Hava boşluklu ağlarda taramanın çalışmaması.",
+      "azaltma": "Hassas depolar için yerel açık kaynak SCA kullanın, bulguları ortak bir toplayıcıda birleştirin.",
+      "id": "BL-01896",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2199",
+      "arac": "MetricStream",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Uygulama ve özelleştirme yükü yüksek kurumsal GRC",
+      "aciklama": "MetricStream Express, Standard ve Premium bulut katmanları sunuyor ve 35'ten fazla ülkede 1.000'den fazla çalışanla kurumsal GRC pazarına odaklanıyor. Kurumsal GRC platformları genellikle uzun uygulama projeleri ve danışmanlık gerektirir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.metricstream.com/platform/metricstream-cloud.htm",
+        "https://www.metricstream.com/about-us.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Program risk kaydı ve risk aksiyon döngüsü için aylar süren bir kurulum, ajan hattının pilot takvimini geciktirir.",
+        "Özelleştirilmiş iş akışları yükseltmelerde kırılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-005",
+        "N-K21-006",
+        "N-K21-001"
+      ],
+      "erken_sinyal": "Uygulama projesinin planı aşması.",
+      "azaltma": "Önce hafif bir risk kaydıyla başlayın. GRC platformunu yalnız kurumsal risk yönetimi ihtiyacı netleşince devreye alın.",
+      "id": "BL-01931",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2318",
+      "arac": "Apache KIE (Drools, jBPM, Kogito)",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Yüksek işletim karmaşıklığı ve kurumsal destek belirsizliği",
+      "aciklama": "Proje Drools, jBPM, Kogito ve SonataFlow'u Quarkus/Spring Boot üzerinde çok sayıda bileşen ve Kubernetes operatörüyle sunuyor. Operatör ve imaj depoları (kogito-operator, kogito-images, serverless-operator) arşivlenmiş durumda. Apache kuluçka sürümleri ASF tarafından tam onaylı değildir ve ticari destek sağlayan bir kurumsal dağıtım doğrulanamadı.",
+      "tarih": "2026-07",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/apache/incubator-kie-kogito-operator",
+        "https://github.com/apache/incubator-kie-kogito-images",
+        "https://incubator.apache.org/projects/kie.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kubernetes kurulumu için operatör artık bakımda olmadığından dağıtım otomasyonu kurum tarafından yazılmalı.",
+        "Kritik bir hatada SLA'lı destek alınamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-005",
+        "N-K13-013"
+      ],
+      "erken_sinyal": "Kurulum belgelerinin arşivlenmiş depolara yönlendirmesi.",
+      "azaltma": "Yalnız gereken bileşeni (ör. yalnız Drools/DMN) gömülü kütüphane olarak kullanın. Operatöre bağımlı olmayın.",
+      "id": "BL-01974",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2464",
+      "arac": "AgentBench",
+      "gorev": "R-G03",
+      "tur": "RT-13",
+      "baslik": "Ağır ve güvenlik açısından hassas kurulum",
+      "aciklama": "Ortamlar çok sayıda Docker konteyneri ve dış hizmet gerektirir; ajanın kabuk erişimi olan görevler izole edilmezse ana makineye risk yaratır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/THUDM/AgentBench"
+      ],
+      "yasatacagi_sorunlar": [
+        "Değerlendirme sunucusu yanlış yapılandırılırsa ajanın ürettiği komutlar kurum ağında çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-004"
+      ],
+      "erken_sinyal": "Değerlendirme konteynerlerinin ağ erişimi olması.",
+      "azaltma": "Değerlendirmeyi ağdan yalıtılmış, tek kullanımlık ortamda koşturun.",
+      "id": "BL-02017",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2526",
+      "arac": "JumpServer",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Varsayılan yönetici parolası ve ilk kurulum penceresi",
+      "aciklama": "Resmî hızlı başlangıç belgesine göre varsayılan yönetici hesabı admin/ChangeMe'dir. Parola yalnız ilk girişte değiştirilmeye zorlanır. 2023'te parola sıfırlama kodu kaba kuvvet (CVE-2023-43650) ve rastgele tohum sızıntısı (CVE-2023-42820) açıkları görülmüştü.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.jumpserver.org/zh/v4/en/quick_start/",
+        "https://github.com/jumpserver/jumpserver/security/advisories/GHSA-7prv-g565-82qp"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomatik (IaC/ajan) kurulumda ilk giriş adımı atlanırsa varsayılan parolayla erişilebilir bir PAM ortaya çıkar.",
+        "Test ortamı için kurulan örnekler üretim ağına açılırsa bastion kolayca ele geçirilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Kurulum sonrası tarama sırasında admin/ChangeMe ile başarılı giriş; kurulum ile ilk parola değişimi arasındaki sürenin uzaması.",
+      "azaltma": "Kurulum otomasyonunda yönetici parolasını sır yöneticisinden alıp ilk açılışta ayarlayın. Kurulum doğrulama testine varsayılan kimlik bilgisi taramasını ekleyin.",
+      "id": "BL-02026",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2023-42820",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2023-43650",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7prv-g565-82qp",
+          "kayit": "osvde-yok",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-3610",
+      "arac": "OpsLevel",
+      "gorev": "R-G12",
+      "tur": "RT-13",
+      "baslik": "Kurum içi kurulum ağır ve yalnız Enterprise'da",
+      "aciklama": "Self-hosted OpsLevel en az 24 CPU çekirdeği, 48 GB RAM, 25+ pod ve 120 GB+ disk isteyen Kubernetes kurulumudur; üretimde veritabanı, Redis, Elasticsearch ve nesne deposunun kurumca işletilmesi öneriliyor. Kurum içi seçenek fiyat sayfasında yalnız Enterprise'da.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.opslevel.com/docs/getting-started-with-self-hosted-opslevel",
+        "https://www.opslevel.com/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veri yerelliği için kurum içi kurulum seçilirse platform ekibine sürekli Kubernetes, arama ve veritabanı işletim yükü biner.",
+        "Sürüm yükseltmeleri tedarikçi kayıt defteri kimlik bilgilerine bağlı kalır; kapalı ağda güncelleme gecikir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-005",
+        "N-K16-008",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Kurulum pilotunda altyapı gereksinimlerinin kapasite planını aşması.",
+      "azaltma": "Kurum içi kurulumu yalnız veri yerelliği şartı kesinse seçin; işletim sahibini ve yedekleme/kurtarma planını baştan atayın.",
+      "id": "BL-02264",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3700",
+      "arac": "ScriptRunner for Jira",
+      "gorev": "R-G03b",
+      "tur": "RT-13",
+      "baslik": "Betik yayılımı ve bakım borcu",
+      "aciklama": "ScriptRunner'ın gücü, yöneticilerin sınırsız özelleştirme yapmasına izin vermesi (ürün tanıtımı 'sınırsız otomasyon ve özelleştirme' diyor). Zamanla belgesiz betikler birikir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://marketplace.atlassian.com/apps/6820/scriptrunner-for-jira"
+      ],
+      "yasatacagi_sorunlar": [
+        "Durum modeli ve pano eşleme mantığı onlarca betiğe dağılırsa tek durum modeli ihtiyacı fiilen bozulur; kimin neyi değiştirdiği izlenemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-001",
+        "N-K02-011",
+        "N-K19-003"
+      ],
+      "erken_sinyal": "Sahipsiz betik sayısında artış; aynı alanı değiştiren birden çok betik.",
+      "azaltma": "Betik sahipliği ve envanter kaydı zorunlu olsun. Periyodik temizlik ve betik testleri yapın.",
+      "id": "BL-02291",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3994",
+      "arac": "bugbug",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "Geniş ve hızla büyüyen bağımlılık yüzeyi",
+      "aciklama": "pyproject.toml langchain, langchain-community, langchain-openai, langchain-anthropic, langchain-google-genai ve langchain-mistralai bağımlılıklarını içeriyor; depoda Mozilla'ya özgü 'hackbot' ajanları var; 689 açık issue.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mozilla/bugbug/blob/master/pyproject.toml",
+        "https://github.com/mozilla/bugbug"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kuruma yalnız sınıflandırıcı gerekse bile çok sayıda LLM istemci kütüphanesi ve bunların açıkları hatta girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-022"
+      ],
+      "erken_sinyal": "Bağımlılık taramasında langchain kaynaklı uyarılar.",
+      "azaltma": "Yalnız gerekli modelleri ayrı, küçük bir pakete çıkarın.",
+      "id": "BL-02328",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4041",
+      "arac": "Magentic-UI (MagenticLite)",
+      "gorev": "R-G11",
+      "tur": "RT-13",
+      "baslik": "İki özel modelin barındırılması ve GPU gereksinimi",
+      "aciklama": "MagenticLite, orkestrasyon için MagenticBrain, tarayıcı için Fara modelinin barındırılmasını istiyor. GPU kapasitesi sınırlıysa yalnız biri çalıştırılabiliyor; Fara olmadan tarayıcı eylemlerindeki kritik nokta tespiti devre dışı kalıyor, çünkü bu tespit Fara'nın eğitilmiş davranışına dayanıyor.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/microsoft/magentic-ui/blob/main/docs/TRANSPARENCY_NOTE.md",
+        "https://github.com/microsoft/magentic-ui/blob/main/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi barındırma için GPU ve model işletim bilgisi gerekir.",
+        "Maliyet nedeniyle tek modelle çalıştırılırsa geri alınamaz eylemlerden önce onay isteme güvencesi zayıflar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K28-003"
+      ],
+      "erken_sinyal": "Kurulumda yalnız tek model uç noktasının tanımlı olması.",
+      "azaltma": "Deney ortamında iki modeli birlikte çalıştırmak; tek modelli yapılandırmayı yasaklamak.",
+      "id": "BL-02332",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4043",
+      "arac": "OpenAI Symphony",
+      "gorev": "R-G11",
+      "tur": "RT-13",
+      "baslik": "Elixir/OTP işletim uzmanlığı ve dar bakım ekibi",
+      "aciklama": "Referans uygulama Elixir/OTP ve mise araç zinciri istiyor. Depodaki commit'lerin büyük kısmı tek bir OpenAI geliştiricisine ait; bakım kapasitesi dar görünüyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/openai/symphony/blob/main/elixir/README.md",
+        "https://github.com/openai/symphony"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumda Elixir bilgisi yoksa arıza ve yükseltmelerde platform ekibi darboğaz olur.",
+        "OpenAI önizlemeyi bırakırsa referans uygulama sahipsiz kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Depoda commit sıklığının düşmesi; sorunların yanıtsız kalması.",
+      "azaltma": "Belirtimi referans alıp kurumun ana yığınında uygulamak; platform sahipliğini açıkça atamak.",
+      "id": "BL-02337",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4289",
+      "arac": "Threat Composer",
+      "gorev": "R-G13",
+      "tur": "RT-13",
+      "baslik": "Web uygulamasında veri yalnız tarayıcı yerel depolamasında",
+      "aciklama": "Web uygulaması tüm girdiyi yalnız tarayıcının yerel depolamasında tutuyor, arka ucu yok; kalıcılık ve paylaşım için JSON dışa/içe aktarma ve git gerekiyor. Barındırma betikleri AWS (CloudFront) odaklı; 'AWS dışında dağıtılabilir mi' sorusu (#203) açık.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/awslabs/threat-composer/blob/main/docs/WEB-APP.md",
+        "https://github.com/awslabs/threat-composer/issues/203"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tarayıcı verisi temizlenirse dışa aktarılmamış tehdit modelleri kaybolur; ekipler arası tutarlı saklama için ek disiplin gerekir.",
+        "Kurum içi barındırma için AWS dışı dağıtım yolu kurum tarafından hazırlanmalıdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K34-001"
+      ],
+      "erken_sinyal": "Tehdit modeli dosyalarının depoda güncel olmaması; tarayıcıya bağlı tekil kopyalar.",
+      "azaltma": "Tehdit modellerini .tc.json olarak depoda tutmayı zorunlu yapın; VS Code eklentisi ile depo tabanlı düzenlemeyi tercih edin.",
+      "id": "BL-02472",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0749",
+      "arac": "Weaviate",
+      "gorev": "E3-codex",
+      "tur": "RT-13",
+      "baslik": "Yedekler FROZEN (dışa aktarılmış) kiracıları atlar; COLD kiracı desteği sürüme bağlı",
+      "aciklama": "Resmî belge: COLD kiracılar v1.37.0'dan (1.35.17 ve 1.36.10'a geri taşındı) itibaren yedeğe alınır; 'Offloaded (FROZEN) tenants are still skipped since they have no local data.'",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.weaviate.io/deploy/configuration/backups"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip başına kiracı kullanan kurumda eski sürümde pasif, her sürümde dışa aktarılmış ekiplerin vektör verisi yedekte yer almaz; geri dönüşte o ekiplerin bilgi tabanı eksik kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-002",
+        "N-K14-007"
+      ],
+      "erken_sinyal": "Yedek manifestinde kiracı sayısının toplam kiracı sayısından az olması.",
+      "azaltma": "Sürümü en az 1.35.17/1.36.10/1.37.0'a taşıma; FROZEN kiracıların dış depo kopyasını ayrıca doğrulama; kiracı kapsamlı geri yükleme testi.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Birincil belge 2026-09-27'de okundu: COLD tenants backed up from v1.37.0 (backport 1.35.17/1.36.10); Offloaded (FROZEN) tenants are still skipped since they have no local data.",
+        "kaynak": [
+          "https://docs.weaviate.io/deploy/configuration/backups"
+        ]
+      },
+      "id": "BL-02508",
+      "codex_kaynagi": "arac-riskleri/analiz/01_urun_belgelerindeki_sinirlar.json#OG-030",
+      "codex_dogrulama": "dogrulandi"
+    },
+    {
+      "arac_id": "AR-1216",
+      "arac": "HashiCorp Vault",
+      "gorev": "E3-codex",
+      "tur": "RT-13",
+      "baslik": "Tüm denetim cihazları yazılamaz olursa Vault istekleri reddeder",
+      "aciklama": "Resmî belge: 'When all enabled audit devices become unavailable, Vault in effect becomes unavailable as well.' Denetim kaydı dayanıklılığı sır hizmetinin erişilebilirliğini doğrudan belirler.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developer.hashicorp.com/vault/docs/audit"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek denetim hedefi (dosya/syslog) dolarsa veya erişilemezse tüm ajan ve CI sır istekleri durur; teslim hattı kilitlenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "Tek audit device; audit hedefinde disk doluluğu.",
+      "azaltma": "En az iki bağımsız audit device; audit hedefi doluluk alarmı.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Birincil belge 2026-09-27'de okundu: When all enabled audit devices become unavailable, Vault in effect becomes unavailable as well.",
+        "kaynak": [
+          "https://developer.hashicorp.com/vault/docs/audit"
+        ]
+      },
+      "id": "BL-02514",
+      "codex_kaynagi": "arac-riskleri/analiz/01_urun_belgelerindeki_sinirlar.json#OG-021",
+      "codex_dogrulama": "dogrulandi"
+    },
+    {
+      "arac_id": "AR-1415",
+      "arac": "Argo CD",
+      "gorev": "E3-codex",
+      "tur": "RT-13",
+      "baslik": "Otomatik senkron açıkken rollback yapılamaz; prune ve self-heal varsayılan kapalı",
+      "aciklama": "Resmî belge: 'Rollback cannot be performed against an application with automated sync enabled.' Otomatik senkron varsayılan olarak Git'ten kalkan kaynakları silmez (prune) ve canlı kümedeki değişiklikleri geri almaz (self-heal).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan kaynaklı hatalı değişiklikte ekip arayüzden rollback bekler; otomatik senkron açıkken geri dönüş ancak Git'te geri alma ile olur, olay süresi uzar.",
+        "Silinmesi gereken kaynaklar kümede kalır; elle yapılan değişiklikler fark edilmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004"
+      ],
+      "erken_sinyal": "Olay tatbikatında rollback'in reddedilmesi; OutOfSync kaynakların birikmesi.",
+      "azaltma": "Geri dönüş runbook'unu Git revert üzerine kurma; prune/self-heal kararını uygulama bazında açıkça verme.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Birincil belge 2026-09-27'de okundu: Rollback cannot be performed against an application with automated sync enabled. Prune and self-heal are off by default.",
+        "kaynak": [
+          "https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/"
+        ]
+      },
+      "id": "BL-02515",
+      "codex_kaynagi": "arac-riskleri/analiz/01_urun_belgelerindeki_sinirlar.json#OG-031",
+      "codex_dogrulama": "dogrulandi"
+    },
+    {
+      "arac_id": "AR-0863",
+      "arac": "cuke_linter",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "Ruby çalışma zamanı ek yığın getirir",
+      "aciklama": "Araç Ruby gem'i olarak çalışır; Python/Node ağırlıklı bir hatta ek dil çalışma zamanı ve bağımlılık yönetimi gerekir.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/enkessler/cuke_linter"
+      ],
+      "yasatacagi_sorunlar": [
+        "CI imajlarına Ruby eklenir; güvenlik taraması ve yükseltme yükü artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-009"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "Tek bir CI imajında toplayın veya gherkin-lint gibi aynı yığındaki araçla değiştirin.",
+      "id": "BL-01181",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0235",
+      "arac": "Llama 4 Maverick",
+      "gorev": "R-G01",
+      "tur": "RT-13",
+      "baslik": "İndirme onay (gated) gerektiriyor",
+      "aciklama": "Depolar 'manual' onaylı erişimle korunuyor; her hesap için Meta onayı ve lisans kabulü gerekiyor.",
+      "tarih": "2025-04",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/api/models/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomatik model aynalama ve yeniden kurulum, onaylı hesaba bağımlı kalır; onay gecikmesi kurulum takvimini kaydırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Erişim talebinin beklemede kalması.",
+      "azaltma": "Onaylı ağırlıkları iç kayıt defterinde özetle saklama.",
+      "id": "BL-00646",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0236",
+      "arac": "Llama 4 Scout",
+      "gorev": "R-G01",
+      "tur": "RT-13",
+      "baslik": "İndirme onay (gated) gerektiriyor",
+      "aciklama": "Depolar 'manual' onaylı erişimle korunuyor; her hesap için Meta onayı ve lisans kabulü gerekiyor.",
+      "tarih": "2025-04",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/api/models/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+      ],
+      "yasatacagi_sorunlar": [
+        "Otomatik model aynalama ve yeniden kurulum, onaylı hesaba bağımlı kalır; onay gecikmesi kurulum takvimini kaydırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Erişim talebinin beklemede kalması.",
+      "azaltma": "Onaylı ağırlıkları iç kayıt defterinde özetle saklama.",
+      "id": "BL-00651",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1510",
+      "arac": "pyJedAI",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "Bloklama-eşleştirme-kümeleme zincirinin ayarı uzmanlık ister",
+      "aciklama": "Uçtan uca hat çok sayıda algoritma ve parametre seçimi içerir; üretim işletimi ek mühendislik gerektirir (harita).",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/AI-team-UoA/pyJedAI"
+      ],
+      "yasatacagi_sorunlar": [
+        "Varsayılan ayarlarla kurulan hat hem aday kaçırır hem gereksiz karşılaştırma yapar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "Küçük altın veriyle adım adım ayar yapın.",
+      "id": "BL-01601",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1511",
+      "arac": "HDBSCAN",
+      "gorev": "R-G10",
+      "tur": "RT-13",
+      "baslik": "388 açık issue ve iki farklı uygulama",
+      "aciklama": "Depoda 388 açık issue var; scikit-learn 1.3'ten itibaren kendi HDBSCAN uygulamasını içeriyor. İki uygulamanın varsayılanları ve özellikleri aynı değil.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/scikit-learn-contrib/hdbscan",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.cluster.HDBSCAN.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler farklı uygulamaları kullanırsa aynı backlog için farklı kümeler çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-005"
+      ],
+      "erken_sinyal": "Ekipler arası küme çıktılarında açıklanamayan fark.",
+      "azaltma": "Tek uygulama ve tek yapılandırma standardı belirleyin.",
+      "id": "BL-01604",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3573",
+      "arac": "Leapsome",
+      "gorev": "R-G08",
+      "tur": "RT-13",
+      "baslik": "Yalnız anket ihtiyacı için geniş İK paketi",
+      "aciklama": "Platform performans, hedef, anket, öğrenme, İK kayıtları ve işe alım modüllerini birleştiriyor; yalnız bağlılık anketi için ağır olabilir (araç haritası notu).",
+      "tarih": "2026-09",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.leapsome.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mevcut İK sistemiyle çakışan kayıtlar ve ek entegrasyon yükü."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Kullanılmayan modüller için ödeme.",
+      "azaltma": "Yalnız gereken modülleri lisanslamak.",
+      "id": "BL-02226",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    }
+  ],
+  "kategori_kaliplari": [
+    "RK-027",
+    "RK-029",
+    "RK-045",
+    "RK-046",
+    "RK-052",
+    "RK-056",
+    "RK-066",
+    "RK-071",
+    "RK-098",
+    "RK-109",
+    "RK-110",
+    "RK-149",
+    "RK-189",
+    "RK-190",
+    "RK-192",
+    "RK-217",
+    "RK-233"
+  ],
+  "olaylar": [
+    "EV-002",
+    "EV-003",
+    "EV-005",
+    "EV-023",
+    "EV-030",
+    "EV-066",
+    "EV-081",
+    "EV-094",
+    "EV-102",
+    "EV-118",
+    "EV-153",
+    "EV-179"
+  ],
+  "senaryolar": [
+    "SS-006",
+    "SS-010",
+    "SS-019",
+    "SS-020",
+    "SS-021",
+    "SS-024",
+    "SS-026",
+    "SS-027",
+    "SS-057",
+    "SS-059",
+    "SS-066",
+    "SS-067",
+    "SS-068",
+    "SS-069",
+    "SS-070",
+    "SS-072",
+    "SS-090",
+    "SS-119"
+  ],
+  "otomatik_sinyalli_araclar": []
+}

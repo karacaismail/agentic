@@ -1,0 +1,11 @@
+import type {EcaKural} from './tipler';
+const kayit = (id:string,asama:EcaKural['asama'],faz:EcaKural['faz'],baslik:string,olay:string,kosul:string,eylem:string,onler:string[]):EcaKural => ({id,asama,faz,baslik,olay,kosul,eylem,onler,kaynak:['Derin inceleme / kaynaklı çapraz eşleme'],neden:'Araştırmada belirlenen açık için önerilen sözleşme; gerçek sistemde henüz uygulanmadı.'});
+export const EK_KURALLAR:EcaKural[]=[
+ kayit('R73','PLN',1,'İş türüne uygun kanıt','Görev planlanıyor','Feature, refactor, docs veya migration profili belirlendi','Profile göre RED, baseline, oracle ve teslim gereğini seç. Refactor için davranış eşliği; docs için örnek ve bağlantı doğruluğu. Eksik profilde beklet.',['DK-04']),
+ kayit('R74','MQ',1,'Bütünleşik release vektörü','Birden çok modül veya şema etkileniyor','Alt görevler hazır','Parent AC yükümlülükleri ve release/schema/event sürüm vektörünü sabitle. Bütünleşik kanıt olmadan parent tamamlanamaz.',['DK-02','DP-08']),
+ kayit('R75','HATA',1,'Eksik yetenekten göreve dönüş','Gerekli skill, MCP veya ajan kabiliyeti yok','Sicilde uygun yetkili sürüm bulunamadı','Tekil yetenek talebi aç; sahip ve süre/bütçe sınırını sakla. Keşif, karantina, eval ve sicilden sonra aynı görev revisionuna bağlanıp devam et.',['DK-08']),
+ kayit('R76','BUT',0,'Atomik kaynak rezervasyonu','İşçi veya büyük test başlayacak','RAM/CPU/runner ve model kotası yeterli','Kaynağı atomik ayır; crash sonrası lease ve tahsisi uzlaştır. Sığmıyorsa sahipli bekleme.',['DP-11']),
+ kayit('R77','TET',0,'Kaynak adaptörü uygunluğu','Plane veya geri bildirim olayı geldi','Edition, sürüm, header ve zarf tanınan profile uyuyor','Doğrulanmış adaptörle kanonik olaya çevir. Bilinmeyen şemayı karantinaya al; sessiz kayıp yok.',['DE-01']),
+ kayit('R78','QA',0,'Kanıt toplamanın tamlığı','CI veya repo kanıtı toplandı','Sayfalama, son sayfa ve eksik kayıt manifesti tam','Eksik sayfa/yarım API yanıtını unknown say; tamlık kanıtı olmadan geçti sonucu verme.',['DE-06']),
+ kayit('R79','GIR',1,'Proje uygunluğu ve işletim işi','Yeni proje veya ortam engeli var','Repo, izin, test ve alpha profili hazır değil','Onboarding/onarım işini ve insan emeğini görünür kaydet. Ortam uygunluğu kanıtlanmadan otomatik teslimi hazır sayma.',['DK-05']),
+];

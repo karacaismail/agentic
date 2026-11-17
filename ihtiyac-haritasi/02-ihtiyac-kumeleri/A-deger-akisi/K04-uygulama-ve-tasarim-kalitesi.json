@@ -1,0 +1,406 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K04",
+    "ad": "Uygulama ve tasarım kalitesi",
+    "alan": "A-deger-akisi",
+    "amac": "Kodun küçük, geri alınabilir, kurallara ve mevcut mimariye uygun adımlarla üretilmesi.",
+    "kapsam": [
+      "davranış başına en küçük değişiklik",
+      "uygulayıcı rolünün yetki sınırları",
+      "sınırlı yeniden deneme ve yaklaşım değişimi",
+      "yeniden düzenleme sınırı",
+      "tasarım ilkeleri",
+      "performans",
+      "mobil öncelikli arayüz",
+      "dayanıklılık tasarımı",
+      "yerelleştirme"
+    ],
+    "kapsam_disi": [
+      "doğrulama ve kabul (K05)",
+      "bütçe değerleri (K20)"
+    ],
+    "komsu_kumeler": [
+      "K03",
+      "K05",
+      "K10",
+      "K20"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K04-001",
+      "baslik": "Davranış başına en küçük değişiklik",
+      "ihtiyac": "Tek bir davranışın tek, doğrulanabilir adımda uygulanması; testleri geçirecek en küçük kodun yazılması.",
+      "cozulecek_sorun": "Büyük ve doğrulanamayan değişiklikler inceleme kapasitesini ve geri almayı zorlaştırıyor.",
+      "yetenek_siniflari": [
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her değişiklik bir kabul kriteri/davranış kimliğine bağlı.",
+        "Davranış başına değişiklik boyutu izleniyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-052"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K05-001"
+      ]
+    },
+    {
+      "id": "N-K04-002",
+      "baslik": "Uygulayıcı rolünün yetki sınırları",
+      "ihtiyac": "Kod üreten rolün testleri, kabul kriterlerini ve eşikleri değiştirememesi, silememesi, atlayamaması; başarı kaydını yazamaması; sayaçları sıfırlayamaması; yıkıcı sürüm kontrolü işlemi yapamaması. Bu sınırların teknik olarak (izinle) uygulanması.",
+      "cozulecek_sorun": "Ajanlar başarıyı testi değiştirerek üretiyor; görünür testlerde bu davranış belirgin, testler gizlendiğinde neredeyse kayboluyor.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-25",
+        "Y-18"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Uygulayıcı kimliğinin test, eşik ve kriter dosyalarına yazma izni yok.",
+        "Yasak eylem denemeleri politika kontrolünde yakalanıp kaydediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-052",
+          "S-062",
+          "S-007",
+          "S-009",
+          "S-112"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "R-004"
+      ]
+    },
+    {
+      "id": "N-K04-003",
+      "baslik": "Sınırlı yeniden deneme ve yaklaşım değişimi",
+      "ihtiyac": "Başarısız denemelerin sınırlı sayıda yapılması; aynı hata iki kez tekrarlanınca bağımsız kök neden analizi ve yaklaşım değişimi; ilk uygulayıcının hakkı bitince yedek uygulayıcıya (farklı model/ajan) geçiş; 'görev imkânsız' sinyali verebilme.",
+      "cozulecek_sorun": "Aynı ajan aynı kör noktada dönüp duruyor. İmkânsız görevde çıkış yolu olmayınca hile artıyor; imkânsızlık sinyali hileyi belirgin biçimde azaltıyor.",
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-12",
+        "Y-02"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Aynı hata imzası 2 kez görülünce yaklaşım değişikliği otomatik tetikleniyor.",
+        "Uygulayıcının 'görev imkânsız/belirsiz' diyebileceği yapılandırılmış bir çıkışı var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-062",
+          "S-112"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K20-001"
+      ]
+    },
+    {
+      "id": "N-K04-004",
+      "baslik": "Tek tur yeniden düzenleme sınırı",
+      "ihtiyac": "Davranış başına tek tur yeniden düzenleme yapılması; bozarsa son yeşil sürüme otomatik dönülmesi.",
+      "cozulecek_sorun": "Yeniden düzenleme adıyla gerileme ve kapsam kayması oluşuyor.",
+      "yetenek_siniflari": [
+        "Y-20"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Yeniden düzenleme sonrası kırmızıda otomatik geri alma %100."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K04-005",
+      "baslik": "Paralel uygulayıcıların ortak dosya çakışmasının önlenmesi",
+      "ihtiyac": "Paralel çalışan uygulayıcıların ayrı çalışma kopyasında çalışması, ortak dosyaları aynı anda değiştirmemesi; ortak sıcak nokta dosyaların tek sahibinin olması.",
+      "cozulecek_sorun": "Paralel ajan değişikliklerinde birleştirme çakışması sık; ortak yönlendirme ve yapılandırma dosyaları çakışma sıcak noktası.",
+      "yetenek_siniflari": [
+        "Y-18",
+        "Y-33"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "10+ ekipte ortak dosyalar ekipler arası çakışma kaynağı olur; sahiplik ve sıralı birleştirme zorunlu hale gelir.",
+      "kabul_olcutleri": [
+        "Eşzamanlı yazma çakışması ölçülüyor ve hedef değeri tanımlı.",
+        "Sıcak nokta dosyaların sahibi tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-018",
+          "S-119"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip"
+    },
+    {
+      "id": "N-K04-006",
+      "baslik": "Uzman rollerin kod yazmaması, bulgu üretmesi",
+      "ihtiyac": "Uzman rollerin (kenar durum, yetki, performans, tasarım ilkeleri vb.) kod yazmaması; bulgu, kanıt ve hedef rol üreten standart bir çıktı vermesi; düzeltmenin ilgili uygulayıcı tarafından yapılması.",
+      "cozulecek_sorun": "Birden çok rolün aynı kodu değiştirmesi sorumluluğu ve izlenebilirliği bozuyor.",
+      "yetenek_siniflari": [
+        "Y-06",
+        "Y-07"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Uzman bulgusu şemaya uygun (bulgu, kanıt, hedef rol).",
+        "Uzman rollerin kod yazma izni yok."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-018"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K04-007",
+      "baslik": "Pragmatik tasarım ilkesi denetimi",
+      "ihtiyac": "Tasarım ilkelerinin dogmatik değil bakım kolaylığı için uygulanması; yeniden düzenleme önerisinin somut kazanç gerekçesiyle yapılması; gereksiz soyutlamadan kaçınılması.",
+      "cozulecek_sorun": "Aşırı mühendislik ya da ilkesiz kod birikiyor.",
+      "yetenek_siniflari": [
+        "Y-08"
+      ],
+      "zorunluluk": "opsiyonel",
+      "kabul_olcutleri": [
+        "Her yeniden düzenleme önerisinde somut kazanç gerekçesi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-035",
+          "S-028"
+        ],
+        "not": "Kaynaktaki akış görselinde beş ilkenin hepsi aynı etiketle yazılmış (kopyalama hatası)."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-024",
+        "G-032",
+        "R-028"
+      ]
+    },
+    {
+      "id": "N-K04-008",
+      "baslik": "Paradigmaya uygun alan modelleme ve anti-kalıp tespiti",
+      "ihtiyac": "Alan davranışının uygun soyutlama, kapsülleme, bileşim ve sorumluluk sınırlarıyla modellenmesi; tanımlı anti-kalıpların (her şeyi yapan sınıf, aşırı kalıtım, anlamsız soyutlama) tespiti.",
+      "cozulecek_sorun": "Bakımı zor ve test edilemeyen yapılar oluşuyor.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-08"
+      ],
+      "zorunluluk": "opsiyonel",
+      "kabul_olcutleri": [
+        "Tanımlı anti-kalıplardan yeni bulgu 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-047"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K04-009",
+      "baslik": "Ölçüme dayalı performans değerlendirmesi ve performans bütçeleri",
+      "ihtiyac": "Değişikliğin ön yüz, ağ, arka uç, veritabanı ve çalışma zamanı katmanlarındaki etkisinin ölçülmesi; iyileştirmenin öncesi/sonrası ölçüm kanıtıyla yapılması; kritik yollar için sayısal performans bütçelerinin tanımlanması ve bütçe aşımının engelleyici olması.",
+      "cozulecek_sorun": "Ölçmeden optimizasyon yapılıyor ya da regresyon fark edilmiyor. Kaynakta rol yalnız öneri veriyor; eşik ve engelleme tanımlı değil.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-27"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Kritik yollar için performans bütçesi yazılı.",
+        "Bütçe aşımı birleştirmeyi engelliyor.",
+        "Her iyileştirme önerisi ölçüm kanıtı taşıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-046",
+          "S-028",
+          "S-117"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "G-004",
+        "Q-028",
+        "U-027"
+      ]
+    },
+    {
+      "id": "N-K04-010",
+      "baslik": "Mobil öncelikli arayüz uygulaması",
+      "ihtiyac": "Arayüz işinin en küçük desteklenen ekran genişliğinden başlaması; duyarlı davranış, dokunma, taşma, görüntü alanı, gezinme ve içerik önceliğinin kontrolü; masaüstü çözümünün mobil davranışı bozmaması; desteklenen en küçük genişliğin tanımlanması.",
+      "cozulecek_sorun": "Masaüstü çözüm mobil davranışı bozuyor; 'en küçük desteklenen genişlik' kaynaklarda farklı değerlerle geçiyor veya tanımsız.",
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Desteklenen genişlik aralığı yazılı.",
+        "Her arayüz işi en küçük genişlikte ve tüm kırılma noktalarında kontrolleri geçiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-045",
+          "S-001",
+          "S-028"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-028",
+        "Q-029"
+      ]
+    },
+    {
+      "id": "N-K04-011",
+      "baslik": "Hata dayanıklılığı tasarımı",
+      "ihtiyac": "Hata yönetimi, eşzamanlılık, yeniden deneme, zaman aşımı, kuyruk, idempotency, yedekleme/geri yükleme gereksinimlerinin yalnız test perspektifi olarak değil tasarım gereksinimi olarak ele alınması.",
+      "cozulecek_sorun": "Ana süreçte bu konular risk kategorisi olarak geçiyor; tasarımdan sorumlu rol yok, yalnız kenar durum testleri var.",
+      "yetenek_siniflari": [
+        "Y-20"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Dış çağrı veya eşzamanlılık içeren her işte dayanıklılık gereksinimleri yazılı ve testlere bağlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-034"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K04-012",
+      "baslik": "Uluslararasılaştırma ve yerelleştirme",
+      "ihtiyac": "Dil, bölge, tarih/sayı biçimi ve metin uzunluğu değişkenliğinin arayüz ve veri katmanında ele alınması.",
+      "cozulecek_sorun": "Kaynaklarda yalnız bir risk kategorisinde anılıyor; sahibi ve kontrolü yok.",
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Çok dilli ürünlerde metin uzaması ve biçim senaryoları test ediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K04-013",
+      "baslik": "Kodlama rolünün katalogda tanımlanması",
+      "ihtiyac": "Kodu üreten rol(ler)in (ön yüz, arka uç vb.) girdi, çıktı, yetki ve tetik koşullarıyla rol kataloğunda tanımlanması.",
+      "cozulecek_sorun": "Kural metinlerinde 'kodlama ajanı' anılıyor ama 20 rollük katalogda yok; bazı kaynaklarda ön yüz ve arka uç kodlama rolleri ayrı tanımlı.",
+      "yetenek_siniflari": [
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kodlama rolleri katalogda tüm alanlarıyla var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-051",
+          "S-052",
+          "S-028"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-023",
+        "G-011"
+      ]
+    },
+    {
+      "id": "N-K04-014",
+      "baslik": "Arayüz ve hata yönetimi yasak kalıp kataloğu ve mevcut ihlal tabanı",
+      "ihtiyac": "Arayüz kodunda erişilebilirliği, bakım kolaylığını ve hata görünürlüğünü bozan yasak kalıpların (alternatif metni olmayan görsel, etiketsiz girdi alanı, düğmeye benzemeyen tıklanabilir öğe, doğal sırayı bozan pozitif sekme sırası, sayfa açılışında zorla odak, tasarım belirteci yerine elle yazılmış renk, öğeye doğrudan yazılmış stil ve her şeyi ezen öncelik bildirimi, eski görüntü alanı yüksekliği ölçüsü, hatayı sessizce yutan boş yakalama) makinece denetlenen, sürümlü bir katalogda tutulması; mevcut kod tabanındaki ihlallerin kural bazında sayılarak taban çizgisi olarak kaydedilmesi, kapının yalnız yeni ihlalleri engellemesi ve taban çizgisinin zamanla azaltılması.",
+      "cozulecek_sorun": "Kaynak panoda bu kalıpların mevcut kodda çok sayıda yerde bulunduğu sayılmış; ajanlar mevcut kalıbı taklit ederek ihlali çoğaltır. Kural kapıya taban çizgisi olmadan eklenirse eski ihlaller yüzünden her değişiklik başarısız olur ve kural devre dışı bırakılır.",
+      "yetenek_siniflari": [
+        "Y-23",
+        "Y-46",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Çok ekipte ortak katalog ve ekip bazında taban çizgisi gerekir; ekip-özel ekler katmanlı kural modeline göre yalnız sıkılaştırabilir.",
+      "kabul_olcutleri": [
+        "Yasak kalıp kataloğu sürümlü; her kuralın gerekçesi ve otomatik denetimi var.",
+        "Mevcut ihlal sayıları kural bazında taban çizgisi olarak kayıtlı; kapı yeni ihlali engelliyor, taban çizgisini artıran değişiklik birleşmiyor.",
+        "Taban çizgisindeki ihlal sayısı dönemsel raporlanıyor ve azalıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-002",
+          "S-095"
+        ],
+        "not": "Oracle problemi panosunun ikinci sürümünde (S-002) numaralı arayüz kuralları listesi (görsele açıklama ve girdi alanına etiket zorunlu; tıklanabilir sahte düğme, elle renk, doğrudan stil, her şeyi ezen öncelik, eski ekran yüksekliği ölçüsü, zorla odak, pozitif sekme sırası ve 'hata olursa hiçbir şey yapma' yasak) mevcut koddaki ihlal sayılarıyla birlikte yer alır; sayılar pano metninde başka sütunlarla iç içe geçtiği için bu kayda aktarılmadı. İkinci atlasın ara metin dosyasında görülüp nihai paketine alınmamıştı; bu haritada da ihtiyaç olarak yoktu. Benzer: N-K05-019 (erişilebilirlik doğrulaması), N-K03-005 (görev tipine göre kural seti), N-K35-001 (çalıştırılabilir mimari kurallar). Fark: arayüz yasak kalıp kataloğu ve mevcut ihlal tabanı tanımlı değildi."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K05-019",
+        "N-K11-003"
+      ],
+      "codex_kaynagi": "tmp/ihtiyac-analizi/pdf-02.txt (kaynak dosya: Oracle-Problem/oracle-problem-v2.pdf; SHA-256 e7e2cb7e52e8… bu haritadaki S-002 ile aynı)",
+      "dogrulama": "dogrulandi"
+    }
+  ]
+}

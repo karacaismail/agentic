@@ -1,0 +1,3129 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-25",
+    "ad": "Kimlik, erişim ve gizli bilgi yönetimi (insan, ajan ve hat kimlikleri; kısa ömürlü göreve özel yetki)",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "Aşırı yetkili, yetim makine kimlikleri; sırların ajan bağlamına veya loglara düşmesi.",
+    "ne_zaman_zorunlu": "Her zaman."
+  },
+  "arac_sayisi": 170,
+  "tur_dagilimi": {
+    "acik-kaynak": 74,
+    "bulut-hizmeti": 20,
+    "protokol-standart": 11,
+    "acik-cekirdek": 16,
+    "ticari-saas": 36,
+    "ticari-yazilim": 10,
+    "cerceve": 1,
+    "kutuphane": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-0081",
+      "ad": "IronClaw",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.ironclaw.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Gizlilik ve güvenlik odaklı 'Agent OS': WASM sandbox, uç nokta izin listesi, gizli anahtarın host tarafında enjekte edilmesi, PostgreSQL ve katmanlı güvenlik (panodaki tanım; depo Rust).",
+      "sinirlar": "Kişisel ajan odaklı; açıklama panodan, kaynak raporda bağımsız doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-0082",
+      "ad": "Moltis",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://moltis.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Rust tek ikili kalıcı kişisel ajan sunucusu: şifreli kasa, passkey, sandbox, Prometheus/OTLP/Langfuse gözlemi ve ACP ile Codex, Claude ve Cursor ajanlarını sürme.",
+      "sinirlar": "Küçük topluluk (~2,9k yıldız); kişisel ajan tasarımı; panodaki açıklama bağımsız doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K15-002",
+        "N-K18-004",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-0122",
+      "ad": "OpenFGA",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openfga.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zanzibar tarzı ilişki tabanlı yetkilendirme motoru (RBAC/ReBAC, koşullu ABAC), model testleri ve SDK'lar; kaynakta 'panonun en güçlü kararı' — yetki kararı deterministik motorda.",
+      "sinirlar": "İlişki verisinin senkronizasyonu uygulama sorumluluğu; modelleme öğrenme eğrisi. ABAC koşulları sınırlı; yüksek hacimde tutarlılık/önbellek ayarı gerekir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-0132",
+      "ad": "Gitleaks",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://gitleaks.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git geçmişi, çalışma dizini ve pre-commit aşamasında regex ve entropi tabanlı sır taraması yapar.",
+      "sinirlar": "Kural/entropi tabanlı; yanlış pozitif ve yeni sır biçimleri için kural bakımı gerekir. Bulunan sırrın geçerliliğini doğrulamaz; kurucusu projeden ayrılarak Betterleaks'i başlattı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K11-008",
+        "N-K18-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-0281",
+      "ad": "agentgateway",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://agentgateway.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP ve A2A trafiği için Rust ile yazılmış vekil; araç bazında RBAC, OpenAPI'den MCP üretimi, çok kiracılık ve OpenTelemetry gözlemlenebilirliği sağlar.",
+      "sinirlar": "LLM maliyet atfı özellikleri adanmış LLM geçitlerine göre sınırlı; hızlı gelişen sürüm yapısı. Yeni proje; politika dili ve yönetim arayüzü gelişiyor; Kubernetes dışı kurulumlar daha az belgelenmiş.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K12-001",
+        "N-K12-002",
+        "N-K12-006",
+        "N-K15-006",
+        "N-K16-007",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-0451",
+      "ad": "Anthropic Sandbox Runtime (srt)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/sandbox-runtime",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Konteyner gerektirmeden işletim sistemi düzeyinde (Linux bubblewrap + seccomp, macOS Seatbelt) dosya sistemi kısıtı ve vekil sunucu üzerinden ağ çıkış izin listesi uygulayan hafif sandbox; ajanlar ve MCP sunucuları için.",
+      "sinirlar": "Beta araştırma önizlemesi; çekirdek düzeyinde mikroVM yalıtımı kadar güçlü değildir. Araştırma önizlemesidir, yapılandırma biçimi değişebilir; çekirdek paylaşımlı işletim sistemi sandbox'ıdır, VM izolasyonu değildir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K10-008",
+        "N-K15-002",
+        "N-K18-004",
+        "N-K18-005",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0458",
+      "ad": "Amazon Bedrock AgentCore",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/bedrock/agentcore/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çerçeveden bağımsız yönetilen ajan platformu: oturum başına mikroVM yalıtımlı Runtime ve Harness, Memory, MCP Gateway, Identity, Code Interpreter, Browser, Observability, Evaluations, Cedar uyumlu Policy ve ajan/araç Registry.",
+      "sinirlar": "AWS'ye kilit; hizmetler hızla değişiyor ve maliyet modeli çok bileşenli.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-004",
+        "N-K10-008",
+        "N-K12-002",
+        "N-K12-006",
+        "N-K14-007",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0508",
+      "ad": "Agent Network Protocol (ANP)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://agent-network-protocol.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Merkeziyetsiz kimlik (DID) tabanlı kimlik doğrulama ve meta-protokol müzakeresiyle açık ağda ajan iletişimi hedefleyen protokol.",
+      "sinirlar": "Kurum içi teslim hattı için gereğinden karmaşık; benimsenme düşük.",
+      "ihtiyaclar": [
+        "N-K12-006"
+      ]
+    },
+    {
+      "id": "AR-0648",
+      "ad": "ToolHive",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.stacklok.com/toolhive/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularını en az izinle izole konteynerlerde çalıştırır; izin profilleriyle dosya sistemi ve ağ erişimi, çıkış proxy'si ve DNS ile alan adı izin listesi, Kubernetes operatörü ve onaylı kayıt defteri sunar.",
+      "sinirlar": "Konteyner çalışma zamanı gerektirir; ticari destek Stacklok'a bağlı. Konteyner izolasyonu; yalnız MCP sunucuları için.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-001",
+        "N-K12-002",
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-0657",
+      "ad": "Agent Governance Toolkit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/agent-governance-toolkit/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan araç çağrılarına YAML, Rego veya Cedar politikalarıyla karar veren taşınabilir politika katmanı; kimlik, denetim izi ve çalışma izolasyonu; LangChain, CrewAI, OpenAI Agents, LangGraph entegrasyonları ve 5 dilde SDK.",
+      "sinirlar": "Kamu önizlemesi (public preview) aşamasında; API'ler değişebilir.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K11-002",
+        "N-K12-002",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-0671",
+      "ad": "Arcade",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (arcade-mcp çerçevesi); platform ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.arcade.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların kullanıcı adına OAuth ile yetkilendirilmiş araç çağrıları yapmasını sağlayan araç yürütme çalışma zamanı ve MCP sunucu çerçevesi.",
+      "sinirlar": "Yönetilen platform ticari; özel araçların bakımı kuruma kalır. Ticari; kurumsal self-host koşulları doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K12-003",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1170",
+      "ad": "Betterleaks",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/betterleaks/betterleaks",
+      "olgunluk": "erken",
+      "ne_saglar": "Gitleaks yapılandırmasıyla uyumlu; BPE tokenizasyonuna dayalı 'token verimliliği' tespiti, CEL ile kural içi doğrulama ve paralel git taraması sunar.",
+      "sinirlar": "Mart 2026'da çıktı; olgunluk ve kural kapsamı yeni doğrulanıyor.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-1171",
+      "ad": "TruffleHog",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (+ ticari Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://trufflesecurity.com/trufflehog",
+      "olgunluk": "olgun",
+      "ne_saglar": "800+ dedektörle git, S3, Slack, Docker imajı ve loglarda sır bulur; bulunan kimlik bilgisini sağlayıcıya karşı canlı doğrular.",
+      "sinirlar": "AGPL; canlı doğrulama dış çağrı yapar (ağ politikası ve gizlilik değerlendirmesi gerekir).",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-009",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1172",
+      "ad": "detect-secrets",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Yelp/detect-secrets",
+      "olgunluk": "olgun",
+      "ne_saglar": "Temel çizgi (baseline) dosyasıyla mevcut sırları kabul edip yalnız yeni eklenen sırları pre-commit aşamasında engeller.",
+      "sinirlar": "Geliştirme hızı düşük (son itme Nisan 2026); dedektör kapsamı sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1173",
+      "ad": "GitGuardian (ggshield ve platform)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (ggshield CLI MIT)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.gitguardian.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "500+ sır türünü geçerlilik kontrolüyle tespit eder; olay yönetimi, geçmiş taraması, bal küpü (honeytoken) ve insan dışı kimlik envanteri sunar.",
+      "sinirlar": "Tarama içeriği SaaS'a gönderilir (self-host sürüm ayrıca lisanslanır).",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-1193",
+      "ad": "Gitsign",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sigstore/gitsign",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Git commit'lerini OIDC kimliğiyle anahtarsız imzalar ve Rekor'a kaydeder; commit yazarlığını doğrulanmış kimliğe bağlar.",
+      "sinirlar": "Kısa ömürlü sertifikalar nedeniyle doğrulama Rekor'a bağımlıdır; bazı Git barındırıcıları 'doğrulandı' rozeti göstermez.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-008",
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-1210",
+      "ad": "Policy in Amazon Bedrock AgentCore",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AgentCore Gateway'de her ajan-araç çağrısını varsayılan-ret ilkesiyle Cedar politikalarına göre ajan kodu dışında değerlendirir; politikalar doğal dilden Cedar'a çevrilebilir. Mart 2026'da GA.",
+      "sinirlar": "Yalnız AgentCore Gateway üzerinden geçen çağrıları kapsar; AWS kilidi.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-1214",
+      "ad": "Permit.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.permit.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OPA/Cedar/OpenFGA üzerinde RBAC/ABAC/ReBAC yönetim arayüzü, denetim kaydı ve yapay zekâ ajanları için erişim kontrolü; karar noktası kurum içinde çalışabilir.",
+      "sinirlar": "Kontrol düzlemi SaaS'tır.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1216",
+      "ad": "HashiCorp Vault",
+      "tur": "ticari-yazilim",
+      "lisans": "BUSL-1.1 (+ ticari Enterprise/HCP)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.hashicorp.com/products/vault",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dinamik ve kısa ömürlü kimlik bilgileri (veritabanı, bulut), PKI, transit şifreleme ve OIDC/JWT tabanlı iş yükü kimlik doğrulaması sunar; sırlar ajan bağlamı dışında tutulur.",
+      "sinirlar": "BUSL rakip hizmet sunmayı kısıtlar; işletimi karmaşık; IBM sahipliği sonrası fiyatlandırma değişkenliği.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1217",
+      "ad": "OpenBao",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openbao.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Vault'un BUSL öncesi sürümünden çatallanmış topluluk projesi; dinamik sırlar, PKI, kimlik doğrulama yöntemleri ve API uyumluluğu sunar.",
+      "sinirlar": "Vault Enterprise özelliklerinin bir kısmının karşılığı yok; ekosistem daha küçük.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1218",
+      "ad": "Infisical",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek) + ticari (ee)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://infisical.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gizli bilgi, sertifika ve ayrıcalıklı erişim yönetimi; dinamik sırlar, sır taraması, makine kimlikleri (OIDC, Kubernetes, bulut kimliği) ve Kubernetes operatörü sunar.",
+      "sinirlar": "Bazı kurumsal özellikler ee lisanslı.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1219",
+      "ad": "SPIFFE / SPIRE",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://spiffe.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş yükü kimlik standardı (X.509/JWT SVID) ve düğüm/iş yükü kanıtlamasıyla statik anahtar yerine kısa ömürlü, otomatik dönen kimlik veren çalışma zamanıdır.",
+      "sinirlar": "Kurulum ve kanıtlama eklentileri uzmanlık ister; insan/ajan yetki modelini tek başına çözmez.",
+      "ihtiyaclar": [
+        "N-K13-012",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1220",
+      "ad": "IETF WIMSE",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://datatracker.ietf.org/wg/wimse/about/",
+      "olgunluk": "erken",
+      "ne_saglar": "Çok sistemli ortamlarda iş yükü kimliği, kimlik bağlamının hizmetler arası yayılımı ve token değişimi için standartlar geliştirir.",
+      "sinirlar": "Belgeler taslak aşamasında; uygulama desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K13-012",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1221",
+      "ad": "MCP Authorization belirtimi",
+      "tur": "protokol-standart",
+      "lisans": "MIT (belirtim deposu)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://modelcontextprotocol.io/specification/draft/basic/authorization",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularına erişim için OAuth 2.1 tabanlı yetkilendirmeyi, korumalı kaynak meta verisini ve token'ın hedef sunucuya bağlanmasını tanımlar.",
+      "sinirlar": "Belirtim hızla değişiyor; sunucu uygulamaları tutarsız.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1222",
+      "ad": "Teleport",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (kaynak); Community Edition ikilileri ayrı lisans; Enterprise ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://goteleport.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SSH, Kubernetes, veritabanı ve uygulama erişimi için sertifika tabanlı kısa ömürlü kimlik, tam zamanında erişim talepleri, oturum kaydı ve makine/iş yükü kimliği (tbot) sunar.",
+      "sinirlar": "Community Edition ikili lisansı ticari kullanımda şirket büyüklüğüne bağlı kısıt içerir; gelişmiş özellikler Enterprise'da.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1223",
+      "ad": "Keycloak",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.keycloak.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OIDC/SAML kimlik sağlayıcı; hizmet hesapları, token değişimi, adım-yukarı kimlik doğrulama ve yetkilendirme servisleri sunar.",
+      "sinirlar": "Yüksek erişilebilirlik ve sürüm yükseltme işletim yükü getirir.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K13-012",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1224",
+      "ad": "ZITADEL",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://zitadel.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok kiracılı kimlik altyapısı; OIDC/SAML, makine kullanıcıları, eylemler ve olay kaynaklı değiştirilemez denetim günlüğü sunar.",
+      "sinirlar": "v3 ile AGPL-3.0'a geçti; gömme senaryolarında lisans değerlendirmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1225",
+      "ad": "External Secrets Operator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://external-secrets.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes'e Vault, OpenBao, Infisical, bulut sır yöneticileri vb. kasalardan sırları senkronlar; sırlar kod ve imaj dışında kalır.",
+      "sinirlar": "Senkronlanan sırlar Kubernetes Secret olarak kümede durur; etcd şifreleme gerekir.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1226",
+      "ad": "SOPS",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://getsops.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML/JSON/ENV dosyalarında değer düzeyinde şifreleme (age, KMS, PGP) yaparak yapılandırmanın git'te şifreli ve incelenebilir tutulmasını sağlar.",
+      "sinirlar": "Dinamik/kısa ömürlü sır üretmez; anahtar yönetimi kurumda kalır.",
+      "ihtiyaclar": [
+        "N-K11-007",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1227",
+      "ad": "CyberArk Conjur Open Source",
+      "tur": "acik-cekirdek",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/cyberark/conjur",
+      "olgunluk": "olgun",
+      "ne_saglar": "Makine kimlikleri için politika tabanlı sır yönetimi; uygulama/CI kimlik doğrulayıcıları ve denetim sunar.",
+      "sinirlar": "Açık kaynak sürümün geliştirmesi yavaş; kurumsal özellikler ticari üründe.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1228",
+      "ad": "step-ca (Smallstep)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/smallstep/certificates",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özel sertifika otoritesi ve ACME sunucusu; OIDC ile kısa ömürlü X.509/SSH sertifikaları vererek statik anahtarları ortadan kaldırır.",
+      "sinirlar": "PKI tasarımı ve kök anahtar koruması kurum sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1229",
+      "ad": "Doppler",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.doppler.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İnsanlar ve yapay zekâ ajanları için gizli bilgi yönetimi; ortam senkronu, rotasyon, erişim kaydı ve CLI ile çalışma zamanında sır enjeksiyonu.",
+      "sinirlar": "Yalnız SaaS.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1230",
+      "ad": "Akeyless",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.akeyless.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık parça şifreleme ile SaaS sır yönetimi; dinamik sırlar, makine ve ajan kimlikleri, kurum içi ağ geçidi.",
+      "sinirlar": "Kontrol düzlemi SaaS.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1231",
+      "ad": "1Password Service Accounts",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.1password.dev/service-accounts",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomasyon için kasa kapsamı sınırlandırılmış hizmet hesapları; CLI/SDK ile çalışma zamanında sır enjeksiyonu ve erişim kaydı.",
+      "sinirlar": "Yalnız SaaS; dinamik sır üretmez.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1232",
+      "ad": "Bitwarden Secrets Manager",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (kaynak erişilebilir)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://bitwarden.com/products/secrets-manager/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Makine hesapları ve erişim token'larıyla CI/ajan için sır dağıtımı; CLI, SDK ve self-host seçeneği.",
+      "sinirlar": "Dinamik sır ve politika motoru sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1233",
+      "ad": "Aembit",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://aembit.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İş yükü ve ajan kimlik/erişim yönetimi; kimlik federasyonuyla sırsız erişim, çalışma zamanında kısa ömürlü kimlik enjeksiyonu ve koşullu erişim politikaları.",
+      "sinirlar": "SaaS kontrol düzlemi.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1234",
+      "ad": "Astrix Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://astrix.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İnsan dışı kimlikleri ve yapay zekâ ajan kimliklerini keşfedip envanterler; aşırı yetkili, yetim ve riskli bağlantıları tespit eder.",
+      "sinirlar": "SaaS; bağlı sistemlere geniş okuma yetkisi gerekir.",
+      "ihtiyaclar": [
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1235",
+      "ad": "Oasis Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.oasis.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İnsan dışı kimliklerin yaşam döngüsü yönetimi: keşif, sahip ataması, rotasyon ve kullanılmayan kimliklerin kapatılması.",
+      "sinirlar": "SaaS; ticari.",
+      "ihtiyaclar": [
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1236",
+      "ad": "Keycard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.keycard.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Otonom ajanların araç, API ve veriye erişimini göreve özel kapsamla, politika ile zorlayan ve her erişimi kaydeden kontrol düzlemidir.",
+      "sinirlar": "Genç girişim; bağımsız değerlendirme sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1237",
+      "ad": "Microsoft Entra Agent ID",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/entra/agent-id/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanlarına Entra dizininde kimlik, envanter, koşullu erişim ve yaşam döngüsü yönetimi getirir.",
+      "sinirlar": "Microsoft ekosistemine bağlı; bazı özellikler önizleme olabilir.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1238",
+      "ad": "Auth0 for AI Agents",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://auth0.com/ai/docs/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Token Vault ile ajanların kullanıcı adına üçüncü taraf API'lere yetkili erişimi, eşzamansız insan onayı ve RAG için ince taneli yetkilendirme sunar.",
+      "sinirlar": "SaaS; Okta ekosistemine bağlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1239",
+      "ad": "Apono",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.apono.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut, veritabanı ve Kubernetes için tam zamanında, süreli, onaylı ayrıcalıklı erişim verir ve süre sonunda otomatik geri alır.",
+      "sinirlar": "SaaS; ajan kimlikleri için kullanım senaryoları yeni.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1301",
+      "ad": "AARM (Autonomous Action Runtime Management)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor (belirtim kamuya açık)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://aarm.dev/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan güvenlik sistemlerinin çalışma zamanında sağlaması gereken yetenekleri (yürütme öncesi kesme, kimlik bağlama, politika uygulama) Core/Extended uyum düzeyleriyle tanımlayan belirtimdir.",
+      "sinirlar": "Yeni belirtim; uyum incelemesinden geçen ürün sayısı az.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K16-003",
+        "N-K18-005",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-1302",
+      "ad": "Microsoft Agent Governance Toolkit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/agent-governance-toolkit",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan eylemlerini yürütmeden önce kesen durumsuz politika motoru, kriptografik ajan kimliği ve güven puanı, yürütme halkaları ve acil durdurma (kill switch) içeren paketler; LangChain, CrewAI, Google ADK, Microsoft Agent Framework entegrasyonları.",
+      "sinirlar": "Nisan 2026'da çıktı; performans ve kapsam iddiaları bağımsız olarak doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K18-003",
+        "N-K18-005",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-1307",
+      "ad": "Santa (North Pole Security)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://northpole.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "macOS için ikili ve dosya erişimi yetkilendirmesi; izin/engel listeleri ve merkezi senkron sunucusuyla geliştirici makinelerinde yalnız onaylı araçların çalışmasını sağlar. Google'ın arşivlenen Santa projesinin devamıdır.",
+      "sinirlar": "Yalnız macOS; kural yönetimi için senkron sunucusu (ör. ticari Workshop veya açık kaynak alternatifler) gerekir.",
+      "ihtiyaclar": [
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1381",
+      "ad": "GitHub (merge queue ve rulesets)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birleştirme kuyruğu PR'ı güncel ana dal ve önündeki PR'larla birleşik geçici dalda yeniden test eder; kural setleri zorunlu kontrol, imzalı commit, force-push/silme yasağı ve CODEOWNERS onayı uygular.",
+      "sinirlar": "Çakışma tahmini yok; kuyruk ve kural özellikleri plan/sürüme göre değişir; GHES'te özellik gecikmesi.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K06-001",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-007",
+        "N-K08-003",
+        "N-K22-004",
+        "N-K24-008"
+      ]
+    },
+    {
+      "id": "AR-1504",
+      "ad": "Unkey",
+      "tur": "acik-cekirdek",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.unkey.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "API anahtarı yaşam döngüsü, anahtar başına kullanım limiti (kalan kredi), yeniden doldurma ve küresel hız sınırlama sunan API geliştirici platformu; ajan/ekip anahtarlarına harcama tavanı koymak için kullanılabilir.",
+      "sinirlar": "Yönetilen hizmet ağırlıklıdır; self-host kurulumu ve lisans koşulları kaynakta doğrulanmalıdır.",
+      "ihtiyaclar": [
+        "N-K15-006",
+        "N-K18-003",
+        "N-K20-003",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-1517",
+      "ad": "Kingfisher",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mongodb.github.io/kingfisher/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kaynak kod, Git geçmişi ve dosya sistemlerinde sızmış gizli bilgileri yüksek hızla tarayıp sağlayıcı API'leriyle canlılık doğrulaması yapan ve etki alanını (blast radius) haritalayan tarayıcı.",
+      "sinirlar": "Canlı doğrulama dış servislere istek gönderir; kapalı ağlarda kapatılmalıdır.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-009",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1533",
+      "ad": "Legitify",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://legitify.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub ve GitLab kuruluş/depo ayarlarındaki yanlış yapılandırmaları (dal koruması, 2FA, fazla yetkili token, webhook) politika kurallarıyla tespit eden araç.",
+      "sinirlar": "Ayar taraması yapar, düzeltmeyi otomatikleştirmez; ticari Legit platformunun küçük açık kaynak parçasıdır.",
+      "ihtiyaclar": [
+        "N-K06-001",
+        "N-K06-007",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1536",
+      "ad": "Bumblebee",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/perplexityai/bumblebee",
+      "olgunluk": "gelisen",
+      "ne_saglar": "macOS/Linux geliştirici makinelerinde kilit dosyaları, paket yöneticisi meta verisi, IDE eklentileri ve MCP yapılandırmalarını salt-okunur tarayıp NDJSON envanter çıkaran; bir tavsiye yayımlandığında hangi makinelerin etkilendiğini bulan araç.",
+      "sinirlar": "Yalnız envanter ve eşleşme yapar; engelleme veya düzeltme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1542",
+      "ad": "hoop.dev",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://hoop.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veritabanı, sunucu ve API erişimini aracı (sidecar) üzerinden geçirip hassas alanları kablo üzerinde maskeleyen, yıkıcı komutları engelleyen, onay ve oturum kaydı sağlayan ajan/insan erişim ağ geçidi.",
+      "sinirlar": "Ek ağ atlaması ve işletim yükü getirir; maskeleme doğruluğu tespit kurallarına bağlıdır.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-007",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-1548",
+      "ad": "coop (trailofbits/coop)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/coop",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code ve Codex'i geliştirici makinesinden yalıtılmış sanal makinede çalıştırmak için hazırlanmış ortam; ana makinedeki kimlik bilgileri ve dosyalara erişimi sınırlar.",
+      "sinirlar": "Belirli ajanlar ve platformlara göre hazırlanmıştır; kurumsal filo yönetimi sunmaz.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1552",
+      "ad": "Octo STS",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/octo-sts/app",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OIDC kimliğini (ör. CI iş akışı) depo içindeki güven politikalarına göre kısa ömürlü, dar kapsamlı GitHub erişim token'larıyla değiştiren güvenlik belirteci hizmeti (STS); uzun ömürlü PAT ihtiyacını ortadan kaldırır.",
+      "sinirlar": "Yalnız GitHub; self-host için GitHub App ve bulut dağıtımı gerekir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K15-004",
+        "N-K18-003",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-1553",
+      "ad": "Phase",
+      "tur": "acik-cekirdek",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://phase.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uçtan uca şifreli, ortam bazlı gizli bilgi yönetimi; CLI, SDK, Kubernetes ve CI entegrasyonları ile ekipler ve ajanlar için erişim kontrollü gizli bilgi dağıtımı.",
+      "sinirlar": "Açık çekirdek; bazı kurumsal özellikler ücretlidir, lisans koşulları doğrulanmalıdır.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1554",
+      "ad": "dotenvx",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://dotenvx.com/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": ".env dosyalarını açık anahtarla şifreleyip depoda güvenle sürümlemeye, çalışma zamanında özel anahtarla çözmeye izin veren dotenv yazarının güvenli dotenv aracı.",
+      "sinirlar": "Anahtar yönetimi kullanıcıya kalır; merkezi erişim denetimi ve rotasyon sunmaz.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1555",
+      "ad": "Sealed Secrets",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/bitnami-labs/sealed-secrets",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes gizli bilgilerini küme anahtarıyla şifreleyip Git'te güvenle saklamaya (GitOps) izin veren denetleyici ve kubeseal CLI'si.",
+      "sinirlar": "Yalnız Kubernetes; anahtar yedekleme/rotasyonu dikkat ister.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1556",
+      "ad": "HashiCorp Boundary",
+      "tur": "acik-cekirdek",
+      "lisans": "BUSL-1.1",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://boundaryproject.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik tabanlı, tam zamanında altyapı erişimi: ağ erişimi vermeden hedef sunucu/veritabanına oturum açar, Vault ile dinamik kimlik bilgisi enjekte eder ve oturumları kaydeder.",
+      "sinirlar": "2023'ten beri BUSL lisanslıdır (açık kaynak tanımı dışında); oturum kaydı gibi özellikler ticari sürümdedir. BUSL lisansı; ajan iş yükleri için tasarım uyarlaması gerekir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-1557",
+      "ad": "Pomerium",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.pomerium.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik ve bağlam farkındalıklı (identity-aware) ters vekil sunucu; iç uygulamalara ve MCP sunucularına istek bazında politika ile sıfır güven erişimi sağlar.",
+      "sinirlar": "Gelişmiş politika ve yönetim konsolu ticari sürümdedir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1561",
+      "ad": "Databunker",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://databunker.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kişisel verileri (PII/PHI) şifreli ve tokenize olarak ayrı bir kasada tutan, rıza, saklama süresi ve 'unutulma hakkı' işlemlerini API ile yöneten kişisel veri kasası.",
+      "sinirlar": "Uygulama mimarisinin kişisel veriyi bu kasaya taşıyacak şekilde tasarlanmasını gerektirir; bazı özellikler ticari sürümdedir.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1646",
+      "ad": "Golf",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://golf.dev/",
+      "olgunluk": "erken",
+      "ne_saglar": "Dosya tabanlı konvansiyonla MCP sunucusu oluşturmayı, kimlik doğrulama (OAuth/API anahtarı), telemetri ve dağıtımı standartlaştıran üretim odaklı MCP sunucu çerçevesi.",
+      "sinirlar": "Genç proje; ekosistemi FastMCP'ye göre küçüktür.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1697",
+      "ad": "Kuadrant",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kuadrant.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gateway API üzerine oran sınırlama (Limitador), kimlik doğrulama/yetkilendirme (Authorino), TLS ve DNS politikaları ekler; TokenRateLimitPolicy ile LLM trafiğinde kullanıcı/ekip başına token tabanlı sınır uygulanabilir.",
+      "sinirlar": "Kubernetes ve Gateway API uygulaması (Istio/Envoy Gateway) gerektirir; token sayımı ağ geçidinden geçen trafikle sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-006",
+        "N-K18-003",
+        "N-K20-005",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-1708",
+      "ad": "cert-manager",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cert-manager.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes'te X.509 sertifikalarını ACME, Vault, özel CA gibi kaynaklardan otomatik üretip yeniler; csi-driver-spiffe gibi eklentilerle iş yüklerine kısa ömürlü kimlik sertifikası dağıtır.",
+      "sinirlar": "Kubernetes'e özgü; insan/ajan kullanıcı kimliği değil iş yükü sertifikası yönetir.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1709",
+      "ad": "Dex",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://dexidp.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "LDAP, SAML, GitHub, GitLab, Microsoft gibi kimlik sağlayıcılarını tek bir OpenID Connect sağlayıcısı arkasında birleştiren federasyon hizmeti; araçlara tek oturum ve grup talepleri sağlar.",
+      "sinirlar": "Tam kimlik yönetimi değildir (kullanıcı deposu yok); ince taneli yetki ayrı sistemde tutulur.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1710",
+      "ad": "Athenz",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.athenz.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "X.509 sertifikalarıyla hizmet kimliği sağlayan ve alan/rol/politika modeliyle yetkilendirme kararı veren platform; kısa ömürlü sertifika ve erişim token'ı üretir.",
+      "sinirlar": "Kurulum ve işletim karmaşık; topluluk görece küçük.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K18-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1711",
+      "ad": "Tokenetes",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://tokenetes.io/",
+      "olgunluk": "erken",
+      "ne_saglar": "IETF Transaction Tokens taslağını uygulayan hizmet: dış isteğin kimlik ve bağlamını çağrı zinciri boyunca kısa ömürlü, değiştirilemez işlem token'ı olarak taşır; ajan adına yapılan iç çağrılarda kimin/neden yetkisini izlenebilir kılar.",
+      "sinirlar": "Taslak standarda dayanır; topluluk küçük, üretim olgunluğu sınırlı.",
+      "ihtiyaclar": [
+        "N-K13-012",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1727",
+      "ad": "Istio",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://istio.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hizmet ağı: iş yükleri arasında otomatik mTLS kimliği, AuthorizationPolicy ile istek düzeyinde izin/red, egress gateway ile dış çıkışın denetlenmesi ve dağıtık iz başlıkları; tek politika değişikliğiyle ajan servislerinin dış erişimini kesmek mümkündür.",
+      "sinirlar": "İşletim yükü yüksek; ambient mod daha hafif olsa da ağ bilgisi gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K16-003",
+        "N-K18-003",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1762",
+      "ad": "AGNTCY Identity",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://spec.identity.agntcy.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanlar, MCP sunucuları ve çok ajanlı sistemler için doğrulanabilir kimlik ve rozet (Verifiable Credentials) oluşturma, kaydetme ve doğrulama; kurumsal kimlik sağlayıcılarıyla bağlanabilir.",
+      "sinirlar": "Erken aşama; standart ajan kimliği ekosistemi henüz oturmadı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1774",
+      "ad": "gittuf",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://gittuf.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Git deposu için barındırıcıdan bağımsız güvenlik katmanı: hangi anahtarın hangi dal/dosyaya yazabileceğini TUF tabanlı imzalı politikayla tanımlar, referans durum günlüğüyle geçmişi doğrular; ajanın kural dosyalarını değiştirememesi gibi kurallar yazılabilir.",
+      "sinirlar": "Beta aşamasında; barındırma platformları ve CI ile entegrasyonu yeni.",
+      "ihtiyaclar": [
+        "N-K06-001",
+        "N-K08-003",
+        "N-K11-007",
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-1777",
+      "ad": "Sigstore Fulcio",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.sigstore.dev/certificate_authority/overview/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OIDC kimliğini (insan ya da CI iş yükü) yaklaşık 10 dakikalık kısa ömürlü kod imzalama sertifikasına bağlayan sertifika otoritesi; uzun ömürlü imza anahtarı ihtiyacını kaldırır.",
+      "sinirlar": "Kimlik, OIDC sağlayıcısının güvenilirliğine bağlı; kurum içi kurulum ek işletim gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-1781",
+      "ad": "opkssh (OpenPubkey SSH)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/openpubkey/opkssh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenPubkey ile OIDC kimliğini (Google, Microsoft, GitLab vb.) kullanıcı anahtarına bağlayarak uzun ömürlü SSH anahtarları yerine tek oturum açmayla kısa ömürlü SSH erişimi verir; geliştirici ve ajan makinelerinde anahtar dağınıklığını azaltır.",
+      "sinirlar": "OIDC sağlayıcısına bağımlı; sunucu tarafı yapılandırma gerekir.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1809",
+      "ad": "Apache Syncope",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://syncope.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik yaşam döngüsü yönetimi: kullanıcı/grup/nesne sağlama ve kaldırma, onay iş akışları, SCIM, erişim sertifikasyonu ve denetim; ajan kimliklerini insan kimlikleriyle aynı süreçlerde yönetmeye uygun.",
+      "sinirlar": "Kurulumu ve yapılandırması karmaşık; kullanıcı arayüzü sade değil.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-003",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-1815",
+      "ad": "PyPI Trusted Publishing ve Attestations",
+      "tur": "bulut-hizmeti",
+      "lisans": "Apache-2.0 (Warehouse)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.pypi.org/trusted-publishers/",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI iş akışının OIDC kimliğiyle uzun ömürlü API token'ı olmadan PyPI'a yayın yapmasını sağlar; PEP 740 dijital attestation'larıyla paketin hangi depo ve iş akışından üretildiği doğrulanabilir.",
+      "sinirlar": "Yalnız desteklenen CI sağlayıcıları (GitHub, GitLab, Google Cloud, ActiveState vb.); iç paket depoları için ayrı çözüm gerekir.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-004",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-1820",
+      "ad": "LF EasyCLA",
+      "tur": "bulut-hizmeti",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://easycla.lfx.linuxfoundation.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR ve Gerrit değişikliklerinde katkıcı lisans anlaşmasının (bireysel/kurumsal CLA) imzalanıp imzalanmadığını denetleyip birleştirmeyi engelleyen hizmet; katkı kimliğinin hukuki izini tutar.",
+      "sinirlar": "LF projeleri için sunulur; kurum içi kurulum pratik değil.",
+      "ihtiyaclar": [
+        "N-K19-006",
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-1850",
+      "ad": "OWASP WrongSecrets",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://owasp.org/www-project-wrongsecrets/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod, konteyner, bulut ve CI'da gizli bilgi yönetimi hatalarını gösteren alıştırmalı eğitim uygulaması; gizli bilgi taramasının ve eğitimin etkinliğini sınamak için.",
+      "sinirlar": "Eğitim amaçlıdır; üretim aracı değildir.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K25-005"
+      ]
+    },
+    {
+      "id": "AR-1875",
+      "ad": "W3C Verifiable Credentials Data Model 2.0",
+      "tur": "protokol-standart",
+      "lisans": "W3C Document License",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.w3.org/TR/vc-data-model-2.0/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kriptografik olarak doğrulanabilir kimlik ve yetki beyanlarının veri modeli (2025 W3C Tavsiyesi); ajan kimlikleri, yetenek rozetleri ve imzalı onay beyanları için kullanılabilir.",
+      "sinirlar": "Ekosistem ve kurumsal araç desteği gelişiyor; iptal ve anahtar yönetimi ayrıca tasarlanmalı.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1880",
+      "ad": "RFC 8693 (OAuth 2.0 Token Exchange)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rfc-editor.org/rfc/rfc8693",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bir token'ı daha dar kapsamlı veya başka hedef kitleye yönelik token ile takas etmeyi tanımlar; 'act' talebiyle kullanıcı adına hareket eden ajanın kimliğini (vekâlet zinciri) token içinde taşır.",
+      "sinirlar": "Kimlik sağlayıcı desteği değişken; politika ve kapsam tasarımı kuruma kalır.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1881",
+      "ad": "RFC 9396 (OAuth 2.0 Rich Authorization Requests)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rfc-editor.org/rfc/rfc9396",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OAuth yetki taleplerinde kapsamdan (scope) daha ince, yapılandırılmış 'authorization_details' (ör. belirli depo, belirli işlem, tutar) tanımlar; görev başına dar yetki ve içeriğe bağlı onay için.",
+      "sinirlar": "Yetkilendirme sunucusu desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1882",
+      "ad": "OAuth Transaction Tokens (IETF taslağı)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://datatracker.ietf.org/doc/draft-ietf-oauth-transaction-tokens/",
+      "olgunluk": "erken",
+      "ne_saglar": "Dış istekle başlayan bir işlemin kimlik ve bağlamını iç hizmet çağrı zinciri boyunca kısa ömürlü, değiştirilemez token olarak taşımayı tanımlayan taslak; ajan adına yapılan çağrıların izlenebilir yetkilendirmesi.",
+      "sinirlar": "Henüz RFC değil, taslak değişebilir.",
+      "ihtiyaclar": [
+        "N-K13-012",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1885",
+      "ad": "OpenID Shared Signals Framework (SSF, CAEP, RISC)",
+      "tur": "protokol-standart",
+      "lisans": "OpenID IPR politikası",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openid.net/wg/sharedsignals/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Oturum iptali, kimlik bilgisi değişikliği, risk seviyesi değişimi gibi güvenlik olaylarını sistemler arasında gerçek zamanlı ileten ve erişimin sürekli yeniden değerlendirilmesini sağlayan standartlar; ajan oturumlarını merkezi olayla anında iptal etmeye temel.",
+      "sinirlar": "Alıcı ve verici tarafların desteği gerekir; kurumsal ürün desteği gelişiyor.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K17-007",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1886",
+      "ad": "SCIM 2.0 (RFC 7643 / RFC 7644)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rfc-editor.org/rfc/rfc7644",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanıcı ve grup kimliklerinin sistemler arasında otomatik sağlanması ve kaldırılması için şema ve REST protokolü; ajan hesaplarının insan hesaplarıyla aynı yaşam döngüsünde yönetilmesine temel.",
+      "sinirlar": "Ajan kimliğine özgü öznitelikler standart şemada yok; uzantı gerekir.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-1946",
+      "ad": "OAuth2 Proxy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://oauth2-proxy.github.io/oauth2-proxy/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik doğrulaması olmayan iç araçların (ajan panoları, iş akışı arayüzleri, model uç noktaları) önüne OIDC/OAuth2 ile oturum açma ve grup tabanlı erişim ekleyen ters vekil sunucu.",
+      "sinirlar": "Yalnız kimlik doğrulama ve kaba erişim; ince taneli yetkilendirme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1947",
+      "ad": "Paralus",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.paralus.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes kümelerine kullanıcı düzeyinde, SSO ile tam zamanında (just-in-time) ve kısa ömürlü kimlik bilgileriyle erişim; RBAC ve kubectl komut düzeyinde denetim kaydı.",
+      "sinirlar": "Kubernetes erişimine özgü; geliştirme temposu yavaşladı.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-1951",
+      "ad": "Cartography",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.cartography.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut hesapları, kimlikler, SaaS ve kod platformlarındaki varlıkları ve ilişkilerini Neo4j grafiğine çekerek aşırı yetkili kimlikleri, erişim yollarını ve güvenlik açıklarını sorgulanabilir kılar; ajan kimliklerinin gerçek yetkilerini denetlemeye uygun.",
+      "sinirlar": "Neo4j işletimi gerekir; veri tazeliği periyodik senkronizasyona bağlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1956",
+      "ad": "Amazon Bedrock AgentCore Gateway",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Mevcut REST API'leri, Lambda fonksiyonlarını ve MCP sunucularını ajanlar için tek bir MCP uç noktasında toplar; gelen/giden kimlik doğrulama ve araç araması (semantic tool search) sağlar.",
+      "sinirlar": "AWS'ye bağımlı; araç kataloğu yönetimi ve izin modeli AWS IAM/Cognito kavramlarına dayanır.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-001",
+        "N-K12-002",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-1957",
+      "ad": "Amazon Bedrock AgentCore Identity",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/identity.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlara iş yükü kimliği verir; kullanıcı adına üçüncü taraf hizmetlere (GitHub, Slack, Salesforce vb.) OAuth belirteçlerini güvenli kasada tutarak görev bazlı, kısa ömürlü erişim sağlar; mevcut IdP'lerle (Okta, Entra, Cognito) bütünleşir.",
+      "sinirlar": "AWS dışı çalışma zamanlarında kullanımı sınırlı; ajan kimliği modeli AWS'ye özgü.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-1968",
+      "ad": "AWS Secrets Manager",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/secrets-manager/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sırların şifreli saklanması, otomatik döndürülmesi (rotation), IAM ile ince taneli erişimi ve CloudTrail ile erişim denetimi.",
+      "sinirlar": "Ajan başına kısa ömürlü yetki için ek tasarım (IAM rolleri, oturum politikaları) gerekir; sır başına ücret.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1969",
+      "ad": "AWS IAM Access Analyzer",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/iam/access-analyzer/",
+      "olgunluk": "olgun",
+      "ne_saglar": "IAM politikalarını otomatik akıl yürütmeyle analiz eder; dış erişim ve kullanılmayan yetkileri bulur, politika önizlemesi ve 'özel politika denetimi' ile CI'da yetki genişlemesini engeller.",
+      "sinirlar": "Yalnız AWS IAM kapsamı; uygulama içi yetkilendirme kararlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K11-007",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1996",
+      "ad": "Azure Key Vault",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/key-vault",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sır, anahtar ve sertifika yönetimi; yönetilen kimliklerle parolasız erişim, RBAC ve erişim günlükleri; Managed HSM seçeneği.",
+      "sinirlar": "Otomatik sır döndürme her sır türü için hazır değildir; ajan başına kısa ömürlü yetki tasarımı ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2002",
+      "ad": "Microsoft Dev Box",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/dev-box",
+      "olgunluk": "olgun",
+      "ne_saglar": "Merkezi yönetilen, Intune ile politika uygulanan bulut geliştirici iş istasyonları; ajan araçlarının kişisel makine yerine denetimli ortamda çalışmasını sağlar.",
+      "sinirlar": "Windows odaklı; saatlik işlem maliyeti; ağ çıkışı politikası ayrıca tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2011",
+      "ad": "Microsoft Entra Workload ID",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulama, hizmet ve hat kimlikleri için federasyonlu (sırsız) kimlik; GitHub Actions/Kubernetes OIDC belirteçleriyle kısa ömürlü erişim, koşullu erişim ve risk tespiti.",
+      "sinirlar": "Premium özellikler ek lisans; ajan-özel kimlik için Entra Agent ID ile birlikte düşünülmeli.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2012",
+      "ad": "Microsoft Entra ID Governance",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Erişim paketleri, periyodik erişim gözden geçirmeleri, ayrıcalıklı kimlik yönetimi (PIM) ile tam zamanında rol yükseltme ve ayrılık-görev (SoD) denetimleri.",
+      "sinirlar": "Ek lisans; ürün içi yetkilendirme kararlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K17-002",
+        "N-K18-003",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-2021",
+      "ad": "GitHub Environments (dağıtım koruma kuralları)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ortam bazında zorunlu gözden geçirenler, bekleme süresi, dal/etiket kısıtı, özel koruma kuralı (GitHub App) ve ortama özgü sırlar; kendi onayını engelleme seçeneği.",
+      "sinirlar": "Karmaşık terfi zinciri için ek araç gerekebilir; özel depolarda plan kısıtları var.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2029",
+      "ad": "Google Secret Manager",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/security/products/secret-manager",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürümlü sır saklama, IAM ile erişim, döndürme zamanlaması, bölgesel sırlar ve Cloud Audit Logs ile erişim izi.",
+      "sinirlar": "Döndürmenin kendisini değil bildirimini yönetir; döndürme mantığı kullanıcıda.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2034",
+      "ad": "Cloud Workstations",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/workstations",
+      "olgunluk": "olgun",
+      "ne_saglar": "VPC içinde, özel imajlı, merkezi yönetilen bulut geliştirme ortamları; yerel makinede kod ve sır tutmadan ajan araçlarını çalıştırmaya olanak verir.",
+      "sinirlar": "Saatlik maliyet; IDE deneyimi ağ gecikmesine bağlı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2049",
+      "ad": "OCI Vault",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.oracle.com/security/cloud-security/key-management/",
+      "olgunluk": "olgun",
+      "ne_saglar": "HSM destekli anahtar yönetimi ve sır saklama; sır sürümleme, döndürme ve IAM politikalarıyla erişim.",
+      "sinirlar": "OCI dışı iş yüklerinde entegrasyon ek çaba ister.",
+      "ihtiyaclar": [
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2066",
+      "ad": "HCP Vault Radar",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://developer.hashicorp.com/hcp/docs/vault-radar",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod depoları, Confluence, Jira, Slack ve Terraform'da açığa çıkmış sır ve kişisel verileri tarar; bulguların Vault'ta olup olmadığını ve aktifliğini önceliklendirir.",
+      "sinirlar": "SaaS; tarama kapsamı desteklenen bağlayıcılarla sınırlı.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-004",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2076",
+      "ad": "MuleSoft Agent Fabric",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.mulesoft.com/ai/agent-fabric",
+      "olgunluk": "erken",
+      "ne_saglar": "Farklı platformlardaki ajanları ve MCP sunucularını kaydeden ajan kataloğu (registry), A2A/MCP üzerinden yönlendiren broker ve ajan trafiğine politika uygulayan yönetişim katmanı.",
+      "sinirlar": "Yeni ürün; MuleSoft ekosistemine bağımlılık.",
+      "ihtiyaclar": [
+        "N-K10-004",
+        "N-K12-002",
+        "N-K12-006"
+      ]
+    },
+    {
+      "id": "AR-2086",
+      "ad": "Atlassian Guard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.atlassian.com/software/guard",
+      "olgunluk": "olgun",
+      "ne_saglar": "Atlassian Cloud için SSO/kullanıcı yaşam döngüsü, veri sınıflandırma ve veri güvenliği politikaları, denetim günlüğü ve hassas veri/sır tespiti (Guard Detect).",
+      "sinirlar": "Yalnız Atlassian Cloud ürünleri; ek lisans.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2096",
+      "ad": "Red Hat OpenShift Dev Spaces",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (upstream Eclipse Che EPL-2.0)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://developers.redhat.com/products/openshift-dev-spaces",
+      "olgunluk": "olgun",
+      "ne_saglar": "devfile ile kod olarak tanımlı, konteyner tabanlı bulut geliştirme ortamları; proje yalıtımı, RBAC, kaynak kotaları ve kurum ağı içinde çalışma.",
+      "sinirlar": "OpenShift gerektirir; tarayıcı IDE deneyimi yerel IDE'den farklı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2112",
+      "ad": "Idira (eski CyberArk)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.paloaltonetworks.com/idira",
+      "olgunluk": "olgun",
+      "ne_saglar": "İnsan, makine ve yapay zekâ ajanı kimlikleri için ayrıcalıklı erişim yönetimi: sıfır kalıcı ayrıcalık, tam zamanında erişim, sır yönetimi ve oturum kaydı.",
+      "sinirlar": "Mayıs 2026'da yeniden markalandı; ürün adları/SKU'lar değişiyor; maliyetli.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2194",
+      "ad": "Okta Cross App Access (XAA)",
+      "tur": "protokol-standart",
+      "lisans": "ticari (açık belirtim önerisi)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.okta.com/solutions/cross-app-access/",
+      "olgunluk": "erken",
+      "ne_saglar": "Yapay zekâ ajanlarının bir uygulamadan diğerine erişimini kurumsal kimlik sağlayıcısının merkezi politikası ve görünürlüğüyle yöneten OAuth uzantısı (Identity Assertion Authorization Grant); MCP yetkilendirmesiyle uyumlu çalışır.",
+      "sinirlar": "Uygulamaların XAA'yı desteklemesi gerekir; ekosistem benimsemesi erken.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-2272",
+      "ad": "SCM-Manager",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://scm-manager.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git, Mercurial ve Subversion depolarını tek sunucudan yöneten; ince ayrıntılı izin modeli, birleştirme isteği ve eklenti ekosistemi sunan self-host sürüm kontrol sunucusu.",
+      "sinirlar": "Topluluğu Gitea/GitLab'e göre küçük; CI için harici araç gerekir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K06-001",
+        "N-K06-007",
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-2301",
+      "ad": "Kron PAM",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://krontech.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ayrıcalıklı erişim yönetimi, oturum kaydı, veritabanı erişim yöneticisi, dinamik veri maskeleme, AAA sunucusu ve gizli bilgi kasası; API anahtarı ve token gibi insan dışı kimlikleri yönetir.",
+      "sinirlar": "Ajanlara görev bazlı kısa ömürlü yetki modeli ürünün yeni sürüm yol haritasında; ticari.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004",
+        "N-K18-011",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2302",
+      "ad": "WALLIX Bastion",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.wallix.com/privileged-access-management/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ayrıcalıklı oturum yönetimi, oturum kaydı, parola kasası ve erişim onay iş akışları sunan PAM çözümü.",
+      "sinirlar": "Ticari; ajan kimlikleri için özel modeller sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2309",
+      "ad": "Passbolt",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (CE) / ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.passbolt.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ekipler için OpenPGP ile uçtan uca şifreli parola ve gizli bilgi paylaşım yöneticisi; API ve CLI ile otomasyon, paylaşım denetimi.",
+      "sinirlar": "İnsan kullanıcılar odaklı; kısa ömürlü makine kimlikleri için sır yönetim sistemlerinin yerini tutmaz.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2310",
+      "ad": "authentik",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (enterprise dizini hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://goauthentik.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "OIDC, SAML, LDAP, RADIUS ve SCIM sağlayıcısı; akış (flow) tabanlı kimlik doğrulama, uygulama bazlı politikalar, servis hesapları ve token yönetimi.",
+      "sinirlar": "Bazı kurumsal özellikler ücretli sürümde; büyük kurulumlar için işletim deneyimi gerekir.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-003",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-2311",
+      "ad": "Ory Hydra",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ory.sh/hydra",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenID sertifikalı OAuth 2.0/OIDC sunucusu; ajan ve hat servisleri için istemci kimlik bilgileri akışı ve kısa ömürlü erişim token'ları üretir.",
+      "sinirlar": "Kullanıcı yönetimi içermez (ayrı kimlik servisi gerekir); yapılandırma uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-2526",
+      "ad": "JumpServer",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-3.0 (Community) + ticari Enterprise",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.jumpserver.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ayrıcalıklı erişim yönetimi (PAM) / bastion: sunucu, veritabanı ve Kubernetes erişimini merkezîleştirir, oturumları kaydeder, komut filtreleme ile tehlikeli komutları engeller; ajanların altyapıya erişimini aracılamak için kullanılabilir.",
+      "sinirlar": "Bazı onay/uyum özellikleri kurumsal sürümde; GPL-3.0.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-007",
+        "N-K18-013",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2527",
+      "ad": "Casdoor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://casdoor.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OAuth 2.0/OIDC/SAML/CAS destekli kimlik ve erişim yönetimi; Casbin modelleriyle (RBAC/ABAC) izin tanımlama ve yetki sorgulama API'si, ajan odaklı kimlik, MCP/ajan geçidi ve web yönetim arayüzü.",
+      "sinirlar": "Ajan kimliği özellikleri yeni; kurumsal denetim/uyum kapsamı olgun IdP'lere göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-001",
+        "N-K18-002",
+        "N-K18-003",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-2528",
+      "ad": "MaxKey",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.maxkey.top",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek oturum açma (SSO) ve IAM/IDaaS ürünü: OAuth2/OIDC/SAML/CAS, kullanıcı-kaynak yetkilendirmesi ve denetim günlükleri.",
+      "sinirlar": "Belgeler Çince ağırlıklı; ajan/makine kimliği için özel özellik yok.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-2670",
+      "ad": "Progent",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sunblaze-ucb/progent",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan araç çağrıları için alana özgü dil ile ayrıntılı ayrıcalık politikaları tanımlayıp deterministik olarak uygulayan kütüphane; politikalar LLM ile otomatik üretilip güncellenebilir.",
+      "sinirlar": "Araştırma prototipi; politika hatalı yazılırsa ya aşırı kısıtlar ya açık bırakır.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K12-002",
+        "N-K18-003",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2825",
+      "ad": "LiteLLM Agent Control Plane",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.litellm-agent-platform.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenCode, Hermes, Claude Managed Agents, Cursor Agents API ve Deep Agents gibi çalışma zamanları üzerinde tek API, merkezi erişim, kalıcı oturum, CRON zamanlama ve bellek sunan kontrol düzlemi.",
+      "sinirlar": "Mayıs 2026'da başladı; bakım temposu ve güvenlik geçmişi izlenmeli.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-2845",
+      "ad": "OpenConnector",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://oomol.com",
+      "olgunluk": "erken",
+      "ne_saglar": "1.000+ SaaS sağlayıcısı için yönetilen OAuth ve 10.000+ hazır eylemi SDK, CLI, MCP, HTTP ve OpenAPI üzerinden ajanlara sunan açık kaynak bağlayıcı geçidi (Composio/Pipedream alternatifi).",
+      "sinirlar": "Barındırılan sürümde kimlik bilgileri sağlayıcıda tutulur; self-host'ta OAuth uygulamalarını kurum yönetmelidir.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2847",
+      "ad": "Jarvis Registry",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://jarvisregistry.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kimlik, erişim denetimi ve gözlemlenebilirlik içeren kurumsal MCP ve A2A ajan geçidi ile iş akışı orkestrasyon platformu; ajanlara iç araç ve verilere yönetilen erişim verir.",
+      "sinirlar": "Tek şirket tarafından geliştiriliyor; bağımsız güvenlik değerlendirmesi yok.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002",
+        "N-K18-003",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-2899",
+      "ad": "nono",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://nono.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar için sıfır güven yaklaşımlı çalışma zamanı güvenliği; işletim sistemi yalıtım mekanizmalarıyla dosya ve ağ erişimini profillerle sınırlar, profiller bir kayıt defterinden çekilir.",
+      "sinirlar": "1.0 öncesi; API değişiklikleri ve kayıt defteri ad alanı taşınması yaşandı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2901",
+      "ad": "Agent Vault (Infisical)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (ee/ dizini hariç)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.agent-vault.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanların gerçek kimlik bilgisi tutmadan LLM sağlayıcıları, GitHub vb. hizmetlere erişmesini sağlayan HTTP kimlik bilgisi aracısı; başlıklarda sahte değeri gerçek değerle değiştirir, çıkış filtreleme ve istek günlüğü sunar.",
+      "sinirlar": "Tüm ajan trafiği vekil üzerinden geçmeli; vekil tek hata noktasıdır.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-2918",
+      "ad": "AgentShield",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/affaan-m/agentshield",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code kurulumlarında gömülü sır, izin yanlış yapılandırması, kanca enjeksiyonu, MCP sunucu riskleri ve istem enjeksiyonu vektörlerini tarayan denetçi; CLI ve GitHub Action.",
+      "sinirlar": "Claude Code yapılandırmasına odaklı.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K18-004",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2925",
+      "ad": "MCP Audit (APIsec)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://apisec-inc.github.io/mcp-audit",
+      "olgunluk": "erken",
+      "ne_saglar": "Makinedeki MCP yapılandırmalarını açık sırlar, gölge API'ler ve AI modelleri açısından tarayıp ajanların neye erişebildiğini canlıya çıkmadan raporlar (CLI ve web).",
+      "sinirlar": "Envanter/tespit aracı; çalışma zamanı engelleme yapmaz.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2930",
+      "ad": "Gondolin",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://earendil-works.github.io/gondolin",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın ürettiği kodu yerel Linux mikro-VM'lerinde (QEMU, deneysel krun) çalıştırıp ağ ve dosya sistemi erişimini JavaScript ile özelleştirilebilen ana makine tarafı politika ile denetler; sızdırma riskini azaltır.",
+      "sinirlar": "Deneysel; son etkinlik Temmuz 2026.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2934",
+      "ad": "Zerobox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/afshinm/zerobox",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenAI Codex'in sandbox çalışma zamanını kullanan, reddi varsayılan yazma/ağ/ortam değişkeni politikası ve yalnız onaylı hostlara kimlik bilgisi enjeksiyonu yapan çapraz platform süreç sandbox'ı; Rust, TypeScript, Python SDK.",
+      "sinirlar": "Windows yok; son etkinlik Mayıs 2026.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2941",
+      "ad": "Matchlock",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/jingkaihe/matchlock",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları geçici mikro-VM'lerde ağ izin listesiyle çalıştırır; MITM vekil ile sırları yalnız izinli hostlara giderken enjekte eder, sırlar VM'e hiç girmez.",
+      "sinirlar": "Deneysel; kırıcı değişiklik olabilir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2948",
+      "ad": "OctoBus",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://chaitin.github.io/OctoBus/",
+      "olgunluk": "erken",
+      "ne_saglar": "Node.js hizmet paketlerindeki gRPC yeteneklerini 'capset' bazında seçip istemcilere/ajanlara gRPC, Connect RPC ve MCP olarak sunan yerel tek ikili geçit; SQLite ile hizmet ve bağlama durumu.",
+      "sinirlar": "GPL-3.0; Node.js paket modeline bağlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3001",
+      "ad": "TokenHub",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://thinkinai-labs.github.io/tokenhome/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kurumsal token yönetişimi altyapısı: model yönlendirme, erişim denetimi, token maliyet optimizasyonu, sağlayıcı mutabakatı ve tüm üst sağlayıcılara yönetilen erişim.",
+      "sinirlar": "README'de üçüncü taraf API aktarım hizmeti sponsorlukları var; aktarım servisleriyle kullanım veri güvenliği riski taşır.",
+      "ihtiyaclar": [
+        "N-K09-004",
+        "N-K20-007",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-3009",
+      "ad": "agentdiff",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://getagentdiff.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Hangi ajanın hangi satırı yazdığını ed25519 ile imzalayıp git geçmişinde saklayan git-yerel AI kod kökeni aracı; Claude Code, Cursor, Codex, Copilot vb. kancalar.",
+      "sinirlar": "Tek geliştiricili; son etkinlik Haziran 2026.",
+      "ihtiyaclar": [
+        "N-K19-006",
+        "N-K22-003"
+      ]
+    },
+    {
+      "id": "AR-3017",
+      "ad": "Microsoft Agent 365",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.microsoft.com/en-us/microsoft-agent-365",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumdaki AI ajanlarını keşfetme, gözlemleme, güvenceye alma ve yönetme için kontrol düzlemi; kimlik, güvenlik ve uyum ekiplerinin mevcut Microsoft araçlarıyla ajanları kullanıcılar gibi yönetmesini sağlar; önizlemede AWS Bedrock ve Google ajanlarını envantere alır. 1 Mayıs 2026'da GA.",
+      "sinirlar": "Microsoft 365 E7 veya kullanıcı başına ücretli lisans; Microsoft ekosistemine bağlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003",
+        "N-K19-007",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-3018",
+      "ad": "OpenAI Frontier",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://openai.com/business/frontier/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları veri ambarı, CRM, ticket ve iç uygulamalara bağlayan paylaşılan iş bağlamı katmanı, ajan yürütme ortamı ve yerleşik güvenlik/yönetişim sunan kurumsal ajan platformu (5 Şubat 2026); üçüncü taraf ajanlarla da çalışır.",
+      "sinirlar": "Kurumsal satış ve erken erişim ağırlıklı; fiyat ve teknik ayrıntılar kamuya sınırlı açık.",
+      "ihtiyaclar": [
+        "N-K10-004",
+        "N-K12-003",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-3068",
+      "ad": "MCP Toolbox for Databases",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/googleapis/mcp-toolbox",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veritabanlarını (PostgreSQL, MySQL, BigQuery, Spanner vb.) yapılandırma dosyasıyla tanımlanan, önceden izinli SQL araçları olarak ajanlara sunan MCP sunucusu; kimlik doğrulama ve OpenTelemetry desteği içerir.",
+      "sinirlar": "Serbest SQL araçları açılırsa en az yetki ilkesi bozulur; araç tanımları gözden geçirilmeli.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002",
+        "N-K12-003",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3366",
+      "ad": "CrowdStrike Falcon MCP",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/CrowdStrike/falcon-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Falcon platformundaki tespit, olay, uç nokta ve tehdit istihbaratı verilerine ajan erişimi sağlayan resmî MCP sunucusu; geliştirici makinelerindeki şüpheli ajan/paket etkinliğinin incelenmesine yardımcı olur.",
+      "sinirlar": "Falcon lisansı ve API kapsamları gerekir; güvenlik verisinin modele gönderilmesi ayrıca onay gerektirir.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K16-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3381",
+      "ad": "Google Cloud Remote MCP Servers",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.cloud.google.com/mcp/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Compute, GKE, Cloud Run, Cloud SQL, Firestore, Monitoring vb. hizmetler için Google altyapısında çalışan HTTP MCP uç noktaları; IAM ile ince taneli yetki, IAM deny politikaları ve Model Armor taramasıyla yönetişim.",
+      "sinirlar": "Hizmet bazında önizleme/GA durumu farklı; yalnız Google Cloud kaynaklarını kapsar.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002",
+        "N-K12-003",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3382",
+      "ad": "HashiCorp Vault MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.hashicorp.com/vault/ai/mcp-server",
+      "olgunluk": "erken",
+      "ne_saglar": "Vault bağlama noktaları ve KV sırları üzerinde listeleme/oluşturma/okuma gibi işlemleri MCP araçlarıyla sunar; ajan iş akışlarını Vault'a bağlar.",
+      "sinirlar": "Sırların model bağlamına düşme riski nedeniyle yalnız yönetim işlemleriyle sınırlanmalı; erken sürüm.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3425",
+      "ad": "GitGuardian MCP Server (ggmcp)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/GitGuardian/ggmcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "600+ sır türünü tespit eden GitGuardian API'siyle ajanın ürettiği kodda gömülü sırları bulup düzeltmesini sağlayan MCP sunucusu.",
+      "sinirlar": "GitGuardian hesabı gerekir; tarama içeriği GitGuardian'a gönderilir.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K18-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3429",
+      "ad": "Microsoft MCP Server for Enterprise (Entra)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari (dokümantasyon CC-BY-4.0)",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/graph/mcp-server/overview",
+      "olgunluk": "erken",
+      "ne_saglar": "Microsoft Entra verisini doğal dil istekleri üzerinden Microsoft Graph çağrılarına çeviren resmî uzak MCP sunucusu (mcp.svc.cloud.microsoft/enterprise); kiracı başına bir kez hizmet sorumlusu olarak sağlanır, MCP.<Graph kapsamı> izinleriyle çalışır; kimlik ve uygulama envanterinin incelenmesine yardımcı olur.",
+      "sinirlar": "Genel önizleme aşamasında; istemci uygulama kaydı ve izin eşlemesi elle yapılır.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K18-003",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3470",
+      "ad": "Visual Studio Code Private Marketplace",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://code.visualstudio.com/docs/enterprise/extensions",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Enterprise müşterileri için kurum içinde barındırılan VS Code eklenti pazarı: iç eklentileri dağıtma, kısıtlı ağda genel eklentileri önbellekleme ve izin/ret listesiyle onaylı eklenti kümesi.",
+      "sinirlar": "GitHub Enterprise veya Copilot Business/Enterprise hesabı gerektirir; yalnız VS Code eklentilerini kapsar.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K12-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3605",
+      "ad": "C1 (eski ConductorOne)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.c1.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik yönetişimi ve erişim talebi platformu; Slack/CLI üzerinden erişim talebi, onay zinciri, süreli (just-in-time) erişim ve erişim gözden geçirmeleri.",
+      "sinirlar": "Erişim onaylarına odaklı; kod/spesifikasyon içeriği onayını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3606",
+      "ad": "Opal Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.opal.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Erişim yönetişimi: talep–onay akışları, süreli erişim, en az yetki analizi ve denetim kaydı; insan ve makine kimlikleri için.",
+      "sinirlar": "Kimlik/erişim kapsamı dışında onay yüzeyi değildir.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3715",
+      "ad": "Nudge Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.nudgesecurity.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Microsoft 365/Google Workspace e-posta meta verisine salt okunur API erişimiyle SaaS ve yapay zekâ uygulaması kayıtlarını keşfeder; tarayıcı eklentisi, politika uyarıları ve çalışana yönelik yönlendirmeli iyileştirme ('nudge').",
+      "sinirlar": "E-posta meta verisi erişimi geniş izin ister; yalnız kayıt izi bırakan kullanımı görür.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3718",
+      "ad": "Reco",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.reco.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SaaS ve yapay zekâ ajanı güvenlik platformu: SaaS uygulamaları, entegrasyonlar ve yapay zekâ ajanlarının keşfi, kimlik/izin riskleri ve yapılandırma denetimi.",
+      "sinirlar": "API entegrasyonları geniş okuma yetkisi ister.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3719",
+      "ad": "Grip Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.grip.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SaaS ve yapay zekâ uygulaması kimlik risk yönetimi: gölge SaaS/yapay zekâ keşfi, erişim ve hesap yaşam döngüsü denetimi.",
+      "sinirlar": "Keşif kimlik izlerine dayanır; hesapsız kullanımı sınırlı görür.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3732",
+      "ad": "Knostic",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.knostic.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kullanıcıların ve kodlama ajanlarının (IDE, MCP, eklentiler) yapay zekâ kullanımına görünürlük, yönetişim ve gerçek zamanlı koruma; kurumsal asistanlarda bilmesi-gereken ilkesine göre aşırı paylaşım kontrolü.",
+      "sinirlar": "Ticari; geliştirici uç noktası kapsamı desteklenen araç listesine bağlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3742",
+      "ad": "Cortex Agentic Endpoint Security (eski Koi)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.paloaltonetworks.com/cortex/agentic-endpoint-security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uç noktalardaki tarayıcı/IDE eklentileri, MCP sunucuları, paketler ve yapay zekâ ajanlarını envanterleyip risk puanlayan ve politika ile engelleyen uç nokta güvenliği.",
+      "sinirlar": "Koi'nin Palo Alto Networks'e katılmasıyla Cortex paketine bağlandı; bağımsız lisanslama belirsiz.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3745",
+      "ad": "Numbat",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/perplexityai/numbat",
+      "olgunluk": "erken",
+      "ne_saglar": "Uç noktalarda çalışan yapay zekâ ajanlarının etkinliğine görünürlük sağlar; cihaz üzerinde tespit ve isteğe bağlı eylem öncesi engelleme yapar.",
+      "sinirlar": "2026'da yayımlanmış yeni proje; kurumsal yönetim konsolu ve geniş platform desteği henüz sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3746",
+      "ad": "Clawdstrike",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/backbay-labs/clawdstrike",
+      "olgunluk": "erken",
+      "ne_saglar": "Geliştirici iş istasyonları ve otonom ajan sürüleri için ajan odaklı uç nokta tespit ve müdahale (EDR) aracı.",
+      "sinirlar": "Küçük topluluk projesi; üretim olgunluğu kanıtlanmamış.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3748",
+      "ad": "claudit-sec",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/HarmonicSecurity/claudit-sec",
+      "olgunluk": "erken",
+      "ne_saglar": "macOS'te Claude Desktop ve Claude Code kurulumlarını tek komutla denetler: yapılandırılmış MCP sunucuları, izinler, eklentiler ve riskli ayarların görünürlüğü.",
+      "sinirlar": "Yalnız macOS ve Anthropic istemcileri; anlık denetim, sürekli izleme değil.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-004",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3749",
+      "ad": "osquery",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / GPL-2.0 (ikili lisans)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://osquery.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşletim sistemini SQL tabloları olarak sorgulatan uç nokta enstrümantasyonu; geliştirici makinelerinde kurulu ajan araçları, eklentiler, süreçler ve ağ bağlantılarının envanteri ve izlenmesi.",
+      "sinirlar": "Ajan/MCP'ye özgü tablolar hazır değil; filo yönetimi için ayrı bir yönetim sunucusu gerekir.",
+      "ihtiyaclar": [
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3750",
+      "ad": "Kolide (1Password Device Trust)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.kolide.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Cihaz güvenlik durumunu (osquery tabanlı kontroller) değerlendirip uyumsuz cihazların kurumsal uygulamalara erişimini engelleyen cihaz güveni çözümü; özel kontrollerle yetkisiz ajan araçlarını tespit etmek için kullanılabilir.",
+      "sinirlar": "Okta ve 1Password ekosistemine bağlı; ajan davranışını çalışma zamanında engellemez.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3755",
+      "ad": "node9-proxy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://node9.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code, Codex, Gemini, Cursor ve MCP sunucularının hangi eylemleri yapabileceğini tanımlayan ajan IAM vekili; riskli komutları engeller veya insan onayına düşürür.",
+      "sinirlar": "Genç proje; kurumsal kimlik sağlayıcı entegrasyonları sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K18-003",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-3758",
+      "ad": "Caracal",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.caracal.run",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanlara uzun ömürlü kimlik bilgisi yerine politika onaylı, yalnız daralabilen devir zinciriyle yetki (authority) veren kontrol katmanı.",
+      "sinirlar": "Yeni proje; standart kimlik altyapılarıyla (SPIFFE, OAuth) birlikte çalışabilirliği sınırlı belgelenmiş.",
+      "ihtiyaclar": [
+        "N-K18-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3760",
+      "ad": "Gate22",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/aipotheosis-labs/gate22",
+      "olgunluk": "erken",
+      "ne_saglar": "Ekiplerin ajanların hangi MCP araçlarını kullanabileceğini ve hangi kimlik bilgileriyle erişeceğini merkezi olarak yönettiği açık kaynak MCP ağ geçidi ve kontrol düzlemi.",
+      "sinirlar": "Depo 2025 sonundan beri güncellenmiyor; bakım durumu izlenmeli.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3761",
+      "ad": "ThinkWatch",
+      "tur": "acik-kaynak",
+      "lisans": "BUSL-1.1",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://thinkwat.ch",
+      "olgunluk": "erken",
+      "ne_saglar": "Yapay zekâ API'leri ve MCP erişimi için kurumsal kale sunucusu: birleşik vekil, rol tabanlı erişim, denetim kayıtları.",
+      "sinirlar": "Business Source License; üretimde rakip hizmet olarak sunma kısıtları olabilir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3860",
+      "ad": "Kivuz",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://kivuz.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "KVKK uyum yazılımı ve ekosistemi: kişisel veri envanteri, aydınlatma/açık rıza yönetimi, çerez rızası ve kimlik güvenliği (IAM) modülleri.",
+      "sinirlar": "Türkiye pazarına özgü; yapay zekâya özgü veri akışı denetimi içermez.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3866",
+      "ad": "Defakto (eski SPIRL)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.defakto.security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SPIFFE ve WIMSE standartlarına dayalı insan olmayan kimlik ve erişim yönetimi: statik kimlik bilgileri yerine kısa ömürlü, doğrulanabilir iş yükü kimlikleri; servisler, hatlar ve yapay zekâ ajanları için.",
+      "sinirlar": "Ticari; SPIFFE altyapısı ve iş yükü entegrasyonu emek ister.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3867",
+      "ad": "Riptides",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://riptides.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Çekirdek düzeyinde SPIFFE tabanlı iş yükü kimliği, sırsız kimlik bilgileri, otomatik mTLS ve ajan başına ağ çıkış kontrolü; kod değişikliği gerektirmez.",
+      "sinirlar": "Linux çekirdek bileşeni gerektirir; genç ürün.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3868",
+      "ad": "Clutch Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.clutch.security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İnsan olmayan kimlikler, yapay zekâ ajanları ve sırların keşfi, sahiplik ve yaşam döngüsü yönetişimi, sıfır güven uygulaması.",
+      "sinirlar": "Ticari; kimlik bilgisi değişimi (rotation) için ek entegrasyon gerekebilir.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3869",
+      "ad": "Token Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.token.security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanları ve insan olmayan kimliklerin sürekli görünürlüğü, sahiplik atfı ve yaşam döngüsü yönetimiyle yetim/aşırı yetkili kimliklerin kapatılması.",
+      "sinirlar": "Ticari; bulut ve kimlik sağlayıcı entegrasyonlarına bağlı.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3870",
+      "ad": "Entro Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://entro.security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanları, insan olmayan kimlikler ve sırlar için birleşik güvenlik: envanter, sahiplik atfı ve anomali tespiti.",
+      "sinirlar": "Ticari; sır kasası ve bulut entegrasyonları gerekir.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3871",
+      "ad": "Silverfort",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.silverfort.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Active Directory, bulut ve yapay zekâ ortamlarında erişim anında çalışan kimlik güvenliği; hizmet hesaplarının keşfi ve korunması, ajan erişimine politika uygulaması.",
+      "sinirlar": "AD merkezli mimari; ajan odaklı özellikler yeni.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3872",
+      "ad": "Veza",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://veza.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "SaaS, bulut ve insan olmayan kimlikler genelinde 'kim hangi veride hangi eylemi yapabilir' grafiğini çıkaran, en az yetkiyi uygulatan kimlik güvenliği platformu; ajan izinlerinin toplu geri alınmasında kullanılır.",
+      "sinirlar": "Ticari; yetki geri alma için hedef sistemlere yazma entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3873",
+      "ad": "Descope",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.descope.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Müşteri ve ajan kimlik platformu: MCP sunucuları için OAuth yetkilendirmesi, ajan kimlikleri, kullanıcı onayı (consent) ve kapsamlı token'lar.",
+      "sinirlar": "Ticari SaaS; kurum içi barındırma yok.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3874",
+      "ad": "Stytch",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://stytch.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik doğrulama API'leri ve SDK'ları; uygulamayı OAuth/OIDC sağlayıcısına çevirerek ajan ve MCP istemcilerine kapsamlı, iptal edilebilir erişim verme.",
+      "sinirlar": "Ticari SaaS; kurumsal iş gücü IAM'ı yerine uygulama kimliği odaklı.",
+      "ihtiyaclar": [
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3875",
+      "ad": "WorkOS",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://workos.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "SSO, dizin eşitleme, denetim günlükleri (Audit Logs) ve AuthKit ile MCP yetkilendirmesi sunan kurumsal hazır kimlik API'leri.",
+      "sinirlar": "Ticari SaaS; denetim günlüğü değiştirilemezlik garantisi sınırlı belgelenmiş.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3876",
+      "ad": "Natoma",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://natoma.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Yapay zekâ istemcileri ve ajanları kurumsal uygulama, veritabanı ve araçlara tek yönetişimli platform üzerinden (MCP) bağlayan; kimlik ve erişim politikası uygulayan hizmet.",
+      "sinirlar": "Genç girişim; SaaS bağımlılığı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3926",
+      "ad": "codeowners-validator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mszostok/codeowners-validator",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub CODEOWNERS dosyasını doğrular: sahipsiz dosyalar, var olmayan kullanıcı/ekip, yazma yetkisi olmayan sahipler, geçersiz veya yinelenen desenler. Test, kabul kriteri, eşik ve kural dosyalarının zorunlu insan sahiplerince korunduğunu CI'de sürekli denetlemek için kullanılır.",
+      "sinirlar": "Son commit 2024 (bakım yavaş); yalnız GitHub; onayı kendisi zorlamaz, dal koruması/ruleset ile birlikte kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K05-006",
+        "N-K08-003",
+        "N-K11-007",
+        "N-K25-004",
+        "N-K31-001"
+      ]
+    },
+    {
+      "id": "AR-3929",
+      "ad": "AWS Organizations Service Control Policies (SCP)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kuruluş kökü → organizasyon birimi → hesap hiyerarşisinde azami izin sınırı koyar; etkili izin tüm üst SCP'lerin kesişimi olduğundan alt katman yalnız daraltabilir. 'Alt katman üst katmanı gevşetemez' ilkesinin ve yasaklı eylem listesinin (ör. ajan rollerinin günlük silmesi, bölge dışı kaynak) çalışan bir örneğidir.",
+      "sinirlar": "Yalnız AWS IAM eylemlerini kapsar, depo/kural dosyası düzeyinde değildir; bulut kilidi; politika hataları tüm hesapları etkileyebilir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K11-003",
+        "N-K11-007",
+        "N-K21-004",
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "AR-3935",
+      "ad": "gitlint",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/jorisroovers/gitlint",
+      "olgunluk": "olgun",
+      "ne_saglar": "Commit mesajı ve metaverisi için yapılandırılabilir linter; `author-valid-email` kuralı yazar e-postasını regex ile denetler, `body-match-regex` ve kullanıcı tanımlı Python kurallarıyla belirli trailer'lar (ör. araç/bot ortak yazar satırları) yasaklanabilir; commit-msg kancasında veya CI'de commit aralığı üzerinde çalışır.",
+      "sinirlar": "Son commit 2024 (bakım yavaş); yerel kanca atlanabileceği için aynı kontrol sunucu/CI tarafında da çalıştırılmalı.",
+      "ihtiyaclar": [
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-3939",
+      "ad": "Overcommit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sds/overcommit",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby tabanlı, yapılandırılabilir Git kanca yöneticisi; yerleşik `AuthorEmail` ve `AuthorName` kancaları yazar kimliğini regex'e göre doğrular; kanca yapılandırmasının imzasını doğrulayarak (verify_signatures) habersizce değiştirilmiş kancaları çalıştırmaz.",
+      "sinirlar": "Ruby gerektirir; istemci tarafı olduğu için sunucu/CI denetimiyle tamamlanmalı.",
+      "ihtiyaclar": [
+        "N-K11-007",
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-3940",
+      "ad": "commit-check",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://commit-check.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Commit mesajı, dal adı, yazar/kaydeden adı ve e-postası, signoff ve imza gibi commit metaverisi standartlarını pre-commit kancası, CLI ve GitHub Action olarak zorlar; aynı kuralın yerelde ve CI'de çalıştırılmasına uygundur.",
+      "sinirlar": "Küçük proje (≈75 yıldız); kurum politikası regex'lerle ifade edilmeli.",
+      "ihtiyaclar": [
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-3942",
+      "ad": "Yet Another Commit Checker (YACC)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1211854/yet-another-commit-checker",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bitbucket Server/Data Center için push anında sunucu tarafı denetim: kaydeden adı ve e-postasının Bitbucket kullanıcısıyla eşleşmesini, commit mesajı regex'ini, geçerli Jira anahtarını ve dal adlandırmasını zorlar; hata mesajları özelleştirilebilir.",
+      "sinirlar": "Yalnız Bitbucket Server/DC (Cloud yok); ücretli; herkese açık GitHub deposu 2020'den beri güncellenmiyor, güncel sürümler Marketplace üzerinden.",
+      "ihtiyaclar": [
+        "N-K22-004"
+      ]
+    },
+    {
+      "id": "AR-4214",
+      "ad": "Satori",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://satoricyber.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajansız veri güvenliği platformu: veri keşfi ve sınıflandırma, veritabanı erişim izleme, politika tabanlı ayrıntılı erişim kontrolü, dinamik maskeleme ve erişim denetim kayıtları; 28'i aşkın veri deposu.",
+      "sinirlar": "Commvault satın aldı; ürün yol haritası değişebilir; amaç (purpose) kavramı kurum politikasıyla modellenmeli.",
+      "ihtiyaclar": [
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-4312",
+      "ad": "Tink",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developers.google.com/tink",
+      "olgunluk": "olgun",
+      "ne_saglar": "AEAD, MAC, dijital imza ve hibrit şifreleme için yanlış kullanımı zorlaştıran üst düzey kriptografi API'leri ve anahtar kümesi yönetimi sunar; Java, C++, Go ve Python için ayrı depolarda sürdürülür; güvensiz kriptografi zayıflık sınıfını tasarımla daraltır.",
+      "sinirlar": "Eski tek depo arşivlendi, dil başına depolar kullanılmalı; tüm dillerde aynı özellik kapsamı yok.",
+      "ihtiyaclar": [
+        "N-K34-005",
+        "N-K34-007"
+      ]
+    },
+    {
+      "id": "AR-4389",
+      "ad": "Gravitee API Management",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (APIM çekirdeği); Enterprise özellikleri ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://documentation.gravitee.io/apim",
+      "olgunluk": "olgun",
+      "ne_saglar": "API ağ geçidi ve API yönetimi: politika tabanlı erişim, kimlik doğrulama, trafik denetimi ve API kataloğu; belgeleri MCP ve ajan trafiğini de kapsıyor.",
+      "sinirlar": "Geçit yetkiyi uygular ama iş anlamını ve yetkinin meşruluğunu belirlemez; bazı özellikler Enterprise lisansı ister.",
+      "ihtiyaclar": [
+        "N-K12-002"
+      ]
+    }
+  ]
+}

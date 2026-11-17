@@ -1,0 +1,127 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-47",
+    "ad": "Ajan hattına saldırı simülasyonu (kırmızı takım)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-231",
+      "yetenek_sinifi": "Y-47",
+      "kalip": "Statik saldırı setlerinin uyarlanır saldırganı temsil etmemesi",
+      "aciklama": "'The Attacker Moves Second' çalışması, savunmaların statik saldırı dizileriyle değerlendirilmesinin sağlamlığı olduğundan yüksek gösterdiğini; AgentDojo ise ajanlar için dinamik istem enjeksiyonu değerlendirme ortamı gerektiğini ortaya koydu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2510.09023",
+        "https://arxiv.org/abs/2406.13352"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hazır kırmızı takım eklentileriyle yapılan yıllık test 'geçti' sonucu verir ama hedefli saldırgan aynı hattı kısa sürede aşar.",
+        "Kurumun kendi araç kombinasyonlarına özgü saldırı yolları hiç denenmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-012",
+        "N-K18-005"
+      ],
+      "ornek_araclar": [
+        "promptfoo red team",
+        "PyRIT",
+        "Garak",
+        "AgentDojo"
+      ],
+      "erken_sinyal": "Kırmızı takım bulgularının yıllar içinde sıfıra yaklaşması (setin eskimesi).",
+      "azaltma": "Kurum araç zincirine özgü senaryolar, uyarlanır ve insan yönlendirmeli testler, bulguların regresyon setine eklenmesi."
+    },
+    {
+      "id": "RK-232",
+      "yetenek_sinifi": "Y-47",
+      "kalip": "Kırmızı takım araç satıcılarının model sağlayıcılarca satın alınması",
+      "aciklama": "Promptfoo Mart 2026'da OpenAI'a katılacağını duyurdu; Palo Alto Networks Protect AI'ı, Check Point Lakera'yı satın aldı. Bağımsız değerlendirme araçları platform satıcılarının ürün ailesine giriyor.",
+      "risk_turleri": [
+        "RT-06",
+        "RT-07"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.promptfoo.dev/blog/promptfoo-joining-openai/",
+        "https://www.paloaltonetworks.com/company/press/2025/palo-alto-networks-completes-acquisition-of-protect-ai",
+        "https://www.checkpoint.com/press-releases/check-point-acquires-lakera-to-deliver-end-to-end-ai-security-for-enterprises/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model sağlayıcısına ait bir aracın rakip modelleri veya sağlayıcının kendi modelini tarafsız test ettiği varsayımı zayıflar; yol haritası sahibin platformuna kayabilir.",
+        "Açık kaynak sürümün bakımı ticari önceliklere bağlı hale gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-012",
+        "N-K16-006"
+      ],
+      "ornek_araclar": [
+        "promptfoo",
+        "Protect AI",
+        "Lakera",
+        "PyRIT"
+      ],
+      "erken_sinyal": "Araç lisansı, telemetri veya entegrasyon önceliklerinde değişiklik.",
+      "azaltma": "Birden çok bağımsız araç, test senaryolarının araçtan bağımsız biçimde saklanması, açık kaynak alternatiflerin hazır tutulması."
+    },
+    {
+      "id": "RK-233",
+      "yetenek_sinifi": "Y-47",
+      "kalip": "Kırmızı takım yüklerinin gerçek sistemlerde yan etki üretmesi",
+      "aciklama": "Ajan hattına yapılan kırmızı takım testleri gerçek bağlayıcılar ve yetkilerle yürütülürse enjekte edilen talimatlar gerçekten veri sızdırabilir veya yıkıcı eylem yapabilir. MITRE ATLAS yapay zekâ sistemlerine yönelik saldırı tekniklerini kataloglar.",
+      "risk_turleri": [
+        "RT-13",
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://atlas.mitre.org/",
+        "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Üretim benzeri ortamda yapılan testte ajan, test yükünü uygulayarak gerçek iş kalemlerini değiştirir veya dış adrese veri gönderir.",
+        "Test yükleri model sağlayıcısının kötüye kullanım tespitini tetikleyip kurum hesabının kısıtlanmasına yol açabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-012",
+        "N-K16-009"
+      ],
+      "ornek_araclar": [
+        "PyRIT",
+        "Garak",
+        "promptfoo red team",
+        "Özel saldırı betikleri"
+      ],
+      "erken_sinyal": "Test sonrası gerçek sistemlerde beklenmeyen değişiklik; sağlayıcıdan politika uyarısı.",
+      "azaltma": "Kırmızı takımı yalıtılmış kopya ortamda, sahte bağlayıcı ve kanarya sırlarla yürütme, sağlayıcıya önceden bildirim."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 4,
+    "orta": 39,
+    "dusuk": 59
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 8,
+    "RT-08": 6,
+    "RT-10": 6,
+    "RT-03": 5,
+    "RT-06": 3,
+    "RT-04": 2,
+    "RT-07": 2,
+    "RT-05": 1,
+    "RT-16": 1,
+    "RT-01": 1,
+    "RT-14": 1
+  }
+}

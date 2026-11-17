@@ -1,0 +1,333 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K11",
+    "ad": "Yetenek paketleri, kurallar ve talimat yönetimi",
+    "alan": "B-ajan-platformu",
+    "amac": "Kuralların, sınırların ve yeniden kullanılabilir iş bilgisinin tek kaynaktan, sürümlü ve ajanların değiştiremeyeceği biçimde yönetilmesi.",
+    "kapsam": [
+      "kural dosyası ve kural yöneticisi",
+      "görev tipine göre kural seti etkinleştirme",
+      "yetenek paketleri",
+      "sürümleme ve koşu başında sabitleme",
+      "ortak ve ekip-özel kurallar",
+      "kontrollü öğrenme ve yayın",
+      "yapılandırma varlık türleri"
+    ],
+    "kapsam_disi": [
+      "kural içeriklerinin kendisi (A alanı kümeleri)"
+    ],
+    "komsu_kumeler": [
+      "K07",
+      "K10",
+      "K13",
+      "K23",
+      "K24"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K11-001",
+      "baslik": "Tek, sürümlü kural kaynağı",
+      "ihtiyac": "Kuralların, sınırların ve görev tanımı ilkelerinin tek, sürümlü, insan ve makine tarafından okunabilir bir kaynakta tutulması; genel kuralların iş kalemlerinden ayrılması.",
+      "cozulecek_sorun": "Kurallar kişiden kişiye ve görevden göreve dağılıyor; genel kurallar iş kalemlerine karışıyor.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-08"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her ajan çıktısı kural sürüm kimliğini taşıyor.",
+        "İş kalemlerinde genel kural tekrarı yok."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-051",
+          "S-053",
+          "S-030"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-025"
+      ]
+    },
+    {
+      "id": "N-K11-002",
+      "baslik": "Kural seçici/orkestratörün sınırları",
+      "ihtiyac": "Kuralları okuyup rolleri yöneten bileşenin kuralların sahibi olmaması: yasaklar, bütçeler ve geçişlerin sürümlü politikada olması; bileşenin hangi rolü ne zaman çağırdığının mantığının yazılı olması.",
+      "cozulecek_sorun": "Kaynakta kural yöneticisi 'orkestra şefi' olarak tanımlı ama çağırma mantığı yok; kurallar istemle değiştirilebilir durumda.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Çağırma mantığı yazılı.",
+        "Yasak, bütçe ve geçişler istemle değiştirilemiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-051",
+          "S-052",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-012"
+      ],
+      "bagimliliklar": [
+        "N-K11-001"
+      ]
+    },
+    {
+      "id": "N-K11-003",
+      "baslik": "Katmanlı kural yönetimi",
+      "ihtiyac": "Kuralların portföy → ART → ekip → depo katmanlarında tutulması; alt katmanın üst katmanı yalnız sıkılaştırabilmesi; her kuralın sahibi, testi ve gözden geçirme tarihi; çatışma çözüm kuralı.",
+      "cozulecek_sorun": "Ekipler arası kural sapması aynı iş için farklı çıktılar üretiyor; kurallar şişiyor.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-09"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Tek ekipte tek katman yeter; 2+ ekipte zorunlu, ekip sayısı değiştiğinde yalnız yapılandırma değişmeli.",
+      "kabul_olcutleri": [
+        "Her kuralın katmanı, sahibi ve gözden geçirme tarihi var.",
+        "Kural çatışması denetimi otomatik."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-115",
+          "S-171"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "iliskili": [
+        "A-013",
+        "D-013",
+        "Q-006",
+        "Q-025",
+        "R-013",
+        "U-029"
+      ]
+    },
+    {
+      "id": "N-K11-004",
+      "baslik": "Kural ve yetenek paketi etkinliğinin ölçülmesi",
+      "ihtiyac": "Her kuralın ve yetenek paketinin kurum görev setinde ölçülerek kullanıma alınması; etkisiz veya zararlı kuralların ayıklanması.",
+      "cozulecek_sorun": "Depo bağlam dosyaları başarıyı genelde artırmıyor ama maliyeti artırıyor; modelin kendi yazdığı paketler fayda sağlamıyor.",
+      "yetenek_siniflari": [
+        "Y-29",
+        "Y-08"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her kural/paket için ölçülmüş etki kaydı var.",
+        "Etkisiz kural belirli sürede kaldırılıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-115",
+          "S-116"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-017",
+        "G-029",
+        "R-019",
+        "U-003"
+      ],
+      "bagimliliklar": [
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "N-K11-005",
+      "baslik": "Yeniden kullanılabilir yetenek paketleri",
+      "ihtiyac": "Tekrarlayan prosedürlerin (ör. test-önce döngüsü, güvenli sürüm kontrolü, erişilebilirlik kontrolü) insan eliyle düzenlenmiş, sürümlü paketler halinde tutulması.",
+      "cozulecek_sorun": "Aynı prosedür her görevde yeniden anlatılıyor; ekipler aynı işi farklı yapıyor.",
+      "yetenek_siniflari": [
+        "Y-08"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Her paketin sahibi, sürümü ve ölçülmüş etkisi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-052",
+          "S-116"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası"
+    },
+    {
+      "id": "N-K11-006",
+      "baslik": "Koşu başında kural ve paket sürümünün sabitlenmesi",
+      "ihtiyac": "Bir koşu başladığında kural, politika ve paket sürümlerinin sabitlenmesi; yeni sürümün yalnız yeni koşulara uygulanması.",
+      "cozulecek_sorun": "Koşu ortasında kural değişince aynı iş iki farklı kurala göre değerlendiriliyor.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Açık koşular başladıkları sürümle bitiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K11-007",
+      "baslik": "Ajanların kural ve politikayı değiştirememesi",
+      "ihtiyac": "Ajanların ve öğrenme kanalının korunan kural/politika dosyalarına yazamaması; kural değişikliğinin yalnız insan onaylı değişiklikle yapılması.",
+      "cozulecek_sorun": "Ajan kendi sınırlarını gevşetebilir; öğrenme yanlış dersi kurala dönüştürebilir.",
+      "yetenek_siniflari": [
+        "Y-25",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ajan kimliklerinin kural/politika deposuna yazma izni yok."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-028"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K11-008",
+      "baslik": "Kural ve talimat dosyası bütünlüğü",
+      "ihtiyac": "Kural ve talimat dosyalarında görünmez karakter ve gizli talimat taraması; dışarıdan alınan paketlerin kaynak ve sahip onayı.",
+      "cozulecek_sorun": "Kural dosyası üzerinden arka kapı açılabiliyor; dış paketler zehirli olabilir.",
+      "yetenek_siniflari": [
+        "Y-26",
+        "Y-41"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kural/paket değişikliklerinde görünmez karakter taraması zorunlu.",
+        "Dış paket sahip onayı olmadan kullanılamıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-146",
+          "S-151"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-006",
+        "R-031",
+        "U-011"
+      ]
+    },
+    {
+      "id": "N-K11-009",
+      "baslik": "Kontrollü öğrenme ve yayın",
+      "ihtiyac": "İzlerden çıkan iyileştirme önerilerinin ayrı bir aday alanında tutulması, gizli değerlendirme setinde karşılaştırılması, insan onayıyla sürüm olarak yayınlanması, yalnız yeni koşulara uygulanması ve geri alınabilmesi; yalnız kapılardan geçmiş izlerin öğrenmede kullanılması.",
+      "cozulecek_sorun": "Paketler sessizce kayıyor; yanlış ders (ör. testi geçirmenin kestirmesi) öğreniliyor; tekrarlanabilirlik bozuluyor.",
+      "yetenek_siniflari": [
+        "Y-40",
+        "Y-29"
+      ],
+      "zorunluluk": "opsiyonel",
+      "kabul_olcutleri": [
+        "Aday paket referans sürüme göre anlamlı iyileşme göstermeden yayınlanmıyor.",
+        "Her yayın geri alınabilir."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-062",
+          "S-006"
+        ],
+        "not": "Öğrenmenin kaliteyi artıracağı bir hipotezdir; kalıcılık, prosedürel öğrenme ve model eğitimi ayrı kavramlardır."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "A-010",
+        "D-015",
+        "Q-033"
+      ]
+    },
+    {
+      "id": "N-K11-010",
+      "baslik": "Ajan yapılandırma varlık türlerinin yönetimi",
+      "ihtiyac": "Karar kayıtları, kural/talimat dosyaları, yetenek paketleri, araç protokolü tanımları ve ajan tanımları için konum, sahip ve değişiklik sürecinin tanımlanması.",
+      "cozulecek_sorun": "Kaynak tuvallerde bu varlık türleri kutu olarak var ama rolleri ve ilişkileri tanımsız.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-37"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her varlık türünün konumu, sahibi ve değişiklik süreci yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-052",
+          "S-001"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-037"
+      ]
+    },
+    {
+      "id": "N-K11-011",
+      "baslik": "Ekipler arası yöntem kalibrasyonu",
+      "ihtiyac": "Test-önce ve TDD'nin sınırları, yapamadıkları, dezavantajları ve test-önce ile farkı üzerine ortak ve yazılı bir anlayış oluşturulması.",
+      "cozulecek_sorun": "Tuvaldeki tartışma soruları cevapsız; ekipler aynı kuralı farklı yorumluyor.",
+      "yetenek_siniflari": [
+        "Y-37"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tartışma sorularının yazılı cevabı kural kaynağında yer alıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-052",
+          "S-001"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk"
+    }
+  ]
+}

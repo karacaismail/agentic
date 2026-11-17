@@ -1,0 +1,484 @@
+[
+  {
+    "id": "K01",
+    "grup": "Yerel geçmiş",
+    "baslik": "Ters vekil yapılandırması başlayamıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+    "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+    "pointer": "/findings/0",
+    "ham": {
+      "id": "K01",
+      "cluster": "01_kurulum_ve_kaynak",
+      "title": "Ters vekil yapılandırması başlayamıyor",
+      "evidence_level": "raw_log",
+      "observed_period": "11 Eylül kurulum kaydı",
+      "symptom": "Caddy aynı yapılandırma hatasını tekrar tekrar yazıyor.",
+      "causal_assessment": "Caddyfile:28 acme_ca yönergesinin argümanı eksik veya geçersiz; hata açıkça parser tarafından verilmiş.",
+      "impact": "Uygulama erişimi daha ajan çalışmadan kesilebilir.",
+      "evidence_ids": [
+        "E01"
+      ],
+      "historical_remediation": "Sonraki devirde HTTP servisleri erişilebilir görülmüş; tek başına bu log hangi değişiklikle düzeldiğini kanıtlamaz.",
+      "inference_boundary": "10 eşleşen satır 10 bağımsız olay demek değildir; boş değerin kaynağı bu logda görünmüyor.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Üretilen yapılandırma gerçek ortam değerleriyle başlangıç öncesinde doğrulanmalı."
+    }
+  },
+  {
+    "id": "K02",
+    "grup": "Yerel geçmiş",
+    "baslik": "Kestra eklenti deposuna yazma izni yok",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+    "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+    "pointer": "/findings/1",
+    "ham": {
+      "id": "K02",
+      "cluster": "01_kurulum_ve_kaynak",
+      "title": "Kestra eklenti deposuna yazma izni yok",
+      "evidence_level": "raw_log",
+      "observed_period": "Kurulum startup.log",
+      "symptom": "Kestra Cannot create local repository for plugins ile başlatılamıyor.",
+      "causal_assessment": "java.nio.file.AccessDeniedException: /app/storage/plugins.",
+      "impact": "Akış motoru başlangıçta duruyor.",
+      "evidence_ids": [
+        "E02"
+      ],
+      "historical_remediation": "Sonraki tarihli çalışan akışlar başlangıç engelinin en azından aşılmış olduğunu gösteriyor; kalıcı izin düzeltmesi burada yeniden doğrulanmadı.",
+      "inference_boundary": "Dosya sistemi/volume izin sorunu kanıtlı; bunu Kestra çekirdeğinin mantık hatası saymak için kanıt yok.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Servisin gerçek UID/GID kimliğiyle kalıcı veri ve eklenti yollarına erişim testi yapılmalı."
+    }
+  },
+  {
+    "id": "K03",
+    "grup": "Yerel geçmiş",
+    "baslik": "1 GB sınırında tarayıcı testi OOM ile öldürülüyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+    "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+    "pointer": "/findings/2",
+    "ham": {
+      "id": "K03",
+      "cluster": "01_kurulum_ve_kaynak",
+      "title": "1 GB sınırında tarayıcı testi OOM ile öldürülüyor",
+      "evidence_level": "tool_output_and_experiment",
+      "observed_period": "15 Eylül",
+      "symptom": "51 testlik birleşik koşu yaklaşık 4,3 saniyede raporsuz bitiyor; çıkış 137.",
+      "causal_assessment": "Kayıtlı kernel çıktısında Memory cgroup out of memory ve headless_shell/MainThread öldürülmesi var. Deney raporu browser --memory 1g sınırını belirtiyor.",
+      "impact": "Test raporu bulunamaması ürün kusuru veya ajan durması sanılıyor; teslim engelleniyor.",
+      "evidence_ids": [
+        "E31",
+        "E11",
+        "E12",
+        "E13"
+      ],
+      "historical_remediation": "Raporda 2 GB ile aynı aday 3/3 PASS; örneklenmiş tepe 887–942 MiB. Sonra testleri gruplama ve ayrı kaynak sınırları eklenmiş.",
+      "inference_boundary": "137 tek başına OOM kanıtı değildir; burada kernel kaydıyla destekli. Bu, LLM/ajanın genel RAM ihtiyacını veya Hetzner kapasitesini ölçmez. Örneklenmiş tepe gerçek anlık tepeden düşük olabilir.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Büyüyen test setinde cgroup OOM, exit/signal, peak bellek, zaman sınırı ve batch makbuzu birlikte gözlenmeli; kaynak artışı ölçüme dayanmalı."
+    }
+  },
+  {
+    "id": "K04",
+    "grup": "Yerel geçmiş",
+    "baslik": "Mac uyuyunca çalışma sahipliği kaybı tüm slotları kapatıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+    "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+    "pointer": "/findings/3",
+    "ham": {
+      "id": "K04",
+      "cluster": "01_kurulum_ve_kaynak",
+      "title": "Mac uyuyunca çalışma sahipliği kaybı tüm slotları kapatıyor",
+      "evidence_level": "tool_output_and_experiment",
+      "observed_period": "13–15 Eylül",
+      "symptom": "SCHEDULER_LEASE_LOST; iki UNKNOWN slot dolu kalırken diğer ekipler başlayamıyor.",
+      "causal_assessment": "15 Eylül deneyinde Clamshell/Maintenance Sleep zamanları heartbeat kesintileriyle eşleştirilmiş. 120 saniyelik sahiplik süresi doluyor; lost bayrağı kalıcı, release de aynı süre şartına takılıyor; max_slots=2 doluyor.",
+      "impact": "Yaşayan veya durmuş işlerin belirsiz sahipliği kapasiteyi kilitliyor; retry sınırı kurtarmayı kapatıyor.",
+      "evidence_ids": [
+        "E03",
+        "E07",
+        "E30",
+        "E28"
+      ],
+      "historical_remediation": "Aynı sahip ve değişmemiş nesil için kontrollü yenileme, ölü slot uzlaştırma ve yeniden kuyruklama kaydedilmiş; 06:16 snapshot ilerlemenin yeniden başladığını destekliyor.",
+      "inference_boundary": "03:59 devir raporu ilk nedeni henüz bilmiyordu; sonraki deney uyku korelasyonunu bulmuş. Bütün lease kayıplarının uyku olduğu söylenemez. Bu olay Mac üzerinde; Ubuntu sunucuda aynı tetikleyici beklenmez.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Duraklama, restart, devralma ve eski worker dönüşü ayrı sınanmalı; eski sahibin yazması engellenirken kapasite geri kazanılmalı."
+    }
+  },
+  {
+    "id": "K05",
+    "grup": "Yerel geçmiş",
+    "baslik": "Doğrulanmış paket, heartbeat yarışıyla hata sayılıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/02_sahiplik_ve_kalici_durum.json",
+    "sha256": "8a86379df5bba4d3635b1823bb89ff2c8fb5e726c6a6a23a2fae75d14be2b5c4",
+    "pointer": "/findings/0",
+    "ham": {
+      "id": "K05",
+      "cluster": "02_sahiplik_ve_kalici_durum",
+      "title": "Doğrulanmış paket, heartbeat yarışıyla hata sayılıyor",
+      "evidence_level": "historical_experiment",
+      "observed_period": "15 Eylül 02:24 UTC",
+      "symptom": "Team 5 UI-05 VERIFIED olduktan aynı saniye sonra PACKAGE_LEASE_LOST.",
+      "causal_assessment": "Yenileme iş parçacığı yalnız CLAIMED/IMPLEMENTED durumunu kabul ediyor; kendi VERIFIED geçişini sahiplik kaybı sanıyor ve kalıcı hata kaydediyor.",
+      "impact": "Başarılı ürün paketi varken takım ERROR durumuna düşüyor.",
+      "evidence_ids": [
+        "E08"
+      ],
+      "historical_remediation": "Kendi VERIFIED geçişini ayırt etme, kabul öncesi heartbeat durdurma ve aynı nesilde devam makbuzları mevcut.",
+      "inference_boundary": "Bu vaka scheduler uyku vakasından ayrıdır; eski deneydeki zamanlı teşhise dayanır.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Accept/renew/checkpoint eşzamanlılığında kendi terminal geçişi, gerçek devralma ve eski token birbirinden ayrılmalı."
+    }
+  },
+  {
+    "id": "K06",
+    "grup": "Yerel geçmiş",
+    "baslik": "Yönetim gözlemcisi kendi idempotency kuralına takılıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/02_sahiplik_ve_kalici_durum.json",
+    "sha256": "8a86379df5bba4d3635b1823bb89ff2c8fb5e726c6a6a23a2fae75d14be2b5c4",
+    "pointer": "/findings/1",
+    "ham": {
+      "id": "K06",
+      "cluster": "02_sahiplik_ve_kalici_durum",
+      "title": "Yönetim gözlemcisi kendi idempotency kuralına takılıyor",
+      "evidence_level": "raw_log_and_experiment",
+      "observed_period": "15 Eylül ve tarihsiz log birikimi",
+      "symptom": "Yönetim gözlemi her döngüde BlockageStoreError veriyor.",
+      "causal_assessment": "Deney aynı olay anahtarıyla route alanı değişen payload yazıldığı için IDEMPOTENCY_CONFLICT oluştuğunu saptıyor; yalnız hata sınıfı loglanmış.",
+      "impact": "Tıkanıklığı çözecek yönetim katmanı da çalışamıyor.",
+      "evidence_ids": [
+        "E06",
+        "E08"
+      ],
+      "historical_remediation": "Mevcut olayın tekrar yazılmaması ve hata nedeninin loglanması kaydedilmiş.",
+      "inference_boundary": "Eski rapor 1275 satır saymış; bu incelemede dosyada 1385 satır var. Bu birikim farkıdır, 1385 ayrı kök neden değildir.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Olay kimliği ve değişebilir projeksiyon ayrılmalı; tekrar gözlem, rota değişimi ve retry idempotency testleri bulunmalı."
+    }
+  },
+  {
+    "id": "K07",
+    "grup": "Yerel geçmiş",
+    "baslik": "Veritabanı kilit döngüleri ve iki bağlantılı kendini kilitleme",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/02_sahiplik_ve_kalici_durum.json",
+    "sha256": "8a86379df5bba4d3635b1823bb89ff2c8fb5e726c6a6a23a2fae75d14be2b5c4",
+    "pointer": "/findings/2",
+    "ham": {
+      "id": "K07",
+      "cluster": "02_sahiplik_ve_kalici_durum",
+      "title": "Veritabanı kilit döngüleri ve iki bağlantılı kendini kilitleme",
+      "evidence_level": "raw_log_and_experiment",
+      "observed_period": "Tarihsiz loglar; 16 Eylül 02:20–02:50 UTC",
+      "symptom": "PostgreSQL deadlock kayıtları; claim sırasında işçilerin ve zamanlayıcının yığılması.",
+      "causal_assessment": "Ham logda jobs satırları üzerinde 7 deadlock kaydı var. Ayrı 10b deneyinde bir transaction kilit tutarken ikinci bağlantı reviewer kapasitesi için aynı job kilidini istiyor.",
+      "impact": "Worker, denetleyici ve bakım beklemeye giriyor; tarihli olayda worker süreçleri sonlandırılıp işler kurtarılmış.",
+      "evidence_ids": [
+        "E04",
+        "E05",
+        "E19"
+      ],
+      "historical_remediation": "10b raporunda kapasite okuması claim transaction öncesine taşınmış.",
+      "inference_boundary": "Tarihsiz 7 deadlock satırını 10b olayıyla birebir eşleştirecek zaman/correlation bilgisi yok; iki kanıt grubu aynı olay diye sayılmaz.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Kilit sırası, transaction sınırı ve ikinci bağlantı kullanımı gerçek eşzamanlı yük altında sınanmalı; süre ve ilk hata loglanmalı."
+    }
+  },
+  {
+    "id": "K08",
+    "grup": "Yerel geçmiş",
+    "baslik": "Teşhis ajanı kanıtsız çalışıyor; okunamayan dosya başarı sayılıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+    "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+    "pointer": "/findings/0",
+    "ham": {
+      "id": "K08",
+      "cluster": "03_teshis_ve_kurtarma",
+      "title": "Teşhis ajanı kanıtsız çalışıyor; okunamayan dosya başarı sayılıyor",
+      "evidence_level": "historical_snapshot_and_report",
+      "observed_period": "15 Eylül 03:59 UTC snapshot",
+      "symptom": "INCIDENT.json okunamadı diyen sonuç SUCCESS/diagnosed olarak kaydedilmiş.",
+      "causal_assessment": "Dosyayı oku talimatı var; dosya içeriği promptta yok, yerel okuma aracı yok ve komut çalıştırmak yasak. Model çağrısının bitmesi teşhis başarısı sayılmış.",
+      "impact": "Yöneticiye sonuç aktarılıyor ama gerçek nedeni belirleyecek kanıt ve uygulanabilir onarım yok.",
+      "evidence_ids": [
+        "E27",
+        "E35",
+        "E08"
+      ],
+      "historical_remediation": "Sınırlı olay içeriğinin girdiye eklenmesi, salt okunur erişim ve NEEDS_EVIDENCE sonucu kaydedilmiş.",
+      "inference_boundary": "Bu, raporlanan bir araç/yetki-sözleşme uyumsuzluğudur; modelin kendi kendine dosyayı okumayı reddetmesi şeklinde yorumlanamaz.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Teşhis başarısı kaynak kimliği, evidence_read, nedensel bulgu ve doğrulanabilir sonraki adım gerektirmeli; araç çağrısı bitişi yeterli olmamalı."
+    }
+  },
+  {
+    "id": "K09",
+    "grup": "Yerel geçmiş",
+    "baslik": "Bekleyen işin onu ilerletecek gerçek sahibi yok",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+    "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+    "pointer": "/findings/1",
+    "ham": {
+      "id": "K09",
+      "cluster": "03_teshis_ve_kurtarma",
+      "title": "Bekleyen işin onu ilerletecek gerçek sahibi yok",
+      "evidence_level": "historical_experiment_with_tool_corroboration",
+      "observed_period": "15–18 Eylül",
+      "symptom": "NEEDS_TRIAGE / NO_QUALIFIED_REPAIR_PROFILE / PARALLEL_CHILDREN_PENDING ile iş sessizce bekliyor.",
+      "causal_assessment": "Onarım talebini tüketen yürütücü yok; tamamlanmış takım yeniden kuyruğa alınmıyor veya bütün takımlar bitmişken root hâlâ çocuk bekliyor. Rol/rapor varlığı çalışan bir onarım yolu sağlamıyor.",
+      "impact": "Ürün hazır parçalarına rağmen saatlerce ilerleme yok; kullanıcı bitti mi diye sorunca fark ediliyor.",
+      "evidence_ids": [
+        "E13",
+        "E20",
+        "E21",
+        "E24"
+      ],
+      "historical_remediation": "Foundation repair/recall yolları kademeli eklenmiş. 18 Eylül 16:18 family watch WAIT_WITHOUT_OWNER, ERROR_WITHOUT_REPAIR, NO_PROGRESS gözlemini eklemiş.",
+      "inference_boundary": "Family watch raporuna göre bu gözlemci kendiliğinden onarım yapmaz veya worker yeniden başlatmaz. Alarmı eklemek onarım döngüsünü tamamlamak değildir.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Her bekleme gerçek sorumlu iş, uyanma olayı, son ilerleme ve zaman sınırı taşımalı; yürütülebilir onarım yoksa görünür karar talebi oluşmalı."
+    }
+  },
+  {
+    "id": "K10",
+    "grup": "Yerel geçmiş",
+    "baslik": "İlerleme gözlemcisi uzun testi ajan takılması sanıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+    "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+    "pointer": "/findings/2",
+    "ham": {
+      "id": "K10",
+      "cluster": "03_teshis_ve_kurtarma",
+      "title": "İlerleme gözlemcisi uzun testi ajan takılması sanıyor",
+      "evidence_level": "historical_experiment",
+      "observed_period": "18 Eylül 07:21–10:09 UTC",
+      "symptom": "AGENT_PROGRESS_STALLED → tekrar → üçüncü olayda RECOVERY_RETRY_BOUND.",
+      "causal_assessment": "Birleşik test süresi 570 saniyeden yaklaşık 70 dakikaya büyümüş. tdd.poll içindeki controller çalışırken yeni makbuz gelmediği için 600 saniyelik ajan boşta sınırı işleyen testi kesmiş.",
+      "impact": "Kurtarma mekanizması her seferinde meşru işi öldürüp yeniden başlatıyor, sonra kendini kapatıyor.",
+      "evidence_ids": [
+        "E22"
+      ],
+      "historical_remediation": "Controller yürütme penceresinde ajan sayaçlarının durdurulduğu; test tarafında ayrı timeout ve lease sınırlarının korunduğu kaydedilmiş.",
+      "inference_boundary": "Bu süreler olay raporundan; bugün benchmark yapılmadı. Ajan zamanlayıcısını durdurmak bütün timeoutları kaldırmak anlamına gelmemeli.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Model düşünmesi, controller çalışması, test ilerlemesi ve gerçek takılma farklı telemetriyle ve ayrı son tarihlerle izlenmeli."
+    }
+  },
+  {
+    "id": "K11",
+    "grup": "Yerel geçmiş",
+    "baslik": "Reviewer kotası tüm üretim kuyruğunu bloke ediyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+    "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+    "pointer": "/findings/0",
+    "ham": {
+      "id": "K11",
+      "cluster": "04_kapasite_ve_buyume",
+      "title": "Reviewer kotası tüm üretim kuyruğunu bloke ediyor",
+      "evidence_level": "historical_experiment",
+      "observed_period": "15–16 Eylül",
+      "symptom": "Coder kapasitesi olsa bile işler review kapasitesi bekleyerek yeniden kuyruğa dönüyor; başka PENDING paketler alınmıyor.",
+      "causal_assessment": "Sabit reviewer rotası kotaya takılıyor; ilk IMPLEMENTED paket her claimde tekrar seçiliyor. Ayrıca root kabul kapasitesi onarımın kullanacağı rol yerine koordinatör rolünden ölçülmüş.",
+      "impact": "Model çağrısı olmadan döngü, tamamlanabilir işleri aç bırakan sıra ve yaklaşık beş saat root beklemesi.",
+      "evidence_ids": [
+        "E18",
+        "E19"
+      ],
+      "historical_remediation": "Review defer, kapasiteye göre paket seçimi ve onarım rolüne göre admission raporlanmış.",
+      "inference_boundary": "RAM eklemek hesap kotasını veya rol bağımlılığını çözmez. Alternatif reviewer bağımsızlığı ve yetkisi korunmalı.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Kaynak bütçesi rol bazında olmalı; reviewer yokken bağımsız yapılabilir iş ilerlemeli, bekleme WIP sınırı ve uyanma koşulu taşımalı."
+    }
+  },
+  {
+    "id": "K12",
+    "grup": "Yerel geçmiş",
+    "baslik": "Plane doğrulama sorguları oran sınırına çarpıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+    "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+    "pointer": "/findings/1",
+    "ham": {
+      "id": "K12",
+      "cluster": "04_kapasite_ve_buyume",
+      "title": "Plane doğrulama sorguları oran sınırına çarpıyor",
+      "evidence_level": "historical_experiment",
+      "observed_period": "15 Eylül 20:04–21:10 UTC",
+      "symptom": "Birden fazla takım 429 ile, API yeniden oluşturulurken bazıları 502 ile düşüyor.",
+      "causal_assessment": "İşçiler aynı anahtarla sık verify_contract sorgusu yapıyor; kapasite bekleme döngüsünde üç saniyede bir GET kaydedilmiş. Gateway hatası unknown sınıfına gidiyor.",
+      "impact": "Görev takip sistemi dar boğaz olup çalışan aileyi durduruyor.",
+      "evidence_ids": [
+        "E18"
+      ],
+      "historical_remediation": "Sınırlı backoff/Retry-After, gateway sınıflandırması ve tarihsel rate-limit artırımı var; bekleme sorgularını seyrekleştirme o bölümde açık kalmış.",
+      "inference_boundary": "Bu dosyada anlatılan tarihsel API limit değişikliği bugünkü yapılandırma tavsiyesi veya yaptığımız işlem değildir.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Ortak kota bütçesi, sorgu birleştirme, backoff/jitter ve kesinti sonrası sözleşme uzlaştırması yük testinde doğrulanmalı."
+    }
+  },
+  {
+    "id": "K13",
+    "grup": "Yerel geçmiş",
+    "baslik": "Büyüyen kanıtlar bağlam ve durum sınırını aşıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+    "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+    "pointer": "/findings/2",
+    "ham": {
+      "id": "K13",
+      "cluster": "04_kapasite_ve_buyume",
+      "title": "Büyüyen kanıtlar bağlam ve durum sınırını aşıyor",
+      "evidence_level": "tool_output_and_experiment",
+      "observed_period": "18 Eylül",
+      "symptom": "UI-48 için 4.762 CLAIM olayı; çok az model çalışması. Sonra TDD state exceeds storage limit ve review context sınırı.",
+      "causal_assessment": "93 bin karakter tarihçe CONTEXT_CAPACITY_UNSUPPORTED üretmiş; CAPACITY alt dizesi gerçek kapasite beklemesi sanılmış. Ayrı olayda makbuz tekrarları state boyutunu 1.008.940 byte, build kanıtı tek başına 100.248 karakter yapmış.",
+      "impact": "İlerlemeyen hızlı döngü; tamamlanan testler kaydedilemiyor veya bağımsız incelemeye sunulamıyor.",
+      "evidence_ids": [
+        "E20",
+        "E32",
+        "E23"
+      ],
+      "historical_remediation": "Bounded history, tam kanıta hash/ref ile erişim, state compaction ve açık hata sınıflandırması raporlanmış; state 233.073 byte seviyesine indirilmiş.",
+      "inference_boundary": "4.762 değeri CLAIM sayısıdır; 4.762 ayrı model çağrısı ya da görev değildir. 13 saat aynı zaman aralığındaki entegrasyon beklemesiyle de ilişkilidir.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Girdi ve durum boyutu görev büyümesiyle sınanmalı; büyük kanıt kaybolmadan harici artifact referansına taşınmalı; aynı checkpoint tekrarları ölçülmeli."
+    }
+  },
+  {
+    "id": "K14",
+    "grup": "Yerel geçmiş",
+    "baslik": "Ayrı çalışma ağaçlarından birleşime geçiş eksik",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+    "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+    "pointer": "/findings/0",
+    "ham": {
+      "id": "K14",
+      "cluster": "05_entegrasyon_ve_sozlesmeler",
+      "title": "Ayrı çalışma ağaçlarından birleşime geçiş eksik",
+      "evidence_level": "historical_experiment",
+      "observed_period": "15–18 Eylül",
+      "symptom": "UI-54 bağımlı bileşeni bekliyor, merge edilmiş takım recall sonrası çalışmıyor; tüm takımlar birleştiği halde root ilerlemiyor.",
+      "causal_assessment": "Paket bağımlılığı ve entegrasyon hazır oluşu aynı biçimde modellenmemiş. Root foundation eskiliği bütün 73 paketi stale gösterip düzeltmeyi yapacak integration aşamasını da kapatmış.",
+      "impact": "Yerel GREEN/VERIFIED toplamı teslim üretmiyor; ortak temel bozukluğu birçok takımı birden engelliyor.",
+      "evidence_ids": [
+        "E14",
+        "E16",
+        "E21",
+        "E20"
+      ],
+      "historical_remediation": "Dependency pending/release, merged takımın yeniden kuyruğa alınması, foundation repair ve integration giriş koşulu düzeltmeleri kaydedilmiş.",
+      "inference_boundary": "Ayrı worktree yaratmak tek başına bağımlılık, ortak temel, recall veya entegrasyon sahipliği sorunlarını çözmez.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Bağımlılık DAGı, ortak dosya sahipliği, birleşik aday regresyonu ve bitmiş işin geri çağrılması uçtan uca doğrulanmalı."
+    }
+  },
+  {
+    "id": "K15",
+    "grup": "Yerel geçmiş",
+    "baslik": "Bir onarım başka aşamanın veri sözleşmesini bozuyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+    "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+    "pointer": "/findings/1",
+    "ham": {
+      "id": "K15",
+      "cluster": "05_entegrasyon_ve_sozlesmeler",
+      "title": "Bir onarım başka aşamanın veri sözleşmesini bozuyor",
+      "evidence_level": "historical_experiment",
+      "observed_period": "15–18 Eylül",
+      "symptom": "Compaction sonrası TDD_UPGRADE_DISCOVERY_MISMATCH; browser makbuzuyla CORRECTION_REGRESSION_STALE_OR_INCOMPLETE; dosyası değişmeyen committe CORRECTION_SOURCE_CHANGED.",
+      "causal_assessment": "Makbuz şeması ve kimlik kuralları tüm üretici/tüketicilerde birlikte güncellenmemiş. Liste→count/digest dönüşümünü okuyucu bilmiyor; tek süreç returncode şartı toplu tarayıcı koşusuna uygulanıyor.",
+      "impact": "Yüzlerce alt test yeşil olsa bile gerçek uzun akışta yeni durmalar çıkıyor; 10ao sonrası 10ap regresyonu yaklaşık on dakikada görülmüş.",
+      "evidence_ids": [
+        "E23",
+        "E16"
+      ],
+      "historical_remediation": "Ortak selection_matches, profile digest taşıma ve içerik digestine göre değişiklik denetimi eklenmiş. 10as raporu ilgili regresyon alt kümesinde 518/0 bildiriyor.",
+      "inference_boundary": "Alt küme test başarısı tüm ürünün AC/DoD ve alpha teslimini kanıtlamaz; değişiklik sonrası tarihsel test sonuçları yeniden çalıştırılmadı.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Sürümlemiş sözleşme, producer/consumer uyumu, eski checkpointten devam ve birleşik akış canary testi olmalı."
+    }
+  },
+  {
+    "id": "K18",
+    "grup": "Yerel geçmiş",
+    "baslik": "Test/oracle hata sınıflandırması yanlış sahibine gönderiyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+    "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+    "pointer": "/findings/2",
+    "ham": {
+      "id": "K18",
+      "cluster": "05_entegrasyon_ve_sozlesmeler",
+      "title": "Test/oracle hata sınıflandırması yanlış sahibine gönderiyor",
+      "evidence_level": "historical_experiment",
+      "observed_period": "15–18 Eylül",
+      "symptom": "Geçersiz test isteği işi ERROR yapıyor; ambient tip eksikliği ürün hatası gibi görülüyor; olmayan production kanıtı için 14 review tekrarı.",
+      "causal_assessment": "Çalıştırıcı ortamı, test yazarı hatası, ürün RED sonucu ve erişilemeyen kabul kanıtı ayrılmamış. Reviewer kapsam dışı kanıt istiyor; author bu beklentiye karşı kendini skip eden test üretmiş.",
+      "impact": "Yanlış onarım rotası, gereksiz retry, sahte başarı veya sonuç üretemeyen doğrulama döngüsü riski.",
+      "evidence_ids": [
+        "E11",
+        "E15",
+        "E23"
+      ],
+      "historical_remediation": "Ambient .d.ts dahil etme, geçersiz isteğe REJECTED geri bildirimi, kapsamlı review ve belirli path hatalarını yazarına gönderme raporlanmış.",
+      "inference_boundary": "Bunlar test altyapısı/oracle boşluklarıdır; bütün oracle probleminin çözüldüğü veya bağımsız iş doğruluğunun kanıtlandığı sonucuna varılamaz.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Test çalıştı mı, assertion var mı, hangi iş kuralını doğruluyor, çalıştırıcı mı ürün mü bozuk soruları ayrı kanıtlarla yanıtlanmalı."
+    }
+  },
+  {
+    "id": "K16",
+    "grup": "Yerel geçmiş",
+    "baslik": "Plane insan/bot kimliği ve pano durumu devamı engelliyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+    "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+    "pointer": "/findings/0",
+    "ham": {
+      "id": "K16",
+      "cluster": "06_girdi_ve_teslim_siniri",
+      "title": "Plane insan/bot kimliği ve pano durumu devamı engelliyor",
+      "evidence_level": "transcript_tool_result_and_report",
+      "observed_period": "13 Eylül; 18 Eylül 16:46–17:24 UTC",
+      "symptom": "16:46 review QUEUED ve job RUNNING; slot 0, PLANE_RECOVERY_ACTOR_AMBIGUOUS. 17:24 yetki makbuzu sonrası PLANE_RECOVERY_OWNER_STATE_PENDING; pano WAITING_DECISION.",
+      "causal_assessment": "Paylaşılan aktörle insan/otomasyon durum değişikliği ayırt edilemiyor. Yetki kaydı eklenince ilk engel değişiyor; bu kez controller panonun ERROR veya IN_PROGRESS olmasını istiyor, mevcut WAITING_DECISION durumundan çıkışı sahibinden bekliyor.",
+      "impact": "Paketler birleşmiş ve testler geçmiş olsa bile nihai kabul incelemesi başlayamıyor; insanın yalnız girdi/çıktıyı görmesi hedefi karşılanmıyor.",
+      "evidence_ids": [
+        "E33",
+        "E37",
+        "E38",
+        "E29",
+        "E25"
+      ],
+      "historical_remediation": "18 Eylül 16:37 review requeue; 17:24 sahip yetkisi makbuzu kabul edilmiş. Son kayıtta pano durumunun insan tarafından değiştirilmesi bekleniyor. Bu yüzden son engeli hâlâ actor ambiguous diye raporlamıyoruz.",
+      "inference_boundary": "Pano kararını beklemek tasarımın bilinçli sınırı olabilir; otomasyon arızasıyla aynı şey değildir. Ancak kullanıcı hedefiyle uyumu çözülmemiştir. Sonraki nihai kabul veya remote alpha yayını doğrulanmadı.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "İnsan ve otomasyon eylemi ayrı doğrulanabilir kimlik/revision taşımalı; requeue sonrası gerçek claim ve review başlangıcı gözlenmeli."
+    }
+  },
+  {
+    "id": "K17",
+    "grup": "Yerel geçmiş",
+    "baslik": "Kurulum, çağrı, paket ve teslim başarısı birbirine karışıyor",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+    "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+    "pointer": "/findings/1",
+    "ham": {
+      "id": "K17",
+      "cluster": "06_girdi_ve_teslim_siniri",
+      "title": "Kurulum, çağrı, paket ve teslim başarısı birbirine karışıyor",
+      "evidence_level": "transcript_assistant_claim_and_later_observation",
+      "observed_period": "15–18 Eylül",
+      "symptom": "17 Eylül yanıtı Sistem kurulumu bitti, bitmek üzere diyor; 18 Eylül kaydı uzun sessiz durmayı gösteriyor.",
+      "causal_assessment": "RUNNING, COMPLETED, VERIFIED ve MERGED farklı nesnelerin durumları. Bunlar nihai kullanıcı kabulünü göstermiyor. Teşhis çağrısının tamamlanması ve yönetici raporunun iletilmesi de onarım yerine sayılmış.",
+      "impact": "Kullanıcı tekrar bitti mi diye sormak zorunda kalmış; sistem gerçekte neyi tamamladı anlaşılmıyor.",
+      "evidence_ids": [
+        "E34",
+        "E20",
+        "E24",
+        "E26",
+        "E35",
+        "E33"
+      ],
+      "historical_remediation": "Family stall watch eklenmiş ve bazı dar kurtarmalar gerçekten üretimi yeniden başlatmış. 18 Eylül 16:14 raporu 74/74 verified ve 79 merged delivery ile GREEN kaydetmiş; ardından acceptance review ve 17:24 pano durumu beklemesi var.",
+      "inference_boundary": "17 Eylül yanıtı bütün teslimin bittiğini açıkça söylemiyor; buna rağmen yakın tamamlanma ve müdahale gerekmez beklentisi sonraki olaylarla doğrulanmıyor. 79 teslim 79 benzersiz ürün gereksinimi değildir.",
+      "current_runtime_status": "not_retested",
+      "recurrence_acceptance_criterion": "Aşama, paket, bütünleşik ürün, remote deploy ve insan kabulü ayrı durumlar olmalı; tamamlandı etiketi ilgili somut kanıta bağlanmalı."
+    }
+  }
+]

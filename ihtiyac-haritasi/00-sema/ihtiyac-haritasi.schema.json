@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ihtiyac-haritasi/00-sema/ihtiyac-haritasi.schema.json",
+  "title": "İhtiyaç haritası şeması",
+  "description": "Tüm dosyaların ortak yapısı. Kayıtlar yalnızca ihtiyacı ve çözülmesi gereken sorunu tanımlar; çözen araç, ürün, marka veya model adı içermez. Anahtarlar ASCII, değerler Türkçedir.",
+  "$defs": {
+    "kimlik": {
+      "type": "string",
+      "pattern": "^(N-K[0-9]{2}-[0-9]{3}|K[0-9]{2}|G-[0-9]{3}|U-[0-9]{3}|Q-[0-9]{3}|R-[0-9]{3}|C-[0-9]{3}|A-[0-9]{3}|D-[0-9]{3}|S-[0-9]{3}|P-[0-9]{2}|H-[0-9]{2}|Y-[0-9]{2}|T-[0-9]{3}|RL-[0-9]{2}|ORG-[0-9]{2}|SN-[0-9]|AY-[0-9])$",
+      "description": "N=ihtiyaç, K=küme, G=boşluk, U=bilinmeyen, Q=açık soru, R=risk, C=çelişki, A=varsayım, D=bekleyen karar, S=kaynak, P=ilke, H=hazırlık kapısı, Y=yetenek sınıfı, T=terim, RL=rol sınıfı, ORG=organizasyon katmanı"
+    },
+    "kanit": {
+      "type": "object",
+      "required": [
+        "duzey",
+        "kaynaklar"
+      ],
+      "properties": {
+        "duzey": {
+          "enum": [
+            "kaynakta_acik",
+            "kaynakta_ima",
+            "arastirma",
+            "cikarim"
+          ],
+          "description": "kaynakta_acik: kaynakta yazılı. kaynakta_ima: kaynaktan dolaylı çıkıyor. arastirma: dış araştırmayla desteklenen. cikarim: analiz sırasında türetilen, doğrulanmamış."
+        },
+        "kaynaklar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/kimlik"
+          }
+        },
+        "not": {
+          "type": "string"
+        }
+      }
+    },
+    "ihtiyac": {
+      "type": "object",
+      "required": [
+        "id",
+        "baslik",
+        "ihtiyac",
+        "cozulecek_sorun",
+        "zorunluluk",
+        "kabul_olcutleri",
+        "kanit",
+        "cember",
+        "belirsizlik"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/kimlik"
+        },
+        "baslik": {
+          "type": "string"
+        },
+        "ihtiyac": {
+          "type": "string",
+          "description": "Ne gerekli (yetenek/durum). Nasıl ve hangi araçla yapılacağı yazılmaz."
+        },
+        "cozulecek_sorun": {
+          "type": "string",
+          "description": "İhtiyaç karşılanmazsa yaşanan sorun."
+        },
+        "yetenek_siniflari": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^Y-[0-9]{2}$"
+          },
+          "description": "01-cerceve/yetenek-siniflari.json içindeki markasız yetenek sınıfları."
+        },
+        "zorunluluk": {
+          "enum": [
+            "zorunlu",
+            "olcege_bagli",
+            "kosullu",
+            "opsiyonel"
+          ],
+          "description": "zorunlu: her ölçekte gerekli. olcege_bagli: ekip/iş sayısı arttıkça zorunlu hale gelir. kosullu: belirli bir koşul oluşursa (regüle veri, mobil ürün vb.). opsiyonel: değer katar, yokluğu engellemez."
+        },
+        "olcek_etkisi": {
+          "type": "string",
+          "description": "Ekip sayısı ve iş hacmi değiştikçe ihtiyacın nasıl değiştiği."
+        },
+        "olcek_esigi": {
+          "type": "string",
+          "description": "Yalnız 'olcege_bagli' ihtiyaçlarda: ihtiyacın zorunlu hale geldiği eşik (ör. '3+ ekip', 'üretim', 'pilot sonrası'). Ayrıntı: 04-projelendirme-girdileri/olcek-senaryolari.json."
+        },
+        "kabul_olcutleri": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "İhtiyacın karşılandığını araçtan bağımsız gösteren gözlemlenebilir ölçütler."
+        },
+        "kanit": {
+          "$ref": "#/$defs/kanit"
+        },
+        "cember": {
+          "enum": [
+            "ic_tanimli",
+            "ic_bosluk",
+            "dis_eksik"
+          ],
+          "description": "ic_tanimli: kaynaklarda var ve yeterince tanımlı. ic_bosluk: kaynaklarda var ama eksik/belirsiz/çelişkili. dis_eksik: kaynaklarda yok ama gerekli."
+        },
+        "belirsizlik": {
+          "enum": [
+            "dusuk",
+            "orta",
+            "yuksek"
+          ]
+        },
+        "bagimliliklar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/kimlik"
+          }
+        },
+        "iliskili": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/kimlik"
+          },
+          "description": "İlgili boşluk, risk, soru, çelişki, varsayım veya karar kimlikleri."
+        },
+        "codex_kaynagi": {
+          "type": "string",
+          "description": "Köken (E1 karşılaştırmalı içe aktarma): kaydın ya da mevcut kayda eklenen parçaların alındığı ikinci bağımsız ihtiyaç atlası dosyası; o atlasın kök dizinine göre göreli yol ve kayıt kimliği. Ayrıntı: S-095."
+        },
+        "dogrulama": {
+          "enum": [
+            "dogrulandi",
+            "kismen",
+            "dogrulanamadi"
+          ],
+          "description": "İçe aktarılan iddiaların birincil kaynakla doğrulanma durumu. kismen: dayanak kaynak doğrulandı, ihtiyaç ifadesinin bir kısmı analiz çıkarımıdır."
+        },
+        "kaynak_url": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "İçe aktarılan parçayı destekleyen özgün kaynak bağlantıları (dis-kaynaklar.json içindeki S kimlikleriyle de eşlenir)."
+        },
+        "ice_aktarilan": {
+          "type": "string",
+          "description": "Mevcut bir kayda yalnız ekleme yapıldıysa hangi parçaların eklendiği (ör. son iki kabul ölçütü)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "kume_dosyasi": {
+      "type": "object",
+      "required": [
+        "sema",
+        "kume",
+        "ihtiyaclar"
+      ],
+      "properties": {
+        "sema": {
+          "const": "ihtiyac-haritasi/kume@1"
+        },
+        "kume": {
+          "type": "object",
+          "required": [
+            "id",
+            "ad",
+            "alan",
+            "amac",
+            "kapsam",
+            "kapsam_disi"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^K[0-9]{2}$"
+            },
+            "ad": {
+              "type": "string"
+            },
+            "alan": {
+              "enum": [
+                "A-deger-akisi",
+                "B-ajan-platformu",
+                "C-guvence-ve-yonetisim",
+                "D-organizasyon-ve-olcek",
+                "E-insan-ajan-birlikte-calisma",
+                "F-guvenilir-yazilim"
+              ]
+            },
+            "amac": {
+              "type": "string"
+            },
+            "kapsam": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kapsam_disi": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "komsu_kumeler": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^K[0-9]{2}$"
+              }
+            }
+          }
+        },
+        "ihtiyaclar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ihtiyac"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,518 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-50",
+    "ad": "İnceleme ergonomisi ve değişiklik ayrıştırma",
+    "grup": "Doğrulama ve kalite",
+    "cozdugu_sorun": "Büyük ve karma ajan değişikliklerinin insan tarafından anlaşılamaması ve incelemenin körlemesine onaya dönüşmesi.",
+    "ne_zaman_zorunlu": "İnceleme bekleme süresi ve değişiklik boyutu artmaya başladığında; pratikte pilot başında."
+  },
+  "arac_sayisi": 26,
+  "tur_dagilimi": {
+    "ticari-yazilim": 1,
+    "ticari-saas": 6,
+    "acik-kaynak": 17,
+    "acik-cekirdek": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-0100",
+      "ad": "Kiro",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://kiro.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Özellik isteğinden EARS kalıbında requirements.md, ardından design.md ve tasks.md üreten spesifikasyon güdümlü ajan IDE'si; gereksinim-önce/tasarım-önce akışları, hata düzeltmeye özel 'bugfix spec' ve dosya kaydı/commit gibi olaylarla tetiklenen ajan kancaları (ör. doküman güncelleme) sunar.",
+      "sinirlar": "Kredi tabanlı ticari hizmet; kod ve spesifikasyon sağlayıcıya gider; kaynak IDE olduğu için başsız hatta kullanılamayacağını söylüyordu, güncel sitede başsız CLI var. Spec iş akışı IDE'ye özgü, CLI'da yok; kapalı kaynak ve AWS hesabı/kredi modeline bağlı. Model çağrıları AWS bulut hizmeti üzerinden yapılır; tamamen kurum içi çalıştırma yoktur, iş akışı IDE'ye bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-009",
+        "N-K01-012",
+        "N-K02-004",
+        "N-K03-005",
+        "N-K05-001",
+        "N-K05-011",
+        "N-K07-001",
+        "N-K10-001",
+        "N-K10-008",
+        "N-K28-001",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0105",
+      "ad": "CodeRabbit",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.coderabbit.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR'larda bağlam farkındalıklı otomatik kod incelemesi, IDE ve CLI ile commit öncesi inceleme, yol bazlı özel talimatlar, statik analiz/güvenlik taraması entegrasyonu; GitHub, GitLab, Azure DevOps, Bitbucket desteği.",
+      "sinirlar": "Kapı değildir, kararı deterministik kontroller ve QA verir; kod üçüncü tarafa gider (kaynak). Denetçi model ailesi seçimi kısıtlı olabilir; yanlış pozitifler ve gürültü ekip ayarı gerektirir. SaaS; yanlış pozitif/negatif oranı kurum verisiyle ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-005",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K17-006",
+        "N-K28-008",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0488",
+      "ad": "Graphite (AI Code Review)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://graphite.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yığınlanmış (stacked) PR'lar, yapay zekâ kod incelemesi ve yığın farkındalıklı birleştirme kuyruğu; Cursor Cloud Agents entegrasyonu.",
+      "sinirlar": "GitHub'a bağımlı; kurumsal ilişki Cursor ile birleşme sonrası değişmiş olabilir. Aralık 2025'te Cursor satın aldı; GitHub'a bağımlı SaaS; bağımsız yol haritası belirsiz.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K05-015",
+        "N-K06-002",
+        "N-K24-008",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-0489",
+      "ad": "PR-Agent",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.pr-agent.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR açıklaması, inceleme ve iyileştirme önerileri üreten LLM tabanlı açık kaynak inceleyici; GitHub, GitLab, Bitbucket, Azure DevOps ile çalışır ve yazardan farklı model ailesi seçilebilir.",
+      "sinirlar": "Qodo'nun ücretsiz katmanı değildir; topluluk bakımı ile sürer, kurumsal destek yok. LLM incelemesi deterministik değildir; bulgu doğruluğu kalibre edilmeli.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-005",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0691",
+      "ad": "Danger JS",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://danger.systems/js/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR meta verisi ve diff üzerinde kod olarak kurallar çalıştırır; test dosyası silinmesi, snapshot/eşik dosyası değişikliği, açıklama eksikliği gibi durumları deterministik olarak işaretler veya PR'ı kırar.",
+      "sinirlar": "Kurallar JavaScript/TypeScript ile yazılır; CI bağlamı dışında zorlayıcı değil. Kurallar kurumca yazılmalı; semantik niyet–kod uyumunu tek başına ölçmez.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K05-005",
+        "N-K05-015",
+        "N-K05-027",
+        "N-K07-001",
+        "N-K08-003",
+        "N-K28-005",
+        "N-K28-007",
+        "N-K30-002",
+        "N-K30-003"
+      ]
+    },
+    {
+      "id": "AR-0839",
+      "ad": "OpenFastTrace",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/itsallcode/openfasttrace",
+      "olgunluk": "olgun",
+      "ne_saglar": "Markdown spesifikasyon öğelerini kaynak kod ve testlerdeki kapsama etiketleriyle eşleyip karşılanmamış veya eskimiş gereksinimleri raporlayan izleme aracı; Maven/Gradle derlemesine kalite kapısı olarak eklenebilir.",
+      "sinirlar": "Java 17 çalışma zamanı gerekir; yalnız etiket tabanlı izleme yapar, anlamsal eşleşme yoktur.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-027",
+        "N-K07-001",
+        "N-K19-003",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-1384",
+      "ad": "Gerrit Code Review",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.gerritcodereview.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Değişiklik (patch set) tabanlı inceleme; Code-Review/Verified oy etiketleri ve submit kurallarıyla birleştirme kapısı; küçük ve atomik değişikliği teşvik eder.",
+      "sinirlar": "Öğrenme eğrisi yüksek; PR tarzı iş akışından farklı.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K06-001",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K19-006",
+        "N-K28-007",
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-1487",
+      "ad": "Sapling",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sapling-scm.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yığılmış (stacked) commit iş akışı, smartlog, geri alma ve GitHub ile çalışan etkileşimli inceleme arayüzü (ReviewStack) sunan ölçeklenebilir kaynak kontrol istemcisi.",
+      "sinirlar": "Sunucu bileşenleri tam açık değildir; Git ile birlikte kullanımda bazı iş akışı farkları vardır.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K06-001",
+        "N-K17-006",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-1488",
+      "ad": "Difftastic",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://difftastic.wilfred.me.uk/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sözdizimi ağacına göre yapısal diff üreten araç; biçimlendirme gürültüsünü ayıklayarak insan incelemecinin ajan değişikliklerindeki gerçek anlamsal farka odaklanmasını kolaylaştırır.",
+      "sinirlar": "Büyük dosyalarda yavaşlayabilir; patch üretmez, yalnız görüntüleme içindir.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K17-006",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-1904",
+      "ad": "RefactoringMiner",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/tsantalis/RefactoringMiner",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Git geçmişinde commit'lerde uygulanan 100'den fazla yeniden düzenleme türünü yüksek doğrulukla tespit eder (Java ağırlıklı, Python ve Kotlin desteği); ajan değişikliklerinde yeniden düzenleme oranını ölçmeye uygun.",
+      "sinirlar": "Araştırma aracı; kurumsal arayüz yok, dil desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K23-014",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-3008",
+      "ad": "Agent Blame",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mesa-dot-dev/agentblame",
+      "olgunluk": "erken",
+      "ne_saglar": "Git geçmişinde AI tarafından yazılan satırları izleyen CLI ve GitHub PR'larında AI işaretlerini gösteren tarayıcı eklentisi; kod incelemesini riskli satırlara odaklar.",
+      "sinirlar": "Son etkinlik Mayıs 2026.",
+      "ihtiyaclar": [
+        "N-K17-006",
+        "N-K19-006",
+        "N-K22-003",
+        "N-K28-008",
+        "N-K29-009"
+      ]
+    },
+    {
+      "id": "AR-3593",
+      "ad": "Reviewable",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://reviewable.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub PR'ları için gelişmiş kod inceleme arayüzü: dosya bazında kim neyi inceledi takibi, revizyonlar arası fark, tartışma çözümleme durumu ve özelleştirilebilir tamamlanma koşulu.",
+      "sinirlar": "Yalnız GitHub; ayrı arayüz ekip alışkanlığı gerektirir.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K17-005",
+        "N-K17-006",
+        "N-K28-007",
+        "N-K31-002"
+      ]
+    },
+    {
+      "id": "AR-3981",
+      "ad": "Recce",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://datarecce.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "dbt değişikliklerinde geliştirme ortamı verisini üretimle karşılaştırır (satır sayısı, profil, değer ve sorgu farkı) ve sonuçları PR incelemesine kontrol listesi olarak ekler.",
+      "sinirlar": "dbt ekosistemine bağlı; ekrandaki içeriği değil veri modelini doğrular.",
+      "ihtiyaclar": [
+        "N-K05-020",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-4023",
+      "ad": "ghstack",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ezyang/ghstack",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yerel commit yığınındaki her commit'i GitHub'da ayrı ve birbirine bağlı PR olarak gönderir; tek davranışlık küçük değişiklik önerilerinin ayrı ayrı incelenip birleştirilmesini sağlar (PyTorch geliştirme akışında yaygın).",
+      "sinirlar": "Boyut sınırını kendisi zorlamaz; özel dal adlandırması GitHub arayüzünde karmaşa yaratabilir.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K04-001",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4024",
+      "ad": "spr (Stacked Pull Requests)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ejoffe/spr",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Her commit'i ayrı GitHub PR'ına dönüştüren yığınlı PR aracı; `git spr update` ile yığını senkronlar, `git spr merge` ile onaylanmış alt yığını sırayla birleştirir.",
+      "sinirlar": "Yalnız GitHub; son commit Nisan 2026, tek ana bakımcı.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K04-001",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4027",
+      "ad": "Pull Request Size Labeler (pr-size-labeler)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://github.com/CodelyTV/pr-size-labeler",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub Action: PR'ı değişen satır sayısına göre XS–XL etiketler; `fail_if_xl` ile XL eşiğini aşan PR'da iş akışını başarısız yapıp birleştirmeyi engeller, dosya hariç tutma ve uyarı mesajı destekler—değişiklik başına boyut sınırının basit, deterministik uygulaması.",
+      "sinirlar": "Tek ölçüt satır sayısıdır; anlamsal boyutu ve bölme önerisini üretmez.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4028",
+      "ad": "gitStream",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (kural motoru/eylemler) + ticari servis",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://gitstream.cm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Depodaki YAML (.cm) kurallarıyla PR'leri tahmini inceleme süresi, boyut, değişen dosya yolları, test dosyası değişikliği gibi koşullara göre etiketler, inceleyici atar, ek onay ister veya otomatik birleştirir; ör. test/beklenti dosyası değişen PR'ye 'yüksek risk' etiketi ve ek onay şartı.",
+      "sinirlar": "GitHub/GitLab/Bitbucket için LinearB'nin barındırdığı uygulamaya bağlı; bazı özellikler ücretli.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K05-005",
+        "N-K08-003",
+        "N-K10-005",
+        "N-K28-007",
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-4045",
+      "ad": "Stacked Git (StGit)",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://stacked-git.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git üzerinde yama yığını yönetimi: değişikliği sıralı ve bağımsız düzenlenebilir yamalara böler; yamaları yeniden sıralar, bölüp birleştirir, e-posta ile gönderir. Mekanik ve davranışsal değişikliklerin ayrı birimler olarak tutulmasına uygun.",
+      "sinirlar": "PR yığını için barındırma platformu entegrasyonu sınırlı; CLI odaklı ve öğrenme eğrisi var.",
+      "ihtiyaclar": [
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4046",
+      "ad": "revup",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Skydio/revup",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tek daldaki commit'leri etiketlerle gruplayıp tek komutla birden çok bağımlı ya da bağımsız GitHub PR'ı oluşturur ve günceller; revizyonlar arası fark takibi ve rebase tespiti yapar.",
+      "sinirlar": "Yalnız GitHub; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4047",
+      "ad": "stack-pr",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 (LLVM istisnalı)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/modular/stack-pr",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yerel commit dizisini GitHub'da her commit için ayrı ve birbirine bağlı PR'lara dönüştürür, yığını günceller ve sırayla birleştirir.",
+      "sinirlar": "Yalnız GitHub; tek şirketin iç iş akışından çıkmış, sınırlı özellik.",
+      "ihtiyaclar": [
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4048",
+      "ad": "git-machete",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/VirtusLab/git-machete",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dal düzeni dosyasıyla dal zincirlerini görselleştirir; sıralı rebase/merge, GitHub ve GitLab PR zincirlerinin hedef dal ve açıklamalarını otomatik yönetir.",
+      "sinirlar": "Dal düzeyinde çalışır; değişikliği otomatik bölmez.",
+      "ihtiyaclar": [
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4049",
+      "ad": "Aviator av CLI",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/aviator-co/av",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yığılı PR oluşturma, senkronlama ve yeniden temellendirme için CLI; Aviator birleştirme kuyruğuyla uyumlu çalışır.",
+      "sinirlar": "GitHub odaklı; kuyruk özellikleri Aviator hizmetine bağlı.",
+      "ihtiyaclar": [
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4050",
+      "ad": "GitHub Stacked Pull Requests (gh-stack)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (gh-stack CLI: MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://github.com/github/gh-stack",
+      "olgunluk": "erken",
+      "ne_saglar": "GitHub'da yerel yığılı PR desteği: büyük değişikliği katman katman sıralı küçük PR'lara böler; yığın haritası, kısmi birleştirme, otomatik rebase, dal korumaları, kontroller ve birleştirme kuyruğuyla uyum; CLI eklentisi ve ajanların kullanabileceği gh-stack skill'i.",
+      "sinirlar": "Temmuz 2026 itibarıyla genel önizleme; yalnız GitHub.",
+      "ihtiyaclar": [
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-4051",
+      "ad": "SemanticDiff",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://semanticdiff.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dil farkında fark aracı: boşluk, isteğe bağlı virgül ve gereksiz parantez gibi anlamsız değişiklikleri gizler; taşınan kodu, yeniden adlandırma ve yeniden düzenlemeleri tespit edip gruplar; VS Code eklentisi ve GitHub PR incelemesi entegrasyonu.",
+      "sinirlar": "Desteklenmeyen dillerde düz farka düşer; kodun sunucuya gönderilip gönderilmediği gizlilik politikasından doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K28-007",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-4052",
+      "ad": "What The Diff",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://whatthediff.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PR farkından düz dilde PR açıklaması, teknik olmayan paydaşlar için sadeleştirilmiş özet, değişiklik günlüğü ve haftalık ilerleme raporu üretir; GitHub ve GitLab ile çalışır.",
+      "sinirlar": "Özet üretir, parçaları kabul kriterine eşlemez; kod farkı üçüncü taraf LLM'e gider (saklanmadığı beyan ediliyor).",
+      "ihtiyaclar": [
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-4053",
+      "ad": "PR Lens",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://prlens.dev/",
+      "olgunluk": "erken",
+      "ne_saglar": "PR'ı animasyonlu mimari ve veri akışı diyagramı olarak çizip PR'a tek yorum olarak ekler (yeni/değişen/silinen bileşenler renkli); inceleyici satırlara geçmeden değişikliğin şeklini ve okuma yolunu görür. GitHub App, Action, CLI ve ajan skill'i olarak çalışır.",
+      "sinirlar": "Genç proje; diyagram doğruluğu LLM'e bağlı; parça–kabul kriteri eşlemesi yapmaz.",
+      "ihtiyaclar": [
+        "N-K28-007",
+        "N-K28-008"
+      ]
+    }
+  ]
+}

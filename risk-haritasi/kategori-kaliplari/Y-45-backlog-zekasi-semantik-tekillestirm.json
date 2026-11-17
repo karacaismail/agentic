@@ -1,0 +1,156 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-45",
+    "ad": "Backlog zekâsı (semantik tekilleştirme, kümeleme, eskime tespiti, ajana uygunluk sınıflandırması)",
+    "grup": "Gereksinim ve backlog zekâsı"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-225",
+      "yetenek_sinifi": "Y-45",
+      "kalip": "Yinelenen kayıt tespitinde gerçek veride başarım düşüşü",
+      "aciklama": "Yinelenen hata raporu tespiti üzerine karşılaştırmalı çalışma, verinin yaşı ve iş takip sistemi seçiminin başarımda anlamlı fark yarattığını ve daha basit bir tekniğin çoğu projede yakın zamanda önerilen karmaşık tekniklerden iyi sonuç verdiğini buldu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2212.00548"
+      ],
+      "yasatacagi_sorunlar": [
+        "Literatürdeki başarım oranlarına güvenilerek otomatik birleştirme yapılırsa 12.000 kayıtta ayrı işler yanlışlıkla birleştirilir, gerçek yinelenenler kalır.",
+        "Model eski veriyle ayarlanırsa yeni kayıt türlerinde başarım düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004"
+      ],
+      "ornek_araclar": [
+        "Jira duplicate detection",
+        "Embedding tabanlı tekilleştirme",
+        "Linear Triage"
+      ],
+      "erken_sinyal": "Otomatik birleştirilen kayıtların geri ayrılma oranı.",
+      "azaltma": "Birleştirmeyi öneri olarak sunma, kurum verisiyle ölçüm, basit sözcük tabanlı yöntemi taban çizgisi olarak tutma."
+    },
+    {
+      "id": "RK-226",
+      "yetenek_sinifi": "Y-45",
+      "kalip": "Kümeleme sonuçlarının koşudan koşuya değişmesi",
+      "aciklama": "BERTopic belgeleri, UMAP'ın stokastik doğası nedeniyle aynı kodun farklı koşularda farklı sonuç verebileceğini, yeniden üretilebilirlik için random_state sabitlemenin başarım pahasına mümkün olduğunu belirtir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://maartengr.github.io/BERTopic/faq.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Backlog kümeleri her yeniden hesaplamada değişirse ekiplerin iş paketleri ve önceliklendirme girdileri kararsızlaşır.",
+        "Küme kimlikleri değiştiği için geçmiş raporlarla karşılaştırma yapılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-009",
+        "N-K24-006"
+      ],
+      "ornek_araclar": [
+        "BERTopic",
+        "HDBSCAN",
+        "UMAP",
+        "k-means"
+      ],
+      "erken_sinyal": "Ardışık koşularda küme üyeliği değişim oranı.",
+      "azaltma": "Tohum sabitleme, küme kararlılık ölçümü, küme kimliklerinin önceki sonuçlarla eşleştirilmesi."
+    },
+    {
+      "id": "RK-227",
+      "yetenek_sinifi": "Y-45",
+      "kalip": "Otomatik eskime kapatmanın katkıyı azaltması",
+      "aciklama": "20 büyük açık kaynak projesinde Stale bot incelemesi, botun birikmiş PR'ları azaltıp inceleme verimini artırdığını ama benimseme sonrası aktif katkıcı sayısında belirgin düşüş olduğunu gösterdi.",
+      "risk_turleri": [
+        "RT-17",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2305.18150"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eskimiş sayılan iş kalemleri otomatik kapatılırsa iş birimlerinin geçerli talepleri kaybolur ve paydaşların sisteme güveni azalır.",
+        "Eskime ölçütü yalnız hareketsizliğe dayanırsa uzun vadeli yasal/altyapı işleri hatalı kapatılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-002"
+      ],
+      "ornek_araclar": [
+        "GitHub Stale bot/actions",
+        "Jira otomasyon kuralları"
+      ],
+      "erken_sinyal": "Otomatik kapatılan kayıtların yeniden açılma oranı; talep sahiplerinden şikâyet.",
+      "azaltma": "Kapatma yerine sahibe bildirim ve onay, iş türüne göre eskime ölçütü, toplu kapatmada insan gözden geçirmesi."
+    },
+    {
+      "id": "RK-228",
+      "yetenek_sinifi": "Y-45",
+      "kalip": "Ajana uygunluk sınıflandırmasında görev süresi etkisi",
+      "aciklama": "METR, öncü modellerin %50 başarıyla tamamlayabildiği görevlerin insan süresi karşılığının (ör. Claude 3.7 Sonnet için yaklaşık 50 dakika) sınırlı olduğunu ve başarının görev uzunluğuyla düştüğünü ölçtü.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2503.14499"
+      ],
+      "yasatacagi_sorunlar": [
+        "Metin benzerliğiyle 'ajana uygun' sınıflanan ama insan için saatler süren işler ajana verildiğinde başarısızlık ve maliyet artar.",
+        "Sınıflandırıcı görev büyüklüğünü dikkate almazsa küçük parti ilkesi bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-010",
+        "N-K01-012",
+        "N-K02-013"
+      ],
+      "ornek_araclar": [
+        "LLM tabanlı sınıflandırıcılar",
+        "Backlog triyaj araçları"
+      ],
+      "erken_sinyal": "Ajana verilen işlerde tahmini süre ile başarı oranı arasındaki ilişki.",
+      "azaltma": "Uygunluk kararına tahmini insan süresi ve bağımlılık sayısının girdi olması, büyük işlerin önce ayrıştırılması, sınıflandırıcının geri beslemeyle kalibrasyonu."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 34,
+    "dusuk": 24,
+    "kritik": 1,
+    "yuksek": 5
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 11,
+    "RT-05": 10,
+    "RT-08": 10,
+    "RT-15": 10,
+    "RT-14": 5,
+    "RT-13": 5,
+    "RT-02": 4,
+    "RT-04": 4,
+    "RT-10": 4,
+    "RT-06": 3,
+    "RT-01": 3,
+    "RT-12": 2,
+    "RT-16": 2,
+    "RT-07": 1,
+    "RT-03": 1,
+    "RT-17": 1
+  }
+}

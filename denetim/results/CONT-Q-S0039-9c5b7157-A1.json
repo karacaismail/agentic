@@ -1,0 +1,223 @@
+{
+  "task_id": "CONT-Q-S0039-9c5b7157-A1",
+  "source": "agents/18Agentic.pdf",
+  "sha256": "c8c9d9619fb35b2a490fe98dd9fdff39ee662f1c43879c68d9c46e035b6b0af5",
+  "manifest": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/c8c9d9619fb35b2a490fe98dd9fdff39ee662f1c43879c68d9c46e035b6b0af5/v2/manifest-04492b47dcb56b1601d0.json",
+  "unit_reviews": [
+    {
+      "unit_id": "p0001-text-exterior",
+      "source_locator": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/c8c9d9619fb35b2a490fe98dd9fdff39ee662f1c43879c68d9c46e035b6b0af5/v2/p0001-text-exterior.json",
+      "status": "partial",
+      "coverage": {
+        "total_items": 23296,
+        "index_basis": "Dosyada index alanı yok. Dizideki 0 tabanlı sıra kullanıldı. start dahil, end dahil değil.",
+        "text_read_ranges": [
+          [
+            0,
+            250
+          ],
+          [
+            7210,
+            7270
+          ],
+          [
+            7360,
+            7410
+          ],
+          [
+            8190,
+            8300
+          ],
+          [
+            12548,
+            12598
+          ],
+          [
+            23246,
+            23296
+          ]
+        ],
+        "keyword_hits_read": "22 eşleşme okundu: maturity, olgunluk, PoC, Blocker. Her eşleşmenin bbox başlangıcı da okundu.",
+        "bbox_read": "Tam bbox yalnız 0 ile 8 arasındaki öğelerde okundu. Diğerlerinde yalnız eşleşmelerin ilk iki koordinatı okundu.",
+        "text_items_read_approx": 592
+      },
+      "items": [
+        {
+          "item_id": "EXT-01",
+          "observation": "Birim visual_region=false ve mode=exterior_text değerlerini taşıyor. 23296 kelime içeriyor. Görsel dosyası yok.",
+          "interpretation": "Bu katman sayfa görselinin dışındaki metindir. Görsel kanıt olarak sayılamaz.",
+          "evidence": "manifest units[9]; Grep sayımı 23296"
+        },
+        {
+          "item_id": "EXT-02",
+          "observation": "Koordinatlar çok geniş bir alana yayılıyor. Örneğin 0. öğe y=-45848, 23295. öğe civarı ise 209658. satırda. x değeri yaklaşık -3095 ile 88206 arasında görüldü.",
+          "interpretation": "Metin, sayfanın kırpıldığı büyük Figma panosunun geri kalanından geliyor. Sayfa 1 görseli bu panonun yalnız küçük bir bölümünü gösteriyor.",
+          "evidence": "json satır 3-8; satır 49071-49074 (x=88206.36); son öğeler satır 209217-209658"
+        },
+        {
+          "item_id": "EXT-03",
+          "observation": "Kelimeler y koordinatına göre sıralı. Farklı notların kelimeleri birbirine karışıyor. Örnek: 'maturity-level.agent ', 'uzatma', '5', 'K', 'araç', 'çağrısı'.",
+          "interpretation": "Sıra okuma sırası değildir. Cümleleri sırayla birleştirmek yanlış metin üretir. Not sınırları bbox ile ayrıca kurulmalı.",
+          "evidence": "json satır 73767-73875 (öğe 8196-8208)"
+        },
+        {
+          "item_id": "EXT-04",
+          "observation": "Bazı harfler düzenli olarak eksik. Özgün değerler şunlar: 'smail', 'esaplamalar,', 'evam', 'itiyaç', 'Perormans', 'eneyim', 'AGETS', 'Pyton', 'muakeme'.",
+          "interpretation": "Olası doğru biçimler: İsmail, Hesaplamalar, Devam, ihtiyaç, Performans, Deneyim, AGENTS, Python, muhakeme. Eksik harfler İ, H, D, h, f, N gibi görünüyor. Bu bir yorumdur ve görselle doğrulanmadı.",
+          "evidence": "json satır 147, 750, 363, 112953, 1551, 1722, 209487, 73956, 74469"
+        },
+        {
+          "item_id": "EXT-05",
+          "observation": "Dosyanın sonunda kelimeler ikişer kez geçiyor. Örnek: 'ama\\n' iki kez, 'kapsam verir.tabindex poziti değer' iki kez, 'Metin Bektemür' iki kez.",
+          "interpretation": "Panoda üst üste binen iki kopya not olabilir. Metin katmanının çift çıkarılması da olabilir. Kelime sayısı bu nedenle içerik miktarını abartabilir.",
+          "evidence": "json satır 209271-209658 (öğe 23246-23295)"
+        },
+        {
+          "item_id": "EXT-06",
+          "observation": "x=2843, y=-13467 civarında 'maturity-level.agent' notunun kelimeleri var. Kelimeler sayfa görselindeki notla aynı: 'Çözümün olgunluk seviyesini (PoC, MVP, PMF, Enterprise) belirle ve kapsamı buna göre uygula', 'Ali Bora'.",
+          "interpretation": "Sayfa görselindeki notun panoda ikinci bir kopyası var. Kopyanın sayfa görseliyle aynı nesne olup olmadığı belirsiz. Hangisinin güncel olduğu kaynakta görünmüyor.",
+          "evidence": "json satır 73767, 73911, 73920, 74073-74253, 74262-74694; p0001-overview.png üst mavi not"
+        },
+        {
+          "item_id": "EXT-07",
+          "observation": "x=60604, y=-15122 civarında başka bir 'maturity-level.agent' tanımı var. Kelimeler şunlar: 'Ürün aşaması', 'PoCMVPüretim', 'olarak modelle.'",
+          "interpretation": "Bu tanım üç aşama kullanıyor gibi görünüyor: PoC, MVP, üretim. Sayfa görselindeki not dört aşama kullanıyor: PoC, MVP, PMF, Enterprise. Bu olası bir iç çelişkidir. Kelimeler karışık olduğu için kesin değildir.",
+          "evidence": "json satır 66306, 66369-66441 (öğe 7367-7382)"
+        },
+        {
+          "item_id": "EXT-08",
+          "observation": "x=56296, y=-625 civarında 'maturity-level.agent' yanında şu kelimeler var: 'denemeMVPüretim aşamasına göre gereken ayrıntıyı belirler', 'Planlama'.",
+          "interpretation": "Üçüncü bir tanım var. Bu tanımda aşamalar 'deneme, MVP, üretim' gibi görünüyor. Ajan burada planlamaya ayrıntı sınırı veriyor. Sayfa görselinde ise kapsamı planlıyor ve uyguluyor.",
+          "evidence": "json satır 112971, 113052-113160 (öğe 12552-12568)"
+        },
+        {
+          "item_id": "EXT-09",
+          "observation": "x=72606, y=-15305 civarında 'maturity-level.agent' adı geçiyor. Yakında x=73560 noktasında '(PoCMVPPMF' kelimesi var. Komşu kelimeler 'documentation.agent', 'Aider', 'Floise', 'Section 99'.",
+          "interpretation": "Bu bölge bir araç ya da ajan karşılaştırma tablosuna benziyor. Tablo yapısı koordinatlardan kurulmadı. Satır ve sütun ilişkisi uydurulmadı.",
+          "evidence": "json satır 64596, 64965-65208 (öğe 7218-7244)"
+        },
+        {
+          "item_id": "EXT-10",
+          "observation": "'Blocker' ve 'Blockera' kelimeleri farklı koordinatlarda 13 kez geçiyor.",
+          "interpretation": "Birçok ajan akışında 'Blocker raporla' adımı olabilir. Bu adımların ortak bir kuralı olup olmadığı okunmadı.",
+          "evidence": "json satır 49071, 79050, 92973, 93450, 102288, 102936, 103449, 110253, 112467, 113457, 123402, 123528"
+        },
+        {
+          "item_id": "EXT-11",
+          "observation": "Baştaki kelimelerde süreç adımları geçiyor: 'Plane', 'Kanban status', 'Evet', 'Hayır', 'Product Backlog', 'startTask', 'Kurallar yüklenir', 'Plan Gözden Geçirilir'.",
+          "interpretation": "Panonun üst kısmında Plane ile başlayan bir görev alma ve planlama akışı var. Oklar ve kutular metin katmanından kurulmadı.",
+          "evidence": "json satır 66-93, 318-381, 498-507, 1146-1236 (öğe 7-136)"
+        },
+        {
+          "item_id": "EXT-12",
+          "observation": "Bazı kelimelerde satır sonu karakteri var. Örnekler: 'araştırma\\n', 'çıkarsa\\n', 'mı?\\n'.",
+          "interpretation": "Satır sonları not içi satır sınırlarını gösteriyor olabilir. Not sınırlarını ayırmak için yardımcı ipucudur.",
+          "evidence": "json satır 112935, 112962, 113358"
+        }
+      ],
+      "remaining": [
+        "Metni okunmayan öğeler: [250, 7210), [7270, 7360), [7410, 8190), [8300, 12548), [12598, 23246). Anahtar kelime eşleşmeleri bu aralıklardan hariç tutuldu.",
+        "Tam bbox okuması yalnız [0, 9) aralığında yapıldı.",
+        "Kelimelerin not ve kutu sınırlarına göre gruplanması yapılmadı.",
+        "Dış metnin hangi kutuya ve oka bağlı olduğu bilinmiyor. Bu bilgi ancak tüm panonun görseliyle doğrulanabilir.",
+        "EXT-07 ve EXT-08 tanımlarının bütün cümleleri okunmadı.",
+        "Çift kopya kelimelerin nedeni doğrulanmadı."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-01",
+      "angle": "iç_çelişki",
+      "summary": "'maturity-level.agent' panoda en az 4 kez geçiyor. Sayfa görselindeki not 4 aşama sayıyor: PoC, MVP, PMF, Enterprise. Diğer iki tanım 3 aşama sayıyor gibi görünüyor: PoC, MVP, üretim.",
+      "evidence": [
+        "EXT-06",
+        "EXT-07",
+        "EXT-08"
+      ],
+      "confidence": "orta. Kelimeler karışık sırada."
+    },
+    {
+      "id": "F-02",
+      "angle": "yanlış_kabul_riski",
+      "summary": "Metin katmanında bazı harfler eksik. Kelimeler de okuma sırasında değil. Bu katman tek başına kanıt sayılırsa ad, kural ve sayı yanlış okunabilir.",
+      "evidence": [
+        "EXT-03",
+        "EXT-04"
+      ],
+      "confidence": "yüksek"
+    },
+    {
+      "id": "F-03",
+      "angle": "kapasite",
+      "summary": "Bu birim 23296 kelime içeriyor. Bir öğe yaklaşık 9 JSON satırı tutuyor. Tek ajan birimi tam okuyamaz. Birim, v3 sözleşmesindeki gibi parent, start ve end ile bölünmeli.",
+      "evidence": [
+        "EXT-01"
+      ],
+      "confidence": "yüksek"
+    },
+    {
+      "id": "F-04",
+      "angle": "dış_bağımlılık",
+      "summary": "Sayfa 1 görseli büyük bir panonun küçük bir parçası. Bağlantılar, tablolar ve öteki ajan tanımları sayfa dışında kalıyor. Bu bağlantılar başka sayfalarda veya kaynak Figma dosyasında doğrulanmalı.",
+      "evidence": [
+        "EXT-02",
+        "EXT-09",
+        "EXT-11"
+      ],
+      "confidence": "yüksek"
+    },
+    {
+      "id": "F-05",
+      "angle": "kesintiden_dönüş",
+      "summary": "Sayfa görselindeki akışta 'max 2 döngü' sınırı var. Sınır dolunca akış 'Blocker raporla' adımına gidiyor. Blocker raporundan sonra kimin ne yapacağı görselde yok. Dış metinde 13 'Blocker' geçişi var, ortak bir dönüş kuralı okunmadı.",
+      "evidence": [
+        "p0001-overview.png",
+        "EXT-10"
+      ],
+      "confidence": "orta"
+    }
+  ],
+  "proposals": [
+    {
+      "need": "Dış metni tam ve doğru okumak",
+      "tool_or_process": "Önce deterministik bir araç kelimeleri bbox yakınlığına göre not bloklarına gruplasın. Sonra birim 2000 kelimelik v3 parçalarına bölünsün. Her parçayı ayrı bir dil modeli okusun.",
+      "dot_comparison": "DOT-BAGLAMI.md 60. satırı PDF ve Figma çizimlerinin öğe düzeyinde incelenmesini istiyor. Bu öneri o ilkeyle uyumludur. Önerinin güncel doğrulaması yok.",
+      "experiment": {
+        "input": "Bu JSON dosyasında 8190-8300 aralığı. Bu aralıkta sayfadaki notun bilinen kopyası var.",
+        "expected_evidence": "Gruplanan blok, sayfa görselindeki not metniyle kelime kelime eşleşir.",
+        "stop_condition": "Eşleşme yüzde 95'in altındaysa gruplama yöntemi durdurulur ve görsel kırpma yöntemine geçilir.",
+        "status": "not_run"
+      }
+    },
+    {
+      "need": "Eksik harfleri düzeltmek",
+      "tool_or_process": "Kaynak PDF yeniden ve farklı bir metin çıkarma aracıyla işlensin. Çıktı bu dosyayla karşılaştırılsın. Dil modeli yalnız öneri versin, özgün değer korunsun.",
+      "dot_comparison": "İlgili bir Dot önerisi bulunmadı.",
+      "experiment": {
+        "input": "EXT-04'teki 9 bozuk kelime ve bbox değerleri.",
+        "expected_evidence": "İkinci araç aynı bbox noktalarında eksiksiz harfleri verir.",
+        "stop_condition": "İkinci araç da aynı harfleri kaybederse sorun yazı tipi kodlamasındadır. O durumda yalnız görsel okuma kabul edilir.",
+        "status": "not_run"
+      }
+    },
+    {
+      "need": "Olgunluk aşaması tanımındaki çelişkiyi çözmek",
+      "tool_or_process": "Dört 'maturity-level.agent' bölgesi görsel olarak kırpılsın. Bir insan veya koordinatör tanımları yan yana karşılaştırsın. Hangi tanımın geçerli olduğuna kaynağın sahibi karar versin.",
+      "dot_comparison": "DOT-BAGLAMI.md 26. satırı olgunluk aşamalarının ölçülen sonuçlara dayanmasını istiyor. Bu bir kullanıcı hedefidir. Aşama sayısı hakkında karar içermiyor.",
+      "experiment": {
+        "input": "x=2843 y=-13467, x=60604 y=-15122, x=56296 y=-625 ve x=72606 y=-15305 bölgeleri.",
+        "expected_evidence": "Her bölgenin aşama listesi görselden okunur.",
+        "stop_condition": "Bölgeler hiçbir sayfa görselinde yoksa iş blocked olur. Kaynak Figma dosyası istenir.",
+        "status": "not_run"
+      }
+    }
+  ],
+  "risks": {
+    "internal": "Metin katmanı karışık sırada ve harf kaybı var. Aynı ajan farklı tanımlarla birden çok kez geçiyor.",
+    "external": "Sayfa dışındaki içerik başka sayfalara veya Figma kaynağına bağlı. Bu kaynakların güncelliği bilinmiyor.",
+    "sustainability": "Tek parça 23296 kelimelik birim tekrar okunamaz. Bölünmeden her inceleme partial kalır."
+  },
+  "historical_note": "Kaynakta eski insan başlangıcı çizimi bu birimde ayrıca aranmadı. 0-250 aralığında 'Plane örnek task açmak' ve 'Product Backlog' geçiyor. Bu kelimeler insanla başlayan eski akışın parçası olabilir. Doğrulanmadı.",
+  "report_markdown": "## p0001-text-exterior incelemesi\n\nDurum: **partial**. Toplam 23296 öğe var. Yaklaşık 592 öğenin metni okundu.\n\nBu birim sayfa görselinin dışındaki metindir. Görsel kanıt değildir.\n\n### Bulgular\n\n1. `maturity-level.agent` panoda en az 4 kez geçiyor. Sayfadaki not 4 aşama sayıyor. Diğer iki tanım 3 aşama sayıyor gibi görünüyor.\n2. Metinde bazı harfler eksik. Örneğin \"smail\" yazıyor. Doğrusu büyük olasılıkla \"İsmail\".\n3. Kelimeler okuma sırasında değil. Farklı notların kelimeleri karışıyor.\n4. Dosyanın sonunda kelimeler ikişer kez geçiyor.\n5. Blocker raporundan sonra ne olacağı görselde yok.\n\n### Kalan iş\n\nOkunmayan aralıklar `remaining` alanında. Birim v3 parçalarına bölünmeli. Önerilen deneylerin hepsi not_run durumunda.\n\nBu sonuç kabul edilmiş değildir. Koordinatör kaynaktan ayrıca doğrulamalı."
+}

@@ -1,0 +1,365 @@
+{
+  "task_id": "CONT-Q-S0037-823db71a-A1",
+  "root_scope": "Q-S0037-823db71a",
+  "source": "agents/16Agentic.pdf",
+  "sha256": "b03ed6de415bb383b056f6a25a16894454aea3044a54c4fafa9a273603901e1b",
+  "manifest": "manifest-07f5ff0aa5836c61efea.json",
+  "result_state": "partial_review_submitted",
+  "locator_note": "Birim, kelime başına bir kayıt içeren JSON dizisidir. Dizide 27.953 kelime var. K0, dizinin tam kelime sırasıdır. K3, en az 3 karakterli kelimelerin sırasıdır ve 21.193 kelime içerir. Kutu koordinatlarını (bbox) yalnız ilk 9 kelimede okudum.",
+  "unit_reviews": [
+    {
+      "unit_id": "p0001-text-exterior",
+      "source_locator": {
+        "file": "p0001-text-exterior.json",
+        "page": 1,
+        "mode": "exterior_text",
+        "read_ranges": [
+          "K0 1-5000",
+          "K3 3495-14694",
+          "K3 20750-21193"
+        ],
+        "unread_ranges": [
+          "K3 14695-20749"
+        ],
+        "bbox_read": "yalnız K0 1-9"
+      },
+      "status": "partial",
+      "items": [
+        {
+          "item_id": "EXT-01",
+          "observation": "İlk kelimelerin koordinatları eksi değerlidir. Örnek: x yaklaşık -10263, y yaklaşık -42744. Sayfa görseli yalnız git-scenario.agent çizimini gösterir.",
+          "interpretation": "Bu metin sayfa alanının dışında kalıyor olabilir. Dokuz görsel birim bu içeriği göstermez. Bu içerik için görsel kanıt yoktur.",
+          "evidence": "K0 1-9 bbox değerleri. p0001-overview.png. Manifestte visual_region=false."
+        },
+        {
+          "item_id": "EXT-02",
+          "observation": "Metin katmanında harfler eksik. Örnekler: 'smail araca', 'lane', 'GREE', 'penCode'. Bazı sayılar da yok: 'Max x defa', 'en fazla deneme'.",
+          "interpretation": "Büyük harfler ve bazı rakamlar çıkarılırken kaybolmuş. Döngü ve bütçe sınırlarının çoğu bu birimden okunamaz.",
+          "evidence": "K0 19-25, 502-505, 1122-1123."
+        },
+        {
+          "item_id": "EXT-03",
+          "observation": "Standart süreç akışı var: 'lanede Bir Görev Seçilir', 'Geliştirici ek omut ile S reci Başlatı', 'startask', 'roe uralları klenir', 'Mevcut Codebase Araştırılı'.",
+          "interpretation": "Akışı insan başlatıyor. Bu çizim, otomatik Plane Todo alma kararına göre tarihsel farktır.",
+          "evidence": "K0 529-547."
+        },
+        {
+          "item_id": "EXT-04",
+          "observation": "Aynı akışta karar kutuları var: 'Eksik veya Belirsiz Bilgi ar Mı', 'lan naylandı Mı', 'ontroller Geçti Mi', 'Denemeyi Aştı Mı', 'Bulgu ar Mı', 'abul riterleri Salandı Mı', 'Geliştirici nayladı Mı'.",
+          "interpretation": "Akış en az bir insan onayı içerir. Okların uçlarını ve yönlerini bu birimden çıkaramadım.",
+          "evidence": "K0 555-565, 587-611, 633-663, 685-689."
+        },
+        {
+          "item_id": "EXT-05",
+          "observation": "Akışın sonu: 'ull Reuest', 'Ana oda Birleştirilir ve Son Dorulama apılır', 'lanede Görev Done', 'Geliştiriciye Devret', 'lanede Görev Durumu ERRR'.",
+          "interpretation": "Başarı yolu Plane'de Done ile biter. Hata yolu Plane'de hata durumu ve geliştiriciye devirle biter.",
+          "evidence": "K0 755-756, 823-838, 1017-1019, 1097-1098, 1146-1149."
+        },
+        {
+          "item_id": "EXT-06",
+          "observation": "Deterministik kapı notu: 'Burada yapay zeka yok makineler kontrol eder', 'Sonuç kesindir ya geçer ya kalır yorum yok', 'alan Dzeltme aanına gider en fazla deneme'. Yazar etiketi 'Ali Bora'.",
+          "interpretation": "Makine kontrolleri yapay zekâ denetiminden önce gelir. Deneme sayısı metinde okunmuyor.",
+          "evidence": "K0 313-338, 399-405, 463-466, 502-526."
+        },
+        {
+          "item_id": "EXT-07",
+          "observation": "ADR açıklaması iki kez geçer. Kargo adapter örneği vardır. 'eremin ADRler oluştur demesi' ifadesi geçer.",
+          "interpretation": "Aynı not iki kopyadır. Kopyaların aynı olduğu görselden doğrulanmadı.",
+          "evidence": "K0 296-501."
+        },
+        {
+          "item_id": "EXT-08",
+          "observation": "TDD akışı: 'ek kçk davranış seç', 'est aanı testi yazar', 'Runner testi çalıştırır', 'Beklenen nedenle RED mi', 'Coding aanı minimum kodu yazar', 'Hepsi GREE mi', 'refactor', 'Hl GREE mi', 'Başka davranış kaldı mı'.",
+          "interpretation": "Kırmızı, yeşil ve sadeleştirme döngüsü davranış başına işler. Ayrı bir Runner sonucu ölçer.",
+          "evidence": "K0 808-838, 858-873, 941-970, 1021-1041, 980-1003."
+        },
+        {
+          "item_id": "EXT-09",
+          "observation": "Sayaç notu: 'Sayaç neyi sayar', 'Davranış başına başarısız kod denemesi 3', 'Görevde hata veya aktif dk veya maliyet tavan', 'lk dolan sınırda dur', 'model deişimi sayacı sıfırlamaz', 'Bunlar ana görev btçesini yenilemez'.",
+          "interpretation": "Bütçe kök görevde tutulur. Model değişimi bütçeyi sıfırlamaz. Görev düzeyindeki sayılar okunmuyor.",
+          "evidence": "K0 1398-1402, 1408-1410, 1438-1488."
+        },
+        {
+          "item_id": "EXT-10",
+          "observation": "Durma notu: 'Durunca ne olur', 'odbtçe tkendi lane ERRR', 'Belirsiz gereksinim bozuk test', 'Altyapı arızası B CEDRA', 'otomatik yeniden başlama yok'.",
+          "interpretation": "Üç durma türü var. Kesintiden dönüş otomatik değildir. Kimin devam ettireceği yazmıyor.",
+          "evidence": "K0 1762-1800."
+        },
+        {
+          "item_id": "EXT-11",
+          "observation": "Altyapı dalı: 'Altyapı sorunu', 'sn ve 3 sn Runner sonra tekrar', 'dzeldi mi', 'B CEDRA kayıtla dur'.",
+          "interpretation": "Altyapı hatasında sınırlı tekrar var. İlk bekleme süresi okunmuyor.",
+          "evidence": "K0 1289-1325."
+        },
+        {
+          "item_id": "EXT-12",
+          "observation": "Çift ajan dalı: 'Aynı hata iki kez tekrar', 'lk aan 3 kez başarısız mı', 'Baımsız aan kök nedeni inceler', 'kinci aan kalan en çok 3 deneme'.",
+          "interpretation": "Üç başarısız denemeden sonra iş ikinci ajana geçer. Dot'un bildirdiği bütçe farkı bu birimden çözülemez.",
+          "evidence": "K0 1153-1226."
+        },
+        {
+          "item_id": "EXT-13",
+          "observation": "Geçiş kanıtı: 'AC srm test kimlii commit runner kayd', 'RED nedeni ve GREE raporu birlikte saklanı'.",
+          "interpretation": "Kabul, ölçüt sürümüne ve commit'e bağlanmak isteniyor.",
+          "evidence": "K0 1498-1510, 1552-1558."
+        },
+        {
+          "item_id": "EXT-14",
+          "observation": "Renk açıklaması: 'Mor renkli kısımlar tamamen Agentların yaptıı kısımlar', 'lane den tasklar alınır ve program başlar', 'eşil insanın devreye girdii', 'ırmız hiçbir yere devam etmiyor burası hat sonu', 'tomasyon kısımları duraksıyor ama durmuyor'.",
+          "interpretation": "Yeşil kutular insan adımıdır. Kırmızı kutular akışın sonudur.",
+          "evidence": "K0 2141-2151, 2589-2614, 3084-3168."
+        },
+        {
+          "item_id": "EXT-15",
+          "observation": "Lojistik görev listesi: sevkiyat çekirdeği, kargo entegrasyon platformu, takip otomasyonu, iade akışı, fiyatlandırma kural motoru ve benzerleri.",
+          "interpretation": "Bu liste örnek ürün işidir. Ajan altyapısının parçası değildir.",
+          "evidence": "K0 2215-2474."
+        },
+        {
+          "item_id": "EXT-16",
+          "observation": "Ajan çerçevesi karşılaştırması: OpenHands, LangGraph, PydanticAI, Dagu, Aider, Goose, CrewAI, AutoGen, Mastra, Strands, Dify, Langflow, smolagents ve kişisel ajan araçları.",
+          "interpretation": "Kaynakta iki yürütme önerisi birlikte duruyor. Biri LangGraph durum ve checkpoint yapısı. Diğeri Dagu ile OpenCode oturumları.",
+          "evidence": "K0 3342-3533. K3 3923-3933, 3967-3999, 4114-4119, 4222-4234, 4308-4317, 4568-4575, 4853-4861, 5115, 5226-5233."
+        },
+        {
+          "item_id": "EXT-17",
+          "observation": "Model rehberi: 'urulum yapılmadı atamalar öneridir', 'bu roller kendi depolarınızda henz benchmar edilmedi', her satırda 'baımsız yerel dorulama yapılmadı'.",
+          "interpretation": "Model atamaları ölçülmemiş öneridir. Kaynak bunu kendisi söylüyor.",
+          "evidence": "K0 3538-3570, 3621-3625. K3 7795-9785 boyunca tekrar eder."
+        },
+        {
+          "item_id": "EXT-18",
+          "observation": "Ajan kartları, her biri 'Section' başlığıyla: module.relation.map, task-dependency-cluster, mobile-first, performance, dependency.priority, authorization, unknown-unknowns, gap-analysis, web-research, edge-case, solid, definition-of-ready, git-scenario, documentation, maturity-level, technology-boundary, frontend-backend-router, test.first, rules.master.",
+          "interpretation": "En az 19 uzman ajan kartı var. Kart sayısı eşzamanlı ajan sayısı değildir.",
+          "evidence": "K3 3566, 3597-3605, 3715-3716, 3816-3817, 3947-3948, 4322-4323, 4427-4429, 4543-4544, 4629-4630, 4681-4682, 4821-4822, 5010-5011, 5188-5189, 5306-5307, 5436-5437, 5574-5575, 5687-5688, 5771-5772, 10827-10828."
+        },
+        {
+          "item_id": "EXT-19",
+          "observation": "git-scenario metni: 'Başlamadan önce branch working tree upstream durumunu kontrol et', 'Kullanıcı değişikliklerini silme/overwrite etme', 'Destructive Git işlemlerini açık izin olmadan çalıştırma'.",
+          "interpretation": "Bu metin sayfa görselindeki pembe notla aynı içeriktedir.",
+          "evidence": "K3 6187-6189, 6217-6233, 6256-6257, 6279-6280, 6292-6294, 6320-6321, 6337-6338, 6371-6372, 6408-6417. Görsel: p0001-overview.png."
+        },
+        {
+          "item_id": "EXT-20",
+          "observation": "Uzman ajan döngüleri: 'max bölme denemes', 'Döng Doldu', 'Blocker raporla', 'dng gap kapanmadı geliştirme durur', 'grev ead saılmaz', 'one saılmaz'.",
+          "interpretation": "Her uzman ajan sınırlı döngü ve engel raporu içerir. Döngü sayıları okunmuyor.",
+          "evidence": "K3 7039-7062, 8395-8398, 9322-9333, 9362-9386, 10162-10171, 11290-11342."
+        },
+        {
+          "item_id": "EXT-21",
+          "observation": "Dagu açıklaması: 'Dagu işleri belirlediimiz sırayla çalıştıran akışı yöneticisidir', 'lanede Start task verilince hazır görevin akışını başlatır', 'Hata olursa belirlediimiz kurala göre yeniden dener veya akışı durdurup sorunu kaydeder', 'Dagu kod yazan bir yapay zek deildir'.",
+          "interpretation": "Yürütme adayı Dagu'dur. Tetik yine Plane'deki Start task eylemidir. Bu da tarihsel insan başlangıcıdır.",
+          "evidence": "K3 10023-10149."
+        },
+        {
+          "item_id": "EXT-22",
+          "observation": "Çalışma düzeni: 'Aanlar ayrı penCode oturumlarında çalışır model servisi ayrıdır', 'Aanlar ayrı proe kopyaları kullanır ortak dosyaları aynı anda deiştirmez', 'ritik eksik varsa akış bekler koşullar salanınca devam eder'.",
+          "interpretation": "Yalıtım ayrı çalışma kopyasına dayanıyor. Ortak dosya kuralının nasıl zorlandığı yazmıyor.",
+          "evidence": "K3 10086-10104, 10955-10973."
+        },
+        {
+          "item_id": "EXT-23",
+          "observation": "Bitiş kuralı: 'Dagu denemeleri bekleyen işleri izler', 'tek başına görevi Done yapmaz', 'özlemeyen sorun gerekçesiyle lanee yazılır', 'test kanıtları kaydedilir'.",
+          "interpretation": "Done kararı gap-analysis ve son kontrollere bağlı. Kararı kimin verdiği kesin okunmuyor.",
+          "evidence": "K3 11136-11173, 11253-11258."
+        },
+        {
+          "item_id": "EXT-24",
+          "observation": "Test first tartışma notu: 'RED kanıtı olmadan Coding Agent çalışamaz', 'Coding Agent testleri silemez atlayamaz veya zayıflatamaz', 'fazla dzeltme döngs sonunda başarısızsa görev CED olur'. Soru notları da var.",
+          "interpretation": "Kurallar yazılı. Soru notları kararların tartışmada olduğunu gösterir.",
+          "evidence": "K3 11379-11571."
+        },
+        {
+          "item_id": "EXT-25",
+          "observation": "Test kalitesi kartları: rol ayrımı, oracle kaynağı, mutasyon testi, metamorfik test, değişmez tespiti, görsel baseline yönetimi, claim-vs-diff, güven skoru, kalibrasyon sınavı, kırmızı takım ajanı, gereksinim kayması dedektörü.",
+          "interpretation": "Kaynak, yanlış kabul risklerini kendisi sayıyor. Uygulandıklarına dair kanıt bu birimde yok.",
+          "evidence": "K3 11609-11645, 12124-12183, 12618-12648, 12987-13024, 14102-14174."
+        },
+        {
+          "item_id": "EXT-26",
+          "observation": "Mobil ve gerçek cihaz notları: safe-area, dvh, visualViewport, touch-action, font fallback, 'Bunları gerçek cihaz kabul kapısına taşı'. Yazar etiketleri: Ali Bora, Ahmet Şeker, Metin Bektemur, Sefa, İsmail.",
+          "interpretation": "Headless test gerçek cihaz kusurlarını göstermez deniyor. Notlar çok yazarlı tartışma içeriğidir.",
+          "evidence": "K3 13062-13066, 13416-13433, 13484-13493, 13539-13563, 13674-13678, 13701-13707, 13813-13818, 11576-11599."
+        },
+        {
+          "item_id": "EXT-27",
+          "observation": "Sondaki bölümde aynı cümleler art arda iki kez geçer.",
+          "interpretation": "Kartlar kopyalanmış. Kopyalar arasında fark olup olmadığı denetlenmedi.",
+          "evidence": "K3 20750-21193. Ayrıca K3 14102-14694, önceki 11609-13024 aralığını yineler."
+        },
+        {
+          "item_id": "EXT-28",
+          "observation": "Dış bağlantı parçaları var: huggingface.co model kartları, artificialanalysis.ai karşılaştırmaları, github.com depoları, opencode.ai, docs.pytest.org, bir figma.com pano bağlantısı, bir Yandex Disk bağlantısı.",
+          "interpretation": "Kaynak dış sayfalara dayanıyor. Bağlantılar parçalı okunuyor. Bu görevde hiçbirini açmadım.",
+          "evidence": "K3 6449-6450, 7265-7287, 9789-9814, 10497-10515, 10582, 10700, 10789, 10832-10841, 10914."
+        }
+      ],
+      "remaining": [
+        "K3 14695-20749 aralığı okunmadı. Bu aralık birimin yaklaşık yüzde 29'udur.",
+        "K0 5001-27953 aralığındaki 1 ve 2 karakterli kelimeler okunmadı.",
+        "Kutu koordinatları okunmadı. Kelimeler hangi kutuya ait, kesin eşlenemedi.",
+        "Çizgi uçları ve ok yönleri bu birimden çıkarılamaz. Görsel kanıt gerekir.",
+        "Okunamayan sayılar: deneme sınırları, süre ve maliyet tavanları, bekleme süreleri.",
+        "Model tablosundaki sürüm, lisans ve puan değerleri öğe öğe eşlenmedi."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "F-01",
+      "angle": "iç çelişki",
+      "summary": "Kaynakta iki ayrı yürütme önerisi var: LangGraph tabanlı ajan grafı ve Dagu ile OpenCode oturumları. Hangisinin geçerli olduğu yazmıyor.",
+      "items": [
+        "EXT-16",
+        "EXT-21"
+      ]
+    },
+    {
+      "finding_id": "F-02",
+      "angle": "iç çelişki",
+      "summary": "Akış insan adımları içeriyor: tek komutla başlatma, plan onayı, geliştirici onayı. Güncel hedef normal akışta insan müdahalesi bırakmamak. Bu fark açık karar konusudur.",
+      "items": [
+        "EXT-03",
+        "EXT-04",
+        "EXT-14",
+        "EXT-21"
+      ]
+    },
+    {
+      "finding_id": "F-03",
+      "angle": "tarihsel fark",
+      "summary": "İnsan başlangıcı çizimi tarihsel farktır. Kullanıcı kararı, uygun Plane Todo görevlerinin otomatik alınmasıdır.",
+      "items": [
+        "EXT-03",
+        "EXT-21"
+      ]
+    },
+    {
+      "finding_id": "F-04",
+      "angle": "yanlış kabul riski",
+      "summary": "Metin katmanı harf ve rakam kaybediyor. Bu metne dayanan sınır değeri yanlış kabul edilebilir. Aynı notların kopyaları da farklılaşmış olabilir.",
+      "items": [
+        "EXT-02",
+        "EXT-07",
+        "EXT-27"
+      ]
+    },
+    {
+      "finding_id": "F-05",
+      "angle": "yanlış kabul riski",
+      "summary": "Sayfa görseli tek çizim gösteriyor. Metin katmanı ise çok sayıda çizim ve not taşıyor. Görsel birimler 'okundu' sayılırsa bu içerik incelenmiş sanılabilir.",
+      "items": [
+        "EXT-01"
+      ]
+    },
+    {
+      "finding_id": "F-06",
+      "angle": "dış bağımlılık",
+      "summary": "Kaynak Plane, Dagu, OpenCode, yerel model servisi, model kartları ve karşılaştırma sitelerine dayanıyor. Kaynak, kurulum ve yerel doğrulama yapılmadığını kendisi söylüyor.",
+      "items": [
+        "EXT-17",
+        "EXT-21",
+        "EXT-28"
+      ]
+    },
+    {
+      "finding_id": "F-07",
+      "angle": "kapasite",
+      "summary": "Bütçe davranış ve kök görev düzeyinde tanımlı. Hesap kotası, makine belleği ve eşzamanlı ajan sınırı bu birimde geçmiyor.",
+      "items": [
+        "EXT-09",
+        "EXT-12",
+        "EXT-22"
+      ]
+    },
+    {
+      "finding_id": "F-08",
+      "angle": "kesintiden dönüş",
+      "summary": "Altyapı arızasında sınırlı tekrar var. Sonrasında otomatik yeniden başlama yok. Kimin, hangi kayıtla devam ettireceği kaynakta görünmüyor.",
+      "items": [
+        "EXT-10",
+        "EXT-11",
+        "EXT-22"
+      ]
+    }
+  ],
+  "tool_or_process_proposals": [
+    {
+      "need": "Sayfa dışı metni çizim çizim ayırmak",
+      "proposal": "Araç süreci öneriyorum. Bir betik kelimeleri kutu koordinatına göre kümelesin. Her küme ayrı birim olsun.",
+      "dot_candidate": "OpenDocRouter, belge okuma karşılaştırma adayıdır. Güncel doğrulaması yok.",
+      "verification_state": "not_run"
+    },
+    {
+      "need": "Çizimlerin görsel kanıtı",
+      "proposal": "Araç süreci öneriyorum. Figma panosundaki her çerçeve ayrı sayfa olarak dışa aktarılsın. Bu adım kullanıcı onayı ister.",
+      "dot_candidate": "mmd ve OmniDiff yalnız karşılaştırma adayıdır. Güncel doğrulamaları yok.",
+      "verification_state": "not_run"
+    },
+    {
+      "need": "Otomatik Plane Todo alma",
+      "proposal": "Araç süreci öneriyorum. Plane olayı ya da sorgusu görevi sıraya alsın. Dil modeli tetik kararına katılmasın.",
+      "dot_candidate": "Plane Agents ve Temporal karşılaştırma adayıdır. Kaynaktaki aday Dagu'dur. Hiçbirinin güncel doğrulaması yok.",
+      "verification_state": "not_run"
+    },
+    {
+      "need": "Kök görev bütçesinin korunması",
+      "proposal": "Araç süreci öneriyorum. Sayaç ajanın değiştiremediği kalıcı kayıtta dursun.",
+      "dot_candidate": "PostgreSQL ve AJX karşılaştırma adayıdır. Güncel doğrulamaları yok.",
+      "verification_state": "not_run"
+    },
+    {
+      "need": "Okunamayan sınır değerlerinin çözülmesi",
+      "proposal": "Dil modeli süreci öneriyorum. Model, çerçeve görsellerinden sayıları okusun. Bir insan ya da ikinci okuma sonucu doğrulasın.",
+      "dot_candidate": "İlgili Dot önerisi yok.",
+      "verification_state": "not_run"
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "D-01",
+      "unknown": "Sayfa dışı metin kaç ayrı çizime ait?",
+      "input": "p0001-text-exterior.json içindeki bbox değerleri.",
+      "expected_evidence": "Küme sayısı, her kümenin sınır kutusu ve kelime sayısı.",
+      "stop_condition": "Kümeler 'Section' başlıklarıyla eşleşmezse deney durur.",
+      "status": "not_run"
+    },
+    {
+      "experiment_id": "D-02",
+      "unknown": "Kaybolan harf ve rakamlar hangileri?",
+      "input": "Bir çerçevenin görseli ve aynı çerçevenin metin kümesi.",
+      "expected_evidence": "Görseldeki metin ile katman metni arasındaki fark listesi.",
+      "stop_condition": "Tek çerçeve karşılaştırılınca deney durur.",
+      "status": "not_run"
+    },
+    {
+      "experiment_id": "D-03",
+      "unknown": "Model değişince sayaç gerçekten korunuyor mu?",
+      "input": "Deneme ortamında tek sahte görev ve iki model adı.",
+      "expected_evidence": "Model değişiminden önce ve sonra aynı sayaç değeri.",
+      "stop_condition": "Bir model değişimi sonrası deney durur. Canlı Plane ya da GitHub kullanılmaz.",
+      "status": "not_run"
+    },
+    {
+      "experiment_id": "D-04",
+      "unknown": "Altyapı arızasından sonra iş nasıl devam ediyor?",
+      "input": "Deneme ortamında elle kesilen tek test çalıştırması.",
+      "expected_evidence": "Tekrar sayısı, bekleme süreleri ve son durum kaydı.",
+      "stop_condition": "Sınırlı tekrar bitince deney durur. Otomatik yeniden başlatma kurulmaz.",
+      "status": "not_run"
+    }
+  ],
+  "risks": {
+    "internal": "Kaynak iki yürütme önerisi, insan onaylı akış ve kopyalanmış notlar içeriyor. Okunamayan sayılar yanlış sınır seçimine yol açabilir.",
+    "external": "Model, araç ve karşılaştırma bilgileri dış sayfalara bağlı. Bu bilgiler değişmiş olabilir. Güncel doğrulama yapılmadı.",
+    "sustainability": "19 ajan kartı ve geniş model tablosu sürekli bakım ister. Kaynak, atamaların ölçülmediğini söylüyor."
+  },
+  "open_work": [
+    "K3 14695-20749 aralığını okuyun.",
+    "Kelimeleri bbox ile çizimlere ayırın.",
+    "Sayfa dışı çerçeveler için görsel hazırlayın.",
+    "İnsan onayı ile müdahalesiz hedef arasındaki farkı kullanıcı kararına sunun.",
+    "LangGraph ile Dagu önerilerinden hangisinin geçerli olduğunu kaynaktan doğrulayın."
+  ],
+  "report_markdown": "# CONT-Q-S0037-823db71a-A1\n\nBirimi kısmen okudum. Durum: partial.\n\n## Ne okudum\n\n- K0 sırasında ilk 5.000 kelimeyi okudum.\n- K3 sırasında 3495-14694 ve 20750-21193 aralıklarını okudum.\n- K3 14695-20749 aralığını okumadım.\n- Kutu koordinatlarını yalnız ilk 9 kelimede okudum.\n\n## Ana bulgular\n\n1. Metin sayfa alanının dışında görünüyor. Sayfa görseli yalnız git-scenario.agent çizimini gösteriyor.\n2. Metin katmanı harf ve rakam kaybediyor. Deneme ve bütçe sınırlarının çoğu okunmuyor.\n3. Akışı insan başlatıyor. Bu, otomatik Plane Todo alma kararına göre tarihsel farktır.\n4. Kaynakta iki yürütme önerisi var: LangGraph grafı ve Dagu ile OpenCode.\n5. Kaynak, kurulum ve yerel doğrulama yapılmadığını kendisi söylüyor.\n6. Altyapı arızasından sonra otomatik yeniden başlama yok. Devam ettirecek kişi yazmıyor.\n7. Hesap kotası ve makine kapasitesi bu birimde geçmiyor.\n\n## Yapılmayanlar\n\n- Deney çalıştırmadım. Bütün deneyler not_run durumunda.\n- Dış bağlantıları açmadım.\n- Dot adaylarının güncel doğrulaması yok.\n- Çizgi uçlarını ve ok yönlerini çıkaramadım.\n\nGerçek okurla denenmedi."
+}

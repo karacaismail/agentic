@@ -1,0 +1,4385 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-31",
+    "ad": "İnsan onay, bildirim ve iş kuyruğu yüzeyi (risk tabanlı yönlendirme dahil)",
+    "grup": "Teslim hattı ve iş yönetimi",
+    "cozdugu_sorun": "Onayların kaybolması, bekleme süresinin görünmemesi, incelemenin kıdemlilerde yığılması.",
+    "ne_zaman_zorunlu": "İnsan kapısı olan her akışta; hacim arttıkça zorunlu."
+  },
+  "arac_sayisi": 219,
+  "tur_dagilimi": {
+    "acik-kaynak": 70,
+    "platform": 1,
+    "acik-cekirdek": 26,
+    "bulut-hizmeti": 12,
+    "cerceve": 5,
+    "ticari-saas": 70,
+    "protokol-standart": 14,
+    "ticari-yazilim": 14,
+    "kutuphane": 4,
+    "diger": 3
+  },
+  "araclar": [
+    {
+      "id": "AR-0001",
+      "ad": "Temporal",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://temporal.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod-öncelikli dayanıklı yürütme: iş akışı durumu olay geçmişinde tutulur, çökmeden sonra replay ile kaldığı yerden sürer. Signal/Update ile günlerce insan beklemesi, dayanıklı zamanlayıcı, activity yeniden deneme politikası, heartbeat ve iptal yayılımı, child workflow ve Workflow ID tekilliği sunar; OpenAI Agents SDK ve Pydantic AI ile resmî entegrasyonu var.",
+      "sinirlar": "İş akışı kodu deterministik olmalı (LLM, dosya, ağ çağrıları activity'ye taşınır); kural değişince patching/worker versioning, uzun döngülerde Continue-As-New gerekir; self-host birden çok servis ve veritabanı ister, Cloud işlem başına ücretlidir. İş akışı kodunda determinizm kısıtı ve sürümleme disiplini gerekir; self-host işletimi (veritabanı + görünürlük deposu) ağırdır ve olay geçmişi boyut sınırı büyük artefaktların dışarıda tutulmasını zorunlu kılar.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-004",
+        "N-K13-005",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-012",
+        "N-K13-013",
+        "N-K17-004",
+        "N-K20-003",
+        "N-K20-004",
+        "N-K27-003",
+        "N-K27-007"
+      ]
+    },
+    {
+      "id": "AR-0003",
+      "ad": "Restate",
+      "tur": "platform",
+      "lisans": "BUSL-1.1 (sunucu)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://restate.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çağrı günlüğü (journal) tabanlı dayanıklı yürütme sunucusu; anahtar başına tek yazarlı 'virtual object' durumu, awakeable/dayanıklı promise ile dış (insan) cevabı bekleme, idempotency anahtarı, çağrı iptali ve değişmez dağıtım sürümleriyle açık çağrıların eski sürümde bitmesini sağlar.",
+      "sinirlar": "Sunucu Business Source License 1.1 ile lisanslı (OSI açık kaynak değil) — kurumsal kullanım için lisans incelenmeli; Temporal'a göre genç ekosistem. Sunucu BSL 1.1 lisanslı (rakip yönetilen hizmet olarak sunmak yasak); görece genç proje, büyük ölçekli küme işletim deneyimi Temporal'a göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-004",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-009",
+        "N-K13-010",
+        "N-K13-012",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0005",
+      "ad": "Inngest",
+      "tur": "acik-cekirdek",
+      "lisans": "SSPL-1.0 (gecikmeli Apache-2.0'a geçişli)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.inngest.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Olay güdümlü adım fonksiyonları için dayanıklı yürütme; step.waitForEvent ile zaman aşımlı insan onayı bekleme, anahtar bazlı eşzamanlılık/kısma/debounce, idempotency ve olayla iptal özellikleri sunar; 1.0 ile tek ikiliyle self-host (Postgres destekli) mümkün.",
+      "sinirlar": "Sunucu SSPL lisanslı; kurum içi barındırmada lisans değerlendirmesi gerekir. Hat mantığı olaylar arasında dağılır, görev başına denetim izi tek yerde toplanmaz (kaynak hükmü). Sunucu SSPL lisanslı; ağır kurumsal self-host senaryolarında olgunluk ve destek ticari bulut sürümüne göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-004",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-012",
+        "N-K13-013",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0006",
+      "ad": "Trigger.dev",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://trigger.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TypeScript uzun süreli görevler ve ajan iş akışları için platform; waitpoint/wait-for-token ile işlem tüketmeden insan onayı bekleme, sürüme kilitli koşular, idempotency anahtarı, kuyruk eşzamanlılık sınırı ve yeniden deneme sağlar.",
+      "sinirlar": "TypeScript merkezli; Python kontrol düzlemiyle doğal uyumu yok (kaynak hükmü). Yalnız TypeScript SDK; self-host dağıtımı (Docker/Kubernetes) birden çok bileşen içerir.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K11-006",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-004",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-009",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0007",
+      "ad": "Prefect",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.prefect.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python akış/görev orkestrasyonu; akışı duraklatma/askıya alma ve tipli insan girdisi bekleme (interactive workflows), görev yeniden denemesi, eşzamanlılık sınırları ve dağıtım sürümleri sağlar.",
+      "sinirlar": "Günlerce süren insan beklemesi ve uzun ajan adımları için Temporal kadar doğal değil (kaynak hükmü); veri/ML hatları odaklı. Python'a özgü; deterministik yeniden oynatma tabanlı dayanıklılık yerine sonuç önbelleği/durum kaydı modeli.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0008",
+      "ad": "Kestra",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (kurumsal sürüm ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://kestra.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML bildirimli olay güdümlü orkestrasyon; Pause görevi ile manuel onay, alt akışlar, tetikleyiciler, yeniden deneme ve akış revizyon geçmişi sunar.",
+      "sinirlar": "Ajan döngüsü ve görev başına bütçe için tasarlanmamış (kaynak hükmü). RBAC/SSO gibi kurumsal özellikler Enterprise sürümde; kod içi dayanıklı yürütme yerine görev tabanlı model.",
+      "ihtiyaclar": [
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-012",
+        "N-K13-013",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0009",
+      "ad": "Apache Airflow",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://airflow.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ile tanımlı DAG'ları zamanlayan ve çalıştıran orkestratör; görev bağımlılıkları, yeniden deneme, havuz/eşzamanlılık sınırları ve Airflow 3 ile Human-in-the-Loop (HITL) operatörleri sunar.",
+      "sinirlar": "Etkileşimli ajan döngüleri ve günlerce insan beklemesi için uygun değil; kaynak 'bu hat için gereksiz' diyor. Toplu veri iş akışı odaklı; olay başına düşük gecikmeli, uzun ömürlü ajan koşuları ve tek durum sahibi semantiği için dayanıklı yürütme motorları kadar uygun değil.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0014",
+      "ad": "Conductor OSS (Orkes Conductor)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://orkes.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "JSON tanımlı, sürümlü iş akışlarını çalıştıran mikroservis orkestratörü; HUMAN ve WAIT görevleri, dinamik fork/join, görev bazlı zaman aşımı/yeniden deneme ve büyük yükleri dış depoda (S3 vb.) tutan external payload storage sunar.",
+      "sinirlar": "JSON tanımlı akış; ajan döngüsü için kod-öncelikli dayanıklı yürütme kadar doğal değil (kaynak hükmü). Netflix projeyi bıraktıktan sonra topluluk/Orkes bakımında; JSON DSL karmaşık akışlarda okunabilirliği düşürür; Redis/veritabanı/indeksleme bileşenleri işletim yükü getirir. Ticari lisans; bazı insan görevi ve güvenlik özellikleri açık kaynak Conductor'da yok.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-011",
+        "N-K13-013",
+        "N-K17-001",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-0015",
+      "ad": "AWS Step Functions",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/step-functions/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Amazon States Language ile tanımlanan durum makineleri; Standard iş akışlarında uzun süreli yürütme, görev jetonuyla geri çağırma (waitForTaskToken) üzerinden insan onayı bekleme, Retry/Catch, Parallel/Map dalları ve sürüm/takma ad ile kademeli akış güncellemesi sağlar.",
+      "sinirlar": "Sağlayıcıya kilitlenme; yerel geliştirme ve replay deneyimi sınırlı (kaynak hükmü). AWS'ye kilitli; JSON DSL; yürütme geçmişi olay kotası uzun ajan döngülerinde alt akışlara bölmeyi gerektirir.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0016",
+      "ad": "Azure Durable Functions",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari (Azure hizmeti)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/durable-task/durable-functions/durable-functions-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kodla orkestrasyon (event sourcing + replay) modeli; WaitForExternalEvent ile dayanıklı zamanlayıcılı insan etkileşimi deseni, fan-out/fan-in alt orkestrasyonlar ve tek yazarlı 'entity' durumları sağlar; Durable Task SDK'larıyla Functions dışında da çalışır.",
+      "sinirlar": "Azure'a kilitlenme; kaynak bulut sağlayıcı iş akışlarını bu hat için dışarıda bırakıyor. Determinizm kuralları ve sürümleme dikkat ister; en iyi deneyim Azure depolama/Scheduler arka uçlarıyla gelir.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0017",
+      "ad": "Cloudflare Workflows",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://developers.cloudflare.com/workflows/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Workers üzerinde adım bazlı dayanıklı yürütme; her tamamlanan adımı kalıcılaştırır, step.waitForEvent ile (bir yıla kadar zaman aşımlı) insan onayı bekler, adım bazlı yeniden dener; Nisan 2025'te GA.",
+      "sinirlar": "Sağlayıcıya kilitlenme; yerel replay deneyimi sınırlı (kaynak hükmü). Cloudflare Workers çalışma zamanına kilitli; adım/durum boyutu sınırları ve kurum içi kurulum yok.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-008",
+        "N-K13-013",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0018",
+      "ad": "Windmill",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 / Apache-2.0 (dosya bazlı) + tescilli kurumsal özellikler",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.windmill.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Betikleri DAG akışlarına bağlayan geliştirici platformu; onay adımları (devam/iptal bağlantısıyla), eşzamanlılık sınırı, yeniden deneme ve otomatik arayüz üretimi sağlar.",
+      "sinirlar": "Hatta Temporal ile örtüşen ikinci bir orkestratör olur (kaynak hükmü); bazı özellikler kurumsal lisansta. AGPL ve ayrı ticari lisans ayrımı dikkat ister; bazı ölçek/SSO özellikleri Enterprise'da.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K12-003",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013",
+        "N-K17-001"
+      ]
+    },
+    {
+      "id": "AR-0019",
+      "ad": "n8n",
+      "tur": "acik-cekirdek",
+      "lisans": "Sustainable Use License (fair-code) + n8n Enterprise License",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://n8n.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Görsel iş akışı otomasyonu; Wait düğümüyle webhook/form cevabına kadar bekleme, AI ajan araç çağrılarında insan onayı (HITL tools) ve yüzlerce hazır bağlayıcı sunar.",
+      "sinirlar": "OSI onaylı açık kaynak değil; kuyruk modunda bekleyen yürütme bir işçiyi meşgul eder; görev başına bütçe ve kanıt paketi için uygun değil — pano 'Agent OS değildir' diyor. Lisans ticari yeniden sunumu kısıtlar (OSI açık kaynak değil); tek durum sahibi, determinizm ve sürümleme garantileri dayanıklı yürütme motorları kadar güçlü değil. Fair-code lisansı ticari yeniden sunumu kısıtlar; dayanıklı iş akışı orkestrasyonu için tasarlanmamıştır.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K10-008",
+        "N-K12-003",
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-001",
+        "N-K25-009",
+        "N-K26-002",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-0033",
+      "ad": "LangGraph",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.langchain.com/langgraph",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık durum grafiği (StateGraph) ile ajan akışı; checkpointer ile kalıcılık, interrupt() ile insan onayı, time-travel; 1.0 sürümü Ekim 2025. Kaynakta 6 perspektifli kenar durum analizi için haklı olduğu yer olarak geçiyor.",
+      "sinirlar": "Dayanıklılık düğüm düzeyinde; heartbeat/iptal yok; Temporal ile kalıcı checkpointer birlikte kullanılırsa iki durum sahibi oluşur; LangChain ekosisteminde API değişim hızı yüksek (kaynak). Uzun süreli, çok işçili dayanıklılık için checkpoint deposunun ve işçi altyapısının ayrıca işletilmesi gerekir; graf karmaşıklığı arttıkça bakım zorlaşır. Dayanıklılık seçilen checkpointer ve dağıtım altyapısına bağlı; dayanıklı zamanlayıcı, kira/nesil ve dış yan etki idempotency'si genel amaçlı iş akışı motor",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K04-003",
+        "N-K05-006",
+        "N-K05-010",
+        "N-K10-005",
+        "N-K10-006",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013",
+        "N-K17-006",
+        "N-K19-005",
+        "N-K28-001",
+        "N-K28-002",
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-0088",
+      "ad": "Block Buzz",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/block/buzz",
+      "olgunluk": "erken",
+      "ne_saglar": "İnsanlar ve ajanların kriptografik kimliklerle aynı kanallarda çalıştığı çok kullanıcılı ajan harness'i ve iş birliği yazılımı; kendi barındırılabilen Nostr relay'inde imzalı olay kaydı; grup mesajlaşma, ajan orkestrasyonu, depo ve otomasyon. Temmuz 2026'da açıldı.",
+      "sinirlar": "Çok yeni; görev durumu ve bütçe orkestrasyonda kalmalı, yalnız iletişim/bildirim için (kaynak hükmü).",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-002",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-0198",
+      "ad": "Slack",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://slack.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ekip mesajlaşma platformu; bot/uygulama API'siyle ajan bildirimleri ve insan soruları; kaynakta Hermes'in Telegram/Slack bildirimleri için anılıyor.",
+      "sinirlar": "Bildirim kanalı onay kaydı sayılmamalı; mesaj içeriği SaaS'ta tutulur.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K25-009",
+        "N-K30-010"
+      ]
+    },
+    {
+      "id": "AR-0504",
+      "ad": "AG-UI Protocol",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ag-ui.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan arka uçları ile kullanıcı arayüzleri arasında olay tabanlı etkileşim protokolü; akış, araç çağrısı, durum paylaşımı ve insan onayı olayları.",
+      "sinirlar": "Ajanlar arası değil ajan-kullanıcı protokolüdür.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-008",
+        "N-K13-003",
+        "N-K28-002",
+        "N-K28-004"
+      ]
+    },
+    {
+      "id": "AR-0512",
+      "ad": "Google Cloud Workflows",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/workflows",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML/JSON tanımlı sunucusuz iş akışı hizmeti; geri çağırma uç noktalarıyla dış (insan) onayını bekleme, paralel adımlar ve yeniden deneme politikaları sunar.",
+      "sinirlar": "GCP'ye kilitli; DSL kod tabanlı motorlara göre sınırlı ifade gücü sunar.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0516",
+      "ad": "LittleHorse",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://littlehorse.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kafka Streams tabanlı iş akışı motoru; kullanıcı görevleri (atama, yeniden atama, süre aşımında eskalasyon), dış olay bekleme, sürümlü iş akışı tanımları ve çok dilli görev işçileri sağlar.",
+      "sinirlar": "AGPL-3.0 sunucu; Kafka tabanlı işletim bilgisi gerektirir; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0518",
+      "ad": "Camunda 8",
+      "tur": "ticari-yazilim",
+      "lisans": "Camunda License 1.0 (üretimde ticari lisans gerekir)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://camunda.com/platform/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zeebe motoruyla BPMN 2.0/DMN süreçlerini çalıştırır; kullanıcı görevleri ve Tasklist, zamanlayıcı/eskalasyon sınır olayları, süreç sürümleri ve Operate/Optimize ile izleme sağlar.",
+      "sinirlar": "8.6'dan itibaren self-managed üretim kullanımı ticari lisans gerektirir; arama/indeks bileşenleri işletim yükü getirir.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-001",
+        "N-K17-004",
+        "N-K25-001",
+        "N-K26-001",
+        "N-K27-007"
+      ]
+    },
+    {
+      "id": "AR-0519",
+      "ad": "Flowable",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (motor), ticari (Flowable Work/Design)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.flowable.com/open-source",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java BPMN/CMMN/DMN motoru; kullanıcı görevleri, zamanlayıcı sınır olaylarıyla eskalasyon, süreç tanımı sürümleme ve REST API sağlar.",
+      "sinirlar": "Görev kutusu/form arayüzleri ağırlıkla ticari üründe; JVM'e gömülü mimari.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-001",
+        "N-K17-004",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-0520",
+      "ad": "Operaton",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://operaton.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Camunda 7 Community Edition'ın (Ekim 2025'te ömrünü tamamladı) topluluk çatalı; BPMN/DMN motoru, REST API, Cockpit ve Tasklist ile insan görevleri sunar.",
+      "sinirlar": "Çatal yeni ve topluluk küçük; Camunda 7 mimari mirasını (tek veritabanı, gömülü motor) taşır.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-001",
+        "N-K17-004",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-0521",
+      "ad": "CIB seven",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cibseven.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Camunda 7 CE tabanlı, CIB tarafından sürdürülen BPMN/DMN süreç motoru çatalı; Camunda 7 süreç modelleriyle uyumlu devamlılık sağlar.",
+      "sinirlar": "Tek şirket ağırlıklı bakım; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K17-001",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-0522",
+      "ad": "Argo Workflows",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://argoproj.github.io/workflows/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes-yerel DAG/adım iş akışı motoru; suspend şablonuyla manuel devam (onay), retryStrategy, activeDeadlineSeconds ile zaman aşımı ve artefakt deposu (S3 uyumlu) entegrasyonu sağlar.",
+      "sinirlar": "Kubernetes zorunlu; her adım bir pod olduğu için kısa adımlarda ek yük; uzun insan beklemelerinde durum CRD/arsiv yapılandırması gerektirir. Kubernetes gerektirir; uzun süreli insan bekleyen iş akışları için tasarlanmadı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-011",
+        "N-K13-013",
+        "N-K15-005",
+        "N-K23-002",
+        "N-K23-003"
+      ]
+    },
+    {
+      "id": "AR-0524",
+      "ad": "Flyte",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://flyte.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes üzerinde tipli, sürümlü ve değişmez iş akışları; approve/wait_for_input/sleep geçit düğümleriyle insan onayı veya dış girdi bekleme, önbellekleme ve büyük verinin blob depoda tutulması sağlar.",
+      "sinirlar": "ML/veri iş akışı odaklı ve Kubernetes gerektirir; işletim karmaşıklığı yüksek.",
+      "ihtiyaclar": [
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-009",
+        "N-K13-010",
+        "N-K13-011",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0527",
+      "ad": "Agent Inbox (LangChain)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/langchain-ai/agent-inbox",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "LangGraph interrupt'larıyla duraklayan ajanlar için kabul/düzenle/yanıtla/yoksay eylemli gelen kutusu arayüzü.",
+      "sinirlar": "GitHub deposu arşivlenmiş (2026) — bakım yok; yalnız fikir/örnek olarak değerli.",
+      "ihtiyaclar": [
+        "N-K13-003",
+        "N-K17-006",
+        "N-K28-009",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-0528",
+      "ad": "Azure Logic Apps",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağlayıcı zengini düşük kodlu iş akışı hizmeti; onay e-postası/Teams onay adımları, zaman aşımı ve yeniden deneme politikalarıyla iş akışlarını dış sistemlere bağlar.",
+      "sinirlar": "Azure'a kilitli; karmaşık ajan yaşam döngüsü için tasarım görsel DSL'de zorlaşır.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-004",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0529",
+      "ad": "StackStorm",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://stackstorm.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay güdümlü otomasyon (sensör, kural, Orquesta iş akışı) platformu; Inquiry (core.ask) ile iş akışını insan cevabına kadar TTL'li duraklatma ve ChatOps komut takma adları sağlar.",
+      "sinirlar": "Topluluk küçüldü (3.9.0, Ekim 2025); ChatOps bileşeni eskimiş Hubot tabanlı; modern dayanıklı yürütme semantiği sınırlı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-003",
+        "N-K13-012",
+        "N-K17-004",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0530",
+      "ad": "BPMN 2.0",
+      "tur": "protokol-standart",
+      "lisans": "OMG spesifikasyonu (ücretsiz erişim)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.omg.org/spec/BPMN/2.0.2/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Süreç, kullanıcı görevi, zamanlayıcı ve eskalasyon olaylarını standart gösterimle tanımlayan iş süreci modelleme standardı; insan karar noktalarının okunabilir envanteri için ortak dil sağlar.",
+      "sinirlar": "Standart tek başına yürütme sağlamaz; motorlar arası taşınabilirlik uzantılar nedeniyle kısmidir. Tam notasyon karmaşıktır; kurum için alt küme tanımlanmalıdır.",
+      "ihtiyaclar": [
+        "N-K07-008",
+        "N-K13-003",
+        "N-K13-013",
+        "N-K17-001",
+        "N-K17-004",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-0531",
+      "ad": "DMN (Decision Model and Notation)",
+      "tur": "protokol-standart",
+      "lisans": "OMG spesifikasyonu (ücretsiz erişim)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.omg.org/dmn/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Karar tabloları ve FEEL ifadeleriyle yönlendirme/sınıflandırma kurallarını (ör. hata sınıfına göre rol, risk düzeyine göre onay gereksinimi) okunabilir ve test edilebilir biçimde tanımlama standardı.",
+      "sinirlar": "Karmaşık politika mantığı için ifade gücü sınırlı; yürütme için Camunda/Flowable/Drools gibi bir motor gerekir.",
+      "ihtiyaclar": [
+        "N-K02-010",
+        "N-K13-008",
+        "N-K17-001",
+        "N-K17-007",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-0564",
+      "ad": "Jira Service Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.atlassian.com/software/jira/service-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "Talep iş akışlarında onaylayıcı adımları (kimlikli onay kaydı), SLA hedefleri ve ihlal uyarıları, nöbet çizelgeleri ve eskalasyon politikaları (Opsgenie yetenekleri taşındı) sağlar.",
+      "sinirlar": "Onayın onaylanan içeriğin özetine bağlanması yerleşik değil; Data Center ömrü 2029'da bitiyor.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K17-002",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K25-001",
+        "N-K25-004"
+      ]
+    },
+    {
+      "id": "AR-0565",
+      "ad": "Opsgenie",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.atlassian.com/software/opsgenie",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Uyarı yönlendirme, nöbet çizelgesi ve eskalasyon politikaları sunan olay bildirim hizmeti.",
+      "sinirlar": "Yeni satış 4 Haziran 2025'te durdu, destek 5 Nisan 2027'de bitiyor; yeni kurulum için seçilmemeli (JSM/Compass'a geçiş).",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K31-011"
+      ]
+    },
+    {
+      "id": "AR-0573",
+      "ad": "Asana",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://asana.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Portföy, hedef ve proje görünümleri; onay görev türü, kurallar ve bağımlılıklarla iş koordinasyonu.",
+      "sinirlar": "Yazılım geliştirme ve SAFe'e özgü değil; yalnız SaaS.",
+      "ihtiyaclar": [
+        "N-K02-004",
+        "N-K17-001",
+        "N-K19-007",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0588",
+      "ad": "ServiceNow Strategic Portfolio Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.servicenow.com/products/strategic-portfolio-management.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Talep yönetimi, portföy planlama, kurumsal çevik planlama (SAFe desteği) ve onay iş akışlarını ServiceNow platformunda birleştirir.",
+      "sinirlar": "ServiceNow platformu ve lisansına bağımlılık; uygulama projesi büyük.",
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K19-007",
+        "N-K20-007",
+        "N-K21-005",
+        "N-K24-002",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0603",
+      "ad": "Swarmia",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.swarmia.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "DORA metrikleri, geliştirici deneyimi anketleri ve yapay zekâ kodlama araçlarının benimseme, maliyet ve etki ölçümünü birleştiren mühendislik zekâsı platformu.",
+      "sinirlar": "Yalnız SaaS; portföy/SAFe katmanı yok. SaaS; veri yerelliği seçenekleri kaynakta belirtilmemiş. SaaS.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K17-005",
+        "N-K23-006",
+        "N-K23-008",
+        "N-K24-011",
+        "N-K24-014",
+        "N-K25-007",
+        "N-K25-009",
+        "N-K30-001",
+        "N-K30-004"
+      ]
+    },
+    {
+      "id": "AR-0611",
+      "ad": "gotoHuman",
+      "tur": "ticari-saas",
+      "lisans": "ticari (MCP sunucusu MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.gotohuman.com/",
+      "olgunluk": "erken",
+      "ne_saglar": "Yapay zekâ ajanları için insan inceleme gelen kutusu: özelleştirilebilir inceleme formlarında ajan çıktısını onayla/reddet/düzenle, Slack bildirimi; REST, TypeScript/Python SDK, n8n düğümü ve MCP sunucusuyla istek oluşturma.",
+      "sinirlar": "Genç ve küçük satıcı; yalnız SaaS; onayın içerik özetine kriptografik bağlanması kurum tarafında tasarlanmalı.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K05-025",
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-001",
+        "N-K17-006",
+        "N-K17-008",
+        "N-K28-005",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-0612",
+      "ad": "HumanLayer",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (depo), ticari (bulut)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.humanlayer.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İlk olarak ajan araç çağrılarından önce Slack/e-posta üzerinden insan onayı isteyen HITL SDK'sı olarak çıktı; bugün kodlama ajanları için görev yönetimi, tasarım incelemesi ve orkestrasyon sunan 'çok oyunculu kontrol düzlemi'ne dönüştü.",
+      "sinirlar": "Ürün yön değiştirdi; eski onay SDK'sı güncel belgelerde yer almıyor — HITL bileşeni olarak uzun vadeli dayanılmamalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-001"
+      ]
+    },
+    {
+      "id": "AR-0613",
+      "ad": "Slack Bolt",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.slack.dev/tools/bolt-js/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Slack uygulamaları için çerçeve: etkileşimli mesaj düğmeleriyle onay/ret, slash komutlarıyla iş başlatma, kısayollar ve istek imzası doğrulaması; iş akışı motorlarına sinyal göndermek için köprü.",
+      "sinirlar": "Slack kimliği kurum kimliğine eşlenmeli; bildirim kanalı tek başına onay kaydı sayılmamalı, onay durumu orkestratörde tutulmalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-012",
+        "N-K17-004",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0614",
+      "ad": "Microsoft Power Automate Onaylar (Approvals) / Teams Approvals",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://learn.microsoft.com/en-us/power-automate/get-started-approvals",
+      "olgunluk": "olgun",
+      "ne_saglar": "Microsoft 365 kimliğiyle bağlı onay istekleri (ilk yanıtlayan/herkes onaylamalı, sıralı onay), Teams Approvals uygulaması ve Dataverse'te onay geçmişi; zaman aşımı ve eskalasyon akışlarla kurulur.",
+      "sinirlar": "Microsoft 365/Power Platform lisansı ve kilidi; onaylanan içeriğin özet değeri bağlama ayrıca kurgulanmalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-002",
+        "N-K17-004",
+        "N-K25-004",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-0615",
+      "ad": "Slack Workflow Builder",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://slack.com/features/workflow-automation",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod yazmadan form, düğme ve onay adımları içeren Slack iş akışları; bağlayıcılarla dış sistemlere istek gönderir.",
+      "sinirlar": "Karmaşık dayanıklı durum ve denetim için uygun değil; Slack'e kilitli.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-001",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0616",
+      "ad": "PagerDuty",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.pagerduty.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet çizelgeleri, kademeli eskalasyon politikaları, olay iş akışları ve Slack/Teams entegrasyonlarıyla süre aşımında sorumluyu otomatik yükselten olay yönetimi.",
+      "sinirlar": "Olay yönetimi odaklı; ürün sahibi/kalite onayları gibi iş kararları için modellenmesi zorlama olur; yalnız SaaS. SaaS; kullanıcı başı maliyet.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K12-005",
+        "N-K16-002",
+        "N-K16-007",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K25-001",
+        "N-K27-007",
+        "N-K31-011",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-0617",
+      "ad": "incident.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://incident.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Slack/Teams içinde olay yönetimi, nöbet, durum sayfası, olay sonrası analiz ve telemetri/dağıtım geçmişinden AI destekli kök neden hipotezleri.",
+      "sinirlar": "Olay odaklı; yalnız SaaS. SaaS; Slack/Teams'e bağımlı iş akışı.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K08-008",
+        "N-K12-005",
+        "N-K16-002",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K17-010",
+        "N-K27-007",
+        "N-K31-001",
+        "N-K31-010"
+      ]
+    },
+    {
+      "id": "AR-0618",
+      "ad": "Grafana Cloud IRM",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://grafana.com/products/cloud/irm/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Grafana OnCall ve Grafana Incident'ı birleştiren nöbet, eskalasyon zinciri ve olay yönetimi hizmeti.",
+      "sinirlar": "Yalnız bulut; OnCall OSS 24 Mart 2026'da arşivlendi, self-host seçeneği kalmadı. Yalnız Grafana Cloud; OSS karşılığı arşivlendi.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K33-008",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-0619",
+      "ad": "Grafana OnCall OSS",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/grafana-cold-storage/oncall",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Nöbet planlama ve eskalasyon; mevcut kurulumlar çalışmaya devam edebilir.",
+      "sinirlar": "Mart 2025'te bakım moduna girdi, 24 Mart 2026'da arşivlendi; bulut bağlantılı SMS/telefon bildirimleri kapandı — yeni kurulum için uygun değil. Mart 2025'te bakım moduna girdi, 24 Mart 2026'da arşivlendi; bulut bağlantılı bildirimler durdu.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-006",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0620",
+      "ad": "Novu",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek), ticari (enterprise dizinleri)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://novu.co/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulama içi gelen kutusu bileşeni, e-posta/SMS/push/sohbet kanalları ve gecikme/özet (digest) adımlı bildirim iş akışları sunan açık kaynak bildirim altyapısı.",
+      "sinirlar": "Onay kaydı değil bildirim katmanı; bazı kurumsal özellikler ticari lisanslı.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K12-005",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K28-009",
+        "N-K30-010",
+        "N-K32-005"
+      ]
+    },
+    {
+      "id": "AR-0621",
+      "ad": "Knock",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://knock.app/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bildirim iş akışı altyapısı: toplama (batch), gecikme, koşullu dallanma ve çok kanallı (Slack etkileşimli mesaj dahil) teslim.",
+      "sinirlar": "Yalnız SaaS; onay durumu orkestratörde tutulmalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K28-009",
+        "N-K30-010",
+        "N-K32-005"
+      ]
+    },
+    {
+      "id": "AR-0622",
+      "ad": "ntfy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / GPL-2.0 (çift lisans)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://ntfy.sh/",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP PUT/POST ile telefona/masaüstüne anlık bildirim gönderen self-host pub/sub hizmeti; eylem düğmeleri (HTTP isteği) ile basit onay geri çağrıları mümkün.",
+      "sinirlar": "Kimlik ve denetim kaydı zayıf; resmi onay kanalı olarak değil bildirim olarak kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0623",
+      "ad": "Apprise",
+      "tur": "kutuphane",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/caronc/apprise",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek API/CLI ile onlarca bildirim servisine (Slack, Teams, e-posta, Telegram, ntfy vb.) mesaj gönderen Python kütüphanesi ve REST API sunucusu.",
+      "sinirlar": "Yalnız tek yönlü bildirim; yanıt/onay toplama yok.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0624",
+      "ad": "Mattermost (Playbooks dahil)",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (kaynak) / MIT (derlenmiş) + ticari Enterprise",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://mattermost.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Self-host ekip mesajlaşması; slash komutları, etkileşimli mesajlar ve botlarla ChatOps; Playbooks ile kontrol listesi, durum güncelleme hatırlatıcısı ve sahiplik atamalı süreçler.",
+      "sinirlar": "Bazı uyum/denetim özellikleri Enterprise'da; mesajlaşma onay kaydı yerine geçmemeli.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-012",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0625",
+      "ad": "Rocket.Chat",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek), ticari (EE dizinleri)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.rocket.chat/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Self-host ekip sohbeti; Apps-Engine, webhook ve botlarla bildirim/komut kanalı.",
+      "sinirlar": "Kurumsal özellikler EE lisanslı; ChatOps ekosistemi Slack'e göre dar.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0626",
+      "ad": "Errbot",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://errbot.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python eklentili ChatOps botu; Slack, Mattermost, Telegram vb. arka uçlar, komut bazlı erişim denetim listeleri (ACL) ile yetkili komut başlatma.",
+      "sinirlar": "Geliştirme temposu düşük; GPL-3.0.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-012",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0627",
+      "ad": "Hubot",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://hubotio.github.io/hubot/",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub kökenli JavaScript ChatOps botu çerçevesi; adaptörlerle sohbet platformlarından komut alıp betik çalıştırır.",
+      "sinirlar": "Yetki/tekilleştirme mantığı yerleşik değil; ekosistemin önemli kısmı eski.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-0668",
+      "ad": "Slack MCP Server",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.slack.dev/ai/mcp-server/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Slack kanal/mesaj arama ve mesaj gönderme gibi işlemleri ajanlara kullanıcı izinleriyle sunan resmî MCP sunucusu.",
+      "sinirlar": "Bildirim kanalıdır, onay kaydı olarak kullanılmamalı; çalışma alanı yönetici onayı gerekir.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K12-005",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-0820",
+      "ad": "Spec Workflow MCP",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Pimzino/spec-workflow-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gereksinim → tasarım → görev spesifikasyon iş akışını MCP sunucusu olarak ajanlara sağlayan; gerçek zamanlı web panosu ve VS Code eklentisi üzerinden belgelerin onaya sunulduğu, geri bildirim ve revizyonların izlendiği onay sistemi içeren araç.",
+      "sinirlar": "Topluluk projesi; onayın kimlik doğrulaması ve içerik özetiyle bağlanması kaynakta belirtilmemiş, GPL-3.0 lisanslıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-009",
+        "N-K01-011"
+      ]
+    },
+    {
+      "id": "AR-0848",
+      "ad": "Checklist for Jira (Enterprise)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.herocoders.com/products/jira-checklist/enterprise",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira iş kalemlerine DoR/DoD ve kabul kriteri kontrol listesi şablonları ekleyen; kurumsal sürümde yönetici tanımlı global şablonlar ve kontrol listesi tamamlanmadan durum geçişini engelleyen iş akışı doğrulayıcıları sunan eklenti.",
+      "sinirlar": "Maddelerin doğruluğunu değil işaretlenmesini denetler; Cloud ve Data Center sürümleri arasında özellik farkı vardır.",
+      "ihtiyaclar": [
+        "N-K01-002",
+        "N-K01-006",
+        "N-K05-027"
+      ]
+    },
+    {
+      "id": "AR-0873",
+      "ad": "Argilla",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/argilla-io/argilla",
+      "olgunluk": "olgun",
+      "ne_saglar": "Alan uzmanlarının model önerilerini (etiket, eşleşme, sınıf, yeniden yazım) gözden geçirip düzelttiği işbirlikçi veri etiketleme ve geri bildirim aracı; toplu dönüşümde örneklem/risk tabanlı insan inceleme kuyruğu kurmaya uygundur.",
+      "sinirlar": "İş takip sistemine doğrudan bağlanmaz; entegrasyon kodu gerekir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-002",
+        "N-K02-003",
+        "N-K02-010",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0874",
+      "ad": "Label Studio",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community) / ticari (Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/HumanSignal/label-studio",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin sınıflandırma, eşleşme ve serbest yanıt dahil çok tipli etiketleme arayüzü; ML arka ucuyla ön-etiketleme ve etkin öğrenme; sınıflandırıcı eğitim verisi ve insan inceleme örneklemi için.",
+      "sinirlar": "Gelişmiş rol/erişim ve denetim özellikleri ticari Enterprise sürümündedir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-002",
+        "N-K02-010",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0919",
+      "ad": "SFIA (Skills Framework for the Information Age)",
+      "tur": "diger",
+      "lisans": "SFIA lisans koşulları (kaynakta)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sfia-online.org/en",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dijital beceri ve yetkinlikleri yedi sorumluluk düzeyinde tanımlayan küresel çerçeve; yeni rollerin (ajan platform mühendisi, değerlendirme mühendisi vb.) beceri ve düzey tanımı için ortak dil.",
+      "sinirlar": "Çerçevedir; SAFe ve hat rol sınıflarına eşlemeyi kurum yapmalıdır.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-002",
+        "N-K25-003",
+        "N-K29-005",
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-0920",
+      "ad": "e-CF (European e-Competence Framework, EN 16234-1)",
+      "tur": "diger",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://itprofessionalism.org/professionalism/e-competence-framework/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Avrupa BİT yetkinlik çerçevesi: beş yetkinlik alanında 41 yetkinlik ve beş yeterlik düzeyiyle rol profilleri tanımlamak için ortak dil.",
+      "sinirlar": "Yapay zekâ/ajan rolleri için hazır profil sınırlı; standart metnine erişim ücretli olabilir.",
+      "ihtiyaclar": [
+        "N-K25-002",
+        "N-K25-003",
+        "N-K29-005"
+      ]
+    },
+    {
+      "id": "AR-0921",
+      "ad": "NICE Framework",
+      "tur": "diger",
+      "lisans": "kamu malı (ABD federal)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.nist.gov/itl/applied-cybersecurity/nice/nice-framework-resource-center",
+      "olgunluk": "olgun",
+      "ne_saglar": "Siber güvenlik iş rollerini, görev, bilgi ve beceri ifadelerini tanımlayan NIST çerçevesi; yapay zekâ güvenliği sorumlusu gibi yeni rollerin yetkinlik tanımına referans.",
+      "sinirlar": "ABD kamu odaklı; yazılım teslim rolleri kapsam dışı.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-003"
+      ]
+    },
+    {
+      "id": "AR-0922",
+      "ad": "GlassFrog",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.glassfrog.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rolleri, sorumlulukları (accountabilities), karar alanlarını (domains) ve çemberleri yazılı ve güncel tutan; yönetişim toplantılarında rol/politika değişikliklerini kayda geçiren organizasyon yönetim aracı.",
+      "sinirlar": "Holacracy/sosyokrasi kavramlarına dayalı; SAFe rol modeline eşleme manueldir.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-002",
+        "N-K25-004",
+        "N-K25-010",
+        "N-K30-001",
+        "N-K30-009"
+      ]
+    },
+    {
+      "id": "AR-0923",
+      "ad": "Holaspirit",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.holaspirit.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rol ve sorumlulukları, çemberleri ve yönetişim kararlarını tanımlayan organizasyon tasarımı/rol yönetim aracı; Talkspirit çalışma platformunun parçası.",
+      "sinirlar": "holaspirit.com adresi Talkspirit ana sayfasına yönleniyor; ürünün bağımsız yol haritası belirsiz.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-004",
+        "N-K25-010",
+        "N-K30-009"
+      ]
+    },
+    {
+      "id": "AR-0936",
+      "ad": "Loomio",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.loomio.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tartışma, gerekçeli oylama/öneri ve sonuç kaydıyla grup kararlarını aranabilir biçimde arşivleyen karar verme aracı; farklı katkı sahiplerinin yöntem önerilerini (ör. TDD akışları) gerekçeleriyle tek karara indirmek için.",
+      "sinirlar": "AGPL-3.0; iş takip sistemiyle yerleşik entegrasyonu sınırlı.",
+      "ihtiyaclar": [
+        "N-K07-003",
+        "N-K11-011",
+        "N-K25-008",
+        "N-K25-009",
+        "N-K30-009",
+        "N-K32-004"
+      ]
+    },
+    {
+      "id": "AR-1238",
+      "ad": "Auth0 for AI Agents",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://auth0.com/ai/docs/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Token Vault ile ajanların kullanıcı adına üçüncü taraf API'lere yetkili erişimi, eşzamansız insan onayı ve RAG için ince taneli yetkilendirme sunar.",
+      "sinirlar": "SaaS; Okta ekosistemine bağlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1239",
+      "ad": "Apono",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.apono.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut, veritabanı ve Kubernetes için tam zamanında, süreli, onaylı ayrıcalıklı erişim verir ve süre sonunda otomatik geri alır.",
+      "sinirlar": "SaaS; ajan kimlikleri için kullanım senaryoları yeni.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1384",
+      "ad": "Gerrit Code Review",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.gerritcodereview.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Değişiklik (patch set) tabanlı inceleme; Code-Review/Verified oy etiketleri ve submit kurallarıyla birleştirme kapısı; küçük ve atomik değişikliği teşvik eder.",
+      "sinirlar": "Öğrenme eğrisi yüksek; PR tarzı iş akışından farklı.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K06-001",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K19-006",
+        "N-K28-007",
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-1426",
+      "ad": "Prometheus Alertmanager",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uyarı gruplama, tekilleştirme, susturma, engelleme ve yönlendirme.",
+      "sinirlar": "Nöbet planı, eskalasyon ve olay yaşam döngüsü yok.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1452",
+      "ad": "Policy Bot (palantir/policy-bot)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/palantir/policy-bot",
+      "olgunluk": "olgun",
+      "ne_saglar": "Depo içindeki policy.yml ile çekme isteklerine dosya yolu, yazar ve dala göre ve/veya kombinasyonlu onay kuralları uygulayan, sonucu zorunlu durum kontrolü olarak raporlayan GitHub uygulaması; örneğin .feature/kabul kriteri dosyalarına yalnız ürün sahibinin onayını, kural dosyalarına yalnız platform ekibinin onayını zorunlu kılabilir.",
+      "sinirlar": "Yalnız GitHub (GitHub App) ile çalışır; onay yüzeyi olarak GitHub incelemelerine dayanır ve kural doğruluğu policy.yml'in bakımına bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K01-011",
+        "N-K05-027",
+        "N-K06-007",
+        "N-K08-003",
+        "N-K11-007",
+        "N-K17-002",
+        "N-K25-001",
+        "N-K25-010",
+        "N-K31-001",
+        "N-K31-003"
+      ]
+    },
+    {
+      "id": "AR-1477",
+      "ad": "µTask (utask)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/ovh/utask",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML ile tanımlanan iş süreçlerini adım adım yürüten otomasyon motoru; başarısız veya bekleyen adımlarda insanın 'çözümleme' (resolution) yapıp görevi yeniden deneme, düzeltme veya iptal etmesine izin veren arayüz, yetkilendirme ve şifreli durum saklama sunar.",
+      "sinirlar": "Genel amaçlı iş akışı motorudur, LLM ajanına özgü bileşen içermez; topluluk ve yayın temposu orta düzeydedir.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-008",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-1478",
+      "ad": "Viewflow",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "http://viewflow.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Django için BPMN benzeri iş akışı kütüphanesi: insan görevleri, atama/izin, görev kuyrukları ve süreç durum makinesiyle insan karar noktalarını kod olarak modellemeyi sağlar.",
+      "sinirlar": "Yalnız Django/Python; bazı gelişmiş özellikler ticari PRO sürümündedir, AGPL yükümlülükleri değerlendirilmelidir.",
+      "ihtiyaclar": [
+        "N-K13-003",
+        "N-K17-001",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-1488",
+      "ad": "Difftastic",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://difftastic.wilfred.me.uk/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sözdizimi ağacına göre yapısal diff üreten araç; biçimlendirme gürültüsünü ayıklayarak insan incelemecinin ajan değişikliklerindeki gerçek anlamsal farka odaklanmasını kolaylaştırır.",
+      "sinirlar": "Büyük dosyalarda yavaşlayabilir; patch üretmez, yalnız görüntüleme içindir.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K17-006",
+        "N-K28-007"
+      ]
+    },
+    {
+      "id": "AR-1507",
+      "ad": "doccano",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/doccano/doccano",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin sınıflandırma, dizi etiketleme ve seq2seq için açık kaynak etiketleme aracı; toplu dönüştürülen backlog kalemlerinin örneklem üzerinde insanlarca işaretlenmesi ve ajana uygunluk etiket setinin oluşturulması için kullanılabilir.",
+      "sinirlar": "Etiketleyiciler arası uyum ölçümü ve aktif öğrenme yerleşik değildir; geliştirme temposu yavaşlamıştır.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K02-010",
+        "N-K09-014",
+        "N-K11-011"
+      ]
+    },
+    {
+      "id": "AR-1578",
+      "ad": "Visual Regression Tracker",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ekran görüntüsü karşılaştırma sonuçlarını izleyen self-host arka uç ve arayüz; referans (baseline) yönetimi, fark inceleme ve insan onayı/reddi ile Playwright, Cypress, Selenium SDK'ları sunar.",
+      "sinirlar": "Karşılaştırma piksel tabanlıdır; algısal fark ve cihaz çiftliği sağlamaz.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-1584",
+      "ad": "Sa11y",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sa11y.netlify.app",
+      "olgunluk": "olgun",
+      "ne_saglar": "İçerik düzenleyicileri için sayfadaki erişilebilirlik ve kullanılabilirlik sorunlarını görsel olarak vurgulayan, insan incelemesine yönelik erişilebilirlik kalite güvence aracı.",
+      "sinirlar": "Otomatik CI kapısı değil, insan odaklı bir inceleme aracıdır.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-1603",
+      "ad": "Agent Prism",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/evilmartians/agent-prism",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanı izlerini (LLM çağrıları, araç kullanımı, alt adımlar) okunabilir zaman çizelgesi ve ağaç olarak gösteren React bileşenleri; insan incelemesi için rapor yüzeyi kurmayı kolaylaştırır.",
+      "sinirlar": "Yalnız görselleştirme bileşenidir; iz toplama/depolama sağlamaz.",
+      "ihtiyaclar": [
+        "N-K07-005",
+        "N-K17-006",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1605",
+      "ad": "Robusta",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://home.robusta.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus uyarılarını Kubernetes bağlamıyla (loglar, olaylar, grafikler) zenginleştirip Slack/Teams'e yönlendiren ve otomatik düzeltme 'playbook'ları çalıştıran olay yönetimi aracı.",
+      "sinirlar": "Kubernetes odaklıdır; yapay zekâ destekli özellikler ticari platformdadır.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-1733",
+      "ad": "Atlantis",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.runatlantis.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform/OpenTofu plan ve apply işlemlerini PR yorum komutlarıyla yürütür; apply öncesi onay şartı, dizin kilitleme ve plan çıktısının PR'a yazılması ile altyapı değişikliklerini insan onayına bağlar.",
+      "sinirlar": "Altyapı-kod iş akışına özgü; bulut kimlik bilgileri Atlantis sunucusunda bulunur, iyi korunmalı.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K17-002",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-1743",
+      "ad": "Prow",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.prow.k8s.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes projesinin CI/CD sistemi: dizin bazlı OWNERS dosyalarına göre /lgtm ve /approve onay yetkisi, /test, /hold gibi yorum komutları ve Tide ile birleştirme havuzu; kimin neyi onaylayabileceğini depoda tanımlar.",
+      "sinirlar": "Kubernetes üzerinde işletim gerektirir; GitHub odaklı, kurulum ve bakım emek ister.",
+      "ihtiyaclar": [
+        "N-K01-011",
+        "N-K06-002",
+        "N-K17-002",
+        "N-K24-008",
+        "N-K26-002",
+        "N-K29-006",
+        "N-K31-001",
+        "N-K31-003"
+      ]
+    },
+    {
+      "id": "AR-1899",
+      "ad": "CRediT (Contributor Roles Taxonomy, ANSI/NISO Z39.104)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://credit.niso.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Katkı türlerini 14 rolle (kavramsallaştırma, yazılım, doğrulama, inceleme ve düzenleme, denetim vb.) tanımlayan taksonomi; insan ve ajan katkı rollerini kayıt altına almak için uyarlanabilir.",
+      "sinirlar": "Akademik yayın odaklı; yazılım teslim rollerine eşleme kurumca yapılmalı.",
+      "ihtiyaclar": [
+        "N-K19-006",
+        "N-K25-004",
+        "N-K25-010"
+      ]
+    },
+    {
+      "id": "AR-1903",
+      "ad": "OpenRefine",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openrefine.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Büyük tablo verisini fasetleme, kümeleme (anahtar çarpışması, en yakın komşu) ile yakın tekrarları birleştirme ve toplu dönüşümle temizleyen araç; yapılan her işlem JSON geçmişi olarak kaydedilip başka veri kümesine yeniden oynatılabilir, insan gözden geçirmeli toplu dönüşüme uygun.",
+      "sinirlar": "Masaüstü/tek kullanıcı; çok büyük veri kümelerinde bellek sınırı; LLM entegrasyonu yok.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-002",
+        "N-K02-003",
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-1918",
+      "ad": "Matrix",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://spec.matrix.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uçtan uca şifreli, federasyonlu gerçek zamanlı iletişim için açık standart; botlar ve köprüler için Client-Server ve Application Service API'leri ile insan–ajan iletişim kanalını satıcıdan bağımsız kurmaya olanak verir.",
+      "sinirlar": "İstemci ve sunucu seçimi/işletimi gerekir; kurumsal özellikler uygulamaya göre değişir.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-1919",
+      "ad": "Zulip",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://zulip.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Konu (topic) tabanlı iş parçacıklı ekip sohbeti; bot API'si ve webhook entegrasyonlarıyla ajan bildirimlerini iş kalemi başına ayrı konularda toplar, kritik yol dışında asenkron iletişim sağlar.",
+      "sinirlar": "Onay/iş akışı özellikleri yok; ayrı onay yüzeyi gerekir.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-1964",
+      "ad": "AWS CodePipeline",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/codepipeline/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kaynak–derleme–test–dağıtım aşamalarını tanımlayan yönetilen CI/CD hattı; manuel onay eylemleri, aşama koşulları (conditions) ile otomatik geri alma ve CodeDeploy ile kademeli dağıtım sağlar.",
+      "sinirlar": "AWS hedeflerine odaklı; karmaşık çok depolu akışlarda ifade gücü sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-1991",
+      "ad": "Azure Pipelines",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/devops/pipelines",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML tabanlı çok aşamalı CI/CD; ortamlar (environments) üzerinde onaylar ve kontroller (manuel onay, iş saati, Azure Monitor sorgusu, dal koruması) ile terfi zinciri tanımlar.",
+      "sinirlar": "Yeni özellik yatırımı GitHub Actions'a kayıyor; kurum içi Azure DevOps Server sürümü de mevcut.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-1993",
+      "ad": "Azure Test Plans",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/devops/test-plans",
+      "olgunluk": "olgun",
+      "ne_saglar": "Manuel, keşif ve kullanıcı kabul testi (UAT) planları; gereksinim–test izlenebilirliği, paydaş geri bildirimi (Test & Feedback eklentisi) ve test sonuç raporları.",
+      "sinirlar": "Ek kullanıcı lisansı gerektirir; otomatik test yürütme için Pipelines entegrasyonu şart.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K05-001",
+        "N-K05-014",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-2005",
+      "ad": "Microsoft Copilot Studio",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.microsoft.com/en-us/copilot/products/copilot-studio",
+      "olgunluk": "olgun",
+      "ne_saglar": "Düşük kodlu ajan oluşturma: Teams/M365 kanallarında çalışan, MCP ve bağlayıcı kullanan, çok ajanlı ve insan onay adımlı otonom ajanlar; yönetim merkezinden DLP ve ortam politikaları.",
+      "sinirlar": "Kod ajanı değildir; karmaşık teslim hattı mantığı için sınırlı; Power Platform lisans modeli karmaşık.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-001",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2006",
+      "ad": "Microsoft 365 Agents SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://github.com/microsoft/Agents",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanları Teams, M365 Copilot, web ve diğer kanallara yayınlamak için çok dilli SDK (C#, JavaScript, Python); kanal etkinlikleri, kimlik ve durum yönetimi; Bot Framework'ün halefi.",
+      "sinirlar": "Ajan mantığı/orkestrasyon sağlamaz; kanal katmanıdır.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K12-005",
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2012",
+      "ad": "Microsoft Entra ID Governance",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Erişim paketleri, periyodik erişim gözden geçirmeleri, ayrıcalıklı kimlik yönetimi (PIM) ile tam zamanında rol yükseltme ve ayrılık-görev (SoD) denetimleri.",
+      "sinirlar": "Ek lisans; ürün içi yetkilendirme kararlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K17-002",
+        "N-K18-003",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-2021",
+      "ad": "GitHub Environments (dağıtım koruma kuralları)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ortam bazında zorunlu gözden geçirenler, bekleme süresi, dal/etiket kısıtı, özel koruma kuralı (GitHub App) ve ortama özgü sırlar; kendi onayını engelleme seçeneği.",
+      "sinirlar": "Karmaşık terfi zinciri için ek araç gerekebilir; özel depolarda plan kısıtları var.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2024",
+      "ad": "Google Cloud Deploy",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/deploy",
+      "olgunluk": "olgun",
+      "ne_saglar": "GKE, Cloud Run ve GKE Enterprise hedefleri için bildirimsel teslim hattı; ortam terfi sırası, onay gerektiren hedefler, kanarya/mavi-yeşil dağıtım, doğrulama işleri ve tek tıkla geri alma.",
+      "sinirlar": "Google Cloud hedefleriyle sınırlı; hedef dışı ortamlarda özel hedef (custom target) yazmak gerekir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K06-010",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2070",
+      "ad": "SAP Build (Build Code, Build Process Automation ve Joule)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.sap.com/products/technology-platform/build.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "SAP BTP üzerinde Joule destekli kod üretimi (CAP/Fiori), süreç otomasyonu ve onay formlarıyla insan onay iş akışları, bekleme süresi ve eskalasyon kuralları.",
+      "sinirlar": "SAP uygulama geliştirme bağlamına özgü; genel teslim hattı orkestratörü değil.",
+      "ihtiyaclar": [
+        "N-K13-003",
+        "N-K17-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2079",
+      "ad": "ServiceNow AI Agent Orchestrator (AI Agents ve AI Agent Fabric)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.servicenow.com/products/ai-agents.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ServiceNow üzerindeki ajan ekiplerini planlayıp çok adımlı işleri koordine eden orkestratör; AI Agent Fabric ile A2A ve MCP üzerinden harici ajan/araçlarla çift yönlü çalışma, insan onay adımları.",
+      "sinirlar": "ServiceNow platform lisansı (Pro Plus/Now Assist) gerektirir; kod geliştirme hattı için değil iş akışları için optimize.",
+      "ihtiyaclar": [
+        "N-K10-006",
+        "N-K12-005",
+        "N-K12-006",
+        "N-K17-001"
+      ]
+    },
+    {
+      "id": "AR-2080",
+      "ad": "ServiceNow DevOps Change Velocity",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.servicenow.com/products/devops-change-velocity.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Azure DevOps, GitHub Actions, GitLab, Jenkins gibi hatlardan iş kalemi, commit, test, kapsama ve güvenlik tarama verisini toplar; değişiklik kaydını otomatik açar ve politikaya göre otomatik onaylar veya insana yönlendirir.",
+      "sinirlar": "ITSM Pro lisansı gerektirir; değişiklik yönetimi süreci olgun kurumlar için anlamlı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K07-005",
+        "N-K17-002",
+        "N-K21-003",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-2083",
+      "ad": "ServiceNow IT Service Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.servicenow.com/products/itsm.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay, problem, değişiklik ve talep yönetimi; SLA bazlı bekleme süresi ve eskalasyon, onay iş akışları ve hat olayları için işletim dokümanı (knowledge) yönetimi.",
+      "sinirlar": "Lisans maliyeti yüksek; geliştirici iş takibiyle çift kayıt riski.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K16-002",
+        "N-K17-003",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2119",
+      "ad": "Datadog Workflow Automation",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/workflow-automation/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uyarı veya olaylarla tetiklenen, onay adımlı (Slack/Teams) otomasyon akışları; özellik bayrağı kapatma, ölçek azaltma gibi acil durdurma eylemlerini standartlaştırır.",
+      "sinirlar": "Uzun süreli dayanıklı iş akışları için değil işletim otomasyonu için.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K16-007",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2143",
+      "ad": "Tricentis qTest",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.tricentis.com/products/unified-test-management-qtest",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gereksinim–test–hata izlenebilirliği olan test yönetimi; manuel/keşif/otomatik test sonuçlarının merkezileştirilmesi, kabul testi yürütme ve denetim raporları.",
+      "sinirlar": "Jira dışı gereksinim kaynaklarıyla entegrasyon efor ister.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-014",
+        "N-K05-025",
+        "N-K05-026"
+      ]
+    },
+    {
+      "id": "AR-2152",
+      "ad": "CucumberStudio",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://smartbear.com/product/cucumberstudio/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş birimi, test ve geliştiricinin Gherkin (Verilen–Olduğunda–O zaman) senaryolarını birlikte yazıp gözden geçirdiği BDD platformu; yaşayan dokümantasyon ve otomasyonla eşleme.",
+      "sinirlar": "SaaS; Türkçe Gherkin anahtar kelimeleri Cucumber tarafında desteklense de arayüz İngilizce.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K01-011",
+        "N-K05-001"
+      ]
+    },
+    {
+      "id": "AR-2158",
+      "ad": "Digital.ai Release",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://digital.ai/products/release/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yayın orkestrasyonu: şablonlu yayın akışları, manuel/otomatik görevler, onay kapıları, başarısız görevi atla/yeniden dene/elle devral, uyum ve denetim raporları.",
+      "sinirlar": "Kurulum ve şablon tasarımı efor ister; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K07-005",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2186",
+      "ad": "Modern Requirements4DevOps",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.modernrequirements.com/products/modern-requirements4devops/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Azure DevOps içinde gereksinim yönetimi: Smart Docs, taban çizgisi, izlenebilirlik matrisi, e-imzalı gözden geçirme/onay ve yapay zekâ (Copilot4DevOps) ile gereksinim/kabul kriteri üretimi ve toplu dönüştürme.",
+      "sinirlar": "Azure DevOps'a bağlı; ek lisans.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-010",
+        "N-K01-011",
+        "N-K02-001",
+        "N-K02-002",
+        "N-K20-009"
+      ]
+    },
+    {
+      "id": "AR-2187",
+      "ad": "UiPath Maestro (Business Orchestration)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.uipath.com/platform/agentic-automation/business-orchestration",
+      "olgunluk": "gelisen",
+      "ne_saglar": "BPMN tabanlı uzun süreli süreç orkestrasyonu: yapay zekâ ajanları, robotlar ve insan görevleri arasında iş devri, istisnaların insana yönlendirilmesi, süreç izleme ve KPI.",
+      "sinirlar": "RPA ekosistemi merkezli; yazılım teslim hattı için özel tasarım gerekir.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-003",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2200",
+      "ad": "SAFe (Scaled Agile Framework) 6.0",
+      "tur": "protokol-standart",
+      "lisans": "ticari (içerik lisanslı, erişim ücretsiz)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://framework.scaledagile.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Portföy/ART/ekip rollerini (RTE, Ürün Yönetimi, Sistem Mimarı, Sistem Ekibi, Paylaşılan Hizmetler), etkinleştirici (enabler) işleri, WSJF önceliklendirmesini, epik hipotez/öncü göstergelerle devam-dur kararını ve uygulama yol haritasını tanımlayan çerçeve.",
+      "sinirlar": "Yapay zekâ ajanı rollerini doğrudan tanımlamaz; eşlemeyi kurum yapmalı; sertifika ve danışmanlık maliyeti.",
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K23-013",
+        "N-K24-004",
+        "N-K24-005",
+        "N-K24-006",
+        "N-K24-009",
+        "N-K24-010",
+        "N-K24-012",
+        "N-K24-013",
+        "N-K24-014",
+        "N-K25-002"
+      ]
+    },
+    {
+      "id": "AR-2247",
+      "ad": "Prodigy",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (kalıcı lisans)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://prodi.gy",
+      "olgunluk": "olgun",
+      "ne_saglar": "Betiklenebilir, aktif öğrenmeli veri etiketleme ve gözden geçirme aracı; LLM önerilerinin insanlarca hızla kabul/ret edilmesini ve kurum görev setleri için altın etiket üretimini sağlar.",
+      "sinirlar": "Geliştirici odaklı ve tek sunucu mimarisi; çok ekipli iş akışı için ek yapılandırma gerekir.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K05-016",
+        "N-K17-006",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2248",
+      "ad": "INCEpTION",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://inception-project.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok kullanıcılı semantik metin etiketleme platformu; öneri motorları (LLM dahil), bilgi tabanına varlık bağlama ve etiketleyiciler arası uyum (agreement) ölçümü sunar.",
+      "sinirlar": "Akademik kökenli arayüz; kurumsal destek sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K05-016",
+        "N-K07-006",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2274",
+      "ad": "Phorge",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://we.phorge.it",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod incelemesi (Differential), depo barındırma, iş takibi (Maniphest), wiki ve Herald kurallarıyla inceleme/onay otomasyonu sunan, Phabricator'ın topluluk sürdürümlü çatalı.",
+      "sinirlar": "Topluluk küçük; modern CI entegrasyonları ve arayüzü sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-001",
+        "N-K17-002",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-2316",
+      "ad": "Element Server Suite (Matrix)",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (Synapse) / ticari (Pro)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://element.io/server-suite",
+      "olgunluk": "olgun",
+      "ne_saglar": "Matrix açık standardı üzerinde uçtan uca şifreli mesajlaşma, bot ve köprü entegrasyonları ile kurumsal yönetim; ajan–insan soru/onay kanalı için bot API'si sağlar.",
+      "sinirlar": "Pro özellikleri ticari; büyük kurulumlarda işletim yükü yüksek.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2321",
+      "ad": "Bonita",
+      "tur": "acik-cekirdek",
+      "lisans": "LGPL-2.1 (Community) / ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.bonitasoft.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "BPMN tabanlı süreç otomasyonu; insan görevleri, onay formları, zaman aşımı/eskalasyon ve rol tabanlı görev atama sunar.",
+      "sinirlar": "Gelişmiş izleme ve kümeleme ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K01-011",
+        "N-K13-003",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2324",
+      "ad": "Budibase",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-3.0 (genel) / ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.budibase.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanı ve API'lere bağlanan dahili araçlar, onay formları ve iş akışı otomasyonu için self-host düşük kodlu platform.",
+      "sinirlar": "Karmaşık iş akışlarında sınırlı; bazı özellikler ücretli.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K17-001",
+        "N-K17-003"
+      ]
+    },
+    {
+      "id": "AR-2334",
+      "ad": "Kiwi TCMS",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://kiwitcms.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak test senaryosu yönetimi: test planları, manuel koşular, otomasyon sonuçlarının eklentilerle (pytest, JUnit vb.) içe alınması, gereksinim–test izlenebilirliği ve raporlar.",
+      "sinirlar": "Arayüz ve raporlama ticari araçlara göre sade; kurumsal destek abonelikle.",
+      "ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-025",
+        "N-K05-026",
+        "N-K07-005"
+      ]
+    },
+    {
+      "id": "AR-2335",
+      "ad": "SquashTM",
+      "tur": "acik-cekirdek",
+      "lisans": "açık kaynak (Community) / ticari (Premium, Ultimate)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.squashtm.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gereksinim ve test senaryosu yönetimi; manuel, keşif, BDD (Gherkin) ve otomatik testler için ortak çerçeve ve gereksinim–test kapsama izlenebilirliği.",
+      "sinirlar": "Gelişmiş özellikler ücretli sürümlerde; Java tabanlı kurulum.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K05-001",
+        "N-K05-014",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-2384",
+      "ad": "BISHENG",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/dataelement/bisheng",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumsal LLM uygulama platformu: insan müdahalesi (human-in-the-loop) destekli iş akışları, değerlendirme, ince ayar ve yüksek doğruluklu belge çözümleme bileşenlerini birlikte sunar.",
+      "sinirlar": "Ağırlıkla Çince kurumsal senaryolara yönelik; bazı gelişmiş özellikler ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K09-008",
+        "N-K12-005",
+        "N-K13-003",
+        "N-K17-001",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2396",
+      "ad": "HuixiangDou",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/InternLM/HuixiangDou",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Grup sohbetlerinde (WeChat, Lark vb.) çalışan teknik asistan: mesajın yanıtlanıp yanıtlanmayacağına karar veren ret boru hattı ve RAG ile gürültüyü azaltır.",
+      "sinirlar": "Entegrasyonları Çin mesajlaşma uygulamalarına odaklı; Slack/Teams için ek geliştirme gerekir.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K14-002",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2498",
+      "ad": "Xurrent IMR (eski Zenduty)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://zenduty.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay yönetimi ve müdahale orkestrasyonu: nöbet çizelgesi, eskalasyon politikaları, olay iş akışları ve runbook otomasyonu.",
+      "sinirlar": "Satın alma sonrası ürün yol haritası Xurrent ITSM ile birleşiyor; kapalı SaaS.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-003",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2511",
+      "ad": "Warm-Flow",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "http://www.warm-flow.cn",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gömülebilir hafif onay iş akışı motoru: tasarımcı, geri gönderme, geri çekme, devretme, çoklu onay (countersign) ve koşullu dallanma; onay sahipliği ve takılan işlerin geri alınması için.",
+      "sinirlar": "Çince dokümantasyon; BPMN tam uyumlu değil, dağıtık dayanıklı yürütme sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-011",
+        "N-K13-003",
+        "N-K17-002",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2529",
+      "ad": "Bytebase",
+      "tur": "acik-cekirdek",
+      "lisans": "Community (kaynak açık) + ticari Enterprise lisansı",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.bytebase.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanı değişikliği yönetişimi: SQL inceleme kuralları, risk tabanlı onay akışları, ortamlara kademeli şema yayını, GitOps entegrasyonu ve denetim kaydı; insanlar ve ajanlar için tek değişiklik kapısı.",
+      "sinirlar": "Özellik kontrolü içeren dizinler kurumsal lisanslı; gelişmiş onay/maskeleme ücretli planlarda.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K11-007",
+        "N-K17-002",
+        "N-K18-007",
+        "N-K19-002",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-2530",
+      "ad": "Archery",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/hhyo/Archery",
+      "olgunluk": "olgun",
+      "ne_saglar": "SQL denetim ve sorgu platformu: iş emri tabanlı onay akışı, SQL kural denetimi (goInception), yürütme ve geri alma, sorgu sonuçlarında veri maskeleme ve denetim kaydı.",
+      "sinirlar": "Ağırlıkla MySQL ekosistemi; arayüz Çince ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K17-002",
+        "N-K18-007",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2532",
+      "ad": "Yearning",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "http://next.yearning.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "MySQL için SQL denetim platformu: otomatik SQL kuralı denetimi, onay akışı, geri alma ifadesi üretimi ve sorgu denetimi.",
+      "sinirlar": "Yalnız MySQL; AGPL-3.0.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2537",
+      "ad": "MeterSphere",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-3.0 (ek koşullu) + ticari Enterprise",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://metersphere.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürekli test platformu: test senaryosu yönetimi, API testi, test planları, kusur takibi ve raporlama; yerleşik yapay zekâ asistanıyla test senaryosu üretimi.",
+      "sinirlar": "Logo/telif koşullu GPL; bazı modüller kurumsal sürümde, arayüz Çince ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-004",
+        "N-K05-014",
+        "N-K05-025",
+        "N-K07-005"
+      ]
+    },
+    {
+      "id": "AR-2553",
+      "ad": "ZenTao (禅道)",
+      "tur": "acik-cekirdek",
+      "lisans": "ZPL 1.2 veya AGPL-3.0 (çift lisans) + ticari sürümler",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "http://www.zentao.pm",
+      "olgunluk": "olgun",
+      "ne_saglar": "Scrum/çevik proje yönetimi: ürün-gereksinim-görev-hata-test senaryosu hiyerarşisi, gereksinim inceleme (review) akışı ve onaylayıcı tanımı, sprint ve raporlar.",
+      "sinirlar": "Arayüz eskimiş; gelişmiş portföy özellikleri ücretli sürümlerde.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K01-011",
+        "N-K02-004",
+        "N-K05-025",
+        "N-K26-001",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-2558",
+      "ad": "Lark Approval (Feishu 审批)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.larksuite.com/en_us/product/approval",
+      "olgunluk": "olgun",
+      "ne_saglar": "Lark/Feishu içinde özel formlu onay akışları: koşullu yönlendirme, çoklu onaylayıcı, hatırlatma ve API ile dış sistemden onay başlatma/sonuç alma.",
+      "sinirlar": "Lark ekosistemine bağlı; kimlik/imza kanıtı dış denetim kaydına ayrıca aktarılmalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-001",
+        "N-K17-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2560",
+      "ad": "Kissflow",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://kissflow.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Düşük kodlu iş akışı ve onay uygulamaları: form tabanlı süreçler, koşullu onay zincirleri, SLA/eskalasyon ve rol tabanlı erişim.",
+      "sinirlar": "Kapalı SaaS; yazılım teslim hattı entegrasyonları API ile kurulmalı.",
+      "ihtiyaclar": [
+        "N-K17-001",
+        "N-K17-002",
+        "N-K17-004",
+        "N-K25-001"
+      ]
+    },
+    {
+      "id": "AR-2561",
+      "ad": "Appsmith",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community) + ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.appsmith.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "İç araç ve yönetim paneli oluşturma platformu; veritabanı/API'ye bağlanarak toplu dönüşüm çıktılarının örneklemli insan incelemesi, onay kuyruğu ve kanıt görüntüleme ekranları hızla kurulabilir.",
+      "sinirlar": "SSO/denetim gibi kurumsal özellikler ücretli; onay mantığı ve kalıcılık ayrıca tasarlanmalı.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K05-025",
+        "N-K17-005",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-2562",
+      "ad": "ToolJet",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (Community) + ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://tooljet.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Düşük kodlu iç uygulama ve iş akışı platformu; inceleme kuyruğu, onay formu ve pano ekranları ile yapay zekâ destekli uygulama üretimi.",
+      "sinirlar": "AGPL-3.0; kurumsal yönetişim özellikleri ücretli.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K17-005",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-2614",
+      "ad": "TiCoder",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/ticoder",
+      "olgunluk": "erken",
+      "ne_saglar": "Test güdümlü kullanıcı niyeti biçimselleştirme: kod üretmeden önce aday testleri kullanıcıya gösterip evet/hayır onayı alır, onaylanan testlerle aday kodları budar ve sıralar.",
+      "sinirlar": "Python fonksiyon düzeyinde deneysel iş akışı; OpenAI/Azure API'sine bağlı, depo düzeyi görevlere doğrudan uygulanmaz.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K01-009",
+        "N-K05-001",
+        "N-K10-010"
+      ]
+    },
+    {
+      "id": "AR-2679",
+      "ad": "AgentStepper",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sola-st/AgentStepper",
+      "olgunluk": "erken",
+      "ne_saglar": "Yazılım geliştirme ajanlarının yörüngelerini LLM, ajan programı ve araçlar arasındaki yapılandırılmış konuşma olarak kaydedip hata ayıklayıcı gibi adım adım ilerletme, durdurma ve inceleme imkânı veren etkileşimli araç.",
+      "sinirlar": "Lisans tezi prototipi; entegrasyon ajan başına uyarlama gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K07-005",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2786",
+      "ad": "HAX Toolkit (Human-AI eXperience)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.microsoft.com/en-us/haxtoolkit/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İnsan–yapay zekâ etkileşimi için 18 araştırma temelli yönerge, ekip planlama çalışma kitabı, tasarım kütüphanesi ve hata senaryoları oyun kitabı; onay ekranlarında güven kalibrasyonu ve otomasyon yanlılığını azaltmaya yarar.",
+      "sinirlar": "Rehber niteliğinde; yazılım bileşeni değil, uygulaması ekip disiplinine bağlı.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K17-001",
+        "N-K17-006",
+        "N-K25-007",
+        "N-K27-001",
+        "N-K28-006",
+        "N-K28-011"
+      ]
+    },
+    {
+      "id": "AR-2787",
+      "ad": "People + AI Guidebook (PAIR)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://pair.withgoogle.com/guidebook/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanıcı ihtiyacı, zihinsel modeller, açıklanabilirlik ve güven, geri bildirim ve kontrol, hatalar ve zarif başarısızlık üzerine yöntem ve çalışma kağıtları; yapay zekâ destekli iş akışlarının benimsenmesi için tasarım rehberi.",
+      "sinirlar": "Ürün tasarımı odaklı rehber; ölçüm aracı değildir.",
+      "ihtiyaclar": [
+        "N-K17-006",
+        "N-K25-005",
+        "N-K25-007",
+        "N-K28-006",
+        "N-K28-011"
+      ]
+    },
+    {
+      "id": "AR-2798",
+      "ad": "POTATO (Portable Text Annotation Tool)",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/davidjurgens/potato",
+      "olgunluk": "gelisen",
+      "ne_saglar": "YAML ile hızla yapılandırılan, yerelde çalışan web tabanlı metin etiketleme aracı; ikili karşılaştırma, çoklu seçim, Likert gibi şemalarla toplu LLM çıktılarının veya dönüştürülmüş iş kalemlerinin insan değerlendirmesini düzenler.",
+      "sinirlar": "Kimlik ve yetki yönetimi basit; kurumsal ölçekte kullanım için ek sertleştirme gerekir.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-2804",
+      "ad": "Paseo",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 (üçüncü taraf bileşenler hariç)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/getpaseo/paseo",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex, Copilot, OpenCode ve Pi ajanlarını kendi makinelerinizde paralel çalıştırıp masaüstü, mobil, web ve CLI'dan aynı arayüzle başlatma, izleme ve devralma imkânı verir; telemetri ve zorunlu giriş yoktur.",
+      "sinirlar": "Bireysel geliştirici odaklıdır; kurumsal rol/yetki, merkezi denetim kaydı ve çok kiracılı yönetim sunmaz.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K12-005",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2808",
+      "ad": "TrueForge",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://trueforge.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Model çağrıları, MCP araçları, skill'ler, sandbox, onaylar, bağlam yönetimi ve oturum durumunu içeren ajan yürütme döngüsünü hazır verir; sohbet arayüzü, API ve CLI ile erişilir.",
+      "sinirlar": "Temmuz 2026'da açıldı; kurumsal kimlik/yetki entegrasyonu ve uzun vadeli bakım henüz kanıtlanmadı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-008",
+        "N-K12-002",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2828",
+      "ad": "Mission Control (Builderz Labs)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mc.builderz.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları işletmek için self-host kontrol paneli: görev gönderme, koşuları ve hataları inceleme, harcama izleme; OpenClaw, Claude Code, Codex gibi çalışma zamanlarıyla çalışır.",
+      "sinirlar": "Proje kendini alfa olarak tanımlar; SQLite tabanlı tek düğüm.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K19-007",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2829",
+      "ad": "Open Multi-Agent (OMA)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://open-multi-agent.com/go/repo",
+      "olgunluk": "erken",
+      "ne_saglar": "Self-host TypeScript ajan çalışma zamanı: sonuç doğuran eylemler dayanıklı ve kurcalamaya karşı korunan onayları bekler; her koşu çevrimdışı doğrulanabilir bir kayıt bırakır. Yerel modeller dahil çoklu sağlayıcı.",
+      "sinirlar": "Mart 2026'da çıktı; büyük ölçekli üretim referansı yok.",
+      "ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K17-002",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2830",
+      "ad": "Cline Kanban",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cline/kanban",
+      "olgunluk": "erken",
+      "ne_saglar": "Her görev kartına ayrı terminal ve git worktree açan, paralel CLI ajanlarını ve diff incelemesini tek yerel web uygulamasında yöneten araç.",
+      "sinirlar": "Araştırma önizlemesi; ajanlarda izin atlatma gibi deneysel özellikler kullanır.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K05-025",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2832",
+      "ad": "Chorus (AI-DLC harness)",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://chorus-ai.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AI-DLC yaklaşımıyla Fikir→Öneri→Doküman+Görev DAG→Yürütme→Doğrulama→Bitti akışı; her aşama için insan/ajan izin matrisi, kanıt zorunlu inceleyici kuralları ve kararlı bulgu kimlikleri.",
+      "sinirlar": "AGPL-3.0; hizmet olarak sunulduğunda kaynak paylaşım yükümlülüğü doğar.",
+      "ihtiyaclar": [
+        "N-K01-011",
+        "N-K04-006",
+        "N-K05-025",
+        "N-K25-001",
+        "N-K25-010"
+      ]
+    },
+    {
+      "id": "AR-2833",
+      "ad": "Kandev",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://kandev.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Kanban ve pipeline görünümleriyle görev yönetimi, çok sağlayıcılı ajan atama, özelleştirilebilir iş akışı ve inceleme kapıları, entegre çalışma alanında çıktı inceleme ve PR açma.",
+      "sinirlar": "AGPL-3.0; güç kullanıcı odaklı, çok ekipli yönetişim sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K05-025",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-2835",
+      "ad": "Groundcrew",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ClipboardHealth/groundcrew",
+      "olgunluk": "erken",
+      "ne_saglar": "Atanmış görevleri (varsayılan Linear; Jira ve yerel dosya) izleyip her göreve worktree açar, gerçek claude/codex/cursor/pi CLI'ını ayrı terminalde başlatır; varsayılan olarak Safehouse veya Docker Sandboxes ile yalıtır, insan istediği an devralır.",
+      "sinirlar": "Geliştiricinin yerel makinesi ve kimlik bilgileriyle çalışır; merkezi yönetim yok.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K17-008",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-2836",
+      "ad": "AgentRQ",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://agentrq.com",
+      "olgunluk": "erken",
+      "ne_saglar": "MCP üzerinden ajanların görev çektiği, durum güncellediği, hassas eylemler için izin istediği ve insanla gerçek zamanlı yazıştığı self-host insan–ajan iş birliği platformu.",
+      "sinirlar": "AGPL-3.0; kurumsal ölçekte kullanım kanıtı yok.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K10-010",
+        "N-K13-003",
+        "N-K17-003"
+      ]
+    },
+    {
+      "id": "AR-2841",
+      "ad": "Paca",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://paca-ai.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanların Scrum ekibinde sprint planlamasına katıldığı, panodan görev aldığı ve BDD spesifikasyonu yazdığı self-host proje yönetimi; iş akışı, veri modeli ve arayüz eklentilerle genişletilir.",
+      "sinirlar": "SAFe portföy/program katmanı yok; genç proje.",
+      "ihtiyaclar": [
+        "N-K24-005",
+        "N-K25-002",
+        "N-K26-001",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-2846",
+      "ad": "OpenTag",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/linxidnju/OpenTag",
+      "olgunluk": "erken",
+      "ne_saglar": "Slack kanal ve iş parçacıklarında yerel ajanları etiketleyerek görev verme; ilerleme görünür, riskli eylemler onaya bağlı, denetim izi tutulur, ajan çalışma zamanı takılabilir.",
+      "sinirlar": "Tek geliştiricili; son etkinlik Temmuz 2026.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-002",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-2851",
+      "ad": "Hunk",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://hunk.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan kaynaklı değişiklik setleri için inceleme öncelikli terminal diff görüntüleyici; çok dosyalı inceleme akışı ve kodun yanında AI/ajan açıklamaları.",
+      "sinirlar": "Yalnız görüntüleme aracıdır; onayların kimlikli kaydını tutmaz.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K07-005",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-2852",
+      "ad": "Plannotator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://plannotator.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanın önerdiği planı, HTML çıktısını veya kod diff'ini tarayıcıda açıp işaretleme, yorumlama ve geri bildirimi ajana gönderme; ekip ile paylaşma. Claude Code, Codex, Copilot CLI, Gemini CLI, OpenCode, Kiro ve diğerlerine kancalanır.",
+      "sinirlar": "Onayların kimliğe bağlı, değiştirilemez kaydını sağlamaz.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K05-025",
+        "N-K17-002",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-2881",
+      "ad": "AIBDD",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Waterball-Software-Academy/aixbdd",
+      "olgunluk": "erken",
+      "ne_saglar": "PM'in Gherkin ile kabul kriterini ve prototipi tanımladığı, geliştiricinin bunu RED→GREEN→REFACTOR davranış testleriyle ön ve arka uca uyguladığı rol ayrımlı AI geliştirme iş akışı.",
+      "sinirlar": "Dokümantasyonu ağırlıkla Çince; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K01-011",
+        "N-K05-001",
+        "N-K05-002"
+      ]
+    },
+    {
+      "id": "AR-2887",
+      "ad": "Spec Kitty",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://spec-kitty.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ürün niyetini depo-yerel spec → plan → görevler → inceleme → kabul → birleştirme akışına çeviren CLI; birden çok kodlama ajanı etrafında yönetilen bir yazılım fabrikası kurar.",
+      "sinirlar": "4.x hattı sürüm adayı; kararlı sürüm kabulü beklemede.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-010",
+        "N-K05-027"
+      ]
+    },
+    {
+      "id": "AR-2889",
+      "ad": "Spectra",
+      "tur": "ticari-yazilim",
+      "lisans": "tescilli (tüm hakları saklı)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/kaochenlong/spectra-app",
+      "olgunluk": "erken",
+      "ne_saglar": "Spesifikasyon dokümanlarını, değişiklikleri ve görevleri görsel izleyen masaüstü uygulaması, CLI ve kodlama ajanı skill'leri (OpenSpec'ten esinlenmiş SDD aracı).",
+      "sinirlar": "Lisans 'tüm hakları saklı'; kurumsal kullanım koşulları netleştirilmeli.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K01-010"
+      ]
+    },
+    {
+      "id": "AR-2891",
+      "ad": "pi-plans",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/MaxInGaussian/pi-plans",
+      "olgunluk": "erken",
+      "ne_saglar": "Pi kodlama ajanı için insan-döngüde planlama: depo salt okunur incelenir, planlama soruları tek tek sorulup yanıtlar koşu defterine yazılır, kod değişmeden önce sürümlü ve incelenmiş Markdown plan oluşur.",
+      "sinirlar": "Pi ajanına özgü; kıyaslama tek model/tek tohumla keşif niteliğinde.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K01-009",
+        "N-K20-009"
+      ]
+    },
+    {
+      "id": "AR-2904",
+      "ad": "Prismor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://prismor.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code, Codex, LangChain gibi ajanlar için self-host çalışma zamanı kontrol düzlemi; riskli araç çağrılarını gözlemleme, insan onayına bağlama veya engelleme, yerel panel.",
+      "sinirlar": "Genç proje; politika kapsamı kullanıcı tanımına bağlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-001",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2905",
+      "ad": "Cordum",
+      "tur": "ticari-yazilim",
+      "lisans": "BSL-1.1 (kaynak erişilebilir)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/cordum-io/cordum",
+      "olgunluk": "erken",
+      "ne_saglar": "Riskli araç çağrıları ve kabuk komutlarından önce politika ve insan onayı uygulayan ajan kontrol düzlemi (API ağ geçidi, zamanlayıcı, güvenlik çekirdeği, iş akışı motoru) ve yerel ajanlar için Cordum Edge uyum güvenlik duvarı.",
+      "sinirlar": "Business Source License; üretim/rakip kullanımında kısıt olabilir, yığın ağır (NATS vb.).",
+      "ihtiyaclar": [
+        "N-K17-001",
+        "N-K18-007",
+        "N-K21-003"
+      ]
+    },
+    {
+      "id": "AR-2913",
+      "ad": "HOL Guard",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://hol.org/guard",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın kabuk komutu, dosya erişimi, paket kurulumu ve MCP çağrılarını çalışmadan önce inceleyip sır ifşası, yıkıcı işlem, istem enjeksiyonu ve zararlı paketleri tespit eder; yerel onay paneli ve karar geçmişi.",
+      "sinirlar": "İsteğe bağlı bulut sürümü; yerel kurallar sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-007",
+        "N-K18-008",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2943",
+      "ad": "Aegis (ajan güvenlik duvarı)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Justin0504/Aegis",
+      "olgunluk": "erken",
+      "ne_saglar": "Her araç çağrısını çalışmadan önce yakalayıp sınıflandıran ve engelleyebilen; kriptografik denetim izi, insan onayı ve acil durdurma (kill switch) sunan ajan güvenlik duvarı.",
+      "sinirlar": "Tek geliştiricili; ticari lisans seçenekleri ayrı.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K17-002",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2944",
+      "ad": "Preloop",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://preloop.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanlar ile eriştikleri her şey arasında duran self-host kontrol düzlemi: MCP güvenlik duvarı (izin/ret/onay), bütçe ve izinli model listeli model ağ geçidi, YAML+CEL politika ve mobil/Slack/e-posta onayları.",
+      "sinirlar": "Küçük topluluk; kapsam geniş ama olgunluk düşük.",
+      "ihtiyaclar": [
+        "N-K09-004",
+        "N-K12-002",
+        "N-K17-001",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-2945",
+      "ad": "CHAP (Collaborative Human-Agent Protocol)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://chap.brightbeam.works/",
+      "olgunluk": "erken",
+      "ne_saglar": "Onay, geçersiz kılma, devir ve eskalasyonları MCP ve A2A üzerinde ortak, denetlenebilir bir biçime sokan açık protokol; insanın düzenlemesi diff, gerekçe ve etiketle yapılandırılmış kayıt olur.",
+      "sinirlar": "Mayıs 2026'da çıktı; benimsenme düşük.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K17-002",
+        "N-K19-006",
+        "N-K27-004",
+        "N-K27-007",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-2946",
+      "ad": "EMILIA Protocol",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.emiliaprotocol.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Korunan bir araç çalışmadan önce yetkiyi denetleyen kapı (EMILIA Gate) ve açık protokol; onaydan sonra içerik (tutar, hedef) değişirse eski onay geçersizdir, kanıt doğrulayıcının kendi anahtarlarıyla bağımsız denetlenir.",
+      "sinirlar": "Ödeme gibi yüksek riskli eylem senaryolarına odaklı; genç.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2947",
+      "ad": "AgentSafe (Decionis)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/decionis/agent-safe-pipeline",
+      "olgunluk": "erken",
+      "ne_saglar": "Sonuç doğuran HTTP eylemlerini yakalayıp Decionis kontrol düzleminden eyleme bağlı karar isteyen; yetkili isteği tek kullanımlık izinle bir kez ileten, insan için bekleten veya reddeden ve zincirli kayıt bırakan yetki sınırı.",
+      "sinirlar": "Kararı Decionis hizmeti verir (ticari bağımlılık).",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2986",
+      "ad": "AI-SDLC Framework",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ai-sdlc.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Operatörün kritik kararları baştan verdiği, açık soruların çerçeve tarafından biriktirilip insan onayına sunulduğu spesifikasyon güdümlü AI iş akışları için bildirimsel karar ve yönetişim motoru (sözleşme → teslim).",
+      "sinirlar": "Genç; Spec Kit gibi ön uç araçlarla birlikte kullanılmak üzere tasarlanmış.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K05-027",
+        "N-K17-001"
+      ]
+    },
+    {
+      "id": "AR-3019",
+      "ad": "GitHub Agent HQ (Mission Control)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://github.blog/news-insights/company-news/welcome-home-agents/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Anthropic, OpenAI, Google, Cognition, xAI gibi sağlayıcıların kodlama ajanlarını Copilot aboneliği içinde GitHub'da çalıştırma; birden çok depo için görev atama, canlı oturum loglarını izleme, çalışma sırasında yönlendirme ve PR'a geçiş için GitHub, VS Code ve CLI'da tek komuta merkezi (Ekim 2025).",
+      "sinirlar": "GitHub ve Copilot aboneliğine bağlı; ajan seçenekleri GitHub'ın sağladıklarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K10-006",
+        "N-K17-004",
+        "N-K26-002",
+        "N-K28-002",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-3362",
+      "ad": "PagerDuty MCP Server (Remote)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (eski yerel sürüm Apache-2.0, arşiv)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://support.pagerduty.com/main/docs/pagerduty-mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Barındırılan MCP sunucusu (US ve EU uç noktaları); olay, servis, nöbet çizelgesi, eskalasyon politikası ve olay orkestrasyonları için okuma/yazma araçları sunar.",
+      "sinirlar": "Yerel (self-host) sürüm kullanımdan kaldırılıp salt okunur arşive alındı; yazma araçlarının yetkisi ayrıca sınırlanmalı.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K12-005",
+        "N-K16-002",
+        "N-K16-003",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-3371",
+      "ad": "Zoom MCP Servers (Tasks, Docs, Team Chat, Meetings)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://developers.zoom.us/docs/mcp/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Zoom'un resmî kayıttaki uzak MCP sunucuları: görev oluşturma/atama, Zoom Docs belgeleri, sohbet kanalları ve toplantı özetlerine ajan erişimi; insan–ajan bildirim ve soru kanalı olarak kullanılabilir.",
+      "sinirlar": "Kurum Zoom Workplace kullanmıyorsa değersiz; toplantı transkriptlerinin modele gitmesi veri politikası gerektirir.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K12-005",
+        "N-K17-001",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3472",
+      "ad": "Timepiece - Time in Status for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1211756/timepiece-time-in-status-for-jira",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira iş kalemi geçmişinden durum başına süre, döngü ve teslim süresi raporları üretir; bekleme (insan kararı) durumlarının aktif çalışmadan ayrı ölçülmesini ve takılan işlerin tespitini sağlar.",
+      "sinirlar": "Ölçüm Jira durum modelinin doğruluğuna bağlıdır. Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K17-005",
+        "N-K17-008",
+        "N-K20-004",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-3474",
+      "ad": "Smart Checklists for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1216451/smart-checklists-for-jira",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş türü, alan değeri veya geçişe göre otomatik eklenen kontrol listesi şablonları; kontrol listesi tamamlanmadan geçişi engelleyen doğrulayıcılarla DoR/DoD'nin iş kaleminde uygulanmasını sağlar.",
+      "sinirlar": "Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K01-002",
+        "N-K01-006",
+        "N-K05-027",
+        "N-K26-003",
+        "N-K30-003",
+        "N-K30-006"
+      ]
+    },
+    {
+      "id": "AR-3480",
+      "ad": "Herzum Approval",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1211763/herzum-approval",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira ve JSM'de yapılandırılabilir onaylayıcı türleri, koşullu kurallar, otomatik bildirim ve geçişlerle onay süreçleri; onay/ret/çekimser oylar e-postadan da verilebilir.",
+      "sinirlar": "Onayın içerik özetine (hash) bağlanması yerleşik değildir. Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K17-001",
+        "N-K17-002",
+        "N-K25-004"
+      ]
+    },
+    {
+      "id": "AR-3481",
+      "ad": "Approval Path for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1220490/approval-path-for-jira",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çok adımlı, çok onaylayıcılı onay zincirleri; dinamik onaylayıcı, koşullu yönlendirme, Slack/e-posta onayı, vekâlet, hatırlatma, eskalasyon ve denetime hazır onay kaydı.",
+      "sinirlar": "Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K17-002",
+        "N-K17-004",
+        "N-K17-005",
+        "N-K25-004"
+      ]
+    },
+    {
+      "id": "AR-3482",
+      "ad": "AssertThat BDD & Test Management for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1219033/assertthat-bdd-cucumber-ai-test-management-for-jira",
+      "olgunluk": "olgun",
+      "ne_saglar": "BDD senaryolarını Jira'da yazma, düzenleme, hikâyelere bağlama ve otomasyon sonuçlarıyla kapsam/izlenebilirlik raporlama; yapay zekâ ile Gherkin üretme/iyileştirme.",
+      "sinirlar": "Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K05-001",
+        "N-K05-014"
+      ]
+    },
+    {
+      "id": "AR-3490",
+      "ad": "Decisions Helper for Confluence",
+      "tur": "ticari-yazilim",
+      "lisans": "bilinmiyor (Atlassian Labs)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1226380/decisions-helper-for-confluence",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Confluence'ta herhangi bir karar sürecine durum iş akışı (duraklatıldı, eskale edildi vb.) ekler ve alan genelindeki kararların filtrelenebilir özetini verir.",
+      "sinirlar": "Atlassian Labs ürünü; destek garantisi sınırlı.",
+      "ihtiyaclar": [
+        "N-K07-003",
+        "N-K11-011",
+        "N-K25-008"
+      ]
+    },
+    {
+      "id": "AR-3582",
+      "ad": "Geekbot",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://geekbot.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Slack/Teams'te asenkron günlük toplantı ve anket botu; engelleri ve durum güncellemelerini standart sorularla toplar.",
+      "sinirlar": "Serbest metin yanıtlar; engel kaydını yapılandırılmış biçime çevirmek için ek işleme gerekir.",
+      "ihtiyaclar": [
+        "N-K17-003",
+        "N-K24-009",
+        "N-K25-009",
+        "N-K30-006",
+        "N-K31-011"
+      ]
+    },
+    {
+      "id": "AR-3583",
+      "ad": "Dailybot",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.dailybot.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ekip güncellemeleri, asenkron toplantılar, anketler ve yapay zekâ özet raporları; ajan etkinliğini ekip güncellemeleriyle aynı akışta toplama iddiası.",
+      "sinirlar": "Sohbet araçlarına bağımlı; ajan etkinliği entegrasyonunun kapsamı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K17-003",
+        "N-K24-009",
+        "N-K25-009",
+        "N-K30-006",
+        "N-K31-011"
+      ]
+    },
+    {
+      "id": "AR-3589",
+      "ad": "PullApprove",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.pullapprove.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "CODEOWNERS'a alternatif kod olarak inceleme politikası: dosya/yol, etiket ve koşula göre hangi grupların kaç onay vermesi gerektiğini tanımlar, inceleme isteklerini gruplar arasında dağıtır.",
+      "sinirlar": "Desteklenen Git barındırma platformları sürüme göre değişir; kural dosyası yanlış yazılırsa onay boşlukları doğabilir.",
+      "ihtiyaclar": [
+        "N-K08-003",
+        "N-K17-001",
+        "N-K17-002",
+        "N-K17-005",
+        "N-K17-010",
+        "N-K24-008",
+        "N-K29-006",
+        "N-K31-003"
+      ]
+    },
+    {
+      "id": "AR-3590",
+      "ad": "Aviator Team Reviews (eski FlexReview)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.aviator.co/team-reviews",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PR'ları alan uzmanlığı ve anlık iş yüküne göre en uygun inceleyiciye atar; ilk inceleme süresi için ekip SLO'ları ve ekip genelinde inceleyici yükü görünümü sunar.",
+      "sinirlar": "GitHub'a bağlı; uzmanlık çıkarımı geçmiş veriye dayanır, yeni modüllerde zayıf.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K17-005",
+        "N-K17-010",
+        "N-K24-008",
+        "N-K29-006",
+        "N-K30-004",
+        "N-K32-005"
+      ]
+    },
+    {
+      "id": "AR-3591",
+      "ad": "Auto Assign Action",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/kentaro-m/auto-assign-action",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR açıldığında yapılandırılmış gruplardan rastgele/sayılı inceleyici ve atanan ekleyen GitHub Action; inceleme yükünü birkaç kıdemli kişide yığılmadan dağıtmaya yardım eder.",
+      "sinirlar": "Yük dengeleme gerçek iş yüküne değil rastgeleliğe dayanır; SLO/eskalasyon yok.",
+      "ihtiyaclar": [
+        "N-K17-005",
+        "N-K24-008"
+      ]
+    },
+    {
+      "id": "AR-3592",
+      "ad": "Mergeable",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/mergeability/mergeable",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR ve issue'lar için yapılandırılabilir kurallar (onay sayısı, başlık/etiket, bayat PR uyarısı, zorunlu inceleyici) uygulayan GitHub botu.",
+      "sinirlar": "Son etkinlik 2024 ortası; bakım yavaş, GitHub'a bağlı.",
+      "ihtiyaclar": [
+        "N-K17-001",
+        "N-K17-004",
+        "N-K24-008",
+        "N-K30-003",
+        "N-K31-003"
+      ]
+    },
+    {
+      "id": "AR-3593",
+      "ad": "Reviewable",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://reviewable.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub PR'ları için gelişmiş kod inceleme arayüzü: dosya bazında kim neyi inceledi takibi, revizyonlar arası fark, tartışma çözümleme durumu ve özelleştirilebilir tamamlanma koşulu.",
+      "sinirlar": "Yalnız GitHub; ayrı arayüz ekip alışkanlığı gerektirir.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K17-005",
+        "N-K17-006",
+        "N-K28-007",
+        "N-K31-002"
+      ]
+    },
+    {
+      "id": "AR-3594",
+      "ad": "Review Board",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.reviewboard.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak web tabanlı kod ve doküman inceleme aracı; çoklu VCS desteği, inceleme istekleri, yorum/çözüm takibi ve raporlar.",
+      "sinirlar": "Arayüz modern PR akışlarına göre eski; GitHub/GitLab içi incelemenin yerini almak ek süreç gerektirir.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K17-005",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-3595",
+      "ad": "SmartBear Collaborator",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://smartbear.com/product/collaborator/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod, doküman ve gereksinimler için eş inceleme aracı; özelleştirilebilir kontrol listeleri, inceleme metrikleri, denetim raporları ve elektronik imza ile kimlikli onay.",
+      "sinirlar": "Ağır ve ticari; regüle sektörler dışında süreç yükü fazla bulunabilir.",
+      "ihtiyaclar": [
+        "N-K17-002",
+        "N-K17-005",
+        "N-K17-006",
+        "N-K19-006"
+      ]
+    },
+    {
+      "id": "AR-3596",
+      "ad": "PullFlow",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.pullflow.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PR konuşmalarını GitHub, Slack ve VS Code arasında eşler; inceleme bildirimleri ve hatırlatmalarla bekleme süresini azaltmayı hedefler.",
+      "sinirlar": "Bildirim katmanıdır; atama/kapasite politikası sağlamaz.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004",
+        "N-K17-005"
+      ]
+    },
+    {
+      "id": "AR-3597",
+      "ad": "Axolo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://axolo.co/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Her PR için geçici Slack kanalı açar, inceleyicileri davet eder, hatırlatma ve inceleme süresi istatistikleri sunar.",
+      "sinirlar": "Slack'e bağımlı; çok sayıda kanal gürültü yaratabilir.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004",
+        "N-K17-005",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-3598",
+      "ad": "PullNotifier",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://pullnotifier.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub PR bildirimlerini Slack ve Microsoft Teams'e taşır; bekleyen inceleme hatırlatmaları ve durum güncellemeleri.",
+      "sinirlar": "Yalnız bildirim; inceleme politikası veya yük dengeleme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-3599",
+      "ad": "CopilotKit",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.copilotkit.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulama içine ajan arayüzü gömen ön yüz yığını; ajan adımlarında insan onayı/düzeltmesi (human-in-the-loop), paylaşılan durum ve üretken UI bileşenleri; AG-UI protokolüyle LangGraph, CrewAI vb. ajanlara bağlanır.",
+      "sinirlar": "Ön yüz katmanıdır; onayın kimlik ve içerik özetine bağlanması (imza, denetim kaydı) ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K10-008",
+        "N-K17-001",
+        "N-K17-006",
+        "N-K17-008",
+        "N-K28-001",
+        "N-K28-002"
+      ]
+    },
+    {
+      "id": "AR-3600",
+      "ad": "assistant-ui",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.assistant-ui.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanları için React/TypeScript sohbet ve araç çağrısı arayüz kütüphanesi; araç çağrısını onaylama/reddetme gibi insan müdahalesi bileşenleri kurulabilir.",
+      "sinirlar": "UI kütüphanesi; iş akışı durumu, kalıcılık ve yetkilendirme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-006",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-3601",
+      "ad": "Chainlit",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://chainlit.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python ile hızlı konuşma arayüzü oluşturma çerçevesi; ajanın insandan yanıt/dosya/eylem istemesi (Ask User), adım görselleştirme ve geri bildirim toplama.",
+      "sinirlar": "Kurumsal yetkilendirme ve çok kiracılık sınırlı; iç araç prototipi için daha uygun.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K05-025",
+        "N-K10-008",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-3602",
+      "ad": "Retool",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://retool.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanı/API'lere bağlanan iç araç oluşturucu; onay kuyrukları, inceleme ekranları ve iş akışları (Retool Workflows) hızla kurulabilir.",
+      "sinirlar": "Karmaşık uygulamalarda platform kilidi; self-host kurumsal planda.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K17-001",
+        "N-K17-004",
+        "N-K17-006",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-3603",
+      "ad": "Superblocks",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.superblocks.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ile üretilen iç uygulamaları merkezi yönetişim (RBAC, denetim, kurum içi ajan/veri erişimi) altında oluşturma ve çalıştırma platformu.",
+      "sinirlar": "Kapalı kaynak; hibrit ajan kurulumu gerektirebilir.",
+      "ihtiyaclar": [
+        "N-K02-002",
+        "N-K17-001",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-3604",
+      "ad": "Process Street",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.process.st/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kontrol listesi tabanlı süreç ve uyum operasyonları platformu; onay adımları, son tarihler, atanmış roller ve denetim izi ile tekrarlanan insan karar noktalarını standartlaştırır.",
+      "sinirlar": "Yazılım teslim araçlarıyla derin entegrasyon sınırlı; genel iş süreçlerine odaklı.",
+      "ihtiyaclar": [
+        "N-K17-001",
+        "N-K17-002",
+        "N-K17-004",
+        "N-K25-004"
+      ]
+    },
+    {
+      "id": "AR-3605",
+      "ad": "C1 (eski ConductorOne)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.c1.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik yönetişimi ve erişim talebi platformu; Slack/CLI üzerinden erişim talebi, onay zinciri, süreli (just-in-time) erişim ve erişim gözden geçirmeleri.",
+      "sinirlar": "Erişim onaylarına odaklı; kod/spesifikasyon içeriği onayını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3606",
+      "ad": "Opal Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.opal.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Erişim yönetişimi: talep–onay akışları, süreli erişim, en az yetki analizi ve denetim kaydı; insan ve makine kimlikleri için.",
+      "sinirlar": "Kimlik/erişim kapsamı dışında onay yüzeyi değildir.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-3607",
+      "ad": "Courier",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.courier.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok kanallı bildirim altyapısı (e-posta, Slack, Teams, push, uygulama içi gelen kutusu); kullanıcı tercihleri, yönlendirme ve eskalasyon zinciri.",
+      "sinirlar": "Bildirim katmanıdır; onay durumu ve kanıt saklama iş akışı motorunda tutulmalı.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3608",
+      "ad": "SuprSend",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.suprsend.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bildirim altyapısı: iş akışı tabanlı bildirim, toplama (digest), gecikme ve kanal yedeklemesi; uygulama içi gelen kutusu.",
+      "sinirlar": "Onay kararı tutmaz; bildirim sonrası geri dönüş ayrı sistemde.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3666",
+      "ad": "xMatters",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.xmatters.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomatik olay yönetimi ve hizmet güvenilirliği platformu: nöbet çizelgesi, eskalasyon politikaları, iş akışı otomasyonu ve olay sonrası raporlar.",
+      "sinirlar": "Everbridge ürün yol haritasına bağlı; kurulum karmaşık olabilir.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-3667",
+      "ad": "ilert",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.ilert.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uyarı, nöbet çizelgesi, olay müdahalesi, durum sayfaları ve yapay zekâ destekli postmortem taslağı üreten olay yönetimi platformu.",
+      "sinirlar": "Olay sonrası eylemlerin kural/yetenek paketine aktarımı ayrı süreç ister.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K08-007",
+        "N-K16-002",
+        "N-K17-004",
+        "N-K25-009",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-3668",
+      "ad": "Better Stack Incident Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://betterstack.com/incident-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet, telefon/SMS uyarıları, Slack içinde olay yönetimi, durum sayfaları ve olay sonrası raporlar; izleme ve log ürünleriyle birleşik.",
+      "sinirlar": "Postmortem analitiği derinliği özel olay platformlarına göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3669",
+      "ad": "SolarWinds Incident Response (eski Squadcast)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.solarwinds.com/incident-response",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet yönetimi, uyarı yönlendirme, SLO takibi, runbook'lar ve olay sonrası analiz; SolarWinds'in Squadcast satın alımından doğan ürün.",
+      "sinirlar": "Satın alma sonrası ürün ve fiyatlandırma değişiyor.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-3670",
+      "ad": "Atlassian Statuspage",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.atlassian.com/software/statuspage",
+      "olgunluk": "olgun",
+      "ne_saglar": "Genel veya iç (yetkili) durum sayfaları, abonelere olay ve bakım bildirimleri; hat kesintisi ve planlı değişiklik duyurusu için.",
+      "sinirlar": "Durum güncellemeleri çoğunlukla elle; olay aracı entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3682",
+      "ad": "Loqbooq",
+      "tur": "ticari-saas",
+      "lisans": "ticari (ücretsiz plan)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://loqbooq.app/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Proje kararları için karar günlüğü (ADR); Slack'ten karar önerisi açılır, gözden geçirenler onaylar/reddeder, tüm onaylar tamamlanınca karar değiştirilemez biçimde saklanır.",
+      "sinirlar": "Küçük sağlayıcı; Microsoft Teams desteği belirsiz.",
+      "ihtiyaclar": [
+        "N-K07-003",
+        "N-K17-002",
+        "N-K25-004",
+        "N-K25-008"
+      ]
+    },
+    {
+      "id": "AR-3692",
+      "ad": "Peerdom",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://peerdom.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rol ve sorumluluk haritalama aracı: roller, ekipler (circle), sorumluluk alanları ve rol sahiplerini görsel harita olarak tutar; kişi değil rol bazlı karar hakkı tanımına uygun.",
+      "sinirlar": "Küçük sağlayıcı; iş takip/kimlik sistemleriyle entegrasyon sınırlı.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-002",
+        "N-K25-004",
+        "N-K25-010"
+      ]
+    },
+    {
+      "id": "AR-3693",
+      "ad": "Functionly",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.functionly.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Etkileşimli organizasyon tasarımı: roller, sorumluluklar, yönetim hatları ve senaryo modelleme; RACI benzeri sorumluluk atamaları.",
+      "sinirlar": "İK/organizasyon odaklı; hat içindeki karar noktalarıyla otomatik bağlantı yok.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-002",
+        "N-K25-004",
+        "N-K25-010"
+      ]
+    },
+    {
+      "id": "AR-3694",
+      "ad": "ChartHop",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.charthop.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Organizasyon zekâsı: dinamik organizasyon şeması, kadro planlama, rol verisi ve insan analitiği.",
+      "sinirlar": "İK verisiyle çalışır; yetkinlik verisinin kullanımı kişisel veri işleme sayılır.",
+      "ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-003",
+        "N-K25-010"
+      ]
+    },
+    {
+      "id": "AR-3701",
+      "ad": "JXL for Jira",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://jxl.app/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira iş kalemlerini elektronik tablo görünümünde düzenleme: toplu düzenleme, özel hiyerarşiler ve otomatik toplamlar; toplu dönüşüm sonuçlarının insan tarafından hızlı gözden geçirilmesine uygun.",
+      "sinirlar": "Görünüm/düzenleme aracıdır; dönüşüm mantığı ve kalite kapısı sağlamaz.",
+      "ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-002",
+        "N-K26-005",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-3703",
+      "ad": "Comala Document Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/142/comala-document-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "Confluence sayfaları için rol bazlı inceleme ve onay iş akışları, elektronik imza, sürüm ve etkinlik günlüğü; kural/yöntem dokümanlarının onaylı sürüm olarak yayımlanmasını sağlar.",
+      "sinirlar": "Confluence'a bağımlı; onay içerik değişince yeniden başlatılmalı (iş akışı yapılandırmasına bağlı).",
+      "ihtiyaclar": [
+        "N-K07-003",
+        "N-K11-001",
+        "N-K17-002",
+        "N-K25-004",
+        "N-K30-009",
+        "N-K32-003"
+      ]
+    },
+    {
+      "id": "AR-3705",
+      "ad": "Behave Pro",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.hindsightsoftware.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira içinde BDD: örnek haritalama (example mapping), Gherkin senaryolarını hikâyeyle birlikte yazma ve senaryoları Cucumber/SpecFlow otomasyonuna aktarma; iş birimi ile ortak kabul kriteri yazımı.",
+      "sinirlar": "Senaryo onayını kimlikli kilitleme özelliği sınırlı; sürümleme depoda yapılmalı.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K01-011",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-3708",
+      "ad": "Marker.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://marker.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web sitesi üzerinden ekran görüntüsü, açıklama ve teknik meta verilerle hata/geri bildirim bildirme; UAT bulgularını doğrudan Jira/Linear vb. iş kalemine dönüştürür.",
+      "sinirlar": "Web uygulamalarıyla sınırlı; kabul/red kararını yapılandırmaz.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-3709",
+      "ad": "BugHerd",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://bugherd.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web sayfası üzerine iğne bırakarak görsel geri bildirim ve hata bildirimi; paydaş kabul turlarında bulguları panoda toplar.",
+      "sinirlar": "Web ile sınırlı; iş takip entegrasyonu plana bağlı.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-3710",
+      "ad": "Usersnap",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://usersnap.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulama içi geri bildirim, ekran görüntülü hata bildirimi, mikro anketler ve ürün kanıtı yönetimi.",
+      "sinirlar": "Veri Usersnap bulutunda; iç araçlara gömmek kimlik eşlemesi gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K08-001",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3906",
+      "ad": "Rundeck (Runbook Automation)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (OSS); Runbook Automation ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.rundeck.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yetkili kişilere operasyon işlerini (ör. ajan hattını duraklatma, kuyruğu boşaltma, yedekten dönüş) erişim kontrolü ve iş geçmişiyle self-servis çalıştırtan runbook otomasyonu.",
+      "sinirlar": "Durdurma mantığı kurum tarafından iş olarak yazılmalı; gelişmiş özellikler ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-003",
+        "N-K16-004"
+      ]
+    },
+    {
+      "id": "AR-3961",
+      "ad": "JamJet",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://jamjet.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın altında çalışan eylem kontrol düzlemi: tek politika dosyasıyla güvensiz araç çağrılarını engelleme, riskli eylemde dayanıklı insan onayı, ajan/koşu/proje başına maliyet tavanı, denetim izi ve çöken koşuyu kontrol noktasından sürdürme; Claude Code, OpenAI Agents SDK, MCP istemcileri, LangChain, Spring AI ile çalışır.",
+      "sinirlar": "0.1.x sürüm, küçük topluluk; kurumsal olgunluk kanıtı yok.",
+      "ihtiyaclar": [
+        "N-K11-002",
+        "N-K20-001",
+        "N-K21-004",
+        "N-K25-004"
+      ]
+    },
+    {
+      "id": "AR-4013",
+      "ad": "Task List Completed",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/stilliard/github-task-list-completed",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PR açıklamasındaki ve yorumlarındaki onay kutusu görevleri tamamlanmadıkça bekleyen bir durum kontrolü üretir; zorunlu kontrol yapıldığında DoD kontrol listesinin tamamı işaretlenmeden birleştirme engellenir.",
+      "sinirlar": "Onay kutusunun kanıta dayalı işaretlendiğini doğrulamaz; yalnız GitHub.",
+      "ihtiyaclar": [
+        "N-K05-027"
+      ]
+    },
+    {
+      "id": "AR-4014",
+      "ad": "ISO 2859-1:2026 (Nitelik muayenesi için örnekleme prosedürleri)",
+      "tur": "protokol-standart",
+      "lisans": "ticari (ücretli standart)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.iso.org/standard/85464.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "AQL indeksli kabul örnekleme şemaları: parti büyüklüğüne göre örneklem boyutu, kabul/ret sayıları, normal/sıkılaştırılmış/azaltılmış muayene geçiş kuralları ve yeni sürümde atlamalı parti örneklemesi. Toplu dönüştürülen backlog kayıtlarında insan incelemesinin örneklem planını ve kapasitesini tanımlamak için doğrudan kullanılabilir.",
+      "sinirlar": "Ücretli standart; 'uygunsuzluk' tanımı ve risk sınıfına göre AQL seçimi kurumca yapılmalı.",
+      "ihtiyaclar": [
+        "N-K02-002"
+      ]
+    },
+    {
+      "id": "AR-4022",
+      "ad": "Orgvue",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.orgvue.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Organizasyon tasarımı ve iş gücü planlama platformu; rol, iş ailesi, sorumluluk (accountability), faaliyet ve beceri modellemesi ile kişi–rol atamalarını senaryolarla planlar. Hattaki insan rol sınıflarını SAFe rolleriyle eşleme ve karar haklarını kayıt altına alma için uyarlanabilir.",
+      "sinirlar": "SAFe'e özgü hazır şablon yok; ticari ve İK verisi içerir.",
+      "ihtiyaclar": [
+        "N-K25-002",
+        "N-K25-004",
+        "N-K25-010"
+      ]
+    },
+    {
+      "id": "AR-4028",
+      "ad": "gitStream",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (kural motoru/eylemler) + ticari servis",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://gitstream.cm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Depodaki YAML (.cm) kurallarıyla PR'leri tahmini inceleme süresi, boyut, değişen dosya yolları, test dosyası değişikliği gibi koşullara göre etiketler, inceleyici atar, ek onay ister veya otomatik birleştirir; ör. test/beklenti dosyası değişen PR'ye 'yüksek risk' etiketi ve ek onay şartı.",
+      "sinirlar": "GitHub/GitLab/Bitbucket için LinearB'nin barındırdığı uygulamaya bağlı; bazı özellikler ücretli.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K05-005",
+        "N-K08-003",
+        "N-K10-005",
+        "N-K28-007",
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-4041",
+      "ad": "Magentic-UI (MagenticLite)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/magentic-ui",
+      "olgunluk": "erken",
+      "ne_saglar": "İnsan merkezli ajan araştırma prototipi: yürütmeden önce planın kullanıcıyla birlikte düzenlenmesi (co-planning), çalışma sırasında duraklatıp doğal dille geri bildirim verme ya da kontrolü devralma (co-tasking), geri alınamaz eylemlerden önce onay isteyen eylem korumaları (action guards) ve başarılı planların öğrenilip yeniden kullanılması.",
+      "sinirlar": "Araştırma prototipi; 2026'da küçük modellere yönelik MagenticLite olarak yeniden tasarlandı ve 0.1 sürümü ayrı dalda kaldı; web/dosya görevleri içindir, kodlama hattına doğrudan bağlanmaz, desen referansı olarak değerlidir.",
+      "ihtiyaclar": [
+        "N-K27-001",
+        "N-K28-001",
+        "N-K28-002",
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-4042",
+      "ad": "Cloudflare Agents SDK",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://developers.cloudflare.com/agents/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Workers üzerinde durum tutan ajanlar için waitForApproval ile aylarca sürebilen dayanıklı onay kapısı, approve/reject API'leri, bekleyen onayların ajan durumunda kalıcı tutulması, schedule() ile hatırlatma ve belirli süre sonra yöneticiye eskalasyon, MCP elicitation ile yapılandırılmış insan girdisi ve kod modunda requiresApproval.",
+      "sinirlar": "Cloudflare platformuna bağlıdır (bulut kilidi); onay arayüzü ve etkileşim sözleşmesi şeması uygulamaca kurulur.",
+      "ihtiyaclar": [
+        "N-K27-003",
+        "N-K27-007",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-4043",
+      "ad": "OpenAI Symphony",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/openai/symphony",
+      "olgunluk": "erken",
+      "ne_saglar": "İş takipçisindeki (ör. Linear) görevleri izleyip her biri için izole, otonom uygulama koşusu başlatan orkestrasyon belirtimi ve Elixir referans uygulaması; ajan işi CI durumu, PR inceleme geri bildirimi, karmaşıklık analizi ve anlatım videosu gibi 'iş kanıtı' paketiyle insana teslim eder, insan onayından sonra PR'ı birleştirir. 'Ajan önde–insan gözden geçirir' modunun somut örneği.",
+      "sinirlar": "Kendi ifadesiyle güvenilir ortamlarda denenecek düşük profilli mühendislik önizlemesi; Codex odaklı; devir paketi şeması alıcı teyidi içermez.",
+      "ihtiyaclar": [
+        "N-K27-001",
+        "N-K27-004",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-4044",
+      "ad": "12-Factor Agents",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0 (kod) / CC BY-SA 4.0 (içerik)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/humanlayer/12-factor-agents",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretim kalitesinde LLM ajanları için 12 ilkelik yöntem rehberi: insanla temasın yapılandırılmış araç çağrısı olarak modellenmesi, basit başlat/duraklat/devam API'leri, yürütme durumunun iş durumuyla birleştirilmesi, hataların bağlama sıkıştırılması, küçük odaklı ajanlar.",
+      "sinirlar": "Yöntem rehberidir, yazılım değil; uygulama ve şema tasarımı ekibe kalır.",
+      "ihtiyaclar": [
+        "N-K27-003",
+        "N-K28-002",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-4062",
+      "ad": "A2UI",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://a2ui.org/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanların arayüzü çalıştırılabilir kod yerine önceden onaylı bileşen kataloğundan bildirimsel JSON olarak göndermesini ve istemcinin (web, mobil, masaüstü) kendi bileşenleriyle çizmesini sağlayan protokol; seçenekli karar formları ve onay kartları için.",
+      "sinirlar": "v0.9.x, v1.0 aday sürümde; zorunlu alan politikası (son tarih, yanıtsızlık davranışı) uygulamaya kalır.",
+      "ihtiyaclar": [
+        "N-K28-001",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-4085",
+      "ad": "Cleanlab Detect (eski TLM)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://cleanlab.ai/detect/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM yanıtlarına gerçek zamanlı güvenilirlik skoru atar; halüsinasyon, yanlış bağlam ve bilgi boşluğunu işaretler, düşük güvenli yanıtları insana yönlendirme (eskalasyon) sağlar.",
+      "sinirlar": "Ticari; Handshake AI satın alması sonrası yol haritası belirsiz; dağıtım seçenekleri açık değil.",
+      "ihtiyaclar": [
+        "N-K28-006",
+        "N-K28-011"
+      ]
+    },
+    {
+      "id": "AR-4097",
+      "ad": "Velt",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://velt.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulamalara eklenen iş birliği SDK'sı: insanlar ve ajanlar için canlı varlık, imleç ve takip modu; bağlamsal yorumlar, aşamalı onay akışları, satır içi düzenleme önerileri, değişmez denetim izi ve uygulama içi/e-posta/Slack/Teams bildirimleri.",
+      "sinirlar": "Web uygulaması içi belgeler için; kod deposu akışına doğrudan uygulanmaz.",
+      "ihtiyaclar": [
+        "N-K27-008",
+        "N-K28-009",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-4098",
+      "ad": "Adaptive Cards",
+      "tur": "protokol-standart",
+      "lisans": "MIT (SDK'lar)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://adaptivecards.microsoft.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Platformdan bağımsız JSON kart şeması: seçenekler, girdi alanları ve eylem düğmeleri içeren, Teams/Outlook ve özel uygulamalarda aynı biçimde çizilen kendi kendine yeten istek kartları; Universal Actions ile yanıt ve kart güncelleme.",
+      "sinirlar": "Sunumu tanımlar; zorunlu alan (son tarih, yanıtsızlık davranışı) politikası uygulamaya kalır.",
+      "ihtiyaclar": [
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-4103",
+      "ad": "GitHub CODEOWNERS",
+      "tur": "ticari-saas",
+      "lisans": "ticari (özellik)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yol desenlerine göre sahip kişi/ekipleri tanımlar; PR'larda otomatik inceleme isteği ve dal koruma kuralıyla sahip onayını zorunlu kılar; alan bazlı onay yetkisinin teknik taşıyıcısı.",
+      "sinirlar": "Rol/ekip bazlıdır, gösterilmiş yetkinliği ölçmez; dosya yetkinlik kaydından üretilmeli ve dönemsel güncellenmeli.",
+      "ihtiyaclar": [
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-4229",
+      "ad": "require-checklist-action",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mheap/require-checklist-action",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR veya issue gövdesi ve yorumlarında işaretlenmemiş kontrol listesi maddesi varsa kontrolü başarısız yapan GitHub Action; isteğe bağlı maddeler regex ile, üstü çizili maddeler 'uygulanamaz' sayılır — DoD, katkı işareti, 'anlama notu' ve onaylayanın yerine getirdiği doğrulama görevleri maddelerini zorunlu kılmak için.",
+      "sinirlar": "İşaretlemenin doğruluğunu denetlemez; yalnız GitHub.",
+      "ihtiyaclar": [
+        "N-K30-002",
+        "N-K30-003",
+        "N-K31-002"
+      ]
+    },
+    {
+      "id": "AR-4230",
+      "ad": "Standuply",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://standuply.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Slack ve Microsoft Teams için eşzamansız stand-up botu: zamanlanmış soru setleri ve kanal raporları; günlük koordinasyon öncesi eşzamansız durum özeti ve dağıtık ekiplerde toplantısız durum paylaşımı için.",
+      "sinirlar": "Ajan koşu durumunu otomatik toplamaz; entegrasyon gerekir.",
+      "ihtiyaclar": [
+        "N-K30-006",
+        "N-K31-011"
+      ]
+    },
+    {
+      "id": "AR-4231",
+      "ad": "Steady (eski Status Hero)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://runsteady.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İnsanlar ve yapay zekâ ajanları için koordinasyon platformu: akıllı eşzamansız kontroller (check-in), hedef hikâyeleri, Slack/GitHub/Jira/Zoom/Takvim etkinliğinden kişiye özel günlük özet ve ajan ekip üyeleri; Claude ve ChatGPT entegrasyonu.",
+      "sinirlar": "Ajanları 'ekip üyesi' olarak konumlandırır; 'ajan hesap verebilir insanın aracıdır' ilkesiyle yapılandırılmalı; kişi bazlı etkinlik akışı gizlilik değerlendirmesi gerektirir.",
+      "ihtiyaclar": [
+        "N-K30-006",
+        "N-K30-010",
+        "N-K31-011"
+      ]
+    },
+    {
+      "id": "AR-4247",
+      "ad": "Splunk On-Call (eski VictorOps)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.splunk.com/en_us/products/on-call.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet rotaları, uyarı yönlendirme ve eskalasyon, olay zaman çizelgesi ve olay sonrası rapor üretimi sağlar.",
+      "sinirlar": "Olay sonrası öğrenme ve eylem maddesi takibi sınırlı; ayrı öğrenme deposu ve iş takip entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K08-007",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-4296",
+      "ad": "Prime Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.primesec.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Tasarım artefaktlarını ve geliştirme işlerini alıp yapay zekâ ile güvenlik incelemesi yapan platform: tehdit modeli, risk puanı ve uygulanabilir önlem önerileri üretir; insan ve yapay zekâ üretimi kod süreçlerine bağlanır.",
+      "sinirlar": "Genç ticari ürün; sınıflama kararlarının deterministik sinyallerle desteklenmesi ve kalibrasyonu kurumca yapılmalı.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    }
+  ]
+}

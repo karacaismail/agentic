@@ -1,0 +1,188 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K12",
+    "ad": "Araç ve bağlam erişim protokolü, entegrasyonlar",
+    "alan": "B-ajan-platformu",
+    "amac": "Ajanların iş takip, sürüm kontrolü, test, doküman ve diğer sistemlere tek tip, sürümü sabit ve yetkisi sınırlı bir arayüzle erişmesi.",
+    "kapsam": [
+      "standart araç/bağlam protokolü",
+      "sistem bağlayıcıları",
+      "araç kaydı ve sürüm sabitleme",
+      "araç başına yetki",
+      "iş takip sistemiyle iki yönlü eşleme",
+      "insan iletişim kanalları"
+    ],
+    "kapsam_disi": [
+      "araç seçimi (bilinçli olarak kapsam dışı)"
+    ],
+    "komsu_kumeler": [
+      "K10",
+      "K14",
+      "K18",
+      "K26"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K12-001",
+      "baslik": "Tüm çalışma zamanlarına ortak araç ve bağlam protokolü",
+      "ihtiyac": "Ajanların araçlara ve bağlam kaynaklarına çalışma zamanından bağımsız, standart bir protokol üzerinden erişmesi; araç tanımlarının ve sunucu sürümlerinin sabitlenmesi.",
+      "cozulecek_sorun": "Her ajan için ayrı entegrasyon yazılıyor; çalışma zamanı değişince araç arayüzü değişiyor.",
+      "yetenek_siniflari": [
+        "Y-10"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Aynı araç, iki farklı çalışma zamanından aynı protokolle kullanılabiliyor.",
+        "Araç sunucusu sürümleri kilitli."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-052"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası"
+    },
+    {
+      "id": "N-K12-002",
+      "baslik": "Onaylı araç kataloğu ve araç başına yetki",
+      "ihtiyac": "Kullanılabilecek araçların onaylı bir katalogda tutulması; her aracın hangi role hangi kapsamda (okuma/yazma) açık olduğunun tanımlanması; araç açıklamalarının zehirlenmeye karşı denetlenmesi.",
+      "cozulecek_sorun": "Araç açıklamasına gömülü talimatla ajan ele geçirilebiliyor; hat modunda yazma izni gereksiz geniş.",
+      "yetenek_siniflari": [
+        "Y-10",
+        "Y-26",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Katalog dışı araç çağrılamıyor.",
+        "Araç açıklaması değişiklikleri incelemeden geçiyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-147",
+          "S-062",
+          "S-151"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-008",
+        "R-031"
+      ]
+    },
+    {
+      "id": "N-K12-003",
+      "baslik": "Sistem bağlayıcıları",
+      "ihtiyac": "İş takip, sürüm kontrolü, sürekli entegrasyon, test çalıştırıcı, doküman ve iletişim sistemlerine okuma/yazma bağlantılarının tanımlanması.",
+      "cozulecek_sorun": "Ajan işi okuyamıyor, sonucunu yazamıyor, insana soru soramıyor.",
+      "yetenek_siniflari": [
+        "Y-11"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her bağlayıcının okuma/yazma kapsamı ve sahibi tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-018",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "A-014"
+      ]
+    },
+    {
+      "id": "N-K12-004",
+      "baslik": "İş takip sistemiyle eşlemenin yönü ve yazma hakkı",
+      "ihtiyac": "Durumun tek sahibinin orkestrasyon olması; iş takip sisteminin durumu yansıtması; ajanın iş takip durumunu doğrudan değiştirmemesi; eşlemenin yönünün tanımlanması.",
+      "cozulecek_sorun": "İki sistem aynı durumu yazınca bölünmüş beyin oluşuyor; senkron yönü tanımsız.",
+      "yetenek_siniflari": [
+        "Y-11",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Durum eşlemesi tek yönlü ve yazılı.",
+        "Ajan kimliği iş takip durumunu doğrudan değiştiremiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-061"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-002",
+        "D-019",
+        "Q-009",
+        "Q-041",
+        "R-021"
+      ],
+      "bagimliliklar": [
+        "N-K13-001"
+      ]
+    },
+    {
+      "id": "N-K12-005",
+      "baslik": "İnsan–ajan iletişim kanalı kritik yol dışında",
+      "ihtiyac": "Ürün sahibine soru, onay isteği ve bildirimlerin kritik yol dışında bir kanaldan gitmesi; bildirim kanalının onay kaydı sayılmaması.",
+      "cozulecek_sorun": "Açık bağlantı veya kuyruk işçisi günlerce insan cevabı bekliyor; bildirimdeki 'tamam' onay kaydı sanılıyor.",
+      "yetenek_siniflari": [
+        "Y-31",
+        "Y-11"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Bekleme sırasında hiçbir işçi meşgul değil.",
+        "Onay yalnız kimlikli onay kaydıyla geçerli."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K12-006",
+      "baslik": "Bağımsız ajan servisleri arası protokol",
+      "ihtiyac": "Farklı ekiplerin veya ürünlerin ajan servislerinin birbirine görev ve sonuç aktarması gerekirse ortak bir ajanlar arası protokolün tanımlanması.",
+      "cozulecek_sorun": "İlk aşamada gerekmeyebilir; ekipler arası ajan etkileşimi başlarsa her ikili için ayrı entegrasyon oluşur.",
+      "yetenek_siniflari": [
+        "Y-07",
+        "Y-10"
+      ],
+      "zorunluluk": "opsiyonel",
+      "kabul_olcutleri": [
+        "İhtiyaç doğduğunda protokol kararı karar kaydıyla alınıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-061"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "yuksek"
+    }
+  ]
+}

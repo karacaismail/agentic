@@ -1,0 +1,43 @@
+const {chromium}=require('/Users/w6x/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+(async()=>{
+ const data=JSON.parse(fs.readFileSync('src/analiz/bulgular.json','utf8'));
+ const raw=JSON.parse(fs.readFileSync('src/veri/kanitlar.json','utf8'));
+ const results=[],errors=[],requests=[];const done=name=>results.push({name,status:'passed'});
+ assert.equal(data.briefs.length,24);assert.equal(new Set(data.briefs.map(b=>b.id)).size,24);
+ assert.ok(data.briefs.every(b=>b.default_decision===null&&b.qualification==='not_run'&&b.options.length>=2&&b.boundary&&b.missing_measurement));done('24 briefs have no preselected architectural decision and explicit limits');
+ assert.deepEqual(data.record_index.map(i=>i.id).sort(),raw.kayitlar.map(i=>i.id).sort());
+ for(const b of data.briefs)for(const s of b.sources){const r=raw.kayitlar.find(r=>r.id===s.record_id);assert.ok(r);assert.equal(s.sha256,r.sha256);assert.equal(s.path,r.kaynak);assert.equal(s.pointer,r.pointer);}done('All 82 records classified; every brief reference resolves to original hash and pointer');
+ assert.ok(data.original_rechecks.every(r=>r.prior_hash_matches));assert.equal(data.primary_rechecks.length,3);done('Rechecked local source identity and primary-source scope recorded');
+ assert.equal(data.record_index.find(i=>i.id==='WF-06').kind,'Geri çekilmiş ürün iddiası');assert.ok(data.record_index.filter(i=>i.id.startsWith('DP-')).every(i=>i.kind==='Statik kod incelemesi'));done('Retraction and static paths are not counted as live incidents');
+ const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1100}});
+ const base='file://'+path.resolve('senaryo-atlasi.html');page.on('pageerror',e=>errors.push(String(e)));page.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url())});
+ const route=async r=>{await page.goto(base+'#/'+r);await page.locator('main').waitFor();};
+ await route('baslangic');await page.getByRole('heading',{name:'Önce bulgu. Sonra senin kararın.'}).waitFor();await page.screenshot({path:'audit/ux-home-desktop.png',fullPage:true});assert.equal(await page.locator('[role=progressbar]').count(),0);done('Evidence-led home and navigation have no progress score');
+ await route('bulgular?id=B03');await page.getByRole('heading',{name:'4.762 kuyruk olayı yalnız bir model çağrısı üretti.'}).waitFor();
+ assert.ok(await page.getByRole('radio',{name:'Henüz seçim yapmadım'}).isChecked());
+ const before=await page.evaluate(()=>localStorage.getItem('senaryo-atlasi:durum:v1'));
+ await page.getByRole('radio',{name:'Özet + değişmez kanıt referansı'}).check();await page.getByLabel('Benim notum / başka bir yaklaşım').fill('Önce kuyruk ilerlemesi ölçülecek. <img src=x onerror=alert(1)>');await page.reload();assert.ok(await page.getByRole('radio',{name:'Özet + değişmez kanıt referansı'}).isChecked());
+ assert.equal(await page.evaluate(()=>localStorage.getItem('senaryo-atlasi:durum:v1')),before);done('User notes persist without mutating scenario defaults');
+ let dl=page.waitForEvent('download');await page.getByRole('button',{name:'Bulgular ve notlar',exact:true}).click();let f=await dl;let exported=JSON.parse(fs.readFileSync(await f.path(),'utf8'));assert.match(exported.user_notes.B03.not,/Önce kuyruk/);done('Decision notebook JSON includes explicit user selection and source-backed brief');
+ await page.getByLabel('Benim notum / başka bir yaklaşım').fill('Geçici not');await page.locator('input[type=file]').setInputFiles({name:'notlar.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});await page.waitForFunction(()=>document.querySelector('textarea')?.value.startsWith('Önce kuyruk'));done('Decision notebook imports without changing scenario');
+ await page.locator('input[type=file]').setInputFiles({name:'bad-notes.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({user_notes:{UNKNOWN:{not:'x',secenek:''}}}))});await page.getByText('Bulgu kimliği, seçenek veya not boyutu geçersiz.').waitFor();done('Unknown evidence note identity rejected');
+ await page.getByRole('button',{name:'K13 · özgün kayıt'}).click();await page.getByRole('heading',{level:2}).waitFor();assert.match(page.url(),/kanit\?id=K13/);assert.match(await page.locator('article').innerText(),/4[.,]762|4762/);done('Brief deep-link resolves to corresponding original evidence');
+ await page.getByRole('button',{name:/Kaynak izi ve belge alıntıları/}).click();await page.locator('.source-excerpt').first().waitFor();assert.match(await page.locator('article').innerText(),/E20/);await page.screenshot({path:'audit/ux-evidence-desktop.png',fullPage:false});done('Evidence reader exposes exact excerpt IDs and source identity');
+ await route('kanit?id=DP-01');await page.locator('article').getByText('Statik kod incelemesi',{exact:true}).waitFor();assert.match(await page.locator('article').innerText(),/canlı olay değil/);done('Static failure traces explicitly labeled');
+ await route('kanit?id=WF-06');await page.locator('article').getByText('Geri çekilmiş ürün iddiası',{exact:true}).waitFor();done('Retracted claim visible on original record');
+ const doc=raw.dosyalar.find(f=>f.yol.endsWith('KANIT-VE-KARAR-INCELEMESI.md'));
+ await route('kaynaklar?dosya='+encodeURIComponent(doc.yol));await page.locator('.document-prose h1').waitFor();assert.equal(await page.locator('.document-prose h3').count(),24);assert.equal(await page.locator('.document-prose script, .document-prose iframe, .document-prose img').count(),0);await page.screenshot({path:'audit/ux-document-desktop.png',fullPage:false});done('Deep review readable as Markdown; no remote media or executable embedded content');
+ await page.getByLabel('Belgelerde ara').fill('pinned_fetch');assert.ok(await page.locator('.finding-index-item').count()>0);done('Document search includes body content');
+ await route('bulgular?id=B01');await page.getByLabel('Bulgu ara').fill('qwerty-nothing');await page.getByRole('heading',{name:'Eşleşen bulgu yok'}).waitFor();await page.getByRole('button',{name:'Filtreleri temizle'}).click();assert.equal(await page.locator('.finding-index-item').count(),24);done('Empty search state recoverable');
+ await page.getByRole('button',{name:'Tema',exact:true}).click();await page.screenshot({path:'audit/ux-findings-dark.png',fullPage:false});assert.equal(await page.locator('html').getAttribute('data-mantine-color-scheme'),'dark');done('Dark theme renders evidence surfaces');
+ await page.getByRole('button',{name:'Tema',exact:true}).click();await page.screenshot({path:'audit/ux-findings-desktop.png',fullPage:false});
+ await route('rapor');await page.locator('[data-report-ready=true]').waitFor({timeout:30000});await page.getByRole('heading',{name:'Kullanıcının bulgu notları'}).waitFor();assert.match(await page.locator('.rapor').innerText(),/Önce kuyruk ilerlemesi ölçülecek/);assert.equal(await page.locator('.rapor img').count(),0);
+ dl=page.waitForEvent('download');await page.getByRole('button',{name:'Karar paketini indir',exact:true}).click();f=await dl;exported=JSON.parse(fs.readFileSync(await f.path(),'utf8'));assert.equal(exported.kararDestegi.length,24);assert.match(exported.bulguNotlari.B03.not,/Önce kuyruk/);done('Report and decision package preserve user notes as text, separately from presets');
+ for(const r of ['baslangic','bulgular?id=B01','kanit?id=K03','kaynaklar?dosya='+encodeURIComponent(doc.yol)]){
+  await page.setViewportSize({width:390,height:844});await route(r);await page.waitForTimeout(120);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,r);done('Mobile width: '+r.split('?')[0]);
+ }
+ await route('bulgular?id=B01');await page.screenshot({path:'audit/ux-findings-mobile.png',fullPage:true});
+ assert.deepEqual(errors,[]);assert.deepEqual(requests,[]);done('No runtime JS errors or external requests in offline use');
+ fs.writeFileSync('audit/evidence-ux-results.json',JSON.stringify({at:new Date().toISOString(),results,errors,external_requests:requests},null,2));console.log(results.length+' evidence/UX checks passed');await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

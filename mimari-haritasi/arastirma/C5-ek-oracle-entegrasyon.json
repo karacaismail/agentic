@@ -1,0 +1,437 @@
+{
+ "meta": {
+  "tarih": "2026-09-27",
+  "durum": "tamamlandı",
+  "kapsam": "Türk HRMS/bordro modülü için oracle kaynakları ve devlet entegrasyon test ortamları",
+  "yontem": "WebSearch/WebFetch + resmi PDF/DOC belgelerinden yerel metin çıkarımı (macOS PDFKit/textutil). Arama oturum bütçesi araştırma sırasında tükendi; bu nedenle bazı açık veri kalemleri doğrulanamadı olarak işaretlendi."
+ },
+ "entegrasyonlar": [
+  {
+   "sistem": "SGK 4/a Sigortalı İşe Giriş ve İşten Ayrılış Bildirgesi (SgkTescil4a web servisleri)",
+   "kanal": "SOAP web servisi (IBM WebSphere, Java). Metotlar: iseGirisKaydet, istenCikisKaydet, tckimlikNoileiseGirisSorgula, tckimlikNoTarihileiseGirisSorgula, tckimlikNoTarihileistenCikisSorgula, PDF döküm metotları. Canlı WSDL: https://uyg.sgk.gov.tr/WS_SgkTescil4a/WS_SgkIseGirisService?wsdl ve .../WS_SgkIstenCikisService?wsdl. Ayrıca portal (uyg.sgk.gov.tr/SigortaliTescil) ve toplu Excel->XML yükleme (IsegirisExceldenXML.xls, IstenCikisExceldenXML.xls, xmlYardim.docx).",
+   "test_ortami_var_mi": "EVET. e.sgk.gov.tr uygulama sayfası: test yapılacak işyeri sicilinin entegretescil@sgk.gov.tr adresine e-posta ile bildirilmesiyle işyeri bilgileri test ortamına indirilir. Test WSDL: https://sgkt.sgk.gov.tr/WS_SgkTescil4a/WS_SgkIseGirisService?wsdl ve https://sgkt.sgk.gov.tr/WS_SgkTescil4a/WS_SgkIstenCikisService?wsdl (test URL'leri arama motoru özetinde görüldü; sgkt alan adına doğrudan erişim bu çalışmada doğrulanamadı).",
+   "erisim_kosulu": "Web servis için ayrı kullanıcı tanımı yok; uyg.sgk.gov.tr/SigortaliTescil uygulamasında kullanılan işyeri kullanıcı adı/şifresi kullanılır. Her çağrıda zorunlu KullaniciBilgileri: kullaniciAdi (11 hane, gönderenin TCKN'sine dayalı), isyeriKodu (4 hane), sistemSifre, isyeriSifre, isyeriSicil (26 karakter). Kullanıcı adı ile işyeri sicili tutarlı olmalı. Yani yalnızca SGK'da tescilli gerçek bir işyerinin yetkili kullanıcısı (işveren/aracı/mali müşavir) erişebilir; bağımsız bir yazılım firması için sahte/sentetik test hesabı yok.",
+   "kaynak": [
+    "https://e.sgk.gov.tr/Uygulamalar/Detay/4a-Sigortali-Ise-Giris-ve-Isten-Ayrilis-Bildirgesi-2024-10-02-10-08-51",
+    "https://e.sgk.gov.tr/Download/DownloadFile?f=ccda7d7e-d99b-40f5-9622-63246763b4b0.doc&d=bf271de4-fea9-4557-a460-957858589cf9"
+   ]
+  },
+  {
+   "sistem": "SGK e-Bildirge V2 (Aylık Prim ve Hizmet Belgesi / APHB, eksik gün bildirimi dahil)",
+   "kanal": "Web portal (https://ebildirge.sgk.gov.tr/EBildirgeV2) + XML dosya yükleme. Yayımlanan XSD: 'EBildirgeV2 XML SEMA TANIMI V1.1.xsd' ve 'EBildirgeV2 Excel ile xml oluştur v1.1' aracı. Herkese açık SOAP/REST bildirge gönderim web servisi dokümante edilmemiş (sayfada yalnızca Hazine ve Maliye Bakanlığı ile SGK arasında sorgu tabanlı ödeme için web servis entegrasyonu geçiyor). 2026 itibarıyla 4/a için bildirge verisi büyük ölçüde GİB MUHSGK üzerinden gelir (bkz. MPHB satırı).",
+   "test_ortami_var_mi": "HAYIR / doğrulanamadı — uygulama sayfasında test ortamı veya test e-posta adresi yok.",
+   "erisim_kosulu": "İşyeri e-Bildirge kullanıcı adı, sistem şifresi ve işyeri şifresi (SGK ünitesinden alınır). Teknik iletişim: btgm_siydb@sgk.gov.tr (sayfada verilen).",
+   "kaynak": [
+    "https://e.sgk.gov.tr/Uygulamalar/Detay/E-BildirgeV2-2026-04-21-09-12-18",
+    "https://ebildirge.sgk.gov.tr/WPEB/HTML/e-bildirge-klavuzV1.2.pdf"
+   ]
+  },
+  {
+   "sistem": "SGK Vizite (iş göremezlik raporu okundu/çalışmazlık bildirimi) web servisi — WS_Vizite",
+   "kanal": "SOAP web servisi, canlı adres https://uyg.sgk.gov.tr/Ws_Vizite/services/ViziteGonder. Duyuru PDF'indeki metotlar: wsLogin (30 dk usrToken üretir), RaporAramaTarihile, RaporAramaKimlikNo, RaporOnay (çalışmazlık beyanı), PersonelimDegildir, IsverenIletisimBilgileri(+Goruntu), OnaylıRaporlarTarihile, RaporOkunduKapat (okunan rapor kapatılmazsa sonraki raporlara erişim engellenir; her sorgu 100 rapor döner), OnayIptal, ManuelCalismazlikBildirimiGiris/Goruntu/Sil. Portal: https://uyg.sgk.gov.tr/vizite/welcome.do. İkincil kaynağa göre 14.09.2022 güncellemesiyle iş kazası raporu sorgu/onay metotları eklendi.",
+   "test_ortami_var_mi": "HAYIR / doğrulanamadı — duyuru PDF'inde yalnızca canlı adres var; 'localhost:9080' izleri belge içi artefakt, test ortamı değil.",
+   "erisim_kosulu": "wsLogin parametreleri: KullaniciAdi CHAR(11) (Vizite uygulamasındaki kullanıcı kodu), İşyeriKodu DECIMAL(4), Ws Şifre CHAR(36) (Vizite uygulamasındaki şifre). Yalnızca gerçek işyerinin Vizite yetkilisi erişebilir. Vizite portal kuralları web servis için de geçerli.",
+   "kaynak": [
+    "https://www.denet.com.tr/vizite_duyuru.pdf",
+    "https://www.cottgroup.com/tr/mevzuat/item/sgk-vizite-web-servisi-hizmete-sunuldu",
+    "https://iskanunu.com/haberler/vizite-web-servisi-uygulamasi/"
+   ]
+  },
+  {
+   "sistem": "SGK İşveren Sistemi (müfredat kartı, borç sorgu, teşvik analizi/tanımlama, yapılandırma) + iş kazası provizyon sorgu metotları",
+   "kanal": "Portal: https://uyg.sgk.gov.tr/IsverenSistemi. Web servis olarak yalnızca Vizite (iş kazası provizyonu için HasIsKazSorguTCile, HasIsKazSorguTarihle, HasIsKazSorguKapat metotları) ve e-Bildirge V2 bağlantısı listeleniyor. Teşvik analizi (işe almadan önce sigortalı bazında yararlanılabilecek teşvikler) ve teşvik tanımlama portal üzerinden. İş kazası/meslek hastalığı bildiriminin ayrı bir kamuya açık web servisi bulunamadı (doğrulanamadı).",
+   "test_ortami_var_mi": "HAYIR / doğrulanamadı.",
+   "erisim_kosulu": "İşyeri kullanıcı adı, sistem şifresi, işyeri şifresi (SGK standart işveren kimlik doğrulaması; sayfada ayrıntı yok).",
+   "kaynak": [
+    "https://e.sgk.gov.tr/Uygulamalar/Detay/Isveren-Sistemi-2022-10-31-10-05-50"
+   ]
+  },
+  {
+   "sistem": "SGK Tescil ve Hizmet Dökümü / e-Devlet SGK hizmetleri (çalışan tarafı)",
+   "kanal": "Yalnızca e-Devlet vatandaş portalı (https://www.turkiye.gov.tr/sgk-tescil-ve-hizmet-dokumu); işe giriş/ayrılış bildirgeleri e-Devlet'ten de görüntülenebilir (https://www.turkiye.gov.tr/sgk-esgkuyg-esgksifre-ise-giris-isten-ayrilis). İşverene API yok.",
+   "test_ortami_var_mi": "HAYIR.",
+   "erisim_kosulu": "Çalışanın kendi e-Devlet kimlik doğrulaması; işveren sistemi bu veriyi otomatik çekemez (çalışan PDF/barkodlu belge sunabilir).",
+   "kaynak": [
+    "https://www.turkiye.gov.tr/sgk-tescil-ve-hizmet-dokumu",
+    "https://www.turkiye.gov.tr/sgk-esgkuyg-esgksifre-ise-giris-isten-ayrilis"
+   ]
+  },
+  {
+   "sistem": "GİB Muhtasar ve Prim Hizmet Beyannamesi (MUHSGK / MPHB, 1003A)",
+   "kanal": "GİB kılavuzuna göre üç düzenleme platformu: (1) Beyanname Düzenleme Programı (BDP, ebyn.exe, https://ebeyanname.gib.gov.tr/download.html), (2) İnternet Vergi Dairesi (bugün Dijital Vergi Dairesi) üzerinde çevrimiçi düzenleme, (3) Defter Beyan Sistemi (DBS). Ayrıca 'herhangi bir platformda beyanname formatına uygun hazırlanan xml dosyalarının sıkıştırılarak' e-Beyanname sistemine gönderilmesi yeterli (yani 3. taraf bordro yazılımı XML üretip BDP/e-Beyanname'ye yükler). XML şeması e-Beyanname kılavuz sayfasında açık yayımlanmıyor (intvrg.gib.gov.tr/ebyn_kilavuzlar.html'de yalnızca BDP/web kullanım kılavuzları var) — XSD kamuya açık kaynağı doğrulanamadı; pratikte BDP içinden/üretici yazılımlardan elde ediliyor. Format değişince BDP güncellemesi gerekir (ör. Haziran 2026 dönemi format güncellemesi, ikincil kaynak). 1-3 Ağustos 2026 arası DBS, e-Beyanname ve İVD üzerinden MPHB gönderimi planlı teknik çalışma nedeniyle kapatıldı (haber).",
+   "test_ortami_var_mi": "HAYIR (MUHSGK için) — Yeni 'e-Beyan' test ortamı (https://ebeyanpreprodapi.gib.gov.tr) var ama ilan edilen kapsamı Damga Vergisi, 1 No.lu KDV, Gelir/Kurumlar Geçici Vergi gibi beyannameler; MUHSGK'nın e-Beyan test/preprod kapsamına alındığına dair duyuru bulunamadı (doğrulanamadı). e-Fatura/e-Arşiv'deki gibi herkese açık MUHSGK test portalı yok.",
+   "erisim_kosulu": "e-Beyanname kullanıcı kodu/parola/şifre (mükellef veya 340 No.lu VUK GT kapsamında aracılık sözleşmeli SM/SMMM). Vergi kesintisi yapmayan işverenler vergi dairesinden ayrı MPHB kullanıcı kodu/parola/şifre alır. GİB, MPHB'nin ayrı ilave şifre ile gönderilmesine ilişkin sirküler taslağı yayımladı (ücret gizliliği için).",
+   "kaynak": [
+    "https://ebeyanname.gib.gov.tr/muphb1.pdf",
+    "https://intvrg.gib.gov.tr/ebyn_kilavuzlar.html",
+    "https://www.gib.gov.tr/muhtasar-ve-prim-hizmet-beyannamesini-elektronik-ortamda-mevcut-e-beyanname-sifresinden-ayri-olarak",
+    "https://uzmanpara.milliyet.com.tr/uzmanpara/gib-duyuru-muhtasar-ve-prim-hizmet-beyannamesi-sistemi-3-gun-hizmet-disi-kalacak-7630553",
+    "https://prozon.net/sirkuler/vergi-danismani-mustafa-celik-bildiriyor-gib-haziran-2026-doneminden-itibaren-gecerli-olmak-uzere-mphib-formatini-guncelledi-sistemden-onay-alabilmek-icin-bdpyi-yenileyin/"
+   ]
+  },
+  {
+   "sistem": "GİB yeni e-Beyan sistemi + e-Beyan Entegrasyon (API) — gelecekte MUHSGK'yı da kapsayabilir",
+   "kanal": "Token tabanlı API (ebeyan.gib.gov.tr profil > 'Entegrasyon Yönetimi' ile token; token bir kez gösterilir). Entegratör dokümanı: https://ebeyan.gib.gov.tr/entegrator/ (JS ile render ediliyor; içerik bu çalışmada okunamadı). Damga Vergisi beyannamesi 1 Haziran 2025'ten itibaren e-Beyan üzerinden (ikincil kaynak).",
+   "test_ortami_var_mi": "EVET (kapsamdaki beyannameler için) — preprod: https://ebeyanpreprodapi.gib.gov.tr. Test beyannamelerinin resmi geçerliliği yok. Geri bildirim: ebeyanentegrasyon@gelirler.gov.tr, ebeyantest@gelirler.gov.tr (ikincil kaynaklardaki GİB duyurusu aktarımı).",
+   "erisim_kosulu": "Dijital Vergi Dairesi 'Başvurularım/Başvuru Formları' altında 'e-Beyan Entegrasyon Başvurusu' onaylananlar; e-Beyanname yetkisi olan kullanıcı kendi bilgileriyle ya da yetkili kullanıcının verdiği API Key ile yazılım firması test edebilir. Test gerçek sicil bilgileri üzerinde çalışır.",
+   "kaynak": [
+    "https://www.tepeymm.com/post/yeni-e-beyan-test-uygulamas%C4%B1-hakk%C4%B1nda-duyuru",
+    "https://www.bbdas.com.tr/bbdas-16-01-2025-17-yeni-e-beyan-test-uygulamasi-basladi-g-2629",
+    "https://ebeyan.gib.gov.tr/entegrator/",
+    "https://www.diaakademi.com/bilgi-bankasi/web-servis-ile-e-beyanname-entegrasyonu/"
+   ]
+  },
+  {
+   "sistem": "GİB e-Fatura / e-Arşiv test portalları (karşılaştırma için — bordro değil)",
+   "kanal": "e-Arşiv Portal test: https://earsivportaltest.efatura.gov.tr/login.jsp ; e-Fatura test: https://test.efatura.gov.tr",
+   "test_ortami_var_mi": "EVET — e-Arşiv test portalında 'Kullanıcı Öner' ile örnek kullanıcı adı/şifre üretilerek giriş yapılır (ikincil kaynak). Bordro/MUHSGK için bunun karşılığı bulunamadı.",
+   "erisim_kosulu": "Herkese açık demo kullanıcı (e-Arşiv test). Bordro modülü açısından yalnızca personel masraf faturası vb. yan senaryolar için ilgili.",
+   "kaynak": [
+    "https://earsivportaltest.efatura.gov.tr/login.jsp",
+    "https://vergigunlugu.com/e-arsiv-portal-test-giris-ekrani/",
+    "https://test.efatura.gov.tr/efatura/logout.html"
+   ]
+  },
+  {
+   "sistem": "İŞKUR aylık işgücü çizelgesi, engelli/eski hükümlü kontenjan takibi, iş ilanı",
+   "kanal": "İŞKUR e-Şube portalı (https://esube.iskur.gov.tr/) — işveren üyeliği sonrası çizelge ve ilan girişi. Yasal dayanak: 4904 s. Kanun md.21, 4857 s. İş Kanunu md.30 (kontenjan). Özel sektörde aynı il sınırında en az 10 işçi çalıştıranlar ve en az 1 işçi çalıştıran kamu kurumları, her ayın çizelgesini takip eden ayın sonuna kadar verir.",
+   "test_ortami_var_mi": "HAYIR — kamuya açık web servis/API veya test ortamı bulunamadı (doğrulanamadı). Çizelgenin SGK verisinden otomatik üretildiğine dair İŞKUR sayfasında ifade yok (doğrulanamadı).",
+   "erisim_kosulu": "e-Şube işveren üyeliği (bazı illerde 24 saat içinde aktivasyon, bazılarında İŞKUR'un telefonla aranması gerekir — ikincil kaynak).",
+   "kaynak": [
+    "https://www.iskur.gov.tr/isveren/isgucu-cizelgesi/",
+    "https://www.iskur.gov.tr/isveren/engelli-istihdami/",
+    "https://muhasebebilenler.com/iskur-aylik-is-gucu-cizelgesi-bildirim-asamalari/"
+   ]
+  },
+  {
+   "sistem": "BES Otomatik Katılım (OKS) — emeklilik şirketi ve EGM",
+   "kanal": "Tek bir kamu standardı yok: her emeklilik şirketi kendi işveren kanalını sunar (ör. Anadolu Hayat 'DES – Dijital Eko Sistem' web servisi, bordro yazılımına (Luca) WS bilgileri tanımlanarak entegrasyon; Excel 'Bireysel Emeklilik Personel Ekleme Şablonu'; bazı şirketlerde e-posta/kargo ile sözleşme). EGM'nin rolü emeklilik şirketlerine web servis ve kontrol altyapısı sağlamak (işverene doğrudan açık API dokümanı bulunamadı — doğrulanamadı). Kamu işverenleri için HMB 'Bireysel Emeklilik (OKS) Kesintisi Uygulama Kılavuzu' KBS/bordro sürecini tanımlar.",
+   "test_ortami_var_mi": "Doğrulanamadı — şirket bazında sözleşme ile verilebilir; kamuya açık test ortamı bulunamadı.",
+   "erisim_kosulu": "İşveren–emeklilik şirketi OKS sözleşmesi; web servis kullanıcı bilgileri şirket tarafından verilir. Kural: katkı payı en az %3, en geç ücret ödeme gününü takip eden iş günü aktarılır (ikincil kaynak özetine göre).",
+   "kaynak": [
+    "https://www.anadoluhayat.com.tr/Documents/PDF%20Files/OtomatikKatilim/Luca_Bordro-Entegrasyonu-islemleri.pdf",
+    "https://www.katilimemeklilik.com.tr/urunler/birikim/otomatik-katilim/isveren-icin",
+    "https://ms.hmb.gov.tr/uploads/sites/3/2019/11/Bireysel-Emeklilik-OKS-Kesintisi-Uygulama-Klavuzu-Version-2.pdf",
+    "https://www.egm.org.tr/otomatik-katilim/oks-nedir/"
+   ]
+  },
+  {
+   "sistem": "Banka toplu maaş ödeme dosyaları (Ziraat, Halkbank, Garanti BBVA, İş Bankası, Akbank vb.)",
+   "kanal": "Bankaya özgü formatlar; ortak ulusal standart bulunamadı. Örnekler: Ziraat — maaş ödemeleri text dosya sistemiyle, şablon şube tarafından firmaya iletilir (MEB il/ilçe yardım dokümanları); Ziraat sitesinde IBAN bazlı ödeme dosyası şablonu (xls) açık. Halkbank DTO (Dosyalı Transfer Otomasyonu) — IBAN veya hesap no bazlı .xls/.xlsx şablon ya da firmanın kendi sisteminden ürettiği .txt; kanal: kurumsal portal yükleme, e-posta, FTP (ön akıbet/akıbet dosyası da FTP ile), dosya onay adımı. Akbank 'Toplu Ödeme Sistemi' kurumsal ürün sayfası. Ayrıntılı alan/pozisyon spesifikasyonları genelde müşteri sözleşmesi ile verilir (kamuya açık tam spesifikasyon doğrulanamadı).",
+   "test_ortami_var_mi": "HAYIR (kamuya açık) — banka bazında sözleşmeli müşteriye test/ön-akıbet imkânı olabilir, doğrulanamadı.",
+   "erisim_kosulu": "Banka ile maaş ödeme/toplu ödeme protokolü; kurumsal internet şube yetkilisi veya FTP/host-to-host kanalı. ISO 20022 pain.001'in Türk bankalarında kurumsal müşteri girişi olarak yaygın kabulü doğrulanamadı; TCMB FAST sayfalarında ISO 20022 ifadesi bu çalışmada bulunamadı (FAST: pilot 18.12.2020, tüm müşterilere 08.01.2021).",
+   "kaynak": [
+    "https://www.halkbank.com.tr/content/dam/halkbank/tr/dokumanlar/ticari-kurumsal/DTOOdemeKesintiMaasMusteriUygulamaKilavuzu.pdf",
+    "https://www.ziraatbank.com.tr/tr/Kobi-ZB/nakit-yonetimi/odeme-cozumleri/Documents/odeme-dosyasi-IBAN.xls",
+    "https://erenler.meb.gov.tr/www/ziraat-bankasi-text-dosyasi/icerik/2373",
+    "https://sultanbeyli.meb.gov.tr/meb_iys_dosyalar/2017_02/03093802_6_-_SYME_TEXT_HAZIRLAMA_YARDIM_SUNUMU.pdf",
+    "https://www.akbank.com/kurumsal/odeme-ve-para-transferi/para-transferleri/toplu-odeme-sistemi",
+    "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Main+Menu/Core+Functions/Payment+Systems/Payment+Systems+in+Turkey/Electronic+Fund+Transfer+System+and+Electronic+Securities+Transfer+System"
+   ]
+  },
+  {
+   "sistem": "e-bordro (elektronik ücret hesap pusulası), KEP, e-imza, personel belgelerinin elektronik tebliği",
+   "kanal": "KEP (PTT KEP ve BTK yetkili KEP hizmet sağlayıcıları) üzerinden gönderim + güvenli elektronik imza/e-mühür. Yasal çerçeve: 4857 s. İş Kanunu md.37 (işveren işçiye ücret hesabını gösteren imzalı veya işyerinin özel işaretini taşıyan pusula vermek zorunda); 5070 s. Elektronik İmza Kanunu md.5/1 (güvenli e-imza elle atılan imza ile aynı hukuki sonuç); HMK md.199 (elektronik veri 'belge') ve md.205/2 (güvenli e-imzalı veri senet hükmünde); KEP Sistemine İlişkin Usul ve Esaslar Hakkında Yönetmelik (RG 25.08.2011/28036, dayanağı 6102 s. TTK md.1525; son değişiklik RG 13.12.2022/32042). ÇSGB Çalışma Genel Müdürlüğü'nün 13.11.2017 tarihli görüş yazısında md.37 yükümlülüğünün KEP Yönetmeliği kapsamında kurulan sistemle elektronik ortamda yerine getirilebileceği belirtilmiş (görüş yazısı ikincil kaynaklardan aktarılmıştır; birincil metin doğrulanamadı — csb.gov.tr PDF'i sertifika hatası nedeniyle açılamadı). e-Bordro bir GİB e-belgesi (e-Fatura/e-Arşiv gibi) değildir; standart format yok (doğrulanamadı).",
+   "test_ortami_var_mi": "Kısmen — KEP sağlayıcılarının ticari API/test ortamları sağlayıcıya özgü; kamu test ortamı yok (doğrulanamadı).",
+   "erisim_kosulu": "İşveren ve çalışanın KEP adresi (çalışanın KEP adresi edinmesi ve onayı), nitelikli e-imza/e-mühür sertifikası (BTK yetkili ESHS).",
+   "kaynak": [
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5",
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=5070&MevzuatTur=1&MevzuatTertip=5",
+    "https://www.btk.gov.tr/kayitli-elektronik-posta-mevzuat",
+    "https://pttwebdosya.ptt.gov.tr/api/file/getFile?FileName=kep_yonetmelik.pdf",
+    "https://www.mevzuat.net/DigerMevzuat/elektronikpostaynt_20221213.aspx",
+    "https://www.turkishlawblog.com/insights/detail/ucret-bordrolarinin-calisanlara-kep-kayitli-elektronik-posta-araciligiyla-teblig-edilmesi-ve-delil-niteligi",
+    "https://www.muhasebetr.com/yazarlarimiz/mevlutkokus/007/",
+    "https://yaklasim.com/yaklasim-dergisi/4857-sayili-is-kanunu-cercevesinde-ucret-hesap-pusulasi-yukumlulugu/"
+   ]
+  }
+ ],
+ "oracle_artefaktlari": [
+  {
+   "artefakt": "GİB 'Muhtasar ve Prim Hizmet Beyannamesi Düzenleme Kılavuzu' (1003A, Ocak/2020)",
+   "tur": "resmi_ornek",
+   "kapsadigi_hesap": "Prim ödeme gün sayısı (ay 28/29/31 olsa da tam ay=30), ay içi giriş/çıkış gün sayısı (ör. 19/03 giriş→13 gün; 19/02 çıkış→19 gün; 17/03–27/03→11 gün), ücretsiz izin/istirahat eksik gün örnekleri, verilme zamanı/dönem örnekleri, düzeltme (ASIL/İPTAL) beyannamesi örneği. ~13 adet 'Örnek' bloğu.",
+   "guvenilirlik": "Yüksek (resmi GİB/SGK ortak kılavuzu) ama 2020 tarihli; tutar/oran içermeyen gün-sayısı ve süreç kuralları için güçlü golden test; güncel format değişiklikleri için yeni sürüm kontrol edilmeli.",
+   "kaynak": "https://ebeyanname.gib.gov.tr/muphb1.pdf"
+  },
+  {
+   "artefakt": "Gelir Vergisi Genel Tebliği Seri No 319 (RG 27.01.2022, sayı 31732) — asgari ücret gelir vergisi ve damga vergisi istisnası",
+   "tur": "resmi_ornek",
+   "kapsadigi_hesap": "18 numaralı sayısal örnek (metinden sayıldı): asgari ücretli istisna (Örn.1-3), emekli çalışan (4), asgari ücret üstü ücret (5-6, 12-13), kısmi süreli/aylık 15 gün çalışan (9), birden fazla işveren (10-11, 14), tevkifata tabi olmayan ücret/basit usul işveren yanında çalışan (16-18). Kümülatif matrah ve dilim geçişi etkileşimini gösterir.",
+   "guvenilirlik": "Çok yüksek (Resmî Gazete'de yayımlanmış idari düzenleme) — ancak 2022 parametreleri (asgari ücret, tarife) kullanır; golden test yıl parametresiyle birlikte kurgulanmalı; sonraki yıllarda ilgili GVK/tarife değişiklikleri ayrıca kontrol edilmeli.",
+   "kaynak": "https://www.resmigazete.gov.tr/eskiler/2022/01/20220127-5.htm"
+  },
+  {
+   "artefakt": "Gelir Vergisi Genel Tebliği Seri No 322 (RG 30.12.2022) — hizmet erbabına ısınma (elektrik, doğalgaz vb.) giderleri için ek ödemelerde istisna",
+   "tur": "resmi_ornek",
+   "kapsadigi_hesap": "Ücret bordrosunda gösterilen ısınma ödemesinin istisna tutarı ve aşan kısmın vergilendirilmesi; Örnek 9: aylık brüt 15.000 TL ücret + 1.500 TL ısınma ödemesi → 1.000 TL istisna, 500 TL vergiye tabi (ikincil kaynak aktarımı).",
+   "guvenilirlik": "Yüksek (resmi tebliğ); dar kapsamlı, dönemsel istisna — güncel geçerliliği kontrol edilmeli.",
+   "kaynak": [
+    "https://www.turmob.org.tr/Mevzuat/PDF/20196",
+    "https://www.pwc.com.tr/gelir-vergisi-genel-teblig-seri-no-322"
+   ]
+  },
+  {
+   "artefakt": "GİB 'Ücret Geliri Elde Edenler İçin Vergi Rehberi' (2026 sürümü)",
+   "tur": "resmi_ornek",
+   "kapsadigi_hesap": "Ücret gelirlerinin beyanı, birden fazla işverenden ücret, beyan sınırı, istisna ve indirimler — yıllık beyan ağırlıklı örnekler (içerik bu çalışmada ayrıntılı okunmadı; örnek sayısı doğrulanamadı).",
+   "guvenilirlik": "Yüksek (GİB resmi rehberi) ama rehberler bağlayıcı mevzuat değil, açıklayıcıdır.",
+   "kaynak": [
+    "https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Ffileadmin%2Fbeyannamerehberi%2F2026%2F2026_Ucret_Geliri.pdf",
+    "https://intvrg.gib.gov.tr/hazirbeyan/assets/pdf/DUYURU_UNIVERSAL_2026_2026_Ucret_Geliri.pdf"
+   ]
+  },
+  {
+   "artefakt": "GİB Gelir Vergisi Tarifesi 2026 (PDF) ve geçmiş yıl tarifeleri",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "Ücret gelirlerine uygulanacak dilim/oran tablosu — kümülatif matrah üzerinden gelir vergisi kesintisi için parametre oracle'ı.",
+   "guvenilirlik": "Çok yüksek (resmi parametre kaynağı).",
+   "kaynak": "https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fgelir-vergisi-tarifeleri%2Fgelir-vergisi-tarifesi-2026.pdf"
+  },
+  {
+   "artefakt": "SGK Sigorta Primleri Genel Müdürlüğü 'Sigorta Primi Teşvikleri 2024' kitapçığı",
+   "tur": "resmi_ornek",
+   "kapsadigi_hesap": "Her teşvik için yasal dayanak, belge/kanun no, başlama-bitiş tarihi, şartlar ve 15 adet 'Rakamlarla Teşvik Örnekleri (2024 Yılı Brüt Asgari Ücretine Göre)' tablosu: PEK alt ve üst sınırından teşviksiz tutar / teşvik tutarı / teşvik sonrası tutar (ör. 5 puan: %37,5 → %5 teşvik → %32,5; PEK alt sınırda 7.500,94 / 1.000,13 / 6.500,81 TL). Kapsam: 5510/81-ı (5 puan), 81-i (yurt dışı), geçici 95 (emekli), 81-j/k, Ek 2 (bölgesel/yatırım), geçici 101 (2024 asgari ücret desteği), 6111, engelli, kültür yatırım vb.",
+   "guvenilirlik": "Yüksek (SGK resmi yayını); 2024 parametreleri — daha yeni sürüm varlığı doğrulanamadı. Birim-teşvik tutarı için güçlü golden test; kombinasyon seçimi için yetersiz (bkz. sadece_insan_oracle).",
+   "kaynak": "https://www.sgk.gov.tr/Download/DownloadFile?f=8af2e39d-6690-4704-8ecb-31d66b98fe1a.pdf&d=de85036d-ef64-49f1-834c-916a79f1a923"
+  },
+  {
+   "artefakt": "SGK 'Prime Esas Kazanç Miktarları' tablosu (2026) + yıllık PEK alt/üst sınır genelgeleri (ör. 2024/2)",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "PEK günlük/aylık alt ve üst sınır; 2026 (01.01–31.12.2026) için günlük alt 1.101,00 TL, aylık alt 33.030,00 TL, günlük üst 9.909,00 TL, aylık üst 297.270,00 TL; çırak/meslek lisesi ve yükseköğrenim stajyerleri için ayrı dönemler (15.12.2025–14.01.2026 ve 15.01.2026–14.12.2026).",
+   "guvenilirlik": "Çok yüksek (SGK resmi parametre). Değerler SGK sayfasından okunmuştur.",
+   "kaynak": [
+    "https://www.sgk.gov.tr/Content/Post/2e0c9e1a-2cfe-4456-af10-49d3de0c58ba/Prime-Esas-Kazanc-Miktarlari-2026-01-14-10-35-39",
+    "https://www.alomaliye.com/2024/01/09/sgk-genelgesi-2024-2-prime-esas-kazanclarin-alt-ve-ust-sinirlari-ile-bazi-islemlere-esas-tutarlar/"
+   ]
+  },
+  {
+   "artefakt": "GİB Dijital Vergi Dairesi — Gelir Vergisi Hesaplama",
+   "tur": "resmi_hesaplayici",
+   "kapsadigi_hesap": "Girdiler: Vergi Dönemi, Gelir Unsuru ('Ücretli' seçeneği dahil), Matrah → tarife üzerinden gelir vergisi. Bordrodaki kümülatif matrah/dilim hesabını çapraz doğrulamak için kullanılabilir (aylık kesinti, asgari ücret istisnası mahsubu yapmaz — doğrulanamadı).",
+   "guvenilirlik": "Yüksek (resmi); ancak otomasyon için API yok, tarayıcı ile manuel/otomatik sorgu gerekir.",
+   "kaynak": "https://dijital.gib.gov.tr/hesaplamalar/GelirVergisiHesaplama"
+  },
+  {
+   "artefakt": "GİB Dijital Vergi Dairesi — Gecikme Zammı ve Faizi Hesaplama (+ 7440 ve Yİ-ÜFE varyantları)",
+   "tur": "resmi_hesaplayici",
+   "kapsadigi_hesap": "Geç ödenen vergi (ör. muhtasar kesintileri) için gecikme zammı/faizi.",
+   "guvenilirlik": "Yüksek (resmi).",
+   "kaynak": [
+    "https://dijital.gib.gov.tr/hesaplamalar/GecikmeZamVeFaizHesaplama",
+    "https://dijital.gib.gov.tr/hesaplamalar/GecikmeZamVeFaizHesaplama_7440"
+   ]
+  },
+  {
+   "artefakt": "SGK emeklilik/aylık hesaplama araçları (4/a 'Ne zaman emekli olurum', 4/a aylık hesap, 4/b, 4/c ikramiye-maaş)",
+   "tur": "resmi_hesaplayici",
+   "kapsadigi_hesap": "Emeklilik hak kazanma ve aylık bağlama hesapları — bordro çekirdeği dışında; İK self-servis bilgilendirme için referans.",
+   "guvenilirlik": "Yüksek (resmi) ama bordro hesaplamasıyla doğrudan ilgili değil. SGK'nın resmi bir 'bordro/prim hesaplama' veya 'geçici iş göremezlik ödeneği hesaplama' aracı bulunamadı (doğrulanamadı).",
+   "kaynak": [
+    "https://uyg.sgk.gov.tr/nezaman/",
+    "https://uyg.sgk.gov.tr/AylikHesap/",
+    "https://uyg.sgk.gov.tr/IkramiyeMaasHesapla4c/Welcome.do",
+    "https://e.sgk.gov.tr/Uygulamalar/Vatandas"
+   ]
+  },
+  {
+   "artefakt": "ÇSGB / e-Devlet resmi kıdem-ihbar-izin hesaplayıcısı",
+   "tur": "resmi_hesaplayici",
+   "kapsadigi_hesap": "BULUNAMADI — ÇSGB sitesinde ve e-Devlet'te resmi kıdem/ihbar/yıllık izin/brütten nete hesaplayıcı bulunamadı; ikincil kaynak e-Devlet'te kıdem tazminatı hesaplama ekranı olmadığını belirtiyor (doğrulanamadı). ÇSGB SSS sayfaları kural açıklaması içerir, sayısal oracle değildir.",
+   "guvenilirlik": "—",
+   "kaynak": [
+    "https://www.csgb.gov.tr/sikca-sorulan-sorular/calisma-genel-mudurlugu/%C4%B1s-kanunu/",
+    "https://kadimhukuk.com.tr/kidem-tazminati-hesaplama/"
+   ]
+  },
+  {
+   "artefakt": "TÜRMOB 'Hesaplamalar' (Ücret, Kıdem-İhbar Tazminatı, Gelir Vergisi, Gecikme Zammı ve Faizi, Kısa Çalışma Ödeneği, SGK Yapım İşleri vb.)",
+   "tur": "meslek_orgutu",
+   "kapsadigi_hesap": "Kıdem-İhbar: girdiler işe giriş/çıkış tarihi, çıkıştaki brüt ücret, kümülatif vergi matrahı, asgari ücret verisi → çalışma süresi, kıdem ve ihbar (brüt/net, istisnalı/istisnasız), damga vergisi, gelir vergisi. Ücret hesaplayıcı brütten nete/netten brüte (ayrıntı doğrulanamadı).",
+   "guvenilirlik": "Orta-yüksek (meslek birliği, ama resmi değil; hata/gecikme olasılığına karşı ikinci oracle ile çapraz kontrol).",
+   "kaynak": "https://www.turmob.org.tr/hesaplamalar/kidemihbarvetazminati"
+  },
+  {
+   "artefakt": "Lebib Yalkın Aylık Mevzuat Dergisi — '2026 Yılı Ücretlerinin Hesaplanışı ve SGDP'ye Tabi Asgari Ücret ile Çalışanların Durumu' (Erdem Azman, Şubat 2026)",
+   "tur": "meslek_orgutu",
+   "kapsadigi_hesap": "2026 asgari ücret ve SGDP'ye tabi (emekli) çalışan dahil tam zamanlı ücret hesaplama örnekleri. Aktarılan örnek: brüt 33.030,00 TL − SGK işçi payı 4.624,20 TL − işsizlik işçi payı 330,30 TL = net 28.075,50 TL (GV ve DV istisna).",
+   "guvenilirlik": "Orta-yüksek (uzman yazar, yerleşik yayınevi; resmi değil). Yıllık tekrarlanan seri — her yıl Ocak/Şubat sayılarında.",
+   "kaynak": "https://lebibyalkin.com.tr/makale/2026-yili-ucretlerinin-hesaplanisi-ve-sosyal-guvenlik-destek-primine-tabi-asgari-ucret-ile-calisanlarin-durumu"
+  },
+  {
+   "artefakt": "İSMMMO e-kitap 'Sosyal Güvenlik Sisteminde Son Değişiklikler' (18.05.2026) ve İSMMMO eğitim dosyaları (ör. 'Personele Dışardan Sağlanan Hizmetler ve Bordro Uygulamaları' 2023)",
+   "tur": "meslek_orgutu",
+   "kapsadigi_hesap": "2026 asgari ücret parametreleri, güncel bordro uygulamaları, 7566 ve 7577 sayılı Kanunlarla gelen yemek bedeli istisnası değişiklikleri, SGK borçlanma tutarları, teşvik uygulamaları — açıklayıcı örneklerle (arama özeti; içerik bu çalışmada ayrıntılı okunmadı).",
+   "guvenilirlik": "Orta-yüksek (meslek odası yayını, uzman yazarlı; resmi değil).",
+   "kaynak": [
+    "https://archive.ismmmo.org.tr/YAYINLAR/e_kitap/18052026_sosyal_guvenlik_sisteminde_son_degisiklikler.pdf",
+    "https://ismmmo.org.tr/Yayinlar/E-Kitap--3",
+    "https://ismmmo.org.tr/dosya/3912/Egitim-Dosya/21022023-personele-disardan-saglanan-hizmetler-2023.pdf",
+    "https://ismmmo.org.tr/Mevzuat/Pratik-Bilgiler-Vergi-Uygulamalari---15715"
+   ]
+  },
+  {
+   "artefakt": "Yaklaşım Dergisi / Yaklaşım Akademi bordro yazıları ve seminerleri",
+   "tur": "meslek_orgutu",
+   "kapsadigi_hesap": "Ücret hesap pusulası yükümlülüğü, yıllık bordro uygulamaları (örnek içerik: '4857 Sayılı İş Kanunu Çerçevesinde Ücret Hesap Pusulası Yükümlülüğü'). Aylık sayılarda ücret hesaplama örnekleri yayımladığı biliniyor ancak 2026 örneklerinin kamuya açıklığı doğrulanamadı (abonelik).",
+   "guvenilirlik": "Orta (uzman yazarlı, ücretli erişim; ikinci oracle olarak).",
+   "kaynak": [
+    "https://yaklasim.com/yaklasim-dergisi/4857-sayili-is-kanunu-cercevesinde-ucret-hesap-pusulasi-yukumlulugu/",
+    "https://yaklasimseminer.com/bordro/"
+   ]
+  },
+  {
+   "artefakt": "Ticari bordro yazılımı/danışmanlık yayınları (Zirve, CottGroup 'Pratik Bilgiler – Bordro Parametreleri 2026', MuhasebeTR bordro parametreleri)",
+   "tur": "meslek_orgutu",
+   "kapsadigi_hesap": "Yıllık/dönemlik bordro parametre tabloları ve asgari ücret net-brüt-maliyet örnekleri.",
+   "guvenilirlik": "Düşük-orta (ticari, ikincil; yalnızca çapraz kontrol — resmi kaynakla doğrulanmadan golden kabul edilmemeli).",
+   "kaynak": [
+    "https://www.cottgroup.com/tr/bordronu-hesapla/pratik-bilgiler",
+    "https://blog.zirveyazilim.net/2026-yili-bordro-parametreleri-nelerdir",
+    "https://www.muhasebetr.com/bordro-parametreleri/"
+   ]
+  },
+  {
+   "artefakt": "SGK kod listeleri — 4/a web servis kılavuzu (4atescilWS_Kullanim_Kilavuzu.doc) içindeki tablolar",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "Eksik gün nedeni kodları (00 eksik gün yok, 01 istirahat, 02 ücretsiz/aylıksız izin, 03 disiplin, 04 gözaltı, 05 tutukluluk, 06 kısmi istihdam, 07 puantaj, 08 grev, 09 lokavt, 10 genel hayatı etkileyen olaylar, 11 doğal afet, 12 birden fazla, 14 diğer, 15 devamsızlık, 16 fesih tarihinde çalışmamış, 17 ev hizmetlerinde 30 günden az, 18 kısa çalışma ödeneği, 19 ücretsiz doğum izni, 20 ücretsiz yol izni, 21 diğer ücretsiz izin, 22 5434 SK ek 76/GM 192, 23 yarım çalışma ödeneği, 24 yarım çalışma ödeneği ve diğer); işten çıkış nedeni kodları 01–37 (ör. 03 işçi feshi, 04 işverence haklı sebep bildirilmeden fesih, 05 belirli süreli sözleşme sonu, 08 emeklilik, 25/29 ahlak ve iyiniyet, 34 işyeri devri...); sigortalı türü kodları (0 tüm sigorta kolları, 7 çırak, 8 SGDP, 19 stajyer...); görev kodu, ÇSGB iş kolu kodları (01–20), öğrenim kodları; eksik gün sayısı 1–31 validasyonu. Meslek kodu İŞKUR meslek kodu (XXXX.XX).",
+   "guvenilirlik": "Yüksek (SGK resmi teknik doküman) — ancak belge tarihi/sürümü belirtilmemiş; en güncel kod eklemeleri (37 sonrası çıkış kodları vb.) için e-Bildirge V2 XSD ve güncel SGK duyuruları ile karşılaştırılmalı (doğrulanamadı).",
+   "kaynak": "https://e.sgk.gov.tr/Download/DownloadFile?f=ccda7d7e-d99b-40f5-9622-63246763b4b0.doc&d=bf271de4-fea9-4557-a460-957858589cf9"
+  },
+  {
+   "artefakt": "SGK e-Bildirge V2 XML Şema Tanımı (EBildirgeV2 XML SEMA TANIMI V1.1.xsd) ve 'Excel ile xml oluştur v1.1'",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "APHB/e-Bildirge V2 XML alan yapısı ve (muhtemelen) enum kod kümeleri — bordro çıktısının şema doğrulaması (schema-level golden test).",
+   "guvenilirlik": "Yüksek (resmi şema); içerik bu çalışmada indirilmedi (enum kapsamı doğrulanamadı).",
+   "kaynak": "https://e.sgk.gov.tr/Uygulamalar/Detay/E-BildirgeV2-2026-04-21-09-12-18"
+  },
+  {
+   "artefakt": "İŞKUR meslek kodları (ISCO-08 tabanlı, XXXX.XX biçimi)",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "İşe giriş bildirgesi ve MUHSGK'daki meslek kodu alanı. SGK e-Bildirge Excel şablonunda meslek kod listesi için İŞKUR bağlantısı (https://app.iskur.gov.tr/Meslek/meslek.aspx) veriliyor; bu adres 2026-09-27'de erişilemedi. Güncel indirilebilir liste kaynağı doğrulanamadı.",
+   "guvenilirlik": "Resmi kaynak ama erişim/indirme yolu doğrulanamadı.",
+   "kaynak": [
+    "https://ebildirge.sgk.gov.tr/WPEB/jsp/duyuru/meslekkod_files/xls2xmly.xls",
+    "https://e.sgk.gov.tr/Download/DownloadFile?f=ccda7d7e-d99b-40f5-9622-63246763b4b0.doc&d=bf271de4-fea9-4557-a460-957858589cf9"
+   ]
+  },
+  {
+   "artefakt": "Resmi tatil / genel tatil günleri — 2429 sayılı Ulusal Bayram ve Genel Tatiller Hakkında Kanun",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "Ulusal bayram ve genel tatil günleri (UBGT ücreti, 4857 md.47 ile birlikte). Kanun metni mevzuat.gov.tr'de HTML/PDF/DOC olarak indirilebilir. Yıllık resmi tatil takvimi için ayrı makine-okunur resmi veri seti bulunamadı (doğrulanamadı).",
+   "guvenilirlik": "Çok yüksek (kanun).",
+   "kaynak": [
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=2429&MevzuatTur=1&MevzuatTertip=5",
+    "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.2429.pdf"
+   ]
+  },
+  {
+   "artefakt": "Diyanet İşleri Başkanlığı 'Dini Günler' sorgu sayfası",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "Ramazan ve Kurban Bayramı, arife vb. tarihleri; yıl seçimi ile sorgu (sayfada 1900–2027 aralığı ve 2026/2027 yılı dini günler menüleri). Dini bayramlar ve arife yarım günü UBGT hesabı için tarih oracle'ı. Makine-okunur API yok, HTML sorgu.",
+   "guvenilirlik": "Yüksek (resmi kurum).",
+   "kaynak": "https://vakithesaplama.diyanet.gov.tr/dini_gunler.php"
+  },
+  {
+   "artefakt": "ÇSGB Çalışma Genel Müdürlüğü İş Kanunu Sıkça Sorulan Sorular (ör. Soru 43/44: kıdem tazminatına dahil olan/olmayan ödemeler; Soru 59: ücret hesap pusulası)",
+   "tur": "resmi_ornek",
+   "kapsadigi_hesap": "Kural düzeyinde oracle (sayısal değil): kıdem tazminatına esas ücrete dahil ödemeler listesi (yemek, kasa tazminatı, gıda, yakacak, eğitim, konut, giyecek, aile/çocuk yardımı vb.), haklı fesih sebepleri, yıllık izin ücreti, fazla çalışma.",
+   "guvenilirlik": "Orta-yüksek (idari görüş; bağlayıcı değil, Yargıtay içtihadı öncelikli).",
+   "kaynak": "https://www.csgb.gov.tr/sikca-sorulan-sorular/calisma-genel-mudurlugu/%C4%B1s-kanunu/"
+  },
+  {
+   "artefakt": "İl/ilçe kodları ve banka/şube (EFT) kodları",
+   "tur": "acik_veri",
+   "kapsadigi_hesap": "Adres ve banka referans verisi.",
+   "guvenilirlik": "Doğrulanamadı — bu çalışmada resmi indirilebilir kaynak (NVİ/TÜİK il-ilçe kodları; TCMB/TBB banka-şube listeleri) doğrulanamadı; arama bütçesi tükendi. Bordro için IBAN (TR + 26 hane) tek başına yeterli olduğundan EFT şube kodu ihtiyacı düşük.",
+   "kaynak": "doğrulanamadı"
+  },
+  {
+   "artefakt": "SGK İşveren Sistemi 'teşvik analizi' / teşvik tanımlama ekranları",
+   "tur": "resmi_hesaplayici",
+   "kapsadigi_hesap": "İşe alım öncesi sigortalı bazında yararlanılabilecek teşviklerin SGK kayıtlarına göre listelenmesi — teşvik uygunluğu için en yetkili (SGK verisine dayalı) oracle; tutar değil uygunluk.",
+   "guvenilirlik": "Çok yüksek (SGK'nın kendi kayıtları) ama yalnızca gerçek işyeri kimlik bilgileriyle erişilebilir; otomasyona açık API yok.",
+   "kaynak": "https://e.sgk.gov.tr/Uygulamalar/Detay/Isveren-Sistemi-2022-10-31-10-05-50"
+  }
+ ],
+ "sadece_insan_oracle": [
+  {
+   "karar": "Teşvik kombinasyonu ve seçimi (hangi sigortalıya hangi kanun numarası/teşvik uygulanacağı; teşviklerin birlikte uygulanamaması; geriye dönük teşvik düzeltmesi)",
+   "neden": "SGK kitapçığında teşviklerin bir kısmının '5 puanlık indirim ile birlikte uygulanmaz' şeklinde kısıtları, her teşvikte ayrı şart listeleri (vadesi geçmiş borç olmaması, 5335/30-2 kapsamı dışında olma, 4734 kapsamı işler, İSG-KATİP sözleşmesi vb.) var. Şartların sağlanıp sağlanmadığı (ör. borç durumu, fiili istihdam, ortalama sigortalı sayısı, muvazaa) olgusal/yorumsal değerlendirme gerektirir; seçim işveren tercihine bağlıdır. MUHSGK kılavuzunda belge/kanun türü değişikliği ve İPTAL+ASIL düzeltme örneği, hatalı teşvik seçiminin sonradan düzeltme gerektirdiğini gösterir. Algoritma sayısal tutarı hesaplayabilir; 'doğru seçim' için SMMM/SGK uzmanı onayı gerekir.",
+   "kaynak": [
+    "https://www.sgk.gov.tr/Download/DownloadFile?f=8af2e39d-6690-4704-8ecb-31d66b98fe1a.pdf&d=de85036d-ef64-49f1-834c-916a79f1a923",
+    "https://ebeyanname.gib.gov.tr/muphb1.pdf"
+   ]
+  },
+  {
+   "karar": "Fesih nedeninin hukuki nitelendirilmesi (haklı/geçerli fesih, 4857 md.24–25) ve buna bağlı SGK işten çıkış kodu seçimi (ör. 03, 04, 25, 29)",
+   "neden": "Çıkış kodu kıdem/ihbar hakkını ve işsizlik ödeneğini etkiler; kodun doğruluğu olgulara ve hukuki değerlendirmeye bağlıdır (ahlak ve iyiniyet kurallarına aykırılık, zorunlu nedenler, sağlık nedenleri). ÇSGB SSS'de haklı fesih halleri ayrı sorularda açıklanır ama somut olayın nitelendirmesi nihayetinde iş mahkemesi/Yargıtay denetimindedir. Sistem yalnızca kodu kaydedebilir, doğruluğunu İK hukukçusu belirlemelidir.",
+   "kaynak": [
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5",
+    "https://e.sgk.gov.tr/Download/DownloadFile?f=ccda7d7e-d99b-40f5-9622-63246763b4b0.doc&d=bf271de4-fea9-4557-a460-957858589cf9",
+    "https://www.csgb.gov.tr/sikca-sorulan-sorular/calisma-genel-mudurlugu/%C4%B1s-kanunu/",
+    "https://karararama.yargitay.gov.tr/"
+   ]
+  },
+  {
+   "karar": "Kıdem tazminatına esas 'giydirilmiş ücret' kapsamı (hangi ikramiye, prim, sosyal yardım, fazla mesai vb. dahil) ve 1475 md.14 uygulaması",
+   "neden": "ÇSGB SSS'de dahil/dahil olmayan ödemeler için ayrı sorular (43/44) var; hukuk büroları giydirilmiş ücreti 'brüt ücret + sosyal haklar + düzenli ikramiye ve primler' diye tarif ediyor. 'Düzenli' olma, süreklilik ve arızi ödeme ayrımı olaya bağlıdır ve Yargıtay içtihadıyla şekillenir (içtihat metinleri: Yargıtay Karar Arama / UYAP Emsal). Yıllık tavan değişimi parametre olarak deterministik; kapsam kararı insan oracle'ı gerektirir.",
+   "kaynak": [
+    "https://www.csgb.gov.tr/sikca-sorulan-sorular/calisma-genel-mudurlugu/%C4%B1s-kanunu/",
+    "https://www.capa.av.tr/kidem-ve-ihbar-tazminati-hesaplama/",
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=1475&MevzuatTur=1&MevzuatTertip=5",
+    "https://karararama.yargitay.gov.tr/",
+    "https://emsal.uyap.gov.tr/"
+   ]
+  },
+  {
+   "karar": "Gelir vergisi istisnası / ücret niteliği belirsiz ödemeler (yemek, ulaşım, ısınma, kira, eğitim vb. yan haklar; ücret mi, istisna mı, SGK primine esas mı)",
+   "neden": "İstisna tutarları ve koşulları tebliğlerle sık değişir (ör. GVGT 322 ısınma ödemesi istisnası; 7566/7577 sayılı Kanunlarla yemek bedeli istisnası değişiklikleri — İSMMMO e-kitap özeti). Belirsiz durumlar için GİB özelge sistemi vardır; özelgeler yalnızca talep eden mükellefi bağlar ve yorum farklılıkları olabilir. Yeni bir yan hak tipinin sınıflandırılması SMMM/vergi uzmanı kararı gerektirir.",
+   "kaynak": [
+    "https://www.turmob.org.tr/Mevzuat/PDF/20196",
+    "https://archive.ismmmo.org.tr/YAYINLAR/e_kitap/18052026_sosyal_guvenlik_sisteminde_son_degisiklikler.pdf",
+    "https://www.gib.gov.tr/mevzuat/ozelgeler"
+   ]
+  },
+  {
+   "karar": "Eksik gün nedeni ve belge türü seçimi (ör. kısmi istihdam 06 vs puantaj 07, 'birden fazla' 12, istirahat/iş göremezlik raporuyla uyum, kısa/yarım çalışma ödeneği)",
+   "neden": "Kod listesi deterministik ama olguya uygun kodun seçimi (ve SGK'ya belge ibrazı gerektiren durumlar) yorum ister; MUHSGK kılavuzu eksik gün nedeninin 'sigortalının durumunu açıklayan kod' ile girilmesini ve istirahat süresinde çalışıp çalışmadığının (E/H) beyanını ister — bu beyanlar Vizite onayı ile tutarlı olmalıdır. Hatalı seçim idari para cezası/teşvik kaybı riskine yol açabilir (ceza tutarları burada verilmemiştir).",
+   "kaynak": [
+    "https://ebeyanname.gib.gov.tr/muphb1.pdf",
+    "https://e.sgk.gov.tr/Download/DownloadFile?f=ccda7d7e-d99b-40f5-9622-63246763b4b0.doc&d=bf271de4-fea9-4557-a460-957858589cf9",
+    "https://www.denet.com.tr/vizite_duyuru.pdf"
+   ]
+  },
+  {
+   "karar": "Yıllık izin, fazla çalışma ve UBGT ücretlerinin somut uyuşmazlıkta hesaplanması (ör. sözleşmede fazla çalışmanın ücrete dahil olduğu hükmü, puantaj/ispat, dini bayram arife yarım günü)",
+   "neden": "Kanun ve parametreler deterministik (4857 md.41, 47, 53–57; 2429 s. Kanun) ancak uyuşmazlıkta ispat ve sözleşme yorumu mahkeme içtihadıyla belirlenir; ÇSGB SSS bu konuları genel kural düzeyinde açıklar.",
+   "kaynak": [
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5",
+    "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=2429&MevzuatTur=1&MevzuatTertip=5",
+    "https://www.csgb.gov.tr/sikca-sorulan-sorular/calisma-genel-mudurlugu/%C4%B1s-kanunu/",
+    "https://karararama.yargitay.gov.tr/"
+   ]
+  },
+  {
+   "karar": "e-bordro/KEP ile tebliğin ispat değeri ve işçinin rızası; elektronik özlük dosyası",
+   "neden": "Ücret hesap pusulasının KEP ile verilmesinin md.37'yi karşıladığı yönündeki ÇSGB görüşü (13.11.2017) idari görüştür; delil değeri HMK 199/205 ve 5070 md.5 çerçevesinde değerlendirilir. Uygulama biçimi (çalışanın KEP adresi, imza/mühür türü) için İK hukukçusu onayı gerekir.",
+   "kaynak": [
+    "https://www.turkishlawblog.com/insights/detail/ucret-bordrolarinin-calisanlara-kep-kayitli-elektronik-posta-araciligiyla-teblig-edilmesi-ve-delil-niteligi",
+    "https://www.muhasebetr.com/yazarlarimiz/mevlutkokus/007/"
+   ]
+  }
+ ],
+ "notlar": [
+  "ÖNEMLİ BULGU: Bordro ile ilgili devlet entegrasyonlarında belgelenmiş TEK test ortamı SGK 4/a işe giriş/işten ayrılış web servisidir (sgkt.sgk.gov.tr; erişim için gerçek işyeri sicilinin entegretescil@sgk.gov.tr'ye e-postayla bildirilmesi). Kaynak: https://e.sgk.gov.tr/Uygulamalar/Detay/4a-Sigortali-Ise-Giris-ve-Isten-Ayrilis-Bildirgesi-2024-10-02-10-08-51",
+  "GİB'in yeni e-Beyan sisteminde preprod API (https://ebeyanpreprodapi.gib.gov.tr) var, ancak ilan edilen kapsamda MUHSGK yok (Damga, KDV, geçici vergi). MUHSGK'nın ileride e-Beyan'a taşınması olasılığı izlenmeli (doğrulanamadı). Kaynak: https://www.tepeymm.com/post/yeni-e-beyan-test-uygulamas%C4%B1-hakk%C4%B1nda-duyuru",
+  "Tüm SGK web servisleri (4/a tescil, Vizite) gerçek işyeri kimlik bilgileri gerektirir; ajan ekibi için sentetik test hesabı yok → entegrasyon testleri (a) SOAP sözleşme/şema testleri + kayıtlı yanıtlarla mock, (b) bir pilot müşterinin test ortamına indirilmiş işyeri sicili ile kontrollü uçtan uca test şeklinde kurgulanmalı. Kimlik bilgileri insan tarafından sağlanmalı (ajanlara verilmemeli).",
+  "Golden test önceliği (güvenilirlik sırası): 1) Resmî Gazete'deki tebliğ örnekleri (GVGT 319: 18 sayısal örnek) 2) GİB/SGK resmi kılavuz örnekleri (MUHSGK kılavuzu gün sayısı örnekleri; SGK teşvik kitapçığı 15 sayısal tablo) 3) Resmi parametre tabloları (PEK sınırları, GV tarifesi) 4) Resmi hesaplayıcılar (GİB GV hesaplama, gecikme zammı) 5) Meslek örgütü/uzman yayınları (TÜRMOB hesaplayıcıları, Lebib Yalkın, İSMMMO) — yalnızca çapraz doğrulama için.",
+  "Resmi örneklerin çoğu eski yıl parametreleriyle yazılmıştır (GVGT 319 → 2022; MUHSGK kılavuzu → 2020; teşvik kitapçığı → 2024). Golden testler 'yıl-parametre seti + girdi + beklenen çıktı' üçlüsü olarak saklanmalı; parametre motoru yıllara göre sürümlenmeli.",
+  "ÇSGB ve e-Devlet'te resmi kıdem/ihbar/izin/brütten-nete hesaplayıcısı bulunamadı; kıdem-ihbar için en iyi erişilebilir hesaplayıcı TÜRMOB'unki (meslek örgütü, resmi değil). Kaynak: https://www.turmob.org.tr/hesaplamalar/kidemihbarvetazminati",
+  "Banka maaş dosyaları bankaya özgüdür; Halkbank DTO örneğinde xls/xlsx/txt + portal/e-posta/FTP kanalları var. Türkiye'de kurumsal pain.001 kabulü ve FAST'ın ISO 20022 kullanımı bu çalışmada doğrulanamadı → banka adaptörleri eklenti mimarisiyle, banka başına sözleşmeli spesifikasyonla yazılmalı.",
+  "BES OKS için ortak ulusal dosya/API standardı bulunamadı; emeklilik şirketi başına adaptör (ör. Anadolu Hayat DES web servisi) gerekir.",
+  "SGK/GİB belge metinleri WebFetch ile okunamadığında yerel olarak indirilip macOS PDFKit/textutil ile metne çevrildi (ws4a kılavuzu, vizite duyurusu, MUHSGK kılavuzu, teşvik kitapçığı, Halkbank DTO kılavuzu). Bu belgelerdeki kod listeleri/örnekler doğrudan metinden alınmıştır.",
+  "Doğrulanamayanlar: test WSDL'lerine (sgkt.sgk.gov.tr) doğrudan erişim; e-Bildirge V2 XSD içeriği; İŞKUR güncel meslek kodu indirme adresi (app.iskur.gov.tr/Meslek/meslek.aspx erişilemedi); il/ilçe ve banka-şube kodları için resmi indirilebilir kaynak; ÇSGB 13.11.2017 e-bordro görüş yazısının birincil metni; MUHSGK XML şemasının kamuya açık yayını; ebeyan.gib.gov.tr/entegrator dokümanı (JS render).",
+  "Bu dosya '_C5-alt' yardımcı dosyasıdır; aynı klasördeki C5-hrms-alan-ve-oracle.json ile birleştirilirken çakışan kalemlerde bu dosyadaki birincil kaynak atıfları tercih edilmelidir."
+ ]
+}

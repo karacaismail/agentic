@@ -1,0 +1,414 @@
+{
+  "sema": "mimari-haritasi/karar@1",
+  "kararlar": [
+    {
+      "id": "M-K01",
+      "karar": "Orkestrasyon bir ajan değil, dayanıklı iş akışı motorudur",
+      "uygulama": "Temporal; görev başına tek GorevAkisi",
+      "reddedilen": [
+        "Kestra (pilotta dayanıklılık parçaları elle yazılmak zorunda kalındı)",
+        "ajan-yöneten-ajan (koordinatör LLM)",
+        "Celery/kuyruk + elle durum makinesi"
+      ],
+      "kanit": [
+        "https://github.com/openai/symphony/blob/main/SPEC.md",
+        "https://www.anthropic.com/engineering/building-effective-agents",
+        "https://docs.temporal.io/cloud/limits"
+      ]
+    },
+    {
+      "id": "M-K02",
+      "karar": "Görev başına tek yazıcı ajan, rol başına ayrı çağrı; rol oyunu yok",
+      "uygulama": "planlayıcı, test yazarı, uygulayıcı, bağımsız gözden geçirici",
+      "reddedilen": [
+        "SAFe/Scrum rolleri için ajan (RTE, SM)",
+        "paralel kod yazan alt ajan sürüleri"
+      ],
+      "kanit": [
+        "https://arxiv.org/abs/2503.13657",
+        "https://cognition.com/blog/dont-build-multi-agents",
+        "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents"
+      ]
+    },
+    {
+      "id": "M-K03",
+      "karar": "Beklenti insandan; test önce ve korunur",
+      "uygulama": "Form = oracle; RED kanıtı; RED sonrası test dosyaları değişirse kapı kalır",
+      "reddedilen": [
+        "ajanın kendi testini yazıp geçirmesi",
+        "yalnız CI yeşiline güvenmek"
+      ],
+      "kanit": [
+        "https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/",
+        "https://arxiv.org/abs/2509.16941"
+      ]
+    },
+    {
+      "id": "M-K04",
+      "karar": "Sınırlı döngü ve sıfırlanmayan bütçe",
+      "uygulama": "en çok 5 uygulama, 2 inceleme, 2 CI turu; aynı hata 2. kez → dur",
+      "reddedilen": [
+        "sınırsız yeniden deneme",
+        "model değiştirerek bütçe yenileme"
+      ],
+      "kanit": [
+        "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2"
+      ]
+    },
+    {
+      "id": "M-K05",
+      "karar": "Trunk tabanlı akış; main = alpha",
+      "uygulama": "kısa ömürlü ajan dalları, tek commit, beklenen SHA ile birleştirme",
+      "reddedilen": [
+        "GitFlow uzun dalları",
+        "ayrı alpha ve prod depoları arasında elle senkron"
+      ],
+      "kanit": []
+    },
+    {
+      "id": "M-K06",
+      "karar": "Model erişimi API anahtarıyla",
+      "uygulama": "sunucu otomasyonu Commercial Terms + API; abonelik değil",
+      "reddedilen": [
+        "Pro/Max aboneliğini sunucuda paylaşmak (pilotta 330 kapasite hatası)"
+      ],
+      "kanit": [
+        "https://code.claude.com/docs/en/legal-and-compliance",
+        "https://platform.claude.com/docs/en/api/rate-limits"
+      ]
+    },
+    {
+      "id": "M-K07",
+      "karar": "Kurum içi katalog; pazardan çalışma anında çekme yok",
+      "uygulama": "özet sabitlemeli katalog, rol profilleri, MVP'de MCP yok",
+      "reddedilen": [
+        "mcpmarket/skill pazarlarından ihtiyaç anında kurulum"
+      ],
+      "kanit": [
+        "https://osv.dev/vulnerability/MAL-2025-47604",
+        "https://github.com/advisories/GHSA-6xpm-ggf7-wc3p",
+        "https://thehackernews.com/2026/02/researchers-find-341-malicious-clawhub.html"
+      ]
+    },
+    {
+      "id": "M-K08",
+      "karar": "Plane CE sınırlarına uyum",
+      "uygulama": "form açıklamada; webhook v1; hızlı 2xx + uzlaştırıcı; Intake",
+      "reddedilen": [
+        "Plane Pro özel alanlarına dayanmak"
+      ],
+      "kanit": [
+        "https://github.com/makeplane/plane/blob/5f7d92784c403f76284f0f16718f320221dc7fec/apps/api/plane/bgtasks/webhook_task.py"
+      ]
+    },
+    {
+      "id": "M-K09",
+      "karar": "Commit kimliği yapılandırmadan; yapay zekâ ortak yazar satırı yok",
+      "uygulama": "FABRIKA_GIT_AD/EPOSTA; ajan commit atamaz; ara commitler tek commit'e indirgenir",
+      "reddedilen": [
+        "bot kimliğiyle commit (pilotta 'Factory Bot')"
+      ],
+      "kanit": []
+    },
+    {
+      "id": "M-K10",
+      "karar": "Tek çerçeve: döngünün tamamını tek iş akışı yönetir; kümeden kümeye aktarma yok",
+      "uygulama": "GorevAkisi Todo→In Progress→alpha→insan testi; n8n yalnız kenarlarda (bildirim, toplu içe aktarma)",
+      "reddedilen": [
+        "Kestra + elle yazılmış Python (iki beyin, kopukluk)",
+        "n8n çekirdek orkestratör (risk haritası: kritik 69; CVE-2026-21858; onay kapısı atlatma)",
+        "Plane → n8n → Kestra zinciri"
+      ],
+      "kanit": [
+        "https://github.com/openai/symphony/blob/main/SPEC.md"
+      ]
+    },
+    {
+      "id": "M-K11",
+      "karar": "Görev içinde sıralı parçalar; paralellik görevler arasında",
+      "uygulama": "planlayıcı/çözücü en çok 6 sıralı parça, her birinin RED/GREEN kapısı; ana dal entegrasyonu",
+      "reddedilen": [
+        "görev içinde paralel yazan alt ajanlar + worktree birleştirme"
+      ],
+      "kanit": [
+        "https://cognition.com/blog/dont-build-multi-agents",
+        "https://arxiv.org/abs/2503.13657"
+      ]
+    },
+    {
+      "id": "M-K12",
+      "karar": "Altyapı takılması ajanın başarısızlığı sayılmaz; tıkanıklıkta önce çözücü, sonra doğru insan",
+      "uygulama": "sağlayıcı yoğunluğunda 4 saate kadar sessiz yeniden deneme; OOM'da kaynak kademesi; çözücü görev başına en çok 2; atama + hatırlatma + RTE yükseltmesi",
+      "reddedilen": [
+        "her hatada hemen insana devretmek",
+        "Scrum Master rol ajanı (pilotta vardı, tıkanıklığı çözmedi)"
+      ],
+      "kanit": []
+    },
+    {
+      "id": "M-K13",
+      "karar": "Her durum alanının tek yetkili yazıcısı vardır; bütün durumun tek yazılımda tutulması gerekmez",
+      "uygulama": "Plane: insan talebi ve görünür iş durumu · Temporal geçmişi: koşu ilerlemesi, faaliyet sonuçları, zamanlayıcı/sinyal/iptal · kabul/etki defteri (M-B15): revizyon, nesil, kök bütçe, dış etki niyet/makbuz · GitHub: commit/PR/check gerçeği · yayın makbuzu (/_surum + artefakt özeti): yayındaki sürüm · iç katalog: yetenek güveni. Değişmezler: sorun başına tek güncel nesil; In Progress'te kalmak ya da yeniden girmek terminal hatayı yeniden başlatmaz; iptal gözlendikten sonra eski nesil yayın yapamaz; makbuzsuz niyet kör yeniden denenmez, uzlaştırılır; kod işçisi politika, kabul, iş akışı tanımı, katalog güveni ve kimlik bilgisi yazamaz; CI kanıtı tam aday/taban SHA'ya, yayın kanıtı tam artefakt özetine bağlıdır; ready_for_review insan kabulü değildir.",
+      "reddedilen": [
+        "Aynı iç durumu iki motorla paralel yönetmek (n8n + Kestra + Temporal üst üste)",
+        "Defteri ikinci bir iş akışı durum makinesine dönüştürmek",
+        "Plane durum adını (UUID yerine) yetki kaynağı saymak"
+      ],
+      "kanit": [
+        "https://docs.temporal.io/develop/python/best-practices/error-handling",
+        "https://docs.github.com/en/rest/deployments/deployments"
+      ],
+      "iliskili": [
+        "M-K01",
+        "M-K10",
+        "M-B15"
+      ],
+      "codex_kaynagi": "agentic-sistem/data/02_mimari/03_yetki_ve_durum_otoriteleri.json; agentic-sistem/data/02_mimari/05_kontrat_kilitleri_ve_github.json",
+      "dogrulama": "kismen"
+    },
+    {
+      "id": "M-K14",
+      "karar": "Dış etki niyet → idempotent etki → makbuz ya da uzlaştırma zinciriyle yapılır; zaman aşımı 'olmadı' sayılmaz",
+      "uygulama": "Anahtarlar: olay = workspace_id:event_id; kabul = issue_id:generation:input_digest; aşama etkisi = run_id:aşama:etki_türü:istenen_içerik_özeti; yayın = ortam:artefakt_özeti:terfi_nesli. Yanıt kaybında önce dış gerçeklik (GitHub/dağıtım) salt okunur sorgulanır; çözülemezse terminal sonuç unknown_effect. Hiçbir motor dış dünyada tam-bir-kez garanti etmez; iptal önceden yola çıkmış etkiyi geri almaz, geç makbuz yeni nesli ezmez.",
+      "reddedilen": [
+        "Kör yeniden deneme (ikinci PR/dağıtım riski)",
+        "Motorun tam-bir-kez dış etki sağladığını varsaymak",
+        "Zaman damgasını tek idempotency kanıtı saymak"
+      ],
+      "kanit": [
+        "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+        "https://docs.temporal.io/encyclopedia/retry-policies"
+      ],
+      "iliskili": [
+        "M-K05",
+        "M-B15"
+      ],
+      "codex_kaynagi": "agentic-sistem/data/02_mimari/05_kontrat_kilitleri_ve_github.json; agentic-sistem/uygulama/evidence/qualification.json",
+      "dogrulama": "kismen",
+      "not": "Bizde birleştirme beklenen SHA ile yapıldığından ana dal yazımı zaten karşılaştır-değiştir niteliğinde; PR açma, etiket/yorum ve dağıtım tetikleme için makbuz zinciri yok."
+    },
+    {
+      "id": "M-K15",
+      "karar": "Görev revizyonu ve nesil: anlamlı girdi değişimi yeni nesil açar; eski nesil çitlenir",
+      "uygulama": "input_digest = normalize edilmiş anlamsal kabul formunun sha256'sı (otomasyon yorumları, durum, sıralama hariç). submission_kind: new | revision | explicit_retry. Durum titremesi yeni iş değildir. Yeni nesilde önceki kanıt kendiliğinden geçerli değildir; eski işçinin çıktısı lease/nesil çitiyle reddedilir. Bizdeki 'Error → insan düzeltir → In Progress' döngüsü korunur ama form özeti değiştiyse yeni nesil sayılır.",
+      "reddedilen": [
+        "Aynı koşu içinde girdinin sessizce değişmesi",
+        "Sabit insan onay kapısıyla ara düzeltme (insan yalnız girdi ve çıktıda)"
+      ],
+      "kanit": [
+        "https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks"
+      ],
+      "iliskili": [
+        "M-K08",
+        "M-K13"
+      ],
+      "codex_kaynagi": "agentic-sistem/data/02_mimari/05_kontrat_kilitleri_ve_github.json; agentic-sistem/data/04_sozlesmeler/01_gorev_formu_ve_proje_profili.json",
+      "dogrulama": "kismen"
+    },
+    {
+      "id": "M-K16",
+      "karar": "Tipli terminal sonuçlar; teknik başarı ile insan kabulü ayrı",
+      "uygulama": "ready_for_review (bizde Human Test) · needs_input · policy_blocked · failed · cancelled · unknown_effect. Done ve Rejected yalnız insan kararıdır. Bizdeki Error paketi bu tiplerden birini ve sorumluyu (ürün sahibi / test eden / platform) taşır; çalışma durumları (queued, retrying, blocked_dependency) terminal sonuç değildir.",
+      "reddedilen": [
+        "Birden çok gerçekliği tek 'Error' metnine ezmek",
+        "CI yeşilini Done saymak"
+      ],
+      "kanit": [],
+      "iliskili": [
+        "M-K03",
+        "M-K12",
+        "M-B09"
+      ],
+      "codex_kaynagi": "agentic-sistem/data/04_sozlesmeler/02_cikti_sozlesmesi.json; agentic-sistem/data/02_mimari/04_yasam_dongusu.json; agentic-sistem/yonergeler/ACCEPTANCE.md",
+      "dogrulama": "kismen"
+    },
+    {
+      "id": "M-K17",
+      "karar": "Canlılık ilerleme değildir; ilerleme yalnız bağımsız doğrulanmış kilometre taşıdır; exit 137 tek başına OOM değildir",
+      "uygulama": "Nabız, log, token, dosya değişimi, aynı özet ya da ajanın '%90 bitti' beyanı ilerleme sayılmaz. Uzun ama meşru derleme/test için görev türüne göre ölçülmüş sessizlik penceresi ve uzatılamaz aşama/görev son tarihi. OOM kararı yalnız o denemenin cgroup'unda oom_kill artışı ya da doğrulanmış çalışma zamanı OOM kaydıyla verilir. Aynı anlamsal hata yinelenirse aynı istemle yeniden başlatılmaz; strateji değişir ya da tipli terminal sonuç üretilir.",
+      "reddedilen": [
+        "Her sessiz işi körlemesine öldürmek",
+        "Bellek sorununa ölçümsüz alt ajan çoğaltmak ya da RAM yükseltmek",
+        "Scrum Master sohbet ajanını engel kaldırıcı saymak"
+      ],
+      "kanit": [
+        "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+        "https://docs.kernel.org/accounting/psi.html",
+        "https://scrumguides.org/scrum-guide.html"
+      ],
+      "iliskili": [
+        "M-K12",
+        "M-B14",
+        "M-B16",
+        "M-B17"
+      ],
+      "codex_kaynagi": "agentic-sistem/deneyler/progress-supervisor/README.md; agentic-sistem/deneyler/progress-supervisor/evidence.json; agentic-sistem/data/10_tikaniklik_ve_toparlanma/03_gozetim_ve_kurtarma.json",
+      "dogrulama": "kismen",
+      "not": "Bizim fabrika/faaliyetler/sandbox.py siniflandir() fonksiyonu kod==137'yi tek başına KaynakYetersiz sayıyor; bu kararla çelişir (bkz. arastirma/E4-codex-mimari.json celiskiler)."
+    },
+    {
+      "id": "M-K18",
+      "karar": "Gözlemci iş akışının dışında çalışır; iş akışı içi try/except tek başına yetmez",
+      "uygulama": "Temporal'da iş akışı kodundaki düz Python istisnası Workflow Task hatasına dönüşür ve süresiz yeniden denenir; iş RUNNING kalır. Determinizm hataları da iş akışı kodu içinde yakalanamaz. Bu yüzden: (1) iş akışı içi beklenmedik hata → platform eskalasyonu (bizde var), (2) temporal_workflow_task_execution_failed alarmı, (3) ayrı süreçte, ayrılmış kaynakla çalışan gözlemci geçmişte WORKFLOW_TASK_FAILED ve kuyruk yaşını izler, koşu sahibine koşullu komut gönderir. Aynı fiziksel sunucudaki ayrı konteyner host kaybına karşı arıza alanı ayırmaz.",
+      "reddedilen": [
+        "Gözlemciyi takılan iş akışı görevinin içine gömmek",
+        "Activity varsayılan sınırsız yeniden denemesini sınırsız bırakmak"
+      ],
+      "kanit": [
+        "https://docs.temporal.io/develop/python/best-practices/error-handling"
+      ],
+      "iliskili": [
+        "M-K01",
+        "M-B14",
+        "M-B16"
+      ],
+      "codex_kaynagi": "agentic-sistem/deneyler/engine-stall-probe/README.md; agentic-sistem/deneyler/engine-stall-probe/evidence.json; agentic-sistem/deneyler/engine-stall-probe/history-before-stop.json",
+      "dogrulama": "dogrulandi",
+      "not": "Deney yalnız enjekte edilmiş iş akışı kod hatasını ve durdurmayı gösterir; gerçek ajan takılması, üretim gözlemci yalıtımı veya dış etkinin güvenli iptali gösterilmedi."
+    },
+    {
+      "id": "M-K19",
+      "karar": "Evrilebilirlik: sürümlü sınırlar, ölçülmüş geçişler, gerektiğinde sınır revizyonu",
+      "uygulama": "Değişim alanları: amaç/iş kuralı, akış/organizasyon (12 ekip dahil), ajan yöntemi, orkestrasyon/durum, yetenek/araç, bilgi/hafıza, veri/alan modeli, altyapı, doğrulama/güven, tedarikçi. Değişim yeni, sınırlı ve sürümlü bir iştir: gerekçe+taban ölçüm → anlam/yetenek farkı → geçiş sözleşmesi → yalıtılmış prova → sınırlı geçiş → kademeli yaygınlaştırma → eski bağımlılığı kapatma. Açık işler için 5 geçiş yolu. Evrilebilirlik eklenti sayısıyla değil değişim eforu, ilgisiz modüle yayılma, kesinti, kayıp/çift iş, veri farkı, kabul kalitesi ve geçici köprülerin kapanmasıyla ölçülür (ayrıntı: codex-eklemeleri.json).",
+      "reddedilen": [
+        "Sabit araçlar + yalnız yapılandırma değişimi (araç değişiminde geniş yeniden yazım)",
+        "Her şeyi kapsayan evrensel eklenti çatısı (en küçük ortak özellik kümesi ve yeni kilitlenme)",
+        "Sırf tak-çıkar için her rolü ayrı mikroservis yapmak",
+        "Çalışan ajanın kendi kabul eşiğini ya da geçiş yetkisini genişletmesi"
+      ],
+      "kanit": [
+        "https://www.thoughtworks.com/insights/books/building-evolutionaryarchitectures-second-edition",
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer",
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig",
+        "https://sre.google/workbook/canarying-releases/"
+      ],
+      "iliskili": [
+        "M-B19"
+      ],
+      "codex_kaynagi": "agentic-sistem/raporlar/05-evrilebilir-fabrika.md; agentic-sistem/data/13_evrilebilirlik/01_evrilebilirlik_ihtiyaci.json; agentic-sistem/data/13_evrilebilirlik/02_degisim_sozlesmesi.json; agentic-sistem/data/13_evrilebilirlik/03_kabul_ve_sinirlar.json",
+      "dogrulama": "kismen",
+      "not": "Kaynaklar örüntüleri destekler; Codex'in 10 kabul deneyi (ET01–ET10) çalıştırılmadı, eşik değerleri null."
+    },
+    {
+      "id": "M-K20",
+      "karar": "Motor kararı (M-K01) koşulludur: geri dönüş ölçütleri ve her motorda zorunlu uygulama katmanları",
+      "uygulama": "Motordan bağımsız zorunlu katmanlar: ilerleme gözetimi, kaynak kabulü, sınırlı alt iş sahipliği, bağımsız kabul ve birleşik CI, etki uzlaştırma, bağımsız platform gözlemcisi. Geri dönüş ölçütleri: (a) n8n + denetimli kodlama servisi aynı arıza paketini daha düşük toplam işletim yüküyle geçerse, (b) sıfırdan Kestra tasarımı aynı paketi geçer ve eski olayın nedeni yapılandırma/harness olarak kanıtlanırsa, (c) Temporal mühendislik/işletim sahipliği sürdürülemezse, (d) gerçek görevler başka güvenilir servise devredilebilen kısa bağımsız API işleriyse, (e) eski fikstür testlerine rağmen gerçek ajanla nitelendirme başarısız olursa. Karşılaştırma 10 arıza sondasıyla yapılır: ilerlemesiz canlılık, sessiz model soketi, gerçek konteyner OOM, çakışan alt worktree, bölme ek yükü, iptal+geç alt sonuç, işçi ve sunucu kaybı, iş akışı görevi hata döngüsü, kendini zayıflatan kabul testi, operatörün anlaması.",
+      "reddedilen": [
+        "Motor seçimini tek başına başarı saymak",
+        "Üç motoru üst üste durum otoritesi yapmak"
+      ],
+      "kanit": [
+        "https://docs.temporal.io/develop/python/best-practices/error-handling",
+        "https://kestra.io/docs/workflow-components/retries",
+        "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.executeworkflow/"
+      ],
+      "iliskili": [
+        "M-K01",
+        "M-K10"
+      ],
+      "codex_kaynagi": "agentic-sistem/data/02_mimari/02_motor_karari_ve_alternatifler.json; agentic-sistem/data/10_tikaniklik_ve_toparlanma/02_motor_karsilastirma.json",
+      "dogrulama": "kismen",
+      "not": "Codex'in güncel üst kararı platform seçmemek (candidate=null); bizim Temporal kararımız uygulanmış koda ve uçtan uca senaryoya dayanır ve korunur. Karşılaştırmalı canlı ölçüm iki tarafta da yok. n8n çekirdek reddimizin güvenlik gerekçesi doğrulandı: GHSA-v4pr-fm98-w9pg / CVE-2026-21858, kritik, CVSS 10, n8n >=1.65.0 <1.121.0."
+    },
+    {
+      "id": "M-K21",
+      "karar": "Model çağrısından önce fiziksel çağrı rezervasyonu; kök çağrı limiti ilk kabulde sabitlenir",
+      "uygulama": "Her model çağrısı öncesinde (kök bütçe, çağrı anahtarı) çifti atomik olarak defterde ayrılır. Aynı anahtar zaten ayrılmışsa önceki fiziksel çağrının sonucu bilinmiyor sayılır ve model çağrısı sessizce tekrarlanmaz. Kök çağrı limiti (max_agent_calls) ilk kabulde yazılır; yeni nesil onu sıfırlayamaz ya da artıramaz. Bizde karşılığı: çağrıdan önce rol başına tahmini_usd ile bütçe denetimi ve gorev_defteri ile iş kaleminin tüm koşularında toplam maliyet tavanı (M-K04); çağrı sayısı rezervasyonu ve 'sonucu bilinmeyen çağrı' işareti yok.",
+      "reddedilen": [
+        "Çağrıdan sonra sayaç artırmak (çökme penceresinde sayılmayan çağrı)",
+        "Faaliyet yeniden denemesinde model çağrısını kör tekrarlamak",
+        "Yeni nesilde bütçeyi yeniden açmak"
+      ],
+      "kanit": [],
+      "iliskili": [
+        "M-K04",
+        "M-B10",
+        "M-B15"
+      ],
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/ledger.py (reserve_call); agentic-sistem/uygulama/tests/test_contracts.py (test_root_budget_cannot_reset_or_increase_in_new_generation)",
+      "dogrulama": "kismen",
+      "not": "Kod ve birim testi adı okundu; testler yeniden çalıştırılmadı. Codex'in kuralı katıdır: çökme sonrası aynı adımın yeniden denenmesi reddedilir; gerçek sağlayıcı istek kimliğiyle uzlaştırma yok."
+    },
+    {
+      "id": "M-K22",
+      "karar": "Görev verisi kabuk koduna ya da argv'ye dönüşmez; ajan aracısı sabit argv ve stdin ile çağrılır",
+      "uygulama": "Görev metni, yorumlar ve depo içeriği yalnız veri kanalından (stdin JSON ya da dosya) ajana gider. Çalıştırıcı komutu operatör yapılandırmasından gelir, sabit argv ile ve shell=False başlatılır; çalıştırılabilirin ve çağrı manifestinin özeti sabitlenir (M-B20). Yalıtımı aracı değil konteyner/gVisor sağlar. Bizde bugün: istem dosyaya yazılır, bash -lc içinde claude -p \"$(cat dosya)\" ile tek argv argümanı olarak verilir; komut ikamesi çift tırnak içinde yeniden yorumlanmadığı için görev metni kabuk kodu olmaz, ama tek argüman sınırı (~128 KiB, E2BIG) ve süreç listesinde görünürlük kalır.",
+      "reddedilen": [
+        "Görev metnini kabuk komutuna birleştirmek",
+        "Depo ya da görevden gelen komutları ana makinede çalıştırmak",
+        "Özetsiz, sürümü kayan çalıştırıcı ikilisi"
+      ],
+      "kanit": [
+        "https://man7.org/linux/man-pages/man2/execve.2.html",
+        "https://docs.python.org/3/library/subprocess.html#security-considerations"
+      ],
+      "iliskili": [
+        "M-K07",
+        "M-B04",
+        "M-B05",
+        "M-B20"
+      ],
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/adapters.py; agentic-sistem/uygulama/README.md (Trust sınırı)",
+      "dogrulama": "dogrulandi",
+      "not": "execve sınırı man7 belgesinden doğrulandı. Codex aracısı bağlanmamış (qualified=False); bizim konteyner yalıtımımız Codex'te yok."
+    },
+    {
+      "id": "M-K23",
+      "karar": "Dürüst durum kaydı: mimaride ele alındı / uygulandı / denendi / canlıda sınandı ayrı alanlardır",
+      "uygulama": "Her bileşen, ihtiyaç eşlemesi ve yetenek kaydı en az şu ayrımı taşır: implemented (kod var), exercised (hangi test/senaryo, gerçek mi fikstür mü), pending (eksik ve nedeni); ihtiyaç eşlemesinde mimaride_ele_alindi, uygulandi, tested_live. Fikstür çıktısı demo=true taşır; gerçek model/GitHub/dağıtım çalışmadıysa bunlar ayrı bayraklarla false yazılır. Sayılar (test adedi, eşlenen ihtiyaç) kabul kanıtı değildir ve farklı kanıt grupları toplanmaz.",
+      "reddedilen": [
+        "Haritada yer almayı uygulama saymak",
+        "Fikstür yeşilini canlı başarı saymak",
+        "Farklı deney gruplarının sayılarını toplayıp tek başarı sayısı vermek"
+      ],
+      "kanit": [],
+      "iliskili": [
+        "M-K03"
+      ],
+      "codex_kaynagi": "agentic-sistem/uygulama/status.json; agentic-sistem/data/03_izlenebilirlik/01_113_ihtiyac_mimari_esleme.json; agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json",
+      "dogrulama": "dogrulandi",
+      "not": "Bizim bilesenler.json 'durum' alanı tek değerli (uygulandi / uygulandi-kismen / sablon / onerildi); 'denendi' ve 'canlida_sinandi' ayrımı yok. codex-eklemeleri.json izlenebilirlik bölümü bu ayrımı bileşen düzeyinde ekler."
+    },
+    {
+      "id": "M-K24",
+      "karar": "Depo, ortam ve Plane durumu operatör eşlemesinden gelir; 'alpha' ortam adıdır, depo adı değil",
+      "uygulama": "Proje eşlemesi tam owner/repo, taban dal, ortam (alpha), hostname (alpha.*), Plane workspace/proje/durum UUID'leri ve yetkili aktörleri tutar; görev metni depo, host ya da yetki seçemez. GitHub'da depo adı sahip başına tekildir; aynı sahip altında ikinci bir 'alpha' deposu açılamaz, bu yüzden projeler ayrı adlar (ör. <proje>-alpha) ya da ayrı sahipler kullanır. Bizde config/projeler.yaml tam owner/repo tutuyor (uyumlu); durum eşleşmesi ada göre (sinyal_turu) ve yetkili aktör denetimi yok.",
+      "reddedilen": [
+        "Görev metninden depo/host çıkarmak",
+        "Plane durum adını UUID yerine yetki anahtarı yapmak"
+      ],
+      "kanit": [
+        "https://docs.github.com/en/repositories/creating-and-managing-repositories/transferring-a-repository",
+        "https://docs.github.com/en/rest/repos/repos"
+      ],
+      "iliskili": [
+        "M-K05",
+        "M-K08",
+        "M-B01"
+      ],
+      "codex_kaynagi": "agentic-sistem/uygulama/README.md (Girdi / çıktı); agentic-sistem/uygulama/examples/project-mapping.json; agentic-sistem/uygulama/agentic_factory/adapters.py (GitHubGateway exact owner/repo)",
+      "dogrulama": "dogrulandi",
+      "not": "GitHub belgesi: 'The target account must not have a repository with the same name' ve REST adresleme {owner}/{repo}; ad tekilliği dolaylı birincil kanıtla doğrulandı."
+    },
+    {
+      "id": "M-K25",
+      "karar": "Plane webhook: imza her sürümde ham gövdenin HMAC-SHA256'sı (X-Plane-Signature); gövde sürümü kurulu Plane ile sözleşme testinden seçilir",
+      "uygulama": "Doğrulama ham bayt üzerinden, sabit zamanlı karşılaştırmayla. Topluluk sürümü (açık kaynak) v1 biçimi gönderir: {event, action, webhook_id, workspace_id, workspace_slug, data, activity}, sürüm alanı ve event_id yok; tekilleştirme için X-Plane-Delivery her denemede yenidir, bu yüzden iş akışı kimliği ve uzlaştırıcı kullanılır. Plane geliştirici belgesi v2 zarfını (version=v2, event_id, workitem.updated, previous_attributes) tanımlar ama sürüm/edisyon belirtmez. Plane yalnız ağ hatasında 5 kez (600 sn geri çekilme) yeniden dener; HTTP 5xx yanıtını yeniden denemez; 5 ağ başarısızlığından sonra webhook'u devre dışı bırakır. Bu yüzden uzlaştırıcı zorunlu ve webhook etkinliği izlenmeli.",
+      "reddedilen": [
+        "Yalnız v2 zarfını kabul etmek (CE'de her olay reddedilir)",
+        "Ayrıştırılmış/yeniden serileştirilmiş gövdeyle imza doğrulamak"
+      ],
+      "kanit": [
+        "https://github.com/makeplane/plane/blob/preview/apps/api/plane/bgtasks/webhook_task.py",
+        "https://developers.plane.so/dev-tools/intro-webhooks"
+      ],
+      "iliskili": [
+        "M-K08",
+        "M-B02"
+      ],
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/adapters.py (verify_plane_webhook: version=='v2' ve workitem.* olayları zorunlu); agentic-sistem/uygulama/deploy/UBUNTU-RUNBOOK.md madde 4",
+      "dogrulama": "dogrulandi",
+      "not": "makeplane/plane preview dalı (2026-09-25 itmesi), webhook_task.py blob 5184ae61: v2 alanları depoda yok (gh code search: previous_attributes, delivery_id bulunmadı). Bizim v1 ayrıştırıcımız CE için doğru; Codex bunu kendisi 'kurulu sürümü nitelendir' diye koşullamış."
+    }
+  ]
+}

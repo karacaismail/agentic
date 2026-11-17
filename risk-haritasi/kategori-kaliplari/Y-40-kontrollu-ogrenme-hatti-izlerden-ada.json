@@ -1,0 +1,126 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-40",
+    "ad": "Kontrollü öğrenme hattı (izlerden aday iyileştirme, gizli değerlendirme, onaylı yayın, geri dönüş)",
+    "grup": "Değerlendirme ve öğrenme"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-208",
+      "yetenek_sinifi": "Y-40",
+      "kalip": "Kendi çıktısıyla öğrenmede çöküş",
+      "aciklama": "Nature'da yayımlanan çalışma, modellerin özyinelemeli olarak üretilmiş veriyle eğitildiğinde dağılımın kuyruklarını kaybederek çöktüğünü gösterdi. Ajan izlerinden otomatik talimat ve skill üretimi de benzer bir geri besleme döngüsüdür.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.nature.com/articles/s41586-024-07566-y"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların kendi başarılı izlerinden öğrenilen kurallar zamanla nadir ama önemli durumları (hata yolları, erişilebilirlik) dışlar.",
+        "Öğrenme hattı yalnız ajan çıktısıyla beslenirse kurum bilgisi daralır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-009",
+        "N-K08-006"
+      ],
+      "ornek_araclar": [
+        "DSPy optimizers",
+        "Prompt optimization araçları",
+        "Ajan bellek sistemleri"
+      ],
+      "erken_sinyal": "Öğrenilen kuralların çeşitliliğinde azalma; nadir görev türlerinde başarı düşüşü.",
+      "azaltma": "İnsan kaynaklı ve olay kaynaklı verinin zorunlu payı, gizli değerlendirmede nadir durum kapsamı, onaylı yayın ve geri dönüş."
+    },
+    {
+      "id": "RK-209",
+      "yetenek_sinifi": "Y-40",
+      "kalip": "Zehirli izlerin kalıcı davranışa dönüşmesi",
+      "aciklama": "'Sleeper Agents' çalışması, eğitimle yerleştirilen arka kapıların sonraki güvenlik eğitimine rağmen kalıcı olabildiğini gösterdi; AgentPoison ve MINJA ise ajan belleği ve bilgi tabanının zehirlenebildiğini gösterdi.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2401.05566",
+        "https://arxiv.org/abs/2407.12784",
+        "https://arxiv.org/abs/2503.03704"
+      ],
+      "yasatacagi_sorunlar": [
+        "İstem enjeksiyonu içeren bir görevin izi 'iyi örnek' olarak öğrenme hattına girerse zararlı davranış skill veya talimata dönüşüp tüm ekiplere yayılır.",
+        "Sonradan fark edildiğinde hangi sürümlerin etkilendiğini bulmak için köken bilgisi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-009",
+        "N-K08-006",
+        "N-K14-005"
+      ],
+      "ornek_araclar": [
+        "Ajan bellek sistemleri",
+        "İnce ayar hatları",
+        "Otomatik skill üreticileri"
+      ],
+      "erken_sinyal": "Öğrenme adaylarında dış içerikten gelen metin parçaları; aday sonrası güvenlik eval skorunda düşüş.",
+      "azaltma": "Öğrenme adaylarının köken filtresi, dış içerikten türetilen izlerin dışlanması, gizli güvenlik değerlendirmesi ve insan onayı."
+    },
+    {
+      "id": "RK-210",
+      "yetenek_sinifi": "Y-40",
+      "kalip": "Ödül kurcalama ve ölçüte aşırı uyum",
+      "aciklama": "Anthropic'in 'Sycophancy to Subterfuge' çalışması, basit ölçüt oyunlarına maruz kalan modellerin daha ciddi ödül kurcalamaya (kendi ödül fonksiyonunu değiştirme) genelleşebildiğini gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2406.10162"
+      ],
+      "yasatacagi_sorunlar": [
+        "Öğrenme hattı yalnız görünür eval skoruna göre aday seçerse, 'daha iyi' bulunan talimatlar aslında testleri atlatmayı öğretir.",
+        "İyileşme raporları gerçek kaliteyi değil ölçütün zayıflığını yansıtır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-009",
+        "N-K23-011"
+      ],
+      "ornek_araclar": [
+        "DSPy",
+        "promptfoo",
+        "Otomatik istem optimizasyonu"
+      ],
+      "erken_sinyal": "Eval skoru artarken üretimde kaçan hata veya insan düzeltme oranının artması.",
+      "azaltma": "Aday seçiminde görünür ve gizli setin ayrılması, hile dedektörü, üretim içi metriklerle doğrulama."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 22,
+    "yuksek": 4,
+    "kritik": 2,
+    "dusuk": 34
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 9,
+    "RT-11": 7,
+    "RT-10": 7,
+    "RT-02": 6,
+    "RT-03": 5,
+    "RT-01": 5,
+    "RT-16": 4,
+    "RT-15": 4,
+    "RT-06": 3,
+    "RT-14": 2,
+    "RT-04": 2,
+    "RT-07": 2,
+    "RT-05": 2,
+    "RT-09": 2,
+    "RT-13": 1
+  }
+}

@@ -1,0 +1,992 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K05",
+    "ad": "Doğrulama, test oracle ve kalite kapıları",
+    "alan": "A-deger-akisi",
+    "amac": "'Testler yeşil' ile 'iş doğru' arasındaki farkın kapatılması: beklentinin bağımsız kaynaktan gelmesi, testin gücünün ölçülmesi, kapıların kanıta dayanması.",
+    "kapsam": [
+      "test-önce disiplini ve RED kanıtı",
+      "test bütünlüğü",
+      "rol ve bağlam ayrımı",
+      "beklenti (oracle) kaynağı",
+      "test gücü",
+      "kenar durumlar",
+      "metamorfik/diferansiyel doğrulama",
+      "deterministik kapılar",
+      "yapay zekâ denetiminin sınırları",
+      "arayüz, cihaz ve erişilebilirlik doğrulaması",
+      "içerik doğruluğu",
+      "kanıt paketi",
+      "tamamlanma tanımı (DoD)"
+    ],
+    "kapsam_disi": [
+      "yayın ortamları (K06)",
+      "insan onay mekanizması (K17)"
+    ],
+    "komsu_kumeler": [
+      "K01",
+      "K04",
+      "K06",
+      "K17",
+      "K19",
+      "K23"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K05-001",
+      "baslik": "Test-önce disiplini ve kabul kriteri–test eşlemesi",
+      "ihtiyac": "Kabul kriterlerine karşılık gelen otomatik testlerin geliştirmeden önce yazılması; her kriterin en az bir teste eşlenmesi.",
+      "cozulecek_sorun": "Test sonradan ve koda uydurularak yazılıyor; bazı kriterler hiç test edilmiyor.",
+      "yetenek_siniflari": [
+        "Y-20"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her kabul kriteri ≥1 teste eşli.",
+        "Test edilemeyen kriter varsa gerekçesi ve alternatif doğrulama yöntemi yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-052",
+          "S-048",
+          "S-018",
+          "S-129"
+        ],
+        "not": "%100 kriter–test eşlemesi testin gücünü ölçmez; bkz. test gücü ihtiyacı."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-024",
+        "G-032",
+        "Q-040"
+      ],
+      "bagimliliklar": [
+        "N-K01-005"
+      ]
+    },
+    {
+      "id": "N-K05-002",
+      "baslik": "RED kanıt kapısı",
+      "ihtiyac": "Yeni testin, kod yazılmadan önce beklenen nedenle başarısız olduğunun bağımsız çalıştırıcıyla kanıtlanması; RED kanıtı olmadan kodlamanın başlamaması.",
+      "cozulecek_sorun": "Kırmızı görülmemiş test hiçbir şey ölçmüyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "RED kanıtı kaydı olmadan kodlama adımı başlamaz.",
+        "Derleme veya ortam hatası RED sayılmaz."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-052",
+          "S-013",
+          "S-007",
+          "S-010",
+          "S-062"
+        ],
+        "not": "Kaynaklar arasında katılık farkı var: bir yerde 'mümkün olan yerlerde', diğerinde mutlak kural."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-004",
+        "C-007",
+        "D-006"
+      ],
+      "bagimliliklar": [
+        "N-K05-001"
+      ]
+    },
+    {
+      "id": "N-K05-003",
+      "baslik": "RED dışı sonuçların triyajı",
+      "ihtiyac": "Testin kırmızı olmadığı durumların sınıflanması: erken yeşil (davranış zaten var mı, test zayıf mı?), yanlış nedenle hata (test düzeltme, sınırlı), altyapı hatası (sınırlı tekrar, sonra altyapı engeli).",
+      "cozulecek_sorun": "Yanlış sınıflanan başarısızlık yanlış role gidiyor; zayıf test 'davranış zaten var' diye geçiyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "RED dışı her sonuç sınıflanıyor; sınıfsız kayıt 0.",
+        "Erken yeşilde test gücü denetimi yapılıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-007",
+          "S-018",
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-005",
+        "D-006"
+      ],
+      "bagimliliklar": [
+        "N-K05-002"
+      ]
+    },
+    {
+      "id": "N-K05-004",
+      "baslik": "İş türüne göre test stratejisi",
+      "ihtiyac": "Yeni özellik, hata düzeltme ve yeniden düzenleme için farklı beklenen ilk sonuç (yeni özellikte kırmızı, hata düzeltmede hatanın yeniden üretilmesi, yeniden düzenlemede yeşil) ve normal + hata + sınır senaryolarının zorunlu olması.",
+      "cozulecek_sorun": "Her işe aynı test şablonu uygulanıyor; yeniden düzenlemede testleri zorla kırmızıya çevirmeye çalışılıyor.",
+      "yetenek_siniflari": [
+        "Y-20"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İş türüne göre beklenen ilk sonuç tanımlı ve denetleniyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-009",
+          "S-008"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-005"
+      ],
+      "bagimliliklar": [
+        "N-K01-012"
+      ]
+    },
+    {
+      "id": "N-K05-005",
+      "baslik": "Test bütünlüğünün korunması",
+      "ihtiyac": "Testlerin, kabul kriterlerinin, eşiklerin, toleransların, maskelerin ve görsel referansların uygulayıcı tarafından silinememesi, atlanamaması, zayıflatılamaması ve toplu yenilenememesi; test/beklenti değişikliğinin ayrı risk sınıfında, ayrı onayla ele alınması ve otomatik tespiti.",
+      "cozulecek_sorun": "Ajanlar testi değiştirerek 'geçiyor'; toleranslar sessizce gevşetiliyor, toplu referans güncellemesiyle hatalar maskeleniyor.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-22",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Test/beklenti/eşik değişikliği otomatik yüksek risk etiketi alıyor ve ayrı onay olmadan birleşemiyor.",
+        "Silinen doğrulama ifadesi ve atlanan test otomatik tespit ediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-052",
+          "S-009",
+          "S-001",
+          "S-002",
+          "S-112"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "R-004",
+        "U-006"
+      ]
+    },
+    {
+      "id": "N-K05-006",
+      "baslik": "Beklenti, üretim ve kabul rollerinin ayrılması",
+      "ihtiyac": "Beklentiyi (testi) yazan, kodu yazan ve kabulü denetleyen rollerin ayrı olması; aynı ajan kimliğinin hem testi hem kodu onaylayamaması; geçti/kaldı sonucunun yalnız bağımsız çalıştırıcıdan gelmesi.",
+      "cozulecek_sorun": "Kendi işini onaylayan ajan; kod ile beklentinin aynı varsayımı paylaşması.",
+      "yetenek_siniflari": [
+        "Y-07",
+        "Y-20",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Aynı kimlik hem beklentiyi hem kodu onaylayamaz.",
+        "Başarı kaydını yalnız çalıştırıcı kimliği yazabilir."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-007",
+          "S-052",
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-004",
+        "D-006",
+        "Q-036",
+        "U-026"
+      ]
+    },
+    {
+      "id": "N-K05-007",
+      "baslik": "Doğrulayıcının bağlam yalıtımı",
+      "ihtiyac": "Doğrulayıcının yalnız gereksinimi ve üretilen çıktıyı (çalışan ekran, arayüz cevabı) görmesi; kod farkını ve uygulayıcının gerekçesini görmemesi; gizli (uygulayıcıya gösterilmeyen) kabul testlerinin kullanılması.",
+      "cozulecek_sorun": "Doğrulayıcı kodu okuyup ikna oluyor; görünür teste aşırı uyum sağlanıyor.",
+      "yetenek_siniflari": [
+        "Y-07",
+        "Y-22"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Doğrulayıcı girdisinde kod farkı yok.",
+        "Otomatik birleştirme yapılan alanlarda gizli kabul testleri var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-112"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-003"
+      ],
+      "bagimliliklar": [
+        "N-K05-006"
+      ]
+    },
+    {
+      "id": "N-K05-008",
+      "baslik": "Koddan ayrı, sürümlü beklenti deposu ve totoloji yasağı",
+      "ihtiyac": "Beklenen değerlerin koddan ayrı, sürümlü bir beklenti deposundan gelmesi; beklentinin kaynak koddan veya mevcut çıktıdan türetilmesinin (totolojik test) yasaklanması.",
+      "cozulecek_sorun": "Ajan 'kendi kağıdını okuyor'; modeller beklenen değil mevcut davranışı onaylayan test yazmaya eğilimli.",
+      "yetenek_siniflari": [
+        "Y-22",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Beklenti değişikliği ayrı onaydan geçiyor.",
+        "Koddan türetilmiş beklenti tespit edilip reddediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003",
+          "S-128",
+          "S-008"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-018",
+        "R-003",
+        "U-005"
+      ]
+    },
+    {
+      "id": "N-K05-009",
+      "baslik": "Test gücünün ölçülmesi",
+      "ihtiyac": "Testin bilinen hatalı sürümde kırıldığının gösterilmesi; hata enjeksiyonu/mutasyonla yakalama oranının ölçülmesi; kritik modüller için eşik tanımlanması.",
+      "cozulecek_sorun": "Yeşil ama anlamsız testler; %100 kriter eşlemesi gücü göstermiyor.",
+      "yetenek_siniflari": [
+        "Y-22"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Kritik modüllerde yakalama oranı eşiği tanımlı ve altı 'düşük güven' etiketi alıyor.",
+        "Regresyon testleri hatalı sürümde kırmızı, düzeltilmiş sürümde yeşil."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-010",
+          "S-013",
+          "S-062",
+          "S-130"
+        ],
+        "not": "Eşik değeri kaynaklarda tanımlanmamış; zorunluluğu kaynaklar arasında farklı (zorunlu / seçici / yok)."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası",
+      "iliskili": [
+        "A-018",
+        "C-030",
+        "D-010",
+        "G-004",
+        "Q-006",
+        "Q-027",
+        "R-003",
+        "U-005"
+      ]
+    },
+    {
+      "id": "N-K05-010",
+      "baslik": "Kenar durum matrisi",
+      "ihtiyac": "Davranış üreten her görev için normal akış, sınır değer, boş/eksik veri, hatalı veri, yetki ve bağımlılık hatası perspektiflerinin; eşzamansız veya dış çağrı varsa eşzamanlılık, yeniden deneme, zaman aşımı ve idempotency senaryolarının çıkarılıp teste bağlanması.",
+      "cozulecek_sorun": "Sınır ve hata durumları atlanıyor.",
+      "yetenek_siniflari": [
+        "Y-22"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Davranış üreten her görevde matris var ve her hücre bir teste bağlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-034",
+          "S-018",
+          "S-028"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K05-001"
+      ]
+    },
+    {
+      "id": "N-K05-011",
+      "baslik": "Metamorfik, özellik tabanlı, diferansiyel ve değişmez tabanlı doğrulama",
+      "ihtiyac": "Her girdinin beklenen çıktısını önceden yazmak mümkün olmadığında girdiler arası ilişkilerin (dar ekranda işlevin korunması, tema değişip dönünce durumun korunması vb.), özelliklerin, bağımsız ikinci uygulamayla karşılaştırmanın ve önceki sürümden çıkarılan değişmezlerin kullanılması.",
+      "cozulecek_sorun": "Tam beklenti yazılamayan alanlarda oracle yok.",
+      "yetenek_siniflari": [
+        "Y-22"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Kritik ekran/algoritma başına onaylı ilişki listesi var.",
+        "Çıkarılan değişmezler insan filtresinden geçiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-004",
+          "S-002"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K05-012",
+      "baslik": "Deterministik kapıların yapay zekâ denetiminden önce koşması",
+      "ihtiyac": "Derleme, biçim, statik analiz, tip, birim ve entegrasyon testleri, güvenlik taraması, erişilebilirlik ve performans kontrollerinin yorumsuz geçer/kalır kapılar olarak yapay zekâ denetiminden önce koşması; kalan hataların sınırlı denemeyle düzeltmeye dönmesi; sonucun revizyon kimliğine bağlanması.",
+      "cozulecek_sorun": "Bariz hatalar pahalı yapay zekâ denetimini tüketiyor. Güçlü otomatik test olmadan artan değişiklik hacmi kararsızlık getiriyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-21"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Yapay zekâ denetimine giden işlerde deterministik kırmızı 0.",
+        "Kapı sonucu dil modeline yorumlatılmıyor.",
+        "Eski yeşil sonuç yeni revizyona taşınmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-013",
+          "S-062",
+          "S-102"
+        ],
+        "not": "Kapının akıştaki yeri kaynaklar arasında farklı."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-008"
+      ]
+    },
+    {
+      "id": "N-K05-013",
+      "baslik": "Kararsız, atlanan ve boş testlerin başarı sayılmaması",
+      "ihtiyac": "Kararsız (flaky), atlanmış ve boş test paketlerinin geçti sayılmaması; kararsız testlerin tespiti, karantinası, sahibi ve yeniden çalıştırma politikası.",
+      "cozulecek_sorun": "Kaynaklar 'kararsız test başarı sayılmaz' diyor ama tespit, karantina ve sahiplik süreci tanımlamıyor; ölçekte kararsız testler akışı tıkar.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-27"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Kararsız test oranı ölçülüyor ve karantinadaki her testin sahibi ve süresi var.",
+        "Atlanan/boş paket geçti sayılmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "iliskili": [
+        "G-016",
+        "R-027"
+      ]
+    },
+    {
+      "id": "N-K05-014",
+      "baslik": "'Test edilmedi' durumu ve çok boyutlu kanıt raporu",
+      "ihtiyac": "Tek geçti/kaldı yerine her kalite boyutunun (işlev, erişilebilirlik, performans, güvenlik, cihaz vb.) durumunun raporlanması; çalıştırılamayan kontrolün 'test edilmedi' olarak ayrı işaretlenmesi; zorunlu boyutta 'test edilmedi' varken teslim kapısının açılmaması.",
+      "cozulecek_sorun": "'Tüm testler yeşil' ifadesi test edilmeyen alanları gizliyor ve otomasyon yanlılığı yaratıyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Zorunlu boyutlarda boş durum yok.",
+        "'Test edilmedi' varken teslim kapısı kapalı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-007",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "R-030"
+      ]
+    },
+    {
+      "id": "N-K05-015",
+      "baslik": "Bağımsız inceleme: niyet–kod uyumu ve hile taraması",
+      "ihtiyac": "Değişiklik açıklaması ile gerçek kod farkının karşılaştırılması; gizli test silme, kapsam dışı değişiklik ve test/eşik gevşetmesinin taranması; gereksinim ile çıktı arasındaki anlamsal kaymanın ölçülmesi.",
+      "cozulecek_sorun": "Testi geçen ama şartnameye uymayan kod; açıklaması ile içeriği uyuşmayan değişiklik; uzun iterasyonda hedef kayması.",
+      "yetenek_siniflari": [
+        "Y-07",
+        "Y-22"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Açıklanmayan test silme otomatik reddediliyor.",
+        "Kayma eşiği aşılınca insan incelemesi başlıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-013",
+          "S-010",
+          "S-001"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K05-016",
+      "baslik": "Yapay zekâ denetçisinin sınırları ve kalibrasyonu",
+      "ihtiyac": "Yapay zekâ denetçisinin yazardan farklı model ailesinden ve ayrı oturumda çalışması; çoklu deneme; cevabı bilinen kalibrasyon setiyle düzenli ölçülmesi; sıra/uzunluk/kendi ailesini kayırma yanlılıklarının kontrolü; kalibrasyon düşerse onay yetkisinin askıya alınması; yanlış alarm maliyetinin ölçülmesi.",
+      "cozulecek_sorun": "Yapay zekâ hakemi yanlı; model güncellemesiyle sessizce geriliyor; farklı model eklemek bağımsız şartname sağlamıyor.",
+      "yetenek_siniflari": [
+        "Y-29",
+        "Y-07"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Denetçinin kalibrasyon sonucu eşik altındaysa onay yetkisi otomatik askıda.",
+        "Duyarlılık ve yanlış alarm oranı birlikte raporlanıyor.",
+        "Birden fazla ajan veya denetçinin aynı beklentiyi tekrarlaması bağımsız kanıt sayılmıyor; ortak varsayıma dayanan uzlaşı ayrıca işaretleniyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003",
+          "S-028",
+          "S-140",
+          "S-095"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-009",
+        "C-021",
+        "C-029",
+        "D-011",
+        "U-025"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T04; ihtiyac-kumeleri/kumeler/04_dogruluk_ve_urun_nitelikleri/01_oracle_test_ve_kanit.json#I11-09",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://arxiv.org/abs/2306.05685"
+      ],
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K05-017",
+      "baslik": "Arayüz doğrulama: görsel referans yönetimi",
+      "ihtiyac": "Görsel karşılaştırmanın 'değişim alarmı' olarak ele alınması; referansın bağlamıyla (görüntü alanı, yazı tipi, veri, tema, etkileşim) saklanması; ortam parmak izi değişince referansın geçersiz sayılması; referansların periyodik ve hedef değişince yeniden onaylanması; kritik bölge ve oran aralığı doğrulamaları; eşik/maskenin ölçülmüş yanlış alarm/kaçırma oranıyla seçilmesi.",
+      "cozulecek_sorun": "Kusurlu ilk referans sonsuza dek korunuyor; tam sayfa eşiği ince kusurları gizliyor; maske içerik kaybını örtüyor.",
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Onaysız referans oracle sayılmıyor.",
+        "Her eşik için yanlış alarm/kaçırma ölçüm belgesi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-002",
+          "S-003"
+        ],
+        "not": "Onayın geçerlilik süresi ve kimin yenileyeceği kaynaklarda netleşmemiş."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-006",
+        "C-027",
+        "C-028",
+        "R-003"
+      ]
+    },
+    {
+      "id": "N-K05-018",
+      "baslik": "Gerçek cihaz kabul kapısı ve cihaz/tarayıcı matrisi",
+      "ihtiyac": "Yayından önce kritik kullanıcı yolculuklarının gerçek cihazda doğrulanması; yazılı cihaz/işletim sistemi/tarayıcı matrisi; dinamik durumlar (ekran yönü, klavye açılması, güvenli alan, dinamik görüntü alanı, yazı tipi yükleme), fiziksel dokunma ve hesaplanmış etkileşim hedefi ölçümü.",
+      "cozulecek_sorun": "Headless ortam dokunma gecikmesini, yazı tipi yüklemesini, çentiği ve adres çubuğunu yansıtmıyor.",
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Kritik yolculukta cihaz kanıtı yoksa yayın yok.",
+        "Cihaz matrisi yazılı ve sahibi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-006",
+        "Q-029"
+      ]
+    },
+    {
+      "id": "N-K05-019",
+      "baslik": "Erişilebilirlik doğrulaması",
+      "ihtiyac": "Yapısal erişilebilirlik kontrollerinin kapıda derlemeyi kırması; odak sırasının ölçülmesi; standart ölçütlerde makine ve insan payının alt kontrol düzeyinde ayrılması ve her ölçüt için uygulanabilirlik kaydı; kontrastla birlikte hesaplanan yazı ağırlığı/boyutunun ve algısal okunabilirliğin insanla onaylanması.",
+      "cozulecek_sorun": "Otomatik araçlar erişilebilirliğin yalnız bir kısmını yakalıyor; 'skor 100 = uyum' yanılgısı yaygın; kontrastı geçen metin silik kalabiliyor.",
+      "yetenek_siniflari": [
+        "Y-23"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Hedef uyum düzeyindeki her ölçüt için makine/insan kanıtı kayıtlı.",
+        "Adı boş etkileşimli öğe 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003",
+          "S-132"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-037",
+        "U-027"
+      ]
+    },
+    {
+      "id": "N-K05-020",
+      "baslik": "İçerik doğruluğunun yetkili kaynakla eşlenmesi",
+      "ihtiyac": "Fiyat, isim, tutar gibi kritik verinin ekranda yetkili kayıt sistemiyle uçtan uca eşlenmesi; modelin belleğinin oracle sayılmaması.",
+      "cozulecek_sorun": "Dil modeli uydurma değer üretiyor; ekranda görünmek doğru olmak demek değil.",
+      "yetenek_siniflari": [
+        "Y-20"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Kritik alanların %100'ü yetkili kaynakla eşli; uyuşmazlık yayını durduruyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-003"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K05-021",
+      "baslik": "Örtük oracle katmanı",
+      "ihtiyac": "Çökme, istisna, konsol ve ağ hatası, zaman aşımı ve bariz performans bozulmasının her kritik akışta otomatik yakalanması.",
+      "cozulecek_sorun": "Beklenti yazılmamış bariz hatalar kaçıyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kritik akışta konsol/ağ hatası 0.",
+        "Kritik akışlarda tohumlu rastgele etkileşim keşfi örtük oracle ile koşuyor; bulunan hata aynı tohum ve eylem kaydıyla yeniden üretilebiliyor; rastgele keşif tek başına iş kabulü yerine geçmiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-004",
+          "S-003",
+          "S-096"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F09",
+      "dogrulama": "kismen",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K05-022",
+      "baslik": "Kusur sınıfı → doğrulayıcı ve risk → test kümesi eşlemesi",
+      "ihtiyac": "Her kusur sınıfı için hangi doğrulayıcının (makine, yapay zekâ, insan) ne düzeyde güvenilir olduğunun ve risk sınıfına göre hangi ek doğrulamaların zorunlu olduğunun tablolaştırılması.",
+      "cozulecek_sorun": "'Riske göre seç' deniyor ama eşleme tanımlı değil; 'test yeşil' ile 'kanıt yeterli' arasındaki bağ görünmüyor.",
+      "yetenek_siniflari": [
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her risk sınıfı için zorunlu doğrulama kümesi yazılı.",
+        "Kapanan kusurlarda kayıt şablonunun tüm alanları dolu."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-003",
+          "S-007"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-029",
+        "D-011"
+      ],
+      "bagimliliklar": [
+        "N-K21-001"
+      ]
+    },
+    {
+      "id": "N-K05-023",
+      "baslik": "Kalite eşiklerinin sayısal tanımı",
+      "ihtiyac": "Test gücü skoru, performans bütçesi, güvenlik bulgu seviyesi, erişilebilirlik uyum düzeyi, görsel fark eşiği, hakem kalibrasyon eşiği gibi kapı eşiklerinin sayısal ve sürümlü tanımlanması.",
+      "cozulecek_sorun": "Kapılar var ama eşikleri yok; aynı kapı ekipten ekibe farklı uygulanıyor.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip sayısı arttıkça portföy/ART/ekip katmanlı eşik yönetimi gerekir (alt katman yalnız sıkılaştırabilir).",
+      "kabul_olcutleri": [
+        "Her kapının eşiği sürümlü yapılandırmada tanımlı ve koşu başında sabitleniyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-007",
+          "S-046"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-004",
+        "Q-028"
+      ]
+    },
+    {
+      "id": "N-K05-024",
+      "baslik": "Arka uç, arayüz ve veri doğrulaması",
+      "ihtiyac": "Arka uç ve arayüzler için sözleşme testleri, veri bütünlüğü, göç doğrulaması ve olay (event) sözleşmesi kontrollerinin oracle kapsamına alınması.",
+      "cozulecek_sorun": "Oracle kaynakları büyük ölçüde ön yüz odaklı; arka uç ve veri oracle'ı yalnız dolaylı geçiyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-22"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Arka uç işlerinde sözleşme ve veri bütünlüğü kanıtı zorunlu.",
+        "Arayüzden yapılan işlemin kalıcı veri deposuna doğru yansıdığı ve tekrarında çift kayıt oluşmadığı uçtan uca doğrulanıyor; ekran görüntüsü tek başına veri etkisinin kanıtı sayılmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-001",
+          "S-030",
+          "S-096"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-021"
+      ],
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F10",
+      "dogrulama": "kismen",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K05-025",
+      "baslik": "İnsan davranış kabulü",
+      "ihtiyac": "Ürün davranışının gösterim ortamında insan tarafından kabul edilmesi ve reddin doğru aşamaya (inceleme veya spesifikasyon) dönmesi.",
+      "cozulecek_sorun": "Şartnameye uyan ama istenmeyen ürün çıkıyor. Kaynaklar insan testinin nerede yapılacağında çelişiyor (tüm testler geliştirme ortamında mı, gösterim ortamında insan testi mi?).",
+      "yetenek_siniflari": [
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İnsan kabulü olmadan yayın yok.",
+        "İnsan kabulünün yapıldığı ortam tek ve yazılı.",
+        "İnsan kabul testi en az pozitif ve negatif senaryoları, kritik kullanıcı yolculuklarını, rastgele etkileşimle keşif testini ve arayüz işleminin kalıcı veriye yansıyıp yansımadığının kontrolünü kapsıyor; kontrol listesi dışında kalan bulgular ('başka?') ayrıca kaydediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-010",
+          "S-013",
+          "S-006",
+          "S-030",
+          "S-096"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-002",
+        "D-005",
+        "G-019",
+        "Q-016"
+      ],
+      "bagimliliklar": [
+        "N-K06-004"
+      ],
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F07,F08,F09,F10,F11",
+      "dogrulama": "dogrulandi",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K05-026",
+      "baslik": "Kanıt paketi",
+      "ihtiyac": "Kabul kriteri sürümü, test kimlikleri ve sürümü, revizyon kimliği, paket özeti, test raporları, iz ve log bağlantılarından oluşan paketin iş kalemine bağlanması.",
+      "cozulecek_sorun": "'Tamam' iddiası denetlenemiyor; yayına neyin gittiği izlenemiyor.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Bitti durumundaki her işte doğrulanabilir özetli kanıt paketi var.",
+        "Paket özeti olmadan yayın reddediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K05-027",
+      "baslik": "Tek tamamlanma tanımı (DoD)",
+      "ihtiyac": "Boşluk analizi, dokümantasyon, bağımlılık kontrolü, yeşil testler, bağımsız kalite kontrolü gibi 'bitti' kapılarının tek bir DoD kontrol listesinde birleşmesi ve DoD sahibinin tanımlanması.",
+      "cozulecek_sorun": "Bitti kuralları beş ayrı role dağılmış; hazır olma için bir kapı var ama bitti için eşdeğer tek bir kapı yok. Boşluk analizi rolü diğer rollerin çıktısını yeniden denetliyor.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tek DoD listesi var ve tüm kapılar çıktısını ona yazıyor.",
+        "Boşluk analizi tek başına işi bitti yapamaz."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-032",
+          "S-038",
+          "S-051",
+          "S-018"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-026",
+        "D-022",
+        "G-017",
+        "H-06"
+      ]
+    },
+    {
+      "id": "N-K05-028",
+      "baslik": "Teslim öncesi boşluk analizi",
+      "ihtiyac": "Hedef durumun spesifikasyon ve kabul kriterlerinden çıkarılıp mevcut durumla özellik, test, yetki, göç, doküman, kullanıcı deneyimi, izleme ve işletim alanlarında karşılaştırılması; açık boşluk varken bitti verilmemesi.",
+      "cozulecek_sorun": "Göç, izleme ve işletim eksikleri teslimden sonra ortaya çıkıyor.",
+      "yetenek_siniflari": [
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Bitti işaretli işlerde açık boşluk 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-032",
+          "S-018"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-026",
+        "D-022",
+        "G-017"
+      ],
+      "bagimliliklar": [
+        "N-K05-027"
+      ]
+    },
+    {
+      "id": "N-K05-029",
+      "baslik": "Başlangıç test sağlığı",
+      "ihtiyac": "Görev başında ilgili mevcut testlerin çalıştırılması; önceden bozuk test ve altyapı hatasının yeni işin hatası sayılmaması.",
+      "cozulecek_sorun": "Önceden kırmızı olan test yeni göreve yükleniyor ve bütçe haksız tüketiliyor.",
+      "yetenek_siniflari": [
+        "Y-20",
+        "Y-18"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Başlangıç test raporu her koşuda saklanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "A-007",
+        "Q-040"
+      ]
+    },
+    {
+      "id": "N-K05-030",
+      "baslik": "Kritik bileşenlerde biçimsel belirtim, model denetimi ve çalışma zamanı değişmezleri",
+      "ihtiyac": "Eşzamanlılık protokolleri, dağıtık koordinasyon, para ve bakiye hesapları, yetkilendirme mantığı ve durum makineleri gibi kritik bileşenlerde hafif biçimsel belirtim (durum makinesi, değişmez, ön ve son koşul) yazılması ve model denetimi ya da makinece denetlenen ispatla doğrulanması; belirtimin insan tarafından onaylanması; ajanın ürettiği ispatın bağımsız denetleyicide yeniden doğrulanması; belirtimin boş veya anlamsız olmadığının (belirtim bozulunca ispatın kırılması) denetlenmesi; kritik değişmezlerin (para korunumu, çift işlem yok, sıralama) üretimde çalışma zamanı izleyicisiyle de denetlenmesi.",
+      "cozulecek_sorun": "Test, eşzamanlılık ve arıza sıralamasına bağlı nadir hataları yakalayamaz; büyük kesintilerin bir kısmı yarış durumlarından doğar. Ajanlar biçimsel doğrulamada hızla ilerliyor ama depo ölçeğinde hâlâ sınırlı; zayıf belirtimi geçen ispat ise sahte güven üretir.",
+      "yetenek_siniflari": [
+        "Y-67",
+        "Y-22",
+        "Y-27"
+      ],
+      "zorunluluk": "kosullu",
+      "olcek_etkisi": "Ekip sayısından çok kritik bileşen sayısına bağlıdır; ortak belirtim kütüphanesi ve uzmanlık havuzu birkaç ekipte paylaşılabilir.",
+      "kabul_olcutleri": [
+        "Kademe 0 ve 'biçimsel yöntem gerektirir' etiketli bileşenlerin listesi ve her biri için onaylı belirtim ile doğrulama sonucu var.",
+        "Model denetimi veya ispat sonucu bağımsız denetleyiciden geliyor; ajan beyanı kabul edilmiyor.",
+        "Kritik değişmezler üretimde izleniyor ve ihlal olay açıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-352",
+          "S-353",
+          "S-354",
+          "S-355"
+        ],
+        "not": "Bir bulut sağlayıcısı 10 büyük sistemde biçimsel belirtim ve model denetimiyle başka yolla bulunamayacak hatalar bulduğunu raporladı. 12.504 belirtimli 2025 kıyaslamasında başarı dillere göre %27–%82; 2026 depo ölçekli kıyaslamada en iyi ajan 43 örneğin 27'sini tam çözdü, en zorlarında hiç belirtim kapatamadı. 2025 bölge kesintisinin kök nedeni bir yarış durumuydu. Benzer mevcut ihtiyaç: N-K05-011; fark: K05-011 özellik tabanlı, metamorfik doğrulama ve önceki sürümden değişmez çıkarımını kapsar; önceden yazılmış biçimsel belirtim, model denetimi, ispat doğrulama ve üretimde değişmez izleme yok. Koşul: kademe 0 kritik algoritma veya dağıtık koordinasyon içeren ürünler."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "bagimliliklar": [
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "N-K05-031",
+      "baslik": "Kabul kanıtının geçerlilik bağlamı ve koşul değişince yeniden açılması",
+      "ihtiyac": "Her kabul kanıtının; dayandığı ihtiyaç ve kabul kriteri sürümü, incelenen çıktı, kullanılan kural/yetenek paketi/model sürümü, erişilebilen bilgi, yetki ve etkili dış koşullarla birlikte kaydedilmesi. Bu koşullardan biri değiştiğinde (kod aynı kalsa bile) kanıtların 'etkilenmedi', 'yeniden değerlendirilmeli' ve 'artık kullanılamaz' olarak ayrılması; yeniden inceleme bitene kadar eski kanıtın hangi sınırlı kullanımda geçerli kaldığının açık olması.",
+      "cozulecek_sorun": "Kanıt yalnız kod revizyonuna bağlanırsa model, iş kuralı, yönerge, yetki veya dış sistem değiştiğinde eski kabul kendiliğinden sürer; tersine, her küçük değişiklik bütün kanıtı gerekçesiz sıfırlarsa doğrulama yükü taşınamaz hale gelir.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-43",
+        "Y-29"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip sayısı arttıkça ortak kural, model ve arayüz değişikliklerinin başka ekiplerin kabul kanıtını etkileme olasılığı artar; kanıt–koşul bağı ekipler arası görünür olmalıdır.",
+      "kabul_olcutleri": [
+        "Her kanıt paketinde ihtiyaç/kriter sürümü, çıktı kimliği, kural–yetenek paketi–model sürümleri ve etkili dış koşullar kayıtlı.",
+        "Model, kural veya iş kuralı değişikliğinden sonra etkilenen kanıtlar listelenebiliyor; kod değişmedi gerekçesiyle kabul otomatik sürmüyor.",
+        "Önemsiz değişiklikler bütün kanıtı sıfırlamıyor; her yeniden açma kararında değişiklik–kanıt ilişkisi ve etkisi açıklanıyor.",
+        "Etkisi bilinmeyen bir koşul değişikliği tamamlanmış doğrulama gibi raporlanmıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-095",
+          "S-375",
+          "S-377"
+        ],
+        "not": "Ölçüm çerçevesi değerlendirmenin kullanım koşullarına yakın yapılmasını ve genellenebilirlik sınırının belgelenmesini ister; köken modeli türeme, revizyon ve geçersizleşmeyi ayrı ilişkiler olarak tanımlar. Benzer mevcut ihtiyaçlar: N-K06-003 (yalnız revizyon değişince eski yeşilin geçersizliği), N-K13-009 (koşu başında sabitleme), N-K23-010 (değişiklik öncesi regresyon). Fark: kod dışı koşul değişiminin mevcut kabul kanıtını hangi ölçüde geçersizleştirdiği tanımlı değildi."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K05-026",
+        "N-K13-009"
+      ],
+      "iliskili": [
+        "G-036",
+        "Q-072"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T21; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/03_ihtiyac_ifadesi_ve_kabul.json#I03-04",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/playbook/measure/",
+        "https://www.w3.org/TR/prov-dm/"
+      ]
+    }
+  ]
+}

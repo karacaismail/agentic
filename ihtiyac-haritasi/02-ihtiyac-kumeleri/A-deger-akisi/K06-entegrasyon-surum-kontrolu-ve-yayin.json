@@ -1,0 +1,323 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K06",
+    "ad": "Entegrasyon, sürüm kontrolü ve yayın",
+    "alan": "A-deger-akisi",
+    "amac": "Doğrulanmış değişikliğin güvenli biçimde birleşmesi ve mevcut yayın hattına kanıtıyla devredilmesi.",
+    "kapsam": [
+      "güvenli sürüm kontrolü işlemleri",
+      "paralel değişikliklerin birleştirilmesi",
+      "birleşim sonrası yeniden doğrulama",
+      "test ve teslim ortamlarının ayrımı",
+      "ortam terfi zinciri",
+      "yayın hattı sahipliği",
+      "geri alma ve kademeli yayın",
+      "veri şeması göçü"
+    ],
+    "kapsam_disi": [
+      "yayın sonrası geri bildirim (K08)"
+    ],
+    "komsu_kumeler": [
+      "K05",
+      "K08",
+      "K15",
+      "K18"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K06-001",
+      "baslik": "Güvenli sürüm kontrolü işlemleri",
+      "ihtiyac": "İşlem öncesi dal, çalışma ağacı ve uzak durumun kontrolü; kullanıcı değişikliklerinin korunması; depo kurallarının uygulanması; silme, üzerine yazma ve zorla gönderme gibi yıkıcı işlemlerin açık insan izni olmadan yapılmaması; geçmişin korunması.",
+      "cozulecek_sorun": "Kullanıcı işinin kaybolması ve geçmişin bozulması; kaydedilmiş ajan olaylarında dondurma sırasında üretim verisinin silinmesi.",
+      "yetenek_siniflari": [
+        "Y-33",
+        "Y-09",
+        "Y-42"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İzinsiz yıkıcı işlem sayısı 0.",
+        "Yıkıcı işlem isteği önce deneme çalıştırması ve insan onayı gerektiriyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-037",
+          "S-062",
+          "S-149"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-024"
+      ]
+    },
+    {
+      "id": "N-K06-002",
+      "baslik": "Paralel değişikliklerin birleştirilmesi ve birleştirme kuyruğu",
+      "ihtiyac": "Paralel ajanların ve ekiplerin değişikliklerinin sıralı bir birleştirme kuyruğundan geçmesi; çakışma tahmini; çakışma çözümünün sahibi.",
+      "cozulecek_sorun": "Ajan değişikliklerinde birleştirme çakışması sık; tek görev ölçeğinde düşünülmüş 'ana dal ilerledi' kuralı çok ekipte kuyruğu tıkar.",
+      "yetenek_siniflari": [
+        "Y-33",
+        "Y-38"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "1–2 ekipte basit sıralama yeter; 10+ ekipte kuyruk ve çakışma tahmini zorunlu.",
+      "kabul_olcutleri": [
+        "Çakışma oranı ve kuyruk bekleme süresi ölçülüyor.",
+        "Çakışma çözümünün sahibi tanımlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-006",
+          "S-018",
+          "S-119"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "iliskili": [
+        "R-015",
+        "U-007"
+      ]
+    },
+    {
+      "id": "N-K06-003",
+      "baslik": "Birleşim sonrası yeniden doğrulama",
+      "ihtiyac": "Güncel ana dalla birleşik tam revizyonun yeniden test edilmesi; revizyon değişince eski yeşilin geçersiz sayılması; teslim edilen paketin revizyonunun kanıttaki revizyonla aynı olması.",
+      "cozulecek_sorun": "Ana dal ilerleyince eski kanıt geçersiz kalıyor ama kullanılmaya devam ediyor.",
+      "yetenek_siniflari": [
+        "Y-33",
+        "Y-20"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Teslim edilen paketin revizyon kimliği kanıttakiyle birebir aynı.",
+        "İnsanın incelediği gösterim veya önizleme ortamındaki sürüm kimliği kanıt paketindeki revizyonla aynı; ortak önizleme adresi başka bir sürüme geçtiğinde bu durum inceleyene görünür."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-062",
+          "S-095"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#do_not_add_or_assume; research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.md",
+      "dogrulama": "kismen",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K06-004",
+      "baslik": "Test ortamı ile teslim ortamlarının ayrımı",
+      "ihtiyac": "Tüm otomatik testlerin geliştirme ortamında koşması; üst ortamların teslim ve sunum ortamı olması; üst ortamda bulunan sorunun bağlantılı işle geliştirme ortamında yeniden üretilmesi; insan kabul testinin hangi ortamda yapılacağının tek biçimde tanımlanması.",
+      "cozulecek_sorun": "Test ve yayın ortamları karışıyor. Kaynaklar çelişiyor: 'üst ortamlar test ortamı değildir' ile 'gösterim ortamında insan testi'.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-19"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Yayın ortamında koşan kabul testi 0 (ya da insan kabulü için tanımlı tek istisna).",
+        "Her sunum bulgusu bağlantılı işe dönüşüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-010",
+          "S-013"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-002",
+        "D-005",
+        "G-019",
+        "Q-016"
+      ]
+    },
+    {
+      "id": "N-K06-005",
+      "baslik": "Mevcut yayın hattına kanıtla devir",
+      "ihtiyac": "Doğrulanmış paketin 'yayına hazır' durumu, revizyon kimliği ve paket özetiyle mevcut yayın hattına devredilmesi; mevcut hattın değiştirilmemesi.",
+      "cozulecek_sorun": "Ajan hattı mevcut sürekli teslim sürecini bozabilir.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Mevcut yayın hattı yapılandırmasında değişiklik 0.",
+        "Devredilen her paketin kanıt paketi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-062"
+        ],
+        "not": "Mevcut yayın hattının ve ortamların var olduğu bir varsayımdır."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "A-001",
+        "Q-008"
+      ]
+    },
+    {
+      "id": "N-K06-006",
+      "baslik": "Ortam terfi zincirinin tek tanımı",
+      "ihtiyac": "Ortam zincirinin (erken erişim, beta, sürüm adayı, üretim veya hazırlık, kanarya, üretim) ve her geçişin ölçütünün tek biçimde tanımlanması.",
+      "cozulecek_sorun": "Kaynaklarda iki farklı zincir var; 'alpha sınırında' gibi ifadeler belirsiz.",
+      "yetenek_siniflari": [
+        "Y-34"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ortam listesi, geçiş ölçütleri ve her geçişin sahibi yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-010",
+          "S-013"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "A-001",
+        "C-003",
+        "D-005",
+        "G-019",
+        "Q-008",
+        "Q-017"
+      ]
+    },
+    {
+      "id": "N-K06-007",
+      "baslik": "Birleştirme ve dağıtım yetkilerinin ayrılması, yayın hattının tek sahibi",
+      "ihtiyac": "Birleştirme ve dağıtım yetkilerinin ayrı olması; yayın hattının tek sahibinin olması.",
+      "cozulecek_sorun": "Kaynaklarda iki farklı otomasyon sistemi yayını sahipleniyor gibi görünüyor.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Yayın hattının sahibi ve yetki ayrımı karar kaydında yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-006"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-033",
+        "D-016",
+        "Q-008"
+      ]
+    },
+    {
+      "id": "N-K06-008",
+      "baslik": "Geri alma, kademeli yayın ve özellik bayrağı",
+      "ihtiyac": "Ajan kaynaklı değişikliğin üretimde kademeli açılması, geri alma ölçütlerinin önceden tanımlanması ve özellik bayrağıyla riskin sınırlanması.",
+      "cozulecek_sorun": "Kaynaklarda yalnız 'bağlantılı hata aç' var; kademeli yayın ve geri alma ölçütü yok. Yapay zekâ kullanımı kararlılık metrikleriyle negatif ilişkili.",
+      "yetenek_siniflari": [
+        "Y-34"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Her yayında geri alma ölçütü ve yöntemi tanımlı.",
+        "Geri alma süresi ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-010",
+          "S-102"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "G-028"
+      ]
+    },
+    {
+      "id": "N-K06-009",
+      "baslik": "Veri şeması göçünün güvenli yürütülmesi",
+      "ihtiyac": "Göçlerin ortamlar boyunca sıralı, geri alınabilir ve doğrulanabilir biçimde yürütülmesi.",
+      "cozulecek_sorun": "Kaynaklarda göç yalnız bir boşluk alanı ve doküman türü; yürütme ve geri alma sahipsiz.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-19"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Her göçün geri alma yolu ve doğrulama kontrolü var."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-032"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K03-011"
+      ]
+    },
+    {
+      "id": "N-K06-010",
+      "baslik": "SLO temelli otomatik kanarya ve ilerleme kararı",
+      "ihtiyac": "Kademeli yayında her adımın ilerleme veya geri alma kararının, SLO'ya bağlı göstergelerin kanarya ile kontrol grubu arasında istatistiksel karşılaştırmasına dayanarak otomatik verilmesi; aynı değerlendirmenin yapılandırma ve veri değişikliklerine de uygulanması; kararın kanıt paketine eklenmesi ve mevcut yayın hattına yalnız karar sinyali olarak bağlanması.",
+      "cozulecek_sorun": "Geri alma ölçütü önceden yazılsa da (K06-008) kararın insan gözlemine kalması ajan hacminde ölçeklenmez; küçük ama sürekli bozulmalar gözden kaçar.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-60",
+        "Y-27"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Günlük değişiklik sayısı arttıkça insan gözlemiyle kanarya değerlendirmesi imkânsızlaşır; ortak değerlendirme hizmeti gerekir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlerde her kademeli yayın adımı SLO göstergelerine dayalı otomatik karar üretiyor.",
+        "Otomatik geri alınan yayınların oranı ve kaçırılan bozulmalar (sonradan olay olan yayınlar) ölçülüyor.",
+        "Karar ve dayandığı göstergeler kanıt paketinde."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-363",
+          "S-310"
+        ],
+        "not": "Otomatik kanarya analiz hizmeti ikili, yapılandırma ve veri seti değişikliklerini SLO'ya bağlı göstergelerle değerlendirir ve çok sayıda olayı önlediği raporlanır. Benzer mevcut ihtiyaç: N-K06-008; fark: K06-008 kademeli yayını ve geri alma ölçütünün varlığını ister; ölçütün SLO'ya bağlı ve otomatik değerlendirilmesini tanımlamaz. Mevcut yayın hattı değiştirilmez; karar sinyali devir noktasına eklenir."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "bagimliliklar": [
+        "N-K06-008"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2490 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-26",
+    "ad": "İstem enjeksiyonu, içerik ve çıktı güvenliği korumaları",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "İş kalemi, yorum, doküman veya web içeriğine gizlenmiş talimatla ajanın hedefinin ele geçirilmesi; kural dosyasına görünmez karakterle arka kapı.",
+    "ne_zaman_zorunlu": "Ajan dış veya kullanıcı kaynaklı içerik okuyorsa (pratikte her zaman)."
+  },
+  "arac_sayisi": 132,
+  "tur_dagilimi": {
+    "cerceve": 3,
+    "kutuphane": 5,
+    "acik-kaynak": 50,
+    "ticari-saas": 37,
+    "platform": 1,
+    "model": 13,
+    "bulut-hizmeti": 8,
+    "protokol-standart": 5,
+    "ticari-yazilim": 4,
+    "acik-cekirdek": 6
+  },
+  "araclar": [
+    {
+      "id": "AR-0031",
+      "ad": "OpenAI Agents SDK",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://openai.github.io/openai-agents-python/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Agent + Runner soyutlamasıyla araç döngüsü, ajanlar arası devir (handoff), ajanı araç olarak kullanma, girdi/çıktı korumaları (guardrails), oturum belleği, izleme ve Pydantic/Zod tipli çıktı sağlar.",
+      "sinirlar": "Varsayılan izleme OpenAI arka ucuna gönderilir, kapatılması ya da yönlendirilmesi gerekir; iki kütüphaneyi birden standart yapmamak önerilir (kaynak). Varsayılan olarak OpenAI Responses API'ye göre tasarlanmıştır (başka modeller adaptörle); dayanıklı iş akışı (kesintiden devam) için Temporal gibi harici motor gerekir.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K04-006",
+        "N-K05-006",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-006",
+        "N-K10-008",
+        "N-K12-001",
+        "N-K13-002",
+        "N-K18-006",
+        "N-K19-001",
+        "N-K27-004",
+        "N-K27-005",
+        "N-K28-010"
+      ]
+    },
+    {
+      "id": "AR-0053",
+      "ad": "CAMEL",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.camel-ai.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ayrıcalıklı planlayıcı LLM ile güvenilmeyen veriyi işleyen karantina LLM'ini ayırır; yetenek (capability) etiketli veri akışı politikasıyla güvenilmeyen içeriğin kontrol akışını ve araç argümanlarını etkilemesini engeller.",
+      "sinirlar": "Araştırma odaklı; kapı ve bütçe kontrolü yok (kaynak). Araştırma ağırlıklı; üretim hattı için izin, dayanıklılık ve denetim katmanları sınırlı. Araştırma kodudur, üretim kullanımı için değildir; görev başarısında bir miktar kayıp raporlanmıştır.",
+      "ihtiyaclar": [
+        "N-K05-006",
+        "N-K10-006",
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-0057",
+      "ad": "OpenHands Software Agent SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.openhands.dev/sdk",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenHands V1 Python SDK'sı ve REST Agent Server: araçlar, yerel/uzak sandbox'lı çalışma, conversation kimliğiyle kalıcılık ve geri yükleme, eylem onayı ve güvenlik analizörü, çok modelli yönlendirme.",
+      "sinirlar": "Genç API (V1); uzun işin kurtarılması ve bütçe uygulamaya bağlı. V1 mimarisi görece yeni; başsız modda 'her şeyi onayla' davranışı nedeniyle mutlaka konteyner/sandbox içinde çalıştırılmalı.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K13-002",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-0112",
+      "ad": "NeMo Guardrails",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.nvidia.com/nemo/guardrails/latest/index.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Colang ile programlanabilir girdi, çıktı, diyalog, geri getirme ve araç rayları; jailbreak/enjeksiyon, PII ve konu denetimi için hazır entegrasyonlar sunar.",
+      "sinirlar": "Tek başına yeterli değil; asıl savunma yetki ayrımı ve sandbox (kaynak). Ek LLM çağrıları gecikme ve maliyet getirir; Colang öğrenme eğrisi.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-0113",
+      "ad": "Guardrails AI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.guardrailsai.com/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğrulayıcı merkezinden (hub) alınan kurallarla LLM girdi/çıktısını doğrular, yapılandırılmış çıktı üretir, başarısızlıkta düzeltme/yeniden sorma uygular; sunucu modu vardır.",
+      "sinirlar": "Tek başına yeterli değil (kaynak); doğrulayıcı kalitesi değişken. Doğrulayıcı kalitesi hub bileşenlerine göre değişir; bazı doğrulayıcılar ek model çağrısı yapar. Hub doğrulayıcılarının bir kısmı ek model/hizmet çağrısı yapar ve gecikme ekler. Doğrulayıcı kalitesi değişken; bazı doğrulayıcılar dış API kullanır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K04-006",
+        "N-K05-012",
+        "N-K10-003",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-0114",
+      "ad": "LlamaFirewall (PurpleLlama)",
+      "tur": "acik-kaynak",
+      "lisans": "karışık (PurpleLlama deposunda Llama topluluk lisansı dahil; bileşen bazında kontrol)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://meta-llama.github.io/PurpleLlama/LlamaFirewall/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar için güvenlik korkuluğu çerçevesi: istem enjeksiyonu/jailbreak tespiti, ajan hedef sapması denetimi ve üretilen kodda güvensiz kalıp taraması; PurpleLlama deposunda güvenlik değerlendirme araçlarıyla birlikte.",
+      "sinirlar": "Tek başına yeterli değil (kaynak); lisans bileşen bazında farklı. AlignmentCheck deneysel ve LLM maliyetlidir; Prompt Guard ağırlıkları Llama lisans koşullarına tabidir.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-0451",
+      "ad": "Anthropic Sandbox Runtime (srt)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/sandbox-runtime",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Konteyner gerektirmeden işletim sistemi düzeyinde (Linux bubblewrap + seccomp, macOS Seatbelt) dosya sistemi kısıtı ve vekil sunucu üzerinden ağ çıkış izin listesi uygulayan hafif sandbox; ajanlar ve MCP sunucuları için.",
+      "sinirlar": "Beta araştırma önizlemesi; çekirdek düzeyinde mikroVM yalıtımı kadar güçlü değildir. Araştırma önizlemesidir, yapılandırma biçimi değişebilir; çekirdek paylaşımlı işletim sistemi sandbox'ıdır, VM izolasyonu değildir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K10-008",
+        "N-K15-002",
+        "N-K18-004",
+        "N-K18-005",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0656",
+      "ad": "Snyk Agent Scan (eski adıyla mcp-scan)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/snyk/agent-scan",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Makinedeki ajan yapılandırmalarını keşfeder; MCP sunucuları ve skill paketlerinde araç zehirlenmesi, gölgeleme, toksik akış, doğal dile gizlenmiş kötü yük ve sabit kodlu sır dahil 15+ risk sınıfını tarar.",
+      "sinirlar": "CLI çıktı biçimi deneysel; bazı analizler Snyk bulut hizmetine araç açıklaması gönderebilir, veri politikası kontrol edilmeli. LLM tabanlı analizler için harici API'ye içerik gönderimi olabilir; yapılandırma kontrol edilmeli.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K12-002",
+        "N-K14-005",
+        "N-K18-008",
+        "N-K18-012",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0675",
+      "ad": "Merge Agent Handler",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.merge.dev/agent-handler",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumsal sistemlere hazır MCP bağlayıcıları; kapsamlı erişim için 'Tool Pack'ler, araç çağrılarında DLP taraması, politika tabanlı korumalar ve aranabilir denetim kaydı.",
+      "sinirlar": "Kredi tabanlı kullanım ücreti; SaaS'a bağımlılık.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-0914",
+      "ad": "Lakera Gandalf / Agent Breaker",
+      "tur": "platform",
+      "lisans": "ücretsiz",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://gandalf.lakera.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kullanıcının dil modelini/ajanı istem enjeksiyonuyla kandırmaya çalıştığı seviyeli eğitim oyunu (yeni sürümü Agent Breaker); ajan güvenliği farkındalığı ve 'model her zaman doğru söylemez' bilinci için uygulamalı alıştırma.",
+      "sinirlar": "Oyun biçimindedir; kurumsal eğitim takibi/raporlaması sunmaz.",
+      "ihtiyaclar": [
+        "N-K25-003",
+        "N-K25-005"
+      ]
+    },
+    {
+      "id": "AR-0930",
+      "ad": "Harmonic Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.harmonic.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tarayıcı eklentisi, uç nokta istemcisi ve MCP ağ geçidiyle çalışanların kullandığı üretken yapay zekâ araçlarını (kayıt dışı/gölge kullanım dahil) envanterleyen; hassas veri paylaşımında uyaran veya engelleyen platform.",
+      "sinirlar": "Çalışan izleme boyutu nedeniyle KVKK/iş hukuku değerlendirmesi ve şeffaflık gerekir.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-1160",
+      "ad": "Snyk",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://snyk.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SCA, SAST (Snyk Code), konteyner ve IaC taraması; düzeltme önerileri; Invariant Labs satın almasıyla ajan/MCP güvenliği ürünleri.",
+      "sinirlar": "SaaS ve maliyet; kaynak kod analizi için kodun sağlayıcıya gönderilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K18-008",
+        "N-K18-009",
+        "N-K22-002"
+      ]
+    },
+    {
+      "id": "AR-1240",
+      "ad": "Llama Guard 4",
+      "tur": "model",
+      "lisans": "Llama 4 Community License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/meta-llama/Llama-Guard-4-12B",
+      "olgunluk": "olgun",
+      "ne_saglar": "İstem ve yanıtları zarar kategorilerine göre sınıflandıran çok kipli (metin+görüntü) güvenlik modelidir.",
+      "sinirlar": "Lisans kullanım eşikleri içerir; istem enjeksiyonu tespiti ana amacı değildir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1241",
+      "ad": "Qwen3Guard",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/QwenLM/Qwen3Guard",
+      "olgunluk": "gelisen",
+      "ne_saglar": "119 dili (Türkçe dahil) kapsayan güvenlik sınıflandırıcısı; Gen varyantı tam istem/yanıtı, Stream varyantı yanıtı token token akışta Güvenli/Tartışmalı/Güvensiz olarak değerlendirir (0.6B/4B/8B).",
+      "sinirlar": "İçerik güvenliği odaklıdır; dolaylı istem enjeksiyonu için özel eğitim sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1242",
+      "ad": "gpt-oss-safeguard",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/openai/gpt-oss-safeguard",
+      "olgunluk": "erken",
+      "ne_saglar": "Geliştiricinin yazdığı politikayı çıkarım anında uygulayan, gerekçesini gösteren muhakemeli güvenlik sınıflandırıcısıdır (20b/120b); politika yeniden eğitim olmadan değiştirilebilir.",
+      "sinirlar": "Araştırma önizlemesi; büyük model gecikme ve donanım maliyeti.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1243",
+      "ad": "Granite Guardian",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/ibm-granite/granite-guardian",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İstem/yanıt risklerini, RAG dayanak eksikliğini ve ajanlardaki fonksiyon çağrısı halüsinasyonunu tespit eden hakem modelidir; düşünme modu gerekçe üretir.",
+      "sinirlar": "Türkçe performansı doğrulanmalı; model boyutu gecikme getirir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1244",
+      "ad": "Lakera Guard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.lakera.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek zamanlı API ile istem enjeksiyonu, jailbreak, veri sızıntısı ve zararlı bağlantı tespiti; RAG ve MCP içeriklerini de tarar.",
+      "sinirlar": "Check Point satın alması (2025) sonrası kurumsal odaklı; SaaS kullanımında istem sağlayıcıya gider.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1245",
+      "ad": "LLM Guard",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/protectai/llm-guard",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "İstem ve çıktı tarayıcıları (enjeksiyon, PII anonimleştirme, sır, toksisite) içeren Python araç takımıdır.",
+      "sinirlar": "Depo Temmuz 2026'da arşivlendi; bakım yok — yeni kurulumda kullanılmamalı, göç planlanmalı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1246",
+      "ad": "Azure AI Content Safety Prompt Shields",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanıcı istemindeki doğrudan saldırıları ve belge/e-posta gibi içeriklerdeki dolaylı istem enjeksiyonunu tespit eden API'dir.",
+      "sinirlar": "Azure'a bağlı; sınıflandırıcı kararları olasılıksaldır.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-1247",
+      "ad": "Amazon Bedrock Guardrails",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/bedrock/guardrails/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İçerik filtreleri, istem saldırısı tespiti, PII maskeleme, konu reddi, bağlamsal dayanak ve otomatik muhakeme kontrolleri; ApplyGuardrail API ile Bedrock dışı modellere de uygulanır.",
+      "sinirlar": "AWS kilidi; Türkçe kapsamı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1248",
+      "ad": "Google Cloud Model Armor",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/security/products/model-armor",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Model bağımsız istem/yanıt taraması: istem enjeksiyonu/jailbreak, kötü amaçlı URL, hassas veri (Sensitive Data Protection entegrasyonu) ve sorumlu yapay zekâ filtreleri.",
+      "sinirlar": "Google Cloud'a bağlı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1249",
+      "ad": "Invariant Guardrails",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/invariantlabs-ai/invariant",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan izleri ve araç çağrıları üzerinde kural tabanlı politika diliyle toksik akışları, veri sızdırmayı ve araç kötüye kullanımını tespit/engeller; MCP ve LLM proxy olarak çalışabilir.",
+      "sinirlar": "Son itme Ocak 2026 — Snyk satın alması sonrası açık kaynak bakımı yavaşladı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1250",
+      "ad": "Cisco MCP Scanner",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/cisco-ai-defense/mcp-scanner",
+      "olgunluk": "gelisen",
+      "ne_saglar": "YARA kuralları, LLM analizi ve isteğe bağlı Cisco AI Defense API ile MCP araç tanımlarını ve sunucu kaynak kodunu davranışsal olarak tarar; çevrimdışı JSON tarama ile CI'da koşar.",
+      "sinirlar": "LLM ve bulut API modları veri çıkışı yaratır; yalnız YARA modu yerel.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-008",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-1251",
+      "ad": "Cisco Skill Scanner",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cisco-ai-defense/skill-scanner",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan skill paketlerinde gizli talimat, istem enjeksiyonu, kötü amaçlı betik ve veri sızdırma kalıplarını tarar.",
+      "sinirlar": "Genç proje; kural kapsamı gelişiyor.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K14-005",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-1252",
+      "ad": "anti-trojan-source",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/lirantal/anti-trojan-source",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kaynak kodu ve kural/talimat dosyalarında Unicode bidi ve görünmez karakterlerle yapılan Trojan Source ve Glassworm türü saldırıları tespit eden CLI'dır.",
+      "sinirlar": "Tek geliştiricili küçük proje; yalnız karakter düzeyi tespit, anlamsal gizli talimatları bulmaz.",
+      "ihtiyaclar": [
+        "N-K11-008"
+      ]
+    },
+    {
+      "id": "AR-1253",
+      "ad": "Lasso MCP Gateway",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/lasso-security/mcp-gateway",
+      "olgunluk": "erken",
+      "ne_saglar": "Diğer MCP sunucularının önünde çalışan eklenti tabanlı ağ geçidi; araç çağrılarında PII/sır maskeleme ve MCP sunucu itibar taraması yapar.",
+      "sinirlar": "Küçük proje, son itme Ocak 2026.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-004",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1254",
+      "ad": "Docker MCP Gateway",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/docker/mcp-gateway",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularını izole konteynerlerde çalıştırıp tek uç noktadan sunar; sır enjeksiyonu, araç filtreleme ve çağrı kaydı sağlar.",
+      "sinirlar": "Docker çalışma zamanına bağlı (Colima ile kullanılabilir); politika ifadesi sınırlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1255",
+      "ad": "any-guardrail",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mozilla-ai/any-guardrail",
+      "olgunluk": "erken",
+      "ne_saglar": "Llama Guard, Qwen3Guard, Granite Guardian gibi farklı guardrail modellerini tek arayüzle çağırıp karşılaştırmayı sağlar.",
+      "sinirlar": "Soyutlama katmanıdır, kendi tespit yeteneği yoktur; genç proje.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1256",
+      "ad": "Prompt Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://prompt.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışan ve uygulama düzeyinde üretken yapay zekâ kullanımını görünür kılar; istem enjeksiyonu ve hassas veri sızıntısını engeller, kayıt dışı yapay zekâ kullanımını tespit eder.",
+      "sinirlar": "Ticari; uç nokta/ tarayıcı ajanı gerektirebilir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-011",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-1257",
+      "ad": "Zenity",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://zenity.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumsal yapay zekâ ajanlarının envanteri, güvenlik duruşu yönetimi ve çalışma zamanında riskli davranış tespiti/engellemesi sunar.",
+      "sinirlar": "SaaS; ağırlıkla ticari ajan platformlarını kapsar.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K18-005",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-1260",
+      "ad": "DeepTeam",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.trydeepteam.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "50+ zafiyet ve 20+ saldırı yöntemiyle LLM ve ajanlara kırmızı takım; hedef ele geçirme, yetki yükseltme gibi ajan senaryoları ve OWASP/NIST eşlemesi sunar.",
+      "sinirlar": "Saldırı üretimi ve değerlendirme LLM'e dayanır, sonuçlar olasılıksaldır.",
+      "ihtiyaclar": [
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-1262",
+      "ad": "Agentic Radar",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/splx-ai/agentic-radar",
+      "olgunluk": "erken",
+      "ne_saglar": "LangGraph, CrewAI, n8n, OpenAI Agents gibi ajan iş akışlarını statik analizle grafa döker; araç ve MCP kaynaklı riskleri raporlar.",
+      "sinirlar": "Son itme Kasım 2025 — bakım yavaşlamış olabilir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-1269",
+      "ad": "OWASP GenAI Security Project (LLM Top 10, Agentic Top 10)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-SA-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://genai.owasp.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM uygulamaları ve ajanlı sistemler için en kritik risk listeleri ve azaltma rehberleri; test araçlarının eşleme hedefidir.",
+      "sinirlar": "Rehberdir; uygulama ve ölçüm araçları ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-1302",
+      "ad": "Microsoft Agent Governance Toolkit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/agent-governance-toolkit",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan eylemlerini yürütmeden önce kesen durumsuz politika motoru, kriptografik ajan kimliği ve güven puanı, yürütme halkaları ve acil durdurma (kill switch) içeren paketler; LangChain, CrewAI, Google ADK, Microsoft Agent Framework entegrasyonları.",
+      "sinirlar": "Nisan 2026'da çıktı; performans ve kapsam iddiaları bağımsız olarak doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K18-003",
+        "N-K18-005",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-1537",
+      "ad": "Tirith",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tirith.sh",
+      "olgunluk": "erken",
+      "ne_saglar": "Geliştiriciler ve yapay zekâ ajanları için terminal güvenlik katmanı: homograf URL'leri, 'pipe-to-shell' kalıplarını, ANSI enjeksiyonunu ve riskli komutları çalıştırılmadan önce yakalar.",
+      "sinirlar": "Yeni proje; kabuk entegrasyonuna bağlıdır ve AGPL lisanslıdır.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1540",
+      "ad": "destructive_command_guard (dcg)",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Dicklesworthstone/destructive_command_guard",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanlarının kabuk komutlarını kanca (hook) ile çalıştırılmadan önce denetleyip 'rm -rf', 'git reset --hard', zorla itme, veritabanı silme gibi yıkıcı işlemleri engelleyen koruma aracı.",
+      "sinirlar": "Kalıp tabanlıdır, dolambaçlı komutları kaçırabilir; lisans GitHub'da NOASSERTION görünür.",
+      "ihtiyaclar": [
+        "N-K06-001",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-1549",
+      "ad": "PasteGuard",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pasteguard.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM sağlayıcılarına ve kodlama ajanlarına gidecek istemlerdeki kişisel veri ve gizli bilgileri yer tutucularla maskeleyen, yanıtta geri çözen yerel öncelikli gizlilik vekil sunucusu.",
+      "sinirlar": "Tespit doğruluğu tanıyıcı kurallarına bağlıdır; Türkçe kişisel veri kalıpları ayrıca doğrulanmalıdır.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1550",
+      "ad": "Kiji Privacy Proxy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/dataiku/kiji-proxy",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenAI uyumlu isteklerdeki kişisel verileri model sağlayıcısına gönderilmeden önce tespit edip maskeleyen gizlilik vekil sunucusu.",
+      "sinirlar": "Genç proje; kapsanan varlık türleri ve dil desteği sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1551",
+      "ad": "WildGuard",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/allenai/wildguard",
+      "olgunluk": "olgun",
+      "ne_saglar": "İstem zararlılığı, yanıt zararlılığı ve yanıt reddini tek modelde sınıflandıran açık ağırlıklı moderasyon modeli ve değerlendirme seti.",
+      "sinirlar": "2024'ten beri güncellenmedi; istem enjeksiyonuna özgü değil, genel zarar moderasyonu odaklıdır; Türkçe performansı ölçülmemiştir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-1696",
+      "ad": "kgateway",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kgateway.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes Gateway API tabanlı API ve yapay zekâ ağ geçidi; LLM sağlayıcılarına yönlendirme, yedekleme, istem koruma (prompt guard) ve kimlik doğrulama politikaları sunar, agentgateway veri düzlemiyle MCP/A2A trafiğini de yönetebilir.",
+      "sinirlar": "Kubernetes ve Envoy bilgisi gerektirir; yapay zekâ özellikleri hızla değişiyor, proje sandbox düzeyinde.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K12-002",
+        "N-K16-007",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-1831",
+      "ad": "Quarkus LangChain4j",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Quarkus'ta bildirimsel AI servisleri, araç çağırma, yapılandırılmış çıktı, girdi/çıktı guardrail'leri, MCP istemcisi ve OpenTelemetry izleri; Java tabanlı ajan servislerini yerel derlemeyle çalıştırır.",
+      "sinirlar": "Quarkus'a bağlı; LangChain4j sürüm hızına bağımlı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-003",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1833",
+      "ad": "AILuminate",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 (demo istem seti)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mlcommons.org/ailuminate/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sohbet modellerinin 12 tehlike kategorisinde güvenlik riskini değerlendiren kıyaslama; herkese açık demo istem seti ve derecelendirme metodolojisi; jailbreak dayanıklılığı çalışmaları.",
+      "sinirlar": "Tam istem seti gizli ve resmî değerlendirme MLCommons üzerinden; kod ajanı senaryolarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K18-012",
+        "N-K23-002"
+      ]
+    },
+    {
+      "id": "AR-1845",
+      "ad": "OWASP AI Exchange",
+      "tur": "protokol-standart",
+      "lisans": "CC0-1.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://owaspai.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ tehditleri (istem enjeksiyonu, veri zehirleme, model sızdırma vb.) ve kontrolleri için kapsamlı açık kılavuz; ISO/IEC 27090 ve AB AI Yasası standardizasyonuna katkı sağlayan içerik.",
+      "sinirlar": "Kılavuzdur; uygulama araçlarını kurumun seçmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-1921",
+      "ad": "TrustyAI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://trustyai.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes/OpenShift AI üzerinde model açıklanabilirliği, yanlılık ve veri kayması metrikleri, lm-evaluation-harness tabanlı değerlendirme işleri ve guardrails orkestrasyonu sunan sorumlu yapay zekâ araç seti.",
+      "sinirlar": "Open Data Hub/OpenShift AI ekosistemine yakın; bağımsız kurulum emek ister.",
+      "ihtiyaclar": [
+        "N-K09-013",
+        "N-K18-006",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1922",
+      "ad": "FMS Guardrails Orchestrator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://foundation-model-stack.github.io/fms-guardrails-orchestrator/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM girdi ve çıktılarını birden çok dedektörden (regex, PII, zararlı içerik, istem enjeksiyonu) geçirip sonuçlarına göre engelleyen/işaretleyen orkestratör; OpenAI uyumlu uç nokta olarak çalışabilir.",
+      "sinirlar": "Dedektörler ayrıca dağıtılmalı; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1995",
+      "ad": "Microsoft Defender for Cloud (DevOps güvenliği ve AI-SPM)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-devops-introduction",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub, Azure DevOps ve GitLab bağlantılarıyla kod-bulut güvenlik duruşu (IaC, sır, bağımlılık bulguları), ayrıca yapay zekâ iş yüklerinin envanteri ve saldırı yolu analizini (AI-SPM) sunar.",
+      "sinirlar": "Çoklu bulut desteği olsa da en derin kapsam Azure'da; plan bazında ek ücret.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-008",
+        "N-K18-009",
+        "N-K22-007"
+      ]
+    },
+    {
+      "id": "AR-2007",
+      "ad": "Microsoft Foundry AI Red Teaming Agent",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "yerel"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/concepts/ai-red-teaming-agent",
+      "olgunluk": "erken",
+      "ne_saglar": "PyRIT tabanlı otomatik kırmızı takım taramaları: model ve ajan uç noktalarına saldırı stratejileri uygular, risk/güvenlik değerlendiricileriyle saldırı başarı oranı (ASR) raporlar; CI/CD'ye bağlanabilir.",
+      "sinirlar": "Önizleme; saldırı kataloğu içerik güvenliği ağırlıklı, kod ajanı hattına özgü senaryolar elle eklenmeli.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-2030",
+      "ad": "Security Command Center (AI Protection)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/security/products/security-command-center",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut güvenlik duruşu ve tehdit tespiti; AI Protection bileşeni yapay zekâ varlık envanteri, model/ajan riskleri ve Model Armor ile çalışma zamanı korumasını tek görünümde toplar.",
+      "sinirlar": "Premium/Enterprise katmanları pahalı; en iyi kapsam Google Cloud varlıklarında.",
+      "ihtiyaclar": [
+        "N-K18-006",
+        "N-K18-009",
+        "N-K22-007"
+      ]
+    },
+    {
+      "id": "AR-2041",
+      "ad": "Secure AI Framework (SAIF)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://saif.google/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ sistemleri için risk haritası (veri zehirlenmesi, istem enjeksiyonu, model hırsızlığı vb.), kontroller ve risk öz-değerlendirme aracı içeren güvenlik çerçevesi.",
+      "sinirlar": "Rehber niteliğinde; ölçüm/uygulama kurumda.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K21-001",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-2044",
+      "ad": "Wiz AI-SPM",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.wiz.io/solutions/ai-spm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulutta kullanılan yapay zekâ hizmetleri, modeller ve SDK'lar için AI-BOM çıkarır; yanlış yapılandırma, veri erişimi ve saldırı yollarını risk grafiğinde gösterir.",
+      "sinirlar": "Ajan davranışını çalışma zamanında engellemez; duruş yönetimidir.",
+      "ihtiyaclar": [
+        "N-K18-006",
+        "N-K18-010",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2055",
+      "ad": "IBM Guardium AI Security",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/guardium",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gölge yapay zekâ dahil model/ajan envanteri çıkarır, yanlış yapılandırmaları ve politika ihlallerini bulur, yapay zekâ uygulamalarına otomatik sızma testi uygular; watsonx.governance ile bütünleşir.",
+      "sinirlar": "IBM ekosistemi dışında entegrasyon eforu; kapsam bulut/ürün bağlayıcılarına bağlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-012",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2068",
+      "ad": "SAP Generative AI Hub (SAP AI Core)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birden çok sağlayıcının modellerine (OpenAI, Anthropic, Google, Mistral, açık modeller) tek erişim; orkestrasyon hizmetiyle şablonlama, içerik filtreleme, veri maskeleme (anonimleştirme) ve grounding.",
+      "sinirlar": "SAP BTP aboneliği gerektirir; SAP dışı teslim hatlarında maliyet/karmaşıklık yüksek.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2074",
+      "ad": "Agentforce Testing Center",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://help.salesforce.com/s/articleView?id=ai.agent_testing_center.htm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM çağrılarında güvenli veri erişimi, istem içi hassas veri maskeleme, sağlayıcıda sıfır veri saklama anlaşmaları, zararlılık tespiti ve denetim izi (audit trail) sağlayan katman.",
+      "sinirlar": "Yalnız Agentforce ajanları için. Salesforce içindeki üretken yapay zekâ çağrılarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-006",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K23-001",
+        "N-K23-003",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-2103",
+      "ad": "Cisco AI Defense",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.cisco.com/site/us/en/products/security/ai-defense/index.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ varlık keşfi, model/ajan için algoritmik kırmızı takım doğrulaması (validation) ve çalışma zamanında istem, yanıt ve MCP araç çağrılarını denetleyen korumalar.",
+      "sinirlar": "SaaS; Cisco güvenlik ekosistemiyle en iyi çalışır.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2105",
+      "ad": "A2A Scanner",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cisco-ai-defense/a2a-scanner",
+      "olgunluk": "erken",
+      "ne_saglar": "A2A ajan kartları ve uç noktalarını statik kurallar, YARA ve LLM destekli analizle tarayıp kimlik taklidi, istem enjeksiyonu ve yetki aşımı gibi riskleri raporlar.",
+      "sinirlar": "Yeni ve küçük proje; son güncellemeler seyrek.",
+      "ihtiyaclar": [
+        "N-K12-006",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2108",
+      "ad": "Prisma AIRS (AI Runtime Security)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.paloaltonetworks.com/ai-security/prisma-airs",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ uygulama ve ajanları için API/ağ düzeyinde istem enjeksiyonu, hassas veri sızıntısı, zararlı URL ve araç kötüye kullanımı tespiti; model dosyası taraması (Model Security) ve AI-SPM.",
+      "sinirlar": "Lisans maliyeti; en güçlü entegrasyon Palo Alto ağ güvenliği ürünleriyle.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-010",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2122",
+      "ad": "Datadog AI Guard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/security/ai_guard/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kullanıcı istemi, model yanıtı, araç çağrısı ve araç sonucunu yapılandırılabilir güvenlik politikalarına göre değerlendirip istem enjeksiyonu, jailbreak, veri sızıntısı ve yıkıcı araç çağrılarını engeller.",
+      "sinirlar": "Önizleme durumunda; özellik bayrağıyla açılıyor.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2132",
+      "ad": "Evo by Snyk (Agent Security, AI-SPM)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://snyk.io/evo/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanları ve yapay zekâ uygulamaları için güvenlik orkestrasyonu: AI-BOM çıkaran keşif ajanı, risk zenginleştirme, ajan eylemlerine politika zorlaması ve sürekli saldırgan güvenlik testleri.",
+      "sinirlar": "Mart 2026'da GA olan bileşenler yeni; kapsam ve fiyatlandırma değişken.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-012",
+        "N-K18-013",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2134",
+      "ad": "Checkmarx One Assist",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://checkmarx.com/product/checkmarx-one-assist/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ kodlama asistanlarının ürettiği kodu IDE'de (Cursor, Windsurf, VS Code) gerçek zamanlı güvenlik açısından tarayan ve düzelten ajanlar ile politika/iç görü asistanları.",
+      "sinirlar": "Yeni ürün ailesi; Checkmarx One lisansına bağlı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K18-009",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2166",
+      "ad": "JFrog AI Catalog",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://jfrog.com/ai-catalog/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kurumda kullanılan model, API tabanlı yapay zekâ hizmetleri ve MCP sunucularının merkezi kataloğu: lisans/kullanım şartı, güvenlik taraması ve onaylı kullanım politikası.",
+      "sinirlar": "Yeni ürün; JFrog platformuna bağlı.",
+      "ihtiyaclar": [
+        "N-K09-012",
+        "N-K12-002",
+        "N-K22-001",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2172",
+      "ad": "Mend AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.mend.io/mend-ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulamalardaki yapay zekâ bileşenlerini (model, ajan çerçevesi, MCP) keşfedip AI-BOM çıkarır, model lisansı/risklerini gösterir, yapay zekâ kırmızı takım testi ve sistem istemi sertleştirmesi sunar.",
+      "sinirlar": "Yeni ürün; kapsam desteklenen ekosistemlerle sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-012",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2175",
+      "ad": "Qualys TotalAI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.qualys.com/apps/totalai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ iş yükü ve model envanteri; LLM uç noktalarına jailbreak, istem enjeksiyonu, veri sızıntısı gibi saldırı testleri ve risk puanlaması.",
+      "sinirlar": "SaaS; ajan hattına özgü saldırı senaryoları sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2235",
+      "ad": "Shieldstral",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mistral.ai/news/shieldstral/",
+      "olgunluk": "erken",
+      "ne_saglar": "Doğal dille yazılmış güvenlik politikasına göre metin ve görsel içeriği tek ileri geçişte puanlayan 3B çok kipli güvenlik sınıflandırıcısı; politika yeniden eğitim olmadan değiştirilebilir.",
+      "sinirlar": "Desteklenen dil listesinde Türkçe yok; zararlı içerik moderasyonu için eğitilmiş, tek başına istem enjeksiyonu savunması değildir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-2417",
+      "ad": "Kanana Safeguard",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/kakaocorp/kanana-safeguard-8b",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Üç ayrı koruma modeli: zararlı içerik (Safeguard), yasal/politika riski (Siren) ve istem saldırısı/enjeksiyon (Prompt) sınıflandırması; ajan girdi/çıktı filtresi olarak kullanılabilir.",
+      "sinirlar": "Korece ve İngilizce odaklı; Türkçe içerikte doğruluk düşük olabilir, ince ayar/kalibrasyon gerekir.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-2418",
+      "ad": "LionGuard 2",
+      "tur": "model",
+      "lisans": "GovTech Singapore özel lisansı",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/govtech/lionguard-2",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Singapur bağlamına (Singlish, Çince, Malayca, Tamilce) yerelleştirilmiş çok dilli içerik moderasyon sınıflandırıcısı; yerel dile özgü koruma modelinin nasıl kurulacağına örnek.",
+      "sinirlar": "Singapur'a özgü kategoriler; Türkçe için doğrudan uygun değil, lisans koşulları özel.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-2484",
+      "ad": "SALAD-Bench",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/OpenSafetyLab/SALAD-BENCH",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hiyerarşik güvenlik taksonomisiyle temel, saldırı-güçlendirilmiş ve savunma-güçlendirilmiş soru setleri ile MD-Judge değerlendirici modeli.",
+      "sinirlar": "2025 başından beri güncelleme yok; ajan/araç kullanımı saldırılarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2485",
+      "ad": "ShieldLM",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/thu-coai/ShieldLM",
+      "olgunluk": "erken",
+      "ne_saglar": "Özelleştirilebilir kurallarla güvenlik tespiti yapan ve kararını açıklayan LLM tabanlı dedektör (Çince/İngilizce).",
+      "sinirlar": "2024'ten beri güncellenmiyor; Türkçe desteği yok.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-2519",
+      "ad": "A.I.G (AI-Infra-Guard)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://tencent.github.io/AI-Infra-Guard/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tam yığın yapay zekâ kırmızı takım platformu: ajan taraması, MCP sunucusu ve Agent Skills taraması, yapay zekâ altyapı bileşenlerinde (vLLM, n8n, MLflow vb.) bilinen CVE taraması ve jailbreak değerlendirmesi.",
+      "sinirlar": "Tarama kuralları LLM tabanlı yargı içerir, yanlış pozitif/negatif olabilir; sonuçlar insan triyajı ister.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K12-002",
+        "N-K18-008",
+        "N-K18-009",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2520",
+      "ad": "MCPScan (Ant Group)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/antgroup/MCPScan",
+      "olgunluk": "erken",
+      "ne_saglar": "MCP sunucuları için çok aşamalı tarayıcı: Semgrep leke (taint) analizi, araç açıklamalarının LLM ile zararlı/şüpheli sınıflandırması ve dosyalar arası akış çıkarımıyla risk kararı.",
+      "sinirlar": "Genç araç (2025 sonu son güncelleme); LLM aşamaları dış model gerektirebilir.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K12-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-2664",
+      "ad": "Agent Security Bench (ASB)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/agiresearch/ASB",
+      "olgunluk": "erken",
+      "ne_saglar": "10 senaryo, 400'ü aşkın araç ile doğrudan/dolaylı istem enjeksiyonu, bellek zehirleme ve plan-arka kapı saldırılarını ve bunlara karşı savunmaları sistematik biçimde kıyaslar.",
+      "sinirlar": "Simüle ajan ortamı; üretim ajan çerçevelerine aktarım için uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2665",
+      "ad": "WASP",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-NC-4.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/facebookresearch/wasp",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Web ajanlarına gerçekçi web ortamında (VisualWebArena tabanlı) dolaylı istem enjeksiyonu saldırılarının başarısını uçtan uca ölçen kıyas.",
+      "sinirlar": "Depo arşivlendi ve ticari olmayan lisanslı; web ajanlarına özgü.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2666",
+      "ad": "BIPIA",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/BIPIA",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "E-posta, web, tablo ve kod gibi dış içerik senaryolarında LLM'lerin dolaylı istem enjeksiyonuna dayanıklılığını ve savunmaları değerlendiren ilk kıyaslardan biri.",
+      "sinirlar": "Depo arşivlendi; sohbet modeli odaklı, ajan araç zincirlerini kapsamaz.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2667",
+      "ad": "Open-Prompt-Injection",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/liu00222/Open-Prompt-Injection",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İstem enjeksiyonu saldırıları ve savunmaları için modüler kıyas araç takımı; saldırı türlerini, hedef görevleri ve tespit/önleme savunmalarını (DataSentinel gibi) aynı çerçevede karşılaştırır.",
+      "sinirlar": "Araştırma kütüphanesi; üretim korumasına doğrudan takılacak bir hizmet değil.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2670",
+      "ad": "Progent",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sunblaze-ucb/progent",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan araç çağrıları için alana özgü dil ile ayrıntılı ayrıcalık politikaları tanımlayıp deterministik olarak uygulayan kütüphane; politikalar LLM ile otomatik üretilip güncellenebilir.",
+      "sinirlar": "Araştırma prototipi; politika hatalı yazılırsa ya aşırı kısıtlar ya açık bırakır.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K12-002",
+        "N-K18-003",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2671",
+      "ad": "AgentSpec",
+      "tur": "cerceve",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/haoyuwang99/AgentSpec",
+      "olgunluk": "erken",
+      "ne_saglar": "LLM ajanları için tetikleyici, yüklem ve yaptırımdan oluşan kurallarla çalışma zamanı güvenlik kısıtı tanımlayan hafif DSL; LangChain'e entegre olur, kod çalıştırma ajanlarında güvensiz yürütmelerin büyük kısmını engellediği raporlanır.",
+      "sinirlar": "Lisans beyanı yok; LangChain'e bağlı araştırma prototipi.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K17-007",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-2673",
+      "ad": "RepoGuardBench",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (kod), CC-BY-4.0 (veri)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/DaoyuanLi2816/RepoGuardBench",
+      "olgunluk": "erken",
+      "ne_saglar": "README, issue metni, kod yorumu, test logu ve ajan kural dosyalarına gömülü talimatlarla yerel kodlama ajanlarının hata düzeltme görevinde kalıp kalmadığını ve hafif savunmaların etkisini ölçer.",
+      "sinirlar": "Arşivsel olmayan çalıştay çalışması; açık ağırlıklı modellerle tek GPU deney düzeni.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2704",
+      "ad": "RuLES",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/normster/llm_rules",
+      "olgunluk": "erken",
+      "ne_saglar": "Modellerin basit kurallara (sır tutma, belirli eylemi yapmama vb.) çok turlu konuşmalarda ve saldırgan kullanıcı karşısında uyup uymadığını programatik değerlendirmeyle ölçen kıyas.",
+      "sinirlar": "2025 başından beri güncellenmiyor; oyunlaştırılmış senaryolar.",
+      "ihtiyaclar": [
+        "N-K07-007",
+        "N-K11-004",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-2871",
+      "ad": "Future AGI",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (çekirdek)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://futureagi.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Simülasyon, değerlendirme, izleme, guardrail, ağ geçidi ve optimizasyonu tek geri besleme döngüsünde birleştiren ajan platformu; OpenTelemetry yerel, Go tabanlı ağ geçidi.",
+      "sinirlar": "Kapsam geniş, bileşen olgunlukları farklı; yönetilen bulut sürümü ayrıdır.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K18-006",
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2895",
+      "ad": "SkillSpector",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.nvidia.com/skills/scanning-agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan skill'lerini kurulumdan önce zafiyet, kötü amaçlı kalıp ve istem enjeksiyonu açısından tarar (Git deposu, URL, zip, dizin); NVIDIA Verified Skills tarama-değerlendirme-imzalama hattının parçasıdır.",
+      "sinirlar": "Statik ve sezgisel analiz; yeni saldırı kalıplarını kaçırabilir.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K12-002",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-2896",
+      "ad": "ADR - Agentic AI Detection and Response (Uber)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/uber/ADR",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışan cihazlarındaki Cursor, Claude Code, Codex, Copilot gibi ajanlar için gölge AI keşfi (kurulu ajan, eklenti, yerel model, MCP envanteri), etkinlik gözlemi, savunma değerlendirmesi, tehdit tespiti ve önleme; Uber'de üretimde, MLSys 2026 makalesiyle.",
+      "sinirlar": "Uç nokta ajanı dağıtımı ve güvenlik operasyon ekibi gerektirir; Nisan 2026'da açıldı.",
+      "ihtiyaclar": [
+        "N-K18-012",
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2897",
+      "ad": "DefenseClaw",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://cisco-ai-defense.github.io/defenseclaw/",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenClaw ve ajan çalışma zamanları için güvenlik yönetişimi: kullanım öncesi yetenek tarama, çalışma zamanı trafik denetimi ve kalıcı denetim kanıtı dışa aktarımı (Python CLI + Go ağ geçidi + bağlayıcı kancalar).",
+      "sinirlar": "OpenClaw odaklı; diğer harness'ler için kapsam sınırlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-013",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2900",
+      "ad": "Pipelock",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pipelab.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan ile ağ arasında duran güvenlik duvarı; HTTP, WebSocket, MCP ve A2A trafiğini (isteğe bağlı TLS kesmeyle) sır sızdırma ve enjeksiyon açısından denetler, kararları imzalı eylem makbuzlarıyla kaydeder.",
+      "sinirlar": "TLS kesme yapılandırması ve sertifika yönetimi operasyonel yük getirir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2902",
+      "ad": "Sage (Gen Digital)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ai.gendigital.com/sage",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama asistanlarının kabuk komutu, URL getirme ve dosya yazma çağrılarını yakalayıp URL itibarı ve yerel kurallarla denetleyen hafif Agent Detection & Response katmanı.",
+      "sinirlar": "URL itibarı bulut hizmetine sorgu gerektirir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2904",
+      "ad": "Prismor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://prismor.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code, Codex, LangChain gibi ajanlar için self-host çalışma zamanı kontrol düzlemi; riskli araç çağrılarını gözlemleme, insan onayına bağlama veya engelleme, yerel panel.",
+      "sinirlar": "Genç proje; politika kapsamı kullanıcı tanımına bağlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-001",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2907",
+      "ad": "Agent Control Standard (ACS)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://genai-security-project.github.io/agent-control-standard/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ayrı bir 'Guardian' ajanın bir ajanın yapacağı eylemi kimlik doğrulamalı kanal üzerinden izin/ret/değiştirme ile denetlemesini ve sonradan yeniden kurulabilir denetim izini tanımlayan tel spesifikasyonu; Microsoft Agent Governance Toolkit ile referans uygulama.",
+      "sinirlar": "Taslak; uygulayan ürün sayısı az.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-007",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2908",
+      "ad": "Agent Threat Rules (ATR)",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://agentthreatrule.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan güvenlik tehditleri için sürümlü şemaya uyan YAML tabanlı açık tespit kuralı biçimi (Sigma benzeri, ATR-YYYY-NNNNN kimlikleri); tespit kurallarının test edilebilir paylaşımını sağlar.",
+      "sinirlar": "Çalışma taslağı (3.0.0-alpha); standartlaşma süreci başlangıçta.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2910",
+      "ad": "Augustus",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/praetorian-inc/augustus",
+      "olgunluk": "erken",
+      "ne_saglar": "LLM'leri 210+ saldırıyla (istem enjeksiyonu, jailbreak, kodlama istismarları, veri çıkarma) test eden, 28 sağlayıcıyla çalışan, eşzamanlı tarama ve hız sınırlama içeren Go tabanlı zafiyet tarayıcı.",
+      "sinirlar": "Model düzeyinde test; ajan araç zincirini uçtan uca kapsamaz.",
+      "ihtiyaclar": [
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2912",
+      "ad": "ZeroLeaks",
+      "tur": "ticari-yazilim",
+      "lisans": "FSL-1.1-Apache-2.0 (kaynak erişilebilir)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://zeroleaks.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Sistem istemlerini ve ajan talimatlarını seçilen modele yükleyip çıkarma ve enjeksiyon saldırılarıyla komut satırından kırmızı takım testine sokar.",
+      "sinirlar": "Yalnız model+istem hedeflenir; araç ve uygulama kodu çalıştırılmaz. FSL lisansı.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2913",
+      "ad": "HOL Guard",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://hol.org/guard",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın kabuk komutu, dosya erişimi, paket kurulumu ve MCP çağrılarını çalışmadan önce inceleyip sır ifşası, yıkıcı işlem, istem enjeksiyonu ve zararlı paketleri tespit eder; yerel onay paneli ve karar geçmişi.",
+      "sinirlar": "İsteğe bağlı bulut sürümü; yerel kurallar sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-007",
+        "N-K18-008",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2914",
+      "ad": "StackOne Defender",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/StackOneHQ/defender",
+      "olgunluk": "erken",
+      "ne_saglar": "Araç sonuçlarına (e-posta, doküman, PR) gizlenmiş dolaylı istem enjeksiyonunu kalıp katmanı ve pakete gömülü ONNX sınıflandırıcıyla tespit edip cümle düzeyinde temizleyen ve izin/engel kararı dönen npm kütüphanesi.",
+      "sinirlar": "Temizleme en iyi çaba; ML katmanı yoksa uyarıyla kalıp katmanına düşer.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-2915",
+      "ad": "Agent Audit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://headyzhang.github.io/agent-audit/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan kodunda araç sınırı taint izleme, MCP yapılandırma denetimi ve anlamsal sır tespiti yapan, OWASP Agentic Top 10 (2026)'ya eşlenmiş 66 kurallı statik güvenlik tarayıcı.",
+      "sinirlar": "Tek geliştiricili; kural kapsamı dile ve çerçeveye göre değişir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-2916",
+      "ad": "MEDUSA",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pantheonsecurity.io",
+      "olgunluk": "erken",
+      "ne_saglar": "40.000+ kalıplı AI öncelikli güvenlik tarayıcı; ajan editör yapılandırmalarıyla depo zehirlenmesi, MCP araç zehirlenmesi ve Claude/Cursor/Copilot sohbet geçmişlerine sızmış anahtarları bulur, yerinde redaksiyon yapar.",
+      "sinirlar": "AGPL-3.0; yüksek kalıp sayısı yanlış pozitif üretebilir.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K18-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-2919",
+      "ad": "AgentSeal",
+      "tur": "ticari-yazilim",
+      "lisans": "FSL-1.1-Apache-2.0 (kaynak erişilebilir)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://agentseal.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Makinedeki tehlikeli skill dosyalarını, zehirli MCP yapılandırmalarını ve veri sızdırma yollarını bulan; sistem istemlerini yerel modellerle saldırılara karşı test eden güvenlik araç seti.",
+      "sinirlar": "FSL lisansı; son etkinlik Haziran 2026.",
+      "ihtiyaclar": [
+        "N-K11-008",
+        "N-K18-012",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2999",
+      "ad": "AISIX AI Gateway",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://api7.ai/ai-gateway",
+      "olgunluk": "erken",
+      "ne_saglar": "Apache APISIX'in kurucularından, Rust ile yazılmış tek statik ikili, OpenAI uyumlu AI ağ geçidi; LLM ve ajan trafiğini yönlendirme, yönetişim, güvenlik, önbellek ve gözlem.",
+      "sinirlar": "Nisan 2026'da çıktı; ticari API7 ürünleriyle konumlanmış.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-3711",
+      "ad": "Netskope (GenAI kullanım görünürlüğü)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.netskope.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SSE/SASE platformu: bulut ve üretken yapay zekâ uygulamalarının keşfi ve risk puanı, uygulama bazlı erişim politikası ve istemlerdeki hassas veri için DLP.",
+      "sinirlar": "Trafik yönlendirme (proxy/ajan) gerektirir; TLS denetimi hukuki ve teknik yük getirir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3712",
+      "ad": "Zscaler (Generative AI koruması)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.zscaler.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sıfır güven bulut güvenliği; yapay zekâ uygulaması görünürlüğü, istem denetimi, erişim politikaları ve veri kaybı önleme.",
+      "sinirlar": "Ağ trafiğini buluta yönlendirme gerektirir; kapsamlı kurulum.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3713",
+      "ad": "Microsoft Defender for Cloud Apps",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/defender-cloud-apps/",
+      "olgunluk": "olgun",
+      "ne_saglar": "CASB: güvenlik duvarı/uç nokta loglarından bulut uygulaması (üretken yapay zekâ uygulamaları dahil) keşfi, risk kataloğu, onaylama/yasaklama ve oturum denetimi.",
+      "sinirlar": "Microsoft 365/Defender lisanslarına bağlı; tam görünürlük için uç nokta entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3714",
+      "ad": "Palo Alto Networks AI Access Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.paloaltonetworks.com/sase/ai-access-security",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretken yapay zekâ uygulaması kullanımının keşfi ve sınıflandırması, erişim kontrolü ve istemlerde veri koruma (SASE parçası).",
+      "sinirlar": "Palo Alto SASE altyapısı gerektirir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3716",
+      "ad": "WitnessAI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://witness.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birleşik yapay zekâ güvenliği ve yönetişimi: çalışanların yapay zekâ kullanımının görünürlüğü, niyet bazlı politika, veri koruma ve model/ajan korumaları.",
+      "sinirlar": "İstem içeriğini işleyen ağ katmanı; gizlilik etkisi yüksek.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3717",
+      "ad": "LayerX",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://layerxsecurity.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tarayıcı eklentisi tabanlı yapay zekâ kullanım denetimi: tüm SaaS ve yapay zekâ uygulaması etkileşimlerinin gerçek zamanlı görünürlüğü, üretken yapay zekâ DLP'si ve tarayıcı güvenliği; proxy gerektirmez.",
+      "sinirlar": "Yalnız tarayıcı içi kullanımı görür; IDE/CLI ajanlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3720",
+      "ad": "Cyberhaven",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.cyberhaven.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri soy ağacına dayalı veri güvenliği/DLP: hassas verinin yapay zekâ araçlarına kopyalanmasını izler ve engeller.",
+      "sinirlar": "Uç nokta ajanı gerektirir; kapsamlı izleme niteliği taşır.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3723",
+      "ad": "Superagent",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.superagent.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ uygulamaları ve ajanlar için istem enjeksiyonu, veri sızıntısı ve zararlı çıktı tespiti yapan koruma katmanı; açık kaynak depo ve barındırılan hizmet olarak sunulur.",
+      "sinirlar": "Ürün konumlandırması 2026'da 'otonom güvenlik fabrikası'na kaydı; açık kaynak ile ticari özellik sınırı değişken.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-3724",
+      "ad": "Arcjet",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (SDK); karar servisi ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://arcjet.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulama koduna gömülen SDK ile istem enjeksiyonu tespiti, ajan araç çağrısı yetkilendirmesi, hassas bilgi tespiti ve hız sınırlama; kararları kanıt olarak saklar.",
+      "sinirlar": "SDK açık kaynak ama karar servisi Arcjet bulutuna bağlı; self-host seçeneği belirtilmemiş.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-3725",
+      "ad": "Pangea AI Guard (CrowdStrike Falcon AIDR)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://pangea.cloud",
+      "olgunluk": "gelisen",
+      "ne_saglar": "API ile çağrılan istem enjeksiyonu, gizli bilgi ve kişisel veri maskeleme, zararlı içerik ve yetkisiz araç çağrısı korumaları; CrowdStrike Falcon'a 'AI Detection and Response' olarak entegre ediliyor.",
+      "sinirlar": "CrowdStrike'ın 2025'teki satın almasıyla ürün yol haritası Falcon platformuna bağlandı; bağımsız kullanım koşulları değişebilir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3726",
+      "ad": "HiddenLayer AISec Platform",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.hiddenlayer.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Model dosyalarında serileştirme zararlı yükü ve arka kapı taraması, çalışma zamanı yapay zekâ tespit ve yanıtı, otomatik kırmızı takım ve yapay zekâ envanteri sunan ticari güvenlik platformu.",
+      "sinirlar": "Kapalı kaynak ve ücretli; tespit kurallarının iç işleyişi bağımsız denetlenemez.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-008",
+        "N-K18-012",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3727",
+      "ad": "Noma Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://noma.security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM, RAG hatları ve ajanlar için keşif/envanter, yapay zekâ malzeme listesi, duruş yönetimi, kırmızı takım ve çalışma zamanı koruması.",
+      "sinirlar": "Ticari SaaS; fiyat ve veri yerleşimi seçenekleri kamuya açık değil.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-008",
+        "N-K18-012",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3728",
+      "ad": "Pillar Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.pillar.security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumdaki yapay zekâ ajanlarını ve iş akışlarını keşfeden, yönetişim politikası uygulayan, kırmızı takım testi ve çalışma zamanı koruması sağlayan platform.",
+      "sinirlar": "Genç girişim ürünü; bağımsız doğrulanmış tespit oranı yayımlanmamış.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-012",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3729",
+      "ad": "Cato AI Security (eski Aim Security)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.catonetworks.com/ai-security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışanların genel yapay zekâ uygulaması kullanımını, kurum içi yapay zekâ uygulama/ajanlarını ve ajan geliştirme yaşam döngüsünü koruyan Aim teknolojisinin Cato SASE platformuna entegre hali.",
+      "sinirlar": "Ağırlıkla Cato SASE müşterilerine yönelik; bağımsız ürün olarak alınabilirliği belirsiz.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3730",
+      "ad": "Straiker",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.straiker.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Geliştirilen ve kullanılan ajanlarda istem enjeksiyonu, araç kötüye kullanımı ve çalışma zamanı saldırılarını tespit eder; ajanları saniyeler içinde devre dışı bırakan 'Agentic Kill Switch' ve kırmızı takım modülü sunar.",
+      "sinirlar": "Tespit doğruluğu iddiası üreticiye ait; kapalı kaynak SaaS.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K17-007",
+        "N-K18-005",
+        "N-K18-007",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-3731",
+      "ad": "Operant AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.operant.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut ve Kubernetes çalışma zamanında yapay zekâ uygulamaları, ajanlar ve MCP trafiğini keşfeden, tespit eden ve satır içi engelleyen koruma; MCP ağ geçidi ve hassas veri maskeleme içerir.",
+      "sinirlar": "Kubernetes merkezli mimari; kurulum seçeneklerinin ayrıntısı satış görüşmesine bağlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-011",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3732",
+      "ad": "Knostic",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.knostic.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kullanıcıların ve kodlama ajanlarının (IDE, MCP, eklentiler) yapay zekâ kullanımına görünürlük, yönetişim ve gerçek zamanlı koruma; kurumsal asistanlarda bilmesi-gereken ilkesine göre aşırı paylaşım kontrolü.",
+      "sinirlar": "Ticari; geliştirici uç noktası kapsamı desteklenen araç listesine bağlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3734",
+      "ad": "Tumeryk",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://tumeryk.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Kurumsal LLM uygulamaları için koruma rayları, kırmızı takım, gözlemlenebilirlik ve 'AI Trust Score' puanlaması sunan platform.",
+      "sinirlar": "Küçük sağlayıcı; puanlama yönteminin ayrıntısı kamuya açık değil.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012",
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "AR-3735",
+      "ad": "ZenGuard AI",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (kütüphane); hizmet ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.zenguard.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanlar için istem enjeksiyonu ve veri sızıntısı tespiti ile güvenlik testi; açık kaynak düşük gecikmeli koruma kütüphanesi ve ticari hizmet.",
+      "sinirlar": "Küçük ekip; açık kaynak depo 2026 başından beri seyrek güncelleniyor.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-011",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-3736",
+      "ad": "Akto",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.akto.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "API ve MCP/ajan envanteri keşfi, ajanlara yönelik güvenlik testleri ve kırmızı takım, ajan duruş yönetimi ve koruma rayları; açık kaynak çekirdek kurum altyapısında çalıştırılabilir.",
+      "sinirlar": "Gelişmiş özelliklerin bir kısmı ticari sürümde; kökeni API güvenliği olduğundan ajan testleri görece yeni.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-012",
+        "N-K22-010",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-3737",
+      "ad": "Alice (eski ActiveFence)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://alice.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gerçek dünya saldırgan verisine dayalı kırmızı takım ve çalışma zamanı koruma rayları; üretken yapay zekâ uygulamaları ve ajanlar için içerik ve ajan güvenliği.",
+      "sinirlar": "Şirket ActiveFence adından Alice'e geçti; ürün adları ve paketleri değişiyor.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-3738",
+      "ad": "Gray Swan AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.grayswan.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ zafiyet araştırmacılarının kurduğu şirketin LLM uygulamaları için koruma katmanı ve topluluk tabanlı kırmızı takım yarışmaları/hizmetleri.",
+      "sinirlar": "Ticari; koruma katmanının ayrıntılı değerlendirmesi kamuya açık değil.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-3740",
+      "ad": "Enkrypt AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.enkryptai.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kırmızı takım testi, koruma rayları, izleme ve düzenleme çerçevelerine uyum raporlaması içeren yapay zekâ güvenlik platformu.",
+      "sinirlar": "Ticari; uyum eşlemelerinin hukuki geçerliliği kurum tarafından doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012",
+        "N-K22-006"
+      ]
+    },
+    {
+      "id": "AR-3741",
+      "ad": "Repello AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://repello.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "ARTEMIS otomatik kırmızı takım, ARGUS çalışma zamanı koruması ve çalışan iş istasyonlarındaki Claude, Cursor, Codex, MCP sunucuları ve skill'leri envanterleyen Workstation Lens.",
+      "sinirlar": "Küçük sağlayıcı; iş istasyonu ajanı desteklenen araçlarla sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-012",
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3747",
+      "ad": "MCP-Defender",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mcpdefender.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Cursor, Claude Desktop gibi uygulamalardaki MCP trafiğini otomatik tarayıp kötü amaçlı araç çağrılarını engelleyen masaüstü uygulaması.",
+      "sinirlar": "AGPL lisansı ve tek geliştirici ağırlıklı bakım; merkezi filo yönetimi yok.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3757",
+      "ad": "Adrian",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://secureagentics.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları çalışma zamanında izleyip kötü amaçlı veya politika dışı araç çağrılarını yakalayan ve engelleyen açık kaynak güvenlik aracı.",
+      "sinirlar": "Erken aşama; kapsanan çerçeve ve araç sayısı sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-007",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3764",
+      "ad": "OWASP Agent Memory Guard",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://owasp.org/www-project-agent-memory-guard/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan belleğine yönelik zehirleme saldırılarını, bağlam sıfırlansa bile çalışma zamanında yakalamayı hedefleyen OWASP projesi.",
+      "sinirlar": "Yeni OWASP projesi; kod olgunluğu ve lisans bilgisi belirsiz.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-3765",
+      "ad": "mcp-context-protector",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/mcp-context-protector",
+      "olgunluk": "erken",
+      "ne_saglar": "MCP sunucularını saran güvenlik katmanı: sunucu yapılandırmasını ilk kullanımda sabitler ve değişiklikleri onaya düşürür, araç yanıtlarını koruma taramasından geçirir, ANSI kaçış dizilerini temizler.",
+      "sinirlar": "Tek istemci-sunucu çifti düzeyinde çalışır; filo yönetimi yok.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-3781",
+      "ad": "Prompt Fuzzer (ps-fuzz)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/prompt-security/ps-fuzz",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sistem istemini dinamik LLM saldırılarına karşı test edip dayanıklılık puanı ve sertleştirme önerileri veren etkileşimli CLI.",
+      "sinirlar": "Tek istem düzeyinde test; çok adımlı ajan akışlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-3790",
+      "ad": "Llama Prompt Guard 2",
+      "tur": "model",
+      "lisans": "Llama 4 Community License",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/meta-llama/Llama-Prompt-Guard-2-86M",
+      "olgunluk": "olgun",
+      "ne_saglar": "86M ve 22M parametreli, istem enjeksiyonu ve jailbreak girişimlerini sınıflandıran küçük model; LLM'e ya da ajana giden güvenilmeyen içerik için düşük gecikmeli ön filtre.",
+      "sinirlar": "Kapılı indirme ve Llama lisans koşulları; Türkçe başarımı kurum verisiyle ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-3791",
+      "ad": "ShieldGemma",
+      "tur": "model",
+      "lisans": "Gemma kullanım şartları",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/google/shieldgemma-2-4b-it",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gemma tabanlı metin (2B/9B/27B) ve görüntü (ShieldGemma 2, 4B) güvenlik sınıflandırıcıları; tanımlı içerik politikalarına göre girdi/çıktı denetimi.",
+      "sinirlar": "Gemma lisans koşullarına tabi; istem enjeksiyonu değil içerik güvenliği odaklı.",
+      "ihtiyaclar": [
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-3792",
+      "ad": "deberta-v3-base-prompt-injection-v2",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/protectai/deberta-v3-base-prompt-injection-v2",
+      "olgunluk": "olgun",
+      "ne_saglar": "İstem enjeksiyonu tespiti için ince ayarlı DeBERTa-v3 sınıflandırıcı; CPU'da çalışabilecek boyutta ön filtre.",
+      "sinirlar": "Model kartına göre İngilizce odaklı; Türkçe ve yeni saldırı türlerinde başarım doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-3793",
+      "ad": "Meta SecAlign",
+      "tur": "model",
+      "lisans": "Llama 3.1 Community License",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://huggingface.co/facebook/Meta-SecAlign-8B",
+      "olgunluk": "erken",
+      "ne_saglar": "Güvenilir talimat ile güvenilmeyen veri kanalını ayıran eğitimle istem enjeksiyonuna karşı sağlamlaştırılmış açık Llama 3.1 tabanlı modeller (8B/70B) ve eğitim kodu.",
+      "sinirlar": "Araştırma sürümü; kapılı indirme; genel yetenek kaybı ve Türkçe başarımı ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-3794",
+      "ad": "Google CaMeL (Defeating Prompt Injections by Design)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/google-research/camel-prompt-injection",
+      "olgunluk": "erken",
+      "ne_saglar": "İstem enjeksiyonunu tasarımla önleyen CaMeL mimarisinin referans kodu: ayrıcalıklı planlayıcı model ile karantinalı model ayrılır, veri akışı yetenek etiketleriyle izlenir, araç çağrıları politikayla denetlenir.",
+      "sinirlar": "Araştırma prototipi; 2025 ortasından beri bakım yok, üretimde doğrudan kullanılamaz.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-3795",
+      "ad": "Microsoft FIDES",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/fides",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanlarda gizlilik ve bütünlük etiketleriyle bilgi akışı kontrolü yaparak deterministik politika uygulayan araştırma sistemi (Flow Integrity Deterministic Enforcement System).",
+      "sinirlar": "Araştırma kodu; 2025 ortasından beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-3804",
+      "ad": "Fiddler AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.fiddler.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajanlar ve modeller için değerlendirme, izleme, koruma modelleri ile politika uygulama, yönetişim ve maliyet görünürlüğü sunan kontrol düzlemi.",
+      "sinirlar": "Ticari; kurum içi kurulum koşulları satış görüşmesine bağlı.",
+      "ihtiyaclar": [
+        "N-K18-006",
+        "N-K19-001",
+        "N-K22-006",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-3841",
+      "ad": "Aurascape",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://aurascape.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Kurumdaki tüm yapay zekâ etkileşimlerine gerçek zamanlı görünürlük, niyet tabanlı kontroller ve veri koruması sağlayan yapay zekâ güvenlik platformu.",
+      "sinirlar": "Genç girişim; bağımsız değerlendirme sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3842",
+      "ad": "Singulr AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://singulr.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Kurumdaki yapay zekâ kullanımını keşfeden, risk puanlayan ve politika uygulayan birleşik yapay zekâ yönetişimi kontrol düzlemi.",
+      "sinirlar": "Genç girişim; entegrasyon kapsamı bağlayıcılara bağlı.",
+      "ihtiyaclar": [
+        "N-K21-005",
+        "N-K22-010"
+      ]
+    }
+  ]
+}

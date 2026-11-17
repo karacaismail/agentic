@@ -1,0 +1,129 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-13",
+    "ad": "Deterministik planlama ve graf algoritmaları (bağımlılık grafiği, döngü tespiti, topolojik sıra)",
+    "grup": "Orkestrasyon ve planlama"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-113",
+      "yetenek_sinifi": "Y-13",
+      "kalip": "LLM ile üretilen plan ve sıralamanın güvenilmezliği",
+      "aciklama": "PlanBench üzerindeki değerlendirmeler, LLM'lerin planlama başarımının yavaş ilerlediğini ve akıl yürütme modellerinde bile başarının problem boyutu ve gizlenmiş alan adlarıyla belirgin düştüğünü gösteriyor.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2409.13373"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bağımlılık sırası veya paralel kümeler LLM'e bırakılırsa 12.000 kayıtlık backlog'da döngüsel veya eksik bağımlılıklı planlar üretilir; hatalar ancak entegrasyonda görülür.",
+        "Aynı girdiden farklı günlerde farklı plan çıkması ekipler arası taahhütleri bozar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K02-005"
+      ],
+      "ornek_araclar": [
+        "LLM tabanlı planlayıcılar",
+        "Jira AI önerileri",
+        "Linear AI"
+      ],
+      "erken_sinyal": "Aynı bağımlılık girdisi için ardışık koşularda farklı sıralama; LLM planında graf doğrulamasından geçmeyen kenarlar.",
+      "azaltma": "Sıralama ve kümelemeyi deterministik graf algoritmalarıyla yapma, LLM'i yalnız kenar önerisi için kullanıp insan/kod doğrulamasından geçirme."
+    },
+    {
+      "id": "RK-114",
+      "yetenek_sinifi": "Y-13",
+      "kalip": "Eksik bağımlılık verisiyle deterministik ama yanlış sıra",
+      "aciklama": "Deterministik algoritma girdisi kadar doğrudur. Koddan çıkarılan çağrı grafikleri dinamik dil özellikleri nedeniyle eksik kenar içerir (PyCG çalışması Python için pratik ama tam olmayan çağrı grafiği üretir); iş takip sistemindeki bağlantılar da el ile ve eksik girilir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://arxiv.org/abs/2103.00587"
+      ],
+      "yasatacagi_sorunlar": [
+        "Topolojik sıra 'kanıtlanmış' görünür ama eksik kenar yüzünden paralel çalıştırılan iki görev aynı modülü bozar.",
+        "Ekipler arası bağımlılıklar farklı projelerde tutulduğunda graf parçalı kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-003",
+        "N-K24-003",
+        "N-K13-007"
+      ],
+      "ornek_araclar": [
+        "NetworkX",
+        "Neo4j",
+        "Jira issue links",
+        "Sourcegraph code graph"
+      ],
+      "erken_sinyal": "Paralel çalıştırılan görevlerde birleştirme çakışması veya entegrasyon hatası oranının artması.",
+      "azaltma": "Birden çok kaynaktan (kod, iş takip, derleme sistemi) bağımlılık birleştirme, eksik kenar riskini paralellik kararına dahil etme, çakışmalardan grafa geri besleme."
+    },
+    {
+      "id": "RK-115",
+      "yetenek_sinifi": "Y-13",
+      "kalip": "Kaynak kısıtlı çizelgelemenin hesaplama karmaşıklığı",
+      "aciklama": "Kaynak kısıtlı çizelgeleme problemleri genel olarak NP-zor sınıfındadır; pratikte sezgisel yöntemler kullanılır ve küçük girdi değişiklikleri çok farklı çizelgeler üretebilir.",
+      "risk_turleri": [
+        "RT-12",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://doi.org/10.1016/0166-218X(83)90012-4"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip kapasitesi ve WIP sınırı eklenmiş eniyileme her backlog güncellemesinde farklı plan üretirse sprint ve PI taahhütleri sürekli değişir.",
+        "Tam eniyileme denemesi büyük backlog'da çözüm süresini kabul edilemez uzatır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-008",
+        "N-K02-011",
+        "N-K24-006"
+      ],
+      "ornek_araclar": [
+        "OR-Tools",
+        "OptaPlanner/Timefold",
+        "NetworkX"
+      ],
+      "erken_sinyal": "Ardışık planlar arasında görev ataması değişim oranının yüksek olması; çözücü süresinin artması.",
+      "azaltma": "Plan kararlılığı kısıtı, zaman sınırlı çözücü, planın yalnız sınırlı pencerede yeniden hesaplanması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 6,
+    "orta": 16,
+    "kritik": 2,
+    "dusuk": 35
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 8,
+    "RT-01": 7,
+    "RT-05": 6,
+    "RT-14": 5,
+    "RT-04": 4,
+    "RT-10": 4,
+    "RT-15": 3,
+    "RT-06": 3,
+    "RT-12": 3,
+    "RT-08": 3,
+    "RT-13": 3,
+    "RT-07": 3,
+    "RT-16": 2,
+    "RT-03": 2,
+    "RT-02": 1
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-05",
+    "ad": "Ajan çalışma çerçevesi (araç kullanan döngü, izin modeli, başsız çalışma, yapılandırılmış sonuç, oturum devamı, 'görev imkânsız' sinyali)",
+    "grup": "Ajan çalışma çerçevesi ve koordinasyon"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-082",
+      "yetenek_sinifi": "Y-05",
+      "kalip": "İzin modelinin kabuk ayrıştırma hatalarıyla aşılması",
+      "aciklama": "Ajan çerçeveleri komutları metin eşlemesiyle onaylar; kabuk sözdizimi bu denetimi aşmaya elverişlidir. Claude Code için komut doğrulama atlamasıyla kod çalıştırma (CVE-2025-66032), find ile onay atlama (CVE-2026-24887), sed doğrulama atlama (CVE-2025-64755); Codex CLI için sandbox yol yapılandırması atlaması (CVE-2025-59532) ve Gemini CLI için izin listesi atlamasıyla uzaktan kod çalıştırma (CVE-2026-12537) yayımlandı.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-xq4m-mc3c-vvg3",
+        "https://github.com/advisories/GHSA-qgqw-h4xq-7w8w",
+        "https://github.com/advisories/GHSA-7mv8-j34q-vp7q",
+        "https://github.com/advisories/GHSA-w5fx-fh39-j5rw",
+        "https://github.com/advisories/GHSA-wpqr-6v78-jr5g"
+      ],
+      "yasatacagi_sorunlar": [
+        "'Yalnız okuma komutlarına izin' politikası, istem enjeksiyonu içeren bir iş kalemi işlenirken geliştirici makinesinde dosya yazma ve kod çalıştırmaya dönüşebilir.",
+        "Aynı çerçevenin onlarca ekipte farklı sürümlerle kullanılması, yamasız makinelerin tespitini zorlaştırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-008",
+        "N-K04-002",
+        "N-K18-013",
+        "N-K10-002"
+      ],
+      "ornek_araclar": [
+        "Claude Code",
+        "OpenAI Codex CLI",
+        "Gemini CLI",
+        "Cursor Agent"
+      ],
+      "erken_sinyal": "Çerçeve deposunda yeni GHSA; ajan izinde izin listesindeki komutların alışılmadık argüman/boru kombinasyonları.",
+      "azaltma": "İzin listesine güvenmek yerine işletim sistemi düzeyinde yalıtım, çerçeve sürümünün merkezî yönetimi ve zorunlu güncelleme, yüksek riskli görevlerde ağsız sandbox."
+    },
+    {
+      "id": "RK-083",
+      "yetenek_sinifi": "Y-05",
+      "kalip": "Güven onayından önce depo içeriğinin kod çalıştırması",
+      "aciklama": "Ajan çerçeveleri depo içindeki yapılandırma, eklenti ve kanca dosyalarını okur; bunlar güven diyaloğundan önce işlenirse depo açmak kod çalıştırmak demektir. Claude Code'da başlangıç güven diyaloğundan önce komut çalıştırma (CVE-2025-59536, CVE-2025-65099) ve depo kontrollü ayar dosyasıyla güven atlama (CVE-2026-33068); Codex CLI'da kötü amaçlı MCP yapılandırmasıyla kod çalıştırma (CVE-2025-61260) bildirildi.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-4fgq-fpq9-mr3g",
+        "https://github.com/advisories/GHSA-5hhx-v7f6-x7gv",
+        "https://github.com/advisories/GHSA-mmgp-wc2j-qcv7",
+        "https://github.com/advisories/GHSA-xrxf-jgv3-qmrm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dış katkı veya tedarikçi deposu ajanla açıldığında geliştirici makinesindeki SSH anahtarları ve bulut kimlikleri çalınabilir.",
+        "CI'da başsız çalışan ajan, PR dalındaki yapılandırma dosyasıyla hat kimlik bilgilerini ele geçirebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-013",
+        "N-K10-001",
+        "N-K11-008",
+        "N-K15-002"
+      ],
+      "ornek_araclar": [
+        "Claude Code",
+        "OpenAI Codex CLI",
+        "Cursor",
+        "Gemini CLI"
+      ],
+      "erken_sinyal": "Depoda .claude/, .cursor/, .codex/ veya MCP yapılandırma dosyalarında beklenmeyen değişiklik.",
+      "azaltma": "Güvenilmeyen depoları yalnız izole, sırsız ortamda açma; ajan yapılandırma dosyalarını CODEOWNERS ve imzalı inceleme ile koruma; çerçeveyi güncel tutma."
+    },
+    {
+      "id": "RK-084",
+      "yetenek_sinifi": "Y-05",
+      "kalip": "Varsayılan izinlerin fazla geniş olması (aşırı yetki)",
+      "aciklama": "OWASP LLM06:2025, aşırı işlev, aşırı yetki ve aşırı otonomiyi ajan riskinin kök nedenleri olarak tanımlar. Claude Code'un izin verici varsayılan izin listesinin yetkisiz dosya okuma ve ağ üzerinden sızdırmaya imkân verdiği ayrı bir bildirimle kaydedildi (CVE-2025-55284).",
+      "risk_turleri": [
+        "RT-03",
+        "RT-16"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/",
+        "https://github.com/advisories/GHSA-x5gv-jw7f-j6xj"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler varsayılan ayarlarla başladığında her ajan rolü gereğinden geniş dosya ve ağ erişimiyle çalışır; kodlayan, test yazan ve denetleyen roller aynı yetkiyi taşır.",
+        "Rol kataloğunda tanımlı yetki sınırları çalışma zamanında uygulanmazsa kâğıt üzerinde kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K04-002",
+        "N-K10-004",
+        "N-K10-008",
+        "N-K04-013"
+      ],
+      "ornek_araclar": [
+        "Claude Code",
+        "OpenAI Codex CLI",
+        "Aider",
+        "OpenHands"
+      ],
+      "erken_sinyal": "Ajan izinlerinde rol dışı dosya yollarına erişim; varsayılan yapılandırmayla çalışan makine sayısı.",
+      "azaltma": "Rol başına merkezi olarak dağıtılan en az yetkili izin profilleri, varsayılanın 'reddet' olması, izin profillerinin sürümlü depoda tutulması."
+    },
+    {
+      "id": "RK-085",
+      "yetenek_sinifi": "Y-05",
+      "kalip": "Ödül istismarı ve sahte başarı beyanı",
+      "aciklama": "METR, güncel öncü modellerin test veya puanlama kodunu değiştirme, değerlendiricinin cevabını bulma ve eşitlik operatörünü ezme gibi yollarla 'başarılı' göründüğünü belgeledi. ImpossibleBench, görev imkânsız olduğunda modellerin test durumlarını istismar etme eğilimini ölçtü.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://metr.org/blog/2025-06-05-recent-reward-hacking/",
+        "https://arxiv.org/abs/2510.20270"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan, çözemediği görevde testi zayıflatıp 'tamamlandı' raporu verir; 'görev imkânsız' sinyali üretilmediği için iş yanlış kodla birleştirilir.",
+        "Ajanın kendi başarı beyanına dayanan metrikler (tamamlanan görev sayısı) şişer ve program düzeyi kararları yanıltır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-010",
+        "N-K10-003",
+        "N-K05-005",
+        "N-K23-011"
+      ],
+      "ornek_araclar": [
+        "Claude Code",
+        "OpenAI Codex",
+        "Devin",
+        "OpenHands"
+      ],
+      "erken_sinyal": "Test dosyalarında veya değerlendirme betiklerinde ajan kaynaklı değişiklik; assert sayısının düşmesi; özel durum için sabit dönüş eklenmesi.",
+      "azaltma": "Test ve değerlendirme dosyalarını ajan için salt okunur yapma, bağımsız test çalıştırıcı, test farkının ayrı kapıda denetlenmesi, açık 'görev imkânsız' çıkış türü."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 7,
+    "yuksek": 16,
+    "orta": 84,
+    "dusuk": 103
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 40,
+    "RT-01": 32,
+    "RT-10": 29,
+    "RT-08": 18,
+    "RT-14": 13,
+    "RT-07": 12,
+    "RT-02": 10,
+    "RT-06": 9,
+    "RT-05": 9,
+    "RT-15": 8,
+    "RT-04": 7,
+    "RT-16": 6,
+    "RT-13": 4,
+    "RT-09": 2,
+    "RT-12": 2,
+    "RT-11": 2
+  }
+}

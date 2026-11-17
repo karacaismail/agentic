@@ -1,0 +1,167 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-41",
+    "ad": "Tedarik zinciri bütünlüğü (bağımlılık varlık/itibar doğrulaması, yazılım malzeme listesi, artefakt imzası ve köken)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-211",
+      "yetenek_sinifi": "Y-41",
+      "kalip": "Halüsinasyonlu paket adı (slopsquatting)",
+      "aciklama": "USENIX Security 2025'te yayımlanan çalışma, kod üreten LLM'lerin önerdiği paketlerde halüsinasyon oranının ticari modellerde en az %5,2, açık kaynak modellerde %21,7 olduğunu ve 205.474 benzersiz uydurma paket adı üretildiğini gösterdi.",
+      "risk_turleri": [
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen",
+        "https://arxiv.org/abs/2406.10279"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan var olmayan bir paketi bağımlılık olarak eklediğinde saldırgan o adla paket yayımlayıp geliştirici ve CI ortamında kod çalıştırabilir.",
+        "Yinelenen halüsinasyonlar tahmin edilebilir olduğu için saldırganlar önceden paket kaydedebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K11-008"
+      ],
+      "ornek_araclar": [
+        "npm",
+        "PyPI",
+        "Maven Central",
+        "Socket/Snyk gibi paket itibar araçları"
+      ],
+      "erken_sinyal": "Yeni bağımlılıkların çok yeni, düşük indirmeli veya tek sürümlü olması.",
+      "azaltma": "Yeni bağımlılık için varlık/itibar denetimi ve insan onayı, iç ayna ve izin listesi, ajanın paket kurma yetkisinin kısıtlanması."
+    },
+    {
+      "id": "RK-212",
+      "yetenek_sinifi": "Y-41",
+      "kalip": "Kendini çoğaltan paket solucanı ve yapay zekâ CLI'larının kötüye kullanımı",
+      "aciklama": "Shai-Hulud solucanı Eylül 2025'te ele geçirilmiş bakımcı hesaplarıyla popüler npm paketlerine kurulum sonrası betik ekleyerek yayıldı; GitHub 500'den fazla paketi kaldırdı. Ağustos 2025'teki Nx 's1ngularity' saldırısında kötü amaçlı sürümler yerel yapay zekâ CLI'larını (Claude, Gemini) sır aramak için kullandı.",
+      "risk_turleri": [
+        "RT-02",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.blog/security/supply-chain-security/our-plan-for-a-more-secure-npm-supply-chain/",
+        "https://nx.dev/blog/s1ngularity-postmortem",
+        "https://github.com/advisories/GHSA-cxm3-wv7p-598c",
+        "https://osv.dev/vulnerability/MAL-2025-47141"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştirici makinesinde izin atlama kipinde çalışan ajan CLI'ları, kötü amaçlı bir paket tarafından sır toplayıcı olarak kullanılabilir.",
+        "Ajanların otomatik bağımlılık güncellemesi, solucanın kurum içine taşınmasını hızlandırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K22-007"
+      ],
+      "ornek_araclar": [
+        "npm",
+        "Nx",
+        "@ctrl/tinycolor",
+        "Claude Code / Gemini CLI"
+      ],
+      "erken_sinyal": "Kurulum sonrası betik içeren yeni sürümler; geliştirici makinesinde ajan CLI'larının beklenmeyen süreçlerce çağrılması.",
+      "azaltma": "Kurulum betiklerinin varsayılan kapalı olması, yeni sürümler için bekleme süresi, ajan CLI'larında izin atlama kipinin yasaklanması, npm token'larının kısa ömürlü olması."
+    },
+    {
+      "id": "RK-213",
+      "yetenek_sinifi": "Y-41",
+      "kalip": "Köken kanıtının kötü amaçlı sürümü önlememesi",
+      "aciklama": "Ultralytics saldırısında (Aralık 2024) kötü amaçlı sürümler GitHub Actions önbellek zehirlenmesiyle meşru yayın hattında üretildi; PyPI analizi, güvenilir yayıncı ve köken bilgisinin olayın görünürlüğünü artırdığını ama önlemediğini ortaya koydu. LiteLLM'in 2026 ele geçirilmesi de meşru CI üzerinden gerçekleşti.",
+      "risk_turleri": [
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://blog.pypi.org/posts/2024-12-11-ultralytics-attack-analysis/",
+        "https://osv.dev/vulnerability/MAL-2026-2144"
+      ],
+      "yasatacagi_sorunlar": [
+        "'İmzalı ve köken belgeli paket güvenlidir' kuralı, hattın kendisi ele geçirildiğinde kötü amaçlı sürümü onaylar.",
+        "SBOM ve imza doğrulaması uyum raporunda yeşil görünür ama saldırıyı durdurmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K22-007"
+      ],
+      "ornek_araclar": [
+        "Sigstore",
+        "PyPI Trusted Publishing",
+        "npm provenance",
+        "SLSA"
+      ],
+      "erken_sinyal": "Kaynak depodaki etiketle yayımlanan paket içeriği arasında fark; beklenmeyen yayın zamanı.",
+      "azaltma": "Köken doğrulamasına ek olarak davranışsal paket analizi, yeni sürümler için bekleme süresi, yeniden üretilebilir derleme karşılaştırması."
+    },
+    {
+      "id": "RK-214",
+      "yetenek_sinifi": "Y-41",
+      "kalip": "SBOM üreticilerinin tutarsızlığı",
+      "aciklama": "Karmaşık Java projelerinde altı SBOM aracının incelendiği çalışma, üretilen SBOM'ların doğruluğunda ciddi zorluklar buldu; SBOM üzerine yapılan geniş çalışma da benimseme ve kalite sorunlarını belgeledi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-16"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2303.11102",
+        "https://arxiv.org/abs/2301.05362"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı ekiplerin farklı araçlarla ürettiği SBOM'lar aynı ürün için farklı bileşen listesi verir; zafiyet eşleştirmesi ve yasal raporlama tutarsızlaşır.",
+        "Eksik SBOM, halüsinasyonlu veya gömülü bağımlılıkları gizler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K22-007",
+        "N-K22-002"
+      ],
+      "ornek_araclar": [
+        "Syft",
+        "CycloneDX araçları",
+        "SPDX araçları",
+        "Trivy SBOM"
+      ],
+      "erken_sinyal": "Aynı artefakt için iki aracın SBOM'u arasında bileşen farkı.",
+      "azaltma": "Tek standart araç ve biçim, SBOM'un derleme sırasında üretilmesi, periyodik araçlar arası karşılaştırma."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 68,
+    "dusuk": 163,
+    "yuksek": 13,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 26,
+    "RT-11": 19,
+    "RT-10": 13,
+    "RT-01": 13,
+    "RT-14": 10,
+    "RT-07": 9,
+    "RT-03": 8,
+    "RT-02": 8,
+    "RT-12": 7,
+    "RT-13": 6,
+    "RT-06": 5,
+    "RT-05": 4,
+    "RT-15": 4,
+    "RT-04": 2,
+    "RT-09": 1
+  }
+}

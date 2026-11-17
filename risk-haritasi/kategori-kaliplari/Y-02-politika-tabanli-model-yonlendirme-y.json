@@ -1,0 +1,171 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-02",
+    "ad": "Politika tabanlı model yönlendirme, yedekleme ve kota",
+    "grup": "Model erişimi ve ekonomisi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-070",
+      "yetenek_sinifi": "Y-02",
+      "kalip": "Model geçidinin tedarik zinciri hedefi olması",
+      "aciklama": "Tüm sağlayıcı anahtarlarını tutan geçit paketi, ele geçirildiğinde en yüksek değerli hedeftir. LiteLLM'in PyPI'daki 1.82.7 ve 1.82.8 sürümleri, projenin CI'ında kullanılan Trivy güvenlik taraması üzerinden ele geçirilerek sırları saldırgan alan adına sızdıran kodla yayımlandı (MAL-2026-2144).",
+      "risk_turleri": [
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://osv.dev/vulnerability/MAL-2026-2144",
+        "https://github.com/advisories/GHSA-92x9-889m-jgmw",
+        "https://www.wiz.io/blog/threes-a-crowd-teampcp-trojanizes-litellm-in-continuation-of-campaign"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geçit imajı 'latest' ile ya da sürüm aralığıyla kuruluyorsa tek bir otomatik güncelleme tüm model sağlayıcı anahtarlarını ve bulut sırlarını dışarı taşır.",
+        "Geçit tüm ajan trafiğini gördüğünden, ele geçirilmiş sürüm istem içeriğini (kaynak kod, kişisel veri içeren iş kalemleri) de sızdırabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K22-008",
+        "N-K09-001",
+        "N-K16-005"
+      ],
+      "ornek_araclar": [
+        "LiteLLM",
+        "Portkey Gateway",
+        "Helicone",
+        "Kong AI Gateway"
+      ],
+      "erken_sinyal": "Geçit sürümünde beklenmeyen artış, bağımlılık özet değerlerinin değişmesi, geçit sunucusundan bilinmeyen alan adlarına çıkış.",
+      "azaltma": "Sürüm ve özet (hash) sabitleme, iç ayna depo ile gecikmeli terfi, geçit sunucusunda ağ çıkışı izin listesi, anahtarların geçit dışında kasada tutulup kısa ömürlü türetilmesi."
+    },
+    {
+      "id": "RK-071",
+      "yetenek_sinifi": "Y-02",
+      "kalip": "Geçitte kimlik doğrulama atlama yoğunluğu ve tek hata noktası",
+      "aciklama": "Geçitler yönetim arayüzü, anahtar üretimi, SSO ve MCP vekilliği gibi geniş bir yüzey taşır. LiteLLM için 2026'da API anahtarı doğrulamasında SQL enjeksiyonu (CVE-2026-42208), Host başlığı ile kimlik doğrulama atlama (CVE-2026-49468), OIDC önbellek anahtarı çakışmasıyla atlama (CVE-2026-35030) ve şablon enjeksiyonu (CVE-2026-37004) gibi kritik bildirimler yayımlandı. Tüm çağrılar geçitten geçtiği için geçit kesintisi tüm hattı durdurur.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-13"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-r75f-5x8p-qvmc",
+        "https://github.com/advisories/GHSA-4xpc-pv4p-pm3w",
+        "https://github.com/advisories/GHSA-jjhc-v7c2-5hh6",
+        "https://github.com/advisories/GHSA-6wvf-77m9-58rm"
+      ],
+      "yasatacagi_sorunlar": [
+        "İç ağda erişilebilir bir geçit yönetim uç noktası üzerinden herhangi bir iç kullanıcı yönetici anahtarı üretebilir ve ekip kotalarını/politikaları değiştirebilir.",
+        "Sık yama zorunluluğu geçidin sık yeniden başlatılmasını gerektirir; yedekli kurulum yoksa her yama tüm ekiplerin ajanlarını durdurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-004",
+        "N-K16-007",
+        "N-K18-003",
+        "N-K22-008"
+      ],
+      "ornek_araclar": [
+        "LiteLLM",
+        "Portkey Gateway",
+        "OpenRouter",
+        "Cloudflare AI Gateway"
+      ],
+      "erken_sinyal": "Geçit sürümü için yeni GHSA yayımlanması; yönetim API'sine beklenmeyen kaynaklardan istek; geçit kesintisinde tüm ajan kuyruklarının aynı anda durması.",
+      "azaltma": "Yönetim düzlemini veri düzleminden ayırma, yönetim arayüzünü ağ seviyesinde kapatma, en az iki örnekli yedekli kurulum, doğrudan sağlayıcıya acil durum yolu, GHSA takibi ve hızlı yama süreci."
+    },
+    {
+      "id": "RK-072",
+      "yetenek_sinifi": "Y-02",
+      "kalip": "Yedek sağlayıcıya geçişte davranış farkı",
+      "aciklama": "Aynı model adı farklı sunucu/sağlayıcılarda farklı niceleme, şablon ve araç çağrısı ayrıştırmasıyla sunulabilir. Moonshot AI, K2 modelinin farklı sağlayıcılardaki araç çağrısı doğruluğunun tutarsız olduğunu görüp sağlayıcıları ölçen K2-Vendor-Verifier aracını yayımladı.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-15"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/MoonshotAI/K2-Vendor-Verifier"
+      ],
+      "yasatacagi_sorunlar": [
+        "Birincil sağlayıcı kesintisinde otomatik yedeğe geçiş, aynı rolün araç çağrılarını bozuk şemayla üretmesine ve görevlerin sessizce başarısız olmasına yol açar.",
+        "Rol başına kalibre edilmiş eşikler yedek modelde geçersiz olduğu için 'bozulmuş mod' beklenenden kötü çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-002",
+        "N-K16-007",
+        "N-K09-010",
+        "N-K23-002"
+      ],
+      "ornek_araclar": [
+        "OpenRouter",
+        "LiteLLM",
+        "Portkey Gateway",
+        "vLLM tabanlı sağlayıcılar"
+      ],
+      "erken_sinyal": "Yedek modele geçişten sonra şema doğrulama hatası ve yeniden deneme oranında sıçrama.",
+      "azaltma": "Her birincil/yedek çiftinin rol bazında önceden değerlendirilmesi, yedeğe geçişin iz kaydına yazılması, araç çağrısı şema doğruluğunun sürekli ölçülmesi."
+    },
+    {
+      "id": "RK-073",
+      "yetenek_sinifi": "Y-02",
+      "kalip": "Yönlendiricinin düşmanca girdiyle manipülasyonu",
+      "aciklama": "Maliyet/kalite yönlendiricileri sorguyu sınıflayarak ucuz veya güçlü modele gönderir. Araştırmacılar, sorguya eklenen 'confounder gadget' dizileriyle açık kaynak ve ticari yönlendiricilerin sorguyu her zaman güçlü modele göndermeye zorlanabildiğini ve perplexity filtresinin etkili olmadığını gösterdi.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-14"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2501.01818"
+      ],
+      "yasatacagi_sorunlar": [
+        "İş kalemi veya yorum metnine gömülen diziler, toplu işlerde tüm isteklerin pahalı modele yönlendirilmesine ve ekip bütçelerinin tükenmesine yol açabilir.",
+        "Karar türü × izinli model matrisi yönlendiriciye bırakılırsa politika istem içeriğiyle aşılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-003",
+        "N-K09-004",
+        "N-K20-005"
+      ],
+      "ornek_araclar": [
+        "RouteLLM",
+        "Not Diamond",
+        "Martian",
+        "OpenRouter Auto Router"
+      ],
+      "erken_sinyal": "Görev türüne göre beklenenden yüksek güçlü-model oranı; belirli kaynaklardan gelen görevlerde maliyet sıçraması.",
+      "azaltma": "Model seçimini içerikten bağımsız deterministik kurallarla (rol, risk, karar türü) yapma; yönlendiriciyi yalnız öneri olarak kullanma; görev başına maliyet tavanı."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 2,
+    "yuksek": 4,
+    "orta": 20,
+    "dusuk": 40
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 7,
+    "RT-11": 5,
+    "RT-14": 4,
+    "RT-10": 4,
+    "RT-03": 3,
+    "RT-08": 3,
+    "RT-02": 2,
+    "RT-07": 2,
+    "RT-16": 2,
+    "RT-04": 2,
+    "RT-13": 2,
+    "RT-06": 1,
+    "RT-05": 1,
+    "RT-12": 1
+  }
+}

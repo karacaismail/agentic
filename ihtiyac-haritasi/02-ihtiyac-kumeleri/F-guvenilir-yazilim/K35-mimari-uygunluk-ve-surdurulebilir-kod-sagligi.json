@@ -1,0 +1,268 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K35",
+    "ad": "Mimari uygunluk ve sürdürülebilir kod sağlığı",
+    "alan": "F-guvenilir-yazilim",
+    "amac": "Ajan hızıyla üretilen kodun zaman içinde mimari niyete uygun, anlaşılır ve bakımı sürdürülebilir kalması; yapay zekâ üretimi kodun uzun vadeli etkisinin kurum içi kanıtla izlenmesi.",
+    "kapsam": [
+      "çalıştırılabilir mimari kurallar (uygunluk fonksiyonları)",
+      "modülerlik ve mimari sağlık metrikleri",
+      "ekipler arası sınır ihlali tespiti",
+      "teknik borç kaydı ve yönetimi",
+      "köken kohortuyla uzun vadeli bakım kanıtı",
+      "özellik bayrağı ve ölü kod yaşam döngüsü",
+      "ürün bağımlılıklarının sağlık ve güncellik yönetimi"
+    ],
+    "kapsam_disi": [
+      "etki analizi ve ilişki haritası (K03)",
+      "tasarım ilkesi ve anti-kalıp denetimi (K04)",
+      "tedarik zinciri güvenliği (K18)",
+      "genel teslim ve kod sağlığı metrik tanımları (K23)"
+    ],
+    "komsu_kumeler": [
+      "K03",
+      "K04",
+      "K07",
+      "K23",
+      "K24"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K35-001",
+      "baslik": "Çalıştırılabilir mimari kurallar (uygunluk fonksiyonları)",
+      "ihtiyac": "Mimari niyetin (katmanlar, bağımlılık yönü, döngüsel bağımlılık yasağı, modül sınırları ve genel arayüz yüzeyi, izin verilen iletişim biçimleri, paylaşılan veri deposu yasağı) kod olarak yazılmış, her değişiklikte deterministik çalışan kurallara dönüştürülmesi; kuralların karar kayıtlarına bağlanması; ihlalin birleştirmeyi engellemesi; kural istisnalarının süreli ve sahipli olması.",
+      "cozulecek_sorun": "Yazılı mimari kurallar ve talimat dosyaları ajan davranışını tutarlı biçimde yönlendirmiyor; bazı modeller mimari kısıtları sıklıkla ihlal edip katmanlar arası yasak bağımlılıklar üretiyor. Aşınma yavaş biriktiği için değişiklik incelemesinde fark edilmiyor.",
+      "yetenek_siniflari": [
+        "Y-65",
+        "Y-14",
+        "Y-20",
+        "Y-37"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Tek depoda basit kurallar yeter; çok ekipte kuralların katmanlı dağıtımı ve ortak kütüphanesi gerekir.",
+      "kabul_olcutleri": [
+        "Her depoda karar kayıtlarına bağlı mimari kural seti var ve deterministik kapıda koşuyor.",
+        "Yeni mimari kural ihlaliyle birleşen değişiklik sayısı 0; mevcut ihlaller azalan hedefli kayıtta.",
+        "Her kural bir karar kaydına ve sahibine bağlı; süresi dolmuş istisna 0."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-345",
+          "S-346",
+          "S-348",
+          "S-347",
+          "S-324"
+        ],
+        "not": "Mimari uygunluk fonksiyonu mimari niteliklerin nesnel, otomatik ve sürekli değerlendirmesidir. 2025 çalışmasında altıgen mimari kısıtı altında bir açık ağırlıklı model %80 mimari ihlal oranı gösterdi. Log çalışması doğal dil talimatlarının yetersiz kaldığını ve deterministik korkuluk gerektiğini bulur. Benzer mevcut ihtiyaç: N-K03-010; fark: K03-010 konvansiyona uyumu raporlar, K04-008 anti-kalıpları tespit eder, K03-009 karar kaydını ajana gösterir; mimari niyeti makinece zorlayan ve karar kaydına bağlı kural yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K03-010"
+      ]
+    },
+    {
+      "id": "N-K35-002",
+      "baslik": "Modülerlik ve mimari sağlık metriklerinin zaman serisi",
+      "ihtiyac": "Ayrışma düzeyi, yayılım maliyeti, döngüsel bağımlılık sayısı, birlikte değişen modüller, mimari sıcak noktalar ve bilişsel karmaşıklık gibi metriklerin depo ve modül bazında zaman serisi olarak izlenmesi; eşik veya eğilim bozulmasında mimari incelemenin tetiklenmesi; ajan katkısı yüksek alanların ayrıca raporlanması.",
+      "cozulecek_sorun": "Kod sağlığı izlemesi (K23-014) klon ve yeniden düzenleme oranına odaklıdır; mimari düzeydeki bağlaşım artışı ayrıca ölçülmezse yapay zekâ benimsemesiyle görülen kalıcı karmaşıklık artışı geç fark edilir.",
+      "yetenek_siniflari": [
+        "Y-65",
+        "Y-46",
+        "Y-14"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Mimari bozulma aylar içinde görünür hale gelir; ekip sayısı arttıkça ekipler arası sınırlarda yoğunlaşır.",
+      "kabul_olcutleri": [
+        "Metrikler her birleştirmede veya haftalık hesaplanıyor ve modül sahiplerine görünür.",
+        "Eğilim eşiği aşımı otomatik mimari inceleme işi açıyor.",
+        "Ajan katkı oranı yüksek modüller için ayrı eğilim raporu var."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-349",
+          "S-321",
+          "S-320"
+        ],
+        "not": "Ayrışma düzeyi metriği 108 açık kaynak ve 21 endüstriyel projede bakım karmaşıklığıyla ilişkilendirildi. Ajan benimsemesinin bilişsel karmaşıklığı yaklaşık %39 artırdığı raporlandı. Benzer mevcut ihtiyaç: N-K23-014; fark: K23-014 klon, yeniden düzenleme ve sık değişen kodu izler; modüler yapı ve bağlaşım metrikleri kapsam dışında."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "zamanla (3–6 ay)",
+      "bagimliliklar": [
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "N-K35-003",
+      "baslik": "Ekipler arası sınır ihlali tespiti ve ART düzeyi mimari kurallar",
+      "ihtiyac": "ART düzeyinde tanımlanan mimari yol ve sınırların (hangi ekip hangi modülün sahibi, hangi arayüz genel, hangi iç yapı yasak) çalıştırılabilir kurallar olarak tüm ekip depolarına dağıtılması; bir ekibin veya ajanının başka ekibin iç modülüne doğrudan bağımlılık kurması, ortak veri deposuna yazması veya belgelenmemiş arayüz kullanması gibi sınır ihlallerinin tespit edilmesi.",
+      "cozulecek_sorun": "Ajanlar en kısa yolu seçer ve başka ekibin iç yapısını doğrudan kullanabilir; bu gizli bağlaşım ekipler arası bağımsız yayını ve sorumluluk sınırlarını bozar. Gevşek bağlaşımlı mimariye sahip ekipler yapay zekâdan daha fazla fayda görüyor.",
+      "yetenek_siniflari": [
+        "Y-65",
+        "Y-14",
+        "Y-35"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı arttıkça sınır sayısı karesel artar; tespit olmadan gizli bağlaşım koordinasyon maliyetini büyütür.",
+      "kabul_olcutleri": [
+        "Ekip sınırını aşan yeni gizli bağımlılık birleştirmeyi engelliyor.",
+        "Sahiplik haritası ve genel arayüz listesi ART düzeyinde sürümlü.",
+        "Sınır ihlali istisnaları iki ekibin de onayını gerektiriyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-345",
+          "S-102"
+        ],
+        "not": "2025 sektör raporu gevşek bağlaşımlı mimariye sahip ekiplerin hızlanmadan fayda gördüğünü, sıkı bağlaşımlı olanların istikrarsızlık yaşadığını belirtir; ekip sınırı kuralları bunun çıkarımsal uygulamasıdır. Benzer mevcut ihtiyaç: N-K24-007; fark: K24-007 mimari yolun ART düzeyinde tutulacağını söyler; bunun çalıştırılabilir kurallara dönüşmesini ve ekipler arası ihlal tespitini tanımlamaz. K24-008 yalnız sıcak nokta dosyaların sahipliğini ele alır."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "bagimliliklar": [
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "N-K35-004",
+      "baslik": "Teknik borç kaydı ve yönetimi",
+      "ihtiyac": "Teknik borcun (bilerek alınmış kısa yol, eksik test, geçici çözüm, eskimiş bağımlılık, mimari sapma) iş takip sisteminde sınıflı, sahipli, 'faiz' tahminli (yavaşlattığı iş, taşıdığı risk) ve geri ödeme tetikleyicisi tanımlı kalemler olarak tutulması; ajanların bir işi tamamlarken aldığı kısa yolları ve bıraktığı geçici çözümleri yapılandırılmış biçimde borç kaydına yazması; borcun ekip ve hizmet bazında eğilim olarak izlenmesi.",
+      "cozulecek_sorun": "Teknik borç geliştirici zamanının önemli bir kısmını tüketiyor; ajanlar hızla çalışan ama borç bırakan kod üretirken bu borç kayıt dışı kalırsa görünmez biçimde birikir. K03-007 yalnız olgunluk geçişine engel borcu işaretler.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-46",
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Paylaşılan bileşenlerde borcun sahibi belirsizleşir; çok ekipte borç sahipliği kuralı gerekir.",
+      "kabul_olcutleri": [
+        "Ajan sonuç şemasında 'bırakılan borç' alanı var; boşsa gerekçeli.",
+        "Borç kalemlerinin sahip, sınıf ve tetikleyici alanları %100 dolu.",
+        "Hizmet bazında borç eğilimi ve geri ödeme oranı raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-350",
+          "S-351"
+        ],
+        "not": "Boylamsal çalışma geliştiricilerin zamanlarının ortalama %23'ünü teknik borç nedeniyle kaybettiğini buldu. 104 kaynaklı 2026 incelemesi dil modeli destekli geliştirmede 'hızlı entegrasyon borcu' gibi yeni borç türleri ve standart ölçüt eksikliği raporlar. Benzer mevcut ihtiyaç: N-K03-007; fark: K03-007 teknik borcu yalnız olgunluk seviyesi bağlamında işaretler; borcun yaşam döngüsü, faizi, geri ödemesi ve ajanın borç beyanı tanımlı değil."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K03-007"
+      ]
+    },
+    {
+      "id": "N-K35-005",
+      "baslik": "Yapay zekâ üretimi kodun uzun vadeli bakım kanıtı (köken kohortu)",
+      "ihtiyac": "Değişiklik ve satır düzeyinde köken bilgisinin (ajan, insan, karma) korunması ve ajan üretimi kodun 6–12 aylık kohortlar halinde insan koduyla aynı modül ve iş türü içinde karşılaştırmalı izlenmesi: statik analiz uyarıları, bilişsel karmaşıklık, kusur yoğunluğu, değişim ve yeniden yazılma oranı, insan onarım payı, olaylara katkı; sonuçların otonomi, kural ve inceleme politikasına geri beslenmesi.",
+      "cozulecek_sorun": "Nedensel çalışmalar ajan benimsemesinde hız kazancının geçici, karmaşıklık ve uyarı artışının kalıcı olabildiğini gösterirken başka bir çalışma ajan üretimi dosyaların daha az bakım gerektirdiğini buluyor; kanıt çelişkili ve bağlama bağlı. Kurum kendi kanıtını üretmezse karar algıya dayanır.",
+      "yetenek_siniflari": [
+        "Y-46",
+        "Y-28",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Kohort anlamlılığı için yeterli değişiklik hacmi gerekir; çok ekipli yapıda ekipler arası karşılaştırma yerine ekip içi zaman serisi kullanılmalıdır.",
+      "kabul_olcutleri": [
+        "Köken bilgisi birleştirilen değişikliklerin %100'ünde kayıtlı ve satır düzeyine indirgenebiliyor.",
+        "Altı ayda bir kohort raporu yayımlanıyor ve en az bir politika kararına girdi oluyor.",
+        "Karşılaştırma aynı modül ve iş türü içinde, karıştırıcılar kontrol edilerek yapılıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-320",
+          "S-321",
+          "S-322",
+          "S-136"
+        ],
+        "not": "Çelişkili kanıt: fark-içinde-fark çalışmalarında kalıcı uyarı ve karmaşıklık artışı; 100 depoda 3.200 değişiklik inceleyen 2026 çalışmasında ajan dosyalarında daha seyrek bakım ama bakımın büyük kısmını insanların yapması; sektör raporunda kopyala-yapıştır kodun taşınmış kodu ilk kez geçmesi. Benzer mevcut ihtiyaç: N-K23-014; fark: K23-014 kod sağlığını köken ayrımı olmadan izler; N-K19-006 insan katkısını kaydeder. Köken bazlı kohort karşılaştırması ve politika geri beslemesi yok."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "olcek_esigi": "zamanla (3–6 ay)",
+      "bagimliliklar": [
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "N-K35-006",
+      "baslik": "Özellik bayrağı ve ölü kod yaşam döngüsü",
+      "ihtiyac": "Her özellik bayrağının sahibi, amacı, son kullanma tarihi ve kaldırma işiyle birlikte oluşturulması; tam açılmış veya terk edilmiş bayrakların ve ulaşılamayan kodun periyodik tespit edilip kaldırılması; bayrak adlarının yeniden kullanılmaması.",
+      "cozulecek_sorun": "Ajanlar kademeli yayın için çok sayıda bayrak ve dal üretebilir; temizlenmeyen bayraklar kombinasyon patlaması yaratır ve eski kodun yeniden kullanılan bir bayrakla yanlışlıkla etkinleşmesi ağır olaylara yol açmıştır.",
+      "yetenek_siniflari": [
+        "Y-34",
+        "Y-14",
+        "Y-46"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Bayrak borcu zamanla birikir; paylaşılan bayrak sisteminde ekipler arası çakışma riski doğar.",
+      "kabul_olcutleri": [
+        "Süresi geçmiş bayrak sayısı hedefin altında ve her biri için kaldırma işi açık.",
+        "Bayrak adının yeniden kullanımı otomatik reddediliyor.",
+        "Ulaşılamayan kod raporu periyodik üretiliyor ve kaldırma işlerine dönüşüyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-370"
+        ],
+        "not": "2013 düzenleyici kararı: 2012'de kaldırılmamış eski kod, yeniden kullanılan bir bayrakla etkinleşti ve yaklaşık 460 milyon dolarlık zarara yol açtı. Benzer mevcut ihtiyaç: N-K06-008; fark: K06-008 bayrağı risk sınırlama aracı olarak ister; bayrağın yaşam döngüsü ve ölü kod temizliği tanımlı değil."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "zamanla (3–6 ay)",
+      "bagimliliklar": [
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "N-K35-007",
+      "baslik": "Ürün bağımlılıklarının sağlık ve güncellik yönetimi",
+      "ihtiyac": "Ürün kodunun kullandığı kütüphane ve çerçevelerin bakım durumu (aktif/terk), sürüm gerisi, kullanımdan kaldırılmış arayüz kullanımı ve kırıcı değişiklik riskinin sürekli izlenmesi; ajanların kullanımdan kaldırılmış arayüz önermesinin kapıda tespiti; güncelleme ritminin ve küçük adımlı yükseltmenin politikaya bağlanması.",
+      "cozulecek_sorun": "Dil modelleri kütüphane evrimini izleyemediği için kullanımdan kaldırılmış arayüzleri sıkça önerir; küçük sürüm yükseltmelerinin de bir kısmı kırıcıdır. K16-006 yalnız platform bileşenlerini, K18-008 güvenlik ve varlık doğrulamasını kapsar.",
+      "yetenek_siniflari": [
+        "Y-41",
+        "Y-14",
+        "Y-17",
+        "Y-21"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekipler aynı bağımlılığın farklı sürümlerini kullandıkça yükseltme maliyeti çoğalır; ortak sürüm politikası gerekir.",
+      "kabul_olcutleri": [
+        "Kullanımdan kaldırılmış arayüz kullanan yeni kod kapıda işaretleniyor.",
+        "Kritik bağımlılıkların sürüm gerisi ve bakım durumu panoda.",
+        "Terk edilmiş bağımlılık için süreli değiştirme planı var."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-367",
+          "S-366"
+        ],
+        "not": "Yedi modelde 28.125 tamamlama isteğiyle yapılan çalışma kullanımdan kaldırılmış arayüz kullanımını belgeledi; bir paket deposunda büyük sürüm dışı yükseltmelerin %20,1'inin kırıcı değişiklik içerdiği raporlandı. Benzer mevcut ihtiyaç: N-K16-006; fark: K16-006 ajan platformunun bileşenlerini izler; K18-008 yeni paketin varlığını ve itibarını doğrular. Ürün bağımlılıklarının bakım durumu ve kullanımdan kaldırılmış arayüz kullanımı izlenmiyor."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K16-006"
+      ]
+    }
+  ]
+}

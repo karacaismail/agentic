@@ -1,0 +1,170 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-50",
+    "ad": "İnceleme ergonomisi ve değişiklik ayrıştırma",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-50",
+      "kalip": "Açıklama ve özetlerin, öneri doğru olsun olmasın kabulü artırması",
+      "aciklama": "Bansal ve ark. (CHI 2021) yapay zekâ açıklamalarının, öneri doğru olsun ya da olmasın insanların kabul oranını artırdığını buldu. Perry ve ark. (CCS 2023) yapay zekâ asistanı kullananların daha güvensiz kod yazdığını ve buna rağmen kodlarını daha güvenli sandıklarını gösterdi.",
+      "risk_turleri": [
+        "RT-17",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://idl.cs.washington.edu/files/2021-AIExplanationsTeamPerformance-CHI.pdf",
+        "https://arxiv.org/abs/2211.03622"
+      ],
+      "yasatacagi_sorunlar": [
+        "Niyet–parça eşlemesi ve okuma rehberi inceleyiciyi ajanın anlatısına kilitler; anlatıda yer almayan yan etki (ör. kaldırılan yetki kontrolü) okunmaz.",
+        "'İncelemesi kolay' paketler daha hızlı onaylanır ve güvenlik kusurları üretime taşınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K28-008",
+        "N-K28-007",
+        "N-K28-014",
+        "N-K28-012"
+      ],
+      "ornek_araclar": [
+        "CodeRabbit",
+        "GitHub Copilot code review",
+        "Graphite",
+        "Qodo Merge"
+      ],
+      "erken_sinyal": "Açıklamalı değişikliklerde onay süresi düşerken üretim kusur oranının artması; yerleştirilmiş bilinen kusurların yakalanma oranında düşüş.",
+      "azaltma": "Yüksek riskli değişikliklerde önce farkı, sonra ajan açıklamasını göstermek; açıklamada anılmayan değişen dosyaları otomatik işaretlemek; bilinen kusur yerleştirmeyle dikkat ölçmek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Bansal ve ark. (CHI 2021) açıklamaların, öneri doğru olsun olmasın kabul olasılığını artırdığını yazıyor. Perry ve ark. (CCS '23) asistan kullananların daha güvensiz kod yazıp kodlarını daha güvenli sandığını raporluyor.",
+        "kaynak": [
+          "https://idl.cs.washington.edu/files/2021-AIExplanationsTeamPerformance-CHI.pdf",
+          "https://arxiv.org/abs/2211.03622"
+        ]
+      },
+      "id": "RK-007"
+    },
+    {
+      "yetenek_sinifi": "Y-50",
+      "kalip": "İnceleme kapasitesinin çöküşü: büyüyen değişiklik hacmi ve boyutu",
+      "aciklama": "Faros AI'ın 1.255 ekipte 10.000'den fazla geliştiriciyi kapsayan telemetri raporu, yapay zekâyı yoğun kullanan ekiplerde birleştirilen PR sayısının %98, PR boyutunun %154, inceleme süresinin %91 arttığını bildirdi. SmartBear'in Cisco çalışması, bir seferde 200–400 satırın ve saatte yaklaşık 500 satırın üstündeki incelemelerde kusur bulma etkinliğinin düştüğünü gösterdi.",
+      "risk_turleri": [
+        "RT-17",
+        "RT-12"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.faros.ai/blog/ai-software-engineering",
+        "https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip başına birkaç kıdemli inceleyici darboğaz olur; kuyruk büyüdükçe inceleme göz gezdirmeye döner.",
+        "İnceleme bütçesi aşıldığında ajan değişiklikleri parçalanmadan birleştirilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K28-007",
+        "N-K30-004",
+        "N-K28-009"
+      ],
+      "ornek_araclar": [
+        "Graphite",
+        "GitHub",
+        "GitLab",
+        "Gerrit"
+      ],
+      "erken_sinyal": "İnceleme bekleme süresi, satır/saat inceleme hızı ve 400 satırı aşan değişiklik oranı.",
+      "azaltma": "Ajan değişikliklerine satır/dosya bütçesi ve yığınlı değişiklik zorunluluğu; sprint kapasitesini insan inceleme saatine göre planlamak.",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Faros verileri (10.000+ geliştirici, PR +%98, boyut +%154, inceleme +%91) doğru. SmartBear sayfası 200–400 satır sınırını doğruluyor ama hız eşiği saatte 450 değil 500 satır.",
+        "kaynak": [
+          "https://www.faros.ai/blog/ai-software-engineering",
+          "https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/"
+        ]
+      },
+      "id": "RK-008"
+    },
+    {
+      "yetenek_sinifi": "Y-50",
+      "kalip": "Kalibre edilmemiş güven ve belirsizlik etiketlerinin sahte güven vermesi",
+      "aciklama": "Xiong ve ark. (ICLR 2024) LLM'lerin sözel olarak ifade ettikleri güvende sistematik biçimde aşırı güvenli olduğunu gösterdi. İddia düzeyinde gösterilen 'yüksek güven' etiketi kalibre edilmezse inceleyici dikkati tam da hatalı iddialardan uzaklaşır.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-17"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2306.13063"
+      ],
+      "yasatacagi_sorunlar": [
+        "'Yüksek güven' etiketli iddialar okunmadan geçilir; hatalar bu iddialarda birikir.",
+        "Model veya sürüm değişince etiket dağılımı kayar, kurum eşikleri geçersizleşir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K28-006",
+        "N-K28-011",
+        "N-K23-005"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Etiket kademelerine göre gerçek hata oranı (güvenilirlik diyagramı); model sürümü değişiminden sonra kayma.",
+      "azaltma": "Etiketleri kurumun görev setinde kalibre etmek; kalibre değilse sayısal güven göstermemek; iddiaları kanıtla (test, iz) desteklenmiş/desteklenmemiş diye işaretlemek.",
+      "id": "RK-009"
+    },
+    {
+      "yetenek_sinifi": "Y-50",
+      "kalip": "Bilişsel zorlamaların kullanıcı direnciyle atlatılması",
+      "aciklama": "Buçinca ve ark. (CSCW 2021) bilişsel zorlama işlevlerinin yapay zekâya aşırı güveni azalttığını, ancak kullanıcıların bu tasarımları daha az beğendiğini ve daha karmaşık bulduğunu; performans ile tercih arasında ödünleşim olduğunu raporladı.",
+      "risk_turleri": [
+        "RT-17"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.eecs.harvard.edu/~kgajos/papers/2021/bucinca2021trust.shtml"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüksek riskli incelemelerde 'önce kendi hükmünü yaz' adımı şikâyet konusu olur, istisna listesi büyür ve sonunda kapatılır.",
+        "Zorlamanın uygulandığı ve uygulanmadığı ekipler arasında inceleme kalitesi ayrışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K28-013",
+        "N-K28-011"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Zorlama adımının boş geçilme veya atlanma oranı; istisna talebi sayısı.",
+      "azaltma": "Zorlamayı yalnız yüksek risk kademesinde ve kısa tutmak; etkisini ölçüp ekiple paylaşmak; atlamayı gerekçeli kayda bağlamak.",
+      "id": "RK-010"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 1,
+    "yuksek": 2,
+    "orta": 9,
+    "dusuk": 14
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 5,
+    "RT-01": 4,
+    "RT-03": 4,
+    "RT-15": 4,
+    "RT-02": 3,
+    "RT-14": 3,
+    "RT-05": 3,
+    "RT-07": 2,
+    "RT-06": 2,
+    "RT-16": 2,
+    "RT-11": 2,
+    "RT-17": 2,
+    "RT-13": 1
+  }
+}

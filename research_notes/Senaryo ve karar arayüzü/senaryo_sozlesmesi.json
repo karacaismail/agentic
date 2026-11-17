@@ -1,0 +1,1612 @@
+{
+  "schema_version": "1.0",
+  "title": "Senaryo presetleri ve düzenlenebilir ECA sözleşmesi",
+  "as_of": "2026-09-27",
+  "artifact_status": "research_proposal_only",
+  "scope": {
+    "source_project": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi",
+    "coding2": "read_only_not_modified",
+    "factory_code": "not_modified_not_executed",
+    "review": "İlgili arayüz veri/durum/export dosyaları statik okundu; tüm repo denetimi değil.",
+    "product_versions": "installed_versions_unknown",
+    "written_files": [
+      "senaryo_sozlesmesi.md",
+      "senaryo_sozlesmesi.json"
+    ]
+  },
+  "sources": [
+    {
+      "id": "SS01",
+      "title": "Kestra subflow retry/restart",
+      "url": "https://kestra.io/docs/how-to-guides/subflow-executions",
+      "verified_claim": "Kestra yürütme durumu taşır. Subflow task düzeyindeki retry tüm çocuk yürütmeyi yeniden başlatabilir; flow-level RETRY_FAILED_TASK farklıdır.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS02",
+      "title": "Temporal Workflow Definition",
+      "url": "https://docs.temporal.io/workflow-definition",
+      "verified_claim": "Workflow replay deterministik komut sırası ve çalışan workflow kodu için sürümleme stratejisi ister.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS03",
+      "title": "OpenHands Software Agent SDK",
+      "url": "https://docs.openhands.dev/sdk",
+      "verified_claim": "Kodla çalışan ajanlar için Python/REST API, agent server, araçlar ve çalışma alanı bileşenleri sunar.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS04",
+      "title": "OpenHands Persistence",
+      "url": "https://docs.openhands.dev/sdk/guides/convo-persistence",
+      "verified_claim": "Conversation kimliği ve persistence diziniyle durum kaydı/devamı belgelenir; kayıtlar hassas içerik içerebilir.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS05",
+      "title": "Hermes Kanban",
+      "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban",
+      "verified_claim": "Kalıcı pano, crash reclaim ve iterasyon sınırları vardır. Paylaşılan panoyu iki hostta çalıştırmak desteklenmez.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS06",
+      "title": "OpenClaw Security",
+      "url": "https://docs.openclaw.ai/gateway/security",
+      "verified_claim": "Gateway başına güven sınırı; karşılıklı güvensiz kullanıcılar için ortak gateway düşmanca çok kiracılı güvenlik sınırı değildir.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS07",
+      "title": "OpenClaw Sub-agents",
+      "url": "https://docs.openclaw.ai/tools/subagents",
+      "verified_claim": "Alt ajan, iç içe görev yapısı ve araç politikası belgelenir; bütün fabrika kabul/yayın zincirinin hazır olduğunun kanıtı değildir.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS08",
+      "title": "Agent Skills Specification",
+      "url": "https://agentskills.io/specification",
+      "verified_claim": "SKILL.md ve compatibility alanı standartlaştırılır; allowed-tools deneysel ve desteği uygulamaya bağlıdır.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS09",
+      "title": "MCP Security Best Practices",
+      "url": "https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices",
+      "verified_claim": "Token passthrough yasaktır; session kimliği authentication değildir. Yerel server başlatma ve OAuth keşfi saldırı yüzeyleridir.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS10",
+      "title": "GitHub About Code Owners",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+      "verified_claim": "CODEOWNERS inceleme yönlendirir; zorunlu code-owner onayı için branch protection/ruleset gerekir.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    },
+    {
+      "id": "SS11",
+      "title": "CloudEvents v1.0.2",
+      "url": "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md",
+      "verified_claim": "source + id benzersiz olay kimliğidir; aynı çift tekrar teslimi temsil edebilir. İş etkisi tekilliği sağlamaz.",
+      "source_type": "official_documentation_or_specification",
+      "accessed_date": "2026-09-27",
+      "installed_version_verified": false,
+      "limit": "Canlı belgede açıklanan özellik, bizim adaptörümüzün kurulduğu veya test edildiği anlamına gelmez."
+    }
+  ],
+  "implementation_findings": [
+    {
+      "id": "SG01",
+      "title": "Ürün kimliği son kullanıcı açıklamasıyla çözüldü; özellik kanıtı ayrı kalmalı",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/senaryolar.ts",
+        "line": 65,
+        "selector": "jev-kumesi",
+        "type": "historical_static_read_plus_user_clarification"
+      },
+      "gap": "İlk incelemede Jev/Laya kimliği doğrulanmamıştı. Kullanıcı şimdi Jev=TypeSafe, Laya=NandhaKishorM/laya olarak açıkladı; kimlik artık açık soru değildir. Hosting/garanti/yetenek iddiaları ayrı resmî kaynak kontrolü ister.",
+      "proposed_addition": "User-supplied identity ile independently verified capability ayrı provenance alanları. Güncel arayüzde belirsiz ürün etiketi uyarısını kaldır; henüz doğrulanmayan özellikleri qualified sayma.",
+      "acceptance_criterion": "Export identity_status=user_confirmed ve capability_status=not_verified_or_sourced ayrımını taşır."
+    },
+    {
+      "id": "SG02",
+      "title": "Kestra durum tutmaz genellemesi",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/senaryolar.ts",
+        "line": 33,
+        "selector": "Kestra durum tutmaz",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Görev durumunun yetkili yazarı ile ürünün execution state'i karışıyor.",
+      "proposed_addition": "Kestra-owner ve Kestra-edge ayrı preset; alan bazında authority.",
+      "acceptance_criterion": "Kestra execution SUCCESS, görev ACCEPTED demek değildir."
+    },
+    {
+      "id": "SG03",
+      "title": "Hermes dayanıklılık iddiası ayrıştırılmalı",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/senaryolar.ts",
+        "line": 56,
+        "selector": "Hermes Kanban tek makine",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Kalıcı pano ve crash reclaim var. Replay kelimesi belirsiz kullanılıyor.",
+      "proposed_addition": "Komut replayi/olay akışı/konuşma resume/task requeue ayrı yetenek; tek-host sınırı korunur.",
+      "acceptance_criterion": "Yetenek matrisinde mevcut sürüm bilinmiyorsa unknown."
+    },
+    {
+      "id": "SG04",
+      "title": "Anahtar açılması çözülmüş risk gibi sayılıyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/hesap.ts",
+        "line": 102,
+        "selector": "some(aktif)",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Bir ilişkili kural açıkken doğrudan kapsandı deniyor; all_of bağımlılık ve kanıt yok.",
+      "proposed_addition": "Planlanan kapsama ile simüle/nitelendirilmiş/canlı gözlenmiş kapsama ayrı.",
+      "acceptance_criterion": "Kural açık/test not_run iken risk çözüldü sayılmaz."
+    },
+    {
+      "id": "SG05",
+      "title": "ECA gösterim metni düzeyinde",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/tipler.ts",
+        "line": 16,
+        "selector": "interface EcaKural",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Olay/koşul/eylem string; öncelik, bağımlılık, çakışma, unknown ve etki sözleşmesi yok.",
+      "proposed_addition": "Typed event, güvenli AST, action catalog ve deterministik simülasyon.",
+      "acceptance_criterion": "Aynı girdiden aynı öneri; çatışmada keyfi writer seçilmez."
+    },
+    {
+      "id": "SG06",
+      "title": "JSON export kanıt/risk bağlamından kopuk",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/sayfalar/Tasarimci.tsx",
+        "line": 82,
+        "selector": "const jsonIndir",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Export yalnız Durum nesnesi; PDF kapalı kuralları zaten gösteriyor.",
+      "proposed_addition": "Draft envelope + effective config + disabled gates + risk/provenans + simulation izi.",
+      "acceptance_criterion": "Kapı kapalı export draft_unsafe; deployed veya qualified iddiası yok."
+    },
+    {
+      "id": "SG07",
+      "title": "Faz değişimi kullanıcı anahtarlarını sıfırlıyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/depo.tsx",
+        "line": 80,
+        "selector": "case 'faz'",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Her kural faza göre tekrar açılıp kapanıyor.",
+      "proposed_addition": "Template defaults ile user overrides ayrı; önce değişim etkisi.",
+      "acceptance_criterion": "Faz0→2→0 kişisel tercihi sessiz değiştirmez."
+    },
+    {
+      "id": "SG08",
+      "title": "Küme silme sessiz yetki değiştiriyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/depo.tsx",
+        "line": 94,
+        "selector": "case 'kumeSil'",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Silinen kümenin aşamaları ilk kalan kümeye aktarılıyor.",
+      "proposed_addition": "Unresolved binding göster; yetenek/yetki nitelendirmesi beklet.",
+      "acceptance_criterion": "Coding kümesi silinince bildirim kümesi coding sahibi olmaz."
+    },
+    {
+      "id": "SG09",
+      "title": "Import yüzeysel doğrulanıyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/depo.tsx",
+        "line": 115,
+        "selector": "function durumGecerliMi",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Sürüm/id/object/array kontrolü; kapsamlı tip/değer/referans doğrulaması yok.",
+      "proposed_addition": "Şema, sonlu sayısal sınırlar, referans bütünlüğü ve migration diff.",
+      "acceptance_criterion": "Bilinmeyen kural/id, cycle, yanlış kontrol türü hatası açık görünür."
+    },
+    {
+      "id": "SG10",
+      "title": "CODEOWNERS enforcement sanılıyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/belgeler.ts",
+        "line": 360,
+        "selector": "yol: '.github/CODEOWNERS'",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Onaysız giremez ve GitHub otomatik uygular metni ek repo korumasını atlıyor.",
+      "proposed_addition": "Required reviews/code owner review ruleset ve enforcement kanıtı ayrı.",
+      "acceptance_criterion": "Tek CODEOWNERS dosyası protected=true yapmaz."
+    },
+    {
+      "id": "SG11",
+      "title": "Skill sayısı ve sağlayıcı seçiminden evrensel uygunluk çıkıyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/veri/ajanlar.ts",
+        "line": 42,
+        "selector": "20'yi geçmemek",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "Deney sonuçlarından evrensel 20 sınırı; farklı QA aracı bağımsız oracle yerine geçebilir.",
+      "proposed_addition": "Katalog büyük olabilir, görev alt kümesi ölçülür; rol/kimlik/veri/test/model bağımsızlığı ayrı.",
+      "acceptance_criterion": "20 üstü otomatik uyumsuzluk yok; kabul testini değiştirene bağımsız hükmü yok."
+    },
+    {
+      "id": "SG12",
+      "title": "Serbest teknoloji metninden gizli rol çıkarılıyor",
+      "evidence": {
+        "path": "/Users/w6x/Documents/otomasyon coding/fabrika-karar-merkezi/src/durum/hesap.ts",
+        "line": 72,
+        "selector": "ORKESTRATORLER",
+        "type": "read_only_static_source",
+        "line_note": "İnceleme sırasında okunan satır; devam eden arayüz düzenlemesinde kayabilir."
+      },
+      "gap": "String ürün eşleşmesi ikinci motoru sadece tetik/bildirim ilan edebiliyor; küme/karar çelişebilir.",
+      "proposed_addition": "Typed slot binding + capability manifest + açık resolved defaults.",
+      "acceptance_criterion": "Diyagram ve karar tek bindingden türetilir; değişim yetenek boşluklarını gösterir."
+    }
+  ],
+  "presets": [
+    {
+      "id": "PS01",
+      "title": "Temporal + OpenHands",
+      "purpose": "Uzun beklemeli görev yaşam döngüsü için doğrudan aday.",
+      "bindings": {
+        "intake": "Plane adaptörü; API/olay eşlemesi nitelendirilecek",
+        "verification": "Bağımsız test alanı + GitHub Actions; reviewer ajanı ihtiyaca göre",
+        "effects": "Deterministik etki adaptörü + intent/receipt kaydı: taslak gereklilik",
+        "delivery": "GitHub alpha repo/trunk eşlemesi + remote alpha deploy adaptörü",
+        "catalog": "Nitelendirilmiş iç paket kataloğu: taslak gereklilik",
+        "lifecycle": "Temporal",
+        "planner": "OpenHands sınırlı plan oturumu",
+        "coding_worker": "OpenHands SDK/Agent Server",
+        "ops_agent": null
+      },
+      "sources": [
+        "SS02",
+        "SS03",
+        "SS04"
+      ],
+      "risks": [
+        "Workflow/Activity ayrımı ve sürümleme uygulaması gerekir.",
+        "Konuşma kaydı dış etki tekilleştirmesi değildir."
+      ],
+      "experiments": [
+        "Worker ölümü sonrası aynı nesilde devam",
+        "Bilinmeyen PR sonucu yeniden başlatmada çift PR yok",
+        "Çalışan koşuda eski policy/adapter revizyonu korunur"
+      ],
+      "mode": "draft",
+      "deployment_status": "not_deployed",
+      "qualification_status": "not_run",
+      "selected_versions": {},
+      "default_environments": [
+        "alpha"
+      ],
+      "team_count": null,
+      "concurrent_workers": null,
+      "not_implied": [
+        "12 veya 144 ekip yük testi",
+        "Tak-çıkar adaptörün hazır olması",
+        "Canlı test/DoD başarısı",
+        "Gözetimsiz production yetkisi"
+      ]
+    },
+    {
+      "id": "PS02",
+      "title": "Kestra + OpenHands",
+      "purpose": "Kestra ana yaşam döngüsü sahibi olacak şekilde açık YAML akış adayı.",
+      "bindings": {
+        "intake": "Plane adaptörü; API/olay eşlemesi nitelendirilecek",
+        "verification": "Bağımsız test alanı + GitHub Actions; reviewer ajanı ihtiyaca göre",
+        "effects": "Deterministik etki adaptörü + intent/receipt kaydı: taslak gereklilik",
+        "delivery": "GitHub alpha repo/trunk eşlemesi + remote alpha deploy adaptörü",
+        "catalog": "Nitelendirilmiş iç paket kataloğu: taslak gereklilik",
+        "lifecycle": "Kestra",
+        "planner": "OpenHands sınırlı plan oturumu",
+        "coding_worker": "OpenHands SDK/Agent Server",
+        "ops_agent": null
+      },
+      "sources": [
+        "SS01",
+        "SS03",
+        "SS04"
+      ],
+      "risks": [
+        "Başarısız eski pilot aynen doğru kabul edilmez.",
+        "Yanlış subflow retry tamamlanan dış etkileri tekrarlayabilir.",
+        "Semantik ilerleme ve toplam görev bütçesi ayrıca uygulanır."
+      ],
+      "experiments": [
+        "Subflow retry sonrası aynı dış etki tek kalır",
+        "Ölen worker görevi sahipsiz bırakmaz",
+        "Retry scope ve global bütçe açık izlenir"
+      ],
+      "mode": "draft",
+      "deployment_status": "not_deployed",
+      "qualification_status": "not_run",
+      "selected_versions": {},
+      "default_environments": [
+        "alpha"
+      ],
+      "team_count": null,
+      "concurrent_workers": null,
+      "not_implied": [
+        "12 veya 144 ekip yük testi",
+        "Tak-çıkar adaptörün hazır olması",
+        "Canlı test/DoD başarısı",
+        "Gözetimsiz production yetkisi"
+      ]
+    },
+    {
+      "id": "PS03",
+      "title": "Kestra giriş + Temporal + OpenHands",
+      "purpose": "Kestra için ayrı entegrasyon/zamanlama ihtiyacı varsa iki motorlu aday.",
+      "bindings": {
+        "intake": "Plane → Kestra doğrulanmış olay normalizasyonu",
+        "verification": "Bağımsız test alanı + GitHub Actions; reviewer ajanı ihtiyaca göre",
+        "effects": "Deterministik etki adaptörü + intent/receipt kaydı: taslak gereklilik",
+        "delivery": "GitHub alpha repo/trunk eşlemesi + remote alpha deploy adaptörü",
+        "catalog": "Nitelendirilmiş iç paket kataloğu: taslak gereklilik",
+        "lifecycle": "Temporal",
+        "planner": "OpenHands sınırlı plan oturumu",
+        "coding_worker": "OpenHands SDK/Agent Server",
+        "ops_agent": null
+      },
+      "sources": [
+        "SS01",
+        "SS02",
+        "SS03"
+      ],
+      "risks": [
+        "İki motor işletim yükünü artırır; giriş ihtiyacı yoksa PS01 daha az bileşendir.",
+        "Kestra kendi execution stateini tutar; job generation durumunun yazarı Temporal'dır."
+      ],
+      "experiments": [
+        "Tekrar webhook aynı görev/workflowa gider",
+        "Kestra SUCCESS, görev kabulü olarak yazılmaz",
+        "İki motor aynı business state alanına yarışarak yazmaz"
+      ],
+      "mode": "draft",
+      "deployment_status": "not_deployed",
+      "qualification_status": "not_run",
+      "selected_versions": {},
+      "default_environments": [
+        "alpha"
+      ],
+      "team_count": null,
+      "concurrent_workers": null,
+      "not_implied": [
+        "12 veya 144 ekip yük testi",
+        "Tak-çıkar adaptörün hazır olması",
+        "Canlı test/DoD başarısı",
+        "Gözetimsiz production yetkisi"
+      ]
+    },
+    {
+      "id": "PS04",
+      "title": "Temporal + Hermes çalışan profilleri",
+      "purpose": "Hermes araştırma/skill/operasyon yetenekleri worker olarak değerlendirilmek istendiğinde.",
+      "bindings": {
+        "intake": "Plane adaptörü; API/olay eşlemesi nitelendirilecek",
+        "verification": "Bağımsız test alanı + GitHub Actions; reviewer ajanı ihtiyaca göre",
+        "effects": "Deterministik etki adaptörü + intent/receipt kaydı: taslak gereklilik",
+        "delivery": "GitHub alpha repo/trunk eşlemesi + remote alpha deploy adaptörü",
+        "catalog": "Nitelendirilmiş iç paket kataloğu: taslak gereklilik",
+        "lifecycle": "Temporal",
+        "planner": "Hermes sınırlı araştırma/plan profili",
+        "coding_worker": "Hermes sınırlı kodlayıcı; adaptör nitelendirmesi gerekli",
+        "ops_agent": "Hermes ayrı salt okunur teşhis profili"
+      },
+      "sources": [
+        "SS02",
+        "SS05",
+        "SS08"
+      ],
+      "risks": [
+        "Hermes Kanban ikinci görev otoritesi yapılmaz.",
+        "Kodlama, cancel ağacı, toplam maliyet ve checkpoint devri bu görevde ölçülmedi.",
+        "Üretilen skill kendi kendini canlıya terfi ettiremez."
+      ],
+      "experiments": [
+        "Typed result veya typed failure",
+        "İptal edilen çocuk yazma yetkisini kaybeder",
+        "Skill sürümü devam eden koşuya sessiz değişmez"
+      ],
+      "mode": "draft",
+      "deployment_status": "not_deployed",
+      "qualification_status": "not_run",
+      "selected_versions": {},
+      "default_environments": [
+        "alpha"
+      ],
+      "team_count": null,
+      "concurrent_workers": null,
+      "not_implied": [
+        "12 veya 144 ekip yük testi",
+        "Tak-çıkar adaptörün hazır olması",
+        "Canlı test/DoD başarısı",
+        "Gözetimsiz production yetkisi"
+      ]
+    },
+    {
+      "id": "PS05",
+      "title": "Temporal + OpenHands + OpenClaw operasyon geçidi",
+      "purpose": "Sohbet tabanlı operasyon/bildirim için ayrı gateway gerekiyorsa.",
+      "bindings": {
+        "intake": "Plane adaptörü; API/olay eşlemesi nitelendirilecek",
+        "verification": "Bağımsız test alanı + GitHub Actions; reviewer ajanı ihtiyaca göre",
+        "effects": "Deterministik etki adaptörü + intent/receipt kaydı: taslak gereklilik",
+        "delivery": "GitHub alpha repo/trunk eşlemesi + remote alpha deploy adaptörü",
+        "catalog": "Nitelendirilmiş iç paket kataloğu: taslak gereklilik",
+        "lifecycle": "Temporal",
+        "planner": "OpenHands sınırlı plan oturumu",
+        "coding_worker": "OpenHands SDK/Agent Server",
+        "ops_agent": "OpenClaw gateway: durum okuma, teşhis önerisi, izinli bildirim"
+      },
+      "sources": [
+        "SS02",
+        "SS03",
+        "SS06",
+        "SS07"
+      ],
+      "risks": [
+        "Gateway task yaşam döngüsünün sahibi değildir.",
+        "Karışık güven alanlarında gateway/credentials/host sınırları ayrılmalıdır.",
+        "Mesaj metni tek başına onay değildir."
+      ],
+      "experiments": [
+        "Tenantlar arası credential/dosya erişimi reddedilir",
+        "Gateway kesilmesi ana koşuyu bozmaz",
+        "Mesajdaki sahte onay merge/deploy üretemez"
+      ],
+      "mode": "draft",
+      "deployment_status": "not_deployed",
+      "qualification_status": "not_run",
+      "selected_versions": {},
+      "default_environments": [
+        "alpha"
+      ],
+      "team_count": null,
+      "concurrent_workers": null,
+      "not_implied": [
+        "12 veya 144 ekip yük testi",
+        "Tak-çıkar adaptörün hazır olması",
+        "Canlı test/DoD başarısı",
+        "Gözetimsiz production yetkisi"
+      ]
+    },
+    {
+      "id": "PS06",
+      "title": "Hermes Kanban + Hermes çalışanları",
+      "purpose": "Tek hostta düşük riskli keşif/kanıtlama alternatifi.",
+      "bindings": {
+        "intake": "Plane adaptörü; API/olay eşlemesi nitelendirilecek",
+        "verification": "Bağımsız test alanı + GitHub Actions; reviewer ajanı ihtiyaca göre",
+        "effects": "Deterministik etki adaptörü + intent/receipt kaydı: taslak gereklilik",
+        "delivery": "GitHub alpha repo/trunk eşlemesi + remote alpha deploy adaptörü",
+        "catalog": "Nitelendirilmiş iç paket kataloğu: taslak gereklilik",
+        "lifecycle": "Hermes Kanban; görev nesli eşlemesi adaptörde",
+        "planner": "Hermes planlayıcı profili",
+        "coding_worker": "Hermes kodlayıcı profili",
+        "ops_agent": "Hermes ayrı teşhis profili"
+      },
+      "sources": [
+        "SS05",
+        "SS08"
+      ],
+      "risks": [
+        "Çok hosta ortak pano olarak taşınamaz.",
+        "Kalıcı pano/crash reclaim vardır; toplam etki/bütçe/kabul sözleşmesi ayrıca gerekir.",
+        "Ölçek artışında motor göçü veya board federasyonu açık tasarım işidir."
+      ],
+      "experiments": [
+        "Dispatcher/worker restart tek sahipliğe döner",
+        "Pano completed gerçek alpha kanıtıyla eşleşir",
+        "İkinci host seçimi capability_conflict gösterir"
+      ],
+      "mode": "draft",
+      "deployment_status": "not_deployed",
+      "qualification_status": "not_run",
+      "selected_versions": {},
+      "default_environments": [
+        "alpha"
+      ],
+      "team_count": null,
+      "concurrent_workers": null,
+      "not_implied": [
+        "12 veya 144 ekip yük testi",
+        "Tak-çıkar adaptörün hazır olması",
+        "Canlı test/DoD başarısı",
+        "Gözetimsiz production yetkisi"
+      ]
+    }
+  ],
+  "user_clarifications": [
+    {
+      "term": "RDD",
+      "means": "TDD",
+      "status": "user_confirmed"
+    },
+    {
+      "term": "Jev",
+      "means": "TypeSafe",
+      "status": "user_confirmed",
+      "capability_verification": "other_researcher"
+    },
+    {
+      "term": "Laya",
+      "means": "NandhaKishorM/laya",
+      "status": "user_confirmed",
+      "url": "https://github.com/NandhaKishorM/laya",
+      "capability_verification": "other_researcher"
+    }
+  ],
+  "component_contracts": {
+    "lifecycle": "Tek görev nesli için tek yetkili business state yazarı. Alt motor/worker kendi execution stateini tutabilir; canonical state projection ile ayrılır.",
+    "worker": {
+      "required": [
+        "task_id/generation/lease_id",
+        "base_sha/worktree_id",
+        "AC/DoD digest",
+        "tool/data capability lease",
+        "CPU/RAM/disk/process quota",
+        "bounded child spawning",
+        "structured result",
+        "semantic progress evidence distinct from heartbeat",
+        "cancel and fencing semantics",
+        "artefact digest manifest",
+        "cost/usage observation; unknown allowed"
+      ],
+      "outcomes": [
+        "ready_for_verification",
+        "needs_input",
+        "policy_blocked",
+        "resource_exhausted",
+        "failed",
+        "cancelled",
+        "unknown_effect"
+      ],
+      "qualification_matrix": [
+        "session persistence",
+        "checkpoint portability",
+        "child tree cancellation",
+        "network/file isolation",
+        "MCP scope enforcement",
+        "cost aggregation",
+        "worktree isolation",
+        "result schema",
+        "queue fairness and backpressure"
+      ],
+      "resource_note": "128 GB RAM veya 1 GB/ajan söylentisi kapasite ölçümü değildir. Test/build/browser süreçleri ve host rezervi ölçülür; exit137 tek başına OOM kanıtı değildir."
+    },
+    "verification": "AC/oracle/test yetkisi, kimlik, çalışma alanı ve veri ayrı korunur. Farklı model/sağlayıcı tek başına bağımsızlık kanıtı değildir.",
+    "effects": "Her etki türü için açık writer; intent→dispatch→receipt veya unknown→read-only reconcile. Tekilleştirme scopeu görev, nesil ve değişmez etki tanımıdır.",
+    "swap": {
+      "same_role_required": true,
+      "checks": [
+        "input/output schema",
+        "state and effect semantics",
+        "cancel/fencing",
+        "permissions and trust",
+        "version compatibility",
+        "evidence retention/data export",
+        "license/hosting constraints"
+      ],
+      "running_jobs": [
+        "drain old version",
+        "finish old jobs on old worker",
+        "explicit qualified checkpoint migration"
+      ],
+      "universal_state_transfer": false,
+      "note": "Tak-çıkar anlık ve evrensel ara-durum transferi vaadi değildir; sözleşmesi uymayan araç incompatible/unknown gösterilir."
+    }
+  },
+  "eca_contract": {
+    "status": "proposed_not_implemented",
+    "version": "eca-v1-draft",
+    "mode": "planning_only",
+    "event_envelope": {
+      "specversion": "1.0",
+      "id": "evt-fixture-01",
+      "source": "urn:factory:adapter:plane",
+      "type": "task.eligible.v1",
+      "subject": "project/P/task/T",
+      "time": "2026-09-27T12:00:00Z",
+      "dataschema": "urn:factory:schema:task-eligible:v1",
+      "data": {
+        "task_id": "T",
+        "project_id": "P",
+        "repo_id": "alpha-id",
+        "generation": 1,
+        "revision": "ac-r1",
+        "actor_id": "fixture-user",
+        "source_delivery_id": "fixture-01",
+        "observed_state": "in-progress"
+      }
+    },
+    "event_rules": [
+      "source+id olay tekrarını ayıklar; effect_id ayrı kimliktir.",
+      "Saat tek başına sıra değildir: aggregate_version/generation/fencing token kullanılır.",
+      "Verified identity payloadın kendi beyanı değildir; güvenilir adaptör bağlamıdır.",
+      "Ham log/PII/credential yerine erişim kontrollü artefakt referansı."
+    ],
+    "rule_fields": {
+      "id": "stable string",
+      "revision": "immutable revision",
+      "enabled": "boolean draft override",
+      "event_types": "typed names[]",
+      "scope": "project/repo/task_generation/effect_kind",
+      "condition": "safe AST",
+      "priority": "integer within protection class",
+      "conflict_group": "exclusive scope or null",
+      "depends_on": "rule ids and required capabilities",
+      "actions": "action-catalog entries[]",
+      "on_unknown": "hold | deny | read_only_diagnose",
+      "risk_if_disabled": "risk refs[]",
+      "sources": "source refs[]",
+      "evidence_required": "experiment refs[]",
+      "status": "proposed | simulated | qualified | observed | revoked"
+    },
+    "condition_language": {
+      "operators": [
+        "all",
+        "any",
+        "not",
+        "eq",
+        "in",
+        "lt",
+        "lte",
+        "gt",
+        "gte",
+        "exists"
+      ],
+      "operands": [
+        "literal",
+        "event_field",
+        "state_field",
+        "policy_field",
+        "evidence_field"
+      ],
+      "truth_values": [
+        "true",
+        "false",
+        "unknown"
+      ],
+      "prohibited": [
+        "eval",
+        "arbitrary JavaScript/shell",
+        "network fetch in simulation",
+        "untrusted template execution"
+      ],
+      "unknown_policy": "Eksik, eskimiş, doğrulanmamış veri unknown; yan etkili allow için trueya çevrilmez."
+    },
+    "evaluation_order": [
+      "Schema and referential checks",
+      "Identity, personal Git authorship, permission and generation",
+      "Terminal/cancel/fencing",
+      "Effect reconciliation and global budget",
+      "Ordinary workflow",
+      "Notifications/projections"
+    ],
+    "conflict_policy": {
+      "deny_overrides": "Aynı etki kapsamındaki deny/hold, allowdan önce; read-only tanı ayrıca izinli olabilir.",
+      "priority": "Koruma sınıfı önce, numeric priority sonra; sayı yükseltmek yetki sınırını atlatmaz.",
+      "same_writer": "Aynı aggregate için uyumsuz iki geçiş unresolved_conflict; keyfi ilk kazanan yok.",
+      "dependency": "all_of/any_of açık; cycle hata; eksik binding başka kümeye otomatik atanmaz.",
+      "graph_separation": "Task dependency DAG ve rule dependency DAG ayrı; bloklu ebeveynin kurtarma işi ebeveyn tamamlanmasını beklerse deadlock olur.",
+      "waits": "Her beklemenin sahibi ve deadline/harici olay sözleşmesi; tüm çocuk/yeniden denemeler lineage bütçesinde."
+    },
+    "effects": {
+      "effect_id": "task_id + generation + effect_kind + target_identity + immutable_spec_digest",
+      "steps": [
+        "intent_written",
+        "dispatch_attempted",
+        "receipt_received OR outcome_unknown",
+        "read_only_reconcile",
+        "confirmed OR absent_then_retry OR unresolved_hold"
+      ],
+      "rules": [
+        "Timeout başarısızlık kanıtı değildir.",
+        "Retry global budget + hedef idempotency + generation ile değerlendirilir.",
+        "Cancel tokenı iptal eder; geç sonuç ayrıca fencing kontrolünden geçer."
+      ]
+    },
+    "export": {
+      "schema_version": 2,
+      "mode": "planning_only",
+      "deployable": false,
+      "safety_status_enum": [
+        "draft_incomplete",
+        "draft_reviewable",
+        "draft_unsafe"
+      ],
+      "required_fields": [
+        "plan_id",
+        "revision",
+        "created_at",
+        "preset_id",
+        "explicit_bindings",
+        "effective_config",
+        "user_overrides",
+        "resolved_defaults",
+        "disabled_controls",
+        "residual_risks",
+        "conflicts",
+        "unqualified_capabilities",
+        "evidence_manifest",
+        "sources",
+        "semantic_digest",
+        "simulation_results"
+      ],
+      "secrets": "Sır değerleri yok; yalnız secret reference ve gerekli scope.",
+      "disabled_gate_behavior": "Kullanıcının kapattığı kapı sessiz yeniden açılmaz. Export kontrolü, nedenini, etkisini ve riskini taşır. Kişisel Git kimlik politikası ihlali deployable konfigürasyona çevrilemez.",
+      "unsupported_claims": [
+        "Kuruldu",
+        "çalışıyor",
+        "sorun giderildi",
+        "risk kapandı",
+        "canlı test geçti"
+      ],
+      "evidence_levels": [
+        "planned",
+        "simulated_not_live",
+        "qualified_in_declared_environment",
+        "observed_in_live_run"
+      ]
+    },
+    "coverage": {
+      "relation": {
+        "risk_id": "example",
+        "required": {
+          "all_of": [
+            "lease_fencing",
+            "effect_reconcile"
+          ],
+          "any_of": [
+            "qualified_isolation_A",
+            "qualified_isolation_B"
+          ]
+        },
+        "evidence_refs": []
+      },
+      "labels": {
+        "open": "Önlem seçilmedi",
+        "planned": "Önlem taslakta",
+        "simulated": "Bu fikstürde simülasyon geçti",
+        "qualified": "Belirtilen sürüm/ortamda deney kanıtı",
+        "observed": "Belirtilen canlı koşuda gözlendi",
+        "unknown": "Kanıt/yetenek bilinmiyor"
+      },
+      "metric": "Toggle sayısı yalnız seçim sayısı; eksik risk evreninde %100 güvenlik veya AC başarısı iddiası yok."
+    },
+    "ast_example": {
+      "rule_id": "EC07",
+      "condition": {
+        "all": [
+          {
+            "eq": [
+              {
+                "evidence_field": "expected_checks_complete"
+              },
+              true
+            ]
+          },
+          {
+            "eq": [
+              {
+                "evidence_field": "checked_tree_is_candidate_tree"
+              },
+              true
+            ]
+          },
+          {
+            "eq": [
+              {
+                "evidence_field": "independent_acceptance_satisfied"
+              },
+              true
+            ]
+          },
+          {
+            "eq": [
+              {
+                "evidence_field": "authorship_verified"
+              },
+              true
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "example_rules": [
+    {
+      "id": "EC01",
+      "event_types": [
+        "task.eligible.v1"
+      ],
+      "protection_class": "authorization",
+      "priority": 1000,
+      "condition_description": "adapter_verified=false OR repo_mapping_verified=false",
+      "actions": [
+        "deny_dispatch"
+      ],
+      "on_unknown": "deny",
+      "conflict_group": "dispatch",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC02",
+      "event_types": [
+        "worker.result.v1",
+        "effect.requested.v1"
+      ],
+      "protection_class": "fencing",
+      "priority": 990,
+      "condition_description": "lease_current=false OR generation_current=false",
+      "actions": [
+        "reject_stale_result",
+        "record_evidence"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "state_write",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC03",
+      "event_types": [
+        "effect.timeout.v1",
+        "task.eligible.v1"
+      ],
+      "protection_class": "effect_reconciliation",
+      "priority": 950,
+      "condition_description": "same_effect_seen=true",
+      "actions": [
+        "lookup_receipt",
+        "reconcile_read_only"
+      ],
+      "on_unknown": "read_only_diagnose",
+      "conflict_group": "effect_write",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC04",
+      "event_types": [
+        "worker.dispatch.requested.v1"
+      ],
+      "protection_class": "budget",
+      "priority": 900,
+      "condition_description": "budget_available=false OR capability_qualified=false",
+      "actions": [
+        "hold_dispatch"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "dispatch",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC05",
+      "event_types": [
+        "worker.progress.tick.v1"
+      ],
+      "protection_class": "recovery",
+      "priority": 600,
+      "condition_description": "heartbeat_live=true AND no_progress_seconds >= policy_limit",
+      "actions": [
+        "capture_diagnostics",
+        "propose_bounded_recovery"
+      ],
+      "on_unknown": "read_only_diagnose",
+      "conflict_group": "recovery",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC06",
+      "event_types": [
+        "worker.exited.v1"
+      ],
+      "protection_class": "recovery",
+      "priority": 610,
+      "condition_description": "cgroup_oom_confirmed=true",
+      "actions": [
+        "propose_memory_or_decomposition",
+        "check_host_headroom"
+      ],
+      "on_unknown": "read_only_diagnose",
+      "conflict_group": "recovery",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC07",
+      "event_types": [
+        "merge.requested.v1"
+      ],
+      "protection_class": "evidence_gate",
+      "priority": 920,
+      "condition_description": "expected_checks_complete AND checked_tree_is_candidate_tree AND independent_acceptance_satisfied AND authorship_verified",
+      "actions": [
+        "propose_serialized_merge"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "merge",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC08",
+      "event_types": [
+        "alpha.deployed.v1"
+      ],
+      "protection_class": "acceptance",
+      "priority": 700,
+      "condition_description": "deployed_digest_matches AND expected_journeys_passed",
+      "actions": [
+        "propose_human_test_handoff"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "terminal_outcome",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC09",
+      "event_types": [
+        "catalog.package.requested.v1"
+      ],
+      "protection_class": "supply_chain",
+      "priority": 930,
+      "condition_description": "package_qualified=false OR package_digest_matches=false",
+      "actions": [
+        "quarantine_package",
+        "propose_qualification"
+      ],
+      "on_unknown": "deny",
+      "conflict_group": "package_activation",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC10",
+      "event_types": [
+        "task.spec.changed.v1"
+      ],
+      "protection_class": "fencing",
+      "priority": 980,
+      "condition_description": "acceptance_digest_changed=true",
+      "actions": [
+        "advance_generation",
+        "revoke_old_write_leases",
+        "record_change_impact"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "state_write",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC11",
+      "event_types": [
+        "plan.export.requested.v1"
+      ],
+      "protection_class": "planning",
+      "priority": 100,
+      "condition_description": "critical_gate_disabled=true",
+      "actions": [
+        "export_draft_unsafe_with_risks"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "export",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    },
+    {
+      "id": "EC12",
+      "event_types": [
+        "human.acceptance.received.v1"
+      ],
+      "protection_class": "acceptance",
+      "priority": 940,
+      "condition_description": "human_actor_authorized AND accepted_deployment_is_current AND generation_current",
+      "actions": [
+        "propose_accepted_transition"
+      ],
+      "on_unknown": "hold",
+      "conflict_group": "terminal_outcome",
+      "status": "proposed",
+      "execution": "simulation_only",
+      "note": "Kavramsal kural listesi; tam motor veya bütün izinlerin listesi değildir. ASTye çeviri ve deny-by-default gereklidir."
+    }
+  ],
+  "simulation_contract": {
+    "execution_mode": "pure_local_deterministic",
+    "status": "not_implemented",
+    "live_io": false,
+    "required_trace": [
+      "fixture_id",
+      "input_digest",
+      "policy_revision",
+      "virtual_clock",
+      "matched_rules",
+      "condition_value_and_provenance",
+      "suppressed_rules_and_reason",
+      "conflicts",
+      "proposed_actions",
+      "proposed_state",
+      "residual_risks",
+      "evidence_status"
+    ],
+    "limit": "Simülasyon fabrika entegrasyon testi değildir. Sentetik fikstür başarıları canlı test sayısına katılmaz."
+  },
+  "simulation_fixtures": [
+    {
+      "id": "SIM01",
+      "title": "Yinelenen webhook",
+      "fixture": {
+        "event": "task.eligible.v1",
+        "source": "plane",
+        "id": "same-01",
+        "delivery_count": 2
+      },
+      "expected": [
+        "Aynı source+id tek olay; ikinci dispatch yok"
+      ],
+      "rule_refs": [
+        "EC01",
+        "EC03"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM02",
+      "title": "PR açıldı ama yanıt kayboldu",
+      "fixture": {
+        "event": "effect.timeout.v1",
+        "effect": "open_pr",
+        "outcome": "unknown"
+      },
+      "expected": [
+        "Salt okunur uzlaşma; kör yeni PR yok"
+      ],
+      "rule_refs": [
+        "EC03"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM03",
+      "title": "Heartbeat var ilerleme yok",
+      "fixture": {
+        "event": "worker.progress.tick.v1",
+        "heartbeat_live": true,
+        "no_progress_seconds": 1800,
+        "policy_limit": 1200
+      },
+      "expected": [
+        "Tanı ve sınırlı toparlanma önerisi; heartbeat başarı değil"
+      ],
+      "rule_refs": [
+        "EC05"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM04",
+      "title": "1 GB exit137, OOM kanıtı yok",
+      "fixture": {
+        "event": "worker.exited.v1",
+        "memory_limit_mb": 1024,
+        "exit_code": 137,
+        "cgroup_oom_confirmed": null
+      },
+      "expected": [
+        "OOM bilinmiyor; önce tanı, sonsuz retry yok"
+      ],
+      "rule_refs": [
+        "EC06"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM05",
+      "title": "Doğrulanmış OOM, host dolu",
+      "fixture": {
+        "event": "worker.exited.v1",
+        "cgroup_oom_confirmed": true,
+        "host_headroom_mb": 0
+      },
+      "expected": [
+        "Büyütme kapasite kapısında bekler; bölme/kuyruk seçenekleri; ortak child bütçesi"
+      ],
+      "rule_refs": [
+        "EC04",
+        "EC06"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM06",
+      "title": "İptal sonrası eski worker",
+      "fixture": {
+        "event": "effect.requested.v1",
+        "worker_generation": 3,
+        "current_generation": 4,
+        "lease_current": false
+      },
+      "expected": [
+        "Yazma reddedilir; artefakt yalnız kanıt olarak saklanabilir"
+      ],
+      "rule_refs": [
+        "EC02",
+        "EC10"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM07",
+      "title": "CI yeşil ama test skipped",
+      "fixture": {
+        "event": "merge.requested.v1",
+        "all_reported_success": true,
+        "expected_check_missing": true
+      },
+      "expected": [
+        "Merge bekler; expected inventory eksikliği görünür"
+      ],
+      "rule_refs": [
+        "EC07"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM08",
+      "title": "Alpha eski sürümü sunuyor",
+      "fixture": {
+        "event": "alpha.deployed.v1",
+        "merge_sha": "sha-A",
+        "deployed_sha": "sha-B"
+      },
+      "expected": [
+        "İnsan testine hazır değil; SHA/digest uyuşmazlığı"
+      ],
+      "rule_refs": [
+        "EC08"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM09",
+      "title": "Güvenlik kapısı kapalı",
+      "fixture": {
+        "event": "plan.export.requested.v1",
+        "disabled_controls": [
+          "authz"
+        ],
+        "mode": "draft"
+      },
+      "expected": [
+        "Export draft_unsafe; kapı sessiz açılmaz; deployable=false; risk taşınır"
+      ],
+      "rule_refs": [
+        "EC11"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM10",
+      "title": "Market paketi kendi yetkisini büyütüyor",
+      "fixture": {
+        "event": "catalog.package.requested.v1",
+        "package_qualified": false,
+        "requested_scope": "all-repos-write"
+      },
+      "expected": [
+        "Karantina/qualification önerisi; mevcut scope büyümez; otomatik kurulum yok"
+      ],
+      "rule_refs": [
+        "EC09"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM11",
+      "title": "Çatışan terminal geçişler",
+      "fixture": {
+        "event": "worker.result.v1",
+        "matched_transitions": [
+          "accepted",
+          "failed"
+        ],
+        "aggregate_version": 7
+      },
+      "expected": [
+        "unresolved_conflict; rastgele başarı seçilmez; side effect yok"
+      ],
+      "rule_refs": [
+        "EC02",
+        "EC12"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM12",
+      "title": "Bağımlılık döngüsü",
+      "fixture": {
+        "event": "plan.changed.v1",
+        "dependencies": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "A"
+          ]
+        ]
+      },
+      "expected": [
+        "Çevrim görünür; simulation invalid; draft export mümkün; otomatik edge silme yok"
+      ],
+      "rule_refs": [],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM13",
+      "title": "Kimliği bilinen ürünün bilinmeyen yeteneği",
+      "fixture": {
+        "event": "plan.import.requested.v1",
+        "product_identity": "TypeSafe (user_confirmed)",
+        "capability": "not_verified",
+        "rule_value": -1
+      },
+      "expected": [
+        "Kimlik biliniyor; özellik kanıtı bekliyor; sayısal şema hatası ayrı; özellik icat edilmez"
+      ],
+      "rule_refs": [],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    },
+    {
+      "id": "SIM14",
+      "title": "Eski dağıtımın insan kabulü",
+      "fixture": {
+        "event": "human.acceptance.received.v1",
+        "accepted_deployment": "alpha-old",
+        "current_deployment": "alpha-new"
+      },
+      "expected": [
+        "Kabul yeni çıktıya aktarılmaz; kimlik uyuşmazlığı gösterilir"
+      ],
+      "rule_refs": [
+        "EC12"
+      ],
+      "status": "not_run",
+      "evidence_class": "proposed_experiment"
+    }
+  ],
+  "skill_agent_mcp_catalog": {
+    "status": "proposed_not_installed",
+    "asset_types": [
+      "skill instruction package",
+      "agent role profile",
+      "MCP server/tool package",
+      "workflow adapter",
+      "test/oracle package"
+    ],
+    "manifest_required": [
+      "package_id",
+      "kind",
+      "upstream_url",
+      "publisher",
+      "license",
+      "version",
+      "digest",
+      "reviewed_at",
+      "reviewer_role",
+      "runtime_compatibility",
+      "requested_capabilities",
+      "data_classification",
+      "network_and_filesystem_scope",
+      "eval_dataset_digest",
+      "qualification_result",
+      "recheck_trigger",
+      "revocation_status"
+    ],
+    "lifecycle": [
+      "discover",
+      "quarantine",
+      "inspect_source_and_dependencies",
+      "define_acceptance_before_generation",
+      "test_in_sandbox",
+      "independent_regression_eval",
+      "approve_catalog_version",
+      "issue_task_scoped_lease",
+      "monitor",
+      "revoke_or_retire"
+    ],
+    "generated_skill": "Ajan skill önerisi yazabilir; tek başına onaylayıp etkinleştiremez. Koşu paket digestlerini sabitler. Yeni sürüm yeni qualification ister.",
+    "acquisition": "Market arama/aday kaynağıdır. Ajan ihtiyacı bildirir; onaylı katalogda karşılık yoksa yetkili qualification işi önerilir. Çalışan görev içine keyfi install komutu alınmaz.",
+    "selection": "Katalog sayısı ile göreve yüklenen alt küme ayrı; keyfi evrensel 20 sınırı yok. İlgililik, token yükü ve seçim doğruluğu ölçülür.",
+    "initial_skills": [
+      "intake-contract-check",
+      "acceptance-scenario-map",
+      "dependency-impact-plan",
+      "tdd-red-validate",
+      "bounded-code-change",
+      "independent-acceptance",
+      "failure-diagnosis",
+      "effect-reconciliation",
+      "alpha-evidence-pack",
+      "handoff-and-checkpoint"
+    ],
+    "conditional_skills": [
+      "schema-migration-rehearsal",
+      "security-review",
+      "accessibility-journey",
+      "performance-load",
+      "payroll-oracle-check",
+      "supply-chain-qualification",
+      "incident-to-regression"
+    ],
+    "agent_roles": [
+      {
+        "id": "contract_planner",
+        "output": "AC/DoD ve bağımlılık taslağı",
+        "cannot": "Kendi önerisiyle yetki veya kabul kriteri genişletemez."
+      },
+      {
+        "id": "coder",
+        "output": "Sabit base SHA üzerindeki aday değişiklik ve kanıtlar",
+        "cannot": "Kabul kanıtının otoritesi veya merge/deploy yazarı olmaz."
+      },
+      {
+        "id": "acceptance_verifier",
+        "output": "Expected test inventory ve oracle sonucu",
+        "cannot": "Faili geçirmek için yetkili AC/test envanterini değiştiremez."
+      },
+      {
+        "id": "recovery_diagnostician",
+        "output": "Hata sınıfı ve sınırlı toparlanma önerisi",
+        "cannot": "Belirsiz dış etkiyi kör yeniden çalıştıramaz."
+      },
+      {
+        "id": "catalog_qualifier",
+        "output": "Skill/MCP/agent profil sürümü için uygunluk kanıtı",
+        "cannot": "Paketi kendi kendine tüm projelere yayamaz."
+      },
+      {
+        "id": "coordinator",
+        "output": "Öncelik/bağımlılık/kapasite önerisi",
+        "cannot": "Scrum veya SAFe adı verilmesi runtime yetkisi ve ek başarı garantisi oluşturmaz."
+      }
+    ],
+    "mcp_contract": {
+      "server_identity": [
+        "origin_or_package_digest",
+        "transport",
+        "version",
+        "tool_schema_digest"
+      ],
+      "grant": [
+        "principal",
+        "project",
+        "repo",
+        "task_generation",
+        "allowed_tool_names",
+        "effect_class",
+        "resource_allowlist",
+        "egress",
+        "expiry",
+        "revocation"
+      ],
+      "enforcement": "Credential/tool gateway/sandbox uygular; SKILL.md okumasına dayanmaz. Child grant parent kapsamını büyütemez.",
+      "token": "MCP hedefine verilmiş token doğrulanır; downstream credential ayrı kapsamda. Session id kimlik yerine kullanılamaz.",
+      "transport": "HTTP authorization ile stdio yerel süreç yetkisi aynı değildir; stdio server OS/sandbox izinlerini miras alabilir.",
+      "roles": [
+        "Plane okuma; gerektiğinde dar yorum yazma adaptörü",
+        "Repo/docs salt okunur arama",
+        "GitHub kanıt okuma; merge ayrı writer",
+        "Tarayıcı keşfi test originleriyle sınırlı",
+        "Tenant filtreli gözlem sorgusu",
+        "Sürümlü resmî docs arama; belirli marka zorunlu değil"
+      ]
+    },
+    "sources": [
+      "SS08",
+      "SS09"
+    ]
+  },
+  "repo_documents": [
+    {
+      "path": "AGENTS.md",
+      "stage": "now",
+      "purpose": "Kısa repo indeksi, komutlar, kimlik/yetki sınırları ve canonical kaynaklar. MD gerçek enforcement değildir.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "CLAUDE.md veya runtime-specific shim",
+      "stage": "conditional",
+      "purpose": "Kullanılan çalıştırıcı gerektiriyorsa canonical belgeye yönlendirme. Öncelik/yükleme adaptör testinde doğrulanır; ikinci çelişik politika yok.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/INTAKE-AND-ACCEPTANCE.md",
+      "stage": "now",
+      "purpose": "Form, AC/DoD, olumsuz örnek ve belirsizliği bloklayan alanlar.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/ARCHITECTURE-AND-AUTHORITY.md",
+      "stage": "now",
+      "purpose": "Slotlar, veri/etki sahipliği, trust boundary, normal ve hatalı devir.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/adr/<id>.md",
+      "stage": "now",
+      "purpose": "Seçim, alternatif, bilinmeyen, çıkış ve göç koşulu.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "contracts/worker.schema.json + contracts/eca.schema.json + contracts/effect.schema.json",
+      "stage": "now",
+      "purpose": "Makine tarafından doğrulanacak shape; yönerge dosyası değildir.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "rules/policy.json veya yaml",
+      "stage": "now",
+      "purpose": "Effective config, override geçmişi, revizyon; export planının runtime policyye terfisi ayrı.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/VERIFICATION-AND-ORACLES.md",
+      "stage": "now",
+      "purpose": "AC→test→kanıt, expected test inventory, bağımsızlık, alan kaynağı ve sürüm.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/RUNBOOK.md",
+      "stage": "now",
+      "purpose": "Unknown effect, kayıp lease, stuck worker, kapasite, rollback ve checkpoint devamı.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/SECURITY-AND-DATA.md",
+      "stage": "now",
+      "purpose": "Sır referansları, retention, egress, tenant izolasyonu; canlı sır yok.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/CATALOG-QUALIFICATION.md + katalog manifestleri",
+      "stage": "now",
+      "purpose": "Aday→onay, digest, ölçüm, iptal ve sürüm değişimi.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "CONTRIBUTING.md + .github/pull_request_template.md",
+      "stage": "now",
+      "purpose": "Git kimliği, scope ve kanıt paketi.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": ".github/CODEOWNERS + ruleset evidence",
+      "stage": "conditional",
+      "purpose": "Sorumluluk ve gerçek enforcement ayrı; zorunlu insan review her görev için otomatik eklenmez.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/OPERATIONS-CAPACITY.md",
+      "stage": "after_measurement",
+      "purpose": "Kaynak profilleri, WIP/admission, fairness; RAMden insan/ekip sayısı türetilmez.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/MIGRATION-AND-EXIT.md",
+      "stage": "before_component_swap",
+      "purpose": "Drain, eski workerda bitirme veya nitelendirilmiş checkpoint göçü ve geri dönüş.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    },
+    {
+      "path": "docs/LEARNING-AND-EVALUATION.md",
+      "stage": "post_mvp",
+      "purpose": "Kaizen/OODA olay→eval→öneri→nitelendirme; canlı politika kendini onaysız değiştirmez.",
+      "note": "Mevcut belge bu ihtiyacı karşılıyorsa yeni dosya çoğaltılmaz; önerilen yol henüz oluşturulmadı."
+    }
+  ],
+  "recommendation": {
+    "first_comparison": [
+      "PS01",
+      "PS02"
+    ],
+    "reason": "Aynı görev/effect/kanıt sözleşmesiyle iki ana workflow yaklaşımını karşılaştır. Önceki pilot tek başına ürünü aklamaz veya elemez.",
+    "optional": [
+      "PS03 giriş entegrasyonu somut ihtiyaçsa",
+      "PS04 Hermes worker uygunluğu ölçülürse",
+      "PS05 ayrı operasyon gatewayi gerekirse",
+      "PS06 tek-host keşif için"
+    ],
+    "fixed_team_or_ram_claim": false,
+    "interface_first": "Role binding + draft risk export + simülasyon; fabrika kurulumu yapılmıyor.",
+    "authorship": "Yeni işlerde hem author hem committer karacaismail <35493655+karacaismail@users.noreply.github.com>; yerel guardın uzak runnerı kapsadığı varsayılmaz."
+  }
+}
+

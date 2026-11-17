@@ -1,0 +1,404 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K31",
+    "ad": "Ekipler arası iş birliği, sahiplik ve sosyo-teknik yapı",
+    "alan": "D-organizasyon-ve-olcek",
+    "amac": "Ajanların ekip sınırlarını kolayca aştığı bir ortamda kod, karar ve ortak varlıkların sahipliğinin ve hesap verebilirliğin bilinçli yönetilmesi. Kapsamda ekipler arası katkı, çakışma çözümü, bilgi paylaşımı, ekip topolojisi, bilişsel yük ve dağıtık çalışma var.",
+    "kapsam": [
+      "alan sahipliği kataloğu ve dört rolün ayrımı (başlatan, yönlendiren, onaylayan, alan sahibi)",
+      "hesap verebilirliğin kontrol koşulu ve görev kanıtı",
+      "ekip sınırını aşan ajan değişikliği protokolü",
+      "ortak kural ve yetenek paketi deposuna iç kaynak katkı modeli",
+      "ekipler arası ajan çakışmalarının iş öncesi tespiti ve kademeli çözümü",
+      "ekip topolojileri, etkileşim modları, bilişsel yük ve Conway etkileri",
+      "uygulama toplulukları ve ekipler arası öğrenme",
+      "dağıtık ve hibrit ekiplerde eşgüdüm"
+    ],
+    "kapsam_disi": [
+      "birleştirme kuyruğu ve sıcak nokta dosya mekaniği (K06, K24-008)",
+      "ajan platformunun sahibi ekip (K24-004, K16-008)",
+      "planlı ekipler arası bağımlılık grafiği (K24-003)"
+    ],
+    "komsu_kumeler": [
+      "K24",
+      "K11",
+      "K06",
+      "K07",
+      "K08",
+      "K16",
+      "K17",
+      "K25"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K31-001",
+      "baslik": "Kod alanı sahipliği kataloğu ve ajan değişikliğinde dört rolün ayrımı",
+      "ihtiyac": "Her modül, servis, arayüz ve ortak varlığın sahibi ekibin (kişi değil) makinece okunabilir bir katalogda tutulması. Ajan değişikliklerinde dört rolün ayrı kaydı: işi başlatan, ajanı yönlendiren, değişikliği onaylayan ve değişen alanın sahibi ekip. Ajanın hiçbir rolde sahip olamaması. İnceleme yönlendirmesinin bu katalogdan yapılması. Sahipsiz alanların tespit edilip sahiplendirilmesi.",
+      "cozulecek_sorun": "Sahiplik dağıldıkça ve düşük uzmanlıklı katkı arttıkça hata oranı artar; ajanlar ise herkesin her yere kolayca dokunmasını sağlar. Sürüm kaydındaki yazar alanı artık anlamayı ya da sahipliği göstermiyor.",
+      "yetenek_siniflari": [
+        "Y-55",
+        "Y-33",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Tek ekipte örtük sahiplik yeterli olabilir; 2+ ekipte katalog olmadan inceleme yönlendirmesi ve sorumluluk dağılır.",
+      "kabul_olcutleri": [
+        "Kod tabanının %100'ü bir sahip ekibe eşlenmiş; sahipsiz alan sayısı raporlanıyor.",
+        "Her ajan değişikliği dört rol alanını taşıyor; alan sahibi onayı olmayan dış değişiklik birleşemiyor.",
+        "Yeniden yapılanmada sahip ekip değişikliği katalogda aynı gün güncelleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-274",
+          "S-268",
+          "S-267"
+        ],
+        "not": "Büyük bir işletim sistemi kod tabanında düşük uzmanlıklı katkıcı sayısı ve baş sahiplik oranı, yayın öncesi ve sonrası hatalarla ilişkili bulundu. Ajan kodunda yazarlık artık anlamayı göstermiyor. Benzer mevcut ihtiyaç: N-K25-004; fark: N-K25-004 her ajan çıktısına bir insan sahibi ister, N-K24-008 yalnız sıcak nokta dosyalarına sahip atar. Alan düzeyinde ekip sahipliği kataloğu ve dört rolün ayrımı yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K25-004"
+      ]
+    },
+    {
+      "id": "N-K31-002",
+      "baslik": "Hesap verebilirliğin gerçek kontrol koşuluna ve 'görev yerine getirildi' kanıtına bağlanması",
+      "ihtiyac": "Bir insanın ajan çıktısından sorumlu tutulabilmesi için yeterli bilgi, süre ve yetkiye sahip olması gerektiğinin tanımlanması. Onaylayanın hangi doğrulama görevlerini fiilen yerine getirdiğinin kayda geçmesi: neye baktığı, neyi test ettiği, neyi kapsam dışı bıraktığı. Olay sonrası analizlerde önce sistem tasarımının (otonomi düzeyi, bilgi sunumu, zaman baskısı) incelenmesi. Bu koşullar sağlanmadan verilen onayın sistem sahibinin riski sayılması.",
+      "cozulecek_sorun": "Otomasyon hatalarında sorumluluk, sistem üzerinde sınırlı kontrolü olan en yakın insana yüklenebilir ('ahlaki ezilme bölgesi'). Sağlayıcı şartları sorumluluğu kullanıcıya yükler ve platformlar olayları kaydeder; ama hiçbir kayıt doğrulama görevinin fiilen yapıldığını göstermez.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip sayısı arttıkça ekipler arası onay zincirleri uzar; kontrol koşulu her halkada aranmalı.",
+      "kabul_olcutleri": [
+        "Onay kayıtlarında yerine getirilen doğrulama görevleri alanı zorunlu.",
+        "Olay sonrası analiz şablonunda 'onaylayanın kontrol koşulları sağlanmış mıydı?' sorusu var.",
+        "Kontrol koşulları sağlanmadan verilen onaylar ayrıca raporlanıyor ve sistem değişikliğini tetikliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-202",
+          "S-267",
+          "S-290"
+        ],
+        "not": "121 belge analizi: şartlar görevi ve sonucu çıktıya bağlıyor, platform olayları kaydediyor, ama hiçbir şey görevin yerine getirildiğini kaydetmiyor. 'Ahlaki ezilme bölgesi' kavramı otomasyon kazalarından çıkarıldı. Benzer mevcut ihtiyaç: N-K17-002; fark: N-K17-002 onayı kimliğe ve içeriğe bağlar, N-K17-006 onay ekranında gösterilecek bilgileri ister. Hesap verebilirliğin kontrol koşulları, görevin yerine getirildiğinin kanıtı ve suçlamasız analiz kuralı tanımlı değil."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "N-K31-003",
+      "baslik": "Ekip sınırını aşan ajan değişiklikleri için protokol ve 'alanın kuralı geçerlidir' ilkesi",
+      "ihtiyac": "Bir ekibin ajanı başka ekibin alanında değişiklik yapmak zorunda kaldığında izinli yolların tanımlanması: sahip ekibe talep açmak; iç kaynak katkısı ve sahip ekibin güvenilir inceleyicisinin onayı; ya da işi sahip ekibin kendi ajanıyla yapması. Değişikliğe sahip alanın kural katmanının ve kalite eşiklerinin uygulanması. Sahip ekibin önceden bilgilendirilmesi. Ajanların başka ekibin backlog'una ancak tanımlı kanaldan ve insan onayıyla kayıt açabilmesi. Sınır aşan değişiklik oranının ve bekleme süresinin ölçülmesi.",
+      "cozulecek_sorun": "Ajanlar başka ekiplerin kodunu değiştirmeyi çok ucuzlatır. Farklı ajanların eşzamanlı değişikliklerinde çakışma oranı, aynı ajanın örnekleri arasındakinin yaklaşık iki katı. Başlatan ekibin kuralları uygulanırsa alanın tutarlılığı bozulur.",
+      "yetenek_siniflari": [
+        "Y-55",
+        "Y-33",
+        "Y-09"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı ve ortak kod arttıkça sınır aşan değişiklik oranı ve çakışma artar.",
+      "kabul_olcutleri": [
+        "Sınır aşan değişiklik yolları çalışma sisteminde yazılı.",
+        "Sahip ekip onayı olmayan sınır aşan değişiklik birleşemiyor.",
+        "Değişikliğe başlatan ekibin değil, alanın kural katmanı uygulanıyor.",
+        "Sınır aşan değişikliklerin bekleme süresi ölçülüyor ve bir hedefi var."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-271",
+          "S-279",
+          "S-274"
+        ],
+        "not": "33.596 ajan değişiklik önerisinde eşzamanlı çiftlerin birleştirme tekrarı: farklı ajanlar arası %41,7, aynı ajan içi %19,8 metinsel çakışma. İç kaynak kalıpları dış katkıyı güvenilir katkıcı incelemesine bağlıyor. Benzer mevcut ihtiyaç: N-K24-008; fark: N-K24-008 ortak sıcak nokta dosyalarına tek sahip atar, N-K11-003 kural katmanlarını tanımlar. Başka ekibin alanına ajan değişikliğinin yolu ve hangi kuralın geçerli olduğu tanımlı değil."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "bagimliliklar": [
+        "N-K24-008"
+      ]
+    },
+    {
+      "id": "N-K31-004",
+      "baslik": "Ortak kural ve yetenek paketi deposuna iç kaynak katkı modeli",
+      "ihtiyac": "10+ ekibin ortak kurallara ve yetenek paketlerine katkısının iç kaynak ilkeleriyle yönetilmesi. Öğeler: katkı rehberi; her paket için güvenilir katkıcı/bakımcı rolü; katkı inceleme süresi hedefi; ölçüm (değerlendirme) kanıtı olmadan birleştirmeme; ekip çatallarının ortak depoya geri kazandırılma yolu; eskitme ve kaldırma süreci; katkıların görünür biçimde tanınması.",
+      "cozulecek_sorun": "Merkezi ekip tüm paketleri yazamaz. Katkı yolu yoksa her ekip kendi kopyasını üretir, kurallar sapar ve iyi uygulama yayılmaz. İç kaynak yeniden kullanımı ve bilgi paylaşımını artırır, ama açık roller ve tanıma olmadan sürmez.",
+      "yetenek_siniflari": [
+        "Y-08",
+        "Y-33",
+        "Y-29"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı arttıkça merkezi düzenleme darboğaza dönüşür; katkı modeli olmadan çatal sayısı ekip sayısıyla büyür.",
+      "kabul_olcutleri": [
+        "Katkı rehberi ve her paketin güvenilir katkıcıları yayımlanmış.",
+        "Katkı inceleme süresi ölçülüyor ve hedefe uyuluyor.",
+        "Ekip çatallarının sayısı ve ortak depoya dönüş oranı izleniyor.",
+        "Ölçülmüş etki kaydı olmayan katkıların birleşmediği denetlenmiş."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-279",
+          "S-280",
+          "S-281"
+        ],
+        "not": "İç kaynak literatür taraması yeniden kullanım ve bilgi paylaşımı faydalarını raporluyor. Ajanların kullandığı kurumsal bilgi birimleri için 'bilgi müştereği' bakım pratiği öneriliyor. Benzer mevcut ihtiyaç: N-K11-005; fark: N-K11-005 paketlerin sahibini ve sürümünü, N-K11-004 etkinliğini ister. Çok ekipli katkı süreci, bakımcı rolü ve çatal yönetimi yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "N-K31-005",
+      "baslik": "Ekipler arası ajan çakışmalarının iş başlamadan tespiti ve kademeli çözüm yolu",
+      "ihtiyac": "Ekiplerin ve ajanların hangi alanda, hangi niyetle çalıştığını iş başlamadan gösteren bir üstlenme kaydı. Başlatma öncesinde yinelenen işin, aynı alana eşzamanlı değişikliğin ve çelişen hedeflerin tespiti. Tespit edilen çakışma için kademeli çözüm yolu (ilgili ekipler → ART mimarı/ürün yönetimi → portföy) ve süre hedefi. Bir ekibin ajanının diğer ekibin değişikliğini geri almasının yasaklanması. Çakışma türlerinin ölçülmesi: yineleme, anlamsal çelişki, ortak kaynak rekabeti, kural çelişkisi.",
+      "cozulecek_sorun": "Birleştirilemeyen ajan değişikliklerinin başlıca nedenlerinden biri, aynı işin başka bir değişiklikle zaten çözülmüş olması. Koordinasyon olmadığında eşzamanlı ajanların yaptığı işin büyük kısmı bir başkasının işini yeniden yapmak olabiliyor. Ajanlar arası bilgi akışı kopuklukları çok ajanlı sistem hatalarının ana sınıflarından biri.",
+      "yetenek_siniflari": [
+        "Y-56",
+        "Y-33",
+        "Y-13"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip ve eşzamanlı ajan sayısıyla çakışma olasılığı kombinatoryal artar.",
+      "kabul_olcutleri": [
+        "Ajan işi başlamadan önce üstlenme kaydında aynı alan ve niyet kontrolü yapılıyor.",
+        "Yinelenen iş oranı ve ekipler arası çakışma sayısı türüne göre raporlanıyor.",
+        "Çözüm yolu ve süre hedefi yazılı; hedef aşımları eskale ediliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-272",
+          "S-270",
+          "S-271",
+          "S-113",
+          "S-273"
+        ],
+        "not": "Git tabanlı üstlenme kaydıyla ekip arkadaşının işini yeniden yapma payı %78'den %0'a indi (ön-baskı). Birleştirilmeyen ajan değişikliklerinin sık nedenlerinden biri sorunun başka değişiklikle çözülmüş olması. İnsan ekiplerde de çakışmaların sık, kalıcı ve derleme/test hatası olarak ortaya çıktığı biliniyor. Benzer mevcut ihtiyaç: N-K06-002; fark: N-K06-002 çakışmayı birleştirme anında, N-K24-003 planlanmış bağımlılıkları, N-K04-005 ekip içi paralel uygulayıcıları ele alır. Ekipler arası iş öncesi üstlenme görünürlüğü ve kademeli çözüm yolu yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "bagimliliklar": [
+        "N-K06-002"
+      ]
+    },
+    {
+      "id": "N-K31-006",
+      "baslik": "Ajan yeteneklerinin ekip topolojisindeki yeri ve ekipler arası etkileşim modları",
+      "ihtiyac": "Dört ekip tipinin ajanlı karşılıklarının tanımlanması. Akışa hizalı ekipler ajanları kullanır. Platform ekibi ajan yeteneklerini self servis hizmet olarak sunar. Etkinleştirici ekip ajanla çalışma pratiklerini öğretir. Karmaşık alt sistem ekipleri uzmanlık gerektiren alanlar için özel kural/paket ve ajan yapılandırması sağlar. Her ekipler arası ilişki için etkileşim modunun (iş birliği, hizmet olarak, kolaylaştırma) ve süresinin belirlenmesi. Ekip arayüzünün (sunulan hizmetler, iletişim, kurallar) katalogda yayımlanması.",
+      "cozulecek_sorun": "Tip ayrımı yapılmazsa her ekip kendi ajan altyapısını kurar ya da platform ekibi tüm ekiplerin içine gömülür; etkinleştirici destek kalıcı bağımlılığa dönüşür. Ajanlar ekiplerin daha geniş uçtan uca kapsamı üstlenmesini sağlar, ama bu ekip sınırlarını ve arayüzlerini yeniden tasarlamayı gerektirir.",
+      "yetenek_siniflari": [
+        "Y-55",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "10+ ekipte etkileşim modları tanımsızsa platform ve etkinleştirici ekipler talep altında ezilir.",
+      "kabul_olcutleri": [
+        "Her ekibin tipi ve ekipler arası ilişkilerin etkileşim modu kayıtlı.",
+        "Etkinleştirici ilişkilerin bitiş ölçütü ve süresi var.",
+        "Platformun ajan hizmetlerinde self servis kullanım oranı ve destek talebi hacmi izleniyor."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-094",
+          "S-277",
+          "S-278"
+        ],
+        "not": "Ekip topolojisi modeli uygulayıcı rehberidir. Ajanlı karşılıkları sektör yazılarından ve çıkarımdan türetildi; hakemli ölçüm yok. Benzer mevcut ihtiyaç: N-K24-004; fark: N-K24-004 ajan platformunun bir platform/etkinleştirici ekipçe sahiplenilmesini ister. Dört ekip tipinin ajanlı karşılıkları, etkileşim modları ve ekip arayüzü tanımlı değil."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "N-K31-007",
+      "baslik": "Ekip bilişsel yükünün ölçülmesi ve sorumluluk alanının buna göre ayarlanması",
+      "ihtiyac": "Ajan kullanımıyla genişleyen ekip sorumluluk alanının (daha çok servis, daha çok teknoloji yığını, 'tam yığın' işler) ekip bilişsel yüküyle birlikte dönemsel değerlendirilmesi. Yükün üretimden doğrulama, entegrasyon ve muhakemeye kaydığının ölçülmesi. Eşik aşıldığında alanın bölünmesi, platforma devri ya da kapsamın daraltılması. Ekip alanının yalnız 'ajan üretiyor' diye ölçümsüz büyütülmemesi.",
+      "cozulecek_sorun": "Üretim ucuzlarken doğrulama, entegrasyon ve karar pahalılaşıyor; bilişsel yük yok olmuyor, yer değiştiriyor. Yazılım profesyonelleri ajan benimsenmesinden sonra bilişsel yük ve iş yükünün yoğunlaştığını bildiriyor. Mühendisler uzmanlık alanları dışındaki işleri de üstleniyor.",
+      "yetenek_siniflari": [
+        "Y-57",
+        "Y-55"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Etki birikimlidir; ekip sayısı sabitken kapsam büyüdükçe görünür hale gelir.",
+      "kabul_olcutleri": [
+        "Her ekip için dönemsel bilişsel yük değerlendirmesi (anket + alan büyüklüğü göstergeleri) var.",
+        "Eşiği aşan ekipler için alan düzenleme kararı kayıtlı.",
+        "Ekip başına sahip olunan alan sayısındaki değişim bilişsel yük verisiyle birlikte raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-283",
+          "S-285",
+          "S-238",
+          "S-277"
+        ],
+        "not": "21 görüşmeli vaka çalışması bilişsel yük ve iş yükünde yoğunlaşma raporluyor. Bir yapay zekâ şirketinin iç araştırması mühendislerin 'tam yığın' hale geldiğini gösteriyor. Geliştirici deneyimi çerçevesi bilişsel yükü temel boyut sayıyor."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "zamanla (3–6 ay)"
+    },
+    {
+      "id": "N-K31-008",
+      "baslik": "Sosyo-teknik uyumun izlenmesi: Conway etkisi ve ajan kaynaklı mimari kayma",
+      "ihtiyac": "Kod bağımlılıklarının gerektirdiği koordinasyon ile ekiplerin gerçek iletişim ve sahiplik yapısı arasındaki uyumun dönemsel ölçülmesi. Ajanların modül sınırlarını kolayca aşmasından ve ekip-özel kural setlerinden doğan mimari kaymanın izlenmesi: sınır ihlalleri, ekipler arası farklı konvansiyonlar, gizli bağımlılıklar. Hedef mimariye göre ekip yapısını bilinçli ayarlama (ters Conway manevrası) kararlarının mimari karar kaydına bağlanması.",
+      "cozulecek_sorun": "Sistem mimarileri onları üreten kurumun iletişim yapısını yansıtır. Bağımlılık ile koordinasyon arasındaki uyumsuzluk görev süresini uzatır ve hatayı artırır. Ajanlar iletişim gerektirmeden sınır ötesi değişiklik yapabildiği için mimari ile organizasyon arasındaki uyum sessizce bozulabilir.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-39",
+        "Y-55"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip ve modül sayısı arttıkça uyumsuzluğun maliyeti ve görünmezliği artar.",
+      "kabul_olcutleri": [
+        "Sosyo-teknik uyum göstergesi (bağımlılığı olduğu hâlde iletişimi olmayan ekip çiftleri) her PI hesaplanıyor.",
+        "Modül sınırı ihlallerinin eğilimi raporlanıyor.",
+        "Ekip yapısı değişikliklerinin mimari etkisi karar kaydında değerlendirilmiş."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-275",
+          "S-276"
+        ],
+        "not": "Sosyo-teknik uyum arttıkça görev tamamlama süresi kısalıyor. Ajanların bu uyumu nasıl etkilediği ölçülmemiş; o kısım çıkarım. Benzer mevcut ihtiyaç: N-K03-001; fark: N-K03-001 teknik ilişki haritasını ister. Bu haritanın ekip yapısıyla karşılaştırılması ve örgüt tasarımına geri bildirimi yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "yuksek",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "N-K31-009",
+      "baslik": "İnsan–ajan pratikleri için uygulama toplulukları ve ekipler arası bilgi akışı",
+      "ihtiyac": "Disiplin bazlı uygulama topluluklarının (test, ön yüz, arka uç, güvenlik, veri) ajanla çalışma pratiklerini, başarısızlık örneklerini ve etkili kalıpları ekipler arasında paylaşması. Toplulukların ortak kural/paket deposuna katkı kanalı olması. Topluluk ritmi, kolaylaştırıcısı ve katılım için ayrılmış zaman. İnsanlar arası yardımlaşmanın (soru sorma, eşli inceleme) ajan varken de sürmesini sağlayan düzenli alanlar.",
+      "cozulecek_sorun": "Kod asistanına erişim, geliştiricileri daha özerk ve daha az iş birlikçi çalışmaya kaydırıyor. Halka açık bilgi paylaşım platformlarında katkı belirgin düştü. Kurum içinde de 'ilk durak' ajan olduğunda gençler daha az soru soruyor; bilgi insanlar arasında dolaşmıyor, iyi uygulamalar ekip içinde kalıyor.",
+      "yetenek_siniflari": [
+        "Y-37",
+        "Y-11",
+        "Y-08"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı arttıkça ekipler arası öğrenme kendiliğinden gerçekleşmez; yapılandırılmış kanal gerekir.",
+      "kabul_olcutleri": [
+        "En azından temel disiplinler için topluluk, kolaylaştırıcı ve ritim tanımlı.",
+        "Topluluklardan ortak depoya gelen katkı sayısı izleniyor.",
+        "Ekipler arası bilgi akışı göstergesi (ör. başka ekipten yanıt alan soru oranı) zaman içinde düşmüyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-260",
+          "S-261",
+          "S-238",
+          "S-254"
+        ],
+        "not": "Sohbet tabanlı dil modelinin yayılmasından sonra altı ayda halka açık soru-cevap etkinliği karşılaştırma platformlarına göre %25 düştü. Bir yapay zekâ şirketinin iç araştırmasında mühendisler gençlerin daha az soru sorduğunu bildiriyor. Benzer mevcut ihtiyaç: N-K25-005; fark: N-K25-005 rol bazlı eğitim sunar. Ekipler arası sürekli pratik paylaşımı ve iş birliği erozyonuna karşı bir yapı yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K25-005"
+      ]
+    },
+    {
+      "id": "N-K31-010",
+      "baslik": "Ajan kaynaklı ramak kala olaylarının ve derslerin ekipler arası suçlamasız yayılması",
+      "ihtiyac": "Üretime ulaşmamış ajan sorunlarının (test zayıflatma girişimi, istem enjeksiyonu denemesi, yanlış öz-rapor, yanlış mimari yön) ramak kala olarak kolayca bildirilmesi. Bildirenin ve ajanı başlatanın cezalandırılmaması. Öğrenme incelemelerinin aranabilir bir kütüphanede tutulması ve düzenli olarak tüm ekiplere özetlenmesi. Aynı sınıf sorunun başka ekipte tekrarının izlenmesi.",
+      "cozulecek_sorun": "Olay analizi yalnız üretim olaylarına odaklanırsa ajanların ürettiği ramak kala sinyalleri ekip içinde kaybolur; aynı hata sınıfı başka ekiplerde tekrarlanır. Suçlama korkusu bildirim oranını düşürür.",
+      "yetenek_siniflari": [
+        "Y-37",
+        "Y-28",
+        "Y-11"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı arttıkça bir ekibin dersi başka ekipte önlenebilir olay sayısını doğrudan azaltır.",
+      "kabul_olcutleri": [
+        "Ramak kala bildirimi bir dakikadan kısa sürüyor; bildirim sayısı izleniyor.",
+        "Öğrenme incelemeleri aranabilir ve ekiplere düzenli özetleniyor.",
+        "Aynı hata sınıfının ekipler arası tekrar oranı raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-290",
+          "S-309"
+        ],
+        "not": "Büyük ölçekli işletim pratiği: suçlamasız, kurum içinde yaygın paylaşılan olay analizleri ve ekipler arası eğilim analizi. Ajan ramak kalalarına uygulanması çıkarım. Benzer mevcut ihtiyaç: N-K08-006; fark: N-K08-006 olay ve kök neden derslerini kurallara aktarır. Ramak kala bildirimi, suçlamasızlık güvencesi ve ekipler arası yayma yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "2+ ekip",
+      "bagimliliklar": [
+        "N-K08-006"
+      ]
+    },
+    {
+      "id": "N-K31-011",
+      "baslik": "Dağıtık ve hibrit ekiplerde insan–ajan eşgüdümü ve eşzamansız devir standardı",
+      "ihtiyac": "Ajan koşularının ve insan kararlarının farklı konum, saat ve çalışma düzenlerine göre yönlendirilmesi. Öğeler: karar bekleyen işin o an erişilebilir yetkili insana gitmesi; onay ve karar için tanımlı ortak zaman pencereleri; eşzamansız devirde standart bir devir notu (durum, bekleyen karar, riskler, sonraki adım); mesai dışı bildirimlerin çalışma anlaşmasındaki sınırlara uyması; uzaktan çalışanların ajan araçlarını kullandığı ortamda işverenin veri koruma ve bilgilendirme yükümlülüklerinin karşılanması; uzaktan çalışanların ekipler arası ağdan kopmasının izlenmesi.",
+      "cozulecek_sorun": "Kurum genelinde uzaktan çalışma iş birliği ağlarını daha durağan ve silolu yaptı, iletişimi eşzamansıza kaydırdı; ajanlar bu eğilimi güçlendirebilir. Onay bekleyen ajan işi, yetkili çevrimdışıyken günlerce bekleyebilir. Türkiye'de uzaktan çalışmada veri koruma tedbirleri işverenin sorumluluğundadır.",
+      "yetenek_siniflari": [
+        "Y-31",
+        "Y-12",
+        "Y-11"
+      ],
+      "zorunluluk": "kosullu",
+      "olcek_etkisi": "Konum ve saat dilimi çeşitliliği arttıkça bekleme süresi ve devir kaybı büyür.",
+      "kabul_olcutleri": [
+        "Karar bekleyen işlerin yetkili ve erişilebilir kişiye yönlendirilme kuralı var; bekleme süresi konuma göre ayrıştırılabiliyor.",
+        "Devir notu şablonu tek ve kullanılıyor.",
+        "Mesai dışı ajan bildirimlerinin hacmi ölçülüyor ve anlaşmadaki sınırı aşmıyor.",
+        "Uzaktan çalışma sözleşmelerinde veya eklerinde ajan araçlarının kullanımı ve veri koruma kuralları yer alıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-289",
+          "S-304"
+        ],
+        "not": "61.182 çalışanlık doğal deneyde kurum geneli uzaktan çalışma iş birliği ağlarını silolu ve durağan yaptı. 10 Mart 2021 tarihli Uzaktan Çalışma Yönetmeliği veri koruma tedbirlerini işverene yüklüyor. Benzer mevcut ihtiyaç: N-K17-004; fark: N-K17-004 bekleme süresi ve eskalasyon ister. Konum ve saat farkına göre yönlendirme, eşzamansız devir standardı ve uzaktan çalışma hukuku boyutu yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K17-004"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
+import {dirname} from 'node:path';
+import {createHash} from 'node:crypto';
+import {SENARYOLAR} from '../src/veri/senaryolar';
+import {KURALLAR} from '../src/veri/kurallar';
+import {KARARLAR} from '../src/veri/kararlar';
+import {BELGELER} from '../src/veri/belgeler';
+import {CODEX_ROLLERI,SKILLER,MCP_SUNUCULARI} from '../src/veri/ajanlar';
+import {senaryodanDurum} from '../src/durum/depo';
+import {OLAYLAR} from '../src/motor/simulasyon';
+import kanit from '../src/veri/kanitlar.json';
+import modeller from '../src/veri/karar-modelleri.json';
+import sozlesme from '../src/veri/uyarlama-sozlesmesi.json';
+import esleme from '../src/veri/kanit-eslemeleri.json';
+import analiz from '../src/analiz/bulgular.json';
+const entries:{path:string;kind:string;count?:number;sha256:string}[]=[];
+function put(path:string,kind:string,value:unknown,count?:number){mkdirSync(dirname(path),{recursive:true});writeFileSync(path,JSON.stringify(value,null,2)+'\n');entries.push({path,kind,count,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')});}
+for(const s of SENARYOLAR)put(`data/scenarios/${s.id}.json`,'scenario',{...s,durum:senaryodanDurum(s.id),status:'design_not_qualified'});
+put('data/eca/rules.json','eca_design_rules',KURALLAR,KURALLAR.length);
+put('data/eca/choices.json','decision_options',KARARLAR,KARARLAR.length);
+put('data/eca/simulation-events.json','simulated_event_families',{events:OLAYLAR,scope:'Only ten deterministic event families; ECA text is not executable workflow code.',priority:['cancel','unknown_effect_reconcile','budget','event_recovery']},OLAYLAR.length);
+put('data/catalog/decision-models.json','decision_layer_candidates',modeller,modeller.candidates.length);
+put('data/catalog/agents-skills-mcp.json','capability_templates',{roles:CODEX_ROLLERI,skills:SKILLER,mcp:MCP_SUNUCULARI,status:'not_installed'});
+put('data/contracts/adapter-contracts.json','adapter_contracts',sozlesme.component_contracts);
+put('data/documents/templates.json','document_templates',BELGELER,BELGELER.length);
+for(const group of ['Yerel geçmiş','Dünya vakaları','Mimari inceleme']){const key={'Yerel geçmiş':'local-history','Dünya vakaları':'world-cases','Mimari inceleme':'deep-review'}[group];const rows=kanit.kayitlar.filter(r=>r.grup===group);put(`data/evidence/${key}.json`,'original_research_records',rows,rows.length);}
+put('data/evidence/crosswalk.json','candidate_partial_mappings',esleme.crosswalk);
+put('data/evidence/source-manifest.json','embedded_source_manifest',kanit.dosyalar.map(f=>({path:f.yol,sha256:f.sha256})),kanit.dosyalar.length);
+put('data/analysis/decision-briefs.json','evidence_based_decision_questions',analiz.briefs,analiz.briefs.length);
+put('data/analysis/evidence-index.json','classified_evidence_records',analiz.record_index,analiz.record_index.length);
+put('data/analysis/rechecks.json','dated_primary_source_rechecks',{scope:analiz.scope,local:analiz.original_rechecks,web:analiz.primary_rechecks});
+writeFileSync('data/map.json',JSON.stringify({schema_version:1,generated_at:new Date().toISOString(),authority:'src/veri typed data and immutable research snapshots; these JSON files are generated exports',runtime_ready:false,qualification:'not_run',note:'Original source records can overlap. Selected mitigations do not close risks.',files:entries},null,2)+'\n');
+console.log(`JSON map: ${entries.length} files, ${SENARYOLAR.length} scenarios, ${BELGELER.length} document templates`);

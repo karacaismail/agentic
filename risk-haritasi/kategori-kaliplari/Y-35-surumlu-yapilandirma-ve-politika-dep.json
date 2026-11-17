@@ -1,0 +1,105 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-35",
+    "ad": "Sürümlü yapılandırma ve politika deposu",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-192",
+      "yetenek_sinifi": "Y-35",
+      "kalip": "Yapılandırma değişikliği kaynaklı büyük kesinti",
+      "aciklama": "Cloudflare'in 18 Kasım 2025 kesintisi, bir veritabanı izin değişikliğinin Bot Management 'feature file' dosyasını iki katına çıkarması ve bu dosyanın tüm ağa yayılmasıyla oluştu. Facebook'un SOSP 2015 çalışması yapılandırma değişikliklerinin kod kadar sıkı doğrulama ve kademeli yayın gerektirdiğini gösterdi.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-13"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://blog.cloudflare.com/18-november-2025-outage/",
+        "https://doi.org/10.1145/2815400.2815401"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model politikası, eşik veya kural dosyası tek depodan tüm ekiplere anında dağıtılırsa şema dışı bir değer tüm ajanları aynı anda durdurabilir.",
+        "Otomatik üretilen yapılandırma (ör. model kaydı) boyut ve şema doğrulaması olmadan yayılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-006",
+        "N-K16-005",
+        "N-K22-001",
+        "N-K09-012"
+      ],
+      "ornek_araclar": [
+        "Git tabanlı yapılandırma depoları",
+        "Consul",
+        "etcd",
+        "Argo CD"
+      ],
+      "erken_sinyal": "Yapılandırma dosyası boyutunda/eleman sayısında ani değişim; yayın sonrası hata oranı artışı.",
+      "azaltma": "Yapılandırma için şema ve boyut doğrulaması, kademeli yayın, koşu başında sürüm sabitleme ve son bilinen iyi sürüme otomatik dönüş."
+    },
+    {
+      "id": "RK-193",
+      "yetenek_sinifi": "Y-35",
+      "kalip": "Ajanın kendi yapılandırmasını değiştirmesi",
+      "aciklama": "Ajan çalışma zamanları kendi yapılandırma dosyalarını çalışma alanında okur; Claude Code'da settings.json'a kalıcı yapılandırma enjeksiyonuyla sandbox kaçışı (CVE-2026-25725) ve depo kontrollü ayar dosyasıyla güven diyaloğu atlama (CVE-2026-33068) kaydedildi.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-16"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-ff64-7w26-62rf",
+        "https://github.com/advisories/GHSA-mmgp-wc2j-qcv7"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kural ve politika dosyaları ajanın yazabildiği dizinde tutulursa ajan (veya ona enjekte edilen talimat) kendi izinlerini genişletebilir; 'ajanlar kural değiştiremez' ilkesi fiilen uygulanmaz.",
+        "Değişiklik yerel kalırsa merkezi depoda izi görülmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-007",
+        "N-K11-003",
+        "N-K24-007",
+        "N-K11-010"
+      ],
+      "ornek_araclar": [
+        "Claude Code settings",
+        "Cursor rules",
+        "Codex config",
+        "MCP yapılandırmaları"
+      ],
+      "erken_sinyal": "Görev sırasında ajan yapılandırma dosyalarında değişiklik.",
+      "azaltma": "Yapılandırmayı salt okunur bağlanan merkezi konumdan yükleme, çalışma alanındaki yapılandırmayı yok sayma, koşu başında yapılandırma özetinin kaydı."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 10,
+    "kritik": 1,
+    "dusuk": 132,
+    "orta": 61
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 22,
+    "RT-01": 18,
+    "RT-15": 16,
+    "RT-03": 16,
+    "RT-05": 14,
+    "RT-11": 14,
+    "RT-10": 13,
+    "RT-14": 12,
+    "RT-06": 11,
+    "RT-07": 9,
+    "RT-16": 8,
+    "RT-13": 8,
+    "RT-02": 5,
+    "RT-12": 5,
+    "RT-04": 5,
+    "RT-17": 2,
+    "RT-09": 2
+  }
+}

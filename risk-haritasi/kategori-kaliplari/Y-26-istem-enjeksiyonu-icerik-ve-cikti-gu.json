@@ -1,0 +1,166 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-26",
+    "ad": "İstem enjeksiyonu, içerik ve çıktı güvenliği korumaları",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-160",
+      "yetenek_sinifi": "Y-26",
+      "kalip": "Uyarlanır saldırılar karşısında savunmaların çökmesi",
+      "aciklama": "'The Attacker Moves Second' çalışması, savunmaların statik saldırı dizileriyle değerlendirilmesinin yanıltıcı olduğunu; gradyan, pekiştirmeli öğrenme, rastgele arama ve insan yönlendirmeli keşifle 12 güncel savunmanın aşıldığını ve çoğunda saldırı başarısının %90'ın üzerine çıktığını gösterdi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2510.09023"
+      ],
+      "yasatacagi_sorunlar": [
+        "Satıcının 'istem enjeksiyonu koruması' ürünü yüksek engelleme oranıyla satın alınıp tek savunma sayılırsa, hedefli saldırgan onu aşar ve ajan yetkileri açıkta kalır.",
+        "Kırmızı takım yalnız hazır saldırı setiyle yapılırsa güvenlik düzeyi olduğundan yüksek görünür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-012"
+      ],
+      "ornek_araclar": [
+        "Lakera Guard",
+        "Meta Prompt Guard",
+        "Azure Prompt Shields",
+        "NeMo Guardrails"
+      ],
+      "erken_sinyal": "Koruma katmanının yeni saldırı tekniklerinde başarı oranının düşmesi; yalnız statik set üzerinden raporlanan metrikler.",
+      "azaltma": "Korumayı olasılıksal ek katman sayıp yetki tasarımıyla (en az yetki, güvenilmeyen içerik okuyan ajanda dış eylem yok) birleştirme; uyarlanır kırmızı takım."
+    },
+    {
+      "id": "RK-161",
+      "yetenek_sinifi": "Y-26",
+      "kalip": "Karakter kaçırma ile koruma sınıflandırıcısını atlatma ve korumanın kendi açıkları",
+      "aciklama": "Altı yaygın koruma sistemine (Azure Prompt Shield ve Meta Prompt Guard dahil) karakter enjeksiyonu ve düşmanca ML kaçırma teknikleriyle bazı durumlarda %100'e varan atlatma sağlandı. LiteLLM'in BannedKeywords ve AzureContentSafety korumalarında atlama (CVE-2026-12797) ve özel kod korumasında sandbox kaçışı (CVE-2026-40217) kaydedildi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-01"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2504.11168",
+        "https://github.com/advisories/GHSA-p897-vf7j-f5h8",
+        "https://github.com/advisories/GHSA-wxxx-gvqv-xp7p"
+      ],
+      "yasatacagi_sorunlar": [
+        "Emoji/Unicode ile gizlenmiş talimatlar iş kalemi ve yorumlardan geçip ajana ulaşır; korumanın 'temiz' kaydı yanlış güven üretir.",
+        "Geçit içindeki koruma katmanının açığı, korumayı saldırı yüzeyine çevirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-005",
+        "N-K11-008",
+        "N-K12-002"
+      ],
+      "ornek_araclar": [
+        "Azure Prompt Shields",
+        "Meta Prompt Guard",
+        "LiteLLM guardrails",
+        "Lakera Guard"
+      ],
+      "erken_sinyal": "Girdilerde Unicode etiket karakterleri, sıfır genişlikli karakterler; koruma katmanı için yeni GHSA.",
+      "azaltma": "Girdiyi normalleştirip görünmez karakterleri temizleme, birden çok bağımsız tespit, korumanın kendisini yamalı ve yalıtılmış tutma."
+    },
+    {
+      "id": "RK-162",
+      "yetenek_sinifi": "Y-26",
+      "kalip": "Türkçe içerikte koruma başarımının doğrulanmamış olması",
+      "aciklama": "Çalışmalar, güvenlik eğitiminin dillerarası eşitsizliği nedeniyle düşük kaynaklı dillerde GPT-4 güvenlik önlemlerinin %79 oranında aşılabildiğini, orta/yüksek kaynaklı dillerde başarının belirgin düşük olduğunu gösterdi. Türkçe için koruma sınıflandırıcılarının başarımına dair bağımsız ölçüm bulunamadı.",
+      "risk_turleri": [
+        "RT-15",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://arxiv.org/abs/2310.02446"
+      ],
+      "yasatacagi_sorunlar": [
+        "İngilizce ağırlıklı eğitilmiş küçük koruma modelleri Türkçe veya karışık dilli iş kalemlerindeki gizli talimatları daha az yakalayabilir; kurum bunu ölçmeden güvenir.",
+        "Yanlış pozitifler Türkçe teknik metinde meşru işleri engelleyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-005",
+        "N-K23-009",
+        "N-K09-014"
+      ],
+      "ornek_araclar": [
+        "Meta Prompt Guard",
+        "Lakera Guard",
+        "Azure Prompt Shields",
+        "Llama Guard"
+      ],
+      "erken_sinyal": "Kurum Türkçe saldırı setinde tespit oranının İngilizce setten düşük çıkması.",
+      "azaltma": "Türkçe istem enjeksiyonu test seti oluşturma, korumaları dil başına ayrı ölçme, dile bağımsız yapısal kontrolleri önceliklendirme."
+    },
+    {
+      "id": "RK-163",
+      "yetenek_sinifi": "Y-26",
+      "kalip": "Yapısal çözümsüzlük: 'ölümcül üçlü'",
+      "aciklama": "Simon Willison, özel veriye erişim, güvenilmeyen içerik ve dışarıyla iletişim yeteneklerinin aynı ajanda birleşmesini 'ölümcül üçlü' olarak tanımladı; Google DeepMind'ın CaMeL çalışması da istem enjeksiyonuna karşı sınıflandırıcı yerine tasarım düzeyinde (kontrol/veri akışı ayrımı) savunma önerdi.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/",
+        "https://arxiv.org/abs/2503.18813"
+      ],
+      "yasatacagi_sorunlar": [
+        "İş kalemi okuyan, kaynak koda erişen ve PR/yorum yazabilen tek bir ajan rolü bu üçlüyü doğal olarak taşır; hiçbir filtre bunu tamamen kapatmaz.",
+        "Onaylı araç kataloğu araç bazında değerlendirilip birleşim riski hesaplanmazsa zararsız araçların kombinasyonu tehlikeli olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-005",
+        "N-K12-002",
+        "N-K10-008"
+      ],
+      "ornek_araclar": [
+        "Tüm araç kullanan ajanlar",
+        "MCP istemcileri",
+        "Tarayıcı ajanları"
+      ],
+      "erken_sinyal": "Rol başına araç setinde üç yeteneğin birlikte bulunması.",
+      "azaltma": "Rol tasarımında üçlüden en az birini kaldırma, güvenilmeyen içerik okuyan ajanın çıktısını yalnız yapılandırılmış veriye indirgeme, dış iletişimi insan onayına bağlama."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 66,
+    "yuksek": 11,
+    "kritik": 1,
+    "dusuk": 54
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 12,
+    "RT-08": 11,
+    "RT-03": 10,
+    "RT-10": 7,
+    "RT-07": 6,
+    "RT-01": 5,
+    "RT-06": 5,
+    "RT-15": 4,
+    "RT-02": 3,
+    "RT-14": 3,
+    "RT-05": 2,
+    "RT-12": 2,
+    "RT-04": 1,
+    "RT-17": 1,
+    "RT-13": 1
+  }
+}

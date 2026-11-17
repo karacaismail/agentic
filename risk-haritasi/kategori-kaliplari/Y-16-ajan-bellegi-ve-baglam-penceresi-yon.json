@@ -1,0 +1,163 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-16",
+    "ad": "Ajan belleği ve bağlam penceresi yönetimi (seçici yükleme, özetleme, önbellekleme, proje izolasyonu)",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-123",
+      "yetenek_sinifi": "Y-16",
+      "kalip": "Bağlam çürümesi: uzun bağlamda kalite kaybı",
+      "aciklama": "Chroma'nın 18 modeli değerlendirdiği 'Context Rot' raporu, basit görevlerde bile girdi uzunluğu arttıkça başarımın düzensiz biçimde düştüğünü gösterdi; 'Lost in the Middle' ve NoLiMa çalışmaları da bağlam ortasındaki ve sözcük eşleşmesi olmayan bilginin zayıf kullanıldığını buldu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://research.trychroma.com/context-rot",
+        "https://arxiv.org/abs/2307.03172",
+        "https://arxiv.org/abs/2502.05167"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajana 'ne olur ne olmaz' diye tüm kural, karar kaydı ve kod bağlamı yüklenirse kritik kısıtlar gözden kaçar ve maliyet artar.",
+        "Uzun bağlam penceresi ilanı, gerçekte kullanılabilir bağlamın küçük olduğunu gizler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-007",
+        "N-K14-008",
+        "N-K10-009"
+      ],
+      "ornek_araclar": [
+        "Uzun bağlamlı modeller",
+        "Claude Code otomatik özetleme",
+        "LangGraph bellek",
+        "Letta"
+      ],
+      "erken_sinyal": "Bağlam boyutu arttıkça görev başarısının düşmesi; ajanın açıkça verilen kısıtı ihlal etmesi.",
+      "azaltma": "Seçici bağlam yükleme ve bütçe, kritik kısıtların istemin başına/sonuna konması, bağlam boyutu–başarı ilişkisinin kurum setinde ölçülmesi."
+    },
+    {
+      "id": "RK-124",
+      "yetenek_sinifi": "Y-16",
+      "kalip": "Bellek zehirlenmesiyle kalıcı ele geçirme",
+      "aciklama": "Johann Rehberger, ChatGPT macOS uygulamasında dolaylı istem enjeksiyonuyla uzun süreli belleğe casus talimat yerleştirilip sonraki tüm oturumlardan sürekli veri sızdırılabildiğini gösterdi (SpAIware, Eylül 2024). MINJA yalnız sorgu etkileşimiyle ajan belleğine kötü kayıt enjekte edilebildiğini, AgentPoison ise bellek/bilgi tabanı zehirlenmesini gösterdi.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://embracethered.com/blog/posts/2024/chatgpt-macos-app-persistent-data-exfiltration/",
+        "https://arxiv.org/abs/2503.03704",
+        "https://arxiv.org/abs/2407.12784"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan belleğine dış içerikten yazılan tek bir 'ders', sonraki tüm görevlerde güvensiz davranışı kalıcılaştırır.",
+        "Bellek içeriği sürümlü ve denetlenebilir değilse zehirlenmenin ne zaman başladığı bulunamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-005",
+        "N-K14-006",
+        "N-K11-009"
+      ],
+      "ornek_araclar": [
+        "ChatGPT Memory",
+        "mem0",
+        "Letta",
+        "LangMem"
+      ],
+      "erken_sinyal": "Bellekte talimat biçimli kayıtlar; bellek güncellemesinin dış içerik okumasından hemen sonra yapılması.",
+      "azaltma": "Belleğe yazmanın yalnız onaylı yoldan yapılması, bellek kayıtlarında köken ve sürüm, dış içerikten doğrudan kalıcı yazmanın yasaklanması."
+    },
+    {
+      "id": "RK-125",
+      "yetenek_sinifi": "Y-16",
+      "kalip": "Bellek servislerinde yetkisiz erişim ve projeler arası karışma",
+      "aciklama": "mem0 sunucusunda bellek yönetimi, oluşturma ve silme API'leri için kimlik doğrulama ve yetkilendirme eksikliği kaydedildi (CVE-2026-31240 yüksek, CVE-2026-31241/31245). n8n'de JS görev çalıştırıcısında kiracılar arası modül önbelleği zehirlenmesi bildirildi.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-jfv9-68m5-gjjr",
+        "https://github.com/advisories/GHSA-9cmh-xcqm-5hqr"
+      ],
+      "yasatacagi_sorunlar": [
+        "Paylaşılan bellek servisi kullanan ekiplerde bir projenin ajanı başka projenin belleğini okuyabilir, değiştirebilir veya silebilir.",
+        "Proje izolasyonu yalnız istemci tarafında kullanıcı kimliği parametresiyle yapılırsa kolayca aşılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-007",
+        "N-K14-006",
+        "N-K24-001"
+      ],
+      "ornek_araclar": [
+        "mem0",
+        "Zep",
+        "Letta",
+        "LangGraph store"
+      ],
+      "erken_sinyal": "Bellek API'sine kimliksiz erişim; bir projenin belleğinde başka projeye ait içerik.",
+      "azaltma": "Proje başına ayrı bellek deposu, sunucu tarafında zorunlu kimlik doğrulama ve kapsam denetimi, bellek içeriğinin veri sınıfı olarak yönetimi."
+    },
+    {
+      "id": "RK-126",
+      "yetenek_sinifi": "Y-16",
+      "kalip": "İstem önbelleği paylaşımıyla zamanlama yan kanalı",
+      "aciklama": "İstem önbelleği denetimi, yedi API sağlayıcısında kullanıcılar arası küresel önbellek paylaşımı tespit etti; bu, yanıt süresinden başka kullanıcıların istemlerine dair bilgi çıkarılmasına imkân verir. Anthropic belgeleri, önbelleğin çalışma alanı düzeyinde yalıtıldığını, bazı bulut dağıtımlarında ise kuruluş düzeyinde olduğunu belirtir.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2502.07776",
+        "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tüm ekiplerin aynı çalışma alanı/kuruluşu kullandığı kurulumda, önbelleğe alınmış sistem istemleri ve bağlam önekleri ekipler arasında yan kanal oluşturabilir.",
+        "Maliyet için önbelleği agresif paylaşmak proje izolasyonu gereksinimiyle çatışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-007",
+        "N-K09-007",
+        "N-K14-008"
+      ],
+      "ornek_araclar": [
+        "OpenAI prompt caching",
+        "Anthropic prompt caching",
+        "vLLM prefix caching",
+        "Amazon Bedrock prompt caching"
+      ],
+      "erken_sinyal": "Sağlayıcının önbellek kapsamı belgelerinde değişiklik; ekipler arası ortak önek kullanımı.",
+      "azaltma": "Hassas projeler için ayrı çalışma alanı, önbellek kapsamının sözleşmede yazılı olması, kendi barındırılan sunumda önek önbelleğinin kiracı başına ayrılması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 25,
+    "yuksek": 2,
+    "dusuk": 43
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 7,
+    "RT-03": 5,
+    "RT-02": 4,
+    "RT-10": 4,
+    "RT-08": 4,
+    "RT-13": 1,
+    "RT-04": 1,
+    "RT-14": 1,
+    "RT-17": 1,
+    "RT-06": 1,
+    "RT-12": 1
+  }
+}

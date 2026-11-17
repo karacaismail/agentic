@@ -1,0 +1,2410 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-34",
+    "ad": "Yayın hattı (ortam terfisi, kademeli yayın, özellik bayrağı, geri alma)",
+    "grup": "Teslim hattı ve iş yönetimi",
+    "cozdugu_sorun": "Kararlılık kaybı; ajan değişikliğinin üretimde geri alınamaması.",
+    "ne_zaman_zorunlu": "Üretim ortamına çıkan her üründe."
+  },
+  "arac_sayisi": 125,
+  "tur_dagilimi": {
+    "ticari-saas": 17,
+    "acik-kaynak": 65,
+    "acik-cekirdek": 17,
+    "bulut-hizmeti": 8,
+    "protokol-standart": 4,
+    "ticari-yazilim": 5,
+    "platform": 2,
+    "kutuphane": 7
+  },
+  "araclar": [
+    {
+      "id": "AR-0127",
+      "ad": "GitHub Actions (merge queue ile)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (self-hosted runner seçeneği)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/actions",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI/CD iş akışları ve zorunlu kontroller; merge queue birleşim öncesi güncel ana dalla birleşik revizyonu yeniden test eder, sonuç SHA'ya bağlı.",
+      "sinirlar": "Jenkins de kullanılıyorsa sahiplik tek sisteme yazılmalı (kaynak); barındırılan runner'larda kod GitHub altyapısında çalışır. Barındırılan koşucu dakika maliyeti; self-host koşucu güvenliği ve izolasyonu kullanıcı sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-029",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K15-004",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0129",
+      "ad": "Jenkins",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.jenkins.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Self-host otomasyon sunucusu; pipeline-as-code, dağıtık ajanlar, geniş eklenti ekosistemi; kurumun mevcut yayın hattında anılıyor.",
+      "sinirlar": "Eklenti ekosistemi düzenli güvenlik yaması takibi ister; GitHub Actions ile birlikteyse sahiplik tek sisteme yazılmalı (kaynak). Eklenti güvenlik geçmişi ve bakım yükü yüksek.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-003",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0568",
+      "ad": "GitLab (Plan: epikler, iterasyonlar, panolar, değer akışı analitiği)",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (CE), ticari (EE)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://about.gitlab.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod, CI ve iş takibini tek platformda birleştirir: çok seviyeli epikler, iş bağlantıları (blocks), iterasyonlar, WIP limitli panolar, değer akışı analitiği ve DORA metrikleri.",
+      "sinirlar": "Çok seviyeli epik, WIP limiti ve DORA gibi özellikler Premium/Ultimate katmanlarında; SAFe'e özgü PI planlama yok. Merge trains ve gelişmiş onay kuralları Premium/Ultimate; self-host işletim yükü yüksek.",
+      "ihtiyaclar": [
+        "N-K02-004",
+        "N-K02-011",
+        "N-K05-005",
+        "N-K06-001",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K08-003",
+        "N-K19-007",
+        "N-K23-006",
+        "N-K24-002",
+        "N-K24-008",
+        "N-K26-001",
+        "N-K26-002",
+        "N-K26-004",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0705",
+      "ad": "AWS AppConfig",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürümlü yapılandırma profilleri ve özellik bayrakları; doğrulayıcılar, kademeli dağıtım stratejileri ve alarmla otomatik geri alma sağlar.",
+      "sinirlar": "AWS'ye bağlı; kurum içi kurulum yok.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K11-006",
+        "N-K16-003",
+        "N-K20-001",
+        "N-K33-005"
+      ]
+    },
+    {
+      "id": "AR-0706",
+      "ad": "Azure App Configuration",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Merkezi anahtar-değer yapılandırması, etiketler, değiştirilemez anlık görüntüler (snapshot) ve özellik bayrakları sunar.",
+      "sinirlar": "Azure'a bağlı; politika mantığı içermez.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K11-006",
+        "N-K13-009",
+        "N-K24-001",
+        "N-K33-005"
+      ]
+    },
+    {
+      "id": "AR-0707",
+      "ad": "OpenFeature",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://openfeature.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sağlayıcıdan bağımsız özellik bayrağı API/SDK standardı ve flagd referans arka ucu; ajan yeteneklerini, otonomi kademelerini ve ekip/model bazlı çalışmayı çalışma zamanında kapatan kill switch'ler için kullanılır.",
+      "sinirlar": "Standarttır; bayrak deposu/sağlayıcı ayrıca gerekir. Bayrak değerlendirmesini ajan kodunun çağırması gerekir; zorlayıcı sandbox değildir. Yalnız arayüz standardı; bayrak yönetim arka ucu ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003",
+        "N-K16-007",
+        "N-K17-007",
+        "N-K33-005",
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-0708",
+      "ad": "flagd",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://flagd.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dosya, HTTP veya Kubernetes CRD'den bayrak tanımı okuyan OpenFeature uyumlu hafif bayrak daemon'u; Git üzerinden sürümlü acil durdurma ve otonomi seviyesi bayrakları.",
+      "sinirlar": "Yönetim arayüzü ve onay akışı yok; git/PR süreci gerekir. Yönetim arayüzü ve onay iş akışı yok.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-0709",
+      "ad": "Unleash",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (açık kaynak sürüm); kurumsal ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.getunleash.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ortam bazlı özellik bayrakları, kademeli yayın stratejileri, değişiklik talebi onayları (kurumsal) ve denetim kaydı sunan bayrak yönetimi platformu.",
+      "sinirlar": "Onay akışı gibi özellikler kurumsal sürümde; AGPL yükümlülükleri değerlendirilmeli. Değişiklik onayı gibi yönetişim özellikleri ücretli sürümde. Değişiklik talebi/onay gibi yönetişim özellikleri ücretli; OSS AGPL.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003",
+        "N-K16-007",
+        "N-K17-007",
+        "N-K19-003",
+        "N-K33-005",
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-0710",
+      "ad": "Flagsmith",
+      "tur": "acik-cekirdek",
+      "lisans": "BSD-3-Clause; kurumsal ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.flagsmith.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özellik bayrakları, uzak yapılandırma ve segmentler; self-host edilebilir; kurumsal sürümde onay akışları ve denetim kaydı.",
+      "sinirlar": "Gelişmiş RBAC/onay kurumsal sürümde. Gelişmiş yönetişim ücretli. Bazı kurumsal özellikler ücretli.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-0711",
+      "ad": "GrowthBook",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT + GrowthBook Enterprise License",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.growthbook.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özellik bayrakları ve kendi veri ambarınız üzerinde çalışan istatistiksel deney (A/B) motoru; ajan kaynaklı değişikliğin etki ölçümüne uygun.",
+      "sinirlar": "Deney odaklı; yapılandırma politikası deposu olarak sınırlı. Kurumsal özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K08-005",
+        "N-K17-007",
+        "N-K23-013"
+      ]
+    },
+    {
+      "id": "AR-0712",
+      "ad": "Flipt",
+      "tur": "acik-cekirdek",
+      "lisans": "FCL-1.0-MIT (Fair Core License, v2)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.flipt.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bayrak tanımlarını git deposunda tutan (git-native) özellik bayrağı çözümü; değişiklikler dal/PR ile onaylanır, sürümler commit ile sabitlenir.",
+      "sinirlar": "v2 lisansı FCL (iki yıl sonra MIT'e dönüşen kaynak-erişilebilir); bazı özellikler ücretli. Fair Core License OSI onaylı değil (iki yıl sonra MIT); Pro özellikleri ücretli.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K11-006",
+        "N-K11-007",
+        "N-K16-003",
+        "N-K16-005",
+        "N-K33-005"
+      ]
+    },
+    {
+      "id": "AR-0713",
+      "ad": "LaunchDarkly (AgentControl / AI Configs)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://launchdarkly.com/docs/home/ai-configs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurumsal özellik bayrakları; guarded rollouts ile trafiği kademeli artırırken metrik gerilemesinde duraklatma ve isteğe bağlı otomatik geri alma; onay iş akışları ve denetim kaydı.",
+      "sinirlar": "Pahalı SaaS; istem/talimat içeriği üçüncü taraf bulutta tutulur. SaaS ve maliyet. Ticari SaaS; maliyet ve veri yerleşimi kısıtları.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K06-010",
+        "N-K08-005",
+        "N-K09-012",
+        "N-K16-003",
+        "N-K16-005",
+        "N-K16-007",
+        "N-K17-007",
+        "N-K33-005",
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-0714",
+      "ad": "ConfigCat",
+      "tur": "ticari-saas",
+      "lisans": "ticari (SDK'lar açık kaynak)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://configcat.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özellik bayrakları ve uzaktan yapılandırma; hedefleme kuralları ve denetim kaydı sunar.",
+      "sinirlar": "Yalnız SaaS; politika/kural deposu olarak sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "AR-1063",
+      "ad": "Atlas",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (çekirdek); Pro/Cloud ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://atlasgo.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Şemayı kod olarak yönetir; göç dosyalarını yıkıcı, geriye uyumsuz veya veri bağımlı değişiklikler için lint eder ve göç testleri çalıştırır.",
+      "sinirlar": "Bazı analizörler ve bulut özellikleri ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K05-024",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1344",
+      "ad": "JFrog Artifactory",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://jfrog.com/artifactory/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Evrensel artefakt deposu; build info ile köken, depolar arası terfi (promotion), saklama politikaları.",
+      "sinirlar": "Ticari lisans ve maliyet; yüksek erişilebilirlik kurumsal sürümde.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K13-011",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1354",
+      "ad": "lakeFS",
+      "tur": "acik-cekirdek",
+      "lisans": "BSL-1.1",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://lakefs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nesne deposu üzerinde Git benzeri dal/commit ile veri anlık görüntüsü; bir koşunun girdilerini sabit bir commit'e bağlayarak yeniden üretilebilirlik.",
+      "sinirlar": "BSL: değiştirilmiş sürümün üretimde kullanımı kısıtlı; veri gölü odaklı.",
+      "ihtiyaclar": [
+        "N-K13-011",
+        "N-K19-004",
+        "N-K19-005",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-1381",
+      "ad": "GitHub (merge queue ve rulesets)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birleştirme kuyruğu PR'ı güncel ana dal ve önündeki PR'larla birleşik geçici dalda yeniden test eder; kural setleri zorunlu kontrol, imzalı commit, force-push/silme yasağı ve CODEOWNERS onayı uygular.",
+      "sinirlar": "Çakışma tahmini yok; kuyruk ve kural özellikleri plan/sürüme göre değişir; GHES'te özellik gecikmesi.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K06-001",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-007",
+        "N-K08-003",
+        "N-K22-004",
+        "N-K24-008"
+      ]
+    },
+    {
+      "id": "AR-1389",
+      "ad": "Tekton Pipelines",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://tekton.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes-yerli pipeline CRD'leri; Chains ile köken kanıtı üretimi.",
+      "sinirlar": "Düşük seviyeli yapı taşı; kullanıcı arayüzü ve deneyim sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1395",
+      "ad": "Harness (CD ve Feature Management)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.harness.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürekli teslim, dağıtım sonrası metrik doğrulamasıyla otomatik geri alma, onay aşamaları ve özellik bayrakları.",
+      "sinirlar": "Ticari ve karmaşık; modül bazlı lisans.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K16-003"
+      ]
+    },
+    {
+      "id": "AR-1397",
+      "ad": "Spinnaker",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://spinnaker.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok bulutlu sürekli teslim; Kayenta ile otomatik kanarya analizi, manuel onay aşamaları ve ortam pipeline'ları.",
+      "sinirlar": "Çok servisli ağır mimari; işletim maliyeti yüksek.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K06-010"
+      ]
+    },
+    {
+      "id": "AR-1398",
+      "ad": "Octopus Deploy",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://octopus.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürüm ve ortam terfisi (lifecycle), onaylar, runbook'lar ve denetim kaydı; veritabanı göç adımlarını ortamlar boyunca sıralar.",
+      "sinirlar": "Ticari lisans.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1415",
+      "ad": "Argo CD",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://argo-cd.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git'teki beyanı kümeyle eşitleyen GitOps sürekli teslim; RBAC, senkron pencereleri, dağıtım geçmişi ve geri alma; ajanın üretime doğrudan yazma kimliği olmadan terfiyi Git üzerinden yapar.",
+      "sinirlar": "Kubernetes'e özgü; çoklu küme ölçeğinde işletim ayarı gerekir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004"
+      ]
+    },
+    {
+      "id": "AR-1416",
+      "ad": "Flux",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://fluxcd.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitOps Toolkit: Kustomize/Helm kontrolcüleri, OCI artefakt kaynakları, imzalı kaynak doğrulama.",
+      "sinirlar": "Yerleşik kullanıcı arayüzü yok.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004"
+      ]
+    },
+    {
+      "id": "AR-1417",
+      "ad": "Argo Rollouts",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://argo-rollouts.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kanarya ve mavi-yeşil dağıtım; AnalysisTemplate ile Prometheus/Datadog vb. metriklere göre otomatik terfi, iptal (abort) ve geri alma.",
+      "sinirlar": "Kubernetes'e özgü; ağırlıklı trafik bölme için servis ağı veya ingress entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-008",
+        "N-K06-010",
+        "N-K08-005",
+        "N-K16-003",
+        "N-K33-005"
+      ]
+    },
+    {
+      "id": "AR-1418",
+      "ad": "Flagger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.flagger.app/main",
+      "olgunluk": "olgun",
+      "ne_saglar": "Istio, Linkerd, Gateway API vb. ile otomatik kanarya, A/B ve mavi-yeşil; metrik eşiği aşılınca otomatik geri alma.",
+      "sinirlar": "Kubernetes'e özgü; metrik sağlayıcı ve ağ katmanı gerektirir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K06-010",
+        "N-K08-005"
+      ]
+    },
+    {
+      "id": "AR-1419",
+      "ad": "Kargo",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Kargo Enterprise ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://kargo.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Artefaktları tanımlı aşamalar (ör. test → hazırlık → üretim) arasında doğrulama kapıları, manuel onay ve denetim iziyle terfi ettirir; Argo CD ile birlikte çalışır.",
+      "sinirlar": "Kubernetes/Argo odaklı; kurumsal özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004"
+      ]
+    },
+    {
+      "id": "AR-1420",
+      "ad": "GO Feature Flag",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://gofeatureflag.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dosya, S3 veya Git'ten bayrak okuyan hafif self-host çözüm; OpenFeature sağlayıcıları.",
+      "sinirlar": "Küçük bakımcı ekibi.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003"
+      ]
+    },
+    {
+      "id": "AR-1421",
+      "ad": "Statsig",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.statsig.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özellik bayrakları, deneyler ve ürün analitiği tek platformda; her yayını metrik etkisiyle ölçme.",
+      "sinirlar": "Sitesi Amplitude ailesinin parçası olduğunu belirtiyor; sahiplik değişiklikleri ve SaaS bağımlılığı izlenmeli.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K08-005",
+        "N-K23-013"
+      ]
+    },
+    {
+      "id": "AR-1489",
+      "ad": "GitOps Promoter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://gitops-promoter.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ortam dalları arasında (dev→staging→prod) GitOps terfisini çekme istekleri ve 'commit status' kapılarıyla yöneten Kubernetes denetleyicisi; terfi zincirini bildirimsel tek tanımda toplar.",
+      "sinirlar": "Argo Labs projesi (henüz Argo çekirdeğinin parçası değil); Kubernetes/GitOps mimarisi gerektirir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007"
+      ]
+    },
+    {
+      "id": "AR-1490",
+      "ad": "FeatBit",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.featbit.co/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Self-host özellik bayrağı platformu: hedefleme/segmentler, kademeli yüzde yayını, deney (A/B) ve anında kapatma (kill switch) ile ekip ekip yaygınlaştırma ve acil durdurmayı destekler.",
+      "sinirlar": "Bazı kurumsal özellikler (SSO, gelişmiş denetim) ücretli sürümdedir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K23-013",
+        "N-K24-010"
+      ]
+    },
+    {
+      "id": "AR-1491",
+      "ad": "Flagr",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openflagr.github.io/flagr",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özellik bayrağı, A/B testi ve dinamik yapılandırma mikroservisi; kısıt tabanlı segmentler, dağılımlar ve değerlendirme kayıtlarını dışa aktarma sunar.",
+      "sinirlar": "Arayüzü sade; denetim/onay iş akışları sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K23-013",
+        "N-K24-010"
+      ]
+    },
+    {
+      "id": "AR-1492",
+      "ad": "Featurevisor",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://featurevisor.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Özellik bayraklarını, deneyleri ve uzaktan yapılandırmayı Git deposunda YAML olarak tutup çekme isteğiyle incelenen, CI'da derlenip statik JSON olarak dağıtılan GitOps tabanlı yönetim aracı.",
+      "sinirlar": "Sunucu tarafı canlı hedefleme ve gerçek zamanlı değişiklik için ek altyapı gerekir.",
+      "ihtiyaclar": [
+        "N-K01-010",
+        "N-K06-008",
+        "N-K11-001",
+        "N-K20-001"
+      ]
+    },
+    {
+      "id": "AR-1493",
+      "ad": "Superposition",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://juspay.io/open-source/superposition",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bağlama (ör. ekip, bölge, müşteri) göre katmanlı geçersiz kılmalarla yapılandırma çözen, tip güvenli şemalı ve deney desteği olan yapılandırma yönetim sistemi.",
+      "sinirlar": "Topluluk küçük; Rust tabanlı sunucu ve istemci SDK entegrasyonu gerektirir.",
+      "ihtiyaclar": [
+        "N-K11-003",
+        "N-K11-006",
+        "N-K20-001",
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "AR-1494",
+      "ad": "Piranha",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/uber/piranha",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanımdan kalkmış özellik bayraklarına bağlı ölü kodu kural tabanlı (tree-sitter + kurallar grafiği) otomatik yeniden düzenlemeyle temizleyen araç; Java, Kotlin, Swift, Go, TypeScript, Python destekler.",
+      "sinirlar": "Kurallar bayrak API'sine göre yazılmalıdır; son güncelleme Nisan 2026'dadır.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K06-008",
+        "N-K23-014",
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-1535",
+      "ad": "Connaisseur",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://sse-secure-systems.github.io/connaisseur/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes'e dağıtılan konteyner imajlarının imzalarını (Cosign, Notary) kabul denetleyicisi olarak doğrulayan ve imzasız imajları reddeden araç.",
+      "sinirlar": "Yalnız Kubernetes; imza anahtar/kimlik yönetimi ayrıca kurulmalıdır.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K15-004",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-1723",
+      "ad": "KubeVela",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kubevela.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Open Application Model tabanlı uygulama teslim platformu; çoklu ortam/küme iş akışları, manuel onay (suspend) adımları, kanarya ve politika ile terfi zinciri tanımlanır.",
+      "sinirlar": "Kendi soyutlama modelini öğrenmeyi gerektirir; topluluk etkinliği yavaşlamış olabilir.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "AR-1724",
+      "ad": "OpenKruise Rollouts",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openkruise.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Deployment, StatefulSet ve CloneSet için adım adım kanarya, mavi-yeşil ve A/B yayın; adımlar arasında manuel onay ve trafik yönlendirme (Gateway API, Istio).",
+      "sinirlar": "Kubernetes'e özgü; metrik analizine dayalı otomatik geri alma Argo Rollouts/Flagger kadar zengin değil.",
+      "ihtiyaclar": [
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "AR-1726",
+      "ad": "Carvel",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://carvel.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ytt (YAML yapısını bilen şablonlama ve katmanlama), kapp (kaynakları uygulama grubu olarak fark önizlemeli dağıtma), vendir, imgpkg ve kapp-controller'dan oluşan araç seti; ortak ve ekip özel yapılandırmaları katmanlamaya uygun.",
+      "sinirlar": "Birden çok aracı öğrenmek gerekir; Broadcom sonrası bakım hızı izlenmeli.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K11-003",
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "AR-1732",
+      "ad": "SchemaHero",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://schemahero.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Veritabanı tablo şemasını Kubernetes kaynağı olarak bildirimsel tanımlar; hedef şemaya göre göç planı üretir ve onaydan sonra uygular.",
+      "sinirlar": "Desteklenen veritabanı ve değişiklik türleri sınırlı; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1733",
+      "ad": "Atlantis",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.runatlantis.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform/OpenTofu plan ve apply işlemlerini PR yorum komutlarıyla yürütür; apply öncesi onay şartı, dizin kilitleme ve plan çıktısının PR'a yazılması ile altyapı değişikliklerini insan onayına bağlar.",
+      "sinirlar": "Altyapı-kod iş akışına özgü; bulut kimlik bilgileri Atlantis sunucusunda bulunur, iyi korunmalı.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K17-002",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-1735",
+      "ad": "Score",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://score.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İş yükünü ve ihtiyaç duyduğu kaynakları platformdan bağımsız tanımlayan şartname; score-compose ve score-k8s ile aynı tanımdan Docker Compose veya Kubernetes çıktısı üretilir.",
+      "sinirlar": "Sınırlı araç ekosistemi; karmaşık dağıtım senaryolarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-1736",
+      "ad": "OpenChoreo",
+      "tur": "platform",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openchoreo.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Kubernetes üzerinde iç geliştirici platformu: proje/bileşen soyutlamaları, ortam terfi zinciri, yerleşik gözlem ve ağ politikalarıyla platform ekibinin paylaşılan hizmet sunmasını sağlar.",
+      "sinirlar": "Erken aşama; kendi soyutlamalarına bağımlılık yaratır.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K16-008",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-1739",
+      "ad": "PipeCD",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://pipecd.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes, ECS, Lambda, Cloud Run ve Terraform için GitOps tabanlı sürekli teslim; plan önizleme, kanarya/mavi-yeşil, metrik analizi ile otomatik geri alma ve manuel onay aşamaları.",
+      "sinirlar": "Topluluk görece küçük; eklenti mimarisi yeniden yapılanıyor.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "AR-1747",
+      "ad": "OpenGitOps",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://opengitops.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitOps'un dört ilkesini (bildirimsel, sürümlü ve değiştirilemez, otomatik çekilen, sürekli uzlaştırılan) satıcıdan bağımsız tanımlayan belge; ortam terfisi ve yapılandırma yönetimi için ortak dil.",
+      "sinirlar": "İlke belgesidir, araç değildir; güncellenmesi seyrek.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K11-001"
+      ]
+    },
+    {
+      "id": "AR-1830",
+      "ad": "JReleaser",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://jreleaser.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java ve diğer projeler için sürüm yayınlama otomasyonu: değişiklik günlüğü, paketleme, imzalama (GPG, Cosign), SBOM, SLSA köken ve dağıtım kanallarına yayın.",
+      "sinirlar": "Kütüphane/CLI yayını odaklı; ortam terfisi yapmaz.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-1920",
+      "ad": "Kratix",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kratix.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "'Promise' soyutlamasıyla platform ekibinin self-servis hizmetler (ör. ajan çalışma alanı, model uç noktası) tanımlayıp birden çok kümeye sunduğu Kubernetes tabanlı platform çerçevesi; paylaşılan ajan platformunun sahiplik modeline uygun.",
+      "sinirlar": "Kubernetes ve GitOps bilgisi ister; ticari destek tek şirkette.",
+      "ihtiyaclar": [
+        "N-K16-008",
+        "N-K24-004",
+        "N-K24-005",
+        "N-K34-005"
+      ]
+    },
+    {
+      "id": "AR-1924",
+      "ad": "Flyway (Community)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://documentation.red-gate.com/flyway",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürümlü SQL/Java göç betikleriyle şema değişikliği; sağlama toplamı doğrulaması, taban çizgisi ve CI entegrasyonu.",
+      "sinirlar": "Geri alma (undo) ve gelişmiş özellikler ticari sürümlerde.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1925",
+      "ad": "Liquibase",
+      "tur": "acik-cekirdek",
+      "lisans": "FSL-1.1-ALv2 (5.0 ve sonrası; iki yıl sonra Apache-2.0)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.liquibase.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "XML/YAML/SQL değişiklik günlükleriyle veritabanı şema göçü, rollback tanımları, önkoşullar ve fark (diff) alma.",
+      "sinirlar": "5.0 ile Functional Source License'a geçti (açık kaynak tanımı dışında); Keycloak gibi bağımlı projelerde lisans kaygısı tartışıldı.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1926",
+      "ad": "pgroll",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pgroll.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL'de genişlet/daralt (expand/contract) desenini otomatikleştirerek eski ve yeni şema sürümlerini aynı anda sunan, anında geri alınabilen sıfır kesintili göç aracı.",
+      "sinirlar": "Yalnız PostgreSQL; bazı DDL işlemleri desteklenmez.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1927",
+      "ad": "gh-ost",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/github/gh-ost",
+      "olgunluk": "olgun",
+      "ne_saglar": "MySQL için tetikleyicisiz çevrim içi şema göçü; ikili log üzerinden kopyalama, duraklatma/kısma ve kesme anının denetimi.",
+      "sinirlar": "Yalnız MySQL; bazı bulut yönetilen MySQL sürümlerinde kısıtlar.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-1945",
+      "ad": "Radius",
+      "tur": "platform",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://radapp.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Uygulamaları ve bağımlı kaynaklarını (veritabanı, kuyruk vb.) platformdan bağımsız tanımlayıp dağıtan ve bunlardan uygulama grafiği üreten bulut-yerel uygulama platformu; platform ekibi 'recipe'lerle altyapı standartlarını belirler.",
+      "sinirlar": "Sandbox aşamasında; ekosistem küçük.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K06-006",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-1948",
+      "ad": "ko",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ko.build",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go uygulamalarını Dockerfile olmadan, yeniden üretilebilir ve minimal taban imajlı OCI imajlarına derler; varsayılan olarak SBOM üretir ve Kubernetes YAML'ına imaj referansı yerleştirir.",
+      "sinirlar": "Yalnız Go uygulamaları.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1964",
+      "ad": "AWS CodePipeline",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/codepipeline/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kaynak–derleme–test–dağıtım aşamalarını tanımlayan yönetilen CI/CD hattı; manuel onay eylemleri, aşama koşulları (conditions) ile otomatik geri alma ve CodeDeploy ile kademeli dağıtım sağlar.",
+      "sinirlar": "AWS hedeflerine odaklı; karmaşık çok depolu akışlarda ifade gücü sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-1991",
+      "ad": "Azure Pipelines",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/devops/pipelines",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML tabanlı çok aşamalı CI/CD; ortamlar (environments) üzerinde onaylar ve kontroller (manuel onay, iş saati, Azure Monitor sorgusu, dal koruması) ile terfi zinciri tanımlar.",
+      "sinirlar": "Yeni özellik yatırımı GitHub Actions'a kayıyor; kurum içi Azure DevOps Server sürümü de mevcut.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2001",
+      "ad": "Azure Deployment Environments",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/deployment-environments/overview-what-is-azure-deployment-environments",
+      "olgunluk": "olgun",
+      "ne_saglar": "Platform ekibinin onayladığı IaC şablonlarından geliştirici/ajan için self-servis, süre sınırlı geçici ortamlar oluşturur; maliyet ve erişim proje bazında yönetilir.",
+      "sinirlar": "Azure kaynaklarıyla sınırlı; test verisi yönetimi içermez.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2021",
+      "ad": "GitHub Environments (dağıtım koruma kuralları)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ortam bazında zorunlu gözden geçirenler, bekleme süresi, dal/etiket kısıtı, özel koruma kuralı (GitHub App) ve ortama özgü sırlar; kendi onayını engelleme seçeneği.",
+      "sinirlar": "Karmaşık terfi zinciri için ek araç gerekebilir; özel depolarda plan kısıtları var.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-004",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2024",
+      "ad": "Google Cloud Deploy",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/deploy",
+      "olgunluk": "olgun",
+      "ne_saglar": "GKE, Cloud Run ve GKE Enterprise hedefleri için bildirimsel teslim hattı; ortam terfi sırası, onay gerektiren hedefler, kanarya/mavi-yeşil dağıtım, doğrulama işleri ve tek tıkla geri alma.",
+      "sinirlar": "Google Cloud hedefleriyle sınırlı; hedef dışı ortamlarda özel hedef (custom target) yazmak gerekir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K06-010",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2038",
+      "ad": "Agent Starter Pack",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "yerel"
+      ],
+      "url": "https://github.com/GoogleCloudPlatform/agent-starter-pack",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ADK/LangGraph tabanlı ajanlar için üretime hazır şablonlar: CI/CD, Terraform altyapısı, değerlendirme ve gözlemlenebilirlik iskeleti tek komutla üretilir.",
+      "sinirlar": "Google Cloud hedefli; şablonlar kurum standartlarına uyarlanmalı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K23-010",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-2048",
+      "ad": "OCI DevOps",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.oracle.com/cloud/cloud-native/devops-service/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OCI üzerinde kod deposu, derleme hattı ve dağıtım hattı; kanarya/mavi-yeşil dağıtım, manuel onay aşaması ve geri alma.",
+      "sinirlar": "OCI hedefleriyle sınırlı; ekosistem küçük.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-008",
+        "N-K17-002"
+      ]
+    },
+    {
+      "id": "AR-2064",
+      "ad": "HashiCorp Terraform (HCP Terraform / Terraform Enterprise)",
+      "tur": "acik-cekirdek",
+      "lisans": "BUSL-1.1",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.hashicorp.com/terraform",
+      "olgunluk": "olgun",
+      "ne_saglar": "Altyapıyı kod olarak sürümleyip planla/uygula döngüsüyle kurar; geçici test ortamları, ortam terfisi ve drift tespiti; HCP Terraform'da politika kontrolü ve çalışma alanı onayları.",
+      "sinirlar": "BUSL lisansı ticari kısıtlar içerir (açık alternatif OpenTofu); durum dosyası güvenliği kritik.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K13-010",
+        "N-K15-001",
+        "N-K16-005"
+      ]
+    },
+    {
+      "id": "AR-2080",
+      "ad": "ServiceNow DevOps Change Velocity",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.servicenow.com/products/devops-change-velocity.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Azure DevOps, GitHub Actions, GitLab, Jenkins gibi hatlardan iş kalemi, commit, test, kapsama ve güvenlik tarama verisini toplar; değişiklik kaydını otomatik açar ve politikaya göre otomatik onaylar veya insana yönlendirir.",
+      "sinirlar": "ITSM Pro lisansı gerektirir; değişiklik yönetimi süreci olgun kurumlar için anlamlı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K07-005",
+        "N-K17-002",
+        "N-K21-003",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-2097",
+      "ad": "Konflux",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://konflux-ci.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tekton tabanlı güvenli yazılım fabrikası: yalıtılmış derleme, SLSA köken, imzalama (Chains), Enterprise Contract politika doğrulaması ve ortam terfisiyle yayın.",
+      "sinirlar": "Kurulumu karmaşık, Kubernetes/Tekton uzmanlığı ister; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-005",
+        "N-K18-008",
+        "N-K22-007"
+      ]
+    },
+    {
+      "id": "AR-2123",
+      "ad": "Datadog Feature Flags",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/feature-flags/",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenFeature uyumlu özellik bayrakları; kademeli yayın, hedefleme ve bayrak değişikliğinin APM/hata metrikleriyle birlikte izlenmesi, gerektiğinde otomatik geri alma.",
+      "sinirlar": "Yeni ürün (Eppo satın alımı sonrası); olgun rakiplere göre sınırlı özellik.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K16-003",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-2125",
+      "ad": "Dynatrace Site Reliability Guardian",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.dynatrace.com/docs/deliver/site-reliability-guardian",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürüm doğrulaması için SLO/hedef tabanlı otomatik kalite kapısı: performans, güvenlik ve iş metriklerini dağıtım sonrası değerlendirip geçti/uyarı/kaldı kararı verir, hattı durdurur.",
+      "sinirlar": "Dynatrace verisine bağlı; eşiklerin kalibrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-023",
+        "N-K06-003",
+        "N-K06-008",
+        "N-K06-010",
+        "N-K33-003"
+      ]
+    },
+    {
+      "id": "AR-2128",
+      "ad": "Keptn (Lifecycle Toolkit)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://keptn.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes dağıtımlarına dağıtım öncesi/sonrası görev ve değerlendirme (kalite kapısı) ekler, OpenTelemetry iz ve DORA metriklerini üretir.",
+      "sinirlar": "Eski Keptn v1 arşivlendi; Lifecycle Toolkit aktif ama topluluğu küçüldü.",
+      "ihtiyaclar": [
+        "N-K06-003",
+        "N-K06-005",
+        "N-K06-010",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-2130",
+      "ad": "New Relic Change Tracking",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.newrelic.com/docs/change-tracking/overview/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtım, yapılandırma ve özellik bayrağı değişikliklerini işaretleyip önce/sonra hata oranı, gecikme ve iş metriklerini karşılaştırır; ajan kaynaklı değişikliklerin üretim etkisi izlenebilir.",
+      "sinirlar": "Değişiklik olaylarının CI/CD'den gönderilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-010",
+        "N-K08-005",
+        "N-K16-002",
+        "N-K33-016"
+      ]
+    },
+    {
+      "id": "AR-2158",
+      "ad": "Digital.ai Release",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://digital.ai/products/release/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yayın orkestrasyonu: şablonlu yayın akışları, manuel/otomatik görevler, onay kapıları, başarısız görevi atla/yeniden dene/elle devral, uyum ve denetim raporları.",
+      "sinirlar": "Kurulum ve şablon tasarımı efor ister; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K07-005",
+        "N-K17-004",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2159",
+      "ad": "Digital.ai Deploy",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://digital.ai/products/deploy/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Model tabanlı dağıtım otomasyonu: uygulama paketlerinin ortamlara tutarlı dağıtımı, geri alma ve ortam yapılandırma yönetimi.",
+      "sinirlar": "Bulut yerel GitOps araçlarına göre klasik yaklaşım.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-008",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-2165",
+      "ad": "JFrog AppTrust",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://jfrog.com/apptrust/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulama sürümlerini kanıt (test, tarama, onay, köken) ile ilişkilendirip politika-kod kapılarıyla ortamlara terfi ettiren yayın yönetişimi; imzalı kanıt deposu.",
+      "sinirlar": "Yeni ürün; JFrog platformuna bağlı.",
+      "ihtiyaclar": [
+        "N-K05-026",
+        "N-K06-005",
+        "N-K19-004",
+        "N-K22-007"
+      ]
+    },
+    {
+      "id": "AR-2191",
+      "ad": "Huawei Cloud CodeArts",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.huaweicloud.com/intl/en-us/product/devcloud.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek çatı DevSecOps: gereksinim/iş takibi (CodeArts Req), kod deposu, derleme, kod denetimi (Check), test planı, dağıtım hattı ve CodeArts Snap yapay zekâ kod asistanı.",
+      "sinirlar": "Ekosistem ve entegrasyonlar küresel rakiplerden dar; dokümantasyon kısmen Çince odaklı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-006",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-2195",
+      "ad": "CloudBees Unify",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.cloudbees.com/unify",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Jenkins, GitHub Actions ve diğer CI/CD araçlarının üzerinde DevSecOps kontrol düzlemi: birleşik görünürlük, uyum kontrolleri, kanıt toplama ve yayın yönetişimi.",
+      "sinirlar": "Yeni platform; mevcut araçlara bağlayıcı kapsamına bağlı.",
+      "ihtiyaclar": [
+        "N-K05-026",
+        "N-K06-005",
+        "N-K19-007",
+        "N-K22-007"
+      ]
+    },
+    {
+      "id": "AR-2273",
+      "ad": "OneDev",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://onedev.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git barındırma, yerleşik CI/CD, iş takibi, kod araması ve sembol gezinmesini tek Java uygulamasında birleştiren self-host DevOps sunucusu.",
+      "sinirlar": "Küçük bir çekirdek ekip tarafından geliştiriliyor; büyük kurumsal referansları sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-006",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-2277",
+      "ad": "Semaphore (Community/Enterprise Edition)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (ee/ dizini hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://semaphore.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "2025'te açık kaynaklanan CI/CD platformu; Kubernetes üzerinde self-host kurulum, paralel iş hatları, terfi (promotion) adımları ve test raporları sağlar.",
+      "sinirlar": "Self-host sürüm yeni ve topluluğu küçük; bazı kurumsal özellikler EE lisansında.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-003",
+        "N-K06-006",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2278",
+      "ad": "GoCD",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.gocd.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Değer akışı haritası (value stream map), boru hattı bağımlılıkları, ortam terfisi ve manuel onay kapıları sunan self-host sürekli teslim sunucusu.",
+      "sinirlar": "Topluluk bakımında; modern bulut yerel özellikler ve eklenti ekosistemi sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008"
+      ]
+    },
+    {
+      "id": "AR-2288",
+      "ad": "Zarf",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.zarf.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes uygulamalarını tüm bağımlılıklarıyla (imajlar, grafikler, ikili dosyalar) paketleyip internetsiz ortamlara bildirimsel olarak dağıtan araç; paket SBOM'u ve imzası üretir.",
+      "sinirlar": "Kubernetes'e özgü; paket şemasını öğrenmek gerekir.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K18-008",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-2436",
+      "ad": "Karmada",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://karmada.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çoklu bulut/çoklu küme Kubernetes orkestrasyonu: tek API ile iş yüklerini kümelere yayma, yük devri ve politika tabanlı yerleşim.",
+      "sinirlar": "Çok kümeli işletim karmaşıklığı; tek küme ortamlarında gereksiz.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K15-005",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-2507",
+      "ad": "FeatureProbe",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://featureprobe.github.io/FeatureProbe/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Özellik bayrağı yönetimi: yüzde bazlı kademeli açma, hedefleme kuralları, kill switch ve çok dilli SDK'lar.",
+      "sinirlar": "Topluluk küçük ve güncellemeler seyrek; OpenFeature uyumu kontrol edilmeli.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-2515",
+      "ad": "Zadig",
+      "tur": "acik-cekirdek",
+      "lisans": "Zadig Open Source License (Apache-2.0 + ticari kullanım koşulları)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://koderover.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut-yerel DevOps platformu: dal/değişiklik başına geçici test ortamları, iş akışları, onay düğümleri, ortam terfisi ve test entegrasyonu.",
+      "sinirlar": "Lisans ek ticari koşullar içerir; kurumsal özellikler ücretli sürümde.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2529",
+      "ad": "Bytebase",
+      "tur": "acik-cekirdek",
+      "lisans": "Community (kaynak açık) + ticari Enterprise lisansı",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.bytebase.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanı değişikliği yönetişimi: SQL inceleme kuralları, risk tabanlı onay akışları, ortamlara kademeli şema yayını, GitOps entegrasyonu ve denetim kaydı; insanlar ve ajanlar için tek değişiklik kapısı.",
+      "sinirlar": "Özellik kontrolü içeren dizinler kurumsal lisanslı; gelişmiş onay/maskeleme ücretli planlarda.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K11-007",
+        "N-K17-002",
+        "N-K18-007",
+        "N-K19-002",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-3114",
+      "ad": "fastlane",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://fastlane.tools",
+      "olgunluk": "olgun",
+      "ne_saglar": "iOS/Android derleme, imzalama, mağaza yükleme ve yerelleştirilmiş ekran görüntüsü üretimini betikleyen mobil yayın otomasyon aracı.",
+      "sinirlar": "Ruby bağımlılığı; mağaza API değişikliklerinde eklenti kırılmaları olur.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K06-005",
+        "N-K06-006"
+      ]
+    },
+    {
+      "id": "AR-3120",
+      "ad": "Drift",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://drift.simonbinder.eu/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dart/Flutter için tip güvenli SQLite kalıcılık kütüphanesi; şema dökümü ve otomatik üretilen göç testleriyle şema evrimini doğrular.",
+      "sinirlar": "Ağırlıklı olarak istemci tarafı SQLite; sunucu veritabanı göçleri için değil.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3126",
+      "ad": "EAS (Expo Application Services)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (eas-cli MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.expo.dev/eas/",
+      "olgunluk": "olgun",
+      "ne_saglar": "React Native/Expo uygulamaları için bulut derleme, mağaza gönderimi ve kanal tabanlı kademeli OTA güncelleme (EAS Update) hizmeti.",
+      "sinirlar": "Bulut hizmeti ve kullanım bazlı ücretlendirme; derleme verisi Expo altyapısında işlenir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-008",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-3156",
+      "ad": "Entity Framework Core Migrations",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://learn.microsoft.com/ef/",
+      "olgunluk": "olgun",
+      "ne_saglar": "EF Core modeli değişikliklerinden göç betikleri üretir; idempotent SQL betiği ve göç paketi (bundle) ile kontrollü şema güncellemesi sağlar.",
+      "sinirlar": "Üretilen göçler veri kaybı riskleri için elle incelenmeli; sıfır kesintili desenleri kendisi uygulamaz.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3157",
+      "ad": "DbUp",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://dbup.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "SQL betiklerini sıralı ve bir kez çalıştırarak veritabanı değişikliklerini dağıtan .NET kütüphanesi.",
+      "sinirlar": "Geri alma (down) göçü kavramı yok; son itme Şubat 2026.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3158",
+      "ad": "FluentMigrator",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://fluentmigrator.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "C# koduyla sürümlü, ileri/geri alınabilir veritabanı göçleri yazmayı sağlayan çok veritabanlı göç çerçevesi.",
+      "sinirlar": "Karmaşık veri göçlerinde ham SQL gerekebilir.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3177",
+      "ad": "golang-migrate",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/golang-migrate/migrate",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birçok veritabanı için sürümlü up/down SQL göçlerini CLI veya Go kütüphanesi olarak çalıştıran göç aracı.",
+      "sinirlar": "Kirli (dirty) durum kurtarması elle müdahale ister; sıfır kesinti desenleri yok.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3200",
+      "ad": "refinery",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/rust-db/refinery",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust için SQL veya Rust kodu ile yazılan sürümlü veritabanı göçlerini çalıştıran araç takımı.",
+      "sinirlar": "Geri alma göçü desteklenmez.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3214",
+      "ad": "Alembic",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://alembic.sqlalchemy.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SQLAlchemy için sürümlü, dallanabilir veritabanı göç aracı; modelden otomatik göç taslağı ve çevrimdışı SQL üretimi sağlar.",
+      "sinirlar": "Otomatik üretilen göçler veri kaybı açısından elle incelenmeli.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3215",
+      "ad": "django-migration-linter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pypi.python.org/pypi/django-migration-linter/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Django göçlerinde geriye uyumsuz değişiklikleri (sütun silme/yeniden adlandırma, NOT NULL ekleme vb.) tespit edip CI'da engelleyen linter.",
+      "sinirlar": "Yalnız Django; kural istisnaları elle yönetilir.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-009",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-3239",
+      "ad": "Doctrine Migrations",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.doctrine-project.org/projects/migrations.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP/Doctrine için sürümlü veritabanı göçleri; şema farkından göç üretimi ve kuru çalıştırma sağlar.",
+      "sinirlar": "Sıfır kesinti desenleri elle uygulanmalı.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3249",
+      "ad": "strong_migrations",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ankane/strong_migrations",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rails göçlerinde kilitlenme veya kesinti yaratabilecek güvensiz işlemleri geliştirme aşamasında yakalayıp güvenli alternatifi öneren gem.",
+      "sinirlar": "Yalnız ActiveRecord; bilinçli istisnalar elle işaretlenir.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-3273",
+      "ad": "Changesets",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://changesets.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Değişiklik niyetini PR ile birlikte küçük dosyalarda kaydedip monorepo paket sürümlerini ve değişiklik günlüklerini üreten sürümleme aracı.",
+      "sinirlar": "Değişiklik dosyası disiplini ister; ajanların doğru semver seviyesini seçmesi denetlenmeli.",
+      "ihtiyaclar": [
+        "N-K01-010",
+        "N-K06-005",
+        "N-K07-001",
+        "N-K30-009"
+      ]
+    },
+    {
+      "id": "AR-3274",
+      "ad": "semantic-release",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://semantic-release.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Commit mesajlarından sonraki sürüm numarasını, sürüm notlarını ve paket yayımını tamamen otomatik belirleyen yayın aracı.",
+      "sinirlar": "Commit mesaj kurallarına sıkı bağlı; yanlış etiketli commit yanlış sürüm üretir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006"
+      ]
+    },
+    {
+      "id": "AR-3307",
+      "ad": "Prisma Migrate",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.prisma.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prisma şemasından SQL göçleri üretip uygulayan, sürüklenme (drift) tespiti ve geliştirme/üretim göç akışları sunan göç aracı.",
+      "sinirlar": "Prisma ORM'e bağlı; veri göçleri elle yazılmalı.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3308",
+      "ad": "Drizzle Kit",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://orm.drizzle.team",
+      "olgunluk": "olgun",
+      "ne_saglar": "Drizzle ORM şemasından SQL göçü üreten, şema çekme ve doğrudan itme (push) sağlayan göç aracı.",
+      "sinirlar": "Push kipi üretimde tehlikeli; göç dosyalarıyla kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3309",
+      "ad": "Sqitch",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://sqitch.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çerçeveden bağımsız, bağımlılık bildirimli deploy/revert/verify betikleriyle çalışan veritabanı değişiklik yönetimi aracı.",
+      "sinirlar": "Perl tabanlı; ekiplerin betik disiplinine bağlı.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3310",
+      "ad": "dbmate",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/amacneil/dbmate",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çerçeveden bağımsız, tek ikili dosya olarak dağıtılan hafif veritabanı göç aracı; şema dökümü üretir.",
+      "sinirlar": "Sıfır kesinti desenleri ve göç linti yok.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3311",
+      "ad": "Skeema",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/skeema/skeema",
+      "olgunluk": "olgun",
+      "ne_saglar": "MySQL/MariaDB şemasını saf SQL dosyalarıyla bildirimsel yöneten; fark üretimi ve şema linti yapan araç.",
+      "sinirlar": "Yalnız MySQL/MariaDB; bazı özellikler ücretli sürümde.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3312",
+      "ad": "pg-schema-diff",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/stripe/pg-schema-diff",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İki PostgreSQL şeması arasındaki farktan, kilitlenmeyi en aza indiren göç planı üretip tehlikeli adımları (hazard) açıkça işaretleyen Go kütüphanesi/CLI.",
+      "sinirlar": "Yalnız PostgreSQL; veri göçlerini kapsamaz.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-3319",
+      "ad": "Graphile Migrate",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/graphile/migrate",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL için SQL ile yazılan, yalnız ileri yönlü (roll-forward) ve geliştirmede hızlı yinelenen göç aracı.",
+      "sinirlar": "Geri alma göçü kavramı yok; yalnız PostgreSQL.",
+      "ihtiyaclar": [
+        "N-K06-009"
+      ]
+    },
+    {
+      "id": "AR-3364",
+      "ad": "PostHog MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (ee dizini hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://posthog.com/docs/model-context-protocol",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ürün analitiği, özellik bayrakları, deneyler, hata izleme ve anketlere ajan erişimi veren resmî MCP sunucusu; bayrak oluşturma/sorgulama ve deney sonucu okuma yapılabilir.",
+      "sinirlar": "Barındırılan MCP uç noktası PostHog Cloud içindir; self-host PostHog için yapılandırma ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K08-005",
+        "N-K12-003",
+        "N-K23-013",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3377",
+      "ad": "Harness MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/harness/mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "11 birleşik araç ve 139 kaynak türüyle Harness CI/CD, GitOps, özellik yönetimi, bulut maliyeti, güvenlik testi, kaos ve IDP işlevlerine ajan erişimi; stdio veya HTTP (Docker/K8s) olarak çalışır ve yanıtlara arayüz derin bağlantıları ekler.",
+      "sinirlar": "Harness hesabı ve API anahtarı gerekir; geniş yazma yetkisi ajan için daraltılmalı.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-008",
+        "N-K12-003",
+        "N-K15-004",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-3378",
+      "ad": "Octopus Deploy MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://octopus.com/docs/octopus-ai/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Octopus Deploy'daki projeler, sürümler, dağıtımlar, ortam terfisi ve görev loglarını ajanlara açan resmî MCP sunucusu; dağıtım sorunlarının incelenmesine yardımcı olur.",
+      "sinirlar": "Yazma/dağıtım işlemleri ajan yerine yayın hattında tutulmalı; Octopus lisansı gerekir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K12-003",
+        "N-K15-004"
+      ]
+    },
+    {
+      "id": "AR-3379",
+      "ad": "Argo CD MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/argoproj-labs/mcp-for-argocd",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Argo CD uygulamalarını, senkronizasyon durumunu, kaynak ağacını ve olayları ajanlara sorgulatan; isteğe bağlı olarak senkronizasyon tetikleyen MCP sunucusu.",
+      "sinirlar": "argoproj-labs altında (resmî ana proje değil); salt okunur modda çalıştırılması önerilir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-008",
+        "N-K12-003",
+        "N-K15-004"
+      ]
+    },
+    {
+      "id": "AR-3383",
+      "ad": "Pulumi MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari (CLI Apache-2.0)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.pulumi.com/docs/ai/mcp-server/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Pulumi Cloud yığınları, kaynak araması, kayıt (registry) şemaları ve dağıtımları için ajan araçları; altyapı kodu yazımında sağlayıcı şemasına erişim verir.",
+      "sinirlar": "Uzak sunucu Pulumi Cloud hesabı gerektirir; üretim dağıtımı yetkisi ajana verilmemeli.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K12-003",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-3391",
+      "ad": "LaunchDarkly MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://launchdarkly.com/docs/home/getting-started/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların LaunchDarkly'de bayrak oluşturma, hedefleme, ortam bazlı durum ve eskimiş bayrak incelemesi yapmasını sağlayan resmî MCP sunucusu.",
+      "sinirlar": "Üretim bayrağı değişikliği ajana bırakılmamalı; LaunchDarkly aboneliği gerekir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-003",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K23-013"
+      ]
+    },
+    {
+      "id": "AR-3392",
+      "ad": "LaunchDarkly Agent Skills (ai-tooling)",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/launchdarkly/ai-tooling",
+      "olgunluk": "erken",
+      "ne_saglar": "Bayrak arama, bir değişikliğin bayrak arkasında yayınlanıp yayınlanmaması gerektiğine dair salt okunur tavsiye, eskimiş bayrak keşfi ve kod tabanı kalıbına uygun bayrak oluşturma gibi Agent Skills oyun kitapları.",
+      "sinirlar": "Depoda açık lisans beyanı yok; skill içeriği sürekli değişiyor.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K11-005",
+        "N-K16-006"
+      ]
+    },
+    {
+      "id": "AR-3393",
+      "ad": "Unleash MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Unleash/unleash-mcp",
+      "olgunluk": "erken",
+      "ne_saglar": "Unleash (self-host edilebilir) bayrak sunucusunu yöneten MCP sunucusu; kod değişikliği için bayrak oluşturma, değerlendirme ve temizlik önerileri sunar.",
+      "sinirlar": "Deponun lisans beyanı yok; 0.x sürüm.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-003",
+        "N-K16-003",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-3394",
+      "ad": "ConfigCat MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/configcat/mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ConfigCat Public Management API'sini MCP araçlarıyla açan resmî sunucu: bayrak, ortam, hedefleme kuralları ve SDK anahtarlarının yönetimi.",
+      "sinirlar": "ConfigCat hesabı gerekir; yönetim API'si geniş yetkilidir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-003",
+        "N-K16-003",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-3395",
+      "ad": "DevCycle MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://docs.devcycle.com/cli-mcp/mcp-getting-started/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "DevCycle CLI ile gelen ve uzak uç noktası da olan MCP sunucusu; OpenFeature uyumlu bayrakların oluşturulması, hedeflenmesi ve kullanım incelemesi.",
+      "sinirlar": "DevCycle platformuna bağlı.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-003",
+        "N-K16-003",
+        "N-K17-007"
+      ]
+    },
+    {
+      "id": "AR-3396",
+      "ad": "GrowthBook MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.growthbook.io/integrations/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GrowthBook bayrak oluşturma, deney sonucu okuma ve skill yükleme işlevlerini MCP ile açar; self-host GrowthBook ile kullanılabilir.",
+      "sinirlar": "İnce istemci; asıl mantık GrowthBook API'sinde.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-003",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K23-013"
+      ]
+    },
+    {
+      "id": "AR-3397",
+      "ad": "Statsig MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.statsig.com/integrations/mcp/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Statsig özellik kapıları, deneyler ve analitik için uzak MCP sunucusu; deney sonuçlarının ve bayrak durumlarının ajana okunmasını sağlar.",
+      "sinirlar": "Yalnız SaaS; Statsig'in OpenAI'ye katılması sonrası ürün yol haritası izlenmeli.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-003",
+        "N-K16-003",
+        "N-K17-007",
+        "N-K23-013"
+      ]
+    },
+    {
+      "id": "AR-3398",
+      "ad": "OpenFeature MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/open-feature/mcp",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenFeature SDK kurulum rehberlerini ve OFREP üzerinden bayrak değerlendirmesini ajanlara sunan, satıcıdan bağımsız MCP sunucusu (resmî kayıtta dev.openfeature ad alanıyla).",
+      "sinirlar": "Çok erken sürüm (0.0.x); yönetim (bayrak oluşturma) değil değerlendirme odaklı.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K12-001",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3399",
+      "ad": "OpenFeature Remote Evaluation Protocol (OFREP)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://openfeature.dev/docs/reference/other-technologies/ofrep/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bayrak değerlendirmesini satıcıdan bağımsız HTTP sözleşmesiyle tanımlayan protokol; tek bir OFREP sağlayıcısıyla farklı bayrak arka uçlarına bağlanmayı mümkün kılar.",
+      "sinirlar": "Yalnız değerlendirme API'sini standardize eder; yönetim/denetim kaydı kapsamı dışında.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K10-002",
+        "N-K16-003"
+      ]
+    },
+    {
+      "id": "AR-3400",
+      "ad": "OpenFeature Operator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/open-feature/open-feature-operator",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te flagd yan-konteynerini iş yüklerine enjekte eden ve bayrak tanımlarını CRD olarak yöneten operatör; bayrakların GitOps ile sürümlü tutulmasını sağlar.",
+      "sinirlar": "Kubernetes gerektirir; bayrak kararlarının denetim/onay akışı ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K11-003",
+        "N-K16-003"
+      ]
+    },
+    {
+      "id": "AR-3431",
+      "ad": "Supabase MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://supabase.com/docs/guides/ai-tools/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Supabase projelerinde tablo, göç (migration), dal (branch), log ve kenar fonksiyonu yönetimi; proje kapsamı ve salt okunur mod desteği.",
+      "sinirlar": "Üretim projelerine bağlanması önerilmez (belgelerde uyarılır); istem enjeksiyonu riskine karşı salt okunur mod gerekir.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-3447",
+      "ad": "HashiCorp Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/hashicorp/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Terraform (16) ve Packer (4) için yaşam döngüsü durumu belirtilmiş skill'ler ve Claude Code eklenti paketleri; altyapı kodunun konvansiyona uygun üretimine yardımcı olur.",
+      "sinirlar": "Yalnız HashiCorp ürünleri. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3453",
+      "ad": "Pulumi Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pulumi/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Altyapı göçü, sır yönetimi ve kod dönüştürme gibi Pulumi iş akışları için dört eklenti grubunda Agent Skills.",
+      "sinirlar": "Pulumi dışı IaC için değeri yok. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3505",
+      "ad": "release-please-action",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/googleapis/release-please-action",
+      "olgunluk": "olgun",
+      "ne_saglar": "Conventional Commits'e göre sürüm PR'ı, CHANGELOG ve sürüm numarasını otomatik hazırlayan GitHub eylemi; yayın kararını insan onaylı PR birleşmesine bağlar.",
+      "sinirlar": "Commit mesajı disiplinine bağımlı; monorepo yapılandırması karmaşık olabilir.",
+      "ihtiyaclar": [
+        "N-K03-011",
+        "N-K06-005",
+        "N-K07-001"
+      ]
+    },
+    {
+      "id": "AR-3587",
+      "ad": "PostHog",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee/ dizini ayrı lisans)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://posthog.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ürün analitiği, deneyler (A/B), özellik bayrakları, uygulama içi anketler ve oturum kaydını tek platformda sunar; iç geliştirici araçları/ajan paneli benimsemesini ve pilot etkisini ölçmek için kullanılabilir.",
+      "sinirlar": "Self-host sürümü büyük ölçekte kaynak yoğun; bazı özellikler yalnız bulutta.",
+      "ihtiyaclar": [
+        "N-K23-012",
+        "N-K23-013",
+        "N-K24-010",
+        "N-K25-007",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3588",
+      "ad": "Datadog Experiments (eski Eppo)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.geteppo.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri ambarı yerel deney platformu: önceden tanımlı metriklerle deney/pilot tasarımı, istatistiksel güven aralıkları ve yaygınlaştırma kararına temel.",
+      "sinirlar": "Eppo artık Datadog'un parçası; ürün adı ve paketlemesi değişiyor.",
+      "ihtiyaclar": [
+        "N-K23-003",
+        "N-K23-013",
+        "N-K24-010"
+      ]
+    },
+    {
+      "id": "AR-4245",
+      "ad": "Kayenta (otomatik kanarya analizi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/spinnaker/spinnaker/tree/main/kayenta",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kanarya ile kontrol grubunun metriklerini (Prometheus, Datadog, Stackdriver, New Relic vb.) istatistiksel olarak karşılaştırıp puan ve geç/kal kararı üretir; Spinnaker hattına ya da Argo Rollouts analiz sağlayıcısı olarak bağlanabilir.",
+      "sinirlar": "Ayrı depo Aralık 2025'te arşivlendi, bakım Spinnaker monoreposunda sürüyor; kurulumu ve metrik yapılandırması ağır.",
+      "ihtiyaclar": [
+        "N-K06-010"
+      ]
+    },
+    {
+      "id": "AR-4246",
+      "ad": "Harness Continuous Verification",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://developer.harness.io/continuous-delivery/use-continuous-delivery/verify-deployments/verify-deployments-with-the-verify-step",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtım hattındaki Verify adımıyla yeni sürümün APM ve log verilerini alıp makine öğrenmesiyle önceki sürüm ya da kanarya-kontrol karşılaştırması yapar; başarısızlıkta hattı durdurup geri almayı tetikleyebilir.",
+      "sinirlar": "Harness CD'ye bağlı; ML tabanlı kararın istatistiksel dayanağı ve açıklanabilirliği kurumca doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K06-010"
+      ]
+    },
+    {
+      "id": "AR-4275",
+      "ad": "SQLMesh",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/SQLMesh/sqlmesh",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri dönüşümlerinde değişiklik planı çıkarır: değişikliği kırıcı/kırıcı olmayan olarak sınıflar, etkilenen modelleri ve geri doldurulacak zaman aralıklarını uygulamadan önce gösterir, sanal ortamlarda önizleme ve denetim (audit) testleri koşturur.",
+      "sinirlar": "Operasyonel veri tabanlarındaki satır düzeyi düzeltmeleri değil analitik dönüşümleri kapsar.",
+      "ihtiyaclar": [
+        "N-K33-011",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-4343",
+      "ad": "ld-find-code-refs (LaunchDarkly kod referansları)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://github.com/launchdarkly/ld-find-code-refs",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI'da kod tabanını tarayarak her özellik bayrağının hangi dosya ve satırlarda kullanıldığını LaunchDarkly'ye bildirir; bayrak referanslarının kaldırılmasını izleyerek terk edilmiş veya tamamen açılmış bayrakların temizliğini destekler.",
+      "sinirlar": "LaunchDarkly hesabı gerektirir; dinamik oluşturulan bayrak anahtarlarını kaçırabilir.",
+      "ihtiyaclar": [
+        "N-K35-006"
+      ]
+    }
+  ]
+}

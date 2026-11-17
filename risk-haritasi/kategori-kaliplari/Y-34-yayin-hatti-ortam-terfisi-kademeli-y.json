@@ -1,0 +1,134 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-34",
+    "ad": "Yayın hattı (ortam terfisi, kademeli yayın, özellik bayrağı, geri alma)",
+    "grup": "Teslim hattı ve iş yönetimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-189",
+      "yetenek_sinifi": "Y-34",
+      "kalip": "Özellik bayrağı borcu ve eski bayrağın yeniden kullanımı",
+      "aciklama": "Uber, bayat özellik bayraklarının biriktirdiği teknik borcu otomatik temizlemek için Piranha aracını geliştirdi (ICSE-SEIP 2020). Knight Capital 2012'de yeniden kullanılan bir bayrağın eski kodu etkinleştirmesiyle büyük zarara uğradı (SEC kararı).",
+      "risk_turleri": [
+        "RT-13",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://doi.org/10.1145/3377813.3381350",
+        "https://www.sec.gov/litigation/admin/2013/34-70694.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlar her değişikliği bayrak arkasında yayımladığında bayrak sayısı hızla artar; kaldırılmayan bayraklar kombinasyon patlaması ve test edilmemiş yollar üretir.",
+        "Bayrak adlarının yeniden kullanımı eski kod yollarını beklenmedik biçimde açabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-008",
+        "N-K03-011"
+      ],
+      "ornek_araclar": [
+        "LaunchDarkly",
+        "Unleash",
+        "Flagsmith",
+        "OpenFeature"
+      ],
+      "erken_sinyal": "Yaşı 90 günü aşan bayrak sayısı; tamamen açık/kapalı durumda kalıp kaldırılmayan bayraklar.",
+      "azaltma": "Bayrak başına sahip ve son kullanma tarihi, bayrak temizliğinin ajan görevi olarak otomatikleştirilmesi, ad yeniden kullanımının yasaklanması."
+    },
+    {
+      "id": "RK-190",
+      "yetenek_sinifi": "Y-34",
+      "kalip": "Bayraksız ve kademesiz küresel yayın",
+      "aciklama": "Google Cloud'un 12 Haziran 2025 kesintisinde yeni politika kod yolu bayrak korumasız ve hata işlemesiz yayımlandığı için küresel çökme yaşandı; CrowdStrike'ın Temmuz 2024 'Channel File 291' olayında içerik güncellemesi kademesiz dağıtılarak milyonlarca Windows makinesini çökertti.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-13"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW",
+        "https://www.crowdstrike.com/wp-content/uploads/2024/08/Channel-File-291-Incident-Root-Cause-Analysis-08.06.2024.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan ürettiği değişiklik 'yalnız yapılandırma' diye kademeli yayın dışında tutulursa tek hata tüm ortamlara aynı anda ulaşır.",
+        "Geri alma hazır olsa bile küresel yayında toparlanma saatler sürer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-008",
+        "N-K06-006",
+        "N-K16-002"
+      ],
+      "ornek_araclar": [
+        "Argo Rollouts",
+        "Flagger",
+        "Spinnaker",
+        "LaunchDarkly"
+      ],
+      "erken_sinyal": "Yapılandırma veya içerik değişikliklerinin kanarya aşamasını atlaması.",
+      "azaltma": "Kod ve yapılandırma için aynı kademeli yayın kuralı, bayrakla korunan yeni yollar, otomatik geri alma kriterleri."
+    },
+    {
+      "id": "RK-191",
+      "yetenek_sinifi": "Y-34",
+      "kalip": "GitOps aracında kimlik bilgisi ve sır sızıntısı",
+      "aciklama": "Argo CD'de proje API token'ının depo kimlik bilgilerini ifşa etmesi (CVE-2025-55190, kritik) ve ServerSideDiff üzerinden Kubernetes Secret çıkarılması (CVE-2026-42880, kritik) kaydedildi.",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-786q-9hcg-v9ff",
+        "https://github.com/advisories/GHSA-3v3m-wc6v-x4x3"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dağıtım aracında dar yetkili sanılan bir proje token'ı tüm depo kimlik bilgilerini ve küme sırlarını açığa çıkarır; birleştirme ile dağıtım yetkilerinin ayrılması anlamsızlaşır.",
+        "Ajanlara dağıtım durumu okuma yetkisi verilmesi sır okumaya dönüşebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-007",
+        "N-K15-004",
+        "N-K06-006"
+      ],
+      "ornek_araclar": [
+        "Argo CD",
+        "Flux",
+        "Spinnaker",
+        "Jenkins"
+      ],
+      "erken_sinyal": "Dağıtım aracı için yeni kritik GHSA; proje token'larının geniş dağıtılması.",
+      "azaltma": "Dağıtım aracını hızlı yamalama, proje token'larını en dar kapsamla ve kısa ömürlü tutma, ajanlara dağıtım aracında yalnız durum okuma API'si."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 82,
+    "yuksek": 20,
+    "orta": 20,
+    "kritik": 3
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 20,
+    "RT-01": 20,
+    "RT-03": 19,
+    "RT-14": 14,
+    "RT-16": 12,
+    "RT-11": 10,
+    "RT-02": 10,
+    "RT-10": 10,
+    "RT-06": 9,
+    "RT-13": 8,
+    "RT-05": 8,
+    "RT-04": 6,
+    "RT-15": 6,
+    "RT-07": 3,
+    "RT-12": 3,
+    "RT-09": 3
+  }
+}

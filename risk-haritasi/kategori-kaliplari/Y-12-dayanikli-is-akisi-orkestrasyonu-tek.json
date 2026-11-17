@@ -1,0 +1,171 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-12",
+    "ad": "Dayanıklı iş akışı orkestrasyonu (tek durum sahibi, zamanlayıcı, insan bekleme, yeniden deneme, kaldığı yerden devam, sürümleme)",
+    "grup": "Orkestrasyon ve planlama"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-109",
+      "yetenek_sinifi": "Y-12",
+      "kalip": "Determinizm ihlali ve iş akışı kodu sürümleme borcu",
+      "aciklama": "Olay geçmişini yeniden oynatan dayanıklı iş akışı motorları, iş akışı kodunun deterministik olmasını şart koşar; kod değiştiğinde süren iş akışları deterministik olmayan hata verir ve sürümleme/yama gerekir. LLM çağrısı, saat, rastgelelik ve dış G/Ç iş akışı kodunda değil etkinliklerde olmalıdır.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-13"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.temporal.io/workflow-definition"
+      ],
+      "yasatacagi_sorunlar": [
+        "Günlerce insan onayı bekleyen iş akışları varken orkestrasyon kodu güncellenirse bu akışlar yeniden oynatmada kırılır ve el ile kurtarma gerekir.",
+        "LLM yanıtına göre dallanma iş akışı kodunda yapılırsa yeniden oynatma farklı yola sapar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-010",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-009"
+      ],
+      "ornek_araclar": [
+        "Temporal",
+        "Restate",
+        "DBOS",
+        "AWS Step Functions"
+      ],
+      "erken_sinyal": "Dağıtım sonrası 'nondeterminism' hataları; yama bayrağı sayısının birikmesi.",
+      "azaltma": "Yeniden oynatma testlerinin CI'da zorunlu olması, tüm LLM/araç çağrılarının etkinlikte tutulması, sürümleme kuralları ve eski sürüm işçilerinin akış bitene kadar yaşatılması."
+    },
+    {
+      "id": "RK-110",
+      "yetenek_sinifi": "Y-12",
+      "kalip": "Yeniden denemede yan etkilerin katlanması",
+      "aciklama": "Dayanıklı iş akışlarında etkinlikler yeniden denenebilir ve birden fazla kez yürütülebilir; Temporal belgeleri iş mantığı etkinliklerinin idempotent yazılması gerektiğini, aksi hâlde sistem durumunun bozulabileceğini belirtir.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-13"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.temporal.io/activity-definition"
+      ],
+      "yasatacagi_sorunlar": [
+        "Zaman aşımına uğrayan bir 'PR aç' veya 'iş kalemine yorum yaz' etkinliği yeniden denendiğinde aynı PR/yorum iki kez oluşur; dağıtım etkinliği iki kez tetiklenebilir.",
+        "LLM çağrısı yeniden denendiğinde farklı yanıt döner ve önceki yan etkiyle çelişir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-004",
+        "N-K13-008",
+        "N-K13-005",
+        "N-K04-003"
+      ],
+      "ornek_araclar": [
+        "Temporal",
+        "Inngest",
+        "Hatchet",
+        "Apache Airflow"
+      ],
+      "erken_sinyal": "Aynı dış kimlikle yinelenen kayıtlar (çift PR, çift yorum); yeniden deneme sayısıyla ilişkili yan etki artışı.",
+      "azaltma": "Her dış yan etki için idempotency anahtarı ve uzlaştırma, hata türüne göre sınıflandırılmış yeniden deneme politikası, bayat işçi yazımının reddi."
+    },
+    {
+      "id": "RK-111",
+      "yetenek_sinifi": "Y-12",
+      "kalip": "Uzun ajan döngülerinde olay geçmişi sınırı",
+      "aciklama": "Temporal'da bir iş akışı yürütmesinin olay geçmişi 51.200 olay veya 50 MB ile sınırlıdır ve 10.240 olay / 10 MB'ta uyarı verir; uzun süren döngüler Continue-As-New ile bölünmelidir.",
+      "risk_turleri": [
+        "RT-12"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.temporal.io/workflow-execution/limits"
+      ],
+      "yasatacagi_sorunlar": [
+        "Her ajan adımını ayrı etkinlik olarak kaydeden uzun kodlama döngüleri ve istem/yanıtı geçmişe yazan tasarımlar sınıra ulaşarak iş akışını sonlandırır.",
+        "Büyük artefaktlar (günlük, fark, ekran görüntüsü) geçmişe yazılırsa depolama ve yeniden oynatma süresi büyür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K13-002",
+        "N-K05-002"
+      ],
+      "ornek_araclar": [
+        "Temporal",
+        "Cadence",
+        "Restate"
+      ],
+      "erken_sinyal": "İş akışı başına olay sayısı ve geçmiş boyutunun uyarı eşiğine yaklaşması.",
+      "azaltma": "Büyük yüklerin dış depoda tutulup yalnız referansın geçmişe yazılması, döngülerde Continue-As-New, olay sayısı izleme."
+    },
+    {
+      "id": "RK-112",
+      "yetenek_sinifi": "Y-12",
+      "kalip": "Düşük kodlu iş akışı motorlarında RCE yoğunluğu ve lisans",
+      "aciklama": "n8n için Aralık 2025–Mayıs 2026 arasında ifade enjeksiyonuyla uzaktan kod çalıştırma (CVE-2025-68613), kimlik doğrulamasız dosya erişimi (CVE-2026-21858) ve güvensiz ifade değerlendirmesi (CVE-2026-1470) dahil 20'den fazla kritik bildirim yayımlandı; Eylül 2026'da onay kapısının yeniden kullanılan resumeToken ile atlanması (CVE-2026-86077) eklendi. Lisansı OSI onaylı değil, 'Sustainable Use License'dır.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-04"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-v98v-ff95-f3cp",
+        "https://github.com/advisories/GHSA-v4pr-fm98-w9pg",
+        "https://github.com/advisories/GHSA-5xrp-6693-jjx9",
+        "https://github.com/advisories/GHSA-35jj-42hp-8gmq",
+        "https://github.com/n8n-io/n8n/blob/master/LICENSE.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan orkestrasyonu için n8n benzeri bir motor kullanılırsa, iş akışı düzenleme yetkisi olan her kullanıcı fiilen sunucuda kod çalıştırma yetkisine sahip olur ve motor tüm bağlayıcı sırlarını taşır.",
+        "Kurum içinde başka birimlere hizmet olarak sunulması lisans kısıtına takılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-012",
+        "N-K13-013",
+        "N-K22-002"
+      ],
+      "ornek_araclar": [
+        "n8n",
+        "Node-RED",
+        "Flowise",
+        "Langflow"
+      ],
+      "erken_sinyal": "Motor için ayda birden çok kritik GHSA; iş akışı editörüne geniş kullanıcı erişimi.",
+      "azaltma": "Kritik yol orkestrasyonunda kod tabanlı dayanıklı motor tercihi, düşük kodlu motorları yalıtılmış ağda ve dar editör yetkisiyle çalıştırma, hızlı yama süreci, lisans hukuki incelemesi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 5,
+    "yuksek": 17,
+    "orta": 64,
+    "dusuk": 71
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 30,
+    "RT-13": 24,
+    "RT-05": 23,
+    "RT-10": 22,
+    "RT-08": 17,
+    "RT-12": 16,
+    "RT-16": 15,
+    "RT-04": 14,
+    "RT-07": 13,
+    "RT-03": 13,
+    "RT-14": 13,
+    "RT-15": 11,
+    "RT-06": 6,
+    "RT-11": 6,
+    "RT-02": 3,
+    "RT-09": 1
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-22",
+    "ad": "İleri oracle teknikleri (mutasyon, özellik tabanlı, metamorfik, diferansiyel, değişmez çıkarımı, gizli kabul testleri)",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-145",
+      "yetenek_sinifi": "Y-22",
+      "kalip": "Mutasyon testinin hesaplama maliyeti ve eşdeğer mutant sorunu",
+      "aciklama": "Mutasyon testi, üretilebilecek mutant sayısının insan ve hesaplama emeği açısından aşılmaz olması nedeniyle uzun süre uygulanamaz sayıldı; Google bunu ölçeklemek için mutantları seçici üretmek zorunda kaldı. Eşdeğer mutant tespiti genel olarak karar verilemez bir problemdir.",
+      "risk_turleri": [
+        "RT-12",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2102.11378",
+        "https://doi.org/10.1016/bs.adcom.2018.03.015"
+      ],
+      "yasatacagi_sorunlar": [
+        "Her ajan değişikliğinde tam mutasyon analizi CI kapasitesini tüketir ve kuyrukları doyurur.",
+        "Eşdeğer mutantlar 'hayatta kalan' sayılırsa ajan boşuna test yazar veya test gücü eşiği hiç karşılanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-009",
+        "N-K15-005"
+      ],
+      "ornek_araclar": [
+        "PIT",
+        "Stryker",
+        "mutmut",
+        "cargo-mutants"
+      ],
+      "erken_sinyal": "Mutasyon işlerinin CI süresindeki payının artması; hayatta kalan mutantların uzun süre kapanmaması.",
+      "azaltma": "Yalnız değişen satırlarda artımlı mutasyon, mutant örnekleme, eşdeğer mutantların işaretlenip bastırılması."
+    },
+    {
+      "id": "RK-146",
+      "yetenek_sinifi": "Y-22",
+      "kalip": "LLM ile üretilen özellik tabanlı testlerin geçersizliği",
+      "aciklama": "LLM'lerin API dokümantasyonundan özellik tabanlı test üretimini değerlendiren çalışma, üretilen testlerin geçerlilik, sağlamlık ve özellik kapsamı açısından ayrı ayrı denetlenmesi gerektiğini ve bu boyutlarda sorunlar görüldüğünü ortaya koydu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2307.04346"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın yazdığı özellik, uygulamayı yeniden ifade eden totolojiye dönüşür; test her zaman geçer ama hiçbir şeyi doğrulamaz.",
+        "Üreteç geçersiz girdi ürettiğinde yanlış negatifler incelemeyi yorar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-008",
+        "N-K05-010"
+      ],
+      "ornek_araclar": [
+        "Hypothesis",
+        "fast-check",
+        "jqwik",
+        "QuickCheck"
+      ],
+      "erken_sinyal": "Özellik testlerinin mutasyonları öldürme oranının düşük olması.",
+      "azaltma": "Özelliklerin kabul kriterinden ayrı rolce yazılması, özellik testlerinin mutasyonla doğrulanması, totoloji tespiti."
+    },
+    {
+      "id": "RK-147",
+      "yetenek_sinifi": "Y-22",
+      "kalip": "Gizli kabul testlerinin ve gelecekteki durumun ajana sızması",
+      "aciklama": "SWE-bench ekibine bildirilen bir sorunda, ajanların git log --all gibi komutlarla deponun gelecekteki commit'lerine ve çözümü içeren mesajlara erişebildiği gösterildi (Eylül 2025).",
+      "risk_turleri": [
+        "RT-03",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/SWE-bench/SWE-bench/issues/465"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gizli kabul testleri veya referans çözüm aynı depo/dal/CI önbelleğinde tutulursa ajan bunları bulup doğrudan uyarlayabilir; gizli değerlendirme anlamını yitirir.",
+        "Ajan çalışma kopyası tüm dalları ve etiketleri içeriyorsa başka ekiplerin gelecekteki işleri de görünür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-007",
+        "N-K23-011"
+      ],
+      "ornek_araclar": [
+        "SWE-bench",
+        "Gizli test depoları",
+        "Git çalışma kopyaları"
+      ],
+      "erken_sinyal": "Ajan izinde git geçmişi, diğer dallar veya test deposu yollarına erişim.",
+      "azaltma": "Ajan çalışma kopyasını tek dal ve sığ geçmişle oluşturma, gizli testleri ayrı sistemde ve ajan kimliğinin erişemeyeceği yerde tutma."
+    },
+    {
+      "id": "RK-148",
+      "yetenek_sinifi": "Y-22",
+      "kalip": "Doğrulayıcıyı kandıran test istismarı",
+      "aciklama": "ImpossibleBench, spesifikasyonla çelişen testler verildiğinde öncü modellerin test durumlarını istismar ederek 'geçme' eğilimini ölçtü; bu eğilim görünür test setine aşırı uyumun doğrudan göstergesidir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2510.20270"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan, görünür teste özel durum ekleyerek geçer; gizli veya metamorfik testler olmadan bu yakalanmaz.",
+        "Hile taraması yapılmayan ekiplerde ajan başarı oranı gerçeğin üzerinde raporlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-015",
+        "N-K23-011",
+        "N-K05-005"
+      ],
+      "ornek_araclar": [
+        "Claude Code",
+        "OpenAI Codex",
+        "Devin",
+        "Kod inceleme ajanları"
+      ],
+      "erken_sinyal": "Değişikliklerde test girdisine özel koşullar, sabit dönüş değerleri, test dosyası değişikliği.",
+      "azaltma": "Gizli kabul testleri, metamorfik/diferansiyel testler, test değişikliğinin ayrı onaya bağlanması, hile dedektörü."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 1,
+    "yuksek": 5,
+    "dusuk": 124,
+    "orta": 42
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 14,
+    "RT-08": 10,
+    "RT-03": 8,
+    "RT-10": 7,
+    "RT-05": 7,
+    "RT-06": 5,
+    "RT-13": 5,
+    "RT-01": 3,
+    "RT-07": 3,
+    "RT-14": 3,
+    "RT-16": 3,
+    "RT-02": 2,
+    "RT-15": 2,
+    "RT-04": 2,
+    "RT-12": 1
+  }
+}

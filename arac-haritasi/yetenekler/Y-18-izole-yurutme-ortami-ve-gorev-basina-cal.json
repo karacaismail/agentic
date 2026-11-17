@@ -1,0 +1,3196 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-18",
+    "ad": "İzole yürütme ortamı ve görev başına çalışma kopyası (ağ çıkışı izin listesi, dosya/süre/kaynak sınırı)",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "Ajan komutlarının asıl sistemi etkilemesi; denemeler arası kirlenme; beklenmeyen kod yürütme.",
+    "ne_zaman_zorunlu": "Her zaman."
+  },
+  "arac_sayisi": 168,
+  "tur_dagilimi": {
+    "ticari-yazilim": 9,
+    "acik-kaynak": 108,
+    "acik-cekirdek": 13,
+    "kutuphane": 4,
+    "ticari-saas": 10,
+    "cerceve": 2,
+    "bulut-hizmeti": 17,
+    "protokol-standart": 3,
+    "platform": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-0054",
+      "ad": "Claude Code",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (Anthropic şartları; kaynak kapalı)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "yerel"
+      ],
+      "url": "https://code.claude.com/docs/en/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terminal kodlama ajanı; -p başsız mod, json/stream-json çıktı, --resume ile oturum devamı, izin modları ve araç izin/ret listeleri, kancalar, alt ajanlar, ajan takımları ve işletim sistemi düzeyinde sandbox sağlar.",
+      "sinirlar": "Kapalı kaynak; Anthropic modellerine bağlı; kod bağlamı sağlayıcıya gider. Kapalı kaynak; yalnız Claude modelleri; izin kuralları yanlış yapılandırılırsa yıkıcı komut riski sürer.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K05-007",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-005",
+        "N-K10-006",
+        "N-K10-007",
+        "N-K10-008",
+        "N-K10-009",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K14-008",
+        "N-K15-002",
+        "N-K18-013",
+        "N-K28-001",
+        "N-K28-002",
+        "N-K28-003",
+        "N-K29-004"
+      ]
+    },
+    {
+      "id": "AR-0055",
+      "ad": "Codex CLI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/openai/codex",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust ile yazılmış terminal kodlama ajanı; 'codex exec' ile etkileşimsiz çalışma, --json JSONL olay akışı, --output-schema ile JSON şemalı son yanıt, onay politikaları ve işletim sistemi sandbox modları (salt okunur/çalışma alanı yazma).",
+      "sinirlar": "OpenAI hesabı ve modelleri merkezli (kaynak); diğer sağlayıcılar yapılandırma gerektirir. Varsayılan olarak OpenAI modelleri; masaüstü uygulaması kapalı kaynak; sandbox kapsamı platforma göre değişir.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K12-001",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0056",
+      "ad": "OpenHands",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://openhands.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak yazılım geliştirme ajanı platformu: Docker sandbox'ında depo okuma, dosya düzenleme, terminal, test, tarayıcı ve Git; Agent Canvas arayüzü, Agent Server ve otomasyon bileşenleri. Kurum panolarında kod üzerinde çalışan ajanların ana sağlayıcısı.",
+      "sinirlar": "Açık modellerle kalite pilotta ölçülmeli (kaynak); Canvas, SDK, Server ve otomasyon ayrı depolarda — sürüm uyumu izlenmeli. Kurumsal/bulut özellikleri ayrı lisanslı olabilir; başsız mod tüm eylemleri onaylar, yalıtım şarttır.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K04-013",
+        "N-K05-029",
+        "N-K10-001",
+        "N-K10-008",
+        "N-K13-012",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0057",
+      "ad": "OpenHands Software Agent SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.openhands.dev/sdk",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenHands V1 Python SDK'sı ve REST Agent Server: araçlar, yerel/uzak sandbox'lı çalışma, conversation kimliğiyle kalıcılık ve geri yükleme, eylem onayı ve güvenlik analizörü, çok modelli yönlendirme.",
+      "sinirlar": "Genç API (V1); uzun işin kurtarılması ve bütçe uygulamaya bağlı. V1 mimarisi görece yeni; başsız modda 'her şeyi onayla' davranışı nedeniyle mutlaka konteyner/sandbox içinde çalıştırılmalı.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K13-002",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-0069",
+      "ad": "Devin",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://devin.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Barındırılan otonom yazılım ajanı; REST API ile oturum açma ve yapılandırılmış çıktı alma, tekrarlanan işler için 'playbook'lar, paralel oturumlar ve PR üretimi.",
+      "sinirlar": "Kurumun kendi hattının dışında çalışır; bütçe, kapı ve kanıt kurallarını kurum kontrol edemez (kaynak). Kapalı ve pahalı; iç işleyiş opak; kalite iddiaları bağımsız ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K11-005",
+        "N-K13-012",
+        "N-K15-001",
+        "N-K28-001",
+        "N-K28-002"
+      ]
+    },
+    {
+      "id": "AR-0071",
+      "ad": "Jules",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://jules.google",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Depoyu bulut VM'ine klonlayıp plan yazan, çok dosyalı değişiklik yapıp PR açan asenkron kodlama ajanı; Jules Tools CLI ve v1alpha REST API.",
+      "sinirlar": "Kurumun hattının dışında çalışır; bütçe, kapı ve kanıt kuralları kontrol edilemez (kaynak). API önizleme sürümünde; GitHub dışı sistemlerle entegrasyon sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K13-012",
+        "N-K15-001",
+        "N-K28-001"
+      ]
+    },
+    {
+      "id": "AR-0072",
+      "ad": "GitHub Copilot cloud agent (eski coding agent)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
+      "olgunluk": "olgun",
+      "ne_saglar": "Issue ataması, sohbet veya @copilot ile görevi alıp GitHub Actions tabanlı sandbox'ta araştıran, kod değiştiren, test/lint koşan ve dal + değişiklik önerisi üreten bulut ajanı; zamanlanmış veya olay tetikli çalışabilir.",
+      "sinirlar": "Görev başına tek depo, tek dal/PR; 59 dakikalık sert süre sınırı; yalnız GitHub'da barındırılan depolar; Actions dakikası ve AI kredisi tüketir; kurum hattının kapı/bütçe kuralları dışında. GitHub'a kilitli; ajan ortamının ağ ve gizli bilgi erişimi depo bazında sıkılaştırılmalı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K04-005",
+        "N-K10-001",
+        "N-K10-006",
+        "N-K12-004",
+        "N-K13-012",
+        "N-K15-001",
+        "N-K26-002",
+        "N-K26-004",
+        "N-K27-009",
+        "N-K28-002",
+        "N-K28-004"
+      ]
+    },
+    {
+      "id": "AR-0075",
+      "ad": "Cursor",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://cursor.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajan öncelikli kod editörü; paralel yerel ajanlar, izole VM'lerde bulut ajanları, Cloud Agents API ve TypeScript SDK ile programatik başlatma, Slack/GitHub/Linear tetikleyicileri.",
+      "sinirlar": "IDE merkezli; kod bağlamı sağlayıcıya gider; kurum hattının kurallarına bağlanması ek iş ister. Kapalı kaynak ve bulut bağımlı; modeller Cursor altyapısından yönlendirilir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K10-001",
+        "N-K10-006",
+        "N-K12-001",
+        "N-K13-012",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-0077",
+      "ad": "Agent Zero",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://agent-zero.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Docker içinde kendi Linux masaüstü, tarayıcı, terminal ve ofis ortamıyla çalışan genel amaçlı bilgisayar kullanan ajan; projeler ve DOM üzerinde işaretleme.",
+      "sinirlar": "Genel amaçlı kişisel ajan; kaynakta bağımsız doğrulanmadı ve hat için önerilmiyor.",
+      "ihtiyaclar": [
+        "N-K14-003",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-0081",
+      "ad": "IronClaw",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.ironclaw.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Gizlilik ve güvenlik odaklı 'Agent OS': WASM sandbox, uç nokta izin listesi, gizli anahtarın host tarafında enjekte edilmesi, PostgreSQL ve katmanlı güvenlik (panodaki tanım; depo Rust).",
+      "sinirlar": "Kişisel ajan odaklı; açıklama panodan, kaynak raporda bağımsız doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-0083",
+      "ad": "ZeroClaw",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.zeroclaw.com/",
+      "olgunluk": "erken",
+      "ne_saglar": "Rust tek ikili kişisel asistan altyapısı: 30+ kanal, 20+ model sağlayıcı, MCP, cron, tarayıcı/kabuk; varsayılan denetimli çalışma ve işletim sistemi sandbox'ı.",
+      "sinirlar": "Kişisel ajan odaklı; OpenClaw'a en yakın genel ikame olarak anılıyor, ekip hattı için değil.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-005",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0084",
+      "ad": "NanoClaw",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://nanoclaw.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Her ajanı kendi Linux veya Apple container'ında çalıştıran, küçük ve anlaşılır kod tabanlı OpenClaw alternatifi; güvenlik yalıtımı hedefli.",
+      "sinirlar": "Kişisel kullanım; Apple container seçeneği macOS/Apple silicon'a bağlı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0089",
+      "ad": "Vibe Kanban",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.vibekanban.com/",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Kodlama ajanlarını (Claude Code, Codex vb.) kanban kartları ve ayrı çalışma alanlarıyla yöneten açık kaynak uygulama; MCP ile görev ayrıştırma.",
+      "sinirlar": "README 'sunsetting' diyor; arkasındaki şirket Nisan 2026'da kapandı, proje topluluk bakımında ve tamamen yerel (kaynak). Ekip ölçeğinde çok kullanıcılı yönetişim ve dayanıklı durum sahipliği sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K04-005",
+        "N-K06-002",
+        "N-K10-006",
+        "N-K13-007",
+        "N-K26-001",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-0094",
+      "ad": "Claude Squad",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://smtg-ai.github.io/claude-squad/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex, OpenCode, Amp gibi terminal ajanlarını tmux oturumları ve ayrı git worktree'lerinde paralel çalıştırıp tek TUI'den yöneten araç.",
+      "sinirlar": "Tek geliştirici odaklı, ekip hattının yerini tutmaz (kaynak); AGPL-3.0. Tek kullanıcılı yerel araç; ağ/dosya yalıtımı sağlamaz, AGPL lisanslı.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-002",
+        "N-K10-006",
+        "N-K13-007",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-0154",
+      "ad": "Inspect (inspect_ai)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://inspect.aisi.org.uk",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM ve ajan değerlendirme çerçevesi; görev/çözücü/puanlayıcı ayrımı, model-hakem puanlayıcıları, çoklu epoch koşu, Docker/Kubernetes sandbox'larında ajan değerlendirmesi ve günlük görüntüleyici.",
+      "sinirlar": "Kurum görev setini hazırlamak ve puanlayıcı tasarlamak kurumun işi. Kurum görev setini hazırlamak emek ister; panel/raporlama sınırlı. Kurumun görev setini ve kalibrasyon verisini kendisinin hazırlaması gerekir. Kurum görev setinin ve gizli testlerin kurumca hazırlanması gerekir. Genel eval çerçevesidir; kırmızı takım senaryoları kurumca yazılmalı. Python merkezli; çok kullanıcılı kurumsal panel, yetki ve takvimleme ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K05-007",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-013",
+        "N-K18-012",
+        "N-K19-005",
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-003",
+        "N-K23-004",
+        "N-K23-005",
+        "N-K23-009",
+        "N-K23-010",
+        "N-K23-011",
+        "N-K27-010",
+        "N-K29-008"
+      ]
+    },
+    {
+      "id": "AR-0167",
+      "ad": "Harbor",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/harbor-framework/harbor",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex CLI, OpenHands gibi hazır ajanları konteyner görevlerinde aynı koşullarda koşturan değerlendirme ve RL ortam çerçevesi; binlerce paralel ortam için Daytona/Modal vb. sağlayıcılar ve kıyaslama adaptörleri.",
+      "sinirlar": "Kurum görevlerinin ortam/tanım biçimine dönüştürülmesi emek ister. Yeni ve hızla değişen proje; API kararlılığı sınırlı. Hızlı değişen genç proje; CNCF Harbor kayıt yazılımıyla ad karışıklığı.",
+      "ihtiyaclar": [
+        "N-K05-007",
+        "N-K10-006",
+        "N-K16-009",
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-003",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-0174",
+      "ad": "E2B",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (altyapı ve SDK); yönetilen hizmet ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://e2b.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajan ve yapay zekâ kodu için Firecracker mikroVM sandbox'ları; Python/JS SDK, kod yorumlayıcı, özel şablonlar, kalıcı birimler; çalışma zamanı ve kontrol düzlemi açık kaynak olduğundan kendi altyapıda kurulabilir.",
+      "sinirlar": "Yönetilen kullanımda kod ve veri üçüncü tarafa gider (kaynak); self-host işletimi ek iş. Self-host kurulumu Terraform ve bulut altyapısı bilgisi gerektirir; ağ çıkış izin listesi ayrıca yapılandırılmalı. Self-host yolu Terraform + Nomad/Consul ve KVM'li düğümler gerektirir (GCP tam, AWS beta olarak belgelenmiştir); işletim yükü yüksektir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K10-007",
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-005",
+        "N-K15-007",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-0175",
+      "ad": "Daytona",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (son açık sürüm v0.190.0); güncel çekirdek kapalı",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.daytona.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Önceden ısıtılmış, 90 ms altında açılan izole sandbox'lar; Python/TypeScript/Go SDK, kalıcı durum, dosya/git/süreç API'si sunar.",
+      "sinirlar": "Açık depo Haziran 2026'dan beri bakımsız, çekirdek geliştirme özel kod tabanına taşındı; self-host için eski AGPL sürümüne kalınır. Açık kaynak depo Haziran 2026'da bakım dışı kaldı, çekirdek geliştirme kapalı koda taşındı; self-host yolu artık güncelleme almıyor (topluluk çatalı Nightona var). Haziran 2026'da çekirdek geliştirme özel kod tabanına taşındı; açık depo güncelleme almıyor, self-host için yalnız eski AGPL sürümü veya topluluk çatalı (Nightona) kalıyor.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0176",
+      "ad": "Modal",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://modal.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ile tanımlanan sunucusuz GPU işleri; vLLM/SGLang gibi motorları kodla tarif edip saniye bazlı ücretle çalıştırma, toplu işler için uygun.",
+      "sinirlar": "Bulut kilidi; hatta gerek görülmedi (kaynak). Yalnız Modal bulutu; kurum içi kurulum yok.",
+      "ihtiyaclar": [
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-002",
+        "N-K15-005",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-0177",
+      "ad": "Vercel Sandbox",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://vercel.com/docs/sandbox",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Firecracker mikroVM'lerinde geçici hesaplama birimi; ajan veya kullanıcı kodunu kendi dosya sistemi ve ağıyla izole çalıştırır; Ocak 2026'da genel kullanıma açıldı.",
+      "sinirlar": "Bulut kilidi; kod üçüncü tarafta çalışır. Vercel platformuna bağlı; uzun süreli ve çok büyük iş yükleri için sınırlar bulunur. Vercel altyapısına bağlıdır, self-host yoktur; bölge seçenekleri sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0178",
+      "ad": "Apple container",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://apple.github.io/container/documentation/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Apple silicon Mac'lerde her Linux konteynerini hafif bir sanal makinede çalıştıran araç (OCI imajları); NanoClaw kullanıyor.",
+      "sinirlar": "macOS 26 ve Apple silicon gerekir; sunucu hattında Docker/devcontainer standart kalmalı (kaynak).",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0179",
+      "ad": "Apptainer (Singularity)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause (+ ek bileşen lisansları)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://apptainer.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "HPC odaklı, root gerektirmeyen konteyner çalışma zamanı (SIF imajları); Hermes'in 'Singularity' terminal arka ucu.",
+      "sinirlar": "HPC ortamı odaklı; ağ çıkışı izin listesi gibi kontroller ek yapılandırma ister.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0180",
+      "ad": "Docker Engine (Moby)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.docker.com/engine/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OCI konteyner çalışma zamanı; cgroup kaynak sınırları, ağ yalıtımı; OpenHands, Agent Zero ve test-first ajanının sandbox temeli.",
+      "sinirlar": "Konteyner tek başına güçlü güvenlik sınırı değildir (paylaşılan çekirdek); rootless/ek sertleştirme ve ağ çıkışı politikası gerekir.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0181",
+      "ad": "Dev Containers (Development Containers Specification)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0 (spesifikasyon)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://containers.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Geliştirme ortamını devcontainer.json ile kod olarak tanımlayan açık belirtimdir; Codespaces, DevPod, Coder, VS Code gibi araçlar aynı tanımdan görev başına özdeş ortam kurar.",
+      "sinirlar": "Güvenlik sandbox'ı değildir; iptal edilen görevde konteynerin öldürülmesi orkestrasyonun işi (kaynak). Tek başına izolasyon veya güvenlik sağlamaz; yalnız ortam tanımıdır.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-0182",
+      "ad": "git worktree",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://git-scm.com/docs/git-worktree",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek depodan birden çok bağımsız çalışma ağacı; her deneme için temiz revizyondan ayrı çalışma kopyası.",
+      "sinirlar": "Dosya yalıtımı sağlar, güvenlik sandbox'ı değildir; kaynak, süre, ağ ve sır erişimi ayrıca sınırlanmalı (kaynak).",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-001",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-0435",
+      "ad": "OpenAI Codex (bulut) ve Codex kod incelemesi",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://learn.chatgpt.com/docs/cloud",
+      "olgunluk": "olgun",
+      "ne_saglar": "Her görevi ayrı bulut konteynerinde çalıştırıp dal/PR üreten barındırılan kodlama ajanı; GitHub'da otomatik kod incelemesi ve CI'da Codex çalıştıran resmî GitHub Action sunar.",
+      "sinirlar": "Bulut kilidi ve ABD merkezli işleme; ajan ağ erişimi ve ortam kurulumu depo başına yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K05-015",
+        "N-K10-001",
+        "N-K13-012",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0436",
+      "ad": "Gemini CLI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://geminicli.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terminal ajanı; -p başsız mod, --output-format json/stream-json olay akışı, araç onay modları, konteyner/Seatbelt sandbox ve GitHub Actions entegrasyonu (run-gemini-cli).",
+      "sinirlar": "Gemini modellerine optimize; JSON modunda araç hatalarında erken çıkış gibi bildirilmiş sorunlar vardı.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-008",
+        "N-K15-002",
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-0440",
+      "ad": "Roomote",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://roomote.dev/",
+      "olgunluk": "erken",
+      "ne_saglar": "Gerçek geliştirme ortamını çalıştıran, çalışmasını doğrulayan, kodu farklı bir modelle inceleyip canlı önizlemeli PR üreten bulut kodlama ajanı; tek kiracılı bulut veya kendi altyapıda kurulum.",
+      "sinirlar": "Yeni ürün; bağımsız üretim referansları sınırlı; model anahtarları müşteriden gelir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K05-015",
+        "N-K09-005",
+        "N-K13-012",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-0450",
+      "ad": "microsandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.microsandbox.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "libkrun tabanlı, OCI imajlarından 100 ms altında açılan yerel/self-host mikroVM'ler; ajanlar için MCP sunucusu ve SDK ile yaşam döngüsü, komut ve dosya erişimi sunar.",
+      "sinirlar": "Genç proje (2025'te çıktı); ölçekli çok kiracılı kullanım ve güvenlik denetimi geçmişi sınırlı. Genç proje; çok düğümlü orkestrasyon ve kurumsal destek sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007",
+        "N-K18-005",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0451",
+      "ad": "Anthropic Sandbox Runtime (srt)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/sandbox-runtime",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Konteyner gerektirmeden işletim sistemi düzeyinde (Linux bubblewrap + seccomp, macOS Seatbelt) dosya sistemi kısıtı ve vekil sunucu üzerinden ağ çıkış izin listesi uygulayan hafif sandbox; ajanlar ve MCP sunucuları için.",
+      "sinirlar": "Beta araştırma önizlemesi; çekirdek düzeyinde mikroVM yalıtımı kadar güçlü değildir. Araştırma önizlemesidir, yapılandırma biçimi değişebilir; çekirdek paylaşımlı işletim sistemi sandbox'ıdır, VM izolasyonu değildir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K10-008",
+        "N-K15-002",
+        "N-K18-004",
+        "N-K18-005",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-0452",
+      "ad": "Kubernetes Agent Sandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://agent-sandbox.sigs.k8s.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te ajan çalışma zamanları için Sandbox, SandboxTemplate, SandboxClaim ve önceden ısıtılmış SandboxWarmPool CRD'leri; gVisor/Kata gibi yalıtım çalışma zamanlarını RuntimeClass ile kullanır.",
+      "sinirlar": "Yeni alt proje; API'ler değişebilir, Kubernetes işletim yetkinliği gerektirir. Genç bir SIG projesidir, API'ler alfa/beta düzeyinde; Kubernetes işletim yetkinliği ve ayrı ağ politikası (NetworkPolicy/Cilium) gerekir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-005",
+        "N-K15-007",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-0453",
+      "ad": "Cloudflare Sandbox SDK",
+      "tur": "bulut-hizmeti",
+      "lisans": "Apache-2.0 (SDK)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://developers.cloudflare.com/sandbox/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Workers üzerinden adla çağrılan, boşta uyuyan ve anlık görüntüyle oturumu geri yükleyen kalıcı Linux konteyner sandbox'ları; komut, dosya, süreç yönetimi ve güvenli kimlik bilgisi enjeksiyonu (Nisan 2026 GA).",
+      "sinirlar": "Cloudflare platformuna kilitli; yürütme yeri ağ genelinde dağıtık.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0454",
+      "ad": "Modal Sandboxes",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://modal.com/products/sandboxes",
+      "olgunluk": "olgun",
+      "ne_saglar": "gVisor üzerinde güvenilmeyen kod yürütme; varsayılanda gelen bağlantı yoktur, çıkış ağı tamamen engellenebilir veya CIDR izin listesiyle sınırlanabilir, CPU/bellek/süre sınırları ve GPU desteği vardır.",
+      "sinirlar": "Kapalı platform; ağ politikaları ve maliyet ölçekte dikkatle yönetilmeli. Yalnız yönetilen bulut; varsayılanda dış ağa çıkış açıktır ve açıkça kısıtlanmalıdır.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0455",
+      "ad": "Runloop Devboxes",
+      "tur": "ticari-saas",
+      "lisans": "ticari (SDK MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://runloop.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için güvenli Linux 'devbox' sandbox'ları, anlık görüntüler ve şablonlar; ajan değerlendirme koşuları için altyapı.",
+      "sinirlar": "Kapalı platform; self-host seçeneği kamuya açık belgelerde net değil. Yalnız SaaS olarak doğrulanabildi; küçük sağlayıcı, self-host seçeneği bilinmiyor.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K23-002"
+      ]
+    },
+    {
+      "id": "AR-0456",
+      "ad": "Blaxel",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://blaxel.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Otonom ajanlar için sandbox'lar, ajan barındırma ve MCP sunucusu barındırma sunan altyapı; boşta bekleyip hızlı sürdürülen kalıcı sandbox'lar.",
+      "sinirlar": "Genç girişim; uzun vadeli süreklilik ve bağımsız güvenlik doğrulaması sınırlı.",
+      "ihtiyaclar": [
+        "N-K13-003",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0457",
+      "ad": "Container Use",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://container-use.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Her kodlama ajanına kendi git dalında taze bir konteyner veren MCP sunucusu; paralel ajanlar çakışmadan çalışır, tüm komut/çıktı/dosya değişiklikleri git geçmişine kaydedilir.",
+      "sinirlar": "Dagger motoru ve konteyner çalışma zamanı gerektirir; birleştirme çakışmaları dalları ana dala alırken ortaya çıkar. Konteyner düzeyi izolasyondur (VM değil); deneysel sürüm, Dagger motoruna bağımlı.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K05-026",
+        "N-K06-002",
+        "N-K13-007",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-0458",
+      "ad": "Amazon Bedrock AgentCore",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/bedrock/agentcore/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çerçeveden bağımsız yönetilen ajan platformu: oturum başına mikroVM yalıtımlı Runtime ve Harness, Memory, MCP Gateway, Identity, Code Interpreter, Browser, Observability, Evaluations, Cedar uyumlu Policy ve ajan/araç Registry.",
+      "sinirlar": "AWS'ye kilit; hizmetler hızla değişiyor ve maliyet modeli çok bileşenli.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-004",
+        "N-K10-008",
+        "N-K12-002",
+        "N-K12-006",
+        "N-K14-007",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0484",
+      "ad": "Sculptor",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/imbue-ai/sculptor",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanlarını izole çalışma kopyalarında paralel çalıştıran masaüstü uygulaması; önce başarısız test yazıp sonra geçiren hata düzeltme akışı gibi hazır skill'ler içerir.",
+      "sinirlar": "Kendini deneysel araştırma önizlemesi olarak tanımlıyor; dış katkı kabul kapasitesi sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K05-002",
+        "N-K06-002",
+        "N-K13-007"
+      ]
+    },
+    {
+      "id": "AR-0485",
+      "ad": "Xum (eski Mux)",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mux.coder.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yerel, git worktree veya SSH uzak çalışma alanlarında paralel ajan oturumları yürüten, git sapmasını merkezi gösteren kodlama ajanı çoklayıcısı; kendi ajan döngüsü ve Plan/Exec modları.",
+      "sinirlar": "Ticari marka nedeniyle yeniden adlandırıldı; AGPL lisanslı.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-002",
+        "N-K13-007",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-0644",
+      "ad": "Docker MCP Catalog, Toolkit ve MCP Gateway",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (mcp-gateway); Docker Desktop ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.docker.com/ai/mcp-catalog-and-toolkit/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularını konteyner imajı olarak kataloglar; gateway sunucuları izole konteynerlerde çalıştırıp gizli bilgileri enjekte eder, araçları filtreleyip tek uç noktadan sunar.",
+      "sinirlar": "Bazı arayüz özellikleri Docker Desktop'a bağlı; konteyner izolasyonu tek başına araç yetki modelinin yerini tutmaz.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-0648",
+      "ad": "ToolHive",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.stacklok.com/toolhive/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularını en az izinle izole konteynerlerde çalıştırır; izin profilleriyle dosya sistemi ve ağ erişimi, çıkış proxy'si ve DNS ile alan adı izin listesi, Kubernetes operatörü ve onaylı kayıt defteri sunar.",
+      "sinirlar": "Konteyner çalışma zamanı gerektirir; ticari destek Stacklok'a bağlı. Konteyner izolasyonu; yalnız MCP sunucuları için.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-001",
+        "N-K12-002",
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1120",
+      "ad": "Firecracker",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://firecracker-microvm.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "KVM tabanlı, milisaniyeler içinde açılan hafif mikroVM monitörüdür; her ajan görevine ayrı çekirdekli donanım düzeyi izolasyon sağlar ve E2B, Vercel Sandbox gibi hizmetlerin temelidir.",
+      "sinirlar": "Yalnız Linux/KVM; orkestrasyon, imaj, ağ çıkış politikası ve yaşam döngüsü katmanı ayrıca kurulmalı; iç içe sanallaştırma desteklemeyen bulutlarda kullanılamaz.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1121",
+      "ad": "gVisor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://gvisor.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Konteyner sistem çağrılarını kullanıcı alanındaki bir uygulama çekirdeğinde (runsc) karşılayarak konteyner kaçışı riskini azaltır; Kubernetes RuntimeClass ve GKE Sandbox ile kullanılır, Modal Sandboxes'ın temelidir.",
+      "sinirlar": "Sistem çağrısı uyumluluğu tam değildir ve G/Ç yoğun işlerde performans kaybı olur; mikroVM düzeyinde donanım izolasyonu sağlamaz.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-1122",
+      "ad": "Kata Containers",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://katacontainers.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Her pod/konteyneri kendi misafir çekirdeği olan hafif bir VM içinde (QEMU, Cloud Hypervisor, Firecracker arka uçları) çalıştıran OCI uyumlu çalışma zamanıdır; Kubernetes'e şeffaf takılır.",
+      "sinirlar": "Donanım sanallaştırma desteği gerekir; açılış gecikmesi ve bellek ek yükü runc'tan yüksektir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1123",
+      "ad": "Cloud Hypervisor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / BSD-3-Clause",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.cloudhypervisor.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust ile yazılmış, modern bulut iş yükleri için sanal makine monitörüdür; CPU/bellek/cihaz sıcak ekleme sunar ve Kata Containers'ın arka uçlarından biridir.",
+      "sinirlar": "Tek başına sandbox ürünü değildir; görev başına yaşam döngüsü ve ağ politikası için üst katman gerekir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1124",
+      "ad": "nsjail",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://nsjail.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Linux namespace, cgroup, rlimit ve seccomp-bpf ile süreç düzeyinde hapis kurar; ağ, dosya sistemi görünürlüğü, süre, CPU/bellek sınırları tek yapılandırmayla uygulanır.",
+      "sinirlar": "Çekirdek paylaşılır (VM izolasyonu yok); yapılandırması uzmanlık ister ve yalnız Linux'ta çalışır.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1125",
+      "ad": "Bubblewrap",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1-or-later",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/containers/bubblewrap",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ayrıcalıksız kullanıcı ad alanlarıyla düşük seviyeli süreç sandbox'ı kurar; Flatpak'in ve Anthropic Sandbox Runtime'ın Linux arka ucudur.",
+      "sinirlar": "Alan adı bazlı ağ filtresi yoktur (yalnız ağ ad alanını kapatma); politika katmanı başka araçla kurulmalıdır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1126",
+      "ad": "Cloudflare Sandboxes (Sandbox SDK)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari (SDK Apache-2.0)",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.cloudflare.com/products/sandboxes/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Cloudflare Containers üzerinde kalıcı izole ortam; komut, dosya, süreç, PTY oturumu ve durum koruyan kod yorumlayıcı API'si; yalnız aktif CPU için ücretlendirme.",
+      "sinirlar": "Cloudflare Workers ekosistemine bağımlıdır; self-host yoktur.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1127",
+      "ad": "Docker Sandboxes",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (ücretsiz kullanım)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.docker.com/products/docker-sandboxes/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanlarını (Claude Code, Codex, Gemini, Kiro) kendi çekirdeği ve özel Docker daemon'ı olan mikroVM'de çalıştırır; host üzerindeki proxy her dış isteğe aracılık eder, çalışma alanı senkronlanır.",
+      "sinirlar": "Geliştirici makinesi odaklıdır; merkezi filo politikası ve denetim kaydı sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K15-002",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1128",
+      "ad": "Sysbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/nestybox/sysbox",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanıcı ad alanlı runc alternatifi; konteyner içinde Docker, systemd veya Kubernetes'i ayrıcalıklı mod olmadan çalıştırarak ajanın konteyner kurması gereken senaryolarda Docker-in-Docker riskini azaltır.",
+      "sinirlar": "Çekirdek paylaşımlıdır; belirli çekirdek sürümleri gerekir, ticari yol haritası belirsizdir.",
+      "ihtiyaclar": [
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1129",
+      "ad": "Coder",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (+ ticari Premium)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://coder.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform şablonlarıyla kurum altyapısında geliştirici ve ajan çalışma alanları açar; çalışma alanı başına yaşam döngüsü, kota, denetim kaydı ve kimlik entegrasyonu sağlar.",
+      "sinirlar": "AGPL lisansı ve bazı yönetişim özelliklerinin ücretli olması; Kubernetes/Terraform işletim bilgisi gerekir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K15-001",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1130",
+      "ad": "DevPod",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://devpod.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "devcontainer.json'dan istemci tarafında, herhangi bir sağlayıcıda (yerel konteyner, Kubernetes, bulut VM) tekrarlanabilir geliştirme ortamı kurar.",
+      "sinirlar": "Depoya son itme Kasım 2025 — bakım yavaşlamış görünüyor; merkezi politika/denetim yoktur.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1131",
+      "ad": "GitHub Codespaces",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://github.com/features/codespaces",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dev container tanımından depo başına geçici bulut geliştirme ortamı açar; kuruluş politikalarıyla makine türü, süre ve gizli bilgi erişimi sınırlandırılır.",
+      "sinirlar": "GitHub'a bağımlıdır; ağ çıkış izin listesi gibi ince kontroller sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1132",
+      "ad": "Ona (eski Gitpod)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://ona.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Arka plan kodlama ajanlarını ve dev container tabanlı geliştirme ortamlarını kurumun kendi bulut hesabındaki çalıştırıcılarda (runner) koşturan ortam platformudur.",
+      "sinirlar": "Gitpod markasından Ona'ya dönüşüm sonrası ürün hızla değişiyor; ticari lisans.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1133",
+      "ad": "Signadot",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.signadot.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te paylaşılan temel ortam üzerinde istek yönlendirmesiyle her kod değişikliği veya kodlama ajanı için hafif, geçici sandbox ortamları açar; değişikliği gerçek bağımlılıklarla doğrular.",
+      "sinirlar": "Başlık (header) yayılımı ve servis ağı gerektirir; paylaşılan veritabanlarında veri izolasyonu tam değildir.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1134",
+      "ad": "Okteto",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (CLI Apache-2.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.okteto.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes üzerinde üretime benzer, geçici geliştirme/ön izleme ortamları; kodlama ajanları için izole ortam iş akışları sunar.",
+      "sinirlar": "Kubernetes bağımlıdır; kurumsal özellikler ücretlidir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1135",
+      "ad": "vCluster",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (+ ticari vCluster Platform)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.vcluster.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek bir Kubernetes kümesinde kiracı başına ayrı kontrol düzlemli sanal kümeler oluşturur; görev/ekip başına geçici tam Kubernetes ortamı ve kota sağlar.",
+      "sinirlar": "Çalışan düğümler varsayılanda paylaşılır, tam izolasyon için ek yapılandırma gerekir; bazı özellikler ücretli platformdadır.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1182",
+      "ad": "Socket Firewall Free (sfw)",
+      "tur": "ticari-yazilim",
+      "lisans": "PolyForm Shield 1.0.0 temelli özel lisans (ücretsiz)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.socket.dev/docs/socket-firewall-free",
+      "olgunluk": "gelisen",
+      "ne_saglar": "npm, pip, uv, cargo vb. komutları sarmalayıp kayıt defteri trafiğini ağ katmanında keserek doğrulanmış kötü amaçlı paketlerin indirilmesini engeller; API anahtarı gerektirmez.",
+      "sinirlar": "Ücretsiz sürüm yalnız insan onaylı malware'i engeller, şüphelileri uyarır; halüsinasyon paket adı (var olmayan paket) kontrolü yapmaz.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1183",
+      "ad": "Aikido Safe Chain",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 + ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/AikidoSec/safe-chain",
+      "olgunluk": "gelisen",
+      "ne_saglar": "npm/yarn/pnpm/npx/pip/uv/poetry komutlarını kabuk takma adlarıyla yerel proxy üzerinden geçirir; derin bağımlılıklar dahil paketleri Aikido tehdit istihbaratına karşı denetleyip malware'i engeller.",
+      "sinirlar": "Tehdit verisi Aikido servisine bağlıdır; AGPL lisansı.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1203",
+      "ad": "StepSecurity Harden-Runner",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (+ ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/step-security/harden-runner",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub Actions çalıştırıcılarında ağ çıkışı alan adı izin listesi (block modu), dosya bütünlüğü ve süreç izleme uygular; aktif saldırılara ait küresel engel listesi sunar.",
+      "sinirlar": "GitHub Actions'a özgüdür; bazı özellikler ücretli; telemetri StepSecurity'ye gider.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-1254",
+      "ad": "Docker MCP Gateway",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/docker/mcp-gateway",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularını izole konteynerlerde çalıştırıp tek uç noktadan sunar; sır enjeksiyonu, araç filtreleme ve çağrı kaydı sağlar.",
+      "sinirlar": "Docker çalışma zamanına bağlı (Colima ile kullanılabilir); politika ifadesi sınırlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-1303",
+      "ad": "Falco",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://falco.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "eBPF ile sistem çağrısı düzeyinde çalışma zamanı tehdit tespiti (beklenmeyen kabuk, hassas dosya okuma, şüpheli ağ bağlantısı); ajan sandbox'larında anomali alarmı üretir.",
+      "sinirlar": "Tespit odaklıdır; engelleme için ek araç gerekir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K16-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1304",
+      "ad": "Tetragon",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://tetragon.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "eBPF ile çekirdek düzeyinde süreç, dosya ve ağ olaylarını gözler ve politika eşleşmesinde süreci senkron olarak öldürme/engelleme yapar.",
+      "sinirlar": "Politika yazımı çekirdek bilgisi ister; Linux'a özgü.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-002",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-1305",
+      "ad": "KubeArmor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kubearmor.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "AppArmor, BPF-LSM ve SELinux üzerinden pod düzeyinde süreç, dosya ve ağ erişimini en az izin ilkesiyle kısıtlar.",
+      "sinirlar": "LSM desteğine bağlı; politika bakımı emek ister.",
+      "ihtiyaclar": [
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1306",
+      "ad": "Smokescreen",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/stripe/smokescreen",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rol bazlı alan adı izin listesi uygulayan ve iç ağ adreslerine erişimi (SSRF) engelleyen çıkış (egress) HTTP CONNECT proxy'sidir; ajan sandbox'larının dış erişimini sınırlamak için kullanılır.",
+      "sinirlar": "Yalnız HTTP(S) CONNECT; TLS içeriğini denetlemez.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-1307",
+      "ad": "Santa (North Pole Security)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://northpole.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "macOS için ikili ve dosya erişimi yetkilendirmesi; izin/engel listeleri ve merkezi senkron sunucusuyla geliştirici makinelerinde yalnız onaylı araçların çalışmasını sağlar. Google'ın arşivlenen Santa projesinin devamıdır.",
+      "sinirlar": "Yalnız macOS; kural yönetimi için senkron sunucusu (ör. ticari Workshop veya açık kaynak alternatifler) gerekir.",
+      "ihtiyaclar": [
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1308",
+      "ad": "LuLu",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://objective-see.org/products/lulu.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "macOS giden bağlantı güvenlik duvarı; bilinmeyen süreçlerin ağ çıkışını kullanıcı onayına bağlar.",
+      "sinirlar": "Kullanıcı başına çalışır, merkezi yönetim yoktur.",
+      "ihtiyaclar": [
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1309",
+      "ad": "Judge0",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://judge0.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "isolate tabanlı sandbox'ta 60+ dilde kod yürütme API'si; süre, bellek ve süreç sınırları uygular.",
+      "sinirlar": "GPL; çekirdek paylaşımlı izolasyon, güçlü ayrım için ek VM katmanı önerilir.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1310",
+      "ad": "Piston",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/engineer-man/piston",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çok dilli, paket tabanlı genel amaçlı kod yürütme motoru; süre/bellek sınırları ve ağsız yürütme sunar.",
+      "sinirlar": "Güvenlik modeli konteyner ve kullanıcı ayrımına dayanır; kurumsal destek yok.",
+      "ihtiyaclar": [
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1392",
+      "ad": "Dagger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://dagger.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Pipeline'ları kod olarak (Go/Python/TypeScript) konteynerde yazar; yerelde ve CI'da aynı biçimde, önbellekli çalışır.",
+      "sinirlar": "Dagger Cloud ticari; API ve konumlandırma sık değişti.",
+      "ihtiyaclar": [
+        "N-K06-003",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1481",
+      "ad": "Golem",
+      "tur": "acik-cekirdek",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://learn.golem.cloud/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "WebAssembly tabanlı 'dayanıklı çalışan' (durable worker) platformu; her çalışanın durumu kesinti sonrası kaldığı yerden sürdürülür, çağrılar tam-bir-kez semantiğiyle yürütülür.",
+      "sinirlar": "Lisans ve ticari model kaynakta incelenmelidir (GitHub: NOASSERTION); ekosistemi genç ve WASM'a bağlıdır.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-006"
+      ]
+    },
+    {
+      "id": "AR-1530",
+      "ad": "SafeDep vet",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://safedep.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "npm/pip gibi paket yöneticisi komutlarını saran, kurulumdan önce paketleri kötü amaçlılık açısından denetleyen ve kurulumu sandbox içinde yapan koruma katmanı; ajanların paket kurmasını da denetler.",
+      "sinirlar": "Kötü amaçlı paket analizinin bir kısmı SafeDep bulut hizmetine dayanır. Yeni ürün; bazı analizler bulut hizmetine bağlıdır.",
+      "ihtiyaclar": [
+        "N-K03-008",
+        "N-K18-008",
+        "N-K18-013",
+        "N-K22-002"
+      ]
+    },
+    {
+      "id": "AR-1543",
+      "ad": "Landrun",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Zouuup/landrun",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Linux Landlock çekirdek LSM'i ile herhangi bir süreci ayrıcalıksız, dosya yolu ve TCP bağlantı noktası bazlı izin listeleriyle yalıtan hafif sandbox CLI'si.",
+      "sinirlar": "Yalnız yeni Linux çekirdeklerinde (Landlock ABI) çalışır; ağ kısıtı TCP ile sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1544",
+      "ad": "Fence",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://fencesandbox.com/docs",
+      "olgunluk": "erken",
+      "ne_saglar": "Konteyner gerektirmeden komutları ağ ve dosya sistemi kısıtlarıyla çalıştıran hafif sandbox; kodlama ajanlarının yerel komutlarını sınırlamak için tasarlanmıştır.",
+      "sinirlar": "İşletim sistemi yalıtım ilkellerine dayanır; VM düzeyinde yalıtım sağlamaz.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1545",
+      "ad": "LLM Sandbox",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://vndee.github.io/llm-sandbox/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM tarafından üretilen kodu Docker, Podman veya Kubernetes konteynerlerinde kaynak sınırları ve güvenlik politikalarıyla çalıştıran Python kütüphanesi; MCP sunucusu da sunar.",
+      "sinirlar": "Konteyner yalıtımı çekirdeği paylaşır; yüksek riskli iş yükleri için mikro-VM tercih edilmelidir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-006"
+      ]
+    },
+    {
+      "id": "AR-1546",
+      "ad": "Firejail",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://firejail.wordpress.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Linux ad alanları, seccomp-bpf ve yetenek kısıtlarıyla uygulamaları sandbox içinde çalıştıran SUID aracı; hazır profillerle ağ/dosya erişimini sınırlar.",
+      "sinirlar": "SUID ikili olması geçmişte güvenlik açıklarına yol açmıştır; yalnız Linux.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1547",
+      "ad": "Minijail",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://google.github.io/minijail/",
+      "olgunluk": "olgun",
+      "ne_saglar": "ChromeOS ve Android'de kullanılan, ad alanları, seccomp filtreleri ve yetenek düşürme ile süreçleri kısıtlayan sandbox aracı ve kütüphanesi.",
+      "sinirlar": "Düşük seviyeli; ajan iş akışlarına entegrasyon için sarmalayıcı gerekir.",
+      "ihtiyaclar": [
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1548",
+      "ad": "coop (trailofbits/coop)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/coop",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code ve Codex'i geliştirici makinesinden yalıtılmış sanal makinede çalıştırmak için hazırlanmış ortam; ana makinedeki kimlik bilgileri ve dosyalara erişimi sınırlar.",
+      "sinirlar": "Belirli ajanlar ve platformlara göre hazırlanmıştır; kurumsal filo yönetimi sunmaz.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1600",
+      "ad": "Garden",
+      "tur": "acik-cekirdek",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://garden.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes üzerinde geçici (ephemeral) geliştirme ve test ortamlarını, bağımlılık grafiği ve önbelleklemeyle kurup test çalıştıran otomasyon aracı.",
+      "sinirlar": "Kubernetes gerektirir; ekip/önbellek özelliklerinin bir kısmı ticari Garden Cloud'dadır.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1675",
+      "ad": "GARM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/cloudbase/garm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Actions ve Gitea Actions için geçici (ephemeral) self-host CI çalıştırıcı havuzlarını OpenStack, LXD, Kubernetes ve bulut sağlayıcılarında yöneten runner yöneticisi.",
+      "sinirlar": "Topluluk küçük; sağlayıcı eklentileri ayrı bakımdadır.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1704",
+      "ad": "Inspektor Gadget",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.inspektor-gadget.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF tabanlı 'gadget'larla konteyner, pod ve ana makinede sistem çağrısı, ağ bağlantısı, dosya erişimi ve süreç yürütmesini izleyip kaydeder; ajan yürütme ortamında beklenmeyen çıkış veya dosya erişimini görünür kılar.",
+      "sinirlar": "Linux çekirdeği/eBPF gerektirir; engelleme değil gözlem aracıdır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1716",
+      "ad": "Confidential Containers",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://confidentialcontainers.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Pod'ları Kata Containers ile Intel TDX, AMD SEV-SNP gibi donanım güvenilir yürütme ortamlarında çalıştırıp uzaktan kanıtlama (attestation) sonrası sır dağıtır; kullanım sırasında veriyi altyapı sahibinden korur.",
+      "sinirlar": "Özel donanım ve çekirdek gerektirir; işletimi ve hata ayıklaması karmaşık, performans ek yükü var.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K15-002",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1717",
+      "ad": "Hyperlight",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://hyperlight.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Güvenilmeyen kodu işletim sistemi olmayan, işlev başına mikro sanal makinelerde milisaniye düzeyinde başlatıp çalıştıran hafif VMM kütüphanesi (KVM, Hyper-V); ajanın ürettiği kodu sanal makine sınırında yalıtmak için.",
+      "sinirlar": "Misafir kod özel API ile derlenmeli; genel amaçlı kabuk/araç zinciri çalıştırmaz; erken aşama.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-1718",
+      "ad": "Lima",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://lima-vm.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "macOS ve Linux'ta dosya paylaşımı ve port yönlendirmeli Linux sanal makineleri açan araç (Colima'nın temeli); yerel kodlama ajanlarını ana makineden ayrı, atılabilir bir VM içinde çalıştırmaya uygun.",
+      "sinirlar": "Tek makine; ağ çıkış izin listesi ve kaynak sınırları ayrıca yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1719",
+      "ad": "Podman",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://podman.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Daemon gerektirmeyen, rootless çalışabilen OCI konteyner ve pod motoru; ajan araç yürütmesini kullanıcı ad alanında, ağ ve kaynak sınırlarıyla yalıtmak için kullanılabilir.",
+      "sinirlar": "Konteyner yalıtımı çekirdeği paylaşır; güvenilmeyen kod için gVisor/Kata gibi ek katman önerilir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1720",
+      "ad": "Devfile",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://devfile.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Geliştirme çalışma alanını (konteynerler, komutlar, olaylar, bağımlılıklar) YAML ile tanımlayan açık şartname; Eclipse Che, OpenShift Dev Spaces ve odo aynı tanımdan görev başına yeniden üretilebilir ortam kurar.",
+      "sinirlar": "Benimseme Red Hat ekosistemiyle sınırlı; Dev Container şartnamesiyle rekabet eder.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1727",
+      "ad": "Istio",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://istio.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hizmet ağı: iş yükleri arasında otomatik mTLS kimliği, AuthorizationPolicy ile istek düzeyinde izin/red, egress gateway ile dış çıkışın denetlenmesi ve dağıtık iz başlıkları; tek politika değişikliğiyle ajan servislerinin dış erişimini kesmek mümkündür.",
+      "sinirlar": "İşletim yükü yüksek; ambient mod daha hafif olsa da ağ bilgisi gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K16-003",
+        "N-K18-003",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1728",
+      "ad": "Cilium",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cilium.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "eBPF tabanlı Kubernetes ağı ve güvenliği; DNS adına dayalı (toFQDNs) çıkış izin listeleri, L7 HTTP politikaları ve Hubble ile akış görünürlüğü sağlar; ajan konteynerlerinin yalnız onaylı alan adlarına çıkmasını zorlar.",
+      "sinirlar": "Linux çekirdeği ve Kubernetes gerektirir; FQDN politikaları DNS proxy davranışına bağlıdır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K16-003",
+        "N-K18-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1729",
+      "ad": "Envoy Proxy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.envoyproxy.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüksek performanslı L4/L7 vekil sunucu; dış yetkilendirme (ext_authz), oran sınırlama, çıkış yönlendirme ve iz yayılımı filtreleriyle ajanların model ve araç trafiğini merkezi noktadan denetlemeye temel olur.",
+      "sinirlar": "Doğrudan yapılandırması karmaşık; genellikle Istio, Envoy Gateway gibi kontrol düzlemiyle kullanılır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-010",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1741",
+      "ad": "kind",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://kind.sigs.k8s.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Docker/Podman konteynerleri içinde dakikalar içinde yerel Kubernetes kümeleri kurar; CI'da görev başına atılabilir entegrasyon test ortamı olarak yaygın.",
+      "sinirlar": "Üretim benzeri ağ/depolama davranışını tam yansıtmaz; tek makine kaynaklarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1791",
+      "ad": "Eclipse Che",
+      "tur": "acik-kaynak",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://eclipse.dev/che/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes/OpenShift üzerinde devfile tanımından çalışma alanı başına konteynerli bulut geliştirme ortamları; geliştirici ve ajan ortamlarının merkezi, yeniden üretilebilir yönetimi.",
+      "sinirlar": "Kubernetes işletimi gerektirir; kaynak tüketimi yüksek olabilir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1829",
+      "ad": "RamaLama",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ramalama.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Modelleri llama.cpp veya vLLM içeren OCI konteynerlerinde, varsayılan olarak ağsız ve salt okunur yalıtımla yerel çalıştırır; modelleri OCI artefaktı olarak çekip itebilir, Kubernetes/Quadlet çıktısı üretir.",
+      "sinirlar": "Tek makine/geliştirici odaklı; büyük ölçekli sunum için vLLM/KServe gerekir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1837",
+      "ad": "Wasmtime",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 WITH LLVM-exception",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://wasmtime.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "WASI destekli, yetenek tabanlı güvenlik modelli WebAssembly çalışma zamanı; dosya ve ağ erişimi yalnız açıkça verilen yeteneklerle, CPU (fuel/epoch) ve bellek sınırlarıyla ajan araçlarını/eklentilerini yalıtır.",
+      "sinirlar": "Kodun WebAssembly'e derlenmesini gerektirir; mevcut kabuk araçlarını doğrudan çalıştırmaz.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-1838",
+      "ad": "WASI (WebAssembly System Interface)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0 WITH LLVM-exception",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://wasi.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "WebAssembly bileşenlerine dosya, ağ, saat gibi sistem yeteneklerini yalnız açık izinle veren arayüz standardı (WASI 0.2/0.3, bileşen modeli, WIT arayüz dili); ajan araçlarını dilden bağımsız, yalıtılmış bileşenler olarak tanımlamaya temel.",
+      "sinirlar": "Standart hâlâ gelişiyor; bazı yetenekler (iş parçacıkları vb.) olgun değil.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-1949",
+      "ad": "K3s",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://k3s.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek ikili dosyalı, hafif, sertifikalı Kubernetes dağıtımı; görev başına geçici test kümeleri, kenar ve geliştirici makinelerinde yalıtılmış ortam kurmak için.",
+      "sinirlar": "Büyük üretim kümelerinde bazı bileşenler (ör. varsayılan SQLite) ayar gerektirir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1959",
+      "ad": "Amazon Bedrock AgentCore Code Interpreter",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/code-interpreter-tool.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanın ürettiği kodu (Python, JavaScript, TypeScript) oturum başına yalıtılmış, ağ modu ayarlanabilir sandbox'ta çalıştırır; dosya yükleme/indirme ve oturum süresi sınırı sağlar.",
+      "sinirlar": "Genel amaçlı derleme/test ortamı değildir; büyük depo derlemeleri ve özel araç zinciri için kısıtlı.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-1960",
+      "ad": "Amazon Bedrock AgentCore Browser",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-tool.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların web uygulamalarıyla etkileşimi için yönetilen, yalıtılmış bulut tarayıcı; Playwright/CDP uyumlu, oturum kaydı ve canlı görüntüleme sunar.",
+      "sinirlar": "Gerçek cihaz testi yerine geçmez; tarayıcı oturumları ücretli ve AWS'ye bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-024",
+        "N-K09-008",
+        "N-K14-003"
+      ]
+    },
+    {
+      "id": "AR-1965",
+      "ad": "AWS CodeBuild",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/codebuild/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Talep üzerine ölçeklenen yönetilen derleme/test çalıştırıcısı; GitHub Actions, GitLab ve Buildkite için geçici (ephemeral) barındırılan çalıştırıcı olarak kullanılabilir, VPC içinde yalıtılmış çalışır.",
+      "sinirlar": "Soğuk başlatma süresi ve dakika bazlı maliyet; GPU ve özel görüntü seçenekleri bölgeye göre değişir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K05-029",
+        "N-K15-005",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2000",
+      "ad": "Azure Container Apps dynamic sessions",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/container-apps/sessions",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hyper-V yalıtımlı, hızlı başlayan oturum havuzlarında güvenilmeyen/LLM üretimi kodu (Python, Node.js veya özel konteyner) çalıştırır; ağ çıkışı kapatılabilir.",
+      "sinirlar": "Oturum süresi ve kaynak sınırları var; depo ölçeğinde derleme için uygun değil.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-002",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-2002",
+      "ad": "Microsoft Dev Box",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/dev-box",
+      "olgunluk": "olgun",
+      "ne_saglar": "Merkezi yönetilen, Intune ile politika uygulanan bulut geliştirici iş istasyonları; ajan araçlarının kişisel makine yerine denetimli ortamda çalışmasını sağlar.",
+      "sinirlar": "Windows odaklı; saatlik işlem maliyeti; ağ çıkışı politikası ayrıca tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2034",
+      "ad": "Cloud Workstations",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/workstations",
+      "olgunluk": "olgun",
+      "ne_saglar": "VPC içinde, özel imajlı, merkezi yönetilen bulut geliştirme ortamları; yerel makinede kod ve sır tutmadan ajan araçlarını çalıştırmaya olanak verir.",
+      "sinirlar": "Saatlik maliyet; IDE deneyimi ağ gecikmesine bağlı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2095",
+      "ad": "Red Hat Advanced Cluster Security for Kubernetes",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (upstream StackRox Apache-2.0)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes imaj/dağıtım zafiyet ve yapılandırma kontrolleri, çalışma zamanı davranış tespiti, ağ politikası üretimi ve dağıtım zamanı politika zorlaması.",
+      "sinirlar": "Kubernetes'e özgü; kod düzeyi tarama yapmaz.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-009",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-2096",
+      "ad": "Red Hat OpenShift Dev Spaces",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (upstream Eclipse Che EPL-2.0)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://developers.redhat.com/products/openshift-dev-spaces",
+      "olgunluk": "olgun",
+      "ne_saglar": "devfile ile kod olarak tanımlı, konteyner tabanlı bulut geliştirme ortamları; proje yalıtımı, RBAC, kaynak kotaları ve kurum ağı içinde çalışma.",
+      "sinirlar": "OpenShift gerektirir; tarayıcı IDE deneyimi yerel IDE'den farklı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2255",
+      "ad": "Ubicloud",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.ubicloud.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çıplak metal sunucular üzerinde VM, blok depolama, özel ağ, yönetilen PostgreSQL, Kubernetes ve GitHub Actions çalıştırıcıları sunan açık kaynak IaaS; kendi donanımınıza kurulabilir.",
+      "sinirlar": "Genç proje; yönetilen hizmet dışında kurumsal destek seçenekleri sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2367",
+      "ad": "Proxmox VE",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.proxmox.com/en/",
+      "olgunluk": "olgun",
+      "ne_saglar": "KVM sanal makineleri ve LXC kapsayıcılarını küme, yedekleme ve yazılım tanımlı depolamayla yöneten sanallaştırma platformu; ajan yalıtım VM'leri ve CI çalıştırıcıları için kurum içi altyapı.",
+      "sinirlar": "Kurumsal destek abonelikle; bulut yerel otomasyon Kubernetes'e göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2371",
+      "ad": "RKE2",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.rke2.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Güvenlik odaklı (CIS sıkılaştırma, FIPS seçenekleri) Kubernetes dağıtımı; resmî internetsiz (air-gap) kurulum yöntemi belgelenmiştir.",
+      "sinirlar": "Rancher ekosistemine bağlı destek; tek başına ajan yalıtımı sağlamaz.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2374",
+      "ad": "DeerFlow",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/bytedance/deer-flow",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uzun soluklu 'süper ajan' koşumu: alt ajanlar, bellek, beceri (skill) ve sandbox ile araştırma-kodlama-içerik üretimi görevlerini planlayıp yürütür; derin web araştırması kökenlidir.",
+      "sinirlar": "Genel amaçlı araştırma ajanı; kurumsal izin modeli, denetim kaydı ve onay kapıları eklenmeli, hızlı değişen API.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K10-001",
+        "N-K10-006",
+        "N-K11-005",
+        "N-K14-003",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2381",
+      "ad": "OpenManus",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/FoundationAgents/OpenManus",
+      "olgunluk": "erken",
+      "ne_saglar": "Genel amaçlı açık ajan: tarayıcı, dosya ve kod çalıştırma araçlarıyla çok adımlı görevleri planlayıp yürütür; RL ile ajan eğitimi (OpenManus-RL) kolu vardır.",
+      "sinirlar": "Araştırma/deneme düzeyinde; güvenlik yalıtımı ve yetki modeli sınırlı, üretimde doğrudan kullanılmamalı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-006",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2466",
+      "ad": "SandboxFusion",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://bytedance.github.io/SandboxFusion/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM'in ürettiği kodu çok sayıda dilde güvenli biçimde çalıştırıp test eden ve puanlayan sandbox hizmeti; hazır kod kıyas setleri için değerlendirme uçları içerir.",
+      "sinirlar": "Değerlendirme amaçlı; ağ çıkışı ve kaynak sınırları üretim ajan yürütmesi için ayrıca sertleştirilmeli.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-002",
+        "N-K19-005",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2517",
+      "ad": "Sealos DevBox",
+      "tur": "acik-cekirdek",
+      "lisans": "Sealos Sustainable Use License",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://sealos.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes üzerinde bulut işletim sistemi; DevBox ile görev başına yalıtılmış, anında oluşturulan geliştirme/test ortamları ve kodlama ajanından doğrudan dağıtım.",
+      "sinirlar": "Kaynak-erişilebilir 'sürdürülebilir kullanım' lisansı (OSI onaylı değil); ticari yeniden sunum kısıtlı.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2518",
+      "ad": "Kuasar",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kuasar.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tek çalışma zamanında birden çok sandbox türünü (MicroVM, uygulama çekirdeği, WebAssembly, runC) yöneten konteyner çalışma zamanı; güvenilmeyen ajan kodu için yalıtım seviyesi seçilebilir.",
+      "sinirlar": "Kurulum ve çekirdek/sanallaştırma gereksinimleri uzmanlık ister; 2026 ortasından beri etkinlik azaldı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2662",
+      "ad": "Vivaria",
+      "tur": "platform",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/METR/vivaria",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Ajan değerlendirmesi ve elicitation araştırması için web arayüzlü, Docker tabanlı görev çalıştırma, iz görüntüleme ve puanlama platformu.",
+      "sinirlar": "METR yeni özellik geliştirmeyi azalttı ve yeni projeler için Inspect'i öneriyor.",
+      "ihtiyaclar": [
+        "N-K19-005",
+        "N-K23-001",
+        "N-K23-003"
+      ]
+    },
+    {
+      "id": "AR-2668",
+      "ad": "RedCode",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/AI-secure/RedCode",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod ajanlarının riskli kodu (dosya silme, yetki yükseltme vb.) çalıştırmayı reddedip reddetmediğini Docker'da ölçen RedCode-Exec ve zararlı yazılım üretimini ölçen RedCode-Gen'den oluşan kıyas.",
+      "sinirlar": "Python/Bash senaryoları; kurum ortamına özgü yıkıcı eylemler ayrıca tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-007",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-2806",
+      "ad": "Worktrunk",
+      "tur": "acik-kaynak",
+      "lisans": "MIT veya Apache-2.0 (çift lisans)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://worktrunk.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Git worktree yönetimini dal açmak kadar kolaylaştıran CLI; paralel ajan çalışmalarında her göreve ayrı çalışma kopyası, kancalar ve birleştirme yardımcıları sağlar.",
+      "sinirlar": "Yalnız dosya sistemi düzeyinde ayrım yapar; ağ/süreç yalıtımı yoktur, bir sandbox ile birlikte kullanılmalıdır.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-002",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2808",
+      "ad": "TrueForge",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://trueforge.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Model çağrıları, MCP araçları, skill'ler, sandbox, onaylar, bağlam yönetimi ve oturum durumunu içeren ajan yürütme döngüsünü hazır verir; sohbet arayüzü, API ve CLI ile erişilir.",
+      "sinirlar": "Temmuz 2026'da açıldı; kurumsal kimlik/yetki entegrasyonu ve uzun vadeli bakım henüz kanıtlanmadı.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-008",
+        "N-K12-002",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2809",
+      "ad": "Open Agents (Vercel Labs)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://open-agents.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Arka planda çalışan kodlama ajanları için web arayüzü, ajan iş akışı, sandbox VM orkestrasyonu ve GitHub entegrasyonu içeren, çatallanıp uyarlanmak üzere tasarlanmış referans uygulama.",
+      "sinirlar": "Ürün değil referans şablondur; Vercel Sandbox ve Workflow altyapısına bağımlıdır.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K12-003",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2812",
+      "ad": "AgentFS",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor (kök LICENSE yok; depoda licenses/ dizini var)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.agentfs.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanlar için tasarlanmış, SQLite tabanlı dosya sistemi; ajanın dosya işlemlerini tek bir veritabanında tutarak denetlenebilir, anlık görüntülenebilir ve taşınabilir çalışma alanı sağlar (TypeScript/Python/Rust SDK).",
+      "sinirlar": "Proje kendini BETA olarak tanımlıyor; lisans durumu netleştirilmeli.",
+      "ihtiyaclar": [
+        "N-K13-011",
+        "N-K14-006",
+        "N-K15-001",
+        "N-K19-005",
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-2821",
+      "ad": "Flue",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.flueframework.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Sandbox içinde otonom ajanlar kurmak için programlanabilir TypeScript harness çerçevesi; model, sandbox, skill ve araç bileşenlerini kodla birleştirir.",
+      "sinirlar": "Şubat 2026'da çıktı; API değişebilir.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-007",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2822",
+      "ad": "Sandcastle",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mattpocock/sandcastle",
+      "olgunluk": "erken",
+      "ne_saglar": "sandcastle.run() ile kodlama ajanlarını Docker, Podman veya Vercel sandbox'larında yapılandırılabilir dal stratejisiyle paralel çalıştırıp commit'leri geri birleştiren TypeScript kütüphanesi.",
+      "sinirlar": "Birleştirme çakışmalarını anlamsal olarak çözmez; tek geliştirici bakımında.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K13-007",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2824",
+      "ad": "Sandbox Agent (Rivet)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://sandboxagent.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Sandbox içinde çalışan bir sunucu; Claude Code, Codex, OpenCode, Cursor, Amp ve Pi'yi HTTP üzerinden tek API ile uzaktan kontrol eder (olay akışı, izin yönetimi, oturum).",
+      "sinirlar": "Deneysel olarak işaretli; son etkinlik Haziran 2026.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-008"
+      ]
+    },
+    {
+      "id": "AR-2826",
+      "ad": "Open Managed Agents (OpenMA)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openma.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Managed Agents API ve OpenAI Agents API'nin self-host karşılığı; kalıcı oturum, sandbox'lı araçlar, bellek, şifreli kimlik bilgisi ve çökme sonrası kurtarma sağlar (Cloudflare veya Node üzerinde).",
+      "sinirlar": "Resmî API'lerle uyumluluk kapsamı gecikebilir; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-001",
+        "N-K13-002"
+      ]
+    },
+    {
+      "id": "AR-2830",
+      "ad": "Cline Kanban",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cline/kanban",
+      "olgunluk": "erken",
+      "ne_saglar": "Her görev kartına ayrı terminal ve git worktree açan, paralel CLI ajanlarını ve diff incelemesini tek yerel web uygulamasında yöneten araç.",
+      "sinirlar": "Araştırma önizlemesi; ajanlarda izin atlatma gibi deneysel özellikler kullanır.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K05-025",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2833",
+      "ad": "Kandev",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://kandev.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Kanban ve pipeline görünümleriyle görev yönetimi, çok sağlayıcılı ajan atama, özelleştirilebilir iş akışı ve inceleme kapıları, entegre çalışma alanında çıktı inceleme ve PR açma.",
+      "sinirlar": "AGPL-3.0; güç kullanıcı odaklı, çok ekipli yönetişim sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K05-025",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-2834",
+      "ad": "Sortie",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://sortie-ai.com",
+      "olgunluk": "erken",
+      "ne_saglar": "İş takip sistemindeki görevleri izole çalışma alanlarında paralel kodlama ajanı oturumlarına dönüştüren açık kaynak orkestratör; yeniden deneme ve oturum yönetimi içerir.",
+      "sinirlar": "Genç proje; desteklenen tracker ve yazma yönü kapsamı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K12-004",
+        "N-K13-008",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-2835",
+      "ad": "Groundcrew",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ClipboardHealth/groundcrew",
+      "olgunluk": "erken",
+      "ne_saglar": "Atanmış görevleri (varsayılan Linear; Jira ve yerel dosya) izleyip her göreve worktree açar, gerçek claude/codex/cursor/pi CLI'ını ayrı terminalde başlatır; varsayılan olarak Safehouse veya Docker Sandboxes ile yalıtır, insan istediği an devralır.",
+      "sinirlar": "Geliştiricinin yerel makinesi ve kimlik bilgileriyle çalışır; merkezi yönetim yok.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K17-008",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-2844",
+      "ad": "GitHub Agentic Workflows (gh-aw)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://gh.io/gh-aw",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Actions üzerinde Markdown ile tanımlanan ajan iş akışları; sandbox'lı yürütme, MCP ağ geçidi ve yazma işlemlerini ajandan ayıran güvenli çıktı katmanı sağlar.",
+      "sinirlar": "GitHub'a bağlıdır; hızlı sürümlenen 0.x hattı (Eylül 2026'da v0.89).",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K12-002",
+        "N-K13-012",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2898",
+      "ad": "Leash (StrongDM)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://leash.strongdm.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanlarını konteynere sarıp etkinliklerini izler ve Cedar dilinde yazılmış politikaları anında uygular.",
+      "sinirlar": "Docker/Podman/OrbStack gerektirir; son etkinlik Nisan 2026.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2899",
+      "ad": "nono",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://nono.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar için sıfır güven yaklaşımlı çalışma zamanı güvenliği; işletim sistemi yalıtım mekanizmalarıyla dosya ve ağ erişimini profillerle sınırlar, profiller bir kayıt defterinden çekilir.",
+      "sinirlar": "1.0 öncesi; API değişiklikleri ve kayıt defteri ad alanı taşınması yaşandı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2903",
+      "ad": "agentsh",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.agentsh.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın altında dosya, ağ, süreç ve sinyal etkinliğini (alt süreç ağaçları dahil) yakalayıp tanımlı politikayı uygulayan ve yapılandırılmış denetim olayları üreten yürütme geçidi.",
+      "sinirlar": "Tam uygulama Linux'ta; macOS ESF+NE alfa, Windows yalnız WSL2.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-007",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2926",
+      "ad": "IronCurtain",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ironcurtain.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Güvenlik politikasının insan tarafından okunabilir bir 'anayasa'dan türetildiği otonom ajan çalışma zamanı; doğal dil kurallarını uygulanabilir politikaya çevirmeyi araştırır.",
+      "sinirlar": "Araştırma prototipi; API ve mimari değişebilir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K07-007",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2927",
+      "ad": "Cube Sandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 (üçüncü taraf bileşenler hariç)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cubesandbox.com",
+      "olgunluk": "erken",
+      "ne_saglar": "RustVMM ve KVM üzerinde donanım yalıtımlı, E2B SDK uyumlu, 60 ms altında açılan ve düşük bellek ek yükü olan sandbox hizmeti; tek düğümden çok düğümlü kümeye ölçeklenir.",
+      "sinirlar": "Nisan 2026'da açıldı; KVM erişimli donanım gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2928",
+      "ad": "OpenSandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://open-sandbox.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama/GUI ajanları, ajan değerlendirmesi, kod yürütme ve RL eğitimi için genel sandbox platformu; Python, Java/Kotlin, TypeScript, .NET, Go SDK'ları, CLI ve MCP; Docker ve Kubernetes çalışma zamanları, Firecracker havuzları, OpenAPI sözleşmeleri.",
+      "sinirlar": "Geniş kapsam; Kubernetes işletim yetkinliği gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2929",
+      "ad": "BoxLite",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://boxlite.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Herhangi bir OCI imajını çalıştıran, kalıcı ve donanım yalıtımlı mikro-VM ('Box'); kütüphane olarak gömülür, root veya arka plan servisi gerektirmez, isteğe bağlı sunucu modu vardır.",
+      "sinirlar": "Genç proje; çok kiracılı ölçekte kanıt sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2930",
+      "ad": "Gondolin",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://earendil-works.github.io/gondolin",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın ürettiği kodu yerel Linux mikro-VM'lerinde (QEMU, deneysel krun) çalıştırıp ağ ve dosya sistemi erişimini JavaScript ile özelleştirilebilen ana makine tarafı politika ile denetler; sızdırma riskini azaltır.",
+      "sinirlar": "Deneysel; son etkinlik Temmuz 2026.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2931",
+      "ad": "Agent Safehouse",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://agent-safehouse.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "macOS'ta sandbox-exec ve birleştirilebilir, reddi öncelikli profillerle LLM kodlama ajanlarının yalnız ihtiyaç duyduğu dosya ve entegrasyonlara erişmesini sağlar; başlıca ajanlar için hazır profiller.",
+      "sinirlar": "Yalnız macOS; sandbox-exec Apple tarafından resmi olarak desteklenmeyen eski bir arabirim.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2932",
+      "ad": "Greywall",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://greywall.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Linux ve macOS'ta konteynersiz, reddi varsayılan dosya/ağ/sistem çağrısı sandbox'ı; öğrenme modu en az yetki profili üretir, tüm ağ trafiği greyproxy panelinden canlı izlenir.",
+      "sinirlar": "Genç proje; platform desteği farklılık gösterir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2933",
+      "ad": "Sandlock",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sandlock.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Landlock, seccomp-bpf ve seccomp kullanıcı bildirimiyle root, cgroup veya konteyner olmadan güvenilmeyen kodu dosya, ağ, IPC ve kaynak sınırlarıyla kısıtlayan hafif Linux süreç sandbox'ı.",
+      "sinirlar": "Yalnız Linux; süreç düzeyi yalıtım VM kadar güçlü değildir.",
+      "ihtiyaclar": [
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-2934",
+      "ad": "Zerobox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/afshinm/zerobox",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenAI Codex'in sandbox çalışma zamanını kullanan, reddi varsayılan yazma/ağ/ortam değişkeni politikası ve yalnız onaylı hostlara kimlik bilgisi enjeksiyonu yapan çapraz platform süreç sandbox'ı; Rust, TypeScript, Python SDK.",
+      "sinirlar": "Windows yok; son etkinlik Mayıs 2026.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2935",
+      "ad": "OpenKruise Agents",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openkruise.io/kruiseagents/introduction",
+      "olgunluk": "erken",
+      "ne_saglar": "Kubernetes'te ajan iş yükleri için operatör ve en iyi uygulamalar: araç kullanımı için yalıtılmış ortamlar, kalıcı çalışma alanları ve sandbox yaşam döngüsünün düşük maliyetli yönetimi.",
+      "sinirlar": "CNCF alt projesi ancak henüz genç.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2936",
+      "ad": "k7 (Katakate)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.katakate.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Kata, Firecracker, QEMU ve K3s üzerinde güvenilmeyen kod için hafif VM sandbox'larını ölçekli oluşturma ve yönetme altyapısı; CLI, API ve Python SDK.",
+      "sinirlar": "Kubernetes ve depolama (Longhorn) işletimi gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2937",
+      "ad": "ArcBox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://arcbox.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "macOS için Rust ile sıfırdan yazılmış açık kaynak konteyner ve VM çalışma zamanı; Docker uyumlu, ajan sandbox'ları, yerel Kubernetes ve tam Linux/macOS VM'leri.",
+      "sinirlar": "Yalnız macOS; genç proje.",
+      "ihtiyaclar": [
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2938",
+      "ad": "forkd",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/deeplethe/forkd",
+      "olgunluk": "erken",
+      "ne_saglar": "Firecracker tabanlı; ısıtılmış ebeveyn anlık görüntüsünden copy-on-write ile yüzlerce mikro-VM'i milisaniyeler içinde çatallayan, ajan paralelleştirmesi (fan-out) için sandbox çalışma zamanı.",
+      "sinirlar": "KVM gerekli; genç proje.",
+      "ihtiyaclar": [
+        "N-K13-007",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2939",
+      "ad": "Dormice",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/BitMiracle-AI/Dormice",
+      "olgunluk": "erken",
+      "ne_saglar": "Tek makinede veya filoda çalışan self-host, E2B uyumlu sandbox platformu; boşta donan/durdurulan/arşivlenen kalıcı sandbox'lar, Docker+gVisor yürütücü, S3 arşivleme, tek SQLite defteri.",
+      "sinirlar": "Proje beyanına göre erken geliştirme aşamasında.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2940",
+      "ad": "Shuru",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "http://shuru.run/",
+      "olgunluk": "erken",
+      "ne_saglar": "macOS'ta Apple Virtualization.framework ile hafif Linux VM'lerde ajan çalıştıran yerel öncelikli mikro-VM sandbox'ı; Linux KVM desteği deneysel.",
+      "sinirlar": "Linux sürümü üretime hazır değil.",
+      "ihtiyaclar": [
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2941",
+      "ad": "Matchlock",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/jingkaihe/matchlock",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları geçici mikro-VM'lerde ağ izin listesiyle çalıştırır; MITM vekil ile sırları yalnız izinli hostlara giderken enjekte eder, sırlar VM'e hiç girmez.",
+      "sinirlar": "Deneysel; kırıcı değişiklik olabilir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-2942",
+      "ad": "ArtifactFS",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://workers.cloudflare.com/product/artifacts",
+      "olgunluk": "erken",
+      "ne_saglar": "Büyük git depolarını hemen çalışma ağacı olarak bağlayıp dosya içeriklerini (önce manifest ve kaynak dosyalarını) talep üzerine getiren Go FUSE sürücüsü; kısa ömürlü sandbox ve ajan ortamlarında klon bekleme süresini kısaltır.",
+      "sinirlar": "Beta sürüm; FUSE desteği gerekir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-3015",
+      "ad": "Claude Managed Agents",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://platform.claude.com/docs/en/managed-agents/overview",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude'u otonom ajan olarak çalıştırmak için yönetilen harness ve altyapı: dosya okuma, komut çalıştırma, web ve kod yürütme için güvenli sandbox, kimlik doğrulama, oturum kesintilerinde otomatik durum kalıcılığı ve zamanlanmış dağıtımlar.",
+      "sinirlar": "Kamu betası (Nisan 2026); yalnız Claude modelleri, token ücretine ek oturum-saat ücreti.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-001",
+        "N-K13-002",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-3267",
+      "ad": "LavaMoat",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://lavamoat.github.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JavaScript bağımlılık grafiğini sandbox'layan araç seti; kurulum betiklerini izin listesine bağlar (allow-scripts) ve paket başına yetenek politikası uygular.",
+      "sinirlar": "Politika üretimi ve bakımı emek ister; bazı paketlerle uyumsuzluk.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3432",
+      "ad": "Neon MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://neon.com/docs/ai/neon-mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Neon/Lakebase Postgres projelerinde dal oluşturma, göçü önce geçici dalda deneme, SQL çalıştırma ve şema karşılaştırma araçları; görev başına veritabanı dalı kurgusuna uygundur.",
+      "sinirlar": "Yalnız Neon/Lakebase; üretim dalında yazma yetkisi verilmemeli.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3506",
+      "ad": "Ellipsis",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.ellipsis.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude veya Codex tabanlı ajanları izole bulut geliştirme ortamlarında çalıştıran yönetilen platform; PR inceleme, otomasyonlar (standup özeti, test) ve GitHub, Linear, Jira, Slack, Sentry entegrasyonları.",
+      "sinirlar": "Yalnız SaaS; SOC 2 Type I; kod dış buluta gider.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K10-001",
+        "N-K15-001",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-3742",
+      "ad": "Cortex Agentic Endpoint Security (eski Koi)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.paloaltonetworks.com/cortex/agentic-endpoint-security",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uç noktalardaki tarayıcı/IDE eklentileri, MCP sunucuları, paketler ve yapay zekâ ajanlarını envanterleyip risk puanlayan ve politika ile engelleyen uç nokta güvenliği.",
+      "sinirlar": "Koi'nin Palo Alto Networks'e katılmasıyla Cortex paketine bağlandı; bağımsız lisanslama belirsiz.",
+      "ihtiyaclar": [
+        "N-K18-008",
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3746",
+      "ad": "Clawdstrike",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/backbay-labs/clawdstrike",
+      "olgunluk": "erken",
+      "ne_saglar": "Geliştirici iş istasyonları ve otonom ajan sürüleri için ajan odaklı uç nokta tespit ve müdahale (EDR) aracı.",
+      "sinirlar": "Küçük topluluk projesi; üretim olgunluğu kanıtlanmamış.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3751",
+      "ad": "Little Snitch",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.obdev.at/products/littlesnitch/",
+      "olgunluk": "olgun",
+      "ne_saglar": "macOS için uygulama bazlı giden bağlantı güvenlik duvarı; ajan araçlarının hangi sunuculara bağlandığını görme ve kural ile engelleme.",
+      "sinirlar": "Tek makine ve macOS odaklı; merkezi politika dağıtımı sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3752",
+      "ad": "OpenSnitch",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/evilsocket/opensnitch",
+      "olgunluk": "olgun",
+      "ne_saglar": "Linux için etkileşimli uygulama güvenlik duvarı; süreç bazında giden bağlantı izleme ve izin/ret kuralları.",
+      "sinirlar": "Masaüstü Linux odaklı; sunucu filosu yönetimi için tasarlanmamış.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3753",
+      "ad": "Landlock",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.kernel.org/userspace-api/landlock.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ayrıcalıksız süreçlerin kendilerine dosya sistemi ve ağ erişim kısıtı koymasını sağlayan Linux güvenlik modülü; ajan araçlarını sandbox'lamada yapı taşı olarak kullanılır.",
+      "sinirlar": "Çekirdek sürümüne göre özellik farkı (ağ kısıtı ABI v4+); tek başına tam yalıtım sağlamaz.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3763",
+      "ad": "vArmor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://varmor.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AppArmor, BPF, Seccomp ve NetworkPolicy ile Kubernetes kapları için yalıtım/sertleştirme politikalarını yöneten bulut-yerel sistem; ajan çalıştırıcılarının yetkisini daraltmada kullanılabilir.",
+      "sinirlar": "Kubernetes gerektirir; politika yazımı çekirdek güvenlik bilgisi ister.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3867",
+      "ad": "Riptides",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://riptides.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Çekirdek düzeyinde SPIFFE tabanlı iş yükü kimliği, sırsız kimlik bilgileri, otomatik mTLS ve ajan başına ağ çıkış kontrolü; kod değişikliği gerektirmez.",
+      "sinirlar": "Linux çekirdek bileşeni gerektirir; genç ürün.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-003",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3900",
+      "ad": "Keylime",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://keylime.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "TPM tabanlı uzaktan doğrulama (attestation) ve çalışma zamanı bütünlük ölçümü; ajan çalıştırıcı düğümlerinin önyükleme ve dosya bütünlüğünü sürekli doğrular.",
+      "sinirlar": "TPM donanımı gerektirir; kurulumu ve politika bakımı uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3934",
+      "ad": "Kubernetes RuntimeClass",
+      "tur": "platform",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://kubernetes.io/docs/concepts/containers/runtime-class/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Pod'ların hangi konteyner çalışma zamanı yapılandırmasıyla (ör. gVisor, Kata Containers) koşacağını adlandırılmış sınıflarla seçer; sınıf başına ek kaynak yükü ve düğüm yerleşimi tanımlanır. 'Kod üzerinde işlem yapan' ajan rolleri için güçlü yalıtımlı, 'akış yöneten' roller için standart çalışma zamanı gibi rol başına çalışma zamanı sınıfının altyapı karşılığıdır.",
+      "sinirlar": "Yalnız yalıtım/çalışma zamanı boyutunu kapsar; araç izinleri, bağlam ve kaynak kotası gibi diğer sınıf gereksinimleri ayrı mekanizmalarla tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K10-007"
+      ]
+    },
+    {
+      "id": "AR-3972",
+      "ad": "Nix",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://nixos.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Saf fonksiyonel paket yöneticisi; flake.lock ile tüm girdileri (nixpkgs commit'i, araç ve derleyici sürümleri) içerik özetleriyle sabitler, aynı kilitle her ortamda aynı araç zincirini üretir—koşu başında araç/paket sürümlerini dondurmak için güçlü temel.",
+      "sinirlar": "Öğrenme eğrisi dik; flakes hâlâ deneysel bayrakla sunuluyor; Windows yerel desteği yok.",
+      "ihtiyaclar": [
+        "N-K11-006",
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-3973",
+      "ad": "GNU Guix",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://guix.gnu.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşlevsel paket yöneticisi; `guix time-machine` ve kanal dosyalarıyla belirli kanal commit'lerine sabitlenmiş ortamı yeniden üretir, `guix describe` kullanılan sürümleri kaydeder; kaynak tabanlı tekrarlanabilir derleme.",
+      "sinirlar": "Yalnız Linux (ve Hurd); özgür yazılım ilkesi nedeniyle bazı araçlar varsayılan kanalda yok; geliştirme 2025'te Codeberg'e taşındı.",
+      "ihtiyaclar": [
+        "N-K11-006",
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-3975",
+      "ad": "ReproZip",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.reprozip.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Komut satırı çalıştırmasını sistem çağrısı izlemesiyle yakalayıp kullanılan tüm dosya, kütüphane ve ortam değişkenlerini tek pakete (.rpz) koyar; paket Docker/Vagrant ile yeniden oynatılabilir—bir koşunun fiili bağlamının kanıt paketi.",
+      "sinirlar": "İzleme yalnız Linux'ta; son commit Şubat 2026; ajan koşularına uyarlamak için sarmalayıcı gerekir.",
+      "ihtiyaclar": [
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-3987",
+      "ad": "PrairieLearn",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (CE) + MIT bölümleri; EE ayrı lisans",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.prairielearn.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Harici notlayıcı Docker konteynerlerinde gönderilen kodu gönderenin görmediği test dosyalarıyla, ağ erişimi kapalı ve süre sınırlı biçimde çalıştırır; doğrulayıcının yalnız çıktıya ve gereksinime bakan yalıtılmış çalışmasına örnek altyapı.",
+      "sinirlar": "Eğitim platformu; AGPL ve ayrı lisanslı EE bölümleri.",
+      "ihtiyaclar": [
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-3988",
+      "ad": "Autolab",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "http://www.autolabproject.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomatik notlanan programlama ödevleri; Tango hizmetiyle notlama betiklerini yalıtılmış konteyner/VM'de çalıştırır, notlayıcı dosyaları ve gizli testler gönderene kapalıdır.",
+      "sinirlar": "Eğitim odaklı; kurumsal SSO ve ölçek için uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-4117",
+      "ad": "Morph Cloud",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.morph.so/web/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar için bulut VM'leri; Infinibranch ile çalışan ortamın anlık görüntüsünü alma, çoğaltma ve dallandırma; ajanın herhangi bir durumdan yeniden başlatılması ve adım düzeyinde geri dönüş.",
+      "sinirlar": "Yönetilen bulut; fiyat ve veri yerelliği ayrıntıları sınırlı; dış yan etkileri geri almaz.",
+      "ihtiyaclar": [
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-4118",
+      "ad": "Sprites",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://sprites.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar için kalıcı Linux bilgisayarlar: yazmada-kopyalama ile yaklaşık bir saniyede otomatik dosya sistemi checkpoint'i ve geri yükleme; kimlik bilgisi saklamadan dış hizmet bağlayıcıları.",
+      "sinirlar": "Fly.io'ya bağlı; dış sistemlerdeki yan etkileri geri almaz.",
+      "ihtiyaclar": [
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-4119",
+      "ad": "Plandex",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://plandex.ai/",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Uzun, çok dosyalı görevler için terminal ajanı: değişiklikleri onaylanana kadar ayrı bir inceleme alanında (kümülatif diff) tutar, plan sürümlerini ve dallarını yönetir, herhangi bir adıma geri sarar.",
+      "sinirlar": "Bulut hizmeti Kasım 2025'te kapandı; depo Ekim 2025'ten beri güncellenmiyor — desen referansı olarak değerli.",
+      "ihtiyaclar": [
+        "N-K28-001",
+        "N-K28-003"
+      ]
+    },
+    {
+      "id": "AR-4393",
+      "ad": "Colima",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://colima.run/",
+      "olgunluk": "olgun",
+      "ne_saglar": "macOS ve Linux'ta Lima sanal makinesi üzerinde Docker, containerd ve isteğe bağlı Kubernetes çalışma zamanlarını en az kurulumla sağlar; yerel ajan ve test işlerini konteyner içinde yalıtmaya yarar.",
+      "sinirlar": "Geliştirici makinesi içindir; üretim çalıştırıcısı veya çok kiracılı yalıtım sınırı değildir; VM kaynak ayarı elle yapılır.",
+      "ihtiyaclar": [
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    }
+  ]
+}

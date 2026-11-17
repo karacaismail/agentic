@@ -1,0 +1,610 @@
+{
+  "task_id": "CONT-Q-S0034-5d75c1c0-A1",
+  "root_scope": "Q-S0034-5d75c1c0",
+  "source": "agents/13Agentic.pdf",
+  "sha256": "9e22743f99028179159de413d99c6f7754ca82acc9af6cbea452761201850468",
+  "manifest_path": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/9e22743f99028179159de413d99c6f7754ca82acc9af6cbea452761201850468/v2/manifest-bdeef22d96a920e0b3c2.json",
+  "review_mode": "read_only_text_layer",
+  "overview_read": true,
+  "overview_note": "p0001-overview.png okundu. Görselde yalnız 'edge-case.agent' notu ve 'Section 90' akışı var. Atanan birim görsel bölge değil. Bu rapordaki hiçbir öğe görsel kanıt sayılmaz.",
+  "unit_reviews": [
+    {
+      "unit_id": "p0001-text-exterior",
+      "source_locator": {
+        "file": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/9e22743f99028179159de413d99c6f7754ca82acc9af6cbea452761201850468/v2/p0001-text-exterior.json",
+        "format": "JSON dizisi, her öğe {text, bbox}. Dizin i = (dosya satırı - 3) / 9.",
+        "array_range_total": "[0-28002]",
+        "word_count_manifest": 28003,
+        "bbox_extent_observed": "x yaklaşık 380 ile 40676 arası, y yaklaşık -42745 ile +5278 arası. Görsel bölge 0..3360 x 0..3040 idi.",
+        "visual_region": false
+      },
+      "status": "partial",
+      "coverage_note": "28003 kaydın tamamının 'text' değeri okundu. 'bbox' değerleri yalnız [0-44] aralığında ve nokta kontrollerde okundu. Kayıtlar kutu ve satır olarak gruplanmadı. 4457 kayıt tek karakterdir ve anlamlandırılamadı.",
+      "items": [
+        {
+          "item_id": "EXT-01",
+          "observation": "Çok sayıda kelimede harfler düşmüş. Örnekler: 'rontend', 'oding', 'Kaul', 'aan', 'angGraph', 'penHands', 'GEEN', 'ED', 'BKED', 'AD', 'NDA'.",
+          "interpretation": "Dışa aktarımda bazı glifler metin katmanına yazılmamış. Olası eksik harfler: b, f, j, w, C, F, L, M, O, R, V, W, İ, Ç, Ö, Ü. 'NDA' büyük olasılıkla 'NVIDIA' demektir, gizlilik sözleşmesi değildir. Metin katmanı tek başına kelime düzeyinde kanıt değildir.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[0-60]",
+              "sample": "'rontend' 'Backend', 'Kaul' 'kriterleri', 'oding' 'agents'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[12285-12290]",
+              "sample": "'nvidia/NDA' 'Nemotron-'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-02",
+          "observation": "4457 kayıt tek karakterden oluşuyor. Uzun diziler halinde geliyor. Ayrıca 'eaa', 'asdesc', 'dedeaenandsadededeeesgeasndasaacgessanaa' gibi okunamayan kelimeler var.",
+          "interpretation": "Bu bölgeler büyük olasılıkla döndürülmüş, harf aralıklı veya üst üste binmiş metin kutularıdır. Metinden anlam çıkarılamaz. Yalnız görsel kiremitle okunabilir.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[3553-3705]",
+              "sample": "'a' 'imin' 'c' 'd' 'o' 'o' ... tek karakter dizisi"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[22560-22660]",
+              "sample": "'ed' 't' 'i' 'e' 'le' 's' ..."
+            },
+            {
+              "locator": "grep count",
+              "sample": "\"text\": \".\", eşleşmesi 4457"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-03",
+          "observation": "Sayılar eksik rakamla geçiyor. '2' '0' 'aktif' 'dk' dizisinde '2' ile '0' arasında 7,4 birim boşluk var. '0 Eylül 202' ve '202 090' tarihleri yarım görünüyor.",
+          "interpretation": "Bir rakam düşmüş olabilir. '120 aktif dk' ve '30 Eylül 2025' olası okumalardır. Bu değerler doğrulanmadan görev bütçesi veya tarih olarak kullanılmamalıdır.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[1166-1169]",
+              "sample": "bbox x: '2' 38563.9-38573.7, '0' 38581.1-38591.5, 'aktif' 38595.3-38628.5"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[1465-1469]",
+              "sample": "'2' '0' 'aktif' 'dk'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[3426-3429]",
+              "sample": "'0' 'Eylül' '202' 'araştırmas'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-04",
+          "observation": "Standart Süreç akışı metin olarak var: Plane'de görev seçilir, geliştirici tek komutla süreci başlatır ('/startTask'), proje kuralları yüklenir, codebase araştırılır, kapsamlı görev araştırması, plan hazırlanır, plan gözden geçirilir (yapay zeka kontrol eder), kodlama başlar, otomatik makine kontrolleri, düzeltme ajanı, deterministik kapılar, testler, Plane'de görev 'Done'.",
+          "interpretation": "Başlangıç insan komutuyla. Bu, kullanıcının güncel 'uygun Plane Todo görevleri otomatik alınsın' kararından farklıdır. Tarihsel fark olarak kaydedilmelidir.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[512-601]",
+              "sample": "'Plane’de' 'Bir' 'Görev' 'Seçilir' 'Geliştirici' 'Tek' 'Komut' 'ile' 'Süreci' 'Başlatır' '/startask'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[13871-13887]",
+              "sample": "'Plane’de' 'Start' 'task' 'verilince' 'hazır' 'görevin' 'akışını' 'aşlatır'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-05",
+          "observation": "Döngü ve bütçe sınırları birden çok biçimde geçiyor: 'max x2 defa', 'max 2 döngü', 'En çok 2 test düzeltmesi', 'DEV kabulünden TDD'ye en çok 2 onarım dönüşü', 'Görevde 2 hata veya [1]20 aktif dk veya maliyet tavanı, ilk dolan sınırda dur', 'model değişimi sayacı sıfırlamaz', 'Bunlar ana görev bütçesini yenilemez'.",
+          "interpretation": "Sayı hep 2 görünüyor ama ölçü birimi değişiyor: deneme, döngü, düzeltme, hata. Sınır dolunca varılan durum da değişiyor: 'Geliştiriciye devret', 'Blocker'a raporla', 'görev BLOCKED olur', 'Plane'e kanıt paketi'. Tek bir bütçe sözleşmesi metinden çıkmıyor. Dot'un '3+2/10' ve '3+3/12' notuyla aynı belirsizlik.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[1461-1479]",
+              "sample": "'Görevde' '2' 'hata' 'veya' '2' '0' 'aktif' 'dk' 'veya' 'maliyet' 'tavan' 'lk' 'dolan' 'sınırda' 'dur' 'model' 'değişimi' 'sayacı' 'sıfırlamaz'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[1378-1393]",
+              "sample": "'DE' 'kaulünden' 'TDDye' 'en' 'çok' '2' 'onarım' 'dönüş' ... 'Bunlar' 'ana' 'görev' 'ütçesini' 'yenilemez'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[1890-1894]",
+              "sample": "'En' 'çok' '2' 'test' 'düzeltmesi'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[15504-15522]",
+              "sample": "'En' 'fazla' 'düzeltme' 'döngüsü' 'sonunda' 'hl' 'aşarısızsa' ... 'görev' 'BKED' 'olur'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-06",
+          "observation": "Kesinti davranışı sınırlı: 'Durunca ne olur?', 'Kod/bütçe tükendi, Plane'e kanıt paketi', 'Altyapı arızası BLOCKED-INFRA, otomatik yeniden başlama yok', 'Altyapı [3]0 sn ve [6]0 sn sonra tekrar, düzeldi mi, BLOCKED-INFRA kayıtla', 'Hata olursa belirlediğimiz kurala göre yeniden dener veya akışı durdurup sorunu kaydeder', LangGraph için 'checkpoint resume replay time-travel'.",
+          "interpretation": "Altyapı hatasında kısa yeniden deneme ve sonra durma var. Hesap kotası bitince oturumun kaldığı yerden devamı tanımlı değil. Kullanıcının 3. ve 4. hedefi bu metinle karşılanmıyor.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[1750-1790]",
+              "sample": "'Durunca' 'ne' 'olur?' ... 'Kod/ütçe' 'tükendi' 'Plane' ... 'kanıt' 'paket'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[1784-1790]",
+              "sample": "'Altyapı' 'arızası' 'BKEDNA' 'otomatik' 'yeniden' 'aşlama' 'yok'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[1285-1301]",
+              "sample": "'Altyapı' '0' 'sn' 've' '0' 'sn' 'unner' 'sonra' 'tekrar' 'düzeldi' 'mi' 'BKEDNA' 'kayıtla'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[13898-13937]",
+              "sample": "'Hata' 'olursa' 'elirlediğimiz' 'kurala' 'göre' 'yeniden' 'dener' ... 'akışı' 'durdurup' 'sorunu' 'kaydeder'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[6456-6462]",
+              "sample": "'angGraph' 'heckpoint' 'resume' 'replay' 'time' '-travel'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-07",
+          "observation": "Yürütme zinciri metinde: Plane 'Start task' verilince Dagu hazır görevi alır ve sırayı yönetir. Ajanlar ayrı OpenCode oturumlarında çalışır. Birbirini beklemeyen işler aynı anda başlayabilir. Dagu kod yazan bir yapay zeka değildir. GPU model servisi ayrıdır.",
+          "interpretation": "Kaynaktaki iş akışı motoru adayı Dagu'dur. Dot'un tablosunda Dagu ve OpenCode yok. Temporal metinde yalnız bir satırda 'Temporal/DBOS ile dayanıklı çalışma' olarak geçiyor. Karşılaştırma adayı listesi bu iki araçla güncellenmeli.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[13829-13962]",
+              "sample": "'Dagu' 'nedir' 'ne' 'yapar?' ... 'Aanlar' 'ayrı' 'penode' 'oturumlarında' 'çalışır' ... 'Dagu' 'kod' 'yazan' 'ir' 'yapay' 'zek' 'değildir'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[6388-6398]",
+              "sample": "'Temporal/DBS' 'ile' 'dayanıklı' 'çalışma' 'proeleriniz' 'için' 'en' 'uyumlu' 'seçenek'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[14377-14386]",
+              "sample": "'https//githu' '.com/' 'depo' 'koyar' 'dagu-org/dagu' ... 'opencode.ai/docs/'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-08",
+          "observation": "Ajan kataloğu ve model tablosu var. Ajan adları: edge-case, test-first, main-relation-map, module.relation.map, gap-analysis, maturity-level, research, performance, task-dependency-cluster, dependency-priority, solid, authorization, unknown-unknowns, mobile-first, technology-boundary, git-scenario, definition-of-ready, documentation, rules.master, frontend-backend-router. Model satırlarında 'Kurulum yapılmadı, atamalar öneridir' ve 'bağımsız yerel doğrulama yapılmadı' tekrar ediyor.",
+          "interpretation": "Katalog bir öneri tablosudur. Hiçbir atama kurulu veya ölçülmüş sayılamaz. Benchmark puanları üretici bildirimi veya Artificial Analysis kaynaklıdır. Puan rakamları glif kaybı nedeniyle güvenilmez.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[3461-3465]",
+              "sample": "'Kurulum' 'yapılmadı' 'atamalar' 'öneridir'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[12314-12322]",
+              "sample": "'ağımsız' 'yerel' 'doğrulama' ... 'yapılmadı.'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[13475-13520]",
+              "sample": "'Bağımsız' 'Artificial' 'Analysis' 'AA' ... 'artificialanalysis.ai/' 'models/' 'comparisons/' 'claude-fale' '--' 'vs-'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[3564-3570]",
+              "sample": "'test-first.agent' ... 'edge-case.agent'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-09",
+          "observation": "Uzman ajan akışı: Planlama Ajanı görevi ve etkilenen dosyalara bakarak gerekli uzmanları belirler. Dagu koşul ve sıraya göre OpenCode oturumlarını başlatır. 'Gerekmeyen uzman çalıştırılmaz'. 'Her görevde 20 uzmanın birden çalışması gerekmez'. 'Ajanlar ayrı proje kopyaları kullanır, ortak dosyaları aynı anda değiştirmez'.",
+          "interpretation": "Kapasite ilkesi: uzman sayısı eşzamanlı ajan sayısı değildir. Bu, Dot'un '20 persona otomatik eşdeğer değil' notuyla uyumlu. Ayrı çalışma kopyası iddiası yalıtım kanıtı değildir.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[14836-14937]",
+              "sample": "'Planlama' 'Aanı' ... 'gerekli' 'uzmanları' 'elirler' ... 'Gerekmeyen' 'uzman' 'çalıştırılmaz.' ... 'ortak' 'dosyaları' 'aynı' 'anda' 'değiştirmez.'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[15254-15263]",
+              "sample": "'Her' 'görevde' '20' 'uzmanın' 'irden' 'çalışması' ... 'gerekmez.'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-10",
+          "observation": "TDD kuralları liste halinde: testler geliştirme öncesinde yazılır ve çalıştırılır, her kabul kriteri en az bir testle eşleşir, RED kanıtı olmadan Coding Agent çalışamaz, Coding Agent minimum kodu yazar, Coding Agent testleri silemez, atlayamaz, zayıflatamaz, tüm testler geçmeden görev tamamlanamaz. Ayrı bir yerde 'Her iş yeni test istemez, uygun test zaten varsa kullanılır'.",
+          "interpretation": "Test üretim kapsamını sınırlayan açık bir sayı yok. Yalnız görsel bölgedeki edge-case için 'max 2 döngü' var. Kullanıcının 'ajan sürekli yeni senaryo ekliyor' sorunu metinde doğrudan çözülmüyor. Testi değiştirme yasağı var, test ekleme sınırı yok.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[15346-15511]",
+              "sample": "'Testler' 'development' 'öncesinde' ... 'oding' 'Agent' 'testleri' 'silemez' 'atlayamaz' ... 'zayıflatamaz.'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[1932-1953]",
+              "sample": "'Her' 'iş' 'yeni' 'test' 'istemez' ... 'test' 'zaten' 'varsa' ... 'kullanılır.'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-11",
+          "observation": "Bağımsız doğrulama ilkeleri: 'Kodu yazan ile doğrulayan farklı olmalı', 'Kör doğrulayıcı (context-isolated verifier)', 'Doğrulayıcı ajanın promptuna kaynak kodun diff'i verilmez', 'Farklı model ailesi ek kanıttır, hatasızlık garantisi değildir', 'Tautolojik testi yasaklama', 'Bilinen kötü sürümde kırılıyor mu kontrolü', 'Otomatik mutasyon testi ile oracle gücünü ölçme', 'Test/baseline değişikliği ayrı risk sınıfı'.",
+          "interpretation": "Dot'un 'farklı model bağımsızlık kanıtı değil' ve 'oracle problemi' notlarıyla aynı içerik. Yeni keşif sayılmaz. Uygulama kanıtı metinde yok.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[15621-15658]",
+              "sample": "'racle' 'Provenance' 'edger' ... 'Kör' 'Doğrulayıcı' '(ontext' '-' 'solated' 'erifier' ... 'Kodu' 'Yazan' 'ile' 'Doğrulayan' 'olleri' 'Ayırma'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[8848-8895]",
+              "sample": "'Yazardan' 'farklı' ... 'arklı' 'model' 'ailedeki' ... 'hatasızlık' 'garantisi' ... 'ikinci' 'inceleme' 'değil.'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[16209-16222]",
+              "sample": "'Tautoloik' 'Testi' 'Yasaklama' 'Bilinen' 'Kötü' 'Sürümde' 'Kırılıyor' 'mu'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-12",
+          "observation": "Ortam cümlesi: 'Tüm testler DEV'de çalışır. Alpha / beta / rc / prod teslim ortamlarıdır'. İnsan rolü: 'İnsan onayı otomasyon kısımları duraksıyor ama durmuyor', 'Kırmızı hiçbir yere devam etmiyor, burası hat sonu', 'Beyaz renkli kısımlar otomatik kontrol ve geçiş', 'Yeşil renkli kutular insanın devreye girdiği kısımlar'.",
+          "interpretation": "Dot ekindeki ortam sınırıyla uyumlu. Renk açıklamaları yalnız görselle doğrulanabilir. Metin katmanında renk yok.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[1914-1927]",
+              "sample": "'Tüm' 'testler' 'DE’de' 'çalışır' '.' 'Alpha' '/' 'eta' '/' 'rc' '/' 'prod' 'teslim' 'ortamlarıdır'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[2941-2947]",
+              "sample": "'nsan' 'onayı' 'tomasyon' 'kısımları' 'duraksıyor' 'ama' 'durmuyor.'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[2134-2144]",
+              "sample": "'Yeşil' 'renkli' 'olan' 'kutular' ... 'nsanın' 'devreye' 'girdiği' 'kısımlar'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-13",
+          "observation": "ADR açıklaması ve örneği: 'ADR Architecture Decision Record, Türkçesi Mimari Karar Kaydı', örnek karar lojistik modülünde kargo firmalarının adapter yapısıyla entegre edilmesi, neden her firma farklı API kullanıyor, alternatif çekirdeğe doğrudan yazmak, sonuç yeni kargo firması eklemek kolaylaşır. ADR şablon alanları: Bağlam, Değerlendirilen seçenekler, Seçilen çözüm, Seçilme nedeni, Reddedilen alternatifler, Sonuçları.",
+          "interpretation": "Belge şablonu tanımlı. Hangi görevlerde ADR zorunlu olduğu metinden çıkmıyor.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[278-302]",
+              "sample": "'AD' 'Architecture' 'Decision' 'ecord' 'demektir' '.' 'Türkçesi' ... 'imari' 'Karar' 'Kaydı'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[357-418]",
+              "sample": "'oistik' 'modülünde' 'kargo' 'firmaları' 'adapter' 'yapısıyla' 'entegre' 'edilecek'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[2866-2929]",
+              "sample": "'Bağlam' ... 'Değerlendirilen' 'seçenekler' ... 'Seçilen' 'çözüm' ... 'eddedilen' 'alternatifler' ... 'Sonuçları'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-14",
+          "observation": "Görsel ve mobil doğrulama tartışması çok uzun ve iki kez tekrar ediyor. Yorumcu adları: Ali Bal, Bora Aydeğer, Çetin Bektemur, Sefa Kılıç, 'xxxx', Ahmet Şeker. Konular: safe-area, 100vh yerine dvh/svh, touch-action, font fallback metrikleri, gerçek cihaz kabul kapısı, headless testin yakalayamadığı kusurlar, 'Tek PASS/FAIL yerine çok boyutlu kanıt', 'Kontrol edilmeyen cihaz TEST REQUIRED olarak açıkça belirt'.",
+          "interpretation": "Bu bölüm agentic altyapıdan çok arayüz kalite rehberidir. Kök kapsam için yalnız 'gerçek cihaz kabul kapısı' ve 'TEST REQUIRED' durumu ilgilidir. Aynı blok 2 kez, bazı başlık şeritleri 8 kez tekrar ediyor. Metinden sayım yapılırsa çift sayılır.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[15584-15609]",
+              "sample": "'Ali' 'Bal' '-' 'Yazılar' ... 'Bora' 'Aydeğer' 'etin' 'Bektemur' 'Sefa' 'Kılıç' 'xxxx' 'Ahmet' 'eker'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[21483-21706]",
+              "sample": "'A' 'oding' 'agents' 'ile)' 'xxxx' 'Agent' 'Standart' 'Süreç' 'Error' 'Karar' 'Döngü' 'AD' 'D' 'SKS' 'P' 'AGENTS' sekiz kez"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[18106-18115]",
+              "sample": "'Kontrol' 'edilmeyen' 'cihaz' 'TEST' 'EDED' 'durumları' 'açıkça' 'elirt'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[21000-21010] ve [23327-23337]",
+              "sample": "aynı 'Sayfa açılır açılmaz imleci zorla kutuya koymak yasak' bloğu iki kez"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-15",
+          "observation": "Dış bağlantılar: Yandex Disk bağlantısı kesik ('https//disk' '.yandex.com/d/Ane' '-asxpAiGZg'), Figma panosu ('.figma.com/' 'oard/' 'A9efH/Agentic' 'node-id'), 'opencode.ai/docs/', 'dagu-org/dagu', 'huggingface.co/', 'artificialanalysis.ai/models/comparisons/claude-fale-...-vs-...', 'GitHub Issues'.",
+          "interpretation": "Bu bağlantılar bu görevde açılmadı. Kesik bağlantı glif kaybı nedeniyle kullanılamaz. Figma kaynağı metin denetimi için PDF'ten daha güvenilir olabilir.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[9257-9259]",
+              "sample": "'https//disk' '.yandex.com/d/Ane' '-asxpAiGZg'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[14794-14840]",
+              "sample": "'penode' '.figma.com/' ... 'oard/' ... 'A9efH/Agentic' ... 'node-id'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[17324-17325]",
+              "sample": "'GitHub' 'ssues'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-16",
+          "observation": "Yazar damgası 'smail Karaca' 100'den fazla kez tek başına geçiyor. 'Ali Bora' notlar halinde geçiyor. Örneğin 'Amaç bariz hataları bedavaya elemek, pahalı yapay zeka denetimini boşa çalıştırmamak. Ali Bora'.",
+          "interpretation": "Bu damgalar Figma yorum sahipleridir. Görev sahibi veya operasyon sorumlusu değildir. Metinden rol veya sahip çıkarılmamalıdır.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[18-19], [34-40], [55-61]",
+              "sample": "'smail' 'Karaca' tekrarları"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[495-509]",
+              "sample": "'Amaç' 'ariz' 'hataları' 'edavaya' 'elemek' 'pahalı' 'yapay' 'zeka' 'denetimini' 'oşa' ... 'çalıştırmamak.' 'Ali' 'Bora'"
+            }
+          ]
+        },
+        {
+          "item_id": "EXT-17",
+          "observation": "Örnek kabul kriterleri: sepet hesabı ('200 TL ürün, 2 adet, fiyat ile miktarı çarpar, toplam döndürür, 0 ve negatif miktar senaryosu') ve stok ('stok 0 ise sipariş açılmamalı, açılıyorsa test yakalar'). Yetki örneği: 'Yönetici stok güncellesin, müşteri güncelleyemesin'.",
+          "interpretation": "Örnekler açıklayıcıdır. Gerçek ürün kuralı değildir. Rakamlar glif kaybından etkilenmiş olabilir.",
+          "evidence": [
+            {
+              "locator": "p0001-text-exterior.json#[1307-1358]",
+              "sample": "'Test' '200' 'T' 'ekler' '2' 'adet' ... 'fiyat' 'ile' 'miktarı' ... 'çarpar' 'döndürür' ... 'negatif' 'miktar'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[2106-2127]",
+              "sample": "'stok' '0' 'ise' ... 'sipariş' 'açılmamalı.' ... 'test' ... 'yakalar.'"
+            },
+            {
+              "locator": "p0001-text-exterior.json#[15166-15172]",
+              "sample": "'Yönetici' 'stok' 'güncellesin' 'müşteri' 'güncelleyemesin'"
+            }
+          ]
+        }
+      ],
+      "remaining": [
+        "bbox değerleri [45-28002] aralığında okunmadı. Kelimeler kutu ve satır olarak gruplanmadı.",
+        "4457 tek karakterlik kayıt ve okunamayan kelime dizileri anlamlandırılmadı. Yalnız görsel kiremitle çözülebilir.",
+        "Dış metin alanı görsel bölge dışındadır. Bu alan için görsel kiremit yok. Ok yönü, kutu sınırı ve renk bilgisi bu birimden çıkarılamaz.",
+        "Dış bağlantılar (Yandex Disk, Figma, opencode.ai, dagu, huggingface, artificialanalysis.ai) açılmadı.",
+        "Eksik rakam sorunu çözülmedi. '120 dk', '30 sn', '60 sn', '30 Eylül 2025' okumaları varsayımdır.",
+        "Tekrarlanan blokların kaç kez ve hangi çerçevede yer aldığı koordinatla doğrulanmadı."
+      ]
+    }
+  ],
+  "five_angle_review": {
+    "ic_celiskiler": [
+      "Döngü sınırı hep 2 ama birim değişiyor: deneme, döngü, test düzeltmesi, hata. Bkz EXT-05.",
+      "Sınır dolunca varılan durum üç farklı adla geçiyor: Geliştiriciye devret, Blocker'a raporla, BLOCKED. Bkz EXT-05, EXT-06.",
+      "'Her kabul kriteri en az bir testle eşleşir, kapsam yüzde 100' ile 'Her iş yeni test istemez' yan yana. Bkz EXT-10.",
+      "'İnsan onayı otomasyonu duraksatır ama durdurmaz' ile 'Kırmızı hat sonu' aynı metinde. Hangi durumda hangisi geçerli, metinden çıkmıyor. Bkz EXT-12."
+    ],
+    "dis_bagimliliklar": [
+      "Plane, Dagu, OpenCode, Figma panosu, GitHub, Playwright, pytest/vitest, vLLM/SGLang GPU servisi.",
+      "Model ve benchmark kaynakları: Hugging Face model kartları, Artificial Analysis, Terminal-Bench 2.0, SWE-bench Verified, LiveCodeBench, OSWorld-Verified, ScreenSpot-Pro, MTEB, OmniDocBench.",
+      "Çerçeve adayları: LangGraph, PydanticAI, OpenHands, Aider, Goose, Strands, AutoGen, Google ADK, smolagents, Mastra, Dify, Langflow, Flowise (metinde 'Ağustos 2025'te arşivlendi' notu var)."
+    ],
+    "yanlis_kabul_riskleri": [
+      "Metin katmanındaki kelimeler ve sayılar glif kaybı nedeniyle yanlış okunabilir. 'NDA' örneği. Bkz EXT-01, EXT-03.",
+      "Ajan ve model atamaları öneridir, kurulu değildir. Tablo kurulum kanıtı sayılamaz. Bkz EXT-08.",
+      "Tekrarlanan bloklar madde sayımını şişirir. Bkz EXT-14.",
+      "Yorum sahipleri görev sahibi değildir. Bkz EXT-16.",
+      "Renk açıklamaları metinde doğrulanamaz. Bkz EXT-12."
+    ],
+    "kapasite": [
+      "'Her görevde 20 uzmanın birden çalışması gerekmez' ve 'Gerekmeyen uzman çalıştırılmaz' ilkesi var. Bkz EXT-09.",
+      "Görev bütçesi: 2 hata, yaklaşık 120 aktif dakika, maliyet tavanı. İlk dolan sınır durdurur. Model değişimi sayacı sıfırlamaz. Rakam doğrulanmalı. Bkz EXT-05.",
+      "Ayrı OpenCode oturumu ve ayrı proje kopyası varsayımı var. Ortak Git alanı ve hesap kotası paylaşımı tanımlı değil."
+    ],
+    "kesintiden_donus": [
+      "Altyapı arızasında kısa yeniden deneme, sonra BLOCKED-INFRA ve otomatik yeniden başlama yok. Bkz EXT-06.",
+      "Bütçe bitince Plane'e kanıt paketi yazılır. Oturumun kaldığı yerden devamı tanımlı değil.",
+      "Hesap kotası ve hesap geçişi metinde yok. Kullanıcının 3. ve 4. hedefi bu kaynakla karşılanmıyor.",
+      "LangGraph checkpoint ve resume yalnız çerçeve özelliği olarak anılıyor. Zincir kanıtı yok."
+    ]
+  },
+  "dot_comparison": {
+    "already_discussed_not_new": [
+      "Bağımsız kabul ve farklı modelin bağımsızlık kanıtı olmaması (EXT-11).",
+      "Test üreten ajanın kapsamı sınırsız genişletememesi. Kaynakta değiştirme yasağı var, ekleme sınırı yok (EXT-10).",
+      "Ajan değişince kök bütçenin sıfırlanmaması. Kaynakta 'model değişimi sayacı sıfırlamaz' (EXT-05).",
+      "Ajanların yalnız DEV ortamında çalışması (EXT-12).",
+      "Rol kartı sayısının eşzamanlı ajan sayısı olmaması (EXT-09)."
+    ],
+    "new_or_different": [
+      "Kaynaktaki yürütme motoru adayı Dagu'dur. Ajan çalıştırıcı OpenCode'dur. Dot tablosunda ikisi de yok (EXT-07).",
+      "Temporal kaynakta yalnız bir satırda entegrasyon seçeneği olarak geçiyor (EXT-07).",
+      "Başlangıç insan komutuyla. Kullanıcının güncel kararı otomatik Todo alımıdır. Tarihsel fark kaydedildi (EXT-04).",
+      "Kaynaktaki geniş model kataloğunda Dot'un adaylarından farklı açık ağırlıklı modeller var. Hepsi öneri ve doğrulanmamış (EXT-08)."
+    ],
+    "dot_candidates_relevant_here": [
+      {
+        "need": "Figma PDF metin katmanının güvenilir okunması",
+        "dot_candidates": [
+          "OpenDocRouter",
+          "Hob",
+          "Nemotron Parse (kaynak içinde)"
+        ],
+        "status": "Güncel doğrulama yok. Karşılaştırma adayıdır."
+      },
+      {
+        "need": "Gereksinim, test ve kanıt ilişkisi",
+        "dot_candidates": [
+          "Provenance"
+        ],
+        "status": "Güncel doğrulama yok. Aynı adlı ürünler karıştırılmamalı."
+      },
+      {
+        "need": "Ajanlar arası teslim şeması",
+        "dot_candidates": [
+          "ReplySlip"
+        ],
+        "status": "Güncel doğrulama yok. Şema uygunluğu içerik doğruluğu değildir."
+      }
+    ]
+  },
+  "process_suggestions": [
+    {
+      "need": "Glif kaybı olan metin katmanını güvenilir metne çevirmek",
+      "tool_or_llm": "Araç: pdffonts ve pymupdf 'rawdict' ile font ve ToUnicode kontrolü. Yedek: kiremitleri OCR ile oku (Tesseract veya PaddleOCR). Dil modeli: görsel okuyabilen bir model kiremitleri okuyup metinle karşılaştırır.",
+      "why": "Mevcut metin katmanında harf ve rakam düşmesi var. Tek başına kanıt olamaz."
+    },
+    {
+      "need": "Kelimeleri kutu ve satır olarak gruplamak",
+      "tool_or_llm": "Araç: bbox'a göre deterministik kümeleme. Aynı y ve küçük x boşluğu aynı satır. Çıktı: her kutu için metin, bbox, dizin aralığı.",
+      "why": "28003 kelimeyi tek tek öğe yapmak işe yaramaz. Kutu düzeyi kanıt gerekir."
+    },
+    {
+      "need": "Bütçe ve döngü sayılarının tüm kaynaklarda karşılaştırılması",
+      "tool_or_llm": "Araç: hazırlanmış tüm metinlerde 'döngü', 'deneme', 'dk', 'hata' araması. Dil modeli: bulunan ifadeleri tek tabloya normalize eder, rakam belirsizliğini işaretler.",
+      "why": "Aynı sınır farklı birimlerle geçiyor. Tek sözleşme çıkarılmalı."
+    },
+    {
+      "need": "Ajan ve model kataloğunu yapılandırmak",
+      "tool_or_llm": "Dil modeli: sabit şemayla satır çıkarımı (ajan, rol, model, lisans, kaynak, doğrulama durumu, dizin aralığı). Araç: şema doğrulama.",
+      "why": "Katalog öneridir. Hangi satırın doğrulandığı ayrı tutulmalı."
+    },
+    {
+      "need": "Metin yerine Figma kaynağından okuma",
+      "tool_or_llm": "Araç: Figma REST API ile pano düğümlerinin metin ve konum verisini almak. Pano kimliği metinde geçiyor.",
+      "why": "PDF dışa aktarımı glif kaybediyor. Kaynak veri daha güvenilir olabilir. Yetki ve erişim ayrıca doğrulanmalı."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "EXP-1",
+      "question": "Hangi glifler metin katmanından düştü?",
+      "input": "agents/13Agentic.pdf, font listesi ve ToUnicode haritaları, 50 kelimelik örnek seti (görsel ile karşılaştırma).",
+      "expected_evidence": "Eksik glif listesi ve kelime düzeyi doğruluk oranı.",
+      "stop_condition": "Örnekte kelime doğruluğu yüzde 99'a ulaşınca veya eksik glif listesi sabitlenince dur.",
+      "status": "not_run"
+    },
+    {
+      "id": "EXP-2",
+      "question": "'2 0 aktif dk' ifadesi 120 mi, 20 mi?",
+      "input": "Dizin [1166-1169] ve [1465-1469] bbox değerleri, aynı fontta '1' glif genişliği, ilgili bölgenin görsel kiremiti.",
+      "expected_evidence": "Boşluk genişliği ile glif genişliği karşılaştırması ve görsel okuma.",
+      "stop_condition": "İki kaynak aynı sayıyı verince dur. Uyuşmazsa 'belirsiz' olarak kaydet.",
+      "status": "not_run"
+    },
+    {
+      "id": "EXP-3",
+      "question": "Dış metin kaç ayrı kutu ve çerçeve içeriyor?",
+      "input": "p0001-text-exterior.json bbox değerleri, kümeleme eşiği (y farkı 2 birim, x boşluğu ortalama harf genişliğinin 1,5 katı).",
+      "expected_evidence": "Kutu listesi, her kutunun dizin aralığı, tekrar eden kutuların sayısı.",
+      "stop_condition": "30 örnek kutu görselle eşleşince dur.",
+      "status": "not_run"
+    },
+    {
+      "id": "EXP-4",
+      "question": "Döngü ve bütçe sınırları diğer kaynaklarda aynı mı?",
+      "input": "Kök kapsamdaki tüm hazırlanmış metinler, arama terimleri: 'max', 'döngü', 'deneme', 'aktif dk', 'maliyet tavanı', '3+2', '3+3'.",
+      "expected_evidence": "Kaynak, değer, birim ve sınır sonrası durum tablosu.",
+      "stop_condition": "Tüm kaynaklar tarandığında dur.",
+      "status": "not_run"
+    },
+    {
+      "id": "EXP-5",
+      "question": "Plane, Dagu ve OpenCode zinciri gerçekten birlikte çalışıyor mu?",
+      "input": "Bu görevin kapsamı dışında. Canlı sistem gerekir.",
+      "expected_evidence": "Başlatma, kesinti, devam ve tamamlanma kaydı.",
+      "stop_condition": "Bu görevde çalıştırılmaz.",
+      "status": "not_run"
+    }
+  ],
+  "risks": {
+    "internal": [
+      "Metin katmanı kayıplı. Rakam ve kelime yanlış okunabilir.",
+      "Tek karakter dizileri ve tekrar eden bloklar sayımı bozar.",
+      "Bütçe sözleşmesi tek değil. Farklı birimler ve farklı bitiş durumları var.",
+      "Kesintiden devam ve hesap geçişi tasarımı yok."
+    ],
+    "external": [
+      "Model ve benchmark iddiaları tarihli ve üretici kaynaklı. Lisans adları glif kaybından etkilenmiş olabilir.",
+      "Dış bağlantılar doğrulanmadı. Yandex bağlantısı kesik.",
+      "Dagu, OpenCode, Plane sürüm ve yetki modelleri metinde yok."
+    ],
+    "sustainability": [
+      "Büyük Figma panosunun PDF dışa aktarımı denetim için kırılgan. Her yeni sürümde aynı kayıp tekrarlanır.",
+      "Metin denetimi görsel denetim olmadan tamamlanamaz. İki katman birlikte planlanmalı.",
+      "Aynı içeriğin birden çok kopyası panoda duruyor. Hangi kopya güncel, metinden anlaşılmıyor."
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "summary": "Metin katmanı glif kaybı içeriyor. Kelime ve rakamlar tek başına kanıt değildir.",
+      "items": [
+        "EXT-01",
+        "EXT-02",
+        "EXT-03"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "summary": "Dış metin, görsel bölge dışındaki bütün panoyu kapsıyor. Bu alan için görsel kiremit yok. Ok, kutu ve renk iddiası yapılamaz.",
+      "items": [
+        "EXT-12",
+        "EXT-14"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "medium",
+      "summary": "Döngü ve bütçe sınırları birden çok birim ve bitiş durumuyla geçiyor. Tek sözleşme yok.",
+      "items": [
+        "EXT-05"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "summary": "Başlangıç insan komutuyla. Kullanıcının otomatik Todo alımı kararına göre tarihsel fark.",
+      "items": [
+        "EXT-04"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "medium",
+      "summary": "Kaynaktaki motor adayı Dagu, çalıştırıcı OpenCode. Dot tablosunda yok. Temporal yalnız bir kez geçiyor.",
+      "items": [
+        "EXT-07"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "medium",
+      "summary": "Ajan ve model kataloğu öneridir. 'Kurulum yapılmadı' ve 'bağımsız doğrulama yapılmadı' notları metinde var.",
+      "items": [
+        "EXT-08"
+      ]
+    },
+    {
+      "id": "F7",
+      "severity": "high",
+      "summary": "Kesintiden devam yalnız altyapı hatası için tanımlı. Kota ve hesap geçişi yok.",
+      "items": [
+        "EXT-06"
+      ]
+    },
+    {
+      "id": "F8",
+      "severity": "low",
+      "summary": "Bağımsız doğrulama ilkeleri Dot notlarıyla aynı. Yeni keşif değil. Uygulama kanıtı yok.",
+      "items": [
+        "EXT-11"
+      ]
+    },
+    {
+      "id": "F9",
+      "severity": "medium",
+      "summary": "Test değiştirme yasağı var, yeni test ekleme sınırı yok. Kullanıcının kapsam büyümesi sorunu açık kalıyor.",
+      "items": [
+        "EXT-10"
+      ]
+    },
+    {
+      "id": "F10",
+      "severity": "low",
+      "summary": "Yorum sahipleri görev sahibi değildir. Sahip ve sorumlu uydurulmamalı.",
+      "items": [
+        "EXT-16"
+      ]
+    },
+    {
+      "id": "F11",
+      "severity": "low",
+      "summary": "Dış bağlantılar açılmadı. Yandex bağlantısı kesik. Figma panosu daha güvenilir kaynak adayı.",
+      "items": [
+        "EXT-15"
+      ]
+    }
+  ],
+  "report_markdown": "# CONT-Q-S0034-5d75c1c0-A1 sonucu\n\n## Ne yapıldı\n\nAtanan birim p0001-text-exterior idi. Bu birim görsel bölge değildir. 28003 kelimenin tamamı okundu. Konum değerleri yalnız ilk 45 kayıtta ve nokta kontrollerde okundu. Genel görünüm görseli okundu. Görselde yalnız 'edge-case.agent' bölümü var. Dış metin, panonun geri kalanıdır.\n\n## Durum\n\nBirim durumu 'partial'. Metin değerleri tam okundu. Kutu ve satır gruplaması yapılmadı. 4457 kayıt tek karakterdir ve okunamadı.\n\n## Ana bulgular\n\n1. Metin katmanında harfler düşmüş. Örnek: 'rontend' Frontend demek. 'NDA' büyük olasılıkla NVIDIA demek. Rakamlar da düşmüş olabilir. '2 0 aktif dk' ifadesi 120 dakika olabilir. Bu sayılar doğrulanmadan kullanılmamalı.\n2. Döngü sınırı her yerde 2 görünüyor. Ama birim değişiyor. Bazı yerde deneme, bazı yerde test düzeltmesi, bazı yerde hata sayısı. Sınır dolunca ne olacağı da üç farklı adla geçiyor.\n3. Süreç insan komutuyla başlıyor. Metinde '/startTask' ve 'Plane'de Start task verilince' yazıyor. Kullanıcının güncel kararı otomatik Todo alımıdır. Bu fark tarihsel kayıt olarak yazıldı.\n4. Kaynaktaki iş akışı motoru Dagu'dur. Ajanlar ayrı OpenCode oturumlarında çalışır. Dot tablosunda bu iki araç yok. Temporal yalnız bir satırda geçiyor.\n5. Ajan ve model tablosu öneridir. Metinde 'Kurulum yapılmadı' ve 'bağımsız doğrulama yapılmadı' yazıyor.\n6. Kesintiden devam yalnız altyapı hatası için tanımlı. Kısa yeniden deneme var. Sonra iş BLOCKED-INFRA olur. Hesap kotası bitince devam tasarımı yok.\n7. Test değiştirme ve silme yasak. Ama yeni test ekleme sayısı sınırlı değil. Kullanıcının kapsam büyümesi şikayeti burada çözülmüyor.\n8. Bağımsız doğrulama ilkeleri Dot notlarıyla aynı. Yeni keşif sayılmaz.\n\n## Açık işler\n\n- Konum değerleri gruplanmalı. Böylece kutu düzeyinde kanıt çıkar.\n- Tek karakter bölgeleri görsel kiremitle okunmalı.\n- Eksik rakamlar görselle doğrulanmalı.\n- Dış bağlantılar bu görevde açılmadı.\n\n## Deneyler\n\nBeş deney önerildi. Hepsi not_run durumundadır. Bu görevde deney yapılmadı.\n\n## Not\n\nKoordinatör sonuçları kaynaklardan ayrıca doğrulamalı. Bu rapor kabul kararı değildir. Gerçek okurla denenmedi."
+}

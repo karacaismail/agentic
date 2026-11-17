@@ -1,0 +1,1744 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-19",
+    "ad": "Geçici test ortamları ve test verisi yönetimi (sentetik/maskeli veri)",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "Görevler arası veri kirlenmesi; ajanın gerçek kişisel veriye erişmesi.",
+    "ne_zaman_zorunlu": "Kişisel veri veya paylaşılan test altyapısı varsa."
+  },
+  "arac_sayisi": 92,
+  "tur_dagilimi": {
+    "kutuphane": 20,
+    "protokol-standart": 2,
+    "acik-cekirdek": 13,
+    "ticari-saas": 7,
+    "acik-kaynak": 34,
+    "ticari-yazilim": 12,
+    "bulut-hizmeti": 3,
+    "cerceve": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0148",
+      "ad": "Testcontainers",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://testcontainers.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanı, kuyruk, tarayıcı gibi gerçek bağımlılıkları test başına geçici container'da ayağa kaldırarak izole ve tekrarlanabilir entegrasyon testi sağlar; Java, .NET, Go, Node, Python, Rust modülleri vardır.",
+      "sinirlar": "Konteyner çalışma zamanı gerektirir; test verisi maskeleme/sentetik üretim ayrı iş. Container çalışma zamanı gerektirir (bu Mac'te Colima); CI'da Docker soketi erişimi güvenlik değerlendirmesi ister. Docker uyumlu bir çalışma zamanı gerekir (Colima ile çalışır); veri üretmez veya maskelemez, yalnız ortam kurar.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-024",
+        "N-K05-029",
+        "N-K06-004",
+        "N-K06-009",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-0181",
+      "ad": "Dev Containers (Development Containers Specification)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0 (spesifikasyon)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://containers.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Geliştirme ortamını devcontainer.json ile kod olarak tanımlayan açık belirtimdir; Codespaces, DevPod, Coder, VS Code gibi araçlar aynı tanımdan görev başına özdeş ortam kurar.",
+      "sinirlar": "Güvenlik sandbox'ı değildir; iptal edilen görevde konteynerin öldürülmesi orkestrasyonun işi (kaynak). Tek başına izolasyon veya güvenlik sağlamaz; yalnız ortam tanımıdır.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1004",
+      "ad": "Keploy",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://keploy.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF ile API ve bağımlılık (DB, dış servis) trafiğini kaydedip test ve taklit (mock) üretir; yeniden oynatmada gürültülü alanları ayıklayarak sürümler arası davranış farkını yakalar.",
+      "sinirlar": "Kaydedilen davranışı oracle kabul eder; Linux/eBPF gereksinimi; kayıtlarda kişisel veri olabilir.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-024",
+        "N-K08-002",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1006",
+      "ad": "Speedscale (proxymock dahil)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (proxymock CLI ücretsiz)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://speedscale.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Trafiği kaydedip değişikliğe karşı yeniden oynatır, yanıtları gerçek üretim yanıtlarıyla otomatik karşılaştırır; HTTP, gRPC, Postgres, MySQL, Redis için protokol düzeyi taklitler ve uç nokta bazlı gecikme yüzdelikleri üretir.",
+      "sinirlar": "Kubernetes odaklı platform kısmı ticari; kayıt tabanlı oracle mevcut davranışı doğru kabul eder.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-011",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1019",
+      "ad": "Prism",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://stoplight.io/open-source/prism",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenAPI belgesinden sahte sunucu üretir ve doğrulama vekili (proxy) modunda gerçek istek/yanıtları sözleşmeye göre denetler; ön yüz arka uçtan önce çalışabilir.",
+      "sinirlar": "Karmaşık iş mantığını taklit edemez; yalnız OpenAPI.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-1022",
+      "ad": "Microcks",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://microcks.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenAPI, AsyncAPI (Kafka, MQTT vb.), gRPC ve GraphQL artefaktlarından sahte servis üretir ve gerçek uygulamanın sözleşmeye uygunluğunu test eder; olay (event) sözleşmelerini de kapsar.",
+      "sinirlar": "Sunucu bileşenleri ve Kubernetes işletimi gerektirir.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-024",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1023",
+      "ad": "WireMock",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://wiremock.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP servis sanallaştırma: dış bağımlılıkları taklit eder, gecikme ve bozuk yanıt gibi hata enjeksiyonu yapar, kayıt/yeniden oynatma sunar.",
+      "sinirlar": "Taklitler gerçek servisten sapabilir; sözleşme testiyle desteklenmeli; WireMock Cloud ticari.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-010",
+        "N-K05-024",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1024",
+      "ad": "Mock Service Worker (MSW)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mswjs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tarayıcıda Service Worker, Node'da istek yakalama ile ağ düzeyinde API taklidi; aynı taklitler birim, bileşen ve E2E testlerde ve geliştirmede kullanılır.",
+      "sinirlar": "Taklitlerin sözleşmeyle senkron tutulması gerekir.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K04-011",
+        "N-K05-010"
+      ]
+    },
+    {
+      "id": "AR-1101",
+      "ad": "Faker (Python)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://faker.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ad, adres, telefon, kimlik benzeri alanlar için yerel ayarlı (tr_TR dahil) sahte veri üretir; tohum ile tekrarlanabilir veri seti sağlar.",
+      "sinirlar": "İlişkisel bütünlük ve istatistiksel gerçekçilik sağlamaz. Şema/ilişki farkındalığı yok. İstatistiksel gerçekçilik ve tablolar arası referans bütünlüğü sağlamaz.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1102",
+      "ad": "Bogus",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/bchavez/Bogus",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET için akıcı API'li sahte veri üretici; kurallarla nesne grafikleri üretir, yerel ayar ve tohum destekler.",
+      "sinirlar": "Tek bakımcı ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1103",
+      "ad": "Datafaker",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.datafaker.net",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java için sahte veri kütüphanesi; şema tanımıyla CSV/JSON/SQL toplu veri üretimi ve yerel ayarlar.",
+      "sinirlar": "İlişkisel tutarlılık sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1104",
+      "ad": "Instancio",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.instancio.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java testlerinde nesneleri rastgele ama kurallı doldurur; tohumla tekrarlanabilirlik ve JUnit entegrasyonuyla başarısız tohumu raporlar.",
+      "sinirlar": "Alan anlamını bilmez; kısıt tanımı gerekir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1105",
+      "ad": "Polyfactory",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://polyfactory.litestar.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Pydantic, dataclass, attrs ve TypedDict modellerinden tip bilgisine göre test verisi fabrikaları üretir.",
+      "sinirlar": "Model kısıtları dışındaki iş kurallarını bilmez.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1106",
+      "ad": "SDV (Synthetic Data Vault)",
+      "tur": "acik-cekirdek",
+      "lisans": "BUSL-1.1",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.sdv.dev/sdv",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek tablo, çok tablolu ilişkisel ve zaman serisi veriden istatistiksel ve derin öğrenme modelleriyle sentetik veri üretir; kalite ve gizlilik metrikleri sunar.",
+      "sinirlar": "BUSL lisansı ticari kullanımda kısıt getirir; sentetik veri yine de yeniden tanımlama riski açısından değerlendirilmeli. Business Source License ticari/üretim kullanımını kısıtlar; gelişmiş özellikler ücretli SDV Enterprise'dadır.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-1107",
+      "ad": "Greenmask",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://greenmask.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL odaklı döküm/geri yükleme sırasında deterministik maskeleme, sentetik değer üretimi ve referans bütünlüğünü koruyan alt kümeleme yapar.",
+      "sinirlar": "Dönüştürücü yapılandırması şema bilgisi ister; yanlış yapılandırma veri sızdırabilir. Küçük çekirdek ekip; ilişkisel olmayan kaynak desteği sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1108",
+      "ad": "PostgreSQL Anonymizer",
+      "tur": "acik-kaynak",
+      "lisans": "PostgreSQL License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://postgresql-anonymizer.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Maskeleme kurallarını SECURITY LABEL ile veritabanı şemasında tanımlayan eklenti; statik ve dinamik maskeleme, anonim döküm ve sahte veri fonksiyonları sağlar.",
+      "sinirlar": "Yalnız PostgreSQL; eklenti kurulumu yönetilen veritabanlarında kısıtlı olabilir. Yalnız PostgreSQL; dinamik maskeleme sorgu performansını etkileyebilir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1109",
+      "ad": "Tonic.ai (Structural, Fabricate, Textual)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.tonic.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Structural ile üretim veritabanlarını referans bütünlüğünü koruyarak maskeleme ve alt küme çıkarma, Fabricate ile sıfırdan sentetik veri, Textual ile yapılandırılmamış metinde kişisel veri tespiti ve sentezi.",
+      "sinirlar": "Ticari ve maliyetli; maskeleme kurallarının doğrulanması kurum sorumluluğunda. Ticari lisans; kaynak veritabanına geniş okuma erişimi gerekir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1114",
+      "ad": "Toxiproxy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Shopify/toxiproxy",
+      "olgunluk": "olgun",
+      "ne_saglar": "Testlerden API ile kontrol edilen TCP vekili; gecikme, bağlantı kesme, bant genişliği ve zaman aşımı gibi ağ koşullarını simüle ederek hata dayanıklılığı senaryolarını test eder.",
+      "sinirlar": "Uygulama katmanı hatalarını (bozuk yanıt gövdesi) simüle etmez. Yalnız ağ düzeyi hatalar.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-010",
+        "N-K16-007",
+        "N-K16-009",
+        "N-K33-009",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-1130",
+      "ad": "DevPod",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://devpod.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "devcontainer.json'dan istemci tarafında, herhangi bir sağlayıcıda (yerel konteyner, Kubernetes, bulut VM) tekrarlanabilir geliştirme ortamı kurar.",
+      "sinirlar": "Depoya son itme Kasım 2025 — bakım yavaşlamış görünüyor; merkezi politika/denetim yoktur.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1131",
+      "ad": "GitHub Codespaces",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://github.com/features/codespaces",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dev container tanımından depo başına geçici bulut geliştirme ortamı açar; kuruluş politikalarıyla makine türü, süre ve gizli bilgi erişimi sınırlandırılır.",
+      "sinirlar": "GitHub'a bağımlıdır; ağ çıkış izin listesi gibi ince kontroller sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1133",
+      "ad": "Signadot",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.signadot.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te paylaşılan temel ortam üzerinde istek yönlendirmesiyle her kod değişikliği veya kodlama ajanı için hafif, geçici sandbox ortamları açar; değişikliği gerçek bağımlılıklarla doğrular.",
+      "sinirlar": "Başlık (header) yayılımı ve servis ağı gerektirir; paylaşılan veritabanlarında veri izolasyonu tam değildir.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1134",
+      "ad": "Okteto",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (CLI Apache-2.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.okteto.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes üzerinde üretime benzer, geçici geliştirme/ön izleme ortamları; kodlama ajanları için izole ortam iş akışları sunar.",
+      "sinirlar": "Kubernetes bağımlıdır; kurumsal özellikler ücretlidir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1135",
+      "ad": "vCluster",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (+ ticari vCluster Platform)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.vcluster.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek bir Kubernetes kümesinde kiracı başına ayrı kontrol düzlemli sanal kümeler oluşturur; görev/ekip başına geçici tam Kubernetes ortamı ve kota sağlar.",
+      "sinirlar": "Çalışan düğümler varsayılanda paylaşılır, tam izolasyon için ek yapılandırma gerekir; bazı özellikler ücretli platformdadır.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1136",
+      "ad": "Neon (veritabanı dallanması)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (depolama motoru) + ticari hizmet",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://neon.com/docs/introduction/branching",
+      "olgunluk": "olgun",
+      "ne_saglar": "Postgres için yazma-üzerine-kopya veritabanı dalları; görev veya PR başına saniyeler içinde üretime benzer izole veritabanı kopyası açar, sıfırlar ve siler.",
+      "sinirlar": "Pratikte yönetilen hizmet odaklıdır, self-host karmaşıktır; dallanan veri kişisel veri içeriyorsa ayrıca maskeleme gerekir.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1137",
+      "ad": "DBLab Engine",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://postgres.ai/products/dblab_engine",
+      "olgunluk": "olgun",
+      "ne_saglar": "Herhangi bir PostgreSQL için ZFS/LVM tabanlı ince klon ve veritabanı dallanması sağlar; göç testi ve ajan başına izole, sıfırlanabilir veritabanı.",
+      "sinirlar": "Yalnız PostgreSQL; ZFS/LVM altyapısı ve ayrı maskeleme adımı gerekir.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1138",
+      "ad": "Tonic Textual",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://textual.tonic.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Serbest metin ve dosyalarda NER tabanlı kişisel veri tespiti, sansür ve gerçekçi sentetik ikame yapar; LLM eğitimi/RAG verisini ve istemleri korumak için kullanılır.",
+      "sinirlar": "Ticari; Türkçe varlık tespiti kalitesi doğrulanmalıdır.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1139",
+      "ad": "Tonic Fabricate",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://fabricate.tonic.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Üretim verisi olmadan sıfırdan ilişkisel sentetik veri, serbest metin ve sahte (mock) API üretir.",
+      "sinirlar": "Yalnız SaaS; üretim dağılımlarını yansıtması tanıma bağlıdır.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1140",
+      "ad": "MOSTLY AI Synthetic Data SDK",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mostly-ai/mostlyai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yerelde eğitilen üretici modellerle tablo ve metin verisinden gizlilik korumalı sentetik veri üreten Python araç takımıdır; isteğe bağlı olarak ticari platforma bağlanır.",
+      "sinirlar": "Kurumsal platform ticaridir; şirket markası 'powered by Syntho' olarak değişti, kurumsal yapı izlenmeli.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1141",
+      "ad": "NeMo Data Designer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/NVIDIA-NeMo/DataDesigner",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sıfırdan veya tohum veriden, şema ve kısıt tanımlı, LLM destekli sentetik veri (tablo, metin, kod) üretim hattı sunar.",
+      "sinirlar": "LLM çağrısı gerektirir (maliyet ve veri çıkışı); tablo verisi için biçimsel gizlilik garantisi sınırlıdır. Eski Gretel açık kaynak kütüphanesi arşivlendi.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1142",
+      "ad": "Synthesized",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.synthesized.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Üretime benzer test verisi için maskeleme, alt kümeleme ve sentezi YAML ile 'test verisi kodu' olarak tanımlar; CI hattına bağlanır.",
+      "sinirlar": "Ticari lisans; topluluğu küçük.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1143",
+      "ad": "Mockaroo",
+      "tur": "ticari-saas",
+      "lisans": "ticari (ücretsiz katman)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.mockaroo.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Şema tanımından CSV/JSON/SQL/Excel biçiminde rastgele test verisi ve sahte API uç noktaları üretir.",
+      "sinirlar": "Gerçek dağılımları yansıtmaz; büyük hacimlerde ücretli, yalnız SaaS.",
+      "ihtiyaclar": [
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1144",
+      "ad": "Perforce Delphix",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.perforce.com/products/delphix",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri sanallaştırma ve maskeleme ile test ortamlarına hızlı, sanal, maskelenmiş veritabanı kopyaları sağlar; birden çok veritabanı motorunu destekler.",
+      "sinirlar": "Pahalı ve ağır kurumsal kurulum.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1592",
+      "ad": "Dev Proxy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://aka.ms/devproxy",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulamanın dış API çağrılarını yakalayıp hata, kısıtlama (throttling), gecikme ve sahte yanıt simüle eden komut satırı vekil sunucusu; hata dayanıklılığını yerelde test etmeyi sağlar.",
+      "sinirlar": "Yerel geliştirme/test odaklıdır; dağıtık kaos deneyi yönetimi sunmaz. Yerel geliştirme/test aracı; üretim trafiği için değil.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-021",
+        "N-K05-024",
+        "N-K15-003",
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "AR-1595",
+      "ad": "pgstream",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://xata.io/docs/opensource/pgstream",
+      "olgunluk": "gelisen",
+      "ne_saglar": "DDL değişikliklerini de taşıyan PostgreSQL mantıksal replikasyon aracı; dönüştürücülerle (transformers) sütun düzeyinde maskeleme/anonimleştirme yaparak test ortamlarına veri akıtabilir.",
+      "sinirlar": "Yalnız PostgreSQL kaynaklı; dönüşüm kuralları kurumca tanımlanmalıdır.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1596",
+      "ad": "MockServer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.mock-server.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP(S) sahte sunucu ve vekil: beklenti tanımlama, istek doğrulama, kayıt/yeniden oynatma ve hata/gecikme enjeksiyonu ile dış bağımlılıkları taklit eder.",
+      "sinirlar": "Java tabanlı ve görece ağır; modern sözleşme (OpenAPI) üretimi sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1597",
+      "ad": "Hoverfly",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://hoverfly.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "API simülasyonu için hafif vekil: trafiği yakalayıp simülasyon olarak yeniden oynatır, gecikme ve hata enjeksiyonu yapar; Java/Python bağlarıyla testlere gömülür.",
+      "sinirlar": "Karmaşık durum makinesi simülasyonları sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-1598",
+      "ad": "Mimesis",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mimesis.name",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok dilli ve yerel ayarlı (Türkçe 'tr' dahil) gerçekçi sahte veri üreten hızlı Python kütüphanesi; şema tabanlı toplu veri üretimi destekler.",
+      "sinirlar": "İlişkisel bütünlük ve dağılım benzerliği (sentetik veri kalitesi) sağlamaz.",
+      "ihtiyaclar": [
+        "N-K09-014",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1599",
+      "ad": "Synthcity",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/vanderschaarlab/synthcity",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tablo ve zaman serisi sentetik veri üretimi (GAN, VAE, difüzyon, Bayes ağları) ve gizlilik/faydalılık/adillik ölçümlerini tek çatıda sunan kütüphane.",
+      "sinirlar": "Araştırma odaklı; üretim hattı için ölçekleme ve bakım sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1600",
+      "ad": "Garden",
+      "tur": "acik-cekirdek",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://garden.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes üzerinde geçici (ephemeral) geliştirme ve test ortamlarını, bağımlılık grafiği ve önbelleklemeyle kurup test çalıştıran otomasyon aracı.",
+      "sinirlar": "Kubernetes gerektirir; ekip/önbellek özelliklerinin bir kısmı ticari Garden Cloud'dadır.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1720",
+      "ad": "Devfile",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://devfile.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Geliştirme çalışma alanını (konteynerler, komutlar, olaylar, bağımlılıklar) YAML ile tanımlayan açık şartname; Eclipse Che, OpenShift Dev Spaces ve odo aynı tanımdan görev başına yeniden üretilebilir ortam kurar.",
+      "sinirlar": "Benimseme Red Hat ekosistemiyle sınırlı; Dev Container şartnamesiyle rekabet eder.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1721",
+      "ad": "Telepresence",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.telepresence.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yerel süreci uzak Kubernetes kümesine bağlayıp belirli servisin trafiğini kişisel olarak yakalamaya (intercept) izin verir; paylaşılan test ortamında hizmet başına yalıtılmış deneme.",
+      "sinirlar": "Küme erişim yetkisi ister; ajanlara verilecek yetki dikkatle sınırlanmalı; bazı gelişmiş özellikler ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1722",
+      "ad": "Crossplane",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://crossplane.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut ve şirket içi altyapıyı Kubernetes API'leri ve Composition'larla soyutlayıp platform ekibinin self-servis API'ler (ör. görev başına geçici ortam) sunmasını sağlayan kontrol düzlemi.",
+      "sinirlar": "Kubernetes ve sağlayıcı paketleri bilgisi ister; hata ayıklaması zor olabilir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K24-004",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-1741",
+      "ad": "kind",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://kind.sigs.k8s.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Docker/Podman konteynerleri içinde dakikalar içinde yerel Kubernetes kümeleri kurar; CI'da görev başına atılabilir entegrasyon test ortamı olarak yaygın.",
+      "sinirlar": "Üretim benzeri ağ/depolama davranışını tam yansıtmaz; tek makine kaynaklarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-1745",
+      "ad": "KWOK (Kubernetes WithOut Kubelet)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://kwok.sigs.k8s.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gerçek kubelet olmadan binlerce sahte düğüm ve pod'u simüle ederek zamanlayıcı, denetleyici ve kapasite/ölçek senaryolarını düşük maliyetle test etmeyi sağlar.",
+      "sinirlar": "Gerçek iş yükü çalıştırmaz; yalnız kontrol düzlemi davranışını sınar.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "AR-1791",
+      "ad": "Eclipse Che",
+      "tur": "acik-kaynak",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://eclipse.dev/che/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes/OpenShift üzerinde devfile tanımından çalışma alanı başına konteynerli bulut geliştirme ortamları; geliştirici ve ajan ortamlarının merkezi, yeniden üretilebilir yönetimi.",
+      "sinirlar": "Kubernetes işletimi gerektirir; kaynak tüketimi yüksek olabilir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-007",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1824",
+      "ad": "OpenTofu",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://opentofu.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform uyumlu açık kaynak altyapı-kod aracı; görev başına geçici test ortamlarını bildirimsel kurup kaldırmak için; durum ve plan dosyası şifreleme desteği vardır.",
+      "sinirlar": "Sağlayıcı ekosistemi Terraform ile ortak; bazı yeni Terraform özellikleri farklılaşabilir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1949",
+      "ad": "K3s",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://k3s.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek ikili dosyalı, hafif, sertifikalı Kubernetes dağıtımı; görev başına geçici test kümeleri, kenar ve geliştirici makinelerinde yalıtılmış ortam kurmak için.",
+      "sinirlar": "Büyük üretim kümelerinde bazı bileşenler (ör. varsayılan SQLite) ayar gerektirir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2001",
+      "ad": "Azure Deployment Environments",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/deployment-environments/overview-what-is-azure-deployment-environments",
+      "olgunluk": "olgun",
+      "ne_saglar": "Platform ekibinin onayladığı IaC şablonlarından geliştirici/ajan için self-servis, süre sınırlı geçici ortamlar oluşturur; maliyet ve erişim proje bazında yönetilir.",
+      "sinirlar": "Azure kaynaklarıyla sınırlı; test verisi yönetimi içermez.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2050",
+      "ad": "Oracle Data Safe",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.oracle.com/security/database-security/data-safe/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Oracle veritabanlarında hassas veri keşfi, test ortamı için veri maskeleme, kullanıcı/yetki değerlendirmesi ve etkinlik denetimi.",
+      "sinirlar": "Oracle veritabanlarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K19-004",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2064",
+      "ad": "HashiCorp Terraform (HCP Terraform / Terraform Enterprise)",
+      "tur": "acik-cekirdek",
+      "lisans": "BUSL-1.1",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.hashicorp.com/terraform",
+      "olgunluk": "olgun",
+      "ne_saglar": "Altyapıyı kod olarak sürümleyip planla/uygula döngüsüyle kurar; geçici test ortamları, ortam terfisi ve drift tespiti; HCP Terraform'da politika kontrolü ve çalışma alanı onayları.",
+      "sinirlar": "BUSL lisansı ticari kısıtlar içerir (açık alternatif OpenTofu); durum dosyası güvenliği kritik.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K13-010",
+        "N-K15-001",
+        "N-K16-005"
+      ]
+    },
+    {
+      "id": "AR-2067",
+      "ad": "IBM Optim Test Data Management",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/optim-test-data-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretim veritabanlarından referans bütünlüğünü koruyarak alt küme çıkarma, maskeleme ve test veritabanı yenileme.",
+      "sinirlar": "Eski mimari; kurulum ve lisans ağır.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2102",
+      "ad": "Broadcom Test Data Manager",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.broadcom.com/products/software/app-dev/test-data-manager",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sentetik test verisi üretimi, alt küme çıkarma, maskeleme ve self-servis test verisi portalı; referans bütünlüğünü korur.",
+      "sinirlar": "Eski nesil kurumsal ürün; bulut yerel veri kaynaklarında sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2148",
+      "ad": "ReadyAPI",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://smartbear.com/product/ready-api/",
+      "olgunluk": "olgun",
+      "ne_saglar": "REST/SOAP/GraphQL/gRPC API fonksiyonel ve performans testi, veri odaklı test ve servis sanallaştırması (bağımlı servislerin taklidi).",
+      "sinirlar": "Ağır masaüstü aracı; açık kaynak SoapUI'ye göre maliyetli.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K04-011",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2178",
+      "ad": "K2view Test Data Management",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.k2view.com/solutions/test-data-management-tools/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Varlık (entity) tabanlı test verisi: kaynaklar arası alt küme çıkarma, referans bütünlüğünü koruyan maskeleme, sentetik veri üretimi, sürümleme ve geri sarma.",
+      "sinirlar": "Kurulum ve varlık modelleme efor ister.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-2179",
+      "ad": "GenRocket",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.genrocket.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kural tabanlı sentetik test verisi üretimi: veri modelinden kenar durum, negatif ve kombinatoryal veri senaryoları; CI'da talep üzerine üretim.",
+      "sinirlar": "Model/kural tanımı ön efor ister; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2180",
+      "ad": "Perforce BlazeMeter",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.blazemeter.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JMeter/Gatling/k6 uyumlu bulut yük testi, API fonksiyonel test, servis sanallaştırma ve test verisi üretimi; eşik tabanlı başarım kriterleri.",
+      "sinirlar": "Sanal kullanıcı bazlı maliyet.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2183",
+      "ad": "Parasoft SOAtest",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.parasoft.com/products/parasoft-soatest/",
+      "olgunluk": "olgun",
+      "ne_saglar": "API ve mesaj/protokol düzeyinde fonksiyonel ve uçtan uca test, servis sanallaştırma (Virtualize) ve yapay zekâ destekli test üretimi.",
+      "sinirlar": "Ağır kurumsal araç; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K04-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2358",
+      "ad": "ARX Data Anonymization Tool",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://arx.deidentifier.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "k-anonimlik, l-çeşitlilik, t-yakınlık ve farklı gizlilik modelleriyle yapılandırılmış kişisel verileri anonimleştiren ve yeniden tanımlanma riskini ölçen masaüstü aracı ve Java kütüphanesi.",
+      "sinirlar": "Tablo verisi içindir, serbest metin maskelemesi yapmaz; son commit Ekim 2025.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-011",
+        "N-K22-005",
+        "N-K23-015",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-2359",
+      "ad": "sdcMicro",
+      "tur": "kutuphane",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sdcTools/sdcMicro",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mikro veri setleri için istatistiksel ifşa kontrolü (risk ölçümü, yerel bastırma, gürültü ekleme, mikro-kümeleme) sunan R paketi ve grafik arayüzü.",
+      "sinirlar": "R ekosistemi; yazılım test verisi üretiminden çok istatistiksel anonimleştirmeye yönelik.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005",
+        "N-K23-015"
+      ]
+    },
+    {
+      "id": "AR-2360",
+      "ad": "Syntho",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.syntho.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veritabanlarından ilişkisel bütünlüğü koruyan sentetik test verisi üretimi, altküme alma ve kişisel veri tespiti/maskeleme.",
+      "sinirlar": "Ticari; üretilen verinin gizlilik güvencesi yapılandırmaya bağlı.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2456",
+      "ad": "distilabel",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://distilabel.argilla.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sentetik veri ve yapay zekâ geri bildirimi (LLM-hakem) boru hatları: görev seti, değerlendirme örnekleri ve tercih verisi üretimini ölçeklenebilir adımlarla tanımlar.",
+      "sinirlar": "Üretilen verinin doğruluğu model kalitesine bağlı; insan örneklem kontrolü gerekir.",
+      "ihtiyaclar": [
+        "N-K11-009",
+        "N-K15-003",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2515",
+      "ad": "Zadig",
+      "tur": "acik-cekirdek",
+      "lisans": "Zadig Open Source License (Apache-2.0 + ticari kullanım koşulları)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://koderover.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut-yerel DevOps platformu: dal/değişiklik başına geçici test ortamları, iş akışları, onay düğümleri, ortam terfisi ve test entegrasyonu.",
+      "sinirlar": "Lisans ek ticari koşullar içerir; kurumsal özellikler ücretli sürümde.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-2517",
+      "ad": "Sealos DevBox",
+      "tur": "acik-cekirdek",
+      "lisans": "Sealos Sustainable Use License",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://sealos.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes üzerinde bulut işletim sistemi; DevBox ile görev başına yalıtılmış, anında oluşturulan geliştirme/test ortamları ve kodlama ajanından doğrudan dağıtım.",
+      "sinirlar": "Kaynak-erişilebilir 'sürdürülebilir kullanım' lisansı (OSI onaylı değil); ticari yeniden sunum kısıtlı.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2548",
+      "ad": "Requestly",
+      "tur": "acik-cekirdek",
+      "lisans": "Kaynak açık + 'ee/' dizini ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://requestly.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tarayıcı/masaüstü tabanlı API istemcisi ve HTTP yakalama-değiştirme aracı: istek/yanıt değiştirme, sahte API yanıtları ve yerel öncelikli koleksiyonlar.",
+      "sinirlar": "Ticari ve açık kısımlar karışık lisanslı; sunucu tarafı test otomasyonu sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2631",
+      "ad": "GitBug-Actions",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/gitbugactions/gitbugactions",
+      "olgunluk": "erken",
+      "ne_saglar": "Depoların GitHub Actions iş akışlarını act ile yerelde yeniden çalıştırarak kurumun kendi depolarından yeniden üretilebilir hata–düzeltme veri seti (çalıştırılabilir görev seti) toplar.",
+      "sinirlar": "GitHub Actions kullanan depolarla sınırlı; tüm iş akışları yerelde çalışmayabilir.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K19-005",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2641",
+      "ad": "TheAgentCompany",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/TheAgentCompany/TheAgentCompany",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitLab, Plane (iş takip), RocketChat ve ownCloud içeren kendi barındırılan sanal yazılım şirketi ortamında 175 gerçekçi iş görevini kontrol noktası bazlı kısmi puanlamayla değerlendirir.",
+      "sinirlar": "Ortamın kurulumu ağır; 2025 sonundan beri güncelleme yavaş.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K23-001",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2646",
+      "ad": "AppWorld",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/StonyBrookNLP/appworld",
+      "olgunluk": "gelisen",
+      "ne_saglar": "9 uygulama ve 457 API'lik kontrollü dünya içinde 750 günlük görev; durum tabanlı birim testleriyle hem görevin yapılmasını hem de istenmeyen yan etkileri (collateral damage) denetler.",
+      "sinirlar": "Tüketici uygulamaları senaryoları; kurum sistemlerini temsil etmesi için yeni görev yazmak gerekir.",
+      "ihtiyaclar": [
+        "N-K18-007",
+        "N-K23-001",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2705",
+      "ad": "ExecutionAgent",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sola-st/ExecutionAgent",
+      "olgunluk": "erken",
+      "ne_saglar": "Rastgele bir projeyi kurup test paketini çalıştırmak için LLM ajanıyla Docker ortamı hazırlar; dil ve CI betiklerinden meta-istem bilgisi çıkararak test sonuçlarını üretir.",
+      "sinirlar": "Başarı projeye göre değişir; üretilen ortam insan doğrulaması olmadan referans kabul edilmemeli.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-2783",
+      "ad": "DataSynthesizer",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/DataResponsibly/DataSynthesizer",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı gizlilikli Bayes ağı ile özgün tablonun istatistiksel özelliklerini koruyan sentetik veri üretir; rastgele, bağımsız ve korelasyonlu modlar sunar.",
+      "sinirlar": "Tek tablo; karmaşık ilişkisel bütünlük kısıtlarını korumaz.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2784",
+      "ad": "OpenDP SmartNoise SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/opendp/smartnoise-sdk",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı gizlilik garantili SQL sorguları ve MWEM, MST, AIM gibi sentetik veri üreticileri sunan kütüphane; gizlilik bütçesiyle (epsilon) kontrollü veri paylaşımı sağlar.",
+      "sinirlar": "Gizlilik bütçesi yönetimi uzmanlık ister; fayda kaybı olabilir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005",
+        "N-K23-015",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-2785",
+      "ad": "Anonymeter",
+      "tur": "kutuphane",
+      "lisans": "Clear BSD",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/statice/anonymeter",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sentetik verinin GDPR'daki üç yeniden tanımlama riskini (tekilleştirme, bağlanabilirlik, çıkarım) saldırı simülasyonlarıyla ölçen çerçeve.",
+      "sinirlar": "Tablo verisiyle sınırlı; risk skorunun yorumlanması uzman değerlendirmesi ister.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2928",
+      "ad": "OpenSandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://open-sandbox.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama/GUI ajanları, ajan değerlendirmesi, kod yürütme ve RL eğitimi için genel sandbox platformu; Python, Java/Kotlin, TypeScript, .NET, Go SDK'ları, CLI ve MCP; Docker ve Kubernetes çalışma zamanları, Firecracker havuzları, OpenAPI sözleşmeleri.",
+      "sinirlar": "Geniş kapsam; Kubernetes işletim yetkinliği gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2939",
+      "ad": "Dormice",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/BitMiracle-AI/Dormice",
+      "olgunluk": "erken",
+      "ne_saglar": "Tek makinede veya filoda çalışan self-host, E2B uyumlu sandbox platformu; boşta donan/durdurulan/arşivlenen kalıcı sandbox'lar, Docker+gVisor yürütücü, S3 arşivleme, tek SQLite defteri.",
+      "sinirlar": "Proje beyanına göre erken geliştirme aşamasında.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-3149",
+      "ad": "Respawn",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/jbogard/Respawn",
+      "olgunluk": "olgun",
+      "ne_saglar": "Entegrasyon testleri arasında veritabanını yabancı anahtar sırasına göre akıllıca temizleyerek testler arası veri kirlenmesini önler.",
+      "sinirlar": "Veri temizler, üretmez; sentetik veri için ayrı araç gerekir.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3150",
+      "ad": "AutoFixture",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/AutoFixture/AutoFixture",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET testlerinde 'Arrange' aşaması için anonim test verisini otomatik üreten kütüphane.",
+      "sinirlar": "Rastgele veri kenar durumları sistematik kapsamaz.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3165",
+      "ad": "Aspire",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://aspire.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık uygulamayı (servisler, veritabanları, kuyruklar) kodla tanımlayıp yerelde tek komutla ayağa kaldıran ve OpenTelemetry izlerini panoda gösteren geliştirme/dağıtım aracı.",
+      "sinirlar": ".NET merkezli; diğer dillerdeki servisler için entegrasyon desteği daha sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3220",
+      "ad": "factory_boy",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://factoryboy.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Django/SQLAlchemy vb. modeller için fabrika tanımlarıyla tekrarlanabilir test verisi üreten kütüphane.",
+      "sinirlar": "Son itme Ocak 2026; bakım yavaş.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3221",
+      "ad": "VCR.py",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/kevin1024/vcrpy",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP etkileşimlerini kasetlere kaydedip testlerde yeniden oynatarak dış servis bağımlılığını ve kararsızlığı azaltır.",
+      "sinirlar": "Kasetler gizli bilgi/kişisel veri içerebilir; filtreleme yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-029",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3255",
+      "ad": "factory_bot",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/thoughtbot/factory_bot",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby test verisi için fabrika, özellik (trait) ve dizi tanımlarıyla tekrarlanabilir nesne üretimi sağlayan kütüphane.",
+      "sinirlar": "Aşırı ilişkili fabrikalar test süresini artırır.",
+      "ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3256",
+      "ad": "VCR (Ruby)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://benoittgt.github.io/vcr",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby test süitindeki HTTP etkileşimlerini kaydedip yeniden oynatarak deterministik ve hızlı testler sağlar.",
+      "sinirlar": "Kasetlerde sır/kişisel veri filtrelemesi yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3282",
+      "ad": "Mountebank",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mountebank-testing/mountebank",
+      "olgunluk": "olgun",
+      "ne_saglar": "HTTP, TCP ve SMTP üzerinden çalışan, dilden bağımsız çok protokollü test dublörü (imposter) sunucusu.",
+      "sinirlar": "Depo bireysel hesaptan topluluk organizasyonuna taşındı; bakım sürekliliği izlenmeli.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3323",
+      "ad": "Pulumi",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.pulumi.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Altyapıyı TypeScript, Python, Go, .NET, Java ile genel amaçlı dillerde tanımlayıp birim testlenebilir hale getiren altyapı-kod platformu.",
+      "sinirlar": "Durum arka ucu varsayılan olarak Pulumi Cloud; kendi barındırma için nesne deposu arka ucu yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K06-006",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-3328",
+      "ad": "Terratest",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://terratest.gruntwork.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform/OpenTofu, Packer, Docker ve Kubernetes altyapısını gerçek ortamda kurup doğrulayıp yıkan Go test kütüphanesi.",
+      "sinirlar": "Gerçek bulut kaynakları oluşturduğu için maliyet ve temizlik yönetimi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-024",
+        "N-K06-004",
+        "N-K15-001"
+      ]
+    },
+    {
+      "id": "AR-3419",
+      "ad": "Bright Security MCP",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://registry.modelcontextprotocol.io/v0/servers?search=brightsec",
+      "olgunluk": "erken",
+      "ne_saglar": "Xata projeleri ve Postgres veritabanı dallarıyla etkileşim için uzak MCP sunucusu; görev başına kopya-yazımlı dal kullanımına uygundur.",
+      "sinirlar": "Resmî dokümantasyon sınırlı; DAST yalnız test ortamlarında koşmalı. Resmî doküman bağlantısı kayıt girdisinde sınırlı; SaaS.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3430",
+      "ad": "MongoDB MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.mongodb.com/docs/mcp-server/overview/",
+      "olgunluk": "olgun",
+      "ne_saglar": "MongoDB veritabanları ve Atlas kümeleri için sorgu, şema inceleme, indeks ve Atlas yönetim araçları; salt okunur mod ve araç devre dışı bırakma seçenekleriyle.",
+      "sinirlar": "Yazma araçları yıkıcı olabilir; salt okunur mod varsayılan yapılmalı.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-003",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-3431",
+      "ad": "Supabase MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://supabase.com/docs/guides/ai-tools/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Supabase projelerinde tablo, göç (migration), dal (branch), log ve kenar fonksiyonu yönetimi; proje kapsamı ve salt okunur mod desteği.",
+      "sinirlar": "Üretim projelerine bağlanması önerilmez (belgelerde uyarılır); istem enjeksiyonu riskine karşı salt okunur mod gerekir.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-3432",
+      "ad": "Neon MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://neon.com/docs/ai/neon-mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Neon/Lakebase Postgres projelerinde dal oluşturma, göçü önce geçici dalda deneme, SQL çalıştırma ve şema karşılaştırma araçları; görev başına veritabanı dalı kurgusuna uygundur.",
+      "sinirlar": "Yalnız Neon/Lakebase; üretim dalında yazma yetkisi verilmemeli.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3433",
+      "ad": "PlanetScale MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://github.com/planetscale/mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PlanetScale veritabanları, dallar, şema, sorgu içgörüleri ve SQL çalıştırma için uzak MCP sunucusu.",
+      "sinirlar": "Yalnız PlanetScale; dağıtım istekleri (deploy request) insan onayında kalmalı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3438",
+      "ad": "Aiven MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://github.com/Aiven-Open/mcp-aiven",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Aiven üzerinde PostgreSQL sağlama, Kafka yönetimi ve uygulama dağıtımı için MCP sunucusu; salt okunur, hizmet kapsamı ve sır izni parametreleriyle.",
+      "sinirlar": "Aiven hesabı gerekir; sağlama işlemleri maliyet doğurur.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K12-003",
+        "N-K15-001",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-4406",
+      "ad": "Insomnia",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "yerel"
+      ],
+      "url": "https://insomnia.rest",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak API istemcisi: GraphQL, REST, WebSocket, SSE ve gRPC istekleri; OpenAPI tasarım düzenleyicisi; test takımları ve koleksiyon çalıştırıcı; bulutta ya da kurum içinde sahte sunucu; CI/CD için Insomnia CLI. Depolama: Local Vault (tamamen yerel), Git Sync ya da isteğe bağlı uçtan uca şifreli Cloud Sync.",
+      "sinirlar": "Hesapsız yalnız yerel Scratch Pad kullanılabiliyor; ürünün çoğu özelliği hesap istiyor. Git Sync, SSO ve sınırsız ortak çalışma ücretli planlarda. npm'deki insomnia-inso paketi 'artık desteklenmiyor' notuyla kaldırıldı.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-4408",
+      "ad": "Apidog",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (kaynak kapalı)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://apidog.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "API tasarımı, hata ayıklama, test, sahte sunucu ve doküman yayımlamayı tek üründe toplar; Apidog CLI ile CI/CD'de test koşturur; npm'de apidog-mcp-server paketi var.",
+      "sinirlar": "Kaynak kapalı; apidog-cli paketinin lisansı UNLICENSED. Kurum içi kurulum (Apidog On-premises) ve AB veri bölgesi (Apidog Europe) ayrı seçenekler.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-4424",
+      "ad": "Mockoon",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mockoon.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sahte API tasarlayıp yerelde koşturan masaüstü uygulaması ve CI ile başsız ortamlar için CLI; OpenAPI uyumu, istek kaydı ve JSON şablonları; hesap gerekmez.",
+      "sinirlar": "2026'da 4 güvenlik bildirimi (biri kritik); ortak çalışma bulut aboneliğinde.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K15-003"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "sema": "mimari-haritasi/bilesen@1",
+  "bilesenler": [
+    {
+      "id": "M-B01",
+      "ad": "Görev girdisi ve insan arayüzü",
+      "gorev": "Tek doğruluk kaynağı; Intake, sprint, Todo → In Progress, Human Test, Error",
+      "secim": "Plane CE (self-host) + web formu (/gorev/yeni → Intake)",
+      "kod": "fabrika/giris/app.py, fabrika/form.py",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K01-003",
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-006",
+        "N-K01-007",
+        "N-K01-008"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0194",
+          "ad": "Plane",
+          "lisans": "AGPL-3.0 (topluluk sürümü); ticari planlar",
+          "risk_seviyesi": "kritik",
+          "risk_puani": 79,
+          "en_onemli_riskler": [
+            "[kritik] 24 ayda 21 güvenlik bildirimi; Ağustos 2026'da altı kritik açık",
+            "[kritik] Topluluk dağıtım manifestolarında sabit gizli anahtar",
+            "[yuksek] API belirteci kapsamsız: kullanıcının tüm yetkisini taşır"
+          ]
+        },
+        {
+          "id": "AR-0197",
+          "ad": "FastAPI",
+          "lisans": "MIT",
+          "risk_seviyesi": "dusuk",
+          "risk_puani": 5,
+          "en_onemli_riskler": []
+        }
+      ]
+    },
+    {
+      "id": "M-B02",
+      "ad": "Olay girişi ve uzlaştırma",
+      "gorev": "İmzalı webhook, hızlı 2xx, kaçan olayları periyodik REST okumasıyla yakalama; idempotent iş akışı kimliği",
+      "secim": "FastAPI + Plane REST",
+      "kod": "fabrika/giris/app.py, fabrika/giris/plane_olay.py",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K13-004",
+        "N-K26-001"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0197",
+          "ad": "FastAPI",
+          "lisans": "MIT",
+          "risk_seviyesi": "dusuk",
+          "risk_puani": 5,
+          "en_onemli_riskler": []
+        }
+      ]
+    },
+    {
+      "id": "M-B03",
+      "ad": "Dayanıklı orkestrasyon",
+      "gorev": "Görev başına tek GorevAkisi; aşamalar, sınırlar, insan sinyalleri, günlerce bekleme",
+      "secim": "Temporal (Postgres, tek düğüm, 512 shard)",
+      "kod": "fabrika/akis/gorev_akisi.py, compose.yaml",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-004",
+        "N-K13-005",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0001",
+          "ad": "Temporal",
+          "lisans": "MIT",
+          "risk_seviyesi": "yuksek",
+          "risk_puani": 47,
+          "en_onemli_riskler": [
+            "[yuksek] Temporal Cloud'da Türkiye bölgesi yok; fiyat modeli değişti",
+            "[yuksek] Olay geçmişi ve yük boyutu sert sınırları",
+            "[yuksek] Determinizm kuralı ve sürümleme disiplini"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M-B04",
+      "ad": "Ajan çalıştırıcı ve roller",
+      "gorev": "Rol başına ayrı çağrı: planlayıcı, test yazarı, uygulayıcı, bağımsız gözden geçirici",
+      "secim": "Claude Code headless (sürüm sabit) · Codex yedek · değiştirilebilir komut şablonu",
+      "kod": "fabrika/istemler.py, fabrika/faaliyetler/sandbox.py, config/politika.yaml",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K09-001",
+        "N-K09-002",
+        "N-K09-003",
+        "N-K09-004",
+        "N-K09-005",
+        "N-K09-006"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0054",
+          "ad": "Claude Code",
+          "lisans": "ticari (Anthropic şartları; kaynak kapalı)",
+          "risk_seviyesi": "kritik",
+          "risk_puani": 76,
+          "en_onemli_riskler": [
+            "[kritik] CI/GitHub Action içinde istem enjeksiyonuyla iş akışı sırlarının çalınması",
+            "[kritik] Güven diyaloğu ve komut doğrulama atlatmaları: repo yapılandırmasıyla onaysız kod çalıştırma",
+            "[yuksek] Dağıtım bütünlüğü: npm'de kaynak kod sızıntısı ve AI CLI'ların kötü amaçlı yazılımca silah olarak kullanılması"
+          ]
+        },
+        {
+          "id": "AR-0032",
+          "ad": "Claude Agent SDK",
+          "lisans": "MIT (SDK); Claude Code çalışma zamanı Anthropic ticari şartları",
+          "risk_seviyesi": "yuksek",
+          "risk_puani": 44,
+          "en_onemli_riskler": [
+            "[kritik] resume parametresiyle argüman enjeksiyonu ve izin denetimini atlayan kod çalıştırma",
+            "[yuksek] Varsayılan olarak proje ayarları, CLAUDE.md ve hook'lar yükleniyor",
+            "[orta] TypeScript SDK açık kaynak değil"
+          ]
+        },
+        {
+          "id": "AR-0055",
+          "ad": "Codex CLI",
+          "lisans": "Apache-2.0",
+          "risk_seviyesi": "yuksek",
+          "risk_puani": 40,
+          "en_onemli_riskler": [
+            "[kritik] Repo içi .env ve .codex/config.toml ile onaysız komut çalıştırma (CVE-2025-61260, kritik)",
+            "[yuksek] Tam atlatma bayrağı '--yolo' ve yapılandırma tabanlı sandbox kaçışları",
+            "[orta] Çok yüksek açık hata sayısı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M-B05",
+      "ad": "Sandbox ve yalıtım",
+      "gorev": "Görev başına geçici konteyner; .git salt okunur; kimlik yok; bellek/CPU/PID sınırı",
+      "secim": "Docker (MVP) → gVisor + çıkış vekili (S1)",
+      "kod": "sandbox/Dockerfile, fabrika/faaliyetler/sandbox.py",
+      "durum": "uygulandi-kismen",
+      "karsilanan_ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-003",
+        "N-K15-004",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007",
+        "N-K18-003",
+        "N-K18-004"
+      ],
+      "araclar": [
+        {
+          "id": "AR-1121",
+          "ad": "gVisor",
+          "lisans": "Apache-2.0",
+          "risk_seviyesi": "dusuk",
+          "risk_puani": 10,
+          "en_onemli_riskler": []
+        }
+      ]
+    },
+    {
+      "id": "M-B06",
+      "ad": "Deterministik kapılar ve oracle",
+      "gorev": "RED kanıtı, korunan testler, korunan yollar, test/lint/tip/derleme, gizli bilgi taraması",
+      "secim": "Proje komutları + gitleaks",
+      "kod": "fabrika/faaliyetler/sandbox.py (kapilari_calistir)",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-002",
+        "N-K05-003",
+        "N-K05-004",
+        "N-K05-005",
+        "N-K05-006",
+        "N-K05-007",
+        "N-K05-008",
+        "N-K05-009",
+        "N-K05-010"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0132",
+          "ad": "Gitleaks",
+          "lisans": "MIT",
+          "risk_seviyesi": "orta",
+          "risk_puani": 23,
+          "en_onemli_riskler": [
+            "[orta] Kurucu projeden ayrıldı ve rakip Betterleaks'i başlattı",
+            "[orta] Regex ve entropi tabanlı; geçerlilik doğrulaması yok",
+            "[orta] GitHub eylemi kuruluşlar için lisans anahtarı istiyor; Node 20 hattı kapanıyor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M-B07",
+      "ad": "Teslim: PR, CI, birleştirme",
+      "gorev": "Tek commit (yapılandırılmış kimlik), PR kanıt paketi, bağımsız CI, beklenen SHA ile birleştirme",
+      "secim": "GitHub + Actions (SHA sabitli)",
+      "kod": "fabrika/faaliyetler/depo.py, github.py, sablonlar/hedef-repo/.github",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K06-001",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-004",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0127",
+          "ad": "GitHub Actions (merge queue ile)",
+          "lisans": "ticari (self-hosted runner seçeneği)",
+          "risk_seviyesi": "kritik",
+          "risk_puani": 78,
+          "en_onemli_riskler": [
+            "[kritik] Zehirlenmiş iş akışları: PR başlığı enjeksiyonu ve pull_request_target ile sır hırsızlığı",
+            "[kritik] Ele geçirilmiş üçüncü taraf eylemler: değiştirilebilir etiketlerin zehirlenmesi",
+            "[kritik] Self-hosted runner kalıcılığı: solucanın runner'ı arka kapıya çevirmesi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M-B08",
+      "ad": "Alpha ortamı ve dağıtım doğrulaması",
+      "gorev": "main → alpha dağıtımı; /_surum ile yayındaki SHA kanıtı; S2'de görev başına önizleme",
+      "secim": "alpha.yml + /_surum",
+      "kod": "sablonlar/hedef-repo/.github/workflows/alpha.yml",
+      "durum": "sablon",
+      "karsilanan_ihtiyaclar": [
+        "N-K06-004",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-007",
+        "N-K06-008",
+        "N-K33-006",
+        "N-K33-007"
+      ],
+      "araclar": []
+    },
+    {
+      "id": "M-B09",
+      "ad": "İnsan karar noktaları ve eskalasyon",
+      "gorev": "DoR kapısı, plan onayı (yüksek risk), Error paketi, Human Test paketi, SAFe etiketi",
+      "secim": "Plane durumları + yorum paketleri",
+      "kod": "fabrika/akis/gorev_akisi.py (_eskale, _insan_test_paketi)",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K17-001",
+        "N-K17-002",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K17-005",
+        "N-K17-006",
+        "N-K17-007",
+        "N-K17-008"
+      ],
+      "araclar": []
+    },
+    {
+      "id": "M-B10",
+      "ad": "Bütçe ve sınırlar",
+      "gorev": "Görev ve ekip bütçesi, sıfırlanmayan sayaçlar, aynı hata durdurma, insan kararıyla ek bütçe",
+      "secim": "politika.yaml + iş akışı",
+      "kod": "config/politika.yaml, config/ekipler.yaml",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K20-001",
+        "N-K20-002",
+        "N-K20-003",
+        "N-K20-004",
+        "N-K20-005",
+        "N-K20-006",
+        "N-K20-007",
+        "N-K20-008"
+      ],
+      "araclar": []
+    },
+    {
+      "id": "M-B11",
+      "ad": "Olay kaydı ve Kaizen",
+      "gorev": "Her aşamanın sonucu, nedeni ve maliyeti; haftalık neden sınıflaması",
+      "secim": "Postgres olay tablosu + kaizen.py",
+      "kod": "fabrika/faaliyetler/kayit.py, fabrika/kaizen.py",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-002",
+        "N-K19-003",
+        "N-K19-004",
+        "N-K08-001",
+        "N-K08-002",
+        "N-K08-003",
+        "N-K08-004",
+        "N-K08-005",
+        "N-K08-006"
+      ],
+      "araclar": []
+    },
+    {
+      "id": "M-B12",
+      "ad": "Kurum içi havuz (skills/MCP kataloğu)",
+      "gorev": "Sabitlenmiş özetli katalog; pazar yalnız aday kaynağı; rol profilleri",
+      "secim": "havuz/katalog.yaml + havuz.py",
+      "kod": "havuz/, fabrika/havuz.py, sablonlar/hedef-repo/.claude/skills",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-002",
+        "N-K11-003",
+        "N-K11-004",
+        "N-K11-005",
+        "N-K11-006",
+        "N-K11-007",
+        "N-K11-008"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0187",
+          "ad": "Agent Skills (SKILL.md spesifikasyonu)",
+          "lisans": "Apache-2.0",
+          "risk_seviyesi": "dusuk",
+          "risk_puani": 10,
+          "en_onemli_riskler": []
+        },
+        {
+          "id": "AR-0184",
+          "ad": "AGENTS.md",
+          "lisans": "MIT",
+          "risk_seviyesi": "dusuk",
+          "risk_puani": 10,
+          "en_onemli_riskler": []
+        },
+        {
+          "id": "AR-0183",
+          "ad": "Model Context Protocol (MCP)",
+          "lisans": "MIT'den Apache-2.0'a geçiş sürecinde",
+          "risk_seviyesi": "kritik",
+          "risk_puani": 66,
+          "en_onemli_riskler": [
+            "[kritik] Resmî SDK ve araçlarda güvensiz varsayılanlar ve kritik açıklar",
+            "[kritik] Araç zehirlenmesi, 'rug pull' ve zehirli veri akışları",
+            "[yuksek] Kötü amaçlı MCP sunucusu paketleri"
+          ]
+        },
+        {
+          "id": "AR-0108",
+          "ad": "Playwright MCP",
+          "lisans": "Apache-2.0",
+          "risk_seviyesi": "orta",
+          "risk_puani": 39,
+          "en_onemli_riskler": [
+            "[yuksek] DNS rebinding ile yerel MCP'nin tüm araçlarına erişim (CVE-2025-9611)",
+            "[yuksek] Web sayfası içeriğiyle istem enjeksiyonu; origin filtreleri güvenlik sınırı değil",
+            "[orta] Varsayılan kalıcı profil oturum bilgilerini diskte tutuyor"
+          ]
+        },
+        {
+          "id": "AR-0116",
+          "ad": "Plane MCP Server",
+          "lisans": "MIT",
+          "risk_seviyesi": "dusuk",
+          "risk_puani": 10,
+          "en_onemli_riskler": []
+        }
+      ]
+    },
+    {
+      "id": "M-B13",
+      "ad": "Ekip şeritleri ve ölçekleme",
+      "gorev": "Ekip = yapılandırma; ekip ve makine kuyrukları; yeni makine = yeni işçi",
+      "secim": "Temporal kuyrukları + ekipler.yaml",
+      "kod": "fabrika/isci.py, config/ekipler.yaml",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K24-001",
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-004",
+        "N-K24-005",
+        "N-K24-006",
+        "N-K24-007",
+        "N-K24-008"
+      ],
+      "araclar": []
+    },
+    {
+      "id": "M-B14",
+      "ad": "Durmama katmanı: tıkanıklık çözücü, kaynak kademesi, atama ve gözcü",
+      "gorev": "Altyapı hatası ≠ ajan hatası (sessiz yeniden deneme); OOM'da 6→12→16 GB; takılınca çözücü (strateji/güçlü model/bölme/soru/ortam); doğru kişiye atama, hatırlatma, 48 saatte RTE; günlük akış gözcüsü",
+      "secim": "Temporal yeniden deneme + cgroup OOM sayacı + çözücü rolü + Plane atama/etiket + gozcu.py",
+      "kod": "fabrika/akis/gorev_akisi.py (_takildi, _profil_artir, _eskale, _hatirlatmalar), fabrika/faaliyetler/sandbox.py (siniflandir), fabrika/gozcu.py",
+      "durum": "uygulandi",
+      "karsilanan_ihtiyaclar": [
+        "N-K13-002",
+        "N-K13-003",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K16-003",
+        "N-K16-004"
+      ],
+      "araclar": [
+        {
+          "id": "AR-0001",
+          "ad": "Temporal",
+          "lisans": "MIT",
+          "risk_seviyesi": "yuksek",
+          "risk_puani": 47,
+          "en_onemli_riskler": [
+            "[yuksek] Temporal Cloud'da Türkiye bölgesi yok; fiyat modeli değişti",
+            "[yuksek] Olay geçmişi ve yük boyutu sert sınırları",
+            "[yuksek] Determinizm kuralı ve sürümleme disiplini"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M-B15",
+      "ad": "Kabul ve dış etki defteri (admission/effect ledger)",
+      "gorev": "Görev revizyonu, girdi özeti (input_digest) ve güncel nesil (generation) kabulü; tekrar olayı yeni koşu açmaz; kök bütçe rezervasyonu; her dış etki için niyet → idempotent etki → makbuz ya da uzlaştırma kaydı. İş akışı durumunu değil, kabul/nesil/bütçe/etki gerçeğini tutar (ikinci durum makinesi değil).",
+      "secim": "Postgres tablosu (fabrika olay veritabanında); Codex pilotunda SQLite nitelendirme defteri olarak denendi",
+      "kod": "yok (bizde: olay tablosu + gorev_defteri faaliyeti yalnız maliyet/insan-devam toplar; iş akışı kimliği gorev-<id> ve USE_EXISTING tekilleştirir)",
+      "durum": "onerildi",
+      "karsilanan_ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-004",
+        "N-K13-005",
+        "N-K13-012",
+        "N-K20-003",
+        "N-K19-002"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/data/02_mimari/03_yetki_ve_durum_otoriteleri.json; agentic-sistem/data/02_mimari/05_kontrat_kilitleri_ve_github.json; agentic-sistem/uygulama/status.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Codex yerel pilotunda gerçek Temporal + SQLite defterle 'crash_after_external_effect_reconciles_without_duplicate_write' ve 'unknown_external_effect_is_not_blindly_retried' geçti (uygulama/evidence/qualification.json); dış etki SQLite fikstürüdür, gerçek GitHub/dağıtım değildir.",
+      "kaynaklar": [
+        "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+        "https://docs.temporal.io/develop/python/best-practices/error-handling"
+      ],
+      "codex_uygulamasi": {
+        "dosya": "agentic-sistem/uygulama/agentic_factory/ledger.py",
+        "tablolar": [
+          "tasks(task_key, generation, digest, cancelled, budget_root, max_calls)",
+          "admissions(run_id, task_key, generation, digest)",
+          "inbox(event_id, payload_hash)",
+          "calls(root, call_key)",
+          "effects(effect_key, run_id, status UNKNOWN|CONFIRMED, receipt)"
+        ],
+        "kurallar": [
+          "Aynı event_id farklı gövde özetiyle gelirse red.",
+          "Eski nesil red; aynı nesilde farklı girdi özeti red; iptal edilmiş nesil ancak açık yeni nesille açılır.",
+          "Sonraki nesil yalnız authorized_revision ve tam +1 ile; budget_root nesiller arası korunur.",
+          "İlk kabulde yazılan max_calls kök limiti sonraki nesilde artırılamaz.",
+          "Etki önce UNKNOWN niyet olarak yazılır, uzak makbuzla CONFIRMED olur; tekrar gelen niyet uzak gerçeklikte makbuz bulamazsa unknown_effect.",
+          "Her faaliyet assert_current ile güncel ve iptal edilmemiş nesil olduğunu doğrular."
+        ],
+        "kabul_akisi": "agentic-sistem/uygulama/agentic_factory/intake.py: önce defter kabulü, sonra aynı run_id ile start_workflow (REJECT_DUPLICATE); WorkflowAlreadyStartedError → mevcut tutamaç (kabul sonrası süreç kaybı kurtarılır).",
+        "kanit": [
+          "agentic-sistem/uygulama/evidence/qualification.json: crash_after_external_effect_reconciles_without_duplicate_write (remote_effect_count=1), unknown_external_effect_is_not_blindly_retried, admission_then_process_loss_before_workflow_start_recovers, duplicate_admission_does_not_rerun_completed_workflow",
+          "agentic-sistem/uygulama/evidence/temporal-history-lost-receipt.json (enjekte çökme mesajı ve attempt 2 görülüyor)"
+        ],
+        "sinir": "SQLite yalnız nitelendirme defteri; 'unknown effect' senaryosunun ön koşulu (makbuzsuz UNKNOWN niyet) elle kuruldu; uzak etki SQLite fikstürü."
+      }
+    },
+    {
+      "id": "M-B16",
+      "ad": "İş akışı dışı ilerleme gözlemcisi ve toparlanma dağıtıcısı",
+      "gorev": "Canlılık ile kabul hedefine doğrulanmış ilerlemeyi ayırır; tipli engel teşhisi (işçi kaybı, anlamsal döngü, hız sınırı, eksik tanım, bağlam, OOM, CI bekleme, platform hatası); sınırlı toparlanma merdiveni; iş akışı görevi hata döngüsü ve kuyruk açlığını iş akışının dışından görür; toparlanma kararını kalıcı karar kimliği, CAS talebi, nesil/lease çiti ve makbuzla uygular.",
+      "secim": "Ayrı süreç + ayrılmış küçük kaynak payı; tek koşu sahibine (GorevAkisi) yalnız koşullu sinyal gönderir, kendi başına durum ilerletmez",
+      "kod": "kısmen: fabrika/gozcu.py (günlük sorgu, 'sorguya yanıt vermiyor' işareti), temporal_workflow_task_execution_failed metriği; iş akışı içi çözücü M-B14",
+      "durum": "uygulandi-kismen",
+      "karsilanan_ihtiyaclar": [
+        "N-K13-006",
+        "N-K13-008",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K16-007",
+        "N-K16-009",
+        "N-K10-003"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/03_gozetim_ve_kurtarma.json; agentic-sistem/deneyler/engine-stall-probe/evidence.json; agentic-sistem/deneyler/progress-supervisor/evidence.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Temporal belgesi doğrulandı: düz Python istisnası Workflow Task hatasına dönüşür ve süresiz yeniden denenir, iş akışı açık kalır. Codex deneyi bunu gerçek yerel Temporal'da gösterdi (history-before-stop: 1 WORKFLOW_TASK_FAILED, durum RUNNING; sonrası TERMINATED); gözlemci aynı Python sürecindeydi. 30 politika testi sentetiktir (sha256 eşleşti); gerçek ajan toparlanması yok.",
+      "kaynaklar": [
+        "https://docs.temporal.io/develop/python/best-practices/error-handling",
+        "https://docs.temporal.io/encyclopedia/retry-policies"
+      ]
+    },
+    {
+      "id": "M-B17",
+      "ad": "Kaynak ölçüm sözleşmesi ve kaynak kabulü",
+      "gorev": "Her deneme için kimlik, etkin limitler, bellek (memory.current/peak/events), PSI baskısı, süreç ağacı, sağlayıcı istek/kota, ilerleme, bekleme ve yetki ölçümü (RM01–RM10); toplayıcı işçi cgroup'u dışında. Yuva sayısı ölçümle: floor((ölçülen kullanılabilir RAM − korunan servis payı − kurtarma payı) / ölçülen profil rezervi); CPU/IO/PID/kota/CI/insan kuyruğu da kabul koşulu.",
+      "secim": "cgroup v2 + PSI okuması; atomik rezervasyon; ölçülmeden '1 ajan = 1 GB' kuralı yok",
+      "kod": "kısmen: fabrika/faaliyetler/sandbox.py (oom_kill ve memory.peak okuması), FABRIKA_HOST_BELLEK_GB toplam bellek bütçesi (_slot_al)",
+      "durum": "uygulandi-kismen",
+      "karsilanan_ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006",
+        "N-K23-005",
+        "N-K23-007"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/04_kaynak_ve_alt_gorevler.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "cgroup-v2 çekirdek belgesi: oom_kill = OOM öldürücüsünün sonlandırdığı süreç sayısı; memory.peak = cgroup ve alt öğelerinin tepe kullanımı. Kapasite formülündeki bütün ölçülmüş değerler Codex'te null; formül tasarım sözleşmesidir.",
+      "kaynaklar": [
+        "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+        "https://docs.kernel.org/accounting/psi.html",
+        "https://docs.docker.com/engine/containers/resource_constraints/"
+      ]
+    },
+    {
+      "id": "M-B18",
+      "ad": "Yetenek sicili yaşam döngüsü ve iş kapsamlı kiralama",
+      "gorev": "Skill/MCP/araç kaydı için durumlar: discovered → quarantined → reviewed → contract_tested → approved → leased → revoked → retired. Manifest (20 alan: sürüm, digest, kaynak, lisans, sahip, risk, girdi/çıktı şeması, izinli işlem/ağ, sır referansı, kaynak profili, eval kanıtı, geri çekme, yerine geçen). Koşuya kısa ömürlü kiralama (run, rol, digest, repo/dal/ortam kapsamı, işlem, bitiş, bütçe, geri çekme nesli). Koşu başında katalog anlık görüntüsü değişmez; pazar yürütme yetkisi değildir; skill izin veremez; kendi kendini terfi yok.",
+      "secim": "havuz/katalog.yaml genişletmesi (durum + lease alanları); geri çekme kuyruktaki/çalışan/geri yüklenen işlerde de etkili",
+      "kod": "kısmen: fabrika/havuz.py (sha256 sabitleme ve doğrulama); karantina, lease ve revoke durumları yok",
+      "durum": "onerildi",
+      "karsilanan_ihtiyaclar": [
+        "N-K11-006",
+        "N-K11-007",
+        "N-K11-009",
+        "N-K12-002",
+        "N-K16-005"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/data/05_havuzlar/04_havuz_yasam_dongusu.json; agentic-sistem/yonergeler/REGISTRY-POLICY.md; agentic-sistem/mcp/registry.template.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Tasarım sözleşmesi; Codex'te hiçbir kayıt kurulmadı (21 skill draft_inactive, MCP kaydı boş). MCP Registry'nin ad alanı doğrulamasını güvenlik taramasından ayırdığı resmi belgede yer alır.",
+      "kaynaklar": [
+        "https://modelcontextprotocol.io/registry/about",
+        "https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices",
+        "https://agentskills.io/specification"
+      ]
+    },
+    {
+      "id": "M-B19",
+      "ad": "Değiştirilebilir bileşen yuvaları ve değişim sözleşmesi",
+      "gorev": "Dokuz yuva: iş kaynağı, koordinatör, ajan çalıştırıcı, model, yalıtılmış ortam, depo/bütünleştirme, doğrulama, uzak yayın, yetenek kataloğu. Ortak sözleşme yalnız komut biçimi değil: kimlik, uyumluluk, yetki, sınırlar, iptal sonucu, devam kaydı, hata türü, dış işlem makbuzu. Yuvalar sabit tasnif değildir; bölünebilir/birleşebilir. Değişim 7 aşamalı sözleşmeyle ve 5 geçiş yoluyla yapılır (bkz. codex-eklemeleri.json).",
+      "secim": "Alan sözleşmeleri ile araç ayrımı; sınırda anlam dönüşümü (anti-corruption layer); kademeli değiştirme (strangler fig); evrensel eklenti motoru yok",
+      "kod": "kısmen: config/politika.yaml değiştirilebilir ajan komut şablonu (Claude Code / Codex); diğer yuvalar kodda doğrudan bağlı",
+      "durum": "onerildi",
+      "karsilanan_ihtiyaclar": [
+        "N-K10-002",
+        "N-K12-006",
+        "N-K13-010",
+        "N-K13-013",
+        "N-K16-006"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/data/12_fabrika_cercevesi/03_adaptor_sozlesmeleri.json; agentic-sistem/data/13_evrilebilirlik/01_evrilebilirlik_ihtiyaci.json; agentic-sistem/data/13_evrilebilirlik/02_degisim_sozlesmesi.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Örüntü kaynakları birincil mimari rehberlerdir; Codex'te hiçbir yuva için uygulama seçilmedi, yerel uyumluluk testi yok (local_compatibility_tested=false).",
+      "kaynaklar": [
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer",
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig",
+        "https://www.thoughtworks.com/insights/books/building-evolutionaryarchitectures-second-edition",
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation"
+      ]
+    },
+    {
+      "id": "M-B20",
+      "ad": "Güvenilir ajan aracısı (sabit argv, stdin JSON, özet manifesti)",
+      "gorev": "Ajan/model çalıştırıcıyı operatörün onayladığı mutlak yoldaki çalıştırılabilir dosyayla, sabit argv ve shell=False ile başlatır; görev verisi yalnız stdin'den JSON olarak gider, argv'ye ya da kabuk koduna girmez. Çalıştırılabilirin sha256'sı ve argv+beyan edilen varlık özetlerinden oluşan çağrı manifestinin sha256'sı onaylı değerle eşleşmelidir. Girdi/çıktı 1 MB ile sınırlı; yanıt JSON nesnesi olmalı.",
+      "secim": "Codex TrustedBrokerAdapter deseni + bizdeki konteyner yalıtımı (aracı yalıtım sağlamaz)",
+      "kod": "bizde yok: config/politika.yaml komut şablonu claude -p \"$(cat {istem_dosyasi})\" bash -lc içinde (görev metni tek argv argümanı olur, kabuk kodu olmaz; şablon operatör yapılandırmasıdır)",
+      "durum": "onerildi",
+      "karsilanan_ihtiyaclar": [
+        "N-K10-001",
+        "N-K18-003",
+        "N-K18-005",
+        "N-K18-008"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/adapters.py (TrustedBrokerAdapter); agentic-sistem/uygulama/tests/test_contracts.py (test_trusted_stdio_broker_json_and_invocation_manifest); agentic-sistem/uygulama/deploy/UBUNTU-RUNBOOK.md madde 8",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Kod okundu; Codex'te qualified=False, iş akışına bağlı değil. Manifest dinamik import ve işletim sistemi kitaplıklarını kapsamaz; zaman aşımı yalnız ana çocuk süreci kapsar (RUNBOOK). Linux execve: tek argv dizgisi en çok 32 sayfa (~131072 bayt, MAX_ARG_STRLEN), aşılırsa E2BIG; bizdeki argv yaklaşımının sınırı budur.",
+      "kaynaklar": [
+        "https://man7.org/linux/man-pages/man2/execve.2.html",
+        "https://docs.python.org/3/library/subprocess.html#security-considerations"
+      ]
+    },
+    {
+      "id": "M-B21",
+      "ad": "Yayın politikası kapısı (alpha eşlemesi, SHA, force, kimlik, korunan yollar)",
+      "gorev": "Her yayın adayını yayından önce denetler: ortam yalnız alpha ve production_enabled=false; depo yapılandırılmış eşlemeyle aynı (tam owner/repo); hostname alpha.* ; aday head SHA = CI'da doğrulanan SHA; taban SHA = güncel taban (değiştiyse yeniden nitelendirme); force yok; her yeni commit'te yazar ve committer kişisel kimlik; Co-Authored-By / generated-with / oturum izi yok; değişen yol listesi eksiksiz; mutlak yol, '..' ve korunan yollar (.github/, .git/, AGENTS.md, kanonik kabul, politika, sicil, yazar koruyucu) reddedilir.",
+      "secim": "Saf, testli denetim fonksiyonu + dar yetkili yayın geçidi; ajanın kimlik bilgisi yok",
+      "kod": "bizde yapısal karşılık: ajan commit atamaz (.git salt okunur), işçi tek commit'i FABRIKA_GIT_AD/EPOSTA ile atar, main'e yalnız beklenen SHA ile hızlı ileri, korunan yollar kapısı (sandbox.py); ayrı yeni-commit kimlik/iz denetimi fonksiyonu yok",
+      "durum": "uygulandi-kismen",
+      "karsilanan_ihtiyaclar": [
+        "N-K06-001",
+        "N-K06-007",
+        "N-K11-007",
+        "N-K18-007"
+      ],
+      "araclar": [],
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/contracts.py (check_publish_policy, PROTECTED_PATHS); agentic-sistem/uygulama/tests/test_contracts.py (test_publication_policy_rejects_protected_paths_identity_force_and_prod)",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Kod okundu. Codex'te fonksiyon GitHubGateway.create_pr içinde çağrılıyor ama write_qualified=False ve iş akışına bağlı değil; gerçek git/ağ geçidi ve dal kuralı uygulaması yok."
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-20",
+    "ad": "Bağımsız test çalıştırıcı ve deterministik kalite kapıları (derleme, tip, statik analiz, birim, entegrasyon, uçtan uca)",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-137",
+      "yetenek_sinifi": "Y-20",
+      "kalip": "Kararsız (flaky) testler ve yeniden deneyerek yeşillenme",
+      "aciklama": "Google, test koşularının yaklaşık %1,5'inin kararsız sonuç verdiğini ve testlerinin yaklaşık %16'sında bir düzeyde kararsızlık bulunduğunu raporladı.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan kırmızı testi 'kararsız' sayıp yeniden çalıştırarak yeşile çevirir; gerçek regresyonlar birleştirilir.",
+        "Kararsız testler RED kanıt kapısını anlamsızlaştırır; ajan yeni testin gerçekten başarısız olduğunu kanıtlayamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-002",
+        "N-K05-029"
+      ],
+      "ornek_araclar": [
+        "pytest",
+        "Jest",
+        "JUnit",
+        "Bazel test"
+      ],
+      "erken_sinyal": "Aynı commit için farklı test sonuçları; yeniden deneme sayısında artış.",
+      "azaltma": "Kararsız testlerin karantinası ve ayrı raporlanması, ajanın yeniden deneme hakkının politika ile sınırlanması, deterministik test ortamı."
+    },
+    {
+      "id": "RK-138",
+      "yetenek_sinifi": "Y-20",
+      "kalip": "Zayıf testlerle yanlış yeşil",
+      "aciklama": "SWE-Bench+ çalışması, SWE-Agent+GPT-4'ün başarılı yamalarının %32,67'sinde çözümün issue metninde verildiğini, geçen yamaların %31,08'inin yetersiz testler nedeniyle şüpheli olduğunu; bu vakalar ayıklandığında çözüm oranının %12,47'den %3,97'ye düştüğünü gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2410.06992"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mevcut test paketi zayıf modüllerde ajan değişiklikleri tüm kapılardan geçer ama davranış yanlıştır; hatalar kullanıcıda bulunur.",
+        "'Testler geçti' metriği ajan verimliliğini olduğundan yüksek gösterir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-009",
+        "N-K05-021",
+        "N-K05-024"
+      ],
+      "ornek_araclar": [
+        "CI test çalıştırıcıları",
+        "SWE-bench tarzı iç değerlendirme",
+        "GitHub Actions",
+        "GitLab CI"
+      ],
+      "erken_sinyal": "Ajan değişikliklerinde test farkının küçük olması; kaçan hataların test kapsamı yüksek modüllerde görülmesi.",
+      "azaltma": "Test gücü ölçümü (mutasyon), kabul kriteri–test eşlemesi, gizli kabul testleri, yeni davranış için RED kanıtı."
+    },
+    {
+      "id": "RK-139",
+      "yetenek_sinifi": "Y-20",
+      "kalip": "Kapsama oranının test etkinliğini göstermemesi",
+      "aciklama": "ICSE 2014'te yayımlanan çalışma, test paketi boyutu kontrol edildiğinde kapsama oranının hata bulma etkinliğiyle güçlü ilişki göstermediğini buldu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://doi.org/10.1145/2568225.2568271"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kalite eşiği yalnız satır kapsamıyla tanımlanırsa ajanlar assert'siz veya zayıf testlerle eşiği kolayca geçer.",
+        "Ekipler arası kalite karşılaştırması yanıltıcı olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-023",
+        "N-K05-009",
+        "N-K05-013"
+      ],
+      "ornek_araclar": [
+        "JaCoCo",
+        "coverage.py",
+        "Istanbul/nyc",
+        "SonarQube"
+      ],
+      "erken_sinyal": "Kapsama artarken kaçan hata oranının düşmemesi.",
+      "azaltma": "Kapsamayı tek başına kapı olarak kullanmama, mutasyon skoru ve kabul kriteri eşlemesiyle birlikte değerlendirme."
+    },
+    {
+      "id": "RK-140",
+      "yetenek_sinifi": "Y-20",
+      "kalip": "CI eylemlerinin ele geçirilmesiyle kapının kendisinin tehlikeye girmesi",
+      "aciklama": "tj-actions/changed-files eyleminin v1–v45.0.7 etiketleri Mart 2025'te değiştirilerek CI günlüklerine sır döken koda yönlendirildi (CVE-2025-30066, CISA KEV'e 18 Mart 2025'te eklendi).",
+      "risk_turleri": [
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-mrrh-fwg8-r2c3",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-30066"
+      ],
+      "yasatacagi_sorunlar": [
+        "Deterministik kalite kapıları üçüncü taraf eylemleri etiketle çağırıyorsa, etiket değiştiğinde kapı sırları sızdırır ve sonuçları güvenilmez olur.",
+        "Ajan değişikliklerini doğrulayan hattın kendisi ele geçirilince tüm kanıt paketi geçersizleşir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-026",
+        "N-K18-008"
+      ],
+      "ornek_araclar": [
+        "GitHub Actions",
+        "tj-actions/changed-files",
+        "reviewdog",
+        "GitLab CI şablonları"
+      ],
+      "erken_sinyal": "Eylem etiketlerinin işaret ettiği commit'in değişmesi; CI günlüklerinde base64 kodlu bloklar.",
+      "azaltma": "Üçüncü taraf eylemleri tam commit özetiyle sabitleme, izinli eylem listesi, CI token'larının en az yetkiyle ve kısa ömürlü olması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 16,
+    "orta": 129,
+    "kritik": 3,
+    "dusuk": 419
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 48,
+    "RT-11": 43,
+    "RT-05": 37,
+    "RT-01": 30,
+    "RT-03": 29,
+    "RT-10": 29,
+    "RT-15": 28,
+    "RT-14": 26,
+    "RT-06": 19,
+    "RT-07": 19,
+    "RT-13": 14,
+    "RT-02": 14,
+    "RT-16": 11,
+    "RT-04": 11,
+    "RT-12": 9,
+    "RT-17": 4,
+    "RT-09": 2
+  }
+}

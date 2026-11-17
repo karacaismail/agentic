@@ -1,0 +1,3190 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-22",
+    "ad": "İleri oracle teknikleri (mutasyon, özellik tabanlı, metamorfik, diferansiyel, değişmez çıkarımı, gizli kabul testleri)",
+    "grup": "Doğrulama ve kalite",
+    "cozdugu_sorun": "'Testler yeşil' olup davranışın yanlış kalması; testin mevcut davranışı onaylaması; görünür teste aşırı uyum.",
+    "ne_zaman_zorunlu": "Ajan test yazıyorsa veya otomatik birleştirme varsa."
+  },
+  "arac_sayisi": 172,
+  "tur_dagilimi": {
+    "ticari-yazilim": 4,
+    "ticari-saas": 6,
+    "acik-kaynak": 111,
+    "kutuphane": 39,
+    "cerceve": 5,
+    "acik-cekirdek": 5,
+    "protokol-standart": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-0100",
+      "ad": "Kiro",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://kiro.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Özellik isteğinden EARS kalıbında requirements.md, ardından design.md ve tasks.md üreten spesifikasyon güdümlü ajan IDE'si; gereksinim-önce/tasarım-önce akışları, hata düzeltmeye özel 'bugfix spec' ve dosya kaydı/commit gibi olaylarla tetiklenen ajan kancaları (ör. doküman güncelleme) sunar.",
+      "sinirlar": "Kredi tabanlı ticari hizmet; kod ve spesifikasyon sağlayıcıya gider; kaynak IDE olduğu için başsız hatta kullanılamayacağını söylüyordu, güncel sitede başsız CLI var. Spec iş akışı IDE'ye özgü, CLI'da yok; kapalı kaynak ve AWS hesabı/kredi modeline bağlı. Model çağrıları AWS bulut hizmeti üzerinden yapılır; tamamen kurum içi çalıştırma yoktur, iş akışı IDE'ye bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-009",
+        "N-K01-012",
+        "N-K02-004",
+        "N-K03-005",
+        "N-K05-001",
+        "N-K05-011",
+        "N-K07-001",
+        "N-K10-001",
+        "N-K10-008",
+        "N-K28-001",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0105",
+      "ad": "CodeRabbit",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.coderabbit.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR'larda bağlam farkındalıklı otomatik kod incelemesi, IDE ve CLI ile commit öncesi inceleme, yol bazlı özel talimatlar, statik analiz/güvenlik taraması entegrasyonu; GitHub, GitLab, Azure DevOps, Bitbucket desteği.",
+      "sinirlar": "Kapı değildir, kararı deterministik kontroller ve QA verir; kod üçüncü tarafa gider (kaynak). Denetçi model ailesi seçimi kısıtlı olabilir; yanlış pozitifler ve gürültü ekip ayarı gerektirir. SaaS; yanlış pozitif/negatif oranı kurum verisiyle ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-005",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K17-006",
+        "N-K28-008",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0106",
+      "ad": "Qodo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.qodo.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR inceleme, kod önerisi ve test üretimine odaklanan yapay zekâ kalite platformu; kurumsal kurallar ve çoklu Git sağlayıcısı desteği.",
+      "sinirlar": "Kapı değildir; kod üçüncü tarafa gider (kaynak). Açık kaynak PR-Agent ile ürün ayrıştı; tam özellikler ticari lisansta.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-001",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-0135",
+      "ad": "StrykerJS (Stryker Mutator)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://stryker-mutator.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript mutasyon testi; thresholds.break ile derlemeyi kırar, artımlı mod ve Stryker Dashboard'a rapor gönderimi sunar.",
+      "sinirlar": "Yavaş; yalnız değişen modüllerde çalıştırılmalı (kaynak). Uzun süren koşular; test çalıştırıcı eklentisine bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-023",
+        "N-K17-007",
+        "N-K23-004",
+        "N-K28-014"
+      ]
+    },
+    {
+      "id": "AR-0136",
+      "ad": "PIT (Pitest)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pitest.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "JVM bayt kodu üzerinde mutasyon testi; artımlı analiz ve mutationThreshold/coverageThreshold ile Maven/Gradle derlemesini eşik altında kırar.",
+      "sinirlar": "Yavaş; yalnız değişen modüllerde çalıştırılmalı (kaynak). Büyük kod tabanında yavaş; eşdeğer mutantlar skoru yapay düşürür; bazı gelişmiş özellikler ticari Arcmutate eklentisinde.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-023",
+        "N-K08-002",
+        "N-K17-007",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0143",
+      "ad": "fast-check",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://fast-check.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript için özellik tabanlı test (QuickCheck benzeri), küçültme ve model tabanlı test; oracle raporundaki TerzoN çalışmasında karşılaştırma aracı.",
+      "sinirlar": "Özelliklerin doğruluğunu kendisi belirlemez; özellik yazımı alan bilgisi ister (kaynak). Asenkron model testleri öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-0144",
+      "ad": "Daikon",
+      "tur": "acik-kaynak",
+      "lisans": "izinli (MIT benzeri)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://plse.cs.washington.edu/daikon/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Program çalışma izlerinden olası değişmezleri (invariant) dinamik olarak çıkarır; yeni sürümün bu değişmezleri ihlali sessiz bozulma alarmı olarak kullanılabilir.",
+      "sinirlar": "Akademik araç; Java/C/C++ gibi dillerde ön yüzleri var, web arayüzü için doğrudan uygun değil; çıkarılan değişmezler insan onayı ister. Çıkarılan değişmezler gözlenen yürütmelere bağlıdır; araştırma aracı niteliğinde, entegrasyon emeği ister.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-0145",
+      "ad": "ApprovalTests",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://approvaltests.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çıktıyı onaylanmış dosyayla karşılaştıran onay (golden master) testi; Java, .NET, Python, JS, C++ gibi dillerde uygulamaları vardır; eski kodu yeniden düzenlerken davranışı kilitler.",
+      "sinirlar": "Mevcut davranışı kaydeder; kaydedilen davranışın doğru olduğu ayrıca kabul edilmelidir (kaynak). Onaylanan çıktı mevcut davranışı doğru kabul eder (totoloji riski); onay dosyası değişikliği ayrı yetkiyle incelenmeli.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K04-004",
+        "N-K05-004",
+        "N-K05-008",
+        "N-K05-017",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0146",
+      "ad": "Quickstrom",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://quickstrom.io",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "LTL özellikleriyle web uygulamalarında özellik tabanlı kabul testi; PLDI 2022'de 43 TodoMVC uygulamasının 20'sinde kusur buldu.",
+      "sinirlar": "Depo Ağustos 2024'ten beri güncellenmiyor; tasarım/yerleşim doğruluğu için özel destek yok (kaynak).",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-0153",
+      "ad": "Promptfoo",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.promptfoo.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "İstem, ajan ve RAG için CLI/CI dostu değerlendirme: model karşılaştırma matrisi, assertion'lar, tekrar koşuları; istem enjeksiyonu, jailbreak ve veri sızıntısı için kırmızı takım taramaları. Kaynakta skill değişikliklerinin sabit örnek kümesinde karşılaştırılması için öneriliyor.",
+      "sinirlar": "Değerlendirme kalitesi görev setine ve hakem tasarımına bağlı; LLM hakem kullanımı kalibrasyon ister. Kurumsal panel ve bazı güvenlik özellikleri ticari; test setinin kalitesi kullanıcıya bağlı. Hakem modelin yanlılığı ayrıca kalibre edilmeli; bulut özellikleri ticari. Mart 2026'da OpenAI tarafından satın alındı — sağlayıcı tarafsızlığı ve yol haritası riski; MIT lisansı korunuyor. Mart 2026'da OpenAI satın alma duyurusu; açık kaynak kalacağı söylendi ancak yönetişim ve çok sağlayıcılı tarafsızl",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K09-005",
+        "N-K09-013",
+        "N-K09-014",
+        "N-K11-004",
+        "N-K18-005",
+        "N-K18-012",
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-003",
+        "N-K23-009",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-0154",
+      "ad": "Inspect (inspect_ai)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://inspect.aisi.org.uk",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM ve ajan değerlendirme çerçevesi; görev/çözücü/puanlayıcı ayrımı, model-hakem puanlayıcıları, çoklu epoch koşu, Docker/Kubernetes sandbox'larında ajan değerlendirmesi ve günlük görüntüleyici.",
+      "sinirlar": "Kurum görev setini hazırlamak ve puanlayıcı tasarlamak kurumun işi. Kurum görev setini hazırlamak emek ister; panel/raporlama sınırlı. Kurumun görev setini ve kalibrasyon verisini kendisinin hazırlaması gerekir. Kurum görev setinin ve gizli testlerin kurumca hazırlanması gerekir. Genel eval çerçevesidir; kırmızı takım senaryoları kurumca yazılmalı. Python merkezli; çok kullanıcılı kurumsal panel, yetki ve takvimleme ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K05-007",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K09-007",
+        "N-K09-013",
+        "N-K18-012",
+        "N-K19-005",
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-003",
+        "N-K23-004",
+        "N-K23-005",
+        "N-K23-009",
+        "N-K23-010",
+        "N-K23-011",
+        "N-K27-010",
+        "N-K29-008"
+      ]
+    },
+    {
+      "id": "AR-0164",
+      "ad": "SWE-bench",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.swebench.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek depo sorunları için ajan yamalarını, ajana gösterilmeyen FAIL_TO_PASS ve PASS_TO_PASS testleriyle Docker içinde değerlendirir; kurumun kendi gizli testli görev setine şablon olur.",
+      "sinirlar": "Geçen yamaların bir kısmı geniş geliştirici testlerinde kalıyor (PatchDiff: 877'den 68), SWE-bench'i geçen PR'ların çoğu birleştirilmezdi (METR), kontaminasyon bulguları var (kaynak). Kamu görevleri eğitim verisine sızmış olabilir; kurum görevleri için uyarlama emeği ister. Kamu depoları, ezber/kontaminasyon riski; Python ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-007",
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-004",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-0489",
+      "ad": "PR-Agent",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.pr-agent.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR açıklaması, inceleme ve iyileştirme önerileri üreten LLM tabanlı açık kaynak inceleyici; GitHub, GitLab, Bitbucket, Azure DevOps ile çalışır ve yazardan farklı model ailesi seçilebilir.",
+      "sinirlar": "Qodo'nun ücretsiz katmanı değildir; topluluk bakımı ile sürer, kurumsal destek yok. LLM incelemesi deterministik değildir; bulgu doğruluğu kalibre edilmeli.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-005",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0850",
+      "ad": "Cucumber ve Gherkin",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cucumber.io/docs/gherkin/reference/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gherkin (Verilen–Olduğunda–O zaman) senaryolarını çalıştırılabilir kabul testlerine bağlayan BDD çerçevesi (Java, JavaScript, Ruby vb.); Gherkin ayrıştırıcısı Türkçe dahil 80 dilin anahtar kelimelerini destekler ('Özellik', 'Senaryo', 'Diyelim ki').",
+      "sinirlar": "Senaryo kalitesini denetlemez; adım tanımlarının bakımı ölçek büyüdükçe maliyetlenir. Adım tanımları zayıf yazılırsa totolojik testler üretir; Gherkin dosyalarının bakım yükü vardır.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-009",
+        "N-K05-001",
+        "N-K05-004",
+        "N-K05-007",
+        "N-K05-025",
+        "N-K07-007"
+      ]
+    },
+    {
+      "id": "AR-0941",
+      "ad": "Jest",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://jestjs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript birim ve bileşen testi, snapshot testleri, kapsam ölçümü; --findRelatedTests/--onlyChanged ile değişiklikle ilişkili testleri seçer.",
+      "sinirlar": "'-u' ile snapshot'ların toplu güncellenebilmesi test bütünlüğü riski oluşturur; ESM desteği kısmen deneysel.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-008",
+        "N-K05-012",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0946",
+      "ad": "Kotest",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://kotest.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kotlin için test çerçevesi; çok sayıda test stili, zengin eşleştiriciler ve yerleşik özellik tabanlı test modülü sunar.",
+      "sinirlar": "Kotlin odaklı; Java projelerinde ek bağımlılık getirir.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-0957",
+      "ad": "Midscene.js",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://midscenejs.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Görsel-dil modeliyle web, Android ve iOS arayüzlerinde doğal dil eylem, sorgu ve aiAssert doğrulamaları yapar; Playwright/Puppeteer entegrasyonu ve görsel yeniden oynatma raporu sunar.",
+      "sinirlar": "Sonuçlar olasılıksaldır, model hatası yanlış geçer/kalır üretebilir; kalibrasyon ve çoklu koşu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-007",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0965",
+      "ad": "Meticulous",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.meticulous.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Geliştirme/önizleme ortamındaki kullanıcı oturumlarını kaydeder, ağ yanıtlarını saklayıp taklit ederek PR'larda yeniden oynatır ve temel/aday sürüm görsel farklarını test yazmadan raporlar.",
+      "sinirlar": "Yalnız web ön yüzü; kayıtlarda kişisel veri olabilir; sonuç kapsamı kayıtlı oturumlara bağlı.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-017",
+        "N-K05-021",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0966",
+      "ad": "Syrupy",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://syrupy-project.github.io/syrupy/",
+      "olgunluk": "olgun",
+      "ne_saglar": "pytest için snapshot testi; snapshot'lar yalnız açık --snapshot-update ile güncellenir ve kullanılmayan snapshot'lar raporlanır.",
+      "sinirlar": "Snapshot mevcut davranışı kaydeder; bilinçsiz toplu güncelleme test gücünü düşürür.",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K05-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-0967",
+      "ad": "Verify",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/VerifyTests/Verify",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET için snapshot/onay testi; nesneleri ve dosyaları serileştirip onaylı sürümle karşılaştırır, tarih/kimlik gibi değişken değerleri 'scrubber' ile maskeler.",
+      "sinirlar": "Mevcut davranışı onaylar; onay dosyaları ayrı inceleme gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K05-008",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0968",
+      "ad": "insta",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://insta.rs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust için snapshot testi; cargo-insta ile farkların etkileşimli incelenip onaylanması ve değişken alanların gizlenmesi (redaction).",
+      "sinirlar": "Yalnız Rust; snapshot onayı insan disiplinine bağlı.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-0989",
+      "ad": "Stryker.NET",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://stryker-mutator.io/docs/stryker-net/introduction/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C# için mutasyon testi; eşik ile derleme kırma, yalnız değişen koda (since/baseline) mutasyon uygulama.",
+      "sinirlar": "Büyük çözümlerde yavaş; F#/VB desteği yok.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-023",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0990",
+      "ad": "mutmut",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mutmut.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python için mutasyon testi; pytest ile çalışır, hayatta kalan mutantları etkileşimli inceleme ve artımlı çalıştırma sunar.",
+      "sinirlar": "Eşik ile derleme kırma dış betik gerektirir; büyük projelerde yavaş.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0991",
+      "ad": "Cosmic Ray",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sixty-north/cosmic-ray",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python için dağıtık çalıştırılabilen mutasyon testi aracı; oturum veritabanıyla uzun koşuları yönetir ve raporlar.",
+      "sinirlar": "Kurulumu mutmut'a göre karmaşık; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0992",
+      "ad": "cargo-mutants",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mutants.rs",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust için mutasyon testi; fonksiyon gövdelerini değiştirip testlerin yakalayıp yakalamadığını ölçer, yalnız diff'e mutasyon (--in-diff) ile PR'da kullanılabilir.",
+      "sinirlar": "Derleme süresi nedeniyle yavaş; mutasyon operatörleri görece sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0993",
+      "ad": "Gremlins",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://gremlins.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Go için mutasyon testi; yalnız kapsanan kodu mutasyona uğratır ve etkinlik/kapsam eşikleriyle çıkış kodu üretir.",
+      "sinirlar": "1.0 öncesi; büyük modüllerde performans sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0994",
+      "ad": "Mull",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mull-project/mull",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C/C++ için LLVM tabanlı mutasyon testi; derleme sırasında mutantları yerleştirip tek derlemeden çok mutant koşturur.",
+      "sinirlar": "Clang/LLVM sürüm bağımlılığı; yapılandırması zahmetli.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0995",
+      "ad": "Mutahunter",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/codeintegrity-ai/mutahunter",
+      "olgunluk": "erken",
+      "ne_saglar": "LLM ile bağlama duyarlı mutantlar üreterek dil bağımsız mutasyon testi yapar; hayatta kalan mutantları raporlar.",
+      "sinirlar": "Depo 2025 ortasından beri etkin görünmüyor; LLM maliyeti ve belirlenimsizliği; AGPL lisansı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-0996",
+      "ad": "Hypothesis",
+      "tur": "kutuphane",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://hypothesis.works",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python için özellik tabanlı test: stratejilerle girdi üretir, başarısız örneği küçültür (shrinking), durum makinesi testleri yapar ve bulunan örnekleri veritabanında saklayarak regresyona dönüştürür.",
+      "sinirlar": "Özelliklerin doğru yazılması uzmanlık ister; yavaş testlerde örnek sayısı ayarlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-030",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0997",
+      "ad": "jqwik",
+      "tur": "kutuphane",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://jqwik.net",
+      "olgunluk": "olgun",
+      "ne_saglar": "JUnit Platform üzerinde çalışan Java/Kotlin özellik tabanlı test motoru; kenar durum üretimi, küçültme ve durumsal testler.",
+      "sinirlar": "JUnit Platform bağımlılığı; bakım tek geliştirici ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-0998",
+      "ad": "proptest",
+      "tur": "kutuphane",
+      "lisans": "MIT / Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/proptest-rs/proptest",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust için Hypothesis esinli özellik tabanlı test; strateji birleştirme, küçültme ve başarısız tohumları kalıcı dosyada saklama.",
+      "sinirlar": "Karmaşık stratejilerde derleme süresi artar.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-0999",
+      "ad": "FsCheck",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://fscheck.github.io/FsCheck/",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET (F# ve C#) için QuickCheck tarzı özellik tabanlı test; xUnit/NUnit entegrasyonu ve model tabanlı test desteği.",
+      "sinirlar": "C# kullanımında API F# odaklı hissettirir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1000",
+      "ad": "rapid",
+      "tur": "kutuphane",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/flyingmutant/rapid",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go için özellik tabanlı test; otomatik küçültme ve durum makinesi testleri sunar.",
+      "sinirlar": "Tek geliştirici ağırlıklı proje.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1001",
+      "ad": "Schemathesis",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://schemathesis.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenAPI/GraphQL şemasından özellik tabanlı API testi üretir; 5xx hataları, şema ihlalleri ve durumlu (link tabanlı) senaryoları otomatik yakalar.",
+      "sinirlar": "Şema kalitesine bağımlı; kimlik doğrulama ve veri hazırlığı yapılandırma ister. Şema kalitesine bağımlıdır; iş mantığı yetkilendirme hatalarını sınırlı yakalar.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-012",
+        "N-K05-021",
+        "N-K05-024",
+        "N-K18-009",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-1002",
+      "ad": "GeMTest",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/tum-i4/gemtest",
+      "olgunluk": "erken",
+      "ne_saglar": "Python için genel metamorfik test çerçevesi; metamorfik ilişkileri pytest eklentisi olarak tanımlayıp kaynak/takip girdileri arasındaki ilişkiyi doğrular.",
+      "sinirlar": "Akademik ve küçük topluluklu; bakım etkinliği sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1003",
+      "ad": "Diffy (opendiffy)",
+      "tur": "acik-kaynak",
+      "lisans": "CC BY-NC-ND 4.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/opendiffy/diffy",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Aynı isteği aday, birincil ve ikincil (mevcut sürüm) servis örneklerine gönderip yanıt farklarını gürültüden ayıklayarak diferansiyel regresyon tespiti yapar.",
+      "sinirlar": "Güncel depo ticari olmayan/türev yasaklı lisans taşır, kurumsal kullanım hukuki inceleme ister; özgün Twitter deposu arşivlendi.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-1004",
+      "ad": "Keploy",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://keploy.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF ile API ve bağımlılık (DB, dış servis) trafiğini kaydedip test ve taklit (mock) üretir; yeniden oynatmada gürültülü alanları ayıklayarak sürümler arası davranış farkını yakalar.",
+      "sinirlar": "Kaydedilen davranışı oracle kabul eder; Linux/eBPF gereksinimi; kayıtlarda kişisel veri olabilir.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-024",
+        "N-K08-002",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1005",
+      "ad": "GoReplay",
+      "tur": "acik-cekirdek",
+      "lisans": "LGPL-3.0 (+ ticari Pro)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://goreplay.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretim HTTP trafiğini yakalayıp test/gölge ortama yansıtır (shadowing) veya kaydeder; yeni sürümün gerçek trafik altında davranış ve performansını karşılaştırmaya olanak verir.",
+      "sinirlar": "Yanıt karşılaştırması yerleşik değil, ek araç gerekir; Pro özellikleri ticari.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-011",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-1006",
+      "ad": "Speedscale (proxymock dahil)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (proxymock CLI ücretsiz)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://speedscale.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Trafiği kaydedip değişikliğe karşı yeniden oynatır, yanıtları gerçek üretim yanıtlarıyla otomatik karşılaştırır; HTTP, gRPC, Postgres, MySQL, Redis için protokol düzeyi taklitler ve uç nokta bazlı gecikme yüzdelikleri üretir.",
+      "sinirlar": "Kubernetes odaklı platform kısmı ticari; kayıt tabanlı oracle mevcut davranışı doğru kabul eder.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-011",
+        "N-K05-024",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1007",
+      "ad": "Scientist.NET",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/scientistproject/Scientist.net",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yeniden yazılan kod yolunu eskisiyle üretimde paralel çalıştırıp sonuç ve süre farklarını yayınlar; kullanıcıya her zaman eski sonucu döndürerek güvenli diferansiyel doğrulama yapar.",
+      "sinirlar": "Yan etkili kodda kullanılamaz; bakım etkinliği düşük.",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1008",
+      "ad": "EvoSuite",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.evosuite.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java sınıfları için arama tabanlı birim test üretir; mutasyon analiziyle küçültülmüş regresyon doğrulamaları (assertion) ekler.",
+      "sinirlar": "Üretilen doğrulamalar mevcut davranışı kilitler; yeni Java sürümleriyle uyum ve bakım etkinliği sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K05-009",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-1009",
+      "ad": "Randoop",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://randoop.github.io/randoop/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java için geri beslemeli rastgele test üretimi; sözleşme ihlali (equals/hashCode, istisna) ortaya çıkaran testler ve regresyon testleri üretir.",
+      "sinirlar": "Üretilen testler okunması zor ve uzun; alan kısıtlarını bilmez.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-1010",
+      "ad": "Pynguin",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/se2p/pynguin",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python modülleri için arama tabanlı (evrimsel algoritmalı) otomatik birim test ve doğrulama (assertion) üretimi yapar.",
+      "sinirlar": "Araştırma prototipi; test edilen kodu çalıştırır, izole ortamda koşturulmalı.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-1011",
+      "ad": "Diffblue Cover",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.diffblue.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java/Kotlin için pekiştirmeli öğrenme tabanlı otonom birim test üretimi; mevcut davranışı yakalayan regresyon testleri yazar ve yerelde/CI'da çalışır; Diffblue Testing Agent Java ve Python'u kapsar.",
+      "sinirlar": "Doğruluğu değil mevcut davranışı test eder; ticari lisans.",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K05-004",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-1012",
+      "ad": "CrossHair",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://crosshair.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python için SMT çözücü destekli sembolik yürütmeyle sözleşme ve özellik ihlallerini arar; 'diffbehavior' komutuyla iki fonksiyon sürümü arasındaki davranış farkını bulur.",
+      "sinirlar": "Yan etkili ve C uzantılı kodda sınırlı; zaman sınırlı arama tam kanıt değildir.",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1013",
+      "ad": "deal",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://deal.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python için sözleşmeyle tasarım (ön/son koşul, değişmez, yan etki bildirimi); sözleşmelerden özellik tabanlı test üretir ve statik linter sunar.",
+      "sinirlar": "Tek geliştirici ağırlıklı; son etkinlik 2025 sonu.",
+      "ihtiyaclar": [
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1014",
+      "ad": "Kani",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://model-checking.github.io/kani",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust için bit düzeyinde model denetleyici; ispat koşum (harness) fonksiyonlarıyla panik, taşma ve kullanıcı doğrulamalarının tüm girdiler için geçerliliğini kanıtlar.",
+      "sinirlar": "Döngü/sınır açma nedeniyle büyük kodda ölçeklenme sınırlı; uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-1015",
+      "ad": "Pact",
+      "tur": "acik-kaynak",
+      "lisans": "MIT / Apache-2.0 (dile göre)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.pact.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tüketici güdümlü sözleşme testi: tüketici beklentilerini sözleşme dosyasına yazar, sağlayıcıda doğrular; Pact Broker ve can-i-deploy ile sürüm uyumluluğunu yayından önce kontrol eder; HTTP ve mesaj sözleşmelerini destekler.",
+      "sinirlar": "Sağlayıcı durum (provider state) yönetimi emek ister; sözleşme kapsamı tüketici testleri kadardır.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K03-011",
+        "N-K03-012",
+        "N-K05-024",
+        "N-K06-003"
+      ]
+    },
+    {
+      "id": "AR-1018",
+      "ad": "Specmatic",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://specmatic.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenAPI, AsyncAPI, gRPC ve GraphQL spesifikasyonlarını yürütülebilir sözleşmeye dönüştürür; sözleşme testleri, servis sanallaştırma ve geriye uyumluluk denetimi yapar.",
+      "sinirlar": "Bazı kurumsal özellikler ticari; spesifikasyon kalitesine bağımlı.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K03-011",
+        "N-K03-012",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-1104",
+      "ad": "Instancio",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.instancio.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java testlerinde nesneleri rastgele ama kurallı doldurur; tohumla tekrarlanabilirlik ve JUnit entegrasyonuyla başarısız tohumu raporlar.",
+      "sinirlar": "Alan anlamını bilmez; kısıt tanımı gerekir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1114",
+      "ad": "Toxiproxy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Shopify/toxiproxy",
+      "olgunluk": "olgun",
+      "ne_saglar": "Testlerden API ile kontrol edilen TCP vekili; gecikme, bağlantı kesme, bant genişliği ve zaman aşımı gibi ağ koşullarını simüle ederek hata dayanıklılığı senaryolarını test eder.",
+      "sinirlar": "Uygulama katmanı hatalarını (bozuk yanıt gövdesi) simüle etmez. Yalnız ağ düzeyi hatalar.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K05-010",
+        "N-K16-007",
+        "N-K16-009",
+        "N-K33-009",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-1116",
+      "ad": "Great Expectations (GX Core)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://greatexpectations.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri için beklenti (expectation) tabanlı testler: şema, benzersizlik, aralık, referans bütünlüğü kontrolleri; doğrulama sonuçlarını doküman olarak üretir, göç sonrası veri bütünlüğünü denetler.",
+      "sinirlar": "Sahiplik/marka yapısı değişmiş görünüyor (depo Fivetran altında); yol haritası takip edilmeli.",
+      "ihtiyaclar": [
+        "N-K05-020",
+        "N-K05-024",
+        "N-K06-009",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-1118",
+      "ad": "reladiff",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://reladiff.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı veya aynı veritabanlarındaki tabloları hash tabanlı ikiye bölme ile verimli karşılaştırıp satır farklarını bulur; göç ve kopyalama doğrulamasında diferansiyel oracle sağlar.",
+      "sinirlar": "Arşivlenen Datafold data-diff'in topluluk çatalı; tek geliştirici ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-024",
+        "N-K06-009",
+        "N-K33-011",
+        "N-K33-012"
+      ]
+    },
+    {
+      "id": "AR-1370",
+      "ad": "EvalPlus",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://evalplus.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "HumanEval+/MBPP+ ile genişletilmiş testlerle kod doğruluğu; zayıf test setlerinin başarıyı nasıl şişirdiğini gösterir.",
+      "sinirlar": "Fonksiyon düzeyinde; son itme Ekim 2025.",
+      "ihtiyaclar": [
+        "N-K23-004",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-1371",
+      "ad": "ImpossibleBench",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/safety-research/impossiblebench",
+      "olgunluk": "erken",
+      "ne_saglar": "Testleri şartnameyle çelişecek biçimde mutasyona uğratılmış 'imkânsız' görevlerle ajanın test değiştirme ve özel durum kodlama gibi ödül istismarı eğilimini ölçer (Inspect uygulaması).",
+      "sinirlar": "Araştırma kodu; LiveCodeBench/SWE-bench türevleri, kurum görevlerine uyarlanması gerekir.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-1563",
+      "ad": "Infection",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://infection.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP için AST tabanlı mutasyon testi çerçevesi; mutasyon skoru (MSI) ve kapsanan kod MSI eşikleriyle CI kapısı kurar, yalnız değişen satırları mutasyona uğratabilir.",
+      "sinirlar": "Yalnız PHP; büyük kod tabanlarında koşu süresi uzundur.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-015",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-1564",
+      "ad": "Mutant (Ruby)",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mbj/mutant",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby için anlamsal mutasyon testi aracı; yalnız değişen konuları (incremental) mutasyona uğratıp hayatta kalan mutantları raporlar, 'ajan testleri yazdıysa testleri kim test eder' sorusuna yöneliktir.",
+      "sinirlar": "Kaynak kodu açıktır ancak ticari kullanım geliştirici başına ücretli abonelik gerektirir (README: Licensing).",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-015",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-1565",
+      "ad": "Muter",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/muter-mutation-testing/muter",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Swift/iOS projeleri için otomatik mutasyon testi aracı; Xcode ile entegre çalışıp hayatta kalan mutantları raporlar.",
+      "sinirlar": "Yalnız Swift; koşu süreleri derleme süresine bağlı olarak uzundur.",
+      "ihtiyaclar": [
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-1566",
+      "ad": "ooze",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/gtramontina/ooze",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go için 'go test' içine gömülen mutasyon testi kütüphanesi; mutasyon eşiği altında testi başarısız sayarak CI kapısı oluşturur.",
+      "sinirlar": "Küçük topluluk; mutasyon operatörü seti sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-1567",
+      "ad": "Universal Mutator",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/agroce/universalmutator",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Düzenli ifade tabanlı kurallarla çok sayıda dilde (C, Python, Java, Rust, Solidity vb.) kaynak kodu mutasyona uğratan dil bağımsız mutasyon aracı.",
+      "sinirlar": "Sözdizimi farkındalığı sınırlı olduğundan geçersiz mutantlar üretebilir; araştırma aracıdır.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-015"
+      ]
+    },
+    {
+      "id": "AR-1568",
+      "ad": "Descartes (pitest-descartes)",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/STAMP-project/pitest-descartes",
+      "olgunluk": "olgun",
+      "ne_saglar": "PIT için aşırı mutasyon motoru: metot gövdelerini tamamen boşaltarak 'sözde test edilmiş' (pseudo-tested) metotları, yani kapsanan ama davranışı doğrulanmayan kodu bulur; hile/totoloji testlerini yakalamada etkilidir.",
+      "sinirlar": "Yalnız JVM ve PIT ile çalışır; ince taneli mutasyonların yerini tutmaz.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-015",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-1569",
+      "ad": "RESTler",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/restler-fuzzer",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenAPI tanımından istek bağımlılıklarını çıkarıp durumlu (stateful) REST API fuzzing yapan; 500 hataları ve güvenlik kuralı ihlallerini bulan araç.",
+      "sinirlar": "Kurulumu ve yapılandırması zahmetlidir; son sürümler seyrekleşmiştir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-1570",
+      "ad": "Jazzer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/CodeIntelligenceTesting/jazzer",
+      "olgunluk": "olgun",
+      "ne_saglar": "JVM için libFuzzer tabanlı kapsama güdümlü fuzzing motoru; JUnit 5 ile @FuzzTest olarak entegre olur ve enjeksiyon gibi hata sınıflarını dedektörlerle yakalar.",
+      "sinirlar": "Yalnız JVM; ticari CI Fuzz ürünüyle ilişkilidir, bazı ileri özellikler orada.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1571",
+      "ad": "Atheris",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/google/atheris",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python kodu ve yerel (C) uzantıları için libFuzzer tabanlı kapsama güdümlü fuzzing motoru.",
+      "sinirlar": "Python sürüm desteği gecikebilir; güncelleme temposu yavaştır.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1572",
+      "ad": "AFL++",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://aflplus.plus",
+      "olgunluk": "olgun",
+      "ne_saglar": "American Fuzzy Lop'un topluluk devamı: kapsama güdümlü, mutasyon tabanlı fuzzing; derleme zamanı enstrümantasyonu, QEMU/Unicorn modu ve özel mutatörler sunar.",
+      "sinirlar": "Ağırlıkla C/C++/ikili hedefler içindir; harness yazımı uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1573",
+      "ad": "KLEE",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://klee-se.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLVM bit kodu üzerinde sembolik yürütme ile yüksek kapsamlı test girdileri üreten ve bellek hatalarını bulan araç; kenar durum matrislerini otomatik üretmekte kullanılır.",
+      "sinirlar": "C/C++ (LLVM) ile sınırlı; yol patlaması nedeniyle büyük programlarda ölçeklenmez.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1574",
+      "ad": "JQF (Zest)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/rohanpadhye/JQF",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Java için kapsama güdümlü özellik tabanlı test (semantic fuzzing) aracı; junit-quickcheck üreteçlerini kapsama geri bildirimiyle yönlendirir.",
+      "sinirlar": "Araştırma kökenli; bakım dönemseldir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1575",
+      "ad": "CsCheck",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/AnthonyLloyd/CsCheck",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C#/.NET için rastgele test kütüphanesi; özellik tabanlı, metamorfik, model tabanlı, eşzamanlılık (linearizability) ve regresyon testlerini küçültme (shrinking) desteğiyle sunar.",
+      "sinirlar": "Tek geliştirici bakımında; ekosistem FsCheck'e göre küçüktür.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1576",
+      "ad": "gopter",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/leanovate/gopter",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go için özellik tabanlı test kütüphanesi; üreteçler, küçültme ve durumlu (komut tabanlı) testleri destekler.",
+      "sinirlar": "Güncelleme temposu yavaştır; rapid gibi alternatiflere göre API eskidir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1577",
+      "ad": "hypothesis-jsonschema",
+      "tur": "kutuphane",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/python-jsonschema/hypothesis-jsonschema",
+      "olgunluk": "olgun",
+      "ne_saglar": "JSON Schema tanımlarından Hypothesis stratejileri üreterek şemaya uyan (ve sınır) örnekleri otomatik oluşturan kütüphane; şemalı ajan çıktıları ve API sözleşmeleri için özellik testleri yazmayı kolaylaştırır.",
+      "sinirlar": "Karmaşık şema anahtar kelimelerinde üretim yavaşlayabilir; bakım düşük tempoludur.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-010",
+        "N-K10-003"
+      ]
+    },
+    {
+      "id": "AR-1767",
+      "ad": "Fuzz Introspector",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://fuzz-introspector.readthedocs.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Fuzzing kampanyalarının kod kapsamını ve ilerlemeyi engelleyen noktaları analiz eder; hangi fonksiyonlara ulaşılamadığını ve yeni fuzz hedefi adaylarını raporlar (OSS-Fuzz ile entegre).",
+      "sinirlar": "Fuzzing altyapısı kurulu projelere yöneliktir; C/C++, Python, Java, Rust ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-1771",
+      "ad": "OSS-CRS",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://oss-crs.openssf.org/",
+      "olgunluk": "erken",
+      "ne_saglar": "AIxCC yarışmasından çıkan siber akıl yürütme sistemlerini (LLM destekli otomatik hata bulma ve yama üretme) açık kaynak projelerde çalıştırmak için çerçeve ve kayıt; CRSBench ile karşılaştırma.",
+      "sinirlar": "Yüksek hesaplama ve LLM maliyeti; üretilen yamalar insan incelemesi gerektirir; erken aşama.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K08-002",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-1806",
+      "ad": "Apache Otava",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://otava.apache.org/",
+      "olgunluk": "erken",
+      "ne_saglar": "Sürekli performans testi sonuçlarındaki anlamlı değişim noktalarını istatistiksel (E-divisive) yöntemle tespit eder; gürültülü ölçümlerde gerçek regresyonu ayırt eder, model davranış metriklerine de uygulanabilir.",
+      "sinirlar": "Kuluçka aşaması; yalnız zaman serisi analizi yapar, ölçüm toplama ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K09-013",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-1869",
+      "ad": "ISO/IEC/IEEE 29119 (Yazılım testi)",
+      "tur": "protokol-standart",
+      "lisans": "ticari (ISO)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.iso.org/standard/81291.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yazılım testi kavramları, süreçleri, test dokümantasyonu (beklenen sonuç, ön koşul, test verisi alanlı test durumu şablonları) ve test tasarım teknikleri (sınır değer, eşdeğerlik sınıfı, karar tablosu vb.) standart serisi.",
+      "sinirlar": "Ücretli ve kapsamlı; çevik ekiplerde hafifletilerek uygulanması gerekir.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-004",
+        "N-K05-010",
+        "N-K05-014"
+      ]
+    },
+    {
+      "id": "AR-1909",
+      "ad": "EvoMaster",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/WebFuzzing/EvoMaster",
+      "olgunluk": "gelisen",
+      "ne_saglar": "REST, GraphQL ve RPC API'leri için evrimsel algoritmalarla sistem düzeyinde test durumları üretir (beyaz kutu ve kara kutu); 500 hataları, şema ihlalleri gibi örtük oracle'ları yakalar, üretilen testler JUnit/pytest olarak dışa aktarılır.",
+      "sinirlar": "Beyaz kutu modu JVM/Node/.NET ile sınırlı; üretilen testler bakım gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-1910",
+      "ad": "ClusterFuzzLite",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://google.github.io/clusterfuzzlite",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OSS-Fuzz uyumlu fuzz hedeflerini CI'da (GitHub Actions, GitLab, Cloud Build) PR başına ve zamanlanmış olarak çalıştırır; çökme ve bellek hatalarını değişiklik birleşmeden bulur.",
+      "sinirlar": "Fuzz hedeflerinin yazılmasını gerektirir; bakım hızı düşük (son commit 2026 başı).",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K06-003",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-2173",
+      "ad": "Contrast Security (Assess ve ADR)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.contrastsecurity.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çalışan uygulamaya gömülü ajanla etkileşimli güvenlik testi (IAST): test koşarken gerçek veri akışından zafiyet bulur; üretimde uygulama tespit ve yanıt (ADR).",
+      "sinirlar": "Dil çalışma zamanı ajanı gerektirir; desteklenen diller sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-021",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-2179",
+      "ad": "GenRocket",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.genrocket.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kural tabanlı sentetik test verisi üretimi: veri modelinden kenar durum, negatif ve kombinatoryal veri senaryoları; CI'da talep üzerine üretim.",
+      "sinirlar": "Model/kural tanımı ön efor ister; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2312",
+      "ad": "Frama-C",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://frama-c.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "C kodu için soyut yorumlama (Eva) ve ACSL sözleşmeleriyle tümdengelimli doğrulama (WP) sunan biçimsel analiz platformu; kanıtlanabilir değişmez ve sözleşme tabanlı oracle sağlar.",
+      "sinirlar": "Yalnız C; ACSL sözleşmesi yazmak uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-009",
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-2543",
+      "ad": "Fastbot",
+      "tur": "acik-kaynak",
+      "lisans": "Fastbot Revised License (özel, izin veren)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/bytedance/Fastbot_Android",
+      "olgunluk": "olgun",
+      "ne_saglar": "Model tabanlı GUI testi: uygulama geçişlerini modelleyip pekiştirmeli öğrenmeyle keşfederek çökme/ANR gibi kararlılık sorunlarını bulur (Android; iOS sürümü ayrı depo).",
+      "sinirlar": "Özel lisans; iş kuralı doğruluğunu değil kararlılığı ölçer, 2025 ortasından beri etkinlik az.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-018",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-2544",
+      "ad": "jvm-sandbox-repeater",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/alibaba/jvm-sandbox-repeater",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Java sunucu tarafında gerçek trafiği ve alt çağrıları kaydedip yeni sürüme karşı oynatarak çıktıları karşılaştıran diferansiyel regresyon çözümü.",
+      "sinirlar": "2024'ten beri güncelleme yok; yeni JDK sürümleriyle uyum doğrulanmalı, kaydedilen trafikteki kişisel veri maskelenmeli.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2592",
+      "ad": "TOGA",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/toga",
+      "olgunluk": "erken",
+      "ne_saglar": "Java birim testleri için dönüştürücü tabanlı sinir ağı modeliyle istisna beklentisi ve assert (test oracle) üretir; EvoSuite gibi üreticilerin önek testlerine anlamlı beklenti eklemeyi hedefler.",
+      "sinirlar": "2023'ten beri güncellenmeyen araştırma kodu; yalnız Java ve sınırlı model, üretim kullanımı için doğrulanmamış.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-008",
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-2593",
+      "ad": "ChatUniTest",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ZJU-ACES-ISE/ChatUniTest",
+      "olgunluk": "erken",
+      "ne_saglar": "LLM ile Java birim testi üretir; üret-doğrula-onar döngüsünde derleme/çalıştırma hatalarını modele geri besleyerek testleri düzeltir, Maven eklentisi ve IntelliJ eklentisi sunar.",
+      "sinirlar": "Depoda açık lisans beyanı yok; kapsam ve oracle kalitesi modele bağlı, yalnız Java.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-010",
+        "N-K05-029"
+      ]
+    },
+    {
+      "id": "AR-2594",
+      "ad": "CoverUp",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/plasma-umass/coverup",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python için kapsam güdümlü LLM test üreticisi: kapsanmayan satır/dalları modele gösterip bunları kapsayan pytest testleri üretir ve başarısız/kararsız testleri eler.",
+      "sinirlar": "Yalnız Python; LLM API maliyeti gerektirir, üretilen testlerin beklenti gücü ayrıca ölçülmelidir.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-010",
+        "N-K05-029"
+      ]
+    },
+    {
+      "id": "AR-2595",
+      "ad": "TestSpark",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/JetBrains-Research/TestSpark",
+      "olgunluk": "gelisen",
+      "ne_saglar": "IntelliJ eklentisi olarak EvoSuite (arama tabanlı), LLM tabanlı ve Kex (sembolik) üreticilerle Java/Kotlin birim testi üretir; testler IDE içinde incelenip düzenlenerek kabul edilir.",
+      "sinirlar": "IDE merkezli, başsız hat kullanımı sınırlı; araştırma prototipi olarak konumlanıyor.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-010",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2596",
+      "ad": "CodaMosa",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/codamosa",
+      "olgunluk": "erken",
+      "ne_saglar": "Pynguin arama tabanlı test üretimi kapsam platosuna takıldığında LLM'den örnek test isteyerek aramayı yeniden canlandırır; Python modülleri için daha yüksek kapsam hedefler.",
+      "sinirlar": "Çoğaltma paketi niteliğinde; özgün Codex API'sine göre yazıldı, güncel modellerle uyarlama gerektirebilir.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-010"
+      ]
+    },
+    {
+      "id": "AR-2597",
+      "ad": "LLMorpheus",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/neu-se/llmorpheus",
+      "olgunluk": "erken",
+      "ne_saglar": "JavaScript/TypeScript kodunda yer tutucular koyup LLM'den gerçek hatalara benzeyen mutantlar önerir ve StrykerJS ile çalıştırarak klasik operatörlerin üretemediği mutasyonlarla test gücünü ölçer.",
+      "sinirlar": "Araştırma prototipi; LLM maliyeti ve eşdeğer mutant oranı yüksek olabilir, yalnız JS/TS.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-2598",
+      "ad": "Major Mutation Framework",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mutation-testing.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "javac derleyici eklentisiyle Java mutantlarını derleme sırasında gömer, Mml DSL ile mutasyon operatörlerini özelleştirir ve canlı mutantları, tespit oranını ve mutant–test matrisini hesaplar.",
+      "sinirlar": "Yalnız Java; lisans ve bakım bilgisi sitede net değil, akademik kullanım odaklı.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-2599",
+      "ad": "DSpot",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/STAMP-project/dspot",
+      "olgunluk": "erken",
+      "ne_saglar": "Mevcut JUnit testlerini girdi değiştirme ve eksik assert ekleme yoluyla güçlendirir (test amplification); mutasyon skorunu artıran yeni testleri önerir.",
+      "sinirlar": "2024'ten beri etkinlik düşük; yalnız Java/JUnit ve önerilerin insan incelemesi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2600",
+      "ad": "TSDetect",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://testsmells.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Java/JUnit testlerinde 'Empty Test', 'Ignored Test', 'Assertion Roulette', 'Redundant Assertion' gibi 20'ye yakın test kokusunu statik olarak tespit eder; IntelliJ eklentisi ve komut satırı sürümü vardır.",
+      "sinirlar": "Yalnız Java; kural tabanlı olduğundan yanlış pozitif üretebilir ve anlamsal test gücünü ölçmez.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-009",
+        "N-K05-013"
+      ]
+    },
+    {
+      "id": "AR-2607",
+      "ad": "DIG (Dynamic Invariant Generator)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/dynaroars/dig",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Program izlerinden veya sembolik durumlardan sayısal değişmezleri (polinom eşitlikler, sekizgen eşitsizlikler, min/max) çıkarır; C/Java programları için sonuçları doğrulamaya çalışır.",
+      "sinirlar": "Sayısal değişmezlere odaklı; iş kuralı düzeyindeki anlamsal değişmezleri çıkarmaz, kurulum ağır.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-2608",
+      "ad": "SpecFuzzer",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/facumolina/specfuzzer",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Dilbilgisi tabanlı fuzzing ile aday sınıf spesifikasyonları (assert'ler) üretip dinamik olarak geçersizleri eler ve mutasyon analiziyle en güçlü değişmezleri seçer.",
+      "sinirlar": "2023'ten beri güncelleme yok; yalnız Java ve deneysel kurulum.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-2609",
+      "ad": "Synoptic / CSight",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ModelInference/synoptic",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Sistem loglarından zamansal değişmezleri madenleyip sonlu durum makinesi modeli çıkarır (CSight dağıtık sistemler için); gözlenen davranışın modelini oracle olarak kullanmaya olanak verir.",
+      "sinirlar": "2022'den beri güncellenmiyor; log biçimini düzenli ifadeyle tanımlamak gerekir.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-2610",
+      "ad": "FRET",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/NASA-SW-VnV/fret",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gereksinimleri kısıtlı yapılandırılmış doğal dil (FRETish) ile yazdırır, bunları zamansal mantığa biçimselleştirip açıklamalı diyagramlarla insana doğrulatır; gerçekleştirilebilirlik denetimi ve çalışma zamanı izleyici/doğrulayıcı (CoCoSim, Kind 2, Copilot) çıktısı üretir.",
+      "sinirlar": "Kontrol/gömülü sistem gereksinimlerine göre tasarlandı; iş uygulaması kullanıcı hikâyeleri için uyarlama ve eğitim gerekir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-009",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-2611",
+      "ad": "nl2spec",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/realChrisHahn2/nl2spec",
+      "olgunluk": "erken",
+      "ne_saglar": "Doğal dil gereksinimlerini LLM ile zamansal mantık formüllerine çevirir; alt ifadeleri kullanıcıya gösterip etkileşimli olarak düzelttirir.",
+      "sinirlar": "2024'ten beri güncellenmiyor; zamansal mantık bilgisi gerektirir ve web arayüzü prototip düzeyinde.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005"
+      ]
+    },
+    {
+      "id": "AR-2612",
+      "ad": "Toradocu",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/albertogoffi/toradocu",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Javadoc yorumlarındaki doğal dil koşullarını (@throws, @param, @return) çalıştırılabilir spesifikasyonlara çevirerek Randoop gibi üreticiler için test oracle'ı üretir.",
+      "sinirlar": "2024'ten beri etkinlik yok; yalnız Java ve iyi yazılmış Javadoc'a bağımlı.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-2613",
+      "ad": "Intent Formalization / nl2postcond",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/nl-2-postcond",
+      "olgunluk": "erken",
+      "ne_saglar": "Doğal dil niyetinden LLM ile biçimsel son koşullar (assert) üretme ve bunların doğruluk ile ayırt edicilik (hatalı kodu yakalama) metrikleriyle değerlendirilmesine ilişkin kod ve veri setleri; FMCAD'24 ve F* spesifikasyon çalışmalarını da içerir.",
+      "sinirlar": "Araştırma artefaktı; hazır bir hat bileşeni değil, sonuçların kurum koduna aktarılması uyarlama ister.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-008",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-2614",
+      "ad": "TiCoder",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/ticoder",
+      "olgunluk": "erken",
+      "ne_saglar": "Test güdümlü kullanıcı niyeti biçimselleştirme: kod üretmeden önce aday testleri kullanıcıya gösterip evet/hayır onayı alır, onaylanan testlerle aday kodları budar ve sıralar.",
+      "sinirlar": "Python fonksiyon düzeyinde deneysel iş akışı; OpenAI/Azure API'sine bağlı, depo düzeyi görevlere doğrudan uygulanmaz.",
+      "ihtiyaclar": [
+        "N-K01-007",
+        "N-K01-009",
+        "N-K05-001",
+        "N-K10-010"
+      ]
+    },
+    {
+      "id": "AR-2615",
+      "ad": "RepairAgent",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sola-st/RepairAgent",
+      "olgunluk": "erken",
+      "ne_saglar": "Otonom LLM ajanıyla program onarımı: hata yerelleştirme, bilgi toplama, yama üretme ve test doğrulama araçlarını durum makinesiyle yönlendirir; Defects4J üzerinde değerlendirildi.",
+      "sinirlar": "Defects4J/Java odaklı araştırma kodu; genel depolarda kurulum ve maliyet kontrolü sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-003",
+        "N-K05-003",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2617",
+      "ad": "Agentless",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/OpenAutoCoder/Agentless",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan döngüsü yerine sabit üç aşamalı (hiyerarşik yerelleştirme, onarım, yeniden üretim testiyle yama doğrulama/seçme) basit bir hat; ucuz ve öngörülebilir sorun çözümü sağlar.",
+      "sinirlar": "2024 sonundan beri güncellenmiyor; SWE-bench tarzı Python görevlerine göre ayarlı.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K05-002",
+        "N-K10-006"
+      ]
+    },
+    {
+      "id": "AR-2621",
+      "ad": "Astor",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/SpoonLabs/astor",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java için üret-doğrula tipi otomatik program onarım kütüphanesi (jGenProg, jKali, jMutRepair, Cardumen); test paketini oracle olarak kullanır.",
+      "sinirlar": "Klasik (LLM öncesi) yaklaşımlar; aşırı uyumlu yama üretme riski ve yalnız Java.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2622",
+      "ad": "Flacoco",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ASSERT-KTH/flacoco",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JaCoCo kapsamı üzerine kurulu spektrum tabanlı hata yerelleştirme; başarısız testlere göre şüpheli satırları puanlar ve CLI/kütüphane olarak kullanılır.",
+      "sinirlar": "Yalnız Java; kapsam tabanlı yerelleştirme çoklu hata durumunda zayıflar.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-2623",
+      "ad": "GZoltar",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/GZoltar/gzoltar",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Java için test kapsam spektrumu toplayıp Ochiai vb. formüllerle hata yerelleştirme raporu üreten kütüphane, Maven/Ant eklentileri ve komut satırı aracı.",
+      "sinirlar": "2024'ten beri güncelleme yavaş; yalnız JVM.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-2624",
+      "ad": "LIBRO",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/coinse/libro",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Hata raporundan LLM ile hatayı yeniden üreten test adayları üretir, bunları çalıştırıp kümeleyerek geliştiriciye en olası yeniden üretim testlerini sunar.",
+      "sinirlar": "Çoğaltma paketi; 2023'ten beri güncellenmiyor, lisans beyanı yok.",
+      "ihtiyaclar": [
+        "N-K05-002",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2625",
+      "ad": "AutoFL",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/coinse/autofl",
+      "olgunluk": "erken",
+      "ne_saglar": "LLM'e kod gezinme fonksiyonları verip başarısız testin nedenini arayarak hata yerelleştirme yapar ve insan tarafından okunabilir açıklama üretir.",
+      "sinirlar": "Araştırma kodu; lisans beyanı yok ve 2025 başından beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K07-005"
+      ]
+    },
+    {
+      "id": "AR-2626",
+      "ad": "FixCheck / LLM-Oracle (ICST 2026 artefaktı)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/inyeongjang/LLM-Oracle",
+      "olgunluk": "erken",
+      "ne_saglar": "Otomatik yama doğruluğu değerlendirmesi için LLM tabanlı oracle tasarımlarını (FixCheck uzantısı, istem stratejileri) ve deney betiklerini içerir; aşırı uyumlu yamaları ayırt etmeye çalışır.",
+      "sinirlar": "Yeni ve topluluk desteği olmayan çoğaltma paketi; üretim aracı değil.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K05-016"
+      ]
+    },
+    {
+      "id": "AR-2627",
+      "ad": "Panta",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/PANTA-TestAutomation/Panta",
+      "olgunluk": "erken",
+      "ne_saglar": "Statik kontrol akışı analizi ve dinamik kapsam analizini yinelemeli birleştirip LLM'i kapsanmayan yürütme yollarına yönlendiren birim test üretim tekniğinin çoğaltma paketi.",
+      "sinirlar": "Lisans beyanı yok; Defects4J/Java deney düzeninde, erken prototip.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-010"
+      ]
+    },
+    {
+      "id": "AR-2628",
+      "ad": "Defects4J",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/rjust/defects4j",
+      "olgunluk": "olgun",
+      "ne_saglar": "17 Java projesinden 800'ü aşkın gerçek, yeniden üretilebilir hata; hatalı/düzeltilmiş sürümleri çıkarma, testleri çalıştırma, kapsam ve mutasyon analizi için komut satırı altyapısı sunar.",
+      "sinirlar": "Yalnız Java ve eski projeler; model eğitim verisine sızmış olması (kontaminasyon) sonuçları şişirebilir.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K08-002",
+        "N-K19-005",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2629",
+      "ad": "BugsInPy",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/soarsmu/BugsInPy",
+      "olgunluk": "gelisen",
+      "ne_saglar": "17 Python projesinden 493 gerçek hatayı, hatayı açığa çıkaran testlerle birlikte yeniden üretilebilir biçimde sunan kıyas veri seti ve betikleri.",
+      "sinirlar": "Lisans beyanı yok; bazı ortamların kurulumu Python sürüm uyumsuzlukları nedeniyle kırılgan.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K08-002",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2633",
+      "ad": "SWT-bench",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/logic-star-ai/swt-bench",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gerçek GitHub sorunlarından, düzeltmeden önce başarısız olup sonra geçen (fail-to-pass) hata yeniden üretim testi yazma yeteneğini ölçen kıyas ve değerlendirme koşumu; kapsam artışını da raporlar.",
+      "sinirlar": "Python depolarıyla sınırlı; kurum görevlerine uyarlamak için kendi örnekleri üretmek gerekir.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-002",
+        "N-K08-002",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2635",
+      "ad": "TestGenEval",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-NC-4.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/facebookresearch/testgeneval",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gerçek depolardan 1.210 kod–test dosyası çifti üzerinde tam test paketi üretimi ve test tamamlama görevlerini kapsam ve mutasyon skoruyla değerlendiren kıyas.",
+      "sinirlar": "Ticari olmayan kullanım lisansı; yalnız Python.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2636",
+      "ad": "UTBoost",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/CUHK-Shenzhen-SE/UTBoost",
+      "olgunluk": "erken",
+      "ne_saglar": "SWE-bench görevlerinin yetersiz testlerini LLM ile ek birim testleri üreterek güçlendirir; yetersiz testler yüzünden yanlış 'çözüldü' sayılan yamaları ortaya çıkarır.",
+      "sinirlar": "SWE-bench'e özgü araştırma kodu; OpenAI API'sine bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-015",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-2654",
+      "ad": "EvilGenie",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/JonathanGabor/evilgenie_inspect",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanlarının test dosyalarını düzenleme veya test vakalarını sabit kodlama gibi ödül istismarı yapıp yapmadığını gizli testler, LLM hakem ve test dosyası değişiklik tespitiyle ölçen Inspect tabanlı kıyas.",
+      "sinirlar": "LiveCodeBench problemleriyle sınırlı küçük ölçekli araştırma kıyası.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-015",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-2758",
+      "ad": "CiRA (Causality in Requirements Artifacts)",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/JulianFrattini/cira",
+      "olgunluk": "erken",
+      "ne_saglar": "Gereksinim cümlelerindeki koşullu/nedensel ifadeleri tespit edip neden–sonuç grafiğine çevirir ve bundan kabul testi vakaları (karar tablosu) üretir.",
+      "sinirlar": "İngilizce odaklı; 2024'ten beri güncellenmiyor ve Türkçe için yeniden eğitim gerekir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K05-001"
+      ]
+    },
+    {
+      "id": "AR-2788",
+      "ad": "Alloy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://alloytools.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapıları ve davranışı ilişkisel mantıkla tanımlayıp SAT tabanlı sınırlı kapsamlı denetimle karşı örnek bulan hafif biçimsel modelleme aracı; durum makineleri ve yetki modellerinde değişmezleri doğrulamaya yarar.",
+      "sinirlar": "Sınırlı kapsam denetimi kanıt değildir; modelleme eğitimi gerekir.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-011",
+        "N-K05-030",
+        "N-K13-001"
+      ]
+    },
+    {
+      "id": "AR-2789",
+      "ad": "TLA+ araçları (TLC, Apalache)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tlaplus/tlaplus",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eşzamanlı ve dağıtık algoritmaları TLA+ ile tanımlayıp TLC model denetleyicisiyle güvenlik/canlılık değişmezlerini doğrular; iş akışı durum sahipliği, idempotency ve yarış koşulu tasarımlarında kullanılır.",
+      "sinirlar": "Öğrenme eğrisi dik; kod ile model arasındaki uyum ayrıca sağlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-030",
+        "N-K13-001",
+        "N-K13-004",
+        "N-K13-005"
+      ]
+    },
+    {
+      "id": "AR-2790",
+      "ad": "P dili",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/p-org/P",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay güdümlü durum makineleriyle dağıtık sistemleri modelleyip sistematik test ve model denetimiyle eşzamanlılık hatalarını bulan dil ve araç zinciri.",
+      "sinirlar": "Modelleme ek emek ister; üretim koduyla eşzamanlılığı elle korunmalı.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "AR-2791",
+      "ad": "DafnyBench",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sun-wendy/DafnyBench",
+      "olgunluk": "erken",
+      "ne_saglar": "750'yi aşkın Dafny programıyla LLM'lerin biçimsel doğrulama için gerekli ara iddiaları (değişmez, ön/son koşul) üretme yeteneğini doğrulayıcıyla ölçen kıyas.",
+      "sinirlar": "Dafny'ye özgü; 2024'ten beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2792",
+      "ad": "AutoVerus (verus-proof-synthesis)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/verus-proof-synthesis",
+      "olgunluk": "erken",
+      "ne_saglar": "Rust için Verus doğrulayıcısına yönelik kanıt ve değişmezleri LLM ajanlarıyla (üretim, iyileştirme, hata tabanlı onarım) otomatik sentezleyen sistem ve Verus-Bench.",
+      "sinirlar": "Verus/Rust'a özgü araştırma kodu.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-2855",
+      "ad": "Mewt",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/mewt",
+      "olgunluk": "erken",
+      "ne_saglar": "Kaynak kodda küçük mutasyonlar yapıp test takımının bunları yakalayıp yakalamadığını ölçen, dil çözümleyici sözleşmesiyle genişletilebilen mutasyon testi aracı.",
+      "sinirlar": "AGPL-3.0; Windows desteklenmiyor.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-009",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-2856",
+      "ad": "pytest-gremlins",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mikelane/pytest-gremlins",
+      "olgunluk": "erken",
+      "ne_saglar": "pytest için hız öncelikli mutasyon testi; mutasyon anahtarlama ile dosya G/Ç ve modül yeniden yüklemesini ortadan kaldırarak TDD döngüsünde pratik sürelere iner.",
+      "sinirlar": "Yalnız Python/pytest; tek geliştiricili.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-2857",
+      "ad": "Bombadil",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://antithesishq.github.io/bombadil/",
+      "olgunluk": "erken",
+      "ne_saglar": "Web ve terminal arayüzleri için özellik tabanlı test; arayüzü otonom keşfedip tanımlı doğruluk özelliklerini denetler; yerelde, CI'da ve Antithesis içinde çalışır.",
+      "sinirlar": "0.x deneysel; API değişebilir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2858",
+      "ad": "Hegel",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://hegel.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Hypothesis üzerine kurulu, diller arası özellik tabanlı test protokolü ve Rust, Go, TypeScript kütüphaneleri; üreteçlerle rastgele girdi ve küçültme sağlar.",
+      "sinirlar": "Beta; kırıcı değişiklik olabilir, hegel-core deposu arşivlendi.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-2859",
+      "ad": "cargo-crap",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://crates.io/crates/cargo-crap",
+      "olgunluk": "erken",
+      "ne_saglar": "Rust projeleri için CRAP (Change Risk Anti-Patterns: karmaşıklık × kapsam eksikliği) metriğini hesaplar; AI üretimi koddaki test edilmemiş karmaşıklığı öne çıkarır.",
+      "sinirlar": "Yalnız Rust.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-2862",
+      "ad": "Greenfield",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/prime-radiant-inc/greenfield",
+      "olgunluk": "erken",
+      "ne_saglar": "Kaynak kod, doküman, SDK, çalışma zamanı davranışı ve ikililerden temiz davranışsal spesifikasyon, test vektörleri, kabul kriterleri ve tam köken izi üreten Claude Code eklentisi.",
+      "sinirlar": "Claude Code'a bağlı; üretilen kriterler insan onayı gerektirir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-2878",
+      "ad": "Code Contracts",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor (lisans dosyası yok)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://code-contracts.cc",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodla yan yana, sahibi ve etiketi olan yapılandırılmış varsayım ve gereksinimleri (@cc açıklamaları) tanımlayan açık biçim; ajanların beklenti ve sınırları koddan okumasını sağlar.",
+      "sinirlar": "Ağustos 2026 taslağı; lisans belirsiz.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K01-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-2883",
+      "ad": "Correctless",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://joshft.github.io/correctless/",
+      "olgunluk": "erken",
+      "ne_saglar": "Spesifikasyon ajanı doğruyu tanımlar, inceleyici spesifikasyona saldırır, test ajanı test yazar; kodu yazan ajan hiçbir zaman incelemez. Ajan ayrımlı spesifikasyon güdümlü TDD ve saldırgan QA iş akışı.",
+      "sinirlar": "Tek geliştiricili, kabuk betiği tabanlı.",
+      "ihtiyaclar": [
+        "N-K05-006",
+        "N-K05-007",
+        "N-K05-015",
+        "N-K17-009"
+      ]
+    },
+    {
+      "id": "AR-3073",
+      "ad": "Spock Framework",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://spockframework.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Groovy tabanlı given/when/then blokları ve veri tablolarıyla okunabilir, örnek odaklı spesifikasyon testleri yazmayı sağlayan JVM test çerçevesi.",
+      "sinirlar": "Groovy bilgisi gerektirir; Kotlin/Java-yalnız ekiplerde benimseme maliyeti var.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K05-001",
+        "N-K05-010"
+      ]
+    },
+    {
+      "id": "AR-3085",
+      "ad": "ArcMutate",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.arcmutate.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PIT üzerine kurulu kurumsal mutasyon testi eklentileri; yalnız değişen kodu mutasyona uğratan artımlı analiz, Kotlin desteği ve PR entegrasyonu sağlar.",
+      "sinirlar": "Ticari lisans; PIT'in açık kaynak çekirdeğine bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-015",
+        "N-K06-003",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-3086",
+      "ad": "ScalaCheck",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://www.scalacheck.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Scala için özellik tabanlı test kütüphanesi; üreteçler ve küçültme (shrinking) ile değişmezleri rastgele girdilerle sınar.",
+      "sinirlar": "Özellik yazımı alan bilgisi ister; Scala dışı JVM dilleri için ergonomik değil.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-3122",
+      "ad": "mutation_test (Dart)",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pub.dev/packages/mutation_test",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodu kural dosyalarına göre mutasyona uğratıp testlerin değişikliği yakalayıp yakalamadığını ölçen komut satırı aracı; Dart için varsayılan kurallarla gelir.",
+      "sinirlar": "Küçük topluluk projesi; Stryker/PIT kadar gelişmiş operatör ve artımlı analiz yok.",
+      "ihtiyaclar": [
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-3135",
+      "ad": "RapidCheck",
+      "tur": "kutuphane",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/emil-e/rapidcheck",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C++ için QuickCheck tarzı özellik tabanlı test kütüphanesi; GoogleTest/Catch entegrasyonu ve küçültme sağlar.",
+      "sinirlar": "Tek bakımcılı; sürüm yayını seyrek.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-3150",
+      "ad": "AutoFixture",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/AutoFixture/AutoFixture",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET testlerinde 'Arrange' aşaması için anonim test verisini otomatik üreten kütüphane.",
+      "sinirlar": "Rastgele veri kenar durumları sistematik kapsamaz.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-3168",
+      "ad": "go-mutesting (Avito çatalı)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/avito-tech/go-mutesting",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go kaynak kodunda mutasyon testi yapan aracın bakımlı çatalı; mutasyon skoru ve hayatta kalan mutant raporu üretir.",
+      "sinirlar": "Son itme Ocak 2026; büyük modüllerde yavaş.",
+      "ihtiyaclar": [
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-3190",
+      "ad": "cargo-fuzz",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 veya MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://rust-fuzz.github.io/book/cargo-fuzz.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "libFuzzer tabanlı Rust fuzz hedeflerini oluşturup çalıştıran Cargo alt komutu.",
+      "sinirlar": "Nightly derleyici gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3191",
+      "ad": "Miri",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 veya MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/rust-lang/miri",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust MIR yorumlayıcısı; testleri çalıştırırken tanımsız davranış, geçersiz bellek erişimi ve veri yarışlarını tespit eden örtük oracle.",
+      "sinirlar": "Çok yavaş; FFI ve bazı sistem çağrıları desteklenmez.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3192",
+      "ad": "Loom",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tokio-rs/loom",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eşzamanlı Rust kodunda olası iş parçacığı serpiştirmelerini sistematik olarak deneyerek yarış koşullarını deterministik test eden araç.",
+      "sinirlar": "Durum uzayı büyür; yalnız küçük eşzamanlı birimler için pratik.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-013",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-3193",
+      "ad": "Verus",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/verus-lang/verus",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust kodu için ön/son koşul ve değişmezlerin SMT çözücüyle biçimsel olarak doğrulandığı doğrulama aracı.",
+      "sinirlar": "Uzmanlık gerektirir; Rust'ın tüm özelliklerini desteklemez.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-011",
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-3194",
+      "ad": "quickcheck (Rust)",
+      "tur": "kutuphane",
+      "lisans": "Unlicense veya MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/BurntSushi/quickcheck",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust için küçültmeli özellik tabanlı test kütüphanesi.",
+      "sinirlar": "proptest'e göre üreteç esnekliği daha az.",
+      "ihtiyaclar": [
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-3222",
+      "ad": "Pandera",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.union.ai/pandera",
+      "olgunluk": "olgun",
+      "ne_saglar": "pandas/Polars vb. veri çerçeveleri için şema ve istatistiksel doğrulama kütüphanesi; Hypothesis ile şemadan sentetik veri üretebilir.",
+      "sinirlar": "Veri çerçevesi dışındaki veri kaynakları için uygun değil.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-3223",
+      "ad": "beartype",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://beartype.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python tip ipuçlarını çalışma zamanında sabit maliyetle denetleyen tip denetleyicisi; testlerde örtük oracle olarak tip ihlallerini yakalar.",
+      "sinirlar": "Rastgele örnekleme yaptığı için koleksiyonlarda tüm öğeleri denetlemez.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3224",
+      "ad": "icontract",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Parquery/icontract",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python'da ön koşul, son koşul ve sınıf değişmezlerini dekoratörlerle tanımlayan sözleşmeli tasarım kütüphanesi; özellik tabanlı test araçlarıyla birleşebilir.",
+      "sinirlar": "Bakım yavaş (son itme Ocak 2026); çalışma zamanı maliyeti ekler.",
+      "ihtiyaclar": [
+        "N-K01-005",
+        "N-K05-011",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3226",
+      "ad": "Pest",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pestphp.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHPUnit üzerinde okunabilir sözdizimli PHP test çerçevesi; yerleşik mimari (arch) testleri ve mutasyon testi sunar.",
+      "sinirlar": "PHPUnit sürüm geçişlerine bağımlı; mutasyon testi büyük projelerde yavaş.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K04-007",
+        "N-K05-001",
+        "N-K05-009"
+      ]
+    },
+    {
+      "id": "AR-3230",
+      "ad": "Eris",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/giorgiosironi/eris",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PHP ve PHPUnit için QuickCheck tarzı özellik tabanlı test kütüphanesi.",
+      "sinirlar": "Bakım yavaş; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K05-011"
+      ]
+    },
+    {
+      "id": "AR-3303",
+      "ad": "Jazzer.js",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/CodeIntelligenceTesting/jazzer.js",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Node.js için kapsam güdümlü, süreç içi fuzzing motoru; Jest entegrasyonuyla fuzz testleri çalıştırır.",
+      "sinirlar": "Topluluğu küçük; bazı özellikler ticari platformda.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3410",
+      "ad": "SmartBear MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://developer.smartbear.com/smartbear-mcp/docs/mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "BugSnag, Reflect, Swagger (API Hub), PactFlow ve QMetry/Zephyr gibi SmartBear ürünlerine tek MCP sunucusundan ajan erişimi; sözleşme testleri ve API tanımlarının ajanlarca kullanılmasını sağlar.",
+      "sinirlar": "Her alt ürün ayrı lisans gerektirir.",
+      "ihtiyaclar": [
+        "N-K03-006",
+        "N-K05-014",
+        "N-K05-024",
+        "N-K12-003",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3443",
+      "ad": "Trail of Bits Skills",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-SA-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Güvenlik araştırması, zafiyet tespiti, denetim ve test (fuzz, özellik tabanlı test, statik analiz) iş akışlarını paketleyen Claude Code eklenti pazarı; Codex de yükleyebilir.",
+      "sinirlar": "CC-BY-SA lisansı türev içerikte paylaşım koşulu getirir. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-015",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3919",
+      "ad": "red-green-mode",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/hidevinliu/red-green-mode",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanlarının 'sahte yeşil' üretmesini yakalayan yedi bağımlılıksız Python CLI: diff üzerinde assertion silme, skip işaretleme, tip denetimi susturma ve dişsiz test gibi manipülasyonları deterministik çıkış koduyla işaretler; doğrulayıcının gerçekten başarısız olabildiğini gösteren kapılar içerir. Dil modeli çağırmaz, ağ kullanmaz.",
+      "sinirlar": "Çok yeni (Ağustos 2026) ve tek geliştiricili (≈10 yıldız); kural kapsamı ağırlıkla Python/pytest örüntülerine dayanır, diğer dillerde doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K05-002",
+        "N-K05-003",
+        "N-K05-005"
+      ]
+    },
+    {
+      "id": "AR-3922",
+      "ad": "eslint-plugin-jest",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/jest-community/eslint-plugin-jest",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jest testleri için ESLint kuralları: `no-disabled-tests` (skip/xit), `no-focused-tests` (only/fit), `expect-expect` (assertion'sız test), `no-conditional-expect`, `no-standalone-expect` gibi kurallarla atlanan, odaklanan veya zayıflatılmış testleri statik olarak yakalar ve CI'de hata seviyesiyle birleştirmeyi durdurur.",
+      "sinirlar": "Yalnız JS/TS ve Jest; test dosyasının tamamen silinmesini göremez, diff tabanlı kontrolle tamamlanmalı; kural kapatma yorumları ayrıca yasaklanmalı.",
+      "ihtiyaclar": [
+        "N-K05-005"
+      ]
+    },
+    {
+      "id": "AR-3923",
+      "ad": "@vitest/eslint-plugin (eslint-plugin-vitest)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/vitest-dev/eslint-plugin-vitest",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Vitest testleri için ESLint kuralları: devre dışı/odaklanmış testleri, assertion içermeyen testleri ve koşullu beklentileri işaretler; Jest eklentisinin Vitest karşılığıdır.",
+      "sinirlar": "Yalnız Vitest; statik kontrol olduğundan anlamsal zayıflatmayı (ör. toleransı büyütme) yakalamaz.",
+      "ihtiyaclar": [
+        "N-K05-005"
+      ]
+    },
+    {
+      "id": "AR-3924",
+      "ad": "eslint-plugin-mocha",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/lo1tuma/eslint-plugin-mocha",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mocha testleri için ESLint kuralları; `no-skipped-tests` ve `no-exclusive-tests` ile atlanan ve yalnız-çalıştırılan (only) testleri, boş başlıklı veya iç içe hatalı yapıları yakalar.",
+      "sinirlar": "Yalnız Mocha; silinen testleri görmez.",
+      "ihtiyaclar": [
+        "N-K05-005"
+      ]
+    },
+    {
+      "id": "AR-3925",
+      "ad": "JNose",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/arieslab/jnose",
+      "olgunluk": "erken",
+      "ne_saglar": "Java/JUnit projelerinde test kokusu (test smell) tespiti: boş test, assertion'sız test, yok sayılan (ignored) test, uyuyan test, sihirli sayı gibi kokuları sayar ve proje sürümleri boyunca eğilim raporlar; zayıflatılmış testlerin izlenmesine yardımcı olur.",
+      "sinirlar": "Akademik ve küçük topluluk (≈30 yıldız); yalnız Java; CI entegrasyonu için ek iş gerekir.",
+      "ihtiyaclar": [
+        "N-K05-005"
+      ]
+    },
+    {
+      "id": "AR-3976",
+      "ad": "goldie",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sebdah/goldie",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go için altın dosya (golden file) testi; beklenen çıktılar testdata altında ayrı dosyalarda sürümlenir ve yalnız açık `-update` bayrağıyla güncellenir, böylece beklenti değişikliği ayrı dosya farkı olarak incelemeye düşer.",
+      "sinirlar": "Toplu `-update` mevcut çıktıdan totolojik beklenti üretebilir; CI'de bayrağın yasaklanması ve beklenti dosyalarının ayrı onaya bağlanması gerekir.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-3977",
+      "ad": "Tavern",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://taverntesting.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "REST, MQTT ve gRPC API testlerini YAML ile bildirimsel yazan pytest eklentisi; beklenen durum kodları, gövde alanları ve şema kontrolleri kaynak koddan ayrı, sürümlü dosyalarda tutulur.",
+      "sinirlar": "Beklentinin yetkili kaynaktan (spesifikasyon) türetildiğini kendiliğinden garanti etmez; karmaşık akışlarda YAML uzar.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-020"
+      ]
+    },
+    {
+      "id": "AR-3978",
+      "ad": "Venom",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ovh/venom",
+      "olgunluk": "gelisen",
+      "ne_saglar": "YAML test takımlarıyla HTTP, SQL, Kafka, IMAP, SSH, web gibi yürütücülerde entegrasyon testleri; değişkenler ve assertion'lar kod dışı dosyalarda, JUnit/xUnit raporu üretir.",
+      "sinirlar": "Topluluk küçük; beklenti kaynağının izlenebilirliği kurumca sağlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-008",
+        "N-K05-020"
+      ]
+    },
+    {
+      "id": "AR-3985",
+      "ad": "nbgrader",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://nbgrader.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jupyter not defterlerinde ödev üretme ve otomatik notlama; 'BEGIN HIDDEN TESTS' işaretli testler öğrenci sürümünden çıkarılır ve yalnız notlamada çalıştırılır—uygulayıcıya gösterilmeyen gizli kabul testi deseninin olgun uygulaması.",
+      "sinirlar": "Eğitim amaçlı ve not defteri biçimine bağlı; kurumsal hat için desen/altyapı kaynağı olarak uyarlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-3986",
+      "ad": "Otter-Grader",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://otter-grader.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ve R için otomatik notlama; test durumları 'hidden' işaretlenerek dağıtılan sürümden ayrılır, notlama Docker konteynerinde yalıtılmış çalışır.",
+      "sinirlar": "Eğitim odaklı; ajan hattına entegrasyon özel iş.",
+      "ihtiyaclar": [
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-3987",
+      "ad": "PrairieLearn",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (CE) + MIT bölümleri; EE ayrı lisans",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.prairielearn.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Harici notlayıcı Docker konteynerlerinde gönderilen kodu gönderenin görmediği test dosyalarıyla, ağ erişimi kapalı ve süre sınırlı biçimde çalıştırır; doğrulayıcının yalnız çıktıya ve gereksinime bakan yalıtılmış çalışmasına örnek altyapı.",
+      "sinirlar": "Eğitim platformu; AGPL ve ayrı lisanslı EE bölümleri.",
+      "ihtiyaclar": [
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-3988",
+      "ad": "Autolab",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "http://www.autolabproject.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomatik notlanan programlama ödevleri; Tango hizmetiyle notlama betiklerini yalıtılmış konteyner/VM'de çalıştırır, notlayıcı dosyaları ve gizli testler gönderene kapalıdır.",
+      "sinirlar": "Eğitim odaklı; kurumsal SSO ve ölçek için uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-3989",
+      "ad": "DOMjudge",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.domjudge.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Programlama yarışması jüri sistemi; gönderimler yalıtılmış judgehost'larda açık örnek ve gizli test verisine karşı çalıştırılır; sonuç doğru/yanlış cevap/zaman aşımı/çalışma hatası/derleme hatası sınıflarıyla döner—derleme hatasını 'yanlış cevap'tan ayıran taksonomi RED dışı sonuç triyajına hazır bir modeldir.",
+      "sinirlar": "Yarışma odaklı; birim testi değil girdi/çıktı karşılaştırma modeli.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K05-007"
+      ]
+    },
+    {
+      "id": "AR-4259",
+      "ad": "Chaos Monkey for Spring Boot",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/codecentric/chaos-monkey-spring-boot",
+      "olgunluk": "olgun",
+      "ne_saglar": "Spring Boot uygulamalarında gecikme, istisna, uygulama sonlandırma ve bellek baskısı saldırılarını belirli bileşen türlerine (controller, service, repository, REST istemcisi) yapılandırılabilir oranla enjekte eder; çalışma zamanında açılıp kapatılabilir.",
+      "sinirlar": "Yalnız JVM/Spring; patlama yarıçapı ve otomatik durdurma yönetimi uygulama dışı araç ister.",
+      "ihtiyaclar": [
+        "N-K33-009",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-4262",
+      "ad": "Jepsen",
+      "tur": "acik-kaynak",
+      "lisans": "EPL-1.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://jepsen.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık sistemlere ağ bölünmesi, süreç çökmesi, saat kayması gibi arızalar enjekte ederken istemci işlemlerinin geçmişini kaydeder ve doğrusallaştırılabilirlik ile işlem yalıtımı gibi tutarlılık özelliklerini denetleyicilerle doğrular; yayımlanmış analizleri ders kaynağıdır.",
+      "sinirlar": "Kurulum ve test yazımı Clojure bilgisi ister; ürün ekibi için öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-4263",
+      "ad": "Elle",
+      "tur": "kutuphane",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/jepsen-io/elle",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşlem geçmişlerinden bağımlılık grafiği kurup döngü tespitiyle kara kutu biçiminde işlem yalıtımı anormalliklerini (ör. kayıp güncelleme, G2) bulur; çift işlem ve sıralama gibi kritik değişmezlerin kanıta dayalı denetimini sağlar.",
+      "sinirlar": "Belirli geçmiş biçimleri ister; üretim trafiğinde sürekli izleyici olarak değil test geçmişlerinde kullanılır.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4264",
+      "ad": "Antithesis",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://antithesis.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Konteynerlerde çalışan sistemi deterministik hipervizörde çalıştırıp ağ, zamanlama ve arıza enjeksiyonunu otonom keşifle uygular; yazılım içine gömülen her zaman/bazen doğrulamalarıyla değişmez ihlallerini yeniden üretilebilir biçimde bulur.",
+      "sinirlar": "Ticari ve bulutta çalışır; kodun ve imajların sağlayıcıya gönderilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-4265",
+      "ad": "Shuttle",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/awslabs/shuttle",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eşzamanlı Rust kodunu kontrollü zamanlayıcıyla rastgele ve PCT gibi stratejilerle çalıştırarak yarış ve kilitlenme hatalarını yeniden üretilebilir tohumlarla bulur.",
+      "sinirlar": "Yalnız Rust; tam kapsam garantisi vermez, olasılıksal keşif yapar.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4266",
+      "ad": "Turmoil",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/tokio-rs/turmoil",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tokio tabanlı dağıtık Rust sistemlerini tek iş parçacığında ağ bölünmesi, gecikme ve düğüm yeniden başlatmalarıyla deterministik simülasyonda test eder; yeniden deneme, zaman aşımı ve idempotency kodunu doğrulamaya yarar.",
+      "sinirlar": "Yalnız Rust/Tokio; gerçek altyapı arızalarını değil simüle ağı kapsar.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-4267",
+      "ad": "MadSim",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/madsim-rs/madsim",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust dağıtık sistemleri için deterministik simülatör: zaman, ağ, rastgelelik ve dosya sistemini simüle ederek arıza senaryolarını tohumla yeniden üretilebilir kılar.",
+      "sinirlar": "Yalnız Rust; uygulamanın simülatöre uygun bağımlılıklarla derlenmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-4355",
+      "ad": "Quint",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://quint.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TLA+ zamansal mantığına dayanan, programcı dostu sözdizimli yürütülebilir belirtim dili; tip denetimi, REPL, rastgele simülasyon ve Apalache/TLC ile model denetimi sağlayarak durum makineleri ve değişmezlerin doğrulanmasına olanak tanır.",
+      "sinirlar": "Model denetimi durum uzayıyla sınırlı; kod ile belirtim arasındaki uyum ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4357",
+      "ad": "P dili ve PObserve",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://p-org.github.io/P/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık protokolleri olay güdümlü durum makineleri olarak modelleyip sistematik test (model denetimi benzeri keşif) ile güvenlik ve canlılık özelliklerini doğrular; PObserve üretim ve test loglarını P belirtimlerine karşı denetleyerek belirtimin çalışma zamanı izleyicisine dönüşmesini sağlar.",
+      "sinirlar": "Uygulama kodu ile P modeli ayrı; PObserve için log ayrıştırıcı yazılması gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4358",
+      "ad": "Dafny",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://dafny.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ön/son koşul, döngü değişmezi ve lemmalarla yazılan doğrulama odaklı programlama dili; SMT tabanlı otomatik doğrulayıcıyla ispatları derleme sırasında denetler, doğrulanmış kodu C#, Java, Go, Python ve JavaScript'e derler.",
+      "sinirlar": "SMT zaman aşımı ve kararsız doğrulama (brittleness) yaşanabilir; ekip yetkinliği gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4372",
+      "ad": "Stateright",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/stateright/stateright",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust ile yazılan aktör tabanlı dağıtık sistemler için gömülü model denetleyici; aynı kodun hem model denetimi hem gerçek çalıştırılması, doğrusallaştırılabilirlik denetleyicisi ve durum uzayı gezgini sağlar.",
+      "sinirlar": "Yalnız Rust ve aktör modeli; 2025'ten beri güncelleme yavaş.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4375",
+      "ad": "Z3",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Z3Prover/z3",
+      "olgunluk": "olgun",
+      "ne_saglar": "SMT çözücü; Dafny, Kani, Verus gibi doğrulayıcıların ve yetkilendirme politikası analizlerinin arka ucudur; Python, Java, .NET ve diğer dillerden doğrudan kısıt çözümü sağlar.",
+      "sinirlar": "Tek başına belirtim aracı değil; karmaşık niceleyicilerde zaman aşımı.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    }
+  ]
+}

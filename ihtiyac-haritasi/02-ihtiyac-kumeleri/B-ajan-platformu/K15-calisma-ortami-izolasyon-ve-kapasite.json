@@ -1,0 +1,223 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K15",
+    "ad": "Çalışma ortamı, izolasyon ve kapasite",
+    "alan": "B-ajan-platformu",
+    "amac": "Her ajan işinin temiz, izole, sınırları belli bir ortamda koşması ve paylaşılan kaynakların ölçekte adil kullanılması.",
+    "kapsam": [
+      "görev başına izole çalışma alanı",
+      "yürütme yalıtımı (ağ, dosya, süre, kaynak)",
+      "başlangıç sağlık kontrolü",
+      "test verisi",
+      "hesaplama ve hızlandırıcı kapasitesi",
+      "ekipler arası kaynak paylaşımı"
+    ],
+    "kapsam_disi": [
+      "güvenlik politikası içeriği (K18)"
+    ],
+    "komsu_kumeler": [
+      "K06",
+      "K09",
+      "K18",
+      "K20",
+      "K24"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K15-001",
+      "baslik": "Görev başına izole çalışma alanı",
+      "ihtiyac": "Her görev ve her deneme için temiz revizyondan kurulan izole bir çalışma kopyası, veritabanı ve test verisi.",
+      "cozulecek_sorun": "Denemeler ve görevler arası kirlenme; önceden bozuk durumun yeni göreve yazılması.",
+      "yetenek_siniflari": [
+        "Y-18",
+        "Y-19"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Görevler arası paylaşılan değişken durum 0.",
+        "Her deneme temiz revizyondan başlıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-018",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K15-002",
+      "baslik": "Yürütme yalıtımı",
+      "ihtiyac": "Çalışma kopyasının ötesinde, ağ çıkışı izin listesi, dosya sistemi, süre, işlemci/bellek ve gizli bilgi erişimi sınırları olan bir yürütme yalıtımı.",
+      "cozulecek_sorun": "Çalışma kopyası tek başına güvenlik yalıtımı değil; geliştirme araçlarındaki açıklar veri sızdırma ve uzaktan kod çalıştırmaya yol açabiliyor.",
+      "yetenek_siniflari": [
+        "Y-18"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ağ, sır, işlemci ve süre sınırları çalıştırıcıda tanımlı ve test edilmiş."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-063",
+          "S-062",
+          "S-145",
+          "S-151"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-008",
+        "R-034"
+      ]
+    },
+    {
+      "id": "N-K15-003",
+      "baslik": "Test verisi yönetimi",
+      "ihtiyac": "Görev başına test verisinin hazırlanması, gerektiğinde sentetik veya maskeli veri kullanılması ve temizlenmesi.",
+      "cozulecek_sorun": "Ajan gerçek kişisel veriye erişebiliyor; test verisi görevler arasında kirleniyor.",
+      "yetenek_siniflari": [
+        "Y-19",
+        "Y-36"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Kişisel veri içeren ortamlarda maskeleme zorunlu ve denetlenmiş."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-006",
+          "S-162"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K15-004",
+      "baslik": "Ajanın üretim kimliği olmaması",
+      "ihtiyac": "Ajanların üretim ortamına yazma kimliği taşımaması; ortam terfisinin yalnız yayın hattından yapılması.",
+      "cozulecek_sorun": "Ajan ortamlar arasında atlayıp üretim verisini etkileyebiliyor.",
+      "yetenek_siniflari": [
+        "Y-25",
+        "Y-34"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Hiçbir ajan kimliğinin üretim yazma yetkisi yok."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-152",
+          "S-149"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "R-022"
+      ]
+    },
+    {
+      "id": "N-K15-005",
+      "baslik": "Hesaplama ve sürekli entegrasyon kapasitesi",
+      "ihtiyac": "Ajanların artırdığı değişiklik hacmine göre test çalıştırıcı, sürekli entegrasyon ve model sunum kapasitesinin ölçülmesi ve ölçeklenmesi.",
+      "cozulecek_sorun": "Değişiklik hacmi artınca kuyruklar doyuyor; akış tıkanıyor.",
+      "yetenek_siniflari": [
+        "Y-38"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Kuyruk bekleme süreleri izleniyor ve eşiği tanımlı.",
+        "Hacmi iki katına çıkaran yük testi yapılmış."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-107"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "iliskili": [
+        "Q-012",
+        "R-015",
+        "R-026",
+        "U-008"
+      ]
+    },
+    {
+      "id": "N-K15-006",
+      "baslik": "Ekipler arası adil kaynak paylaşımı",
+      "ihtiyac": "Paylaşılan çalıştırıcı, test altyapısı ve model kapasitesinin ekipler/ART'lar arasında kota ve öncelikle paylaştırılması.",
+      "cozulecek_sorun": "Bir ekibin toplu işi diğer ekiplerin akışını durduruyor.",
+      "yetenek_siniflari": [
+        "Y-38",
+        "Y-30"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Tek ekipte gereksiz; ekip sayısı arttıkça zorunlu. Ekip ekleme/çıkarma yalnız yapılandırma değişikliği olmalı.",
+      "kabul_olcutleri": [
+        "Ekip/ART bazında kota ve öncelik kuralları tanımlı ve uygulanıyor.",
+        "Ertelenen veya reddedilen işin nedeni ve yeniden ele alınma koşulu kayıtlı; düşük öncelikli işin bekleme süresi izleniyor ve eşik aşıldığında görünür bir karar üretiliyor.",
+        "Bir ekibin yeniden deneme ve alt iş artışı diğer ekiplerin kabul edilmiş iş sınıfı için bekleme koşulunu bozmuyor; durdurma, durum sorgulama ve devretme işlemleri aşırı yük altında da öncelikli çalışıyor.",
+        "Kapasite ve kota, istek sayısıyla değil gerçek kaynak tüketimiyle ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-095",
+          "S-386"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "iliskili": [
+        "Q-001",
+        "R-026",
+        "R-034"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T13; ihtiyac-kumeleri/kumeler/03_guvenli_ve_tutarli_yurutme/01_orkestrasyon_ve_durum.json#I09-08",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://sre.google/sre-book/handling-overload/"
+      ],
+      "ice_aktarilan": "E1 karşılaştırması: son 3 kabul ölçütü ve kanıt kaynaklarından S-095, S-386 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K15-007",
+      "baslik": "Yerel deneme ortamı ile üretim çalıştırıcılarının ayrılması",
+      "ihtiyac": "Pilot/deneme ortamı ile ekiplerin kullanacağı üretim çalıştırıcılarının ayrı tanımlanması ve aralarındaki farkların bilinmesi.",
+      "cozulecek_sorun": "Tek makinede çalışan pilot, ekip ölçeğine taşınınca farklı davranıyor; tek kullanıcı tehdit modeli ekip için yeterli değil.",
+      "yetenek_siniflari": [
+        "Y-18",
+        "Y-38"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Pilot ve üretim ortam farkları yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-061",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası"
+    }
+  ]
+}

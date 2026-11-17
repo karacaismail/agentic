@@ -1,0 +1,138 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-32",
+    "ad": "İş takip ve backlog yönetimi",
+    "grup": "Teslim hattı ve iş yönetimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-182",
+      "yetenek_sinifi": "Y-32",
+      "kalip": "Kurum içi sürümün ömür sonu ve bulutta veri yerelliği",
+      "aciklama": "Atlassian, Jira ve Confluence dahil Data Center ürünlerinin 28 Mart 2029'da ömrünü tamamlayıp salt okunur olacağını, yeni müşteri satışlarının 30 Mart 2026'da bittiğini duyurdu. Atlassian Cloud veri yerelliği konumları arasında Türkiye yer almıyor.",
+      "risk_turleri": [
+        "RT-06",
+        "RT-07",
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/licensing/data-center-end-of-life",
+        "https://support.atlassian.com/security-and-access-policies/docs/understand-data-residency/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kamu kurumunun kurum içi Jira/Confluence'ı 2029'dan sonra güncellenemez; buluta geçiş, iş kalemlerindeki kişisel verinin yurt dışında tutulması anlamına gelir.",
+        "Ajan entegrasyonları Data Center API'sine göre yazılırsa bulut göçünde yeniden yazılmaları gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-001",
+        "N-K26-005",
+        "N-K22-005",
+        "N-K24-002"
+      ],
+      "ornek_araclar": [
+        "Jira Data Center",
+        "Confluence Data Center",
+        "Jira Cloud",
+        "Jira Align"
+      ],
+      "erken_sinyal": "Satıcı lisans duyuruları; yeni uygulama/eklenti lisanslarının satın alınamaması.",
+      "azaltma": "Ömür sonu takvimine göre çıkış planı, iş kalemi şemasının araçtan bağımsız tutulması, yurt içi barındırılabilir alternatiflerin değerlendirilmesi."
+    },
+    {
+      "id": "RK-183",
+      "yetenek_sinifi": "Y-32",
+      "kalip": "İş kalemi içeriği üzerinden ajanın ele geçirilmesi",
+      "aciklama": "İş takip kayıtları dışarıdan (müşteri, tedarikçi, açık depo) yazılabilen güvenilmeyen içeriktir. Invariant Labs, kötü amaçlı bir GitHub issue'su ile ajanın özel depo verisini açık depoya sızdırtılabildiğini gösterdi; OWASP LLM01:2025 dolaylı enjeksiyonu birinci risk sayar.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://invariantlabs.ai/blog/mcp-github-vulnerability",
+        "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Toplu backlog dönüşümünde 12.000 kaydın her biri ajan için olası talimat kaynağıdır; tek bir kötü kayıt dönüştürücü ajanın diğer kayıtları değiştirmesine yol açabilir.",
+        "Hizmet masasından gelen talepler doğrudan geliştirme ajanına yönlendirilirse dış kişi kod değişikliği tetikleyebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-003",
+        "N-K02-001",
+        "N-K12-004",
+        "N-K18-005"
+      ],
+      "ornek_araclar": [
+        "Jira",
+        "GitHub Issues",
+        "GitLab Issues",
+        "Azure Boards"
+      ],
+      "erken_sinyal": "İş kalemlerinde talimat kalıpları, gizli karakterler; ajanın okuduğu kayıttan sonra kapsam dışı eylemler.",
+      "azaltma": "İş kalemi içeriğini veri olarak işleme, dış kaynaklı kayıtlarda ajan yetkisinin daraltılması, iş takip sisteminin yetkisi sınırlı yansıma olması."
+    },
+    {
+      "id": "RK-184",
+      "yetenek_sinifi": "Y-32",
+      "kalip": "Toplu dönüşümde uydurma alan ve yinelenen kayıt üretimi",
+      "aciklama": "NIST AI 600-1 üretken yapay zekâ profili, modelin kendinden emin ama yanlış içerik üretmesini (confabulation) başlıca risklerden biri olarak tanımlar; toplu şablon dönüşümünde bu, boş alanların makul görünen uydurmalarla doldurulması demektir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eski kayıtlarda bulunmayan kabul kriterleri, riskler veya bağımlılıklar ajan tarafından uydurulur ve 'hazır' durumuna geçer; ekipler uydurma gereksinime göre kod yazar.",
+        "Dönüşüm sırasında aynı işin farklı ifadeleri yeni kayıtlar olarak çoğalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-002",
+        "N-K26-005",
+        "N-K01-002"
+      ],
+      "ornek_araclar": [
+        "Jira Automation + LLM",
+        "Atlassian Rovo",
+        "Linear AI",
+        "Özel dönüşüm betikleri"
+      ],
+      "erken_sinyal": "Dönüştürülen kayıtlarda kaynağa bağlanmamış alan oranı; insan incelemesinde düzeltme oranı.",
+      "azaltma": "Her alan için kaynak bağlantısı zorunluluğu, bilinmeyen alanların 'bilinmiyor' bırakılması, örneklem tabanlı insan incelemesi ve toplu işte ayrı onay."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 66,
+    "kritik": 6,
+    "dusuk": 54,
+    "yuksek": 9
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 23,
+    "RT-03": 18,
+    "RT-12": 11,
+    "RT-14": 8,
+    "RT-06": 7,
+    "RT-01": 7,
+    "RT-07": 7,
+    "RT-15": 7,
+    "RT-16": 6,
+    "RT-13": 5,
+    "RT-05": 4,
+    "RT-04": 2,
+    "RT-11": 2,
+    "RT-09": 2,
+    "RT-02": 1,
+    "RT-17": 1,
+    "RT-10": 1
+  }
+}

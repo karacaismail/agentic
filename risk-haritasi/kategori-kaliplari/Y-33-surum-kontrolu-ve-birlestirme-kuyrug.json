@@ -1,0 +1,169 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-33",
+    "ad": "Sürüm kontrolü ve birleştirme kuyruğu (çakışma tahmini dahil)",
+    "grup": "Teslim hattı ve iş yönetimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-185",
+      "yetenek_sinifi": "Y-33",
+      "kalip": "Anlamsal birleştirme çakışması ve ana dalın kırılması",
+      "aciklama": "Uber'in EuroSys 2019 çalışması, yüksek değişiklik hacminde ayrı ayrı doğrulanmış değişikliklerin birlikte ana dalı kırabildiğini ve bunun için çakışma tahminli gönderim kuyruğu gerektiğini gösterdi. GitHub birleştirme kuyruğu da değişiklikleri güncel ana dal ile birlikte yeniden doğrular.",
+      "risk_turleri": [
+        "RT-12",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://doi.org/10.1145/3302424.3303970",
+        "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue"
+      ],
+      "yasatacagi_sorunlar": [
+        "Paralel çalışan onlarca ajan metinsel çakışmasız ama anlamsal olarak çelişen değişiklikler üretir; eski doğrulama sonucu yeni revizyona taşınarak ana dal kırılır.",
+        "Kuyruk derinliği CI süresiyle çarpılınca birleştirme bekleme süresi saatleri bulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-002",
+        "N-K06-003",
+        "N-K04-005",
+        "N-K02-013"
+      ],
+      "ornek_araclar": [
+        "GitHub merge queue",
+        "GitLab merge trains",
+        "Mergify",
+        "Aviator"
+      ],
+      "erken_sinyal": "Ana dalda birleştirme sonrası kırmızı derleme oranı; kuyruk bekleme süresi.",
+      "azaltma": "Birleştirme kuyruğu zorunluluğu, birleşim sonrası yeniden doğrulama, ortak sıcak nokta dosyalarına sahiplik ve küçük parti sınırı."
+    },
+    {
+      "id": "RK-186",
+      "yetenek_sinifi": "Y-33",
+      "kalip": "Kendi barındırılan Git sunucusunda kritik açıklar",
+      "aciklama": "GitLab'da şifre sıfırlama e-postasının doğrulanmamış adrese gönderilmesiyle hesap devralma (CVE-2023-7028, CVSS 10) Mayıs 2024'te CISA'nın aktif istismar edilen açıklar kataloğuna eklendi.",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-7028",
+        "https://about.gitlab.com/releases/2024/01/11/critical-security-release-gitlab-16-7-2-released/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kamu kurumunun kurum içi Git sunucusu yamasız kalırsa tüm ekiplerin kaynak kodu ve CI sırları ele geçirilebilir; ajan hesapları da devralınabilir.",
+        "Ajan trafiğiyle artan API yükü, bakım pencerelerini ve yama hızını zorlaştırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-001",
+        "N-K22-004",
+        "N-K18-003"
+      ],
+      "ornek_araclar": [
+        "GitLab Self-Managed",
+        "Gitea",
+        "Bitbucket Data Center",
+        "GitHub Enterprise Server"
+      ],
+      "erken_sinyal": "Sürüm kontrol sunucusu için yayımlanmış kritik güvenlik sürümü; KEV listesine ekleme.",
+      "azaltma": "Kritik yamalar için kısa SLA, yönetici hesaplarında donanım anahtarlı MFA, ajan hesaplarının ayrı ve dar yetkili olması."
+    },
+    {
+      "id": "RK-187",
+      "yetenek_sinifi": "Y-33",
+      "kalip": "SaaS kod barındırmada veri yerelliği",
+      "aciklama": "GitHub Enterprise Cloud veri yerelliği şu anda AB, Avustralya, ABD ve Japonya bölgeleriyle sunuluyor; Türkiye için bölge yok.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-09"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/about-github-enterprise-cloud-with-data-residency"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kaynak kodu ve iş kalemleri kişisel veri veya kritik altyapı bilgisi içeriyorsa SaaS barındırma KVKK ve sektörel düzenlemelerle çatışabilir.",
+        "Barındırma sağlayıcısının yaptırım veya ihracat kısıtı uygulaması durumunda erişim kesintisi riski oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-004"
+      ],
+      "ornek_araclar": [
+        "GitHub Enterprise Cloud",
+        "GitLab.com",
+        "Bitbucket Cloud",
+        "Azure DevOps Services"
+      ],
+      "erken_sinyal": "Veri sınıflandırmasında kritik altyapı veya kişisel veri içeren depoların SaaS'ta bulunması.",
+      "azaltma": "Depo sınıflandırmasına göre barındırma kararı, hassas depolar için kurum içi barındırma, SaaS'ta sırsız ve kişisel verisiz depo ilkesi."
+    },
+    {
+      "id": "RK-188",
+      "yetenek_sinifi": "Y-33",
+      "kalip": "Git yan kanallarıyla kod çalıştırma",
+      "aciklama": "Git yapılandırması, kancalar ve worktree'ler ajan araçlarında kod çalıştırma yolu olabilir: Claude Code'da kötü amaçlı git e-posta yapılandırmasıyla kod çalıştırma (CVE-2025-59041) ve git worktree sahtelemesiyle güven diyaloğu atlama (CVE-2026-40068); n8n Git düğümünde özel pre-commit kancasıyla uzaktan kod çalıştırma (CVE-2025-65964).",
+      "risk_turleri": [
+        "RT-03",
+        "RT-01"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-j4h9-wv2m-wrf7",
+        "https://github.com/advisories/GHSA-q5hj-mxqh-vv77",
+        "https://github.com/advisories/GHSA-wpqc-h9wp-chmq"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın klonladığı depo veya çalışma kopyası yapılandırması, sürüm kontrol işlemi sırasında kod çalıştırır; 'güvenli sürüm kontrol işlemleri' varsayımı bozulur.",
+        "Paralel ajanlar için worktree kullanımı yeni saldırı yüzeyi açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-001",
+        "N-K04-005",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "Git",
+        "Claude Code",
+        "n8n Git düğümü",
+        "Ajan worktree yöneticileri"
+      ],
+      "erken_sinyal": "Depo içinde .git/config, hooks veya worktree tanımlarında beklenmeyen değişiklik.",
+      "azaltma": "Ajan ortamında git kancalarının ve include yapılandırmalarının devre dışı bırakılması, depo klonlarının izole ortamda açılması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 31,
+    "kritik": 4,
+    "dusuk": 59,
+    "yuksek": 8
+  },
+  "sinif_bulgu_turleri": {
+    "RT-15": 18,
+    "RT-03": 13,
+    "RT-08": 12,
+    "RT-01": 9,
+    "RT-14": 9,
+    "RT-05": 7,
+    "RT-16": 7,
+    "RT-13": 7,
+    "RT-02": 6,
+    "RT-06": 6,
+    "RT-17": 6,
+    "RT-11": 5,
+    "RT-10": 4,
+    "RT-12": 4,
+    "RT-09": 3,
+    "RT-07": 1
+  }
+}

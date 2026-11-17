@@ -1,0 +1,3159 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-23",
+    "ad": "Arayüz doğrulama (görsel referans karşılaştırma, gerçek cihaz, erişilebilirlik denetimi, algısal inceleme)",
+    "grup": "Doğrulama ve kalite",
+    "cozdugu_sorun": "Arayüz kusurlarının testlerden kaçması; headless ortamın gerçek cihazı yansıtmaması.",
+    "ne_zaman_zorunlu": "Arayüzü ağır ürünlerde; kamu hizmetinde erişilebilirlik."
+  },
+  "arac_sayisi": 173,
+  "tur_dagilimi": {
+    "acik-kaynak": 68,
+    "ticari-saas": 32,
+    "kutuphane": 32,
+    "protokol-standart": 9,
+    "model": 5,
+    "acik-cekirdek": 4,
+    "cerceve": 9,
+    "bulut-hizmeti": 5,
+    "ticari-yazilim": 9
+  },
+  "araclar": [
+    {
+      "id": "AR-0108",
+      "ad": "Playwright MCP",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM ajanlarına erişilebilirlik ağacı tabanlı tarayıcı kontrolü sağlayan MCP sunucusu; bağımsız doğrulayıcı ajanın kod farkını görmeden çalışan uygulamayı incelemesine olanak verir.",
+      "sinirlar": "Keşif içindir; kalıcı testler yine kod olarak yazılmalı (kaynak). Kendisi oracle değildir; web içeriğinden istem enjeksiyonu riski taşır, izin listesiyle kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-007",
+        "N-K05-021",
+        "N-K05-024",
+        "N-K05-025",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-0110",
+      "ad": "Stagehand",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://stagehand.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Playwright üzerinde doğal dil eylemleri (act), yapılandırılmış veri çıkarma (extract) ve ajan modu sunar; doğrulayıcı ajanın yalnız çalışan ekranı görerek akış yürütmesine uygundur.",
+      "sinirlar": "LLM güdümlü; deterministik test yerine geçmez (kaynak). LLM çağrısı nedeniyle deterministik değildir ve maliyetlidir; deterministik kapıların yerine değil ardından kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K05-007",
+        "N-K05-020",
+        "N-K05-021",
+        "N-K14-003"
+      ]
+    },
+    {
+      "id": "AR-0134",
+      "ad": "Playwright",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://playwright.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Chromium, Firefox ve WebKit üzerinde uçtan uca test; cihaz/viewport/dokunma emülasyonu, toHaveScreenshot ile görsel karşılaştırma, konsol ve ağ olaylarını yakalama, iz (trace) kaydı ve yeniden denemede 'flaky' işaretleme.",
+      "sinirlar": "Playwright WebKit Safari ürünüyle aynı değil, emülasyon gerçek cihaz değil; görsel karşılaştırma onaylı referansa göre değişimi ölçer, kusurlu referansı da korur (kaynak). Mobil yalnız emülasyondur (WebKit gerçek iOS Safari değildir); ekran görüntüsü karşılaştırması işletim sistemi/yazı tipi ortamına duyarlıdır.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K04-012",
+        "N-K05-001",
+        "N-K05-012",
+        "N-K05-013",
+        "N-K05-017",
+        "N-K05-018",
+        "N-K05-020",
+        "N-K05-021",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-0137",
+      "ad": "axe-core",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.deque.com/axe/",
+      "olgunluk": "olgun",
+      "ne_saglar": "DOM üzerinde WCAG 2.x A/AA kurallarını denetler; sonuçları violations, incomplete (insan incelemesi gerekir) ve inapplicable olarak ayırır; Playwright/Cypress/Selenium entegrasyonlarıyla derlemeyi kırabilir.",
+      "sinirlar": "Deque'nin %57,38'i kendi denetimlerindeki sorun örneği oranıdır, WCAG kapsamı değil; manuel denetim ve kullanıcı yolculuğu testi gerekir (kaynak). WCAG ölçütlerinin yalnız otomatikleştirilebilir kısmını yakalar; odak sırası ve anlamsal uygunluk insan incelemesi ister.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-014",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0138",
+      "ad": "Lighthouse / Lighthouse CI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.chrome.com/docs/lighthouse/overview/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web sayfasını mobil emülasyon ve ağ/CPU kısıtlamasıyla yükleyip performans (Core Web Vitals laboratuvar metrikleri), erişilebilirlik, en iyi uygulama ve SEO denetimleri yapar.",
+      "sinirlar": "Erişilebilirlik puanı 100 tüm WCAG uyumu demek değil, manuel denetimler puana girmez (kaynak); LHCI deposunda son push Mart 2026. Laboratuvar ölçümü koşudan koşuya değişir; çoklu koşu medyanı gerekir; erişilebilirlik puanı yalnız otomatik kontrollerdir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-012",
+        "N-K05-019",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-0139",
+      "ad": "WAVE",
+      "tur": "ticari-saas",
+      "lisans": "ticari (tarayıcı eklentisi ücretsiz, API ücretli)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://wave.webaim.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sayfa üzerinde erişilebilirlik hatalarını, uyarıları ve yapısal öğeleri görsel olarak işaretler; API ve standalone sürümle toplu denetim yapılabilir.",
+      "sinirlar": "2023 deneyinde otomatik kapsam 13/78 ölçüt (%16,7) bulundu; tek başına uyum kanıtı değildir (kaynak). API kredi bazlı ücretli; otomatik kurallar sınırlı kapsamlı.",
+      "ihtiyaclar": [
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0142",
+      "ad": "Vitest",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://vitest.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Vite tabanlı hızlı JS/TS test çalıştırıcısı; Browser Mode ile bileşen testlerini Playwright/WebdriverIO üzerinden gerçek tarayıcıda koşturur, snapshot ve kapsam desteği sunar.",
+      "sinirlar": "Ön yüz ekosistemine özgü; atlanan testlerin raporlanması politikası ayrıca kurgulanmalı. Tarayıcı modu gerçek cihaz değildir; Jest'ten göçte bazı API farkları vardır.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-001",
+        "N-K05-002",
+        "N-K05-004",
+        "N-K05-012",
+        "N-K05-013",
+        "N-K05-017",
+        "N-K05-029"
+      ]
+    },
+    {
+      "id": "AR-0145",
+      "ad": "ApprovalTests",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://approvaltests.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çıktıyı onaylanmış dosyayla karşılaştıran onay (golden master) testi; Java, .NET, Python, JS, C++ gibi dillerde uygulamaları vardır; eski kodu yeniden düzenlerken davranışı kilitler.",
+      "sinirlar": "Mevcut davranışı kaydeder; kaydedilen davranışın doğru olduğu ayrıca kabul edilmelidir (kaynak). Onaylanan çıktı mevcut davranışı doğru kabul eder (totoloji riski); onay dosyası değişikliği ayrı yetkiyle incelenmeli.",
+      "ihtiyaclar": [
+        "N-K01-009",
+        "N-K04-004",
+        "N-K05-004",
+        "N-K05-008",
+        "N-K05-017",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0146",
+      "ad": "Quickstrom",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://quickstrom.io",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "LTL özellikleriyle web uygulamalarında özellik tabanlı kabul testi; PLDI 2022'de 43 TodoMVC uygulamasının 20'sinde kusur buldu.",
+      "sinirlar": "Depo Ağustos 2024'ten beri güncellenmiyor; tasarım/yerleşim doğruluğu için özel destek yok (kaynak).",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-0147",
+      "ad": "Chromatic",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.chromatic.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Storybook, Playwright ve Cypress testlerinin görsel anlık görüntülerini bulutta birden çok tarayıcıda alır; UI Review onayı, yalnız etkilenen hikâyeleri test eden TurboSnap ve erişilebilirlik testleri sunar.",
+      "sinirlar": "SaaS, ekran görüntüleri üçüncü tarafta; görsel regresyon değişim alarmıdır, tüm hataları yakalamaz (kaynak: 307 PR çalışması). SaaS; snapshot kotası maliyeti; Storybook olmadan değeri azalır.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-017",
+        "N-K05-019",
+        "N-K19-003"
+      ]
+    },
+    {
+      "id": "AR-0199",
+      "ad": "WCAG 2.2",
+      "tur": "protokol-standart",
+      "lisans": "W3C Document License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "olgunluk": "olgun",
+      "ne_saglar": "86 aktif başarı ölçütlü web erişilebilirlik standardı (A 31, AA 24, AAA 31); A+AA hedefi 55 ölçüt.",
+      "sinirlar": "Resmî olarak birbirini dışlayan 'makine/insan' ölçüt sayıları yok (kaynak).",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K05-019",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-0200",
+      "ad": "W3C ACT Rules",
+      "tur": "protokol-standart",
+      "lisans": "W3C Document License",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.w3.org/WAI/standards-guidelines/act/rules/",
+      "olgunluk": "olgun",
+      "ne_saglar": "WCAG ölçütlerini test edilebilir kurallara ayıran standart biçim ve kural kataloğu; hangi kuralın otomatik, yarı otomatik veya manuel olduğunu ve araçların kural uyumluluğunu yayımlar; makine/insan payını alt kontrol düzeyinde ayırmak için referans olur.",
+      "sinirlar": "ACT kuralları kısmi kontroldür; bir ölçüt için otomatik kural olması ölçütün tümüyle test edildiği anlamına gelmez (kaynak). Tüm WCAG ölçütlerini kapsamaz; araç uyum beyanları satıcı raporlarına dayanır.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K05-022",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-0237",
+      "ad": "NVIDIA Nemotron 3 Nano Omni",
+      "tur": "model",
+      "lisans": "NVIDIA Open Model Agreement",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metin, görsel, ses ve video girdili 256K algılama modeli; ekran, belge ve kayıt açıklama; kaynakta mobile-first ve görsel kontrol yardımcısı.",
+      "sinirlar": "Testi çalıştıran veya sonucu kesin doğrulayan araç değildir; bulgular deterministik testle teyit edilmeli (kaynak).",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K09-008",
+        "N-K09-009",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-0246",
+      "ad": "UI-TARS 1.5 7B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ekran görüntüsü + görevden arayüz eylemi üreten bilgisayar kullanım modeli; OSWorld 42,5 (100 adım), ScreenSpot-Pro 61,6; kaynakta uçtan uca arayüz denemeleri yardımcısı.",
+      "sinirlar": "Eylemleri uygulayan ayrı çalışma ortamı gerekir; OSWorld ile OSWorld-Verified aynı sayılmamalı; UI-Mate'e göre eski (kaynak).",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-024",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-0247",
+      "ad": "UI-Mate-27B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/tencent/UI-Mate-27B",
+      "olgunluk": "erken",
+      "ne_saglar": "Masaüstü görevlerinde eylem üreten bilgisayar kullanım modeli; kart OSWorld-Verified 77,0 bildiriyor; kaynakta uçtan uca kullanıcı akışı yardımcısı.",
+      "sinirlar": "Üretici bildirimi, bağımsız doğrulanmadı; Ağustos 2026 yayını, indirme sayısı çok düşük.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-024",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-0248",
+      "ad": "Molmo2-8B",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/allenai/Molmo2-8B",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Görsel, çoklu görsel ve video anlama; görselde konum gösterme (pointing) ve izleme; kaynakta mobile-first ve hata videosu inceleme yardımcısı.",
+      "sinirlar": "Görsel algılama uzmanı; güvenilir tarayıcı testi için Playwright benzeri araç ve açık beklenen sonuç gerekir (kaynak).",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-0483",
+      "ad": "Superset",
+      "tur": "acik-cekirdek",
+      "lisans": "Elastic License 2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://superset.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex ve diğer CLI ajanlarını terminaller, fark görüntüleyici, kod incelemesi ve tarayıcı önizlemesiyle paralel çalışma alanlarında yöneten masaüstü uygulaması.",
+      "sinirlar": "ELv2 yönetilen hizmet olarak sunmayı kısıtlar; Windows desteği yok, Linux deneysel.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-002",
+        "N-K10-006",
+        "N-K13-007",
+        "N-K28-009"
+      ]
+    },
+    {
+      "id": "AR-0525",
+      "ad": "Maestro",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Netflix/maestro",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Netflix'in yüz binlerce iş akışını yöneten genel amaçlı orkestratörü; sürümlü iş akışı tanımları, foreach/alt iş akışları, sinyaller ve yatay ölçeklenme sağlar; Temmuz 2024'te açık kaynak.",
+      "sinirlar": "Veri platformu iş akışlarına göre şekillenmiş; dış topluluk ve belge küçük. Gerçek iOS cihaz desteği simülatöre göre sınırlı olabilir (sürüme göre doğrulanmalı); bulut koşuları ücretli.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-001",
+        "N-K05-018",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-010",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0947",
+      "ad": "Robot Framework",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://robotframework.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Anahtar kelime tabanlı kabul testi çerçevesi; Browser (Playwright), Appium, REST vb. kütüphanelerle web, mobil ve API kabul testlerini okunur biçimde yazıp HTML/XML raporlar.",
+      "sinirlar": "Karmaşık mantıkta anahtar kelime katmanı hantallaşır; Python ekosistemine bağlıdır.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-014",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0950",
+      "ad": "Cypress",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (uygulama); Cypress Cloud ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.cypress.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tarayıcı içinde çalışan uçtan uca ve bileşen testi; ağ yakalama/taklit, zaman yolculuklu hata ayıklama; Cypress Cloud'da kararsız test analizi, test tekrarı ve erişilebilirlik raporları (ücretli).",
+      "sinirlar": "WebKit desteği deneysel, çoklu sekme kısıtlı; bulut özellikleri ücretli ve SaaS.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-013",
+        "N-K05-019",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-0951",
+      "ad": "Selenium (WebDriver + Grid)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.selenium.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "W3C WebDriver standardının referans uygulaması; Selenium Grid ile kurum içinde çok tarayıcılı/çok sürümlü test matrisi kurulabilir.",
+      "sinirlar": "Senkronizasyon ve bekleme kodu gerektirir, kararsız teste yatkın; gerçek mobil cihaz için Appium gerekir.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-018",
+        "N-K05-020"
+      ]
+    },
+    {
+      "id": "AR-0952",
+      "ad": "WebdriverIO",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://webdriver.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "WebDriver/WebDriver BiDi tabanlı web ve Appium üzerinden yerel mobil uygulama testini tek API'de sunar; görsel test servisi ve bulut cihaz sağlayıcı entegrasyonları vardır.",
+      "sinirlar": "Yapılandırma seçenekleri çok; mobil için Appium altyapısı gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-012",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0953",
+      "ad": "Appium",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://appium.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "iOS (XCUITest sürücüsü) ve Android (UiAutomator2/Espresso sürücüleri) yerel, hibrit ve mobil web uygulamalarını WebDriver protokolüyle gerçek cihaz, simülatör veya bulut cihaz çiftliklerinde otomatikleştirir.",
+      "sinirlar": "Sürücü/OS sürümü uyumluluğu bakım yükü getirir; testler yavaş ve kırılgan olabilir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-012",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0954",
+      "ad": "Detox",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://wix.github.io/Detox/",
+      "olgunluk": "olgun",
+      "ne_saglar": "React Native uygulamaları için gri kutu uçtan uca test; uygulamanın boşta olmasını bekleyen senkronizasyon ile kararsızlığı azaltır.",
+      "sinirlar": "React Native'e özgü; gerçek cihaz desteği simülatör/emülatöre göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-013",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0955",
+      "ad": "Espresso (AndroidX Test)",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developer.android.com/training/testing/espresso",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android yerel arayüz testleri için Google'ın çerçevesi; UI iş parçacığı senkronizasyonu ve erişilebilirlik kontrolleri (AccessibilityChecks) ile gerçek cihaz/emülatörde koşar.",
+      "sinirlar": "Yalnız Android ve uygulama süreci içi; çok uygulamalı akışlar için UI Automator gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0956",
+      "ad": "XCTest / XCUITest",
+      "tur": "cerceve",
+      "lisans": "ticari (Xcode ile birlikte ücretsiz)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developer.apple.com/documentation/xctest",
+      "olgunluk": "olgun",
+      "ne_saglar": "iOS/macOS birim, performans (measure metrikleri) ve arayüz testleri için Apple'ın yerleşik çerçevesi; gerçek cihaz ve simülatörde koşar.",
+      "sinirlar": "Yalnız Apple platformları ve macOS derleme ortamı gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0957",
+      "ad": "Midscene.js",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://midscenejs.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Görsel-dil modeliyle web, Android ve iOS arayüzlerinde doğal dil eylem, sorgu ve aiAssert doğrulamaları yapar; Playwright/Puppeteer entegrasyonu ve görsel yeniden oynatma raporu sunar.",
+      "sinirlar": "Sonuçlar olasılıksaldır, model hatası yanlış geçer/kalır üretebilir; kalibrasyon ve çoklu koşu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-007",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0958",
+      "ad": "Storybook (etkileşim, erişilebilirlik ve Vitest eklentileri)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://storybook.js.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Arayüz bileşenlerini izole hikâyelerle farklı durum, tema, dil ve viewport'larda render eder; etkileşim testleri, axe tabanlı erişilebilirlik eklentisi ve görsel test entegrasyonları sunar.",
+      "sinirlar": "Bileşen düzeyidir; tam kullanıcı yolculuğunu ve arka uç entegrasyonunu kapsamaz.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K04-012",
+        "N-K05-017",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0959",
+      "ad": "Percy",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.browserstack.com/percy",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI'da DOM anlık görüntülerini birden çok tarayıcı ve genişlikte bulutta render edip referansla karşılaştırır; farkları onay/ret iş akışıyla yönetir.",
+      "sinirlar": "Bulut kilidi ve ekran görüntüsü başına ücretlendirme; referans onayı yetki kurallarıyla sınırlanmalı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-005",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-0960",
+      "ad": "Applitools Eyes",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://applitools.com/platform/eyes/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Piksel yerine algısal 'Visual AI' karşılaştırması (katı, içerik, düzen eşleştirme seviyeleri), Ultrafast Grid ile çok tarayıcı/cihaz render ve referans yönetimi sağlar.",
+      "sinirlar": "Pahalı ticari ürün; karşılaştırma modeli kara kutu, yanlış negatif oranı kurum verisiyle kalibre edilmeli.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0961",
+      "ad": "BackstopJS",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/garris/BackstopJS",
+      "olgunluk": "olgun",
+      "ne_saglar": "Senaryo ve viewport tanımlarıyla Puppeteer/Playwright ekran görüntüsü alıp referansla piksel farkını HTML raporlar; Docker ile tutarlı render ortamı sağlar.",
+      "sinirlar": "Piksel karşılaştırması yazı tipi/animasyon kaynaklı yanlış pozitif üretir; referans yönetimi manuel.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-0962",
+      "ad": "reg-suit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://reg-viz.github.io/reg-suit/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mevcut ekran görüntüsü dizinlerini commit bazlı referansla karşılaştırır, referansları S3/GCS gibi depolarda saklar ve PR'a fark raporu yazar.",
+      "sinirlar": "Ekran görüntüsünü kendisi üretmez; depolama eklentisine bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-026"
+      ]
+    },
+    {
+      "id": "AR-0963",
+      "ad": "Argos",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://argos-ci.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Playwright, Cypress ve Storybook ekran görüntülerini referansla karşılaştıran görsel test platformu; PR durum kontrolü ve fark onay akışı sunar.",
+      "sinirlar": "SaaS birincil kullanım modelidir; self-host kurulumunun resmî destek düzeyi doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K05-005",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-0964",
+      "ad": "Happo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://happo.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Storybook, Cypress, Playwright ve yerel iOS/Android için gerçek tarayıcılarda (Chrome, Firefox, Safari, Edge, iOS Safari) görsel regresyon ve erişilebilirlik ihlali tespiti yapar.",
+      "sinirlar": "SaaS ve ticari; mobil yerel destek API entegrasyonu gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0965",
+      "ad": "Meticulous",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.meticulous.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Geliştirme/önizleme ortamındaki kullanıcı oturumlarını kaydeder, ağ yanıtlarını saklayıp taklit ederek PR'larda yeniden oynatır ve temel/aday sürüm görsel farklarını test yazmadan raporlar.",
+      "sinirlar": "Yalnız web ön yüzü; kayıtlarda kişisel veri olabilir; sonuç kapsamı kayıtlı oturumlara bağlı.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-017",
+        "N-K05-021",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-0969",
+      "ad": "Paparazzi",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cashapp.github.io/paparazzi/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android ekranlarını cihaz veya emülatör olmadan JVM üzerinde render edip ekran görüntüsü testi yapar; cihaz yapılandırması, tema ve yazı ölçeği varyasyonları desteklenir.",
+      "sinirlar": "Gerçek cihaz değildir; layoutlib render farkları olabilir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K04-012",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-0970",
+      "ad": "Roborazzi",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://takahirom.github.io/roborazzi/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Robolectric üzerinde Android (Compose dahil) ekran görüntüsü testleri; referans kaydet/karşılaştır/doğrula görevleri Gradle'a entegredir.",
+      "sinirlar": "JVM simülasyonu; gerçek cihaz davranışını birebir yansıtmaz.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-0971",
+      "ad": "swift-snapshot-testing",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pointfreeco/swift-snapshot-testing",
+      "olgunluk": "olgun",
+      "ne_saglar": "iOS görünüm ve denetleyicilerini farklı cihaz boyutları ve özellikleriyle (karanlık mod, dinamik yazı boyutu) görüntü veya metin snapshot'ı olarak test eder.",
+      "sinirlar": "Simülatör/OS sürümü değişince referanslar geçersizleşir; ortam parmak izi sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K04-012",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-0972",
+      "ad": "BrowserStack (Automate / App Automate / App Live)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.browserstack.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Binlerce gerçek iOS/Android cihaz ve masaüstü tarayıcıda manuel ve otomatik (Appium, Espresso, XCUITest, Playwright, Selenium) test; erişilebilirlik ve görsel test ürünleriyle entegredir.",
+      "sinirlar": "Bulut kilidi ve dakika/paralellik bazlı maliyet; özel ağ erişimi için tünel gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-012",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0973",
+      "ad": "Sauce Labs (Real Device Cloud)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://saucelabs.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek cihaz bulutu, emülatör/simülatörler ve masaüstü tarayıcı ızgarası; Appium, Espresso, XCUITest, Playwright, Cypress koşuları ve görsel test hizmeti sunar.",
+      "sinirlar": "Ticari; özel cihazlar ek maliyetli; tünel (Sauce Connect) gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0974",
+      "ad": "TestMu AI (eski adıyla LambdaTest)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.testmuai.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek cihaz bulutu, tarayıcı ızgarası, hızlandırılmış test yürütme ve görsel regresyon ürünlerini tek platformda sunar; LambdaTest markası TestMu AI olarak yenilendi.",
+      "sinirlar": "Yeniden markalaşma sonrası ürün adları/API uç noktaları değişmiş olabilir; SaaS kilidi.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-012",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0975",
+      "ad": "AWS Device Farm",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/device-farm/",
+      "olgunluk": "olgun",
+      "ne_saglar": "AWS'de barındırılan gerçek Android ve iOS cihazlarda Appium, Espresso, XCUITest testlerini paralel koşturur; tarayıcıdan uzaktan etkileşimli cihaz erişimi, video ve log raporları sunar.",
+      "sinirlar": "Uzaktan erişim oturumu süre sınırlı; cihaz çeşitliliği özel çiftliklere göre dar olabilir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0976",
+      "ad": "Firebase Test Lab",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://firebase.google.com/docs/test-lab",
+      "olgunluk": "olgun",
+      "ne_saglar": "Google veri merkezlerindeki gerçek ve sanal Android/iOS cihazlarda Espresso, UI Automator, XCTest testleri ve uygulamayı otomatik gezip çökme yakalayan Robo testi koşturur.",
+      "sinirlar": "Google bulutuna bağımlı; cihaz ve kota sınırları vardır.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-0977",
+      "ad": "Kobiton",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://kobiton.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek cihaz test platformu; genel bulut yanında 'Standalone' (kurum içi) ve hibrit cihaz laboratuvarı kurulumu, Appium otomasyonu ve betiksiz otomasyon sunar.",
+      "sinirlar": "Ticari lisans; kurum içi kurulum cihaz ve Mac host yönetimi gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0978",
+      "ad": "HeadSpin",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.headspin.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Farklı ülkelerdeki gerçek cihazlarda mobil, web ve OTT testleri; ağ, sayfa yükleme ve medya kalitesi gibi performans KPI'larını oturum bazında ölçer.",
+      "sinirlar": "Pahalı kurumsal ürün; KPI tanımları satıcıya özgü.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0979",
+      "ad": "Perfecto",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.perforce.com/products/perfecto",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurumsal gerçek cihaz ve tarayıcı bulutu; Appium/Selenium/Espresso/XCUITest otomasyonu ve raporlama sunar.",
+      "sinirlar": "Ticari ve bulut kilidi; fiyatlandırma kurumsal sözleşmeye bağlı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0980",
+      "ad": "DeviceFarmer STF (Smartphone Test Farm)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/DeviceFarmer/stf",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurum içindeki Android cihazlarını tarayıcıdan uzaktan kontrol etmeyi ve otomasyon için paylaşmayı sağlayan self-host cihaz çiftliği.",
+      "sinirlar": "Yalnız Android; iOS desteği yok; topluluk bakımı, kurulum ve donanım işletimi kurumdadır.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0981",
+      "ad": "GADS",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/shamanec/GADS",
+      "olgunluk": "erken",
+      "ne_saglar": "Android ve iOS gerçek cihazları için self-host cihaz çiftliği; uzaktan kontrol arayüzü ve Appium grid olarak otomasyon koşuları sunar.",
+      "sinirlar": "Küçük topluluk, erken olgunluk; AGPL lisansı değişiklik paylaşımı yükümlülüğü getirir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-0982",
+      "ad": "Pa11y / pa11y-ci",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pa11y.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "URL listesi üzerinde HTML_CodeSniffer veya axe koşturucusuyla erişilebilirlik denetimi yapar; pa11y-ci eşik ve hata sayısı ile CI kapısı kurar.",
+      "sinirlar": "Yalnız otomatik denetlenebilir kurallar; dinamik durumlar için eylem betikleri gerekir.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-019",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-0983",
+      "ad": "Lighthouse CI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/GoogleChrome/lighthouse-ci",
+      "olgunluk": "olgun",
+      "ne_saglar": "Lighthouse'u CI'da çoklu koşuyla çalıştırır; assertion ve performans bütçeleriyle PR'ı kırar; LHCI sunucusunda geçmiş karşılaştırması tutar.",
+      "sinirlar": "Bakım temposu yavaşlamış görünüyor (son depo etkinliği 2026 başı); laboratuvar ölçümü sınırlamaları geçerli.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-012",
+        "N-K05-019",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-0984",
+      "ad": "IBM Equal Access Accessibility Checker",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ibm.com/able/toolkit/tools",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tarayıcı eklentisi ve Node/Playwright/Cypress/Selenium için accessibility-checker motoru; IBM kural seti (WCAG 2.x tabanlı) ile otomatik denetim ve referans (baseline) karşılaştırması yapar.",
+      "sinirlar": "Kural seti axe'tan farklıdır; iki araç birlikte kullanılırsa sonuç uzlaştırma gerekir.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0985",
+      "ad": "Accessibility Insights",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://accessibilityinsights.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "FastPass otomatik kontrolleri, sekme durakları (odak sırası) görselleştirmesi ve WCAG AA için yönlendirmeli manuel değerlendirme (Assessment) ile makine ve insan payını ayırır; Web, Windows ve Android sürümleri vardır.",
+      "sinirlar": "Değerlendirme adımları insan emeği ister; CI entegrasyonu axe tabanlı kısımla sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0986",
+      "ad": "eslint-plugin-jsx-a11y",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/jsx-eslint/eslint-plugin-jsx-a11y",
+      "olgunluk": "olgun",
+      "ne_saglar": "JSX kodunda alt metin, ARIA rol/özellik geçerliliği, etkileşimli öğe erişimi gibi erişilebilirlik kurallarını statik olarak denetler.",
+      "sinirlar": "Yalnız statik analiz; çalışma zamanı durumu ve kontrastı göremez; son sürüm etkinliği yavaş.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0987",
+      "ad": "Accessibility Test Framework for Android (ATF)",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/google/Accessibility-Test-Framework-for-Android",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android görünüm hiyerarşisinde dokunma hedefi boyutu, kontrast, etiket eksikliği gibi erişilebilirlik kontrollerini Espresso/Robolectric testlerine ekler.",
+      "sinirlar": "Depo etkinliği 2024'ten beri durgun; Compose kapsamı sınırlı olabilir.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-0988",
+      "ad": "Alfa",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Siteimprove/alfa",
+      "olgunluk": "gelisen",
+      "ne_saglar": "W3C ACT kurallarına dayalı erişilebilirlik denetim motoru; kural uygulanabilirliği ve sonuçları ACT biçiminde üretir, test çerçevelerine entegre edilebilir.",
+      "sinirlar": "Topluluk küçük; dokümantasyon sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K05-022"
+      ]
+    },
+    {
+      "id": "AR-1046",
+      "ad": "Biome",
+      "tur": "acik-kaynak",
+      "lisans": "MIT / Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://biomejs.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "JS/TS, JSX, JSON ve CSS için tek ikili dosyada hızlı lint ve biçimlendirme; erişilebilirlik (a11y) kural grubu içerir.",
+      "sinirlar": "ESLint eklenti ekosisteminin tamamını karşılamaz.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-1069",
+      "ad": "sitespeed.io",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.sitespeed.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek tarayıcılarla (Browsertime) web performansı ölçer; performans bütçesiyle CI kapısı, Grafana panoları ve Android/iOS Safari üzerinde mobil ölçüm sunar.",
+      "sinirlar": "Kararlı ölçüm için ayrılmış ve kısıtlanmış test makinesi gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-1072",
+      "ad": "Unlighthouse",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://unlighthouse.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Siteyi tarayıp tüm sayfalarda Lighthouse denetimi koşturur; CI modunda puan bütçeleriyle derlemeyi kırabilir.",
+      "sinirlar": "Lighthouse'un laboratuvar ölçümü sınırlamalarını devralır.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-1084",
+      "ad": "Perfetto",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://perfetto.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android, Linux ve Chrome için sistem düzeyi iz kaydı ve SQL tabanlı iz analizi; mobil uygulamada kare atlama, başlatma ve CPU zamanlamasını incelemeye yarar.",
+      "sinirlar": "İz yorumlama uzmanlık ister; otomatik kapı için ek betik gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010"
+      ]
+    },
+    {
+      "id": "AR-1085",
+      "ad": "Jetpack Macrobenchmark",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android uygulamalarında başlatma süresi, kaydırma akıcılığı (kare zamanlaması) gibi metrikleri gerçek cihazda ölçen test kütüphanesi; Baseline Profile üretimini destekler.",
+      "sinirlar": "Güvenilir sonuç için gerçek cihaz gerekir; yalnız Android.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-1086",
+      "ad": "Flashlight",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://docs.flashlight.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Android uygulamaları için FPS, CPU ve RAM ölçüp performans skoru üretir; Maestro gibi E2E akışlarla çoklu iterasyonlu ölçüm ve karşılaştırma raporu sunar.",
+      "sinirlar": "Ağırlıkla Android; iOS desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010"
+      ]
+    },
+    {
+      "id": "AR-1100",
+      "ad": "Momentic",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://momentic.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Doğal dilde yazılan ve depoda YAML olarak saklanan uçtan uca testler; web (Chromium), iOS simülatör ve Android emülatörde çalışır, yapay zekâ ile kendini onaran seçiciler ve CLI/CI koşusu sunar.",
+      "sinirlar": "Kendini onarma gerçek regresyonu maskeleyebilir; onarımlar ayrı onaylanmalı; ticari.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-001",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-1119",
+      "ad": "pseudo-localization",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/tryggvigy/pseudo-localization",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Arayüz metinlerini aksanlı ve uzatılmış sahte yerelleştirmeye dönüştürerek metin uzunluğu taşması, sabit kodlanmış metin ve karakter seti sorunlarını görsel/E2E testlerde ortaya çıkarır.",
+      "sinirlar": "Yalnız web/JS; gerçek çeviri kalitesini ölçmez.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-1454",
+      "ad": "playwright-bdd",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://vitalets.github.io/playwright-bdd",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gherkin .feature dosyalarını Playwright Test koşucusuna dönüştürür; okunabilir kabul senaryolarını paralel, çok tarayıcılı uçtan uca testler olarak çalıştırır ve Cucumber raporları üretir.",
+      "sinirlar": "Tek geliştirici öncülüğünde topluluk projesi; yalnız Playwright/TypeScript yığını için anlamlıdır.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K05-001",
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-1457",
+      "ad": "UUV (User centric Usecases Validator)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://e2e-test-quest.github.io/uuv/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Geliştirici olmayanların da okuyup yazabildiği hazır İngilizce/Fransızca cümle sözlüğüyle Gherkin E2E testleri yazdıran, erişilebilirlik odaklı seçicileri öne çıkaran ve Cypress/Playwright üzerinde koşturan araç.",
+      "sinirlar": "Türkçe adım sözlüğü yoktur; topluluk küçüktür.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K05-019",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-1578",
+      "ad": "Visual Regression Tracker",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ekran görüntüsü karşılaştırma sonuçlarını izleyen self-host arka uç ve arayüz; referans (baseline) yönetimi, fark inceleme ve insan onayı/reddi ile Playwright, Cypress, Selenium SDK'ları sunar.",
+      "sinirlar": "Karşılaştırma piksel tabanlıdır; algısal fark ve cihaz çiftliği sağlamaz.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-1579",
+      "ad": "reg-cli",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://reg-viz.github.io/reg-cli/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İki ekran görüntüsü dizinini karşılaştırıp farkları etkileşimli HTML raporda gösteren görsel regresyon CLI'si (reg-suit'in çekirdek bileşeni).",
+      "sinirlar": "Referans saklama ve onay iş akışı için reg-suit veya benzeri gerekir.",
+      "ihtiyaclar": [
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-1580",
+      "ad": "Creevey",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/creevey/creevey",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Storybook bileşenleri için çapraz tarayıcı ekran görüntüsü testi; farkları inceleyip referansı onaylamaya yarayan arayüz koşucusu sunar.",
+      "sinirlar": "Storybook'a bağlıdır; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-1581",
+      "ad": "jest-image-snapshot",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/americanexpress/jest-image-snapshot",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jest için görüntü anlık görüntüsü eşleştiricisi; pixelmatch/SSIM ile eşik ayarlı görsel karşılaştırma ve fark görüntüsü üretir.",
+      "sinirlar": "Referans görüntü yönetimi depo içinde elle yapılır; tarayıcı/işletim sistemi farkları gürültü yaratabilir.",
+      "ihtiyaclar": [
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-1582",
+      "ad": "AccessibilitySnapshot",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cashapp/AccessibilitySnapshot",
+      "olgunluk": "olgun",
+      "ne_saglar": "iOS görünümlerinin erişilebilirlik hiyerarşisini (VoiceOver etiketleri, sıralama) anlık görüntü olarak kaydedip regresyon testine dönüştüren kütüphane.",
+      "sinirlar": "Yalnız iOS; ekran okuyucu davranışının tamamını değil hiyerarşiyi doğrular.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-1583",
+      "ad": "Guidepup",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://guidepup.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gerçek ekran okuyucuları (macOS VoiceOver, Windows NVDA) otomasyonla sürerek erişilebilirlik testlerini Playwright vb. ile uçtan uca çalıştıran kütüphane; Virtual Screen Reader ile birim testi de sağlar.",
+      "sinirlar": "Gerçek ekran okuyucu içeren işletim sistemi ve CI yapılandırması gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-1584",
+      "ad": "Sa11y",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sa11y.netlify.app",
+      "olgunluk": "olgun",
+      "ne_saglar": "İçerik düzenleyicileri için sayfadaki erişilebilirlik ve kullanılabilirlik sorunlarını görsel olarak vurgulayan, insan incelemesine yönelik erişilebilirlik kalite güvence aracı.",
+      "sinirlar": "Otomatik CI kapısı değil, insan odaklı bir inceleme aracıdır.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-1585",
+      "ad": "Lingui",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://lingui.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/React uygulamaları için ICU MessageFormat tabanlı uluslararasılaştırma çerçevesi; mesaj çıkarma, derleme ve eksik çeviri denetimi sunar.",
+      "sinirlar": "Yalnız JS/TS ekosistemi.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-1586",
+      "ad": "i18n-tasks",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "http://glebm.github.io/i18n-tasks",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby i18n anahtarlarını statik analizle tarayıp eksik ve kullanılmayan çevirileri bulan, CI'da başarısız olabilen araç.",
+      "sinirlar": "Ruby/Rails odaklıdır.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "AR-1811",
+      "ad": "webhint",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://webhint.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Web sayfalarını erişilebilirlik (axe tabanlı), performans, uyumluluk, PWA ve güvenlik ipuçlarına karşı denetleyen yapılandırılabilir lint aracı (CLI, VS Code).",
+      "sinirlar": "Geliştirme temposu yavaşladı; bazı kurallar güncel tarayıcılara göre eskiyebilir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-1812",
+      "ad": "messageformat",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://messageformat.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "ICU MessageFormat ve Unicode MessageFormat 2 için JavaScript (ve Java) uygulaması; çoğul, cinsiyet ve seçimli çevrilebilir mesajları derler ve doğrular.",
+      "sinirlar": "Yalnız mesaj biçimlendirme; çeviri yönetimi ve görsel doğrulama kapsamaz.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-1878",
+      "ad": "WebDriver BiDi",
+      "tur": "protokol-standart",
+      "lisans": "W3C Document License",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.w3.org/TR/webdriver-bidi/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tarayıcı otomasyonu için çift yönlü, olay tabanlı protokol; konsol logları, ağ olayları ve DOM değişikliklerini dinleyerek tarayıcılar arası (Chrome, Firefox) standart test ve örtük oracle (konsol hatası, ağ hatası) sağlar.",
+      "sinirlar": "Çalışma Taslağı aşamasında; tarayıcı desteği özelliğe göre değişir.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-1895",
+      "ad": "Unicode CLDR (Common Locale Data Repository)",
+      "tur": "protokol-standart",
+      "lisans": "Unicode License v3",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cldr.unicode.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tarih, sayı, para birimi, çoğul kuralları, sıralama gibi yerel ayar verisinin (Türkçe dahil) standart deposu; ICU, tarayıcılar ve işletim sistemleri tarafından kullanılır, yerelleştirme testlerinde referans.",
+      "sinirlar": "Veri deposudur; uygulamanın doğru kullanımını ayrıca test etmek gerekir.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-1896",
+      "ad": "Unicode MessageFormat 2",
+      "tur": "protokol-standart",
+      "lisans": "Unicode License v3",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.unicode.org/reports/tr35/tr35-messageFormat.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çoğul, cinsiyet ve seçim ifadeleri içeren çevrilebilir mesajlar için sözdizimi ve veri modeli (LDML'nin parçası); çeviri dizelerinin makinece doğrulanabilir olmasını sağlar.",
+      "sinirlar": "Uygulama kütüphaneleri (ICU4J/ICU4C, messageformat) sürüme göre farklı destek düzeyinde.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-1941",
+      "ad": "OWASP MASVS (Mobile Application Security Verification Standard)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-SA-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mas.owasp.org/MASVS/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mobil uygulama güvenliği doğrulama standardı; MASTG test rehberi ve MASWE zayıflık kataloğuyla birlikte mobil öncelikli arayüzlerde güvenlik kontrollerinin ölçütü.",
+      "sinirlar": "Kontrol listesidir; test otomasyonu ayrı araçlar gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-022",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-1944",
+      "ad": "WebMCP",
+      "tur": "protokol-standart",
+      "lisans": "W3C Community Contributor License",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://webmachinelearning.github.io/webmcp/",
+      "olgunluk": "erken",
+      "ne_saglar": "Web uygulamalarının JavaScript fonksiyonlarını veya HTML formlarını doğal dil açıklamaları ve şemalarla tarayıcı içi ajan araçları olarak sunmasını sağlayan önerilen web API'si; kullanıcı oturumu ve arayüz bağlamı korunur.",
+      "sinirlar": "Topluluk grubu taslağı; tarayıcı desteği deneysel.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002"
+      ]
+    },
+    {
+      "id": "AR-1960",
+      "ad": "Amazon Bedrock AgentCore Browser",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-tool.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların web uygulamalarıyla etkileşimi için yönetilen, yalıtılmış bulut tarayıcı; Playwright/CDP uyumlu, oturum kaydı ve canlı görüntüleme sunar.",
+      "sinirlar": "Gerçek cihaz testi yerine geçmez; tarayıcı oturumları ücretli ve AWS'ye bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-024",
+        "N-K09-008",
+        "N-K14-003"
+      ]
+    },
+    {
+      "id": "AR-1982",
+      "ad": "Amazon Nova Act",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://nova.amazon.com/act",
+      "olgunluk": "erken",
+      "ne_saglar": "Tarayıcıda UI iş akışlarını güvenilir biçimde yürütmek için eğitilmiş bilgisayar-kullanımı ajanı ve SDK; adımları doğal dil + Python ile tanımlama ve yeniden oynatma.",
+      "sinirlar": "Web ile sınırlı; gerçek mobil cihaz testi sağlamaz; hizmet koşulları ve bölge kısıtları var.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-024",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-1999",
+      "ad": "Azure App Testing (Azure Load Testing + Playwright Workspaces)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/app-testing/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JMeter/Locust/Playwright betikleriyle çok bölgeli yük testi ve Playwright testlerini bulut tarayıcılarda paralel koşturma; CI/CD entegrasyonu ve performans eşik kriterleriyle geçti/kaldı.",
+      "sinirlar": "Gerçek mobil cihaz sağlamaz; sanal kullanıcı saati/tarayıcı dakikası bazlı ücret.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-018",
+        "N-K05-024",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2117",
+      "ad": "Datadog Synthetic Monitoring",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/synthetic-monitoring/",
+      "olgunluk": "olgun",
+      "ne_saglar": "API, çok adımlı tarayıcı ve mobil uygulama (gerçek cihaz) testleri; CI'da sürekli test, ekran görüntüsü ve erişilebilirlik/performans denetimleri.",
+      "sinirlar": "Test çalıştırması başına ücret; karmaşık kimlik doğrulama senaryoları efor ister.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-019",
+        "N-K05-021",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2144",
+      "ad": "Testim",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.testim.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ destekli akıllı konum belirleyicilerle (smart locators) kararlı web, mobil ve Salesforce UI testleri; test kaydı, kod ile özelleştirme ve CI'da paralel koşum.",
+      "sinirlar": "SaaS; karmaşık akışlarda kod eklentisi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2146",
+      "ad": "TestComplete",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://smartbear.com/product/testcomplete/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Masaüstü, web ve mobil uygulamalar için kayıt/betik tabanlı UI test otomasyonu; nesne tanıma ve görsel doğrulama.",
+      "sinirlar": "Windows'a bağlı; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2151",
+      "ad": "SmartBear Reflect",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://smartbear.com/product/reflect/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodsuz, yapay zekâ destekli web ve mobil UI testi: doğal dil adımları, görsel doğrulama ve kendi kendini onaran testler.",
+      "sinirlar": "SaaS; karmaşık iş mantığı için sınırlı ifade gücü.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2156",
+      "ad": "OpenText Functional Testing (eski UFT One)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.opentext.com/products/functional-testing",
+      "olgunluk": "olgun",
+      "ne_saglar": "Masaüstü, web, mobil, ana bilgisayar ve paket uygulamalar için yapay zekâ destekli fonksiyonel test otomasyonu.",
+      "sinirlar": "Windows ağırlıklı; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2160",
+      "ad": "Digital.ai Continuous Testing",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://digital.ai/products/continuous-testing/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek mobil cihaz ve tarayıcı bulutu (kurum içi cihaz laboratuvarı seçeneğiyle); Appium/Selenium testlerini paralel koşturma ve kayıt.",
+      "sinirlar": "Cihaz başına maliyet; kurum içi laboratuvar işletim yükü.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2184",
+      "ad": "Katalon Platform",
+      "tur": "ticari-saas",
+      "lisans": "ticari (Studio ücretsiz katmanlı)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://katalon.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web, mobil, API ve masaüstü test otomasyonu; TestCloud tarayıcı/cihaz yürütme, test analitiği ve kararsız test raporları, yapay zekâ destekli test üretimi.",
+      "sinirlar": "Gelişmiş özellikler ücretli; Groovy/Java bilgisi gerekebilir.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2185",
+      "ad": "mabl",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.mabl.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajanlı, düşük kodlu uçtan uca test: web/mobil/API testleri, otomatik iyileştirme, görsel değişiklik, erişilebilirlik ve sayfa performansı kontrolleri.",
+      "sinirlar": "SaaS; yerel geliştirme döngüsünde çalıştırma sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-017",
+        "N-K05-019",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2188",
+      "ad": "UiPath Test Cloud",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.uipath.com/product/test-cloud",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlı test platformu: gereksinimden test durumu üretimi, UI/API test otomasyonu, test yönetimi ve SAP/Salesforce gibi kurumsal uygulama testleri.",
+      "sinirlar": "UiPath ekosistemi bağımlılığı; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K05-024",
+        "N-K08-002"
+      ]
+    },
+    {
+      "id": "AR-2233",
+      "ad": "Holo3 ve Holo-3.1 (bilgisayar kullanımı modelleri)",
+      "tur": "model",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.hcompany.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ekran görüntüsünden arayüz öğesi konumlandırma ve web/masaüstü gezinme için eğitilmiş, Qwen tabanlı 0.8B–35B açık ağırlıklı görsel-dil modelleri; GGUF/FP8 sürümleriyle yerel çalıştırılabilir.",
+      "sinirlar": "Qwen türevi olduğundan temel model köken/lisans envanterine eklenmeli; arayüz testinde deterministik doğrulamanın yerini tutmaz.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-024",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-2331",
+      "ad": "Testinium",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://testinium.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web, API ve mobil test otomasyonu platformu (Testinium Suite) ve yönetilen test hizmetleri; ekosistemde performans testi (Loadium), cihaz parkı (Device Park) ve mühendislik zekâsı (Oobeya) ürünleri bulunur.",
+      "sinirlar": "Kurum içi kurulum seçenekleri kamuya açık belgelerde net değil; ağırlıkla bulut ve hizmet modeli.",
+      "ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2332",
+      "ad": "TheRafi",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://therafi.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Düz dildeki gereksinimlerden çalıştırılabilir test senaryosu üreten (RafiGen), kendini onaran seçicilerle kodsuz otomasyon (RafiRun) ve WCAG 2.2 erişilebilirlik denetimi (RafiAccess) sunan yapay zekâ tabanlı test platformu.",
+      "sinirlar": "Yeni ürün; üretilen testlerin oracle kalitesi bağımsız doğrulama gerektirir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K05-001",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-2338",
+      "ad": "Tricentis Tosca",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.tricentis.com/products/automate-continuous-testing-tosca",
+      "olgunluk": "olgun",
+      "ne_saglar": "Model tabanlı, kodsuz uçtan uca test otomasyonu; SAP, masaüstü, web, API ve mobil uygulamalar ile risk tabanlı test optimizasyonu.",
+      "sinirlar": "Pahalı ve üretici kilidi yüksek; lisanslama karmaşık.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2340",
+      "ad": "Ranorex Studio",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ranorex.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Windows masaüstü, web ve mobil uygulamalar için kayıt ve kod tabanlı GUI test otomasyonu; nesne deposu ve raporlama.",
+      "sinirlar": "Windows'a bağımlı geliştirme ortamı; ürün yatırımının sürekliliği belirsiz.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2341",
+      "ad": "Squish",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.qt.io/product/quality-assurance/squish",
+      "olgunluk": "olgun",
+      "ne_saglar": "Qt, Java, web, Windows, macOS ve gömülü arayüzler için nesne tabanlı GUI test otomasyonu; görsel doğrulama noktaları ve BDD desteği.",
+      "sinirlar": "Ticari; web testinde açık kaynak alternatiflere göre ağır.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2387",
+      "ad": "Mobile-Agent (GUI-Owl)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/X-PLUG/MobileAgent",
+      "olgunluk": "erken",
+      "ne_saglar": "Mobil/masaüstü arayüzleri ekran görüntüsünden algılayıp dokunma/yazma eylemleri üreten GUI ajan ailesi ve modelleri; gerçek cihaz üzerinde uçtan uca senaryo koşmak için kullanılabilir.",
+      "sinirlar": "Araştırma kodu; deterministik test aracı değil, sonuçlar model kararlılığına bağlı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-2388",
+      "ad": "Open-AutoGLM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/zai-org/Open-AutoGLM",
+      "olgunluk": "erken",
+      "ne_saglar": "Telefon ekranını anlayıp ADB üzerinden uygulama kullanan açık telefon ajanı modeli ve çerçevesi; mobil akışların doğal dille yürütülmesini sağlar.",
+      "sinirlar": "Ağırlıkla Çin mobil uygulama ekosisteminde eğitilmiş; test kanıtı olarak kullanımda tekrarlanabilirlik sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-2539",
+      "ad": "Airtest",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "http://airtest.netease.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Görüntü tanıma tabanlı çapraz platform UI otomasyonu (Android, iOS, Windows, oyunlar); Poco ile arayüz öğesi seçimi ve AirtestIDE ile kayıt.",
+      "sinirlar": "Görüntü eşleştirme çözünürlük/tema değişimlerine duyarlı; 2026 başından beri etkinlik az.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2540",
+      "ad": "SoloPi",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/alipay/SoloPi",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android cihaz üzerinde çalışan otomasyon aracı: kayıt-oynatma, bir cihazdan çok cihaza eşzamanlı oynatma ve başarım (CPU, bellek, akıcılık) ölçümü.",
+      "sinirlar": "Yalnız Android; dokümantasyon Çince ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2541",
+      "ad": "uiautomator2",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/openatx/uiautomator2",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android UI Automator için Python sarmalayıcısı; gerçek cihaz veya emülatörde öğe seçme, dokunma ve ekran görüntüsü alma ile hızlı mobil test/ajan araçları.",
+      "sinirlar": "Yalnız Android; iOS için ayrı araç gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2542",
+      "ad": "tidevice",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/alibaba/tidevice",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Xcode gerektirmeden iPhone ile iletişim kurarak uygulama kurma, WebDriverAgent başlatma ve başarım verisi toplama; Linux/Windows'tan iOS cihaz testi için.",
+      "sinirlar": "Apple'ın yeni iOS sürümleriyle uyumluluk kırılabilir; resmî Apple aracı değildir.",
+      "ihtiyaclar": [
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2543",
+      "ad": "Fastbot",
+      "tur": "acik-kaynak",
+      "lisans": "Fastbot Revised License (özel, izin veren)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/bytedance/Fastbot_Android",
+      "olgunluk": "olgun",
+      "ne_saglar": "Model tabanlı GUI testi: uygulama geçişlerini modelleyip pekiştirmeli öğrenmeyle keşfederek çökme/ANR gibi kararlılık sorunlarını bulur (Android; iOS sürümü ayrı depo).",
+      "sinirlar": "Özel lisans; iş kuralı doğruluğunu değil kararlılığı ölçer, 2025 ortasından beri etkinlik az.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-018",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-2549",
+      "ad": "Testsigma",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community) + ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://testsigma.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Web, mobil ve API için ajanlı test otomasyonu: doğal dil adımlı testler, iş kalemlerinden test senaryosu üretimi, kendi kendini onaran konumlayıcılar ve bulut cihaz çiftliği.",
+      "sinirlar": "Ajan özellikleri ticari bulut sürümünde; açık topluluk sürümü sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K05-001",
+        "N-K05-004",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2550",
+      "ad": "Autify (Genesis, Aximo, Next)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://autify.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ test platformu: Genesis ürün gereksinimleri ve kaynak koddan yapılandırılmış test senaryoları üretir; Aximo doğal dil ve görsel tanıma ile uçtan uca test yürütür; Next Playwright tabanlıdır.",
+      "sinirlar": "Kapalı SaaS; üretilen senaryoların insan onayı ve beklenti deposuyla eşlenmesi ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K05-001",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2551",
+      "ad": "MagicPod",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://magicpod.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web ve mobil için yapay zekâ destekli kodsuz test otomasyonu: kendi kendini onaran konumlayıcılar, bulut gerçek cihaz/tarayıcı çalıştırma ve CI entegrasyonu.",
+      "sinirlar": "Kapalı SaaS; arayüz ve destek Japonca ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2552",
+      "ad": "WeTest",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.wetest.net",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mobil, PC ve konsol oyun/uygulama test platformu: bulut gerçek cihazlar, uyumluluk ve başarım testi (PerfDog), güvenlik ve yerelleştirme test hizmetleri.",
+      "sinirlar": "Oyun odaklı; kapalı SaaS.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-2643",
+      "ad": "BrowserGym ve AgentLab",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ServiceNow/BrowserGym",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Web ajanları için ortak gym ortamı (WebArena, WorkArena, MiniWoB vb. tek arayüzde) ve AgentLab ile büyük ölçekli paralel deney, yeniden üretilebilirlik ve sonuç tablosu altyapısı sağlar.",
+      "sinirlar": "Web ajanı odaklı; kod ajanı görevleri için ek uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K19-005",
+        "N-K23-002",
+        "N-K23-003"
+      ]
+    },
+    {
+      "id": "AR-2644",
+      "ad": "WebArena",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/web-arena-x/webarena",
+      "olgunluk": "olgun",
+      "ne_saglar": "E-ticaret, forum, GitLab, CMS gibi kendi barındırılan gerçekçi web sitelerinde 812 uzun ufuklu görevle web ajanlarını işlevsel doğrulamayla değerlendirir.",
+      "sinirlar": "Docker imajları büyük; site sürümleri sabit olduğundan güncel arayüzleri temsil etmeyebilir.",
+      "ihtiyaclar": [
+        "N-K05-024",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2793",
+      "ad": "Design2Code",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/NoviScl/Design2Code",
+      "olgunluk": "erken",
+      "ne_saglar": "Gerçek web sayfası ekran görüntülerinden kod üretimini blok eşleme, metin, konum, renk ve CLIP benzerliği gibi görsel metriklerle ölçen kıyas; görsel referans karşılaştırma metriği sağlar.",
+      "sinirlar": "2024 sonundan beri güncellenmiyor; statik tek sayfa HTML ile sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-017",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2794",
+      "ad": "DroidBot",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/honeynet/droidbot",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Android uygulamalarında UI geçiş grafiği çıkararak model tabanlı test girdisi üreten hafif araç; DroidBot-GPT ile LLM güdümlü görev tamamlama modu vardır.",
+      "sinirlar": "Yalnız Android; karmaşık oturum/giriş akışları için betik gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-2854",
+      "ad": "@shadcn/lint",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/shadcn-ui/lint",
+      "olgunluk": "erken",
+      "ne_saglar": "Tailwind tasarım sistemleri için ajan öncelikli linter; izinli bileşen, varyant ve tema kurallarını yazıp ajan ihlal ettiğinde bileşenlerinize dayalı düzeltme öneren ESLint/Oxlint eklentisi (React, Svelte, Vue).",
+      "sinirlar": "Eylül 2026'da çıktı; yalnız Tailwind v4 projeleri.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-012",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-2857",
+      "ad": "Bombadil",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://antithesishq.github.io/bombadil/",
+      "olgunluk": "erken",
+      "ne_saglar": "Web ve terminal arayüzleri için özellik tabanlı test; arayüzü otonom keşfedip tanımlı doğruluk özelliklerini denetler; yerelde, CI'da ve Antithesis içinde çalışır.",
+      "sinirlar": "0.x deneysel; API değişebilir.",
+      "ihtiyaclar": [
+        "N-K05-010",
+        "N-K05-011",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-2873",
+      "ad": "agent-device",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://agent-device.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "iOS, Android ve HarmonyOS simülatör/emülatör ile fiziksel cihazlarda uygulamayı inceleme, kontrol etme ve doğrulama için CLI, MCP sunucusu ve tipli Node.js API; ajanlara canlı uygulama geri besleme döngüsü verir.",
+      "sinirlar": "Cihaz çiftliği yönetimi sunmaz; paralel cihaz ölçeği kurumca sağlanmalı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-025"
+      ]
+    },
+    {
+      "id": "AR-2874",
+      "ad": "Accessibility Agents",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Community-Access/accessibility-agents",
+      "olgunluk": "erken",
+      "ne_saglar": "WCAG 2.2 AA'yı ajanlı kodlamada uygulatan skill paketi; kullanıcıya dönük dosyalarda erişilebilirlik incelemesi bitmeden düzenlemeyi engeller ve raporları yapılandırılmış bulgulardan üretir.",
+      "sinirlar": "LLM tabanlı inceleme; axe-core gibi deterministik araçlarla birlikte kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K05-022"
+      ]
+    },
+    {
+      "id": "AR-2875",
+      "ad": "Playwriter",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://playwriter.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların çalışan Chrome tarayıcınızı (oturum ve eklentilerle) Playwright kod parçacıklarıyla durumlu bir sandbox'ta kontrol etmesini sağlayan eklenti, CLI ve MCP.",
+      "sinirlar": "Gerçek tarayıcı oturumuna erişim verdiğinden kimlik bilgisi ve istem enjeksiyonu riski taşır.",
+      "ihtiyaclar": [
+        "N-K05-024",
+        "N-K09-008"
+      ]
+    },
+    {
+      "id": "AR-2893",
+      "ad": "squirrelscan",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://squirrelscan.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Web sitelerini SEO, performans, güvenlik, erişilebilirlik ve ajan deneyimi açısından 295 kuralla denetleyip kodlama ajanına kesin düzeltmeler veren CLI.",
+      "sinirlar": "Web siteleriyle sınırlı; mobil uygulamaları kapsamaz.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-2894",
+      "ad": "Shadscan",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://shadscan.com",
+      "olgunluk": "erken",
+      "ne_saglar": "shadcn tabanlı React uygulamalarının arayüz temellerini (erişilebilir kontroller, form geri bildirimi, rota durumları, mobil davranış) uygulamayı çalıştırmadan, AI çağırmadan deterministik tarayıp kanıtlı 0–100 puan verir.",
+      "sinirlar": "Yalnız shadcn/React projeleri.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3057",
+      "ad": "Storybook MCP (@storybook/addon-mcp)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (npm)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://storybook.js.org/docs/ai/mcp/overview",
+      "olgunluk": "erken",
+      "ne_saglar": "Storybook eklentisi olarak çalışan MCP sunucusu; ajanların bileşen hikâyeleri yazıp test etmesine ve bileşen kataloğunu bağlam olarak kullanmasına yardım eder.",
+      "sinirlar": "Ayrı deneysel depo arşivlendi ve eklentiye taşındı; özellik seti hızla değişiyor.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017",
+        "N-K05-019",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-3058",
+      "ad": "Chrome DevTools MCP",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kodlama ajanlarına gerçek Chrome üzerinde performans izi kaydı/analizi, ağ ve konsol inceleme, ekran görüntüsü ve kullanıcı etkileşimi yaptıran MCP sunucusu.",
+      "sinirlar": "Tarayıcıdaki tüm içeriği ajana açar; istem enjeksiyonu ve oturum çerezleri açısından izole profil kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-021",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-3061",
+      "ad": "MobileBuildMCP (eski XcodeBuildMCP)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/getsentry/MobileBuildMCP",
+      "olgunluk": "gelisen",
+      "ne_saglar": "iOS/macOS projelerinde derleme, test, simülatör yönetimi ve uygulama çalıştırma işlemlerini ajanlara MCP ve CLI olarak sunar; ajan skill dosyaları içerir.",
+      "sinirlar": "Yalnız macOS + Xcode; ad değişikliği nedeniyle eski XcodeBuildMCP yapılandırmaları güncellenmeli.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-029",
+        "N-K10-001",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-3062",
+      "ad": "mobile-mcp",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mobile-next/mobile-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "iOS/Android simülatör, emülatör ve gerçek cihazlarda erişilebilirlik ağacı ve ekran görüntüsüyle mobil otomasyon yaptıran MCP sunucusu.",
+      "sinirlar": "Gerçek cihaz kurulumu platforma özgü araçlar gerektirir; algısal doğrulama modele bağlı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-019",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-3096",
+      "ad": "Android Lint",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.android.com/studio/write/lint",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android projelerinde doğruluk, güvenlik, performans, erişilebilirlik ve sabit kodlanmış metin (i18n) sorunlarını denetleyen, özel kurallarla genişletilebilir statik analiz aracı.",
+      "sinirlar": "Android'e özgü; kurum kuralları için özel lint kuralı yazmak gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K04-012",
+        "N-K05-012",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3097",
+      "ad": "Compose Preview Screenshot Testing",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.android.com/studio/preview/compose-screenshot-testing",
+      "olgunluk": "erken",
+      "ne_saglar": "Jetpack Compose önizlemelerinden referans ekran görüntüleri üretip sonraki derlemelerde farkları raporlayan Gradle tabanlı görsel regresyon aracı.",
+      "sinirlar": "Android Studio'nun önizleme/deneysel özelliği; yalnız Compose arayüzleri.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-3099",
+      "ad": "UI Automator",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://developer.android.com/training/testing/other-components/ui-automator",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulamalar arası ve sistem arayüzü etkileşimlerini gerçek cihaz/emülatörde test etmeye yarayan Android UI test çerçevesi.",
+      "sinirlar": "Espresso'ya göre yavaş ve kırılgan olabilir; cihaz çiftliği gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-3101",
+      "ad": "Shot",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/pedrovgs/Shot",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Android için enstrümantasyon testlerinde ekran görüntüsü kaydı ve karşılaştırması yapan Gradle eklentisi; HTML fark raporu üretir.",
+      "sinirlar": "Tek bakımcılı; emülatör yapılandırması farklarına duyarlı.",
+      "ihtiyaclar": [
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-3102",
+      "ad": "Accessibility Scanner (Android)",
+      "tur": "ticari-yazilim",
+      "lisans": "ücretsiz (kapalı kaynak)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://support.google.com/accessibility/android/answer/6376570",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android cihazda çalışan uygulamanın ekranlarını tarayıp dokunma hedefi boyutu, kontrast ve içerik etiketi gibi erişilebilirlik sorunlarını öneren Google uygulaması.",
+      "sinirlar": "Elle çalıştırılan cihaz uygulaması; CI kapısı için ATF/Espresso kontrolleri gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3110",
+      "ad": "iOSSnapshotTestCase",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/uber/ios-snapshot-test-case",
+      "olgunluk": "olgun",
+      "ne_saglar": "UIView/CALayer anlık görüntülerini referans görüntüyle karşılaştıran iOS görsel regresyon test kütüphanesi.",
+      "sinirlar": "Bakım yavaş (son itme Aralık 2025); simülatör/cihaz farklarına duyarlı.",
+      "ihtiyaclar": [
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-3111",
+      "ad": "Accessibility Inspector (Xcode)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (Xcode ile ücretsiz)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developer.apple.com/documentation/accessibility/accessibility-inspector",
+      "olgunluk": "olgun",
+      "ne_saglar": "Xcode ile gelen, iOS/macOS uygulamalarının erişilebilirlik öğelerini inceleyen ve denetim (audit) çalıştıran geliştirici aracı.",
+      "sinirlar": "Etkileşimli masaüstü aracı; otomatik kapı için XCUITest erişilebilirlik denetimi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3113",
+      "ad": "SwiftGen",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/SwiftGen/SwiftGen",
+      "olgunluk": "olgun",
+      "ne_saglar": "Localizable.strings, varlık katalogları ve storyboard'lardan tip güvenli Swift kodu üretir; eksik çeviri anahtarlarını derleme zamanında görünür kılar.",
+      "sinirlar": "Son itme Nisan 2026; Xcode String Catalogs yaklaşımıyla örtüşme var.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3115",
+      "ad": "Patrol",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://patrol.leancode.co",
+      "olgunluk": "olgun",
+      "ne_saglar": "Flutter için yerel izin diyalogları, bildirimler ve sistem arayüzüyle etkileşebilen uçtan uca UI test çerçevesi; cihaz çiftlikleriyle çalışır.",
+      "sinirlar": "Flutter'a özgü; yerel yapılandırma iOS/Android için ayrı adımlar ister.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K05-018",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-3116",
+      "ad": "Alchemist",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Betterment/alchemist",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Flutter golden (referans görüntü) testlerini platformdan bağımsız CI görüntüleri ve senaryo tablolarıyla kolaylaştıran paket.",
+      "sinirlar": "Son sürüm Mart 2026; golden görüntüler font/işleme farklarına duyarlı.",
+      "ihtiyaclar": [
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-3119",
+      "ad": "slang",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pub.dev/packages/slang",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dart/Flutter için JSON/YAML/CSV/ARB dosyalarından kod üreterek tip güvenli çeviri sağlayan i18n çözümü; eksik anahtar analizini destekler.",
+      "sinirlar": "Ana geliştirme Codeberg'e taşındı; topluluk projesi.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3123",
+      "ad": "accessibility_tools (Flutter)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pub.dev/packages/accessibility_tools",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Flutter arayüzünü geliştirme sırasında denetleyip eksik semantik etiket, küçük dokunma hedefi gibi erişilebilirlik sorunlarını ekranda işaretleyen paket.",
+      "sinirlar": "Geliştirme zamanı yardımcı; otomatik test kapısı için flutter_test erişilebilirlik kılavuzlarıyla birleştirilmeli.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3124",
+      "ad": "React Native Testing Library",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://oss.callstack.com/react-native-testing-library/",
+      "olgunluk": "olgun",
+      "ne_saglar": "React Native bileşenlerini kullanıcı gibi (rol, erişilebilirlik etiketi, metin ile) sorgulayarak test eden kütüphane.",
+      "sinirlar": "Jest ortamında çalışır; yerel modül davranışını taklit etmek gerekir.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-004",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3125",
+      "ad": "React Native AMA",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://commerce.nearform.com/open-source/react-native-ama/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "React Native'de erişilebilirlik kurallarını geliştirme sırasında zorunlu kılan bileşen ve kontrol seti (dokunma hedefi, etiket, kontrast vb.).",
+      "sinirlar": "Kendi bileşenlerinin benimsenmesini ister; mevcut kod tabanında geçiş maliyeti var.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3179",
+      "ad": "go-i18n",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/nicksnyder/go-i18n",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go programları için CLDR çoğul kurallı mesaj çevirisi ve çeviri dosyası çıkarma/birleştirme aracı.",
+      "sinirlar": "Topluluk projesi; ICU MessageFormat'ın tüm özelliklerini desteklemez.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3201",
+      "ad": "rust-i18n",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/longbridge/rust-i18n",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust uygulamaları için YAML/JSON/TOML çeviri dosyalarını derleme zamanında yükleyen i18n crate'i ve çeviri çıkarma aracı.",
+      "sinirlar": "Çoğul/cinsiyet gibi karmaşık dilbilgisi için Fluent kadar güçlü değil.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3216",
+      "ad": "Babel (Python)",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://babel.pocoo.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "CLDR verisiyle tarih/sayı/para biçimlendirme ve gettext mesaj kataloglarını çıkarma/derleme (pybabel) sağlayan Python i18n kütüphanesi.",
+      "sinirlar": "Çeviri yönetim arayüzü yok; TMS ile birlikte kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3262",
+      "ad": "Testing Library (DOM/React)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://testing-library.com/react",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bileşenleri uygulama ayrıntısı yerine kullanıcı gibi (rol, erişilebilir ad, etiket) sorgulayarak test eden DOM/React/Vue/Angular kütüphane ailesi; erişilebilir işaretlemeyi teşvik eder.",
+      "sinirlar": "jsdom gerçek tarayıcı değildir; görsel/yerleşim hatalarını yakalamaz.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K05-019",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-3263",
+      "ad": "jest-axe",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/NickColley/jest-axe",
+      "olgunluk": "olgun",
+      "ne_saglar": "axe-core'u Jest eşleştiricisi olarak sarar; birim/bileşen testlerinde otomatik erişilebilirlik ihlali denetimi yapar.",
+      "sinirlar": "jsdom'da renk kontrastı gibi kurallar çalışmaz; tam denetim yerine geçmez.",
+      "ihtiyaclar": [
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3289",
+      "ad": "i18next",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.i18next.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript için React, Vue, Angular, Node ve mobil entegrasyonlu i18n çerçevesi; çoğul, bağlam ve ad alanı desteği sağlar.",
+      "sinirlar": "Barındırılan çeviri yönetimi (locize) ticari.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3290",
+      "ad": "i18next-cli",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.locize.com/blog/i18next-cli",
+      "olgunluk": "gelisen",
+      "ne_saglar": "i18next projelerinde anahtar çıkarma, tip üretimi, sabit kodlanmış metin lint'i ve eksik çeviri denetimi yapan birleşik komut satırı aracı.",
+      "sinirlar": "Yeni araç; eski i18next-parser yapılandırmalarından geçiş gerekir.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "AR-3291",
+      "ad": "eslint-plugin-i18next",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/edvardchen/eslint-plugin-i18next",
+      "olgunluk": "olgun",
+      "ne_saglar": "JSX/JS kodunda çeviri fonksiyonundan geçmeyen, kullanıcıya görünen sabit metinleri lint hatası olarak işaretleyen ESLint eklentisi.",
+      "sinirlar": "Sezgisel; teknik dizeleri yanlış pozitif olarak işaretleyebilir.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "AR-3292",
+      "ad": "i18n-check",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/lingualdev/i18n-check",
+      "olgunluk": "erken",
+      "ne_saglar": "Çeviri dosyalarını kaynak dile göre eksik/fazla anahtar ve ICU mesaj sözdizimi hataları için doğrulayan CI aracı.",
+      "sinirlar": "Küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3293",
+      "ad": "FormatJS (react-intl)",
+      "tur": "kutuphane",
+      "lisans": "MIT / BSD-3-Clause (paket bazında)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://formatjs.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "ICU MessageFormat tabanlı JavaScript i18n kütüphaneleri; react-intl, mesaj çıkarma CLI'ı ve ESLint eklentisi içerir.",
+      "sinirlar": "ICU sözdizimi çevirmenler için öğrenme eğrisi yaratır.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3294",
+      "ad": "Vue I18n",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://vue-i18n.intlify.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Vue 3 için resmî ekosistem i18n eklentisi; çoğullama, tarih/sayı biçimlendirme ve tek dosya bileşeni içi çeviri blokları sağlar.",
+      "sinirlar": "Yalnız Vue.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3295",
+      "ad": "Transloco",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://jsverse.gitbook.io/transloco/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Angular için çalışma zamanında dil değiştirme, tembel yükleme ve anahtar yönetimi araçları sunan i18n kütüphanesi.",
+      "sinirlar": "Yalnız Angular; Angular'ın yerleşik derleme zamanı i18n'inden farklı model.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3296",
+      "ad": "Paraglide JS",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://paraglidejs.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Mesajları tip güvenli, ağaç sarsılabilir fonksiyonlara derleyen i18n kütüphanesi; inlang açık çeviri biçimini kullanır.",
+      "sinirlar": "Görece yeni; ekosistem araçları gelişiyor.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3304",
+      "ad": "angular-eslint",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/angular-eslint/angular-eslint",
+      "olgunluk": "olgun",
+      "ne_saglar": "Angular TypeScript ve şablon dosyaları için ESLint kuralları; şablonlarda erişilebilirlik (alt metin, etiket, klavye olayı) kontrolleri içerir.",
+      "sinirlar": "Yalnız Angular.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K05-012",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3305",
+      "ad": "eslint-plugin-vuejs-accessibility",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Vue tek dosya bileşenlerinde erişilebilirlik kurallarını statik olarak denetleyen ESLint eklentisi.",
+      "sinirlar": "Statik kontrol; çalışma zamanı erişilebilirlik testinin yerine geçmez.",
+      "ihtiyaclar": [
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-3346",
+      "ad": "Pontoon",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://pontoon.mozilla.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mozilla'nın Fluent odaklı çeviri yönetim platformu; çeviri belleği, terminoloji ve kalite kontrolleriyle topluluk çevirisini yönetir.",
+      "sinirlar": "Mozilla iş akışlarına göre şekillenmiş; kurumsal özelleştirme gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K07-006"
+      ]
+    },
+    {
+      "id": "AR-3347",
+      "ad": "Crowdin",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://crowdin.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Depo ve CI entegrasyonlu bulut yerelleştirme platformu; sözlük, çeviri belleği, bağlam ekran görüntüleri ve makine/yapay zekâ çevirisi sunar.",
+      "sinirlar": "SaaS; çeviri içeriği sağlayıcı altyapısında tutulur.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K07-006"
+      ]
+    },
+    {
+      "id": "AR-3348",
+      "ad": "Lokalise",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://lokalise.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mobil ve web uygulamaları için çeviri yönetimi SaaS'ı; sözlük, çeviri belleği, SDK ile anında güncelleme ve iş akışları sunar.",
+      "sinirlar": "SaaS ve ücretli; veri sağlayıcı bulutunda.",
+      "ihtiyaclar": [
+        "N-K04-012",
+        "N-K07-006"
+      ]
+    },
+    {
+      "id": "AR-3349",
+      "ad": "Project Fluent",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://projectfluent.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğal dil çeşitliliğini (çoğul, cinsiyet, çekim) çevirmenin ifade etmesine izin veren yerelleştirme sistemi ve söz dizimi; JS, Rust, Python uygulamaları vardır.",
+      "sinirlar": "Firefox dışında benimseme sınırlı; araç desteği ICU'ya göre dar.",
+      "ihtiyaclar": [
+        "N-K04-012"
+      ]
+    },
+    {
+      "id": "AR-3375",
+      "ad": "Figma MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Figma tasarım bağlamını (bileşenler, değişkenler, Code Connect eşlemeleri, ekran görüntüleri) kodlayıcı ajanlara veren uzak ve masaüstü MCP sunucusu.",
+      "sinirlar": "Tam özellikler ücretli Dev/Full koltuk gerektirir; tasarım–kod eşlemesinin doğruluğu Code Connect bakımına bağlı.",
+      "ihtiyaclar": [
+        "N-K03-009",
+        "N-K04-010",
+        "N-K05-017",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3401",
+      "ad": "BrowserStack MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.browserstack.com/docs/browserstack-mcp-server/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların BrowserStack gerçek cihaz/tarayıcı bulutunda manuel ve otomatik test başlatmasını, erişilebilirlik taraması yapmasını, test yönetimi ve hata ayıklama verisini okumasını sağlayan resmî MCP sunucusu.",
+      "sinirlar": "AGPL-3.0 lisanslı; test bulutu ücretli ve SaaS.",
+      "ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-017",
+        "N-K05-018",
+        "N-K05-019",
+        "N-K05-026",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3402",
+      "ad": "TestMu AI (LambdaTest) MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.lambdatest.com/support/docs/testmu-mcp-server/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "HyperExecute işleri, test hata triyajı, SmartUI görsel farkları ve erişilebilirlik denetimlerine ajan erişimi veren uzak MCP sunucusu.",
+      "sinirlar": "Yalnız SaaS; resmî kayıttaki depo yalnız kılavuz içerir.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014",
+        "N-K05-017",
+        "N-K05-019",
+        "N-K05-026",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3403",
+      "ad": "Sauce Labs MCP Server (sauce-api-mcp)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/saucelabs/sauce-api-mcp",
+      "olgunluk": "erken",
+      "ne_saglar": "Sauce Labs API'sini (işler, cihazlar, yapılar, test sonuçları) modelleyen açık kaynak MCP sunucusu; ajanın gerçek cihaz testi sonuçlarını okumasını sağlar.",
+      "sinirlar": "Genç proje; Sauce Labs aboneliği gerekir.",
+      "ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-018",
+        "N-K05-026",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3404",
+      "ad": "Applitools MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/applitools/mcp",
+      "olgunluk": "erken",
+      "ne_saglar": "Applitools Eyes ile görsel test oluşturma, güncelleme ve sonuç analizini kodlayıcı ajanlara açan MCP sunucusu.",
+      "sinirlar": "Eyes aboneliği gerekir; referans (baseline) onayı insan sürecinde kalmalı.",
+      "ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-017",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3405",
+      "ad": "Appium MCP",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/appium/appium-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "iOS ve Android cihazlarda Appium ile mobil otomasyon ve test oluşturma araçları sunan resmî Appium projesine ait MCP sunucusu.",
+      "sinirlar": "Cihaz/emülatör altyapısını kurum sağlamalı; üretilen testlerin kararlılığı ayrıca doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3406",
+      "ad": "Cypress Cloud MCP",
+      "tur": "ticari-saas",
+      "lisans": "ticari (ai-toolkit MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.cypress.io/cloud/integrations/cloud-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Cypress Cloud test sonuçları, kararsız test bilgisi ve erişilebilirlik raporlarını ajan iş akışına getiren uzak MCP sunucusu.",
+      "sinirlar": "Cypress Cloud aboneliği gerekir.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014",
+        "N-K05-019",
+        "N-K05-026",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3708",
+      "ad": "Marker.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://marker.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web sitesi üzerinden ekran görüntüsü, açıklama ve teknik meta verilerle hata/geri bildirim bildirme; UAT bulgularını doğrudan Jira/Linear vb. iş kalemine dönüştürür.",
+      "sinirlar": "Web uygulamalarıyla sınırlı; kabul/red kararını yapılandırmaz.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-3709",
+      "ad": "BugHerd",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://bugherd.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web sayfası üzerine iğne bırakarak görsel geri bildirim ve hata bildirimi; paydaş kabul turlarında bulguları panoda toplar.",
+      "sinirlar": "Web ile sınırlı; iş takip entegrasyonu plana bağlı.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-4395",
+      "ad": "Penpot",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://help.penpot.app/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak tasarım ve prototip platformu; ekiplerin ortak görsel hedef ve bileşen referansı üretmesini, kendi sunucusunda barındırılmasını sağlar.",
+      "sinirlar": "Görsel hedefi tutar, uygulamanın bu hedefe uyduğunu kendisi doğrulamaz; görsel regresyon aracı ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-4396",
+      "ad": "Figma",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.figma.com/design/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ortak arayüz tasarımı, prototip ve geliştirici devri (Dev Mode) platformu; arayüz uygulaması için görsel referans kaynağıdır. MCP sunucusu ayrı kayıttır (AR-3375).",
+      "sinirlar": "Kapalı SaaS; tasarımla uygulama arasındaki uyumu kendisi doğrulamaz; lisans ve koltuk maliyeti ekip ölçeğiyle artar.",
+      "ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "AR-4397",
+      "ad": "NVDA",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.nvaccess.org/about-nvda/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Windows için ücretsiz, açık kaynak ekran okuyucu; otomatik erişilebilirlik taramalarının yakalayamadığı ekran okuyucu deneyiminin elle doğrulanmasında kullanılır.",
+      "sinirlar": "Elle test aracıdır, otomatik kalite kapısı değildir; yalnız Windows; Türkçe ses/sentezleyici deneyimi ayrıca sınanmalı.",
+      "ihtiyaclar": [
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-4398",
+      "ad": "VoiceOver",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (işletim sistemiyle birlikte gelir)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://support.apple.com/guide/voiceover/welcome/mac",
+      "olgunluk": "olgun",
+      "ne_saglar": "Apple işletim sistemlerine gömülü ekran okuyucu; macOS'ta arayüzün ekran okuyucu ile kullanılabilirliğinin elle doğrulanmasında kullanılır.",
+      "sinirlar": "Elle test aracıdır; yalnız Apple platformları; otomatik kapı veya kapsam raporu üretmez.",
+      "ihtiyaclar": [
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-4400",
+      "ad": "ACCESSIBILITY.md",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mgifford.github.io/ACCESSIBILITY.md",
+      "olgunluk": "erken",
+      "ne_saglar": "AGENTS.md ile hizalı, depoya konan açık biçim; kodlama ajanlarını erişilebilirlik beklentileri ve doğrulama adımları konusunda yönlendiren talimat dosyası.",
+      "sinirlar": "Küçük topluluk önerisi (≈74 yıldız); standartlaşmış değil; talimat uyumu ayrıca test edilmeli.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-4401",
+      "ad": "accessibility-skills",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mgifford/accessibility-skills",
+      "olgunluk": "erken",
+      "ne_saglar": "ACCESSIBILITY.md içeriğini yansıtan, erişilebilirlik incelemesi ve elle test adımları için hazır Claude Skill (SKILL.md) koleksiyonu.",
+      "sinirlar": "Küçük proje (≈49 yıldız); AGPL-3.0 kurum içi dağıtım koşulları değerlendirilmeli; skill etkinliği ölçülmeden yaygınlaştırılmamalı.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K11-005"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-30",
+    "ad": "Maliyet ölçümü, bütçe ve kota yönetimi",
+    "grup": "Model erişimi ve ekonomisi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-175",
+      "yetenek_sinifi": "Y-30",
+      "kalip": "Fiyatlandırma modelinin ani değişmesi",
+      "aciklama": "Cursor, Haziran 2025'teki Pro planı fiyat değişikliğinin güveni zedelediğini kabul edip üç haftalık dönemde oluşan beklenmedik ücretleri iade edeceğini açıkladı.",
+      "risk_turleri": [
+        "RT-14"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://cursor.com/blog/june-2025-pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Koltuk başı sabit maliyetle planlanan ajan araçları kullanım bazlıya dönerse ekip bütçeleri ay ortasında aşılır; kamu bütçe döngüsünde ek ödenek bulmak aylar sürer.",
+        "Dolar bazlı fiyatlarda kur artışı TL bütçesini ayrıca zorlar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K20-005",
+        "N-K20-007",
+        "N-K24-006"
+      ],
+      "ornek_araclar": [
+        "Cursor",
+        "GitHub Copilot",
+        "Claude Code",
+        "Windsurf"
+      ],
+      "erken_sinyal": "Satıcı fiyat sayfası veya kullanım politikası değişikliği; kullanıcı başı aylık maliyette sıçrama.",
+      "azaltma": "Sözleşmede fiyat sabitleme süresi, kullanım tavanı ve aşım bildirimi, çoklu araç stratejisi, maliyetin iç birimle izlenmesi."
+    },
+    {
+      "id": "RK-176",
+      "yetenek_sinifi": "Y-30",
+      "kalip": "Bütçe verisinin gecikmesiyle sert limit uygulanamaması",
+      "aciklama": "AWS Budgets verisi günde en fazla üç kez, önceki güncellemeden 8–12 saat sonra yenilenir. Anthropic API'de aylık kullanım eşiği aşıldığında istekler ay başına kadar 429 ile reddedilir.",
+      "risk_turleri": [
+        "RT-14",
+        "RT-12"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+        "https://docs.anthropic.com/en/api/rate-limits"
+      ],
+      "yasatacagi_sorunlar": [
+        "Döngüye giren bir ajan, fatura tabanlı bütçe alarmı tetiklenene kadar saatlerce harcama yapar; görev başına tavan fatura verisiyle uygulanamaz.",
+        "Sağlayıcı tarafındaki aylık eşik, hattı ay sonuna kadar durdurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K20-003",
+        "N-K20-005",
+        "N-K20-006",
+        "N-K20-001"
+      ],
+      "ornek_araclar": [
+        "AWS Budgets",
+        "Anthropic Console limits",
+        "OpenAI usage limits",
+        "LiteLLM budgets"
+      ],
+      "erken_sinyal": "Fatura verisi ile gerçek zamanlı token sayacı arasındaki fark.",
+      "azaltma": "Görev başına token sayacının geçit/orkestratörde gerçek zamanlı tutulması, sıfırlanamayan görev bütçesi, sağlayıcı eşiğinin önceden yükseltilmesi."
+    },
+    {
+      "id": "RK-177",
+      "yetenek_sinifi": "Y-30",
+      "kalip": "Görünmeyen akıl yürütme token'ları ve çoklu ajan çarpanı",
+      "aciklama": "OpenAI belgeleri, akıl yürütme token'larının API'de görünmediğini ama bağlam penceresinde yer kapladığını ve çıktı token'ı olarak ücretlendirildiğini belirtir; Anthropic çoklu ajan sistemlerin sohbetten yaklaşık 15 kat token kullandığını raporlar.",
+      "risk_turleri": [
+        "RT-14"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://platform.openai.com/docs/guides/reasoning",
+        "https://www.anthropic.com/engineering/multi-agent-research-system"
+      ],
+      "yasatacagi_sorunlar": [
+        "Görünür çıktıya göre yapılan maliyet tahminleri akıl yürütme seviyesi yükseltildiğinde katlarca sapar; uzun kuyruklu maliyet dağılımı ekip atfını zorlaştırır.",
+        "Akıl yürütme seviyesi rol başına kaydedilmezse maliyet artışının kaynağı bulunamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K20-006",
+        "N-K09-006",
+        "N-K20-007",
+        "N-K23-007"
+      ],
+      "ornek_araclar": [
+        "OpenAI reasoning modelleri",
+        "Claude extended thinking",
+        "Gemini thinking"
+      ],
+      "erken_sinyal": "Görünür çıktı ile faturalanan çıktı token'ı oranında artış.",
+      "azaltma": "Akıl yürütme bütçesinin rol başına politika ile sınırlanması, token türlerinin ayrı ölçülmesi, üst %1 pahalı görevlerin incelenmesi."
+    },
+    {
+      "id": "RK-178",
+      "yetenek_sinifi": "Y-30",
+      "kalip": "Maliyet saldırısı (Denial of Wallet)",
+      "aciklama": "OWASP LLM10:2025, kullanım başı ödemeli yapay zekâ hizmetlerinde yüksek hacimli işlemlerle sürdürülemez mali yük yaratılmasını (Denial of Wallet) sınırsız tüketim riski olarak tanımlar.",
+      "risk_turleri": [
+        "RT-14",
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dış kullanıcıların açabildiği iş kalemleri veya webhook'larla tetiklenen ajan görevleri, kötü niyetli içerikle sonsuz döngüye sokularak bütçe tüketilebilir.",
+        "Ekip kotası yoksa tek ekibin olayı tüm programın bütçesini tüketir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K20-005",
+        "N-K20-008",
+        "N-K15-006",
+        "N-K13-012"
+      ],
+      "ornek_araclar": [
+        "Tüm kullanım bazlı LLM API'leri",
+        "Ajan orkestratörleri"
+      ],
+      "erken_sinyal": "Belirli bir kaynaktan tetiklenen görev sayısında ve görev başına token'da ani artış.",
+      "azaltma": "Tetikleme yetkisinin kimlik doğrulamalı ve tekilleştirilmiş olması, görev/ekip/gün tavanları, döngü tespiti."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 55,
+    "orta": 45,
+    "yuksek": 14,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 15,
+    "RT-01": 8,
+    "RT-10": 8,
+    "RT-11": 8,
+    "RT-14": 6,
+    "RT-06": 5,
+    "RT-03": 5,
+    "RT-17": 4,
+    "RT-15": 4,
+    "RT-16": 3,
+    "RT-05": 3,
+    "RT-04": 3,
+    "RT-13": 3,
+    "RT-07": 2,
+    "RT-02": 2,
+    "RT-12": 1
+  }
+}

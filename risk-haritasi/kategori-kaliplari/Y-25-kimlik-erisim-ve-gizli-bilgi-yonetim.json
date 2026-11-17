@@ -1,0 +1,176 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-25",
+    "ad": "Kimlik, erişim ve gizli bilgi yönetimi (insan, ajan ve hat kimlikleri; kısa ömürlü göreve özel yetki)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-156",
+      "yetenek_sinifi": "Y-25",
+      "kalip": "Sır kasasında lisans ve sahiplik değişimi",
+      "aciklama": "HashiCorp Ağustos 2023'te Vault dahil ürünlerini BSL kaynak-erişilebilir lisansa geçirdi; bunun üzerine Linux Foundation altında OpenBao çatalı doğdu. IBM, HashiCorp satın alımını 27 Şubat 2025'te tamamladı.",
+      "risk_turleri": [
+        "RT-04",
+        "RT-06",
+        "RT-14"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license",
+        "https://openbao.org/",
+        "https://newsroom.ibm.com/2025-02-27-ibm-completes-acquisition-of-hashicorp,-creates-comprehensive,-end-to-end-hybrid-cloud-platform"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum, sır yönetimini platform hizmeti olarak diğer kamu birimlerine sunarsa BSL'nin rekabet kısıtı hukuki inceleme gerektirir.",
+        "Kurumsal özelliklerin (namespace, DR replikasyonu) ücretli sürümde kalması, fiyat politikası değişiminde maliyet artışı yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K16-006",
+        "N-K22-002"
+      ],
+      "ornek_araclar": [
+        "HashiCorp Vault",
+        "OpenBao",
+        "Infisical",
+        "CyberArk Conjur"
+      ],
+      "erken_sinyal": "Lisans dosyası veya fiyat sayfası değişikliği; topluluk sürümünden özellik çıkarılması.",
+      "azaltma": "API uyumlu açık kaynak alternatifle geçiş planı, kasa API'sini soyutlayan iç istemci, lisans envanteri."
+    },
+    {
+      "id": "RK-157",
+      "yetenek_sinifi": "Y-25",
+      "kalip": "Sır kasası ve kimlik sağlayıcıda kimlik doğrulama/yetki açıkları",
+      "aciklama": "Vault'ta sys/audit yazma yetkisi olan yöneticinin eklenti yoluyla ana makinede kod çalıştırması (CVE-2025-6000, CVSS 9,1), AWS kimlik doğrulama atlaması (CVE-2025-11621) ve LDAP'ta MFA'nın uygulanmaması (CVE-2025-6013) yayımlandı. Keycloak'ta şifre sıfırlama akışı üzerinden kimlik doğrulamasız hesap devralma (CVE-2026-18963, kritik) kaydedildi.",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-6000",
+        "https://github.com/advisories/GHSA-9g4h-h484-3578",
+        "https://github.com/advisories/GHSA-7rx2-769v-hrwf",
+        "https://github.com/advisories/GHSA-4gv3-mc9p-5wqc"
+      ],
+      "yasatacagi_sorunlar": [
+        "İnsan, ajan ve hat kimliklerinin tek sağlayıcıda toplandığı yapıda kimlik sağlayıcıdaki tek açık tüm ajanların ve CI'ın yetkilerini devralmaya imkân verir.",
+        "Kasa yöneticisi rolü fiilen ana makine root'u anlamına gelir; ayrı görevler ilkesi bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004",
+        "N-K06-007",
+        "N-K15-004"
+      ],
+      "ornek_araclar": [
+        "HashiCorp Vault",
+        "Keycloak",
+        "OpenBao",
+        "Azure Key Vault"
+      ],
+      "erken_sinyal": "Kimlik sağlayıcı ve kasa için yeni kritik bildirim; yönetici yetkisinin geniş dağıtılması.",
+      "azaltma": "Kasa ve kimlik sağlayıcıda hızlı yama SLA'sı, yönetici rollerinin bölünmesi ve iki kişi kuralı, denetim cihazı yapılandırmasının kilitlenmesi."
+    },
+    {
+      "id": "RK-158",
+      "yetenek_sinifi": "Y-25",
+      "kalip": "Sırların ajan bağlamına, depolara ve günlüklere düşmesi",
+      "aciklama": "GitGuardian 2025 raporuna göre taranan 69,6 milyon açık deponun en az %4,61'inde sır bulundu, 2022'de sızan sırların %70'i hâlâ geçerliydi ve Copilot kullanılan açık depolarda sır sızıntısı ortalamadan %40 yüksekti. SpiceDB bağlantı dizesinin başlangıç günlüğüne yazılması (CVE-2026-40091) ve n8n'de kimlik bilgisi başlıklarının LLM düğümü yürütme verisine düz metin sızması (CVE-2026-65589) aynı kalıbın ürün örnekleridir.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.gitguardian.com/state-of-secrets-sprawl-report-2025",
+        "https://github.com/advisories/GHSA-jf4f-rr2c-9m58",
+        "https://github.com/advisories/GHSA-89gh-3pgc-v5h2"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan .env veya yapılandırma dosyasını okuduğunda sır istem bağlamına, model sağlayıcısına ve iz kayıtlarına gider; ardından commit'e yazılabilir.",
+        "Sızan sır iptal edilmezse yıllarca geçerli kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-011",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "GitGuardian",
+        "gitleaks",
+        "TruffleHog",
+        "GitHub secret scanning"
+      ],
+      "erken_sinyal": "Ajan izlerinde veya commit'lerde sır kalıbı; sır tarayıcı alarm sayısında artış.",
+      "azaltma": "Ajan çalışma alanına sır verilmemesi (çalışma zamanında vekil üzerinden enjeksiyon), ön commit ve iz maskeleme, sızan sırların otomatik iptali."
+    },
+    {
+      "id": "RK-159",
+      "yetenek_sinifi": "Y-25",
+      "kalip": "Aşırı yetkili uzun ömürlü token",
+      "aciklama": "Microsoft yapay zekâ araştırmacılarının paylaştığı aşırı yetkili SAS token'ı 38 TB iç veriyi açığa çıkardı (Wiz, 2023); Amazon Q eklentisi olayında uygunsuz kapsamlı GitHub token'ı kötü kod eklemeye imkân verdi (AWS-2025-015); Ultralytics saldırısının ikinci turu iptal edilmemiş PyPI token'ıyla yapıldı.",
+      "risk_turleri": [
+        "RT-16",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.wiz.io/blog/38-terabytes-of-private-data-accidentally-exposed-by-microsoft-ai-researchers",
+        "https://aws.amazon.com/security/security-bulletins/AWS-2025-015/",
+        "https://blog.pypi.org/posts/2024-12-11-ultralytics-attack-analysis/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlara verilen kişisel erişim token'ları veya hat token'ları görev bitince iptal edilmezse yetim makine kimlikleri birikir.",
+        "Ajanın üretim kimliği taşıması, istem enjeksiyonunu doğrudan üretim olayına dönüştürür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-003",
+        "N-K15-004",
+        "N-K13-012",
+        "N-K26-002"
+      ],
+      "ornek_araclar": [
+        "GitHub PAT",
+        "Bulut erişim anahtarları",
+        "PyPI/npm token'ları",
+        "SAS token"
+      ],
+      "erken_sinyal": "Son kullanım tarihi olmayan veya 90 günden eski token'lar; kullanılmayan kimliklerin sayısı.",
+      "azaltma": "OIDC tabanlı kısa ömürlü göreve özel kimlik, token envanteri ve otomatik süre sonu, ajan ile üretim kimliklerinin ayrılması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 12,
+    "orta": 65,
+    "dusuk": 91,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 16,
+    "RT-03": 15,
+    "RT-08": 12,
+    "RT-14": 8,
+    "RT-13": 7,
+    "RT-07": 6,
+    "RT-11": 6,
+    "RT-10": 6,
+    "RT-16": 5,
+    "RT-06": 4,
+    "RT-04": 4,
+    "RT-15": 3,
+    "RT-12": 2,
+    "RT-02": 2,
+    "RT-05": 1
+  }
+}

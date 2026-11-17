@@ -1,0 +1,147 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-59",
+    "ad": "Çalışan verisi için amaç bağlı erişim ve toplulaştırma",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-59",
+      "kalip": "Ajan izlerinin amaç kaymasıyla çalışan profiline dönüşmesi",
+      "aciklama": "Hamburg veri koruma otoritesi, çalışanların sağlık, aile ve inanç bilgilerini içeren kayıtlarla profil oluşturup istihdam kararlarında kullandığı için H&M'ye 35,3 milyon avro ceza verdi (Ekim 2020); kayıtlar bir yapılandırma hatasıyla şirket içinde birkaç saat erişilebilir olunca ortaya çıktı.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-04"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://edpb.europa.eu/news/national-news/2020/hamburg-commissioner-fines-hm-353-million-euro-data-protection-violations_en"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan oturum kayıtları (istemler, sohbetler) çalışanın kişisel durumuna dair ifadeler içerir; yöneticiler bu kayıtlara hata ayıklama gerekçesiyle erişip performans veya disiplin sürecinde kullanır.",
+        "Yanlış yapılandırılmış iz deposu geniş okuma yetkisiyle tüm şirkete açılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K29-009",
+        "N-K22-009"
+      ],
+      "ornek_araclar": [
+        "LangSmith",
+        "Langfuse",
+        "Datadog LLM Observability",
+        "Arize Phoenix",
+        "Helicone"
+      ],
+      "erken_sinyal": "İz deposuna İK veya yönetici hesaplarından erişim; erişim kayıtlarında amaç alanının boş olması.",
+      "azaltma": "Amaç etiketli ve kayıtlı erişim (acil erişim dahil) ile düzenli erişim denetimi; istem içeriğinde kişisel veri maskeleme; kısa saklama süresi; rol bazlı erişim.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Hamburg DPA'nın Ekim 2020 cezası (35,3 milyon avro; sağlık, aile ve inanç verisi; istihdam kararları için profil; Ekim 2019'daki yapılandırma hatasıyla birkaç saat şirket içinde erişilebilir olması) ikincil kaynaklarla doğrulandı. Verilen EDPB bağlantısı artık haber listesine yönleniyor.",
+        "kaynak": [
+          "https://edpb.europa.eu/news/national-news/2020/hamburg-commissioner-fines-hm-353-million-euro-data-protection-violations_en",
+          "https://www.gdprregister.eu/articles/hm-gdpr-fine/"
+        ]
+      },
+      "id": "RK-038"
+    },
+    {
+      "yetenek_sinifi": "Y-59",
+      "kalip": "Toplulaştırılmış verinin çok boyutlu sorgularla yeniden kimliklendirilmesi",
+      "aciklama": "Narayanan ve Shmatikov (IEEE S&P 2008), az miktarda arka plan bilgisiyle 'anonim' Netflix veri setinde bireyleri tanımlamanın mümkün olduğunu gösterdi; seyrek ve yüksek boyutlu davranış verisi bu tür saldırılara özellikle açıktır.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/cs/0610105"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip düzeyi panolar zaman aralığı, depo, dil ve saat filtreleriyle daraltılınca tek bir kişinin ajan kullanımı ve hata oranı çıkarılır.",
+        "İki farklı toplulaştırmanın farkı alınarak kişi değeri hesaplanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K23-015",
+        "N-K32-002"
+      ],
+      "ornek_araclar": [
+        "GitHub Copilot usage metrics",
+        "Cursor Analytics",
+        "LinearB",
+        "Jellyfish"
+      ],
+      "erken_sinyal": "Pano sorgularında küçük grup sonuçları; aynı kullanıcının ardışık daraltıcı sorguları.",
+      "azaltma": "En az grup eşiği ve fark bastırma; sorgu bütçesi; gerekirse diferansiyel gizlilik; ham olay verisine doğrudan erişimi kapatmak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "arXiv cs/0610105 (IEEE S&P 2008'de 'Robust De-anonymization of Large Sparse Datasets' adıyla yayımlanan çalışma), az arka plan bilgisiyle Netflix Prize verisinde kişilerin tanımlanabildiğini gösteriyor.",
+        "kaynak": [
+          "https://arxiv.org/abs/cs/0610105"
+        ]
+      },
+      "id": "RK-039"
+    },
+    {
+      "yetenek_sinifi": "Y-59",
+      "kalip": "Çalışan telemetrisinin yurt dışındaki SaaS'a aktarılması",
+      "aciklama": "KVKK md. 9, 7499 sayılı Kanunla 1 Haziran 2024'ten itibaren yeterlilik kararı, uygun güvenceler (standart sözleşme, bağlayıcı şirket kuralları) ve istisnai haller düzenine geçti; standart sözleşmenin imzadan sonra 5 iş günü içinde Kurul'a bildirilmemesi idari para cezasına bağlandı.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-04"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.kvkk.gov.tr/Icerik/8142/Kisisel-Verilerin-Yurt-Disina-Aktarilmasi-Rehberi",
+        "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan gözlemlenebilirlik ve kod asistanı analitiği ABD bölgesindeki SaaS'ta tutulur; standart sözleşme imzalanıp bildirilmezse her aktarım hukuka aykırı olur.",
+        "Kurum kamu veya kritik altyapı kapsamındaysa sektörel veri yerelliği kuralları ek kısıt getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K29-009",
+        "N-K22-005"
+      ],
+      "ornek_araclar": [
+        "LangSmith",
+        "Datadog",
+        "GitHub Copilot",
+        "Helicone"
+      ],
+      "erken_sinyal": "Tedarikçi envanterinde veri merkezi Türkiye dışında olan gözlemlenebilirlik veya analitik aracı; standart sözleşme kaydı eksikliği.",
+      "azaltma": "Yurt içi barındırma ya da kendi sunucusunda çalışan seçenekler; aktarım envanteri; standart sözleşme ve bildirim takibi; kişi tanımlayıcılarının kaynağında takma adlandırılması.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Güncel md. 9 (7499/34) yeterlilik kararı, uygun güvenceler ve arızi hal düzenini içeriyor. md. 9/5 standart sözleşmenin 5 iş günü içinde bildirilmesini, md. 18/1-d de bildirmemeye 50.000–1.000.000 TL idari para cezasını öngörüyor. Yürürlük tarihi 1 Haziran 2024.",
+        "kaynak": [
+          "https://www.kvkk.gov.tr/Icerik/8142/Kisisel-Verilerin-Yurt-Disina-Aktarilmasi-Rehberi",
+          "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+        ]
+      },
+      "id": "RK-040"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 8,
+    "yuksek": 2,
+    "dusuk": 13
+  },
+  "sinif_bulgu_turleri": {
+    "RT-17": 4,
+    "RT-08": 3,
+    "RT-06": 3,
+    "RT-01": 1,
+    "RT-13": 1,
+    "RT-14": 1
+  }
+}

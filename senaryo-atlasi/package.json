@@ -1,0 +1,38 @@
+{
+  "name": "senaryo-atlasi",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Yeni fabrika için senaryo, ECA kuralı, diyagram ve belge merkezi. Tek HTML dosyası üretir.",
+  "scripts": {
+    "veri": "node scripts/veri-uret.mjs && python3 scripts/kanit-uret.py",
+    "dev": "npm run veri && vite",
+    "denetle": "tsc --noEmit",
+    "build": "npm run veri && tsc --noEmit && vite build && node scripts/sonrasi.mjs",
+    "build:offline": "tsc --noEmit && vite build && node scripts/sonrasi.mjs",
+    "dev:offline": "vite",
+    "test:contracts": "node -e \"require('esbuild').buildSync({entryPoints:['scripts/contracts-test.ts'],bundle:true,platform:'node',format:'cjs',outfile:'audit/contracts-test.cjs'})\" && node audit/contracts-test.cjs",
+    "export:data": "node -e \"require('esbuild').buildSync({entryPoints:['scripts/export-data.ts'],bundle:true,platform:'node',format:'cjs',outfile:'audit/export-data.cjs'})\" && node audit/export-data.cjs"
+  },
+  "dependencies": {
+    "@mantine/core": "8.3.18",
+    "@mantine/hooks": "8.3.18",
+    "@mantine/spotlight": "8.3.18",
+    "@tabler/icons-react": "3.48.0",
+    "dompurify": "3.4.16",
+    "echarts": "6.1.0",
+    "marked": "16.4.2",
+    "mermaid": "11.17.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "sass": "1.105.0",
+    "typescript": "5.9.3",
+    "vite": "7.3.6",
+    "vite-plugin-singlefile": "2.3.3"
+  }
+}

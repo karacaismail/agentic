@@ -1,0 +1,432 @@
+{
+  "task_id": "CONT-Q-S0038-e85d2564-A1",
+  "root_scope": "Q-S0038-e85d2564",
+  "source": "agents/17Agentic.pdf",
+  "sha256": "a924b32b7aa920995f656daef767bd20f6efcb938f8d9ecd39d82234a0618e45",
+  "manifest": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/a924b32b7aa920995f656daef767bd20f6efcb938f8d9ecd39d82234a0618e45/v3/manifest-29ef3450c9a0a7b60a63.json",
+  "result_state": "submitted_for_coordinator_review",
+  "stage_status": {
+    "reading": "complete_for_text_layer",
+    "semantic_analysis": "partial",
+    "visual_verification": "not_run",
+    "integrity_assessment": "not_run"
+  },
+  "preconditions": [
+    {
+      "item_id": "PRE-01",
+      "observation": "Manifestte \"overview\" veya \"image\" alanı yok. Atanan üç birimde \"visual_region\" değeri false.",
+      "interpretation": "Sözleşme önce genel görünüm görselinin okunmasını istiyor. Bu görevde okunacak görsel yok. Bu yüzden metin katmanı görsel kanıt sayılmadı.",
+      "evidence": "manifest-29ef3450c9a0a7b60a63.json: \"prepared_scope\": \"listed_units_only\", \"complete\": false, \"review_state\": \"unverified\". Grep \"overview|image\" sonucu: eşleşme yok."
+    },
+    {
+      "item_id": "PRE-02",
+      "observation": "Sayfa 1 çok büyük bir tuval. x değeri yaklaşık 620 ile 63113 arasında, y değeri 560 ile 15790 arasında değişiyor.",
+      "interpretation": "Bu sayfa büyük olasılıkla bir Figma veya pano çıktısı. Okuma sırası görsel sırayla aynı değil. Kayıtlar farklı bölgeler arasında atlıyor.",
+      "evidence": "s031 index 15000 bbox x=63003, index 15154 bbox x=4947. s032 index 15554 bbox y=8724. s033 index 16071 bbox x=21116."
+    }
+  ],
+  "unit_reviews": [
+    {
+      "unit_id": "p0001-text-exterior-s031",
+      "source_locator": "agents/17Agentic.pdf, sayfa 1, parent p0001-text-exterior, words[15000..15500), dosya p0001-text-exterior-s031.json",
+      "status": "read",
+      "read_ranges": "15000-15499 dahil, toplam 500 kayıt. Her kaydın index, text ve bbox alanı okundu.",
+      "items": [
+        {
+          "item_id": "S031-01",
+          "observation": "15000 \"korunur\" ve 15001 \".\" kayıtları x≈63003 y≈560 konumunda. Önceki cümlenin devamı gibi görünüyor.",
+          "interpretation": "Bu cümle s030 parçasında başlıyor. Cümlenin başı bu görevin kapsamında değil.",
+          "evidence": "index 15000-15001, bbox [63003.18,560.18,63075.31,576.18]"
+        },
+        {
+          "item_id": "S031-02",
+          "observation": "x≈67644-67966, y 574-686 aralığında kısa bir not sütunu var. Kayıtlar şunlar: \"kararının bağlamı\", \"önceki inceleme. Bu\", \"araştırmada pano\", \"değiştirilmedi.\". Sağ sütunda \"board\", \"nHDeeHEMi\", \"A9eH 4 Agentic\", \"irstdevelopment\", \"nodeid\" var.",
+          "interpretation": "Bu bölge bir karar notu ile etiket sütununa benziyor. \"irstdevelopment\" büyük olasılıkla \"firstdevelopment\" sözcüğü. \"nHDeeHEMi\" ve \"A9eH\" çözülemedi.",
+          "evidence": "index 15002-15004, 15007-15010, 15017-15021, 15052-15053, 15066"
+        },
+        {
+          "item_id": "S031-03",
+          "observation": "15005-15006 \"Ali Bora\" x≈12276 y≈591 konumunda. Bu kayıt diğer metinlerden ayrı duruyor.",
+          "interpretation": "Bu kayıt bir kişi adı etiketi. Büyük olasılıkla yorum veya yazar etiketi. Hangi kutuya ait olduğu görselden doğrulanmadı.",
+          "evidence": "index 15005-15006, bbox [12276.17,591.47,12343.32,610.17]"
+        },
+        {
+          "item_id": "S031-04",
+          "observation": "x≈59880-60866, y 610-866 aralığında süreç anlatımı var. Örnek metin: \"[Uz]manlar nasıl çağrılır\", \"Planlama A[j]anı görev ve etkilenen dosyalara bakarak gerekli [uz]manları belirler.\", \"Openode oturumlarını başlatır\", \"Her [uz]mana görev ilgili kod, pro[j]e kuralları ve önceki bulgular verilir.\"",
+          "interpretation": "Planlama ajanı gerekli uzmanları seçiyor. Kodlama işleri \"OpenCode\" oturumlarında çalışıyor. Her uzmana görev bağlamı veriliyor. Uzman bulgusunu ve kanıtını geri veriyor.",
+          "evidence": "index 15011-15039, 15054-15056, 15078-15102"
+        },
+        {
+          "item_id": "S031-05",
+          "observation": "15103-15132 kayıtlarında üç kural var: \"Gerekmeyen [uz]man çalıştırılma[z].\", \"Bağımlılıklar uygunsa gerekli işler birlikte çalışır.\", \"[Aj]anlar ayrı pro[j]e kopyaları kullanır, ortak dosyaları aynı anda değiştirme[z]. Kritik eksik varsa akış bekler, koşullar sağlanınca devam eder.\"",
+          "interpretation": "Bunlar paralel çalışma ve bekleme kurallarıdır. \"Ayrı proje kopyaları\" büyük olasılıkla Git worktree anlamına geliyor. Bekleme koşulunu kimin kontrol ettiği metinde yazmıyor.",
+          "evidence": "index 15103-15132, y 778-818"
+        },
+        {
+          "item_id": "S031-06",
+          "observation": "15133-15145: \"Pro[j]e kuralları (rules/.master.agent[...]) ... görev başında geçerli kuralları sağlar.\"",
+          "interpretation": "Görev başında kural dosyası yükleniyor. Dosya adının bir parçası metin katmanında kayıp.",
+          "evidence": "index 15133-15145, y 850-866"
+        },
+        {
+          "item_id": "S031-07",
+          "observation": "x≈61082-61633, y 645-709 aralığında şu metin var: \"Birleştir test et ve bağımsı[z] incele\", \"Dagu gerekli kodlama işlerini bekler.\", \"Değişiklikler birleştirilir, araçlar gerçek ekran/sunucu testlerini ve ilgili eski testleri çalıştırır. Kontrol ayrı oturumlarda Kimi K[...] ..4 A9 B.\"",
+          "interpretation": "Birleştirmeden sonra test çalışıyor ve bağımsız inceleme yapılıyor. \"Dagu\" bir ajan veya araç adı olabilir. Bu ad metinden kesinleşmiyor. \"Kimi K\" bir model adının başı olabilir. \"..4 A9 B.\" çözülemedi.",
+          "evidence": "index 15040-15051, 15057-15077"
+        },
+        {
+          "item_id": "S031-08",
+          "observation": "x≈61740-62149, y 938-1026 aralığında uzman eşlemesi var: \"[İ]lgili a[j]ana geri ver\", \"Ekran [h]atası → [F]rontend Kodlama A[j]anı\", \"Sunucu [h]atası → Backend Kodlama A[j]anı\", \"[T]est çalıştırma [h]atası → [T]est A[j]anı\", \"Beklenen sonuç belirsi[z] → Planlama A[j]anı\", \"Düzeltmeden sonra kontrolleri tekrarla.\"",
+          "interpretation": "Bu bir hata türüne göre yönlendirme tablosu. Her hata türü bir sorumlu ajana gidiyor. Ok başı ve kutu sınırı görselden doğrulanmadı.",
+          "evidence": "index 15146-15153, 15166-15193"
+        },
+        {
+          "item_id": "S031-09",
+          "observation": "x≈61250-61330, y 951-1039 aralığında \"Bu küçük iş [T]est doğru ve kontroller başarılı mı\" sorusu var. x≈61601 y≈1144 konumunda \"Hayır\", x≈61278 y≈1244 konumunda \"Evet\" yazıyor.",
+          "interpretation": "Bu bir karar düğmesi. Hayır ve Evet etiketleri dal etiketleri olabilir. Dalların nereye gittiği metin katmanında yok.",
+          "evidence": "index 15163-15165, 15175-15176, 15185, 15194-15196, 15222"
+        },
+        {
+          "item_id": "S031-10",
+          "observation": "15223-15260: \"Birleştirme ve tamamlamadan önce\", \"gitscenario.agent GM[...]\", \"Ayrı çalışma kopyaları a[y]ırlanırken ve değişiklikler birleştirilirken çalışır, çatışma çö[z]ümünü yönetir, birleştirilmiş kod yeniden [t]est[...]\", \"Kontrol aşamasına gider\". Ayrıca \"Dagu kalan işleri ve son kontrolleri tamamla\", \"Kalan işlerde [T]est Kodlama Kontrol tekrarlanır\".",
+          "interpretation": "Git ajanı çalışma kopyalarını ve birleştirme çatışmasını yönetiyor. Birleşmiş kod yeniden test ediliyor. \"GM\" kısaltması çözülemedi.",
+          "evidence": "index 15223-15260, 15274"
+        },
+        {
+          "item_id": "S031-11",
+          "observation": "15275-15313: \"documantation.agent [C]ommand A[...]\", \"Kullanım, API, kurulum veya işletim bilgisi değişirse belgeleri kodla uyumlu günceller. Kontrol A[j]anına güncel belgeleri verir.\", \"[T]amamlama kuralı\", \"Kodu sadeleştirdikten ve parçaları birleştirdikte[n] sonra testler yeniden çalışır\", \"Hepsi bitince belgeler ve birleştirme tamamlanır, son testler çalışır.\"",
+          "interpretation": "Belge ajanı kod değişince belgeleri güncelliyor. \"documantation\" yazımı kaynakta hatalı olabilir. Ya da metin katmanında bozulmuş olabilir.",
+          "evidence": "index 15275-15313"
+        },
+        {
+          "item_id": "S031-12",
+          "observation": "15314-15354: \"gapanalysis.agent Kimi K\", \"Bitişten önce kabul koşullarını kod, test ve belgelerle karşılaştırır, eksikleri ilgili a[j]ana verir. Açık kalmayınca son kontrole geçilir\", \"tek ... başına görevi Done yapma.\", \"Dagu denemeleri ve bekleyen işleri i[z]ler\", \"[Ç]ö[z]ülemeyen sorun gerekçesiyle Plane'e yazılır.\"",
+          "interpretation": "Boşluk analizi ajanı kabul koşullarını denetliyor. Bir ajanın görevi tek başına \"Done\" yapması yasak. Bu kural iki satıra bölünmüş. 15343 \"tek\" y=1560 konumunda, 15350 \"başına\" y=1584 konumunda. Çözülemeyen sorun Plane'e yazılıyor.",
+          "evidence": "index 15314-15354"
+        },
+        {
+          "item_id": "S031-13",
+          "observation": "15355-15360: \"Bütün işler ve son kontroller tamam\". 15411-15413 ve 15421-15424: \"Sonucu Plane'e ya[z]\", \"Rapor A[j]anı [...]\". 15442-15450: \"[T]amamlanan iş, değişiklik[...]P[R] ve test kanıtları kaydedilir.\"",
+          "interpretation": "Bu, akışın son adımıdır. Rapor ajanı sonucu Plane'e yazıyor. Plane yazımı canlı bir entegrasyon olarak kanıtlanmadı. Bu yalnız tasarım metni.",
+          "evidence": "index 15355-15360, 15411-15413, 15421-15424, 15442-15450"
+        },
+        {
+          "item_id": "S031-14",
+          "observation": "x≈62151-63113, y 1713-1921 aralığında örnek senaryo var: \"[Ö]rnek: [Y]önetici stok güncellesin, müşteri güncelleyemesin\", \"Router: [h]em ekran [h]em sunucu\", \"Autori[z]ation edge-case [y]etki ve [h]atalı stok senaryoları\", \"[T]est A[j]anı bu senaryoların testleri\", \"[F]rontend ve Backend ortak bağlantı kurallarıyla paralel geliştirme\", \"Birleştirme, gerçek ekran/sunucu testleri, belge ve eksik kontrolü\", \"[Y]eni teknoloji önerilmese teknoloji uzmanı [y]a [d]a sorunu yoksa performans uzmanı çalışma[z]. Her görevde uzmanın birden çalışması gerekme[z].\"",
+          "interpretation": "Bu, bir yetki senaryosu üzerinden uzman seçimini anlatıyor. Gereksiz uzmanın çalışmaması kuralı S031-05 ile tutarlı.",
+          "evidence": "index 15361-15366, 15378-15410, 15425-15446"
+        },
+        {
+          "item_id": "S031-15",
+          "observation": "Üç paralel sütun var. Hepsi y=942 konumunda \"Görev context'ini al\" ile başlıyor. Sütunların x değerleri 4947, 8531 ve 12115.",
+          "interpretation": "Bunlar üç ayrı karar akışının başlangıç kutuları. Kutuların sınırları ve okları görselden doğrulanmadı.",
+          "evidence": "index 15154-15162"
+        },
+        {
+          "item_id": "S031-16",
+          "observation": "Birinci sütunda x≈4650-6000 aralığında şu kayıtlar var: \"Olgunluk seviyesini belirle\" (y1179), \"[P]ro[j]e [h]edefi + task se[tt]en\" (y1219), \"Kapsamı seviyeye göre planla\" (y1442), \"Po MP PM Enterprise\" (y1723), \"Seviyeye uygun uygula\" (y1994), \"[F]azla veya eksik karmaşıklık yok\" (y2034), \"Evet\" (y2146), \"Seviye dışı kapsam var mı?\" (y2259), \"Blocker raporla\" (x5766 y2259), \"döngü doldu\" (y2279), \"max 2 döngü\" (y2299), \"ka[p]sam seviyeyle uyumsuz\" (x5744 y2299), \"Hayır\" (y2411).",
+          "interpretation": "Bu, olgunluk seviyesine göre kapsam akışı. Seviye etiketleri \"Po\", \"MP\", \"PM\" ve \"Enterprise\". \"Po\" büyük olasılıkla \"PoC\" anlamına geliyor. \"PM\" belirsiz, belki \"MVP\" sözcüğünün bozulmuş hali. Tekrar sınırı en çok 2 döngü. Sınır dolunca \"Blocker raporla\" adımına gidiliyor. Bu bağlantı yalnız konumdan çıkarıldı.",
+          "evidence": "index 15197-15199, 15207-15211, 15261-15264, 15367-15370, 15451-15458, 15459, 15478-15492, 15495"
+        },
+        {
+          "item_id": "S031-17",
+          "observation": "İkinci sütunda x≈8330-8900 aralığında şu kayıtlar var: \"[Y]eni teknolo[j]i talebini incele\" (y1179), \"[F]rame[w]ork · [p]ackage · [p]attern\" (y1219), \"[C]odebase ile uyumu kontrol et\" (y1442), \"Mevcut çö[z]üm / [C]odebase uyumu\" (y1724), \"[Y]eterlilik anali[z]i / Gerekçe dokümanı\" (y1874), \"Karar kriterlerini uygula\" (y2144), \"çözülmüş [p]robleme 2. teknoloji yok\" (y2184), \"Evet\" (x8333 y2296), \"Gerekçe veya uyum eksik mi?\" (y2409).",
+          "interpretation": "Bu, yeni teknoloji talebinin kabul akışı. Kural şu: Aynı sorun için ikinci bir teknoloji eklenmez.",
+          "evidence": "index 15200-15203, 15212-15216, 15265-15269, 15371-15374, 15414-15417, 15460-15471, 15493, 15496-15499"
+        },
+        {
+          "item_id": "S031-18",
+          "observation": "Üçüncü sütunda x≈11900-12570 aralığında şu kayıtlar var: \"Görev tipini belirle\" (y1179), \"değişen dosyalar + task se[t]\" (y1219), \"[İ]lgili rule setini seç\" (y1442), \"[F]rontend Backend [F]ullstack\" (y1724), \"Database Inrastructure Ortak\" (y1874), \"Rule setlerini akti[f] e[t]\" (y2144), \"· [p]ay · mobile [s]e[c]urity ·\" (y2184), \"Evet\" (x11917 y2296).",
+          "interpretation": "Bu, görev türüne göre kural seti seçme akışı. \"pay\" sözcüğü ödeme, \"mobile\" mobil, \"security\" güvenlik kural setleri olabilir.",
+          "evidence": "index 15204-15206, 15217-15221, 15270-15273, 15375-15377, 15418-15420, 15463-15466, 15472-15477, 15494"
+        },
+        {
+          "item_id": "S031-19",
+          "observation": "Metin katmanında sistematik harf kaybı var. Kaybolan harfler f, j, z, h, T, F, C, Y, İ, Ç ve bazen p ile ğ. Örnekler: \"Aanı\" (Ajanı), \"umanı\" (uzmanı), \"proe\" (proje), \"teknoloi\" (teknoloji), \"est\" (Test), \"rontend\" (Frontend), \"odebase\" (Codebase), \"deişen\" (değişen).",
+          "interpretation": "Bu kayıp büyük olasılıkla yazı tipi eşleme sorunundan geliyor. Bir sözcüğün doğru okunduğu görsel doğrulama olmadan kesin sayılmaz.",
+          "evidence": "Örnek indexler: 15023, 15030, 15083, 15201, 15099, 15265, 15217"
+        }
+      ],
+      "remaining": [
+        "Görsel doğrulama yapılmadı. Kutu sınırları, oklar ve ok yönleri bilinmiyor.",
+        "15000-15001 cümlesinin başı s030 parçasında. Bu bağlantı açık iş olarak kaldı.",
+        "15496-15499 \"Gerekçe veya uyum eksik mi?\" sorusu s032 15500 \"mi?\" kaydıyla tamamlanıyor. Bu birleştirme yalnız sıra ve bbox ile yapıldı.",
+        "Çözülemeyen kayıtlar: 15010 \"nHDeeHEMi\", 15019 \"A9eH\", 15075-15077 \"..4 A9 B.\", 15229 \"GM\", 15033/15046/15231/15318 \"Dagu\".",
+        "Evet/Hayır etiketlerinin bağlı olduğu dallar bilinmiyor: 15196, 15222, 15459, 15493, 15494, 15495."
+      ]
+    },
+    {
+      "unit_id": "p0001-text-exterior-s032",
+      "source_locator": "agents/17Agentic.pdf, sayfa 1, parent p0001-text-exterior, words[15500..16000), dosya p0001-text-exterior-s032.json",
+      "status": "read",
+      "read_ranges": "15500-15999 dahil, toplam 500 kayıt. Her kaydın index, text ve bbox alanı okundu.",
+      "items": [
+        {
+          "item_id": "S032-01",
+          "observation": "İkinci sütunun devamı şöyle: 15500 \"mi?\", \"Ekleme reddedili[r]\" (x9334 y2409), \"döngü doldu\" (x9012 y2429), \"max 2 döngü\" (x8605 y2449), \"me[v]cut çözümle devam et\" (x9333 y2449), \"Hayır\" (x8641 y2561), \"Onayla ve belgele\" (y2674), \"[d]e[p]endency gerekçesiyle eklenir\" (y2714).",
+          "interpretation": "Gerekçe veya uyum eksikse ekleme reddediliyor ve mevcut çözümle devam ediliyor. Eksik yoksa teklif onaylanıyor, belgeleniyor ve bağımlılık gerekçesiyle ekleniyor. Bu yorum etiket konumlarından çıkarıldı.",
+          "evidence": "index 15500-15502, 15510-15511, 15514-15520, 15539, 15541-15549"
+        },
+        {
+          "item_id": "S032-02",
+          "observation": "Üçüncü sütunun devamı şöyle: \"[K]urallar arası çelişki var mı?\" (x12054 y2409), \"Blocker raporla\" (x12934 y2409), \"döngü doldu\" (x12596 y2429), \"[F]ullstack sözleşmesi · max 2 döngü\" (x12089 y2449), \"sözleşme uyuşmazlığı · durur\" (x12904 y2449), \"Hayır\" (x12225 y2561), \"Router raporu oluştu\" (y2674), \"akti[f] kurallarla [c]oding başlar\" (y2714).",
+          "interpretation": "Kurallar çelişirse en çok 2 döngü deneniyor. Sınır dolunca Blocker raporlanıyor. Sözleşme uyuşmazlığında akış duruyor. Çelişki yoksa Router raporu oluşuyor ve kodlama başlıyor.",
+          "evidence": "index 15503-15509, 15512-15513, 15521-15530, 15540, 15544-15546, 15550-15553"
+        },
+        {
+          "item_id": "S032-03",
+          "observation": "Birinci sütunun sonunda şu kayıtlar var: \"[T]eknik borcu işaretle\" (y2524), \"sonraki seviyeye geçiş notuyla ra[p]orla\" (y2564).",
+          "interpretation": "Seviye dışı kapsam yoksa teknik borç işaretleniyor. Sonra sonraki seviyeye geçiş notuyla raporlanıyor. Dalın yönü doğrulanmadı.",
+          "evidence": "index 15531-15538"
+        },
+        {
+          "item_id": "S032-04",
+          "observation": "Bölüm başlıkları x≈2840-3290 aralığında: \"AI agentları. Solid AG[...]\" (y8724), \"A[...] Security vb. Agentlar\" (y8784), \"[İ]smail Karaca\" (y8917), \"[T]DD [F]irst [T]est süreci\" (y9481-9581).",
+          "interpretation": "Sayfada yeni bir bölüm başlıyor. Konu TDD (önce test yazma) süreci. Başlığın altında bir kişi adı etiketi var.",
+          "evidence": "index 15554-15567"
+        },
+        {
+          "item_id": "S032-05",
+          "observation": "Sol kenarda x≈620-900 aralığında dikey etiketler var: \"Agent\" (y9891), \"Standart Süreç\" (y10165), \"Error\" (y10410), \"Karar\" (y10673), \"Döngü\" (y10924), \"ADR\" (y11682), \"MD\" (y11994), \"SKI[LL] S\" (y12266), \"MP\" (y12538), \"AGE[NT] S\" (y12810).",
+          "interpretation": "Bunlar bir satır başlıkları ızgarası veya gezinme menüsü. Aynı etiketler s033 içinde y≈15177 konumunda yeniden başlıyor. Bu, ikinci bir pano satırına işaret ediyor.",
+          "evidence": "index 15568-15571, 15585, 15597, 15750, 15796, 15799-15803"
+        },
+        {
+          "item_id": "S032-06",
+          "observation": "x≈6037-6708, y 10480-10864 aralığında şu kayıtlar var: \"[T]estler development öncesinde yalnı[z]ca ya[z]ılıp çalıştırılıp beklenen nedenle başarısı[z] olduğu doğrulanır\", \"[T]estleri ya[z]\", \"[T]estleri çalıştır RED\", \"Development\", \"[T]estleri tekrar çalıştır GREE[N]\", \"Re[f]actor\", \"Regresyon test\".",
+          "interpretation": "Bu, TDD döngüsünün adımlarıdır: test yaz, RED, geliştir, GREEN, refactor, regresyon. Adımların ok ile bağlı olduğu görselden doğrulanmadı.",
+          "evidence": "index 15572-15596"
+        },
+        {
+          "item_id": "S032-07",
+          "observation": "x≈6040-6708, y 11152-11644 aralığında numaralı kurallar var. Numaraların çoğu \".\" olarak kalmış. Yalnız \"4.\" (15627) ve \"9.\" (15699) okunuyor. Kurallar: kabul kriterine karşılık gelen otomatik testler yazılır. Her kabul kriteri en a[z] bir testle eşleştirilir. Testler development öncesinde çalıştırılır. Yeni testlerin beklenen nedenle başarısız olduğu doğrulanır (RED). RED kanıtı olmadan Coding Agent çalışama[z]. Coding Agent testleri geçirecek minimum kodu geliştirir. Yeni testler ve mevcut regresyon testleri yeniden çalıştırılır. [T]üm testler geçmeden görev tamamlanama[z] (GREEN). Coding Agent testleri sileme[z], atlayama[z] veya [z]ayıflatama[z]. \"En [f]a[z]la düzeltme döngüsü sonunda [h]âlâ başarısı[z]sa görev B[L]OCKED olur\".",
+          "interpretation": "Bu, TDD'nin zorunlu kurallarıdır. Son kuralda en fazla düzeltme sayısı yazmıyor. Sayı kaynakta hiç olmayabilir. Ya da metin katmanında kaybolmuş olabilir. Karar akışlarında \"max 2 döngü\" geçiyor. TDD kuralı için sayı doğrulanmadı.",
+          "evidence": "index 15598-15633, 15645-15647, 15653-15679, 15689-15705, 15720-15742"
+        },
+        {
+          "item_id": "S032-08",
+          "observation": "x≈7361-7753, y 11299-11771 aralığında sorular var: \"ingilice [k]a[y]naklardan araştırın çünkü c[h]atgpt internet yorumlarından beslenir ama [Cl]aude [i]se akademik veriden beslenir.\", \"[T]DD nasıl olmalı\", \"[T]DD yaklaşımı kendi iş akışlarımı[z]a nasıl implemente etmeliyi[z]\", \"[T]est [F]irst yaklaşım ile [T]DD yaklaşımın [f]arkı nedir.\", \"Ara[y]ı[z]da [T]DD anlayışını nasıl uygulamamı[z] gerektiğini tartışını[z].\", \"[T]DD sınırları neler olmalı, [h]angi çerçevenin dışına çıkmamalıyı[z]?\", \"[T]DD kapsamı neyi yapama[z], yetenekleri nelere yetme[z]?\", \"[T]DD de[z]avanta[j]ları nelerdir, nasıl elemine edilir?\". Altında \"[İ]smail Karaca\" yazıyor (y11746).",
+          "interpretation": "Bu bir araştırma talep notu. Bir model hakkındaki kaynak iddiası doğrulanmamış bir görüş. Bu iddia kanıt sayılmamalı.",
+          "evidence": "index 15634-15644, 15648-15652, 15680-15688, 15697-15698, 15706-15719, 15722-15723, 15732-15739, 15743-15749, 15751-15756, 15759-15760"
+        },
+        {
+          "item_id": "S032-09",
+          "observation": "x≈6053-6640, y 11728-12040 aralığında rol özeti var: \"[T]est Agent: [T]estleri ya[z]ar ve RED'i doğrular\", \"[C]oding Agent: Development yapar\", \"[T]est Agent: GREEN'i doğrular\", \"[Q]A Agent: Regresyon ve kabul kontrolü yapa[r]\", \"Kısacası: [Ö]nce test ya[z]ılır ve başarısı[z]lığı doğrulanır, sonra development yapılır, ardından testler geçene kadar kod düzeltilir.\"",
+          "interpretation": "Test yazan ve kod yazan roller ayrılmış. 15774 \"A\" kaydı büyük olasılıkla \"QA\" sözcüğünün kalan kısmı. Bu kesin değil.",
+          "evidence": "index 15757-15758, 15761-15798"
+        },
+        {
+          "item_id": "S032-10",
+          "observation": "Alt panoda y≈14767-15250 aralığında şu kayıtlar var: \"AI [C]oding agents ile\" (x3008), \"xxxx\" (x3060 y15149), kişi adı etiketleri \"Ali Bal\" (x10447 y14967), \"Bora Aydeğer\" (x13779), \"Metin Bektemur\" (x17054), \"Se[z]a[i]? Kılıç\" (x20571), \"A[h]met [Ş]eker\" (x7033 y15149 ve x5897 y15315).",
+          "interpretation": "Bunlar sütun sahibi veya yorum yazarı etiketleri. Adların bağlı olduğu sütunlar görselden doğrulanmadı. \"Sea\" kaydının tam adı bilinmiyor. \"xxxx\" kaynakta bir yer tutucu.",
+          "evidence": "index 15804-15809, 15824-15832, 15857-15858"
+        },
+        {
+          "item_id": "S032-11",
+          "observation": "x≈5897-6184, y 15010-15250 aralığında arayüz denetim listesi var: \"[Y]a[z]ılar: [y]a[z]ı tipi, boyutu, kalınlığı ve rengi okunaklı olmalı, başlıkla açıklama kolayca ayırt edilmelidi[r]\", \"Açıklamalarda belirli satır gibi truncate gibi işlemler kullanmalıyı[z]\".",
+          "interpretation": "Bu, arayüz okunabilirlik kuralları. Liste s033 parçasında devam ediyor.",
+          "evidence": "index 15810-15823, 15833-15835, 15837-15841"
+        },
+        {
+          "item_id": "S032-12",
+          "observation": "x≈9052-11854 aralığında Oracle tablosu başlıyor. y≈15310-15342 başlıkları şunlar: \"Kodu [Y]a[z]an ile Doğrulayan Rolleri Ayırma\" (x9055), \"Her Görev için Oracle Kaynağı Alanı [Z]orunl[u]\" (x9503), \"Belirsi[z] Gereksinimi [Ö]lçülebilir Kısıta [Ç]evirme\" (x9951), \"Oracle Provenance [L]edger / Değişme[z] Onay Kaydı\" (x10604), \"Kör Doğrulayıcı / [C]ontextIsolated [V]eri[f]ier\" (x11052), \"Otomatik Mutasyon [T]esti ile Oracle Gücünü [Ö]lçm[e]\" (x11500).",
+          "interpretation": "Altı sütunlu bir tablo görünüyor. Her sütunda \"eden\" (Neden), \"[Ö]rnek\" ve \"Ali\" etiketleri tekrar ediyor. Tablo büyük olasılıkla \"Neden / Örnek / yazar\" düzeninde. Bu düzen yalnız tekrar eden etiketlerden çıkarıldı.",
+          "evidence": "index 15842-15882, 15901-15908"
+        },
+        {
+          "item_id": "S032-13",
+          "observation": "Tablonun \"Neden\" hücreleri şunlar: \"Aynı a[j]an [h]em çö[z]ümü [h]em testi üretirse ikisi de aynı yanlış varsayımı paylaşabilir, test yeşil olur ama sistem [h]atalıdır\" (x9052). \"[T]est var diye o testin ölçtüğü şey doğru değildir, kaynağı sorgulanmamış bir beklenti sadece testte yer aldığı için doğru statüsü ka[z]anır\" (x9500). \"Mobilde dü[z]gün olsun gibi i[f]adeler AI tarafından [h]er seferinde farklı yorumlanabilir. Belirsi[z] [if]ade yanlış oracle üretir\" (x9948). \"Her test baseline veya eşik değişikliği kim ne [z]aman neden değiştirdiğini kaydeden geriye dönük silinemeyen [h]as[h] [z]incirli bir kayda ya[z]ılır\" (x10604). \"Doğrulayıcı a[j]anın prompt'una kaynak kodun di[ff]'i [v]erilme[z], sadece gereksinim metni ve üretilen çıktı (render, API cevabı) verilir\" (x11052). \"[C]I'da kod tabanına rastgele küçük [h]atalar en[j]ekte edilir. [T]est paketi bu [h]ataların en a[z] %[?]'ini yakalamıyorsa güçlü oracle statüsü verilme[z]\" (x11500).",
+          "interpretation": "Bu, oracle problemine karşı önerilen önlemler. Oracle, doğru sonucu neyin belirlediği sorusudur. Mutasyon eşiğinin yüzde değeri metin katmanında yok. 16003 \"a\" ile 16004 \"'ini\" arasında sayı kayıp. Dot bağlamında bir \"yüzde 93\" tartışması var. Bu sayıyla eşleşip eşleşmediği doğrulanmadı.",
+          "evidence": "s032 index 15909-15933, 15945-15999. s033 index 16000-16004, 16025-16051"
+        },
+        {
+          "item_id": "S032-14",
+          "observation": "x≈15910-18441, y 15369-15420 aralığında görsel test kuralları var: \"Birleşim bölgesi snaps[h]otı at boyunca renk sürekliliği assertionı\", \"rules oran aralığı assertionları mutlak px değil\", \"Her aralığın yanında onay kaydı ve [h]angi[...]\", \"Kontrast [h]esabı computed [f]ont ağırlığı/boyutu ailesi assertionı\".",
+          "interpretation": "Görsel testlerde mutlak piksel yerine oran aralığı kullanılması öneriliyor. Bu kural s033 parçasında devam ediyor.",
+          "evidence": "index 15883-15900, 15934-15944"
+        }
+      ],
+      "remaining": [
+        "Görsel doğrulama yapılmadı. TDD adımları arasındaki oklar ve tablo hücre sınırları bilinmiyor.",
+        "15999 \"paketi\" cümlesi s033 16000-16004 kayıtlarında devam ediyor. Yüzde değeri kayıp.",
+        "TDD BLOCKED kuralında en fazla döngü sayısı kayıp veya kaynakta yok (15725-15742).",
+        "Numaralı kural listesinde 4 ve 9 dışındaki numaralar okunamadı (15598, 15610, 15621, 15653, 15661, 15670, 15689, 15724).",
+        "Çözülemeyen kayıtlar: 15557 \"AG\" (WCAG olabilir), 15558 \"A\", 15774 \"A\", 15828 \"Sea\".",
+        "Kişi adı etiketlerinin hangi sütuna ait olduğu bilinmiyor."
+      ]
+    },
+    {
+      "unit_id": "p0001-text-exterior-s033",
+      "source_locator": "agents/17Agentic.pdf, sayfa 1, parent p0001-text-exterior, words[16000..16500), dosya p0001-text-exterior-s033.json",
+      "status": "read",
+      "read_ranges": "16000-16499 dahil, toplam 500 kayıt. Her kaydın index, text ve bbox alanı okundu.",
+      "items": [
+        {
+          "item_id": "S033-01",
+          "observation": "Oracle tablosunun \"Örnek\" hücreleri şunlar: \"Builder genişlik px ya[z]ar, [V]eri[f]ier bunu [C]SS'e bakarak değil ayrı bir kurala göre kontrol eder\" (x9076). \"Her görevde dört alan doldurulur: Beklenen sonuç, Kaynak, Doğrulama yöntemi, Kapsam dışı bıraktığı alan.\" (x9524). \"Mobilde dü[z]gün yerine: [3?]4 px'te yatay scroll yok, ana buton [h]er [z]aman görünür, dokunma [h]ede[f]i 44px.\" (x9972).",
+          "interpretation": "Belirsiz bir gereksinim ölçülebilir hale getiriliyor. \"4 px'te\" ifadesinin başındaki rakamlar kayıp olabilir. 16140 \"4\" ile 16141 \"px'te\" arasında yaklaşık 20 birim boşluk var. Bu boşluk kayıp rakama işaret edebilir. Gerçek genişlik değeri doğrulanmadı.",
+          "evidence": "index 16125-16141, 16183-16200, 16245-16256"
+        },
+        {
+          "item_id": "S033-02",
+          "observation": "Diğer örnek hücreler şunlar: \"[Ş]ubat önce bir görsel eşik %[?]'den %[?]'e çıkarılmışsa bu kayıt kalıcı görünür kalır, kimse gi[z]leyeme[z].\" (x10604-10967). \"[V]eri[f]ier'a bu buton px doğru mu değil, sadece bu ekran görüntüsünde ana buton dengeli görünüyor mu sorulur\" (x11052-11388). \"[C]heckout modülünde en[j]ekte edilen yapay [h]atanın sadece %[?]'u yakalanıyorsa modül düşük güven etiketiyle işaretlenir\" (x11500-11811).",
+          "interpretation": "Yüzde değerleri metin katmanında hiç yok. 16149 \"'den\", 16150 \"'e\" ve 16218 \"'u\" kayıtları sayı eklerinin kaldığını gösteriyor. \"ay önce\" ifadesinin başı da kayıp.",
+          "evidence": "index 16144-16161, 16205-16220, 16257-16266, 16298-16299"
+        },
+        {
+          "item_id": "S033-03",
+          "observation": "x≈12669-12854 aralığında şu kayıtlar var: \"A[j]anın [h]em kodu [h]em testi aynı bağlamdan üretmesine i[z]in verme.\", \"[T]DD yaklaşıma aykırı mı?\", \"[İ]smai[l]\", \"Hayır tam tersine [T]DD'nin ö[z]ünü koruyor, [h]atta [z]orluyor\".",
+          "interpretation": "Bu, tablo için bir yorum notu. Rol ayrımının TDD ile çelişmediği söyleniyor.",
+          "evidence": "index 16221-16224, 16267-16269, 16300-16303, 16324-16327, 16358, 16373-16375, 16398-16400, 16440-16441"
+        },
+        {
+          "item_id": "S033-04",
+          "observation": "x≈13237-15120 aralığında başka sütunlar var. Okunabilen metinler şunlar: \"Somut ya[z]ılı bir [h]ede[f] belirlemek a[j]anın iyi [h]i[s] kendi kodundan çıkartmasını engeller.\" (x13237). \"Doğru cevabını bilmesen bile, farklı girdiler arasında [h]er zaman geçerli olması gereken bir ilişkiyi kurup, o ilişkinin bozulup bozulmadığını kontrol etme yöntemi.\" (x13806). \"[B]ir sistemin tam olarak ... veya bağımsız implementasyonları birbiriyle kıyaslamak [f]ark, [h]angisinin doğru olduğunu söylemez ... şüp[h]e üretir.\" (x14373). \"[İ]nsan bir kez inceleyip kabul ediyor, bu re[f]erans sonraki değişimler için otomatik kıyaslamaya dönüşüyor.\" (x14941).",
+          "interpretation": "Bu sütunlar metamorfik test, farklı uygulamaları karşılaştırma ve onaylı referans (golden master) yöntemlerini anlatıyor. Sütun başlıkları bozuk: \".etamoitet\", \".ieanietetugu\", \".natetiaoa\", \"eitaantetua\", \"tetinggodenmate\". Son başlık \"golden master testing\" olabilir. Bu tahmin doğrulanmadı.",
+          "evidence": "index 16102-16104, 16162-16166, 16225-16231, 16270-16281, 16304-16316, 16328-16339, 16359-16368, 16376-16383, 16420-16425, 16442-16443, 16466-16467"
+        },
+        {
+          "item_id": "S033-05",
+          "observation": "Görsel test kurallarının devamı x≈15910-18441 aralığında: \"sınır pikselleri ile komşu pikseller arasındaki [f]ark eşiği aşmamalı\", \"kombinasyonlarda ölçüldüğ[ü] ya[z]ılı.\", \"birlikte. [T]ek bir oranı bütün okunabilirliğin yerine koyma\", \"[İ]kincisi snaps[h]ot eşiğinin altında kalan ince bandı yakalar.\", \"[W]CAG standartlarını ekleyeli[m]\", \"[İ]smai[l]\".",
+          "interpretation": "Snapshot eşiğinin ince hataları kaçırabileceği belirtiliyor. Bunun için ek bir kontrol öneriliyor. WCAG ekleme isteği bir kişi notu olarak duruyor.",
+          "evidence": "index 16005-16020, 16052-16056, 16077-16083, 16143, 16317-16320, 16340"
+        },
+        {
+          "item_id": "S033-06",
+          "observation": "x≈19916-21459 aralığında üç sütun var. Okunabilen metinler şunlar: \"[S]ayfanın bütünsel kompozisyonunu ve [h]iyerarşisini g[ö]remediği için, Playrig[h]t ile tüm sayfanın değil, sadece [P]itoc platformuna [ö]zgü kritik bileşenlerin ([ö]rneğin tablolar veya [f]ormlar) [h]izalamasını denetleyen dar kapsamlı g[ö]rsel regresyon testleri yazmak.\". \"[W]indsur[f] gibi araçların kendi yazdığı [h]atalı koda bakıp kendi kendini onaylamasını, öğrencinin kendi kağıdını okuması yanılgısını [ö]nlemek için, testlerdeki beklenen değerleri [h]arici bir konfigürasyon dosyasından çeken bir yapı kurmak.\". \"Arayüz mobil boyuta daraldığında [k]ritik işlemleri bozmasını engellemek adına, sadece çözünürlüğü küçülten değil, küçüldükten sonra menü içindeki butonların gerçekten tıklanabilir olduğunu [T]ypeScript ile doğrulayan senaryolar [h]azırlamak.\". Her sütunun altında \"Se[...]\" etiketi var.",
+          "interpretation": "Üç somut test önerisi var. \"itoc\" büyük olasılıkla bir ürün veya platform adı. Bu ad metinden kesinleşmiyor.",
+          "evidence": "index 16021-16024, 16057-16062, 16064-16076, 16084-16089, 16105-16120, 16167-16182, 16232-16244, 16282-16291, 16321-16323, 16344-16345"
+        },
+        {
+          "item_id": "S033-07",
+          "observation": "Arayüz denetim listesinin devamı x≈5897-8367 aralığında. \"[İ]kon ve görseller: Anlamları açık, boyutları tutarlı ve [görüntüleri] dü[z]gün mü\", \"Görseller karta sığıyor mu, sığmıyor mu bakılmalı\", \"Boşluk ve [h]i[z]alama: Bir tara[f] boş, diğer taraf sıkışık kalmamalı, öğelerin aralıkları tasarımın bütününe [uygun?]\", \"Kaydırma: Kısa içerikte gereksi[z] kaydırma olmamalı, uzun içerikte bütün gerekli bilgiye ve düğmelere [erişilmeli?]\", \"[W]AG Standartları: uı ux olar[a]k bo[z]mamalı, yani örneğin [W]C[A]G[...] göre [f]ont si[z]e [?]4 px olmalıdır ... denildiğinde orada uı [f]ont [...]\", \"yükleren görsel uı tasarımı bo[z]abilir\", \"verilen alanda\".",
+          "interpretation": "Font boyutu için tek rakam \"4\" okunuyor (16436). Önündeki rakam kayıp olabilir. Değer 14 veya 24 olabilir. Değer doğrulanmadı. Kullanıcının 14 CSS px alt sınırıyla karşılaştırma ancak görselden yapılabilir.",
+          "evidence": "index 16121-16124, 16201-16204, 16292-16294, 16346-16357, 16369-16372, 16384-16395, 16402-16404, 16426-16438, 16460-16463, 16468-16478, 16481-16483"
+        },
+        {
+          "item_id": "S033-08",
+          "observation": "Oracle tablosunun 4. satırı y≈15694-15790 aralığında: \"4 [T]autolo[j]ik [T]esti [Y]asaklama\" (x9052), \"Bilinen Kötü Sürümde Kırılıyor mu Kontrol[ü]\" (x9503), \"[T]ek Sinyale Güvenmemek / [Ç]ok Katmanlı Kontro[l]\" (x9950), \"4 Kademeli Otonomi Güven Skoru Sistem[i]\" (x10604), \"[N]iyet-Kod Eşleşme Kontrolü / [C]laim vs Di[ff]\" (x11055), \"Ortam Parmak [İ]zi ile Otomatik Baseline Geçersi[z]leştirm[e]\" (x11500).",
+          "interpretation": "Tabloda ikinci bir altılı başlık grubu var. \"4\" kaydı \"4 Kademeli\" ifadesinde sayı, ilk sütunda ise satır numarası olabilir. Hücre metinleri s034 parçasında devam ediyor.",
+          "evidence": "index 16405-16419, 16439, 16444-16459, 16479-16480"
+        },
+        {
+          "item_id": "S033-09",
+          "observation": "4. satırın ilk \"Neden\" metinleri şunlar: \"Beklenen değer kaynak koddan türetilirse test [...]\" (x9052 y15766). \"Bir test yalnı[z]ca doğru sürümde geçiyorsa o [...]\" (x9500 y15766). Sonra \"eden\" etiketleri ve 16499 \"Ali\" geliyor.",
+          "interpretation": "Bu cümleler s034 parçasında devam ediyor. Anlamları burada tamamlanamaz.",
+          "evidence": "index 16464-16465, 16484-16499"
+        },
+        {
+          "item_id": "S033-10",
+          "observation": "Sol kenar etiketleri y≈15451-15736 aralığında yeniden görünüyor: \"Standart Süreç\" (16038-16039) ve \"Error\" (16401). Kişi etiketleri \"Ali\" (y15604 ve y15636), \"Ali Bora\" (y15684 ve y15708) ve \"Sea\" (y15601 ve y15637) tekrar ediyor.",
+          "interpretation": "Pano ikinci bir satır bloğunda yeniden başlıyor. Kişi etiketleri hücre yazarlarını gösteriyor olabilir.",
+          "evidence": "index 16038-16039, 16295-16297, 16321, 16341-16345, 16396-16397, 16401, 16422-16425"
+        }
+      ],
+      "remaining": [
+        "Görsel doğrulama yapılmadı. Tablo hücre sınırları ve sütun başlıklarının doğru okunuşu bilinmiyor.",
+        "16000-16004 kayıtları s032 15999 kaydına bağlı. Yüzde değeri kayıp.",
+        "16484-16499 kayıtlarındaki cümleler s034 parçasında devam ediyor. Bu bağlantı açık iş olarak kaldı.",
+        "Sayılar kayıp veya belirsiz: 16140-16141 \"4 px'te\", 16149-16150 yüzde aralığı, 16218 \"'u\", 16436 \"4 px\".",
+        "Çözülemeyen sütun başlıkları: 16102 \".etamoitet\", 16103 \".ieanietetugu\", 16104 \".natetiaoa\", 16162 \"eitaantetua\", 16166 \"tetinggodenmate\".",
+        "Çözülemeyen adlar: 16087 \"itoc\", 16064 \"indsur\" (Windsurf olabilir)."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "F-01",
+      "type": "iç_çelişki_adayı",
+      "observation": "Karar akışlarında üç kez \"max 2 döngü\" yazıyor. TDD BLOCKED kuralında ise en fazla düzeltme sayısı okunmuyor.",
+      "interpretation": "İki tekrar sınırı farklı olabilir. Dot farklı TDD bütçeleri gördüğünü de bildirmişti. Bu sayılar güncel bütçe sayılmamalı.",
+      "evidence": "s031 15487-15489, s032 15514-15516, 15524-15526, 15725-15742. DOT-BAGLAMI.md satır 169-171."
+    },
+    {
+      "finding_id": "F-02",
+      "type": "yanlış_kabul_riski",
+      "observation": "Metin katmanında belirli harfler sistematik olarak kayboluyor. Bazı yüzde ve px değerleri de hiç görünmüyor.",
+      "interpretation": "Metne bakıp sayısal kural çıkarmak yanlış kabul doğurur. Sayısal değerlerin hepsi görselden doğrulanmalı.",
+      "evidence": "S031-19, S033-01, S033-02, S033-07"
+    },
+    {
+      "finding_id": "F-03",
+      "type": "tasarım_iddiası",
+      "observation": "Tasarımda görev sonucu Plane'e yazılıyor. Çözülemeyen sorun da Plane'e yazılıyor. Ajanın görevi tek başına \"Done\" yapması yasak.",
+      "interpretation": "Bu, Plane görev alımı ile güvenli tamamlama arasındaki ilişkiyi tanımlıyor. Canlı bir entegrasyon kanıtı değil. Kullanıcının otomatik görev alımı kararı canlı değişiklik yetkisi de vermiyor.",
+      "evidence": "s031 15343-15354, 15411-15413"
+    },
+    {
+      "finding_id": "F-04",
+      "type": "dış_bağımlılık",
+      "observation": "Kaynakta şu araç ve servisler geçiyor: OpenCode, Kimi K[...], Dagu, Plane, Playwright, Windsurf ve CI.",
+      "interpretation": "\"Dagu\" sözcüğü \"Dagu\" iş akışı motoru da olabilir. Ancak kaynakta yazımı belirsiz. Bu araçların hiçbiri Dot listesinde \"Dagu\" adıyla geçmiyor. Güncel doğrulama yapılmadı.",
+      "evidence": "s031 15033, 15054, 15072, 15316, 15347. s033 16060, 16064. DOT-BAGLAMI.md satır 88-114."
+    },
+    {
+      "finding_id": "F-05",
+      "type": "kavramsal_tutarlılık",
+      "observation": "Oracle tablosu altı önlem öneriyor: rol ayrımı, oracle kaynağı alanı, ölçülebilir kısıt, değişmez onay kaydı, kör doğrulayıcı ve mutasyon testi.",
+      "interpretation": "Bu öneriler Dot bağlamındaki oracle sınırıyla uyumlu. Dot'a göre aynı yanlış varsayım kodu ve testi birlikte geçirebilir. Mutasyon eşiğinin değeri kayıp. Bu yüzden \"yüzde 93\" tartışmasıyla bağı kurulamıyor.",
+      "evidence": "S032-12, S032-13, DOT-BAGLAMI.md satır 155-167"
+    },
+    {
+      "finding_id": "F-06",
+      "type": "kapasite_ve_bekleme",
+      "observation": "Paralel uzmanlar ayrı proje kopyalarında çalışıyor. Kritik bir eksik varsa akış bekliyor.",
+      "interpretation": "Beklemeyi kimin bitireceği yazmıyor. Kesintiden nasıl dönüleceği de yazmıyor. Bekleme süresi ve kapasite sınırı yazmıyor. Bu bilgiler kaynakta yok.",
+      "evidence": "s031 15113-15132"
+    },
+    {
+      "finding_id": "F-07",
+      "type": "kanıt_niteliği",
+      "observation": "Bir not, bir modelin akademik veriden, diğerinin internet yorumlarından beslendiğini söylüyor.",
+      "interpretation": "Bu doğrulanmamış bir görüş. Kaynak seçimi için kanıt sayılmamalı.",
+      "evidence": "s032 15634-15652"
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "EXP-01",
+      "status": "not_run",
+      "purpose": "Karar akışlarının oklarını ve dallarını doğrulamak.",
+      "input": "Sayfa 1 görsel kırpımı: x 4600-13200, y 900-2750 aralığı. Sayfa ölçeği manifestten alınmalı.",
+      "expected_evidence": "Her Evet ve Hayır etiketinin bağlı olduğu ok ve hedef kutu.",
+      "stop_condition": "Üç sütunun bütün dalları eşlenince veya görsel okunamazsa durun."
+    },
+    {
+      "experiment_id": "EXP-02",
+      "status": "not_run",
+      "purpose": "Kayıp harflerin ve sayıların nedenini bulmak.",
+      "input": "Kaynak PDF'nin yazı tipi listesi ve ToUnicode eşlemesi. Salt okunur bir araç kullanılmalı.",
+      "expected_evidence": "f, j, z, h, T, F, C harflerinin ve rakamların eşlemesiz olduğunu gösteren liste.",
+      "stop_condition": "Eşleme raporu alınınca durun. PDF'yi değiştirmeyin."
+    },
+    {
+      "experiment_id": "EXP-03",
+      "status": "not_run",
+      "purpose": "Kayıp sayısal değerleri görselden okumak.",
+      "input": "16140-16141, 16149-16150, 16218, 16436 ve 16003-16004 kayıtlarının bbox bölgeleri. Ayrıca 15725-15742 TDD kuralı bölgesi.",
+      "expected_evidence": "Ekran genişliği, yüzde eşikleri, font boyutu ve TDD döngü sınırının görünen değerleri.",
+      "stop_condition": "Her bölge okununca veya okunamaz diye işaretlenince durun."
+    }
+  ],
+  "tool_suggestions": [
+    {
+      "need": "Bozuk metin katmanını görselle doğrulamak",
+      "suggestion": "PDF sayfasını bbox bölgelerine göre kırpın. Görseli çok kipli (multimodal) bir dil modeline okutun. Sonucu metin katmanıyla karşılaştırın.",
+      "dot_comparison": "Dot listesinde doğrudan karşılığı yok. Playwright yalnız arayüz testleri için önerilmişti.",
+      "verification": "Güncel doğrulama yapılmadı."
+    },
+    {
+      "need": "Oracle gücünü ölçmek",
+      "suggestion": "Kaynak mutasyon testini öneriyor. Dot listesinde Stryker bu rol için aday.",
+      "dot_comparison": "Stryker satırı: zaman aşımı ve etkisiz değişiklikler ayrı raporlanmalı.",
+      "verification": "Güncel doğrulama yapılmadı."
+    }
+  ],
+  "risks": {
+    "internal": "Tekrar sınırları birbiriyle tutarsız olabilir. Bekleme ve dönüş kuralları eksik. Sayısal eşikler okunamıyor.",
+    "external": "OpenCode, Kimi, Dagu, Plane ve Windsurf gibi araçlara bağımlılık var. Bunların sürümü ve erişimi doğrulanmadı.",
+    "sustainability": "Değişmez onay kaydı ve ortam parmak izi önerileri bakım yükü getirir. Kaynakta bu kayıtların sahibi yazmıyor."
+  },
+  "report_markdown": "## CONT-Q-S0038-e85d2564-A1 raporu\n\nKaynak dosya `agents/17Agentic.pdf`, sayfa 1.\n\n### Okuma durumu\n\n- s031 için 15000-15499 kayıtları okundu. Toplam 500 kayıt.\n- s032 için 15500-15999 kayıtları okundu. Toplam 500 kayıt.\n- s033 için 16000-16499 kayıtları okundu. Toplam 500 kayıt.\n- Manifestte görsel yok. Görsel doğrulama yapılmadı.\n\n### Bölgelerin içeriği\n\n1. s031 ajan sürecini anlatıyor. Planlama ajanı uzmanları seçiyor. Birleştirme ve son kontrolden sonra sonuç Plane'e yazılıyor.\n2. s031 ve s032 üç karar akışını içeriyor. Bu akışlar olgunluk seviyesi, yeni teknoloji ve kural seti akışlarıdır. Her akışta en çok 2 döngü var.\n3. s032 TDD kurallarını ve rol ayrımını anlatıyor.\n4. s032 ve s033 Oracle önlemleri tablosunu ve arayüz test kurallarını içeriyor.\n\n### Önemli bulgular\n\n- Metin katmanında bazı harfler sistematik olarak kayıp.\n- Bazı yüzde ve px değerleri metin katmanında yok.\n- TDD döngü sınırı okunmuyor. Bu sınır karar akışlarındaki 2 döngüden farklı olabilir.\n- Bekleme, kesintiden dönüş ve kapasite kuralları kaynakta yok.\n\n### Açık işler\n\n- s030 ile s034 parçalarına geçen cümleler tamamlanmadı.\n- Oklar, dallar ve tablo hücreleri görselden doğrulanmalı.\n- Üç deney önerildi. Hiçbiri çalıştırılmadı.\n\nBu sonuç kabul edilmiş sayılmaz. Koordinatör sonuçları kaynaktan ayrıca doğrulamalı."
+}

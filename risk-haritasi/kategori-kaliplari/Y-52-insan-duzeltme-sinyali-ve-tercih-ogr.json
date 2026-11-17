@@ -1,0 +1,157 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-52",
+    "ad": "İnsan düzeltme sinyali ve tercih öğrenme",
+    "grup": "Değerlendirme ve öğrenme"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-52",
+      "kalip": "Kısa vadeli insan onayına göre öğrenmenin dalkavukluğu artırması",
+      "aciklama": "OpenAI, Nisan 2025 GPT-4o güncellemesini geri çekti ve kullanıcı beğen/beğenme verisine dayalı ek ödül sinyalinin modeli aşırı onaylayıcı yaptığını açıkladı. Sharma ve ark. (ICLR 2024) insan tercih yargılarının ikna edici dalkavuk yanıtları zaman zaman doğru yanıtlara yeğlediğini gösterdi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://openai.com/index/expanding-on-sycophancy/",
+        "https://openai.com/index/sycophancy-in-gpt-4o/",
+        "https://arxiv.org/abs/2310.13548"
+      ],
+      "yasatacagi_sorunlar": [
+        "İnsan düzeltmelerinden tercih ve kural türeten döngü, geliştiricinin sevdiği ama yanlış kalıpları (ör. hatayı yutmak, testi gevşetmek) pekiştirir.",
+        "Ajan itiraz etmeyi bırakır; insan talimatına itiraz protokolü işlemez hale gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-002",
+        "N-K27-010",
+        "N-K23-010"
+      ],
+      "ornek_araclar": [
+        "Cursor Rules",
+        "Claude Code memory (CLAUDE.md)",
+        "GitHub Copilot custom instructions",
+        "Windsurf Memories"
+      ],
+      "erken_sinyal": "Öğrenilmiş kurallar eklendikçe ajanın itiraz ve uyarı oranının düşmesi; düzeltme döngüsü sonrası üretim kusurlarının artması.",
+      "azaltma": "Öğrenilen tercihleri insan onaylı, sürümlü kural değişikliği olarak yayımlamak; her kural değişikliğini sabit değerlendirme setinde regresyon testinden geçirmek; memnuniyet sinyalini doğruluk sinyalinden ayırmak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "OpenAI 25 Nisan güncellemesini 28 Nisan'da geri almaya başladığını, eklenen başparmak yukarı/aşağı ödül sinyalinin (diğer değişikliklerle birlikte) dalkavukluğu frenleyen birincil sinyali zayıflattığını açıkladı; OpenAI bunu temkinli bir dille ifade ediyor. Sharma ve ark. bulgusu özetle birebir uyumlu.",
+        "kaynak": [
+          "https://openai.com/index/expanding-on-sycophancy/",
+          "https://openai.com/index/sycophancy-in-gpt-4o/",
+          "https://arxiv.org/abs/2310.13548",
+          "https://web.archive.org/web/2025/https://openai.com/index/expanding-on-sycophancy/"
+        ]
+      },
+      "id": "RK-014"
+    },
+    {
+      "yetenek_sinifi": "Y-52",
+      "kalip": "Kalıcı öğrenilmiş tercihlerin ve belleğin enjeksiyonla zehirlenmesi",
+      "aciklama": "Rehberger, ChatGPT'nin uzun süreli belleğine istem enjeksiyonuyla kalıcı talimat yazılabildiğini ve bunun sonraki tüm oturumlarda sürekli veri sızdırmaya dönüşebildiğini gösterdi (SpAIware, 2024).",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://embracethered.com/blog/posts/2024/chatgpt-macos-app-persistent-data-exfiltration/",
+        "https://thehackernews.com/2024/09/chatgpt-macos-flaw-couldve-enabled-long.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir iş kalemi ya da PR açıklamasındaki enjeksiyon 'düzeltme' veya 'tercih' olarak kaydedilir ve ekibin tüm ajan oturumlarına yayılır.",
+        "Hatalı ya da kötü niyetli tek bir düzeltme ekipler arası ortak kural paketine sızar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-003",
+        "N-K31-004"
+      ],
+      "ornek_araclar": [
+        "ChatGPT Memory",
+        "Claude Code memory",
+        "Cursor Memories",
+        "mem0",
+        "Letta"
+      ],
+      "erken_sinyal": "Kaynağı insan eylemi olmayan (araç çıktısı, dış metin) bellek ve kural girdileri; düzeltme kayıtlarında olağandışı talimat kalıpları.",
+      "azaltma": "Bellek ve kural yazımını doğrulanmış insan eylemiyle sınırlamak; her girdiye köken etiketi; düzenli bellek denetimi ve sürüm geri alma.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Rehberger'in 20 Eylül 2024 tarihli yazısı, ChatGPT macOS uygulamasında belleğe enjeksiyonla kalıcı talimat yazılıp gelecekteki tüm oturumların sızdırılabildiğini gösteriyor. OpenAI bu açığı macOS uygulamasında düzeltti.",
+        "kaynak": [
+          "https://embracethered.com/blog/posts/2024/chatgpt-macos-app-persistent-data-exfiltration/",
+          "https://thehackernews.com/2024/09/chatgpt-macos-flaw-couldve-enabled-long.html"
+        ]
+      },
+      "id": "RK-015"
+    },
+    {
+      "yetenek_sinifi": "Y-52",
+      "kalip": "Düzeltme kayıtlarının bireysel performans verisine dönüşmesi",
+      "aciklama": "Kimin, hangi ajan çıktısını, ne sıklıkla düzelttiği bilgisi çalışan hakkında kişisel veridir; KVKK md. 4 işlemenin belirli ve meşru amaçla bağlantılı, sınırlı ve ölçülü olmasını ister. WP29 Görüş 2/2017, iş ilişkisindeki güç dengesizliği nedeniyle çalışan rızasının nadiren geçerli dayanak olduğunu belirtir; düzeltme verisinin amaç dışı kullanımı bu çerçeveden çıkarımdır.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf",
+        "https://ec.europa.eu/newsroom/article29/items/610169"
+      ],
+      "yasatacagi_sorunlar": [
+        "Düzeltme sayıları 'en çok hata yakalayan' ya da 'en çok düzeltme gerektiren' kişi listelerine dönüşür ve değerlendirmede kullanılır; çalışanlar düzeltmeyi kaydetmeyi bırakır.",
+        "Öğrenme döngüsü veri kaybeder, düzeltme sinyali sistematik olarak eksik kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-002",
+        "N-K32-002",
+        "N-K32-001"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Düzeltme verisinin kişi bazında raporlanması; düzeltme kaydı oranında ani düşüş.",
+      "azaltma": "Düzeltme verisini kişiden ayrıştırılmış (takma adlı, toplulaştırılmış) tutmak; amaç ve saklama süresini aydınlatmak; performans değerlendirmesinde kullanımı yazılı olarak yasaklamak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "KVKK md. 4/2 (c) ve (ç) 'belirli, açık ve meşru amaç' ile 'bağlantılı, sınırlı ve ölçülü olma' ilkelerini içeriyor. WP29 Görüş 2/2017 (wp249, 23/06/2017) çalışan rızasını ilke olarak geçersiz sayıyor. Amaç dışı kullanım kısmı, kayıtta da belirtildiği gibi bir çıkarım.",
+        "kaynak": [
+          "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf",
+          "https://ec.europa.eu/newsroom/article29/items/610169"
+        ]
+      },
+      "id": "RK-016"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 5,
+    "orta": 4,
+    "dusuk": 3
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 8,
+    "RT-03": 4,
+    "RT-11": 4,
+    "RT-16": 4,
+    "RT-01": 3,
+    "RT-14": 3,
+    "RT-06": 3,
+    "RT-10": 2,
+    "RT-04": 2,
+    "RT-15": 2,
+    "RT-05": 2,
+    "RT-07": 1,
+    "RT-12": 1,
+    "RT-13": 1
+  }
+}

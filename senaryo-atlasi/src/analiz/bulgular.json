@@ -1,0 +1,2908 @@
+{
+  "schema": "decision-evidence/v1",
+  "reviewed_at": "2026-09-27",
+  "scope": "82 gömülü kayıt üzerinden sentez; 5 özgün yerel aralık ve 3 dış kaynak tekrar okundu. Güncel servis/alpha/araç uygunluğu test edilmedi.",
+  "briefs": [
+    {
+      "id": "B01",
+      "title": "1 GB sınırı tarayıcı testini öldürdü; ajan kapasitesi ölçülmedi.",
+      "theme": "Kaynak ve ilerleme",
+      "evidence_kind": "Yerel deney + kernel kaydı",
+      "record_ids": [
+        "K03",
+        "CP-05"
+      ],
+      "observation": "15 Eylül deneyinde 51 testlik birleşik koşu yaklaşık 4,3 saniyede, rapor üretmeden 137 ile bitti. Kernel kaydında cgroup OOM var. Aynı aday 2 GB ile 3/3 geçti; örneklenen tepe 887–942 MiB.",
+      "interpretation": "Bu olayda darboğaz tarayıcı test konteyneriydi. 137 kodunun tek başına OOM anlamına gelmemesi için kernel kanıtı ayırıcıdır.",
+      "boundary": "Bu ölçüm, bir LLM ajanının 1 GB tükettiğini veya 128 GB sunucunun 128 ajan çalıştıracağını göstermez. Örneklenmiş tepe anlık tepeyi kaçırabilir; daha büyük test setinde 2 GB da yetersiz kalmış.",
+      "decision_question": "Test yükü büyüdüğünde kapasiteyi nasıl yöneteceksin?",
+      "options": [
+        {
+          "label": "Sınırı ölçerek büyüt",
+          "tradeoff": "Bir işi hızla kurtarabilir; host toplam bütçesi ayrıca sınırlandırılır."
+        },
+        {
+          "label": "Testleri partilere böl",
+          "tradeoff": "Tepe bellek düşebilir; kurulum tekrarı ve toplam süre artabilir."
+        },
+        {
+          "label": "İkisini yük profiline göre birleştir",
+          "tradeoff": "Daha fazla seçenek verir; kabul deneyi ve zamanlayıcı karmaşıklığı artar."
+        }
+      ],
+      "missing_measurement": "Aynı commit ve test setini farklı parti/eşzamanlılık ayarlarında çalıştır; cgroup tepe bellek, OOM sayısı, süre ve host toplamını kaydet. Bu atlas bu deneyi çalıştırmadı.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K03",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+          "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+          "pointer": "/findings/2"
+        },
+        {
+          "record_id": "CP-05",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+          "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+          "pointer": "/cases/3"
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "title": "İlerleyen test, 600 saniyelik “ajan sessiz” kuralına takıldı.",
+      "theme": "Kaynak ve ilerleme",
+      "evidence_kind": "Tarihli deney günlüğü",
+      "record_ids": [
+        "K10",
+        "CP-01"
+      ],
+      "observation": "18 Eylül günlüğünde bütünleşik test süresi 570 saniyeden yaklaşık 70 dakikaya çıkıyor. Gözetleyici yalnız yeni test makbuzunu ilerleme saydığı için 600 saniyede çağrıyı öldürüyor; üç tekrar sonrası kurtarma sınırına ulaşılıyor.",
+      "interpretation": "Ajan sessizliği, alt sürecin ilerlemesi ve görevin toplam süresi aynı saatle izlenmiş. Başka orkestratöre geçmek bu sinyal ayrımını kendiliğinden sağlamaz.",
+      "boundary": "Bu bulgu bütün timeout’ları kaldırmayı desteklemez. OpenHands SDK kaydı benzer mekanizma ailesidir; aynı olay veya kod değildir.",
+      "decision_question": "Uzun süren geçerli iş ile kilitlenmeyi hangi sinyalle ayıracaksın?",
+      "options": [
+        {
+          "label": "Aşama bazlı süre ve ilerleme",
+          "tradeoff": "Test/derleme için ayrı sinyal gerekir; yanlış kesmeleri azaltmayı hedefler."
+        },
+        {
+          "label": "Tek uzun üst süre",
+          "tradeoff": "Kurulumu daha basittir; gerçek kilit daha geç fark edilir."
+        }
+      ],
+      "missing_measurement": "Aynı gözetleyicide bilerek uzun süren test, gerçek sonsuz döngü ve ölü alt süreç dene; her biri için tespit ve kurtarma süresini ayrı kaydet.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K10",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+          "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+          "pointer": "/findings/2"
+        },
+        {
+          "record_id": "CP-01",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+          "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+          "pointer": "/cases/0"
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "title": "4.762 kuyruk olayı yalnız bir model çağrısı üretti.",
+      "theme": "Kaynak ve ilerleme",
+      "evidence_kind": "Tarihli deney günlüğü",
+      "record_ids": [
+        "K13"
+      ],
+      "observation": "18 Eylül 00:56 kaydı: 93 bin karakterlik inceleme geçmişi CONTEXT_CAPACITY_UNSUPPORTED üretiyor. CAPACITY metni kapasite beklemesi sayılıyor; yaklaşık 10 saniyelik yeniden kabul döngüsünde 4.762 CLAIM/RETRY olayı, yalnız bir model çağrısı var.",
+      "interpretation": "Kuyruğun hareket etmesi işin ilerlediği anlamına gelmiyor. Hata sınıflandırması, bağlam boyutu ve tekrar kabul koşulu aynı tıkanmayı büyütmüş.",
+      "boundary": "4.762 sayısı ajan, bitmiş görev veya model çağrısı sayısı değildir. Tarihli rapor güncel sistemin hâlâ böyle olduğunu kanıtlamaz.",
+      "decision_question": "Bağlam sınırına gelen işi hangi yoldan sürdüreceksin?",
+      "options": [
+        {
+          "label": "Özet + değişmez kanıt referansı",
+          "tradeoff": "Girdi küçülür; özetin kaybettiği yükümlülükleri kontrol etmek gerekir."
+        },
+        {
+          "label": "Daha geniş bağlamlı çalışan",
+          "tradeoff": "Özetleme azalabilir; maliyet ve model uyumluluğu ölçülmelidir."
+        },
+        {
+          "label": "İşi bağımsız alt parçalara ayır",
+          "tradeoff": "Bağlam küçülebilir; entegrasyon ve ana kabul ölçütlerini koruma yükü getirir."
+        }
+      ],
+      "missing_measurement": "Aynı hata ve değişmeyen girdi altında tekrar sayısını sınırla; değişen bağlam digest’i olmadan yeniden kabulü gözle. Kanıt eksilmesi testi de ekle.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K13",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+          "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+          "pointer": "/findings/2"
+        }
+      ]
+    },
+    {
+      "id": "B04",
+      "title": "Teşhis ajanı dosyayı okuyamadı; çağrı yine başarılı sayıldı.",
+      "theme": "Yetki ve kurtarma",
+      "evidence_kind": "Tarihli devir raporu",
+      "record_ids": [
+        "K08",
+        "MA-08"
+      ],
+      "observation": "15 Eylül devir kaydı, INCIDENT.json okunamadığını söyleyen çıktıya rağmen bakım isteğinin SUCCESS ve engelin diagnosed olduğunu aktarıyor. Prompt dosyayı istiyor; içerik girdide yok, okuma aracı yok, shell yasak.",
+      "interpretation": "Tamamlama durumu yalnız çağrının bittiğini bildirmiş. Teşhis kanıtı ve araç erişimi ayrıca doğrulanmamış.",
+      "boundary": "Bu, modelin isteksiz olduğunu veya tüm shell yetkilerinin açılması gerektiğini göstermez. Kaynak bir tarihî rapordur; aynı çağrı yeniden çalıştırılmadı.",
+      "decision_question": "Teşhis rolüne olay verisini nasıl ulaştıracaksın?",
+      "options": [
+        {
+          "label": "Temizlenmiş içerik girdiye ekle",
+          "tradeoff": "Az yetkiyle çalışır; boyut ve veri tazeliği yönetilir."
+        },
+        {
+          "label": "Dar kapsamlı salt okunur araç",
+          "tradeoff": "Güncel kanıtı okuyabilir; dosya kapsamı ve erişim kaydı gerekir."
+        }
+      ],
+      "missing_measurement": "Bilinen işareti içeren olay dosyası ver; okunduğuna dair doğrulanabilir alan bekle. Erişim yoksa sonuç NEEDS_EVIDENCE olmalı; diagnosed olmamalı.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+          "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+          "pointer": "/findings/0"
+        },
+        {
+          "record_id": "MA-08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+          "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+          "pointer": "/cases/3"
+        }
+      ]
+    },
+    {
+      "id": "B05",
+      "title": "Engel kaydı ve rol ataması, onarım çalışanını başlatmadı.",
+      "theme": "Yetki ve kurtarma",
+      "evidence_kind": "Tarihî akış kaydı",
+      "record_ids": [
+        "K09",
+        "K16",
+        "DK-08"
+      ],
+      "observation": "Yerel kayıtlarda NEEDS_TRIAGE, NO_QUALIFIED_REPAIR_PROFILE ve PARALLEL_CHILDREN_PENDING beklemeleri var. Devir raporunda record_repair_observation kaydının worker başlatmadığı açıkça belirtiliyor.",
+      "interpretation": "Bir “Scrum Master” rolü tanımlamak yetmez: hangi olayın hangi yetkili yürütücüyü başlatacağı ve aynı göreve nasıl dönüleceği ayrı sözleşmedir.",
+      "boundary": "Yetki belirsizliği nedeniyle bilinçli duran K16, her durumda yazılım hatası sayılmaz. Bilinmeyen her arızanın insansız çözülebileceğine dair kanıt yok.",
+      "decision_question": "Havuzda uygun onarım yeteneği yoksa ne olacak?",
+      "options": [
+        {
+          "label": "Önceden sınanmış onarım profilleri",
+          "tradeoff": "Öngörülebilir kapsam; yeni arızalar terminal engelli çıktı üretebilir."
+        },
+        {
+          "label": "Yalıtılmış yetenek hazırlama hattı",
+          "tradeoff": "Yeni onarım üretilebilir; nitelendirme, yetki ve bütçe sınırı gerekir."
+        },
+        {
+          "label": "Kanıtlı engelli teslim",
+          "tradeoff": "Sistem tahminle ilerlemez; insanın çıktı incelemesinde karar vermesi gerekir."
+        }
+      ],
+      "missing_measurement": "Hiçbir onarım profiline uymayan arıza ver. Sahibi, bütçesi, zaman sınırı ve son çıktısı olan tek bir kurtarma vakası oluştuğunu göster.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K09",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+          "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+          "pointer": "/findings/1"
+        },
+        {
+          "record_id": "K16",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+          "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+          "pointer": "/findings/0"
+        },
+        {
+          "record_id": "DK-08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/27"
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "title": "Uyku kaynaklı lease kaybı ile durum geçişi hatası ayrı olaylar.",
+      "theme": "Yetki ve kurtarma",
+      "evidence_kind": "Tarihî deneyler",
+      "record_ids": [
+        "K04",
+        "K05"
+      ],
+      "observation": "K04: Mac uyku döneminde 120 saniyelik heartbeat boşluğu, lease kaybı ve UNKNOWN slotlar var. K05: VERIFIED geçişinin aynı saniyesinde, yalnız CLAIMED/IMPLEMENTED kabul eden yenileme kontrolü sahipliği düşürüyor.",
+      "interpretation": "Her iki olay “lease lost” görünse de biri zaman/bağlantı, diğeri durum makinesi tutarlılığı sorunu. Aynı otomatik yeniden başlatma reçetesi ikisine eşit kanıt sağlamaz.",
+      "boundary": "Mac uyku bulgusu Ubuntu sunucunun uyuduğunu göstermez. Lease uzatmak eski ve yeni çalışanın aynı anda yazması riskini tek başına çözmez.",
+      "decision_question": "Sahipliği kaybeden iş nasıl geri alınacak?",
+      "options": [
+        {
+          "label": "Kısa lease + fencing",
+          "tradeoff": "Hızlı devralma; eski yazarı durduran nesil kimliği gerekir."
+        },
+        {
+          "label": "Uzun lease + uzlaştırma",
+          "tradeoff": "Kısa kopmalara tolerans; gerçek kayıpta daha uzun bekleme."
+        }
+      ],
+      "missing_measurement": "Uyku/bağlantı kesilmesi ile VERIFIED durum geçişini ayrı test et. Eski çalışan geri döndüğünde yazısının reddedildiğini kanıtla.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K04",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+          "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+          "pointer": "/findings/3"
+        },
+        {
+          "record_id": "K05",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/02_sahiplik_ve_kalici_durum.json",
+          "sha256": "8a86379df5bba4d3635b1823bb89ff2c8fb5e726c6a6a23a2fae75d14be2b5c4",
+          "pointer": "/findings/0"
+        }
+      ]
+    },
+    {
+      "id": "B07",
+      "title": "Daha fazla worker, ortak hesap kotasını genişletmiyor.",
+      "theme": "Kaynak ve ilerleme",
+      "evidence_kind": "Yerel ve dış raporlar",
+      "record_ids": [
+        "K11",
+        "K12",
+        "MA-04",
+        "DP-11"
+      ],
+      "observation": "Yerel reviewer rotasında kota dolarken bazı IMPLEMENTED işler tekrar alınmış, PENDING işler beklemiş. Ayrı prototip incelemesinde süreç içindeki RAM/WIP sayacının worker sayısıyla çoğalabildiği görülmüş.",
+      "interpretation": "Ekip sayısı, süreç sayısı, test kapasitesi ve model sağlayıcısının ortak kotası farklı kaynaklardır. 12×12 rol şeması eşzamanlı çalışma kapasitesi değildir.",
+      "boundary": "DP-11 statik prototip bulgusudur; canlı sunucu ölçümü değildir. Bu veri belirli bir maksimum ekip veya insan sayısı vermez.",
+      "decision_question": "Eşzamanlılığı hangi kaynak sınırlarına bağlayacaksın?",
+      "options": [
+        {
+          "label": "Merkezî bütçe ve adil kuyruk",
+          "tradeoff": "Ortak limitler görünür; denetleyicinin dayanıklılığı gerekir."
+        },
+        {
+          "label": "Ayrılmış kaynak havuzları",
+          "tradeoff": "İzolasyon kolaylaşır; kullanılmayan kapasite başka havuza aktarılamayabilir."
+        }
+      ],
+      "missing_measurement": "Worker sayısını artırırken toplam RAM, API kota tüketimi ve en uzun görev bekleme süresini ölç; aynı üst limitin çoğalmadığını doğrula.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K11",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+          "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+          "pointer": "/findings/0"
+        },
+        {
+          "record_id": "K12",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+          "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+          "pointer": "/findings/1"
+        },
+        {
+          "record_id": "MA-04",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/02_kaynak_ve_kapasite.json",
+          "sha256": "003cecd638a5580adbac870c3013e84b8eaed6e65bfeeed4a3501637801ee1c8",
+          "pointer": "/cases/1"
+        },
+        {
+          "record_id": "DP-11",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/10"
+        }
+      ]
+    },
+    {
+      "id": "B08",
+      "title": "Worktree’de biten iş, bağımlılığı gelince kendiliğinden ilerlemedi.",
+      "theme": "Bütünleştirme ve teslim",
+      "evidence_kind": "Tarihli deney günlüğü",
+      "record_ids": [
+        "K14",
+        "MA-01"
+      ],
+      "observation": "UI-54, başka paketten Empty bileşenini bekliyor. Bağımlılık daha sonra birleşse de handoff taşıyan blok yeniden denenmiyor; kök iş COMPONENT_DELIVERY_BLOCKED_WAIT durumunda kalıyor.",
+      "interpretation": "Yalıtılmış dallar çakışmayı azaltabilir. Bağımlılık yayımlandığında tüketiciyi uyandırma ve güncel tabana göre yeniden doğrulama ayrı mekanizmalardır.",
+      "boundary": "Bu olay worktree’nin gereksiz olduğunu göstermez. Dış merge kuyruğu vakası yerel olayın bağımsız tekrar deneyi değildir.",
+      "decision_question": "Bağımlı paketler hangi anda yeniden doğrulanacak?",
+      "options": [
+        {
+          "label": "Birleşim olayında seçici yeniden deneme",
+          "tradeoff": "Daha az iş tekrar eder; bağımlılık haritasının doğruluğuna bağlıdır."
+        },
+        {
+          "label": "Periyodik bütünleşik yeniden deneme",
+          "tradeoff": "Kaçan olayları yakalayabilir; daha fazla test maliyeti ve gecikme getirir."
+        }
+      ],
+      "missing_measurement": "Önce tüketiciyi, sonra bağımlılığı teslim et; tek uyandırma, güncel taban ve eski kanıtın kullanılmaması koşullarını kontrol et.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K14",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+          "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+          "pointer": "/findings/0"
+        },
+        {
+          "record_id": "MA-01",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/05_koordinasyon_ve_birlestirme.json",
+          "sha256": "dff45f97d513ffbad9e74de605f14f9faf1ad2e832db2902cb7a56b76d0920aa",
+          "pointer": "/cases/0"
+        }
+      ]
+    },
+    {
+      "id": "B09",
+      "title": "Yeşil test sayısı, eksiksiz kabul ölçütü kapsamı değil.",
+      "theme": "Doğruluk ve kabul",
+      "evidence_kind": "Statik inceleme + tasarım karşı örneği",
+      "record_ids": [
+        "DP-08",
+        "DK-01",
+        "K18",
+        "CP-10"
+      ],
+      "observation": "Prototipte kabul ölçütü sayıları eşleşirken yinelenen kimliklerin eksik üst yükümlülükleri saklayabildiği yol saptanmış. Yerel kayıtta atlanan test ve ortam hatasının ürün RED’iyle karışması da var.",
+      "interpretation": "“90/90 geçti” ancak hangi sürümde hangi yükümlülüğün hangi bağımsız kanıtla sınandığı biliniyorsa anlamlıdır. Ajanın yazdığı test, ajanla aynı yanlış varsayımı paylaşabilir.",
+      "boundary": "DP-08 statik bir kod yoludur; bu projede üretilmiş bordronun yanlış hesaplandığına dair canlı olay değildir. Tüm bilinmeyenlerin keşfedildiği ispatlanamaz.",
+      "decision_question": "Tamamlandı kararının dayanağı ne olacak?",
+      "options": [
+        {
+          "label": "AC → benzersiz kanıt matrisi",
+          "tradeoff": "Eksik/yinelenen kapsam görünür; alan kabul verisi hazırlanmalıdır."
+        },
+        {
+          "label": "Matrise bağımsız alan örnekleri ekle",
+          "tradeoff": "Ortak yanlış varsayımı sınar; beklenen sonuçların sahipliği gerekir."
+        },
+        {
+          "label": "Risk odaklı keşif testleri ekle",
+          "tradeoff": "Önceden yazılmamış akışları araştırır; sınırsız doğruluk garantisi vermez."
+        }
+      ],
+      "missing_measurement": "Bir AC’yi eksilt, diğerini iki kez yaz, bir testi skip et ve yanlış ama tutarlı bordro örneği ekle; toplam sayı değişmese bile kabulün durduğunu göster.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DP-08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/7"
+        },
+        {
+          "record_id": "DK-01",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/20"
+        },
+        {
+          "record_id": "K18",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+          "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+          "pointer": "/findings/2"
+        },
+        {
+          "record_id": "CP-10",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+          "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+          "pointer": "/cases/0"
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "title": "İnceleme sonrası değişen kod, eski onayla ilerleyebiliyor.",
+      "theme": "Doğruluk ve kabul",
+      "evidence_kind": "Statik prototip incelemesi",
+      "record_ids": [
+        "DP-03",
+        "DP-09"
+      ],
+      "observation": "Sabit prototip incelemesi, CI/entegrasyon onarımı yeni kod ürettikten sonra önceki bağımsız incelemenin kullanılabildiğini gösteriyor. Korunan dosya kontrolünden sonra test kodunun çalışma ağacını değiştirebildiği yol da var.",
+      "interpretation": "İnceleme bir görev adına değil belirli içerik kimliğine bağlanmalı. Test koşturan işlem de çalışma ağacını değiştirebilir.",
+      "boundary": "Kod yolu gözlemi çalışma zamanında sömürü veya teslim hatası yaşandığı anlamına gelmez; bu tur prototip çalıştırılmadı.",
+      "decision_question": "Onay hangi değişiklikte geçersizleşecek?",
+      "options": [
+        {
+          "label": "Her içerik değişiminde tüm inceleme",
+          "tradeoff": "Basit geçerlilik kuralı; süre/maliyet artar."
+        },
+        {
+          "label": "Değişen alan + etki alanını tekrar incele",
+          "tradeoff": "Daha az tekrar; etki haritasının eksikliği ayrı risk olur."
+        }
+      ],
+      "missing_measurement": "Onaydan sonra kaynak dosyayı ve ardından test sırasında korunan dosyayı değiştir. Eski commit/digest’e ait kanıtın teslimi açmadığını doğrula.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DP-03",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/2"
+        },
+        {
+          "record_id": "DP-09",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/8"
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "title": "Merge sırası ile alpha’ya dağıtım sırası aynı değil.",
+      "theme": "Bütünleştirme ve teslim",
+      "evidence_kind": "Statik prototip incelemesi",
+      "record_ids": [
+        "DP-10",
+        "DK-02"
+      ],
+      "observation": "İncelenen akışta A sonra B birleşebiliyor; B’nin CI’ı önce bitip dağıtıldıktan sonra A’nın yavaş CI’ı eski sürümü alpha’ya taşıyabiliyor. Çoklu repo/veri sürümü için kabul birimi ayrıca açık.",
+      "interpretation": "Trunk tabanlı çalışma tek başına ortam sürüm sırasını korumaz. Commit, build artifact ve etkin ortam sürümü birlikte izlenmelidir.",
+      "boundary": "Bu kayıt alpha.example.com üzerinde gözlenmiş geri sürümleme değildir. Birden çok repo kullanmak zorunlu bir karar olarak çıkarılamaz.",
+      "decision_question": "Alpha ortamını nasıl güncelleyeceksin?",
+      "options": [
+        {
+          "label": "Proje başına sıralı teslim kuyruğu",
+          "tradeoff": "Sıra basitleşir; uzun CI diğer teslimleri bekletir."
+        },
+        {
+          "label": "Paralel CI + güncel hedef karşılaştırması",
+          "tradeoff": "CI paralel kalır; dağıtım anında atomik sürüm kontrolü gerekir."
+        }
+      ],
+      "missing_measurement": "A’nın CI’ını geciktir; B’den sonra A bitsin. Ortamın B’den A’ya izinsiz gerilemediğini ve ekranın gerçek artifact kimliğini gösterdiğini doğrula.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DP-10",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/9"
+        },
+        {
+          "record_id": "DK-02",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/21"
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "title": "Sağlık kapısı, kendi onarımını da engelleyebiliyor.",
+      "theme": "Bütünleştirme ve teslim",
+      "evidence_kind": "Statik prototip incelemesi",
+      "record_ids": [
+        "DP-02"
+      ],
+      "observation": "Prototipte geri alma/onarım yolu, alpha sağlıklı olana kadar bekleyen aynı merge kapısına giriyor. Alpha yalnız bu onarımla düzelecekse koşul kendi çözümünü durduruyor.",
+      "interpretation": "Yeni özellik, onarım ve geri alma aynı politika kapsamına sokulmuş. Onarım istisnasının yazılı olması çağrı yolunda uygulandığını göstermiyor.",
+      "boundary": "Bu, tüm sağlık/test kontrollerini atlama gerekçesi değildir. Kaynak canlı kesinti kaydı değil statik karşı yoldur.",
+      "decision_question": "Sağlıksız alpha nasıl onarılacak?",
+      "options": [
+        {
+          "label": "Ayrı yetkili onarım yolu",
+          "tradeoff": "Kilit çözülür; hangi artifact ve etki için yetkili olduğu dar tanımlanır."
+        },
+        {
+          "label": "Son doğrulanmış artifacta dönüş",
+          "tradeoff": "Kod geri dönüşü hızlı olabilir; veri migration’ı ayrıca ele alınmalıdır."
+        }
+      ],
+      "missing_measurement": "Alpha sağlıksızken sıradan özelliği beklet; aynı hatayı düzelten doğrulanmış onarımı yürüt. Yanlış hedefe yapılan onarım denemesini reddet.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DP-02",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/1"
+        }
+      ]
+    },
+    {
+      "id": "B13",
+      "title": "Kalıcı workflow, dış etkinin tek kez oluşmasını garanti etmiyor.",
+      "theme": "Yetki ve kurtarma",
+      "evidence_kind": "Dış vaka + statik inceleme",
+      "record_ids": [
+        "WF-03",
+        "DP-12"
+      ],
+      "observation": "Temporal forum vakasında 10 işlem beklenirken heartbeat timeout sonrası ilk 3 işlem yeniden başlayıp toplam 13 altakış doğuruyor. Prototip incelemesi de activity tekrarında aynı dış etkinin uzlaştırılmadığını işaretliyor.",
+      "interpretation": "Durable history işin nereden sürdürüleceğini kaydeder; dış API çağrısının gerçekten gerçekleşip gerçekleşmediğini ayrıca çözmek gerekir.",
+      "boundary": "Bu, tüm Temporal işlerinin çift çalıştığı veya bir ürünün bunu otomatik olarak her entegrasyonda çözdüğü anlamına gelmez.",
+      "decision_question": "Yanıtı kaybolan GitHub/dağıtım çağrısında ne yapılacak?",
+      "options": [
+        {
+          "label": "Etki kimliğiyle uzlaştır, sonra dene",
+          "tradeoff": "Çift etkiyi sınırlamayı hedefler; hedef API’dan durum okunabilmelidir."
+        },
+        {
+          "label": "Belirsiz etkiyi engelli çıktıya taşı",
+          "tradeoff": "Tahminle tekrar yapılmaz; bazı işler insan incelemesi bekler."
+        }
+      ],
+      "missing_measurement": "Dış işlem başarılı olduktan hemen sonra yanıtı düşür. Yeniden denemede yeni PR/dağıtım/maliyet kaydı üretilmeden mevcut etkinin bulunduğunu doğrula.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "WF-03",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/03_sahiplik_tekrar_ve_yan_etki.json",
+          "sha256": "b2a81193676f5b9f3a648262171d8e80d8090d36aa03d630aed9f9ca0241b8ea",
+          "pointer": "/cases/1"
+        },
+        {
+          "record_id": "DP-12",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/11"
+        }
+      ]
+    },
+    {
+      "id": "B14",
+      "title": "İnsan reddi, botun daha yeni zaman damgası yüzünden kaybolabiliyor.",
+      "theme": "Yetki ve kurtarma",
+      "evidence_kind": "Statik prototip incelemesi",
+      "record_ids": [
+        "DP-07",
+        "K16",
+        "DK-03"
+      ],
+      "observation": "İncelenen prototip yolunda botun durum yazımı, eşzamanlı insan reddinden daha yeni görünüyor; reddetme eski olay kabul edilip atılabiliyor. Yerel K16’da ortak aktör kimliği kurtarma yetkisini belirsizleştirmiş.",
+      "interpretation": "Aktör, komut türü ve görev sürümü olmadan yalnız zamana göre sıralama insan niyetini korumuyor.",
+      "boundary": "Prototipteki olasılık kullanıcının gerçek reddinin kaybolduğu kanıtı değildir. Her eski olayın kabul edilmesi de güvenli bir sonuç değildir.",
+      "decision_question": "İnsan iptali/reddi için hangi öncelik geçerli olacak?",
+      "options": [
+        {
+          "label": "Sürümlü niyet + ayrı bot kimliği",
+          "tradeoff": "Niyet ayırt edilir; olay şeması ve çakışma kuralı gerekir."
+        },
+        {
+          "label": "Çelişkili niyette dur ve raporla",
+          "tradeoff": "Yanlış devamı azaltır; çıktı inceleme yükü artabilir."
+        }
+      ],
+      "missing_measurement": "Bot durumu ile insan reddini ters sırada ve tekrar ederek gönder; reddin yutulmadığını, iptalden sonra yeni dış etki açılmadığını sınayarak karar ver.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DP-07",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/6"
+        },
+        {
+          "record_id": "K16",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+          "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+          "pointer": "/findings/0"
+        },
+        {
+          "record_id": "DK-03",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/22"
+        }
+      ]
+    },
+    {
+      "id": "B15",
+      "title": "Tak-çıkar; geçmiş, kanıt ve yetki de taşınırsa anlamlı.",
+      "theme": "Uyarlanabilirlik",
+      "evidence_kind": "Dış rapor + statik inceleme",
+      "record_ids": [
+        "CP-06",
+        "CP-07",
+        "DP-04",
+        "DK-07"
+      ],
+      "observation": "Droid kullanıcı raporunda model değişince eski konuşma şeması HTTP 400 üretiyor; ayrı kayıtta pluginler çalıştığı hâlde list/update görünmüyor. Prototipte workflow politika snapshot’ı alırken activity canlı yapılandırmayı okuyabiliyor.",
+      "interpretation": "API adresi değiştirmek, çalışan işin durumu ve kanıt semantiği korunuyor demek değildir. Geçmiş şeması, politika sürümü ve yetki sözleşmesi de geçiş kapsamındadır.",
+      "boundary": "Bu kayıtlar tüm adaylar arasında sıcak geçiş yapılabildiğini veya yapılamadığını kanıtlamaz. Açık API tek başına taşınabilirlik ölçüsü değil.",
+      "decision_question": "Çalışan işler sırasında bileşen nasıl değişecek?",
+      "options": [
+        {
+          "label": "Yeni işler yeni adaptöre; eskiler tamamlasın",
+          "tradeoff": "Göç karmaşıklığı azalır; iki sürüm geçici birlikte işletilir."
+        },
+        {
+          "label": "Kontrollü duraklat ve dönüştür",
+          "tradeoff": "Geçiş daha hızlı olabilir; checkpoint ve kanıt dönüştürme testleri gerekir."
+        }
+      ],
+      "missing_measurement": "Aynı görev sözleşmesini iki adaptörde çalıştır; iptal, checkpoint, test makbuzu, maliyet ve terminal durum alanlarının kayıpsız karşılığını ölç.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "CP-06",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+          "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+          "pointer": "/cases/0"
+        },
+        {
+          "record_id": "CP-07",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+          "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+          "pointer": "/cases/1"
+        },
+        {
+          "record_id": "DP-04",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/3"
+        },
+        {
+          "record_id": "DK-07",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/26"
+        }
+      ]
+    },
+    {
+      "id": "B16",
+      "title": "Skill dosyasının varlığı, yüklenebilir ve yetkili olması değil.",
+      "theme": "Uyarlanabilirlik",
+      "evidence_kind": "Belge ve paket incelemesi",
+      "record_ids": [
+        "DE-07",
+        "DK-08"
+      ],
+      "observation": "İncelemede 21 etkin olmayan SKILL taslağı sayılmış; doğrudan okunan iki örnekte name alanı ile klasör adı uyuşmuyor. Katalogda bulunmaları çalışan sisteme yüklendikleri anlamına gelmiyor.",
+      "interpretation": "Havuzdan edinme, şema doğrulama, sürüm sabitleme, izin denetimi ve deneme çalıştırması ayrı adımlardır.",
+      "boundary": "21 şablonun hepsinin bozuk olduğu ya da canlı ajanları durdurduğu gösterilmedi. “20–30 skill sınırı” için bağımsız ölçüm bulunmadı.",
+      "decision_question": "Havuzdan gelen yetenek ne zaman kullanılabilir olacak?",
+      "options": [
+        {
+          "label": "Önceden nitelendirilmiş katalog",
+          "tradeoff": "Öngörülebilir; yeni ihtiyaç için katalog güncellemesi gerekir."
+        },
+        {
+          "label": "Talep anında yalıtılmış nitelendirme",
+          "tradeoff": "Yeni yeteneğe daha hızlı erişim; tedarik ve izin kontrolü karmaşıklaşır."
+        }
+      ],
+      "missing_measurement": "Adı hatalı, sürümü değişmiş, aşırı izin isteyen ve testte kalan dört skill paketi dene; hiçbiri onaylı kayıt gibi görünmemeli.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DE-07",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/18"
+        },
+        {
+          "record_id": "DK-08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/27"
+        }
+      ]
+    },
+    {
+      "id": "B17",
+      "title": "“Temporal kurtaramadı” vakası, yazarı tarafından geri çekilmiş.",
+      "theme": "Kanıtın sınırı",
+      "evidence_kind": "Birincil kaynak düzeltmesi",
+      "record_ids": [
+        "WF-06"
+      ],
+      "observation": "Forum yazarı 24 Mart 2021’de nedenin kendi kodundaki hata olduğunu ve örneğin beklendiği gibi çalıştığını açıklıyor. Son mesaj bu tur birincil kaynaktan tekrar okundu.",
+      "interpretation": "İlk şikâyet başlığıyla ürün kusuru yazmak yanlış olur. İlk belirti ve son düzeltme aynı kayıt zincirinde tutulmalı.",
+      "boundary": "Bu tek düzeltme Temporal’ın her senaryoda sorunsuz olduğunu da kanıtlamaz. Başka olaylara genellenemez.",
+      "decision_question": "Araç karşılaştırmasında hangi kanıtı geçerli sayacaksın?",
+      "options": [
+        {
+          "label": "Sonuç ve sürümüyle olay kaydı",
+          "tradeoff": "Düzeltme korunur; her kaynak için kapanış takibi gerekir."
+        },
+        {
+          "label": "Yeniden üretilmiş vakalarla daralt",
+          "tradeoff": "Nedene güven artar; henüz tekrarlanamayan riskler ayrı listede kalır."
+        }
+      ],
+      "missing_measurement": "Karşılaştırma tablosunda geri çekilmiş bu iddianın “ürün hatası sayısı”na eklenmediğini kontrol et.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "WF-06",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/07_devam_durum_ve_gozlem.json",
+          "sha256": "b1698cd4fc2dd863398f931c0221966080b552054e97972dcd45ebd9f65f693b",
+          "pointer": "/cases/2"
+        }
+      ]
+    },
+    {
+      "id": "B18",
+      "title": "Webhook 5xx davranışının bir bölümü hâlâ kanıtlanmamış.",
+      "theme": "Kanıtın sınırı",
+      "evidence_kind": "Düzeltilmiş arşiv incelemesi",
+      "record_ids": [
+        "DE-01",
+        "DE-02"
+      ],
+      "observation": "Arşivli Plane yolunda HTTP 5xx yanıtı ile ağ istisnası farklı işleniyor. Ancak kullanılan pinned_fetch uygulaması elde olmadığı için son 5xx davranışının tamamı çıkarılamıyor; kurulu sürümün canlı payload’ı da okunmamış.",
+      "interpretation": "“Beş hatada kapanır, 5xx yeniden denenmez” ifadesi kurulu sisteme kesin hüküm olarak taşınamaz. Eksik bağımlılık, nedensel zincirde açık bir halkadır.",
+      "boundary": "Bu inceleme hiçbir retry olmadığını veya kurulu Plane sürümünün aynı olduğunu kanıtlamaz.",
+      "decision_question": "Görev kabulünü webhook’a ne kadar bağlayacaksın?",
+      "options": [
+        {
+          "label": "Webhook + dönemsel uzlaştırma",
+          "tradeoff": "Kaçan olayları yakalayabilir; durum sürümü ve tekrar önleme gerekir."
+        },
+        {
+          "label": "Yalnız webhook, teslim garantisi sınanmış",
+          "tradeoff": "Daha az tarama; kayıp olay deneyinden geçmesi gerekir."
+        }
+      ],
+      "missing_measurement": "Kurulu sürümde 500, 429, bağlantı kopması ve yinelenen olay üret; retry sayısı, gecikmesi ve kaçan görevleri geri kazanma davranışını kaydet.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DE-01",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/12"
+        },
+        {
+          "record_id": "DE-02",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/13"
+        }
+      ]
+    },
+    {
+      "id": "B19",
+      "title": "Kaynak sayısı, risk araştırmasının tamamlandığını göstermiyor.",
+      "theme": "Kanıtın sınırı",
+      "evidence_kind": "Kaynak tarama denetimi",
+      "record_ids": [
+        "DE-06",
+        "DE-08"
+      ],
+      "observation": "Önceki 130/722 danışma kaydı sayıları için başarılı sayfalama manifesti yok. 403/429 erişim hataları ve kopya belgeler ayrıca ayrılmalı; byte eşitliği anlamsal kapsama kanıtı değil.",
+      "interpretation": "Bir raporun başka raporu tekrar etmesi yeni bağımsız olay değildir. Sayfa sayısı/araç sayısı güvenilirlik puanına çevrilemez.",
+      "boundary": "Bu bulgu bütün araştırmanın geçersiz olduğunu söylemez. Eksik tarama ölçüsü varken “tüm sorunlar kapsandı” sonucu çıkarılamaz.",
+      "decision_question": "Karar vermeden önce hangi araştırma açığı kapanmalı?",
+      "options": [
+        {
+          "label": "Seçtiğin adaylar için sürüm odaklı tarama",
+          "tradeoff": "Daha dar ama izlenebilir kapsam; diğer adaylar açık kalır."
+        },
+        {
+          "label": "Tüm katalog için kapsam manifesti",
+          "tradeoff": "Karşılaştırma genişler; tarama ve güncellik yükü büyür."
+        }
+      ],
+      "missing_measurement": "Her sorgu için tarih, sürüm aralığı, sayfa/cursor, başarı/hata ve sonlandırma nedenini kaydet. Erişilemeyen kaynağı sıfır bulgu sayma.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DE-06",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/17"
+        },
+        {
+          "record_id": "DE-08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/19"
+        }
+      ]
+    },
+    {
+      "id": "B20",
+      "title": "“Bitti” tek durum değil: yürütme, kanıt ve insan kabulü farklı.",
+      "theme": "Doğruluk ve kabul",
+      "evidence_kind": "Yerel geçmiş + tasarım boşluğu",
+      "record_ids": [
+        "K15",
+        "K17",
+        "DE-03",
+        "DK-07"
+      ],
+      "observation": "Yerel belgelerde RUNNING, COMPLETED, VERIFIED ve MERGED farklı nesnelere ait. 18 Eylül toparlanma raporuna karşı 25 Eylül kök işte ERROR/review ve NOT_TESTED görünümü var; uzaktaki alpha kabulü doğrulanmamış.",
+      "interpretation": "İşin kapanması, testin geçmesi, kodun birleşmesi, doğru sürümün yayında olması ve insanın kabulü ayrı kanıt gerektirir.",
+      "boundary": "17 Eylül “kurulum bitti” ifadesi tüm ürünün teslim edildiği iddiası diye yeniden yazılamaz. 25 Eylül snapshot’ı tüm tarih boyunca hiçbir şey çalışmadı demek değildir.",
+      "decision_question": "Tek ekranda hangi bitiş durumlarını görmek istiyorsun?",
+      "options": [
+        {
+          "label": "Ayrı yürütme / kanıt / kabul durumu",
+          "tradeoff": "Anlam açık kalır; tek renkli “done”dan daha fazla bilgi gösterir."
+        },
+        {
+          "label": "Bir özet durum + zorunlu alt kanıtlar",
+          "tradeoff": "İlk bakış basittir; ayrıntıların kaybolmaması gerekir."
+        }
+      ],
+      "missing_measurement": "Kod MERGED iken alpha yanlış sürüm, test PASS iken kabul bekliyor ve iş ERROR iken geri alma tamam senaryolarını ayrı göster.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "K15",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+          "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+          "pointer": "/findings/1"
+        },
+        {
+          "record_id": "K17",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+          "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+          "pointer": "/findings/1"
+        },
+        {
+          "record_id": "DE-03",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/14"
+        },
+        {
+          "record_id": "DK-07",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/26"
+        }
+      ]
+    },
+    {
+      "id": "B21",
+      "title": "Karar modeli, teslimin doğru olduğuna tek başına tanıklık edemez.",
+      "theme": "Doğruluk ve kabul",
+      "evidence_kind": "Tasarım çıkarımı",
+      "record_ids": [
+        "MA-10",
+        "DK-04",
+        "DP-08"
+      ],
+      "observation": "Dış hata atfetme araştırması, LLM’ye teşhis yaptırmanın ilk kritik hatayı güvenilir biçimde bulmayı garanti etmediğini raporluyor. Prototipte kabul sayısı eşleşmesi de gerçek yükümlülük kapsamını kaçırabiliyor.",
+      "interpretation": "Jev/Laya benzeri tipli karar katmanı yönlendirmeye aday olabilir; test sonucu, yetki ve artifact kimliği için ayrıca doğrulanabilir kurallar gerekir. Bu ayrım araç ismine bağlı değildir.",
+      "boundary": "Bu kaynaklar Jev veya Laya’nın senin görevlerinde ölçülmüş doğruluk oranı değildir. Paylaşılan benchmark yüzdeleri bu sistemin kabul eşiğine çevrilemez.",
+      "decision_question": "Öğrenilmiş kararın rolünü nerede sınırlayacaksın?",
+      "options": [
+        {
+          "label": "Yalnız yönlendirme/öncelik adayı",
+          "tradeoff": "Operasyonel fayda sınanır; nihai geçişler kanıta bağlanır."
+        },
+        {
+          "label": "Gölge modda karşılaştır",
+          "tradeoff": "Gerçek sonucu değiştirmez; faydayı ölçmek için etiketli veri gerekir."
+        },
+        {
+          "label": "Şimdilik sabit kurallar",
+          "tradeoff": "Başlangıç daha izlenebilir; yeni örüntüleri elle tarif etmek gerekir."
+        }
+      ],
+      "missing_measurement": "Etiketli görev örneklerinde yanlış kabul, yanlış engel, kararsızlık ve kalibrasyonu ayrı ölç; sürüm bazında izlemeyi önceden tanımla.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "MA-10",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+          "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+          "pointer": "/cases/4"
+        },
+        {
+          "record_id": "DK-04",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/23"
+        },
+        {
+          "record_id": "DP-08",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/7"
+        }
+      ]
+    },
+    {
+      "id": "B22",
+      "title": "Proje katılımı ve işletim işleri, gizli insan emeği olabilir.",
+      "theme": "Uyarlanabilirlik",
+      "evidence_kind": "Tasarım boşluğu",
+      "record_ids": [
+        "DK-05",
+        "DK-04"
+      ],
+      "observation": "Derin incelemede repo ilk kurulumu, sır rotasyonu, veri migration’ı ve erişim onarımı için task içi otonomiden ayrı bir sınır ihtiyacı kaydedilmiş. Bunların insansız işlediğine dair uçtan uca kabul kaydı yok.",
+      "interpretation": "İnsanın yalnız girdi ve çıktıyı görmesi hedefi, her görevin hangi hazır proje sözleşmesine dayandığı belirtilmeden ölçülemez.",
+      "boundary": "Bu bir yaşanmış olay sayımı değil tasarım boşluğudur. İnsan başına sunucu sayısı hesaplayacak iş hacmi veya inceleme süresi ölçümü bulunmuyor.",
+      "decision_question": "İlk MVP hangi işleri kapsayacak?",
+      "options": [
+        {
+          "label": "Hazır proje profili içinde özellik geliştirme",
+          "tradeoff": "Daha dar ölçüm alanı; onboarding dışarıda açıkça gösterilir."
+        },
+        {
+          "label": "Onboarding ve bakım da kapsamda",
+          "tradeoff": "Daha geniş otonomi; ek yetki, test ve işletim sözleşmeleri gerekir."
+        }
+      ],
+      "missing_measurement": "Bir görevin girişinden çıktısına kadar insan müdahalesi günlüğü tut; görev tanımı/kabul, onboarding ve arıza müdahalesini ayrı say.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DK-05",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/24"
+        },
+        {
+          "record_id": "DK-04",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/23"
+        }
+      ]
+    },
+    {
+      "id": "B23",
+      "title": "Koruma aracının kurulmuş olması, kapının doğru kapandığını göstermiyor.",
+      "theme": "Doğruluk ve kabul",
+      "evidence_kind": "Statik prototip incelemesi",
+      "record_ids": [
+        "DP-01"
+      ],
+      "observation": "İncelenen shell yolunda gizli bilgi tarayıcısı sıfır dışı çıkınca “|| echo” kolu başarılı bitiyor; sonuç taramanın geçtiği gibi kayda girebiliyor.",
+      "interpretation": "Araç varlığı, araç bulgusu ve taramanın çalışamaması farklı sonuçlardır. Son komutun exit 0 olması bu ayrımı kaybediyor.",
+      "boundary": "Statik bulgu gerçek sır sızıntısı yaşandığını göstermez. Doğru bağlı bağımsız CI kapısı sonraki aşamada engellemiş olabilir.",
+      "decision_question": "Tarama sonucunu nasıl temsil edeceksin?",
+      "options": [
+        {
+          "label": "Temiz / bulgu / çalışmadı tipleri",
+          "tradeoff": "Neden görünür; sonuç şeması ve çağıran taraf uyumu gerekir."
+        },
+        {
+          "label": "Zorunlu araç için başarısızlıkta kapalı geçit",
+          "tradeoff": "Yayın durur; geçici altyapı hatasında kurtarma yolu gerekir."
+        }
+      ],
+      "missing_measurement": "Sahte test sırrı, eksik tarayıcı ve çalışma hatasını ayrı dene. Üçü de temiz tarama olarak kaydedilmemeli.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DP-01",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/0"
+        }
+      ]
+    },
+    {
+      "id": "B24",
+      "title": "Kabul kanıtı; kod, veri ve dış girdinin sürümüne bağlı.",
+      "theme": "Bütünleştirme ve teslim",
+      "evidence_kind": "Tasarım boşluğu",
+      "record_ids": [
+        "DK-02",
+        "DK-06"
+      ],
+      "observation": "Derin inceleme, bir URL’nin değişmez içerik kimliği olmadığını ve çoklu repo/veri şemasıyla oluşan alpha sürümünün tek commit’e indirgenemediğini kaydediyor.",
+      "interpretation": "HRMS gibi üründe aynı kod, farklı kural tablosu veya veri şemasıyla farklı sonuç üretebilir. Dış girdi değiştiğinde önceki test kanıtının geçerliliği yeniden değerlendirilir.",
+      "boundary": "Bu, çoklu repo veya belirli ERP seçmen gerektiği sonucu değildir. Bordro mevzuatının güncelliği bu teknik incelemede doğrulanmadı.",
+      "decision_question": "Teslim paketinin kimliği neleri içerecek?",
+      "options": [
+        {
+          "label": "Kod + bağımlılık + test veri kimliği",
+          "tradeoff": "Tek proje için başlangıç olabilir; dış kural kaynağı ayrıca sürümlenir."
+        },
+        {
+          "label": "Ürün sürüm vektörü",
+          "tradeoff": "Birden fazla repo/şema/konfigürasyon birlikte izlenir; manifest yönetimi gerekir."
+        }
+      ],
+      "missing_measurement": "Kod aynı kalırken kural verisini veya şemayı değiştir; eski kabul paketinin yeni ürün durumunu yanlışlıkla onaylamadığını dene.",
+      "qualification": "not_run",
+      "default_decision": null,
+      "sources": [
+        {
+          "record_id": "DK-02",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/21"
+        },
+        {
+          "record_id": "DK-06",
+          "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+          "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+          "pointer": "/records/25"
+        }
+      ]
+    }
+  ],
+  "record_index": [
+    {
+      "id": "K01",
+      "kind": "Yerel log",
+      "period": "11 Eylül kurulum kaydı",
+      "observation": "Caddy aynı yapılandırma hatasını tekrar tekrar yazıyor.",
+      "mechanism": "Caddyfile:28 acme_ca yönergesinin argümanı eksik veya geçersiz; hata açıkça parser tarafından verilmiş.",
+      "boundary": "10 eşleşen satır 10 bağımsız olay demek değildir; boş değerin kaynağı bu logda görünmüyor.",
+      "test": "Üretilen yapılandırma gerçek ortam değerleriyle başlangıç öncesinde doğrulanmalı.",
+      "status": "Sonraki devirde HTTP servisleri erişilebilir görülmüş; tek başına bu log hangi değişiklikle düzeldiğini kanıtlamaz.",
+      "source_ids": [
+        "E01"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "K02",
+      "kind": "Yerel log",
+      "period": "Kurulum startup.log",
+      "observation": "Kestra Cannot create local repository for plugins ile başlatılamıyor.",
+      "mechanism": "java.nio.file.AccessDeniedException: /app/storage/plugins.",
+      "boundary": "Dosya sistemi/volume izin sorunu kanıtlı; bunu Kestra çekirdeğinin mantık hatası saymak için kanıt yok.",
+      "test": "Servisin gerçek UID/GID kimliğiyle kalıcı veri ve eklenti yollarına erişim testi yapılmalı.",
+      "status": "Sonraki tarihli çalışan akışlar başlangıç engelinin en azından aşılmış olduğunu gösteriyor; kalıcı izin düzeltmesi burada yeniden doğrulanmadı.",
+      "source_ids": [
+        "E02"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "K03",
+      "kind": "Araç çıktısı + tarihî deney",
+      "period": "15 Eylül",
+      "observation": "51 testlik birleşik koşu yaklaşık 4,3 saniyede raporsuz bitiyor; çıkış 137.",
+      "mechanism": "Kayıtlı kernel çıktısında Memory cgroup out of memory ve headless_shell/MainThread öldürülmesi var. Deney raporu browser --memory 1g sınırını belirtiyor.",
+      "boundary": "137 tek başına OOM kanıtı değildir; burada kernel kaydıyla destekli. Bu, LLM/ajanın genel RAM ihtiyacını veya Hetzner kapasitesini ölçmez. Örneklenmiş tepe gerçek anlık tepeden düşük olabilir.",
+      "test": "Büyüyen test setinde cgroup OOM, exit/signal, peak bellek, zaman sınırı ve batch makbuzu birlikte gözlenmeli; kaynak artışı ölçüme dayanmalı.",
+      "status": "Raporda 2 GB ile aynı aday 3/3 PASS; örneklenmiş tepe 887–942 MiB. Sonra testleri gruplama ve ayrı kaynak sınırları eklenmiş.",
+      "source_ids": [
+        "E31",
+        "E11",
+        "E12",
+        "E13"
+      ],
+      "brief_ids": [
+        "B01"
+      ]
+    },
+    {
+      "id": "K04",
+      "kind": "Araç çıktısı + tarihî deney",
+      "period": "13–15 Eylül",
+      "observation": "SCHEDULER_LEASE_LOST; iki UNKNOWN slot dolu kalırken diğer ekipler başlayamıyor.",
+      "mechanism": "15 Eylül deneyinde Clamshell/Maintenance Sleep zamanları heartbeat kesintileriyle eşleştirilmiş. 120 saniyelik sahiplik süresi doluyor; lost bayrağı kalıcı, release de aynı süre şartına takılıyor; max_slots=2 doluyor.",
+      "boundary": "03:59 devir raporu ilk nedeni henüz bilmiyordu; sonraki deney uyku korelasyonunu bulmuş. Bütün lease kayıplarının uyku olduğu söylenemez. Bu olay Mac üzerinde; Ubuntu sunucuda aynı tetikleyici beklenmez.",
+      "test": "Duraklama, restart, devralma ve eski worker dönüşü ayrı sınanmalı; eski sahibin yazması engellenirken kapasite geri kazanılmalı.",
+      "status": "Aynı sahip ve değişmemiş nesil için kontrollü yenileme, ölü slot uzlaştırma ve yeniden kuyruklama kaydedilmiş; 06:16 snapshot ilerlemenin yeniden başladığını destekliyor.",
+      "source_ids": [
+        "E03",
+        "E07",
+        "E30",
+        "E28"
+      ],
+      "brief_ids": [
+        "B06"
+      ]
+    },
+    {
+      "id": "K05",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15 Eylül 02:24 UTC",
+      "observation": "Team 5 UI-05 VERIFIED olduktan aynı saniye sonra PACKAGE_LEASE_LOST.",
+      "mechanism": "Yenileme iş parçacığı yalnız CLAIMED/IMPLEMENTED durumunu kabul ediyor; kendi VERIFIED geçişini sahiplik kaybı sanıyor ve kalıcı hata kaydediyor.",
+      "boundary": "Bu vaka scheduler uyku vakasından ayrıdır; eski deneydeki zamanlı teşhise dayanır.",
+      "test": "Accept/renew/checkpoint eşzamanlılığında kendi terminal geçişi, gerçek devralma ve eski token birbirinden ayrılmalı.",
+      "status": "Kendi VERIFIED geçişini ayırt etme, kabul öncesi heartbeat durdurma ve aynı nesilde devam makbuzları mevcut.",
+      "source_ids": [
+        "E08"
+      ],
+      "brief_ids": [
+        "B06"
+      ]
+    },
+    {
+      "id": "K06",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15 Eylül ve tarihsiz log birikimi",
+      "observation": "Yönetim gözlemi her döngüde BlockageStoreError veriyor.",
+      "mechanism": "Deney aynı olay anahtarıyla route alanı değişen payload yazıldığı için IDEMPOTENCY_CONFLICT oluştuğunu saptıyor; yalnız hata sınıfı loglanmış.",
+      "boundary": "Eski rapor 1275 satır saymış; bu incelemede dosyada 1385 satır var. Bu birikim farkıdır, 1385 ayrı kök neden değildir.",
+      "test": "Olay kimliği ve değişebilir projeksiyon ayrılmalı; tekrar gözlem, rota değişimi ve retry idempotency testleri bulunmalı.",
+      "status": "Mevcut olayın tekrar yazılmaması ve hata nedeninin loglanması kaydedilmiş.",
+      "source_ids": [
+        "E06",
+        "E08"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "K07",
+      "kind": "Yerel tarihî kayıt",
+      "period": "Tarihsiz loglar; 16 Eylül 02:20–02:50 UTC",
+      "observation": "PostgreSQL deadlock kayıtları; claim sırasında işçilerin ve zamanlayıcının yığılması.",
+      "mechanism": "Ham logda jobs satırları üzerinde 7 deadlock kaydı var. Ayrı 10b deneyinde bir transaction kilit tutarken ikinci bağlantı reviewer kapasitesi için aynı job kilidini istiyor.",
+      "boundary": "Tarihsiz 7 deadlock satırını 10b olayıyla birebir eşleştirecek zaman/correlation bilgisi yok; iki kanıt grubu aynı olay diye sayılmaz.",
+      "test": "Kilit sırası, transaction sınırı ve ikinci bağlantı kullanımı gerçek eşzamanlı yük altında sınanmalı; süre ve ilk hata loglanmalı.",
+      "status": "10b raporunda kapasite okuması claim transaction öncesine taşınmış.",
+      "source_ids": [
+        "E04",
+        "E05",
+        "E19"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "K08",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15 Eylül 03:59 UTC snapshot",
+      "observation": "INCIDENT.json okunamadı diyen sonuç SUCCESS/diagnosed olarak kaydedilmiş.",
+      "mechanism": "Dosyayı oku talimatı var; dosya içeriği promptta yok, yerel okuma aracı yok ve komut çalıştırmak yasak. Model çağrısının bitmesi teşhis başarısı sayılmış.",
+      "boundary": "Bu, raporlanan bir araç/yetki-sözleşme uyumsuzluğudur; modelin kendi kendine dosyayı okumayı reddetmesi şeklinde yorumlanamaz.",
+      "test": "Teşhis başarısı kaynak kimliği, evidence_read, nedensel bulgu ve doğrulanabilir sonraki adım gerektirmeli; araç çağrısı bitişi yeterli olmamalı.",
+      "status": "Sınırlı olay içeriğinin girdiye eklenmesi, salt okunur erişim ve NEEDS_EVIDENCE sonucu kaydedilmiş.",
+      "source_ids": [
+        "E27",
+        "E35",
+        "E08"
+      ],
+      "brief_ids": [
+        "B04"
+      ]
+    },
+    {
+      "id": "K09",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15–18 Eylül",
+      "observation": "NEEDS_TRIAGE / NO_QUALIFIED_REPAIR_PROFILE / PARALLEL_CHILDREN_PENDING ile iş sessizce bekliyor.",
+      "mechanism": "Onarım talebini tüketen yürütücü yok; tamamlanmış takım yeniden kuyruğa alınmıyor veya bütün takımlar bitmişken root hâlâ çocuk bekliyor. Rol/rapor varlığı çalışan bir onarım yolu sağlamıyor.",
+      "boundary": "Family watch raporuna göre bu gözlemci kendiliğinden onarım yapmaz veya worker yeniden başlatmaz. Alarmı eklemek onarım döngüsünü tamamlamak değildir.",
+      "test": "Her bekleme gerçek sorumlu iş, uyanma olayı, son ilerleme ve zaman sınırı taşımalı; yürütülebilir onarım yoksa görünür karar talebi oluşmalı.",
+      "status": "Foundation repair/recall yolları kademeli eklenmiş. 18 Eylül 16:18 family watch WAIT_WITHOUT_OWNER, ERROR_WITHOUT_REPAIR, NO_PROGRESS gözlemini eklemiş.",
+      "source_ids": [
+        "E13",
+        "E20",
+        "E21",
+        "E24"
+      ],
+      "brief_ids": [
+        "B05"
+      ]
+    },
+    {
+      "id": "K10",
+      "kind": "Yerel tarihî kayıt",
+      "period": "18 Eylül 07:21–10:09 UTC",
+      "observation": "AGENT_PROGRESS_STALLED → tekrar → üçüncü olayda RECOVERY_RETRY_BOUND.",
+      "mechanism": "Birleşik test süresi 570 saniyeden yaklaşık 70 dakikaya büyümüş. tdd.poll içindeki controller çalışırken yeni makbuz gelmediği için 600 saniyelik ajan boşta sınırı işleyen testi kesmiş.",
+      "boundary": "Bu süreler olay raporundan; bugün benchmark yapılmadı. Ajan zamanlayıcısını durdurmak bütün timeoutları kaldırmak anlamına gelmemeli.",
+      "test": "Model düşünmesi, controller çalışması, test ilerlemesi ve gerçek takılma farklı telemetriyle ve ayrı son tarihlerle izlenmeli.",
+      "status": "Controller yürütme penceresinde ajan sayaçlarının durdurulduğu; test tarafında ayrı timeout ve lease sınırlarının korunduğu kaydedilmiş.",
+      "source_ids": [
+        "E22"
+      ],
+      "brief_ids": [
+        "B02"
+      ]
+    },
+    {
+      "id": "K11",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15–16 Eylül",
+      "observation": "Coder kapasitesi olsa bile işler review kapasitesi bekleyerek yeniden kuyruğa dönüyor; başka PENDING paketler alınmıyor.",
+      "mechanism": "Sabit reviewer rotası kotaya takılıyor; ilk IMPLEMENTED paket her claimde tekrar seçiliyor. Ayrıca root kabul kapasitesi onarımın kullanacağı rol yerine koordinatör rolünden ölçülmüş.",
+      "boundary": "RAM eklemek hesap kotasını veya rol bağımlılığını çözmez. Alternatif reviewer bağımsızlığı ve yetkisi korunmalı.",
+      "test": "Kaynak bütçesi rol bazında olmalı; reviewer yokken bağımsız yapılabilir iş ilerlemeli, bekleme WIP sınırı ve uyanma koşulu taşımalı.",
+      "status": "Review defer, kapasiteye göre paket seçimi ve onarım rolüne göre admission raporlanmış.",
+      "source_ids": [
+        "E18",
+        "E19"
+      ],
+      "brief_ids": [
+        "B07"
+      ]
+    },
+    {
+      "id": "K12",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15 Eylül 20:04–21:10 UTC",
+      "observation": "Birden fazla takım 429 ile, API yeniden oluşturulurken bazıları 502 ile düşüyor.",
+      "mechanism": "İşçiler aynı anahtarla sık verify_contract sorgusu yapıyor; kapasite bekleme döngüsünde üç saniyede bir GET kaydedilmiş. Gateway hatası unknown sınıfına gidiyor.",
+      "boundary": "Bu dosyada anlatılan tarihsel API limit değişikliği bugünkü yapılandırma tavsiyesi veya yaptığımız işlem değildir.",
+      "test": "Ortak kota bütçesi, sorgu birleştirme, backoff/jitter ve kesinti sonrası sözleşme uzlaştırması yük testinde doğrulanmalı.",
+      "status": "Sınırlı backoff/Retry-After, gateway sınıflandırması ve tarihsel rate-limit artırımı var; bekleme sorgularını seyrekleştirme o bölümde açık kalmış.",
+      "source_ids": [
+        "E18"
+      ],
+      "brief_ids": [
+        "B07"
+      ]
+    },
+    {
+      "id": "K13",
+      "kind": "Araç çıktısı + tarihî deney",
+      "period": "18 Eylül",
+      "observation": "UI-48 için 4.762 CLAIM olayı; çok az model çalışması. Sonra TDD state exceeds storage limit ve review context sınırı.",
+      "mechanism": "93 bin karakter tarihçe CONTEXT_CAPACITY_UNSUPPORTED üretmiş; CAPACITY alt dizesi gerçek kapasite beklemesi sanılmış. Ayrı olayda makbuz tekrarları state boyutunu 1.008.940 byte, build kanıtı tek başına 100.248 karakter yapmış.",
+      "boundary": "4.762 değeri CLAIM sayısıdır; 4.762 ayrı model çağrısı ya da görev değildir. 13 saat aynı zaman aralığındaki entegrasyon beklemesiyle de ilişkilidir.",
+      "test": "Girdi ve durum boyutu görev büyümesiyle sınanmalı; büyük kanıt kaybolmadan harici artifact referansına taşınmalı; aynı checkpoint tekrarları ölçülmeli.",
+      "status": "Bounded history, tam kanıta hash/ref ile erişim, state compaction ve açık hata sınıflandırması raporlanmış; state 233.073 byte seviyesine indirilmiş.",
+      "source_ids": [
+        "E20",
+        "E32",
+        "E23"
+      ],
+      "brief_ids": [
+        "B03"
+      ]
+    },
+    {
+      "id": "K14",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15–18 Eylül",
+      "observation": "UI-54 bağımlı bileşeni bekliyor, merge edilmiş takım recall sonrası çalışmıyor; tüm takımlar birleştiği halde root ilerlemiyor.",
+      "mechanism": "Paket bağımlılığı ve entegrasyon hazır oluşu aynı biçimde modellenmemiş. Root foundation eskiliği bütün 73 paketi stale gösterip düzeltmeyi yapacak integration aşamasını da kapatmış.",
+      "boundary": "Ayrı worktree yaratmak tek başına bağımlılık, ortak temel, recall veya entegrasyon sahipliği sorunlarını çözmez.",
+      "test": "Bağımlılık DAGı, ortak dosya sahipliği, birleşik aday regresyonu ve bitmiş işin geri çağrılması uçtan uca doğrulanmalı.",
+      "status": "Dependency pending/release, merged takımın yeniden kuyruğa alınması, foundation repair ve integration giriş koşulu düzeltmeleri kaydedilmiş.",
+      "source_ids": [
+        "E14",
+        "E16",
+        "E21",
+        "E20"
+      ],
+      "brief_ids": [
+        "B08"
+      ]
+    },
+    {
+      "id": "K15",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15–18 Eylül",
+      "observation": "Compaction sonrası TDD_UPGRADE_DISCOVERY_MISMATCH; browser makbuzuyla CORRECTION_REGRESSION_STALE_OR_INCOMPLETE; dosyası değişmeyen committe CORRECTION_SOURCE_CHANGED.",
+      "mechanism": "Makbuz şeması ve kimlik kuralları tüm üretici/tüketicilerde birlikte güncellenmemiş. Liste→count/digest dönüşümünü okuyucu bilmiyor; tek süreç returncode şartı toplu tarayıcı koşusuna uygulanıyor.",
+      "boundary": "Alt küme test başarısı tüm ürünün AC/DoD ve alpha teslimini kanıtlamaz; değişiklik sonrası tarihsel test sonuçları yeniden çalıştırılmadı.",
+      "test": "Sürümlemiş sözleşme, producer/consumer uyumu, eski checkpointten devam ve birleşik akış canary testi olmalı.",
+      "status": "Ortak selection_matches, profile digest taşıma ve içerik digestine göre değişiklik denetimi eklenmiş. 10as raporu ilgili regresyon alt kümesinde 518/0 bildiriyor.",
+      "source_ids": [
+        "E23",
+        "E16"
+      ],
+      "brief_ids": [
+        "B20"
+      ]
+    },
+    {
+      "id": "K18",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15–18 Eylül",
+      "observation": "Geçersiz test isteği işi ERROR yapıyor; ambient tip eksikliği ürün hatası gibi görülüyor; olmayan production kanıtı için 14 review tekrarı.",
+      "mechanism": "Çalıştırıcı ortamı, test yazarı hatası, ürün RED sonucu ve erişilemeyen kabul kanıtı ayrılmamış. Reviewer kapsam dışı kanıt istiyor; author bu beklentiye karşı kendini skip eden test üretmiş.",
+      "boundary": "Bunlar test altyapısı/oracle boşluklarıdır; bütün oracle probleminin çözüldüğü veya bağımsız iş doğruluğunun kanıtlandığı sonucuna varılamaz.",
+      "test": "Test çalıştı mı, assertion var mı, hangi iş kuralını doğruluyor, çalıştırıcı mı ürün mü bozuk soruları ayrı kanıtlarla yanıtlanmalı.",
+      "status": "Ambient .d.ts dahil etme, geçersiz isteğe REJECTED geri bildirimi, kapsamlı review ve belirli path hatalarını yazarına gönderme raporlanmış.",
+      "source_ids": [
+        "E11",
+        "E15",
+        "E23"
+      ],
+      "brief_ids": [
+        "B09"
+      ]
+    },
+    {
+      "id": "K16",
+      "kind": "Yerel tarihî kayıt",
+      "period": "13 Eylül; 18 Eylül 16:46–17:24 UTC",
+      "observation": "16:46 review QUEUED ve job RUNNING; slot 0, PLANE_RECOVERY_ACTOR_AMBIGUOUS. 17:24 yetki makbuzu sonrası PLANE_RECOVERY_OWNER_STATE_PENDING; pano WAITING_DECISION.",
+      "mechanism": "Paylaşılan aktörle insan/otomasyon durum değişikliği ayırt edilemiyor. Yetki kaydı eklenince ilk engel değişiyor; bu kez controller panonun ERROR veya IN_PROGRESS olmasını istiyor, mevcut WAITING_DECISION durumundan çıkışı sahibinden bekliyor.",
+      "boundary": "Pano kararını beklemek tasarımın bilinçli sınırı olabilir; otomasyon arızasıyla aynı şey değildir. Ancak kullanıcı hedefiyle uyumu çözülmemiştir. Sonraki nihai kabul veya remote alpha yayını doğrulanmadı.",
+      "test": "İnsan ve otomasyon eylemi ayrı doğrulanabilir kimlik/revision taşımalı; requeue sonrası gerçek claim ve review başlangıcı gözlenmeli.",
+      "status": "18 Eylül 16:37 review requeue; 17:24 sahip yetkisi makbuzu kabul edilmiş. Son kayıtta pano durumunun insan tarafından değiştirilmesi bekleniyor. Bu yüzden son engeli hâlâ actor ambiguous diye raporlamıyoruz.",
+      "source_ids": [
+        "E33",
+        "E37",
+        "E38",
+        "E29",
+        "E25"
+      ],
+      "brief_ids": [
+        "B05",
+        "B14"
+      ]
+    },
+    {
+      "id": "K17",
+      "kind": "Yerel tarihî kayıt",
+      "period": "15–18 Eylül",
+      "observation": "17 Eylül yanıtı Sistem kurulumu bitti, bitmek üzere diyor; 18 Eylül kaydı uzun sessiz durmayı gösteriyor.",
+      "mechanism": "RUNNING, COMPLETED, VERIFIED ve MERGED farklı nesnelerin durumları. Bunlar nihai kullanıcı kabulünü göstermiyor. Teşhis çağrısının tamamlanması ve yönetici raporunun iletilmesi de onarım yerine sayılmış.",
+      "boundary": "17 Eylül yanıtı bütün teslimin bittiğini açıkça söylemiyor; buna rağmen yakın tamamlanma ve müdahale gerekmez beklentisi sonraki olaylarla doğrulanmıyor. 79 teslim 79 benzersiz ürün gereksinimi değildir.",
+      "test": "Aşama, paket, bütünleşik ürün, remote deploy ve insan kabulü ayrı durumlar olmalı; tamamlandı etiketi ilgili somut kanıta bağlanmalı.",
+      "status": "Family stall watch eklenmiş ve bazı dar kurtarmalar gerçekten üretimi yeniden başlatmış. 18 Eylül 16:14 raporu 74/74 verified ve 79 merged delivery ile GREEN kaydetmiş; ardından acceptance review ve 17:24 pano durumu beklemesi var.",
+      "source_ids": [
+        "E34",
+        "E20",
+        "E24",
+        "E26",
+        "E35",
+        "E33"
+      ],
+      "brief_ids": [
+        "B20"
+      ]
+    },
+    {
+      "id": "CP-01",
+      "kind": "Dış kaynak kaydı",
+      "period": "2024-12-01; 2025-03-21; 2025-10-16",
+      "observation": "Meşru uzun süreç beklenirken ajan döngüde sanılıp durduruluyor.",
+      "mechanism": "Sabit tekrar sayısı, gerçek ilerleme yokluğu ile beklemeyi ayıramıyor. Maintainer açıklaması ve kullanıcı CI gözlemiyle yüksek mekanizma güveni; burada yeniden üretilmedi.",
+      "boundary": "Eski OpenHands vakası ile yeni SDK iyileştirmesi aynı mekanizma ailesi; aynı tek olay değildir.",
+      "test": "Öneri, çalıştırılmadı: kontrollü uzun test ile gerçekten döngüye giren ajanı aynı gözlemciye ver; uzun test korunmalı, gerçek döngü sınır içinde durmalı.",
+      "status": "#763 2025-12-18 birleşmiş; varsayılan eşikler korunmuş. Her iş yükünde yanlış pozitifin bittiği veya kullanıcının sürümünde düzeldiği kanıtı değildir.",
+      "source_ids": [
+        "CPS-01",
+        "CPS-02",
+        "CPS-03"
+      ],
+      "brief_ids": [
+        "B02"
+      ]
+    },
+    {
+      "id": "CP-03",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-06-23",
+      "observation": "Sert kesilen iş callback göndermiyor; RUNNING ve PR'deki inceleme sürüyor mesajı gerçek sonucu yansıtmıyor.",
+      "mechanism": "Graceful exception kapanışına bağlanan tamamlanma bildirimi sert kapanış yolunda garanti değil. Kaynak açıkça AI-yardımlı inceleme; mekanizma makul, bütün olaylar bağımsız doğrulanmadı.",
+      "boundary": "SIGKILL/OOM için süreç içi finally veya signal handler garantisi kurulamaz. Sayı600s evrensel güncel ürün sınırı diye sunulmamalı.",
+      "test": "Öneri, çalıştırılmadı: başarı, SIGTERM, SIGKILL, OOM ve callback ağ kesintisi enjekte et; bir kez terminalleşme, görünür neden ve kaynaksız yetim iş bırakmama doğrulansın.",
+      "status": "#203 kapalı; cleanup #209 2026-06-24 birleşmiş. İlişkili timeout #206 erişimde açık. Bütün kill yolları düzeldi denemez.",
+      "source_ids": [
+        "CPS-06",
+        "CPS-07",
+        "CPS-08"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "CP-04",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-03-26",
+      "observation": "Arayüz mesaj alıyor ama ajan başlamıyor; görünür hata yok.",
+      "mechanism": "Traceback MCP başlangıç timeout'unu destekliyor. Ağ gecikmesi, MCP deadlock'u veya kaynak yetersizliği alternatifleri kanıtlanmamış.",
+      "boundary": "HTTP 200 veya skill listesinin yüklenmesi agent readiness kanıtı değil. Bu vaka RAM azlığını kanıtlamaz.",
+      "test": "Öneri, çalıştırılmadı: tek MCP cevabını geciktir; işin ready görünmemesi, hangi yeteneğin eksik olduğunun raporlanması ve kısıtlı çalışma politikasının uygulanması ölçülsün.",
+      "status": "2026-09-27 canlı API açık; üretici düzeltmesi doğrulanmadı.",
+      "source_ids": [
+        "CPS-09"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "CP-05",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-09-16",
+      "observation": "Basit shell komutları bile milisaniyeler içinde SIGKILL oluyor; diğer araçlar çalışıyor.",
+      "mechanism": "Raporun izole deneyine göre owner-liveness probe başarısızlığı owner öldü diye yorumlanıp süreç grubu öldürülüyor. Üretici onayı yok; güçlü kullanıcı kanıtı.",
+      "boundary": "Sandbox'ı tamamen kaldırmak önerimiz değildir. Bu örnekte137 OOM değil supervisor SIGKILL belirtisi.",
+      "test": "Öneri, çalıştırılmadı: canlı worker ile sağlık probunu engelle, ardından gerçekten worker'ı öldür; iki durum farklı sonuç ve neden üretmeli.",
+      "status": "2026-09-27 açık.",
+      "source_ids": [
+        "CPS-10"
+      ],
+      "brief_ids": [
+        "B01"
+      ]
+    },
+    {
+      "id": "MA-03",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-07-27",
+      "observation": "Agent list dört ajan gösterirken swarm status sıfır gösteriyor.",
+      "mechanism": "Üç uzlaştırılmayan kayıt yolu; kodlu tekrar raporu ve owner'ın yayımlanan paket doğrulaması var.",
+      "boundary": "Ajan kaydının görünmesi, gerçek görev yürütmesini tek başına kanıtlamaz.",
+      "test": "Dört worker başlat; API, pano, scheduler ve gerçek process/lease kayıtlarını karşılaştır. Birini öldürünce bütün görünümler belirlenmiş sürede uzlaşmalı.",
+      "status": "Owner v3.32.23'te aynı repro ile doğruladı; resmî sürüm kaydı mevcut.",
+      "source_ids": [
+        "MAS-03",
+        "MAS-04"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-05",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-02-10",
+      "observation": "Üst timeout hata dönüyor, alttaki model süreci çalışmaya devam ediyor.",
+      "mechanism": "Owner tarafından kabul edilen timeout/child-process yaşam döngüsü uyumsuzluğu.",
+      "boundary": "Promise'ın kapanması ile process'in bitmesi ayrı olaylar; bu kaynak yerel OOM'un sebebini ispatlamaz.",
+      "test": "Uzun alt process ve torun process başlat; dış timeout ver. Tanımlı bekleme sonunda süreç, lease ve rezervasyon kalmamalı; ikinci worker eski işi sürdüren process ile yarışmamalı.",
+      "status": "Owner 26 Martta v3.5.47 düzeltmesini bildirdi; binary bağımsız denenmedi.",
+      "source_ids": [
+        "MAS-08",
+        "MAS-09"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-01",
+      "kind": "Dış kaynak kaydı",
+      "period": "2023-12-08",
+      "observation": "OOM/137 sonrası görev RUNNING kalıyor; tekrar gönderim boru hattını ilerletmiyor.",
+      "mechanism": "Raporlayan worker kaybı ile heartbeat tespit boşluğu arasında bağ kuruyor. Maintainer DELETE bayrağının yürütmeyi durdurmadığını doğruluyor; kesin iç kök neden bu kaynakta kapanmıyor.",
+      "boundary": "Eski sürüm vakasıdır; güncel Kestra’da devam ettiğini veya kullanıcının aynı bug’a çarptığını göstermez.",
+      "test": "Test çalışırken workerı OOM ile öldür; terminal durum, kaynak temizliği, yeniden sahiplenme ve tek teslim oluşumunu ölç.",
+      "status": "Issue 2024-05-02 completed; milestone 0.17.0. Kesin fix PR ve yayımlanan sürüm burada doğrulanmadı.",
+      "source_ids": [
+        "WFS-01"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-02",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-05-22",
+      "observation": "SLA ile durdurulan görev, bütün worker JVM’ini tekrar tekrar düşürüyor.",
+      "mechanism": "Issue yazarına göre interrupted bayrağı temizlenmeden son durum JDBC’ye yazılıyor; bağlantı alma InterruptedException üretip fatal shutdown’a dönüşüyor. Stack trace güçlü; bağımsız tekrar testi yapılmadı.",
+      "boundary": "Hikari hatası bu olayda bağlantı havuzunun dolduğunu kanıtlamıyor. Her Kestra timeout’unun sonucu değildir.",
+      "test": "Bir takımı SLA ile iptal ederken komşu takımların ilerlediğini ve iptal edilen işin son durumunun yazıldığını kontrol et.",
+      "status": "Issue açık; develop üzerinde düzelmiş görünüyor yorumu var, yayımlanan düzeltme sürümü doğrulanmadı.",
+      "source_ids": [
+        "WFS-02"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-08",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-03-15",
+      "observation": "RUNNING görünen işi worker hiç almıyor; yeniden bağlanınca iş sahipsiz kalıyor.",
+      "mechanism": "Raporlayan stream keepalive ile ayrı heartbeat RPC’sinin farklılığını izliyor; worker canlı görünürken görev taşıyan stream ölebiliyor. Tespit güçlü ama maintainer doğrulaması yok.",
+      "boundary": "Azure L7 topolojisine özgü rapor; bütün Hatchet kurulumlarına genellenmez.",
+      "test": "Idle proxy bağlantısını kes, sonra iş gönder; delivery acknowledgement yoksa iş yeniden güvenli sahiplenilmeli.",
+      "status": "18 Haziran stale sonrası not_planned kapanmış; kapalı olması düzelmiş demek değil.",
+      "source_ids": [
+        "WFS-09"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "CP-02",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-02-23",
+      "observation": "30 worker, toplam 8 GiB sınırındaki SWTBench koşusu 5 saat 4 dakika sonra OOMKilled/137.",
+      "mechanism": "Parent düzeltmesi worker belleği çoğalmasını kapsamamış. Issue ile düzeltme PR'si aynı mekanizmayı belirtir; yüksek güven. Tek tek bellek parçalanması iddiaları bağımsız ölçülmedi.",
+      "boundary": "Bu coding ajanının1 GB tükettiği iddiası değildir; benchmark koordinatörü ve worker süreçlerinin toplamıdır. 137 tek başına değil, OOMKilled kaydıyla birlikte kullanılmıştır.",
+      "test": "Öneri, çalıştırılmadı: hedef paralellikte uzun soak testi; parent/child RSS, konteyner limiti, retry başına artış ve OOM olaylarını ayrı ölç.",
+      "status": "#446 API'ye göre 2026-03-23 birleşmiş. Evrensel RAM tasarruf oranı doğrulanmadı.",
+      "source_ids": [
+        "CPS-04",
+        "CPS-05"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-04",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-07-13",
+      "observation": "Worktree sayısı arttıkça arka plandaki model işleri ortak hesap kotasını tüketiyor.",
+      "mechanism": "Proje sahibinin doğruladığı tasarım kusuru: yerel tekilleştirme var, kullanıcı/repo çapında sınır yok.",
+      "boundary": "Eski kusur bugünkü sürümün kesin davranışı diye sunulmamalı; performans tekrar deneyi yapılmadı.",
+      "test": "Aynı hesabı paylaşan 10 worktree ve iki repo aç; tanımlı global çağrı/eşzamanlılık bütçesinin aşılmadığını, 429 sonrasında bütün filonun ortak geri çekildiğini doğrula.",
+      "status": "#2662 ve #2663 14 Temmuzda merged; 3.27.0 ve 3.28.0 yayın commit'leri doğrulandı.",
+      "source_ids": [
+        "MAS-05",
+        "MAS-06",
+        "MAS-07"
+      ],
+      "brief_ids": [
+        "B07"
+      ]
+    },
+    {
+      "id": "WF-10",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-06-22/2026-06-23",
+      "observation": "Yeni işler başlayamıyor; alternatif bölge de benzer nedenle düşüyor.",
+      "mechanism": "Şirket raporu K8s control plane yüklenmesi ve etcd quorum kaybını açıklıyor; ikinci bölge aynı zayıflıkla daha küçük tabandan hızla büyüyor.",
+      "boundary": "Bütün~18 saat boyunca her iki bölgenin aynı anda kapalı olduğu söylenmiyor; şirketin kendi raporu.",
+      "test": "144 takımın cold-start dalgasını kademeli test et; admission backpressure ve bir cluster kaybında gerçek bağımsız failover ölç.",
+      "status": "Rapor toparlanmayı bildiriyor; planlanan mimarinin tamamlandığı bu kaynakla doğrulanmıyor.",
+      "source_ids": [
+        "WFS-12"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-12",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-07-15",
+      "observation": "Ajan CLI’si bellek hatası, thread açma hatası veya sonsuz çalışan süreç görünümü veriyor.",
+      "mechanism": "Limits ve VmPeak ölçümü sınıra işaret ediyor; hang’in Bun iç nedeni yazarın çıkarımı. Fiziksel RAM tüketimiyle aynı limit değil.",
+      "boundary": "İzolasyonu kapatmayı önermiyoruz. Toplam sunucu RAM’ini büyütmek iç limitin otomatik değişeceği anlamına gelmez.",
+      "test": "İzolasyon açıkken gerçek SDK + tarayıcı iş yükünü limitlerle çalıştır; testten sonra namespace sınırları ve doğru OOM sınıflandırmasını doğrula.",
+      "status": "PR 10138 15 Temmuzda merge; ilk release bilinmiyor. PR ortamında gerçek nsjail uçtan uca testi yapılmadığı açık.",
+      "source_ids": [
+        "WFS-14",
+        "WFS-15"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-02",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-05-12/2026-05-13",
+      "observation": "Tamamlanmış convoy'lar yaklaşık 40 saniyede bir yeniden tamamlandı bildirimi üretiyor.",
+      "mechanism": "Tek seferlik tamamlanma bildirimi kaydının eksikliği rapor sahibinin hipotezi.",
+      "boundary": "Tek kurulum raporu; bütün kurulumlarda sıklık çıkarılamaz.",
+      "test": "Tek completion olayını 100 kez yeniden teslim et; tamamlama kaydı ve takip işi birer kez oluşmalı, uyarı kuyruğu büyümemeli.",
+      "status": "27 Eylül erişiminde açık, needs-triage.",
+      "source_ids": [
+        "MAS-02"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-03",
+      "kind": "Dış kaynak kaydı",
+      "period": "2023-05-11",
+      "observation": "10 kayıt için düşünülen işlem heartbeat timeout sonrası ilk 3 kayıt tekrar edilince 13 altakış başlatıyor.",
+      "mechanism": "Activity retry semantiği ve yan etkinin tekilleştirilmemesi; maintainer heartbeat detayları da throttling yüzünden tekrar ihtimalini tamamen kaldırmaz diyor.",
+      "boundary": "Forum tek geliştirici örneğidir; yaygınlık ölçümü ve şirket genellemesi yok.",
+      "test": "GitHub yazımı tamamlandıktan sonra cevap alınmadan workerı kes; tekrar geldiğinde ikinci PR/deploy oluşmamalı.",
+      "status": "Ürün bug düzeltmesi olarak sunulmamış; uygulama tasarımı gereği.",
+      "source_ids": [
+        "WFS-03"
+      ],
+      "brief_ids": [
+        "B13"
+      ]
+    },
+    {
+      "id": "WF-09",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-04-26",
+      "observation": "Eski kuyruk öğeleri lease doğrulamasında aynı sayaca takılıp sonsuz dönüyor.",
+      "mechanism": "Doğrulama attempt sayacı artmadan hata veriyor. PR 4321 aynı yolu açıklayıp backoff/attempt/dequeue düzeltmesi öneriyor.",
+      "boundary": "Üretim Redis temizliği burada uygulama talimatı değildir; ölçümler yaygınlık istatistiği değildir.",
+      "test": "Eski şemalı kuyruk kaydı enjekte et; bounded retry/DLQ oluşmalı ve sağlıklı görev akış hızı korunmalı.",
+      "status": "Issue ve PR açık; birleşmiş düzeltme diye sunulmadı.",
+      "source_ids": [
+        "WFS-10",
+        "WFS-11"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-14",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-07-16",
+      "observation": "Otomatik altakış kurtarması aynı lock üzerinde yarışıp INFO log fırtınasına dönüşüyor.",
+      "mechanism": "Raporlayan bütün retry’ların aynı deterministik childId lock’una geldiğini kod yollarıyla açıklıyor;2 s blocking lock bekleyişi workerları da tüketiyor.",
+      "boundary": "Kod analizi+üretici kullanıcı gözlemi; bağımsız benchmark değil. Microsoft Conductor ve DBOS Conductor farklı ürünler.",
+      "test": "Aynı child launch hatasını iki replika ve çok worker altında tetikle; bir etkinrepair, bounded backoff ve sağlıklı işlere ilerleme bekle.",
+      "status": "Issue açık; çözüm önerileri uygulanmış ve doğrulanmış sayılmadı.",
+      "source_ids": [
+        "WFS-18"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "CP-06",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-09-13",
+      "observation": "Model değişimi sonrası geçmiş tekrar gönderilirken HTTP 400; yeni prompt denemeleri aynı biçimde başarısız.",
+      "mechanism": "Raporlayan kişi görüntü köprü mesajlarının tool-call eşleşmesini kopardığını payload A/B deneyiyle gösteriyor. Üretici onayı yok.",
+      "boundary": "Bu tek adaptör/oturum raporudur. Bütün sağlayıcılar arası geçişler bozuk denemez.",
+      "test": "Öneri, çalıştırılmadı: paralel metin/görüntü araç geçmişini taşıyan işi sağlayıcıA'danB'ye aktar; çağrı kimlikleri, sonuç sayısı ve devam edebilme doğrulansın.",
+      "status": "2026-09-27 açık; dağıtılmış düzeltme bulunamadı.",
+      "source_ids": [
+        "CPS-11"
+      ],
+      "brief_ids": [
+        "B15"
+      ]
+    },
+    {
+      "id": "CP-07",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-08-27",
+      "observation": "Yüklü pluginler çalışırken list/update komutları kurulu değil diyor.",
+      "mechanism": "Raporlayan kişi disk yapısı ve geri kurma deneyi gösteriyor; ayrıca ölü PID'lere ait pending kilitler gözlemiş. Üretici teyidi bulunamadı.",
+      "boundary": "Rapora göre oturumdaki plugin çalışması sürmüş; bunu bütün ajan yürütmesi durdu diye aktarmamak gerekir.",
+      "test": "Öneri, çalıştırılmadı: havuz yükseltmesini ortasında kes; yeniden başladıktan sonra kurulu/çalışan sürüm eşleşmesi ve stale-lock geri kazanımı doğrulansın.",
+      "status": "2026-09-27 açık.",
+      "source_ids": [
+        "CPS-12"
+      ],
+      "brief_ids": [
+        "B15"
+      ]
+    },
+    {
+      "id": "MA-06",
+      "kind": "Dış kaynak kaydı",
+      "period": "2025-01-06/2025-01-07",
+      "observation": "Java işi için dönen paket alanı, Python alanı bekleyen şemada reddediliyor; tekrarlar ve hata işleme sonrası uygulama çıkıyor.",
+      "mechanism": "Traceback açık; collaborator format uyumsuzluğunu teşhis etmiş. Ayrı bir recovery bugının mekanizması tam doğrulanmış değil.",
+      "boundary": "Kapanış başarı değildir. Model değişimi önerisi kapsamlı iyileştirme kanıtı değildir.",
+      "test": "Eksik alanlı, eski sürümlü ve semantik olarak yanlış üç çıktı ver; görev sessiz başarıya geçmemeli ve recovery ilk hata kanıtını korumalı.",
+      "status": "45 günlük hareketsizlik nedeniyle bot kapattı; düzeltilmiş sürüm kanıtı yok.",
+      "source_ids": [
+        "MAS-10",
+        "MAS-11",
+        "MAS-12"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-08",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-09-18",
+      "observation": "Protocol seçimi SDK'ya uygunsuz parametre geçiriyor; hata metni çıktıya dönüştürülünce workflow tamamlanmış görünüyor. Sessiz endpoint uzun bekleme yaratıyor.",
+      "mechanism": "Kod ve gözlem içeren kullanıcı raporu; maintainer teyidi yok.",
+      "boundary": "Sonsuz timeout yok: bildirilen SDK read timeout'u 600 saniye; uygulamanın 300 saniyelik sınırı bu yolda uygulanmıyor.",
+      "test": "Bağlantıyı kabul edip yanıt vermeyen sahte endpoint ve TypeError üreten adapter kullan; tanımlı deadline'da başarısızlık makbuzu oluşmalı, completion kapısı geçilmemeli.",
+      "status": "Erişimde açık.",
+      "source_ids": [
+        "MAS-14"
+      ],
+      "brief_ids": [
+        "B04"
+      ]
+    },
+    {
+      "id": "WF-05",
+      "kind": "Dış kaynak kaydı",
+      "period": "2023-07-02; rapor 2023-07-17",
+      "observation": "Çocuk işler tamamlanmışken replay, No command scheduled for event ile 15 kez hata veriyor.",
+      "mechanism": "Bakımcı eski SDK’da bilinen nondeterminism hatalarını işaret ediyor. Kullanıcı deployment, query mutation ve karışık worker checksum ihtimallerini reddediyor. Kesin SDK bug teşhisi yok.",
+      "boundary": "Her nondeterminism olayını kullanıcı deployment hatası veya motor bug’ı saymak yanlış. Sürüm eski.",
+      "test": "Devam eden görevlerin kaydedilmiş history’sini aday SDK/kod sürümüyle replay et; farklı komut üretimi varsa yayını engelle.",
+      "status": "Kullanıcı yükseltmeyi planlıyor; bu olayın son başarı teyidi forumda yok.",
+      "source_ids": [
+        "WFS-05"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-07",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-02-28",
+      "observation": "Fonksiyon dönse de serileştirilemeyen dict_items sonucu görev timeout’una kadar asılı kalıyor.",
+      "mechanism": "Çıktı serileştirme hata yolunun görevi bitirememesi; birleşmiş PR bunu düzeltiyor.",
+      "boundary": "Küçük reproducer; büyük şirket kesintisi veya bug’ün güncelde sürmesi iddiası yok.",
+      "test": "Ajan sonucuna geçersiz tip/bozuk JSON ekle; iş belirli sürede açıklayıcı FAILED olmalı, asılı kalmamalı.",
+      "status": "PR 3125 aynı gün merge; değişiklik notu Python 1.27.2.",
+      "source_ids": [
+        "WFS-07",
+        "WFS-08"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-13",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-05-22; release 2026-06-18",
+      "observation": "Prefix’ten yeniden başlayan invocation, ctx.rand kullandığında replay uyumsuzluğu üretebiliyor.",
+      "mechanism": "Rastgele tohumun invocation ID’den türemesi yeni yürütmede farklı seri verebiliyor; maintainer seed’i kalıcılaştıranPR’ı birleştirmiş.",
+      "boundary": "Ürün mühendisliği düzeltmesidir; doğrulanmış şirket outage öyküsü diye sayılmamalı.",
+      "test": "Prefix içinde rastgelelik ve dış çağrı içeren görevi taşı; karar izi korunmalı, uyumsuz geri dönüş açıkça reddedilmeli.",
+      "status": "PR 4750merge ; 1.7.0 release notunda opt-in. Aktifleştirme sonrası <1.7 rollback mümkün değil; eski invocation’lara backfill yok.",
+      "source_ids": [
+        "WFS-16",
+        "WFS-17"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-01",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-01-17",
+      "observation": "Merge kuyruğundaki kayıtlar saatlerce bekliyor; ilgili branch işlenmeden silinebiliyor.",
+      "mechanism": "Katkıcı stale/orphan MR gözlemi ve eskalasyonu eksikliğini bildiriyor; bağımsız doğrulama yok.",
+      "boundary": "Kapalı kayıt bugın bugün sürdüğünü veya eksiksiz çözüldüğünü ispatlamaz.",
+      "test": "Worker bittikten sonra merger'ı durdur; branch'i silme isteğini dene. Teslim kanıtı oluşmadan temizlik reddedilmeli; yeniden açılışta tek MR yürütülmeli.",
+      "status": "2026-02-12 kapalı; düzeltme commit'i/sürümü doğrulanmadı.",
+      "source_ids": [
+        "MAS-01"
+      ],
+      "brief_ids": [
+        "B08"
+      ]
+    },
+    {
+      "id": "MA-11",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-01-14/2026-02-05",
+      "observation": "Ortak koordinasyon dosyası kilitleri tutuluyor/unutuluyor; 20 ajan yaklaşık 2–3 ajanlık işe düşüyor. Zor işler sahipsiz kalıyor.",
+      "mechanism": "Deneyi yürüten mühendislerin doğrudan anlatımı; bağımsız yeniden üretim yok.",
+      "boundary": "Browser iç araştırma projesidir, dış kullanıcıya teslim için hedeflenmemiştir. CI geçişi ERP kabulü değildir.",
+      "test": "Aynı bağımlılık grafiğinde 2/8/20 worker çalıştır; kilitte bekleme, yeniden yapılan iş ve kabul edilen değişiklik/saat eğrisini ölç. Tıkanıklıkta yeni ajan ekleme kararı bu ölçüme dayanmalı.",
+      "status": "Koordinasyonda ilerleme bildirilmiş; sonraki yazı devam eden sapma ve erken tamamlama sorunlarını anlatıyor.",
+      "source_ids": [
+        "MAS-18",
+        "MAS-19"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-12",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-02-05",
+      "observation": "16 ajan Linux kernel derlemesinde aynı engeli çözüp birbirinin değişikliklerini eziyor; daha fazla ajan ilerlemeyi artırmıyor.",
+      "mechanism": "Deneyi yapan araştırmacının doğrudan gözlemi.",
+      "boundary": "Kontrollü yetenek benchmark'ı; üretimde HRMS/ERP teslim vakası değil.",
+      "test": "Bordro/izin/puantaj için ayrı ve birleşik fixture'lar kur; tek tek geçen ama birlikte bozulan çifti enjekte et. Referans sonuç kaynağı ve uyuşmazlık çözümü açıklanmadan DoD kapanmamalı.",
+      "status": "Kernel hedefinde ilerleme sağlanmış; yayın derleyicinin tam ikame olmadığını açıklıyor.",
+      "source_ids": [
+        "MAS-20"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "CP-10",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-05-29 yayın; iç olay tarihleri tek tek verilmemiş",
+      "observation": "Ajan testte ilgisiz akışlara sapıyor, asıl davranışı atlıyor veya UI yerine JavaScript ile durumu oluşturuyor.",
+      "mechanism": "Üreticinin kendi mühendislik anlatımı. Sonucu sonradan başarılı diye yorumlama ve eksik kullanıcı-yolculuğu doğrulaması bildiriliyor; sıklık ölçümü yok.",
+      "boundary": "Resmi deneyim anlatımıdır; bütün testlerin aldatıcı olduğu iddiası değildir. İş kuralı oracle'ını tek başına sağlamaz.",
+      "test": "Öneri, çalıştırılmadı: API doğruyken UI düğmesini boz; testin programatik kestirmeyle geçmemesini ve geçici bildirim için doğru zaman aralığı kanıtını iste.",
+      "status": "Kaynak, zamanlama ve UI'ı programatik atlama sorunları üzerinde çalışıldığını söylüyor; tamamıyla çözülmüş değil.",
+      "source_ids": [
+        "CPS-16"
+      ],
+      "brief_ids": [
+        "B09"
+      ]
+    },
+    {
+      "id": "CP-11",
+      "kind": "Dış kaynak kaydı",
+      "period": "2025-01-08 yayın; önceki yaklaşık bir aylık kullanım",
+      "observation": "Tıkanan işler, karmaşık ama kullanılmayan çıktı ve çalışıyor görünen fakat etkisiz tema.",
+      "mechanism": "Answer.AI ekibinin ilk el gözlemleri; tek mekanizma değil. Örneğin tema varsayılan renklerle çalışıyor görünmüş, SSH incelemesi ilk şüpheye saplanmış.",
+      "boundary": "Railway destek sınırı yazarın döneme ait değerlendirmesidir; güncel platform kuralı diye aktarılmadı. İki başarılı entegrasyon da raporda vardır.",
+      "test": "Öneri, çalıştırılmadı: gerçek ERP'den temsilci küçük görev seti kur; kör insan değerlendirmesiyle AC, bakım kolaylığı ve kurtarma insan-süresini ölç, demo başarısını genelleme.",
+      "status": "Tarihsel deneme;2026 sürümünü değerlendirmez.",
+      "source_ids": [
+        "CPS-17"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-07",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-07-11",
+      "observation": "Reviewer altı değerlendirme kuralını görüyor; düzeltici programcıya yalnız tek öncelikli yorum aktarılıyor.",
+      "mechanism": "Kaynakta satırları belirtilen statik analiz; maintainer doğrulaması ve ölçülmüş üretim hatası yok.",
+      "boundary": "ChatDev 2.0'a otomatik genellenemez; olası davranış ile yaşanmış müşteri olayı ayrılmalı.",
+      "test": "Beş bağımsız ihlalli bir aday ver; üç tur doldu diye tamamlandı sayılmamalı. Kapanan ve açık kalan kriterler ayrı kanıtlanmalı.",
+      "status": "Erişimde açık.",
+      "source_ids": [
+        "MAS-13"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-09",
+      "kind": "Dış kaynak kaydı",
+      "period": "2025-10-26",
+      "observation": "Rol/sistem tasarımı, ajanlar arası iletişim ve eksik/yanlış doğrulama farklı hata sınıfları oluşturuyor.",
+      "mechanism": "1.642 trace/7 sistem üzerine deneysel sınıflandırma; nedensel ve evrensel bir ürün başarısızlık oranı değil.",
+      "boundary": "Kodlama/matematik/genel görev benchmark'ı. GitHub alpha/remote deploy/ERP kabulünü ölçmüyor.",
+      "test": "Aynı görev kümesini tek yürütücü ve iki farklı takım topolojisiyle karşılaştır; AC kabulü, tekrar iş, token maliyeti ve doğrulama yanlışlarını ayrı ölç.",
+      "status": "Araştırma sonucu; bir ürün düzeltmesi değil.",
+      "source_ids": [
+        "MAS-15"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "MA-10",
+      "kind": "Dış kaynak kaydı",
+      "period": "2025-07",
+      "observation": "Hata teşhisini başka bir LLM'ye vermek sorumlu ajanı ve ilk kritik adımı güvenilir biçimde bulmayı garanti etmiyor.",
+      "mechanism": "ICML deneyinde en iyi yöntem ajan seçiminde %53,5, hata adımında %14,2 doğruluk; 127 sistemden 184 anotasyon görevi.",
+      "boundary": "GAIA/AssistantBench başarısız örnekleri seçilmiş; 127 şirket değildir ve genel sistem başarısızlık oranı ölçülmez.",
+      "test": "Kök nedeni bilinen 10 arızayı enjekte et; teşhis ajanının ilk neden, etki zinciri ve önerdiği onarımı gerçek hata kayıtlarıyla karşılaştır.",
+      "status": "Açık araştırma problemi.",
+      "source_ids": [
+        "MAS-16",
+        "MAS-17"
+      ],
+      "brief_ids": [
+        "B21"
+      ]
+    },
+    {
+      "id": "CP-09",
+      "kind": "Dış kaynak kaydı",
+      "period": "2025-07-23",
+      "observation": "Ajan insan yardımı istiyor; ön yüz bunu genel MCP aracı gibi çiziyor ve cevap verilemiyor.",
+      "mechanism": "Yardım isteği, bildirim, cevap arayüzü ve graph resume yolları eksik bağlanmış. Issue ve birleşmiş PR ile yüksek güven.",
+      "boundary": "Her görevde insan şartı anlamına gelmez; insan gerektiren istisnanın çözüm kanalı eksikliği örneği.",
+      "test": "Öneri, çalıştırılmadı: bilgi eksiği üret; yetkili cevap tek kez doğru iş/checkpoint'e ulaşmalı, eski cevap yeni işi yanlışlıkla sürdürmemeli.",
+      "status": "#505 2025-07-31 main'e birleşmiş; eski issue canlı erişimi artık doğrulanamıyor.",
+      "source_ids": [
+        "CPS-14",
+        "CPS-15"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-04",
+      "kind": "Dış kaynak kaydı",
+      "period": "2022-10-06",
+      "observation": "Gece temizliği büyüyünce workflow sonlanıyor; ertesi gece otomatik devam etmiyor.",
+      "mechanism": "Destek history sınırını öneriyor; kullanıcı 50K sınırına vurduğunu teyit ediyor.",
+      "boundary": "50K burada tarihsel gözlemdir; bugünkü tüm plan ve sürümlere taşınacak evrensel limit değildir.",
+      "test": "Uzun görev geçmişini büyüt; eşik öncesi kontrollü devam ve artifact referanslarının sürekliliğini doğrula.",
+      "status": "Tasarım/sınır vakası; 2022 cron sınırlamasının bugün sürdüğü ileri sürülmüyor.",
+      "source_ids": [
+        "WFS-04"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "WF-06",
+      "kind": "Geri çekilmiş ürün iddiası",
+      "period": "2021-03-19/2021-03-24",
+      "observation": "Worker öldürülünce diğer worker sürekli timeout/NOT_FOUND ile yeniden deniyor.",
+      "mechanism": "Maintainer örneği sorunsuz çalışıyor. Raporlayan sonunda kendi kodundaki hatayı bulduğunu ve failover’ın beklenen gibi çalıştığını söylüyor; hatalı satır açıklanmıyor.",
+      "boundary": "Kod hatasının ayrıntısı bilinmediğinden spesifik kök neden uydurulmadı.",
+      "test": "Aynı kill-and-resume deneyini üretim akışı ve yalın referans workflow üzerinde karşılaştır.",
+      "status": "Raporlayan tarafından çözüldü; motor arızası olarak sayılmamalı.",
+      "source_ids": [
+        "WFS-06"
+      ],
+      "brief_ids": [
+        "B17"
+      ]
+    },
+    {
+      "id": "WF-11",
+      "kind": "Dış kaynak kaydı",
+      "period": "2026-06-30",
+      "observation": "Dashboard ve loglar bozuluyor, yürütmeler ise çalışmaya devam ediyor.",
+      "mechanism": "Şirket raporu yeni sabit complexity sınırı, biriken parçalar, ağır sorgular ve belleğin ~180 GiB’ye vurduğu geri besleme zincirini açıklıyor.",
+      "boundary": "Dashboard eksikliği işin durmuş olduğunu kanıtlamaz; bellek artırma merge uyumsuzluğunu tek başına çözmemiş.",
+      "test": "Gözlem deposunu devre dışı bırak; ilerleyen işi ikinci kez başlatmadan operasyonel durum kaynağından doğrula.",
+      "status": "Akut olay toparlanmış; her önlem tamamlandı iddiası yok.",
+      "source_ids": [
+        "WFS-13"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "DP-01",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Scanner varlığı ile bulgu sonucu aynı başarı koluna katılmış; sır tarandı ifadesinin gerçek semantiği denetlenmemiş.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Bilinen sahte test sırrı içeren fixture, eksik executable ve scanner çalışma hatası üç ayrı denemede yerel kapıyı kapatmalı; temiz fixture açıkça pass olmalı. Gerçek sır kullanma.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S001",
+        "DR-S002",
+        "DR-S003",
+        "DR-S004"
+      ],
+      "brief_ids": [
+        "B23"
+      ]
+    },
+    {
+      "id": "DP-02",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Yeni ihtiyaç adı değil: kaynak prototipin zaten tanımlı onarım istisnasını ihlal eden somut çapraz yol ve testlerin ortak kör noktası kaçmıştı.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Alpha false kalırken onu düzelten revert/repair adayını geçerli kanıtla ilerlet; sıradan özellik beklemeli. Onarımın yetki ve testlerini gevşetmeden dağıtımın sağlığı yeniden doğruladığını kontrol et.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S005",
+        "DR-S006",
+        "DR-S007",
+        "DR-S008"
+      ],
+      "brief_ids": [
+        "B12"
+      ]
+    },
+    {
+      "id": "DP-03",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Aday değişince hangi kanıtın geçersizleştiği incelenmemiş. Bağımsız CI yeniden çalışması semantik review veya oracle bağının yeniden doğrulandığı anlamına gelmez.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "A onaylandıktan sonra CI onarımıyla yetki denetimini zayıflatan B üret; birim test ve CI yeşil olsa da A reviewsiyle yayınlanamasın. Aynı deney çatışma çözümü ve oracle/test profil değişimi için ayrı koşsun.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S009",
+        "DR-S010",
+        "DR-S011",
+        "DR-S012"
+      ],
+      "brief_ids": [
+        "B10"
+      ]
+    },
+    {
+      "id": "DP-04",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Deterministik orchestration geçmişi ile dış faaliyetlerin canlı konfigürasyon çözümlemesi birbirine eşit kabul edilmiş.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Run v1 beklerken runner/profil/test command/repo mapping v2ye geçsin; eski run aynı onaylı v1le devam etsin veya sürümlü açık geçişte dursun. İki worker sürümünde aynı activity farklı ayar okuyamasın.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S013",
+        "DR-S014",
+        "DR-S015",
+        "DR-S016",
+        "DR-S017"
+      ],
+      "brief_ids": [
+        "B15"
+      ]
+    },
+    {
+      "id": "DP-05",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Aynı event tekrarı ile meşru yeni generation ayrımı kaynak giriş yolunda yok. Sabit workflow ID tek başına ömür boyu iş tekilliği garantisi değil.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Tamamlanan g1 için eski event 10 kez gelsin: model çağrısı/sahiplenme sıfır. Sonra yetkili rev2/g2 talebi bir kez çalışabilsin; eşzamanlı webhook+uzlaştırıcı tek kabul üretsin.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S018",
+        "DR-S019",
+        "DR-S020",
+        "DR-S021",
+        "DR-S022",
+        "DR-S023"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "DP-06",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Kaynak görev kimliği ile yürütme hedefinin aynı yetkili mappinge bağlı olduğu varsayılmış.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "İki proje ve farklı actor yetkileriyle P-A görevine B yaz; Bde clone/model/push oluşmadan reddet. Yetkili çapraz proje routing varsa açık mapping ve audit receiptle kabul et.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S024",
+        "DR-S025",
+        "DR-S013",
+        "DR-S026",
+        "DR-S027"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "DP-07",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Zaman damgası nedensel olay kimliği yerine kullanılmış. Botun kendi güncellemesiyle insanın ayrı eyleminin revision ve actor bağı birbirinden ayrılmıyor.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "PATCH(T1), insan red(T2), GET(T2), webhook(T2) sırasını kontrollü fixture ile kur; red tam bir kez uygulanmalı. Ayrıca alpha doğrulaması sırasında iptalin daha geç bot state yazımıyla kaybolmadığını sınayın.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S028",
+        "DR-S029",
+        "DR-S030"
+      ],
+      "brief_ids": [
+        "B14"
+      ]
+    },
+    {
+      "id": "DP-08",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "90/90 testin kapsamın tamamı olduğunu kanıtlamadığı somutlaşmış oldu: hedef payda plan dilimleme sırasında küçülebiliyor; aynı AC iki kez sayılabiliyor.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "İki ACye karşı aynı AC-1in iki kez eşlenmesi; yedi alt iş/altı sınırı; onay+engelleyici bulgu; boş plan test listesi ayrı negatif fixturelar olsun. Hepsi yayın yetkisini kapatsın, yalnız tüm yetkili kapsam kapandığında ilerlesin.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S031",
+        "DR-S032",
+        "DR-S033"
+      ],
+      "brief_ids": [
+        "B09",
+        "B21"
+      ]
+    },
+    {
+      "id": "DP-09",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Repo kodu yalnız ajan sürecinde değil kurulum/test/derleme adımlarında da güvenilmeyen yürütmedir. Önceki temiz snapshot sonraki çalışma ağacının temiz olduğu anlamına gelmez.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Zararsız fixture test komutu kontrol geçtikten sonra korunan bir dosyaya sentinel yazar ve exit0 döner. Son kapı bunu reddetsin; sentinel commit/push adayında görünmesin. Rapor sahteciliği ve CI onarım yollarında da aynı tree bağı doğrulansın.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S034",
+        "DR-S035",
+        "DR-S036",
+        "DR-S037"
+      ],
+      "brief_ids": [
+        "B10"
+      ]
+    },
+    {
+      "id": "DP-10",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Trunk birleşim sırası, CI tamamlanma sırası ve dağıtım hedef sırası üç ayrı düzlemdir. Bir deployun doğru SHAyı çalıştırması sistemin doğru en son hedefi koruduğunu kanıtlamaz.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "A/B CI bitişlerini ters sıraya sok. B kabul edilmiş hedef olduktan sonra A deploy yetkisi alamamalı; bilinçli rollback farklı yetkili generationla mümkün olmalı. İki publisher ile aynı deney tekrarlansın.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S038",
+        "DR-S039"
+      ],
+      "brief_ids": [
+        "B11"
+      ]
+    },
+    {
+      "id": "DP-11",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Ajan RAMini artırmak kapasiteyi büyütmek değildir. Hosttaki her worker kendi izin defterini tuttuğunda yatay worker eklemek görünürdeki toplam limiti de çoğaltır.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Aynı hosta iki workerla96GB toplam budget altında72+72GB talep gönder; ikincisi beklemeli.8GB host/16GB profile kapalı karar verilmeli. Activityler beklerken workflow WIPi sınırdan fazla büyüyememeli; crash sonrası reservation tek sahibinde kalmalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S040",
+        "DR-S041",
+        "DR-S042",
+        "DR-S043"
+      ],
+      "brief_ids": [
+        "B07"
+      ]
+    },
+    {
+      "id": "DP-12",
+      "kind": "Statik kod incelemesi",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Workflow replayinin deterministik olması, activitynin dış etkisinin idempotent olmasıyla karıştırılmamalı. Kanıt defterinin de tekrar denemede maliyeti iki kere sayması mümkündür.",
+      "mechanism": "",
+      "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+      "test": "Push kabul edildikten hemen sonra activity cevabını düşür; retry aynı SHA/receipt dönmeli ve ikinci commit/CI üretmemeli. DB INSERT sonrası cevap kaybında tek maliyet satırı; revert sonrası cevap kaybında çift revert veya sahte çatışma olmamalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S044",
+        "DR-S045",
+        "DR-S046",
+        "DR-S047"
+      ],
+      "brief_ids": [
+        "B13"
+      ]
+    },
+    {
+      "id": "DE-01",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "İlk tur prototip koduna ve ihtiyaç kümelerine odaklandı; E4 ve arşivlenmiş üretici kaynak karşı kontrolü incelenmedi.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Kurulu sürümden imzalı olay v1/v2 sözleşme fixturelarıyla alınır; tekrar, eksik event_id, bilinmeyen şema ve geçersiz imza ayrı sonuç üretir; tanınmayan zarf sessiz iş kaybına dönüşmez.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S048",
+        "DR-S049",
+        "DR-S050"
+      ],
+      "brief_ids": [
+        "B18"
+      ]
+    },
+    {
+      "id": "DE-02",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Taşıyıcının hata sınıfı ve devre dışı kalması arşiv kodundan okunmamıştı.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Aynı olay için 503, ağ timeoutu, kapalı webhook ve imzalı fakat eski olay enjekte edildiğinde iş kaybı, yinelenen kabul veya sahte başarı olmaz; kapalı kanal fark edilir ve pano polling ile uzlaştırılır.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S051",
+        "DR-S052"
+      ],
+      "brief_ids": [
+        "B18"
+      ]
+    },
+    {
+      "id": "DE-03",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "İlk Kestra incelemesi son eşleşen 18 Eylül kaydında durdu; E6 ve sonraki public status görüntüsü kapsam dışı kaldı.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Yedi günlük insan kabulü beklemesi zaman hızlandırmalı senaryoda işi kaybettirmez; owner/deadline/escalation görünürdür; teknik timeout ayrıca terminal reason verir. Gerçek kabul ancak aynı generation/SHA/deploy/acceptance receipt ile kapanır.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S053",
+        "DR-S054",
+        "DR-S055",
+        "DR-S056",
+        "DR-S057"
+      ],
+      "brief_ids": [
+        "B20"
+      ]
+    },
+    {
+      "id": "DE-04",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "E3 eleştirileri toplu katalog farkı sayılıp ikinci otorite ve yeni CVSS alanı eşlemesi yapılmadı.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "FastMCP high/critical ve Haystack low/high birlikte kaynaklarıyla görünür; v3/v4 birbirine yazılmaz, null/0/unknown aynı sayılmaz; ham yayıncı verisi korunur.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S058",
+        "DR-S059",
+        "DR-S060",
+        "DR-S061",
+        "DR-S062",
+        "DR-S063"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "DE-05",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "E3’ün eleştirisi kaynak otoritesi karşılaştırılmadan doğru sanılabilirdi; ham kaynaklara inildi.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "x5vx için 2.29.7/2.29.8/2.30.0/2.30.1; h44j için 2.27.3/2.27.4/2.28.0/2.28.1 sınır örnekleri kaynağa bağlı beklenen sonuç verir; aralıklar tek kontinü aralığa indirgenmez.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S064",
+        "DR-S065",
+        "DR-S066",
+        "DR-S067",
+        "DR-S068"
+      ],
+      "brief_ids": []
+    },
+    {
+      "id": "DE-06",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "İlk tur arşivden yalnız E2E logunu okudu; araştırma başarısızlık logları ve sayfalı karşı küme görülmedi.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "201 kayıtlık fixture 3 sayfada eksiksiz alınır; orta sayfa 429/403 olduğunda complete=false ve unknown_total oluşur; tekrar alınan GHSA tekilleşir; başarısız HTTP [] diye başarıya çevrilmez.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S069",
+        "DR-S070",
+        "DR-S071",
+        "DR-S072",
+        "DR-S073"
+      ],
+      "brief_ids": [
+        "B19"
+      ]
+    },
+    {
+      "id": "DE-07",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "E4’ün skill uyumluluğu itirazı dışlanan taslaklar arasında kaldı; bizim paket üzerinde ad kontrolü yapılmadı.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Linux üzerinde case-sensitive temiz yükleyicide 21 paket adı-dizin eşleşir; bilinmeyen/bozuk paket fail closed; draft_inactive yine yetki kazanmaz.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S074",
+        "DR-S075",
+        "DR-S076"
+      ],
+      "brief_ids": [
+        "B16"
+      ]
+    },
+    {
+      "id": "DE-08",
+      "kind": "Kaynak denetimi / düzeltme",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Önceki kapsamda E1–E6 ve devir-teslim hiç yoktu; hash eşitliği ile anlamsal kapsam aynı sanılabilirdi.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Aynı kaynak olayı üç özette geçerse vaka sayısı bir kalır; yeni tarihli artefakt ayrı gözlem olur. İncelenmeyen medya anlamsal olarak okundu işaretlenmez; tarihsel DEVIR yönergesi talimat olarak uygulanmaz.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S077",
+        "DR-S078",
+        "DR-S079",
+        "DR-S080"
+      ],
+      "brief_ids": [
+        "B19"
+      ]
+    },
+    {
+      "id": "DK-01",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Kabul izlenebilirliği mevcut; eksik anlam üst amaç→yükümlülük→alt iş/ortak birleşim→ürün çıktısı arasında kayıpsız sorumluluk ve kanıt muhasebesidir.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Üç çocuk çıktısı yeşilken üst sözleşmedeki şirket-transferi→puantaj→bordro→muhasebe yükümlülüğünü hiçbirine atama. Üst kapanış atanmayan obligation_id ile reddedilmeli; yükümlülük sayısını azaltan çocuk planı kabul edilmemeli. Bütünleşik kanıt eklenince yalnız o yükümlülük kapanmalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S081",
+        "DR-S082",
+        "DR-S083",
+        "DR-S084",
+        "DR-S085",
+        "DR-S086",
+        "DR-S087"
+      ],
+      "brief_ids": [
+        "B09"
+      ]
+    },
+    {
+      "id": "DK-02",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Tek deponun commit kimliği ile çok bileşenli ERP ürün sürümü farklı kabul birimleridir. Veri kaydının yetkili sahibi ile kod alanının sahibi da ayrı tutulmalıdır.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "HRMS v2 + ERP v1 + eski olay tüketicisi karışımında bireysel CI yeşil kalsın. Ürün release kapısı uyumsuz bileşen vektörünü reddetmeli; eski olay verisini sessizce düşürmemeli. Doğrulanmış geçiş matrisi oluşmadan insan incelemesine tam ürün diye sunmamalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S088",
+        "DR-S089",
+        "DR-S090",
+        "DR-S091",
+        "DR-S092",
+        "DR-S084",
+        "DR-S093",
+        "DR-S094",
+        "DR-S095",
+        "DR-S096",
+        "DR-S097"
+      ],
+      "brief_ids": [
+        "B11",
+        "B24"
+      ]
+    },
+    {
+      "id": "DK-03",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Eksik olan geri bildirimin sadece yeni görev açması değil, daha önce türetilmiş doğruluk/kabul iddialarının etki grafı üzerinden yeniden değerlendirilmesidir.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "A→B→C bağımlılık zinciri ve bağımsız D oluştur. A için gerekçeli ret geldikten sonra B artifact, C veri mutabakatı ve B review oturumu yeniden değerlendirilmeden kabul edilememeli; D çalışmaya devam etmeli. A revert başarılı C telafisi başarısızsa tümünün geri alındığı raporlanmamalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S098",
+        "DR-S099",
+        "DR-S100",
+        "DR-S101",
+        "DR-S102",
+        "DR-S097",
+        "DR-S103",
+        "DR-S104"
+      ],
+      "brief_ids": [
+        "B14"
+      ]
+    },
+    {
+      "id": "DK-04",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Kalite profili var; iş sınıflamasının deterministik politika seçimine girdi olması, beklenen ilk sonucun sınıfa göre değişmesi ve kod dışı çıktının kapanışı eksik.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Aynı çerçeveye üç fixture ver: davranışı koruyan refactor, yalnız belge düzeltmesi, gerçek bug. Refactor için zorunlu kırmızı test üretilmemeli; belge işi deploy URLsi uydurmamalı; bug hatayı göstermeyen yeşil testle geçmemeli. Sınıfı sonradan refactor yaparak gerçek davranış değişikliğinin kapısı aşılamamalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S105",
+        "DR-S106",
+        "DR-S107",
+        "DR-S108",
+        "DR-S109",
+        "DR-S110",
+        "DR-S111"
+      ],
+      "brief_ids": [
+        "B21",
+        "B22"
+      ]
+    },
+    {
+      "id": "DK-05",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Tek görevin otonomisi ile fabrikanın kurulması/işletilmesi ayrı hizmet sözleşmeleri olmalı. Önceden nitelikli profil yokluğunu gizleyen demo gerçek girdi/çıktı deneyimi değildir.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Hiç kayıtlı profili olmayan ikinci projeyi yalnız kullanıcı düzeyindeki form ve yetkili kaynak erişimiyle sun. Sistem hangi teknik alanları kendisinin keşfettiğini, hangi gerçek yetkinin eksik olduğunu ve kalan platform işini açık sonucu ile göstermeli; operatör gizlice YAML düzenleyince tam otonom başarı yazılmamalı. Sonra DB kesintisi oluştur; kullanıcıya iş kuralı sorusu gibi yansıtılmamalı.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S112",
+        "DR-S113",
+        "DR-S114",
+        "DR-S115",
+        "DR-S116",
+        "DR-S109",
+        "DR-S117",
+        "DR-S118"
+      ],
+      "brief_ids": [
+        "B22"
+      ]
+    },
+    {
+      "id": "DK-06",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Kaynak URI kimliği içerik kimliği değildir. Çalışmanın hangi okunmuş girdilerle yetkilendirildiği ve yeni gözlemin anlamlı değişiklik olup olmadığı kaydedilmelidir.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "AC metni aynı kalsın; aynı URLdeki kabul fixtureını değiştir. İki içerik aynı kabul digestine veya sessizce aynı yetkilendirilmiş revizyona düşmemeli. İkinci denemede yalnız otomasyon yorumu değişsin; bu yeni ürün niyeti oluşturmamalı. Üçüncüde yetki geri alınsın; eski snapshot yayın izni verememeli.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S119",
+        "DR-S120",
+        "DR-S121",
+        "DR-S099",
+        "DR-S122",
+        "DR-S123",
+        "DR-S124",
+        "DR-S125"
+      ],
+      "brief_ids": [
+        "B24"
+      ]
+    },
+    {
+      "id": "DK-07",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Başarı şartları zaten mevcut. Bunların farklı adaptör/sözleşme sözlüklerinde kaybolmasını önleyecek tiplenmiş boyutlar ve kapalı dönüşüm tablosu gerekir.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "Yedi completion değerini, altı outcome değerini ve kuyruk/bekleme durumlarını kombinasyonlu sözleşme fixturelarıyla döndür. Deploy eksik doğrulanmış kod ready_for_review olmamalı; unknown dış etki accepted maskesiyle kaybolmamalı; insan kabul olayı replayi yeni run üretmemeli.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S126",
+        "DR-S127",
+        "DR-S128",
+        "DR-S129",
+        "DR-S130",
+        "DR-S131",
+        "DR-S132"
+      ],
+      "brief_ids": [
+        "B15",
+        "B20"
+      ]
+    },
+    {
+      "id": "DK-08",
+      "kind": "Tasarım boşluğu",
+      "period": "Sabit belge/snapshot incelemesi",
+      "observation": "Katalog güveni ile yetenek tedarik hizmeti ayrı sözleşmelerdir. Güvenlik için kendi kendine terfiyi kapatırken bütün görevleri belirsiz platform ekibi bekleyişine bırakmamak gerekir.",
+      "mechanism": "",
+      "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+      "test": "İki proje aynı eksik yeteneği istesin. Tek niteleme talebi açılsın; kuyruktaki işlerin ana bütçesi büyümesin. Aday malicious veya kontrat uyumsuzsa active olmamalı. Başarılı nitelemeden sonra eski katalog digestini kullanan koşuya sessiz yer değiştirme yapılmamalı; açık yeniden bağlanma kanıtı gerekir.",
+      "status": "documented_not_implemented",
+      "source_ids": [
+        "DR-S133",
+        "DR-S134",
+        "DR-S114",
+        "DR-S135",
+        "DR-S136",
+        "DR-S137",
+        "DR-S138",
+        "DR-S139",
+        "DR-S140"
+      ],
+      "brief_ids": [
+        "B05",
+        "B16"
+      ]
+    }
+  ],
+  "primary_rechecks": [
+    {
+      "record_id": "CP-01",
+      "url": "https://github.com/OpenHands/software-agent-sdk/issues/762",
+      "checked": "2026-09-27",
+      "finding": "Sabit stuck eşikleri meşru bekleme/tekrarları kesebiliyor; eşik yapılandırma önerisi.",
+      "boundary": "Issue metni okundu; yerel tekrar deneyi yapılmadı."
+    },
+    {
+      "record_id": "CP-05",
+      "url": "https://github.com/Factory-AI/factory/issues/33",
+      "checked": "2026-09-27",
+      "finding": "Kullanıcı raporu: ps yokken liveness kontrolü SIGKILL üretiyor.",
+      "boundary": "Yazarın mekanizma açıklaması; maintainer tarafından doğrulanmış genel ürün kusuru diye sayılmadı."
+    },
+    {
+      "record_id": "WF-06",
+      "url": "https://community.temporal.io/t/workflow-not-recovered-after-crash/1770",
+      "checked": "2026-09-27",
+      "finding": "Yazar 24 Mart 2021 son mesajında kendi kod hatasını kabul ediyor.",
+      "boundary": "Başlıktaki ürün kusuru izlenimi son mesajla düzeltilmeli."
+    }
+  ],
+  "original_rechecks": [
+    {
+      "source_id": "S11",
+      "path": "/Users/w6x/Developer/software-factory/experiments/runner-environment-20260915/README.md",
+      "line_start": 8,
+      "line_end": 23,
+      "sha256": "28e02c94d1963b61da0a752ef53e891e34cc552f9fa36f007244dd829db06c86",
+      "prior_hash_matches": true,
+      "excerpt": "1. **Tarayıcı container'ı bellek sınırında öldürülüyor.** Splitter (UI-11)\n   adayının 51 testlik birleşik regresyonu 4,3 saniyede boş çıktıyla\n   `TDD_BROWSER_REPORT_MISSING` veriyordu; container çıkış kodu 137; Colima VM\n   kernel günlüğü: `Memory cgroup out of memory: Killed process … (headless_shell)`\n   / `(MainThread)`. 2 GB sınırla aynı aday 3/3 PASS; örneklenen tepe bellek\n   887–942 MiB (2–3 testte ~600 MiB → test başına ~6 MiB birikim). UI-10 aynı\n   imza; UI-05 aynı sınır altında \"page.goto: Page crashed\" (renderer çökmesi).\n2. **Tip çalıştırıcısı projenin ambient bildirimlerini derlemiyordu.**\n   `runtime/type-tests/driver.cjs` yalnız seçili testleri kök dosya alıyor,\n   `types:[]` kullanıyordu; projenin `src/vite-env.d.ts` (`/// <reference\n   types=\"vite/client\" />`) dosyası derlemeye girmiyordu. Paylaşımlı\n   `registry.ts` (`import.meta.glob`) içeren her tip testi\n   `TDD_TYPE_COMPILER_ERROR` (TS2339) ile stage hatasına dönüşüyordu (Team 2).\n3. **Biçimsiz TDD isteği stage'i düşürüyordu.** Team 3'ün `revise_test` isteği\n   seçili test dosyasıyla birebir olmayan değişiklik seti taşıdı;\n   `TDD_TEST_REVISION_PATH` `StopJob` olarak worker'a kadar çıktı ve iş ERROR",
+      "checked": "2026-09-27",
+      "kind": "historical_experiment_report"
+    },
+    {
+      "source_id": "S14",
+      "path": "/Users/w6x/Developer/software-factory/experiments/foundation-repair-20260915/README.md",
+      "line_start": 507,
+      "line_end": 513,
+      "sha256": "6231540cc244ce9c5ebefe22fdb240c3f09a74eb366d88ec567298f215c062ce",
+      "prior_hash_matches": true,
+      "excerpt": "## Step 10ag (installed 2026-09-18 01:19 UTC): bounded review history, context bound is a failure, yield backoff, dependency-pending lane\nMeasured 2026-09-18 00:56 UTC after 13 idle hours (76 merged, 1 blocked): (1) Team 5 / UI-48 — the reviewer's TDD context rendered five historical runs of the thrice-recalled package (93k characters of receipts) → `fit_context` CONTEXT_CAPACITY_UNSUPPORTED on every claim; `defer_failure` matched 'CAPACITY' and yielded PACKAGE_CAPACITY_WAIT; the scheduler re-admitted the team every ~10 s: 4,762 CLAIM/RETRY events, one model call. (2) Team 1 / UI-54 — examples.tsx imports ../empty/Empty (UI-44, same team, merged 08:24, after the candidate failed at 02:22); the candidate (green root + UI-54 only) failed as vite 'Failed to resolve import' → TDD_BROWSER_INFRASTRUCTURE with NEEDS_TRIAGE; `_refresh_lane` never retries blocks that carry a handoff → root waited COMPONENT_DELIVERY_BLOCKED_WAIT since 12:47.\n- factory_delivery_coordinator `_bound_history`: two most recent historical runs detailed, older ones summarized (run id, completion digest, cycle count, test paths), revision diffs cut at 6000 chars, rendered history ≤ 40k; every run is still hash-validated (tampering still stops before the provider). UI-48 context: 93k → ~22k.\n- factory_autonomy_delivery `defer_failure`: only `<NAME>_CAPACITY[_WAIT|_UNAVAILABLE]` messages are waits (account/provider/package/port); CONTEXT_CAPACITY_UNSUPPORTED and INVALID_RUNTIME_CAPACITY_POLICY fail the stage visibly.\n- factory_scheduler `_repeated_yield_backoff`: a child that yielded the same PACKAGE_CAPACITY_WAIT checkpoint digest 4× within 15 min is re-admitted 2 min after its last yield (waiting=PACKAGE_CAPACITY_BACKOFF).\n- factory_component_delivery `classify_dependency`/`_missing_dependency`: an ERROR candidate regression whose artifact says `Failed to resolve import \"<relative>\" from \"<own file>\"` and whose resolved module lies in another package's write_paths gets handoff status DEPENDENCY_PENDING (+dependency_plan_id/package_id, missing_module); `_eligible` counts such a row once the dependency's delivery is MERGED (current evidence) and `_refresh_lane` releases it once (owner_events component-dependency-release). deploy10ag.py `reclassify` applied it to the live UI-54 row (dependency UI-44, module …/components/empty/Empty).\n- Tests +7 (review context 3, worker integration 1 parametrized, scheduler 1, component delivery 2); regression baseline 502 passed, 2 known + 3 test_blockage_checkpoint_database failures that also fail on the untouched live tree (BLOCKAGE_FINALIZE_RECOVERY_REQUIRED), 1 pre-existing test_package_review_tdd_context failure (double `_release_pulse` in accept).",
+      "checked": "2026-09-27",
+      "kind": "historical_experiment_journal"
+    },
+    {
+      "source_id": "S14",
+      "path": "/Users/w6x/Developer/software-factory/experiments/foundation-repair-20260915/README.md",
+      "line_start": 536,
+      "line_end": 542,
+      "sha256": "6231540cc244ce9c5ebefe22fdb240c3f09a74eb366d88ec567298f215c062ce",
+      "prior_hash_matches": true,
+      "excerpt": "## Step 10al (installed 2026-09-18 10:13 UTC): controller execution of a submitted request is not agent idleness\n07:21–10:09: the root's integration suite grew from 570 s to ~70 minutes (the public barrel now publishes all 73 components, so every browser test loads a much larger bundle). `tdd.poll()` executes the submitted request inside the agent-call loop with `protocol_guard` as the harness guard, and `ProgressWatchdog` counts only new controller test receipts as progress — so each request killed its own agent call at the 600 s idle bound (AGENT_PROGRESS_STALLED), the stage failed, recovery restarted it, and on the third occurrence recovery hit RECOVERY_RETRY_BOUND and the root sat in ERROR with no repairer.\n- factory_worker: the loop marks the controller-execution window around `tdd.poll()`.\n- factory_progress `controller_busy` + `_now`: both the idle and the absolute call timers freeze for exactly that window, and `summary()` reports `controller_execution_seconds`. Controller-side hangs remain bounded by the harness's per-run timeouts and the stage lease, not by this idle timer.\n- Tests +4 (test_progress 3, test_worker_progress 1). Regression: 527 passed with the 2 known baseline failures.\n- Root resumed (receipt 0ed5bb87…); hold off 10:13.\n- Open capacity item: the browser runner executes its 50-test batches sequentially (one container at a time) while the VM sits near 19% CPU; parallel batches would cut the ~70 minute suite several-fold, but the runner digest is qualification-covered, so it needs a real-container requalification.",
+      "checked": "2026-09-27",
+      "kind": "historical_experiment_journal"
+    },
+    {
+      "source_id": "S06",
+      "path": "/Users/w6x/Developer/software-factory/docs/handoffs/2026-09-15-claude/DEVIR-RAPORU.md",
+      "line_start": 93,
+      "line_end": 109,
+      "sha256": "df2405d5bab45d9f986c66b8eec7673c5893001009bebb5a5d56210a25660a60",
+      "prior_hash_matches": true,
+      "excerpt": "### P0-3 — Teşhis agent'ının görevi ile erişimi çelişiyor\n\n**Doğrudan kanıt:** bakım çağrısı `51cf5584-674f-4ef1-8ed5-705f0ec79a1d` COMPLETED; çıktı “INCIDENT.json okunamadı, yerel dosya okuma aracı yok, komut çalıştırmak yasak” diyor. Maintenance request SUCCESS ve blockage `step=diagnosed`; ancak gerçek hata teşhis edilmemiş.\n\nOlay dosyası: [INCIDENT.json](/Users/w6x/Developer/software-factory/projects/.impediments/2f4281a4-32be-5634-a442-6abbbb9cd266/diagnosis/INCIDENT.json). SHA256: `9bec9b91fdf553677e3458302ac3d67a734ccdf47bc082d3caada544fe090279`.\n\n[Teşhis prompt'u](/Users/w6x/Developer/software-factory/factory_blockage_worker.py:315) dosyayı okumayı istiyor, komut çalıştırmayı yasaklıyor. [Model girdisi](/Users/w6x/Developer/software-factory/factory_maintenance.py:409) dosyanın kendisini değil talimatı iletiyor. [Codex SDK adaptörü](/Users/w6x/Developer/software-factory/runtime/sdk/codex.mjs:70) özel dosya okuyucu sağlamıyor; proje dokümanı otomatik yükleme de kapalı.\n\n**Gereken:** boyutu sınırlı ve sırlardan temizlenmiş olay içeriğini yapılandırılmış girdiye eklemek veya yalnız ilgili salt okunur dosyayı okuyabilen araç sağlamak. Bunun için geniş yazma/shell yetkisi açmak gerekmiyor. “Dosyayı okuyamadım” çıktısı teşhis başarısı değil, `NEEDS_EVIDENCE` gibi ayrı bir sonuç olmalı. Kabul testi gerçek kullanılan SDK/hesap yolunda dosyadaki bilinen kanıtın okunabildiğini göstermeli.\n\n### P0-4 — Yönetim kaydı ile gerçek onarım arasında eksik yürütme adımı\n\nPush/pull gözlem, sorumlu ataması ve eskalasyon var. Fakat profilsiz teşhisten yeni onarımın hazırlanması → bağımsız doğrulanması → uygulanması → eski işin güvenli devamı zinciri genel olarak tamamlanmış değil.\n\n`record_repair_observation` bir ART kaydı yazar; **worker başlatmaz**. Risk OWNED, kayıt SENT, çağrı COMPLETED veya handoff COMPLETE tek başına onarım/ürün başarısı değildir. [factory_art_runtime.py:63](/Users/w6x/Developer/software-factory/factory_art_runtime.py:63), [factory_blockage_worker.py:469](/Users/w6x/Developer/software-factory/factory_blockage_worker.py:469), [onarım yapılandırması](/Users/w6x/Developer/software-factory/config/self-repair.json).\n\n**Gereken:** RTE'nin kararı, belirli yürütücüye ve makinece doğrulanabilir çıktıya bağlanmalı. Mevcut açık vaka korunmalı; yeni isimle aynı işi açıp bütçe veya deneme sınırı aşılmamalı. Teşhis için gelen model cevabı, uygulanabilir onarım profili olarak kendiliğinden kabul edilmemeli.",
+      "checked": "2026-09-27",
+      "kind": "historical_handoff"
+    },
+    {
+      "source_id": "S20",
+      "path": "/Users/w6x/.claude/projects/-Users-w6x-Library-Application-Support-Claude-scratch-workspaces-df1f8649-21c5-41c8-b9ec-a76cc4374a33-19ed567c-f1a5-419d-a6c4-969331743397-scratch-2026-09-15-95eef1/937c0fea-2f31-4179-b800-431ad0f8843e.jsonl",
+      "line_start": 1573,
+      "line_end": 1573,
+      "sha256": "6d5aef7e6f4161969c5cd4717179ac1ec3caedf54dd914e306cd6ef5c0d3fcc5",
+      "prior_hash_matches": true,
+      "excerpt": "[206336.538407] Memory cgroup out of memory: Killed process 1117907 (MainThread) total-vm:11454408kB, anon-rss:288916kB, file-rss:69248kB, shmem-rss:0kB, UID:501 pgtables:2688kB oom_score_adj:0\n[206336.538778] Memory cgroup out of memory: Killed process 1118229 (headless_shell) total-vm:50719640kB, anon-rss:16140kB, file-rss:53464kB, shmem-rss:13392kB, UID:501 pgtables:524kB oom_score_adj:200",
+      "checked": "2026-09-27",
+      "kind": "transcript_tool_result",
+      "boundary": "Aynı tool_result içinde yinelenen satırlar tekilleştirildi; satır sayısı bağımsız olay sayısı değildir."
+    }
+  ],
+  "local_excerpt_registry": [
+    {
+      "id": "E01",
+      "source_id": "S01",
+      "line_start": 4,
+      "line_end": 4,
+      "kind": "raw_service_log",
+      "excerpt": "proxy-1   | Error: adapting config using caddyfile: parsing caddyfile tokens for 'acme_ca': wrong argument count or unexpected line ending after 'acme_ca', at /etc/caddy/Caddyfile:28",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E02",
+      "source_id": "S01",
+      "line_start": 50,
+      "line_end": 56,
+      "kind": "raw_service_log",
+      "excerpt": "kestra-1  | Caused by: java.lang.RuntimeException: Cannot create local repository for plugins\nkestra-1  | \tat io.kestra.core.plugins.PluginManager.createLocalRepositoryIfNotExist(PluginManager.java:150)\nkestra-1  | \tat io.kestra.core.plugins.LocalPluginManager.<init>(LocalPluginManager.java:70)\nkestra-1  | \tat io.kestra.core.plugins.$LocalPluginManager$Definition.instantiate(Unknown Source)\nkestra-1  | \tat io.micronaut.context.DefaultBeanContext.resolveByBeanFactory(DefaultBeanContext.java:2342)\nkestra-1  | \t... 23 more\nkestra-1  | Caused by: java.nio.file.AccessDeniedException: /app/storage/plugins",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E03",
+      "source_id": "S02",
+      "line_start": 1,
+      "line_end": 6,
+      "kind": "raw_worker_log",
+      "excerpt": "{\"event\": \"lease_lost\", \"lease\": \"822f0c2f-c60d-45e3-93a7-c703900af5a5\"}\n{\"event\": \"lease_lost\", \"lease\": \"c3915c10-0ec9-4b2e-9c9b-42e528ee31fc\"}\n{\"event\": \"lease_lost\", \"lease\": \"bd4956b1-0366-449e-9ef0-19be1e59e161\"}\n{\"event\": \"lease_lost\", \"lease\": \"472f2a12-36ab-4776-883c-61777a85c1b7\"}\n{\"event\": \"lease_lost\", \"lease\": \"94d96c93-021b-43f1-b4cf-6acbd77a69e0\"}\n{\"event\": \"lease_lost\", \"lease\": \"b9c7d738-b21e-4052-a78f-ff86c66e2e72\"}",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E04",
+      "source_id": "S03",
+      "line_start": 1,
+      "line_end": 3,
+      "kind": "raw_controller_log",
+      "excerpt": "{\"autonomy_error\": \"DeadlockDetected\", \"reason\": \"deadlock detected\\nDETAIL:  Process 1759593 waits for ShareLock on transaction 664822; blocked by process 1759590.\\nProcess 1759590 waits for ShareLock on transaction 664823; blocked by process 1759593.\\nHINT:  See server log for query details.\\nCONTEXT:  while locking tuple (3,4) in relation \\\"jobs\\\"\"}\n{\"autonomy_error\": \"DeadlockDetected\", \"reason\": \"deadlock detected\\nDETAIL:  Process 1801777 waits for ShareLock on transaction 676645; blocked by process 1801775.\\nProcess 1801775 waits for ShareLock on transaction 676644; blocked by process 1801777.\\nHINT:  See server log for query details.\\nCONTEXT:  while locking tuple (6,1) in relation \\\"jobs\\\"\"}\n{\"recovery_dispatch_pending\": \"bc22dc95-c957-441e-8f87-97f31eaf1db3\", \"error\": \"StopJob\"}",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E05",
+      "source_id": "S03",
+      "line_start": 572,
+      "line_end": 576,
+      "kind": "raw_controller_log",
+      "excerpt": "{\"autonomy_error\": \"DeadlockDetected\", \"reason\": \"deadlock detected\\nDETAIL:  Process 2291575 waits for ShareLock on transaction 1858218; blocked by process 2291655.\\nProcess 2291655 waits for ShareLock on transaction 1858219; blocked by process 2291575.\\nHINT:  See server log for query details.\\nCONTEXT:  while locking tuple (4,11) in relation \\\"jobs\\\"\"}\n{\"autonomy_error\": \"DeadlockDetected\", \"reason\": \"deadlock detected\\nDETAIL:  Process 2305962 waits for ShareLock on transaction 1862022; blocked by process 2305958.\\nProcess 2305958 waits for ShareLock on transaction 1862023; blocked by process 2305962.\\nHINT:  See server log for query details.\\nCONTEXT:  while locking tuple (4,9) in relation \\\"jobs\\\"\"}\n{\"autonomy_error\": \"DeadlockDetected\", \"reason\": \"deadlock detected\\nDETAIL:  Process 2307187 waits for ShareLock on transaction 1862316; blocked by process 2307181.\\nProcess 2307181 waits for ShareLock on transaction 1862317; blocked by process 2307187.\\nHINT:  See server log for query details.\\nCONTEXT:  while locking tuple (4,4) in relation \\\"jobs\\\"\"}\n{\"autonomy_error\": \"Deadlock",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E06",
+      "source_id": "S04",
+      "line_start": 1,
+      "line_end": 3,
+      "kind": "raw_controller_log",
+      "excerpt": "{\"management_observation_pending\": \"9fbcac08-ea4e-47ab-ab68-4aa444d3dc25\", \"error\": \"BlockageStoreError\"}\n{\"management_observation_pending\": \"9fbcac08-ea4e-47ab-ab68-4aa444d3dc25\", \"error\": \"BlockageStoreError\"}\n{\"management_observation_pending\": \"9fbcac08-ea4e-47ab-ab68-4aa444d3dc25\", \"error\": \"BlockageStoreError\"}",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E07",
+      "source_id": "S08",
+      "line_start": 7,
+      "line_end": 21,
+      "kind": "historical_report",
+      "excerpt": "## Doğrulanan kök nedenler (canlı kayıt + pmset günlüğü)\n\n1. **Scheduler lease kaybı = Mac'in kapak kapalı uykusu.** `pmset -g log`:\n   04:40:33 'Clamshell Sleep', ardından 'Maintenance Sleep' / DarkWake pencereleri.\n   Her uyku girişi iki ekibin son heartbeat'iyle saniyesi saniyesine eşleşiyor\n   (05:29:46 → hb 05:29:45/48; 05:48:31 → 05:48:23; 06:04:57 → 06:05:02;\n   06:24:50 → 06:24:36/51, yerel saat). Uyanışta (06:40:07) lease 120 s TTL'i\n   geçmiş olduğundan `heartbeat()` `lease_until>now()` şartını sağlayamıyor,\n   worker'ın `lost` bayrağı kalıcılaşıyor ve bir sonraki guard `SCHEDULER_LEASE_LOST`\n   yazıyor (job güncellemesi 06:40:08/09). Worker süreci ölmemişti; sahiplik\n   kimseye geçmemişti. `caffeinate -i` kapak kapanmasını engellemez.\n2. **Zombi slot + kapasite kilidi.** Worker süresi dolmuş lease ile `release_stage`\n   yapamıyordu (aynı `lease_until>now()` şartı). UNKNOWN kalan iki slot\n   `max_slots=2` kapasitenin tamamını tuttu; `worker_launch_budget` 0 döndü ve\n   Team 3/7/9 hiç başlamadan kuyrukta bekledi. Slot ancak recovery `_requeue`",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E08",
+      "source_id": "S08",
+      "line_start": 23,
+      "line_end": 36,
+      "kind": "historical_report",
+      "excerpt": "3. **Package lease kaybı (Team 5) uyku değil, yarış.** `autonomy_package_events`:\n   UI-05 02:24:11.35 UTC'de VERIFIED oldu; yenileme iş parçacığı aynı saniyede\n   `status IN ('CLAIMED','IMPLEMENTED') AND lease_until>now()` şartını göremeyip\n   `PACKAGE_LEASE_LOST` fırlattı; `_lease_error` kalıcılaştı ve `checkpoint()`\n   içindeki `current()` 02:24:11.97'de işi düşürdü. Paket doğrulanmış ve\n   evidence'ı kayıtlıydı; iş kaybı sahte idi.\n4. **Yönetim gözlemi her döngüde çöküyordu.** `observe()` aynı stage lease için\n   sabit olay anahtarını `route` alanı değişmiş payload ile yeniden yazmaya\n   çalışıyor, `IDEMPOTENCY_CONFLICT` fırlatıyor ve `scan()` yalnız sınıf adını\n   logluyordu (`autonomy-management.log`: 1275 satır `BlockageStoreError`).\n5. **Teşhis ajanı kanıtı okuyamıyordu.** Prompt \"INCIDENT.json'u oku, komut\n   çalıştırma\" diyor; Codex SDK'da dosya okuma aracı yok; dosya içeriği girdide\n   değildi. Çıktı \"dosya okunamadı\" olduğu halde SUCCESS/`step=diagnosed`\n   sayılıyordu.",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E09",
+      "source_id": "S08",
+      "line_start": 38,
+      "line_end": 75,
+      "kind": "historical_report",
+      "excerpt": "## Uygulanan değişiklikler (kaynak hash'leri `activation-manifest.json`)\n\n- `factory_scheduler.py`: `_renew` — sahiplik (lease, worker pid, stage lease)\n  üçlüsüdür; süresi dolmuş ama devralınmamış lease aynı canlı süreçte yenilenir,\n  UNKNOWN slot RUNNING'e döner. RECOVERED/RELEASED slot, yeniden kuyruğa alınmış\n  veya başka lease'li stage, başka worker pid, değişmiş generation veya iptal\n  edilmiş root asla canlanmaz; `max_stage_seconds` sert sınırı korunur.\n  `revive_lease` — guard tarafında, 741941 kilidi olmadan, çağıranın kendi\n  transaction'ında tek adımlık canlandırma. `assert_current_lease` katı kaldı.\n  `release_stage` — sahibi süresi dolmuş/UNKNOWN slotunu kapatabilir.\n  `reconcile_stale` — stage artık o lease ile çalışmıyorsa ve pid `ABSENT`\n  doğrulanmışsa zombi UNKNOWN slot `RELEASED/ZOMBIE_SLOT_RECONCILED` olur; stage\n  hâlâ RUNNING ise veya pid doğrulanamıyorsa dokunulmaz.\n- `factory_worker.py`: `_pulse_loop` — geçici DB hatası yeniden denenir, yalnız\n  kesin `False` sahiplik kaybıdır; ilk hata ayrıntısı loglanır. `_lease_guard` —\n  katı assert, sonra tek `revive_leas",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E10",
+      "source_id": "S08",
+      "line_start": 79,
+      "line_end": 100,
+      "kind": "historical_report",
+      "excerpt": "- `tests/test_sleep_tolerant_leases.py` (15): canlanma, devralma durumları,\n  zombi slot, nabız dayanıklılığı, guard, sınıflandırma. Değişiklik öncesi 15/15\n  kırmızıydı.\n- `tests/test_sleep_tolerant_package_lease.py` (5), `tests/test_controller_correction.py` (3),\n  `tests/test_blockage_diagnosis_evidence.py` (4), `test_management_watch.py`'ye\n  eklenen idempotent pull testi (1).\n- `tests/test_scheduler.py`'de iki eski varsayım yeni kurala göre güncellendi:\n  süresi dolmuş ama devralınmamış lease aynı sahip tarafından canlanır;\n  yayın lease'i kaybolduysa slot canlanmaz.\n- Regresyon: recovery DB grubu 182 geçti; autonomy DB grubu 108 + 40 + 21 geçti;\n  skills DB grubu 18 geçti. Diğer DB'yi isteyen fixture'lar kendi DB'sinde\n  koşturuldu. `tests/test_maintenance.py::test_unknown_partial_response_blocks_request_account_and_all_retries`\n  üç test DB'sinde de başarısız; provider hesap durumu (`USAGE_UNKNOWN`) ile\n  ilgili, bu değişiklik kümesinin dokunmadığı alan; değişiklik öncesi durumu\n  doğrulanmadı ve açık bırakıldı.\n\n## Canlı uygulama\n\n`apply-correction.py` üç ekibi (Team 1/2 `SCH",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E11",
+      "source_id": "S11",
+      "line_start": 8,
+      "line_end": 23,
+      "kind": "historical_report",
+      "excerpt": "1. **Tarayıcı container'ı bellek sınırında öldürülüyor.** Splitter (UI-11)\n   adayının 51 testlik birleşik regresyonu 4,3 saniyede boş çıktıyla\n   `TDD_BROWSER_REPORT_MISSING` veriyordu; container çıkış kodu 137; Colima VM\n   kernel günlüğü: `Memory cgroup out of memory: Killed process … (headless_shell)`\n   / `(MainThread)`. 2 GB sınırla aynı aday 3/3 PASS; örneklenen tepe bellek\n   887–942 MiB (2–3 testte ~600 MiB → test başına ~6 MiB birikim). UI-10 aynı\n   imza; UI-05 aynı sınır altında \"page.goto: Page crashed\" (renderer çökmesi).\n2. **Tip çalıştırıcısı projenin ambient bildirimlerini derlemiyordu.**\n   `runtime/type-tests/driver.cjs` yalnız seçili testleri kök dosya alıyor,\n   `types:[]` kullanıyordu; projenin `src/vite-env.d.ts` (`/// <reference\n   types=\"vite/client\" />`) dosyası derlemeye girmiyordu. Paylaşımlı\n   `registry.ts` (`import.meta.glob`) içeren her tip testi\n   `TDD_TYPE_COMPILER_ERROR` (TS2339) ile stage hatasına dönüşüyordu (Team 2).\n3. **Biçimsiz TDD isteği stage'i düşürüyordu.** Team 3'ün `revise_test` isteği\n   seçili test dosyasıyla birebir olmayan değişikli",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E12",
+      "source_id": "S11",
+      "line_start": 31,
+      "line_end": 42,
+      "kind": "historical_report",
+      "excerpt": "  imajın bağımlılık ağacına (`/opt/browser/node_modules`) düşer, `allowed`\n  sınırı korunur. Rapor `ambient` sayısını içerir.\n- `factory_tdd_browser.py`: `--memory` 1g → `BROWSER_MEMORY='2g'`; container\n  137/143 ile ölürse `TDD_BROWSER_RUNNER_KILLED: exit …` (ayrı sınıf, environment)\n  ve `browser_diagnostic.exit_code/memory_limit` kaydı.\n- `factory_tdd.py`: `handle` içinde değişiklik uygulanmadan önce doğrulanan\n  istek hataları (`REQUEST_REJECTABLE` listesi: TDD_PHASE, TDD_TEST:, TDD_TEST_REVISION_*\n  (DAMAGED hariç), TDD_NO_CHANGE, TDD_REFACTOR_REASON/MODE, TDD_ACTION_UNKNOWN,\n  TDD_CHANGE_LIMIT, TDD_PROTECTED_PATH, TDD_INVALID_FILE_CONTENT, TDD_UNSAFE_PATH,\n  TDD_REQUIREMENT_OR_ORACLE_UNKNOWN, TDD_BEHAVIOR_OR_TEST_PATH_REQUIRED,\n  TDD_TEST_DISCOVERY_REQUIRED, TDD_MISSING_API_NOT_NEW_PRODUCTION) `REJECTED`\n  cevabı olur; aynı hata `same_error_limit` ile `BLOCKED/TDD_REQUEST_LIMIT`.",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E13",
+      "source_id": "S11",
+      "line_start": 68,
+      "line_end": 92,
+      "kind": "historical_report",
+      "excerpt": "`TDD_TEST_REVISION_PATH`) → recheck (UI-11, UI-10, UI-05) → upgrade\n(`type_runner_transition`, `allow_idle_running`; root için gözlemci anlık\ngörüntü uzlaştırma) → start. Makbuzlar bu dizinde.\n\nAçık: test paketi ~150'yi geçince 2 GB de yetmez; ölçüme dayalı gruplama\n(harness'ta batch + birleşik makbuz) sonraki adımdır. Bu turda uygulanmadı.\n\n## Devreye alma sonucu (11:5x–12:2x TRT)\n\n- 3. tur: Team 2 ve Team 3 aynı generation'da geri kuyruğa alındı; UI-11/UI-10/UI-05\n  makbuzla READY oldu; root, Team 2/3/7/9 profilleri `type_runner_transition`\n  (`runner_transition` beyanıyla; `factory_tdd_upgrade.validate_profiles` bu beyanı\n  bugün öğrendi, testleri `test_tdd_type_qualification_upgrade.py`) ile yükseltildi.\n  Team 2'nin kimliği 1. tur harness'ına aitti; eski profil `runner_digest` +\n  `environment_digest` yeniden hesaplanarak kuruldu (`old-profiles.json`).\n- Sonuç: Team 2 tip testi gerçek RED → GREEN/PASS'e geçti. Üç bileşen merge'i\n  artık 2 GB altında tam regresyonu (57–59 test, ~50 s) koşuyor ve **gerçek,\n  atfedilebilir** bir hata veriyor: `tests/developer/test-foundation-publis",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E14",
+      "source_id": "S14",
+      "line_start": 3,
+      "line_end": 21,
+      "kind": "historical_report",
+      "excerpt": "## Bulgular (kanıtlı)\n\n1. `tests/developer/test-foundation-published-index.js` (FOUNDATION paketi, kök\n   sahipli) tek bir testte katalogdaki her bileşene aynı sayfada `page.goto`\n   yapıyor; ~7 bileşenden sonra Chromium modül isteklerini\n   `net::ERR_INSUFFICIENT_RESOURCES` ile reddediyor. Aynı test:\n   - kökte 9 READY teslimin birleşik aday regresyonunu düşürüyor (hepsi BLOCKED,\n     `repair_handoff NEEDS_TRIAGE`, tüketicisi yok);\n   - Team 2 ve Team 3'ün kendi çalışma ağaçlarında GREEN doğrulamasını (tam paket)\n     düşürüyor → stage ERROR, bakım rotası `NO_QUALIFIED_REPAIR_PROFILE`.\n2. Sınıflandırıcı: başarısız bir `expect` adımının yanında fixture'ın kaydettiği\n   sayfa çalışma zamanı hatası (`TDD_BROWSER_RUNTIME_ERROR: asset request failed …`)\n   varsa test-level hata listesi adımlarla birebir eşleşmiyor →\n   `TDD_BROWSER_INFRASTRUCTURE`. Oysa hata sayfanın kendi davranışı; kanıt\n   atfedilebilir (test id, adım, hata kodu).\n3. Team 5: doğrulanmış (VERIFIED) UI-14 paketinin tip testi geçersiz\n   (`test-ui-14-public-api.types.ts`); baseline hiç yeşil olamıyor\n   (`TDD_BASELINE_NO",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E15",
+      "source_id": "S14",
+      "line_start": 51,
+      "line_end": 64,
+      "kind": "historical_report",
+      "excerpt": "## Aynı turda görülen iki tıkanma daha (12:23 ve 12:42 UTC)\n\n- Team 7: `green` isteği kök sahipli `frontend/ui-library/src/index.ts` dosyasını\n  değiştirmeye çalıştı → `CHILD_WRITE_OWNERSHIP_VIOLATION` stage'i düşürdü. Yazma\n  kapsamı denetimi değişiklik uygulanmadan önce çalışan bir istek doğrulamasıdır;\n  artık `REJECTED` cevabı (`REQUEST_REJECTABLE`), aynı hata `same_error_limit`\n  ile sınırlı.\n- Team 9: UI-09 incelemesi 14 kez \"production yükleme gözlemi yok\" diye FAIL verdi;\n  paket için yapılandırılmış controller probe'u yok (`config/package-delivery-checks.json`\n  yalnız FOUNDATION). Coder buna karşılık kendini geliştirme çalıştırıcısında `skip`\n  eden bir \"production build\" testi yazdı → `TDD_BROWSER_ASSERTION_REQUIRED` stage\n  hatası. İki düzeltme: (1) inceleme istemi `production_delivery` null ise built\n  teslimin paket kapsamı dışında olduğunu ve bu gerekçeyle FAIL/NOT_TESTED verilmeyeceğini\n  söylüyor; (2) kendini atlayan seçili test `ASSERTION_REQUIRED` yazar geri bildirimi.",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E16",
+      "source_id": "S14",
+      "line_start": 84,
+      "line_end": 121,
+      "kind": "historical_report",
+      "excerpt": "## Devreye alma sonucu (13:05–13:21 UTC)\n\n- `deploy6.py`: kurulum + tarayıcı çalıştırıcısı yeniden nitelendirmesi (45 gerçek test,\n  `evidence/saas-ui-browser/foundation-repair-20260915/`), Team 2/3/7/9 düzeltildi,\n  kayıtlı 9 BLOCKED teslimden tek kusur açıldı (`test-foundation-published-index.js`).\n- Kök `coder-repair` oturumu kusuru 1 denemede onardı (`9e93833 fix: foundation repair`,\n  85 testlik kök regresyonu PASS); 9 teslim `RECHECK_REQUIRED` ile READY oldu ve UI-11\n  onarımdan sonra merge edildi. Team 3 kendi tam paketinde aynı testle RED aldı →\n  `FOUNDATION_DEFECT_WAIT` ile checkpoint verdi (yol canlıda çalıştı).\n- Yürütücü kusuru (6b): onarımı henüz almamış Team 2'nin raporu \"nüks\" sayılıp kusuru\n  yeniden açtı; ikinci kök geçişi kapalı kök koşusunun anlık görüntüsü merge'lerle\n  uyuşmadığı için `TDD_SOURCE_CHANGED_OUTSIDE_CONTROLLER` verdi, kök ERROR oldu,\n  Team 1/7/9 `PARENT_WORK_REVOKED` ile düştü. Düzeltmeler: `_fresh_run` (kanıtlı\n  merge/onarım HEAD'inde IDLE koşu), yayılım satırı olmayan takım raporu `stale`\n  (kusur REPAIRED kalır), REPAIRING sırasında önceki makb",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E17",
+      "source_id": "S14",
+      "line_start": 124,
+      "line_end": 137,
+      "kind": "historical_report",
+      "excerpt": "## 6f (14:36– UTC): 100 test sınırı ve kapalı koşu yükseltmesi\n\n- Kök geliştirici paketi 101 teste ulaştı; tek container seçimi 100 ile sınırlıydı\n  (`TDD_BROWSER_TEST_SELECTION`, 6 teslim BLOCKED). Çalıştırıcı artık seçimi 50'lik\n  gruplara böler (her grup kendi bellek/süre sınırıyla ayrı container), tek birleşik\n  makbuz (`batches` alanı); gerçek container testi tek koşu ile grup koşusunun aynı\n  sonucu verdiğini doğrular. Yeniden nitelendirme `foundation-repair-20260915f`.\n- `factory_tdd_upgrade.upgrade_completed`: kapalı (COMPLETED) TDD koşusunun kanıtı\n  hâlâ gerekliyken (paket incelemeyi bekliyor) çalıştırıcı profili değişirse\n  kontrolör tam regresyonu yeni profille kendisi koşar ve `tdd-diagnostic-upgrade`\n  soyağacı olarak kaydeder; incelemeyi bekleyen paketin `evidence.tdd` kanıtı\n  aynı makbuzla yenilenir. Team 9 (UI-09) bu yolla kuyruğa döndü (6f öncesi tek seferlik).\n- Çalıştırıcı hatası yeniden kontrolü (`recheck_blocked_delivery`) artık\n  `TDD_BROWSER_TEST_SELECTION` ve `TDD_BROWSER_RUNNER_KILLED` için de geçerli.",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E18",
+      "source_id": "S14",
+      "line_start": 187,
+      "line_end": 242,
+      "kind": "historical_report",
+      "excerpt": "## 8e (20:04–20:16 UTC): Plane 429 ve üretim derleme hatası\n\n- Yedi worker aynı sözleşmeyi her model çağrısında Plane'den doğruluyor; Plane\n  dakikalık sınırla 429 verdi ve beş takım + kök aynı anda düştü. `factory_core.plane`\n  429'da `Retry-After`/üstel bekleme ile en fazla 4 kez yeniden dener; 429 artık\n  `environment` sınıfı.\n- Team 5: takımın kendi yazma kapsamındaki üretim dosyasında TS hatası (`Popover.tsx`)\n  stage'i düşürüyordu; kapsam içi üretim derleme hataları\n  `REJECTED/TDD_TYPE_PRODUCTION_COMPILE` yazar geri bildirimi (kapsam dışı dosyalar\n  olay olarak kalır).\n- `resume_children_blocked_root`: aile gözlemcisi tüm takımlar düşünce kökü ERROR\n  yapar; düzeltilmiş nedenle kök makbuzla kuyruğa döner, sonra takımlar.\n- Protokol özeti değişince incelemeyi bekleyen paketi olan kapalı koşular\n  `upgrade_completed` ile (gerçek tam regresyon: 97–156 test/takım) yükseltildi;\n  8e'nin ilk yükseltme adımı bunu atlamıştı (COMPLETION_STALE), aynı pencerede düzeltildi.\n- Regresyon 8d ile birebir.\n\n## 8f: bitmemiş TDD çağrısı\n\n- Team 5'in coder çağrısı döngüyü bitirmeden (finish olmad",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E19",
+      "source_id": "S14",
+      "line_start": 244,
+      "line_end": 252,
+      "kind": "historical_report",
+      "excerpt": "  autonomy alt kümesi 2 failed / 494 passed (taban 2/493 + yeni test).\n- 02:20–02:50 UTC (10b): adım 10 kurulumundan sonra Team 2/1/3 işçileri `claim()` içinde kendi kendini kilitledi: `next_pending` işlemi\n  plan/paket FOR UPDATE ve kök iş FOR SHARE tutarken `reviewer_capacity()` ikinci bağlantıda `decision_for` → jobs FOR UPDATE bekledi;\n  otonomi servisi ve zamanlayıcı (advisory 741941) aynı satırın arkasında yığıldı, hold betiği bile bekledi. İşçiler SIGTERM ile bitirildi\n  (lease kaybı → kurtarma), hold açıldı; düzeltme: kapasite okuması claim işleminden ÖNCE (test: capacity→claim sırası). deploy10b.py install.\n- 03:30 UTC (10c): kök 5 saattir hiç kabul edilmemişti: zamanlayıcı kabul kapasitesini planlama rolü (scrum-coordinator → codex-turksab)\n  için ölçüyor; temel-onarım yürütücüsü (coder-repair, Claude) bu yüzden hiç çalışamadı; Team 2 yeni temel hatası (test-foundation-demo-retry.js)\n  için FOUNDATION_DEFECT_WAIT'e düştü. Düzeltme: açık ve alınabilir hata varken kök kabulü coder-repair rotasıyla ölçülür (factory_scheduler.py,\n  test_scheduler_foundation 4/4, zamanlayıcı pak",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E20",
+      "source_id": "S14",
+      "line_start": 507,
+      "line_end": 513,
+      "kind": "historical_report",
+      "excerpt": "## Step 10ag (installed 2026-09-18 01:19 UTC): bounded review history, context bound is a failure, yield backoff, dependency-pending lane\nMeasured 2026-09-18 00:56 UTC after 13 idle hours (76 merged, 1 blocked): (1) Team 5 / UI-48 — the reviewer's TDD context rendered five historical runs of the thrice-recalled package (93k characters of receipts) → `fit_context` CONTEXT_CAPACITY_UNSUPPORTED on every claim; `defer_failure` matched 'CAPACITY' and yielded PACKAGE_CAPACITY_WAIT; the scheduler re-admitted the team every ~10 s: 4,762 CLAIM/RETRY events, one model call. (2) Team 1 / UI-54 — examples.tsx imports ../empty/Empty (UI-44, same team, merged 08:24, after the candidate failed at 02:22); the candidate (green root + UI-54 only) failed as vite 'Failed to resolve import' → TDD_BROWSER_INFRASTRUCTURE with NEEDS_TRIAGE; `_refresh_lane` never retries blocks that carry a handoff → root waited COMPONENT_DELIVERY_BLOCKED_WAIT since 12:47.\n- factory_delivery_coordinator `_bound_history`: two most recent historical runs detailed, older ones summarized (run id, completion digest, cycle count, ",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E21",
+      "source_id": "S14",
+      "line_start": 515,
+      "line_end": 526,
+      "kind": "historical_report",
+      "excerpt": "## Step 10ah (installed 2026-09-18 01:50 UTC): requeue a team whose link is already MERGED\n01:29 UTC: the released UI-54 candidate and UI-48 both failed merged sibling test test-ui-02-reflow-reach.js → repeated-sibling triage reopened UI-02 (Team 2) a second time; Team 2's link was already MERGED (whole-team merge done) and `_requeue_finished_child` only handled VERIFIED → UI-02 PENDING with no team queued. Condition now VERIFIED or MERGED (link back to READY, stage QUEUED, audited). Test +1 (test_package_recall). deploy10ah.py wait|install|requeue (requeue applies the recorded reopen event to Team 2). Regression baseline unchanged (502 passed, 5 known). The 10ag lane test got an explicit created_at order (flaked once in the full run).\n10ah live 01:50 UTC: Team 2 requeued for UI-02 (link MERGED → READY, receipt 2f49ec62…); UI-54 and UI-48 blocked SIBLING_PACKAGE_REOPENED until UI-02's corrected delivery merges (release_sibling_blocked).\n\n## Step 10ai (installed 2026-09-18 06:11 UTC): the root integrates once every team has merged\n03:29–05:00: all nine teams MERGED, lane empty (79 MER",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E22",
+      "source_id": "S14",
+      "line_start": 536,
+      "line_end": 542,
+      "kind": "historical_report",
+      "excerpt": "## Step 10al (installed 2026-09-18 10:13 UTC): controller execution of a submitted request is not agent idleness\n07:21–10:09: the root's integration suite grew from 570 s to ~70 minutes (the public barrel now publishes all 73 components, so every browser test loads a much larger bundle). `tdd.poll()` executes the submitted request inside the agent-call loop with `protocol_guard` as the harness guard, and `ProgressWatchdog` counts only new controller test receipts as progress — so each request killed its own agent call at the 600 s idle bound (AGENT_PROGRESS_STALLED), the stage failed, recovery restarted it, and on the third occurrence recovery hit RECOVERY_RETRY_BOUND and the root sat in ERROR with no repairer.\n- factory_worker: the loop marks the controller-execution window around `tdd.poll()`.\n- factory_progress `controller_busy` + `_now`: both the idle and the absolute call timers freeze for exactly that window, and `summary()` reports `controller_execution_seconds`. Controller-side hangs remain bounded by the harness's per-run timeouts and the stage lease, not by this idle timer.",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E23",
+      "source_id": "S14",
+      "line_start": 550,
+      "line_end": 580,
+      "kind": "historical_report",
+      "excerpt": "## Step 10an (installed 2026-09-18 11:20 UTC): a provider transport failure is an environment failure\n11:16: the root's coder call ended after 40 minutes with the Claude CLI reporting `sdk_execution_failed` (1.6M input tokens, mostly cached). `classify_failure` returned kind 'unknown' for PROVIDER_FAILED, recovery answered NO_QUALIFIED_REPAIR_PROFILE, and the root stopped with two witnessed integration cycles already on record. Codes beginning PROVIDER_ / MAINTENANCE_PROVIDER_ are now environment failures: the stage resumes the witnessed run in a new call, and the recovery no-progress bound still stops a provider that never advances. Quota, rate limits and reauthentication are matched earlier and keep their own routes (test asserts all five cases). Test +1 parametrized (test_autonomy_recovery). Regression 510 passed with the 2 known failures. Root resumed (receipt 10f25376…), hold off.\n\n## Step 10ao (installed 2026-09-18 12:44 UTC): the run state keeps a receipt's identity, not its bulk\n12:39: the root's integration cycles each stored the whole 1516-test selection and every runner su",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E24",
+      "source_id": "S14",
+      "line_start": 582,
+      "line_end": 587,
+      "kind": "historical_report",
+      "excerpt": "## Step 10at (installed 2026-09-18 16:18 UTC): the family stall watch\nThe nine stalls of this round were each found because the owner asked whether the work had finished, never because the factory said so. `factory_family_watch.observe()` now runs in the supervisor's 30-second reconciliation block and records three states under an idempotent receipt (owner_events action `family-stall`, one per state and progress fingerprint):\n- **WAIT_WITHOUT_OWNER** — the recorded wait reason has no party that could end it: children pending while every team has merged (10ai), a blocked delivery lane with no claimable delivery (10ag), a recall wait with no pending recall, a foundation wait with no open defect, a package capacity wait with every package verified. An admission hold, and any reason the watch does not judge, are never called ownerless.\n- **ERROR_WITHOUT_REPAIR** — a member job is in ERROR and its recovery lane answered BLOCKED (RECOVERY_RETRY_BOUND, NO_QUALIFIED_REPAIR_PROFILE): 10al, 10an, 10ao, 10aq, 10as.\n- **NO_PROGRESS** — the family progress fingerprint (newest job, stage, TDD run,",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E25",
+      "source_id": "S14",
+      "line_start": 589,
+      "line_end": 598,
+      "kind": "historical_report",
+      "excerpt": "## Step 10au (installed 2026-09-18 16:24 UTC): a specialist receives the controller's execution records\n16:14 the root's delivery stage passed GREEN (nine teams merged, 74/74 packages verified, 79 deliveries merged, full developer regression green). The acceptance review then dispatched the architecture reviewer as a keyword candidate with an empty facts object; a specialist reads the repository and never the database, so it answered that it had no controller-observed verification tied to the current candidate and asked for it — change request #562, job WAITING_DECISION, for evidence the controller already held.\n- `controller_verification(job)` collects those records as identities and artifact references: the developer regression verdict with artifact path and digest, the TDD completion identity, the merged-team aggregate with its verified package count, the last correction outcome and the component delivery counts. The prompt states they are observed facts about what ran, never an acceptance. Bulk stays out. Test +1; regression 533 passed (one order-dependent blockage flake that pas",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E26",
+      "source_id": "S06",
+      "line_start": 43,
+      "line_end": 69,
+      "kind": "historical_report",
+      "excerpt": "## 3. Güncel ekip ve teslim durumu\n\n| Ekip | Child job ID | Gerçek stage durumu | Son durum |\n|---|---|---|---|\n| Team 1 | `db974f18-ed9a-4d04-9abe-ba9dafdb31ea` | FAIL | `SCHEDULER_LEASE_LOST` |\n| Team 2 | `9fbcac08-ea4e-47ab-ab68-4aa444d3dc25` | FAIL | `SCHEDULER_LEASE_LOST` |\n| Team 3 | `64458c2a-99d3-43cd-b47a-9d80bf992d99` | QUEUED | Henüz çalışmıyor |\n| Team 5 | `bc22dc95-c957-441e-8f87-97f31eaf1db3` | FAIL | `PACKAGE_LEASE_LOST: PACKAGE_LEASE_LOST` |\n| Team 7 | `1b9a73ae-aba8-4c98-8f78-829353a1346c` | QUEUED | Henüz çalışmıyor |\n| Team 9 | `a8fc8e64-e5ac-47c6-b6c3-951e8b1e2313` | QUEUED | Henüz çalışmıyor |\n| Team 4/6/8 | Child yok | PLANNED | ART'de planlı; çalışır ekip kurulmamış |\n\nÇocuk işlerin generation'ı **1**. Her çocuğun ayrı mutlak worktree yolu ve paket listesi CANLI-DURUM.json'da var. Dokuz ekip planı, 81 aktif agent demek değil; şu an aktif çağrı **0**. Team 1/2 child/ART etiketi READY kalırken gerçek job ERROR/stage FAIL: durum ekranında bu ayrım görünmeli.\n\nİki scheduler slotu UNKNOWN. Son heartbeat'ler 03:24:36 ve 03:24:51 UTC; lease sonları 03:26:36 ve 03:26:5",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E27",
+      "source_id": "S06",
+      "line_start": 93,
+      "line_end": 109,
+      "kind": "historical_report",
+      "excerpt": "### P0-3 — Teşhis agent'ının görevi ile erişimi çelişiyor\n\n**Doğrudan kanıt:** bakım çağrısı `51cf5584-674f-4ef1-8ed5-705f0ec79a1d` COMPLETED; çıktı “INCIDENT.json okunamadı, yerel dosya okuma aracı yok, komut çalıştırmak yasak” diyor. Maintenance request SUCCESS ve blockage `step=diagnosed`; ancak gerçek hata teşhis edilmemiş.\n\nOlay dosyası: [INCIDENT.json](/Users/w6x/Developer/software-factory/projects/.impediments/2f4281a4-32be-5634-a442-6abbbb9cd266/diagnosis/INCIDENT.json). SHA256: `9bec9b91fdf553677e3458302ac3d67a734ccdf47bc082d3caada544fe090279`.\n\n[Teşhis prompt'u](/Users/w6x/Developer/software-factory/factory_blockage_worker.py:315) dosyayı okumayı istiyor, komut çalıştırmayı yasaklıyor. [Model girdisi](/Users/w6x/Developer/software-factory/factory_maintenance.py:409) dosyanın kendisini değil talimatı iletiyor. [Codex SDK adaptörü](/Users/w6x/Developer/software-factory/runtime/sdk/codex.mjs:70) özel dosya okuyucu sağlamıyor; proje dokümanı otomatik yükleme de kapalı.\n\n**Gereken:** boyutu sınırlı ve sırlardan temizlenmiş olay içeriğini yapılandırılmış girdiye eklemek veya yaln",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E28",
+      "source_id": "S15",
+      "line_start": 40,
+      "line_end": 44,
+      "kind": "historical_report",
+      "excerpt": "## Gerçek denemede yakalananlar\n\n1. **SDK dışı mevcut işçi kesintisi:** macOS 227 saniye boşta uyumuş; 120 saniyelik işçi kirası dolmuş. Aktif stage boyunca `caffeinate -i -w <worker-pid>` uygulanır; iş tamamlanınca bırakılır. Ekran uyuyabilir; genel güç ayarı değiştirilmez. Kapak kapatma, kullanıcının uyutması, elektrik veya ağ kesintisinin hiç olmayacağı garanti edilmez.\n2. **Kurtarma tespiti:** Docker'ın küçük harfli, tam hedefe ait “no such object” yanıtı yanlışlıkla belirsiz sayılıyordu. Yalnız gerçek bulunamadı yanıtı `ABSENT` olur; daemon/izin/başka hedef hatası belirsiz kalır. Aynı işçi hatası için mükerrer kurtarma kaydı üretilmez. Kesin işçi kirası kaybı ortam kesintisi olarak sınıflandırılır; süreç, konteyner ve dış etki doğrulaması korunur.\n3. **İlk gerçek Codex SDK denemesi:** hesap oturumu ve model cevabı çalıştı; iç Linux sandbox namespace oluşturamadığı için dosya okuma gerçekleşmedi. Beklenen dosya içeriği gelmediğinden yeterlilik verilmedi. Üstteki salt okunur konteyner sınırı korunarak gereksiz ikinci sandbox kaldırıldı. Aynı dosya okuma beklentisi yeni imajda gerç",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E29",
+      "source_id": "S15",
+      "line_start": 53,
+      "line_end": 68,
+      "kind": "historical_report",
+      "excerpt": "## Canlı kurtarma ve ürün çalışmasının yeniden başlaması\n\n13 Eylül 2026, 20:52 UTC kontrol noktası. Eski Plane `ERROR` kaydı, kurtarma sonrası yanlışlıkla kullanıcı durdurması sayılıyordu. Kurtarma artık aynı neslin `IN_PROGRESS` bildirimini kalıcı olarak yeniden kuyruğa koyuyor. Bildirimin gerçek teslimi ve kurtarma kimliği eşleşmeden scheduler iş vermiyor; supervisor boş worker açmıyor. Eski durum görüntüsü kilit altında yeniden okunuyor. Geçici bağlantı/geçmiş gecikmesi artan aralıklarla yeniden deneniyor; aynı nesilde ikinci hata ayrı olay olarak tutuluyor.\n\nBu değişiklikler için son birleşik PostgreSQL/servis kontrolünde **66 test geçti**. Önceki 116 testlik SDK/hesap kontrolüyle örtüşebilir; iki sayı bir toplam olarak sunulmaz. [Test kaydı](/Users/w6x/Developer/software-factory/evidence/autonomy-20260913/handoff-combined-tests.txt).\n\nMevcut Plane bağlantısında bot ile yetkili kullanıcı aynı kimliği kullanıyor. Geçmişteki olay için otomatik teslim kanıtı uydurulmadı: kullanıcının önceden verdiği düzeltip devam etme talimatı, yalnız bu iş/nesil/aşama/olay/kaynak/kurtarma kimliğin",
+      "excerpt_may_be_shortened": true
+    },
+    {
+      "id": "E30",
+      "source_id": "S20",
+      "line_start": 244,
+      "line_end": 244,
+      "kind": "transcript_tool_result",
+      "excerpt": "ivity Assertion Using B\n2026-09-15 04:40:33 +0300 Sleep               \tEntering Sleep state due to 'Clamshell Sleep':TCPKeepAlive=active Using AC (Charge:\n2026-09-15 04:40:41 +0300 DarkWake            \tDarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.Ou\n2026-09-15 04:41:26 +0300 Sleep               \tEntering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using AC (Charg\n2026-09-15 04:56:37 +0300 DarkWake            \tDarkWake from Deep Idle [CDNPB] : due to NUB.SPMI0Sw3IRQ nub-spmi0.0x02 nub-spmi-a0\n2026-09-15 05:29:46 +0300 Sleep               \tEnter",
+      "recorded_at_utc": "2026-09-15T05:51:19.907Z"
+    },
+    {
+      "id": "E31",
+      "source_id": "S20",
+      "line_start": 1573,
+      "line_end": 1573,
+      "kind": "transcript_tool_result",
+      "excerpt": "b3a515044afc63461fa3dedea9740d3679f9bcaa15a663a,task=MainThread,pid=1117907,uid=501\n[206336.538407] Memory cgroup out of memory: Killed process 1117907 (MainThread) total-vm:11454408kB, anon-rss:288916kB, file-rss:69248kB, shmem-rss:0kB, UID:501 pgtables:2688kB oom_score_adj:0\n[206336.538697] Chrome_ChildIOT invoked oom-killer: gfp_mask=0x400cc0(GFP_KERNEL_ACCOUNT), order=0, oom_score_adj=0\n[206336.538703]  oom_kill_process+0x1f8/0x3e0\n[206336.538748] [  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name\n[206336.538755] oom-kill:constrai",
+      "recorded_at_utc": "2026-09-15T08:03:50.017Z"
+    },
+    {
+      "id": "E32",
+      "source_id": "S21",
+      "line_start": 138,
+      "line_end": 138,
+      "kind": "transcript_tool_result",
+      "excerpt": "{'kind': 'IMPLEMENTED', 'count': 5}, {'kind': 'COMPONENT_DELIVERED', 'count': 3}, {'kind': 'CLAIM', 'count': 4762}]\n== latest events\n{'id': '10948', 'plan_id': '04bc0f2b-1b78-4724-9bcf-759e7e123b34', 'package_id': 'UI-48', 'kind': 'RETRY', 'request_key': '798d16cf-19a8-42e4-bc26-13f6992c7737', 'payload': \"{'reason': 'CONTEXT_CAPACITY_UNSUPPORTED: required context exceeds controller ceiling; no required instructions dropped', 'implementation_retained': True}\", 'created_at': '2026-09-18 01:03:22.902128+00:00'}\n{'id': '10947', 'plan_id': '04bc0f2b-1b78-4724-9bcf-759e7e123b34', 'package_id': 'UI-4",
+      "recorded_at_utc": "2026-09-18T01:03:28.616Z"
+    },
+    {
+      "id": "E33",
+      "source_id": "S21",
+      "line_start": 2269,
+      "line_end": 2269,
+      "kind": "transcript_tool_result",
+      "excerpt": ", 'plane_recovery_handoff': 'de6ed650-61f5-501d-aa9c-31feaa19d8da', 'plane_recovery_block_reason': 'PLANE_RECOVERY_ACTOR_AMBIGUOUS'}}\nslots {'n': 0}\nhold {'value': {'actor': 'operator', 'active': False, 'reason': '', 'changed_at': 1789749452.373921}}\npaused [{'key': 'emergency_stop', 'value': False}, {'key': 'paused', 'value': False}]\nintake/dispatch HTTPError 429 Client Error: Too Many Requests for url: http://127.0.0.1:8088/api/v1/workspaces/fabrika/projects/be18b4f0-b07d-4c3c-8088-3974331a3fec/work-items/?state=c1c5d49e-782e-479\nintake/dispatch HTTPError 429 Client Error: Too Many Requests ",
+      "recorded_at_utc": "2026-09-18T16:46:43.406Z"
+    },
+    {
+      "id": "E34",
+      "source_id": "S20",
+      "line_start": 12847,
+      "line_end": 12847,
+      "kind": "transcript_assistant_claim",
+      "excerpt": "Sistem kurulumu bitti; ekiplerin işi ise kendi başına sürüyor ve bitmek üzere.\n\n**Şu an:**\n- 9 takımın 73 paketinin hepsi VERIFIED (takımların üretim işi tamamlandı, hata yok).\n- Kök şeridi birleştiriyor: 41 MERGED, 1 MERGING, 32 READY sırada (aday başına ~3 dk → yaklaşık 1,5 saat), 2 BLOCKED (bunlar UI-02 bloklarından kalan; sırası gelince tek seferlik yeniden denemeyle açılır).\n- Hold kapalı, hata yok; operatör müdahalesi gerekmiyor.\n\n**Bittiğinde ne olacak:** son READY teslimat birleşince kök",
+      "recorded_at_utc": "2026-09-17T06:26:09.013Z"
+    },
+    {
+      "id": "E37",
+      "source_id": "S21",
+      "line_start": 2336,
+      "line_end": 2336,
+      "kind": "transcript_tool_result",
+      "excerpt": ", 'plane_recovery_handoff': 'de6ed650-61f5-501d-aa9c-31feaa19d8da', 'plane_recovery_block_reason': 'PLANE_RECOVERY_OWNER_STATE_PENDING', 'plane_recovery_resume_authorization': 'b47e1a03-9f27-5d3f-a497-852d1d3e8cd0'}\noutbox [{'state_name': 'WAITING_DECISION', 'attempts': 0, 'delivered_at': datetime.datetime(2026, 9, 18, 16, 17, 31, 222242, tzinfo=datetime.timezone.utc)}, {'state_name': 'ERROR', 'attempts': 0, 'delivered_at': datetime.datetime(2026, 9, 18, 14, 32, 13, 758068, tzinfo=datetime.timezone.utc)}]\njob {'status': 'RUNNING', 'stage': 'review'}\nFri Sep 18 17:24:07 UTC 2026",
+      "recorded_at_utc": "2026-09-18T17:24:07.707Z"
+    },
+    {
+      "id": "E38",
+      "source_id": "S21",
+      "line_start": 2341,
+      "line_end": 2341,
+      "kind": "transcript_tool_result",
+      "excerpt": " 'delivered_at': datetime.datetime(2026, 9, 18, 16, 17, 31, 222242, tzinfo=datetime.timezone.utc)}]\nboard state now: WAITING_DECISION\nneeded for resume: ERROR or IN_PROGRESS\nissue url hint: project v1test name Geliştirici, hazır UI kütüphanesinden component seçebilsin",
+      "recorded_at_utc": "2026-09-18T17:24:33.585Z"
+    },
+    {
+      "id": "E35",
+      "source_id": "S07",
+      "line_start": 1,
+      "line_end": 1,
+      "kind": "historical_snapshot",
+      "json_pointer": "/blockage_cases/0/details/diagnosis",
+      "excerpt": "{\"diagnosis\": \"Diagnosis blocked: INCIDENT.json was not read. Available tools provide no direct local text-file reader; running commands and calling external services are prohibited. The specific failure, reproduction, source version and acceptance evidence remain unknown.\", \"next_action\": \"RTE should supply INCIDENT.json contents to the existing platform specialist, who can then assess the failure and return an evidence-based handoff within the current scope and budget. No commands or changes were executed.\", \"evidence_needed\": [\"Contents of INCIDENT.json, excluding secrets, supplied directly or through an authorized local file-reading capability.\"], \"recommended_role\": \"Platform specialist remains the diagnostic owner; RTE coordinates access to the missing evidence.\"}"
+    },
+    {
+      "id": "E36",
+      "source_id": "S09",
+      "line_start": 1,
+      "line_end": 1,
+      "kind": "historical_snapshot",
+      "json_pointer": "/children",
+      "excerpt": "2026-09-15T06:16:45.690844+00:00: root RUNNING; Team 1/2/5 QUEUED; Team 3 RUNNING. Yeniden kuyruklama, tamamlanmış teslim değildir."
+    }
+  ],
+  "decision_policy": "Alternatifler sıralama veya tavsiye puanı değildir; hiçbir seçenek kullanıcı adına seçilmez."
+}

@@ -1,0 +1,820 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-65",
+    "ad": "Mimari uygunluk denetimi ve modülerlik ölçümü",
+    "grup": "Doğrulama ve kalite",
+    "cozdugu_sorun": "Katman, bağımlılık yönü, modül ve ekip sınırı kurallarının deterministik denetlenememesi; bağlaşım metriklerinin zaman serisi olarak izlenememesi.",
+    "ne_zaman_zorunlu": "Ajanların mevcut kod tabanına yazmaya başladığı andan itibaren."
+  },
+  "arac_sayisi": 40,
+  "tur_dagilimi": {
+    "acik-cekirdek": 1,
+    "acik-kaynak": 19,
+    "kutuphane": 10,
+    "ticari-yazilim": 6,
+    "protokol-standart": 1,
+    "ticari-saas": 2,
+    "cerceve": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0557",
+      "ad": "Nx",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek), ticari (Nx Cloud)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://nx.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Monorepo proje/görev grafiği çıkarır; değişiklikten etkilenen projeleri (affected) hesaplar, görevleri bağımlılık sırasına göre paralel çalıştırır ve modül sınırı kurallarını uygular.",
+      "sinirlar": "Kod/proje düzeyi bağımlılık; iş kalemi bağımlılığı değil; en güçlü JS/TS ekosisteminde. Monorepo yapısını varsayar; çoklu depo ilişkilerini sınırlı kapsar; uzak önbellek/dağıtık yürütme ticari. Proje düzeyi etki analizi (test düzeyi değil); en iyi JS/TS monorepolarda çalışır.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K05-012",
+        "N-K06-003",
+        "N-K13-007",
+        "N-K24-003",
+        "N-K24-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0558",
+      "ad": "dependency-cruiser",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sverweij/dependency-cruiser",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript modül bağımlılıklarını çıkarıp kural setiyle (yasaklı bağımlılık, döngü, yetim modül) doğrular ve grafik olarak görselleştirir.",
+      "sinirlar": "Yalnız JS/TS kod tabanları. JS/TS ekosistemiyle sınırlı; servisler arası ilişkileri kapsamaz. Yalnız JS/TS ekosistemi.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K03-004",
+        "N-K04-008",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0694",
+      "ad": "ArchUnit",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.archunit.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java mimari kurallarını (katman erişimi, paket bağımlılığı, döngü yasağı, adlandırma) birim testi olarak yazdırır; FreezingArchRule ile mevcut ihlalleri dondurup yalnız yenilerini kırar.",
+      "sinirlar": "Yalnız JVM; kurallar elle yazılmalı. Yalnız JVM; kuralların yazımı ve bakımı ekip disiplini ister.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-004",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K05-012",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0695",
+      "ad": "Import Linter",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://import-linter.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python paketleri için mimari sözleşmeler (katmanlar, yasak içe aktarma, bağımsızlık) tanımlayıp içe aktarma grafiğine göre doğrular.",
+      "sinirlar": "Yalnız Python içe aktarma grafiği; çalışma zamanı bağımlılıklarını görmez. Yalnız statik içe aktarmaları görür; dinamik içe aktarmayı kaçırır.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-004",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0697",
+      "ad": "jQAssistant",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://jqassistant.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod ve derleme yapısını Neo4j grafına tarayıp Cypher sorgularıyla mimari kuralları doğrulayan ve raporlayan araç.",
+      "sinirlar": "Ağırlıklı JVM; GPL lisansı dağıtımda dikkat gerektirir; Neo4j bilgisi gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-0743",
+      "ad": "Structurizr",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://structurizr.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C4 modelini kod olarak (Structurizr DSL) tanımlayıp birden çok diyagram görünümü üreten; mimari dokümantasyon ve ADR'leri aynı çalışma alanında yayınlayan araç.",
+      "sinirlar": "İlişkiler elle modellenir, koddan otomatik çıkarılmaz; eski lite/onpremises depoları arşivlendi, yeni birleşik depoya geçildi. Eski 'lite', 'cli' ve 'onpremises' depoları 2026 başında arşivlenip tek depoda birleştirildi; mevcut kurulumlar için göç planı gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-009",
+        "N-K07-001",
+        "N-K07-003",
+        "N-K07-008",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0745",
+      "ad": "Emerge",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/glato/emerge",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birçok dil için modül bağımlılık grafiği ve metrikleri çıkarıp tarayıcı tabanlı etkileşimli görselleştirme üretir.",
+      "sinirlar": "Tek bakımcılı; kural doğrulaması yok.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-0902",
+      "ad": "Context Mapper",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://contextmapper.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Alan güdümlü tasarımın sınırlı bağlamlarını, bağlam haritasını ve ortak dil (ubiquitous language) kavramlarını DSL ile modelleyip diyagram ve servis ayrıştırma önerileri üreten araç.",
+      "sinirlar": "Son sürüm Ağustos 2024; bakım temposu düşük.",
+      "ihtiyaclar": [
+        "N-K03-009",
+        "N-K07-006",
+        "N-K07-008",
+        "N-K31-006",
+        "N-K31-008",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1039",
+      "ad": "Teamscale",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://teamscale.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Test boşluk analizi (değişen ama test edilmemiş kod), test etki analizi, klon tespiti, mimari uygunluk denetimi ve zaman serisi kod kalitesi metrikleri sunar.",
+      "sinirlar": "Ticari; test boşluk analizi için test kapsam izlerinin toplanması altyapı ister.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K04-008",
+        "N-K05-001",
+        "N-K05-029",
+        "N-K06-003",
+        "N-K23-014",
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-1090",
+      "ad": "CodeScene",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://codescene.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod Sağlığı metriği, sıcak nokta (sık değişen ve düşük sağlıklı kod), değişim bağlaşımı ve bilgi dağılımı analizleri; PR'da kod sağlığı düşüşünü kalite kapısı olarak işaretler.",
+      "sinirlar": "Ticari; metrik tanımı satıcıya özgü. Ticari.",
+      "ihtiyaclar": [
+        "N-K04-008",
+        "N-K05-012",
+        "N-K08-005",
+        "N-K23-006",
+        "N-K23-014",
+        "N-K24-008",
+        "N-K24-014",
+        "N-K29-006",
+        "N-K29-007",
+        "N-K31-007",
+        "N-K31-008",
+        "N-K35-002",
+        "N-K35-004",
+        "N-K35-005"
+      ]
+    },
+    {
+      "id": "AR-1098",
+      "ad": "NDepend",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ndepend.com",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET kod tabanı için metrikler, CQLinq ile sorgulanabilir kurallar, teknik borç tahmini, kalite kapıları, bağımlılık grafiği ve anlık görüntüler arası trend karşılaştırması.",
+      "sinirlar": "Yalnız .NET; ticari lisans.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K04-008",
+        "N-K05-023",
+        "N-K23-014",
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-1656",
+      "ad": "Tach",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.gauge.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python projelerinde modül sınırlarını ve izinli bağımlılıkları tanımlayıp ihlalleri CI'da engelleyen, bağımlılık grafiğini görselleştiren Rust tabanlı araç.",
+      "sinirlar": "Yalnız Python; proje Gauge'dan topluluk organizasyonuna (tach-org) taşınmıştır.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-004",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1657",
+      "ad": "Deptrac",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "http://deptrac.github.io/deptrac/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP kod tabanında katmanlar arası izinli bağımlılık kurallarını tanımlayıp mimari ihlalleri raporlayan statik analiz aracı.",
+      "sinirlar": "Yalnız PHP.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-1658",
+      "ad": "Packwerk",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Shopify/packwerk",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rails monolitlerini paketlere bölüp paketler arası bağımlılık ve gizlilik sınırlarını statik olarak denetleyen araç.",
+      "sinirlar": "Yalnız Ruby/Rails; Shopify iç kullanımına göre şekillenmiştir.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K04-008",
+        "N-K24-008",
+        "N-K31-001",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1659",
+      "ad": "Konsist",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.konsist.lemonappdev.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kotlin kod tabanında adlandırma, katman ve mimari kurallarını birim testi olarak yazdıran yapısal linter; paradigmaya uyumu test kodu ile zorlar.",
+      "sinirlar": "Yalnız Kotlin.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-1660",
+      "ad": "ArchUnitNET",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/TNG/ArchUnitNET",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET için ArchUnit'in karşılığı: katman, bağımlılık ve adlandırma kurallarını C# birim testleri olarak ifade edip derlenmiş derlemeler üzerinde denetler.",
+      "sinirlar": "Yalnız .NET; kurallar elle yazılmalıdır.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-1785",
+      "ad": "FINOS CALM (Common Architecture Language Model)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://calm.finos.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Mimariyi düğümler, ilişkiler, arayüzler ve kontrollerle JSON Schema tabanlı makinece okunur modelde tanımlar; desenlere (pattern) uyumu CLI ile doğrular, dokümantasyon ve görselleştirme üretir.",
+      "sinirlar": "Genç proje; kod tabanından otomatik mimari çıkarımı sınırlı, modeller elle bakım ister.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-008",
+        "N-K03-009",
+        "N-K07-008",
+        "N-K33-014",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-2215",
+      "ad": "vFunction",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://vfunction.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari gözlemlenebilirlik: çalışma zamanı ve statik analizle alan (domain) sınırlarını, sınıf/modül bağımlılıklarını ve mimari kaymayı çıkarır; mimari teknik borcu izler ve yeniden düzenleme görevleri üretir.",
+      "sinirlar": "Java/.NET odaklı; ajan kurulumu gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K04-008",
+        "N-K23-014",
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-2306",
+      "ad": "Axivion Suite",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.qt.io/product/quality-assurance/axivion",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari doğrulama (hedef mimariye aykırı bağımlılıklar), klon tespiti, ölü kod, döngü tespiti ve MISRA/AUTOSAR/CERT statik analizi; her commit'te mimari sapmayı raporlar.",
+      "sinirlar": "Yalnız C, C++, C#, CUDA ve Rust; Java/Python/TypeScript kapsanmaz.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K23-014",
+        "N-K24-008",
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-2307",
+      "ad": "Sonargraph",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (ücretsiz Explorer sürümü)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.hello2morrow.com/products/sonargraph",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari DSL ile katman ve bağımlılık kurallarını tanımlayıp denetleyen, döngüsel bağımlılık tespiti, yüzlerce metrik ve kalite kapısı sunan statik analiz aracı; Zügel MCP sunucusuyla kodlama ajanlarına mimari kuralları iletir.",
+      "sinirlar": "Ticari; dil desteği Java/Kotlin, C#, Python, Go, TypeScript ve C/C++ ile sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K03-010",
+        "N-K04-007",
+        "N-K23-014",
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-2877",
+      "ad": "Archgate",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cli.archgate.dev/",
+      "olgunluk": "erken",
+      "ne_saglar": "ADR'leri YAML ön bilgili Markdown olarak tutar ve her ADR'ye eşlik eden .rules.ts denetimleriyle kod tabanına karşı çalıştırılabilir kurallara dönüştürür; ajanlar kuralları okur, ihlaller lint gibi raporlanır.",
+      "sinirlar": "Kurallar TypeScript ile yazılır; genç proje.",
+      "ihtiyaclar": [
+        "N-K03-008",
+        "N-K03-009",
+        "N-K07-003",
+        "N-K24-007",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-3171",
+      "ad": "go-arch-lint",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/fe3dback/go-arch-lint",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go projelerinde bileşenler arası izinli import ilişkilerini YAML'da tanımlayıp mimari ihlalleri CI'da yakalayan linter.",
+      "sinirlar": "Küçük topluluk; yalnız import düzeyinde bağımlılık.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-004",
+        "N-K03-008",
+        "N-K04-007",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-3231",
+      "ad": "PHPArkitect",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/phparkitect/arkitect",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PHP mimari kurallarını (adlandırma, bağımlılık, arayüz uygulama) kod olarak yazıp test eden araç.",
+      "sinirlar": "Deptrac'a göre küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-4180",
+      "ad": "Sheriff",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/softarc-consulting/sheriff",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript projelerinde modül sınırlarını index.ts genel arayüzleriyle tanımlar, modüllere otomatik veya elle etiket vererek etiket tabanlı bağımlılık kurallarını ESLint üzerinden zorlar; ekip sahipliğine göre etiketleme ile ekip sınırı ihlali yakalanabilir.",
+      "sinirlar": "Yalnız TypeScript; ekip iletişim verisiyle karşılaştırma yapmaz. Yalnız TypeScript; depolar arası sınırları kapsamaz.",
+      "ihtiyaclar": [
+        "N-K31-003",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4320",
+      "ad": "ts-arch",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ts-arch/ts-arch",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TypeScript projelerinde klasör/dosya bağımlılık kurallarını, döngü yasağını ve adlandırma kurallarını birim testi olarak yazmayı sağlar; ihlal testte kırmızıya düşerek birleştirmeyi engeller.",
+      "sinirlar": "Yalnız TypeScript; büyük monorepolarda başarım ve kural ifade gücü sınırlı.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4321",
+      "ad": "ArchUnitTS",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/LukasNiessen/ArchUnitTS",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TypeScript ve JavaScript projelerinde bağımlılık yönü, döngüsel bağımlılık, katman ve kodlama standardı kurallarını herhangi bir test çatısında çalıştırır; modül metrikleri API'siyle bağlaşım/uyum ölçümlerini kurala bağlamaya olanak tanır.",
+      "sinirlar": "Genç proje, tek bakımcı ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4322",
+      "ad": "eslint-plugin-boundaries",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/javierbrea/eslint-plugin-boundaries",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript projelerinde dosyaları eleman tiplerine (katman, modül, özellik) sınıflayıp hangi tipin hangisine bağımlı olabileceğini ve yalnız genel giriş noktalarından içe aktarma yapılmasını ESLint kuralı olarak zorlar; editörde ve CI'da anında geri bildirim verir.",
+      "sinirlar": "Yalnız JS/TS; sınır kuralları kurumca modellenmeli.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4323",
+      "ad": "arch-go",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/arch-go/arch-go",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go projelerinde izinli/yasaklı iç ve dış bağımlılık, paket içeriği, fonksiyon ve adlandırma kurallarını YAML ile tanımlayıp denetler; uyum ve kapsam eşiği belirlenerek CI kapısı olarak çalışır.",
+      "sinirlar": "Yalnız Go; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4324",
+      "ad": "depguard",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/OpenPeeDeeP/depguard",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go paketlerinin içe aktarabileceği paketleri izin/yasak listeleriyle denetleyen linter; golangci-lint içinde koşarak yasaklı iç modül veya kullanımdan kaldırılmış kütüphane kullanımını kapıda yakalar.",
+      "sinirlar": "Yalnız içe aktarma düzeyi; katman semantiği ve metrik üretmez.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003",
+        "N-K35-007"
+      ]
+    },
+    {
+      "id": "AR-4325",
+      "ad": "NetArchTest",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/BenMorris/NetArchTest",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET derlemelerinde katman bağımlılıkları, adlandırma ve tip kurallarını akıcı API ile birim testi olarak yazmayı sağlar; eNhancedEdition çatalı ek kural ve raporlama sunar.",
+      "sinirlar": "Ana depo 2024'ten beri az güncelleniyor; ArchUnitNET'e göre ifade gücü sınırlı.",
+      "ihtiyaclar": [
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-4326",
+      "ad": "NsDepCop",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/realvizu/NsDepCop",
+      "olgunluk": "olgun",
+      "ne_saglar": "C# projelerinde ad alanı ve derleme bağımlılık kurallarını Roslyn analizörü olarak derleme sırasında denetler; planlanmamış bağımlılıkları derleme uyarısı/hatası olarak raporlar.",
+      "sinirlar": "Yalnız C#; GPL lisansı kurum politikasına göre değerlendirilmeli (araç olarak kullanım).",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4327",
+      "ad": "PyTestArch",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/zyskarch/pytestarch",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python modülleri arasındaki içe aktarmalardan bağımlılık grafiği kurup ArchUnit benzeri mimari kuralları pytest testleri olarak denetler; katman kuralları ve grafik görselleştirme sunar.",
+      "sinirlar": "Yalnız statik içe aktarmalar; dinamik içe aktarmaları göremez.",
+      "ihtiyaclar": [
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-4328",
+      "ad": "jMolecules",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/xmolecules/jmolecules",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java kodunda DDD yapı taşlarını, katmanlı/onion/hexagonal mimari rollerini anotasyon ve tiplerle ifade eder; jMolecules entegrasyonlarıyla bu niyet ArchUnit/jQAssistant kurallarına dönüştürülerek doğrulanır; mimari karar kodla birlikte yaşar.",
+      "sinirlar": "Kodun anotasyonla işaretlenmesi disiplini ister; tek başına kapı değildir.",
+      "ihtiyaclar": [
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-4329",
+      "ad": "Spring Modulith",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/spring-projects/spring-modulith",
+      "olgunluk": "olgun",
+      "ne_saglar": "Spring Boot uygulamalarında paket yapısından uygulama modüllerini çıkarır, modüller arası döngü ve iç tip erişimi ihlallerini testle doğrular, modül dokümantasyonu üretir, modüller arası olay yayını ve modül bazlı entegrasyon testi sağlar.",
+      "sinirlar": "Yalnız Spring Boot monolitleri; depolar arası sınırları kapsamaz.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4330",
+      "ad": "cargo-modules",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/regexident/cargo-modules",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust crate'lerinin modül ağacını ve iç bağımlılıklarını görselleştirir, yetim dosyaları ve döngüsel bağımlılıkları (acyclic denetimi) raporlar; CI'da döngü yasağı kapısı olarak kullanılabilir.",
+      "sinirlar": "Yalnız Rust; kural dili yok, katman kuralları için ek betik gerekir.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-4331",
+      "ad": "ArchGuard",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/archguard/archguard",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod, veritabanı ve API düzeyinde mimari analiz yapan mimari yönetişim aracı: mimari uygunluk fonksiyonları ve kural denetimi, kod/test/SQL/API kokuları, hizmet haritası ve mimari metrikler sunar.",
+      "sinirlar": "Topluluk etkinliği azalmış; dağıtık mimari metrikleri tamamlanmamış.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4332",
+      "ad": "Arcan",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.arcan.tech/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kaynak koddan mimari teknik borcu ve mimari anti-kalıpları tespit eder, düzeltme maliyetini tahmin eder ve CI/CD'ye bağlanarak mimari borcu sürekli izler; değişiklik etkisi tahmini sunar.",
+      "sinirlar": "Desteklenen diller ve metrik tanımları kamuya açık belgede sınırlı; SaaS.",
+      "ihtiyaclar": [
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-4333",
+      "ad": "CppDepend",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.cppdepend.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C, C++ (ve sitesine göre Java, Rust) kod tabanlarında bağımlılık grafiği ve matrisi, sorgu dili tabanlı özel kurallar, kod metrikleri, eğilim izleme ve teknik borç tahmini sunar; CI'da kural ihlaliyle kırılabilir.",
+      "sinirlar": "Ticari ve Windows ağırlıklı araç zinciri; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-4334",
+      "ad": "LikeC4",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/likec4/likec4",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C4 tarzı mimari modeli (sistemler, kapsayıcılar, ilişkiler, sahipler) kod olarak tanımlayıp canlı diyagramlar üretir; ART düzeyinde sistem sınırları ve genel arayüzlerin sürümlü tek kaynakta tutulmasına yardımcı olur.",
+      "sinirlar": "Model ile kod arasındaki uyumu kendisi denetlemez; uygunluk kuralları için ek araç gerekir.",
+      "ihtiyaclar": [
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4341",
+      "ad": "Hercules",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/src-d/hercules",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Git geçmişinden kod yaşı tükenme (burndown), geliştirici sahipliği ve birlikte değişen dosya/geliştirici (couples) analizleri üretir; kohort ve birlikte değişim metrikleri için veri sağlar.",
+      "sinirlar": "2023'ten beri bakımı yok; yeni Go sürümlerinde derleme sorunları olabilir.",
+      "ihtiyaclar": [
+        "N-K35-002",
+        "N-K35-005"
+      ]
+    }
+  ]
+}

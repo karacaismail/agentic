@@ -1,0 +1,352 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-64",
+    "ad": "Tehdit ve gizlilik modelleme çalışma alanı",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "Tehdit ve gizlilik modellerinin sürümlü, farkı alınabilir, önlemleri teste bağlı yaşayan artefaktlar olarak tutulamaması.",
+    "ne_zaman_zorunlu": "Kademe 0–1 hizmetlere dokunan ilk epikte."
+  },
+  "arac_sayisi": 18,
+  "tur_dagilimi": {
+    "acik-kaynak": 5,
+    "kutuphane": 1,
+    "protokol-standart": 6,
+    "ticari-yazilim": 2,
+    "ticari-saas": 4
+  },
+  "araclar": [
+    {
+      "id": "AR-1841",
+      "ad": "OWASP Threat Dragon",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://owasp.org/www-project-threat-dragon/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri akış diyagramı üzerinde STRIDE, LINDDUN, CIA gibi yöntemlerle tehdit modelleme yapan masaüstü/web aracı; modeller JSON olarak depoda sürümlenir, görevde yazmayan riskleri görünür kılar.",
+      "sinirlar": "Tehditleri büyük ölçüde insan tanımlar; otomatik öneriler sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K07-003",
+        "N-K21-002",
+        "N-K34-001"
+      ]
+    },
+    {
+      "id": "AR-1842",
+      "ad": "OWASP pytm",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://owasp.org/www-project-pytm/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sistem modelini (aktörler, süreçler, veri akışları, güven sınırları) Python ile kod olarak tanımlayıp kural tabanlı otomatik tehdit listesi, veri akış ve sıralı diyagramlar üretir; CI'da tehdit modeli farkı çıkarılabilir.",
+      "sinirlar": "Tehdit kütüphanesi genel; kuruma özgü kurallar eklenmeli.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K05-022",
+        "N-K21-002",
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    },
+    {
+      "id": "AR-1940",
+      "ad": "OWASP Cornucopia",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-SA-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cornucopia.owasp.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tehdit modellemeyi ekiplere oyunlaştırılmış kart destesiyle öğreten yöntem (web ve mobil sürümleri, ASVS/MASVS eşlemeli); ekiplerin yapay zekâ kullanırken güvenlik düşünme becerisini korumasına ve görevde yazmayan riskleri keşfetmesine yardımcı.",
+      "sinirlar": "Kolaylaştırıcı gerektirir; ajan/LLM tehditlerine özgü kartlar sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K25-005",
+        "N-K25-006",
+        "N-K34-001",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-3837",
+      "ad": "STRIDE GPT",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mrwadams/stride-gpt",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulama tanımından LLM ile STRIDE tehdit modeli, saldırı ağaçları, DREAD risk puanları ve test senaryoları üreten araç; yerel modellerle de çalışabilir.",
+      "sinirlar": "Üretilen tehditler insan incelemesi ister; LLM çıktısı belirlenimsiz.",
+      "ihtiyaclar": [
+        "N-K18-012",
+        "N-K21-001",
+        "N-K21-002",
+        "N-K34-001",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-3838",
+      "ad": "Threagile",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://threagile.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML ile tanımlanan mimari modelinden kurallarla otomatik tehdit ve risk tespiti yapan, risk takibi ve rapor üreten 'tehdit modeli kod olarak' aracı; CI'da koşturulabilir.",
+      "sinirlar": "Yapay zekâ/ajan bileşenlerine özgü hazır kurallar sınırlı; özel kural yazımı gerekir.",
+      "ihtiyaclar": [
+        "N-K21-001",
+        "N-K21-002",
+        "N-K21-005",
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    },
+    {
+      "id": "AR-3839",
+      "ad": "IriusRisk",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.iriusrisk.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari diyagramlardan otomatik tehdit modelleme, kontrol önerileri ve güvenlik gereksinimleri üreten platform; yapay zekâ/LLM bileşenleri için tehdit kütüphaneleri içerir.",
+      "sinirlar": "Ücretli; kütüphane kalitesi bileşen modellemesinin doğruluğuna bağlı.",
+      "ihtiyaclar": [
+        "N-K18-012",
+        "N-K21-001",
+        "N-K21-002",
+        "N-K34-001",
+        "N-K34-006"
+      ]
+    },
+    {
+      "id": "AR-3840",
+      "ad": "Microsoft Threat Modeling Tool",
+      "tur": "ticari-yazilim",
+      "lisans": "ücretsiz (kapalı kaynak)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri akış diyagramından STRIDE tabanlı tehditleri otomatik üreten ücretsiz masaüstü tehdit modelleme aracı.",
+      "sinirlar": "Yalnız Windows; yapay zekâya özgü şablon yok, gelişimi yavaş.",
+      "ihtiyaclar": [
+        "N-K21-002",
+        "N-K34-001"
+      ]
+    },
+    {
+      "id": "AR-3996",
+      "ad": "CAPEC (Common Attack Pattern Enumeration and Classification)",
+      "tur": "protokol-standart",
+      "lisans": "MITRE kullanım koşulları (ücretsiz)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://capec.mitre.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Saldırı desenleri kataloğu; her desen ilişkili CWE zayıflıkları, önkoşullar, etki ve azaltımlarla bağlıdır—güvenlik risk sınıfına göre zorunlu doğrulama (kötüye kullanım testi, fuzz, sızma testi) kümesini seçmek için referans sözlük.",
+      "sinirlar": "Katalogdur, test üretmez; kurum eşleme tablosunu kendisi kurmalı.",
+      "ihtiyaclar": [
+        "N-K05-022",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-4215",
+      "ad": "NIST Privacy Framework",
+      "tur": "protokol-standart",
+      "lisans": "kamu yayını (NIST)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.nist.gov/privacy-framework",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gizlilik riskini Identify-P, Govern-P, Control-P, Communicate-P ve Protect-P işlevleriyle yönetmek için gönüllü çerçeve; veri envanteri ve veri işleme eşlemesi, veri minimizasyonu ve hedef profil tanımına temel olur.",
+      "sinirlar": "ABD kökenli gönüllü çerçeve; KVKK yükümlülüklerine eşlenmesi gerekir. Kurumsal çerçevedir; özellik düzeyinde tehdit analizi ve otomatik tetikleme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-4216",
+      "ad": "LINDDUN",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://linddun.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağlanabilirlik, tanımlanabilirlik, inkâr edilemezlik, tespit edilebilirlik, veri ifşası, farkındalıksızlık ve uyumsuzluk kategorilerinde gizlilik tehdit modelleme çerçevesi; LINDDUN GO kart tabanlı hafif oturum, LINDDUN PRO veri akışı diyagramı üzerinde sistematik analiz sağlar.",
+      "sinirlar": "Yöntem; çıktılar kurumun tehdit modeli deposunda tutulmalı. Yöntemdir; araç desteği ve kod değişikliğinden otomatik tetikleme kurumca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K34-001",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-4289",
+      "ad": "Threat Composer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://awslabs.github.io/threat-composer/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tehditleri yapılandırılmış bir dilbilgisiyle (tehdit kaynağı, ön koşul, eylem, etki, varlık) yazmayı; varsayımları ve önlemleri tehditlere bağlamayı; uygulama açıklaması, mimari ve veri akışı bilgisini tek bir .tc.json dosyasında tutmayı sağlar; dosya depoda sürümlenip farkı alınabilir, VS Code (AWS Toolkit) ve CLI ile düzenlenebilir, kalite panosu eksikleri gösterir.",
+      "sinirlar": "Tehdit ve önlemleri teste otomatik bağlamaz; STRIDE dışı gizlilik kategorileri için ek şablon gerekir.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    },
+    {
+      "id": "AR-4290",
+      "ad": "SD Elements",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.securitycompass.com/sdelements/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Proje bağlamını anketle toplayıp mimariye göre önceliklendirilmiş güvenlik gereksinimleri, görevler ve anında eğitim üretir; gereksinimleri Jira, GitHub, IDE ve yapay zekâ kodlama ajanı iş akışlarına iletir; Devici entegrasyonuyla OTM tabanlı tehdit modellemesi sunar.",
+      "sinirlar": "Ticari ve kapsamlı kurulum ister; gereksinimlerin testle doğrulanması kurum hattına bağlanmalı.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002",
+        "N-K34-006"
+      ]
+    },
+    {
+      "id": "AR-4291",
+      "ad": "ThreatModeler",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.threatmodeler.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari diyagramlardan ve bulut yapılandırmalarından tehdit kütüphanesi tabanlı otomatik tehdit modeli üreten, önlem ve kalan riski izleyen, iş takip sistemleriyle bütünleşen ticari tehdit modelleme platformu.",
+      "sinirlar": "Ticari; modellerin açık biçimde dışa aktarımı ve depo içinde sürümlenmesi sınırlı olabilir.",
+      "ihtiyaclar": [
+        "N-K34-001"
+      ]
+    },
+    {
+      "id": "AR-4292",
+      "ad": "Open Threat Model (OTM) ve StartLeft",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-SA-4.0 (OTM şartnamesi), Apache-2.0 (StartLeft)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/iriusrisk/OpenThreatModel",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bileşenleri, güven sınırlarını, veri akışlarını, tehditleri ve önlemleri araçtan bağımsız YAML/JSON olarak tanımlayan açık tehdit modeli biçimi; StartLeft IaC dosyaları, diyagramlar ve tehdit modelleme araçlarının dışa aktarımlarından OTM üreterek tehdit modelinin kod olarak sürümlenmesini ve farkının alınmasını kolaylaştırır.",
+      "sinirlar": "Topluluk benimsemesi dar; OTM sürüm değişiklikleri araçlar arası uyumu etkileyebilir.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    },
+    {
+      "id": "AR-4293",
+      "ad": "Elevation of Privilege (EoP) tehdit modelleme kart oyunu",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.microsoft.com/en-us/download/details.aspx?id=20303",
+      "olgunluk": "olgun",
+      "ne_saglar": "STRIDE kategorilerine göre düzenlenmiş kartlarla ekiplerin bir tasarım veya veri akışı diyagramı üzerinde oyunlaştırılmış biçimde tehdit bulmasını sağlar; ürün sahibi ve güvenlik yetkinliğinin birlikte katıldığı epik düzeyi oturumlara uygundur.",
+      "sinirlar": "Elle yürütülen oturum aracı; sonuçların sürümlü artefakta aktarılması ayrıca yapılmalı.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-4294",
+      "ad": "Deciduous",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.deciduous.app/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Saldırganın olası yollarını ve savunma kararlarını metin tabanlı tanımdan saldırı/karar ağacı olarak çizer; kötüye kullanım senaryolarının ekipçe tartışılmasını ve tanım dosyasının depoda sürümlenmesini sağlar.",
+      "sinirlar": "2024'ten beri güncelleme az; test veya önlem izlenebilirliği yok.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-4295",
+      "ad": "Seezo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://seezo.io/",
+      "olgunluk": "erken",
+      "ne_saglar": "Jira, Confluence ve Google Docs gibi kaynaklardaki tasarım aşaması girdilerinden yapay zekâ ile güvenlik tasarım incelemesi yapar; tehdit modeli, saldırı yolları, güven sınırları ve gerekçesi izlenebilir güvenlik gereksinimleri üretip iş akışına geri yazar.",
+      "sinirlar": "Genç ticari ürün; üretilen modelin insan güvenlik uzmanıyla tamamlanması ve doğrulanması gerekir, tasarım verisi SaaS'a gider.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    },
+    {
+      "id": "AR-4296",
+      "ad": "Prime Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.primesec.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Tasarım artefaktlarını ve geliştirme işlerini alıp yapay zekâ ile güvenlik incelemesi yapan platform: tehdit modeli, risk puanı ve uygulanabilir önlem önerileri üretir; insan ve yapay zekâ üretimi kod süreçlerine bağlanır.",
+      "sinirlar": "Genç ticari ürün; sınıflama kararlarının deterministik sinyallerle desteklenmesi ve kalibrasyonu kurumca yapılmalı.",
+      "ihtiyaclar": [
+        "N-K34-001",
+        "N-K34-002"
+      ]
+    }
+  ]
+}

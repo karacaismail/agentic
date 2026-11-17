@@ -1,0 +1,684 @@
+<meta charset="utf-8">
+<title>İnsan–Ajan Yazılım İhtiyaç Haritası</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --bg:#F1F4F2; --surface:#FFFFFF; --surface-2:#E7ECE9; --surface-3:#DCE3DF;
+  --ink:#121A17; --muted:#56635E; --faint:#8A9892; --line:#D1D9D5;
+  --accent:#2446C7; --accent-soft:#E2E7FA; --accent-ink:#FFFFFF;
+  --ok:#1E7A55; --ok-soft:#DCEFE6; --warn:#B7791F; --warn-soft:#F6EAD3; --bad:#C0392B; --bad-soft:#F7DEDA;
+  --dA:#2F5BD3; --dB:#8A4FC2; --dC:#13837F; --dD:#5E6B7D; --dE:#C2410C; --dF:#A21C5B;
+  --shadow:0 1px 2px rgba(18,26,23,.06),0 6px 20px rgba(18,26,23,.06);
+  --f-display:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0D1311; --surface:#141C19; --surface-2:#1B2521; --surface-3:#23302B;
+    --ink:#E5ECE8; --muted:#9BA9A3; --faint:#6E7C76; --line:#2A3631;
+    --accent:#8FA6FF; --accent-soft:#1E2747; --accent-ink:#0D1311;
+    --ok:#4CC38A; --ok-soft:#15352A; --warn:#E3A546; --warn-soft:#3A2D14; --bad:#F07A6B; --bad-soft:#3F1F1B;
+    --dA:#7F9BFF; --dB:#C39AF0; --dC:#4FC7C1; --dD:#A3AEBD; --dE:#F59A5B; --dF:#F07FB4;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0D1311; --surface:#141C19; --surface-2:#1B2521; --surface-3:#23302B;
+  --ink:#E5ECE8; --muted:#9BA9A3; --faint:#6E7C76; --line:#2A3631;
+  --accent:#8FA6FF; --accent-soft:#1E2747; --accent-ink:#0D1311;
+  --ok:#4CC38A; --ok-soft:#15352A; --warn:#E3A546; --warn-soft:#3A2D14; --bad:#F07A6B; --bad-soft:#3F1F1B;
+  --dA:#7F9BFF; --dB:#C39AF0; --dC:#4FC7C1; --dD:#A3AEBD; --dE:#F59A5B; --dF:#F07FB4;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:clamp(16px,3vw,32px)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.2vw,44px);font-weight:760;font-stretch:88%;line-height:1.05}
+h2{font-size:clamp(20px,2.4vw,26px);font-weight:700;font-stretch:92%}
+h3{font-size:16px;font-weight:650}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-size:.86em;letter-spacing:0}
+.muted{color:var(--muted)}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+a{color:var(--accent)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* header */
+header.top{padding-block:28px 18px;border-bottom:1px solid var(--line);background:var(--surface)}
+.top-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:end}
+.lede{margin-top:10px;color:var(--muted);max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stat{background:var(--surface);padding:10px 12px}
+.stat b{display:block;font-family:var(--f-display);font-size:26px;font-weight:720;font-stretch:85%;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+.circlebar{display:flex;height:8px;border-radius:99px;overflow:hidden;margin-top:14px;background:var(--surface-2)}
+.circlebar i{display:block;height:100%}
+.legend-inline{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font-size:12.5px;color:var(--muted)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.d-ok{background:var(--ok)} .d-warn{background:var(--warn)} .d-bad{background:var(--bad)}
+
+/* nav */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:transparent;padding:7px 12px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--muted);white-space:nowrap}
+.tab:hover{background:var(--surface-2);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tab .n{font-family:var(--f-mono);font-size:11px;opacity:.7;margin-left:6px}
+
+main{padding-block:26px 80px}
+section.pane{display:none}
+section.pane.on{display:block}
+.pane-head{display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap;margin-bottom:18px}
+.pane-head p{max-width:70ch;color:var(--muted);margin-top:6px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card.lift{box-shadow:var(--shadow);border-color:transparent}
+.card h3+p,.card h3+ul{margin-top:6px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.chart{width:100%;height:420px}
+.scroll-x{overflow-x:auto}
+ul.clean{list-style:none;margin:0;padding:0}
+ul.bul{margin:8px 0 0;padding-left:18px}
+ul.bul li{margin-block:4px}
+
+/* chips & pills */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11.5px;padding:2px 8px;border-radius:99px;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);white-space:nowrap;cursor:default}
+button.chip{cursor:pointer}
+button.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.p-ok{background:var(--ok-soft);color:var(--ok)} .p-warn{background:var(--warn-soft);color:var(--warn)} .p-bad{background:var(--bad-soft);color:var(--bad)}
+.p-acc{background:var(--accent-soft);color:var(--accent)} .p-neu{background:var(--surface-2);color:var(--muted)}
+.dom{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:0}
+
+/* overview */
+.goal{font-family:var(--f-display);font-size:clamp(18px,2vw,22px);font-weight:560;font-stretch:95%;line-height:1.35;max-width:60ch}
+.domain-card{display:flex;flex-direction:column;gap:10px}
+.domain-card .big{font-family:var(--f-display);font-size:34px;font-weight:720;font-stretch:85%;line-height:1;font-variant-numeric:tabular-nums}
+.minibar{display:flex;height:6px;border-radius:99px;overflow:hidden;background:var(--surface-2)}
+.minibar i{display:block;height:100%}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-variant-numeric:tabular-nums}
+.principle{display:grid;grid-template-columns:52px 1fr;gap:10px;padding-block:10px;border-top:1px solid var(--line)}
+.principle:first-child{border-top:0}
+
+/* circle */
+.circle-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;align-items:start}
+#ch-cember{height:680px}
+.prio{border-left:3px solid var(--line);padding:6px 0 6px 12px}
+.prio.P1{border-color:var(--bad)} .prio.P2{border-color:var(--warn)} .prio.P3{border-color:var(--accent)}
+
+/* explorer */
+.filters{display:grid;grid-template-columns:2fr repeat(6,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.filters input,.filters select{width:100%;font:inherit;font-size:13.5px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.count-line{font-size:13px;color:var(--muted);margin-bottom:8px}
+table.t{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table.t th{position:sticky;top:0;text-align:left;font-weight:600;font-size:12px;color:var(--muted);background:var(--surface-2);padding:9px 12px;border-bottom:1px solid var(--line)}
+table.t td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
+table.t tr:last-child td{border-bottom:0}
+table.t tbody tr{cursor:pointer}
+table.t tbody tr:hover td{background:var(--surface-2)}
+.t-title{font-weight:560}
+.t-sub{color:var(--muted);font-size:13px;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* lists */
+.item{padding:12px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0;padding-top:0}
+.item-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.vs > div{background:var(--surface-2);border-radius:8px;padding:10px 12px;font-size:13.5px}
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quad .card{min-height:0}
+.quad .qn{font-family:var(--f-display);font-size:30px;font-weight:720;font-stretch:85%;line-height:1}
+.pestel-filter{display:flex;flex-wrap:wrap;gap:6px;margin-block:10px}
+.pestel-filter button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.pestel-filter button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,14,12,.35);opacity:0;pointer-events:none;transition:opacity .18s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+aside.drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:50;transform:translateX(102%);transition:transform .22s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+aside.drawer.on{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:start;gap:12px;padding:18px 20px 12px;border-bottom:1px solid var(--line)}
+.drawer-body{padding:16px 20px calc(40px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+.drawer-body h4{font-family:var(--f-mono);font-size:11.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:18px 0 6px}
+.xbtn{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px}
+.rel{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:13.5px;align-items:baseline}
+@media (prefers-reduced-motion:reduce){aside.drawer,.scrim{transition:none}}
+
+/* responsive */
+@media (max-width:980px){
+  .top-grid,.circle-layout,.grid2{grid-template-columns:minmax(0,1fr)}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid3{grid-template-columns:minmax(0,1fr)}
+  .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .filters .q{grid-column:1/-1}
+  #ch-cember{height:560px}
+}
+@media (max-width:640px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid4,.quad,.vs{grid-template-columns:minmax(0,1fr)}
+  #ch-cember{height:420px}
+  table.t thead{display:none}
+  table.t,table.t tbody,table.t tr,table.t td{display:block;width:100%}
+  table.t tr{border-bottom:1px solid var(--line);padding:8px 0}
+  table.t td{border:0;padding:3px 12px}
+}
+</style>
+
+<header class="top">
+  <div class="wrap top-grid">
+    <div>
+      <div class="eyebrow">İnsan ve ajanlarla çok ekipli yazılım üretimi · ihtiyaç ve sorun haritası</div>
+      <h1 style="margin-top:8px">Ne gerekli, ne eksik, ne belirsiz?</h1>
+      <p class="lede" id="lede"></p>
+    </div>
+    <div>
+      <div class="stats" id="stats"></div>
+      <div class="circlebar" id="circlebar" aria-hidden="true"></div>
+      <div class="legend-inline">
+        <span><i class="dot d-ok"></i>Çemberin içi, tanımlı</span>
+        <span><i class="dot d-warn"></i>Çemberin içi, boşluklu</span>
+        <span><i class="dot d-bad"></i>Çemberin dışı, eksik</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Bölümler">
+  <div class="wrap tabrow" role="tablist" id="tabrow"></div>
+</nav>
+
+<main class="wrap">
+  <section class="pane" id="genel" role="tabpanel"></section>
+  <section class="pane" id="cember" role="tabpanel"></section>
+  <section class="pane" id="kumeler" role="tabpanel"></section>
+  <section class="pane" id="ihtiyaclar" role="tabpanel"></section>
+  <section class="pane" id="gap" role="tabpanel"></section>
+  <section class="pane" id="bilinmeyen" role="tabpanel"></section>
+  <section class="pane" id="risk" role="tabpanel"></section>
+  <section class="pane" id="yetenek" role="tabpanel"></section>
+  <section class="pane" id="olcek" role="tabpanel"></section>
+  <section class="pane" id="karar" role="tabpanel"></section>
+  <section class="pane" id="kaynak" role="tabpanel"></section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="dr-title">
+  <div class="drawer-head">
+    <div>
+      <div class="eyebrow" id="dr-eyebrow"></div>
+      <h2 id="dr-title" style="margin-top:6px;font-size:20px"></h2>
+    </div>
+    <button class="xbtn" id="dr-close" type="button">Kapat</button>
+  </div>
+  <div class="drawer-body" id="dr-body"></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<script id="veri" type="application/json">__VERI__</script>
+<script>
+(function(){
+"use strict";
+const V = JSON.parse(document.getElementById("veri").textContent);
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- sözlükler ---------- */
+const ALAN = {"A-deger-akisi":{ad:"Değer akışı",v:"--dA",k:"A"},"B-ajan-platformu":{ad:"Ajan platformu",v:"--dB",k:"B"},"C-guvence-ve-yonetisim":{ad:"Güvence ve yönetişim",v:"--dC",k:"C"},"D-organizasyon-ve-olcek":{ad:"Organizasyon ve ölçek",v:"--dD",k:"D"},"E-insan-ajan-birlikte-calisma":{ad:"İnsan–ajan birlikte çalışma",v:"--dE",k:"E"},"F-guvenilir-yazilim":{ad:"Güvenilir yazılım",v:"--dF",k:"F"}};
+Object.keys(ALAN).forEach(a=>{ if(!V.kumeler.some(k=>k.alan===a)) delete ALAN[a]; });
+const CEM = {ic_tanimli:{ad:"İçeride, tanımlı",v:"--ok",p:"p-ok"},ic_bosluk:{ad:"İçeride, boşluklu",v:"--warn",p:"p-warn"},dis_eksik:{ad:"Dışarıda, eksik",v:"--bad",p:"p-bad"}};
+const ZOR = {zorunlu:"Zorunlu",olcege_bagli:"Ölçeğe bağlı",kosullu:"Koşullu",opsiyonel:"Opsiyonel"};
+const BEL = {dusuk:"Düşük",orta:"Orta",yuksek:"Yüksek"};
+const DUZ = {kaynakta_acik:"Kaynakta açık",kaynakta_ima:"Kaynakta ima",arastirma:"Araştırma",cikarim:"Çıkarım"};
+const GTUR = {tanim_yok:"Tanım yok",sahip_yok:"Sahip yok",olcut_yok:"Ölçüt yok",celiski:"Çelişki",kanit_yok:"Kanıt yok",mekanizma_yok:"Mekanizma yok",olcek_yok:"Ölçek yok",kapsam_disi:"Kapsam dışı"};
+const PES = {politik:"Politik",ekonomik:"Ekonomik",sosyal:"Sosyal",teknolojik:"Teknolojik",cevresel:"Çevresel",yasal:"Yasal"};
+const ENG = {projelendirmeyi_engeller:["Projelendirmeyi engeller","p-bad"],tasarimi_engeller:["Tasarımı engeller","p-warn"],sonra_cevaplanabilir:["Sonra cevaplanabilir","p-neu"]};
+
+/* ---------- indeksler ---------- */
+const N = V.ihtiyaclar, NB = Object.fromEntries(N.map(n=>[n.id,n]));
+const K = V.kumeler, KB = Object.fromEntries(K.map(k=>[k.id,k]));
+const Y = V.yetenek.siniflar, YB = Object.fromEntries(Y.map(y=>[y.id,y]));
+const SRC = Object.fromEntries([...V.kaynak, ...V.dis].map(s=>[s.id,s]));
+const REF = {};
+V.celiski.forEach(x=>REF[x.id]={t:"Çelişki",b:x.konu,tab:"karar"});
+V.soru.sorular.forEach(x=>REF[x.id]={t:"Açık soru",b:x.soru,tab:"karar"});
+V.varsayim.forEach(x=>REF[x.id]={t:"Varsayım",b:x.varsayim,tab:"karar"});
+V.risk.riskler.forEach(x=>REF[x.id]={t:"Risk",b:x.risk,tab:"risk"});
+V.karar.forEach(x=>REF[x.id]={t:"Bekleyen karar",b:x.karar,tab:"karar"});
+V.gap.bosluklar.forEach(x=>REF[x.id]={t:"Boşluk",b:x.bosluk,tab:"gap"});
+V.bilinmeyen.bilinmeyen_bilinmeyenler.forEach(x=>REF[x.id]={t:"Bilinmeyen bilinmeyen",b:x.konu,tab:"bilinmeyen"});
+V.kapi.forEach(x=>REF[x.id]={t:"Hazırlık kapısı",b:x.kapi,tab:"karar"});
+V.org.rol_siniflari.forEach(x=>REF[x.id]={t:"Rol sınıfı",b:x.ad,tab:"karar"});
+const refLabel = id => NB[id] ? NB[id].baslik : REF[id] ? REF[id].b : YB[id] ? YB[id].ad : SRC[id] ? (SRC[id].baslik||SRC[id].aciklama) : KB[id] ? KB[id].ad : id;
+
+const dcol = a => css(ALAN[a].v);
+const short = (s,n) => s.length>n ? s.slice(0,n-1)+"…" : s;
+function hash(s, salt){let h=2166136261^salt;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return ((h>>>0)%10007)/10007}
+const needChip = id => `<button class="chip" data-need="${id}" title="${esc(refLabel(id))}">${id}</button>`;
+const refChip = id => NB[id] ? needChip(id) : `<span class="chip" title="${esc(refLabel(id))}">${id}</span>`;
+const cemPill = c => `<span class="pill ${CEM[c].p}">${CEM[c].ad}</span>`;
+const domTag = a => `<span class="dom" style="background:var(${ALAN[a].v})"></span>`;
+
+/* ---------- başlık ---------- */
+const I = V.indeks.istatistik;
+$("#lede").textContent = V.amac.ana_amac;
+$("#stats").innerHTML = [["ihtiyac","İhtiyaç"],["kume","Küme"],["yetenek_sinifi","Yetenek sınıfı"],["bilinmeyen_bilinmeyen","Bilinmeyen bilinmeyen"],["bosluk","Toplulaştırılmış boşluk"],["celiski","Çelişki"],["acik_soru","Açık soru"],["risk","Risk"]]
+  .map(([k,l])=>`<div class="stat"><b>${I[k]}</b><span>${l}</span></div>`).join("");
+const cemTot = I.cember, cemSum = N.length;
+$("#circlebar").innerHTML = ["ic_tanimli","ic_bosluk","dis_eksik"].map(c=>`<i style="width:${cemTot[c]/cemSum*100}%;background:var(${CEM[c].v})"></i>`).join("");
+
+/* ---------- sekmeler ---------- */
+const TABS = [["genel","Genel bakış"],["cember","Çember",N.length],["kumeler","Kümeler",K.length],["ihtiyaclar","İhtiyaçlar",N.length],["gap","Gap analizi",V.gap.bosluklar.length],["bilinmeyen","Bilinmeyenler",V.bilinmeyen.bilinmeyen_bilinmeyenler.length],["risk","Riskler",V.risk.riskler.length],["yetenek","Yetenekler",Y.length],["olcek","Ölçek"],["karar","Kararlar ve sorular",V.karar.length+V.soru.sorular.length],["kaynak","Kaynaklar",V.kaynak.length+V.dis.length]];
+$("#tabrow").innerHTML = TABS.map(([id,l,n])=>`<button class="tab" role="tab" id="t-${id}" aria-controls="${id}" data-tab="${id}">${l}${n!=null?`<span class="n">${n}</span>`:""}</button>`).join("");
+const built = {}, charts = {};
+function show(id){
+  if(!document.getElementById(id)) id = "genel";
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t.dataset.tab===id));
+  document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on", p.id===id));
+  if(!built[id]){ BUILD[id](); built[id]=true; }
+  drawCharts(id);
+  try{ localStorage.setItem("ih-tab", id); }catch(e){}
+  if(location.hash.slice(1)!==id) history.replaceState(null,"","#"+id);
+}
+$("#tabrow").addEventListener("click", e=>{const b=e.target.closest(".tab"); if(b){show(b.dataset.tab); window.scrollTo({top:0});}});
+
+/* ---------- grafikler ---------- */
+const CH = {};  // id -> {el, opt:()=>option, tab}
+function reg(tab, el, opt, onclick){ CH[el] = {tab, opt, onclick}; }
+function drawCharts(tab){
+  if(typeof echarts==="undefined") return;
+  Object.entries(CH).forEach(([el,c])=>{
+    if(c.tab!==tab) return;
+    const node = document.getElementById(el); if(!node) return;
+    if(charts[el]) { charts[el].resize(); return; }
+    const ch = echarts.init(node, null, {renderer:"canvas"});
+    ch.setOption(c.opt());
+    if(c.onclick) ch.on("click", c.onclick);
+    charts[el] = ch;
+  });
+}
+function rethemeAll(){ Object.keys(charts).forEach(el=>{ charts[el].dispose(); delete charts[el]; }); const on=document.querySelector(".pane.on"); if(on) drawCharts(on.id); }
+window.addEventListener("resize", ()=>Object.values(charts).forEach(c=>c.resize()));
+try{ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", rethemeAll); }catch(e){}
+new MutationObserver(rethemeAll).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","class"]});
+const base = () => ({textStyle:{fontFamily:"IBM Plex Sans, system-ui, sans-serif",color:css("--ink")},
+  tooltip:{backgroundColor:css("--surface"),borderColor:css("--line"),textStyle:{color:css("--ink"),fontSize:12.5},extraCssText:"box-shadow:0 6px 20px rgba(0,0,0,.12);border-radius:8px;max-width:340px;white-space:normal"}});
+const axisTxt = () => ({color:css("--muted"),fontSize:11.5,fontFamily:"IBM Plex Sans, system-ui, sans-serif"});
+
+/* ---------- çekmece ---------- */
+const drawer=$("#drawer"), scrim=$("#scrim");
+function closeDrawer(){ drawer.classList.remove("on"); scrim.classList.remove("on"); drawer.setAttribute("aria-hidden","true"); }
+$("#dr-close").onclick = closeDrawer; scrim.onclick = closeDrawer;
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeDrawer(); });
+document.addEventListener("click", e=>{ const b=e.target.closest("[data-need]"); if(b){ e.preventDefault(); openNeed(b.dataset.need); }});
+function srcLine(id){
+  const s = SRC[id]; if(!s) return `<span class="mono">${id}</span>`;
+  if(s.url) return `<span class="mono">${id}</span> <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.aciklama)}</a> <span class="muted">(${esc(s.tur)})</span>`;
+  return `<span class="mono">${id}</span> ${esc(s.baslik)}${s.yol?` <span class="muted mono" style="font-size:11px">· ${esc(s.yol)}</span>`:""}`;
+}
+function openNeed(id){
+  const n = NB[id]; if(!n) return;
+  const k = KB[n.kume];
+  $("#dr-eyebrow").innerHTML = `${domTag(n.alan)}${esc(ALAN[n.alan].ad)} · ${n.kume} ${esc(k.ad)}`;
+  $("#dr-title").innerHTML = `<span class="mono" style="color:var(--muted);font-size:14px">${n.id}</span><br>${esc(n.baslik)}`;
+  const rel = (n.iliskili||[]).map(r=>`<span class="chip">${r}</span><span>${esc(REF[r]?REF[r].t+": ":"")}${esc(refLabel(r))}</span>`).join("");
+  $("#dr-body").innerHTML = `
+    <div class="chips">${cemPill(n.cember)}<span class="pill p-acc">${ZOR[n.zorunluluk]}</span>${n.olcek_esigi?`<span class="pill p-neu">Eşik: ${esc(n.olcek_esigi)}</span>`:""}<span class="pill p-neu">Belirsizlik: ${BEL[n.belirsizlik]}</span><span class="pill p-neu">${DUZ[n.kanit.duzey]}</span></div>
+    <h4>İhtiyaç</h4><p>${esc(n.ihtiyac)}</p>
+    <h4>Çözülecek sorun</h4><p>${esc(n.cozulecek_sorun)}</p>
+    <h4>Kabul ölçütleri</h4><ul class="bul">${n.kabul_olcutleri.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    ${n.olcek_etkisi?`<h4>Ölçek etkisi</h4><p>${esc(n.olcek_etkisi)}</p>`:""}
+    ${(n.yetenek_siniflari||[]).length?`<h4>Yetenek sınıfları</h4><ul class="clean stack" style="gap:6px">${n.yetenek_siniflari.map(y=>`<li><span class="chip">${y}</span> ${esc(YB[y]?YB[y].ad:"")}</li>`).join("")}</ul>`:""}
+    <h4>Kanıt</h4><ul class="clean stack" style="gap:6px;font-size:13.5px">${n.kanit.kaynaklar.map(s=>`<li>${srcLine(s)}</li>`).join("")||"<li class='muted'>Kaynak yok (çıkarım)</li>"}</ul>
+    ${n.kanit.not?`<p class="muted" style="margin-top:8px;font-size:13.5px">${esc(n.kanit.not)}</p>`:""}
+    ${(n.bagimliliklar||[]).length?`<h4>Bağımlılıklar</h4><div class="chips">${n.bagimliliklar.map(needChip).join("")}</div>`:""}
+    ${rel?`<h4>İlişkili analiz kayıtları</h4><div class="rel">${rel}</div>`:""}`;
+  drawer.classList.add("on"); scrim.classList.add("on"); drawer.setAttribute("aria-hidden","false");
+  $("#dr-body").scrollTop = 0; $("#dr-close").focus();
+}
+
+/* ======================= BÖLÜMLER ======================= */
+const BUILD = {};
+
+BUILD.genel = () => {
+  const byA = {};
+  N.forEach(n=>{ const a=byA[n.alan] ||= {t:0,ic_tanimli:0,ic_bosluk:0,dis_eksik:0,zorunlu:0}; a.t++; a[n.cember]++; if(n.zorunluluk==="zorunlu") a.zorunlu++; });
+  const cards = Object.keys(ALAN).map(a=>{ const s=byA[a]; const ks=K.filter(k=>k.alan===a);
+    return `<div class="card domain-card">
+      <div class="eyebrow">${domTag(a)}${ALAN[a].k} · ${esc(ALAN[a].ad)}</div>
+      <div class="big">${s.t}<span class="muted" style="font-size:14px;font-family:var(--f-body);font-weight:400"> ihtiyaç · ${ks.length} küme</span></div>
+      <div class="minibar">${["ic_tanimli","ic_bosluk","dis_eksik"].map(c=>`<i style="width:${s[c]/s.t*100}%;background:var(${CEM[c].v})"></i>`).join("")}</div>
+      <dl class="kv"><dt>Tanımlı</dt><dd>${s.ic_tanimli}</dd><dt>İç boşluk</dt><dd>${s.ic_bosluk}</dd><dt>Dış eksik</dt><dd>${s.dis_eksik}</dd></dl>
+      <div class="chips">${ks.map(k=>`<button class="chip" data-kume="${k.id}" title="${esc(k.ad)}">${k.id}</button>`).join("")}</div>
+    </div>`;}).join("");
+  const AY = V.amac.amacin_ayaklari || [];
+  const nOfK = id => N.filter(n=>n.kume===id);
+  const ayak = AY.length ? `<div class="pane-head" style="margin-top:30px"><div><h2>Amacın ${AY.length} ayağı</h2><p>Ana amaç dört parçaya ayrıldı; her küme en çok katkı verdiği ayağa bağlandı. Dış eksik oranı, o ayağın kaynaklarda ne kadar az işlendiğini gösterir.</p></div></div>
+    <div class="grid4">${AY.map(a=>{ const ns=a.kumeler.flatMap(nOfK); const de=ns.filter(n=>n.cember==="dis_eksik").length;
+      return `<div class="card"><div class="eyebrow">${a.id}</div><h3 style="margin-top:4px">${esc(a.ad)}</h3><p class="muted" style="font-size:13.5px;margin-top:4px">${esc(a.aciklama||"")}</p>
+      <div class="big" style="margin-top:8px">${ns.length}<span class="muted" style="font-size:14px;font-family:var(--f-body);font-weight:400"> ihtiyaç · ${de} dış eksik</span></div>
+      <div class="minibar">${["ic_tanimli","ic_bosluk","dis_eksik"].map(c=>`<i style="width:${ns.length?ns.filter(n=>n.cember===c).length/ns.length*100:0}%;background:var(${CEM[c].v})"></i>`).join("")}</div>
+      <div class="chips" style="margin-top:8px">${a.kumeler.map(id=>{const k=K.find(x=>x.id===id); return k?`<button class="chip" data-kume="${k.id}" title="${esc(k.ad)}">${domTag(k.alan)}${k.id}</button>`:"";}).join("")}</div></div>`;}).join("")}</div>` : "";
+  $("#genel").innerHTML = `
+    <div class="grid2" style="align-items:start">
+      <div class="stack">
+        <div class="eyebrow">Ana amaç</div>
+        <p class="goal">${esc(V.amac.ana_amac)}</p>
+        <div class="card" style="margin-top:6px"><h3>Çözülecek ana sorun</h3><p class="muted" style="margin-top:6px">${esc(V.amac.cozulecek_ana_sorun)}</p></div>
+      </div>
+      <div class="card lift"><h3>Başarı nasıl görünür</h3><ul class="bul">${V.amac.basari_tanimi.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    </div>
+    ${ayak}
+    <div class="pane-head" style="margin-top:30px"><div><h2>${Object.keys(ALAN).length} alan, ${K.length} küme</h2><p>Her alan için ihtiyaçların çembere göre dağılımı. Küme koduna tıklayınca o kümenin ihtiyaçları açılır.</p></div></div>
+    <div class="grid3">${cards}</div>
+    <div class="grid2" style="margin-top:30px;align-items:start">
+      <div class="card"><h3>Çember analizinin ana bulguları</h3><ul class="bul">${V.cember.ana_bulgular.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="card"><h3>Kullanıcı kısıtları</h3><ul class="bul">${V.amac.kullanici_kisitlari.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+        <h3 style="margin-top:14px">Bilinçli kapsam dışı</h3><ul class="bul">${V.amac.bilincli_kapsam_disi.map(x=>`<li><b style="font-weight:600">${esc(x.konu)}.</b> <span class="muted">${esc(x.gerekce)}</span></li>`).join("")}</ul></div>
+    </div>
+    <div class="pane-head" style="margin-top:30px"><div><h2>İlkeler</h2><p>Kaynaklardan çıkarılan ve tüm kümelerde geçerli olan tasarım ilkeleri.</p></div></div>
+    <div class="grid2">${[0,1].map(col=>`<div class="card">${V.amac.ilkeler.filter((_,i)=>i%2===col).map(p=>`<div class="principle"><span class="mono muted">${p.id}</span><div><b style="font-weight:600">${esc(p.ilke)}</b><p class="muted" style="font-size:13.5px">${esc(p.aciklama)}</p></div></div>`).join("")}</div>`).join("")}</div>`;
+};
+document.addEventListener("click", e=>{ const b=e.target.closest("[data-kume]"); if(b){ filterTo({kume:b.dataset.kume}); }});
+
+/* ---- Çember ---- */
+BUILD.cember = () => {
+  const g = V.cember.cembere_girmesi_gerekenler;
+  const grp = ["P1","P2","P3"].map(p=>{ const xs=g.filter(x=>x.oncelik===p); if(!xs.length) return "";
+    return `<div class="stack" style="gap:10px"><div class="eyebrow">${p} · ${esc(xs[0].zamanlama)}</div>${xs.map(x=>`<div class="prio ${p}"><b style="font-weight:600">${esc(x.tema)}</b><p class="muted" style="font-size:13px;margin-top:2px">${esc(x.gerekce)}</p><div class="chips" style="margin-top:6px">${x.ihtiyaclar.map(needChip).join("")}</div></div>`).join("")}</div>`; }).join("");
+  $("#cember").innerHTML = `
+    <div class="pane-head"><div><h2>Çemberin içi, halkası ve dışı</h2><p>Her nokta bir ihtiyaç. Merkezdekiler kaynaklarda tanımlı, halkadakiler kaynaklarda var ama eksik ya da çelişkili, çemberin dışındakiler kaynaklarda hiç yok. Dilimler ${K.length} kümeyi, dış şerit rengi alanı gösterir. Noktaya tıklayınca ayrıntı açılır.</p></div>
+      <div class="chips"><span class="pill p-ok">${cemTot.ic_tanimli} tanımlı</span><span class="pill p-warn">${cemTot.ic_bosluk} iç boşluk</span><span class="pill p-bad">${cemTot.dis_eksik} dış eksik</span></div></div>
+    <div class="circle-layout">
+      <div class="card" style="padding:8px"><div id="ch-cember" class="chart"></div>
+        <div class="legend-inline" style="padding:0 10px 8px">${Object.keys(ALAN).map(a=>`<span>${domTag(a)}${ALAN[a].k} ${esc(ALAN[a].ad)}</span>`).join("")}<span>Nokta boyutu: zorunluluk</span></div></div>
+      <div class="stack">
+        <div class="card"><h3>Çembere girmesi gerekenler</h3><p class="muted" style="font-size:13.5px">Dışarıdaki eksiklerden ve kritik iç boşluklardan, kapsama alınması gerekenler öncelik sırasıyla.</p><div class="stack" style="margin-top:14px;gap:18px">${grp}</div></div>
+        <div class="card"><h3>Bilinçli olarak dışarıda</h3><ul class="bul">${V.cember.bilincli_disarida_kalanlar.map(x=>`<li><b style="font-weight:600">${esc(x.konu)}.</b> <span class="muted">${esc(x.gerekce)}</span></li>`).join("")}</ul></div>
+      </div>
+    </div>`;
+  reg("cember","ch-cember", optCember, p=>{ if(p.data && p.data.id) openNeed(p.data.id); });
+};
+function optCember(){
+  const W = 360/K.length, idx = Object.fromEntries(K.map((k,i)=>[k.id,i]));
+  const band = {ic_tanimli:[0.1,0.52],ic_bosluk:[0.7,0.26],dis_eksik:[1.12,0.34]};
+  const sz = {zorunlu:10,olcege_bagli:8,kosullu:7,opsiyonel:6};
+  const pts = c => N.filter(n=>n.cember===c).map(n=>{ const i=idx[n.kume], b=band[c];
+    return {value:[b[0]+b[1]*hash(n.id,7), i*W + (0.14+0.72*hash(n.id,13))*W], id:n.id, symbolSize:sz[n.zorunluluk]}; });
+  const circle = (r,type,w,col) => ({type:"line",coordinateSystem:"polar",silent:true,symbol:"none",data:Array.from({length:181},(_,i)=>[r,i*2]),lineStyle:{type,width:w,color:col},z:1});
+  const series = [
+    circle(1.05,"solid",2,css("--ink")),
+    circle(0.64,[2,4],1,css("--faint")),
+    ...K.map((k,i)=>({type:"line",coordinateSystem:"polar",silent:true,symbol:"none",data:[[0.06,i*W],[1.55,i*W]],lineStyle:{width:.6,color:css("--line")},z:0})),
+    ...K.map((k,i)=>({type:"line",coordinateSystem:"polar",silent:true,symbol:"none",data:Array.from({length:8},(_,j)=>[1.66,i*W+0.6+j*(W-1.2)/7]),lineStyle:{width:7,color:dcol(k.alan),cap:"butt"},z:1})),
+    {type:"scatter",coordinateSystem:"polar",silent:true,symbolSize:0,data:K.map((k,i)=>({value:[1.84,i*W+W/2],name:k.id})),label:{show:true,formatter:p=>p.name,color:css("--muted"),fontSize:10.5,fontFamily:"IBM Plex Mono, monospace"},z:2},
+    ...["ic_tanimli","ic_bosluk","dis_eksik"].map(c=>({name:CEM[c].ad,type:"scatter",coordinateSystem:"polar",data:pts(c),itemStyle:{color:css(CEM[c].v),borderColor:css("--surface"),borderWidth:1,opacity:.92},emphasis:{scale:1.6,itemStyle:{borderColor:css("--ink")}},z:5})),
+  ];
+  return Object.assign(base(),{
+    polar:{radius:["0%","84%"],center:["50%","52%"]},
+    angleAxis:{type:"value",min:0,max:360,startAngle:90,clockwise:true,show:false},
+    radiusAxis:{type:"value",min:0,max:1.9,show:false},
+    legend:{top:4,left:"center",data:Object.values(CEM).map(c=>c.ad),textStyle:{color:css("--muted"),fontSize:12},itemWidth:10,itemHeight:10},
+    tooltip:Object.assign(base().tooltip,{trigger:"item",formatter:p=>{ if(!p.data||!p.data.id) return ""; const n=NB[p.data.id];
+      return `<div style="font-family:IBM Plex Mono,monospace;font-size:11px;opacity:.7">${n.id} · ${n.kume}</div><b>${esc(n.baslik)}</b><div style="opacity:.75;margin-top:4px">${esc(KB[n.kume].ad)}<br>${ZOR[n.zorunluluk]} · ${CEM[n.cember].ad}</div>`; }}),
+    series});
+}
+
+/* ---- Kümeler ---- */
+BUILD.kumeler = () => {
+  $("#kumeler").innerHTML = `
+    <div class="pane-head"><div><h2>${K.length} küme, çembere göre</h2><p>Her küme için tanımlı, iç boşluklu ve dış eksik ihtiyaç sayısı. Çubuğa tıklayınca kümenin ihtiyaçları listelenir.</p></div></div>
+    <div class="card" style="padding:8px"><div id="ch-kume" class="chart" style="height:${K.length*27+70}px"></div></div>
+    <div class="grid2" style="margin-top:18px;align-items:start">
+      <div class="card" style="padding:8px"><div class="eyebrow" style="padding:8px 10px 0">Komşu kümeler ağı · düğüm boyutu = ihtiyaç sayısı</div><div id="ch-ag" class="chart" style="height:460px"></div></div>
+      <div class="card"><h3>Küme tanımları</h3><div class="stack" style="margin-top:10px;max-height:460px;overflow:auto;padding-right:6px">${K.map(k=>`<div class="item"><div class="item-head">${domTag(k.alan)}<button class="chip" data-kume="${k.id}">${k.id}</button><b style="font-weight:600">${esc(k.ad)}</b><span class="muted mono">${k.sayi}</span></div><p class="muted" style="font-size:13.5px;margin-top:4px">${esc(k.amac)}</p></div>`).join("")}</div></div>
+    </div>`;
+  reg("kumeler","ch-kume", optKume, p=>{ const k=K[p.dataIndex]; if(k) filterTo({kume:k.id}); });
+  reg("kumeler","ch-ag", optAg, p=>{ if(p.dataType==="node") filterTo({kume:p.data.id}); });
+};
+function optKume(){
+  const cats = K.map(k=>`${k.id}  ${short(k.ad,34)}`);
+  const ser = ["ic_tanimli","ic_bosluk","dis_eksik"].map(c=>({name:CEM[c].ad,type:"bar",stack:"s",barWidth:14,data:K.map(k=>N.filter(n=>n.kume===k.id&&n.cember===c).length),itemStyle:{color:css(CEM[c].v)},label:{show:true,color:css("--surface"),fontSize:10.5,formatter:p=>p.value>1?p.value:""}}));
+  return Object.assign(base(),{grid:{left:8,right:20,top:34,bottom:10,containLabel:true},legend:{top:0,textStyle:{color:css("--muted"),fontSize:12},itemWidth:10,itemHeight:10},
+    tooltip:Object.assign(base().tooltip,{trigger:"axis",axisPointer:{type:"shadow"}}),
+    xAxis:{type:"value",axisLabel:axisTxt(),splitLine:{lineStyle:{color:css("--line")}}},
+    yAxis:{type:"category",inverse:true,data:cats,axisLabel:Object.assign(axisTxt(),{color:css("--ink"),fontSize:12}),axisTick:{show:false},axisLine:{lineStyle:{color:css("--line")}}},series:ser});
+}
+function optAg(){
+  const seen=new Set(), links=[];
+  K.forEach(k=>(k.komsu_kumeler||[]).forEach(o=>{ const key=[k.id,o].sort().join("-"); if(!seen.has(key)&&KB[o]){seen.add(key);links.push({source:k.id,target:o});} }));
+  return Object.assign(base(),{tooltip:Object.assign(base().tooltip,{formatter:p=>p.dataType==="node"?`<b>${p.data.id}</b> ${esc(KB[p.data.id].ad)}<br>${KB[p.data.id].sayi} ihtiyaç`:""}),
+    series:[{type:"graph",layout:"force",roam:true,draggable:true,force:{repulsion:260,edgeLength:[60,120],gravity:.12},
+      data:K.map(k=>({id:k.id,name:k.id,symbolSize:14+k.sayi*1.5,itemStyle:{color:dcol(k.alan),borderColor:css("--surface"),borderWidth:2},label:{show:true,color:css("--ink"),fontSize:11,fontFamily:"IBM Plex Mono, monospace"}})),
+      links, lineStyle:{color:css("--faint"),opacity:.55,width:1}, emphasis:{focus:"adjacency"}}]});
+}
+
+/* ---- İhtiyaçlar (gezgin) ---- */
+const F = {q:"",alan:"",kume:"",zor:"",cem:"",bel:"",duz:""};
+function filterTo(o){ Object.assign(F,{q:"",alan:"",kume:"",zor:"",cem:"",bel:"",duz:""},o); if(built.ihtiyaclar) syncFilters(); show("ihtiyaclar"); if(built.ihtiyaclar) renderRows(); window.scrollTo({top:0}); }
+BUILD.ihtiyaclar = () => {
+  const opt = (o,all) => `<option value="">${all}</option>`+Object.entries(o).map(([v,l])=>`<option value="${v}">${esc(l)}</option>`).join("");
+  $("#ihtiyaclar").innerHTML = `
+    <div class="pane-head"><div><h2>İhtiyaç gezgini</h2><p>Tüm ihtiyaçlar. Filtreleyin, satıra tıklayınca ihtiyaç, sorun, kabul ölçütleri, kanıt ve ilişkili analizler açılır.</p></div></div>
+    <div class="filters">
+      <input class="q" id="f-q" type="search" placeholder="Ara: başlık, ihtiyaç, sorun, kimlik…" aria-label="Ara">
+      <select id="f-alan" aria-label="Alan">${opt(Object.fromEntries(Object.entries(ALAN).map(([k,v])=>[k,v.k+" · "+v.ad])),"Tüm alanlar")}</select>
+      <select id="f-kume" aria-label="Küme">${opt(Object.fromEntries(K.map(k=>[k.id,k.id+" "+short(k.ad,28)])),"Tüm kümeler")}</select>
+      <select id="f-zor" aria-label="Zorunluluk">${opt(ZOR,"Tüm zorunluluklar")}</select>
+      <select id="f-cem" aria-label="Çember">${opt(Object.fromEntries(Object.entries(CEM).map(([k,v])=>[k,v.ad])),"Tüm çember durumları")}</select>
+      <select id="f-bel" aria-label="Belirsizlik">${opt(BEL,"Tüm belirsizlikler")}</select>
+      <select id="f-duz" aria-label="Kanıt düzeyi">${opt(DUZ,"Tüm kanıt düzeyleri")}</select>
+    </div>
+    <div class="count-line" id="f-count"></div>
+    <div class="scroll-x"><table class="t"><thead><tr><th style="width:110px">Kimlik</th><th>İhtiyaç</th><th style="width:70px">Küme</th><th style="width:120px">Zorunluluk</th><th style="width:150px">Çember</th><th style="width:90px">Belirsizlik</th></tr></thead><tbody id="rows"></tbody></table></div>`;
+  const map = {q:"f-q",alan:"f-alan",kume:"f-kume",zor:"f-zor",cem:"f-cem",bel:"f-bel",duz:"f-duz"};
+  Object.entries(map).forEach(([k,id])=>{ const el=document.getElementById(id); el.addEventListener(id==="f-q"?"input":"change",()=>{F[k]=el.value;renderRows();}); });
+  $("#rows").addEventListener("click", e=>{ const tr=e.target.closest("tr[data-id]"); if(tr && !e.target.closest("[data-need]")) openNeed(tr.dataset.id); });
+  syncFilters(); renderRows();
+};
+function syncFilters(){ [["q","f-q"],["alan","f-alan"],["kume","f-kume"],["zor","f-zor"],["cem","f-cem"],["bel","f-bel"],["duz","f-duz"]].forEach(([k,id])=>{ const el=document.getElementById(id); if(el) el.value=F[k]; }); }
+function renderRows(){
+  const q = F.q.trim().toLocaleLowerCase("tr");
+  const rows = N.filter(n=>(!F.alan||n.alan===F.alan)&&(!F.kume||n.kume===F.kume)&&(!F.zor||n.zorunluluk===F.zor)&&(!F.cem||n.cember===F.cem)&&(!F.bel||n.belirsizlik===F.bel)&&(!F.duz||n.kanit.duzey===F.duz)
+    &&(!q||(n.id+" "+n.baslik+" "+n.ihtiyac+" "+n.cozulecek_sorun+" "+n.kabul_olcutleri.join(" ")).toLocaleLowerCase("tr").includes(q)));
+  $("#f-count").textContent = `${rows.length} / ${N.length} ihtiyaç`;
+  $("#rows").innerHTML = rows.map(n=>`<tr data-id="${n.id}"><td class="mono">${n.id}</td><td><div class="t-title">${esc(n.baslik)}</div><div class="t-sub">${esc(n.ihtiyac)}</div></td><td>${domTag(n.alan)}<span class="mono">${n.kume}</span></td><td>${ZOR[n.zorunluluk]}${n.olcek_esigi?`<div class="muted" style="font-size:12px">${esc(n.olcek_esigi)}</div>`:""}</td><td>${cemPill(n.cember)}</td><td>${BEL[n.belirsizlik]}</td></tr>`).join("")
+    || `<tr><td colspan="6" class="muted">Bu filtrelerle eşleşen ihtiyaç yok. Filtrelerden birini "Tümü"ne çevirin.</td></tr>`;
+}
+
+/* ---- Gap ---- */
+BUILD.gap = () => {
+  const G = V.gap.bosluklar;
+  $("#gap").innerHTML = `
+    <div class="pane-head"><div><h2>Mevcut durum ile hedef arasındaki boşluklar</h2><p>Isı haritası, her boşluk türünün hangi kümelerdeki ihtiyaçlara dokunduğunu gösterir. Aşağıda toplulaştırılmış ${G.length} boşluk ve her kümenin mevcut durumu var.</p></div></div>
+    <div class="card scroll-x" style="padding:8px"><div id="ch-gap" class="chart" style="height:${K.length*22+110}px;min-width:640px"></div></div>
+    <div class="grid2" style="margin-top:18px;align-items:start">
+      <div class="card"><h3>Toplulaştırılmış boşluklar</h3><div class="stack" style="margin-top:10px">${G.map(g=>`<div class="item"><div class="item-head"><span class="mono muted">${g.id}</span><span class="pill p-warn">${GTUR[g.tur]}</span><b style="font-weight:600">${esc(g.bosluk)}</b></div><p class="muted" style="font-size:13.5px;margin-top:4px">${esc(g.aciklama)}</p><p style="font-size:13px;margin-top:4px"><span class="muted">Kapatmak için:</span> ${esc(g.kapatmak_icin_gereken)}</p><div class="chips" style="margin-top:6px">${g.ilgili_ihtiyaclar.map(needChip).join("")}</div></div>`).join("")}</div></div>
+      <div class="card"><h3>Küme bazında mevcut durum</h3><div class="stack" style="margin-top:10px">${V.gap.kume_ozeti.map(k=>`<div class="item"><div class="item-head">${domTag(KB[k.kume].alan)}<button class="chip" data-kume="${k.kume}">${k.kume}</button><b style="font-weight:600">${esc(k.ad)}</b></div>
+        <div class="minibar" style="margin-top:8px">${["ic_tanimli","ic_bosluk","dis_eksik"].map(c=>`<i style="width:${k.sayilar[c]/k.sayilar.toplam*100}%;background:var(${CEM[c].v})"></i>`).join("")}</div>
+        <p class="muted" style="font-size:13.5px;margin-top:6px">${esc(k.mevcut_durum)}</p></div>`).join("")}</div></div>
+    </div>`;
+  reg("gap","ch-gap", optGap);
+};
+function optGap(){
+  const T = Object.keys(GTUR), data=[];
+  K.forEach((k,yi)=>T.forEach((t,xi)=>{ const v = V.gap.bosluklar.filter(g=>g.tur===t).reduce((a,g)=>a+g.ilgili_ihtiyaclar.filter(i=>NB[i]&&NB[i].kume===k.id).length,0); data.push([xi,yi,v||"-"]); }));
+  return Object.assign(base(),{grid:{left:8,right:16,top:10,bottom:70,containLabel:true},
+    tooltip:Object.assign(base().tooltip,{formatter:p=>`${K[p.value[1]].id} ${esc(KB[K[p.value[1]].id].ad)}<br><b>${GTUR[T[p.value[0]]]}</b>: ${p.value[2]==="-"?0:p.value[2]} ihtiyaç`}),
+    xAxis:{type:"category",data:T.map(t=>GTUR[t]),axisLabel:Object.assign(axisTxt(),{rotate:30}),splitArea:{show:false},axisLine:{lineStyle:{color:css("--line")}}},
+    yAxis:{type:"category",inverse:true,data:K.map(k=>`${k.id}  ${short(k.ad,30)}`),axisLabel:Object.assign(axisTxt(),{color:css("--ink")}),axisLine:{lineStyle:{color:css("--line")}}},
+    visualMap:{show:false,min:0,max:6,inRange:{color:[css("--surface-2"),css("--warn"),css("--bad")]}},
+    series:[{type:"heatmap",data,label:{show:true,color:css("--ink"),fontSize:11,formatter:p=>p.value[2]==="-"?"":p.value[2]},itemStyle:{borderColor:css("--surface"),borderWidth:2}}]});
+}
+
+/* ---- Bilinmeyenler ---- */
+let pesF = "";
+BUILD.bilinmeyen = () => {
+  const B = V.bilinmeyen;
+  $("#bilinmeyen").innerHTML = `
+    <div class="pane-head"><div><h2>Bilinenler ve bilinmeyenler</h2><p>${esc(B.aciklama)} ${esc(B.mercek_notu)}</p></div></div>
+    <div class="quad">
+      <div class="card"><div class="eyebrow">Bilinen bilinenler</div><div class="qn">${B.bilinen_bilinenler.length}</div><ul class="bul" style="font-size:13.5px">${B.bilinen_bilinenler.map(x=>`<li>${esc(x.ifade)}</li>`).join("")}</ul></div>
+      <div class="card"><div class="eyebrow">Bilinen bilinmeyenler · açık sorular</div><div class="qn">${B.bilinen_bilinmeyenler.sorular.length}</div><p class="muted" style="font-size:13.5px;margin-top:6px">${esc(B.bilinen_bilinmeyenler.aciklama)} Projelendirmeyi engelleyenler:</p><ul class="bul" style="font-size:13.5px">${V.soru.sorular.filter(s=>s.engelleyicilik==="projelendirmeyi_engeller").map(s=>`<li><span class="mono muted">${s.id}</span> ${esc(s.soru)}</li>`).join("")}</ul></div>
+      <div class="card"><div class="eyebrow">Bilinmeyen bilinenler · örtük bilgi</div><div class="qn">${B.bilinmeyen_bilinenler.length}</div><ul class="bul" style="font-size:13.5px">${B.bilinmeyen_bilinenler.map(x=>`<li><b style="font-weight:600">${esc(x.konu)}.</b> <span class="muted">${esc(x.neden_onemli)}</span></li>`).join("")}</ul></div>
+      <div class="card" style="border-color:var(--bad)"><div class="eyebrow">Bilinmeyen bilinmeyenler</div><div class="qn">${B.bilinmeyen_bilinmeyenler.length}</div><div id="ch-pestel" class="chart" style="height:220px"></div></div>
+    </div>
+    <div class="pane-head" style="margin-top:26px"><div><h3>Bilinmeyen bilinmeyenler: sinyal, etki ve erken keşif</h3></div>
+      <div class="pestel-filter" id="pes">${[["","Tümü"],...Object.entries(PES)].map(([k,l])=>`<button type="button" data-p="${k}" aria-pressed="${k===""}">${l}</button>`).join("")}</div></div>
+    <div class="scroll-x"><table class="t"><thead><tr><th style="width:70px">Kimlik</th><th>Konu</th><th>Erken sinyal</th><th>Etki</th><th>Erken keşif yöntemi</th><th style="width:130px">Mercek</th></tr></thead><tbody id="u-rows"></tbody></table></div>`;
+  $("#pes").addEventListener("click", e=>{ const b=e.target.closest("button"); if(!b) return; pesF=b.dataset.p; document.querySelectorAll("#pes button").forEach(x=>x.setAttribute("aria-pressed",x===b)); renderU(); });
+  renderU();
+  reg("bilinmeyen","ch-pestel", optPestel, p=>{ const k=Object.keys(PES)[p.dataIndex]; pesF=k; document.querySelectorAll("#pes button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.p===k)); renderU(); });
+};
+function renderU(){
+  const U = V.bilinmeyen.bilinmeyen_bilinmeyenler.filter(u=>!pesF||u.mercek.pestel===pesF);
+  $("#u-rows").innerHTML = U.map(u=>`<tr><td class="mono">${u.id}</td><td><div class="t-title">${esc(u.konu)}</div><div class="chips" style="margin-top:6px">${u.ilgili_ihtiyaclar.map(needChip).join("")}</div></td><td>${esc(u.erken_sinyal)}</td><td>${esc(u.etki)}</td><td>${esc(u.erken_kesif_yontemi)}</td><td><span class="pill p-neu">${PES[u.mercek.pestel]}</span> <span class="pill ${u.mercek.cevre==="dis"?"p-bad":"p-acc"}">${u.mercek.cevre==="dis"?"Dış":"İç"}</span><div class="muted" style="font-size:12px;margin-top:4px">${DUZ[u.kanit.duzey]}</div></td></tr>`).join("");
+}
+function optPestel(){
+  const U = V.bilinmeyen.bilinmeyen_bilinmeyenler, ks=Object.keys(PES);
+  const s = cev => ks.map(k=>U.filter(u=>u.mercek.pestel===k&&u.mercek.cevre===cev).length);
+  return Object.assign(base(),{grid:{left:6,right:10,top:26,bottom:4,containLabel:true},legend:{top:0,right:0,textStyle:{color:css("--muted"),fontSize:11.5},itemWidth:10,itemHeight:10},
+    tooltip:Object.assign(base().tooltip,{trigger:"axis",axisPointer:{type:"shadow"}}),
+    xAxis:{type:"category",data:ks.map(k=>PES[k]),axisLabel:axisTxt(),axisLine:{lineStyle:{color:css("--line")}},axisTick:{show:false}},
+    yAxis:{type:"value",axisLabel:axisTxt(),splitLine:{lineStyle:{color:css("--line")}}},
+    series:[{name:"İç çevre",type:"bar",stack:"p",data:s("ic"),itemStyle:{color:css("--accent")},barWidth:22},{name:"Dış çevre",type:"bar",stack:"p",data:s("dis"),itemStyle:{color:css("--bad")}}]});
+}
+
+/* ---- Riskler ---- */
+BUILD.risk = () => {
+  const R = [...V.risk.riskler].sort((a,b)=>b.skor-a.skor);
+  const lv = {cok_yuksek:["Çok yüksek","p-bad"],yuksek:["Yüksek","p-warn"],orta:["Orta","p-acc"],dusuk:["Düşük","p-neu"]};
+  $("#risk").innerHTML = `
+    <div class="pane-head"><div><h2>Program riskleri</h2><p>${esc(V.risk.aciklama)}</p></div></div>
+    <div class="grid2" style="align-items:start">
+      <div class="card" style="padding:8px"><div id="ch-risk" class="chart" style="height:520px"></div></div>
+      <div class="card"><h3>Geçici ölçek</h3><dl class="kv" style="margin-top:8px">${Object.entries(V.risk.gecici_olcek.olasilik).map(([k,v])=>`<dt>Olasılık ${k}</dt><dd>${esc(v)}</dd>`).join("")}${Object.entries(V.risk.gecici_olcek.etki).map(([k,v])=>`<dt>Etki ${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+        <p class="muted" style="font-size:13px;margin-top:10px">Kaynaklarda 3×3, 5×5 ve 10×10 ölçekler ve üç farklı seviye modeli var; ölçek kararı bekleniyor (D-004).</p></div>
+    </div>
+    <div class="scroll-x" style="margin-top:18px"><table class="t"><thead><tr><th style="width:70px">Kimlik</th><th>Risk</th><th style="width:80px">O × E</th><th>Erken sinyal</th><th>Azaltan ihtiyaçlar</th></tr></thead><tbody>
+      ${R.map(r=>`<tr><td class="mono">${r.id}</td><td><div class="t-title">${esc(r.risk)}</div><div class="t-sub" style="-webkit-line-clamp:4">${esc(r.aciklama)}</div></td><td><span class="pill ${lv[r.seviye][1]}">${r.olasilik}×${r.etki}=${r.skor}</span></td><td>${esc(r.erken_sinyal)}</td><td><div class="chips">${r.azaltan_ihtiyaclar.map(needChip).join("")}</div></td></tr>`).join("")}
+    </tbody></table></div>`;
+  reg("risk","ch-risk", optRisk);
+};
+function optRisk(){
+  const R = V.risk.riskler, cell={};
+  const pts = R.map(r=>{ const k=r.olasilik+"-"+r.etki; const i=(cell[k]=(cell[k]||0)+1)-1; const cols=3;
+    return {value:[r.etki-0.3+(i%cols)*0.3, r.olasilik+0.28-Math.floor(i/cols)*0.28], id:r.id, name:r.id.slice(2)}; });
+  const lvlColor = s => s>=16?css("--bad-soft"):s>=10?css("--warn-soft"):s>=5?css("--accent-soft"):css("--surface-2");
+  const areas=[]; for(let o=1;o<=5;o++) for(let e=1;e<=5;e++) areas.push([{xAxis:e-0.5,yAxis:o-0.5,itemStyle:{color:lvlColor(o*e)}},{xAxis:e+0.5,yAxis:o+0.5}]);
+  return Object.assign(base(),{grid:{left:10,right:14,top:14,bottom:10,containLabel:true},
+    tooltip:Object.assign(base().tooltip,{formatter:p=>{ const r=V.risk.riskler.find(x=>x.id===p.data.id); return r?`<b>${r.id} ${esc(r.risk)}</b><br>Olasılık ${r.olasilik} · Etki ${r.etki}`:""; }}),
+    xAxis:{type:"value",min:0.5,max:5.5,interval:1,name:"Etki",nameLocation:"middle",nameGap:26,nameTextStyle:axisTxt(),axisLabel:Object.assign(axisTxt(),{formatter:v=>Number.isInteger(v)?v:""}),splitLine:{lineStyle:{color:css("--surface")}}},
+    yAxis:{type:"value",min:0.5,max:5.5,interval:1,name:"Olasılık",nameLocation:"middle",nameGap:26,nameTextStyle:axisTxt(),axisLabel:Object.assign(axisTxt(),{formatter:v=>Number.isInteger(v)?v:""}),splitLine:{lineStyle:{color:css("--surface")}}},
+    series:[{type:"scatter",data:pts,symbolSize:24,itemStyle:{color:css("--ink")},label:{show:true,formatter:p=>p.data.name,color:css("--bg"),fontSize:10,fontFamily:"IBM Plex Mono, monospace"},markArea:{silent:true,data:areas},z:3}]});
+}
+
+/* ---- Yetenekler ---- */
+BUILD.yetenek = () => {
+  const Yv = V.yetenek, groups = Yv.gruplar;
+  const use = Object.fromEntries(Y.map(y=>[y.id,N.filter(n=>(n.yetenek_siniflari||[]).includes(y.id)).length]));
+  $("#yetenek").innerHTML = `
+    <div class="pane-head"><div><h2>Gerçekte ne gerekli? Markasız yetenek sınıfları</h2><p>${esc(Yv.aciklama)}</p></div></div>
+    <div class="card"><h3>Sizin örnekleriniz neye karşılık geliyor?</h3>
+      <div class="grid3" style="margin-top:10px">${Yv.kullanici_ornekleri_eslemesi.map(m=>`<div><div class="eyebrow">"${esc(m.kullanici_ifadesi)}"</div><ul class="clean stack" style="gap:4px;margin-top:6px;font-size:13.5px">${m.yetenek_siniflari.map(y=>`<li><span class="chip">${y}</span> ${esc(YB[y].ad)}</li>`).join("")}</ul></div>`).join("")}</div></div>
+    <div class="card scroll-x" style="padding:8px;margin-top:18px"><div class="eyebrow" style="padding:8px 10px 0">Yetenek sınıfı × küme · hücre = o kümede bu yeteneği gerektiren ihtiyaç sayısı</div><div id="ch-yk" class="chart" style="height:${Y.length*19+120}px;min-width:860px"></div></div>
+    <div class="stack" style="margin-top:18px;gap:18px">${groups.map(g=>`<div class="card"><h3>${esc(g)}</h3><div class="stack" style="margin-top:8px">${Y.filter(y=>y.grup===g).map(y=>`<div class="item"><div class="item-head"><span class="chip">${y.id}</span><b style="font-weight:600">${esc(y.ad)}</b><span class="muted mono">${use[y.id]} ihtiyaç</span></div><p style="font-size:13.5px;margin-top:4px">${esc(y.cozdugu_sorun)}</p><p class="muted" style="font-size:13px;margin-top:2px"><b style="font-weight:600">Ne zaman zorunlu:</b> ${esc(y.ne_zaman_zorunlu)} · <b style="font-weight:600">Olgunluk:</b> ${esc(y.olgunluk_ve_belirsizlik)}</p></div>`).join("")}</div></div>`).join("")}</div>`;
+  reg("yetenek","ch-yk", optYK);
+};
+function optYK(){
+  const data=[]; let mx=1;
+  Y.forEach((y,yi)=>K.forEach((k,xi)=>{ const v=N.filter(n=>n.kume===k.id&&(n.yetenek_siniflari||[]).includes(y.id)).length; if(v>mx) mx=v; data.push([xi,yi,v||"-"]); }));
+  return Object.assign(base(),{grid:{left:8,right:12,top:8,bottom:30,containLabel:true},
+    tooltip:Object.assign(base().tooltip,{formatter:p=>`${Y[p.value[1]].id} ${esc(Y[p.value[1]].ad)}<br>${K[p.value[0]].id} ${esc(K[p.value[0]].ad)}: <b>${p.value[2]==="-"?0:p.value[2]}</b>`}),
+    xAxis:{type:"category",position:"bottom",data:K.map(k=>k.id),axisLabel:Object.assign(axisTxt(),{fontFamily:"IBM Plex Mono, monospace",fontSize:10.5}),axisLine:{lineStyle:{color:css("--line")}}},
+    yAxis:{type:"category",inverse:true,data:Y.map(y=>`${y.id}  ${short(y.ad,40)}`),axisLabel:Object.assign(axisTxt(),{color:css("--ink"),fontSize:11}),axisLine:{lineStyle:{color:css("--line")}}},
+    visualMap:{show:false,min:0,max:mx,inRange:{color:[css("--surface-2"),css("--accent")]}},
+    series:[{type:"heatmap",data,label:{show:true,color:css("--ink"),fontSize:10,formatter:p=>p.value[2]==="-"?"":p.value[2]},itemStyle:{borderColor:css("--surface"),borderWidth:1.5}}]});
+}
+
+/* ---- Ölçek ---- */
+BUILD.olcek = () => {
+  const S = V.olcek.senaryolar;
+  const byT = {}; N.filter(n=>n.olcek_esigi).forEach(n=>(byT[n.olcek_esigi] ||= []).push(n.id));
+  $("#olcek").innerHTML = `
+    <div class="pane-head"><div><h2>Ekip sayısı belirsizken ne zaman ne gerekli?</h2><p>${esc(V.olcek.aciklama)}</p></div></div>
+    <div class="grid2" style="align-items:start">
+      <div class="card" style="padding:8px"><div id="ch-olcek" class="chart" style="height:380px"></div></div>
+      <div class="stack">${S.map(s=>`<div class="card"><div class="item-head"><span class="mono muted">${s.id}</span><b style="font-weight:600">${esc(s.ad)}</b><span class="pill p-neu">${esc(s.ekip)}</span><span class="pill p-neu">ART: ${esc(s.art)}</span></div><p class="muted" style="font-size:13.5px;margin-top:4px">${esc(s.uretim_baglantisi)}. Zorunlu: <b style="color:var(--ink)">${s.sayilar.toplam_zorunlu}</b>${s.not?` · ${esc(s.not)}`:""}</p></div>`).join("")}</div>
+    </div>
+    <div class="pane-head" style="margin-top:26px"><div><h3>Eşiğe göre ölçeğe bağlı ihtiyaçlar</h3></div></div>
+    <div class="grid3">${Object.entries(byT).sort((a,b)=>b[1].length-a[1].length).map(([t,ids])=>`<div class="card"><div class="item-head"><b style="font-weight:600">${esc(t)}</b><span class="muted mono">${ids.length}</span></div><div class="chips" style="margin-top:8px">${ids.map(needChip).join("")}</div></div>`).join("")}</div>
+    <div class="pane-head" style="margin-top:26px"><div><h3>Belirsizlik parametreleri</h3><p>Tasarımın dayanıklı olması gereken parametreler.</p></div></div>
+    <div class="scroll-x"><table class="t"><thead><tr><th>Parametre</th><th>Bilinen</th><th>Kesinlik</th><th>Yaklaşım</th><th>Kümeler</th></tr></thead><tbody>${V.belirsizlik.map(b=>`<tr style="cursor:default"><td class="mono">${esc(b.ad)}</td><td>${esc(b.bilinen_deger)}</td><td><span class="pill p-neu">${esc(b.kesinlik)}</span></td><td>${esc(b.yaklasim)}</td><td><div class="chips">${b.etkiledigi_kumeler.map(k=>`<button class="chip" data-kume="${k}">${k}</button>`).join("")}</div></td></tr>`).join("")}</tbody></table></div>`;
+  reg("olcek","ch-olcek", optOlcek);
+};
+function optOlcek(){
+  const S = V.olcek.senaryolar;
+  const ser = [["zorunlu","Her ölçekte zorunlu","--ink"],["olcekle_zorunlu","Ölçekle zorunlu hale gelen","--accent"],["kosula_bagli","Koşula bağlı","--warn"],["opsiyonel","Opsiyonel","--faint"]]
+    .map(([k,l,c])=>({name:l,type:"bar",stack:"s",barWidth:34,data:S.map(s=>s.sayilar[k]),itemStyle:{color:css(c)},label:{show:k!=="opsiyonel",color:css("--bg"),fontSize:11}}));
+  return Object.assign(base(),{grid:{left:8,right:12,top:50,bottom:8,containLabel:true},legend:{top:0,textStyle:{color:css("--muted"),fontSize:11.5},itemWidth:10,itemHeight:10},
+    tooltip:Object.assign(base().tooltip,{trigger:"axis",axisPointer:{type:"shadow"}}),
+    xAxis:{type:"category",data:S.map(s=>`${s.ad}\n${s.ekip.split(" (")[0]}`),axisLabel:axisTxt(),axisLine:{lineStyle:{color:css("--line")}},axisTick:{show:false}},
+    yAxis:{type:"value",axisLabel:axisTxt(),splitLine:{lineStyle:{color:css("--line")}}},series:ser});
+}
+
+/* ---- Kararlar ve sorular ---- */
+BUILD.karar = () => {
+  const Q = V.soru.sorular, ord = {projelendirmeyi_engeller:0,tasarimi_engeller:1,sonra_cevaplanabilir:2};
+  const rol = id => (V.org.rol_siniflari.find(r=>r.id===id)||{}).ad || id;
+  $("#karar").innerHTML = `
+    <div class="pane-head"><div><h2>Projelendirmeye hazır mıyız?</h2><p>Projelendirme yapılmadı. Aşağıdakiler, projelendirmenin boşluksuz başlayabilmesi için kapanması gereken kapılar, verilmesi gereken kararlar ve cevaplanması gereken sorulardır.</p></div></div>
+    <div class="grid3">${V.kapi.map(h=>`<div class="card"><div class="item-head"><span class="mono muted">${h.id}</span><b style="font-weight:600">${esc(h.kapi)}</b></div><p class="muted" style="font-size:13.5px;margin-top:4px">${esc(h.tamamlanma_olcutu)}</p><div class="chips" style="margin-top:8px">${h.bagli_soru_ve_kararlar.map(refChip).join("")}${h.bagli_ihtiyaclar.map(needChip).join("")}</div></div>`).join("")}</div>
+    <div class="pane-head" style="margin-top:28px"><div><h3>Bekleyen kararlar (${V.karar.length})</h3><p>Seçenekler araç değil, mimari veya süreç sınıflarıdır.</p></div></div>
+    <div class="grid2">${V.karar.map(d=>`<div class="card"><div class="item-head"><span class="mono muted">${d.id}</span><b style="font-weight:600">${esc(d.karar)}</b></div><p style="font-size:13.5px;margin-top:4px">${esc(d.soru)}</p>
+      <div class="chips" style="margin-top:8px">${d.secenek_siniflari.map(s=>`<span class="pill p-acc">${esc(s)}</span>`).join("")}</div>
+      <p class="muted" style="font-size:13px;margin-top:8px"><b style="font-weight:600">Ölçütler:</b> ${d.karar_olcutleri.map(esc).join("; ")}</p>
+      <p class="muted" style="font-size:13px;margin-top:4px"><b style="font-weight:600">Karar sahibi:</b> ${d.karar_sahibi_rol_sinifi.map(rol).map(esc).join(", ")} · <b style="font-weight:600">Kaynakta:</b> ${esc(d.kaynaktaki_durum)}</p>
+      <div class="chips" style="margin-top:8px">${d.bagli_ihtiyaclar.map(needChip).join("")}</div></div>`).join("")}</div>
+    <div class="pane-head" style="margin-top:28px"><div><h3>Açık sorular (${Q.length})</h3></div></div>
+    <div class="scroll-x"><table class="t"><thead><tr><th style="width:70px">Kimlik</th><th>Soru</th><th style="width:170px">Engelleyicilik</th><th>Cevaplayabilecek</th><th>Etkilediği</th></tr></thead><tbody>
+      ${[...Q].sort((a,b)=>ord[a.engelleyicilik]-ord[b.engelleyicilik]).map(q=>`<tr style="cursor:default"><td class="mono">${q.id}</td><td><div class="t-title">${esc(q.soru)}</div><div class="t-sub">${esc(q.neden_onemli)}</div></td><td><span class="pill ${ENG[q.engelleyicilik][1]}">${ENG[q.engelleyicilik][0]}</span><div class="muted" style="font-size:12px;margin-top:4px">${esc(q.tur)}</div></td><td style="font-size:13px">${q.cevaplayabilecek_rol_sinifi.map(rol).map(esc).join(", ")}</td><td><div class="chips">${q.etkiledigi_ihtiyaclar.map(needChip).join("")}</div></td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="pane-head" style="margin-top:28px"><div><h3>Çelişkiler (${V.celiski.length})</h3><p>Kaynaklar arasında birbiriyle çelişen ifadeler ve kapatmak için gereken karar.</p></div></div>
+    <div class="grid2">${V.celiski.map(c=>`<div class="card"><div class="item-head"><span class="mono muted">${c.id}</span><b style="font-weight:600">${esc(c.konu)}</b>${c.bekleyen_karar?`<span class="chip">${c.bekleyen_karar}</span>`:""}</div>
+      <div class="vs"><div><div class="eyebrow">A · ${c.taraf_a.kaynaklar.join(", ")}</div>${esc(c.taraf_a.ifade)}</div><div><div class="eyebrow">B · ${c.taraf_b.kaynaklar.join(", ")}</div>${esc(c.taraf_b.ifade)}</div></div>
+      <p class="muted" style="font-size:13px;margin-top:8px">${esc(c.etkisi)} <b style="font-weight:600;color:var(--ink)">Gereken:</b> ${esc(c.kapatmak_icin_gereken)}</p>
+      <div class="chips" style="margin-top:6px">${c.ilgili_ihtiyaclar.map(needChip).join("")}</div></div>`).join("")}</div>
+    <div class="pane-head" style="margin-top:28px"><div><h3>Varsayımlar (${V.varsayim.length})</h3></div></div>
+    <div class="scroll-x"><table class="t"><thead><tr><th style="width:70px">Kimlik</th><th>Varsayım</th><th>Yanlışsa</th><th>Doğrulama</th><th>İlgili</th></tr></thead><tbody>${V.varsayim.map(a=>`<tr style="cursor:default"><td class="mono">${a.id}</td><td>${esc(a.varsayim)}</td><td class="muted">${esc(a.yanlissa_etki)}</td><td>${esc(a.dogrulama_yolu)}</td><td><div class="chips">${a.ilgili_ihtiyaclar.map(needChip).join("")}</div></td></tr>`).join("")}</tbody></table></div>`;
+};
+
+/* ---- Kaynaklar ---- */
+BUILD.kaynak = () => {
+  const L = V.kaynak, byG = {};
+  L.forEach(s=>(byG[s.grup] ||= []).push(s));
+  const use = id => N.filter(n=>n.kanit.kaynaklar.includes(id)).length;
+  $("#kaynak").innerHTML = `
+    <div class="pane-head"><div><h2>Kaynaklar</h2><p>Yerel belgeler (${L.length}) ve markasız dış araştırmanın kanıtları (${V.dis.length}). Dosya yolları ve bağlantılar yalnız izlenebilirlik içindir. Sağdaki sayı, kaynağa dayanan ihtiyaç sayısıdır.</p></div></div>
+    <div class="grid2" style="align-items:start">${Object.entries(byG).map(([g,xs])=>`<div class="card"><div class="eyebrow">${esc(g)}</div><div class="stack" style="margin-top:8px">${xs.map(s=>`<div class="item"><div class="item-head"><span class="mono muted">${s.id}</span><b style="font-weight:600">${esc(s.baslik)}</b>${s.kopyasi?`<span class="pill p-neu">${s.kopyasi} kopyası</span>`:""}<span class="muted mono" style="margin-left:auto">${use(s.id)}</span></div><p class="muted" style="font-size:13px;margin-top:2px">${esc(s.ozet)}</p><p class="mono muted" style="font-size:11px;margin-top:2px">${esc(s.yol)}${s.katki_sahibi?` · ${esc(s.katki_sahibi)}`:""}</p></div>`).join("")}</div></div>`).join("")}</div>
+    <div class="pane-head" style="margin-top:26px"><div><h3>Dış araştırma kanıtları</h3><p>Tedarikçi, analist ve ön baskı kaynakları yön gösterici kabul edilmelidir.</p></div></div>
+    <div class="scroll-x"><table class="t"><thead><tr><th style="width:70px">Kimlik</th><th>Açıklama</th><th style="width:150px">Tür</th><th style="width:70px">İhtiyaç</th></tr></thead><tbody>${V.dis.map(s=>`<tr style="cursor:default"><td class="mono">${s.id}</td><td><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.aciklama)}</a></td><td><span class="pill p-neu">${esc(s.tur)}</span></td><td class="mono">${use(s.id)}</td></tr>`).join("")}</tbody></table></div>`;
+};
+
+/* ---------- başlat ---------- */
+let start = location.hash.slice(1);
+if(!start){ try{ start = localStorage.getItem("ih-tab") || ""; }catch(e){} }
+show(start || "genel");
+try{ history.scrollRestoration = "manual"; }catch(e){}
+window.addEventListener("load", ()=>window.scrollTo(0,0), {once:true});
+window.addEventListener("hashchange", ()=>show(location.hash.slice(1)));
+if(typeof echarts==="undefined"){ document.querySelectorAll(".chart").forEach(c=>c.innerHTML='<p class="muted" style="padding:16px">Grafik kütüphanesi yüklenemedi; listeler ve tablolar kullanılabilir.</p>'); }
+})();
+</script>

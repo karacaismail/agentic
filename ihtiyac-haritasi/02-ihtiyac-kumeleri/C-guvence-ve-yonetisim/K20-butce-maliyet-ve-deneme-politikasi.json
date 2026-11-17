@@ -1,0 +1,295 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K20",
+    "ad": "Bütçe, maliyet ve deneme politikası",
+    "alan": "C-guvence-ve-yonetisim",
+    "amac": "Ajan denemelerinin, sürenin ve maliyetin tek, sürümlü ve atlatılamaz bir politikayla sınırlanması; maliyetin doğru yere atfedilmesi.",
+    "kapsam": [
+      "sayaç türleri ve anlamları",
+      "tek bütçe politikası",
+      "sıfırlanamayan paylaşılan bütçe",
+      "altyapı denemelerinin ayrımı",
+      "aktif süre ve insan beklemesi",
+      "maliyet birimi ve atfı",
+      "ekip/ART kotaları",
+      "kalibrasyon"
+    ],
+    "kapsam_disi": [
+      "parasal bütçe onayı (projelendirme)"
+    ],
+    "komsu_kumeler": [
+      "K13",
+      "K15",
+      "K23",
+      "K24"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K20-001",
+      "baslik": "Tek, sürümlü deneme/süre/maliyet politikası",
+      "ihtiyac": "Tüm deneme, süre ve maliyet sınırlarının tek, sürümlü bir politika kaynağında tutulması; her deneme türünün hangi sayacı artırdığının tanımlanması; her ajan çağrısından önce kontrol edilmesi; ilk dolan sınırda durulması.",
+      "cozulecek_sorun": "Kaynaklarda sayılar çelişiyor (davranış başına 3+2 / 3+3=6; görev başına 10 / 12; düzeltme ajanı 4 / 6; 'max 12' döngüsünün neyi saydığı belirsiz). Çelişkili sayılar koda dökülürse yanlış sınırlar binlerce işe kopyalanır.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-35",
+        "Y-30"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Politika dosyası tek kaynak; her sayacın anlamı yazılı.",
+        "Her çağrı öncesi bütçe kontrolü kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-013",
+          "S-030",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-011",
+        "C-001",
+        "D-003",
+        "G-003",
+        "H-06",
+        "Q-019",
+        "R-002"
+      ]
+    },
+    {
+      "id": "N-K20-002",
+      "baslik": "Sayaç anlamları",
+      "ihtiyac": "Yalnız 'kod değişti ve doğrulama başarısız' olayının kod deneme sayacını artırması; beklenen RED'in ve başarılı döngünün sayılmaması; altyapı denemelerinin ayrı sayılması; deterministik kapı, kalite dönüşü, test düzeltme, belirsizlik turu ve görev bölme sayaçlarının ayrı tanımlanması.",
+      "cozulecek_sorun": "Haksız bütçe tüketimi; farklı türde denemelerin aynı sayaçta toplanması.",
+      "yetenek_siniflari": [
+        "Y-30",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Sayaç olayları türe göre etiketli.",
+        "Altyapı sayacı kod sayacından ayrı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-007",
+          "S-006",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-001",
+        "D-003",
+        "G-003",
+        "Q-020"
+      ],
+      "bagimliliklar": [
+        "N-K20-001"
+      ]
+    },
+    {
+      "id": "N-K20-003",
+      "baslik": "Sıfırlanamayan paylaşılan görev bütçesi",
+      "ihtiyac": "Sayaçların yalnız görev kimliğine bağlı olması; model, alt ajan veya yeni koşu değişiminin bütçeyi yenilememesi; paralel dalların bütçeyi önceden ayırması.",
+      "cozulecek_sorun": "Model veya ajan değiştirerek bütçe atlatılıyor.",
+      "yetenek_siniflari": [
+        "Y-30",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Model değişimi kalan bütçeyi değiştirmiyor (test).",
+        "Sayaç sıfırlama arayüzü yok."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K20-004",
+      "baslik": "Aktif süre ile insan beklemesinin ayrılması",
+      "ihtiyac": "Aktif süre sayacının insan beklemesi sırasında durması; insan beklemesinin ayrı ölçülmesi.",
+      "cozulecek_sorun": "Bekleme bütçeyi tüketiyor ya da tersine bekleme hiç sınırlanmıyor.",
+      "yetenek_siniflari": [
+        "Y-30",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Aktif süre sayacı bekleme sırasında duruyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "N-K20-005",
+      "baslik": "Görev başına maliyet tavanı ve birimi",
+      "ihtiyac": "Görev, davranış ve ekip başına maliyet tavanının değeri ve biriminin tanımlanması; maliyet biriminin (model + araç + yalıtım + orkestrasyon + depolama + insan müdahalesi) / kabul edilmiş görev olarak ölçülmesi.",
+      "cozulecek_sorun": "Maliyet tavanı var ama değeri ve birimi yok; token ucuzluğu tek başına tasarruf sanılıyor.",
+      "yetenek_siniflari": [
+        "Y-30"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tavanın değeri, birimi ve kapsamı yazılı.",
+        "Kabul edilmiş görev başına maliyet medyan ve üst yüzdelik olarak raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-008",
+        "Q-013",
+        "R-007",
+        "R-037",
+        "U-039"
+      ]
+    },
+    {
+      "id": "N-K20-006",
+      "baslik": "Uzun kuyruklu maliyet dağılımının yönetimi",
+      "ihtiyac": "Aynı görevde bile çok değişken olan token tüketiminin izlenmesi; üst yüzdelik sapmaların yakalanması; tahminlerin aralık olarak verilmesi.",
+      "cozulecek_sorun": "Ajan işleri sohbete göre katlarca fazla token harcıyor; modeller kendi maliyetini tahmin edemiyor; çok ajanlı yapı maliyeti katlıyor.",
+      "yetenek_siniflari": [
+        "Y-30",
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Görev başı maliyetin üst yüzdeliği izleniyor ve alarm eşiği tanımlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-123",
+          "S-176"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-008",
+        "R-007",
+        "U-002"
+      ]
+    },
+    {
+      "id": "N-K20-007",
+      "baslik": "Maliyetin ekip, ART ve portföye atfı ve kotalar",
+      "ihtiyac": "Maliyetin ekip, ART, portföy, iş kalemi ve rol bazında atfedilmesi; ekip/ART kotaları; kapasite planlamasında token/maliyet bütçesinin yer alması.",
+      "cozulecek_sorun": "Maliyet görünmüyor; bir ekibin tüketimi diğerlerini etkiliyor; bütçe aşımı geç fark ediliyor.",
+      "yetenek_siniflari": [
+        "Y-30",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "Ekip sayısı belirsiz olduğundan kota ve etiketler yapılandırmayla eklenip çıkarılabilmeli.",
+      "kabul_olcutleri": [
+        "Her maliyet kaydında ekip/ART etiketi var.",
+        "Kota aşımında tanımlı davranış (bekle, yükselt, onay iste) var."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-123",
+          "S-171"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "iliskili": [
+        "G-008",
+        "Q-003",
+        "Q-013",
+        "R-007"
+      ]
+    },
+    {
+      "id": "N-K20-008",
+      "baslik": "Toplu işler için ayrı bütçe",
+      "ihtiyac": "Backlog normalizasyonu gibi toplu işlerin zorunlu bir toplu bütçe girdisiyle ve aşımda durmayla yürütülmesi.",
+      "cozulecek_sorun": "Toplu iş sınırsız maliyet üretebilir.",
+      "yetenek_siniflari": [
+        "Y-30"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Toplu iş bütçesiz başlatılamıyor; aşımda duruyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K20-009",
+      "baslik": "Spesifikasyon kalitesinin maliyet kontrolü olarak ele alınması",
+      "ihtiyac": "Hazır olma kalitesi ile görev maliyeti arasındaki ilişkinin ölçülmesi ve hazır olma kapısının maliyet kontrolü olarak da kullanılması.",
+      "cozulecek_sorun": "Ayrıntılı spesifikasyon yerine çıplak hikâye verildiğinde maliyet belirgin artıyor.",
+      "yetenek_siniflari": [
+        "Y-30",
+        "Y-44"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "DoR puanı ile görev maliyeti ilişkisi raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-124"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "pilot sonrası",
+      "iliskili": [
+        "U-021"
+      ],
+      "bagimliliklar": [
+        "N-K01-006"
+      ]
+    }
+  ]
+}

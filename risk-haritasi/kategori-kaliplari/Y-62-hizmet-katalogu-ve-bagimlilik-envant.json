@@ -1,0 +1,152 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-62",
+    "ad": "Hizmet kataloğu ve bağımlılık envanteri",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-62",
+      "kalip": "Katalogda görünmeyen kritik ve dolaylı bağımlılıklar",
+      "aciklama": "Cloudflare'in 12 Haziran 2025 kesintisinde Workers KV depolama altyapısının bir kısmının üçüncü taraf bir bulut sağlayıcıya dayandığı ve bu arızanın Access, WARP ve Gateway gibi ürünleri de düşürdüğü açıklandı. AWS'nin Ekim 2025 us-east-1 olayında DynamoDB DNS otomasyonundaki yarış durumu, DynamoDB'ye bağımlı çok sayıda hizmeti yaklaşık 15 saat etkiledi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-12"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://blog.cloudflare.com/cloudflare-service-outage-june-12-2025/",
+        "https://aws.amazon.com/message/101925/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hizmet kataloğu yalnız beyan edilen doğrudan bağımlılıkları içerir; kimlik, DNS, sır deposu ve tedarikçi SaaS gibi dolaylı kritik bağımlılıklar görünmez ve kritiklik kademesi yanlış hesaplanır.",
+        "Olay anında 'bu kesintiden hangi hizmetlerimiz etkilenir' sorusu yanıtlanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-013",
+        "N-K33-014",
+        "N-K33-001"
+      ],
+      "ornek_araclar": [
+        "Backstage",
+        "Port",
+        "Cortex",
+        "OpsLevel",
+        "ServiceNow CMDB",
+        "Datadog Software Catalog"
+      ],
+      "erken_sinyal": "Çalışma zamanı izlerinde görülen ama katalogda olmayan bağımlılık sayısı.",
+      "azaltma": "Bağımlılıkları dağıtık izleme ve ağ akışından otomatik keşfedip beyanla karşılaştırmak; tedarikçi bağımlılıklarını da kataloglamak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Cloudflare, Workers KV altyapısının bir kısmının üçüncü taraf bulut sağlayıcıya dayandığını ve WARP, Access, Gateway gibi ürünlerin etkilendiğini yazıyor. AWS, DynamoDB DNS otomasyonundaki gizli yarış durumunu ve olayın 19 Ekim 23:48'den 20 Ekim 14:20'ye (PDT, yaklaşık 14,5 saat) sürdüğünü doğruluyor.",
+        "kaynak": [
+          "https://blog.cloudflare.com/cloudflare-service-outage-june-12-2025/",
+          "https://aws.amazon.com/message/101925/"
+        ]
+      },
+      "id": "RK-047"
+    },
+    {
+      "yetenek_sinifi": "Y-62",
+      "kalip": "Geliştirici portalı ve katalog bileşenlerindeki güvenlik açıkları",
+      "aciklama": "Backstage'de 2026'da TechDocs üzerinden MkDocs kancaları ve yapılandırma anahtarıyla keyfî kod çalıştırmaya izin veren (CVE-2026-25153, CVE-2026-29186) ve Scaffolder eylemlerinde sembolik bağ ile yol geçişine yol açan (CVE-2026-24046) yüksek önem dereceli açıklar yayımlandı; Scaffolder'da 2023'te de güvensiz sandbox açığı (CVE-2023-35926) vardı.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-6jr7-99pf-8vgf",
+        "https://github.com/advisories/GHSA-928r-fm4v-mvrw",
+        "https://github.com/advisories/GHSA-rq6q-wr2q-7pgp",
+        "https://github.com/advisories/GHSA-wg6p-jmpc-xjmr"
+      ],
+      "yasatacagi_sorunlar": [
+        "Portal tüm depolara okuma ve CI ile bulut hesaplarına yazma yetkisiyle çalışır; bir depodaki kötü niyetli belge yapılandırması portal sunucusunda kod çalıştırıp bu yetkileri ele geçirir.",
+        "Ajanların şablon çalıştırması yol geçişiyle sır sızdırabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-006",
+        "N-K33-001"
+      ],
+      "ornek_araclar": [
+        "Backstage",
+        "Roadie",
+        "Red Hat Developer Hub"
+      ],
+      "erken_sinyal": "Portal eklentilerinde yama geriliği; TechDocs'un sunucu tarafında belge üretmesi.",
+      "azaltma": "Belge üretimini yalıtılmış CI'da yapmak; portal hizmet hesabının yetkilerini en aza indirmek; eklenti sürümlerini güvenlik bildirimleriyle izlemek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA kayıtları dört açığı doğruluyor: CVE-2026-25153 (MkDocs kancaları, yüksek), CVE-2026-29186 (yapılandırma anahtarı, yüksek), CVE-2026-24046 (sembolik bağla yol geçişi, yüksek), CVE-2023-35926 (güvensiz sandbox, yüksek).",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-6jr7-99pf-8vgf",
+          "https://github.com/advisories/GHSA-928r-fm4v-mvrw",
+          "https://github.com/advisories/GHSA-rq6q-wr2q-7pgp",
+          "https://github.com/advisories/GHSA-wg6p-jmpc-xjmr"
+        ]
+      },
+      "id": "RK-048"
+    },
+    {
+      "yetenek_sinifi": "Y-62",
+      "kalip": "Beyana dayalı hazırlık puanlarının gerçek işletilebilirliği yansıtmaması",
+      "aciklama": "Port'un 2025 raporuna göre ekiplerin %50'si merkezi meta veri deposunun kalitesine güvenmiyor ve %53'ü meta veriyi en fazla haftada bir güncelliyor. Üretime hazırlık puan kartları elle girilen alanlara dayanırsa aynı güven sorunu hazırlık kararına taşınır.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-16"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.port.io/state-of-internal-developer-portals"
+      ],
+      "yasatacagi_sorunlar": [
+        "'İşletim dokümanı var', 'nöbet tanımlı' gibi alanlar işaretlenir ama doküman güncel değildir; ajan üretimi bileşenler hazırlık incelemesinden 'yeşil' geçer.",
+        "Kritiklik kademesi ekiplerin beyanına kaldığı için ya her şey kademe 0 olur ya da kritik hizmetler düşük kademede kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-006",
+        "N-K33-001",
+        "N-K33-017"
+      ],
+      "ornek_araclar": [
+        "Cortex Scorecards",
+        "OpsLevel Rubrics",
+        "Port Scorecards",
+        "Backstage Tech Insights"
+      ],
+      "erken_sinyal": "Puan kartı yeşil olan hizmetlerde yaşanan olaylarda eksik işletim dokümanı veya nöbet bulgusu.",
+      "azaltma": "Puan kartı alanlarını kanıta (son tatbikat, son doküman güncellemesi, gerçek alarm yönlendirmesi) bağlamak; kritiklik kademesini etki verisiyle doğrulamak.",
+      "id": "RK-049"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 13,
+    "yuksek": 1,
+    "dusuk": 6
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 10,
+    "RT-14": 7,
+    "RT-07": 5,
+    "RT-03": 4,
+    "RT-11": 4,
+    "RT-06": 4,
+    "RT-01": 3,
+    "RT-13": 3,
+    "RT-05": 2,
+    "RT-17": 2,
+    "RT-16": 2,
+    "RT-15": 1,
+    "RT-02": 1,
+    "RT-04": 1
+  }
+}

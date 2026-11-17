@@ -1,0 +1,172 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-27",
+    "ad": "Gözlemlenebilirlik (dağıtık iz, log, metrik; ajan, araç ve ürün)",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-164",
+      "yetenek_sinifi": "Y-27",
+      "kalip": "İzlerde kişisel veri ve sır birikimi",
+      "aciklama": "OpenTelemetry GenAI anlamsal kuralları, girdi/çıktı mesajlarını ve sistem talimatlarını isteğe bağlı (Opt-In) öznitelik olarak tanımlar ve bu özniteliklerin kullanıcı/kişisel veri dahil hassas bilgi içerebileceği uyarısını yapar. Wiz'in bulduğu açık DeepSeek ClickHouse veritabanında sohbet geçmişi, günlük akışları ve API sırları yer alıyordu.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-spans.md",
+        "https://www.wiz.io/blog/wiz-research-uncovers-exposed-deepseek-database-leak"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan izleri tam istem/yanıtla toplanırsa iş kalemlerindeki kişisel veriler, kaynak kod ve sırlar gözlem arka ucunda uzun süre birikir; silme talebi bu kopyalara ulaşmaz.",
+        "SaaS gözlem aracına gönderilen izler yurt dışı aktarım sayılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K22-009",
+        "N-K19-004"
+      ],
+      "ornek_araclar": [
+        "Langfuse",
+        "LangSmith",
+        "Arize Phoenix",
+        "Datadog LLM Observability"
+      ],
+      "erken_sinyal": "İz deposunda kişisel veri kalıbı taraması bulguları; iz saklama süresinin tanımsız olması.",
+      "azaltma": "İçerik yakalamayı varsayılan kapalı tutma, yakalamada maskeleme, iz verisini veri sınıfına göre saklama süresiyle yönetme, kurum içi arka uç."
+    },
+    {
+      "id": "RK-165",
+      "yetenek_sinifi": "Y-27",
+      "kalip": "Anlamsal kuralların kararsız olması",
+      "aciklama": "OpenTelemetry GenAI span kuralları 'Development' durumundadır ve Mayıs 2026'da ayrı bir depoya taşındı; öznitelik adları ve yapıları sürümler arasında değişebilir.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-15"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/open-telemetry/semantic-conventions-genai",
+        "https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-spans.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı ajan çalışma zamanları ve çerçeveler farklı kural sürümleriyle iz ürettiğinde uçtan uca iz birleşmez; maliyet ve kalite panoları kırılır.",
+        "Kural değişikliğinde tüm panoların ve alarm sorgularının yeniden yazılması gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-001",
+        "N-K16-001",
+        "N-K23-007"
+      ],
+      "ornek_araclar": [
+        "OpenTelemetry",
+        "OpenLLMetry",
+        "OpenInference",
+        "Langfuse"
+      ],
+      "erken_sinyal": "Enstrümantasyon kütüphanelerinde öznitelik adı değişikliği; panolarda boş metrikler.",
+      "azaltma": "Kural sürümünü sabitleme, iz toplayıcıda öznitelik dönüşümü katmanı, pano sorgularının sürümlü tutulması."
+    },
+    {
+      "id": "RK-166",
+      "yetenek_sinifi": "Y-27",
+      "kalip": "Gözlem/değerlendirme platformu satıcısının kapanması",
+      "aciklama": "Humanloop ekibi Ağustos 2025'te Anthropic'e katıldı ve platform 8 Eylül 2025'te kapatıldı; kullanıcılara göç için birkaç haftalık süre kaldı.",
+      "risk_turleri": [
+        "RT-06",
+        "RT-07"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://humanloop.com/",
+        "https://news.ycombinator.com/item?id=44592216"
+      ],
+      "yasatacagi_sorunlar": [
+        "İstem sürümleri, değerlendirme veri setleri ve iz geçmişi tek bir SaaS platformunda tutulursa satıcı kapandığında denetim kanıtı ve regresyon tabanı kaybolur.",
+        "Kısa göç süresi, PI ortasında platform değişimi zorunluluğu doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K19-005",
+        "N-K23-001"
+      ],
+      "ornek_araclar": [
+        "Humanloop",
+        "LangSmith",
+        "Langfuse",
+        "Braintrust"
+      ],
+      "erken_sinyal": "Satıcıda satın alma/ekip transferi haberi; dışa aktarma API'sinin kısıtlanması.",
+      "azaltma": "İz ve eval verisinin açık biçimde (OTel, JSONL) düzenli dışa aktarımı, kendi barındırılabilir alternatif, sözleşmede çıkış maddesi."
+    },
+    {
+      "id": "RK-167",
+      "yetenek_sinifi": "Y-27",
+      "kalip": "Gözlem arka ucunda yetki ve veri sızıntısı açıkları",
+      "aciklama": "Grafana'da yanlış yetki ataması (CVE-2025-41115, kritik), herkese açık panoların tüm doğrudan kip veri kaynaklarını ifşa etmesi (CVE-2026-27877) ve yetki kaldırıldıktan sonra servis hesabı token'ı üretilebilmesi (CVE-2026-33381) kaydedildi.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-16"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-w62r-7c53-fmc5",
+        "https://github.com/advisories/GHSA-3q27-7qjq-p9c5",
+        "https://github.com/advisories/GHSA-wfhv-mj62-f5xh"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan maliyet ve kalite panoları herkese açık paylaşıldığında arkadaki iz veritabanı bağlantıları ifşa olabilir.",
+        "Ekipten ayrılan kişinin yetkisi kaldırılsa da token üretimi sürebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-007",
+        "N-K16-001",
+        "N-K18-011"
+      ],
+      "ornek_araclar": [
+        "Grafana",
+        "Kibana",
+        "Langfuse",
+        "Jaeger"
+      ],
+      "erken_sinyal": "Gözlem aracı için yeni GHSA; herkese açık pano sayısı.",
+      "azaltma": "Gözlem araçlarının yamalı tutulması, herkese açık panoların kapatılması, veri kaynağı kimliklerinin salt okunur ve dar kapsamlı olması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 87,
+    "dusuk": 163,
+    "yuksek": 34,
+    "kritik": 2
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 47,
+    "RT-01": 26,
+    "RT-14": 22,
+    "RT-03": 20,
+    "RT-10": 19,
+    "RT-16": 18,
+    "RT-06": 15,
+    "RT-12": 11,
+    "RT-05": 11,
+    "RT-11": 10,
+    "RT-13": 10,
+    "RT-02": 9,
+    "RT-07": 9,
+    "RT-15": 8,
+    "RT-04": 5,
+    "RT-17": 5,
+    "RT-09": 1
+  }
+}

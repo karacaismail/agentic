@@ -1,0 +1,5446 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-27",
+    "ad": "Gözlemlenebilirlik (dağıtık iz, log, metrik; ajan, araç ve ürün)",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim",
+    "cozdugu_sorun": "Ajanın kara kutu olması; maliyetin ve kalitenin görünmemesi.",
+    "ne_zaman_zorunlu": "Her zaman."
+  },
+  "arac_sayisi": 287,
+  "tur_dagilimi": {
+    "acik-kaynak": 147,
+    "acik-cekirdek": 29,
+    "protokol-standart": 8,
+    "ticari-saas": 73,
+    "bulut-hizmeti": 12,
+    "ticari-yazilim": 8,
+    "kutuphane": 8,
+    "platform": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-0082",
+      "ad": "Moltis",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://moltis.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Rust tek ikili kalıcı kişisel ajan sunucusu: şifreli kasa, passkey, sandbox, Prometheus/OTLP/Langfuse gözlemi ve ACP ile Codex, Claude ve Cursor ajanlarını sürme.",
+      "sinirlar": "Küçük topluluk (~2,9k yıldız); kişisel ajan tasarımı; panodaki açıklama bağımsız doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K15-002",
+        "N-K18-004",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-0140",
+      "ad": "k6",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://grafana.com/oss/k6/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript senaryolu yük testi; eşikler (ör. p95 gecikme, hata oranı) aşılınca sıfırdan farklı çıkış koduyla CI kapısını kırar; tarayıcı modülüyle ön yüz metrikleri ölçer.",
+      "sinirlar": "AGPL-3.0; tarayıcı tarafı ölçüm sınırlı. AGPL lisansı; dağıtık büyük yük için bulut veya operatör gerekir. AGPL; dağıtık büyük testler için k6 Cloud (ticari) veya operator gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-012",
+        "N-K05-023",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K16-001"
+      ]
+    },
+    {
+      "id": "AR-0149",
+      "ad": "Langfuse",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee dizinleri hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://langfuse.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM/ajan çağrılarını iz ve span olarak kaydeder (istem, araç çağrısı, süre, token, maliyet); prompt yönetimi ve sürümleme, veri setleri, LLM-yargıç ve insan etiketiyle değerlendirme sunar; OpenTelemetry ile veri alabilir.",
+      "sinirlar": "İzler hassas veri deposuna dönüşebilir, maskeleme gerekir; bazı kurumsal özellikler ee lisansında; telif sahibi artık ClickHouse, Inc. Bazı kurumsal özellikler ticari lisanslı; lisans metnine göre telif ClickHouse, Inc.'e geçmiş, yol haritası izlenmeli. Kurumsal özellikler ayrı lisanslı; hakem kalibrasyonu kullanıcıya bırakılır. Ocak 2026'da ClickHouse satın aldı (MIT çekirdeğin korunacağı taahhüt edildi); bazı kurumsal özellikler ee lisansında; self-host kurulum ClickHouse, Postgres, Redis ve n",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K08-005",
+        "N-K09-006",
+        "N-K11-009",
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-007",
+        "N-K20-006",
+        "N-K20-007",
+        "N-K23-005",
+        "N-K23-007",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K24-001",
+        "N-K28-004",
+        "N-K29-001",
+        "N-K30-008"
+      ]
+    },
+    {
+      "id": "AR-0150",
+      "ad": "OpenTelemetry",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://opentelemetry.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık iz, metrik ve log için açık standart ve SDK'lar; GenAI anlamsal kuralları; Collector ile maskeleme, örnekleme ve yönlendirme.",
+      "sinirlar": "Ajan/LLM anlamsal kuralları hâlâ gelişiyor; depolama ve arayüz ayrı araç ister.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K19-001",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-0151",
+      "ad": "LangSmith",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.langchain.com/langsmith",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çerçeveden bağımsız izleme (Python/TS/Go/Java SDK, OTel desteği), üretim izlemede maliyet/gecikme, kümeleme ile örüntü tespiti, veri setleri ve deney tabanlı değerlendirme sunar.",
+      "sinirlar": "Kapalı kaynak SaaS (kaynak); self-host kurumsal lisansla. Kapalı kaynak; self-host ve BYOC kurumsal lisans gerektirir.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-003",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K28-011",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0152",
+      "ad": "Arize Phoenix",
+      "tur": "acik-cekirdek",
+      "lisans": "Elastic License 2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://arize.com/docs/phoenix",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry/OpenInference tabanlı LLM ve ajan izleme, iz üzerinde LLM-yargıç değerlendirmeleri, veri setleri ve deney karşılaştırması sağlar.",
+      "sinirlar": "Elastic License 2.0 (OSI açık kaynak değil; yönetilen hizmet olarak sunma kısıtı) — katalogdaki 'açık kaynak' ifadesi düzeltilmeli. Elastic License 2.0 yönetilen hizmet olarak sunmayı kısıtlar. ELv2 OSI onaylı açık kaynak değildir (yönetilen hizmet olarak sunma yasak); ölçekli kurumsal özellikler ticari Arize AX ürünündedir.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K09-006",
+        "N-K19-001",
+        "N-K23-003",
+        "N-K23-007",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0157",
+      "ad": "Braintrust",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.braintrust.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri setleriyle deneyler, LLM/kod/insan skorlayıcıları, üretim izlerinden tek tıkla değerlendirme seti oluşturma ve 'Loop' ajanıyla prompt/skorlayıcı iyileştirme önerileri sunar.",
+      "sinirlar": "Kapalı SaaS; Promptfoo ile örtüşür (kaynak). SaaS ve ticari; veri barındırma koşulları doğrulanmalı. Kontrol düzlemi SaaS; hibrit modda yalnız Brainstore veri düzlemi kendi altyapınızda çalışır.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K11-009",
+        "N-K19-001",
+        "N-K23-003",
+        "N-K23-005",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K29-001",
+        "N-K29-008"
+      ]
+    },
+    {
+      "id": "AR-0158",
+      "ad": "AgentOps",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (SDK); platform ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://agentops.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan oturumlarını, LLM ve araç çağrılarını, maliyeti kaydeden Python SDK'sı ve oturum tekrar izleme paneli sağlar.",
+      "sinirlar": "Langfuse ile örtüşür (kaynak); SDK son push Haziran 2026. Panel ağırlıklı olarak SaaS; depo etkinliği 2026 ortasından beri yavaşlamış görünüyor.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-0159",
+      "ad": "Opik",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.comet.com/docs/opik/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM/ajan izleri, değerlendirme deneyleri ve LLM-yargıç metrikleri, prompt kitaplığı sağlar; Agent Optimizer modülüyle değerlendirme setine karşı prompt optimizasyonu yapar.",
+      "sinirlar": "Langfuse ile örtüşür, birini seçmek önerilir (kaynak). Hakem metrikleri kalibrasyon gerektirir; bazı özellikler bulut sürümünde. Comet'in ticari platformuna bağlı bir ürün; optimizasyon modülü görece yeni, optimize edilen prompt'un onay ve sürüm süreci ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K08-006",
+        "N-K11-004",
+        "N-K11-009",
+        "N-K19-001",
+        "N-K23-003",
+        "N-K23-009",
+        "N-K23-010",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-0160",
+      "ad": "Helicone",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.helicone.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Proxy/ağ geçidi üzerinden LLM isteklerini kaydeder; maliyet, gecikme, kullanıcı/özellik bazında analiz, önbellek ve oran sınırı sunar.",
+      "sinirlar": "Langfuse ile örtüşür (kaynak); gateway kritik yolda ek servis olur. Mart 2026'da Mintlify satın aldı; ürün bakım modunda (yeni özellik yok), ekip müşterileri başka platforma geçirmeyi öneriyor. Mart 2026'da Mintlify satın aldı; barındırılan ürün bakım modunda (yalnız güvenlik/düzeltme), yeni özellik beklenmemeli.",
+      "ihtiyaclar": [
+        "N-K16-007",
+        "N-K19-001",
+        "N-K20-005",
+        "N-K20-006",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-0161",
+      "ad": "W&B Weave",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (SDK); platform ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://wandb.ai/site/weave/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM uygulama fonksiyonlarını izler, sürümlü veri setleri/modeller ve Evaluation nesneleriyle skorlayıcı tabanlı değerlendirme ve karşılaştırma yapar.",
+      "sinirlar": "Langfuse ile örtüşür (kaynak); platform ticari. Sunucu tarafı W&B platformudur (SaaS veya ticari özel kurulum); W&B CoreWeave'e aittir.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-005",
+        "N-K23-002",
+        "N-K23-003",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-0162",
+      "ad": "Prometheus",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://prometheus.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zaman serisi metrik toplama ve uyarı sistemi; hattın kuyruk, eşzamanlılık ve SLO metrikleri için (Moltis entegrasyonunda anılıyor).",
+      "sinirlar": "Uzun süreli saklama ve yüksek kardinalite için ek bileşen gerekir. Uzun süreli saklama ve çok kiracılık için Thanos/Mimir gibi ek bileşen gerekir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K05-021",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K16-001",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-0295",
+      "ad": "MLflow (Model Registry ve AI Gateway)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://mlflow.org/docs/latest/genai/governance/ai-gateway/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OTel GenAI kurallarıyla uyumlu izleme, LLM-yargıç değerlendirmesi, sürümlü prompt kayıt defteri ve prompt optimizasyon API'si; deney/model kayıt defteriyle koşuların yapılandırmasını sonuçla birlikte saklar.",
+      "sinirlar": "Geçit özellikleri adanmış LLM geçitlerine göre sınırlı (bütçe/kota zayıf); kayıt şeması LLM'e özgü alanlar için genişletilmeli. Geniş kapsamlı bir ML platformu; GenAI özellikleri hızlı değişiyor; yönetilen sürüm büyük ölçüde Databricks'e bağlı.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K09-001",
+        "N-K09-012",
+        "N-K09-013",
+        "N-K11-009",
+        "N-K16-005",
+        "N-K19-001",
+        "N-K19-005",
+        "N-K23-002",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-0375",
+      "ad": "Claude Usage & Cost Admin API (ve Claude Code Analytics API)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kuruluş düzeyinde token kullanımını 1 dk/1 sa/1 gün kovalarla API anahtarı, çalışma alanı, model, hizmet katmanı ve çıkarım coğrafyasına göre; maliyeti USD olarak çalışma alanı bazında döndürür; Claude Code için kullanıcı başı tahmini maliyet API'si ayrı.",
+      "sinirlar": "Maliyet uç noktası yalnız günlük; Priority Tier maliyeti ve AWS üzerindeki Claude Platform'da programatik erişim yok; ekip/ART atfı için anahtar veya çalışma alanı tasarımı gerekir.",
+      "ihtiyaclar": [
+        "N-K20-005",
+        "N-K20-006",
+        "N-K20-007",
+        "N-K23-007",
+        "N-K24-001",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0385",
+      "ad": "OpenLIT",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openlit.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenTelemetry-yerli SDK ve ClickHouse tabanlı panelle LLM/ajan izleri, token maliyeti, GPU metrikleri, değerlendirme ve prompt yönetimi sunar; kodlama ajanlarını da izlemeyi hedefler.",
+      "sinirlar": "Küçük ekip; kurumsal ölçekte işletim referansı sınırlı. Küçük topluluk ve şirket desteği sınırlı; kurumsal SSO/denetim özellikleri olgun değil.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K09-006",
+        "N-K09-011",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-0388",
+      "ad": "OpenTelemetry GenAI Semantic Conventions",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/open-telemetry/semantic-conventions",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM çağrıları ve ajan adımları için model adı, sağlayıcı, girdi/çıktı token sayısı gibi standart iz özniteliklerini tanımlar; maliyetin ekip/rol etiketleriyle araçtan bağımsız atfı için ortak şema.",
+      "sinirlar": "GenAI kuralları hâlâ geliştirme aşamasında; öznitelik adları değişebiliyor. Tüm GenAI kuralları 'Development' statüsünde; öznitelik adları değişebilir, sürüm sabitlemesi gerekir.",
+      "ihtiyaclar": [
+        "N-K09-006",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K20-007",
+        "N-K23-007",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-0389",
+      "ad": "OpenLLMetry",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/traceloop/openllmetry",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM sağlayıcıları, vektör veritabanları ve ajan çerçeveleri için OpenTelemetry tabanlı otomatik enstrümantasyon; izleri herhangi bir OTel arka ucuna gönderir.",
+      "sinirlar": "Maliyet hesabı arka uçta yapılmalı; enstrümantasyon kapsamı kütüphaneye göre değişir. Traceloop 2026'da ServiceNow'a katıldı; projenin açık kalacağı duyuruldu ancak uzun vadeli yol haritası ServiceNow önceliklerine bağlı.",
+      "ihtiyaclar": [
+        "N-K09-006",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-0393",
+      "ad": "Evidently",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.evidentlyai.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM ve ML sistemleri için test takımları, metin tanımlayıcıları, LLM-yargıç değerlendiricileri ve zaman içinde kayma izleme panoları.",
+      "sinirlar": "Bulut panosu ve bazı özellikler ticari; LLM davranış kaymasında referans seti kullanıcı tanımlar. Ajan izi ayrıntısı sınırlı; bulut sürümü ticari.",
+      "ihtiyaclar": [
+        "N-K09-013",
+        "N-K23-010",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-0511",
+      "ad": "Durable Task Scheduler",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/durable-task/scheduler/durable-task-scheduler",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Durable Functions ve Durable Task SDK'ları için tam yönetilen orkestrasyon arka ucu ve izleme panosu; Dedicated SKU GA (Kasım 2025), Consumption SKU GA (Mart 2026).",
+      "sinirlar": "Azure'a kilitli; kurum içi kurulum yok.",
+      "ihtiyaclar": [
+        "N-K13-001",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-013",
+        "N-K16-004"
+      ]
+    },
+    {
+      "id": "AR-0597",
+      "ad": "Planview Viz",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.planview.com/products-solutions/products/viz/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Eski Tasktop Viz; Flow Framework ile akış süresi, verimliliği, hızı, yükü ve dağılımını Jira, Azure DevOps, ServiceNow, GitLab verisinden ölçer.",
+      "sinirlar": "Veri toplama için Planview Hub entegrasyonuna dayanır; yalnız SaaS.",
+      "ihtiyaclar": [
+        "N-K19-007",
+        "N-K23-006",
+        "N-K24-009",
+        "N-K24-011"
+      ]
+    },
+    {
+      "id": "AR-0601",
+      "ad": "LinearB",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://linearb.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "DORA ve akış metrikleri, AI kodlama aracı etkisi, gitStream ile politika tabanlı PR yönlendirme/onay kuralları ve AI kod incelemesi.",
+      "sinirlar": "Metrik yorumları bağlam ister; yalnız SaaS. SaaS; algı anketi derinliği özel DevEx araçlarına göre sınırlı. SaaS; ölçümün ekip performans değerlendirmesine dönüşme riski.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K08-005",
+        "N-K17-005",
+        "N-K19-007",
+        "N-K23-006",
+        "N-K24-014",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-0607",
+      "ad": "Faros AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.faros.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ kodlama ajanlarının token kullanımı, maliyeti ve çıktı etkisini 60+ mühendislik veri kaynağıyla ilişkilendiren; model/bütçe politikası uygulama ve denetim izi sunan platform.",
+      "sinirlar": "Eskiden açık kaynak Community Edition vardı; faros-community-edition deposu Eylül 2026 itibarıyla erişilemiyor — self-host yolu belirsiz. AWS üzerinde barındırılan SaaS; açık kaynak/self-host sürümü kaynakta yok. Ana platform ticari; eski açık 'community edition' artık bulunmuyor.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K19-007",
+        "N-K20-007",
+        "N-K23-006",
+        "N-K23-007",
+        "N-K23-008",
+        "N-K24-011",
+        "N-K25-007",
+        "N-K28-012",
+        "N-K29-008",
+        "N-K33-016",
+        "N-K35-005"
+      ]
+    },
+    {
+      "id": "AR-0608",
+      "ad": "Apache DevLake",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://devlake.apache.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub/GitLab, Jira, Jenkins vb. kaynaklardan veri toplayıp DORA panoları sunar; veri modeli SQL ile genişletilerek ajan katkılı değişiklikler ayrı etiketlenebilir.",
+      "sinirlar": "Hâlâ Apache Incubator'da; eklenti kalitesi değişken, pano özelleştirmesi SQL bilgisi ister. Ajan/insan ayrımı için özel etiketleme ve veri modeli genişletmesi gerekir; pano kalitesi veri hijyenine bağlı.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K19-007",
+        "N-K23-006",
+        "N-K23-008",
+        "N-K24-011",
+        "N-K26-006",
+        "N-K33-016"
+      ]
+    },
+    {
+      "id": "AR-0616",
+      "ad": "PagerDuty",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.pagerduty.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet çizelgeleri, kademeli eskalasyon politikaları, olay iş akışları ve Slack/Teams entegrasyonlarıyla süre aşımında sorumluyu otomatik yükselten olay yönetimi.",
+      "sinirlar": "Olay yönetimi odaklı; ürün sahibi/kalite onayları gibi iş kararları için modellenmesi zorlama olur; yalnız SaaS. SaaS; kullanıcı başı maliyet.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K12-005",
+        "N-K16-002",
+        "N-K16-007",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K25-001",
+        "N-K27-007",
+        "N-K31-011",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-0617",
+      "ad": "incident.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://incident.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Slack/Teams içinde olay yönetimi, nöbet, durum sayfası, olay sonrası analiz ve telemetri/dağıtım geçmişinden AI destekli kök neden hipotezleri.",
+      "sinirlar": "Olay odaklı; yalnız SaaS. SaaS; Slack/Teams'e bağımlı iş akışı.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K08-008",
+        "N-K12-005",
+        "N-K16-002",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K17-010",
+        "N-K27-007",
+        "N-K31-001",
+        "N-K31-010"
+      ]
+    },
+    {
+      "id": "AR-0618",
+      "ad": "Grafana Cloud IRM",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://grafana.com/products/cloud/irm/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Grafana OnCall ve Grafana Incident'ı birleştiren nöbet, eskalasyon zinciri ve olay yönetimi hizmeti.",
+      "sinirlar": "Yalnız bulut; OnCall OSS 24 Mart 2026'da arşivlendi, self-host seçeneği kalmadı. Yalnız Grafana Cloud; OSS karşılığı arşivlendi.",
+      "ihtiyaclar": [
+        "N-K12-005",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K17-003",
+        "N-K17-004",
+        "N-K33-008",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-0619",
+      "ad": "Grafana OnCall OSS",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/grafana-cold-storage/oncall",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Nöbet planlama ve eskalasyon; mevcut kurulumlar çalışmaya devam edebilir.",
+      "sinirlar": "Mart 2025'te bakım moduna girdi, 24 Mart 2026'da arşivlendi; bulut bağlantılı SMS/telefon bildirimleri kapandı — yeni kurulum için uygun değil. Mart 2025'te bakım moduna girdi, 24 Mart 2026'da arşivlendi; bulut bağlantılı bildirimler durdu.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-006",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-0669",
+      "ad": "Sentry MCP",
+      "tur": "acik-cekirdek",
+      "lisans": "FSL-1.1-Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://docs.sentry.io/product/sentry-mcp/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sentry hata olayları, sorunlar ve performans verilerini ajanlara MCP üzerinden sunar.",
+      "sinirlar": "FSL lisansı rakip ticari kullanımı iki yıl kısıtlar; Sentry'ye bağlı.",
+      "ihtiyaclar": [
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-0754",
+      "ad": "OpenSearch",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://opensearch.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Log ve iz arama/analizi, Trace Analytics, Data Prepper ile OTel alımı ve indeks yaşam döngüsü politikalarıyla saklama yönetimi.",
+      "sinirlar": "Küme işletimi uzmanlık ister; semantik kalite gömme modeli seçimine bağlı. Kaynak tüketimi yüksek; küme işletimi uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K09-014",
+        "N-K14-002",
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-0949",
+      "ad": "ReportPortal",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://reportportal.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Test sonuçlarını merkezi toplar, geçmişle karşılaştırır ve başarısızlıkları (ürün hatası, otomasyon hatası, sistem sorunu) makine öğrenmesiyle otomatik sınıflar; kararsız test eğilimini gösterir.",
+      "sinirlar": "Çok servisli, ağır kurulum (Kubernetes/Docker); otomatik sınıflama geçmiş etiketli veriye bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K05-013",
+        "N-K05-014",
+        "N-K05-026",
+        "N-K08-001"
+      ]
+    },
+    {
+      "id": "AR-0978",
+      "ad": "HeadSpin",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.headspin.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Farklı ülkelerdeki gerçek cihazlarda mobil, web ve OTT testleri; ağ, sayfa yükleme ve medya kalitesi gibi performans KPI'larını oturum bazında ölçer.",
+      "sinirlar": "Pahalı kurumsal ürün; KPI tanımları satıcıya özgü.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018"
+      ]
+    },
+    {
+      "id": "AR-1027",
+      "ad": "Trunk Flaky Tests",
+      "tur": "ticari-saas",
+      "lisans": "ticari (analytics-cli MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://trunk.io/flaky-tests",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI'dan yüklenen test sonuçlarından kararsız testleri tespit eder, otomatik karantinaya alır (başarısızlığı derlemeyi kırmadan izler), sahip ve iş kaydı oluşturur.",
+      "sinirlar": "Karantinadaki testlerin 'geçti' sayılmaması için kapıda ayrı işaretlenmesi gerekir; SaaS.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014",
+        "N-K05-029"
+      ]
+    },
+    {
+      "id": "AR-1028",
+      "ad": "BuildPulse",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://buildpulse.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Derlemeler ve dallar arası sonuçları karşılaştırarak kararsız testleri bulur, harcadığı mühendislik zamanına göre sıralar ve en kötülerini karantinaya alır; kapsam ve CI metrikleri sunar.",
+      "sinirlar": "SaaS; karantina politikası ve sahiplik kurumda tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014"
+      ]
+    },
+    {
+      "id": "AR-1029",
+      "ad": "Develocity",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://gradle.com/develocity/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Build Scan gözlemi, derleme ve artefakt önbelleği, test dağıtımı, öngörücü test seçimi, kararsız test tespiti; Gradle, Maven, Bazel, npm, sbt, Python; AI ajanları için MCP sunucuları.",
+      "sinirlar": "Ticari ve JVM ağırlıklı; öngörücü seçim birleşim öncesi tam koşunun yerini tutmamalı. Ticari; tam fayda için build aracı entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-012",
+        "N-K05-013",
+        "N-K05-026",
+        "N-K06-003",
+        "N-K15-005",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1030",
+      "ad": "Datadog Test Optimization",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/tests/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Test koşularını izlerle ilişkilendirir; kararsız test yönetimi (karantina, devre dışı, düzeltme denemesi), erken kararsızlık tespiti, otomatik yeniden deneme ve kapsam tabanlı test etki analizi sunar.",
+      "sinirlar": "Datadog ekosistemine kilitlenme ve yüksek maliyet; test etki analizi dil desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014",
+        "N-K05-021",
+        "N-K06-003"
+      ]
+    },
+    {
+      "id": "AR-1032",
+      "ad": "Buildkite Test Engine",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://buildkite.com/platform/test-engine/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Test paketlerini izler, kararsız testleri tespit edip karantinaya alır veya susturur, test sahipliğini ve en yavaş/en güvensiz testleri gösterir, testleri paralel işlere böler.",
+      "sinirlar": "SaaS; susturulan testlerin kapı raporunda ayrı görünmesi sağlanmalı.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014"
+      ]
+    },
+    {
+      "id": "AR-1069",
+      "ad": "sitespeed.io",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.sitespeed.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek tarayıcılarla (Browsertime) web performansı ölçer; performans bütçesiyle CI kapısı, Grafana panoları ve Android/iOS Safari üzerinde mobil ölçüm sunar.",
+      "sinirlar": "Kararlı ölçüm için ayrılmış ve kısıtlanmış test makinesi gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-1070",
+      "ad": "WebPageTest",
+      "tur": "ticari-saas",
+      "lisans": "PolyForm Shield 1.0.0 (kaynak erişilebilir)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.webpagetest.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek tarayıcı ve konumlardan ayrıntılı sayfa yükleme ölçümü (şelale, filmstrip, Core Web Vitals); API ile CI entegrasyonu.",
+      "sinirlar": "Açık kaynak değil (PolyForm Shield); self-host ajan kurulumu karmaşık, depo etkinliği 2025'ten beri düşük.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010"
+      ]
+    },
+    {
+      "id": "AR-1077",
+      "ad": "Bencher",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 / MIT (Plus özellikleri ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://bencher.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sürekli kıyaslama platformu: çok dilli benchmark çıktılarını zaman serisi olarak saklar, istatistiksel eşiklerle gerilemeyi PR'da yakalar ve uyarı üretir.",
+      "sinirlar": "Kararlı ölçüm için ayrılmış koşucu gerekir; bazı özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-023"
+      ]
+    },
+    {
+      "id": "AR-1080",
+      "ad": "Grafana Pyroscope",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/pyroscope/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürekli profil çıkarma: CPU, bellek ve kilit profillerini zaman serisi olarak saklar, sürümler arası alev grafiği karşılaştırması yapar.",
+      "sinirlar": "AGPL; depolama ve ajan işletimi gerekir. AGPL; profil verisi hacimli.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1081",
+      "ad": "py-spy",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/benfred/py-spy",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çalışan Python süreçlerini yeniden başlatmadan örnekleyen düşük ek yüklü profil aracı; alev grafiği ve top görünümü.",
+      "sinirlar": "Yalnız CPython; bazı ortamlarda ptrace yetkisi gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-1082",
+      "ad": "async-profiler",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/async-profiler/async-profiler",
+      "olgunluk": "olgun",
+      "ne_saglar": "JVM için güvenli nokta yanlılığı olmayan düşük ek yüklü CPU, tahsis ve kilit profil aracı; alev grafiği üretir.",
+      "sinirlar": "Linux/macOS; Windows desteği yok.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-1083",
+      "ad": "Parca",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.parca.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF tabanlı, enstrümantasyonsuz sürekli profil çıkarma; zaman içinde ve sürümler arası profil karşılaştırması.",
+      "sinirlar": "Linux/eBPF gerektirir; bazı dillerde sembol çözümleme sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-1084",
+      "ad": "Perfetto",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://perfetto.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android, Linux ve Chrome için sistem düzeyi iz kaydı ve SQL tabanlı iz analizi; mobil uygulamada kare atlama, başlatma ve CPU zamanlamasını incelemeye yarar.",
+      "sinirlar": "İz yorumlama uzmanlık ister; otomatik kapı için ek betik gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010"
+      ]
+    },
+    {
+      "id": "AR-1272",
+      "ad": "OpenTelemetry Collector (redaction/transform işlemcileri)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/open-telemetry/opentelemetry-collector-contrib",
+      "olgunluk": "olgun",
+      "ne_saglar": "İz, log ve metrik özniteliklerini izin listesi ve regex ile maskeleyen redaction işlemcisi ile transform/filter işlemcilerini sunar; ajan izleri dışa aktarılmadan önce kişisel veri ve sır temizlenir.",
+      "sinirlar": "Kural tabanlıdır; serbest metindeki PII'yi anlamsal olarak bulmaz. Yapılandırma karmaşık; contrib bileşenlerinin olgunluk düzeyi değişken.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-004",
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1303",
+      "ad": "Falco",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://falco.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "eBPF ile sistem çağrısı düzeyinde çalışma zamanı tehdit tespiti (beklenmeyen kabuk, hassas dosya okuma, şüpheli ağ bağlantısı); ajan sandbox'larında anomali alarmı üretir.",
+      "sinirlar": "Tespit odaklıdır; engelleme için ek araç gerekir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K16-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1311",
+      "ad": "OpenInference",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://arize-ai.github.io/openinference/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenTelemetry üzerine LLM, ajan, araç, retriever span öznitelik kuralları ve çok sayıda çerçeve/SDK için hazır enstrümantasyon paketleri sunar.",
+      "sinirlar": "OpenTelemetry GenAI semantik kurallarıyla paralel ayrı bir sözlüktür; iki şema arasında eşleme gerekebilir.",
+      "ihtiyaclar": [
+        "N-K09-006",
+        "N-K19-001",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1312",
+      "ad": "Laminar",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://laminar.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan koşularını (LLM çağrıları, araçlar, alt ajanlar, token, maliyet) okunur bir döküme çevirir; 'Signals' ile koşuları analiz edip benzer başarısızlıkları kümeler; OTel-yerli, Docker/Helm ile self-host.",
+      "sinirlar": "YC S24 kökenli erken aşama girişim; uzun vadeli sürdürülebilirlik ve kurumsal destek riski.",
+      "ihtiyaclar": [
+        "N-K17-008",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1313",
+      "ad": "Pydantic Logfire",
+      "tur": "ticari-saas",
+      "lisans": "MIT (SDK); platform ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://pydantic.dev/logfire/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenTelemetry tabanlı SDK ile uygulama izlerini ve LLM/ajan (ör. Pydantic AI) çağrılarını aynı iz ağacında toplar; SQL ile sorgulanır.",
+      "sinirlar": "Sunucu tarafı kapalı kaynak SaaS; self-host koşulları satıcıyla netleştirilmeli.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-1314",
+      "ad": "Agenta",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee/ dizinleri ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://agenta.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Prompt oyun alanı, prompt sürümleme ve ortamlara dağıtım, otomatik ve insan değerlendirmesi ile gözlem özelliklerini birleştirir.",
+      "sinirlar": "Küçük şirket; kurumsal özellikler ee lisansında; ürün odağı 'ajan çalışma alanı'na kayıyor.",
+      "ihtiyaclar": [
+        "N-K11-004",
+        "N-K11-009",
+        "N-K19-001",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-1315",
+      "ad": "Datadog LLM Observability",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/llm_observability/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM/ajan zincirlerini APM izleriyle ilişkilendirir; token maliyeti, gecikme, hata ve kalite/güvenlik değerlendirmeleri sunar.",
+      "sinirlar": "Yalnız SaaS; iz hacmine göre maliyet hızla artabilir; Datadog ekosistemine kilitlenme.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1316",
+      "ad": "HoneyHive",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.honeyhive.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenTelemetry-yerli ajan gözlemi; canlı trafikte kalite puanlama, davranış kayması tespiti; kodlama ajanlarını da izleyebilir; SaaS, hibrit ve self-host Kubernetes seçenekleri.",
+      "sinirlar": "Küçük girişim; fiyat ve kurumsal koşullar kamuya açık değil.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K23-007",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1317",
+      "ad": "Galileo (Splunk Agent Observability)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://galileo.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajan değerlendirme ve gözlem platformu; Luna-2 küçük değerlendirme modelleriyle çevrimdışı metrikleri üretimde koruma kuralına dönüştürür.",
+      "sinirlar": "Cisco Mayıs 2026'da satın aldı, Ağustos 2026'da Splunk Agent Observability adını aldı; ürün yol haritası Splunk'a bağlı.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K23-007",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1318",
+      "ad": "OpenTelemetry eBPF Instrumentation (OBI)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod değişikliği olmadan eBPF ile HTTP/gRPC/SQL trafiğinden iz ve RED metrikleri üretir; enstrümante edilemeyen bileşenleri görünür kılar.",
+      "sinirlar": "Linux çekirdeği ve ayrıcalıklı çalışma gerektirir; 2026'da hâlâ 1.0 öncesi.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1319",
+      "ad": "Fluent Bit",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://fluentbit.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hafif log, metrik ve iz toplayıcı/işlemci; filtrelerle alan maskeleme, zenginleştirme ve çok hedefe yönlendirme yapar.",
+      "sinirlar": "Karmaşık dönüşümler için Lua/özel filtre gerekir; kalıcı tampon ayarı yapılmazsa veri kaybı riski.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1320",
+      "ad": "Vector",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://vector.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust ile yazılmış gözlem veri hattı; VRL diliyle log/metrik dönüştürme, hassas alan temizleme ve çok hedefe gönderim sağlar.",
+      "sinirlar": "Datadog'a ait; iz (trace) desteği log/metriğe göre daha sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1321",
+      "ad": "Grafana Alloy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/alloy",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry Collector dağıtımı ile Prometheus bileşenlerini programlanabilir boru hattında birleştirir.",
+      "sinirlar": "Grafana yığınına yönelik; kendi yapılandırma dili öğrenme gerektirir.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1322",
+      "ad": "Jaeger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.jaegertracing.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık iz depolama, sorgulama ve görselleştirme; v2 OpenTelemetry Collector çekirdeğine dayanır.",
+      "sinirlar": "Yalnız iz; LLM'e özgü görünüm (istem/yanıt, maliyet) sunmaz.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1323",
+      "ad": "Grafana Tempo",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/tempo/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nesne deposunda düşük maliyetli, yüksek hacimli iz arka ucu; TraceQL ile sorgu.",
+      "sinirlar": "AGPL lisansı; tam indeks yok, sorgu yetenekleri TraceQL ile sınırlı.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1324",
+      "ad": "Grafana Loki",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/loki",
+      "olgunluk": "olgun",
+      "ne_saglar": "Etiket indeksli log toplama, nesne deposunda saklama ve saklama süresi (retention) politikaları sunar.",
+      "sinirlar": "Tam metin indeksi yok; yüksek kardinaliteli etiketler performans sorunu yaratır; AGPL.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1325",
+      "ad": "Grafana Mimir",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/mimir/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yatay ölçeklenen, çok kiracılı, uzun süreli Prometheus uyumlu metrik deposu; ekip/ART bazında kiracı ayrımı.",
+      "sinirlar": "AGPL; mikroservis mimarisi işletim uzmanlığı ister.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-001",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1326",
+      "ad": "Thanos",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://thanos.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus için yüksek erişilebilirlik, küresel sorgu ve nesne deposunda uzun süreli saklama.",
+      "sinirlar": "Çok bileşenli mimari; sorgu performansı ayar ister.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1327",
+      "ad": "VictoriaMetrics",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (bazı özellikler kurumsal)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://victoriametrics.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus uyumlu yüksek performanslı zaman serisi veritabanı; kümeli sürümde çok kiracılık.",
+      "sinirlar": "Bazı özellikler (ör. downsampling, gelişmiş güvenlik) kurumsal sürümde.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-001",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1328",
+      "ad": "VictoriaLogs ve VictoriaTraces",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.victoriametrics.com/victorialogs/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Terabaytlarca log için LogsQL sorgulu log veritabanı ve aynı yaklaşımla iz deposu (VictoriaTraces).",
+      "sinirlar": "VictoriaTraces yeni ve erken aşamada; ekosistem entegrasyonları sınırlı.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1329",
+      "ad": "Grafana",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (OSS); kurumsal sürüm ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://grafana.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metrik, log, iz ve SQL kaynaklarından panolar ve uyarılar; ekip, ART ve portföy düzeyinde ajan hattı görünürlüğü kurmaya uygun.",
+      "sinirlar": "AGPL; bazı veri kaynağı eklentileri ve raporlama kurumsal sürümde.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-007",
+        "N-K23-006",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-1330",
+      "ad": "Perses",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://perses.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Panoları kod olarak (CUE/Go SDK) tanımlayıp GitOps ile sürümleyen gözlem panosu; Prometheus, Tempo, Loki destekli.",
+      "sinirlar": "CNCF sandbox; eklenti ekosistemi Grafana'dan küçük.",
+      "ihtiyaclar": [
+        "N-K16-005",
+        "N-K19-007"
+      ]
+    },
+    {
+      "id": "AR-1331",
+      "ad": "SigNoz",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee/ dizinleri ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://signoz.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry-yerli APM: iz, metrik ve log tek ClickHouse deposunda; LLM/ajan izleme panoları ve uyarılar.",
+      "sinirlar": "Kurumsal özellikler ticari; ClickHouse işletimi gerekir.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-1332",
+      "ad": "ClickStack (HyperDX)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://clickhouse.com/clickstack",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ClickHouse üzerinde log, iz, metrik ve oturum tekrarını birleştiren gözlem arayüzü (HyperDX) ve OTel toplayıcıdan oluşan yığın.",
+      "sinirlar": "ClickHouse'a bağımlı; uyarı/SLO özellikleri özel APM ürünlerine göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1333",
+      "ad": "Elastic Observability",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 / SSPL / Elastic-2.0 (seçmeli)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.elastic.co/observability",
+      "olgunluk": "olgun",
+      "ne_saglar": "Log, APM, iz, altyapı ve LLM gözlem entegrasyonları; Keep satın alımıyla uyarı korelasyonu ve iş akışı otomasyonu ekleniyor.",
+      "sinirlar": "Lisans yapısı karmaşık; birçok gelişmiş özellik ücretli abonelikte.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1334",
+      "ad": "Uptrace",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://uptrace.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ClickHouse tabanlı OpenTelemetry APM: iz, metrik, log ve uyarılar.",
+      "sinirlar": "Küçük ekip; AGPL.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1335",
+      "ad": "Coroot",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Enterprise ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://coroot.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF ile kod değişikliksiz gözlem, servis haritası, SLO tabanlı uyarı ve kök neden analizi; kaynak/maliyet görünümü.",
+      "sinirlar": "Bazı özellikler (ör. AI destekli RCA) Enterprise sürümde.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K15-005",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K33-002",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-1336",
+      "ad": "Sentry",
+      "tur": "acik-cekirdek",
+      "lisans": "FSL-1.1-Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://sentry.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hata/istisna ve performans izleme, sürüm sağlığı ile hangi sürümün hataları artırdığını gösterir; AI ajan izleme görünümü sunar.",
+      "sinirlar": "FSL OSI onaylı değil (iki yıl sonra Apache-2.0'a dönüşür); self-host kurulumu ağır.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K08-001",
+        "N-K08-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1337",
+      "ad": "OpenObserve",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://openobserve.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust ile yazılmış tek ikili gözlem platformu: log, metrik, iz, RUM; nesne deposunda düşük maliyetli saklama.",
+      "sinirlar": "AGPL; kurumsal özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1338",
+      "ad": "Honeycomb",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.honeycomb.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüksek kardinaliteli olay/iz analitiği ve SLO; OpenTelemetry ile veri alımı.",
+      "sinirlar": "Yalnız SaaS; hacme bağlı maliyet.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K33-002",
+        "N-K33-007",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1350",
+      "ad": "AWS CloudTrail Lake",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "API etkinlik olaylarını değiştirilemez olay veri deposunda saklar, SQL ile sorgular; AWS dışı özel olayların alımını destekler.",
+      "sinirlar": "AWS kapsamına odaklı; saklama süresine bağlı maliyet.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K19-002",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1367",
+      "ad": "TruLens",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.trulens.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Geri bildirim fonksiyonlarıyla LLM/ajan değerlendirmesi ve OTel tabanlı izleme.",
+      "sinirlar": "Snowflake ekosistemine yönelim artıyor.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K19-001",
+        "N-K23-012",
+        "N-K28-006"
+      ]
+    },
+    {
+      "id": "AR-1399",
+      "ad": "BuildBuddy",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (enterprise/ ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://buildbuddy.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bazel için uzak önbellek, uzak yürütme, derleme olay görüntüleyici ve test geçmişi.",
+      "sinirlar": "Uzak yürütme ve kurumsal özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1414",
+      "ad": "NVIDIA DCGM Exporter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/NVIDIA/dcgm-exporter",
+      "olgunluk": "olgun",
+      "ne_saglar": "GPU kullanımı, bellek, sıcaklık ve hata metriklerini Prometheus'a aktarır; model sunucu kapasite planlamasının veri kaynağı.",
+      "sinirlar": "Yalnız NVIDIA GPU'lar.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1422",
+      "ad": "OpenSLO",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.openslo.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SLO, SLI ve hata bütçesi politikalarını YAML ile sağlayıcıdan bağımsız tanımlama şartnamesi.",
+      "sinirlar": "Araçlar arasında destek düzeyi değişken.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-1423",
+      "ad": "Sloth",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://sloth.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Basit SLO tanımından Prometheus kayıt kuralları ve çok pencereli burn-rate uyarıları üretir; OpenSLO girdisini destekler.",
+      "sinirlar": "Prometheus'a özgü; tek bakımcı ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1424",
+      "ad": "Pyrra",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://demo.pyrra.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SLO'ları Kubernetes CRD/yapılandırmayla tanımlayıp Prometheus kuralları ve hata bütçesi panosu üretir.",
+      "sinirlar": "Prometheus'a özgü; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1425",
+      "ad": "Nobl9",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.nobl9.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SLO yönetimi, hata bütçesi uyarıları, bileşik SLO ve yönetici raporları; OpenSLO/Terraform ile SLO-as-code.",
+      "sinirlar": "Ticari SaaS.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-007",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-004",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-1426",
+      "ad": "Prometheus Alertmanager",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uyarı gruplama, tekilleştirme, susturma, engelleme ve yönlendirme.",
+      "sinirlar": "Nöbet planı, eskalasyon ve olay yaşam döngüsü yok.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1427",
+      "ad": "Keep",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee/ dizini ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://keephq.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı izleme araçlarından uyarıları tek yerde toplar, tekilleştirir ve ilişkilendirir; iş akışı-kod ile otomatik müdahale.",
+      "sinirlar": "Şubat 2026'da Elastic satın aldı; açık kalacağı belirtildi ancak yol haritası Elastic'e bağlı.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K16-002",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-1428",
+      "ad": "Rootly",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://rootly.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Slack tabanlı olay yönetimi, nöbet, otomatik iş akışları ve retrospektifler.",
+      "sinirlar": "SaaS.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K08-008",
+        "N-K16-002",
+        "N-K17-010"
+      ]
+    },
+    {
+      "id": "AR-1429",
+      "ad": "FireHydrant",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://firehydrant.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet, runbook otomasyonu, AI destekli olay zenginleştirme ve retrospektifler.",
+      "sinirlar": "SaaS.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-007",
+        "N-K08-008",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-1430",
+      "ad": "Netflix Dispatch",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/Netflix/dispatch",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Olay meta verisi ve kaynaklarını Jira, PagerDuty, Slack ile yöneten olay orkestrasyon çerçevesi.",
+      "sinirlar": "Depo Eylül 2025'te arşivlendi; yeni kurulum için önerilmez.",
+      "ihtiyaclar": [
+        "N-K08-007",
+        "N-K16-002",
+        "N-K16-006"
+      ]
+    },
+    {
+      "id": "AR-1431",
+      "ad": "Uptime Kuma",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://uptime.kuma.pet",
+      "olgunluk": "olgun",
+      "ne_saglar": "Self-host erişilebilirlik izleme (HTTP, TCP, DNS vb.) ve durum sayfaları; model sağlayıcı ve iç servis erişimini izlemeye uygun.",
+      "sinirlar": "Tek düğüm; yüksek erişilebilirlik ve çok kiracılık yok.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-1432",
+      "ad": "LitmusChaos",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://litmuschaos.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes için ChaosHub deneyleri, iş akışı tabanlı kaos senaryoları ve probe'larla kararlı durum doğrulaması.",
+      "sinirlar": "Kubernetes odaklı; kontrol düzlemi kurulumu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-011",
+        "N-K16-004",
+        "N-K16-007",
+        "N-K16-009",
+        "N-K33-007",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-1505",
+      "ad": "Tokscale",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tokscale.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex, Gemini CLI, Cursor gibi kodlama ajanlarının yerel oturum kayıtlarından token kullanımını ve maliyeti terminalde toplayan izleme aracı.",
+      "sinirlar": "Bireysel kullanım odaklı; isteğe bağlı küresel liderlik tablosu veri paylaşımı içerir, kurumsal kullanımda kapatılmalıdır.",
+      "ihtiyaclar": [
+        "N-K20-006",
+        "N-K23-007",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-1601",
+      "ad": "Odigos",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://odigos.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes iş yüklerine eBPF ve OpenTelemetry ile kod değişikliği olmadan dağıtık izleme ekleyen ve telemetriyi seçilen arka uçlara yönlendiren kontrol düzlemi.",
+      "sinirlar": "Kubernetes'e bağlıdır; bazı gelişmiş özellikler ticari sürümdedir.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1602",
+      "ad": "Quickwit",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://quickwit.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nesne depolama üzerinde çalışan, log ve izler için tasarlanmış bulut-yerel arama motoru; Jaeger/OTel uyumlu, saklama politikalarıyla uygun maliyetli uzun süreli kayıt tutar.",
+      "sinirlar": "Datadog satın almasından sonra yol haritası belirsizleşmiştir; analitik sorgu desteği sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K05-026",
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1603",
+      "ad": "Agent Prism",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/evilmartians/agent-prism",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanı izlerini (LLM çağrıları, araç kullanımı, alt adımlar) okunabilir zaman çizelgesi ve ağaç olarak gösteren React bileşenleri; insan incelemesi için rapor yüzeyi kurmayı kolaylaştırır.",
+      "sinirlar": "Yalnız görselleştirme bileşenidir; iz toplama/depolama sağlamaz.",
+      "ihtiyaclar": [
+        "N-K07-005",
+        "N-K17-006",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1604",
+      "ad": "Latitude",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://latitude.so",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanları için açık kaynak gözlemlenebilirlik ve istem mühendisliği platformu: izler, hata kümeleri, değerlendiriciler ve sürümlü istemlerle üretim içi değerlendirme yapar.",
+      "sinirlar": "Bulut sürümüyle özellik farkı olabilir; ajan çerçevesi entegrasyonları SDK'ya bağlıdır.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K11-004",
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1605",
+      "ad": "Robusta",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://home.robusta.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus uyarılarını Kubernetes bağlamıyla (loglar, olaylar, grafikler) zenginleştirip Slack/Teams'e yönlendiren ve otomatik düzeltme 'playbook'ları çalıştıran olay yönetimi aracı.",
+      "sinirlar": "Kubernetes odaklıdır; yapay zekâ destekli özellikler ticari platformdadır.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-1687",
+      "ad": "Pezzo",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/pezzolabs/pezzo",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İstem yönetimi (sürümleme, anında yayın), gözlemlenebilirlik ve maliyet izleme sunan geliştirici öncelikli LLMOps platformu.",
+      "sinirlar": "Etkinlik düşmüştür; gelişmiş değerlendirme özellikleri sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-006",
+        "N-K16-005"
+      ]
+    },
+    {
+      "id": "AR-1694",
+      "ad": "HolmesGPT",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://holmesgpt.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Log, metrik ve iz kaynaklarını (Prometheus, Loki, Tempo, Datadog vb.) ve yapılandırılmış runbook'ları LLM akıl yürütmesiyle birleştirip uyarı ve olaylarda kök neden analizi öneren SRE ajanı; CLI, Slack ve uyarı entegrasyonları var.",
+      "sinirlar": "Önerileri doğrulama ister; telemetri seçilen LLM sağlayıcısına gider; araç izinlerinin salt okunur tutulması kullanıcının sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-002",
+        "N-K16-009",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1695",
+      "ad": "K8sGPT",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://k8sgpt.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes kümesini yerleşik analizörlerle tarayıp hatalı kaynakları tespit eder ve LLM ile açıklama/çözüm önerisi üretir; LLM'e gönderilen nesne adlarını anonimleştirme seçeneği ve operatör modu vardır.",
+      "sinirlar": "Kubernetes'e özgü; analizörlerin kapsamı sınırlı, LLM açıklamaları yanlış olabilir.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1703",
+      "ad": "Kepler",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://sustainable-computing.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes pod/konteyner ve süreç düzeyinde enerji tüketimini donanım sayaçları ve modellerle tahmin edip Prometheus metriği olarak sunar; yerel model sunumunun enerji maliyetini görünür kılar.",
+      "sinirlar": "Sanal makinelerde ve bazı GPU'larda değerler tahmine dayalıdır; doğrudan parasal maliyet vermez.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K20-006",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-1704",
+      "ad": "Inspektor Gadget",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.inspektor-gadget.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF tabanlı 'gadget'larla konteyner, pod ve ana makinede sistem çağrısı, ağ bağlantısı, dosya erişimi ve süreç yürütmesini izleyip kaydeder; ajan yürütme ortamında beklenmeyen çıkış veya dosya erişimini görünür kılar.",
+      "sinirlar": "Linux çekirdeği/eBPF gerektirir; engelleme değil gözlem aracıdır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1705",
+      "ad": "Pixie",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://px.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF ile kod değişikliği gerektirmeden Kubernetes uygulamalarının HTTP/gRPC/SQL isteklerini, gecikmelerini ve CPU profillerini toplar; PxL betikleriyle sorgulanır.",
+      "sinirlar": "Yalnız Linux/Kubernetes; veri saklama süresi kısa (küme belleği), uzun süreli saklama için dışa aktarım gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K08-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1706",
+      "ad": "Fluentd",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.fluentd.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birleşik log katmanı: yüzlerce girdi/çıktı eklentisiyle logları toplar, filtreler (ör. alan maskeleme, kayıt dönüştürme) ve depolara yönlendirir.",
+      "sinirlar": "Ruby tabanlı, yüksek hacimde Fluent Bit'e göre daha fazla kaynak tüketir; maskeleme kuralları elle yazılır.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1728",
+      "ad": "Cilium",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cilium.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "eBPF tabanlı Kubernetes ağı ve güvenliği; DNS adına dayalı (toFQDNs) çıkış izin listeleri, L7 HTTP politikaları ve Hubble ile akış görünürlüğü sağlar; ajan konteynerlerinin yalnız onaylı alan adlarına çıkmasını zorlar.",
+      "sinirlar": "Linux çekirdeği ve Kubernetes gerektirir; FQDN politikaları DNS proxy davranışına bağlıdır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K16-003",
+        "N-K18-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1729",
+      "ad": "Envoy Proxy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.envoyproxy.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüksek performanslı L4/L7 vekil sunucu; dış yetkilendirme (ext_authz), oran sınırlama, çıkış yönlendirme ve iz yayılımı filtreleriyle ajanların model ve araç trafiğini merkezi noktadan denetlemeye temel olur.",
+      "sinirlar": "Doğrudan yapılandırması karmaşık; genellikle Istio, Envoy Gateway gibi kontrol düzlemiyle kullanılır.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-010",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1746",
+      "ad": "OpenTelemetry Weaver",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/open-telemetry/weaver",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Anlamsal kural (semantic conventions) kayıtlarını tanımlar, sürümler ve doğrular; bunlardan dokümantasyon ve kod üretir, canlı telemetriyi kayda karşı denetler. Kurum içi telemetri öznitelik adlarını kanonikleştirmeye uygun.",
+      "sinirlar": "OpenTelemetry kavramlarına aşinalık ister; genel terim sözlüğü değildir.",
+      "ihtiyaclar": [
+        "N-K07-006",
+        "N-K16-005",
+        "N-K19-001",
+        "N-K33-007"
+      ]
+    },
+    {
+      "id": "AR-1748",
+      "ad": "Marquez",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://marquezproject.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenLineage referans uygulaması: iş, koşu ve veri kümesi köken meta verisini toplar, sürümler ve görselleştirir; hangi koşunun hangi girdiden hangi çıktıyı ürettiğini sorgulanabilir kılar.",
+      "sinirlar": "Veri boru hatlarına odaklı; ajan koşuları için OpenLineage olaylarını kendiniz üretmeniz gerekir.",
+      "ihtiyaclar": [
+        "N-K13-011",
+        "N-K19-004",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1752",
+      "ad": "Monocle",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://monocle2ai.github.io/docs/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GenAI ve ajan uygulamalarını (LangChain, LlamaIndex, OpenAI vb.) OpenTelemetry uyumlu izlerle otomatik enstrümante eder; izlere dayalı testler ile ajan davranışını doğrulamaya yardımcı olur.",
+      "sinirlar": "Benzer araçlara göre küçük topluluk; OTel GenAI anlamsal kurallarıyla uyum gelişiyor.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-1783",
+      "ad": "CDEvents",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cdevents.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sürekli teslim olayları (değişiklik, derleme, test, artefakt, dağıtım, olay/incident) için CloudEvents üzerine ortak sözlük ve Go/Java/Python SDK'ları; farklı CI/CD araçlarından DORA ve akış metriklerini tek olay akışından hesaplamaya temel.",
+      "sinirlar": "Araç desteği henüz kısmi (Tekton, Jenkins, Keptn vb.); çoğu entegrasyon elle yazılır.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K19-001",
+        "N-K23-006",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-1803",
+      "ad": "Apache SkyWalking",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://skywalking.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulama performans izleme: dağıtık iz, hizmet topolojisi, metrik, log ve profil; OpenTelemetry ve Zipkin verisini alır, SLO/uyarı kuralları tanımlanır.",
+      "sinirlar": "Kendi depolama/arayüz yığını var; LLM'e özgü semantik izler sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K16-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1873",
+      "ad": "W3C Trace Context",
+      "tur": "protokol-standart",
+      "lisans": "W3C Document License",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.w3.org/TR/trace-context/",
+      "olgunluk": "olgun",
+      "ne_saglar": "traceparent ve tracestate HTTP başlıklarıyla dağıtık iz bağlamının sistemler ve satıcılar arasında yayılmasını tanımlayan W3C Tavsiyesi; orkestratör, ajan, araç ve ürün çağrılarını tek izde birleştirmenin temeli.",
+      "sinirlar": "Yalnız bağlam yayılımı; iz verisinin toplanması/saklanması ayrı araç işidir.",
+      "ihtiyaclar": [
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1934",
+      "ad": "TestGrid",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/GoogleCloudPlatform/testgrid",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Test sonuçlarını iş/test × koşu ızgarasında gösteren yapılandırılabilir pano; kararsız (flaky), sürekli kırmızı ve yeni kırılan testleri zaman içinde ayırt eder, uyarı ve özet üretir. Kubernetes projesinin CI sağlığı bu araçla izlenir.",
+      "sinirlar": "Açık kaynaklaştırma kısmen tamamlanmış; kurulum belgeleri sınırlı, Prow/GCS düzenine yakın.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K05-013",
+        "N-K16-001"
+      ]
+    },
+    {
+      "id": "AR-1950",
+      "ad": "Kuberhealthy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kuberhealthy.github.io/kuberhealthy/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te pod olarak çalışan sentetik kontroller (ör. model uç noktası yanıtı, ajan akışının uçtan uca çalışması) tanımlayıp sonuçları Prometheus metriği olarak sunan operatör; hattın hizmet seviyesi göstergelerine girdi.",
+      "sinirlar": "Kontrollerin yazılması kullanıcıya kalır; Kubernetes'e özgü.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K16-001",
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "AR-1973",
+      "ad": "Amazon CloudWatch Application Signals ve GenAI Observability",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Monitoring-Sections.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry tabanlı otomatik enstrümantasyonla uygulama SLO'ları, hizmet haritası ve dağıtık iz; AgentCore/Bedrock ajanları için oturum, iz ve token metriklerini gösteren GenAI gözlemlenebilirlik panosu.",
+      "sinirlar": "AWS dışı iş yüklerinde tam değer için ek toplayıcı gerekir; yüksek hacimli izlerde maliyet artar.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K23-012",
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1987",
+      "ad": "AWS Distro for OpenTelemetry (ADOT)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://aws-otel.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry Collector ve SDK'larının AWS destekli dağıtımı; iz/metrik/logları CloudWatch, X-Ray, Prometheus ve üçüncü taraf arka uçlara gönderir.",
+      "sinirlar": "Upstream OTel'in alt kümesi; AWS dışı destek sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-1998",
+      "ad": "Azure Monitor Application Insights",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry tabanlı APM: dağıtık iz, bağımlılık haritası, kullanılabilirlik testleri; Microsoft Foundry ajan izleri ve değerlendirme sonuçları da burada toplanır.",
+      "sinirlar": "Veri alımı (GB) bazlı maliyet; örnekleme ayarı yanlışsa iz kaybı.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2017",
+      "ad": "Microsoft Sentinel",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-sentinel",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut yerel SIEM/SOAR: GitHub, Azure DevOps, Entra ve bulut denetim kayıtlarını toplayıp korelasyon, analitik kural ve otomatik yanıt (playbook) çalıştırır; uzun süreli veri gölü saklama.",
+      "sinirlar": "Değiştirilemezlik garantisi için ayrı WORM depolama gerekir; veri alımı maliyeti yüksek.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K19-002",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-2032",
+      "ad": "Google Cloud Trace",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/trace",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry uyumlu dağıtık iz toplama ve gecikme analizi; Gemini Enterprise Agent Platform ajan izleri de burada görüntülenir.",
+      "sinirlar": "Google Cloud dışı kaynaklar için toplayıcı yapılandırması gerekir.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2039",
+      "ad": "Gemini Cloud Assist",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/products/gemini/cloud-assist",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Google Cloud ortamında sorun giderme (investigations), maliyet optimizasyonu önerileri ve mimari tasarım yardımı sunan yapay zekâ işletim asistanı.",
+      "sinirlar": "Yalnız Google Cloud kaynakları; öneriler insan onayı gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-002",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2053",
+      "ad": "IBM Instana",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/instana",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomatik keşif ve 1 saniye çözünürlüklü APM; OpenTelemetry/OpenLLMetry ile LLM ve ajan çağrılarını (token, gecikme, maliyet) izler.",
+      "sinirlar": "Kurum içi kurulum işletim yükü getirir; lisans ana bilgisayar bazlı.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2054",
+      "ad": "IBM Concert",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/concert",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulama topolojisi, SBOM, zafiyet, sertifika ve uyum verisini birleştirip yapay zekâ ile önceliklendirilmiş risk ve dayanıklılık içgörüleri ile düzeltme önerileri sunar.",
+      "sinirlar": "Yeni ürün; değer, beslenen verinin kapsamına bağlı.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K18-009",
+        "N-K21-005"
+      ]
+    },
+    {
+      "id": "AR-2083",
+      "ad": "ServiceNow IT Service Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.servicenow.com/products/itsm.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay, problem, değişiklik ve talep yönetimi; SLA bazlı bekleme süresi ve eskalasyon, onay iş akışları ve hat olayları için işletim dokümanı (knowledge) yönetimi.",
+      "sinirlar": "Lisans maliyeti yüksek; geliştirici iş takibiyle çift kayıt riski.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K16-002",
+        "N-K17-003",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2106",
+      "ad": "Splunk Observability Cloud",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.splunk.com/en_us/products/observability-cloud.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry yerel APM, altyapı izleme, RUM ve sentetik izleme; yapay zekâ ajan/LLM uygulaması izleme ve SLO tabanlı uyarılar.",
+      "sinirlar": "Veri hacmine bağlı maliyet; kurum içi sürümü yok (Splunk Enterprise ayrı).",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2107",
+      "ad": "Splunk AppDynamics",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.splunk.com/en_us/products/splunk-appdynamics.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş işlemleri (business transactions) odaklı APM; sürüm karşılaştırması ve temel çizgiden sapma tespitiyle değişikliklerin üretim etkisini ölçer; kurum içi kurulum seçeneği.",
+      "sinirlar": "Ajan tabanlı enstrümantasyon ağır; lisans maliyeti yüksek.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K08-005",
+        "N-K16-001"
+      ]
+    },
+    {
+      "id": "AR-2111",
+      "ad": "Chronosphere",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://chronosphere.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus/OpenTelemetry uyumlu ölçeklenebilir gözlemlenebilirlik; telemetri boru hattında veri azaltma/biçimlendirme ile gözlemlenebilirlik maliyet kontrolü.",
+      "sinirlar": "Ocak 2026'da Palo Alto'ya geçti; ürün yol haritası değişebilir.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2113",
+      "ad": "Datadog APM",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/apm/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık iz, hizmet haritası, dağıtım takibi (sürüm bazlı hata/gecikme karşılaştırması) ve sürekli profil çıkarma; LLM Observability ile aynı izde birleşir.",
+      "sinirlar": "Hacim ve ana bilgisayar bazlı maliyet hızla artabilir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K08-005",
+        "N-K16-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2115",
+      "ad": "Datadog Bits Investigation (eski Bits AI SRE)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/ai/bits-investigation/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uyarı geldiğinde metrik, log, iz ve değişiklikleri paralel inceleyen SRE ajanı; kök neden hipotezlerini kanıtla sunar ve düzeltme önerir.",
+      "sinirlar": "Önerilerin doğruluğu telemetri kapsamına bağlı; soruşturma başına ücret.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-002",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2124",
+      "ad": "Dynatrace AI Observability",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.dynatrace.com/solutions/ai-observability/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM ve ajan uygulamaları için OpenTelemetry/OpenLLMetry tabanlı uçtan uca iz, token/maliyet, gecikme, hata ve model davranış değişimi izleme; altyapı ve uygulama verisiyle ilişkilendirme.",
+      "sinirlar": "Lisans tüketim modeli karmaşık; Managed sürümü kurum içi seçenektir.",
+      "ihtiyaclar": [
+        "N-K09-013",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-2129",
+      "ad": "New Relic AI Observability (AI Monitoring)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://newrelic.com/platform/ai-observability",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM ve ajan çağrılarını APM ile ilişkilendirir: istem/yanıt izleri, token ve maliyet, model karşılaştırma, geri bildirim ve hassas veri hariç tutma ayarları.",
+      "sinirlar": "Veri alımı bazlı maliyet; istem içeriğinin kaydı gizlilik riski taşır.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K23-007",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2130",
+      "ad": "New Relic Change Tracking",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.newrelic.com/docs/change-tracking/overview/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtım, yapılandırma ve özellik bayrağı değişikliklerini işaretleyip önce/sonra hata oranı, gecikme ve iş metriklerini karşılaştırır; ajan kaynaklı değişikliklerin üretim etkisi izlenebilir.",
+      "sinirlar": "Değişiklik olaylarının CI/CD'den gönderilmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-010",
+        "N-K08-005",
+        "N-K16-002",
+        "N-K33-016"
+      ]
+    },
+    {
+      "id": "AR-2147",
+      "ad": "BugSnag",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.bugsnag.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web/mobil/arka uç hata ve kararlılık izleme: sürüm bazlı kararlılık skoru, hataların gruplanması (aynı hatadan kopya kayıt engeli) ve iş takip sistemine bağlama.",
+      "sinirlar": "APM derinliği sınırlı; kurum içi sürüm ek lisans.",
+      "ihtiyaclar": [
+        "N-K08-001",
+        "N-K08-004",
+        "N-K08-005",
+        "N-K16-001"
+      ]
+    },
+    {
+      "id": "AR-2193",
+      "ad": "Sumo Logic",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.sumologic.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut yerel log analitiği, SIEM ve gözlemlenebilirlik; denetim kayıtlarının uzun süre saklanması, sorgu tabanlı uyarılar ve olay soruşturması.",
+      "sinirlar": "Veri alım bazlı maliyet; değiştirilemez arşiv ayrıca yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K19-002",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-2211",
+      "ad": "Databricks Unity Gateway (eski Mosaic AI Gateway)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.databricks.com/aws/en/ai-gateway/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Databricks ve harici (OpenAI, Anthropic vb.) modellere birleşik erişim: hız sınırı, kullanım takibi (sistem tabloları), içerik/güvenlik politikaları, trafik bölme ve yedek model, istek/yanıt günlüğü (inference tables).",
+      "sinirlar": "Databricks platformuna bağlı; ajan-dışı teslim hattı istemcileri için ek entegrasyon.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K09-004",
+        "N-K18-010",
+        "N-K19-001",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-2270",
+      "ad": "Seldon Core 2",
+      "tur": "ticari-yazilim",
+      "lisans": "BSL-1.1",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/SeldonIO/seldon-core",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes üzerinde model ve LLM sunumu, çok modelli sunum, deney/kademeli trafik bölme, boru hatları ve izleme bileşenleri sunan MLOps altyapısı.",
+      "sinirlar": "BSL-1.1 lisansı üretim kullanımında ücretli lisans gerektirir; son commit Mart 2026.",
+      "ihtiyaclar": [
+        "N-K09-010",
+        "N-K09-011",
+        "N-K09-012",
+        "N-K16-005"
+      ]
+    },
+    {
+      "id": "AR-2297",
+      "ad": "Wazuh",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://wazuh.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak SIEM/XDR: uç nokta ajanları, log analizi, dosya bütünlüğü izleme, zafiyet tespiti ve uyum (PCI DSS, GDPR) raporları; ajan çalıştıran geliştirici makinelerini de izleyebilir.",
+      "sinirlar": "Ölçeklendirme ve kural ayarı uzmanlık ister; LLM izlerini anlamlandırmaz.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K18-013",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2303",
+      "ad": "Logsign Unified SecOps",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.logsign.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "SIEM, UEBA, tehdit istihbaratı ve otomatik tehdit tespit/müdahale (TDIR) sunan birleşik güvenlik operasyonları platformu; 400'ü aşkın log kaynağı entegrasyonu.",
+      "sinirlar": "Ürün sayfası kurulum modelini açıkça belirtmiyor; LLM/ajan izlerine özgü analiz sunmaz.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2325",
+      "ad": "Graylog",
+      "tur": "acik-cekirdek",
+      "lisans": "SSPL (Open) / ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://graylog.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Merkezi log toplama, işleme hattı kuralları (maskeleme/zenginleştirme), arama, uyarı ve arşivleme sunan log yönetimi platformu.",
+      "sinirlar": "SSPL açık kaynak tanımına uymaz; güvenlik analitiği ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K18-011",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2326",
+      "ad": "Checkmk",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-2.0 (Raw/Community) / ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://checkmk.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Altyapı ve uygulama izleme; binlerce hazır denetim eklentisi, otomatik keşif, hizmet seviyesi raporlama ve uyarı.",
+      "sinirlar": "LLM/ajan izi gibi uygulama düzeyi gözlemlenebilirlik için değil, altyapı izleme odaklı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2327",
+      "ad": "Zabbix",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.zabbix.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sunucu, ağ, GPU ve uygulama metriklerini toplayan; tetikleyici/eskalasyon kuralları ve SLA raporları sunan kurumsal izleme sistemi.",
+      "sinirlar": "Dağıtık iz ve LLM gözlemlenebilirliği sağlamaz; yapılandırma karmaşıklaşabilir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K16-001",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2349",
+      "ad": "trail",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.trail-ml.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ varlık kaydı, politika ve yapay zekâ okuryazarlığı programları, risk yönetimi ve otomatik uyum belgelendirmesi sunan yönetişim platformu; değişiklik öncesi insan onayı isteyen 'copy-on-write' ajanları içerir.",
+      "sinirlar": "Genç ürün; kurum süreçlerine uyarlama gerektirir. Küçük veri seti ve 2025 ortasından beri güncelleme yok.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K05-016",
+        "N-K10-003",
+        "N-K21-007",
+        "N-K22-006",
+        "N-K22-010",
+        "N-K25-005"
+      ]
+    },
+    {
+      "id": "AR-2373",
+      "ad": "Coze Loop",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/coze-dev/coze-loop",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan/istem yaşam döngüsü platformu: istem sürüm yönetimi ve karşılaştırmalı playground, değerlendirme seti-değerlendirici-deney yönetimi ve SDK ile iz (trace) toplama/izleme sağlar.",
+      "sinirlar": "Açık sürüm ticari Coze Loop'un çekirdek modülleriyle sınırlı; Coze ekosistemi dışındaki ajanlar için entegrasyon SDK üzerinden elle yapılmalı.",
+      "ihtiyaclar": [
+        "N-K09-013",
+        "N-K11-001",
+        "N-K11-004",
+        "N-K11-009",
+        "N-K19-001",
+        "N-K23-001",
+        "N-K23-004",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-2489",
+      "ad": "Apache HertzBeat",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://hertzbeat.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajan kurulumu gerektirmeyen (agentless), şablonla genişletilebilir gerçek zamanlı izleme; metrik ve log toplama, merkezî uyarı dağıtımı ve durum sayfası.",
+      "sinirlar": "Derin dağıtık iz yok; büyük ölçekte zaman serisi deposu ayrıca planlanmalı.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K16-001",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2490",
+      "ad": "Nightingale (夜莺)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://n9e.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus/VictoriaMetrics/Loki gibi kaynaklar üzerinde uyarı kuralı yönetimi, olay birleştirme, susturma, bildirim ve pano sağlayan izleme-uyarı platformu; Categraf toplayıcısıyla gelir.",
+      "sinirlar": "Kendi başına veri deposu değildir; olay/nöbet yönetimi kurumsal sürümde daha kapsamlı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2491",
+      "ad": "DeepFlow",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://deepflow.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "eBPF ile kod değişikliği gerektirmeden dağıtık iz, ağ akışı metrikleri ve sürekli profil çıkarma; kapalı kutu (ör. ajan araç süreçleri) davranışını görünür kılar.",
+      "sinirlar": "Linux çekirdek/eBPF gereksinimleri; ClickHouse depolaması işletilmeli, bazı özellikler kurumsal sürümde.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021",
+        "N-K08-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2492",
+      "ad": "LoongCollector (eski iLogtail)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/alibaba/loongcollector",
+      "olgunluk": "olgun",
+      "ne_saglar": "Log, metrik ve iz toplayan hafif gözlemlenebilirlik veri toplayıcısı; işleme eklentileriyle alan ayrıştırma ve hassas veri maskeleme (desensitize) yapılabilir.",
+      "sinirlar": "Varsayılan hedefler Alibaba SLS odaklı; diğer arka uçlar için yapılandırma gerekir.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2493",
+      "ad": "Pinpoint",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://pinpoint-apm.gitbook.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Büyük dağıtık sistemler için bayt kodu enstrümantasyonlu APM: servis haritası, çağrı yığını düzeyinde iz, gerçek zamanlı aktif iş parçacığı izleme (Java, PHP, Python).",
+      "sinirlar": "Java ağırlıklı; HBase/Pinot depolama işletim yükü.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K08-005",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2494",
+      "ad": "GreptimeDB",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://greptime.com/product/db",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Metrik, log ve izleri tek sütunlu motorda saklayan gözlemlenebilirlik veritabanı; SQL ve PromQL sorgusu, nesne depolamada ucuz saklama.",
+      "sinirlar": "Görece yeni; bazı kurumsal özellikler bulut/ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-2495",
+      "ad": "Arthas",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://arthas.aliyun.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çalışan Java uygulamalarında yeniden başlatmadan metot izleme, çağrı süresi, sınıf/iş parçacığı teşhisi ve alev grafiği üreten çevrimiçi tanılama aracı.",
+      "sinirlar": "Üretimde güçlü yetki gerektirir; ajan kullanımına açılırsa sıkı erişim kontrolü şart.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K08-005",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2496",
+      "ad": "Mackerel",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://mackerel.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sunucu/servis izleme SaaS'ı: rol tabanlı ana makine gruplama, metrik ve dış izleme, uyarı ve OpenTelemetry uyumlu APM.",
+      "sinirlar": "Japonya pazarı odaklı; LLM/ajan izi için özel özellik yok.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2497",
+      "ad": "Last9",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://last9.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yüksek kardinaliteli metrik, log ve izleri OpenTelemetry ile toplayan telemetri platformu; kardinalite ve maliyet kontrolü için akış kuralları sunar.",
+      "sinirlar": "Kapalı SaaS; LLM'e özgü değerlendirme yok.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2498",
+      "ad": "Xurrent IMR (eski Zenduty)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://zenduty.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay yönetimi ve müdahale orkestrasyonu: nöbet çizelgesi, eskalasyon politikaları, olay iş akışları ve runbook otomasyonu.",
+      "sinirlar": "Satın alma sonrası ürün yol haritası Xurrent ITSM ile birleşiyor; kapalı SaaS.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-003",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-2552",
+      "ad": "WeTest",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.wetest.net",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mobil, PC ve konsol oyun/uygulama test platformu: bulut gerçek cihazlar, uyumluluk ve başarım testi (PerfDog), güvenlik ve yerelleştirme test hizmetleri.",
+      "sinirlar": "Oyun odaklı; kapalı SaaS.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-018",
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "AR-2609",
+      "ad": "Synoptic / CSight",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ModelInference/synoptic",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Sistem loglarından zamansal değişmezleri madenleyip sonlu durum makinesi modeli çıkarır (CSight dağıtık sistemler için); gözlenen davranışın modelini oracle olarak kullanmaya olanak verir.",
+      "sinirlar": "2022'den beri güncellenmiyor; log biçimini düzenli ifadeyle tanımlamak gerekir.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-2675",
+      "ad": "Inspect Scout",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/meridianlabs-ai/inspect_scout",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan transkriptlerini LLM veya kural tabanlı tarayıcılarla (scanner) toplu analiz edip hile, ortam hatası, talimat ihlali gibi örüntüleri bulan araç; Inspect logları ve diğer kaynaklarla çalışır.",
+      "sinirlar": "Genç proje; tarayıcı kalitesi LLM'e bağlı ve doğrulama örneklemi gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K08-006",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-2676",
+      "ad": "Docent",
+      "tur": "platform",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/TransluceAI/docent",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan yörüngelerini yükleyip doğal dil sorgularıyla arama, kümeleme ve kural tabanlı rubrik değerlendirmesi yapan ajan davranış analiz platformu; kendi sunucunuzda barındırılabilir.",
+      "sinirlar": "Kâr amacı gütmeyen araştırma kuruluşunun genç ürünü; kurumsal yetkilendirme özellikleri sınırlı olabilir.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K08-006",
+        "N-K23-011"
+      ]
+    },
+    {
+      "id": "AR-2679",
+      "ad": "AgentStepper",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sola-st/AgentStepper",
+      "olgunluk": "erken",
+      "ne_saglar": "Yazılım geliştirme ajanlarının yörüngelerini LLM, ajan programı ve araçlar arasındaki yapılandırılmış konuşma olarak kaydedip hata ayıklayıcı gibi adım adım ilerletme, durdurma ve inceleme imkânı veren etkileşimli araç.",
+      "sinirlar": "Lisans tezi prototipi; entegrasyon ajan başına uyarlama gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K07-005",
+        "N-K17-008"
+      ]
+    },
+    {
+      "id": "AR-2730",
+      "ad": "Loghub",
+      "tur": "acik-kaynak",
+      "lisans": "Özel araştırma lisansı (yalnız araştırma/akademik kullanım)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/logpai/loghub",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık sistem, süper bilgisayar, işletim sistemi ve uygulama loglarından oluşan büyük log veri seti koleksiyonu; log ayrıştırma ve anomali tespiti yöntemlerini değerlendirmeye yarar.",
+      "sinirlar": "Yalnız araştırma kullanımına izin veren lisans; ticari kullanım için uygun değil.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2731",
+      "ad": "Drain3",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/logpai/Drain3",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Drain algoritmasına dayalı akış halinde log şablonu madenciliği; CI/test loglarını şablonlara kümeleyerek başarısızlık türlerini sınıflamaya ve maskeleme kurallarıyla parametre ayıklamaya yarar.",
+      "sinirlar": "2025 başından beri güncellenmiyor; şablon kalitesi ayar parametrelerine duyarlı.",
+      "ihtiyaclar": [
+        "N-K05-003",
+        "N-K16-002",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2763",
+      "ad": "PM4Py",
+      "tur": "kutuphane",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/process-intelligence-solutions/pm4py",
+      "olgunluk": "olgun",
+      "ne_saglar": "XES ve OCEL olay loglarından süreç keşfi, uygunluk denetimi ve performans analizi (bekleme/hizmet süreleri, darboğazlar) yapan Python kütüphanesi; ajan hattı olaylarından aktif süre ile insan beklemesini ayırmaya yarar.",
+      "sinirlar": "AGPL-3.0 lisansı ticari dağıtımda yükümlülük doğurur; olay logu modellemesi gerektirir.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K17-005",
+        "N-K20-002",
+        "N-K20-004",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-2764",
+      "ad": "bupaR",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/bupaverse/bupaR",
+      "olgunluk": "olgun",
+      "ne_saglar": "R için iş süreci analizi paket ailesi: olay logu işleme, süreç haritası, performans ve darboğaz analizi, animasyonlu süreç görselleştirme.",
+      "sinirlar": "R ekosistemi; büyük loglarda başarım sınırlı.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K20-004",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-2766",
+      "ad": "OCEL 2.0 (Object-Centric Event Log standardı)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ocel-standard.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bir olayın birden çok nesneye (iş kalemi, PR, ajan koşusu, onay) bağlanabildiği nesne merkezli olay logu değişim standardı; JSON, XML ve SQLite biçimleri tanımlar.",
+      "sinirlar": "Standart; kayıt üretimi ve iz dönüştürme kurum tarafından uygulanmalı.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K20-004",
+        "N-K26-001"
+      ]
+    },
+    {
+      "id": "AR-2811",
+      "ad": "Observal",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://observal.io/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanı eklentileri (ajan, skill, MCP) için self-host onaylı kayıt: gönderimleri inceleme/onaylama, sürüm farkları, her harness için yapılandırma üretimi ve telemetri kancalarıyla oturum izlerini toplama.",
+      "sinirlar": "Mart 2026'da çıktı; kayıt ve telemetri tek serviste birleşik, kurumsal SSO/yetki olgunluğu doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K11-010",
+        "N-K12-002",
+        "N-K16-006",
+        "N-K19-001",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-2827",
+      "ad": "Warren",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/jayminwest/warren",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan harness'lerini izole ve gözlemlenebilir iş yükleri olarak çalıştırır; çalışma alanı, koşu yaşam döngüsü, harcama limitleri, canlı olaylar, müdahale, kurtarma ve Git teslimini yönetir.",
+      "sinirlar": "Tek geliştiricili, Mayıs 2026'da başlamış proje.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K17-008",
+        "N-K20-003",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-2828",
+      "ad": "Mission Control (Builderz Labs)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://mc.builderz.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları işletmek için self-host kontrol paneli: görev gönderme, koşuları ve hataları inceleme, harcama izleme; OpenClaw, Claude Code, Codex gibi çalışma zamanlarıyla çalışır.",
+      "sinirlar": "Proje kendini alfa olarak tanımlar; SQLite tabanlı tek düğüm.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K19-007",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2847",
+      "ad": "Jarvis Registry",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://jarvisregistry.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kimlik, erişim denetimi ve gözlemlenebilirlik içeren kurumsal MCP ve A2A ajan geçidi ile iş akışı orkestrasyon platformu; ajanlara iç araç ve verilere yönetilen erişim verir.",
+      "sinirlar": "Tek şirket tarafından geliştiriliyor; bağımsız güvenlik değerlendirmesi yok.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-002",
+        "N-K18-003",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-2864",
+      "ad": "Tracely",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://tracely-ai.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Her ajan izini geldiği anda puanlar, hataları kümelere ayırır, kötü koşuları tekrar oynatılabilir vakalara dondurur ve bunları yeniden gönderecek PR'ı engeller (üretim hatası → regresyon testi → CI kapısı).",
+      "sinirlar": "Self-host yığını ağır (Postgres, ClickHouse, Redis, MinIO); tek geliştiricili.",
+      "ihtiyaclar": [
+        "N-K08-002",
+        "N-K23-010",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2865",
+      "ad": "agentevals",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://aevals.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenTelemetry izlerinden, LLM çağrılarını yeniden çalıştırmadan ajan davranışını puanlayan çerçeve; altın değerlendirme setleriyle deterministik geçti/kaldı kapısı ve özel değerlendiriciler.",
+      "sinirlar": "OTel enstrümantasyonu önkoşul; genç proje.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K23-003",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2866",
+      "ad": "Raindrop Workshop",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.raindrop.ai/workshop/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın her token, araç çağrısı ve kararını yerelde izleyen hata ayıklayıcı; kodlama ajanına izleri okuma, kod tabanına karşı eval yazma ve kırılanı düzeltme yeteneği verir.",
+      "sinirlar": "Yerel geliştirici aracı; üretim izleme ticari Raindrop ürününe yönlendirilir.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K19-001",
+        "N-K23-001"
+      ]
+    },
+    {
+      "id": "AR-2871",
+      "ad": "Future AGI",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (çekirdek)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://futureagi.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Simülasyon, değerlendirme, izleme, guardrail, ağ geçidi ve optimizasyonu tek geri besleme döngüsünde birleştiren ajan platformu; OpenTelemetry yerel, Go tabanlı ağ geçidi.",
+      "sinirlar": "Kapsam geniş, bileşen olgunlukları farklı; yönetilen bulut sürümü ayrıdır.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K18-006",
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2896",
+      "ad": "ADR - Agentic AI Detection and Response (Uber)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/uber/ADR",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışan cihazlarındaki Cursor, Claude Code, Codex, Copilot gibi ajanlar için gölge AI keşfi (kurulu ajan, eklenti, yerel model, MCP envanteri), etkinlik gözlemi, savunma değerlendirmesi, tehdit tespiti ve önleme; Uber'de üretimde, MLSys 2026 makalesiyle.",
+      "sinirlar": "Uç nokta ajanı dağıtımı ve güvenlik operasyon ekibi gerektirir; Nisan 2026'da açıldı.",
+      "ihtiyaclar": [
+        "N-K18-012",
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2898",
+      "ad": "Leash (StrongDM)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://leash.strongdm.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanlarını konteynere sarıp etkinliklerini izler ve Cedar dilinde yazılmış politikaları anında uygular.",
+      "sinirlar": "Docker/Podman/OrbStack gerektirir; son etkinlik Nisan 2026.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2904",
+      "ad": "Prismor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://prismor.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code, Codex, LangChain gibi ajanlar için self-host çalışma zamanı kontrol düzlemi; riskli araç çağrılarını gözlemleme, insan onayına bağlama veya engelleme, yerel panel.",
+      "sinirlar": "Genç proje; politika kapsamı kullanıcı tanımına bağlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-001",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-2932",
+      "ad": "Greywall",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://greywall.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Linux ve macOS'ta konteynersiz, reddi varsayılan dosya/ağ/sistem çağrısı sandbox'ı; öğrenme modu en az yetki profili üretir, tüm ağ trafiği greyproxy panelinden canlı izlenir.",
+      "sinirlar": "Genç proje; platform desteği farklılık gösterir.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K15-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-2950",
+      "ad": "CodeBurn",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://codeburn.app/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex, Cursor dahil 37 araç ve ajanın yerelde yazdığı oturum dosyalarını okuyup her token'ı fiyatlandırarak maliyeti proje, model ve görev bazında ve israf edilen kısmıyla gösterir; hesap gerektirmez.",
+      "sinirlar": "Oturum dosyalarına dayalı tahmindir; kurumsal toplama ve ekip/ART atfı için ek katman gerekir.",
+      "ihtiyaclar": [
+        "N-K20-006",
+        "N-K20-007",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-2951",
+      "ad": "Failproof AI",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://befailproof.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "12 ajan harness'ine (Claude Code, Codex vb.) kancalanarak her koşuyu kaydeder ve 39 yerleşik politikayla tehlikeli araç çağrılarını çalışmadan engeller; tek politika API'si ve ortak oturum geçmişi, yerel çalışır.",
+      "sinirlar": "Engelleme yeteneği harness'e göre değişir (tur sonu kapıları 12'nin 8'inde).",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-007",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2952",
+      "ad": "agentacct",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://trytofu.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanlarının projeler arası etkinliğini, araç çağrılarını, kayıtlı adımlarını, kontrollerini, token ve tahmini maliyetini kaydeder; her görev için okunabilir bir 'iş makbuzu' üretir.",
+      "sinirlar": "Temmuz 2026'da çıktı; tek makine odaklı.",
+      "ihtiyaclar": [
+        "N-K07-005",
+        "N-K20-004",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-2954",
+      "ad": "Agents Observe",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/simple10/agents-observe",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code ve Codex ajanları için gerçek zamanlı gözlem paneli; çoklu ajan oturumlarında filtreleme, arama, görselleştirme, tam tekrar oynatma ve token/maliyet dökümü.",
+      "sinirlar": "Yerel geliştirici paneli; kurumsal saklama ve erişim denetimi yok.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2955",
+      "ad": "ClawMetry",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://clawmetry.com",
+      "olgunluk": "erken",
+      "ne_saglar": "32 ajan çalışma zamanının oturum dosyalarından zaman çizelgesi, araç çağrıları ve token/maliyet verisini tek görünümde birleştirir; ilerleyen uzun koşuyu takılandan ayırmaya yardım eder.",
+      "sinirlar": "Maliyet verisi çalışma zamanının sunduğu kadarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2956",
+      "ad": "Traccia",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://traccia.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenTelemetry tabanlı Python SDK: dağıtık iz, token ve maliyet takibi, değerlendirme, yönetişim kanıtı ve çalışma zamanı politika uygulaması (OpenAI Agents, LangGraph, CrewAI).",
+      "sinirlar": "Yalnız Python; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2957",
+      "ad": "PandaProbe",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://pandaprobe.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları ekip halinde izleme, değerlendirme, gözleme ve hata ayıklama için açık kaynak ajan mühendisliği platformu; self-host veya bulut.",
+      "sinirlar": "Genç proje; mevcut izleme platformlarına göre ekosistem küçük.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-2958",
+      "ad": "TMA1",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tma1.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "GreptimeDB ile desteklenen, her LLM çağrısını kaydedip ajanın kendi döngüsüne geri okuyabildiği yerel öncelikli gözlemlenebilirlik.",
+      "sinirlar": "Alfa sürümler; tek düğüm.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2959",
+      "ad": "Pup (Datadog CLI)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/DataDog/pup",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların Datadog metrik, log, monitör, RUM ve güvenlik verilerine OAuth2+PKCE ile kapsamlı erişip yapılandırılmış JSON/YAML çıktı aldığı, 33+ ürün alanını kapsayan CLI.",
+      "sinirlar": "Datadog aboneliği gerektirir.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K12-003",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2960",
+      "ad": "OpenSRE",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://opensre.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Log, metrik, iz, son dağıtımlar ve yapılandırmayı ilişkilendirerek üretim olaylarını kanıta dayalı teşhis eden AI SRE ajanları kurmak için açık kaynak çerçeve.",
+      "sinirlar": "Public alpha; etkileşimli kabuk için hesap gerekiyor.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3016",
+      "ad": "AWS DevOps Agent",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/devops-agent/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Olayları araştıran, çözüm süresini kısaltan ve sorunları önlemeye yönelik öneriler üreten otonom bulut operasyon ajanı; 31 Mart 2026'da GA oldu.",
+      "sinirlar": "AWS ağırlıklı telemetriyle en iyi çalışır; iddia edilen MTTR iyileşmeleri üretici verisi.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3017",
+      "ad": "Microsoft Agent 365",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.microsoft.com/en-us/microsoft-agent-365",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumdaki AI ajanlarını keşfetme, gözlemleme, güvenceye alma ve yönetme için kontrol düzlemi; kimlik, güvenlik ve uyum ekiplerinin mevcut Microsoft araçlarıyla ajanları kullanıcılar gibi yönetmesini sağlar; önizlemede AWS Bedrock ve Google ajanlarını envantere alır. 1 Mayıs 2026'da GA.",
+      "sinirlar": "Microsoft 365 E7 veya kullanıcı başına ücretli lisans; Microsoft ekosistemine bağlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-003",
+        "N-K19-007",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-3024",
+      "ad": "ServiceNow AI Control Tower",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.servicenow.com/products/ai-control-tower.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ServiceNow ve üçüncü taraf AI ajanlarını, modellerini ve iş akışlarını keşfetme, gözlem, yönetişim, güvenlik ve değer ölçümü için merkezi komuta merkezi; Mayıs 2026 genişlemesiyle 30 dış sistemi tarama ve Traceloop satın alımıyla çalışma zamanı gözlemi eklendi.",
+      "sinirlar": "İlk sürüm Mayıs 2025; ServiceNow platform lisansı gerekir.",
+      "ihtiyaclar": [
+        "N-K19-007",
+        "N-K21-005",
+        "N-K22-010",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-3058",
+      "ad": "Chrome DevTools MCP",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kodlama ajanlarına gerçek Chrome üzerinde performans izi kaydı/analizi, ağ ve konsol inceleme, ekran görüntüsü ve kullanıcı etkileşimi yaptıran MCP sunucusu.",
+      "sinirlar": "Tarayıcıdaki tüm içeriği ajana açar; istem enjeksiyonu ve oturum çerezleri açısından izole profil kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K04-010",
+        "N-K05-018",
+        "N-K05-021",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-3070",
+      "ad": "Postgres MCP Pro",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/crystaldba/postgres-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL için yapılandırılabilir okuma/yazma erişimi, sorgu planı açıklama, indeks ayarlama önerisi ve veritabanı sağlık kontrolleri sunan MCP sunucusu.",
+      "sinirlar": "Küçük ekip ürünü; kısıtlı kip kullanılmadıkça ajan DDL/DML çalıştırabilir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K06-009",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3083",
+      "ad": "JDK Mission Control",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/openjdk/jmc",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java Flight Recorder kayıtlarını analiz eden üretim uyumlu profil ve tanılama aracı; düşük ek yükle CPU, bellek, kilit ve GC davranışını gösterir.",
+      "sinirlar": "Masaüstü araç; CI'da otomatik performans kapısı için ek betik gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3084",
+      "ad": "VisualVM",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0 (depo LICENSE)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://visualvm.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çalışan JVM'ler için CPU/bellek profili, iş parçacığı ve yığın dökümü analizi sunan hepsi bir arada sorun giderme aracı.",
+      "sinirlar": "Etkileşimli masaüstü aracı; ajan hattında otomasyonu sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3100",
+      "ad": "LeakCanary",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://square.github.io/leakcanary",
+      "olgunluk": "olgun",
+      "ne_saglar": "Android uygulamalarında bellek sızıntılarını otomatik tespit edip sızıntı izini raporlayan kütüphane; testlerde örtük oracle olarak kullanılabilir.",
+      "sinirlar": "Hata ayıklama derlemelerinde çalışır; üretim izlemesi için tasarlanmadı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3118",
+      "ad": "Flutter DevTools",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.flutter.dev/tools/devtools",
+      "olgunluk": "olgun",
+      "ne_saglar": "Flutter/Dart uygulamaları için performans (kare süreleri), CPU/bellek profili, ağ ve widget ağacı inceleme araçları.",
+      "sinirlar": "Etkileşimli; CI performans bütçesi için ayrıca betik/entegrasyon gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3127",
+      "ad": "React Native DevTools",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://reactnative.dev/docs/react-native-devtools",
+      "olgunluk": "olgun",
+      "ne_saglar": "React Native uygulamaları için Chrome DevTools tabanlı hata ayıklama, React bileşen inceleme ve performans profili aracı.",
+      "sinirlar": "Hermes motoru gerektirir; etkileşimli kullanım içindir.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3137",
+      "ad": "Tracy Profiler",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://tracy.nereid.pl/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nanosaniye çözünürlüklü, gerçek zamanlı kare/örnekleme profil aracı; C/C++ ve diğer diller için CPU, GPU, bellek ve kilit izleri toplar.",
+      "sinirlar": "Kod enstrümantasyonu gerektirir; ağırlıklı olarak oyun/gerçek zamanlı sistemlere yönelik.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3138",
+      "ad": "heaptrack",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://invent.kde.org/sdk/heaptrack",
+      "olgunluk": "olgun",
+      "ne_saglar": "Linux'ta C/C++ uygulamalarının tüm bellek ayırmalarını izleyip sızıntı, en çok ayıran çağrı yığınları ve geçici ayırmaları raporlayan yığın profilleyici.",
+      "sinirlar": "Yalnız Linux.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3139",
+      "ad": "Valgrind",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://valgrind.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Memcheck, Helgrind, Callgrind gibi araçlarla bellek hataları, veri yarışları ve önbellek/çağrı profilini dinamik olarak tespit eden enstrümantasyon çerçevesi.",
+      "sinirlar": "Çalışmayı 10-50 kat yavaşlatır; macOS/ARM desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3153",
+      "ad": ".NET diagnostics araçları (dotnet-trace, dotnet-counters, dotnet-dump)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/dotnet/diagnostics",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET uygulamaları için platformlar arası iz toplama, canlı sayaç izleme ve bellek dökümü analizi komut satırı araçları.",
+      "sinirlar": "Toplanan izlerin yorumlanması uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3154",
+      "ad": "PerfView",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/perfview",
+      "olgunluk": "olgun",
+      "ne_saglar": "ETW tabanlı CPU, bellek ve GC performans analizi aracı; .NET uygulamalarında darboğaz tespitinde kullanılır.",
+      "sinirlar": "Yalnız Windows; arayüzü uzman odaklı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3165",
+      "ad": "Aspire",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://aspire.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık uygulamayı (servisler, veritabanları, kuyruklar) kodla tanımlayıp yerelde tek komutla ayağa kaldıran ve OpenTelemetry izlerini panoda gösteren geliştirme/dağıtım aracı.",
+      "sinirlar": ".NET merkezli; diğer dillerdeki servisler için entegrasyon desteği daha sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3176",
+      "ad": "pprof",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/google/pprof",
+      "olgunluk": "olgun",
+      "ne_saglar": "Profil verisini (CPU, bellek, kilit) görselleştirip analiz eden araç; Go çalışma zamanı profilleriyle doğrudan çalışır, profil farkı alabilir.",
+      "sinirlar": "Profil toplama ve karşılaştırmayı CI'a bağlamak ek betik ister.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3195",
+      "ad": "samply",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 veya MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mstange/samply",
+      "olgunluk": "gelisen",
+      "ne_saglar": "macOS, Linux ve Windows'ta çalışan, sonuçları Firefox Profiler'da gösteren komut satırı örnekleme profilleyicisi.",
+      "sinirlar": "Etkileşimli analiz odaklı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3196",
+      "ad": "flamegraph (cargo-flamegraph)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 veya MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/flamegraph-rs/flamegraph",
+      "olgunluk": "olgun",
+      "ne_saglar": "perf/dtrace ile Rust (ve diğer) programlar için tek komutla alev grafiği üreten araç.",
+      "sinirlar": "Sistem profil araçlarına (perf, dtrace) ve yetkiye bağlı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3211",
+      "ad": "Scalene",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/plasma-umass/scalene",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python için satır düzeyinde CPU, GPU ve bellek profili çıkaran, Python ile yerel kod süresini ayıran yüksek hassasiyetli profilleyici; LLM destekli optimizasyon önerisi sunabilir.",
+      "sinirlar": "LLM önerileri dış sağlayıcıya kod gönderebilir; kapatılmalı veya yerel modele yönlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3212",
+      "ad": "Memray",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://bloomberg.github.io/memray/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ve yerel uzantılardaki bellek ayırmalarını izleyen profilleyici; pytest eklentisiyle testlerde bellek sınırı kapısı kurulabilir.",
+      "sinirlar": "Yalnız Linux ve macOS.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021"
+      ]
+    },
+    {
+      "id": "AR-3213",
+      "ad": "pyinstrument",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pyinstrument.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python için düşük ek yüklü, çağrı yığını odaklı örnekleme profilleyicisi; web çerçeveleri için ara katman sunar.",
+      "sinirlar": "Örnekleme tabanlı; çok kısa işlevlerde hassasiyet düşük.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3240",
+      "ad": "SPX",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/NoiseByNorthwest/php-spx",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dahili web arayüzlü, düşük ek yüklü PHP profil uzantısı; zaman çizelgesi ve alev grafiği sunar.",
+      "sinirlar": "PHP uzantısı derleme/kurulum ister; Windows desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3241",
+      "ad": "Blackfire",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.blackfire.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP, Python ve Go için profil çıkarma ve sürekli performans izleme hizmeti; testlerde performans iddiaları (assertion) ile CI kapısı kurulabilir.",
+      "sinirlar": "Ticari SaaS; profil verisi sağlayıcı altyapısına gider.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-023",
+        "N-K08-005"
+      ]
+    },
+    {
+      "id": "AR-3242",
+      "ad": "Xdebug",
+      "tur": "acik-kaynak",
+      "lisans": "Xdebug License 1.03",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://xdebug.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP için adım adım hata ayıklayıcı, kod kapsamı sürücüsü ve profil çıkarıcı uzantı.",
+      "sinirlar": "Etkinken çalışmayı yavaşlatır; üretimde kapalı tutulmalı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-014"
+      ]
+    },
+    {
+      "id": "AR-3253",
+      "ad": "Vernier",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://vernier.prof/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "CRuby için çok iş parçacıklı, GVL ve GC olaylarını da izleyen yeni nesil örnekleme profilleyicisi; Firefox Profiler çıktısı üretir.",
+      "sinirlar": "Yeni Ruby sürümleri gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3254",
+      "ad": "rack-mini-profiler",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/MiniProfiler/rack-mini-profiler",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rack/Rails uygulamalarında her sayfa isteğinin SQL, render ve bellek süresini gösteren geliştirme/üretim profilleyicisi.",
+      "sinirlar": "Üretimde yalnız yetkili kullanıcılara açılmalı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3264",
+      "ad": "React Scan",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://react-scan.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "React uygulamalarında gereksiz yeniden render'ları kod değişikliği olmadan otomatik tespit edip görselleştiren performans aracı.",
+      "sinirlar": "Geliştirme zamanı odaklı; üretim izlemesi sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3265",
+      "ad": "web-vitals",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://web.dev/vitals",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek kullanıcı tarayıcısında Core Web Vitals (LCP, INP, CLS) ölçen küçük kütüphane; performans bütçelerini sahada doğrulamayı sağlar.",
+      "sinirlar": "Toplama ve analiz arka ucu ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021",
+        "N-K08-005"
+      ]
+    },
+    {
+      "id": "AR-3316",
+      "ad": "Dexter",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ankane/dexter",
+      "olgunluk": "olgun",
+      "ne_saglar": "PostgreSQL sorgu istatistiklerinden hipotetik indekslerle maliyet karşılaştırması yapıp indeks öneren otomatik indeksleyici.",
+      "sinirlar": "Önerilerin yazma yükü etkisi ayrıca değerlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3317",
+      "ad": "HypoPG",
+      "tur": "acik-kaynak",
+      "lisans": "PostgreSQL License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://hypopg.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "PostgreSQL'de gerçekte oluşturmadan hipotetik indeks tanımlayıp sorgu planlayıcısı üzerindeki etkisini ölçmeyi sağlayan uzantı.",
+      "sinirlar": "Yalnız planlayıcı tahmini; gerçek çalışma süresini ölçmez.",
+      "ihtiyaclar": [
+        "N-K04-009"
+      ]
+    },
+    {
+      "id": "AR-3318",
+      "ad": "pgBadger",
+      "tur": "acik-kaynak",
+      "lisans": "PostgreSQL License",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://pgbadger.darold.net/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PostgreSQL loglarını analiz ederek en yavaş sorgular, kilitler, bağlantılar ve hatalar hakkında HTML rapor üreten log analizörü.",
+      "sinirlar": "Uygun log yapılandırması (log_min_duration vb.) gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3353",
+      "ad": "Datadog MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari (yerel köprü MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/mcp_server/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanların metrik, log, iz, monitör, pano ve güvenlik sinyallerini MCP üzerinden sorgulamasını sağlayan barındırılan sunucu; kullanıcının kendi Datadog RBAC/Data Access Control yetkileriyle çalışır.",
+      "sinirlar": "Adil kullanım sınırı (10 sn'de 50 istek, ayda 100.000 araç çağrısı) var; GovCloud sitelerinde yok; yazma işlemleri ilgili yetkiyi gerektirir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021",
+        "N-K08-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3354",
+      "ad": "Grafana MCP Server (mcp-grafana)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/grafana/mcp-grafana",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Grafana panoları, veri kaynakları (Prometheus, Loki, Tempo vb.), uyarılar ve olay kayıtlarına ajan erişimi veren resmî MCP sunucusu; yerel (Docker/ikili) veya Grafana Cloud uzak uç noktası olarak çalışır.",
+      "sinirlar": "Araç seti geniştir; yazma araçlarının (pano/uyarı değiştirme) rol bazında kısıtlanması gerekir; hizmet hesabı belirteci yönetimi kuruma kalır.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K08-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K19-001",
+        "N-K19-007"
+      ]
+    },
+    {
+      "id": "AR-3355",
+      "ad": "Dynatrace MCP Server (Remote) ve Dynatrace for AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari (skills deposu Apache-2.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.dynatrace.com/docs/dynatrace-intelligence/dynatrace-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Platform içindeki MCP ağ geçidi üzerinden DQL üretme/açıklama, problem inceleme, Kubernetes olay analizi ve zaman serisi tahmini araçları sunar; dynatrace-for-ai deposu aynı iş için Agent Skills paketleri, Managed sürüm için ayrı yerel MCP sunucusu sağlar.",
+      "sinirlar": "Uzak sunucu CIMD/dinamik istemci kaydını desteklemez; gizli OAuth istemcisi veya bearer token ve MCP gateway izinleri gerekir; eski yerel sunucu kullanımdan kaldırıldı.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K08-005",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3356",
+      "ad": "New Relic MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Barındırılan MCP sunucusu; ajanların New Relic metrik, log, iz ve varlıklarını doğal dille sorgulamasını, uyarı analizi ve dağıtım etkisi değerlendirmesi yapmasını sağlar.",
+      "sinirlar": "Doğal dil→NRQL, uyarı içgörüsü, iz analizi gibi bazı araçlar yalnız OAuth ile çalışır; önizleme araçları yönetici etkinleştirmesi ister.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K06-008",
+        "N-K08-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3357",
+      "ad": "Honeycomb MCP",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.honeycomb.io/integrations/mcp/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlara Honeycomb iz, olay, metrik, SLO, tetik ve panolarını sorgulatır; gecikme sıçraması ve aykırı değer incelemesini hızlandırır.",
+      "sinirlar": "Araçların çoğu salt okunur; yazma için ayrı mcp:write kapsamı gerekir; yalnız barındırılan Honeycomb verisiyle çalışır.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-021",
+        "N-K08-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3358",
+      "ad": "Axiom MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://axiom.co/docs/console/intelligence/mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Axiom veri kümelerini ve şemalarını listeleme, APL sorguları çalıştırma ve anomali/izleme odaklı hazır istemler sağlayan uzak MCP sunucusu.",
+      "sinirlar": "Yalnız Axiom'a gönderilmiş log/iz verisini görür; SaaS bağımlılığı vardır.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K12-003",
+        "N-K16-002",
+        "N-K19-001",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-3359",
+      "ad": "SigNoz MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/SigNoz/signoz-mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenTelemetry tabanlı SigNoz'daki metrik, iz, log, uyarı ve panolara MCP üzerinden erişim; Docker imajıyla kurum içinde çalıştırılabilir.",
+      "sinirlar": "SigNoz kurulumu gerektirir; proje görece genç ve araç kapsamı sürümlerle değişiyor.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K08-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3360",
+      "ad": "Elastic Agent Builder MCP Server",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (Elastic lisansları; katman bilgisi bilinmiyor)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/mcp-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Elastic 9.2+ ve Serverless projelerinde Agent Builder araçlarını (ES|QL, arama, özel araçlar) standart MCP uç noktası olarak dışa açar; eski bağımsız Elasticsearch MCP sunucusunun yerini alır.",
+      "sinirlar": "Eski elastic/mcp-server-elasticsearch yalnız kritik güvenlik güncellemesi alıyor; Agent Builder özellikleri lisans katmanına bağlı.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-003",
+        "N-K14-002",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3361",
+      "ad": "Splunk MCP Server",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://splunkbase.splunk.com/app/7931",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Splunk Enterprise ve Splunk Cloud için Splunkbase uygulaması; yapay zekâ istemcilerinin Splunk verisinde arama çalıştırmasını ve bilgi nesnelerini keşfetmesini sağlar.",
+      "sinirlar": "Splunk lisansı ve uygulama kurulumu gerekir; arama maliyeti/kotası ajan kullanımıyla artabilir.",
+      "ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-002",
+        "N-K19-001",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3363",
+      "ad": "Rootly MCP Server",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://github.com/Rootly-AI-Labs/Rootly-MCP-server",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rootly olay yönetimi, nöbet planlama ve olay analizini ajanlara açan MCP sunucusu; uzak uç nokta veya PyPI paketiyle yerel çalışır.",
+      "sinirlar": "Rootly aboneliği gerekir; olay verisinin LLM'e gitmesi veri politikasıyla değerlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K12-003",
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-3364",
+      "ad": "PostHog MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (ee dizini hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://posthog.com/docs/model-context-protocol",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ürün analitiği, özellik bayrakları, deneyler, hata izleme ve anketlere ajan erişimi veren resmî MCP sunucusu; bayrak oluşturma/sorgulama ve deney sonucu okuma yapılabilir.",
+      "sinirlar": "Barındırılan MCP uç noktası PostHog Cloud içindir; self-host PostHog için yapılandırma ayrıca gerekir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K08-005",
+        "N-K12-003",
+        "N-K23-013",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3365",
+      "ad": "Amplitude MCP Server",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://amplitude.com/docs/amplitude-ai/amplitude-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Amplitude ürün analitiği verisini (grafikler, kohortlar, deneyler) ajanlara aranabilir ve sorgulanabilir kılan uzak MCP sunucusu.",
+      "sinirlar": "Yalnız Amplitude'a akan kullanım verisini görür; SaaS kilidi.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K12-003",
+        "N-K23-008",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3435",
+      "ad": "ClickHouse MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ClickHouse/mcp-clickhouse",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ClickHouse kümeleri ve chDB üzerinde sorgu ve şema keşfi için resmî MCP sunucusu; iz/metrik analitiği depolarının ajanlarca sorgulanmasını sağlar.",
+      "sinirlar": "Sorgu maliyeti sınırlanmalı; varsayılan salt okunur ayar önerilir.",
+      "ihtiyaclar": [
+        "N-K12-003",
+        "N-K19-007",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-3448",
+      "ad": "Grafana Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/grafana/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Grafana, Prometheus, Loki, Tempo, Pyroscope ve k6 ile çalışmak için Agent Skills paketleri; npx skills veya Claude Code ile kurulur.",
+      "sinirlar": "LGTM yığını dışında değeri sınırlı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3449",
+      "ad": "Datadog Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/datadog-labs/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Datadog CLI (pup), monitör, log, APM, dokümantasyon araması ve ajan gözlemlenebilirliği (deney, eval kök neden analizi) için skill'ler; Claude Code, Codex, Gemini CLI, Cursor vb. ile uyumlu.",
+      "sinirlar": "Datadog hesabı gerekir. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3463",
+      "ad": "Claude Code Templates (aitmpl)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/davila7/claude-code-templates",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code için ajan, komut, ayar, hook, MCP ve skill şablonlarını CLI ile kuran ve oturum izleme/analitik arayüzü sunan topluluk aracı ve web kataloğu.",
+      "sinirlar": "Topluluk projesi; şablonların kaynağı ve güvenliği kurumca incelenmeli.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-010",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3486",
+      "ad": "eazyBI for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1211051/eazybi-for-jira-reports-charts-and-dashboards",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira, pazar uygulamaları ve dış veri kaynaklarını birleştirip özel hesaplamalı OLAP raporları ve panolar üreten BI uygulaması; ekip/ART düzeyinde teslim metriklerinin zaman serisi analizine uygun.",
+      "sinirlar": "Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K19-007",
+        "N-K20-007",
+        "N-K23-006",
+        "N-K24-011"
+      ]
+    },
+    {
+      "id": "AR-3503",
+      "ad": "issue-metrics (GitHub)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/github-community-projects/issue-metrics",
+      "olgunluk": "olgun",
+      "ne_saglar": "Issue/PR/tartışmalar için ilk yanıta, kapanışa ve cevaplanmaya kadar geçen süre gibi metrikleri toplayıp Markdown rapor olarak issue'ya yazan GitHub eylemi.",
+      "sinirlar": "GitHub'daki kayıtlarla sınırlı; Jira verisini kapsamaz.",
+      "ihtiyaclar": [
+        "N-K17-004",
+        "N-K19-007",
+        "N-K23-006",
+        "N-K31-003",
+        "N-K31-004"
+      ]
+    },
+    {
+      "id": "AR-3509",
+      "ad": "OpenTelemetry Operator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://opentelemetry.io/docs/platforms/kubernetes/operator/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes'te OpenTelemetry Collector'ları CRD ile yöneten ve iş yüklerine otomatik enstrümantasyon enjekte eden operatör; ajan ve araç servislerinden iz toplamanın standart yolu.",
+      "sinirlar": "Kubernetes gerektirir; kişisel veri maskeleme Collector işlemcileriyle ayrıca yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3510",
+      "ad": "OpenTelemetry Registry",
+      "tur": "platform",
+      "lisans": "Apache-2.0 (içerik CC-BY-4.0)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://opentelemetry.io/ecosystem/registry/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry enstrümantasyon kütüphaneleri, Collector bileşenleri, dışa aktarıcılar ve yardımcı araçların dil/tür bazında aranabilir resmî kataloğu; bileşen bakım durumunun izlenmesine yardımcı olur.",
+      "sinirlar": "Katalog kaydı kalite veya olgunluk garantisi değildir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K16-006",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3530",
+      "ad": "Screenful",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://screenful.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira, GitHub, Trello vb. iş takip verisinden akış metrikleri, panolar, otomatik raporlar ve olasılıksal teslim tahminleri üretir.",
+      "sinirlar": "Kaynak sistemdeki durum modeline bağımlı; yanlış iş akışı eşlemesi metrikleri bozar.",
+      "ihtiyaclar": [
+        "N-K23-006",
+        "N-K24-006",
+        "N-K24-011",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-3551",
+      "ad": "Waydev",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://waydev.co/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git, iş takip ve CI verisinden DORA, SPACE ve geliştirici deneyimi metrikleri; PR inceleme süreleri ve iş dağılımı raporları.",
+      "sinirlar": "Kişi bazlı raporlar kötüye kullanılabilir; ajan katkısını insan katkısından ayırma yeteneği doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K17-005",
+        "N-K23-006",
+        "N-K23-008",
+        "N-K24-011"
+      ]
+    },
+    {
+      "id": "AR-3555",
+      "ad": "Axify",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://axify.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "DORA ve akış metrikleri, değer akışı haritası ve yapay zekâ ile desteklenen ekiplerin teslim performansını izleyen mühendislik zekâsı platformu.",
+      "sinirlar": "Metrikler ekip düzeyinde anlamlı; bireysel kıyas için tasarlanmamış olsa da kötüye kullanım riski var.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K23-006",
+        "N-K23-013",
+        "N-K24-011"
+      ]
+    },
+    {
+      "id": "AR-3557",
+      "ad": "Opsera",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://opsera.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "DevOps araç zinciri orkestrasyonu ve birleşik içgörüler; hat, güvenlik ve teslim metriklerini tek panoda toplar, yapay zekâ yazılım fabrikası konumlandırması.",
+      "sinirlar": "Geniş kapsamlı platform; yalnız metrik için ağır olabilir.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K19-007",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-3558",
+      "ad": "Copilot Metrics Viewer",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/github-copilot-resources/copilot-metrics-viewer",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Copilot metrik API'sinden kabul oranı, aktif kullanıcı, dil/editör bazında kullanım gibi benimseme göstergelerini görselleştiren açık kaynak pano.",
+      "sinirlar": "Yalnız GitHub Copilot verisi; diğer ajan araçları için benzer veri kaynağı ayrıca bağlanmalı.",
+      "ihtiyaclar": [
+        "N-K23-007",
+        "N-K23-013",
+        "N-K24-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3567",
+      "ad": "Worklytics",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.worklytics.co/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş araçlarının log/iz verisinden (içerik değil) iş birliği kalıpları ve Copilot/ChatGPT gibi üretken yapay zekâ araçlarının benimseme ve harcamasını ölçer; takma adlandırma ve grup düzeyi toplulaştırma kullanır.",
+      "sinirlar": "Metadata analizi de kişisel veri sayılır; toplulaştırma eşikleri yapılandırılmalı.",
+      "ihtiyaclar": [
+        "N-K23-008",
+        "N-K23-013",
+        "N-K23-015",
+        "N-K24-010",
+        "N-K25-007",
+        "N-K31-008"
+      ]
+    },
+    {
+      "id": "AR-3568",
+      "ad": "Nexthink",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://nexthink.com/en",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dijital çalışan deneyimi (DEX) yönetimi: uç nokta ajanlarıyla uygulama kullanımı ve performansını izler, çalışanlara bağlamsal anket/duyuru gönderir; kullanılan uygulamaların (yapay zekâ araçları dahil) envanterini çıkarır.",
+      "sinirlar": "Uç nokta ajanı gerektirir; kapsamlı izleme niteliği taşır.",
+      "ihtiyaclar": [
+        "N-K18-013",
+        "N-K25-007",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3587",
+      "ad": "PostHog",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee/ dizini ayrı lisans)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://posthog.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ürün analitiği, deneyler (A/B), özellik bayrakları, uygulama içi anketler ve oturum kaydını tek platformda sunar; iç geliştirici araçları/ajan paneli benimsemesini ve pilot etkisini ölçmek için kullanılabilir.",
+      "sinirlar": "Self-host sürümü büyük ölçekte kaynak yoğun; bazı özellikler yalnız bulutta.",
+      "ihtiyaclar": [
+        "N-K23-012",
+        "N-K23-013",
+        "N-K24-010",
+        "N-K25-007",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3666",
+      "ad": "xMatters",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.xmatters.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomatik olay yönetimi ve hizmet güvenilirliği platformu: nöbet çizelgesi, eskalasyon politikaları, iş akışı otomasyonu ve olay sonrası raporlar.",
+      "sinirlar": "Everbridge ürün yol haritasına bağlı; kurulum karmaşık olabilir.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-3667",
+      "ad": "ilert",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.ilert.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uyarı, nöbet çizelgesi, olay müdahalesi, durum sayfaları ve yapay zekâ destekli postmortem taslağı üreten olay yönetimi platformu.",
+      "sinirlar": "Olay sonrası eylemlerin kural/yetenek paketine aktarımı ayrı süreç ister.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K08-007",
+        "N-K16-002",
+        "N-K17-004",
+        "N-K25-009",
+        "N-K33-017"
+      ]
+    },
+    {
+      "id": "AR-3668",
+      "ad": "Better Stack Incident Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://betterstack.com/incident-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet, telefon/SMS uyarıları, Slack içinde olay yönetimi, durum sayfaları ve olay sonrası raporlar; izleme ve log ürünleriyle birleşik.",
+      "sinirlar": "Postmortem analitiği derinliği özel olay platformlarına göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K17-004",
+        "N-K25-009"
+      ]
+    },
+    {
+      "id": "AR-3669",
+      "ad": "SolarWinds Incident Response (eski Squadcast)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.solarwinds.com/incident-response",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nöbet yönetimi, uyarı yönlendirme, SLO takibi, runbook'lar ve olay sonrası analiz; SolarWinds'in Squadcast satın alımından doğan ürün.",
+      "sinirlar": "Satın alma sonrası ürün ve fiyatlandırma değişiyor.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K16-002",
+        "N-K17-004"
+      ]
+    },
+    {
+      "id": "AR-3676",
+      "ad": "Chaos Monkey",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/Netflix/chaosmonkey",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretim örneklerini rastgele sonlandırarak hizmetlerin örnek kaybına dayanıklılığını test eden klasik kaos aracı; oyun günleri için başlangıç.",
+      "sinirlar": "Spinnaker'a bağımlı; son güncelleme 2025 başı, bakım sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "AR-3678",
+      "ad": "Harness Resilience Testing (eski Harness Chaos Engineering)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.harness.io/products/resilience-testing",
+      "olgunluk": "olgun",
+      "ne_saglar": "LitmusChaos temelli kaos ve dayanıklılık testi: deney kütüphanesi, oyun günü yönetimi, dayanıklılık puanı ve risk içgörüleri; hatlara entegre deneyler.",
+      "sinirlar": "Harness ekosistemine bağlı; açık kaynak LitmusChaos'a göre ücretli.",
+      "ihtiyaclar": [
+        "N-K16-004",
+        "N-K16-009",
+        "N-K21-005",
+        "N-K33-009"
+      ]
+    },
+    {
+      "id": "AR-3679",
+      "ad": "AWS Resilience Hub",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/resilience-hub/",
+      "olgunluk": "olgun",
+      "ne_saglar": "AWS üzerindeki uygulamaların RTO/RPO hedeflerine göre dayanıklılığını değerlendirir, öneriler üretir ve Fault Injection Service deneyleriyle doğrulama/tatbikat planlar.",
+      "sinirlar": "Yalnız AWS kaynakları; bulut kilidi.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-004",
+        "N-K16-009",
+        "N-K33-010",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-3745",
+      "ad": "Numbat",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/perplexityai/numbat",
+      "olgunluk": "erken",
+      "ne_saglar": "Uç noktalarda çalışan yapay zekâ ajanlarının etkinliğine görünürlük sağlar; cihaz üzerinde tespit ve isteğe bağlı eylem öncesi engelleme yapar.",
+      "sinirlar": "2026'da yayımlanmış yeni proje; kurumsal yönetim konsolu ve geniş platform desteği henüz sınırlı.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3746",
+      "ad": "Clawdstrike",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/backbay-labs/clawdstrike",
+      "olgunluk": "erken",
+      "ne_saglar": "Geliştirici iş istasyonları ve otonom ajan sürüleri için ajan odaklı uç nokta tespit ve müdahale (EDR) aracı.",
+      "sinirlar": "Küçük topluluk projesi; üretim olgunluğu kanıtlanmamış.",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3749",
+      "ad": "osquery",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / GPL-2.0 (ikili lisans)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://osquery.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşletim sistemini SQL tabloları olarak sorgulatan uç nokta enstrümantasyonu; geliştirici makinelerinde kurulu ajan araçları, eklentiler, süreçler ve ağ bağlantılarının envanteri ve izlenmesi.",
+      "sinirlar": "Ajan/MCP'ye özgü tablolar hazır değil; filo yönetimi için ayrı bir yönetim sunucusu gerekir.",
+      "ihtiyaclar": [
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3757",
+      "ad": "Adrian",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://secureagentics.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanları çalışma zamanında izleyip kötü amaçlı veya politika dışı araç çağrılarını yakalayan ve engelleyen açık kaynak güvenlik aracı.",
+      "sinirlar": "Erken aşama; kapsanan çerçeve ve araç sayısı sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-007",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3759",
+      "ad": "Lunar MCPX",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://lunar.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan-doğal MCP ağ geçidi: araç bazında erişim kontrolü, politika, denetim kaydı ve trafik gözlemlenebilirliği.",
+      "sinirlar": "Gelişmiş yönetim özellikleri ticari sürümde olabilir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-008",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3762",
+      "ad": "MCPSpy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/alex-ilgayev/MCPSpy",
+      "olgunluk": "erken",
+      "ne_saglar": "eBPF ile çekirdek düzeyinde MCP iletişimini (stdio ve HTTP) yakalayıp izleyen gözlem aracı; ajan-araç etkileşimlerinin kanıtı için.",
+      "sinirlar": "Yalnız Linux; 2026 başından beri güncelleme yok.",
+      "ihtiyaclar": [
+        "N-K18-013",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3804",
+      "ad": "Fiddler AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.fiddler.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ajanlar ve modeller için değerlendirme, izleme, koruma modelleri ile politika uygulama, yönetişim ve maliyet görünürlüğü sunan kontrol düzlemi.",
+      "sinirlar": "Ticari; kurum içi kurulum koşulları satış görüşmesine bağlı.",
+      "ihtiyaclar": [
+        "N-K18-006",
+        "N-K19-001",
+        "N-K22-006",
+        "N-K23-012"
+      ]
+    },
+    {
+      "id": "AR-3902",
+      "ad": "Linux Audit (auditd)",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/linux-audit/audit-userspace",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çekirdek düzeyinde sistem çağrısı, komut çalıştırma ve dosya erişimi denetimi; ajan çalıştırıcılarında yapılan işlemlerin ajan dışı, bağımsız kaydı.",
+      "sinirlar": "Log hacmi yüksek; değiştirilemezlik için kayıtların uzak/WORM depoya aktarılması gerekir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-013",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3903",
+      "ad": "go-audit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/slackhq/go-audit",
+      "olgunluk": "olgun",
+      "ne_saglar": "auditd yerine geçen, çekirdek denetim olaylarını JSON olarak toplayıp merkezi log sistemine akıtan Go servisi.",
+      "sinirlar": "Yalnız Linux; kural yazımı auditd bilgisi ister.",
+      "ihtiyaclar": [
+        "N-K18-013",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-3966",
+      "ad": "PromptLayer",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.promptlayer.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İstem kayıt defteri: istemler sürümlenir, 'prod/staging' gibi yayın etiketleriyle belirli sürüme sabitlenir, her istek kaydında kullanılan istem sürümü ve model parametreleri tutulur; değerlendirme ve A/B karşılaştırma içerir.",
+      "sinirlar": "SaaS; kurum içi barındırma seçeneği bilinmiyor; kural/politika paketlerini değil yalnız istemleri kapsar.",
+      "ihtiyaclar": [
+        "N-K09-006",
+        "N-K11-006",
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-3980",
+      "ad": "Checkly",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.checklyhq.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "'İzleme kod olarak': Playwright tabanlı tarayıcı kontrolleri ve API kontrolleri depoda yazılıp CLI ile dağıtılır, ön-üretim/üretimde zamanlanmış ya da dağıtım sonrası çalışır. Aynı kontrolde ekranda gösterilen fiyat/ad gibi değerler yetkili API'den çekilen değerle karşılaştırılıp uyuşmazlıkta dağıtım kapısı başarısız sayılabilir.",
+      "sinirlar": "SaaS; karşılaştırma mantığı ve kritik alan kataloğu ekip tarafından yazılır.",
+      "ihtiyaclar": [
+        "N-K05-020"
+      ]
+    },
+    {
+      "id": "AR-3990",
+      "ad": "Bugsink",
+      "tur": "acik-cekirdek",
+      "lisans": "PolyForm Shield 1.0.0 (kaynak erişimli)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.bugsink.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sentry SDK uyumlu, kendi barındırılan hata izleme; olayları parmak izine göre tek bir 'issue' altında toplar, çözülmüş hatanın yeniden ortaya çıkmasını aynı kayda regresyon olarak bağlar—aynı hatadan kopya iş açılmasını kaynağında azaltır.",
+      "sinirlar": "PolyForm Shield lisansı OSI onaylı açık kaynak değildir (rakip ürün kısıtı); ölçek/özellik Sentry'nin alt kümesi.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3991",
+      "ad": "Exceptionless",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://exceptionless.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hata ve olayları imzaya göre 'stack'lerde toplar; düzeltildi işaretlenen stack tekrar oluşursa regresyon olarak yeniden açar, böylece aynı hata için tek kayıt korunur.",
+      "sinirlar": ".NET ve JS ağırlıklı istemciler; self-host için Elasticsearch işletimi gerekir.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3992",
+      "ad": "GlitchTip",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://glitchtip.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık kaynak, Sentry API uyumlu hata izleme ve çalışırlık izleme; olayları parmak izine göre issue'larda gruplar, self-host kurulumla veriyi kurum içinde tutar.",
+      "sinirlar": "Sentry'nin gelişmiş gruplama/benzerlik ve AI özelliklerinin alt kümesi.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-3993",
+      "ad": "Raygun",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://raygun.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hata raporlama, gerçek kullanıcı izleme ve APM; hataları gruplama kurallarıyla tek grupta toplar ve özel gruplama anahtarları tanımlanabilir.",
+      "sinirlar": "SaaS; iş takip sistemine kopya kontrolüyle bağlamak entegrasyon ister.",
+      "ihtiyaclar": [
+        "N-K08-004"
+      ]
+    },
+    {
+      "id": "AR-4039",
+      "ad": "Celonis",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.celonis.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay günlüklerinden süreç madenciliği: etkinlikler arası bekleme ve işlem sürelerini, darboğazları ve yeniden işleme döngülerini ölçer; nesne-merkezli süreç madenciliği destekler. Ajan ve insan adımlarından oluşan teslim hattında aktif süre ile insan beklemesinin ayrıştırılmasına uygundur.",
+      "sinirlar": "Ticari ve maliyetli; ajan olaylarının uygun olay günlüğüne dönüştürülmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K20-004",
+        "N-K24-009"
+      ]
+    },
+    {
+      "id": "AR-4055",
+      "ad": "claude-code-log",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/daaain/claude-code-log",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code JSONL oturum dökümlerini proje bazında gezinilebilir HTML/Markdown'a dönüştürür; devralan kişi veya inceleyici için okunur çalışma anlatısı sağlar.",
+      "sinirlar": "Yalnız Claude Code; kararları gerekçe ve kaynakla yapılandırmaz, ham dökümün okunur halidir.",
+      "ihtiyaclar": [
+        "N-K27-006",
+        "N-K28-004"
+      ]
+    },
+    {
+      "id": "AR-4102",
+      "ad": "CodeTogether",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://codetogether.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Eşli programlama aracından yapay zekâ destekli geliştirme yönetişimi ve analitiğine dönüştü: IDE ve yapay zekâ araçlarına (Claude, Copilot, Cursor) eklentilerle token harcaması, yapay zekâ üretimi kodun kalite sorunları ve iş akışı bazında değer/risk analizi.",
+      "sinirlar": "Ürün yeni yöndedir, olgunluğu belirsiz; geliştirici düzeyi verinin bireysel izlemeye dönüşmemesi için amaç sınırlaması gerekir.",
+      "ihtiyaclar": [
+        "N-K27-009",
+        "N-K28-012"
+      ]
+    },
+    {
+      "id": "AR-4236",
+      "ad": "Google SLO Generator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/google/slo-generator",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML ile sürümlü tanımlanan SLO'lar için Cloud Monitoring, Prometheus, Datadog, Dynatrace, Elasticsearch gibi arka uçlardan SLI, SLO, hata bütçesi ve yanma hızını hesaplar; sonuçları BigQuery, Cloud Monitoring, Prometheus gibi hedeflere aktarır; CLI, API ya da zamanlanmış iş olarak çalışır.",
+      "sinirlar": "Yalnız hesaplama ve dışa aktarım yapar; uyarı yönlendirme, onay akışı ve politika uygulaması ayrı araç gerektirir.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-008",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-4237",
+      "ad": "slo-exporter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/seznam/slo-exporter",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Log dosyaları, Envoy erişim logları, Kafka ve Prometheus gibi olay kaynaklarından gelen olayları SLO sınıflarına ve alanlarına etiketleyip standart SLI/SLO metrikleri üretir ve Prometheus'a sunar; çoklu pencereli yanma hızı uyarı kurallarına veri sağlar.",
+      "sinirlar": "Tek kurum kökenli, küçük topluluklu proje; SLO kataloğu, onay ve politika katmanı içermez.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4238",
+      "ad": "Pint (Prometheus kural denetleyicisi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/cloudflare/pint",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus uyarı ve kayıt kurallarını CI'da veya sürekli modda canlı Prometheus'a karşı denetler: sorgunun gerçekten seri döndürüp döndürmediği, eksik etiket/anotasyon (ör. runbook bağlantısı zorunluluğu), sözdizimi ve maliyetli sorgu gibi sorunları raporlar; uyarı standardını talimat yerine deterministik kapıya çevirir.",
+      "sinirlar": "Yalnız Prometheus uyumlu kural dosyaları; bir uyarının belirti temelli mi neden temelli mi olduğunu anlamsal olarak değerlendirmez.",
+      "ihtiyaclar": [
+        "N-K33-007",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4239",
+      "ad": "Grafana SLO",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://grafana.com/docs/grafana-cloud/observe-and-act/alert-and-measure-reliability/slo/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Grafana Cloud içinde SLI sorgusu, hedef ve zaman penceresiyle SLO tanımlamayı; hata bütçesi panolarını ve hızlı/yavaş yanma uyarı kurallarını otomatik üretmeyi sağlar; SLO'lar API ve Terraform sağlayıcısıyla kod olarak yönetilebilir.",
+      "sinirlar": "Grafana Cloud'a bağlı özellik; açık kaynak Grafana'nın self-host kurulumunda aynı biçimde bulunmaz.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4240",
+      "ad": "Datadog Service Level Objectives",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/service_level_objectives/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metrik, monitör veya zaman dilimi tabanlı SLO'lar, hata bütçesi hesabı, yanma hızı ve bütçe uyarıları ile SLO durum raporları sunar; SLO'lar API/Terraform ile tanımlanabilir.",
+      "sinirlar": "Datadog'a bağlı SaaS; maliyet telemetri hacmiyle artar, SLO tanımlarının taşınabilirliği sınırlı.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4241",
+      "ad": "Google Cloud Service Monitoring (SLO izleme)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring",
+      "olgunluk": "olgun",
+      "ne_saglar": "Google Cloud Observability içinde hizmetler için istek veya pencere tabanlı SLI/SLO tanımı, hata bütçesi takibi ve yanma hızına dayalı uyarı politikaları sağlar.",
+      "sinirlar": "Google Cloud metriklerine odaklı; çoklu bulut ve şirket içi hizmetlerde ek entegrasyon gerekir.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4242",
+      "ad": "Harness Service Reliability Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://developer.harness.io/service-reliability-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "İzlenen hizmetler için SLO ve hata bütçesi takibi, dağıtım/olay/bayrak gibi değişiklik olaylarını sağlık metrikleriyle ilişkilendiren değişiklik etkisi analizi, SLO notları ve bakım penceresi planlaması sunar.",
+      "sinirlar": "Harness platformuna bağlı ticari modül; bütçe durumunu ajan otonomisine bağlamak özel entegrasyon ister.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-016"
+      ]
+    },
+    {
+      "id": "AR-4243",
+      "ad": "Instrumentation Score",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/instrumentation-score/spec",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenTelemetry enstrümantasyon kalitesini 0–100 arası puanlayan, etki düzeyine göre sınıflanmış kurallardan oluşan açık spesifikasyon; hizmet bazında telemetri kalitesini ölçülebilir ve kapıya bağlanabilir kılar.",
+      "sinirlar": "Erken aşama spesifikasyon; puanı hesaplayan uygulamalar satıcıya göre değişir ve arıza enjeksiyonuyla doğrulamayı kapsamaz.",
+      "ihtiyaclar": [
+        "N-K33-007"
+      ]
+    },
+    {
+      "id": "AR-4245",
+      "ad": "Kayenta (otomatik kanarya analizi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/spinnaker/spinnaker/tree/main/kayenta",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kanarya ile kontrol grubunun metriklerini (Prometheus, Datadog, Stackdriver, New Relic vb.) istatistiksel olarak karşılaştırıp puan ve geç/kal kararı üretir; Spinnaker hattına ya da Argo Rollouts analiz sağlayıcısı olarak bağlanabilir.",
+      "sinirlar": "Ayrı depo Aralık 2025'te arşivlendi, bakım Spinnaker monoreposunda sürüyor; kurulumu ve metrik yapılandırması ağır.",
+      "ihtiyaclar": [
+        "N-K06-010"
+      ]
+    },
+    {
+      "id": "AR-4246",
+      "ad": "Harness Continuous Verification",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://developer.harness.io/continuous-delivery/use-continuous-delivery/verify-deployments/verify-deployments-with-the-verify-step",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtım hattındaki Verify adımıyla yeni sürümün APM ve log verilerini alıp makine öğrenmesiyle önceki sürüm ya da kanarya-kontrol karşılaştırması yapar; başarısızlıkta hattı durdurup geri almayı tetikleyebilir.",
+      "sinirlar": "Harness CD'ye bağlı; ML tabanlı kararın istatistiksel dayanağı ve açıklanabilirliği kurumca doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K06-010"
+      ]
+    },
+    {
+      "id": "AR-4248",
+      "ad": "Datadog Incident Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/incident_response/incident_management/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Olay bildirme, önem ve özel alanlarla sınıflama, zaman çizelgesi, olay sonrası analiz şablonları ve olay analitiği sunar; telemetriyle aynı platformda bağlam sağlar.",
+      "sinirlar": "Datadog'a bağlı; ortak sınıflama ve ekipler arası örüntü analizi kurumun alan tasarımına bağlı.",
+      "ihtiyaclar": [
+        "N-K08-007",
+        "N-K08-008"
+      ]
+    },
+    {
+      "id": "AR-4258",
+      "ad": "StatusGator",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://statusgator.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut ve SaaS sağlayıcılarının durum sayfalarını tek yerde toplayıp bildirim gönderir ve kesinti geçmişini tutar; dış bağımlılık olaylarının hizmet SLO'suna etkisini ilişkilendirmek için girdi sağlar.",
+      "sinirlar": "Sağlayıcının kendi beyan ettiği durumlara dayanır; gerçek gerçekleşen hizmet düzeyini ölçmez.",
+      "ihtiyaclar": [
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-4273",
+      "ad": "Elementary",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.elementary-data.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "dbt projelerine gömülü veri gözlemlenebilirliği: hacim, tazelik, dağılım ve şema değişikliği anormallik testleri, test sonuçlarının raporlanması ve uyarı; bulut sürümünde soy ağacı ve olay yönetimi.",
+      "sinirlar": "dbt'ye bağımlı; akış (olay) verileri için doğrudan kullanılmaz, gelişmiş özellikler ticari bulutta.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4277",
+      "ad": "Monte Carlo (veri ve yapay zekâ gözlemlenebilirliği)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://montecarlo.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri ambarı ve hatlarında tazelik, hacim, şema ve dağılım anormalliklerini otomatik izler, soy ağacıyla etkiyi gösterir ve veri olaylarını yönetir.",
+      "sinirlar": "Ticari SaaS; kural tabanlı sözleşme doğrulama ve yetkili kaynakla uzlaştırma ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4278",
+      "ad": "Bigeye",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.bigeye.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tablo ve sütun düzeyinde veri kalitesi metrikleri, otomatik eşikli anormallik tespiti, soy ağacı tabanlı etki analizi ve veri olay yönetimi sağlar.",
+      "sinirlar": "Ticari SaaS; akış verisi ve uygulama içi sözleşmeler için sınırlı.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4280",
+      "ad": "Sifflet",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.siffletdata.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri gözlemlenebilirliği: izleyiciler, anormallik tespiti, alan düzeyi soy ağacı ve veri olaylarının iş etkisine göre önceliklendirilmesi.",
+      "sinirlar": "Ticari SaaS; uzlaştırma ve karantina akışları kurum hattıyla kurulmalı.",
+      "ihtiyaclar": [
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4346",
+      "ad": "Scavenger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/naver/scavenger",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JVM (ve beta Python) uygulamalarına eklenen ajanla üretimde hangi metotların çağrıldığını toplar ve uzun süre hiç çağrılmayan kodu çalışma zamanı verisiyle tespit eder.",
+      "sinirlar": "Üretimde ajan çalıştırmayı gerektirir; nadir kullanılan ama gerekli yolları yanlışlıkla ölü gösterebilir.",
+      "ihtiyaclar": [
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-4357",
+      "ad": "P dili ve PObserve",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://p-org.github.io/P/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık protokolleri olay güdümlü durum makineleri olarak modelleyip sistematik test (model denetimi benzeri keşif) ile güvenlik ve canlılık özelliklerini doğrular; PObserve üretim ve test loglarını P belirtimlerine karşı denetleyerek belirtimin çalışma zamanı izleyicisine dönüşmesini sağlar.",
+      "sinirlar": "Uygulama kodu ile P modeli ayrı; PObserve için log ayrıştırıcı yazılması gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4381",
+      "ad": "Copilot (NASA çalışma zamanı doğrulama dili)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://copilot-language.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Akış tabanlı çalışma zamanı doğrulama dili; Haskell'e gömülü belirtimlerden sert gerçek zamanlı, sabit bellekli C izleyicileri üretir; kritik değişmezlerin üretimde sürekli izlenmesi için kullanılabilir.",
+      "sinirlar": "Gömülü ve gerçek zamanlı sistemlere odaklı; iş uygulamalarında kullanım için uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K05-030"
+      ]
+    },
+    {
+      "id": "AR-4384",
+      "ad": "Matomo",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://matomo.org/guides/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurum içinde barındırılabilen, gizlilik odaklı web ve ürün kullanım analitiği; ziyaret, hedef/dönüşüm ve olay ölçümüyle yayın sonrası kullanıcı etkisinin izlenmesine veri sağlar.",
+      "sinirlar": "Ürün sonucunu ölçer, başarı/zarar tanımını ve karar eşiğini vermez; ajan kaynaklı değişikliğe atıf için sürüm/bayrak bilgisinin ayrıca olaylara işlenmesi gerekir.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K22-005"
+      ]
+    }
+  ]
+}

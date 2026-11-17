@@ -1,0 +1,125 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-24",
+    "ad": "Ürün yetkilendirme karar motoru (rol, öznitelik ve ilişki tabanlı)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-153",
+      "yetenek_sinifi": "Y-24",
+      "kalip": "Yetki motorunda mantık hatası kaynaklı yetki atlama",
+      "aciklama": "İlişki tabanlı yetki motorlarında model değerlendirme hataları doğrudan yetki atlamasına dönüşür: OpenFGA için 2024–2026 arasında çok sayıda 'Authorization Bypass' ve 'Improper Policy Enforcement' bildirimi (ör. CVE-2024-42473, önbellek anahtarıyla atlama CVE-2026-33729, BatchCheck tekilleştirmesinde yanlış karar CVE-2026-34972); SpiceDB'de caveat içeren ilişkilerde koşulsuz izin (CVE-2026-55866) kaydedildi.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-11"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-3f6g-m4hr-59h8",
+        "https://github.com/advisories/GHSA-h6c8-cww8-35hf",
+        "https://github.com/advisories/GHSA-jwvj-g8pc-cx45",
+        "https://github.com/advisories/GHSA-4vrg-r928-h5vv"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ürün yetkisi tek karar noktasına taşındığında motorun tek bir mantık hatası tüm uygulamalarda yetkisiz erişim yaratır.",
+        "Yetki modeli karmaşıklaştıkça (hariç tutma, koşul, joker) hatalı karar olasılığı artar ve testleri zorlaşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ],
+      "ornek_araclar": [
+        "OpenFGA",
+        "SpiceDB",
+        "Permify",
+        "Ory Keto"
+      ],
+      "erken_sinyal": "Yetki motoru için yeni GHSA; yetki modelinde 'but not', caveat, joker kullanımının artması.",
+      "azaltma": "Yetki modeli için kapsamlı karar test seti ve sürüm yükseltmede regresyon, hızlı yama, kritik kararlarda uygulama tarafında savunma katmanı."
+    },
+    {
+      "id": "RK-154",
+      "yetenek_sinifi": "Y-24",
+      "kalip": "Tutarlılık ve bayat yetki önbelleği",
+      "aciklama": "Zanzibar makalesi, ACL değişiklikleri ile içerik değişiklikleri arasında nedensel sıranın korunmaması durumunda 'yeni düşman' sorununun doğduğunu ve bunun için tutarlılık belirteçleri (zookie) gerektiğini anlatır. Uygulamalarda önbellek anahtarı hataları (OpenFGA CVE-2026-48096) bayat veya yanlış kararlar üretebilir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.usenix.org/conference/atc19/presentation/pang",
+        "https://github.com/advisories/GHSA-8396-jffm-qx4w"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir kullanıcının yetkisi kaldırıldıktan hemen sonra önbellek nedeniyle eski kararla erişim sürer; denetimde 'yetki kaldırıldı' kaydı ile erişim kaydı çelişir.",
+        "Tutarlılık belirteci kullanılmayan entegrasyonlarda hata sessizdir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-001"
+      ],
+      "ornek_araclar": [
+        "OpenFGA",
+        "SpiceDB",
+        "Zanzibar türevleri"
+      ],
+      "erken_sinyal": "Yetki değişikliği sonrasında erişim reddinin gecikmesi.",
+      "azaltma": "Kritik işlemlerde tam tutarlılık kipinin kullanılması, önbellek süresinin risk sınıfına göre ayarlanması, yetki geri alma testleri."
+    },
+    {
+      "id": "RK-155",
+      "yetenek_sinifi": "Y-24",
+      "kalip": "Yetkilendirme kütüphanesinin kullanımdan kaldırılması",
+      "aciklama": "Oso'nun açık kaynak kütüphanesi deposunda 'Deprecated' olarak işaretlendi ve ürün barındırılan hizmete yöneldi.",
+      "risk_turleri": [
+        "RT-05",
+        "RT-07",
+        "RT-06"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/osohq/oso"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uygulamalara gömülü yetki kütüphanesi bakım dışı kalırsa güvenlik yamaları gelmez; göç, tüm yetki kurallarının yeniden yazılması demektir.",
+        "Barındırılan yetki hizmetine geçiş her yetki kararını yurt dışındaki bir hizmete bağımlı kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-001",
+        "N-K16-006"
+      ],
+      "ornek_araclar": [
+        "Oso",
+        "Casbin",
+        "Cerbos",
+        "Cedar"
+      ],
+      "erken_sinyal": "Depo açıklamasında 'deprecated', sürüm sıklığında düşüş.",
+      "azaltma": "Standart politika dili (Cedar/Rego) ve değiştirilebilir karar noktası, bileşen bakım durumu takibi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 10,
+    "dusuk": 25,
+    "yuksek": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 5,
+    "RT-10": 5,
+    "RT-06": 4,
+    "RT-03": 3,
+    "RT-13": 3,
+    "RT-08": 2,
+    "RT-11": 2,
+    "RT-07": 2,
+    "RT-15": 1,
+    "RT-05": 1
+  }
+}

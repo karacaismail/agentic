@@ -1,0 +1,1422 @@
+[
+  {
+    "id": "K01",
+    "kind": "Yerel log",
+    "period": "11 Eylül kurulum kaydı",
+    "observation": "Caddy aynı yapılandırma hatasını tekrar tekrar yazıyor.",
+    "mechanism": "Caddyfile:28 acme_ca yönergesinin argümanı eksik veya geçersiz; hata açıkça parser tarafından verilmiş.",
+    "boundary": "10 eşleşen satır 10 bağımsız olay demek değildir; boş değerin kaynağı bu logda görünmüyor.",
+    "test": "Üretilen yapılandırma gerçek ortam değerleriyle başlangıç öncesinde doğrulanmalı.",
+    "status": "Sonraki devirde HTTP servisleri erişilebilir görülmüş; tek başına bu log hangi değişiklikle düzeldiğini kanıtlamaz.",
+    "source_ids": [
+      "E01"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "K02",
+    "kind": "Yerel log",
+    "period": "Kurulum startup.log",
+    "observation": "Kestra Cannot create local repository for plugins ile başlatılamıyor.",
+    "mechanism": "java.nio.file.AccessDeniedException: /app/storage/plugins.",
+    "boundary": "Dosya sistemi/volume izin sorunu kanıtlı; bunu Kestra çekirdeğinin mantık hatası saymak için kanıt yok.",
+    "test": "Servisin gerçek UID/GID kimliğiyle kalıcı veri ve eklenti yollarına erişim testi yapılmalı.",
+    "status": "Sonraki tarihli çalışan akışlar başlangıç engelinin en azından aşılmış olduğunu gösteriyor; kalıcı izin düzeltmesi burada yeniden doğrulanmadı.",
+    "source_ids": [
+      "E02"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "K03",
+    "kind": "Araç çıktısı + tarihî deney",
+    "period": "15 Eylül",
+    "observation": "51 testlik birleşik koşu yaklaşık 4,3 saniyede raporsuz bitiyor; çıkış 137.",
+    "mechanism": "Kayıtlı kernel çıktısında Memory cgroup out of memory ve headless_shell/MainThread öldürülmesi var. Deney raporu browser --memory 1g sınırını belirtiyor.",
+    "boundary": "137 tek başına OOM kanıtı değildir; burada kernel kaydıyla destekli. Bu, LLM/ajanın genel RAM ihtiyacını veya Hetzner kapasitesini ölçmez. Örneklenmiş tepe gerçek anlık tepeden düşük olabilir.",
+    "test": "Büyüyen test setinde cgroup OOM, exit/signal, peak bellek, zaman sınırı ve batch makbuzu birlikte gözlenmeli; kaynak artışı ölçüme dayanmalı.",
+    "status": "Raporda 2 GB ile aynı aday 3/3 PASS; örneklenmiş tepe 887–942 MiB. Sonra testleri gruplama ve ayrı kaynak sınırları eklenmiş.",
+    "source_ids": [
+      "E31",
+      "E11",
+      "E12",
+      "E13"
+    ],
+    "brief_ids": [
+      "B01"
+    ]
+  },
+  {
+    "id": "K04",
+    "kind": "Araç çıktısı + tarihî deney",
+    "period": "13–15 Eylül",
+    "observation": "SCHEDULER_LEASE_LOST; iki UNKNOWN slot dolu kalırken diğer ekipler başlayamıyor.",
+    "mechanism": "15 Eylül deneyinde Clamshell/Maintenance Sleep zamanları heartbeat kesintileriyle eşleştirilmiş. 120 saniyelik sahiplik süresi doluyor; lost bayrağı kalıcı, release de aynı süre şartına takılıyor; max_slots=2 doluyor.",
+    "boundary": "03:59 devir raporu ilk nedeni henüz bilmiyordu; sonraki deney uyku korelasyonunu bulmuş. Bütün lease kayıplarının uyku olduğu söylenemez. Bu olay Mac üzerinde; Ubuntu sunucuda aynı tetikleyici beklenmez.",
+    "test": "Duraklama, restart, devralma ve eski worker dönüşü ayrı sınanmalı; eski sahibin yazması engellenirken kapasite geri kazanılmalı.",
+    "status": "Aynı sahip ve değişmemiş nesil için kontrollü yenileme, ölü slot uzlaştırma ve yeniden kuyruklama kaydedilmiş; 06:16 snapshot ilerlemenin yeniden başladığını destekliyor.",
+    "source_ids": [
+      "E03",
+      "E07",
+      "E30",
+      "E28"
+    ],
+    "brief_ids": [
+      "B06"
+    ]
+  },
+  {
+    "id": "K05",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15 Eylül 02:24 UTC",
+    "observation": "Team 5 UI-05 VERIFIED olduktan aynı saniye sonra PACKAGE_LEASE_LOST.",
+    "mechanism": "Yenileme iş parçacığı yalnız CLAIMED/IMPLEMENTED durumunu kabul ediyor; kendi VERIFIED geçişini sahiplik kaybı sanıyor ve kalıcı hata kaydediyor.",
+    "boundary": "Bu vaka scheduler uyku vakasından ayrıdır; eski deneydeki zamanlı teşhise dayanır.",
+    "test": "Accept/renew/checkpoint eşzamanlılığında kendi terminal geçişi, gerçek devralma ve eski token birbirinden ayrılmalı.",
+    "status": "Kendi VERIFIED geçişini ayırt etme, kabul öncesi heartbeat durdurma ve aynı nesilde devam makbuzları mevcut.",
+    "source_ids": [
+      "E08"
+    ],
+    "brief_ids": [
+      "B06"
+    ]
+  },
+  {
+    "id": "K06",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15 Eylül ve tarihsiz log birikimi",
+    "observation": "Yönetim gözlemi her döngüde BlockageStoreError veriyor.",
+    "mechanism": "Deney aynı olay anahtarıyla route alanı değişen payload yazıldığı için IDEMPOTENCY_CONFLICT oluştuğunu saptıyor; yalnız hata sınıfı loglanmış.",
+    "boundary": "Eski rapor 1275 satır saymış; bu incelemede dosyada 1385 satır var. Bu birikim farkıdır, 1385 ayrı kök neden değildir.",
+    "test": "Olay kimliği ve değişebilir projeksiyon ayrılmalı; tekrar gözlem, rota değişimi ve retry idempotency testleri bulunmalı.",
+    "status": "Mevcut olayın tekrar yazılmaması ve hata nedeninin loglanması kaydedilmiş.",
+    "source_ids": [
+      "E06",
+      "E08"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "K07",
+    "kind": "Yerel tarihî kayıt",
+    "period": "Tarihsiz loglar; 16 Eylül 02:20–02:50 UTC",
+    "observation": "PostgreSQL deadlock kayıtları; claim sırasında işçilerin ve zamanlayıcının yığılması.",
+    "mechanism": "Ham logda jobs satırları üzerinde 7 deadlock kaydı var. Ayrı 10b deneyinde bir transaction kilit tutarken ikinci bağlantı reviewer kapasitesi için aynı job kilidini istiyor.",
+    "boundary": "Tarihsiz 7 deadlock satırını 10b olayıyla birebir eşleştirecek zaman/correlation bilgisi yok; iki kanıt grubu aynı olay diye sayılmaz.",
+    "test": "Kilit sırası, transaction sınırı ve ikinci bağlantı kullanımı gerçek eşzamanlı yük altında sınanmalı; süre ve ilk hata loglanmalı.",
+    "status": "10b raporunda kapasite okuması claim transaction öncesine taşınmış.",
+    "source_ids": [
+      "E04",
+      "E05",
+      "E19"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "K08",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15 Eylül 03:59 UTC snapshot",
+    "observation": "INCIDENT.json okunamadı diyen sonuç SUCCESS/diagnosed olarak kaydedilmiş.",
+    "mechanism": "Dosyayı oku talimatı var; dosya içeriği promptta yok, yerel okuma aracı yok ve komut çalıştırmak yasak. Model çağrısının bitmesi teşhis başarısı sayılmış.",
+    "boundary": "Bu, raporlanan bir araç/yetki-sözleşme uyumsuzluğudur; modelin kendi kendine dosyayı okumayı reddetmesi şeklinde yorumlanamaz.",
+    "test": "Teşhis başarısı kaynak kimliği, evidence_read, nedensel bulgu ve doğrulanabilir sonraki adım gerektirmeli; araç çağrısı bitişi yeterli olmamalı.",
+    "status": "Sınırlı olay içeriğinin girdiye eklenmesi, salt okunur erişim ve NEEDS_EVIDENCE sonucu kaydedilmiş.",
+    "source_ids": [
+      "E27",
+      "E35",
+      "E08"
+    ],
+    "brief_ids": [
+      "B04"
+    ]
+  },
+  {
+    "id": "K09",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15–18 Eylül",
+    "observation": "NEEDS_TRIAGE / NO_QUALIFIED_REPAIR_PROFILE / PARALLEL_CHILDREN_PENDING ile iş sessizce bekliyor.",
+    "mechanism": "Onarım talebini tüketen yürütücü yok; tamamlanmış takım yeniden kuyruğa alınmıyor veya bütün takımlar bitmişken root hâlâ çocuk bekliyor. Rol/rapor varlığı çalışan bir onarım yolu sağlamıyor.",
+    "boundary": "Family watch raporuna göre bu gözlemci kendiliğinden onarım yapmaz veya worker yeniden başlatmaz. Alarmı eklemek onarım döngüsünü tamamlamak değildir.",
+    "test": "Her bekleme gerçek sorumlu iş, uyanma olayı, son ilerleme ve zaman sınırı taşımalı; yürütülebilir onarım yoksa görünür karar talebi oluşmalı.",
+    "status": "Foundation repair/recall yolları kademeli eklenmiş. 18 Eylül 16:18 family watch WAIT_WITHOUT_OWNER, ERROR_WITHOUT_REPAIR, NO_PROGRESS gözlemini eklemiş.",
+    "source_ids": [
+      "E13",
+      "E20",
+      "E21",
+      "E24"
+    ],
+    "brief_ids": [
+      "B05"
+    ]
+  },
+  {
+    "id": "K10",
+    "kind": "Yerel tarihî kayıt",
+    "period": "18 Eylül 07:21–10:09 UTC",
+    "observation": "AGENT_PROGRESS_STALLED → tekrar → üçüncü olayda RECOVERY_RETRY_BOUND.",
+    "mechanism": "Birleşik test süresi 570 saniyeden yaklaşık 70 dakikaya büyümüş. tdd.poll içindeki controller çalışırken yeni makbuz gelmediği için 600 saniyelik ajan boşta sınırı işleyen testi kesmiş.",
+    "boundary": "Bu süreler olay raporundan; bugün benchmark yapılmadı. Ajan zamanlayıcısını durdurmak bütün timeoutları kaldırmak anlamına gelmemeli.",
+    "test": "Model düşünmesi, controller çalışması, test ilerlemesi ve gerçek takılma farklı telemetriyle ve ayrı son tarihlerle izlenmeli.",
+    "status": "Controller yürütme penceresinde ajan sayaçlarının durdurulduğu; test tarafında ayrı timeout ve lease sınırlarının korunduğu kaydedilmiş.",
+    "source_ids": [
+      "E22"
+    ],
+    "brief_ids": [
+      "B02"
+    ]
+  },
+  {
+    "id": "K11",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15–16 Eylül",
+    "observation": "Coder kapasitesi olsa bile işler review kapasitesi bekleyerek yeniden kuyruğa dönüyor; başka PENDING paketler alınmıyor.",
+    "mechanism": "Sabit reviewer rotası kotaya takılıyor; ilk IMPLEMENTED paket her claimde tekrar seçiliyor. Ayrıca root kabul kapasitesi onarımın kullanacağı rol yerine koordinatör rolünden ölçülmüş.",
+    "boundary": "RAM eklemek hesap kotasını veya rol bağımlılığını çözmez. Alternatif reviewer bağımsızlığı ve yetkisi korunmalı.",
+    "test": "Kaynak bütçesi rol bazında olmalı; reviewer yokken bağımsız yapılabilir iş ilerlemeli, bekleme WIP sınırı ve uyanma koşulu taşımalı.",
+    "status": "Review defer, kapasiteye göre paket seçimi ve onarım rolüne göre admission raporlanmış.",
+    "source_ids": [
+      "E18",
+      "E19"
+    ],
+    "brief_ids": [
+      "B07"
+    ]
+  },
+  {
+    "id": "K12",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15 Eylül 20:04–21:10 UTC",
+    "observation": "Birden fazla takım 429 ile, API yeniden oluşturulurken bazıları 502 ile düşüyor.",
+    "mechanism": "İşçiler aynı anahtarla sık verify_contract sorgusu yapıyor; kapasite bekleme döngüsünde üç saniyede bir GET kaydedilmiş. Gateway hatası unknown sınıfına gidiyor.",
+    "boundary": "Bu dosyada anlatılan tarihsel API limit değişikliği bugünkü yapılandırma tavsiyesi veya yaptığımız işlem değildir.",
+    "test": "Ortak kota bütçesi, sorgu birleştirme, backoff/jitter ve kesinti sonrası sözleşme uzlaştırması yük testinde doğrulanmalı.",
+    "status": "Sınırlı backoff/Retry-After, gateway sınıflandırması ve tarihsel rate-limit artırımı var; bekleme sorgularını seyrekleştirme o bölümde açık kalmış.",
+    "source_ids": [
+      "E18"
+    ],
+    "brief_ids": [
+      "B07"
+    ]
+  },
+  {
+    "id": "K13",
+    "kind": "Araç çıktısı + tarihî deney",
+    "period": "18 Eylül",
+    "observation": "UI-48 için 4.762 CLAIM olayı; çok az model çalışması. Sonra TDD state exceeds storage limit ve review context sınırı.",
+    "mechanism": "93 bin karakter tarihçe CONTEXT_CAPACITY_UNSUPPORTED üretmiş; CAPACITY alt dizesi gerçek kapasite beklemesi sanılmış. Ayrı olayda makbuz tekrarları state boyutunu 1.008.940 byte, build kanıtı tek başına 100.248 karakter yapmış.",
+    "boundary": "4.762 değeri CLAIM sayısıdır; 4.762 ayrı model çağrısı ya da görev değildir. 13 saat aynı zaman aralığındaki entegrasyon beklemesiyle de ilişkilidir.",
+    "test": "Girdi ve durum boyutu görev büyümesiyle sınanmalı; büyük kanıt kaybolmadan harici artifact referansına taşınmalı; aynı checkpoint tekrarları ölçülmeli.",
+    "status": "Bounded history, tam kanıta hash/ref ile erişim, state compaction ve açık hata sınıflandırması raporlanmış; state 233.073 byte seviyesine indirilmiş.",
+    "source_ids": [
+      "E20",
+      "E32",
+      "E23"
+    ],
+    "brief_ids": [
+      "B03"
+    ]
+  },
+  {
+    "id": "K14",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15–18 Eylül",
+    "observation": "UI-54 bağımlı bileşeni bekliyor, merge edilmiş takım recall sonrası çalışmıyor; tüm takımlar birleştiği halde root ilerlemiyor.",
+    "mechanism": "Paket bağımlılığı ve entegrasyon hazır oluşu aynı biçimde modellenmemiş. Root foundation eskiliği bütün 73 paketi stale gösterip düzeltmeyi yapacak integration aşamasını da kapatmış.",
+    "boundary": "Ayrı worktree yaratmak tek başına bağımlılık, ortak temel, recall veya entegrasyon sahipliği sorunlarını çözmez.",
+    "test": "Bağımlılık DAGı, ortak dosya sahipliği, birleşik aday regresyonu ve bitmiş işin geri çağrılması uçtan uca doğrulanmalı.",
+    "status": "Dependency pending/release, merged takımın yeniden kuyruğa alınması, foundation repair ve integration giriş koşulu düzeltmeleri kaydedilmiş.",
+    "source_ids": [
+      "E14",
+      "E16",
+      "E21",
+      "E20"
+    ],
+    "brief_ids": [
+      "B08"
+    ]
+  },
+  {
+    "id": "K15",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15–18 Eylül",
+    "observation": "Compaction sonrası TDD_UPGRADE_DISCOVERY_MISMATCH; browser makbuzuyla CORRECTION_REGRESSION_STALE_OR_INCOMPLETE; dosyası değişmeyen committe CORRECTION_SOURCE_CHANGED.",
+    "mechanism": "Makbuz şeması ve kimlik kuralları tüm üretici/tüketicilerde birlikte güncellenmemiş. Liste→count/digest dönüşümünü okuyucu bilmiyor; tek süreç returncode şartı toplu tarayıcı koşusuna uygulanıyor.",
+    "boundary": "Alt küme test başarısı tüm ürünün AC/DoD ve alpha teslimini kanıtlamaz; değişiklik sonrası tarihsel test sonuçları yeniden çalıştırılmadı.",
+    "test": "Sürümlemiş sözleşme, producer/consumer uyumu, eski checkpointten devam ve birleşik akış canary testi olmalı.",
+    "status": "Ortak selection_matches, profile digest taşıma ve içerik digestine göre değişiklik denetimi eklenmiş. 10as raporu ilgili regresyon alt kümesinde 518/0 bildiriyor.",
+    "source_ids": [
+      "E23",
+      "E16"
+    ],
+    "brief_ids": [
+      "B20"
+    ]
+  },
+  {
+    "id": "K18",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15–18 Eylül",
+    "observation": "Geçersiz test isteği işi ERROR yapıyor; ambient tip eksikliği ürün hatası gibi görülüyor; olmayan production kanıtı için 14 review tekrarı.",
+    "mechanism": "Çalıştırıcı ortamı, test yazarı hatası, ürün RED sonucu ve erişilemeyen kabul kanıtı ayrılmamış. Reviewer kapsam dışı kanıt istiyor; author bu beklentiye karşı kendini skip eden test üretmiş.",
+    "boundary": "Bunlar test altyapısı/oracle boşluklarıdır; bütün oracle probleminin çözüldüğü veya bağımsız iş doğruluğunun kanıtlandığı sonucuna varılamaz.",
+    "test": "Test çalıştı mı, assertion var mı, hangi iş kuralını doğruluyor, çalıştırıcı mı ürün mü bozuk soruları ayrı kanıtlarla yanıtlanmalı.",
+    "status": "Ambient .d.ts dahil etme, geçersiz isteğe REJECTED geri bildirimi, kapsamlı review ve belirli path hatalarını yazarına gönderme raporlanmış.",
+    "source_ids": [
+      "E11",
+      "E15",
+      "E23"
+    ],
+    "brief_ids": [
+      "B09"
+    ]
+  },
+  {
+    "id": "K16",
+    "kind": "Yerel tarihî kayıt",
+    "period": "13 Eylül; 18 Eylül 16:46–17:24 UTC",
+    "observation": "16:46 review QUEUED ve job RUNNING; slot 0, PLANE_RECOVERY_ACTOR_AMBIGUOUS. 17:24 yetki makbuzu sonrası PLANE_RECOVERY_OWNER_STATE_PENDING; pano WAITING_DECISION.",
+    "mechanism": "Paylaşılan aktörle insan/otomasyon durum değişikliği ayırt edilemiyor. Yetki kaydı eklenince ilk engel değişiyor; bu kez controller panonun ERROR veya IN_PROGRESS olmasını istiyor, mevcut WAITING_DECISION durumundan çıkışı sahibinden bekliyor.",
+    "boundary": "Pano kararını beklemek tasarımın bilinçli sınırı olabilir; otomasyon arızasıyla aynı şey değildir. Ancak kullanıcı hedefiyle uyumu çözülmemiştir. Sonraki nihai kabul veya remote alpha yayını doğrulanmadı.",
+    "test": "İnsan ve otomasyon eylemi ayrı doğrulanabilir kimlik/revision taşımalı; requeue sonrası gerçek claim ve review başlangıcı gözlenmeli.",
+    "status": "18 Eylül 16:37 review requeue; 17:24 sahip yetkisi makbuzu kabul edilmiş. Son kayıtta pano durumunun insan tarafından değiştirilmesi bekleniyor. Bu yüzden son engeli hâlâ actor ambiguous diye raporlamıyoruz.",
+    "source_ids": [
+      "E33",
+      "E37",
+      "E38",
+      "E29",
+      "E25"
+    ],
+    "brief_ids": [
+      "B05",
+      "B14"
+    ]
+  },
+  {
+    "id": "K17",
+    "kind": "Yerel tarihî kayıt",
+    "period": "15–18 Eylül",
+    "observation": "17 Eylül yanıtı Sistem kurulumu bitti, bitmek üzere diyor; 18 Eylül kaydı uzun sessiz durmayı gösteriyor.",
+    "mechanism": "RUNNING, COMPLETED, VERIFIED ve MERGED farklı nesnelerin durumları. Bunlar nihai kullanıcı kabulünü göstermiyor. Teşhis çağrısının tamamlanması ve yönetici raporunun iletilmesi de onarım yerine sayılmış.",
+    "boundary": "17 Eylül yanıtı bütün teslimin bittiğini açıkça söylemiyor; buna rağmen yakın tamamlanma ve müdahale gerekmez beklentisi sonraki olaylarla doğrulanmıyor. 79 teslim 79 benzersiz ürün gereksinimi değildir.",
+    "test": "Aşama, paket, bütünleşik ürün, remote deploy ve insan kabulü ayrı durumlar olmalı; tamamlandı etiketi ilgili somut kanıta bağlanmalı.",
+    "status": "Family stall watch eklenmiş ve bazı dar kurtarmalar gerçekten üretimi yeniden başlatmış. 18 Eylül 16:14 raporu 74/74 verified ve 79 merged delivery ile GREEN kaydetmiş; ardından acceptance review ve 17:24 pano durumu beklemesi var.",
+    "source_ids": [
+      "E34",
+      "E20",
+      "E24",
+      "E26",
+      "E35",
+      "E33"
+    ],
+    "brief_ids": [
+      "B20"
+    ]
+  },
+  {
+    "id": "CP-01",
+    "kind": "Dış kaynak kaydı",
+    "period": "2024-12-01; 2025-03-21; 2025-10-16",
+    "observation": "Meşru uzun süreç beklenirken ajan döngüde sanılıp durduruluyor.",
+    "mechanism": "Sabit tekrar sayısı, gerçek ilerleme yokluğu ile beklemeyi ayıramıyor. Maintainer açıklaması ve kullanıcı CI gözlemiyle yüksek mekanizma güveni; burada yeniden üretilmedi.",
+    "boundary": "Eski OpenHands vakası ile yeni SDK iyileştirmesi aynı mekanizma ailesi; aynı tek olay değildir.",
+    "test": "Öneri, çalıştırılmadı: kontrollü uzun test ile gerçekten döngüye giren ajanı aynı gözlemciye ver; uzun test korunmalı, gerçek döngü sınır içinde durmalı.",
+    "status": "#763 2025-12-18 birleşmiş; varsayılan eşikler korunmuş. Her iş yükünde yanlış pozitifin bittiği veya kullanıcının sürümünde düzeldiği kanıtı değildir.",
+    "source_ids": [
+      "CPS-01",
+      "CPS-02",
+      "CPS-03"
+    ],
+    "brief_ids": [
+      "B02"
+    ]
+  },
+  {
+    "id": "CP-03",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-06-23",
+    "observation": "Sert kesilen iş callback göndermiyor; RUNNING ve PR'deki inceleme sürüyor mesajı gerçek sonucu yansıtmıyor.",
+    "mechanism": "Graceful exception kapanışına bağlanan tamamlanma bildirimi sert kapanış yolunda garanti değil. Kaynak açıkça AI-yardımlı inceleme; mekanizma makul, bütün olaylar bağımsız doğrulanmadı.",
+    "boundary": "SIGKILL/OOM için süreç içi finally veya signal handler garantisi kurulamaz. Sayı600s evrensel güncel ürün sınırı diye sunulmamalı.",
+    "test": "Öneri, çalıştırılmadı: başarı, SIGTERM, SIGKILL, OOM ve callback ağ kesintisi enjekte et; bir kez terminalleşme, görünür neden ve kaynaksız yetim iş bırakmama doğrulansın.",
+    "status": "#203 kapalı; cleanup #209 2026-06-24 birleşmiş. İlişkili timeout #206 erişimde açık. Bütün kill yolları düzeldi denemez.",
+    "source_ids": [
+      "CPS-06",
+      "CPS-07",
+      "CPS-08"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "CP-04",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-03-26",
+    "observation": "Arayüz mesaj alıyor ama ajan başlamıyor; görünür hata yok.",
+    "mechanism": "Traceback MCP başlangıç timeout'unu destekliyor. Ağ gecikmesi, MCP deadlock'u veya kaynak yetersizliği alternatifleri kanıtlanmamış.",
+    "boundary": "HTTP 200 veya skill listesinin yüklenmesi agent readiness kanıtı değil. Bu vaka RAM azlığını kanıtlamaz.",
+    "test": "Öneri, çalıştırılmadı: tek MCP cevabını geciktir; işin ready görünmemesi, hangi yeteneğin eksik olduğunun raporlanması ve kısıtlı çalışma politikasının uygulanması ölçülsün.",
+    "status": "2026-09-27 canlı API açık; üretici düzeltmesi doğrulanmadı.",
+    "source_ids": [
+      "CPS-09"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "CP-05",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-09-16",
+    "observation": "Basit shell komutları bile milisaniyeler içinde SIGKILL oluyor; diğer araçlar çalışıyor.",
+    "mechanism": "Raporun izole deneyine göre owner-liveness probe başarısızlığı owner öldü diye yorumlanıp süreç grubu öldürülüyor. Üretici onayı yok; güçlü kullanıcı kanıtı.",
+    "boundary": "Sandbox'ı tamamen kaldırmak önerimiz değildir. Bu örnekte137 OOM değil supervisor SIGKILL belirtisi.",
+    "test": "Öneri, çalıştırılmadı: canlı worker ile sağlık probunu engelle, ardından gerçekten worker'ı öldür; iki durum farklı sonuç ve neden üretmeli.",
+    "status": "2026-09-27 açık.",
+    "source_ids": [
+      "CPS-10"
+    ],
+    "brief_ids": [
+      "B01"
+    ]
+  },
+  {
+    "id": "MA-03",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-07-27",
+    "observation": "Agent list dört ajan gösterirken swarm status sıfır gösteriyor.",
+    "mechanism": "Üç uzlaştırılmayan kayıt yolu; kodlu tekrar raporu ve owner'ın yayımlanan paket doğrulaması var.",
+    "boundary": "Ajan kaydının görünmesi, gerçek görev yürütmesini tek başına kanıtlamaz.",
+    "test": "Dört worker başlat; API, pano, scheduler ve gerçek process/lease kayıtlarını karşılaştır. Birini öldürünce bütün görünümler belirlenmiş sürede uzlaşmalı.",
+    "status": "Owner v3.32.23'te aynı repro ile doğruladı; resmî sürüm kaydı mevcut.",
+    "source_ids": [
+      "MAS-03",
+      "MAS-04"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-05",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-02-10",
+    "observation": "Üst timeout hata dönüyor, alttaki model süreci çalışmaya devam ediyor.",
+    "mechanism": "Owner tarafından kabul edilen timeout/child-process yaşam döngüsü uyumsuzluğu.",
+    "boundary": "Promise'ın kapanması ile process'in bitmesi ayrı olaylar; bu kaynak yerel OOM'un sebebini ispatlamaz.",
+    "test": "Uzun alt process ve torun process başlat; dış timeout ver. Tanımlı bekleme sonunda süreç, lease ve rezervasyon kalmamalı; ikinci worker eski işi sürdüren process ile yarışmamalı.",
+    "status": "Owner 26 Martta v3.5.47 düzeltmesini bildirdi; binary bağımsız denenmedi.",
+    "source_ids": [
+      "MAS-08",
+      "MAS-09"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-01",
+    "kind": "Dış kaynak kaydı",
+    "period": "2023-12-08",
+    "observation": "OOM/137 sonrası görev RUNNING kalıyor; tekrar gönderim boru hattını ilerletmiyor.",
+    "mechanism": "Raporlayan worker kaybı ile heartbeat tespit boşluğu arasında bağ kuruyor. Maintainer DELETE bayrağının yürütmeyi durdurmadığını doğruluyor; kesin iç kök neden bu kaynakta kapanmıyor.",
+    "boundary": "Eski sürüm vakasıdır; güncel Kestra’da devam ettiğini veya kullanıcının aynı bug’a çarptığını göstermez.",
+    "test": "Test çalışırken workerı OOM ile öldür; terminal durum, kaynak temizliği, yeniden sahiplenme ve tek teslim oluşumunu ölç.",
+    "status": "Issue 2024-05-02 completed; milestone 0.17.0. Kesin fix PR ve yayımlanan sürüm burada doğrulanmadı.",
+    "source_ids": [
+      "WFS-01"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-02",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-05-22",
+    "observation": "SLA ile durdurulan görev, bütün worker JVM’ini tekrar tekrar düşürüyor.",
+    "mechanism": "Issue yazarına göre interrupted bayrağı temizlenmeden son durum JDBC’ye yazılıyor; bağlantı alma InterruptedException üretip fatal shutdown’a dönüşüyor. Stack trace güçlü; bağımsız tekrar testi yapılmadı.",
+    "boundary": "Hikari hatası bu olayda bağlantı havuzunun dolduğunu kanıtlamıyor. Her Kestra timeout’unun sonucu değildir.",
+    "test": "Bir takımı SLA ile iptal ederken komşu takımların ilerlediğini ve iptal edilen işin son durumunun yazıldığını kontrol et.",
+    "status": "Issue açık; develop üzerinde düzelmiş görünüyor yorumu var, yayımlanan düzeltme sürümü doğrulanmadı.",
+    "source_ids": [
+      "WFS-02"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-08",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-03-15",
+    "observation": "RUNNING görünen işi worker hiç almıyor; yeniden bağlanınca iş sahipsiz kalıyor.",
+    "mechanism": "Raporlayan stream keepalive ile ayrı heartbeat RPC’sinin farklılığını izliyor; worker canlı görünürken görev taşıyan stream ölebiliyor. Tespit güçlü ama maintainer doğrulaması yok.",
+    "boundary": "Azure L7 topolojisine özgü rapor; bütün Hatchet kurulumlarına genellenmez.",
+    "test": "Idle proxy bağlantısını kes, sonra iş gönder; delivery acknowledgement yoksa iş yeniden güvenli sahiplenilmeli.",
+    "status": "18 Haziran stale sonrası not_planned kapanmış; kapalı olması düzelmiş demek değil.",
+    "source_ids": [
+      "WFS-09"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "CP-02",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-02-23",
+    "observation": "30 worker, toplam 8 GiB sınırındaki SWTBench koşusu 5 saat 4 dakika sonra OOMKilled/137.",
+    "mechanism": "Parent düzeltmesi worker belleği çoğalmasını kapsamamış. Issue ile düzeltme PR'si aynı mekanizmayı belirtir; yüksek güven. Tek tek bellek parçalanması iddiaları bağımsız ölçülmedi.",
+    "boundary": "Bu coding ajanının1 GB tükettiği iddiası değildir; benchmark koordinatörü ve worker süreçlerinin toplamıdır. 137 tek başına değil, OOMKilled kaydıyla birlikte kullanılmıştır.",
+    "test": "Öneri, çalıştırılmadı: hedef paralellikte uzun soak testi; parent/child RSS, konteyner limiti, retry başına artış ve OOM olaylarını ayrı ölç.",
+    "status": "#446 API'ye göre 2026-03-23 birleşmiş. Evrensel RAM tasarruf oranı doğrulanmadı.",
+    "source_ids": [
+      "CPS-04",
+      "CPS-05"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-04",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-07-13",
+    "observation": "Worktree sayısı arttıkça arka plandaki model işleri ortak hesap kotasını tüketiyor.",
+    "mechanism": "Proje sahibinin doğruladığı tasarım kusuru: yerel tekilleştirme var, kullanıcı/repo çapında sınır yok.",
+    "boundary": "Eski kusur bugünkü sürümün kesin davranışı diye sunulmamalı; performans tekrar deneyi yapılmadı.",
+    "test": "Aynı hesabı paylaşan 10 worktree ve iki repo aç; tanımlı global çağrı/eşzamanlılık bütçesinin aşılmadığını, 429 sonrasında bütün filonun ortak geri çekildiğini doğrula.",
+    "status": "#2662 ve #2663 14 Temmuzda merged; 3.27.0 ve 3.28.0 yayın commit'leri doğrulandı.",
+    "source_ids": [
+      "MAS-05",
+      "MAS-06",
+      "MAS-07"
+    ],
+    "brief_ids": [
+      "B07"
+    ]
+  },
+  {
+    "id": "WF-10",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-06-22/2026-06-23",
+    "observation": "Yeni işler başlayamıyor; alternatif bölge de benzer nedenle düşüyor.",
+    "mechanism": "Şirket raporu K8s control plane yüklenmesi ve etcd quorum kaybını açıklıyor; ikinci bölge aynı zayıflıkla daha küçük tabandan hızla büyüyor.",
+    "boundary": "Bütün~18 saat boyunca her iki bölgenin aynı anda kapalı olduğu söylenmiyor; şirketin kendi raporu.",
+    "test": "144 takımın cold-start dalgasını kademeli test et; admission backpressure ve bir cluster kaybında gerçek bağımsız failover ölç.",
+    "status": "Rapor toparlanmayı bildiriyor; planlanan mimarinin tamamlandığı bu kaynakla doğrulanmıyor.",
+    "source_ids": [
+      "WFS-12"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-12",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-07-15",
+    "observation": "Ajan CLI’si bellek hatası, thread açma hatası veya sonsuz çalışan süreç görünümü veriyor.",
+    "mechanism": "Limits ve VmPeak ölçümü sınıra işaret ediyor; hang’in Bun iç nedeni yazarın çıkarımı. Fiziksel RAM tüketimiyle aynı limit değil.",
+    "boundary": "İzolasyonu kapatmayı önermiyoruz. Toplam sunucu RAM’ini büyütmek iç limitin otomatik değişeceği anlamına gelmez.",
+    "test": "İzolasyon açıkken gerçek SDK + tarayıcı iş yükünü limitlerle çalıştır; testten sonra namespace sınırları ve doğru OOM sınıflandırmasını doğrula.",
+    "status": "PR 10138 15 Temmuzda merge; ilk release bilinmiyor. PR ortamında gerçek nsjail uçtan uca testi yapılmadığı açık.",
+    "source_ids": [
+      "WFS-14",
+      "WFS-15"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-02",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-05-12/2026-05-13",
+    "observation": "Tamamlanmış convoy'lar yaklaşık 40 saniyede bir yeniden tamamlandı bildirimi üretiyor.",
+    "mechanism": "Tek seferlik tamamlanma bildirimi kaydının eksikliği rapor sahibinin hipotezi.",
+    "boundary": "Tek kurulum raporu; bütün kurulumlarda sıklık çıkarılamaz.",
+    "test": "Tek completion olayını 100 kez yeniden teslim et; tamamlama kaydı ve takip işi birer kez oluşmalı, uyarı kuyruğu büyümemeli.",
+    "status": "27 Eylül erişiminde açık, needs-triage.",
+    "source_ids": [
+      "MAS-02"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-03",
+    "kind": "Dış kaynak kaydı",
+    "period": "2023-05-11",
+    "observation": "10 kayıt için düşünülen işlem heartbeat timeout sonrası ilk 3 kayıt tekrar edilince 13 altakış başlatıyor.",
+    "mechanism": "Activity retry semantiği ve yan etkinin tekilleştirilmemesi; maintainer heartbeat detayları da throttling yüzünden tekrar ihtimalini tamamen kaldırmaz diyor.",
+    "boundary": "Forum tek geliştirici örneğidir; yaygınlık ölçümü ve şirket genellemesi yok.",
+    "test": "GitHub yazımı tamamlandıktan sonra cevap alınmadan workerı kes; tekrar geldiğinde ikinci PR/deploy oluşmamalı.",
+    "status": "Ürün bug düzeltmesi olarak sunulmamış; uygulama tasarımı gereği.",
+    "source_ids": [
+      "WFS-03"
+    ],
+    "brief_ids": [
+      "B13"
+    ]
+  },
+  {
+    "id": "WF-09",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-04-26",
+    "observation": "Eski kuyruk öğeleri lease doğrulamasında aynı sayaca takılıp sonsuz dönüyor.",
+    "mechanism": "Doğrulama attempt sayacı artmadan hata veriyor. PR 4321 aynı yolu açıklayıp backoff/attempt/dequeue düzeltmesi öneriyor.",
+    "boundary": "Üretim Redis temizliği burada uygulama talimatı değildir; ölçümler yaygınlık istatistiği değildir.",
+    "test": "Eski şemalı kuyruk kaydı enjekte et; bounded retry/DLQ oluşmalı ve sağlıklı görev akış hızı korunmalı.",
+    "status": "Issue ve PR açık; birleşmiş düzeltme diye sunulmadı.",
+    "source_ids": [
+      "WFS-10",
+      "WFS-11"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-14",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-07-16",
+    "observation": "Otomatik altakış kurtarması aynı lock üzerinde yarışıp INFO log fırtınasına dönüşüyor.",
+    "mechanism": "Raporlayan bütün retry’ların aynı deterministik childId lock’una geldiğini kod yollarıyla açıklıyor;2 s blocking lock bekleyişi workerları da tüketiyor.",
+    "boundary": "Kod analizi+üretici kullanıcı gözlemi; bağımsız benchmark değil. Microsoft Conductor ve DBOS Conductor farklı ürünler.",
+    "test": "Aynı child launch hatasını iki replika ve çok worker altında tetikle; bir etkinrepair, bounded backoff ve sağlıklı işlere ilerleme bekle.",
+    "status": "Issue açık; çözüm önerileri uygulanmış ve doğrulanmış sayılmadı.",
+    "source_ids": [
+      "WFS-18"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "CP-06",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-09-13",
+    "observation": "Model değişimi sonrası geçmiş tekrar gönderilirken HTTP 400; yeni prompt denemeleri aynı biçimde başarısız.",
+    "mechanism": "Raporlayan kişi görüntü köprü mesajlarının tool-call eşleşmesini kopardığını payload A/B deneyiyle gösteriyor. Üretici onayı yok.",
+    "boundary": "Bu tek adaptör/oturum raporudur. Bütün sağlayıcılar arası geçişler bozuk denemez.",
+    "test": "Öneri, çalıştırılmadı: paralel metin/görüntü araç geçmişini taşıyan işi sağlayıcıA'danB'ye aktar; çağrı kimlikleri, sonuç sayısı ve devam edebilme doğrulansın.",
+    "status": "2026-09-27 açık; dağıtılmış düzeltme bulunamadı.",
+    "source_ids": [
+      "CPS-11"
+    ],
+    "brief_ids": [
+      "B15"
+    ]
+  },
+  {
+    "id": "CP-07",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-08-27",
+    "observation": "Yüklü pluginler çalışırken list/update komutları kurulu değil diyor.",
+    "mechanism": "Raporlayan kişi disk yapısı ve geri kurma deneyi gösteriyor; ayrıca ölü PID'lere ait pending kilitler gözlemiş. Üretici teyidi bulunamadı.",
+    "boundary": "Rapora göre oturumdaki plugin çalışması sürmüş; bunu bütün ajan yürütmesi durdu diye aktarmamak gerekir.",
+    "test": "Öneri, çalıştırılmadı: havuz yükseltmesini ortasında kes; yeniden başladıktan sonra kurulu/çalışan sürüm eşleşmesi ve stale-lock geri kazanımı doğrulansın.",
+    "status": "2026-09-27 açık.",
+    "source_ids": [
+      "CPS-12"
+    ],
+    "brief_ids": [
+      "B15"
+    ]
+  },
+  {
+    "id": "MA-06",
+    "kind": "Dış kaynak kaydı",
+    "period": "2025-01-06/2025-01-07",
+    "observation": "Java işi için dönen paket alanı, Python alanı bekleyen şemada reddediliyor; tekrarlar ve hata işleme sonrası uygulama çıkıyor.",
+    "mechanism": "Traceback açık; collaborator format uyumsuzluğunu teşhis etmiş. Ayrı bir recovery bugının mekanizması tam doğrulanmış değil.",
+    "boundary": "Kapanış başarı değildir. Model değişimi önerisi kapsamlı iyileştirme kanıtı değildir.",
+    "test": "Eksik alanlı, eski sürümlü ve semantik olarak yanlış üç çıktı ver; görev sessiz başarıya geçmemeli ve recovery ilk hata kanıtını korumalı.",
+    "status": "45 günlük hareketsizlik nedeniyle bot kapattı; düzeltilmiş sürüm kanıtı yok.",
+    "source_ids": [
+      "MAS-10",
+      "MAS-11",
+      "MAS-12"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-08",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-09-18",
+    "observation": "Protocol seçimi SDK'ya uygunsuz parametre geçiriyor; hata metni çıktıya dönüştürülünce workflow tamamlanmış görünüyor. Sessiz endpoint uzun bekleme yaratıyor.",
+    "mechanism": "Kod ve gözlem içeren kullanıcı raporu; maintainer teyidi yok.",
+    "boundary": "Sonsuz timeout yok: bildirilen SDK read timeout'u 600 saniye; uygulamanın 300 saniyelik sınırı bu yolda uygulanmıyor.",
+    "test": "Bağlantıyı kabul edip yanıt vermeyen sahte endpoint ve TypeError üreten adapter kullan; tanımlı deadline'da başarısızlık makbuzu oluşmalı, completion kapısı geçilmemeli.",
+    "status": "Erişimde açık.",
+    "source_ids": [
+      "MAS-14"
+    ],
+    "brief_ids": [
+      "B04"
+    ]
+  },
+  {
+    "id": "WF-05",
+    "kind": "Dış kaynak kaydı",
+    "period": "2023-07-02; rapor 2023-07-17",
+    "observation": "Çocuk işler tamamlanmışken replay, No command scheduled for event ile 15 kez hata veriyor.",
+    "mechanism": "Bakımcı eski SDK’da bilinen nondeterminism hatalarını işaret ediyor. Kullanıcı deployment, query mutation ve karışık worker checksum ihtimallerini reddediyor. Kesin SDK bug teşhisi yok.",
+    "boundary": "Her nondeterminism olayını kullanıcı deployment hatası veya motor bug’ı saymak yanlış. Sürüm eski.",
+    "test": "Devam eden görevlerin kaydedilmiş history’sini aday SDK/kod sürümüyle replay et; farklı komut üretimi varsa yayını engelle.",
+    "status": "Kullanıcı yükseltmeyi planlıyor; bu olayın son başarı teyidi forumda yok.",
+    "source_ids": [
+      "WFS-05"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-07",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-02-28",
+    "observation": "Fonksiyon dönse de serileştirilemeyen dict_items sonucu görev timeout’una kadar asılı kalıyor.",
+    "mechanism": "Çıktı serileştirme hata yolunun görevi bitirememesi; birleşmiş PR bunu düzeltiyor.",
+    "boundary": "Küçük reproducer; büyük şirket kesintisi veya bug’ün güncelde sürmesi iddiası yok.",
+    "test": "Ajan sonucuna geçersiz tip/bozuk JSON ekle; iş belirli sürede açıklayıcı FAILED olmalı, asılı kalmamalı.",
+    "status": "PR 3125 aynı gün merge; değişiklik notu Python 1.27.2.",
+    "source_ids": [
+      "WFS-07",
+      "WFS-08"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-13",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-05-22; release 2026-06-18",
+    "observation": "Prefix’ten yeniden başlayan invocation, ctx.rand kullandığında replay uyumsuzluğu üretebiliyor.",
+    "mechanism": "Rastgele tohumun invocation ID’den türemesi yeni yürütmede farklı seri verebiliyor; maintainer seed’i kalıcılaştıranPR’ı birleştirmiş.",
+    "boundary": "Ürün mühendisliği düzeltmesidir; doğrulanmış şirket outage öyküsü diye sayılmamalı.",
+    "test": "Prefix içinde rastgelelik ve dış çağrı içeren görevi taşı; karar izi korunmalı, uyumsuz geri dönüş açıkça reddedilmeli.",
+    "status": "PR 4750merge ; 1.7.0 release notunda opt-in. Aktifleştirme sonrası <1.7 rollback mümkün değil; eski invocation’lara backfill yok.",
+    "source_ids": [
+      "WFS-16",
+      "WFS-17"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-01",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-01-17",
+    "observation": "Merge kuyruğundaki kayıtlar saatlerce bekliyor; ilgili branch işlenmeden silinebiliyor.",
+    "mechanism": "Katkıcı stale/orphan MR gözlemi ve eskalasyonu eksikliğini bildiriyor; bağımsız doğrulama yok.",
+    "boundary": "Kapalı kayıt bugın bugün sürdüğünü veya eksiksiz çözüldüğünü ispatlamaz.",
+    "test": "Worker bittikten sonra merger'ı durdur; branch'i silme isteğini dene. Teslim kanıtı oluşmadan temizlik reddedilmeli; yeniden açılışta tek MR yürütülmeli.",
+    "status": "2026-02-12 kapalı; düzeltme commit'i/sürümü doğrulanmadı.",
+    "source_ids": [
+      "MAS-01"
+    ],
+    "brief_ids": [
+      "B08"
+    ]
+  },
+  {
+    "id": "MA-11",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-01-14/2026-02-05",
+    "observation": "Ortak koordinasyon dosyası kilitleri tutuluyor/unutuluyor; 20 ajan yaklaşık 2–3 ajanlık işe düşüyor. Zor işler sahipsiz kalıyor.",
+    "mechanism": "Deneyi yürüten mühendislerin doğrudan anlatımı; bağımsız yeniden üretim yok.",
+    "boundary": "Browser iç araştırma projesidir, dış kullanıcıya teslim için hedeflenmemiştir. CI geçişi ERP kabulü değildir.",
+    "test": "Aynı bağımlılık grafiğinde 2/8/20 worker çalıştır; kilitte bekleme, yeniden yapılan iş ve kabul edilen değişiklik/saat eğrisini ölç. Tıkanıklıkta yeni ajan ekleme kararı bu ölçüme dayanmalı.",
+    "status": "Koordinasyonda ilerleme bildirilmiş; sonraki yazı devam eden sapma ve erken tamamlama sorunlarını anlatıyor.",
+    "source_ids": [
+      "MAS-18",
+      "MAS-19"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-12",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-02-05",
+    "observation": "16 ajan Linux kernel derlemesinde aynı engeli çözüp birbirinin değişikliklerini eziyor; daha fazla ajan ilerlemeyi artırmıyor.",
+    "mechanism": "Deneyi yapan araştırmacının doğrudan gözlemi.",
+    "boundary": "Kontrollü yetenek benchmark'ı; üretimde HRMS/ERP teslim vakası değil.",
+    "test": "Bordro/izin/puantaj için ayrı ve birleşik fixture'lar kur; tek tek geçen ama birlikte bozulan çifti enjekte et. Referans sonuç kaynağı ve uyuşmazlık çözümü açıklanmadan DoD kapanmamalı.",
+    "status": "Kernel hedefinde ilerleme sağlanmış; yayın derleyicinin tam ikame olmadığını açıklıyor.",
+    "source_ids": [
+      "MAS-20"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "CP-10",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-05-29 yayın; iç olay tarihleri tek tek verilmemiş",
+    "observation": "Ajan testte ilgisiz akışlara sapıyor, asıl davranışı atlıyor veya UI yerine JavaScript ile durumu oluşturuyor.",
+    "mechanism": "Üreticinin kendi mühendislik anlatımı. Sonucu sonradan başarılı diye yorumlama ve eksik kullanıcı-yolculuğu doğrulaması bildiriliyor; sıklık ölçümü yok.",
+    "boundary": "Resmi deneyim anlatımıdır; bütün testlerin aldatıcı olduğu iddiası değildir. İş kuralı oracle'ını tek başına sağlamaz.",
+    "test": "Öneri, çalıştırılmadı: API doğruyken UI düğmesini boz; testin programatik kestirmeyle geçmemesini ve geçici bildirim için doğru zaman aralığı kanıtını iste.",
+    "status": "Kaynak, zamanlama ve UI'ı programatik atlama sorunları üzerinde çalışıldığını söylüyor; tamamıyla çözülmüş değil.",
+    "source_ids": [
+      "CPS-16"
+    ],
+    "brief_ids": [
+      "B09"
+    ]
+  },
+  {
+    "id": "CP-11",
+    "kind": "Dış kaynak kaydı",
+    "period": "2025-01-08 yayın; önceki yaklaşık bir aylık kullanım",
+    "observation": "Tıkanan işler, karmaşık ama kullanılmayan çıktı ve çalışıyor görünen fakat etkisiz tema.",
+    "mechanism": "Answer.AI ekibinin ilk el gözlemleri; tek mekanizma değil. Örneğin tema varsayılan renklerle çalışıyor görünmüş, SSH incelemesi ilk şüpheye saplanmış.",
+    "boundary": "Railway destek sınırı yazarın döneme ait değerlendirmesidir; güncel platform kuralı diye aktarılmadı. İki başarılı entegrasyon da raporda vardır.",
+    "test": "Öneri, çalıştırılmadı: gerçek ERP'den temsilci küçük görev seti kur; kör insan değerlendirmesiyle AC, bakım kolaylığı ve kurtarma insan-süresini ölç, demo başarısını genelleme.",
+    "status": "Tarihsel deneme;2026 sürümünü değerlendirmez.",
+    "source_ids": [
+      "CPS-17"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-07",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-07-11",
+    "observation": "Reviewer altı değerlendirme kuralını görüyor; düzeltici programcıya yalnız tek öncelikli yorum aktarılıyor.",
+    "mechanism": "Kaynakta satırları belirtilen statik analiz; maintainer doğrulaması ve ölçülmüş üretim hatası yok.",
+    "boundary": "ChatDev 2.0'a otomatik genellenemez; olası davranış ile yaşanmış müşteri olayı ayrılmalı.",
+    "test": "Beş bağımsız ihlalli bir aday ver; üç tur doldu diye tamamlandı sayılmamalı. Kapanan ve açık kalan kriterler ayrı kanıtlanmalı.",
+    "status": "Erişimde açık.",
+    "source_ids": [
+      "MAS-13"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-09",
+    "kind": "Dış kaynak kaydı",
+    "period": "2025-10-26",
+    "observation": "Rol/sistem tasarımı, ajanlar arası iletişim ve eksik/yanlış doğrulama farklı hata sınıfları oluşturuyor.",
+    "mechanism": "1.642 trace/7 sistem üzerine deneysel sınıflandırma; nedensel ve evrensel bir ürün başarısızlık oranı değil.",
+    "boundary": "Kodlama/matematik/genel görev benchmark'ı. GitHub alpha/remote deploy/ERP kabulünü ölçmüyor.",
+    "test": "Aynı görev kümesini tek yürütücü ve iki farklı takım topolojisiyle karşılaştır; AC kabulü, tekrar iş, token maliyeti ve doğrulama yanlışlarını ayrı ölç.",
+    "status": "Araştırma sonucu; bir ürün düzeltmesi değil.",
+    "source_ids": [
+      "MAS-15"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "MA-10",
+    "kind": "Dış kaynak kaydı",
+    "period": "2025-07",
+    "observation": "Hata teşhisini başka bir LLM'ye vermek sorumlu ajanı ve ilk kritik adımı güvenilir biçimde bulmayı garanti etmiyor.",
+    "mechanism": "ICML deneyinde en iyi yöntem ajan seçiminde %53,5, hata adımında %14,2 doğruluk; 127 sistemden 184 anotasyon görevi.",
+    "boundary": "GAIA/AssistantBench başarısız örnekleri seçilmiş; 127 şirket değildir ve genel sistem başarısızlık oranı ölçülmez.",
+    "test": "Kök nedeni bilinen 10 arızayı enjekte et; teşhis ajanının ilk neden, etki zinciri ve önerdiği onarımı gerçek hata kayıtlarıyla karşılaştır.",
+    "status": "Açık araştırma problemi.",
+    "source_ids": [
+      "MAS-16",
+      "MAS-17"
+    ],
+    "brief_ids": [
+      "B21"
+    ]
+  },
+  {
+    "id": "CP-09",
+    "kind": "Dış kaynak kaydı",
+    "period": "2025-07-23",
+    "observation": "Ajan insan yardımı istiyor; ön yüz bunu genel MCP aracı gibi çiziyor ve cevap verilemiyor.",
+    "mechanism": "Yardım isteği, bildirim, cevap arayüzü ve graph resume yolları eksik bağlanmış. Issue ve birleşmiş PR ile yüksek güven.",
+    "boundary": "Her görevde insan şartı anlamına gelmez; insan gerektiren istisnanın çözüm kanalı eksikliği örneği.",
+    "test": "Öneri, çalıştırılmadı: bilgi eksiği üret; yetkili cevap tek kez doğru iş/checkpoint'e ulaşmalı, eski cevap yeni işi yanlışlıkla sürdürmemeli.",
+    "status": "#505 2025-07-31 main'e birleşmiş; eski issue canlı erişimi artık doğrulanamıyor.",
+    "source_ids": [
+      "CPS-14",
+      "CPS-15"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-04",
+    "kind": "Dış kaynak kaydı",
+    "period": "2022-10-06",
+    "observation": "Gece temizliği büyüyünce workflow sonlanıyor; ertesi gece otomatik devam etmiyor.",
+    "mechanism": "Destek history sınırını öneriyor; kullanıcı 50K sınırına vurduğunu teyit ediyor.",
+    "boundary": "50K burada tarihsel gözlemdir; bugünkü tüm plan ve sürümlere taşınacak evrensel limit değildir.",
+    "test": "Uzun görev geçmişini büyüt; eşik öncesi kontrollü devam ve artifact referanslarının sürekliliğini doğrula.",
+    "status": "Tasarım/sınır vakası; 2022 cron sınırlamasının bugün sürdüğü ileri sürülmüyor.",
+    "source_ids": [
+      "WFS-04"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "WF-06",
+    "kind": "Geri çekilmiş ürün iddiası",
+    "period": "2021-03-19/2021-03-24",
+    "observation": "Worker öldürülünce diğer worker sürekli timeout/NOT_FOUND ile yeniden deniyor.",
+    "mechanism": "Maintainer örneği sorunsuz çalışıyor. Raporlayan sonunda kendi kodundaki hatayı bulduğunu ve failover’ın beklenen gibi çalıştığını söylüyor; hatalı satır açıklanmıyor.",
+    "boundary": "Kod hatasının ayrıntısı bilinmediğinden spesifik kök neden uydurulmadı.",
+    "test": "Aynı kill-and-resume deneyini üretim akışı ve yalın referans workflow üzerinde karşılaştır.",
+    "status": "Raporlayan tarafından çözüldü; motor arızası olarak sayılmamalı.",
+    "source_ids": [
+      "WFS-06"
+    ],
+    "brief_ids": [
+      "B17"
+    ]
+  },
+  {
+    "id": "WF-11",
+    "kind": "Dış kaynak kaydı",
+    "period": "2026-06-30",
+    "observation": "Dashboard ve loglar bozuluyor, yürütmeler ise çalışmaya devam ediyor.",
+    "mechanism": "Şirket raporu yeni sabit complexity sınırı, biriken parçalar, ağır sorgular ve belleğin ~180 GiB’ye vurduğu geri besleme zincirini açıklıyor.",
+    "boundary": "Dashboard eksikliği işin durmuş olduğunu kanıtlamaz; bellek artırma merge uyumsuzluğunu tek başına çözmemiş.",
+    "test": "Gözlem deposunu devre dışı bırak; ilerleyen işi ikinci kez başlatmadan operasyonel durum kaynağından doğrula.",
+    "status": "Akut olay toparlanmış; her önlem tamamlandı iddiası yok.",
+    "source_ids": [
+      "WFS-13"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "DP-01",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Scanner varlığı ile bulgu sonucu aynı başarı koluna katılmış; sır tarandı ifadesinin gerçek semantiği denetlenmemiş.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Bilinen sahte test sırrı içeren fixture, eksik executable ve scanner çalışma hatası üç ayrı denemede yerel kapıyı kapatmalı; temiz fixture açıkça pass olmalı. Gerçek sır kullanma.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S001",
+      "DR-S002",
+      "DR-S003",
+      "DR-S004"
+    ],
+    "brief_ids": [
+      "B23"
+    ]
+  },
+  {
+    "id": "DP-02",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Yeni ihtiyaç adı değil: kaynak prototipin zaten tanımlı onarım istisnasını ihlal eden somut çapraz yol ve testlerin ortak kör noktası kaçmıştı.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Alpha false kalırken onu düzelten revert/repair adayını geçerli kanıtla ilerlet; sıradan özellik beklemeli. Onarımın yetki ve testlerini gevşetmeden dağıtımın sağlığı yeniden doğruladığını kontrol et.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S005",
+      "DR-S006",
+      "DR-S007",
+      "DR-S008"
+    ],
+    "brief_ids": [
+      "B12"
+    ]
+  },
+  {
+    "id": "DP-03",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Aday değişince hangi kanıtın geçersizleştiği incelenmemiş. Bağımsız CI yeniden çalışması semantik review veya oracle bağının yeniden doğrulandığı anlamına gelmez.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "A onaylandıktan sonra CI onarımıyla yetki denetimini zayıflatan B üret; birim test ve CI yeşil olsa da A reviewsiyle yayınlanamasın. Aynı deney çatışma çözümü ve oracle/test profil değişimi için ayrı koşsun.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S009",
+      "DR-S010",
+      "DR-S011",
+      "DR-S012"
+    ],
+    "brief_ids": [
+      "B10"
+    ]
+  },
+  {
+    "id": "DP-04",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Deterministik orchestration geçmişi ile dış faaliyetlerin canlı konfigürasyon çözümlemesi birbirine eşit kabul edilmiş.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Run v1 beklerken runner/profil/test command/repo mapping v2ye geçsin; eski run aynı onaylı v1le devam etsin veya sürümlü açık geçişte dursun. İki worker sürümünde aynı activity farklı ayar okuyamasın.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S013",
+      "DR-S014",
+      "DR-S015",
+      "DR-S016",
+      "DR-S017"
+    ],
+    "brief_ids": [
+      "B15"
+    ]
+  },
+  {
+    "id": "DP-05",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Aynı event tekrarı ile meşru yeni generation ayrımı kaynak giriş yolunda yok. Sabit workflow ID tek başına ömür boyu iş tekilliği garantisi değil.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Tamamlanan g1 için eski event 10 kez gelsin: model çağrısı/sahiplenme sıfır. Sonra yetkili rev2/g2 talebi bir kez çalışabilsin; eşzamanlı webhook+uzlaştırıcı tek kabul üretsin.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S018",
+      "DR-S019",
+      "DR-S020",
+      "DR-S021",
+      "DR-S022",
+      "DR-S023"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "DP-06",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Kaynak görev kimliği ile yürütme hedefinin aynı yetkili mappinge bağlı olduğu varsayılmış.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "İki proje ve farklı actor yetkileriyle P-A görevine B yaz; Bde clone/model/push oluşmadan reddet. Yetkili çapraz proje routing varsa açık mapping ve audit receiptle kabul et.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S024",
+      "DR-S025",
+      "DR-S013",
+      "DR-S026",
+      "DR-S027"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "DP-07",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Zaman damgası nedensel olay kimliği yerine kullanılmış. Botun kendi güncellemesiyle insanın ayrı eyleminin revision ve actor bağı birbirinden ayrılmıyor.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "PATCH(T1), insan red(T2), GET(T2), webhook(T2) sırasını kontrollü fixture ile kur; red tam bir kez uygulanmalı. Ayrıca alpha doğrulaması sırasında iptalin daha geç bot state yazımıyla kaybolmadığını sınayın.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S028",
+      "DR-S029",
+      "DR-S030"
+    ],
+    "brief_ids": [
+      "B14"
+    ]
+  },
+  {
+    "id": "DP-08",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "90/90 testin kapsamın tamamı olduğunu kanıtlamadığı somutlaşmış oldu: hedef payda plan dilimleme sırasında küçülebiliyor; aynı AC iki kez sayılabiliyor.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "İki ACye karşı aynı AC-1in iki kez eşlenmesi; yedi alt iş/altı sınırı; onay+engelleyici bulgu; boş plan test listesi ayrı negatif fixturelar olsun. Hepsi yayın yetkisini kapatsın, yalnız tüm yetkili kapsam kapandığında ilerlesin.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S031",
+      "DR-S032",
+      "DR-S033"
+    ],
+    "brief_ids": [
+      "B09",
+      "B21"
+    ]
+  },
+  {
+    "id": "DP-09",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Repo kodu yalnız ajan sürecinde değil kurulum/test/derleme adımlarında da güvenilmeyen yürütmedir. Önceki temiz snapshot sonraki çalışma ağacının temiz olduğu anlamına gelmez.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Zararsız fixture test komutu kontrol geçtikten sonra korunan bir dosyaya sentinel yazar ve exit0 döner. Son kapı bunu reddetsin; sentinel commit/push adayında görünmesin. Rapor sahteciliği ve CI onarım yollarında da aynı tree bağı doğrulansın.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S034",
+      "DR-S035",
+      "DR-S036",
+      "DR-S037"
+    ],
+    "brief_ids": [
+      "B10"
+    ]
+  },
+  {
+    "id": "DP-10",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Trunk birleşim sırası, CI tamamlanma sırası ve dağıtım hedef sırası üç ayrı düzlemdir. Bir deployun doğru SHAyı çalıştırması sistemin doğru en son hedefi koruduğunu kanıtlamaz.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "A/B CI bitişlerini ters sıraya sok. B kabul edilmiş hedef olduktan sonra A deploy yetkisi alamamalı; bilinçli rollback farklı yetkili generationla mümkün olmalı. İki publisher ile aynı deney tekrarlansın.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S038",
+      "DR-S039"
+    ],
+    "brief_ids": [
+      "B11"
+    ]
+  },
+  {
+    "id": "DP-11",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Ajan RAMini artırmak kapasiteyi büyütmek değildir. Hosttaki her worker kendi izin defterini tuttuğunda yatay worker eklemek görünürdeki toplam limiti de çoğaltır.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Aynı hosta iki workerla96GB toplam budget altında72+72GB talep gönder; ikincisi beklemeli.8GB host/16GB profile kapalı karar verilmeli. Activityler beklerken workflow WIPi sınırdan fazla büyüyememeli; crash sonrası reservation tek sahibinde kalmalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S040",
+      "DR-S041",
+      "DR-S042",
+      "DR-S043"
+    ],
+    "brief_ids": [
+      "B07"
+    ]
+  },
+  {
+    "id": "DP-12",
+    "kind": "Statik kod incelemesi",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Workflow replayinin deterministik olması, activitynin dış etkisinin idempotent olmasıyla karıştırılmamalı. Kanıt defterinin de tekrar denemede maliyeti iki kere sayması mümkündür.",
+    "mechanism": "",
+    "boundary": "Sabit snapshot kodunun statik okunması; kaynak kod çalıştırılmadı, canlı hata yeniden üretilmedi.",
+    "test": "Push kabul edildikten hemen sonra activity cevabını düşür; retry aynı SHA/receipt dönmeli ve ikinci commit/CI üretmemeli. DB INSERT sonrası cevap kaybında tek maliyet satırı; revert sonrası cevap kaybında çift revert veya sahte çatışma olmamalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S044",
+      "DR-S045",
+      "DR-S046",
+      "DR-S047"
+    ],
+    "brief_ids": [
+      "B13"
+    ]
+  },
+  {
+    "id": "DE-01",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "İlk tur prototip koduna ve ihtiyaç kümelerine odaklandı; E4 ve arşivlenmiş üretici kaynak karşı kontrolü incelenmedi.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Kurulu sürümden imzalı olay v1/v2 sözleşme fixturelarıyla alınır; tekrar, eksik event_id, bilinmeyen şema ve geçersiz imza ayrı sonuç üretir; tanınmayan zarf sessiz iş kaybına dönüşmez.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S048",
+      "DR-S049",
+      "DR-S050"
+    ],
+    "brief_ids": [
+      "B18"
+    ]
+  },
+  {
+    "id": "DE-02",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Taşıyıcının hata sınıfı ve devre dışı kalması arşiv kodundan okunmamıştı.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Aynı olay için 503, ağ timeoutu, kapalı webhook ve imzalı fakat eski olay enjekte edildiğinde iş kaybı, yinelenen kabul veya sahte başarı olmaz; kapalı kanal fark edilir ve pano polling ile uzlaştırılır.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S051",
+      "DR-S052"
+    ],
+    "brief_ids": [
+      "B18"
+    ]
+  },
+  {
+    "id": "DE-03",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "İlk Kestra incelemesi son eşleşen 18 Eylül kaydında durdu; E6 ve sonraki public status görüntüsü kapsam dışı kaldı.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Yedi günlük insan kabulü beklemesi zaman hızlandırmalı senaryoda işi kaybettirmez; owner/deadline/escalation görünürdür; teknik timeout ayrıca terminal reason verir. Gerçek kabul ancak aynı generation/SHA/deploy/acceptance receipt ile kapanır.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S053",
+      "DR-S054",
+      "DR-S055",
+      "DR-S056",
+      "DR-S057"
+    ],
+    "brief_ids": [
+      "B20"
+    ]
+  },
+  {
+    "id": "DE-04",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "E3 eleştirileri toplu katalog farkı sayılıp ikinci otorite ve yeni CVSS alanı eşlemesi yapılmadı.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "FastMCP high/critical ve Haystack low/high birlikte kaynaklarıyla görünür; v3/v4 birbirine yazılmaz, null/0/unknown aynı sayılmaz; ham yayıncı verisi korunur.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S058",
+      "DR-S059",
+      "DR-S060",
+      "DR-S061",
+      "DR-S062",
+      "DR-S063"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "DE-05",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "E3’ün eleştirisi kaynak otoritesi karşılaştırılmadan doğru sanılabilirdi; ham kaynaklara inildi.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "x5vx için 2.29.7/2.29.8/2.30.0/2.30.1; h44j için 2.27.3/2.27.4/2.28.0/2.28.1 sınır örnekleri kaynağa bağlı beklenen sonuç verir; aralıklar tek kontinü aralığa indirgenmez.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S064",
+      "DR-S065",
+      "DR-S066",
+      "DR-S067",
+      "DR-S068"
+    ],
+    "brief_ids": []
+  },
+  {
+    "id": "DE-06",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "İlk tur arşivden yalnız E2E logunu okudu; araştırma başarısızlık logları ve sayfalı karşı küme görülmedi.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "201 kayıtlık fixture 3 sayfada eksiksiz alınır; orta sayfa 429/403 olduğunda complete=false ve unknown_total oluşur; tekrar alınan GHSA tekilleşir; başarısız HTTP [] diye başarıya çevrilmez.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S069",
+      "DR-S070",
+      "DR-S071",
+      "DR-S072",
+      "DR-S073"
+    ],
+    "brief_ids": [
+      "B19"
+    ]
+  },
+  {
+    "id": "DE-07",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "E4’ün skill uyumluluğu itirazı dışlanan taslaklar arasında kaldı; bizim paket üzerinde ad kontrolü yapılmadı.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Linux üzerinde case-sensitive temiz yükleyicide 21 paket adı-dizin eşleşir; bilinmeyen/bozuk paket fail closed; draft_inactive yine yetki kazanmaz.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S074",
+      "DR-S075",
+      "DR-S076"
+    ],
+    "brief_ids": [
+      "B16"
+    ]
+  },
+  {
+    "id": "DE-08",
+    "kind": "Kaynak denetimi / düzeltme",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Önceki kapsamda E1–E6 ve devir-teslim hiç yoktu; hash eşitliği ile anlamsal kapsam aynı sanılabilirdi.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Aynı kaynak olayı üç özette geçerse vaka sayısı bir kalır; yeni tarihli artefakt ayrı gözlem olur. İncelenmeyen medya anlamsal olarak okundu işaretlenmez; tarihsel DEVIR yönergesi talimat olarak uygulanmaz.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S077",
+      "DR-S078",
+      "DR-S079",
+      "DR-S080"
+    ],
+    "brief_ids": [
+      "B19"
+    ]
+  },
+  {
+    "id": "DK-01",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Kabul izlenebilirliği mevcut; eksik anlam üst amaç→yükümlülük→alt iş/ortak birleşim→ürün çıktısı arasında kayıpsız sorumluluk ve kanıt muhasebesidir.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Üç çocuk çıktısı yeşilken üst sözleşmedeki şirket-transferi→puantaj→bordro→muhasebe yükümlülüğünü hiçbirine atama. Üst kapanış atanmayan obligation_id ile reddedilmeli; yükümlülük sayısını azaltan çocuk planı kabul edilmemeli. Bütünleşik kanıt eklenince yalnız o yükümlülük kapanmalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S081",
+      "DR-S082",
+      "DR-S083",
+      "DR-S084",
+      "DR-S085",
+      "DR-S086",
+      "DR-S087"
+    ],
+    "brief_ids": [
+      "B09"
+    ]
+  },
+  {
+    "id": "DK-02",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Tek deponun commit kimliği ile çok bileşenli ERP ürün sürümü farklı kabul birimleridir. Veri kaydının yetkili sahibi ile kod alanının sahibi da ayrı tutulmalıdır.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "HRMS v2 + ERP v1 + eski olay tüketicisi karışımında bireysel CI yeşil kalsın. Ürün release kapısı uyumsuz bileşen vektörünü reddetmeli; eski olay verisini sessizce düşürmemeli. Doğrulanmış geçiş matrisi oluşmadan insan incelemesine tam ürün diye sunmamalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S088",
+      "DR-S089",
+      "DR-S090",
+      "DR-S091",
+      "DR-S092",
+      "DR-S084",
+      "DR-S093",
+      "DR-S094",
+      "DR-S095",
+      "DR-S096",
+      "DR-S097"
+    ],
+    "brief_ids": [
+      "B11",
+      "B24"
+    ]
+  },
+  {
+    "id": "DK-03",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Eksik olan geri bildirimin sadece yeni görev açması değil, daha önce türetilmiş doğruluk/kabul iddialarının etki grafı üzerinden yeniden değerlendirilmesidir.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "A→B→C bağımlılık zinciri ve bağımsız D oluştur. A için gerekçeli ret geldikten sonra B artifact, C veri mutabakatı ve B review oturumu yeniden değerlendirilmeden kabul edilememeli; D çalışmaya devam etmeli. A revert başarılı C telafisi başarısızsa tümünün geri alındığı raporlanmamalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S098",
+      "DR-S099",
+      "DR-S100",
+      "DR-S101",
+      "DR-S102",
+      "DR-S097",
+      "DR-S103",
+      "DR-S104"
+    ],
+    "brief_ids": [
+      "B14"
+    ]
+  },
+  {
+    "id": "DK-04",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Kalite profili var; iş sınıflamasının deterministik politika seçimine girdi olması, beklenen ilk sonucun sınıfa göre değişmesi ve kod dışı çıktının kapanışı eksik.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Aynı çerçeveye üç fixture ver: davranışı koruyan refactor, yalnız belge düzeltmesi, gerçek bug. Refactor için zorunlu kırmızı test üretilmemeli; belge işi deploy URLsi uydurmamalı; bug hatayı göstermeyen yeşil testle geçmemeli. Sınıfı sonradan refactor yaparak gerçek davranış değişikliğinin kapısı aşılamamalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S105",
+      "DR-S106",
+      "DR-S107",
+      "DR-S108",
+      "DR-S109",
+      "DR-S110",
+      "DR-S111"
+    ],
+    "brief_ids": [
+      "B21",
+      "B22"
+    ]
+  },
+  {
+    "id": "DK-05",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Tek görevin otonomisi ile fabrikanın kurulması/işletilmesi ayrı hizmet sözleşmeleri olmalı. Önceden nitelikli profil yokluğunu gizleyen demo gerçek girdi/çıktı deneyimi değildir.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Hiç kayıtlı profili olmayan ikinci projeyi yalnız kullanıcı düzeyindeki form ve yetkili kaynak erişimiyle sun. Sistem hangi teknik alanları kendisinin keşfettiğini, hangi gerçek yetkinin eksik olduğunu ve kalan platform işini açık sonucu ile göstermeli; operatör gizlice YAML düzenleyince tam otonom başarı yazılmamalı. Sonra DB kesintisi oluştur; kullanıcıya iş kuralı sorusu gibi yansıtılmamalı.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S112",
+      "DR-S113",
+      "DR-S114",
+      "DR-S115",
+      "DR-S116",
+      "DR-S109",
+      "DR-S117",
+      "DR-S118"
+    ],
+    "brief_ids": [
+      "B22"
+    ]
+  },
+  {
+    "id": "DK-06",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Kaynak URI kimliği içerik kimliği değildir. Çalışmanın hangi okunmuş girdilerle yetkilendirildiği ve yeni gözlemin anlamlı değişiklik olup olmadığı kaydedilmelidir.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "AC metni aynı kalsın; aynı URLdeki kabul fixtureını değiştir. İki içerik aynı kabul digestine veya sessizce aynı yetkilendirilmiş revizyona düşmemeli. İkinci denemede yalnız otomasyon yorumu değişsin; bu yeni ürün niyeti oluşturmamalı. Üçüncüde yetki geri alınsın; eski snapshot yayın izni verememeli.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S119",
+      "DR-S120",
+      "DR-S121",
+      "DR-S099",
+      "DR-S122",
+      "DR-S123",
+      "DR-S124",
+      "DR-S125"
+    ],
+    "brief_ids": [
+      "B24"
+    ]
+  },
+  {
+    "id": "DK-07",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Başarı şartları zaten mevcut. Bunların farklı adaptör/sözleşme sözlüklerinde kaybolmasını önleyecek tiplenmiş boyutlar ve kapalı dönüşüm tablosu gerekir.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "Yedi completion değerini, altı outcome değerini ve kuyruk/bekleme durumlarını kombinasyonlu sözleşme fixturelarıyla döndür. Deploy eksik doğrulanmış kod ready_for_review olmamalı; unknown dış etki accepted maskesiyle kaybolmamalı; insan kabul olayı replayi yeni run üretmemeli.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S126",
+      "DR-S127",
+      "DR-S128",
+      "DR-S129",
+      "DR-S130",
+      "DR-S131",
+      "DR-S132"
+    ],
+    "brief_ids": [
+      "B15",
+      "B20"
+    ]
+  },
+  {
+    "id": "DK-08",
+    "kind": "Tasarım boşluğu",
+    "period": "Sabit belge/snapshot incelemesi",
+    "observation": "Katalog güveni ile yetenek tedarik hizmeti ayrı sözleşmelerdir. Güvenlik için kendi kendine terfiyi kapatırken bütün görevleri belirsiz platform ekibi bekleyişine bırakmamak gerekir.",
+    "mechanism": "",
+    "boundary": "Bu bir tasarım boşluğu / kaynak incelemesidir. Canlı sistemde yeniden üretilmiş olay veya uygulanmış çözüm değildir.",
+    "test": "İki proje aynı eksik yeteneği istesin. Tek niteleme talebi açılsın; kuyruktaki işlerin ana bütçesi büyümesin. Aday malicious veya kontrat uyumsuzsa active olmamalı. Başarılı nitelemeden sonra eski katalog digestini kullanan koşuya sessiz yer değiştirme yapılmamalı; açık yeniden bağlanma kanıtı gerekir.",
+    "status": "documented_not_implemented",
+    "source_ids": [
+      "DR-S133",
+      "DR-S134",
+      "DR-S114",
+      "DR-S135",
+      "DR-S136",
+      "DR-S137",
+      "DR-S138",
+      "DR-S139",
+      "DR-S140"
+    ],
+    "brief_ids": [
+      "B05",
+      "B16"
+    ]
+  }
+]

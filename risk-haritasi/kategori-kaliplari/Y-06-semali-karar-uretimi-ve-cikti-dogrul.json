@@ -1,0 +1,171 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-06",
+    "ad": "Şemalı karar üretimi ve çıktı doğrulama",
+    "grup": "Ajan çalışma çerçevesi ve koordinasyon"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-086",
+      "yetenek_sinifi": "Y-06",
+      "kalip": "Biçim kısıtının akıl yürütme kalitesini düşürmesi",
+      "aciklama": "JSON/XML gibi yapılandırılmış çıktıya zorlamak LLM'lerin akıl yürütme başarımını anlamlı biçimde düşürebilir; kısıt sıkılaştıkça düşüş artar.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2408.02442"
+      ],
+      "yasatacagi_sorunlar": [
+        "DoR, sınıflandırma ve onay/ret gibi kısa kararlar doğrudan katı şemayla istenirse karar kalitesi, serbest metinle alınan aynı karardan düşük olabilir.",
+        "Şema doğrulamasının %100 geçmesi kalite sorununu gizler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-006",
+        "N-K02-010",
+        "N-K10-003"
+      ],
+      "ornek_araclar": [
+        "OpenAI Structured Outputs",
+        "Anthropic tool use",
+        "Outlines",
+        "Instructor"
+      ],
+      "erken_sinyal": "Aynı karar görevinde serbest metin ve şemalı modun eval skorları arasında fark.",
+      "azaltma": "Önce serbest gerekçe sonra ayrı adımda şemaya dönüştürme; karar türü başına şemalı ve şemasız başarımın eval setinde ölçülmesi."
+    },
+    {
+      "id": "RK-087",
+      "yetenek_sinifi": "Y-06",
+      "kalip": "Şemaya uygun ama anlamca yanlış karar",
+      "aciklama": "Şema doğrulaması yalnız biçimi garanti eder; alanların doğruluğunu ve kaynağa bağlılığını garanti etmez. OWASP LLM05:2025, model çıktısının doğrulanmadan aşağı akış sistemlerine verilmesini ayrı bir risk olarak tanımlar.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/",
+        "https://arxiv.org/abs/2408.02442"
+      ],
+      "yasatacagi_sorunlar": [
+        "DoR kapısında tüm zorunlu alanlar dolu görünür ama kabul kriterleri uydurma olabilir; 'şema geçti' bilgisi incelemeyi rahatlatır.",
+        "Sınıflandırıcı güven alanı modelin kendi beyanı olduğu için eşik kararları yanlış kalibre olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K17-009",
+        "N-K05-028"
+      ],
+      "ornek_araclar": [
+        "Instructor",
+        "Pydantic AI",
+        "Guardrails AI",
+        "Outlines"
+      ],
+      "erken_sinyal": "Şemadan geçen kararların sonradan insan tarafından ters çevrilme oranı.",
+      "azaltma": "Alan düzeyinde anlamsal doğrulayıcılar (kaynak bağlantısı var mı, referans edilen dosya var mı), örneklem bazlı insan denetimi, güven alanının ayrı kalibrasyonu."
+    },
+    {
+      "id": "RK-088",
+      "yetenek_sinifi": "Y-06",
+      "kalip": "Sağlayıcılar arası şema desteği farkı ve kısıtlı çözümleme motorlarının açıkları",
+      "aciklama": "Barındırılan yapılandırılmış çıktı özellikleri JSON Schema'nın yalnız bir alt kümesini destekler ve sağlayıcıdan sağlayıcıya farklıdır. Kendi barındırılan kısıtlı çözümleme motorlarında da zaman aşımı olmayan regex derlemesi DoS açığına dönüştü (vLLM CVE-2026-55574).",
+      "risk_turleri": [
+        "RT-15",
+        "RT-07",
+        "RT-01"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://platform.openai.com/docs/guides/structured-outputs",
+        "https://github.com/advisories/GHSA-rwxx-mrjm-wc2m"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek görev spesifikasyonu şeması tüm çalışma zamanlarında aynen kullanılamaz; yedek sağlayıcıya geçişte şema reddedilir veya sessizce gevşetilir.",
+        "Şema içinde kullanıcı kaynaklı regex kabul edilirse model sunucusu kilitlenebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-002",
+        "N-K01-013",
+        "N-K10-003"
+      ],
+      "ornek_araclar": [
+        "OpenAI Structured Outputs",
+        "vLLM guided decoding",
+        "XGrammar",
+        "Outlines"
+      ],
+      "erken_sinyal": "Sağlayıcı değişiminde şema reddi hataları; şema derleme süresinde artış.",
+      "azaltma": "Tüm sağlayıcıların ortak desteklediği şema alt kümesiyle sınırlı kanonik şema, istemci tarafı doğrulama, regex desenlerinde uzunluk/zaman sınırı."
+    },
+    {
+      "id": "RK-089",
+      "yetenek_sinifi": "Y-06",
+      "kalip": "Model çıktısının doğrudan yürütülmesi ve serileştirme enjeksiyonu",
+      "aciklama": "Model çıktısı güvenilmeyen girdidir. LangChain'de dumps/loads API'lerinde serileştirme enjeksiyonuyla sır çıkarma (CVE-2025-68664, kritik) ve istem şablonlarında öznitelik erişimiyle şablon enjeksiyonu (CVE-2025-65106) yayımlandı.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-c67j-w6g6-q2cm",
+        "https://github.com/advisories/GHSA-6qv9-48xg-fc7f",
+        "https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan kararının JSON'u doğrudan yürütücü, şablon motoru veya nesne yükleyiciye verilirse iş kalemine gömülü içerikle sır ve kod çalıştırma elde edilebilir.",
+        "Orkestratörün kalıcı durumunda serileştirilmiş ajan nesneleri saklanıyorsa geri yüklemede enjeksiyon olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-006",
+        "N-K10-003",
+        "N-K21-002"
+      ],
+      "ornek_araclar": [
+        "LangChain",
+        "LlamaIndex",
+        "Semantic Kernel",
+        "CrewAI"
+      ],
+      "erken_sinyal": "Çerçeve bağımlılıklarında yeni GHSA; model çıktısının eval/exec/şablon işlemcilerine akan kod yolları.",
+      "azaltma": "Model çıktısını yalnız kapalı bir eylem kümesine eşleme, genel nesne serileştirmeden kaçınma, çerçeve bağımlılıklarını SCA ile izleme."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 3,
+    "yuksek": 6,
+    "orta": 40,
+    "dusuk": 38
+  },
+  "sinif_bulgu_turleri": {
+    "RT-10": 22,
+    "RT-03": 12,
+    "RT-15": 12,
+    "RT-11": 12,
+    "RT-08": 11,
+    "RT-01": 10,
+    "RT-07": 8,
+    "RT-14": 8,
+    "RT-05": 8,
+    "RT-02": 7,
+    "RT-04": 6,
+    "RT-06": 6,
+    "RT-16": 3,
+    "RT-13": 2,
+    "RT-12": 2,
+    "RT-09": 1
+  }
+}

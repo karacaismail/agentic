@@ -1,0 +1,1045 @@
+{
+  "sema": "risk-haritasi/arac-grubu@1",
+  "grup": "İnsan–ajan iş birliği",
+  "arac_sayisi": 11,
+  "derin_arastirilan": 3,
+  "seviye_dagilimi": {
+    "orta": 6,
+    "yuksek": 2,
+    "dusuk": 3
+  },
+  "araclar": [
+    {
+      "id": "AR-4058",
+      "ad": "MCP Agent Mail",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (OpenAI/Anthropic ekli)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Dicklesworthstone/mcp_agent_mail",
+      "yetenek_siniflari": [
+        "Y-48",
+        "Y-49",
+        "Y-56"
+      ],
+      "arastirma_derinligi": "derin",
+      "risk_puani": 48,
+      "risk_seviyesi": "yuksek",
+      "arastirilmis_puan": 58,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-02",
+        "RT-03",
+        "RT-04",
+        "RT-05",
+        "RT-10",
+        "RT-12"
+      ],
+      "otomatik_sinyaller": [
+        "bireysel hesap, az katkıcı (tek bakımcı riski)"
+      ],
+      "lisans_sinifi": "izin-verici",
+      "depo": {
+        "ad": "Dicklesworthstone/mcp_agent_mail",
+        "arsiv": false,
+        "son_push": "2026-09-22",
+        "yildiz": 2170,
+        "katkici_yaklasik": 2,
+        "acik_issue": 0,
+        "son_surum": "2026-04-16",
+        "commit_12ay": 869,
+        "sahip_turu": "User"
+      },
+      "bulgu_sayisi": 5,
+      "siddet_dagilimi": {
+        "yuksek": 3,
+        "orta": 2
+      },
+      "en_onemli_riskler": [
+        {
+          "id": "BL-02352",
+          "tur": "RT-03",
+          "baslik": "Ajan kimliği taklidi ve gelen kutusunun istem enjeksiyonu kanalı olması",
+          "siddet": "yuksek",
+          "olasilik": "yuksek"
+        },
+        {
+          "id": "BL-02354",
+          "tur": "RT-12",
+          "baslik": "Çok ajanlı yükte Git kilidi, SQLite havuzu ve bozulma sorunları",
+          "siddet": "yuksek",
+          "olasilik": "yuksek"
+        },
+        {
+          "id": "BL-02353",
+          "tur": "RT-04",
+          "baslik": "MIT'ye eklenen OpenAI/Anthropic kısıtlaması ve otomatik fesih maddesi",
+          "siddet": "yuksek",
+          "olasilik": "orta"
+        },
+        {
+          "id": "BL-02356",
+          "tur": "RT-05",
+          "baslik": "Tek bakımcı, dış katkı kabul edilmiyor, Python sürümü Rust'a devredildi",
+          "siddet": "orta",
+          "olasilik": "yuksek"
+        }
+      ],
+      "olaylar": [],
+      "guvenlik_gecmisi": {
+        "cve_ghsa_24ay": 0,
+        "kritik_yuksek": [],
+        "not": "GHSA, OSV ve NVD'de kayıt bulunamadı. Buna karşın #259'da ajan kimliği taklidi pratikte yaşandı; Python sürümünde kapatılmadı.",
+        "kaynak": "https://github.com/Dicklesworthstone/mcp_agent_mail/security ; OSV sorgusu (PyPI mcp-agent-mail) ; https://github.com/Dicklesworthstone/mcp_agent_mail/issues/259"
+      },
+      "surdurulebilirlik": {
+        "sahiplik": "Jeffrey Emanuel (bireysel geliştirici)",
+        "son_surum": "2026-04",
+        "bakim": "yavas",
+        "tek_bakimci_riski": true,
+        "not": "Son Python sürümü v0.3.2 (Nisan 2026). Geliştirme ağırlıkla Rust yeniden yazımına (mcp_agent_mail_rust) kaydı; dış katkı birleştirilmiyor."
+      },
+      "ticari": {
+        "fiyat_modeli": "Ücretsiz (MIT + OpenAI/Anthropic eki); ayrıca ticari 'Companion' uygulaması var",
+        "kilitlenme": "Düşük-orta: Git + SQLite arşivi; Beads/br ekosistemine bağlanma eğilimi",
+        "sahiplik_degisimi": "Yok; Şubat 2026'da lisans değişikliği ve Rust yeniden yazımı"
+      },
+      "veri": {
+        "veri_nereye_gider": "Self-host HTTP sunucusu; mesajlar proje Git arşivinde ve SQLite dizininde tutulur",
+        "bolge_secenekleri": "Kurum içinde barındırılabilir",
+        "kvkk_notu": "Ajan mesajlarında sır ve kişisel veri birikebilir; saklama ve silme politikası ile erişim kısıtı gerekir."
+      },
+      "genel_degerlendirme": "En büyük sorunlar lisans ekinin OpenAI/Anthropic ajanlarıyla çalışan bir kurumda yarattığı hukuki belirsizlik ve ajan kimliğinin taklit edilebilmesi. Tek bakımcıya bağlı, Python sürümü Rust'a devredilmiş ve yük altında kırılgan; çok ekipli üretim eşgüdümü için uygun değil.",
+      "bulgular": [
+        {
+          "arac_id": "AR-4058",
+          "arac": "MCP Agent Mail",
+          "gorev": "R-G11",
+          "tur": "RT-03",
+          "baslik": "Ajan kimliği taklidi ve gelen kutusunun istem enjeksiyonu kanalı olması",
+          "aciklama": "Kayıt belirteçleri (registration_token) aynı kullanıcıdaki her süreçten okunabiliyor ve süreçler arası kullanım tasarım gereği destekleniyor. Ağustos 2026'da bir oturumun başka bir ajanın kimliğiyle mesaj gönderdiği bildirildi (#259). Bakımcı tehdidi kabul etti ama düzeltmeyi Python sürümünde değil Rust sürümünde planlıyor. Dosya kiralamaları yalnız danışma niteliğinde, yani uyulması zorunlu değil.",
+          "tarih": "2026-08",
+          "siddet": "yuksek",
+          "olasilik": "yuksek",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/issues/259",
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/README.md"
+          ],
+          "yasatacagi_sorunlar": [
+            "Bir ekibin ajanı başka bir ajan ya da 'insan gözetmen' gibi görünerek yüksek öncelikli talimat gönderebilir. Gelen kutusunu talimat kaynağı sayan ajanlar bu metni uygular.",
+            "Kiralamalar atlatılabildiğinden iki ekibin ajanı aynı dosyaya çakışan yazım yapabilir; çakışma ancak birleştirmede fark edilir.",
+            "Denetim sırasında 'bu mesajı hangi ajan gönderdi' sorusuna güvenilir yanıt verilemez; belirteç yenilenemediği için sızan belirteç fiilen iptal edilemez."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K27-008",
+            "N-K31-005",
+            "N-K27-005",
+            "N-K19-001"
+          ],
+          "erken_sinyal": "Gönderici kimliği ile oturum kayıtları arasında uyumsuzluk; ajanların beklenmedik 'yüksek önem' işaretli mesajlar alması.",
+          "azaltma": "Her ajanı ayrı işletim sistemi kullanıcısı ya da konteynerde çalıştırmak. Ajan yönergelerinde gelen mesajları talimat değil veri olarak işlemeyi zorunlu kılmak. Pre-commit korumasını zorunlu hâle getirmek. Oturuma bağlı kimlik gelene kadar kullanımı tek ekiple sınırlamak.",
+          "id": "BL-02352",
+          "dogrulama_turu": {
+            "karar": "dogrulandi",
+            "not": "#259 (2026-08-15) belirteçlerin aynı kullanıcıdaki süreçlerce okunabildiğini ve yaşanan kimlik taklidini anlatıyor. Bakımcı tehdidi kabul etti; konu 2026-08-31'de Rust deposundaki #279'a devredilerek kapatıldı. README dosya kiralamalarını 'advisory' olarak tanımlıyor.",
+            "kaynak": [
+              "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail/issues/259",
+              "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail/issues/259/comments",
+              "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/README.md"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4058",
+          "arac": "MCP Agent Mail",
+          "gorev": "R-G11",
+          "tur": "RT-04",
+          "baslik": "MIT'ye eklenen OpenAI/Anthropic kısıtlaması ve otomatik fesih maddesi",
+          "aciklama": "Lisans 22 Şubat 2026'da düz MIT'den 'MIT + OpenAI/Anthropic Rider' biçimine çevrildi. Ek madde bu şirketlere ve onlar adına ya da yararına hareket eden herkese (yüklenici, hizmet sağlayıcı dahil) hak tanımıyor, yazılımın onlara 'erişilebilir kılınmasını' yasaklıyor ve ihlalde lisansı kendiliğinden sona erdiriyor. Lisans OSI onaylı değil; GitHub lisansı NOASSERTION olarak görüyor.",
+          "tarih": "2026-02",
+          "siddet": "yuksek",
+          "olasilik": "orta",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/LICENSE",
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/commit/7c1fe5b0"
+          ],
+          "yasatacagi_sorunlar": [
+            "Kurum ajan olarak Claude Code ya da Codex kullanıyorsa, yazılımın kodu veya türevleri ajan bağlamı üzerinden Anthropic/OpenAI'ye gidebilir. Bu 'erişilebilir kılma' sayılabilir; hukuk birimi belirsizlik nedeniyle kullanımı durdurabilir.",
+            "Kuruma hizmet veren yüklenici aynı zamanda OpenAI/Anthropic için de çalışıyorsa 'onlar adına hareket eden' tanımına girebilir; bu durumda lisans kendiliğinden düşer ve kurulu sistem lisanssız kalır.",
+            "Kurum içi çatal ya da türev dağıtılırken ek madde değiştirilmeden taşınmak zorunda. Açık kaynak lisans envanterinde standart dışı bir istisna açmak gerekir."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K22-002",
+            "N-K22-001",
+            "N-K27-008"
+          ],
+          "erken_sinyal": "Lisans taramasında NOASSERTION ya da standart dışı lisans uyarısı; LICENSE dosyasında yeni değişiklik commit'i.",
+          "azaltma": "Hukuk görüşü alınmadan üretimde kullanmamak. Gerekirse ek madde öncesi (Şubat 2026 öncesi, düz MIT) sürümü sabitlemek ya da eşdeğer lisanslı bir alternatife geçmek. Lisans değişikliğini otomatik izlemek.",
+          "id": "BL-02353",
+          "dogrulama_turu": {
+            "karar": "dogrulandi",
+            "not": "7c1fe5b0 commit'i 2026-02-22'de LICENSE'ı 'MIT with OpenAI/Anthropic Rider' yaptı; önceki hali 2026-01-22 tarihli düz MIT. Rider yüklenici ve hizmet sağlayıcıları kapsıyor, 'make available' yasağı ve otomatik fesih içeriyor. GitHub spdx NOASSERTION.",
+            "kaynak": [
+              "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/LICENSE",
+              "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail/commits/7c1fe5b0",
+              "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4058",
+          "arac": "MCP Agent Mail",
+          "gorev": "R-G11",
+          "tur": "RT-12",
+          "baslik": "Çok ajanlı yükte Git kilidi, SQLite havuzu ve bozulma sorunları",
+          "aciklama": "Bakımcının Rust deposu, Python uygulamasının gerçek çok ajanlı iş yüklerinde üç tekrarlayan arıza modu olduğunu açıkça yazıyor: eşzamanlı yazımda Git kilit dosyası çekişmesi, sürekli yükte SQLite bağlantı havuzunun tükenmesi ve çok sayıda ajan aynı anda bağlandığında zincirleme hatalar. Tekrarlayan 'database disk image is malformed' bildirimi 'planlanmadı' olarak kapatıldı (#246).",
+          "tarih": "2026-07",
+          "siddet": "yuksek",
+          "olasilik": "yuksek",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/Dicklesworthstone/mcp_agent_mail_rust#rust-vs-python-stress-test-results",
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/issues/246"
+          ],
+          "yasatacagi_sorunlar": [
+            "10'dan fazla ekipte onlarca ajan aynı sunucuya bağlandığında mesajlar ve kiralamalar kaybolabilir; ajanlar birbirinden habersiz aynı dosyada çalışır.",
+            "SQLite dizini bozulursa eşgüdüm katmanı yeniden kurma döngüsüne girer ve ajan işleri durur."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K31-005",
+            "N-K27-008",
+            "N-K16-007"
+          ],
+          "erken_sinyal": "Günlüklerde kilit zaman aşımı, 'malformed' hatası ve arşivden yeniden kurma döngüsü.",
+          "azaltma": "Ekip ya da proje başına ayrı sunucu kurmak; gerçekçi eşzamanlılıkta yük testi yapmak; yedekten dönüş tatbikatı yapmak; Rust sürümüne geçişi değerlendirmek.",
+          "id": "BL-02354",
+          "dogrulama_turu": {
+            "karar": "dogrulandi",
+            "not": "Rust README Python uygulamasındaki üç arıza modunu (Git kilidi, SQLite havuzu tükenmesi, zincirleme hatalar) birebir yazıyor. #246 2026-07-20'de 'not_planned' olarak kapatıldı.",
+            "kaynak": [
+              "https://github.com/Dicklesworthstone/mcp_agent_mail_rust#rust-vs-python-stress-test-results",
+              "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail/issues/246"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4058",
+          "arac": "MCP Agent Mail",
+          "gorev": "R-G11",
+          "tur": "RT-02",
+          "baslik": "Sabitlenmemiş curl|bash kurulumu ve sessiz araç değişimi",
+          "aciklama": "Önerilen kurulum, main dalındaki betiği curl ile doğrudan bash'e aktarıyor. Betik varsayılan olarak mevcut 'bd' (Beads, Go) aracını Beads Rust 'br' ile değiştiriyor, kabuk takma adı oluşturuyor ve algıladığı tüm ajan araçlarına MCP entegrasyonu ekliyor.",
+          "tarih": "",
+          "siddet": "orta",
+          "olasilik": "orta",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/README.md"
+          ],
+          "yasatacagi_sorunlar": [
+            "Geliştirici makinelerinde sürümü sabitlenmemiş, main dalındaki kod çalışır. Depo ya da hesap ele geçirilirse tüm kurulumlar etkilenir.",
+            "Mevcut 'bd' iş akışları haber verilmeden başka bir uygulamaya yönlenir; ajan yapılandırma dosyaları toplu olarak değişir."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K16-005"
+          ],
+          "erken_sinyal": "Kurulum sonrası kabuk profillerinde yeni takma ad; ajan yapılandırmalarında beklenmeyen MCP girdileri.",
+          "azaltma": "Kurulumu kurum içi paketle, sabit commit ve --skip-beads seçeneğiyle yapmak; yapılandırma değişikliklerini kurulumdan önce gözden geçirmek.",
+          "id": "BL-02355",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        },
+        {
+          "arac_id": "AR-4058",
+          "arac": "MCP Agent Mail",
+          "gorev": "R-G11",
+          "tur": "RT-05",
+          "baslik": "Tek bakımcı, dış katkı kabul edilmiyor, Python sürümü Rust'a devredildi",
+          "aciklama": "Depodaki commit'lerin tamamına yakını tek geliştiriciye ait. README'ye göre dış katkılar birleştirilmiyor; önerileri Claude/Codex'e inceletip bağımsız karar veriliyor. Şubat 2026'da Rust ile yeniden yazım başladı; Python deposundaki istekler 'Rust sürümüne taşındı' gerekçesiyle kapatılıyor.",
+          "tarih": "2026-08",
+          "siddet": "orta",
+          "olasilik": "yuksek",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/blob/main/README.md",
+            "https://github.com/Dicklesworthstone/mcp_agent_mail_rust",
+            "https://github.com/Dicklesworthstone/mcp_agent_mail/issues/259"
+          ],
+          "yasatacagi_sorunlar": [
+            "Kurumun bulduğu hata ya da güvenlik düzeltmesi PR olarak birleştirilmez; düzeltme bakımcının öncelik vermesine kalır.",
+            "Python sürümüne yatırım yapılırsa, oturuma bağlı kimlik gibi yeni özellikler yalnız Rust sürümünde geleceği için göç zorunlu olur.",
+            "Bakımcı çekilirse proje durur; ajan eşgüdüm katmanı sahipsiz kalır."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K16-006",
+            "N-K16-005"
+          ],
+          "erken_sinyal": "Python deposunda sorunların Rust'a yönlendirilerek kapatılması; sürümler arasındaki sürenin uzaması (son Python sürümü Nisan 2026).",
+          "azaltma": "Kurum içi çatal ve sabit sürüm kullanmak; çıkış planı hazırlamak; kritik kullanımda bakım güvencesi olan bir alternatif değerlendirmek.",
+          "id": "BL-02356",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        }
+      ]
+    },
+    {
+      "id": "AR-4065",
+      "ad": "Happy (Happy Coder)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://happy.engineering/",
+      "yetenek_siniflari": [
+        "Y-48",
+        "Y-51"
+      ],
+      "arastirma_derinligi": "derin",
+      "risk_puani": 41,
+      "risk_seviyesi": "yuksek",
+      "arastirilmis_puan": 51,
+      "otomatik_puan": 10,
+      "risk_turleri": [
+        "RT-01",
+        "RT-02",
+        "RT-03",
+        "RT-08",
+        "RT-10"
+      ],
+      "otomatik_sinyaller": [],
+      "lisans_sinifi": "izin-verici",
+      "depo": {
+        "ad": "slopus/happy",
+        "arsiv": false,
+        "son_push": "2026-09-22",
+        "yildiz": 23921,
+        "katkici_yaklasik": 75,
+        "acik_issue": 634,
+        "son_surum": "2026-09-22",
+        "commit_12ay": 1422,
+        "sahip_turu": "Organization"
+      },
+      "bulgu_sayisi": 5,
+      "siddet_dagilimi": {
+        "yuksek": 2,
+        "orta": 3
+      },
+      "en_onemli_riskler": [
+        {
+          "id": "BL-02358",
+          "tur": "RT-03",
+          "baslik": "Telefondan hızlı onay ve izin atlama modları",
+          "siddet": "yuksek",
+          "olasilik": "yuksek"
+        },
+        {
+          "id": "BL-02357",
+          "tur": "RT-01",
+          "baslik": "Uçtan uca şifrelemeyi zayıflatan açık güvenlik bildirimleri",
+          "siddet": "yuksek",
+          "olasilik": "orta"
+        },
+        {
+          "id": "BL-02360",
+          "tur": "RT-08",
+          "baslik": "Varsayılan aktarım sunucusu ve düz metin günlüğe yazılan belirteçler",
+          "siddet": "orta",
+          "olasilik": "yuksek"
+        },
+        {
+          "id": "BL-02359",
+          "tur": "RT-02",
+          "baslik": "Paket adı göçü ve eski paketin güncelleme almaması",
+          "siddet": "orta",
+          "olasilik": "orta"
+        }
+      ],
+      "olaylar": [],
+      "guvenlik_gecmisi": {
+        "cve_ghsa_24ay": 0,
+        "kritik_yuksek": [],
+        "not": "GHSA/OSV kaydı yok. Açık ve doğrulanmamış bildirimler: #1503 (kimliği doğrulanmamış içerik anahtarı), #1764 (herkese açık geliştirme sırrıyla belirteç sahteciliği), #1279 (belirteçlerin düz metin günlüğe yazılması), #1086 (web'de Mermaid XSS).",
+        "kaynak": "https://github.com/slopus/happy/issues?q=is%3Aissue+security"
+      },
+      "surdurulebilirlik": {
+        "sahiplik": "Topluluk (slopus; ana geliştiriciler ex3ndr ve bra1nDump)",
+        "son_surum": "2026-09",
+        "bakim": "aktif",
+        "tek_bakimci_riski": false,
+        "not": "cli-1.2.5 (Eylül 2026); 633 açık issue; npm paketi happy-coder'dan happy'ye taşındı."
+      },
+      "ticari": {
+        "fiyat_modeli": "Ücretsiz (MIT)",
+        "kilitlenme": "Düşük",
+        "sahiplik_degisimi": "Yok; varsayılan aktarım sunucusunu proje ekibi işletiyor"
+      },
+      "veri": {
+        "veri_nereye_gider": "Şifreli oturum verisi varsayılan aktarım sunucusundan (api.cluster-fluster.com) geçer; mobil bildirimler Apple/Google üzerinden",
+        "bolge_secenekleri": "Self-host aktarım sunucusu mümkün",
+        "kvkk_notu": "Uçtan uca şifreleme iddiası açık bildirimlerle sorgulanıyor; kurum içi sunucu şart."
+      },
+      "genel_degerlendirme": "Dikkat yönetimi için çekici, ancak uçtan uca şifrelemeyi zayıflatan açık bildirimler, varsayılan üçüncü taraf aktarım sunucusu ve telefondan hızlı onay birleşince ajan oturumları uzaktan yönlendirmeye açık hâle geliyor.",
+      "bulgular": [
+        {
+          "arac_id": "AR-4065",
+          "arac": "Happy (Happy Coder)",
+          "gorev": "R-G11",
+          "tur": "RT-01",
+          "baslik": "Uçtan uca şifrelemeyi zayıflatan açık güvenlik bildirimleri",
+          "aciklama": "Açık #1503: terminal, eşleşmede gelen içerik anahtarını kimlik doğrulaması yapmadan kabul ediyor; kötü niyetli bir aktarım sunucusu tüm oturum verisini çözebilir ve geçerli sahte mesajlar üretebilir. Açık #1764: sunucu yapılandırmalarında herkese açık geliştirme sırları var; bunlarla dağıtım yapılırsa istenen kullanıcı adına belirteç üretilebilir. Açık #1086: web istemcisinde Mermaid SVG'si temizlenmeden işleniyor (XSS). Bildirimler bakımcılarca henüz doğrulanmadı; GHSA yok.",
+          "tarih": "2026-09",
+          "siddet": "yuksek",
+          "olasilik": "orta",
+          "dogrulama": "ikincil",
+          "kanit_url": [
+            "https://github.com/slopus/happy/issues/1503",
+            "https://github.com/slopus/happy/issues/1764",
+            "https://github.com/slopus/happy/issues/1086"
+          ],
+          "yasatacagi_sorunlar": [
+            "Varsayılan aktarım sunucusu ele geçirilirse ya da kötü niyetliyse geliştirici makinelerindeki tüm ajan oturumları okunabilir; sahte 'kullanıcı mesajı' ile ajan komut çalıştırmaya yönlendirilebilir.",
+            "Self-host sunucuda örnek sır değiştirilmezse saldırgan istediği kullanıcı adına oturum açabilir."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K28-002",
+            "N-K28-010",
+            "N-K22-005"
+          ],
+          "erken_sinyal": "Bildirimlerin yanıtsız kalması; eşleşmede beklenmeyen açık anahtar değişimi.",
+          "azaltma": "Kurum içinde güçlü sırla self-host aktarım sunucusu kurmak; kritik depolarda kullanmamak; düzeltmeler gelene kadar pilotla sınırlamak.",
+          "id": "BL-02357",
+          "dogrulama_turu": {
+            "karar": "dogrulandi",
+            "not": "#1503, #1764 ve #1086 açık; bakımcı yorumu yok, depoda yayımlanmış güvenlik danışmanlığı yok. #1764 yalnız yayımlanmış geliştirme sırrıyla kurulan (self-host) sunucuları etkiliyor; #1503 kötü niyetli ya da ele geçirilmiş aktarıcı gerektiriyor. Doğrulanmamış ve koşullu olduğundan yüksek.",
+            "kaynak": [
+              "https://api.github.com/repos/slopus/happy/issues/1503",
+              "https://api.github.com/repos/slopus/happy/issues/1764",
+              "https://api.github.com/repos/slopus/happy/issues/1086",
+              "https://api.github.com/repos/slopus/happy/security-advisories"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4065",
+          "arac": "Happy (Happy Coder)",
+          "gorev": "R-G11",
+          "tur": "RT-03",
+          "baslik": "Telefondan hızlı onay ve izin atlama modları",
+          "aciklama": "Uygulama izin isteklerini telefona bildirip oradan onaylatıyor; 'yolo/bypass' modları --dangerously-skip-permissions geçiriyor. agy arka ucunda 'varsayılan' mod seçilse bile araç çağrıları hiç onay istemiyor. Daemon, telefondan yeni ajan oturumu başlatmaya izin veriyor.",
+          "tarih": "2026-09",
+          "siddet": "yuksek",
+          "olasilik": "yuksek",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/slopus/happy/blob/main/packages/happy-cli/README.md"
+          ],
+          "yasatacagi_sorunlar": [
+            "Bağlamı görmeden telefondan yapılan hızlı onaylar, yıkıcı komutların dikkatsizce kabul edilmesine yol açar.",
+            "Telefonu ya da hesabı ele geçirilen bir geliştiricinin makinesinde uzaktan ajan oturumu başlatılabilir."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K28-009",
+            "N-K28-010",
+            "N-K17-006",
+            "N-K28-013"
+          ],
+          "erken_sinyal": "Mobil onay sürelerinin çok kısa olması; yolo modunun sık kullanımı.",
+          "azaltma": "Yüksek riskli eylemlerde mobil onayı kapatmak; yolo modlarını politikayla yasaklamak; daemon'u yalnız gerektiğinde çalıştırmak.",
+          "id": "BL-02358",
+          "dogrulama_turu": {
+            "karar": "dogrulandi",
+            "not": "README agy'de 'default' modun --sandbox geçirdiğini ama onay kapısı olmadığını, yolo/bypass modlarının --dangerously-skip-permissions kullandığını ve daemon'ın telefondan oturum başlatmaya izin verdiğini yazıyor.",
+            "kaynak": [
+              "https://github.com/slopus/happy/blob/main/packages/happy-cli/README.md"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4065",
+          "arac": "Happy (Happy Coder)",
+          "gorev": "R-G11",
+          "tur": "RT-02",
+          "baslik": "Paket adı göçü ve eski paketin güncelleme almaması",
+          "aciklama": "CLI 'happy-coder' paketinden 2013'ten beri başka yazarlarca kullanılmış ve bağışlanmış 'happy' paket adına taşındı. happy-coder son olarak Mayıs 2026'da (1.1.9) güncellendi. Olumlu yan: yeni paket GitHub OIDC güvenilir yayıncı ile yayımlanıyor.",
+          "tarih": "2026-09",
+          "siddet": "orta",
+          "olasilik": "orta",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://www.npmjs.com/package/happy",
+            "https://www.npmjs.com/package/happy-coder"
+          ],
+          "yasatacagi_sorunlar": [
+            "Eski paketle kalan makineler güvenlik düzeltmesi almaz.",
+            "Ad karışıklığı yanlış ya da sahte paket kurulumuna kapı açar."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K16-005",
+            "N-K16-006"
+          ],
+          "erken_sinyal": "Envanterde happy-coder paketinin görünmesi.",
+          "azaltma": "Kurum içi paket deposunda yalnız 'happy' paketini ve doğrulanmış sürümleri izinli kılmak.",
+          "id": "BL-02359",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        },
+        {
+          "arac_id": "AR-4065",
+          "arac": "Happy (Happy Coder)",
+          "gorev": "R-G11",
+          "tur": "RT-08",
+          "baslik": "Varsayılan aktarım sunucusu ve düz metin günlüğe yazılan belirteçler",
+          "aciklama": "CLI varsayılan olarak proje ekibinin api.cluster-fluster.com sunucusunu kullanıyor; sunucunun yargı alanı belirtilmiyor. Açık #1279'a göre --claude-env ile verilen API belirteçleri ~/.happy/logs altındaki günlüklere düz metin yazılıyor.",
+          "tarih": "2026-05",
+          "siddet": "orta",
+          "olasilik": "yuksek",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/slopus/happy/blob/main/packages/happy-agent/src/config.ts",
+            "https://github.com/slopus/happy/issues/1279"
+          ],
+          "yasatacagi_sorunlar": [
+            "Şifreli de olsa oturum meta verisi ve trafik üçüncü taraf sunucudan geçer.",
+            "Kurum içi model ağ geçidi belirteçleri geliştirici diskinde süresiz düz metin olarak kalır."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K22-005"
+          ],
+          "erken_sinyal": "Uç noktalardan cluster-fluster.com'a trafik; günlüklerde belirteç kalıpları.",
+          "azaltma": "HAPPY_SERVER_URL ile kurum içi sunucuyu zorunlu kılmak; belirteçleri ortam değişkeni yerine güvenli depodan vermek; günlükleri taramak.",
+          "id": "BL-02360",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        },
+        {
+          "arac_id": "AR-4065",
+          "arac": "Happy (Happy Coder)",
+          "gorev": "R-G11",
+          "tur": "RT-10",
+          "baslik": "Yüksek açık issue sayısı ve oturum yönetimi hataları",
+          "aciklama": "Depoda 633 açık issue var. Açık #1693: istemci kaybolduğunda daemon'un başlattığı oturumlar sonlandırılmıyor, sahipsiz oturum ağaçları günlerce birikiyor. Açık #1277: Codex'te bellek yeni oturuma sızıyor.",
+          "tarih": "2026-08",
+          "siddet": "orta",
+          "olasilik": "orta",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://github.com/slopus/happy/issues/1693",
+            "https://github.com/slopus/happy/issues/1277"
+          ],
+          "yasatacagi_sorunlar": [
+            "Sahipsiz ajan oturumları geliştirici makinesinde kaynak tüketir ve gözetimsiz çalışmaya devam eder.",
+            "Önceki oturumun bağlamı yeni işe sızarak yanlış yönlendirmeye yol açar."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K28-002",
+            "N-K16-006"
+          ],
+          "erken_sinyal": "Makinelerde uzun süredir çalışan ajan süreçleri.",
+          "azaltma": "Oturum zaman aşımı ve periyodik temizlik; pilot süresince izleme.",
+          "id": "BL-02361",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        }
+      ]
+    },
+    {
+      "id": "AR-4099",
+      "ad": "Reclaim.ai",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://reclaim.ai/",
+      "yetenek_siniflari": [
+        "Y-51",
+        "Y-57"
+      ],
+      "arastirma_derinligi": "derin",
+      "risk_puani": 39,
+      "risk_seviyesi": "orta",
+      "arastirilmis_puan": 45,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-03",
+        "RT-06",
+        "RT-07",
+        "RT-08",
+        "RT-17"
+      ],
+      "otomatik_sinyaller": [
+        "yalnız SaaS/bulut (kilit ve veri yerelliği)"
+      ],
+      "lisans_sinifi": "ticari",
+      "depo": null,
+      "bulgu_sayisi": 4,
+      "siddet_dagilimi": {
+        "yuksek": 2,
+        "orta": 1,
+        "dusuk": 1
+      },
+      "en_onemli_riskler": [
+        {
+          "id": "BL-02362",
+          "tur": "RT-08",
+          "baslik": "Takvim ve iletişim meta verisinin yalnız ABD'de işlenmesi",
+          "siddet": "yuksek",
+          "olasilik": "yuksek"
+        },
+        {
+          "id": "BL-02363",
+          "tur": "RT-17",
+          "baslik": "Workforce Analytics ile bireysel mesai dışı çalışma ve odak raporları",
+          "siddet": "yuksek",
+          "olasilik": "orta"
+        },
+        {
+          "id": "BL-02364",
+          "tur": "RT-03",
+          "baslik": "Takvim ve Slack'te geniş yazma yetkisi; ajanlara MCP ile açılma",
+          "siddet": "orta",
+          "olasilik": "orta"
+        },
+        {
+          "id": "BL-02365",
+          "tur": "RT-06",
+          "baslik": "Dropbox'a satılması ve yol haritasının ana şirkete bağlanması",
+          "siddet": "dusuk",
+          "olasilik": "orta"
+        }
+      ],
+      "olaylar": [],
+      "guvenlik_gecmisi": {
+        "cve_ghsa_24ay": 0,
+        "kritik_yuksek": [],
+        "not": "NVD'de Reclaim.ai kaydı yok. SOC 2 Type II, GDPR/CCPA ve Data Privacy Framework beyanı var.",
+        "kaynak": "https://reclaim.ai/security"
+      },
+      "surdurulebilirlik": {
+        "sahiplik": "Dropbox (2024'te satın aldı)",
+        "son_surum": "SaaS (sürekli)",
+        "bakim": "aktif",
+        "tek_bakimci_riski": false,
+        "not": "Büyük bir ana şirketin parçası."
+      },
+      "ticari": {
+        "fiyat_modeli": "Freemium; kullanıcı başına aylık Starter ve Business planları",
+        "kilitlenme": "Düşük-orta: kurallar Reclaim'e özgü, veri takvimde",
+        "sahiplik_degisimi": "2024'te Dropbox'a satıldı"
+      },
+      "veri": {
+        "veri_nereye_gider": "AWS us-east-1 / us-east-2 (ABD)",
+        "bolge_secenekleri": "Yok (yalnız ABD)",
+        "kvkk_notu": "Takvim, kişiler ve Slack meta verisi yurt dışına aktarılır; md.9 standart sözleşme ve 5 iş günü içinde bildirim gerekir."
+      },
+      "genel_degerlendirme": "Odak koruma işlevi basit, ancak veri yalnız ABD'de işleniyor ve bireysel mesai dışı çalışma raporları çalışan izleme riskini doğrudan getiriyor. Kurumsal takvim verisiyle kullanılmadan önce KVKK aktarımı ve amaç sınırlaması çözülmeli.",
+      "bulgular": [
+        {
+          "arac_id": "AR-4099",
+          "arac": "Reclaim.ai",
+          "gorev": "R-G11",
+          "tur": "RT-08",
+          "baslik": "Takvim ve iletişim meta verisinin yalnız ABD'de işlenmesi",
+          "aciklama": "Reclaim'in güvenlik sayfasına göre tüm veri ABD'de, AWS us-east-1 ve us-east-2 bölgelerinde barındırılıyor. Google/Outlook takvim okuma-yazma, kişiler, Gmail ileti meta verisi ve Slack mesaj geçmişi kapsamları isteniyor.",
+          "tarih": "",
+          "siddet": "yuksek",
+          "olasilik": "yuksek",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://reclaim.ai/security",
+            "https://www.kvkk.gov.tr/Icerik/8142/Kisisel-Verilerin-Yurt-Disina-Aktarilmasi-Rehberi"
+          ],
+          "yasatacagi_sorunlar": [
+            "Toplantı başlıkları, katılımcı listeleri ve Slack durumları ABD'de işlenir; KVKK md.9 standart sözleşmesi ve Kurul bildirimi olmadan kullanım ihlal olur.",
+            "Kamu kapsamında hassas toplantı içerikleri (ihale, güvenlik) yurt dışına çıkar."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K22-005",
+            "N-K22-008",
+            "N-K28-009"
+          ],
+          "erken_sinyal": "Kullanıcıların kurumsal takvimi bireysel olarak bağlaması (gölge kullanım).",
+          "azaltma": "Kurumsal hesapta OAuth uygulama onayını merkezileştirmek; yalnız odak bloğu gibi sınırlı kapsamla ve aktarım değerlendirmesinden sonra kullanmak.",
+          "id": "BL-02362",
+          "dogrulama_turu": {
+            "karar": "dogrulandi",
+            "not": "Güvenlik sayfası tüm verinin ABD'de, us-east-1 ve us-east-2'de tutulduğunu söylüyor. Kapsamlar entegrasyona bağlı ve dar: Slack'te im:history (bot DM'leri), Gmail'de eklenti içinde taslak ve açık ileti meta verisi. DPF sertifikası Türkiye için geçerli bir aktarım aracı değil.",
+            "kaynak": [
+              "https://reclaim.ai/security"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4099",
+          "arac": "Reclaim.ai",
+          "gorev": "R-G11",
+          "tur": "RT-17",
+          "baslik": "Workforce Analytics ile bireysel mesai dışı çalışma ve odak raporları",
+          "aciklama": "Workforce Analytics şirket, departman, ekip ve birey düzeyinde raporlar sunuyor: toplantı yükü, odak süresi ve oturum uzunluğu, takvim parçalanması, serbest, seyahat ve mola süresi. Sayfada ayrı bir 'mesai dışı çalışma' metriği yok, yalnız genel bir 'work-life balance' ifadesi geçiyor. Reclaim bu sinyallerin bireysel performans değerlendirmesi için kullanılmadığını söylüyor. Bireysel raporların yöneticilere açık olması ise bir çıkarımdır.",
+          "tarih": "",
+          "siddet": "yuksek",
+          "olasilik": "orta",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://reclaim.ai/features/workforce-analytics"
+          ],
+          "yasatacagi_sorunlar": [
+            "Mesai dışı çalışma ve odak süresi verisi bireysel performans ya da disiplin gerekçesi olarak kullanılırsa iş hukuku ve KVKK ölçülülük ilkesi açısından uyuşmazlık çıkar.",
+            "Çalışanlar odak bloklarını 'gösteriş' için doldurur; dikkat verisi anlamını yitirir."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K32-001",
+            "N-K32-002",
+            "N-K32-005"
+          ],
+          "erken_sinyal": "Yönetici panellerinde kişi bazlı raporların açılması.",
+          "azaltma": "Bireysel raporları kapatıp yalnız toplu (anonim) düzeyde kullanmak; aydınlatma ve çalışan temsilcileriyle danışma.",
+          "id": "BL-02363",
+          "dogrulama_turu": {
+            "karar": "kismen",
+            "not": "Şirket, departman, ekip ve birey düzeyinde raporlar, odak süresi, toplantı yükü ve parçalanma doğru. 'Mesai dışı çalışma' metriği sayfada açıkça yok; Reclaim sinyallerin bireysel performans değerlendirmesi için olmadığını söylüyor. Bireysel raporların yöneticiye görünmesi çıkarım.",
+            "kaynak": [
+              "https://reclaim.ai/features/workforce-analytics"
+            ]
+          }
+        },
+        {
+          "arac_id": "AR-4099",
+          "arac": "Reclaim.ai",
+          "gorev": "R-G11",
+          "tur": "RT-03",
+          "baslik": "Takvim ve Slack'te geniş yazma yetkisi; ajanlara MCP ile açılma",
+          "aciklama": "Outlook için Calendars.ReadWrite, Slack için mesaj geçmişi, kullanıcı verisi ve durum güncelleme kapsamları isteniyor. Schedule Assistant için yeni 'mcp:connect' Slack kapsamı eklenmiş; asistan ajanlar tarafından çağrılabiliyor.",
+          "tarih": "",
+          "siddet": "orta",
+          "olasilik": "orta",
+          "dogrulama": "birincil",
+          "kanit_url": [
+            "https://reclaim.ai/security"
+          ],
+          "yasatacagi_sorunlar": [
+            "Ajanlarca çağrılan ve takvim/Slack'e yazabilen bir asistan, istem enjeksiyonuyla sahte toplantı ya da yanlış durum oluşturarak bildirim politikasını bozabilir.",
+            "Hesap ele geçirilirse çalışanların takvim ve mesaj meta verisi toplu olarak sızar."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K28-009",
+            "N-K30-010"
+          ],
+          "erken_sinyal": "Kullanıcı eylemi olmadan oluşan takvim etkinlikleri ya da durum değişiklikleri.",
+          "azaltma": "MCP bağlantısını kapatmak; en az yetkili kapsam; Slack uygulama onaylarını yönetici denetimine almak.",
+          "id": "BL-02364",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        },
+        {
+          "arac_id": "AR-4099",
+          "arac": "Reclaim.ai",
+          "gorev": "R-G11",
+          "tur": "RT-06",
+          "baslik": "Dropbox'a satılması ve yol haritasının ana şirkete bağlanması",
+          "aciklama": "Dropbox, Reclaim.ai'ı 2024 yazında yaklaşık 40,2 milyon dolara satın aldı. O dönemde yakın vadede fiyat ve destek değişikliği planlanmadığı söylendi; ürün yönü artık Dropbox önceliklerine bağlı.",
+          "tarih": "2024-08",
+          "siddet": "dusuk",
+          "olasilik": "orta",
+          "dogrulama": "ikincil",
+          "kanit_url": [
+            "https://siliconangle.com/2024/08/22/dropbox-acquires-ai-powered-calendar-app-reclaim-ai/",
+            "https://reclaim.ai/blog/dropbox-acquires-reclaim"
+          ],
+          "yasatacagi_sorunlar": [
+            "Dropbox'ın ürün paketlemesi ya da fiyat politikası değişirse bireysel odak aracı paketin içine alınabilir veya maliyeti artabilir."
+          ],
+          "etkilenen_ihtiyaclar": [
+            "N-K22-008"
+          ],
+          "erken_sinyal": "Fiyat sayfasında ya da hizmet koşullarında Dropbox'a bağlı değişiklikler.",
+          "azaltma": "Kısa süreli sözleşme; takvim kurallarını araca bağımlı olmayan biçimde belgelemek.",
+          "id": "BL-02365",
+          "dogrulama_turu": {
+            "karar": "yapilmadi",
+            "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+          }
+        }
+      ]
+    },
+    {
+      "id": "AR-0483",
+      "ad": "Superset",
+      "tur": "acik-cekirdek",
+      "lisans": "Elastic License 2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://superset.sh",
+      "yetenek_siniflari": [
+        "Y-07",
+        "Y-23",
+        "Y-48",
+        "Y-51"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 20,
+      "risk_seviyesi": "orta",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-04",
+        "RT-08",
+        "RT-10"
+      ],
+      "otomatik_sinyaller": [
+        "lisans sınıfı: kaynak-erisilebilir"
+      ],
+      "lisans_sinifi": "kaynak-erisilebilir",
+      "depo": {
+        "ad": "superset-sh/superset",
+        "arsiv": false,
+        "son_push": "2026-09-27",
+        "yildiz": 14665,
+        "katkici_yaklasik": 132,
+        "acik_issue": 384,
+        "son_surum": "2026-09-27",
+        "commit_12ay": 4540,
+        "sahip_turu": "Organization"
+      },
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4095",
+      "ad": "Liveblocks",
+      "tur": "ticari-saas",
+      "lisans": "ticari (istemci SDK'ları açık kaynak)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://liveblocks.io/",
+      "yetenek_siniflari": [
+        "Y-48",
+        "Y-51"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 20,
+      "risk_seviyesi": "orta",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-07",
+        "RT-08"
+      ],
+      "otomatik_sinyaller": [
+        "yalnız SaaS/bulut (kilit ve veri yerelliği)"
+      ],
+      "lisans_sinifi": "ticari",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4096",
+      "ad": "Yjs",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://yjs.dev/",
+      "yetenek_siniflari": [
+        "Y-48"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 20,
+      "risk_seviyesi": "orta",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-06",
+        "RT-07",
+        "RT-08",
+        "RT-13"
+      ],
+      "otomatik_sinyaller": [],
+      "lisans_sinifi": "izin-verici",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4100",
+      "ad": "Tuple",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://tuple.app/",
+      "yetenek_siniflari": [
+        "Y-48",
+        "Y-53"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 20,
+      "risk_seviyesi": "orta",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-07",
+        "RT-08"
+      ],
+      "otomatik_sinyaller": [
+        "yalnız SaaS/bulut (kilit ve veri yerelliği)"
+      ],
+      "lisans_sinifi": "ticari",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4101",
+      "ad": "Visual Studio Live Share",
+      "tur": "ticari-saas",
+      "lisans": "ticari (ücretsiz)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://visualstudio.microsoft.com/services/live-share/",
+      "yetenek_siniflari": [
+        "Y-48",
+        "Y-53"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 20,
+      "risk_seviyesi": "orta",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 20,
+      "risk_turleri": [
+        "RT-07",
+        "RT-08"
+      ],
+      "otomatik_sinyaller": [
+        "yalnız SaaS/bulut (kilit ve veri yerelliği)"
+      ],
+      "lisans_sinifi": "ticari",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4122",
+      "ad": "Shape of AI",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-NC-SA",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.shapeof.ai/",
+      "yetenek_siniflari": [
+        "Y-48"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 15,
+      "risk_seviyesi": "dusuk",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 15,
+      "risk_turleri": [
+        "RT-04"
+      ],
+      "otomatik_sinyaller": [
+        "lisans sınıfı: ticari-olmayan"
+      ],
+      "lisans_sinifi": "ticari-olmayan",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4123",
+      "ad": "Linear Agent Interaction Guidelines (AIG)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://linear.app/developers/aig",
+      "yetenek_siniflari": [
+        "Y-48",
+        "Y-49"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 15,
+      "risk_seviyesi": "dusuk",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 15,
+      "risk_turleri": [
+        "RT-04",
+        "RT-09",
+        "RT-10"
+      ],
+      "otomatik_sinyaller": [],
+      "lisans_sinifi": "bilinmiyor",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    },
+    {
+      "id": "AR-4124",
+      "ad": "I-PASS Devir Yöntemi",
+      "tur": "protokol-standart",
+      "lisans": "ticari (tescilli program)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ipassinstitute.com/",
+      "yetenek_siniflari": [
+        "Y-49"
+      ],
+      "arastirma_derinligi": "otomatik",
+      "risk_puani": 0,
+      "risk_seviyesi": "dusuk",
+      "arastirilmis_puan": null,
+      "otomatik_puan": 0,
+      "risk_turleri": [],
+      "otomatik_sinyaller": [],
+      "lisans_sinifi": "ticari",
+      "depo": null,
+      "bulgu_sayisi": 0,
+      "siddet_dagilimi": {},
+      "en_onemli_riskler": [],
+      "olaylar": []
+    }
+  ]
+}

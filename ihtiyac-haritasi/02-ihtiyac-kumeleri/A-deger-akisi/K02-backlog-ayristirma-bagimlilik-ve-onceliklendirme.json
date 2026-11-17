@@ -1,0 +1,405 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K02",
+    "ad": "Backlog, ayrıştırma, bağımlılık ve önceliklendirme",
+    "alan": "A-deger-akisi",
+    "amac": "Büyük ve ham backlog'un paralel, doğru sırada ve değer odaklı işlenebilir iş kümelerine dönüşmesi.",
+    "kapsam": [
+      "~12.000 kayıtlık backlog'un normalizasyonu",
+      "kopya/eskimiş kayıt temizliği",
+      "iş hiyerarşisi ve ayrıştırma",
+      "bağımsız küme çıkarımı",
+      "bağımlılığa dayalı sıralama",
+      "önceliklendirme modeli",
+      "eşzamanlı iş sınırı"
+    ],
+    "kapsam_disi": [
+      "ekipler arası program düzeyi bağımlılık (K24)",
+      "kod düzeyi ilişki haritası (K03)"
+    ],
+    "komsu_kumeler": [
+      "K01",
+      "K03",
+      "K24",
+      "K26"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K02-001",
+      "baslik": "Büyük backlog'un ortak şablona toplu dönüştürülmesi",
+      "ihtiyac": "Park edilmiş ~12.000 kayıtlık ham backlog'un ön yüz/arka uç vb. ayrımıyla ortak şablona dönüştürülmesi; eksiklerin listelenip ürün sahibi kuyruğuna düşmesi; toplu işin hız ve maliyet tavanıyla yürümesi.",
+      "cozulecek_sorun": "Ham backlog şablona uymuyor; ajanlar bu kayıtlarla çalışamıyor.",
+      "yetenek_siniflari": [
+        "Y-45",
+        "Y-44",
+        "Y-30"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Kayıt sayısı kesin değil; kayıt sayısı arttıkça insan gözden geçirmesi örneklemeye dönmek zorunda kalır.",
+      "kabul_olcutleri": [
+        "Dönüşüm oranı, insan düzeltme oranı, süre ve maliyet raporlanır.",
+        "Tavan aşılınca toplu iş durur."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-054",
+          "S-062"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-003",
+        "Q-007"
+      ],
+      "bagimliliklar": [
+        "N-K01-002"
+      ]
+    },
+    {
+      "id": "N-K02-002",
+      "baslik": "Toplu dönüşümün insan gözden geçirme modeli",
+      "ihtiyac": "Kaynaktaki 'insan okur, anlar, günceller' adımının hangi kapsamda (tamamı mı, örneklem mi, risk sınıfına göre mi) ve hangi kapasiteyle yapılacağının tanımlanması.",
+      "cozulecek_sorun": "Binlerce kaydın tek tek insan tarafından okunması kapasite olarak mümkün olmayabilir; kapasite hesabı yok.",
+      "yetenek_siniflari": [
+        "Y-31",
+        "Y-45"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Gözden geçirme kapsamı ve örnekleme kuralı yazılı.",
+        "Gözden geçirilen ve geçirilmeyen kayıtlar ayrı etiketli."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-030",
+          "S-054"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "olcek_esigi": "yüksek hacim",
+      "iliskili": [
+        "G-024",
+        "Q-007"
+      ],
+      "bagimliliklar": [
+        "N-K02-001"
+      ]
+    },
+    {
+      "id": "N-K02-003",
+      "baslik": "Yinelenen, eskimiş ve birleşmesi gereken kayıtların tespiti",
+      "ihtiyac": "Backlog'da anlamca aynı işlerin, eskimiş kayıtların ve birleşmesi gereken parçaların tespit edilip insan kararına sunulması.",
+      "cozulecek_sorun": "Aynı iş için yinelenen değişiklikler ve istenmeyen özellikler emek israfına dönüşüyor.",
+      "yetenek_siniflari": [
+        "Y-45",
+        "Y-15"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Tekilleştirme önerilerinin kesinliği ölçülür.",
+        "Eskimiş kayıtlar akışa girmeden ayrılır."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-118"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "yüksek hacim",
+      "iliskili": [
+        "G-031",
+        "Q-007",
+        "U-022"
+      ]
+    },
+    {
+      "id": "N-K02-004",
+      "baslik": "İş hiyerarşisi ve ayrıştırma sorumluluğu",
+      "ihtiyac": "Portföy epiği → özellik → hikâye → görev hiyerarşisinin ve büyük işi küçük, bağımsız doğrulanabilir işlere kimin (insan/ajan) ayıracağının tanımlanması.",
+      "cozulecek_sorun": "Kümeleme ve önceliklendirme rolleri 'parçalanmış görev' bekliyor; parçalamayı kimin yaptığı tanımlı değil. Uzun görevlerde ajan başarısı düşüyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her iş kalemi bir üst işe bağlı.",
+        "Ayrıştırmayı yapan rol ve ayrıştırma sonucu onaylayan rol tanımlı.",
+        "Görev boyutu için üst sınır tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-044",
+          "S-053",
+          "S-106"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "U-037"
+      ]
+    },
+    {
+      "id": "N-K02-005",
+      "baslik": "Görevlerin bağımsız kümelere ayrılması",
+      "ihtiyac": "Parçalanmış görevlerin ilişki ve bağımlılığa göre, birbirinden bağımsız başlatılabilecek kümelere ayrılması; bağımsızlığın doğrulanması ve sınırlı bölme denemesinden sonra engel kaydı.",
+      "cozulecek_sorun": "Paralel çalışma, çakışma ve bekleme olmadan mümkün olmuyor.",
+      "yetenek_siniflari": [
+        "Y-13"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kümeler arasında bağımlılık kenarı 0.",
+        "En fazla 2 bölme denemesinden sonra bölünemeyen iş engel olarak kaydedilir."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-044",
+          "S-030",
+          "S-051"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K02-004",
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "N-K02-006",
+      "baslik": "Bağımlılığa dayalı sıralama",
+      "ihtiyac": "Geliştirme sırasının iş kaydı sırasına göre değil; teknik bağımlılık, ilişkisel bağımlılık, temel bileşen ve tüketici bileşen analizine göre (temel → bağımlılık → tüketici) belirlenmesi; hazır olmayan altyapı üzerinde iş başlatılmaması.",
+      "cozulecek_sorun": "Altyapı hazır olmadan üst katmanda geliştirme yapılıyor.",
+      "yetenek_siniflari": [
+        "Y-13"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Sıralama bağımlılık grafiğine göre ihlalsiz.",
+        "Önkoşulu tamamlanmamış iş 'başlatılamaz' durumunda kalır."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-049",
+          "S-043"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K02-005"
+      ]
+    },
+    {
+      "id": "N-K02-007",
+      "baslik": "Bağımlılık ve sıralama kararlarının deterministik hesaplanması",
+      "ihtiyac": "Döngü tespiti, topolojik sıralama ve küme bağımsızlığı kontrolünün programatik yapılması; dil modelinin yalnız yorumlama ve açıklama yapması.",
+      "cozulecek_sorun": "Dil modeli bağımlılık uydurabiliyor; sıralama her koşuda farklı çıkabiliyor.",
+      "yetenek_siniflari": [
+        "Y-13",
+        "Y-14"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Bağımlılık ve sıralama kararlarında dil modeli çağrısı 0.",
+        "Dil modeli çıktısı ile programatik sonuç arasındaki fark raporlanır."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-028",
+          "S-022"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K02-008",
+      "baslik": "Paralellik ile sıralama arasındaki karar sahipliği",
+      "ihtiyac": "Kümelemenin 'her küme bağımsız başlayabilir' kararı ile önceliklendirmenin 'önce temel' kararı çeliştiğinde hangi rolün karar vereceğinin tanımlanması.",
+      "cozulecek_sorun": "İki rol aynı alanda farklı kararlar üretiyor; kararın sahibi yok.",
+      "yetenek_siniflari": [
+        "Y-13",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Çelişki durumunda karar kuralı ve karar sahibi yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-044",
+          "S-049"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-025"
+      ]
+    },
+    {
+      "id": "N-K02-009",
+      "baslik": "Değer, etki, efor ve risk tabanlı önceliklendirme modeli",
+      "ihtiyac": "İşlerin etki × efor, gecikme maliyeti ve risk boyutlarıyla önceliklendirilmesi; önceliklendirme kararının kime ait olduğunun ve bağımlılık sırasıyla nasıl birleşeceğinin tanımlanması.",
+      "cozulecek_sorun": "Kaynaklarda yalnız referans matris görselleri var; binlerce iş için bir önceliklendirme modeli ve karar hakkı tanımlı değil.",
+      "yetenek_siniflari": [
+        "Y-39",
+        "Y-45"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Önceliklendirme boyutları ve ölçekleri yazılı.",
+        "Bağımlılık sırası ile değer önceliği birleşme kuralı yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-055",
+          "S-056",
+          "S-171"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-031"
+      ]
+    },
+    {
+      "id": "N-K02-010",
+      "baslik": "İşin ajana uygunluğunun sınıflandırılması",
+      "ihtiyac": "Her işin ajanla yapılmaya uygunluğunun (tam otomatik, ajan + insan, yalnız insan) iş türü, modül, karmaşıklık ve risk açısından sınıflandırılması.",
+      "cozulecek_sorun": "Her iş ajana veriliyor. Oysa doküman, derleme ve kurallı göç işlerinde başarı yüksek, karmaşık mevcut kodda ve performans işlerinde düşük.",
+      "yetenek_siniflari": [
+        "Y-45",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her iş kaleminde uygunluk sınıfı var.",
+        "Sınıfa göre kabul oranı ve maliyet raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-117",
+          "S-118",
+          "S-174",
+          "S-108"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-031",
+        "R-018",
+        "U-023"
+      ]
+    },
+    {
+      "id": "N-K02-011",
+      "baslik": "Eşzamanlı iş sınırı ve iş çekme kuralı",
+      "ihtiyac": "Kişi, ekip ve ajan başına eşzamanlı iş sınırı; hazır işin sırayla çekilmesi; aynı hata için kopya iş açılmaması.",
+      "cozulecek_sorun": "Aşırı paralellik kuyrukları ve incelemeyi tıkıyor; kopya işler emek israfına yol açıyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Pilot varsayımı 'kişi başına 1 aktif iş' idi; 10+ ekipte sınırın ekip ve ajan kapasitesine göre yeniden tanımlanması gerekir.",
+      "kabul_olcutleri": [
+        "Eşzamanlı iş sınırı ihlali 0.",
+        "Kopya iş oranı ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-004"
+      ]
+    },
+    {
+      "id": "N-K02-012",
+      "baslik": "Backlog boyutu ile eşzamanlılığın ayrılması",
+      "ihtiyac": "Kapasite ve altyapı kararlarının backlog'daki kayıt sayısına göre değil, ölçülen aktif yüke (eşzamanlı koşu, süre, bekleme) göre verilmesi.",
+      "cozulecek_sorun": "12.000 kayıt eşzamanlı yük sanılarak gereksiz büyük altyapı tasarlanabiliyor, ya da tersine gerçek yük görülmüyor.",
+      "yetenek_siniflari": [
+        "Y-38",
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kapasite kararları ölçülmüş aktif yük verisine dayanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-004",
+        "A-012",
+        "C-032"
+      ]
+    },
+    {
+      "id": "N-K02-013",
+      "baslik": "Görev boyutu ve küçük parti sınırı",
+      "ihtiyac": "Ajan işlerinin ve değişiklik önerilerinin boyutuna üst sınır konması; büyük işlerin bölünmesi.",
+      "cozulecek_sorun": "Büyük değişiklik incelenemiyor; büyük partiler kararsızlıkla ilişkili; uzun görevlerde ajan tutarlılığı düşüyor.",
+      "yetenek_siniflari": [
+        "Y-33"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Değişiklik başına boyut sınırı tanımlı ve aşan öneri bölünüyor.",
+        "Değişiklik boyutu dağılımı izleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-101",
+          "S-107",
+          "S-118",
+          "S-106"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "R-001",
+        "U-037"
+      ],
+      "bagimliliklar": [
+        "N-K02-004"
+      ]
+    }
+  ]
+}

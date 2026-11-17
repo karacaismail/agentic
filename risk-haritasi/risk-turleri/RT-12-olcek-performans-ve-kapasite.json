@@ -1,0 +1,3291 @@
+{
+  "sema": "risk-haritasi/risk-turu@1",
+  "risk_turu": {
+    "id": "RT-12",
+    "ad": "Ölçek, performans ve kapasite",
+    "tanim": "Çok kiracılık sınırları, eşzamanlılık, kaynak tüketimi, maliyetli hesaplama."
+  },
+  "ozet": {
+    "bulgu": 94,
+    "siddet": {
+      "yuksek": 22,
+      "orta": 70,
+      "dusuk": 2
+    },
+    "arac": 91,
+    "kategori_kalibi": 13,
+    "olay": 21,
+    "senaryo": 10,
+    "otomatik_sinyalli_arac": 0
+  },
+  "en_cok_etkilenen_ihtiyaclar": [
+    [
+      "N-K15-005",
+      34
+    ],
+    [
+      "N-K09-011",
+      22
+    ],
+    [
+      "N-K09-009",
+      17
+    ],
+    [
+      "N-K16-001",
+      13
+    ],
+    [
+      "N-K13-011",
+      9
+    ],
+    [
+      "N-K16-007",
+      9
+    ],
+    [
+      "N-K15-006",
+      8
+    ],
+    [
+      "N-K26-005",
+      7
+    ],
+    [
+      "N-K02-001",
+      7
+    ],
+    [
+      "N-K19-004",
+      6
+    ],
+    [
+      "N-K24-001",
+      6
+    ],
+    [
+      "N-K19-002",
+      6
+    ],
+    [
+      "N-K13-002",
+      5
+    ],
+    [
+      "N-K16-004",
+      5
+    ],
+    [
+      "N-K13-003",
+      4
+    ],
+    [
+      "N-K13-004",
+      4
+    ],
+    [
+      "N-K12-004",
+      4
+    ],
+    [
+      "N-K20-003",
+      3
+    ],
+    [
+      "N-K16-003",
+      3
+    ],
+    [
+      "N-K26-004",
+      3
+    ],
+    [
+      "N-K24-002",
+      3
+    ],
+    [
+      "N-K05-012",
+      3
+    ],
+    [
+      "N-K18-009",
+      3
+    ],
+    [
+      "N-K04-003",
+      2
+    ],
+    [
+      "N-K17-004",
+      2
+    ]
+  ],
+  "bulgular": [
+    {
+      "arac_id": "AR-0001",
+      "arac": "Temporal",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Olay geçmişi ve yük boyutu sert sınırları",
+      "aciklama": "Bir iş akışı yürütmesinin olay geçmişi 51.200 olay veya 50 MB'ı aşarsa Temporal yürütmeyi sonlandırır; tek bir yük (blob) 2 MB'da hata verir, gRPC mesajı 4 MB ile sınırlıdır. Uzun ajan döngüleri ve LLM çıktılarını geçmişe yazan tasarımlar bu sınırlara hızla ulaşır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.temporal.io/workflow-execution/limits",
+        "https://docs.temporal.io/self-hosted-guide/defaults"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onlarca tur süren bir uygulayıcı-inceleyici döngüsü geçmiş sınırına takılıp sonlandırılır; koşu yarıda kalır ve kanıt paketi eksik oluşur.",
+        "LLM yanıtları, diff'ler veya test çıktıları doğrudan activity sonucu olarak döndürülürse 2 MB yük sınırı iş akışını durdurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K13-002",
+        "N-K19-004",
+        "N-K20-003"
+      ],
+      "erken_sinyal": "Sunucu günlüklerinde 10.240 olay / 10 MB uyarıları ve 'Blob size exceeds limit' uyarıları; iş akışı başına ortalama olay sayısının artması.",
+      "azaltma": "Büyük artefaktları nesne deposunda tutup yalnız referans geçirmek; belirli tur sayısında Continue-As-New ve alt iş akışlarıyla geçmişi bölmek; geçmiş boyutunu metrik olarak izlemek.",
+      "id": "BL-00003",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Resmî belgeyle birebir: 51.200 olay veya 50 MB'da yürütme sonlandırılır, blob 2 MB'da hata verir, gRPC mesajı 4 MB. Continue-As-New ve harici depolama ile aşılabilir.",
+        "kaynak": [
+          "https://docs.temporal.io/workflow-execution/limits",
+          "https://docs.temporal.io/self-hosted-guide/defaults"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0015",
+      "arac": "AWS Step Functions",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "25.000 olaylık geçmiş ve 256 KiB yük sert sınırları",
+      "aciklama": "Standard iş akışlarında yürütme geçmişi 25.000 olayla sınırlıdır ve artırılamaz; 25.000. olay başarı değilse yürütme başarısız olur. Durumlar arası yük 256 KiB ile sınırlıdır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html",
+        "https://docs.aws.amazon.com/step-functions/latest/dg/sfn-best-practices.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yeniden deneme ve inceleme döngüsü uzayan bir ajan koşusu geçmiş sınırında başarısız olur.",
+        "LLM çıktısı ve diff'ler durum yüküne sığmaz; her adımda S3'e yazıp referans taşımak gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K13-002",
+        "N-K04-003"
+      ],
+      "erken_sinyal": "Yürütme başına olay sayısının 10.000'i aşması; States.DataLimitExceeded hataları.",
+      "azaltma": "Uzun döngüleri alt yürütmelere bölmek; büyük veriyi nesne deposunda tutmak.",
+      "id": "BL-00050",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kota sayfasına göre 25.000 olay sert bir kota; aşılırsa yürütme başarısız olur. Girdi/çıktı sınırı 256 KiB ve değiştirilemez.",
+        "kaynak": [
+          "https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html",
+          "https://docs.aws.amazon.com/step-functions/latest/dg/sfn-best-practices.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0127",
+      "arac": "GitHub Actions (merge queue ile)",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Barındırılan platformda sık kesinti: Actions kaynaklı hattın durması",
+      "aciklama": "githubstatus.com'daki son 50 olayın (24 Temmuz – 27 Eylül 2026) 16'sı major/critical, 12'si Actions ile ilgili. Mayıs 2026 kullanılabilirlik raporunda Actions iş hata oranı %42'ye çıktı; ayrıca bir servis hesabı yanlışlıkla askıya alınınca işler başarısız oldu.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.githubstatus.com/history",
+        "https://github.blog/news-insights/company-news/github-availability-report-may-2026/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Birleştirme kuyruğu ve zorunlu kontroller Actions'a bağlı olduğundan kesinti süresince hiçbir ekip birleştirme yapamaz; ajan görevleri zaman aşımıyla başarısız olur.",
+        "Kesinti sırasında yeniden denenen ajan görevleri maliyet ve kuyruk yığılması üretir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-007",
+        "N-K15-005",
+        "N-K13-008",
+        "N-K13-002"
+      ],
+      "erken_sinyal": "githubstatus bileşen durumu; kuyrukta bekleyen iş sayısı; 'queued' süresindeki artış.",
+      "azaltma": "Bozulmuş mod tanımlayın (kuyruğu dondur, ajanları duraklat), kritik kontroller için yedek runner havuzu tutun, ajan yeniden denemelerini sınıflandırın.",
+      "id": "BL-00317",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "githubstatus API'sindeki son 50 olay 24 Tem–24 Eyl 2026 aralığında; 8 major + 8 critical = 16, adı/bileşeni Actions içeren 12 olay. Mayıs 2026 raporu: 15 Mayıs'ta Actions çalıştırmalarının %42'si başarısız, 26 Mayıs'ta servis hesabının yanlışlıkla askıya alınması.",
+        "kaynak": [
+          "https://www.githubstatus.com/api/v2/incidents.json",
+          "https://github.blog/news-insights/company-news/github-availability-report-may-2026/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0191",
+      "arac": "vLLM",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Kimlik doğrulamasız hizmet dışı bırakma yüzeyi ve çok kiracılı veri sızıntısı",
+      "aciklama": "2026'da ses sıkıştırma bombası (CVE-2026-57173), yapılandırılmış çıktı regex'lerinde ReDoS (CVE-2026-55574), sınırsız n parametresi (CVE-2026-34756) gibi çok sayıda DoS açığı ile kullanıcılar arası veri sızıntısı (CVE-2026-73558) ve çok kiracılı sunumda başlatılmamış GPU belleğinin açığa çıkması (CVE-2026-53923) yayımlandı.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-hcwq-8wjf-3gcr",
+        "https://github.com/advisories/GHSA-rwxx-mrjm-wc2m",
+        "https://github.com/advisories/GHSA-3mwp-wvh9-7528",
+        "https://github.com/advisories/GHSA-7m6h-x95x-82q5",
+        "https://github.com/advisories/GHSA-5jv2-g5wq-cmr4"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek bir ekibin ajanının ürettiği hatalı istek, ekipler arası paylaşılan sunucuyu düşürüp tüm hattı bozulmuş moda sokar.",
+        "Paylaşılan sunucuda bir ekibin istemi başka ekibin yanıtına sızabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-006",
+        "N-K16-007",
+        "N-K09-011",
+        "N-K24-001"
+      ],
+      "erken_sinyal": "Sunucu çökmeleri, OOM yeniden başlatmaları, gecikmede ani artış.",
+      "azaltma": "Giriş boyutu/parametre sınırlarını geçitte uygulama; hassas ekipler için ayrı sunum örnekleri; kaynak kotası.",
+      "id": "BL-00500",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Beş CVE de vLLM'e ait ve açıklamalar GHSA özetleriyle örtüşüyor (ses sıkıştırma bombası, ReDoS, sınırsız n, kullanıcılar arası sızıntı, GGUF başlatılmamış GPU belleği).",
+        "kaynak": [
+          "https://api.osv.dev/v1/vulns/GHSA-hcwq-8wjf-3gcr",
+          "https://api.osv.dev/v1/vulns/GHSA-rwxx-mrjm-wc2m",
+          "https://api.osv.dev/v1/vulns/GHSA-3mwp-wvh9-7528",
+          "https://api.osv.dev/v1/vulns/GHSA-7m6h-x95x-82q5",
+          "https://api.osv.dev/v1/vulns/GHSA-5jv2-g5wq-cmr4"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-34756",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-53923",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-55574",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-57173",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-73558",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-3mwp-wvh9-7528",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-5jv2-g5wq-cmr4",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-7m6h-x95x-82q5",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-hcwq-8wjf-3gcr",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-rwxx-mrjm-wc2m",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0201",
+      "arac": "GLM-5.3",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "BF16 ağırlıklar 282 safetensors parçasından oluşuyor; kaynağa göre büyük GPU kümesi ve resmî SGLang/vLLM reçetesi gerekiyor; üretici puanları yerelde doğrulanmadı.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/zai-org/GLM-5.3-BF16"
+      ],
+      "yasatacagi_sorunlar": [
+        "GLM-5.3 için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00516",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "HF: 282 safetensors parçası (~753B parametre); SGLang/vLLM tarifleri gösteriliyor.",
+        "kaynak": [
+          "https://huggingface.co/zai-org/GLM-5.3-BF16"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0202",
+      "arac": "Kimi K3",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre 2,8T toplam / 104B etkin parametre ve 401M görsel kodlayıcı; 96 safetensors parçası. Kurum içi sunum çok düğümlü GPU kümesi gerektirir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/moonshotai/Kimi-K3"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kimi K3 için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00523",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Model kartında 2,8T toplam/104B etkin parametre ve 401M MoonViT-V2 var; HF API 96 safetensors dosyası gösteriyor.",
+        "kaynak": [
+          "https://huggingface.co/moonshotai/Kimi-K3"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0203",
+      "arac": "Qwen3.8-2.4T-A95B",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "2,4T toplam / 95B etkin parametre, 213 safetensors parçası; çok düğümlü, yüksek bant genişlikli GPU kümesi gerektirir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+      ],
+      "yasatacagi_sorunlar": [
+        "Qwen3.8-2.4T-A95B için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00527",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "HF API: 213 safetensors dosyası, yaklaşık 2,45T parametre (2,4T/95B).",
+        "kaynak": [
+          "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0205",
+      "arac": "DeepSeek-V4-Pro-0813",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Kartta önerilen kurulum 4'lü veri paralelliği ve uzman paralelliği gerektiriyor; depo 66 safetensors parçasından oluşuyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
+      ],
+      "yasatacagi_sorunlar": [
+        "DeepSeek-V4-Pro için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00539",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kart örneğinde --data-parallel-size 4 --enable-expert-parallel var; depoda 66 safetensors parçası (yaklaşık 1,65T parametre) bulunuyor.",
+        "kaynak": [
+          "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+          "https://huggingface.co/api/models/deepseek-ai/DeepSeek-V4-Pro-0813"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0212",
+      "arac": "MiMo-V2.5-Pro",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre 1,02T toplam / 42B etkin parametre, 1M bağlam; kaynağa göre AA v4.3 zor otomasyon sonuçları liderlerden düşük (indeks 26).",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro"
+      ],
+      "yasatacagi_sorunlar": [
+        "MiMo-V2.5-Pro için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00569",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Model kartı 1,02T toplam / 42B etkin parametre ve 1M bağlamı doğruluyor (FP8 ağırlıklar ~1,02T). AA v4.3 indeksi (26) iddiası bu kaynakta yok; doğrulanamadı.",
+        "kaynak": [
+          "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0213",
+      "arac": "Hy4-preview",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre 770B toplam / 49B etkin parametre ve 10B'lik MTP katmanı; 131 safetensors parçası.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/tencent/Hy4-preview"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hy4-preview için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00573",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Model kartı 770B toplam / 49B etkin ve 10B MTP katmanı diyor; depoda 131 safetensors dosyası var.",
+        "kaynak": [
+          "https://huggingface.co/tencent/Hy4-preview",
+          "https://huggingface.co/api/models/tencent/Hy4-preview"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0222",
+      "arac": "NVIDIA Nemotron 3 Ultra",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre en düşük GPU gereksinimi 8× GB200/B200/GB300/B300, 16× H100 veya 8× H200; 550B toplam / 55B etkin parametre, 1M bağlam.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+      ],
+      "yasatacagi_sorunlar": [
+        "Nemotron 3 Ultra için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00605",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Model kartında asgari GPU gereksinimi 8x GB200/B200/GB300/B300, 16x H100 veya 8x H200; 550B toplam/55B etkin, 1M bağlam.",
+        "kaynak": [
+          "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0512",
+      "arac": "Google Cloud Workflows",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "512 KB değişken belleği ve 90 günlük yürütme kaydı",
+      "aciklama": "Değişkenler, argümanlar ve olay yükleri yürütme başına toplam 512 KB ile sınırlı; tek dize 256 KB; yürütme başına 100.000 adım; yürütme kayıtları tamamlandıktan sonra en fazla 90 gün tutulur.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.cloud.google.com/workflows/quotas"
+      ],
+      "yasatacagi_sorunlar": [
+        "LLM yanıtları ve kod diff'leri değişken belleğine sığmaz; her şey dış depoya yazılmalı.",
+        "90 gün sonra yürütme izi kaybolur; denetim ve yeniden üretilebilirlik için ayrı kayıt gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K19-002",
+        "N-K19-004"
+      ],
+      "erken_sinyal": "Bellek sınırı hataları.",
+      "azaltma": "Artefaktları Cloud Storage'da tutup referans geçirmek; yürütme kayıtlarını kalıcı depoya aktarmak.",
+      "id": "BL-00809",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kota sayfası 512 KB değişken/argüman/olay toplamını, 256 KB dize sınırını, 100.000 adımı ve 90 gün yürütme saklamayı gösteriyor.",
+        "kaynak": [
+          "https://docs.cloud.google.com/workflows/quotas"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0614",
+      "arac": "Microsoft Power Automate Onaylar (Approvals) / Teams Approvals",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "30 günlük koşu süresi ve 30 günlük koşu geçmişi saklama",
+      "aciklama": "Bir bulut akışı koşusu en fazla 30 gün sürer; süre onay gibi bekleyen adımları da kapsar ve 30 gün sonunda bekleyen adımlar zaman aşımına düşer. Koşu geçmişi de 30 gün saklanır.",
+      "tarih": "2026-07",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+      ],
+      "yasatacagi_sorunlar": [
+        "Program artımı sınırında haftalarca bekleyen onaylar 30. günde sessizce 'TimedOut' olur; iş akışı yeniden kurulmalı.",
+        "Onay kanıtı koşu geçmişinden 30 gün sonra silinir; denetimde onayın içeriği gösterilemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-003",
+        "N-K17-004",
+        "N-K19-002",
+        "N-K19-004"
+      ],
+      "erken_sinyal": "Zaman aşımına düşen onay sayısı; 25 günü aşan koşular.",
+      "azaltma": "Onayları Dataverse'te kalıcı kaydedip iki akışlı desene geçmek; onay kanıtını ayrı değiştirilemez depoya yazmak.",
+      "id": "BL-00960",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Limitler sayfası: koşu süresi 30 gün (onay gibi bekleyen adımlar dahil, sonra zaman aşımı); koşu saklama 30 gün.",
+        "kaynak": [
+          "https://learn.microsoft.com/en-us/power-automate/limits-and-config"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1954",
+      "arac": "AWS Lambda durable functions",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Yürütme başına 3.000 işlem ve 100 MB sert sınırları",
+      "aciklama": "Lambda kotalarına göre yürütme başına en fazla 3.000 dayanıklı işlem ve 100 MB kümülatif dayanıklı depolama vardır; ikisi de artırılamaz. Her adım yeniden denemesi ve her yoklama ayrı işlem sayılır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-sdk.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çok turlu ajan döngüsü yeniden denemelerle 3.000 işlem sınırına ulaşır ve koşu tamamlanamaz.",
+        "Adım çıktılarının kopyaları 100 MB'ı hızla doldurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K04-003",
+        "N-K20-003"
+      ],
+      "erken_sinyal": "Yürütme başına işlem sayısı ve yazılan veri metrikleri.",
+      "azaltma": "Uzun döngüleri alt yürütmelere bölmek; büyük çıktıları S3'te tutmak.",
+      "id": "BL-01659",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kotalar sayfası: yürütme başına 3.000 işlem ve 100 MB, ikisi de 'Cannot be increased'. SDK sayfasına göre adım yeniden denemeleri '1 + N retries', WaitForCondition '1 + N polls' sayılıyor.",
+        "kaynak": [
+          "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+          "https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-sdk.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4058",
+      "arac": "MCP Agent Mail",
+      "gorev": "R-G11",
+      "tur": "RT-12",
+      "baslik": "Çok ajanlı yükte Git kilidi, SQLite havuzu ve bozulma sorunları",
+      "aciklama": "Bakımcının Rust deposu, Python uygulamasının gerçek çok ajanlı iş yüklerinde üç tekrarlayan arıza modu olduğunu açıkça yazıyor: eşzamanlı yazımda Git kilit dosyası çekişmesi, sürekli yükte SQLite bağlantı havuzunun tükenmesi ve çok sayıda ajan aynı anda bağlandığında zincirleme hatalar. Tekrarlayan 'database disk image is malformed' bildirimi 'planlanmadı' olarak kapatıldı (#246).",
+      "tarih": "2026-07",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Dicklesworthstone/mcp_agent_mail_rust#rust-vs-python-stress-test-results",
+        "https://github.com/Dicklesworthstone/mcp_agent_mail/issues/246"
+      ],
+      "yasatacagi_sorunlar": [
+        "10'dan fazla ekipte onlarca ajan aynı sunucuya bağlandığında mesajlar ve kiralamalar kaybolabilir; ajanlar birbirinden habersiz aynı dosyada çalışır.",
+        "SQLite dizini bozulursa eşgüdüm katmanı yeniden kurma döngüsüne girer ve ajan işleri durur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-005",
+        "N-K27-008",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Günlüklerde kilit zaman aşımı, 'malformed' hatası ve arşivden yeniden kurma döngüsü.",
+      "azaltma": "Ekip ya da proje başına ayrı sunucu kurmak; gerçekçi eşzamanlılıkta yük testi yapmak; yedekten dönüş tatbikatı yapmak; Rust sürümüne geçişi değerlendirmek.",
+      "id": "BL-02354",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Rust README Python uygulamasındaki üç arıza modunu (Git kilidi, SQLite havuzu tükenmesi, zincirleme hatalar) birebir yazıyor. #246 2026-07-20'de 'not_planned' olarak kapatıldı.",
+        "kaynak": [
+          "https://github.com/Dicklesworthstone/mcp_agent_mail_rust#rust-vs-python-stress-test-results",
+          "https://api.github.com/repos/Dicklesworthstone/mcp_agent_mail/issues/246"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0152",
+      "arac": "Arize Phoenix",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "Yük altında bağlantı havuzu tükenmesi, PostgreSQL kilitlenmesi ve sessiz span kaybı",
+      "aciklama": "Açık hata #12358'e göre BulkInserter her 100 ms'de 7'ye kadar DB oturumu açıyor ve varsayılan SQLAlchemy havuzunu (5+10) tüketebiliyor. Açık hata #16113'e göre, PostgreSQL üzerinde birden çok ingest replikası kilitlenebiliyor. Bu durumda iptal edilen span yeniden kuyruğa alınmıyor, oysa SDK'ya zaten 200 yanıtı dönülmüş oluyor. #10021'de büyük izlerle RESOURCE_EXHAUSTED hatası bildirilmiş. Varsayılan veritabanı, geçici klasördeki SQLite.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Arize-ai/phoenix/issues/12358",
+        "https://github.com/Arize-ai/phoenix/issues/16113",
+        "https://github.com/Arize-ai/phoenix/issues/10021",
+        "https://arize.com/docs/phoenix/self-hosting/configuration"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sprint sonunda onlarca ajan paralel çalıştığında, aynı oturuma ait span'ler iki replika arasında kilitlenir ve bir kısmı sessizce kaybolur. Uçtan uca iz ve 'hangi ajan neyi değiştirdi' denetim zinciri eksik kalır.",
+        "Varsayılan SQLite geçici klasörde bırakılırsa yeniden başlatmada izler kaybolur ve üretim içi değerlendirme geçmişi silinir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-002",
+        "N-K16-001",
+        "N-K23-012"
+      ],
+      "erken_sinyal": "Sunucu loglarında DeadlockDetectedError ya da havuz zaman aşımı görülür; SDK tarafında gönderilen ve arayüzde görünen span sayısı arasında fark oluşur.",
+      "azaltma": "Denetim amaçlı izi Phoenix'e tek kopya olarak bırakmayın. OTel Collector ile değiştirilemez bir depoya da çoğaltın. PostgreSQL kullanın, ingest replikasını tek tutun ve span kaybı için sayaç karşılaştırmalı alarm kurun.",
+      "id": "BL-00389",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "#12358, #16113 ve #10021 açık ve iddiayla örtüşüyor. Yapılandırma belgesi URL verilmezse geçici klasörde SQLite ile başladığını yazıyor.",
+        "kaynak": [
+          "https://github.com/Arize-ai/phoenix/issues/12358",
+          "https://github.com/Arize-ai/phoenix/issues/16113",
+          "https://github.com/Arize-ai/phoenix/issues/10021",
+          "https://arize.com/docs/phoenix/self-hosting/configuration"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0517",
+      "arac": "Dapr Workflow",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Geçmiş sidecar gövde sınırıyla bağlı; aşılırsa iş akışı durur",
+      "aciklama": "İş akışı veya activity gönderimleri sidecar'ın --max-body-size ayarıyla (varsayılan 4 MiB) sınırlıdır; geçmiş olaylar ve yeni olaylar bu sınırın %95'ini aşarsa iş akışı durdurulur (stalled). Sonsuz döngüler için continue-as-new veya alt iş akışı gerekir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.dapr.io/developing-applications/building-blocks/workflow/workflow-features-concepts/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uzun inceleme döngüsündeki ajan koşusu sessizce 'stalled' duruma düşer; operatör fark edene kadar ilerlemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K13-002",
+        "N-K17-008"
+      ],
+      "erken_sinyal": "Stalled durumdaki iş akışı sayısı.",
+      "azaltma": "Belirli tur sonra continue-as-new; büyük veriyi dış depoda tutmak; stalled alarmı.",
+      "id": "BL-00819",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belge --max-body-size varsayılanının 4 MiB olduğunu ve %95 aşımında iş akışının stall edildiğini yazıyor; sonsuz döngüler için continue-as-new öneriliyor.",
+        "kaynak": [
+          "https://docs.dapr.io/developing-applications/building-blocks/workflow/workflow-features-concepts/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0560",
+      "arac": "Jira (Jira Software / Jira Cloud)",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "SaaS kesintileri ve toplu veri kaybı olayı geçmişi",
+      "aciklama": "jira-software.status.atlassian.com'daki son 50 olayın (20 Kasım 2025 – 24 Eylül 2026) 25'i major (14) veya critical (11); bunlar arasında 3 Eylül 2026 ABD Doğu erişilebilirlik kesintisi (critical) var. Nisan 2022'de bir bakım betiği yanlış kimliklerle 883 siteyi (775 müşteri) sildi; müşterilerin bir kısmı 14 güne kadar erişemedi. Siteler geri yüklendi, veri kaybı silmeden önceki en fazla 5 dakikayla sınırlı kaldı. Olay kalıcı toplu veri kaybı değil, toplu site silme ve uzun erişim kesintisidir.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jira-software.status.atlassian.com/history",
+        "https://www.atlassian.com/engineering/post-incident-review-april-2022-outage"
+      ],
+      "yasatacagi_sorunlar": [
+        "PI planlama ya da sprint kapanışı sırasında kesinti olursa ajanların iş çekme ve durum yazma döngüsü durur; yeniden denemeler çift kayıt üretebilir.",
+        "Tek kaynak Jira olursa toplu silme gibi bir sağlayıcı hatasında backlog günlerce erişilemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-004",
+        "N-K16-007",
+        "N-K13-004",
+        "N-K13-001"
+      ],
+      "erken_sinyal": "Status sayfası bileşen durumu; API 5xx oranı.",
+      "azaltma": "Durumun tek sahibi Jira dışında olsun (Jira yansıma olsun), düzenli dışa aktarım ve yedek alın, kesinti modunda ajanları duraklatın.",
+      "id": "BL-00884",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Statuspage API'sindeki son 50 olay 20 Kasım 2025 ile 24 Eylül 2026 arasında; 14'ü major, 11'i critical (toplam 25). 3 Eylül 2026 ABD Doğu kesintisi 'critical'. Nisan 2022'de 883 site ve 775 müşteri etkilendi, kesinti 14 güne kadar sürdü. Ancak siteler geri yüklendi ve veri kaybı silmeden önceki en fazla 5 dakikayla sınırlı kaldı; 'toplu veri kaybı' ifadesi abartılı.",
+        "kaynak": [
+          "https://jira-software.status.atlassian.com/history",
+          "https://jira-software.status.atlassian.com/api/v2/incidents.json",
+          "https://www.atlassian.com/engineering/post-incident-review-april-2022-outage"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0616",
+      "arac": "PagerDuty",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "28 Ağustos 2025: Kafka kararsızlığıyla büyük müşteri etkili kesinti",
+      "aciklama": "Kademeli açılan bir özellikteki mantık hatası, olay alımı ve asenkron işlemenin omurgası olan Kafka'yı yük altında kararsızlaştırdı. PagerDuty bunu yakın dönemin en önemli müşteri etkili olaylarından biri olarak tanımladı. Şirket, yeni önlemlerin asıl arızayı tek başına engellemeyebileceğini de yazıyor.",
+      "tarih": "2025-08",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.pagerduty.com/eng/watchtower-and-journey-gated-rollouts/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Üretimde ajan kaynaklı bir değişiklik sorun çıkarırken nöbetçiye bildirim gecikebilir; global duraklatma kararı geç verilir.",
+        "Bekleme süreleri ve eskalasyon SLO'ları sağlayıcı kesintisi yüzünden ihlal edilir; olay kaydında boşluk kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-002",
+        "N-K16-003",
+        "N-K16-007",
+        "N-K17-004"
+      ],
+      "erken_sinyal": "status.pagerduty.com'da olay alımı gecikmesi; sentetik test uyarısının geç gelmesi.",
+      "azaltma": "Uçtan uca sentetik uyarı ve 'ölü adam anahtarı' testi kurmak; kritik uyarılar için ikinci bir bağımsız bildirim yolu tutmak.",
+      "id": "BL-00963",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "PagerDuty mühendislik blogu (2026-06-08) 28 Ağustos 2025 Kafka olayını 'most significant customer-facing incidents' olarak tanımlıyor ve yeni önlemlerin asıl arızayı 'would not necessarily have prevented' diyor.",
+        "kaynak": [
+          "https://www.pagerduty.com/eng/watchtower-and-journey-gated-rollouts/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0687",
+      "arac": "Kyverno",
+      "gorev": "R-G03",
+      "tur": "RT-12",
+      "baslik": "Politika motorunda hizmet reddi",
+      "aciklama": "JMESPath değişken değerlendirmesi (CVE-2025-47281), bağlam değişkeni çoğaltma (CVE-2026-23881) ve forEach mutasyon paniği (CVE-2026-41485) ile denetleyici DoS'a uğrayabiliyordu.",
+      "tarih": "2026-04",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-r5p3-955p-5ggq",
+        "https://github.com/advisories/GHSA-r2rj-wwm5-x6mq",
+        "https://github.com/advisories/GHSA-fpjq-c37h-cqcv"
+      ],
+      "yasatacagi_sorunlar": [
+        "Admission webhook çökerse ve fail-open ise politikalar uygulanmaz; fail-closed ise tüm dağıtımlar durur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K15-004"
+      ],
+      "erken_sinyal": "Kyverno pod yeniden başlatmaları; webhook zaman aşımları.",
+      "azaltma": "Yüksek erişilebilirlik, kaynak limitleri ve bilinçli fail-closed kararı.",
+      "id": "BL-01030",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Üç CVE de OSV/GitHub'da yüksek şiddetli Kyverno DoS bildirimi (2025-07, 2026-01, 2026-04).",
+        "kaynak": [
+          "https://github.com/advisories/GHSA-r5p3-955p-5ggq",
+          "https://github.com/advisories/GHSA-r2rj-wwm5-x6mq",
+          "https://github.com/advisories/GHSA-fpjq-c37h-cqcv"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2025-47281",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-23881",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "CVE-2026-41485",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-fpjq-c37h-cqcv",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-r2rj-wwm5-x6mq",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-r5p3-955p-5ggq",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-2025",
+      "arac": "Google Cloud Build",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Küresel kesinti (12 Haziran 2025)",
+      "aciklama": "Service Control'de hata işleme eksik bir kota politikası özelliği boş alanlarla karşılaşınca null pointer ile çöktü. Yaklaşık 3 saat süren küresel kesinti Cloud Build, Artifact Registry ve SCC dahil birçok hizmeti etkiledi.",
+      "tarih": "2025-06",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kesinti sırasında bütün derleme ve dağıtım hattı durur; geri alma (rollback) da yapılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Google Cloud durum sayfasında çoklu hizmet olayı.",
+      "azaltma": "Kritik hatlar için ikincil bir derleme yolu ve yerel imaj önbelleği tutun.",
+      "id": "BL-01775",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Google olay raporu: 12 Haziran 2025 10:49–13:49 PDT (3 saat), Service Control'de hata işleme eksik yeni kota politikası kodu boş alanlarla null pointer'a düştü; etkilenen ürünler arasında Cloud Build ve Security Command Center var.",
+        "kaynak": [
+          "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1274",
+      "arac": "Microsoft Purview",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "Microsoft log hattında 2024'te kalıcı güvenlik logu kaybı",
+      "aciklama": "Microsoft, izleme ajanındaki bir hata yüzünden 2-19 Eylül 2024 arasında (bazı hizmetlerde 3 Ekim'e kadar) Entra, Sentinel, Azure Monitor ve Power Platform dahil çeşitli hizmetlerin güvenlik loglarının kalıcı olarak kaybolduğunu müşterilere bildirdi.",
+      "tarih": "2024-10",
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.bleepingcomputer.com/news/security/microsoft-warns-it-lost-some-customers-security-logs-for-a-month/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Denetim ve güvenlik kanıtını tek sağlayıcının log hattına bırakmak, olay incelemesinde kalıcı boşluk riskini taşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-002",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Log hacminde açıklanamayan düşüş; sağlayıcı hizmet sağlığı bildirimleri.",
+      "azaltma": "Kritik denetim olaylarını ikinci bir bağımsız depoya da yazmak; hacim anomali alarmı kurmak.",
+      "id": "BL-01417",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "BleepingComputer'e göre 2-19 Eylül 2024 arasında, bazı hizmetlerde 3 Ekim'e kadar log kaybı yaşandı. Entra, Sentinel, Azure Monitor, Power Platform ve Purview'a akan loglar etkilendi; veri kurtarılamadı.",
+        "kaynak": [
+          "https://www.bleepingcomputer.com/news/security/microsoft-warns-it-lost-some-customers-security-logs-for-a-month/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0017",
+      "arac": "Cloudflare Workflows",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Adım sonucu 1 MiB ve örnek başına durum sınırları",
+      "aciklama": "Akış olmayan step.do() dönüş değeri en fazla 1 MiB; adım sayısı varsayılan 10.000 (en fazla 25.000); örnek başına kalıcı durum Paid'de 1 GB.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developers.cloudflare.com/workflows/reference/limits/",
+        "https://developers.cloudflare.com/changelog/post/2026-03-03-step-limits-to-25k/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Büyük LLM çıktıları ve diff'ler adım sonucu olarak saklanamaz; dış depoya taşıma zorunlu."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K13-002"
+      ],
+      "erken_sinyal": "Adım sonucu boyut hataları.",
+      "azaltma": "Artefaktları R2/nesne deposunda tutup referans döndürmek.",
+      "id": "BL-00059",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0032",
+      "arac": "Claude Agent SDK",
+      "gorev": "R-G02",
+      "tur": "RT-12",
+      "baslik": "Alt süreç mimarisi yüksek eşzamanlılıkta bellek ve performans darboğazı",
+      "aciklama": "Her oturum ayrı bir CLI süreci başlattığından sunucu tarafı yüksek eşzamanlılıkta performans/bellek darboğazı (#372), listSessions() çağrısının tam CLI süreci başlatıp 900 MB+ bellek tüketmesi (#268) ve çoklu örnek dağıtımda performans sorunları (Python #333) açık issue olarak duruyor.",
+      "tarih": "2026-07",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/anthropics/claude-agent-sdk-typescript/issues/372",
+        "https://github.com/anthropics/claude-agent-sdk-typescript/issues/268",
+        "https://github.com/anthropics/claude-agent-sdk-python/issues/333"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekibin paralel işçileri aynı düğümlerde koşarken bellek tükenmesi ve kuyruk gecikmesi; CI kapasitesi planı tutmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K13-007",
+        "N-K15-006"
+      ],
+      "erken_sinyal": "İşçi düğümlerinde OOM, süreç sayısında patlama.",
+      "azaltma": "Düğüm başına eşzamanlı oturum sınırı, oturum başına konteyner ve kapasite testi.",
+      "id": "BL-00086",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0112",
+      "arac": "NeMo Guardrails",
+      "gorev": "R-G05",
+      "tur": "RT-12",
+      "baslik": "Her ray ek LLM çağrısı: gecikme ve maliyet",
+      "aciklama": "Girdi, çıktı, diyalog ve geri getirme rayları çoğunlukla ek model çağrısı yapar; araç haritası ek gecikme ve maliyet ile Colang öğrenme eğrisini sınırlama olarak kaydediyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.nvidia.com/nemo/guardrails/latest/index.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüksek hacimli ajan çağrılarında her adıma 2–3 ek model çağrısı eklenmesi hem maliyeti hem yanıt süresini katlar; ekipler rayları kapatma eğilimine girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-006",
+        "N-K18-011"
+      ],
+      "erken_sinyal": "Ray çağrılarının toplam token maliyetindeki payı.",
+      "azaltma": "Hafif yerel sınıflandırıcılar ve seçici ray uygulaması.",
+      "id": "BL-00280",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0128",
+      "arac": "GitHub Issues",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "İçerik oluşturma hız sınırları ve hiyerarşi sınırları",
+      "aciklama": "GitHub REST belgesine göre içerik üreten istekler dakikada 80, saatte 500 ile sınırlı (ikincil hız sınırı); kişisel belirteçle saatte 5.000, Enterprise Cloud uygulamalarında 15.000 istek. Alt issue özelliği ebeveyn başına en çok 100 alt issue ve 8 seviye iç içe yapıya izin veriyor. Projects'te en çok 50 alan var.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+        "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues",
+        "https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıtlık backlog'un toplu içe aktarımı ve ajanların sonuç yorumları saatte 500 içerik isteği sınırına takılır; aktarım en az 24 saate yayılır ve ajan geri bildirimleri gecikir.",
+        "100'den fazla hikâyesi olan SAFe epikleri tek ebeveyn altında toplanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-005",
+        "N-K26-004",
+        "N-K02-004",
+        "N-K02-001"
+      ],
+      "erken_sinyal": "403/429 ikincil hız sınırı yanıtları; alt issue ekleme hataları.",
+      "azaltma": "Toplu aktarımı GitHub App ile ve kuyruklu yapın. Ajan yorumlarını birleştirerek yazın. Hiyerarşiyi 100 sınırına göre tasarlayın.",
+      "id": "BL-00322",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0140",
+      "arac": "k6",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "Açık kaynak sürümde dağıtık yürütme yok; büyük yük için operatör veya ücretli bulut",
+      "aciklama": "'Clustering and distributed execution' talebi 2017'den beri açık (#140, 100+ oy). Büyük dağıtık testler için Kubernetes üzerinde k6-operator veya Grafana Cloud k6 gerekiyor; Cloud Pro fiyatı sanal kullanıcı saati başına 0,15 USD, Enterprise en az 25.000 USD/yıl.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/grafana/k6/issues/140",
+        "https://grafana.com/pricing/"
+      ],
+      "yasatacagi_sorunlar": [
+        "PI öncesi uçtan uca kapasite testi tek makineyle yapılamaz; operatör kurulumu ayrı Kubernetes işletimi ister.",
+        "Cloud yük üreticileri kullanılırsa iç API'lerin dış yük kaynaklarına açılması veya özel yük bölgesi kurulması gerekir; VUh maliyeti öngörülemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K04-009",
+        "N-K15-005",
+        "N-K20-007"
+      ],
+      "erken_sinyal": "Tek yük üreticisinde CPU doygunluğu nedeniyle hedefe ulaşılamayan RPS, Cloud faturasında VUh artışı.",
+      "azaltma": "Büyük testler için kurum içi k6-operator kapasitesini planlayın; Cloud kullanımında test başına VUh bütçesi ve onay tanımlayın.",
+      "id": "BL-00355",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0148",
+      "arac": "Testcontainers",
+      "gorev": "R-G05",
+      "tur": "RT-12",
+      "baslik": "Paralel test ve kaynak tüketimi CI kapasitesini zorlar",
+      "aciklama": "JUnit 5 paralel test desteği isteği 2019'dan beri açık (86 tepki); her test için gerçek konteyner kaldırmak CPU/bellek ve imaj çekme süresi maliyeti getirir.",
+      "tarih": "2019-05",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/testcontainers/testcontainers-java/issues/1495"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip ve yoğun ajan PR'ı altında entegrasyon testleri CI kuyruklarını uzatır; zaman aşımı nedeniyle yanlış kırmızılar oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-029",
+        "N-K06-004"
+      ],
+      "erken_sinyal": "CI bekleme süresinde artış; konteyner başlatma zaman aşımları.",
+      "azaltma": "Yeniden kullanılabilir konteyner/önceden çekilmiş imajlar; test sınıfları arasında kapsayıcı paylaşımı ve kapasite kotası.",
+      "id": "BL-00375",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0162",
+      "arac": "Prometheus",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "Yüksek kardinalite ve uzun süreli saklama için ek bileşen zorunluluğu",
+      "aciklama": "Belgeler her benzersiz etiket kombinasyonunun yeni bir zaman serisi olduğunu ve kullanıcı kimliği gibi sınırsız değerlerin etiket yapılmamasını söyler. Yerel depolama kümelenmez ve replike edilmez; ölçek ve dayanıklılık için remote write ile Thanos/Mimir/Cortex gibi ek sistemler gerekir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://prometheus.io/docs/practices/naming/",
+        "https://prometheus.io/docs/prometheus/latest/storage/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Görev, ajan çalıştırması veya backlog kaydı kimliği (yaklaşık 12.000 kayıt) etiket olarak eklenirse seri sayısı patlar, bellek tükenir ve sorgular zaman aşımına uğrar.",
+        "PI ve çeyrek bazlı akış metrikleri için aylarca saklama gerekir; tek düğüm yerel depo disk arızasında geçmişi kaybeder, Thanos/Mimir işletimi ayrı bir ekip yükü yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-012",
+        "N-K23-006",
+        "N-K16-004",
+        "N-K09-011"
+      ],
+      "erken_sinyal": "prometheus_tsdb_head_series hızlı artışı, sorgu gecikmesi, OOM yeniden başlatmaları.",
+      "azaltma": "Etiket sözlüğü ve kardinalite bütçesi tanımlayın; görev kimliğini metrikte değil iz/logda tutun; uzun süreli saklama için baştan uzak depo mimarisi planlayın.",
+      "id": "BL-00438",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0164",
+      "arac": "SWE-bench",
+      "gorev": "R-G06",
+      "tur": "RT-12",
+      "baslik": "Harness büyük kaynak ister; ARM desteği deneysel",
+      "aciklama": "README'ye göre en az 120 GB boş disk, 16 GB RAM ve 8 CPU çekirdeği gerekiyor. x86_64 öneriliyor, arm64 desteği deneysel.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/SWE-bench/SWE-bench"
+      ],
+      "yasatacagi_sorunlar": [
+        "Apple Silicon geliştirici makinelerinde ve ARM CI koşucularında sonuçlar güvenilmez. Çoklu koşu ve güven aralığı için ayrılmış büyük kapasite gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K23-003"
+      ],
+      "erken_sinyal": "İmaj oluşturma hataları ve zaman aşımları; aynı görevin mimariye göre farklı sonuç vermesi.",
+      "azaltma": "Değerlendirme için ayrılmış x86_64 koşucu havuzu kullan. İmajları önceden oluştur ve önbelleğe al.",
+      "id": "BL-00446",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0165",
+      "arac": "SWE-Bench Pro",
+      "gorev": "R-G08",
+      "tur": "RT-12",
+      "baslik": "Görev başına konteyner imajı ve uzun koşu süresi",
+      "aciklama": "Her örnek için ayrı imaj (ghcr.io) gerekiyor; bazı örneklerin çok uzun sürdüğü, imaj adlarının uyuşmadığı ve Modal sandbox hatalarında yeniden koşu gerektiği issue ve sürüm notlarında belirtiliyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/scaleapi/SWE-bench_Pro-os/issues/22",
+        "https://github.com/scaleapi/SWE-bench_Pro-os/issues/12",
+        "https://github.com/scaleapi/SWE-bench_Pro-os/releases/tag/v2.0.0"
+      ],
+      "yasatacagi_sorunlar": [
+        "642 görevlik çoklu koşu (güven aralığı için) yüzlerce GB imaj ve günlerce hesaplama ister; kapalı ağda imaj aynalama yükü doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-003",
+        "N-K09-011"
+      ],
+      "erken_sinyal": "Altyapı kaynaklı başarısızlık oranının yükselmesi.",
+      "azaltma": "İmajları iç kayıt defterine aynalamak; altyapı hatalarını görev başarısızlığından ayrı raporlamak.",
+      "id": "BL-00451",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0194",
+      "arac": "Plane",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "API hız sınırı: dakikada 60 istek, sayfada en fazla 100 kayıt",
+      "aciklama": "Plane API'si her API anahtarını dakikada 60 istekle sınırlar, sayfa boyutu da en çok 100 kayıttır. Öz-barındırmada API_KEY_RATE_LIMIT ile değiştirilebilir (varsayılan 60/dk). Bulutta bu sınır sabittir. Nisan 2025'te bulutta içe aktarma işleri kuyruktan tüketilmedi, aktarımlar durdu.",
+      "tarih": "2025-04",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developers.plane.so/api-reference/introduction",
+        "https://github.com/makeplane/plane/blob/preview/apps/api/plane/api/rate_limit.py",
+        "https://status.plane.so/"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kaydın her biri için tek bir oluşturma isteği bile en az yaklaşık 200 dakika sürer. Etiket, ilişki, yorum ve durum güncellemeleri eklenince ilk aktarım günlere yayılır.",
+        "Birden çok ajan aynı anahtarı paylaşırsa 429 hataları ve yarım kalmış eşlemeler oluşur. İdempotent yeniden deneme yoksa yinelenen iş kalemleri açılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-005",
+        "N-K02-001",
+        "N-K13-004",
+        "N-K12-004"
+      ],
+      "erken_sinyal": "429 yanıtları; X-RateLimit-Remaining değerinin sıfıra inmesi; eşleme kuyruğunda biriken işler.",
+      "azaltma": "İlk toplu aktarımı içe aktarıcıyla ya da veritabanı düzeyinde yapın, API'yi yalnız artımlı eşleme için kullanın. Her ajana ayrı belirteç ve kuyruk verin; öz-barındırmada sınırı ölçerek artırın.",
+      "id": "BL-00511",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0204",
+      "arac": "DeepSeek-V4.1-Flash",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre 552B omurga parametresi, ayrıca 196B parametreli Engram koşullu bellek; ön doldurmada 8B, çözümde 16B etkin; 1M bağlam. 10 Eylül 2026'da yayımlandı (erken).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+      ],
+      "yasatacagi_sorunlar": [
+        "DeepSeek-V4.1-Flash için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00536",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0211",
+      "arac": "MiniMax-M3",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre yaklaşık 428B toplam / 23B etkin parametre, 1M bağlam, görsel ve video girdisi.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/MiniMaxAI/MiniMax-M3"
+      ],
+      "yasatacagi_sorunlar": [
+        "MiniMax-M3 için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00566",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0214",
+      "arac": "Hy3",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre 295B toplam / 21B etkin parametre ve 3,8B MTP katmanı; 99 safetensors parçası.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/tencent/Hy3"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hy3 için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00578",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0215",
+      "arac": "Mistral Medium 3.5",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "128B yoğun (dense) model; token başına tüm parametreler hesaplanıyor, 256K bağlam ve görsel girdi.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mistral Medium 3.5 için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00583",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0216",
+      "arac": "Mistral Small 4",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Adına rağmen 119B toplam / 6,5B etkin MoE; ağırlıkların tamamı belleğe yüklenmeli; 256K bağlam ve görsel girdi.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mistral Small 4 için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00586",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0234",
+      "arac": "Command A+",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "Model kartına göre 218B toplam / 25B etkin parametre; BF16 için 4× B200 veya 8× H100, FP8 için 2× B200 veya 4× H100 öneriliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16"
+      ],
+      "yasatacagi_sorunlar": [
+        "Command A+ için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00639",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0511",
+      "arac": "Durable Task Scheduler",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "1 MB yük sınırı ve SKU kotaları; görev merkezleri arası kaynak paylaşımı",
+      "aciklama": "Orkestratör/activity girdi-çıktıları, dış olaylar ve varlık durumu 1 MB ile sınırlıdır. Consumption SKU'da bölge/abonelik başına 10 zamanlayıcı ve zamanlayıcı başına 5 görev merkezi; aynı zamanlayıcıdaki görev merkezleri kaynakları paylaşır ve biri diğerinin performansını etkileyebilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/durable-task/scheduler/durable-task-scheduler"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip tek zamanlayıcıyı paylaşırsa yoğun bir ekip diğerlerini yavaşlatır; görev merkezi kotası ekip sayısına yetmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-006",
+        "N-K24-001",
+        "N-K13-011"
+      ],
+      "erken_sinyal": "Görev merkezi başına gecikme artışı; kota hataları.",
+      "azaltma": "Ekip gruplarına ayrı zamanlayıcı; büyük yükleri dış depoda tutmak.",
+      "id": "BL-00807",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0560",
+      "arac": "Jira (Jira Software / Jira Cloud)",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Puan tabanlı API hız sınırları ve iş kalemi başına yazma sınırı ajan yükünü keser",
+      "aciklama": "2 Mart 2026'dan itibaren Jira Cloud uygulamalarına puan tabanlı kota uygulanıyor. Varsayılan global havuzda uygulama başına, tüm kiracılar için ortak saatte 65.000 puan var; kiracı havuzu Standard'da 100.000 + 10×kullanıcı puan/saat. İş kalemi başına 2 saniyede 20 ve 30 saniyede 100 yazma sınırı bulunuyor; aşımda HTTP 429 dönüyor.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developer.atlassian.com/cloud/jira/platform/rate-limiting/"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıtlık backlog'un şablona toplu dönüştürülmesi ve ajanların durum yansıtma yazımları saatlik kotayı tüketir; senkron gecikir ve pano yanlış durumu gösterir.",
+        "Aynı epiğe paralel yazan ajanlar iş kalemi başına yazma sınırına takılır; yeniden deneme olmadan güncellemeler kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-005",
+        "N-K02-001",
+        "N-K12-004",
+        "N-K13-004",
+        "N-K26-001"
+      ],
+      "erken_sinyal": "429 yanıtları ve RateLimit-Reason başlıkları; senkron gecikmesi.",
+      "azaltma": "Toplu işleri gece ve partiler hâlinde çalıştırın, Retry-After'a uyan kuyruk kullanın, ajan yazımlarını tek yazıcı serviste toplayın.",
+      "id": "BL-00883",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Tüm sayılar belgeyle birebir uyuşuyor: 2 Mart 2026 başlangıç, global havuz 65.000 puan/saat, Standard kiracı havuzu 100.000 + 10×kullanıcı, iş kalemi başına 20/2 sn ve 100/30 sn, HTTP 429. Ancak puan kotası yalnız Forge, Connect ve OAuth 2.0 (3LO) uygulamalarına uygulanıyor; API tokenlı trafik bundan muaf ve kiracı havuzuna yalnız inceleme sonrası geçiliyor. Bu yüzden şiddet 'orta' daha uygun.",
+        "kaynak": [
+          "https://developer.atlassian.com/cloud/jira/platform/rate-limiting/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0566",
+      "arac": "Linear",
+      "gorev": "R-G03",
+      "tur": "RT-12",
+      "baslik": "API hız sınırı büyük backlog ve ajan senkronizasyonunu sınırlıyor",
+      "aciklama": "API anahtarıyla kullanıcı başına saatte 2.500 istek sınırı var ve aynı kullanıcının tüm anahtarları bu kotayı paylaşıyor; ayrıca sorgu karmaşıklığı sınırı uygulanıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://linear.app/developers/rate-limiting"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıtlık backlog'un toplu dönüşümü ve çok sayıda ajanın aynı servis hesabıyla yazması kotayı hızla tüketir; ajanlar sonuç yazamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K26-004"
+      ],
+      "erken_sinyal": "429 yanıtları ve X-RateLimit-Requests-Remaining değerinin sıfıra yaklaşması.",
+      "azaltma": "Ajan başına ayrı kimlik, olay tabanlı (webhook) senkronizasyon ve toplu işlemleri zamana yayma.",
+      "id": "BL-00898",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0569",
+      "arac": "Azure Boards",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "12.000 kayıtlık backlog için görüntüleme, sorgu ve revizyon sınırları",
+      "aciklama": "Azure DevOps Services'te bir backlog en fazla 10.000 iş kalemi gösterir (fazlası gizlenir); sorgu sonuçları 20.000'de uyarısız kesilir; REST API ile bir iş kalemine en fazla 10.000 güncelleme yapılabilir; bir yıldan eski kapanmış kalemler pano/backlog'da görünmez. Azure DevOps Server'da backlog görüntüleme 999, pano 400 karttır. Portföy backlog seviyesi en fazla 5.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/devops/organizations/settings/work/object-limits?view=azure-devops"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kalemlik backlog tek ekip/program backlog'unda tutulursa yaklaşık 2.000 kalem sessizce görünmez olur ve önceliklendirme eksik yapılır.",
+        "Veri yerelliği için kurum içi Server seçilirse 999 kalem sınırı nedeniyle backlog'un çok sayıda ekibe bölünmesi zorunlu olur.",
+        "Durum ve kanıt yazan ajanlar uzun ömürlü epik/özelliklerde 10.000 API revizyon sınırına takılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K26-005",
+        "N-K26-001",
+        "N-K24-002",
+        "N-K26-004"
+      ],
+      "erken_sinyal": "Backlog sayfasında kalem sayısının 10.000'e yaklaşması; sorgu sonuçlarının tam 20.000 dönmesi; API'de revizyon sınırı hatası.",
+      "azaltma": "Alan yolu ve ekip ayrımıyla backlog'u bölmek, sorguları tarih/alanla daraltmak, ajan durum güncellemelerini seyrek ve toplu yapmak, kapanmış kalemleri arşiv sorgularıyla yönetmek.",
+      "id": "BL-00911",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Sayılar sayfayla birebir uyuşuyor (backlog 10.000 görüntüleme, sorgu 20.000'de uyarısız kesme, REST ile 10.000 revizyon, 1 yıldan eski kapalı kalemler gizli, Server'da 999/400, portföy seviyesi 5; sayfa 2026-09-10 güncel). Hepsinin belgelenmiş geçici çözümü (ekip bölme, sorgu) olduğundan şiddet orta daha uygun.",
+        "kaynak": [
+          "https://learn.microsoft.com/en-us/azure/devops/organizations/settings/work/object-limits?view=azure-devops"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0569",
+      "arac": "Azure Boards",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Toplu dönüşüm ve ajan senkronizasyonunda TSTU hız sınırı",
+      "aciklama": "Her kimlik 5 dakikalık kayan pencerede 200 TSTU ile sınırlıdır; karmaşık iş kalemi sorgularının yükü kalem sayısıyla artar; aşımda gecikme veya HTTP 429 (TF400733) döner. Limit artırımı için entegrasyon kimliğine Basic + Test Plans (52 USD/ay) atanması gerekir.",
+      "tarih": "2025-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kaydın ortak şablona toplu dönüşümü tek entegrasyon kimliğiyle yapılırsa saatlerce gecikmeli/engelli çalışır; yarım kalan dönüşüm tutarsız durum bırakır.",
+        "İş takip sistemiyle hat arasındaki çift yönlü eşleme hız sınırında geride kalır ve pano bayat durum gösterir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K02-002",
+        "N-K12-004",
+        "N-K26-005"
+      ],
+      "erken_sinyal": "X-RateLimit-Remaining başlığının sıfırlanması; kullanım izleme sayfasında entegrasyon kimliğinin üst sıralarda görünmesi.",
+      "azaltma": "Toplu işleri gece ve partiler halinde çalıştırmak, Retry-After'a uymak, idempotent ve devam ettirilebilir dönüşüm betiği, gerekirse ayrı entegrasyon kimliği.",
+      "id": "BL-00913",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0595",
+      "arac": "Aha! Roadmaps",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "API sınırı hesap genelinde paylaşımlı: dakikada 300, saniyede 20 istek",
+      "aciklama": "Aha! API'si hesap başına dakikada en fazla 300, saniyede en fazla 20 isteğe izin verir; aşınca 429 döner. Sınır hesaptaki tüm API kullanıcıları arasında paylaşılır. Özellik oluşturma için toplu uç nokta belgelenmemiştir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.aha.io/api",
+        "https://www.aha.io/api/resources/features/create_a_feature"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlar, Jira/Rally entegrasyonu ve raporlama betikleri aynı kotayı paylaştığından yoğun eşitleme anında birbirlerini durdurur.",
+        "Binlerce kaydı tek tek oluşturmak saatler sürer; yarıda kalan aktarımlar yinelenen özellikler bırakabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-005",
+        "N-K13-004",
+        "N-K12-004"
+      ],
+      "erken_sinyal": "429 yanıtlarının artması; entegrasyon hata kayıtları.",
+      "azaltma": "API tüketicilerini tek bir aracı kuyruk üzerinden sıraya koyun; toplu aktarımı CSV içe aktarıcıyla yapın.",
+      "id": "BL-00933",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1175",
+      "arac": "DefectDojo",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Büyük hacimde performans sorunları",
+      "aciklama": "Envanter, büyük hacimde performans ayarı gerektiğini söylüyor. Açık konular arasında raporlama performansı (#12771), çok bulgulu uç nokta formunun yavaşlığı (#10227) ve SonarQube senkronizasyon performansı (#14732) var.",
+      "tarih": "2026-04",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/DefectDojo/django-DefectDojo/issues/12771",
+        "https://github.com/DefectDojo/django-DefectDojo/issues/10227",
+        "https://github.com/DefectDojo/django-DefectDojo/issues/14732"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların her PR'da içe aktardığı tarama sonuçları veritabanını şişirir; raporlar zaman aşımına uğrar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-012",
+        "N-K19-004"
+      ],
+      "erken_sinyal": "İçe aktarma ve rapor sürelerinin uzaması.",
+      "azaltma": "Tekilleştirme ve yeniden içe aktarma kullanın, eski bulguları arşivleyin, veritabanını ölçekleyin.",
+      "id": "BL-01373",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1913",
+      "arac": "Dependabot",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Ölçekte PR gürültüsü ve ekosistem boşlukları",
+      "aciklama": "open-pull-requests-limit varsayılanı 5. Depoda 1.551 açık konu ve PR var. Tam Gradle desteği (#1164, 231+ oy) ve bağımlılık başına elle tetikleme (#2980) gibi talepler yıllardır açık.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file",
+        "https://github.com/dependabot/dependabot-core/issues/1164",
+        "https://github.com/dependabot/dependabot-core/issues/2980"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çok sayıda depoda yüzlerce PR birikir; ekipler PR'ları toplu kapatır ve güvenlik güncellemeleri de gözden kaçar.",
+        "Gradle projelerinde güncellemeler eksik kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Açık Dependabot PR'larının yaşının artması.",
+      "azaltma": "Grup güncellemelerini ve öncelik kurallarını kullanın, desteklenmeyen ekosistemler için ayrı bir güncelleme aracı ekleyin.",
+      "id": "BL-01653",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1997",
+      "arac": "Azure Policy",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Değerlendirme gecikmesi ve belirsiz tamamlanma süresi",
+      "aciklama": "Microsoft belgesine göre yeni atama yaklaşık 5 dakikada uygulanıyor. Tek kaynağın uyum durumu oluşturma veya güncellemeden yaklaşık 15 dakika sonra görünüyor. Standart değerlendirme döngüsü 24 saatte bir çalışıyor ve büyük kapsamlarda tamamlanma için 'önceden tanımlı bir beklenti yok'.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın oluşturduğu kaynağın uyum sonucunu hemen bekleyen bir DoD kapısı yanlış 'uyumlu' ya da 'bilinmiyor' sonucuyla geçebilir.",
+        "Denetim (audit) etkili kurallar ihlali saatler sonra raporlar; bu sürede yasaklı yapılandırma üretimde kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-004",
+        "N-K05-027",
+        "N-K11-003"
+      ],
+      "erken_sinyal": "Uyum panosunda 'Not started' ya da eski tarihli değerlendirmeler.",
+      "azaltma": "Yasaklı sınıflar için audit yerine deny ya da DenyAction etkisi kullanın. Hattı Azure Policy uyum sonucuna değil, dağıtım öncesi IaC doğrulamasına bağlayın.",
+      "id": "BL-01730",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2089",
+      "arac": "GitLab Merge Trains",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Kuyruktan düşen MR tüm arkadaki pipeline'ları yeniden başlatır; varsayılan 20 paralel sınır",
+      "aciklama": "Bir MR trenden çıkarılırsa ya da pipeline'ı başarısız olursa, arkasındaki tüm MR'ların pipeline'ları yeniden başlar ve başarısız tren pipeline'ı yeniden denenemez (MR trene yeniden eklenmelidir). Tren başına 20 paralel pipeline sınırı eskiden beri (en az 16.x'ten beri) sabit olarak vardı; GitLab 19.0 ile bu sınır proje ayarından (en az 1, örnek sınırını aşmayacak şekilde) değiştirilebilir hale geldi.",
+      "tarih": "2026",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.gitlab.com/ci/pipelines/merge_trains/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlar gün içinde çok sayıda küçük MR ürettiğinde tek bir kararsız test tüm treni sıfırlar; CI dakikaları ve runner kapasitesi katlanarak tükenir.",
+        "20 paralel sınırı dolunca ekiplerin MR'ları saatlerce bekler; teslim süresi (lead time) metrikleri bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-002",
+        "N-K06-003",
+        "N-K15-005",
+        "N-K05-013",
+        "N-K15-006"
+      ],
+      "erken_sinyal": "Tren başına yeniden başlatma sayısı, kuyrukta bekleme süresi ve düşen MR oranında artış.",
+      "azaltma": "Kararsız testleri karantinaya alın, tren kapsamını ekip bazında bölün, işlere retry anahtarı ekleyin, CI kapasite planı yapın.",
+      "id": "BL-01839",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Yeniden başlama ve başarısız pipeline'ın yeniden denenememesi belgede doğrulanıyor. Ancak 20 paralel pipeline sınırı 16.x/17.x belgelerinde de sabit olarak vardı; 19.0'da gelen yenilik bu sınırın proje ayarı ile değiştirilebilir hale gelmesi.",
+        "kaynak": [
+          "https://docs.gitlab.com/ci/pipelines/merge_trains/",
+          "https://docs.gitlab.com/17.11/ci/pipelines/merge_trains/",
+          "https://docs.gitlab.com/16.11/ee/ci/pipelines/merge_trains.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2119",
+      "arac": "Datadog Workflow Automation",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "7 günlük çalışma süresi ve dakikalık hız sınırları",
+      "aciklama": "Bir iş akışı en fazla 7 gün çalışır; adım başlatma dakikada 60, kuruluş genelinde dakikada 200 yürütme; iş akışı çıktısı 5 MB.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.datadoghq.com/actions/workflows/limits/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Günlerce süren insan beklemesi veya olay fırtınasında toplu otomasyon sınırlara takılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-003",
+        "N-K16-003"
+      ],
+      "erken_sinyal": "Hız sınırı hataları.",
+      "azaltma": "Uzun beklemeli akışları dayanıklı motorda tutmak; Datadog'u olay otomasyonu ile sınırlamak.",
+      "id": "BL-01856",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2137",
+      "arac": "Veracode (Application Risk Management platformu)",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Pipeline Scan'de süre ve hız sınırları",
+      "aciklama": "Her pipeline taraması en fazla 60 dakika sürebiliyor. Tek kullanıcı hesabı 60 saniyede en fazla 6 tarama başlatabiliyor, fazlası HTTP 429 dönüyor. Pipeline Scan sonuçları platformda saklanmıyor; azaltma takibi ve bulgu eşleştirmesi de yok.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.veracode.com/r/Pipeline_Scan"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların paralel açtığı çok sayıda PR, tek servis hesabıyla 429 hatasına takılır ve kapı zaman aşımına uğrar.",
+        "Pipeline Scan sonuçları merkezde tutulmadığı için kanıt paketine ve denetim izine giremez (N-K19-004)."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-012",
+        "N-K18-009",
+        "N-K19-004"
+      ],
+      "erken_sinyal": "CI loglarında 429 veya zaman aşımı hatalarının artması.",
+      "azaltma": "Tarama hesaplarını ekiplere bölün, results.json dosyalarını kanıt deposunda arşivleyin, kritik dallarda politika taraması çalıştırın.",
+      "id": "BL-01877",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2591",
+      "arac": "Gitee",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Depo boyutu ve üye sınırları",
+      "aciklama": "Kullanım şartlarına göre depo başına 1 GB, kullanıcı başına toplam 5 GB (wiki dahil) sınır var; daha büyük depo e-postayla başvuru ve onaya bağlı, izinsiz büyük depo durdurulup silinebilir. Özel depolarda üye sayısı en fazla 5.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://gitee.com/terms"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip ve ajan hesaplarının aynı özel depoya erişmesi 5 üye sınırına takılır; ücretli kurumsal sürüm gerekir.",
+        "Büyük test verisi/artefakt içeren depolar izinsiz büyürse sağlayıcı depoyu durdurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-001",
+        "N-K13-011",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Depo boyutunun 1 GB'a yaklaşması; üye ekleme hatası.",
+      "azaltma": "Büyük artefaktları ayrı depolamak, kurumsal sürüm/özel dağıtım değerlendirmesi.",
+      "id": "BL-02067",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3406",
+      "arac": "Cypress Cloud MCP",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Saatte 100 araç çağrısı sınırı",
+      "aciklama": "Cloud MCP her planda saatte 100 araç isteğiyle sınırlı.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.cypress.io/cloud/integrations/cloud-mcp"
+      ],
+      "yasatacagi_sorunlar": [
+        "Aynı hesapla çalışan birden fazla ajan saatlik sınırı hızla doldurur; hata ayıklama durur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-013",
+        "N-K05-014"
+      ],
+      "erken_sinyal": "MCP çağrılarında hız sınırı hatalarının görülmesi.",
+      "azaltma": "Ajan başına ayrı kullanıcı veya token kullanın, sonuçları önbelleğe alın.",
+      "id": "BL-02169",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4239",
+      "arac": "Grafana SLO",
+      "gorev": "R-G13",
+      "tur": "RT-12",
+      "baslik": "Varsayılan 70 SLO sınırı ve yalnız Prometheus uyumlu kaynaklar",
+      "aciklama": "Belgeye göre her Grafana örneği varsayılan olarak 70 SLO ile sınırlı; her SLO 10–12 Prometheus kayıt kuralı üretiyor. Kaynak ve hedef veri kaynakları Mimir/Prometheus uyumlu olmalı; çoklu stack veri kaynakları henüz desteklenmiyor; Splunk, AppDynamics ve Graphite SLO'larında hedef her zaman varsayılan Grafana Cloud Mimir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://grafana.com/docs/grafana-cloud/observe-and-act/alert-and-measure-reliability/slo/introduction/",
+        "https://grafana.com/docs/grafana-cloud/observe-and-act/alert-and-measure-reliability/slo/set-up/additionaldatasources/"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip ve kullanıcı yolculuğu başına birden çok SLO ile 70 sınırı ilk yıl içinde aşılır; sınır artışı için satıcıya bağımlı kalınır.",
+        "Ekipler farklı stack'lerdeyse bileşik ve ekipler arası SLO'lar (N-K33-014) tek yerde kurulamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ],
+      "erken_sinyal": "SLO sayısının 50'yi geçmesi; SLO oluşturma hataları.",
+      "azaltma": "Kurulumdan önce SLO envanterini çıkarıp sınır artışını sözleşmeye yazın; stack mimarisini ekipler arası SLO ihtiyacına göre tasarlayın.",
+      "id": "BL-02449",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0002",
+      "arac": "DBOS",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Ölçek ve dayanıklılık tek Postgres'e bağlı",
+      "aciklama": "İş akışı durumu Postgres 'system database'inde tutulur; motorun ölçeği ve erişilebilirliği bu veritabanına bağlıdır. Açık kayıt #869 veri kaynaklarının CREATE yetkisi istemesini bildiriyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.dbos.dev/",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/869"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uygulama veritabanıyla aynı kümede tutulursa ajan kuyruğunun yükü uygulama sorgularını yavaşlatır.",
+        "CREATE yetkisi gereksinimi en az yetki ilkesiyle çelişir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K18-003",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Postgres bağlantı havuzu doygunluğu; iş akışı tablosu büyümesi.",
+      "azaltma": "Sistem veritabanını ayrı kümeye almak; şema yönetimini dağıtım dışında ayrıcalıklı adımda yapmak.",
+      "id": "BL-00007",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0023",
+      "arac": "Celery",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Uzun süredir açık bellek sızıntısı ve asyncio desteği eksikliği",
+      "aciklama": "'Continuous memory leak' kaydı (#4843, 178 yorum) 2018'den beri açık; yerel async fonksiyon desteği talebi (#6552) en çok tepki alan açık kayıt.",
+      "tarih": "2018-06",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/celery/celery/issues/4843",
+        "https://github.com/celery/celery/issues/6552"
+      ],
+      "yasatacagi_sorunlar": [
+        "Asenkron LLM istemcileri Celery işçisinde verimsiz çalışır; işçiler periyodik geri dönüşüm ister."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006"
+      ],
+      "erken_sinyal": "İşçi bellek kullanımının zamanla artması.",
+      "azaltma": "max-tasks-per-child ve bellek sınırı; async ağırlıklı işler için farklı yürütücü.",
+      "id": "BL-00075",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0121",
+      "arac": "NetworkX",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Saf Python ve bellek içi: büyük kod/bağımlılık grafiklerinde yavaşlık",
+      "aciklama": "NetworkX bellek içinde saf Python ile çalışır; 12.000 kayıtlık backlog için yeterlidir ancak depolar arası kod grafiği yüz binlerce düğüme çıktığında süre ve bellek hızla artar. Hızlandırma için ayrı backend'ler (dispatch) gerekir ve sonuçları değiştirebilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://networkx.org/documentation/stable/reference/backends.html",
+        "https://github.com/networkx/networkx"
+      ],
+      "yasatacagi_sorunlar": [
+        "Modül düzeyinde etki analizi CI'da dakikalar sürer; her değişiklikte yeniden hesap maliyetli olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-003",
+        "N-K24-003",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Grafik hesaplarının CI süresinde baskın hale gelmesi.",
+      "azaltma": "Kalıcı graf deposu veya artımlı hesap; büyük grafikte yalnız ilgili alt grafı yüklemek.",
+      "id": "BL-00298",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0174",
+      "arac": "E2B",
+      "gorev": "R-G02",
+      "tur": "RT-12",
+      "baslik": "Plan bazlı eşzamanlılık ve oturum süresi sınırları",
+      "aciklama": "Hobby planda 20, Pro'da 100 eşzamanlı sandbox (ek paketlerle 600/1.100); oturum süresi Hobby'de 1 saat, Pro'da 24 saat ile sınırlı; kullanım saniye başına vCPU ve RAM üzerinden ücretleniyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://e2b.dev/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sprint sonu yoğunluğunda paralel işçi sayısı plan sınırına takılır; günlerce süren insan-bekleme akışları 24 saatlik oturum sınırını aşar ve durum kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006",
+        "N-K13-003",
+        "N-K20-005"
+      ],
+      "erken_sinyal": "Kuyrukta bekleyen sandbox istekleri, oturum zaman aşımı hataları.",
+      "azaltma": "Duraklat/devam (snapshot) desenini kullanın, eşzamanlılığı ekip kotasıyla sınırlayın, uzun beklemeleri sandbox dışında tutun.",
+      "id": "BL-00463",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0177",
+      "arac": "Vercel Sandbox",
+      "gorev": "R-G05",
+      "tur": "RT-12",
+      "baslik": "Plan bazlı sınırlar: oturum süresi, vCPU ve tahsis hızı",
+      "aciklama": "Pro planda en fazla 8 vCPU/16 GB, oturum başına 24 saat; vCPU tahsis hızı boşta 150 vCPU/dk'dan başlar; kontrol düzlemi 10.000 istek/dk; silme 20 istek/sn ile sınırlı.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://vercel.com/docs/sandbox/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sabah yoğunluğunda yüzlerce ajan görevi aynı anda başladığında tahsis hızı sınırı nedeniyle görevler kuyrukta bekler; büyük derlemeler 8 vCPU sınırında yavaşlar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001"
+      ],
+      "erken_sinyal": "Sandbox oluşturma çağrılarında hız sınırı hataları; görev başlama gecikmesi.",
+      "azaltma": "Kurumsal kotaları sözleşmeye bağlamak, görev kuyruğunda eşzamanlılık sınırı ve geri basınç uygulamak.",
+      "id": "BL-00475",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0192",
+      "arac": "SGLang",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Büyük MoE ve ayrık sunumda kapasite ve işletim yükü",
+      "aciklama": "SGLang'ın güçlü olduğu ayrık prefill/decode ve büyük MoE sunumu, tam da kritik açıkların yoğunlaştığı bileşenler; bu modlar çok düğümlü GPU ve yüksek hızlı ağ gerektiriyor.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/sgl-project/sglang",
+        "https://github.com/advisories/GHSA-jx93-g359-86wm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Performans için açılan ayrık mod, güvenlik ekibinin onaylamayacağı ağ açıklığı yaratır; performans ile güvenlik arasında seçim yapmak zorunda kalınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Kapasite planında ayrık modun zorunlu hale gelmesi.",
+      "azaltma": "Ayrık modu yalnız ayrı, sıkı segmentlenmiş kümede kullanma.",
+      "id": "BL-00505",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-jx93-g359-86wm",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0208",
+      "arac": "Qwen3-Coder-Next",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "256K varsayılan bağlamda sunucu açılmayabilir",
+      "aciklama": "Model kartı varsayılan bağlamın 256K olduğunu ve sunucu açılamazsa 32.768 gibi daha küçük bir değere düşürülmesini öneriyor.",
+      "tarih": "2026-02",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://huggingface.co/Qwen/Qwen3-Coder-Next"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bellek yetersizliğinde bağlam kısaltılırsa depo üzerinde çalışan test kodu yardımcısı büyük dosya bağlamını kaybeder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K14-008"
+      ],
+      "erken_sinyal": "Açılışta OOM; bağlam sınırı hataları.",
+      "azaltma": "Rol bazında bağlam bütçesi ve kapasite testi.",
+      "id": "BL-00553",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0219",
+      "arac": "Gemma 4 31B IT",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "31B yoğun (dense) model; 256K bağlam ve görsel girdi. Yoğun mimari MoE'ye göre token başına daha fazla hesaplama ister.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://huggingface.co/google/gemma-4-31B-it"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gemma 4 31B için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00593",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0220",
+      "arac": "Gemma 4 26B A4B IT",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "26B toplam / yaklaşık 4B etkin MoE; tüm uzmanlar belleğe yüklenmeli.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://huggingface.co/google/gemma-4-26B-A4B-it"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gemma 4 26B A4B için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00597",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0221",
+      "arac": "Gemma 4 12B IT",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "Sunum kapasitesi ağır",
+      "aciklama": "12B; metin, görsel, ses ve video girdisi; tek GPU'ya sığabilir ancak uzun video/ses girdileri bellek ve süre tüketimini artırır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://huggingface.co/google/gemma-4-12B-it"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gemma 4 12B için gereken GPU sayısı karşılanamazsa rol ya kuantize/düşük kaliteli sürümle ya da dış API ile çalıştırılır; bu da veri yerelliği kararını bozar.",
+        "Çok düğümlü sunum, sunum motorlarının kimliksiz iç kanal açıklarını büyütür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Kapasite testinde hedef eşzamanlılığa ulaşılamaması; uzun kuyruklar.",
+      "azaltma": "Satın alma öncesi kurum donanımında yük testi; küçük yedek model tanımı.",
+      "id": "BL-00601",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0281",
+      "arac": "agentgateway",
+      "gorev": "R-G01",
+      "tur": "RT-12",
+      "baslik": "LLM maliyet atfı sınırlı; Kubernetes dışı kurulum az belgelenmiş",
+      "aciklama": "Kaynağa göre LLM maliyet atfı özellikleri adanmış LLM geçitlerine göre sınırlı, Kubernetes dışı kurulumlar daha az belgelenmiş.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://agentgateway.dev/",
+        "https://github.com/agentgateway/agentgateway"
+      ],
+      "yasatacagi_sorunlar": [
+        "MCP/A2A için agentgateway, LLM bütçesi için ayrı geçit gerekince iki geçitte kimlik ve politika tekrarı oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K20-007",
+        "N-K12-001"
+      ],
+      "erken_sinyal": "Pilotta bütçe ihtiyacının karşılanamaması.",
+      "azaltma": "Rol ayrımı: araç trafiği agentgateway'de, model maliyeti adanmış geçitte; ortak kimlik sağlayıcı.",
+      "id": "BL-00676",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0453",
+      "arac": "Cloudflare Sandbox SDK",
+      "gorev": "R-G05",
+      "tur": "RT-12",
+      "baslik": "Platform geneli kesintiler",
+      "aciklama": "18 Kasım 2025'te Cloudflare yaklaşık 6 saatlik küresel kesinti yaşadı; Workers KV ve Access dahil hizmetler etkilendi.",
+      "tarih": "2025-11",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://blog.cloudflare.com/18-november-2025-outage/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sandbox'lar Workers/Durable Objects üzerinden çağrıldığı için benzer bir kesinti tüm ajan görevlerini durdurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001"
+      ],
+      "erken_sinyal": "Cloudflare durum sayfası olayları.",
+      "azaltma": "Görev kuyruğunda yeniden deneme ve alternatif sandbox'a yük devri.",
+      "id": "BL-00753",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0520",
+      "arac": "Operaton",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Camunda 7 mimari mirası: tek ilişkisel veritabanı",
+      "aciklama": "Motor JVM içine gömülü çalışır ve durumu tek ilişkisel veritabanında tutar; iş yürütücü yoklamasıyla çalışır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/operaton/operaton"
+      ],
+      "yasatacagi_sorunlar": [
+        "Binlerce eşzamanlı ajan koşusunda veritabanı kilitlenmeleri ve yoklama gecikmesi hat performansını sınırlar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K24-001"
+      ],
+      "erken_sinyal": "Veritabanı kilit bekleme süresi artışı.",
+      "azaltma": "Yük testi; motoru insan onayı süreçleriyle sınırlamak.",
+      "id": "BL-00831",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0522",
+      "arac": "Argo Workflows",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "etcd 1 MB nesne sınırı ve durum boşaltma (offloading) gereksinimi",
+      "aciklama": "İş akışı kaynağı etcd sınırı nedeniyle 1 MB altında kalmalı; sıkıştırma yetmezse düğüm durumlarını Postgres/MySQL/MariaDB'ye boşaltmak gerekir. gzip dışı algoritmaya geçip eski sürüme dönülürse uçuştaki büyük iş akışları okunamaz hale gelir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://argo-workflows.readthedocs.io/en/latest/offloading-large-workflows/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Binlerce adımlı toplu backlog dönüşümü (12.000 kayıt) tek iş akışında çalıştırılırsa nesne sınırı aşılır.",
+        "Durum boşaltma ek veritabanı ve yedekleme yükü getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-011",
+        "N-K02-002",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "'request entity too large' veya offload hataları; iş akışı nesne boyutunun 1 MB'a yaklaşması.",
+      "azaltma": "Toplu işleri parçalara bölmek; durum boşaltmayı baştan açmak; veritabanını yedekleme kapsamına almak.",
+      "id": "BL-00837",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0528",
+      "arac": "Azure Logic Apps",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Uzun insan beklemelerinde çalışma süresi ve geçmiş saklama sınırları",
+      "aciklama": "Limit belgesine göre çok kiracılı ortamda varsayılan çalışma süresi ve çalışma geçmişi saklama 90 gün (Consumption'da en az 7, en çok 365 gün). Stateless iş akışlarında çalışma süresi 5 dakika. Çalışma süresi saklama sınırını aşarsa çalışma geçmişten silinir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-limits-and-config"
+      ],
+      "yasatacagi_sorunlar": [
+        "Günlerce süren onay beklemeleri yönetilebilir, ancak saklama süresi dolan onay çalışmaları geçmişten silinir ve kimlikli onay kanıtı kaybolur.",
+        "Yanlışlıkla stateless seçilen onay akışları 5 dakikada zaman aşımına düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-003",
+        "N-K19-002",
+        "N-K19-004",
+        "N-K17-002"
+      ],
+      "erken_sinyal": "Tamamlanmamış çalışmaların 60 günü aşması; denetimde onay kaydının bulunamaması.",
+      "azaltma": "Onay kararlarını Logic Apps geçmişine değil ayrı ve değiştirilemez bir denetim deposuna yazın. Uzun beklemeleri zamanlayıcı ve durum deposuyla yeniden başlatılabilir kurgulayın.",
+      "id": "BL-00849",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0538",
+      "arac": "River",
+      "gorev": "R-G04",
+      "tur": "RT-12",
+      "baslik": "Postgres kuyruğunda autovacuum aç kalması",
+      "aciklama": "Açık kayıt #59 yoğun kuyrukta autovacuum aç kalması (starvation) konusunun belgelenmesini istiyor.",
+      "tarih": "2023-11",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/riverqueue/river/issues/59"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüksek hacimli ajan görevlerinde tablo şişmesi uygulama veritabanını yavaşlatır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-001"
+      ],
+      "erken_sinyal": "Ölü satır sayısında artış.",
+      "azaltma": "Kuyruğu ayrı veritabanına almak; vacuum ayarları.",
+      "id": "BL-00862",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0561",
+      "arac": "Jira Align",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Üretim veritabanı kesintileri: PI planlama günlerinde erişilemezlik",
+      "aciklama": "Jira Align durum sayfasında 22 Mayıs 2025'te kritik 'RDS outage affecting the production database', 18 Kasım 2025'te kritik 'Elevated Server Errors' ve Nisan 2025'te iki major kesinti kaydı var.",
+      "tarih": "2025-11",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jira-align.status.atlassian.com/history"
+      ],
+      "yasatacagi_sorunlar": [
+        "PI planlama etkinliğinde program panosu ve bağımlılık görünümü erişilemezse ART düzeyinde planlama ertelenir; ajanlardan gelen PI girdileri işlenemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-006",
+        "N-K19-007",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Status sayfası olayları; PI öncesi performans uyarıları.",
+      "azaltma": "PI planlama için çevrimdışı dışa aktarım ve yedek plan hazırlayın; kritik tarihleri sağlayıcıyla paylaşın.",
+      "id": "BL-00889",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0563",
+      "arac": "Jira Product Discovery",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Jira platform kesintileri ve otomasyon gecikmeleri JPD'yi de etkiliyor",
+      "aciklama": "JPD durum sayfasında 14 Mayıs 2026 kritik çoklu ürün kesintisi, 10 Mart 2026 APAC otomasyon gecikmesi ve 2025'te birden çok major olay var. JPD, Jira platformu ve aynı API kotalarıyla çalışıyor.",
+      "tarih": "2026-05",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jira-product-discovery.status.atlassian.com/history",
+        "https://developer.atlassian.com/cloud/jira/platform/rate-limiting/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Fikirleri teslim işlerine bağlayan otomasyonlar gecikirse önceliklendirme kararı ile backlog arasında tutarsızlık oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-009",
+        "N-K24-002",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Otomasyon gecikmesi olayları; bağlı iş sayısı ile fikir sayısı arasındaki fark.",
+      "azaltma": "Fikir–iş bağlantısını periyodik uzlaştırma işiyle doğrulayın.",
+      "id": "BL-00893",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0567",
+      "arac": "GitHub Issues ve Projects",
+      "gorev": "R-G03",
+      "tur": "RT-12",
+      "baslik": "Projects alan sınırı ve büyük backlog",
+      "aciklama": "Bir projede en fazla 50 alan kullanılabiliyor; SAFe katmanları ve çok sayıda özel alan gereken 12.000 kayıtlık backlog için sınırlar tasarımı kısıtlar.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects"
+      ],
+      "yasatacagi_sorunlar": [
+        "Portföy/program alanları, risk ve DoR alanları eklendikçe 50 alan sınırına yaklaşılır; birden çok projeye bölmek görünürlüğü dağıtır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-002",
+        "N-K26-006",
+        "N-K02-004"
+      ],
+      "erken_sinyal": "Alan sayısının 40'ı aşması; aynı bilgiyi tutan paralel projeler.",
+      "azaltma": "Alan tasarımını sadeleştirin; portföy katmanını ayrı sistemde tutup GitHub'ı ekip yansıması yapın.",
+      "id": "BL-00902",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0698",
+      "arac": "CUE",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Performans sorunları uzun süredir açık",
+      "aciklama": "Ayrışma (disjunction), artımlı değerlendirme ve tekrarlanan tamamlanmamış ifade değerlendirmesi başlıklı performans issue'ları (#2850–#2855) 2024-02'den beri açık.",
+      "tarih": "2024-02",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/cue-lang/cue/issues/2850",
+        "https://github.com/cue-lang/cue/issues/2855"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıtlık backlog'un toplu şema doğrulaması ya da büyük politika ağaçları dakikalar sürebilir ve CI süresini uzatır.",
+        "Ayrışma yoğun şemalar (iş türüne göre alan setleri) üstel yavaşlamaya açıktır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K26-005",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Doğrulama süresinin kayıt sayısıyla doğrusal olmayan biçimde artması.",
+      "azaltma": "Toplu doğrulamayı parçalara bölüp paralel çalıştırın. Ayrışmaları azaltın. Performans bütçesi testi ekleyin.",
+      "id": "BL-01049",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0706",
+      "arac": "Azure App Configuration",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "İstek kotası aşımında HTTP 429: kill switch yenilemesi saat sonuna kadar bloke olabilir",
+      "aciklama": "Standard katman mağaza başına saatte 30.000 istek, okuma için yaklaşık 300 RPS ile sınırlıdır; kota aşılınca saat sonuna kadar isteklerin artan bir kısmı 429 alır. Developer katmanında saatte 6.000, Free katmanında günde 1.000 istek sınırı vardır; Free ve Developer katmanlarının SLA'sı yoktur. Kotasız erişim yalnız Premium katmandadır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/azure-app-configuration/faq"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çok sayıda ajan örneği veya servisin yeniden başlatma fırtınası kotayı tüketirse, kill switch değişikliği saat sonuna kadar istemcilere ulaşmaz.",
+        "Pilotta Developer katmanıyla başlanırsa kota ve SLA eksikliği üretim benzeri testleri geçersiz kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-003",
+        "N-K16-001",
+        "N-K24-001",
+        "N-K20-001"
+      ],
+      "erken_sinyal": "Request Quota Usage metriğinin yüzde 80'i aşması; istemci günlüklerinde 429.",
+      "azaltma": "Üretimde Premium katman ve coğrafi çoğaltma kullanın; sağlayıcı önbelleği ve gözcü anahtar ile istek sayısını azaltın; kota metriğine alarm koyun.",
+      "id": "BL-01058",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "SSS'deki sayılar birebir: Standard 30.000 istek/saat ve 300 RPS okuma, Developer 6.000/saat, Free 1.000/gün, Free/Developer SLA yok, Premium kotasız. Ancak SSS sentinel anahtar isteklerinin çoğunun saatlik kotaya sayılmadığını belirtiyor; Premium'a geçişle aşılabildiğinden şiddet orta daha uygun.",
+        "kaynak": [
+          "https://learn.microsoft.com/en-us/azure/azure-app-configuration/faq"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0784",
+      "arac": "deps.dev (Open Source Insights)",
+      "gorev": "R-G03",
+      "tur": "RT-12",
+      "baslik": "SLA'sız ücretsiz hizmete kritik kapı bağlamak",
+      "aciklama": "deps.dev ücretsiz bir Google hizmeti; belgelerde hizmet seviyesi taahhüdü veya hız sınırı bilgisi bulunamadı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.deps.dev/api/",
+        "https://github.com/google/deps.dev"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hizmet kesintisinde veya hız sınırında lisans/bağımlılık kontrolü yapılamaz; hat ya durur ya da kontrol atlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K16-001"
+      ],
+      "erken_sinyal": "Zaman aşımı ve 429 yanıtlarında artış.",
+      "azaltma": "Sonuçları kurum içinde önbelleğe alın; BigQuery veri kümesi veya kurum içi SCA ile yedekleyin.",
+      "id": "BL-01104",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1155",
+      "arac": "Trivy",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Zafiyet veritabanı indirmesinde hız sınırı ve dış bağımlılık",
+      "aciklama": "Trivy açık veritabanını OCI kayıt defterlerinden (ghcr.io ve mirror.gcr.io) çekiyor. 2024'te yaşanan hız sınırı sorunları nedeniyle GITHUB_TOKEN desteği (#7580) ve ek varsayılan aynalar (#7864) eklendi.",
+      "tarih": "2024-11",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/aquasecurity/trivy/pull/7864",
+        "https://github.com/aquasecurity/trivy/pull/7580"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüzlerce paralel CI işi aynı anda veritabanı indirirse TOOMANYREQUESTS hatasıyla tarama kapısı düşer.",
+        "Hava boşluklu kritik altyapı ağlarında ayna kurulmadan araç çalışmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K05-012"
+      ],
+      "erken_sinyal": "CI loglarında veritabanı indirme hataları.",
+      "azaltma": "Veritabanını kurum içi OCI aynasında önbelleğe alın, istemci/sunucu modunu kullanın.",
+      "id": "BL-01339",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1349",
+      "arac": "Azure Confidential Ledger",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "Abonelik başına 2 standart defter ve işlem hızı sınırları",
+      "aciklama": "Sınırlar: abonelik başına 2 standart SKU defter, defter başına 50.000 koleksiyon kimliği, saniyede 1.800 kayıt oluşturma. Artış için ürün ekibine başvurmak gerekiyor.",
+      "tarih": "2026-04",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/confidential-ledger/overview"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip ve çok sayıda ajan olayının her birini deftere yazma tasarımı sınırlara takılır; ekip başına ayrı defter açılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-002",
+        "N-K24-001"
+      ],
+      "erken_sinyal": "Kısıtlama (throttling) hataları.",
+      "azaltma": "Olayları toplu özetleyip (Merkle kökü) yalnız özetleri deftere yazmak.",
+      "id": "BL-01493",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1387",
+      "arac": "Trunk Merge Queue",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "GitHub API kesintilerinde kuyruk durur",
+      "aciklama": "Trunk durum sayfası GitHub API bileşenini ayrı izliyor ve incelendiği anda ~%98,91 erişilebilirlik gösteriyordu (anlık görüntü); Merge Queue GitHub webhook ve API'sine bağımlı olduğundan GitHub sorunlarında ilerleyemez.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://status.trunk.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "GitHub kesintisinde ajan PR'ları kuyrukta birikir; kesinti sonrası toplu birleşme sırasında çakışma ve yeniden test yükü oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-007",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Durum sayfasında GitHub API bileşeninin 'degraded' olması; kuyruk bekleme süresi artışı.",
+      "azaltma": "Kuyruk SLO'su ve bekleme alarmı, kesinti sonrası parti boyutunu sınırlamak.",
+      "id": "BL-01513",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1972",
+      "arac": "AWS Config",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Hesap ve bölge başına tek kaydedici; çok hesaplı yönetişim karmaşıklığı",
+      "aciklama": "Belgeye göre her hesap ve bölge için yalnız bir müşteri tarafından yönetilen kaydedici tanımlanabiliyor. Kuruluş genelinde yayılım Systems Manager Quick Setup ya da toplayıcılarla yapılıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekip ve çok hesaplı yapıda, ekiplerin kendi kayıt kapsamlarını bağımsız yönetmesi mümkün olmaz; platform ekibi darboğaz olur.",
+        "Bir bölgenin atlanması o bölgedeki değişikliklerin hiç kaydedilmemesi demektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K24-004",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Toplayıcıda eksik hesap veya bölge.",
+      "azaltma": "Config'i kuruluş düzeyinde, tüm bölgeleri kapsayan IaC ile kurun. Kapsam denetimini periyodik bir testle yapın.",
+      "id": "BL-01693",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1991",
+      "arac": "Azure Pipelines",
+      "gorev": "R-G09",
+      "tur": "RT-12",
+      "baslik": "Hat başına 200 TSTU hız sınırı",
+      "aciklama": "Her hat 5 dakikalık kayan pencerede 200 TSTU ile sınırlıdır; aşımda istekler 30 saniyeye kadar geciktirilir veya HTTP 429 ile engellenir. Kendinden barındırılan ajanlar da klonlama ve log gönderimiyle yük üretir. Microsoft'un limit artırımı için önerdiği tek yol entegrasyon kimliğine Basic + Test Plans (kullanıcı başı 52 USD/ay) erişimi atamaktır.",
+      "tarih": "2025-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops",
+        "https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çok sayıda ajanın paralel PR'larıyla aynı hattın sık tetiklenmesi ve büyük log üretmesi hattı yavaşlatır veya engeller; hat SLO'ları tutmaz.",
+        "Entegrasyon hesaplarına ek lisans atanmadan ölçek büyütülemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006",
+        "N-K16-001"
+      ],
+      "erken_sinyal": "Hat loglarında hız sınırı mesajları, X-RateLimit-Remaining başlığının sıfıra yaklaşması, Proje Koleksiyonu Yöneticilerine gelen gecikme e-postaları.",
+      "azaltma": "Sığ klon ve log hacmi azaltma, ajan başına eşzamanlılık üst sınırı, entegrasyon kimliklerini ayırma ve kullanım izleme sayfasını düzenli okumak.",
+      "id": "BL-01714",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2030",
+      "arac": "Security Command Center (AI Protection)",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Küresel kesintiden etkilenme",
+      "aciklama": "12 Haziran 2025'teki Service Control kesintisi SCC'yi de etkiledi.",
+      "tarih": "2025-06",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kesinti sırasında tehdit tespiti ve bulgu akışı durur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009"
+      ],
+      "erken_sinyal": "Durum sayfasında SCC olayı.",
+      "azaltma": "Kritik tespitler için yedek bir alarm kanalı kurun.",
+      "id": "BL-01788",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2145",
+      "arac": "Zephyr (SmartBear)",
+      "gorev": "R-G06b",
+      "tur": "RT-12",
+      "baslik": "Büyük test kütüphanelerinde performans",
+      "aciklama": "Envanterde büyük test kütüphanelerinde performans sorunları bildirildiği yazıyor. Marketplace'te Zephyr Essential'ın ortalaması 900 değerlendirmeyle 3,9 yıldız.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://marketplace.atlassian.com/rest/2/addons/com.thed.zephyr.je"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıtlık backlog ve binlerce test durumunda Jira'nın yavaşlaması, bütün ekipleri etkiler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-025"
+      ],
+      "erken_sinyal": "Jira sayfa yükleme süreleri; test döngüsü raporlarında zaman aşımı.",
+      "azaltma": "Proje başına test deposunu bölün, raporları dışarıda üretin, yük testini satın almadan önce yapın.",
+      "id": "BL-01885",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2215",
+      "arac": "vFunction",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Çalışma zamanı analizi için üretim ya da QA JVM/CLR'ına ajan eklenmesi",
+      "aciklama": "vFunction fiyat sayfasına göre analiz için uygulamaların 'üretimde çalıştırılması ya da QA veya staging ortamında otomatik test yapılması' gerekiyor. Her JVM ya da CLR bir uygulama sayılıyor. Destek Java 1.6+ ve .NET 4.0+ için; diğer diller OpenTelemetry üzerinden.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://vfunction.com/pricing/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Üretim JVM'lerine ek bir analiz ajanı takılması performans ve kararlılık riski doğurur; kritik altyapı değişiklik yönetimi süreçlerinde onay alınması zorlaşır.",
+        "Yalnız QA'da çalıştırılırsa, üretim kullanım örüntüleri yakalanmaz ve öneriler eksik kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-002",
+        "N-K04-009",
+        "N-K15-007"
+      ],
+      "erken_sinyal": "Ajan eklenen ortamlarda gecikme ve bellek artışı.",
+      "azaltma": "Ajanı önce yük testi ortamında deneyin. Üretimde yalnız sınırlı süreli ve onaylı pencerelerde çalıştırın.",
+      "id": "BL-01946",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2810",
+      "arac": "Entire CLI",
+      "gorev": "R-G11",
+      "tur": "RT-12",
+      "baslik": "Büyük çalışma ağaçlarında istem kancası gecikmesi",
+      "aciklama": "Açık sorun #1642'ye göre büyük çalışma ağaçlarında istem kancaları 40-55 saniye sürüyor. Neden, go-git kütüphanesinin git tarafından yok sayılan dizinleri de gezmesi.",
+      "tarih": "2026-07",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/entireio/cli/issues/1642"
+      ],
+      "yasatacagi_sorunlar": [
+        "Monorepo'larda her istemde neredeyse bir dakikalık gecikme olur; geliştiriciler aracı kapatır ve köken kaydında boşluk kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K29-009",
+        "N-K28-004"
+      ],
+      "erken_sinyal": "Ajan oturumlarında istem gönderimi ile yanıt arasındaki sürenin artması.",
+      "azaltma": "Pilotu büyük depolarda ölçmek; düzeltme gelene kadar büyük depoları kapsam dışı tutmak.",
+      "id": "BL-02088",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3353",
+      "arac": "Datadog MCP Server",
+      "gorev": "R-G03",
+      "tur": "RT-12",
+      "baslik": "Kullanım kotası ve GovCloud desteğinin olmaması",
+      "aciklama": "Belgelere göre 10 saniyede 50 istek ve ayda 100.000 araç çağrısı sınırı var; MCP sunucusu GovCloud (ddog-gov) sitelerinde desteklenmiyor.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.datadoghq.com/mcp_server/"
+      ],
+      "yasatacagi_sorunlar": [
+        "10+ ekibin olay ajanları aylık kotayı tüketirse olay anında ajan gözlem verisine erişemez.",
+        "Kamu/regüle sitede barındırılan Datadog hesabıyla kullanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K12-001"
+      ],
+      "erken_sinyal": "Aylık araç çağrısı sayısının kotaya yaklaşması; 429 yanıtları.",
+      "azaltma": "Ekip başına kota bütçesi ve kritik olaylarda insan yedek süreci.",
+      "id": "BL-02119",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3354",
+      "arac": "Grafana MCP Server (mcp-grafana)",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Loki sorgu maliyeti koruması varsayılan kapalı",
+      "aciklama": "README, Loki'nin satır filtresi olmayan log sorgularında bayt sınırı uygulamadığını ve geniş bir seçicinin terabaytlarca veri tarayabileceğini belirtiyor. --loki-guardrail-mode varsayılanı 'off'.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/grafana/mcp-grafana"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın '[30d]' gibi geniş zaman aralıklı sorguları Loki kümesini yorar ve paylaşılan gözlemlenebilirlik altyapısında diğer ekiplerin sorgularını yavaşlatır.",
+        "Grafana Cloud kullanılıyorsa sorgu maliyeti öngörülemez biçimde artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K20-006",
+        "N-K15-006"
+      ],
+      "erken_sinyal": "Loki querier CPU/bellek sıçramaları; MCP hizmet hesabından gelen uzun süreli sorgular.",
+      "azaltma": "--loki-guardrail-mode=enforce kullanın. Ajan hizmet hesabı için Loki kiracı sınırları ve sorgu zaman aşımı tanımlayın.",
+      "id": "BL-02125",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3359",
+      "arac": "SigNoz MCP Server",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Serbest ClickHouse SQL ve PromQL sorguları",
+      "aciklama": "signoz_execute_builder_query aracı ClickHouse SQL ve PromQL dahil ham sorgular çalıştırabiliyor. Varsayılan sınırlar standart sorgularda 100, formüle bağlı temel sorgularda 10.000 satır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/SigNoz/signoz-mcp-server"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın geniş zaman aralıklı ClickHouse sorguları paylaşılan gözlemlenebilirlik kümesini yavaşlatır.",
+        "Log ve izlerde bulunan kişisel veriler toplu olarak modele aktarılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K20-006"
+      ],
+      "erken_sinyal": "ClickHouse sorgu loglarında MCP kaynaklı uzun sorgular.",
+      "azaltma": "Ajan kullanıcısı için ClickHouse sorgu kotası ve zaman aşımı tanımlayın. Kişisel veri alanlarını toplama aşamasında maskeleyin.",
+      "id": "BL-02145",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3929",
+      "arac": "AWS Organizations Service Control Policies (SCP)",
+      "gorev": "R-G03b",
+      "tur": "RT-12",
+      "baslik": "Katı kota: varlık başına 10 SCP ve 10.240 karakter",
+      "aciklama": "Kuruluş kotalarına göre bir kök, OU ya da hesaba en çok 10 SCP doğrudan bağlanabilir; SCP belge boyutu en çok 10.240 karakter; OU iç içe derinliği 5 seviye. Bunlar kesin (hard) sınırlar. RCP için sınır 5 politika ve 5.120 karakter.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip-özel ve ortak kurallar (N-K24-007) katmanlandıkça karakter sınırına takılınır; kurallar birleştirilip okunaksız hâle gelir ve denetimi zorlaşır.",
+        "SAFe portföy/ART/ekip hiyerarşisi 5 OU seviyesine sığdırılmak zorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-007",
+        "N-K11-003",
+        "N-K24-001"
+      ],
+      "erken_sinyal": "SCP boyutunun %80'i aşması; yeni kural eklenemeyen OU'lar.",
+      "azaltma": "Kuralları ekip bazında değil hesap sınıfı bazında tasarlayın. Politika boyutunu CI'da ölçün. Bir kısmını izin sınırlarına ve IAM koşullarına taşıyın.",
+      "id": "BL-02319",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4180",
+      "arac": "Sheriff",
+      "gorev": "R-G13",
+      "tur": "RT-12",
+      "baslik": "Büyük kod tabanlarında yavaşlık",
+      "aciklama": "Açık issue #99: ~1,8 bin TypeScript dosyası ve 14 bin import satırında 'çok yavaş'; bakımcı ESLint'in her dosya için yeni bir Sheriff çalıştırıp bağımlılık grafiğini yeniden kurduğunu, önbellek gerektiğini söylüyor.",
+      "tarih": "2024-06",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/softarc-consulting/sheriff/issues/99"
+      ],
+      "yasatacagi_sorunlar": [
+        "Büyük monorepolarda IDE ve CI lint süreleri uzar; ekipler kuralı kapatma eğilimine girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003"
+      ],
+      "erken_sinyal": "Lint süresinin PR başına dakikalar mertebesine çıkması.",
+      "azaltma": "Kural denetimini CI'da tek 'sheriff verify' çalıştırmasına taşıyın; IDE'de yalnız değişen dosyalar için çalıştırın.",
+      "id": "BL-02414",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4236",
+      "arac": "Google SLO Generator",
+      "gorev": "R-G13",
+      "tur": "RT-12",
+      "baslik": "Datadog arka ucunda eşzamanlılık ve API hız sınırı sorunları",
+      "aciklama": "Açık hata #527 (2024-11): Datadog Python modülünün küresel yapılandırması nedeniyle birden fazla Datadog arka ucu eşzamanlı kullanılamıyor. Açık issue #243: hesaplama sırasında Datadog API hız sınırlarına takılınıyor.",
+      "tarih": "2024-11",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/google/slo-generator/issues/527",
+        "https://github.com/google/slo-generator/issues/243"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı ekiplerin farklı Datadog hesapları/organizasyonları varsa tek bir servis olarak çalıştırılan hesaplayıcı yanlış hesaba sorgu atabilir veya hata verir.",
+        "SLO sayısı arttıkça hız sınırı nedeniyle hesaplamalar atlanır ve bütçe raporunda boşluklar oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-014",
+        "N-K33-002"
+      ],
+      "erken_sinyal": "Hesaplama loglarında 429 yanıtları; eşzamanlı işlerde tutarsız sonuçlar.",
+      "azaltma": "Her arka uç/hesap için ayrı süreç çalıştırın; hesaplama sıklığını hız sınırlarına göre ayarlayın.",
+      "id": "BL-02443",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0191",
+      "arac": "vLLM",
+      "gorev": "E3-codex",
+      "tur": "RT-12",
+      "baslik": "Yapılandırılmış çıktı hatasının ortak motoru durdurması ve metrik etiketi patlamasıyla kimliksiz hizmet dışı bırakma",
+      "aciklama": "vllm <0.30.0: yapılandırılmış çıktı isteklerindeki hataların istek sınırından taşıp paylaşılan EngineCore'u sonlandırması (GHSA-85xf-c7hm-whqw, orta, CVSS 3.1 6.5) ve Rust ön yüz metrik ara katmanında saldırganın denetlediği HTTP yöntem belirteçleriyle sınırsız Prometheus etiket çeşitliliği (GHSA-5fj9-pfhr-6j48, orta, 5.9, kimlik doğrulamasız). İkisi 2026-09-23'te yayımlandı, 0.30.0'da düzeltildi.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/vllm-project/vllm/security/advisories/GHSA-85xf-c7hm-whqw",
+        "https://github.com/vllm-project/vllm/security/advisories/GHSA-5fj9-pfhr-6j48"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek bir hatalı yapılandırılmış çıktı isteği, aynı model sunucusunu paylaşan tüm ekiplerin ajanlarını durdurur.",
+        "Metrik etiketi patlaması izleme yığınını da doldurur; kesinti sırasında gözlem verisi kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "EngineCore yeniden başlatmaları; Prometheus seri sayısında ani artış.",
+      "azaltma": "0.30.0 ve üstü; metrik ucunu kimlik doğrulamalı ağda tutma; ekip başına ayrı model sunucusu veya istek yalıtımı.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Depo bildirimleri gh api ile çekildi; değerler Codex ile aynı; global veritabanında henüz yok.",
+        "kaynak": [
+          "https://github.com/vllm-project/vllm/security/advisories/GHSA-85xf-c7hm-whqw",
+          "https://github.com/vllm-project/vllm/security/advisories/GHSA-5fj9-pfhr-6j48"
+        ]
+      },
+      "id": "BL-02502",
+      "codex_kaynagi": "arac-riskleri/guvenlik-bildirimleri/k05.json#GB-85xf-c7hm-whqw, #GB-5fj9-pfhr-6j48",
+      "codex_dogrulama": "dogrulandi",
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-85xf-c7hm-whqw",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        },
+        {
+          "kimlik": "GHSA-5fj9-pfhr-6j48",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-1315",
+      "arac": "Datadog LLM Observability",
+      "gorev": "R-G07",
+      "tur": "RT-12",
+      "baslik": "Tek SaaS sağlayıcıya bağımlılık: çok bölgeli toplu kesinti geçmişi",
+      "aciklama": "Datadog'un kendi analizine göre 8 Mart 2023'te bir systemd güvenlik güncellemesi, birden çok bölge ve bulut sağlayıcısındaki örneklerin %60'ından fazlasında ağ bağlantısını kopardı; veri alımı ve platform hizmetleri durdu. Olay eski, ancak tek sağlayıcıya bağımlılık riskini gösteriyor.",
+      "tarih": "2023-03",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.datadoghq.com/blog/engineering/2023-03-08-deep-dive-into-platform-level-impact/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Datadog kesintisinde ajan hattının izleri, maliyet sayaçları ve üretim içi değerlendirme alarmları aynı anda kör kalır; bütçe tavanı ve anomali alarmları çalışmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-007",
+        "N-K20-003"
+      ],
+      "erken_sinyal": "status.datadoghq.com'da veri alımı gecikmesi duyurusu yayımlanır; panellerde veri boşluğu görülür.",
+      "azaltma": "Bütçe tavanı ve acil durdurma gibi kritik kontrolleri izleme SaaS'ından bağımsız, kurum içi sayaçlarla uygulayın.",
+      "id": "BL-01456",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0922",
+      "arac": "GlassFrog",
+      "gorev": "R-G10",
+      "tur": "RT-12",
+      "baslik": "API çağrı sınırı",
+      "aciklama": "Premium'da API sınırı kullanıcı başına saatte 25 çağrı, ücretsiz katmanda toplam saatte 50.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.glassfrog.com/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların rol/karar hakkı sorgusu sık yapılırsa sınır aşılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-004"
+      ],
+      "erken_sinyal": "HTTP 429 yanıtları.",
+      "azaltma": "Rol verisini önbelleğe alın.",
+      "id": "BL-01218",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1181",
+      "arac": "Socket",
+      "gorev": "R-G05",
+      "tur": "RT-12",
+      "baslik": "Kurulum yolunda harici hizmet bağımlılığı",
+      "aciklama": "Kurulum anı güvenlik duvarı devredeyken paket kurulumları Socket hizmetinin erişilebilirliğine bağlı hale gelir (çıkarım).",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://socket.dev/blog/introducing-socket-firewall"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sağlayıcı kesintisinde CI derlemeleri ve ajan ortam kurulumları durur ya da koruma devre dışı bırakılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Kurulumda zaman aşımı hataları.",
+      "azaltma": "Açık/kapalı-kal politikasını bilinçli seçmek; iç ayna önbelleği.",
+      "id": "BL-01377",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    }
+  ],
+  "kategori_kaliplari": [
+    "RK-008",
+    "RK-042",
+    "RK-047",
+    "RK-069",
+    "RK-076",
+    "RK-091",
+    "RK-108",
+    "RK-111",
+    "RK-115",
+    "RK-145",
+    "RK-176",
+    "RK-185",
+    "RK-202"
+  ],
+  "olaylar": [
+    "EV-005",
+    "EV-038",
+    "EV-057",
+    "EV-068",
+    "EV-096",
+    "EV-106",
+    "EV-108",
+    "EV-120",
+    "EV-133",
+    "EV-188",
+    "EV-190",
+    "EV-200",
+    "EV-218",
+    "EV-237",
+    "EV-239",
+    "EV-242",
+    "EV-278",
+    "EV-303",
+    "EV-308",
+    "EV-313",
+    "EV-317"
+  ],
+  "senaryolar": [
+    "SS-015",
+    "SS-026",
+    "SS-059",
+    "SS-060",
+    "SS-072",
+    "SS-074",
+    "SS-091",
+    "SS-095",
+    "SS-109",
+    "SS-118"
+  ],
+  "otomatik_sinyalli_araclar": []
+}

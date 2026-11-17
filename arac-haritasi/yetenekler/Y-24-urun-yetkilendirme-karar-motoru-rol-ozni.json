@@ -1,0 +1,700 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-24",
+    "ad": "Ürün yetkilendirme karar motoru (rol, öznitelik ve ilişki tabanlı)",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "Yetki kararının ön yüzde ya da LLM'de verilmesi.",
+    "ne_zaman_zorunlu": "Kullanıcı/rol/özel veri içeren ürünlerde."
+  },
+  "arac_sayisi": 36,
+  "tur_dagilimi": {
+    "acik-kaynak": 15,
+    "acik-cekirdek": 6,
+    "kutuphane": 2,
+    "bulut-hizmeti": 2,
+    "ticari-saas": 5,
+    "protokol-standart": 4,
+    "ticari-yazilim": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-0122",
+      "ad": "OpenFGA",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openfga.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zanzibar tarzı ilişki tabanlı yetkilendirme motoru (RBAC/ReBAC, koşullu ABAC), model testleri ve SDK'lar; kaynakta 'panonun en güçlü kararı' — yetki kararı deterministik motorda.",
+      "sinirlar": "İlişki verisinin senkronizasyonu uygulama sorumluluğu; modelleme öğrenme eğrisi. ABAC koşulları sınırlı; yüksek hacimde tutarlılık/önbellek ayarı gerekir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-0123",
+      "ad": "SpiceDB",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://authzed.com/spicedb",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zanzibar esinli ReBAC veritabanı; şema dili, caveat'larla öznitelik koşulları ve ZedToken ile yeni-düşman (new-enemy) tutarlılığı sağlar.",
+      "sinirlar": "Ek veri deposu ve işletim; ilişki senkronizasyonu uygulamanın işi. Ayrı bir veri deposu işletimi gerektirir; ilişki verisinin senkronu kurum sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-0124",
+      "ad": "Cerbos",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (PDP); Cerbos Hub ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.cerbos.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Durumsuz politika karar noktası; YAML politikalarıyla RBAC/ABAC, sorgu planı (liste filtreleme), politika test çerçevesi ve ajan/MCP araç yetkilendirmesi örnekleri sunar.",
+      "sinirlar": "İlişki tabanlı (ReBAC) senaryolarda Zanzibar tarzı motorlar kadar doğal değil; yönetim düzlemi ticari. Politika yönetim paneli ve dağıtım ticari Hub'da; ilişki tabanlı modelleme sınırlı. ReBAC için harici ilişki verisi gerekir; merkezi yönetim (Hub) ücretli.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K10-008",
+        "N-K11-001",
+        "N-K12-002",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-0125",
+      "ad": "Oso",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (eski kütüphane); Oso Cloud ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.osohq.com",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Polar diliyle yönetilen yetkilendirme hizmeti; ajanlar için keşif, izleme, politika ve uyum raporlama ürünü.",
+      "sinirlar": "Açık kaynak Oso kütüphanesi kullanımdan kaldırıldı (README 'Deprecated'); güncel yol SaaS. Eski açık kaynak Oso kütüphanesi kullanımdan kaldırıldı ('Deprecated'); yalnız SaaS.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-0126",
+      "ad": "Apache Casbin",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://casbin.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "PERM model dosyasıyla ACL, RBAC ve ABAC destekleyen çok dilli yetkilendirme kütüphanesidir; birçok depolama adaptörü vardır.",
+      "sinirlar": "Kütüphane düzeyinde; merkezi karar noktası ve ilişki grafiği için ek tasarım gerekir. Kütüphane olduğundan tek karar noktası ve dağıtık tutarlılık kurumca tasarlanmalıdır.",
+      "ihtiyaclar": [
+        "N-K18-001"
+      ]
+    },
+    {
+      "id": "AR-0683",
+      "ad": "Open Policy Agent (OPA)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.openpolicyagent.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rego diliyle genel amaçlı politika motoru; API yetkilendirmesi, Kubernetes admission, CI ve ajan eylem politikaları için yan süreç, kütüphane veya Wasm olarak deterministik karar verir.",
+      "sinirlar": "Rego öğrenme eğrisi; politika sahipliği ve katman önceliği kurum tasarımına kalır. Rego öğrenme eğrisi; büyük ilişki grafikleri (ReBAC) için uygun değil; politika verisinin dağıtımı ayrı katman (ör. OPAL) ister.",
+      "ihtiyaclar": [
+        "N-K01-006",
+        "N-K04-002",
+        "N-K05-023",
+        "N-K05-027",
+        "N-K09-004",
+        "N-K10-008",
+        "N-K11-002",
+        "N-K11-003",
+        "N-K18-001",
+        "N-K18-002",
+        "N-K18-006",
+        "N-K18-007",
+        "N-K20-001",
+        "N-K21-003",
+        "N-K21-004",
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "AR-0688",
+      "ad": "Cedar",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.cedarpolicy.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rol, öznitelik ve ilişki tabanlı izinleri okunabilir politika diliyle ifade eden, şema doğrulamalı ve biçimsel analiz araçları olan yetkilendirme dili ve motoru.",
+      "sinirlar": "Yetkilendirme kararlarına odaklı; genel yapılandırma/risk kuralları için Rego kadar ifade gücü yok. ReBAC ilişki depolaması yerleşik değildir; ekosistem OPA'dan küçüktür.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K08-003",
+        "N-K09-004",
+        "N-K10-008",
+        "N-K12-002",
+        "N-K18-001",
+        "N-K18-002",
+        "N-K18-007"
+      ]
+    },
+    {
+      "id": "AR-0690",
+      "ad": "OPAL",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.opal.ac/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OPA ve Cedar ajanlarına politikaları git'ten, yetki verisini kaynak sistemlerden gerçek zamanlı dağıtan yönetim katmanıdır.",
+      "sinirlar": "Gerçek zamanlı dağıtım koşu başında sürüm sabitleme ihtiyacıyla çelişebilir; sabitleme ayrıca tasarlanmalı. Ek işletim bileşeni; olay kaynağı entegrasyonları kurumca yazılmalı.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-003",
+        "N-K11-007",
+        "N-K18-001",
+        "N-K18-002",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1209",
+      "ad": "Amazon Verified Permissions",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/verified-permissions/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Cedar tabanlı yönetilen yetkilendirme hizmeti; şema, politika deposu, politika şablonları ve karar günlüğü sunar.",
+      "sinirlar": "AWS kilidi; Türkiye bölgesi yoktur.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1210",
+      "ad": "Policy in Amazon Bedrock AgentCore",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AgentCore Gateway'de her ajan-araç çağrısını varsayılan-ret ilkesiyle Cedar politikalarına göre ajan kodu dışında değerlendirir; politikalar doğal dilden Cedar'a çevrilebilir. Mart 2026'da GA.",
+      "sinirlar": "Yalnız AgentCore Gateway üzerinden geçen çağrıları kapsar; AWS kilidi.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-1211",
+      "ad": "Ory Keto",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ory.com/keto",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zanzibar modeline dayalı ilişki tabanlı izin sunucusudur; Ory Network'te yönetilen olarak da sunulur.",
+      "sinirlar": "Geliştirme hızı ve topluluğu SpiceDB/OpenFGA'ya göre daha küçük.",
+      "ihtiyaclar": [
+        "N-K18-001"
+      ]
+    },
+    {
+      "id": "AR-1212",
+      "ad": "Topaz",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.topaz.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OPA politika motorunu Zanzibar tarzı dizinle birleştirerek RBAC, ABAC ve ReBAC kararlarını yerelde verir.",
+      "sinirlar": "Arkasındaki şirketin ticari durumu belirsiz; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K18-001"
+      ]
+    },
+    {
+      "id": "AR-1213",
+      "ad": "Permify",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://permify.co/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Zanzibar esinli, ABAC kurallarını da destekleyen yetkilendirme hizmetidir; şema dili ve çok kiracılık sunar.",
+      "sinirlar": "AGPL lisansı ürün içine gömmede hukuki değerlendirme ister.",
+      "ihtiyaclar": [
+        "N-K18-001"
+      ]
+    },
+    {
+      "id": "AR-1214",
+      "ad": "Permit.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.permit.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OPA/Cedar/OpenFGA üzerinde RBAC/ABAC/ReBAC yönetim arayüzü, denetim kaydı ve yapay zekâ ajanları için erişim kontrolü; karar noktası kurum içinde çalışabilir.",
+      "sinirlar": "Kontrol düzlemi SaaS'tır.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1215",
+      "ad": "OpenID AuthZEN",
+      "tur": "protokol-standart",
+      "lisans": "OpenID IPR",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openid.net/wg/authzen/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Politika uygulama noktası (PEP) ile karar noktası (PDP) arasında standart yetkilendirme API'si tanımlar; motor değiştirmeyi kolaylaştırır.",
+      "sinirlar": "Yeni standart; motor desteği değişken.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1223",
+      "ad": "Keycloak",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.keycloak.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OIDC/SAML kimlik sağlayıcı; hizmet hesapları, token değişimi, adım-yukarı kimlik doğrulama ve yetkilendirme servisleri sunar.",
+      "sinirlar": "Yüksek erişilebilirlik ve sürüm yükseltme işletim yükü getirir.",
+      "ihtiyaclar": [
+        "N-K06-007",
+        "N-K13-012",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1557",
+      "ad": "Pomerium",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.pomerium.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kimlik ve bağlam farkındalıklı (identity-aware) ters vekil sunucu; iç uygulamalara ve MCP sunucularına istek bazında politika ile sıfır güven erişimi sağlar.",
+      "sinirlar": "Gelişmiş politika ve yönetim konsolu ticari sürümdedir.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1558",
+      "ad": "ZenStack",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://zenstack.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "TypeScript için şema içinde tanımlanan erişim politikalarını (RBAC/ABAC) veri katmanında otomatik uygulayan ORM/veri katmanı; yetkilendirme kararlarını tek noktada toplar.",
+      "sinirlar": "Yalnız TypeScript/Node ve desteklenen veritabanları; uygulama dışı servisler için merkezi PDP değildir.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1559",
+      "ad": "AccessControl (onury/accesscontrol)",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/onury/accesscontrol",
+      "olgunluk": "olgun",
+      "ne_saglar": "Node.js için rol ve öznitelik tabanlı erişim kontrolü (RBAC/ABAC) kütüphanesi; kaynak/eylem/sahiplik kurallarını akıcı API veya JSON ile tanımlar.",
+      "sinirlar": "Uygulama içi kütüphanedir; dağıtık PDP, denetim kaydı ve politika sürümleme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K18-001"
+      ]
+    },
+    {
+      "id": "AR-1710",
+      "ad": "Athenz",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.athenz.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "X.509 sertifikalarıyla hizmet kimliği sağlayan ve alan/rol/politika modeliyle yetkilendirme kararı veren platform; kısa ömürlü sertifika ve erişim token'ı üretir.",
+      "sinirlar": "Kurulum ve işletim karmaşık; topluluk görece küçük.",
+      "ihtiyaclar": [
+        "N-K04-002",
+        "N-K18-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-1799",
+      "ad": "Apache Ranger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://ranger.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri platformlarında (Hive, Trino, Kafka, HDFS vb.) merkezi erişim politikası, sütun maskeleme, satır filtreleme ve erişim denetim kaydı; etiket tabanlı politikalar Atlas sınıflandırmalarıyla çalışır.",
+      "sinirlar": "Büyük veri ekosistemine odaklı; uygulama düzeyi yetkilendirme için genel amaçlı değil.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-001",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-1856",
+      "ad": "XACML",
+      "tur": "protokol-standart",
+      "lisans": "OASIS IPR politikası",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Öznitelik tabanlı erişim denetimi için politika dili ve PDP/PEP/PAP/PIP mimarisi standardı; tek karar noktasında deterministik yetkilendirme modeli.",
+      "sinirlar": "XML ağırlıklı ve karmaşık; modern alternatiflere (Cedar, Rego, AuthZEN) göre araç ekosistemi zayıfladı.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1857",
+      "ad": "AuthzForce",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://authzforce-ce-fiware.readthedocs.io/en/latest/",
+      "olgunluk": "olgun",
+      "ne_saglar": "XACML 3.0 uyumlu, çok kiracılı yetkilendirme karar noktası (PDP) ve politika yönetim noktası (PAP) REST sunucusu.",
+      "sinirlar": "Küçük topluluk; XACML öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-1881",
+      "ad": "RFC 9396 (OAuth 2.0 Rich Authorization Requests)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rfc-editor.org/rfc/rfc9396",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OAuth yetki taleplerinde kapsamdan (scope) daha ince, yapılandırılmış 'authorization_details' (ör. belirli depo, belirli işlem, tutar) tanımlar; görev başına dar yetki ve içeriğe bağlı onay için.",
+      "sinirlar": "Yetkilendirme sunucusu desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K17-002",
+        "N-K18-003"
+      ]
+    },
+    {
+      "id": "AR-2202",
+      "ad": "Auth0 Fine Grained Authorization (Okta FGA)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (OpenFGA tabanlı)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://auth0.com/fine-grained-authorization",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zanzibar/OpenFGA modeline dayalı, yönetilen ilişki tabanlı yetkilendirme hizmeti: yetki modeli DSL'i, ilişki kayıtları, düşük gecikmeli 'check' ve 'list objects' API'leri; RAG/ajan senaryoları için belge düzeyi yetki filtreleme.",
+      "sinirlar": "SaaS; kurum içi için açık kaynak OpenFGA'ya geçilmeli; ilişki verisinin senkronu uygulamanın sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-2203",
+      "ad": "PingAuthorize",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.pingidentity.com/en/capability/authorization.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Öznitelik ve politika tabanlı dinamik yetkilendirme: merkezi politika editörü, karar noktası (PDP), API/veri düzeyinde ince taneli izin ve karar günlükleri.",
+      "sinirlar": "Ping ekosistemi dışında entegrasyon eforu; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002",
+        "N-K24-007"
+      ]
+    },
+    {
+      "id": "AR-2204",
+      "ad": "Axiomatics Orchestrated Authorization",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://axiomatics.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "ABAC tabanlı kurumsal yetkilendirme platformu: ALFA/XACML politikaları, merkezi PDP, uygulama/API/veri/yapay zekâ erişimi için tutarlı karar ve politika test/yönetim araçları.",
+      "sinirlar": "Politika dili öğrenme eğrisi; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-2205",
+      "ad": "PlainID Policy-Based Access Control",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.plainid.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Politika tabanlı erişim denetimi (PBAC): uygulama, API, veri ve yapay zekâ (RAG/ajan) erişimi için merkezi politika yönetimi ve dağıtık yetkilendirme ajanları.",
+      "sinirlar": "SaaS kontrol düzlemi; kurum içi ajan kurulumu gerekir.",
+      "ihtiyaclar": [
+        "N-K14-007",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-2527",
+      "ad": "Casdoor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://casdoor.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OAuth 2.0/OIDC/SAML/CAS destekli kimlik ve erişim yönetimi; Casbin modelleriyle (RBAC/ABAC) izin tanımlama ve yetki sorgulama API'si, ajan odaklı kimlik, MCP/ajan geçidi ve web yönetim arayüzü.",
+      "sinirlar": "Ajan kimliği özellikleri yeni; kurumsal denetim/uyum kapsamı olgun IdP'lere göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-001",
+        "N-K18-002",
+        "N-K18-003",
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "AR-3736",
+      "ad": "Akto",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.akto.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "API ve MCP/ajan envanteri keşfi, ajanlara yönelik güvenlik testleri ve kırmızı takım, ajan duruş yönetimi ve koruma rayları; açık kaynak çekirdek kurum altyapısında çalıştırılabilir.",
+      "sinirlar": "Gelişmiş özelliklerin bir kısmı ticari sürümde; kökeni API güvenliği olduğundan ajan testleri görece yeni.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-012",
+        "N-K22-010",
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-3756",
+      "ad": "permit0",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://permit0.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan eylemleri için yürütme öncesi, deterministik yetkilendirme katmanı; politika dışı eylemler araç çağrılmadan reddedilir.",
+      "sinirlar": "Küçük topluluk; 2026 ortasından beri güncelleme az.",
+      "ihtiyaclar": [
+        "N-K18-002",
+        "N-K18-007",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-3851",
+      "ad": "Trust3 AI (Privacera)",
+      "tur": "acik-cekirdek",
+      "lisans": "ticari (Apache Ranger temelli)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://privacera.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Apache Ranger kökenli veri erişim yönetişimi: veri ve yapay zekâ platformlarında merkezi erişim politikası, maskeleme ve denetim; Trust3 AI ile yapay zekâ erişim yönetişimi.",
+      "sinirlar": "Ürün adı Trust3 AI'a geçiş sürecinde; ticari özellikler kapalı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3852",
+      "ad": "Immuta",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.immuta.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri erişimi için yetkilendirme katmanı: insan ve ajan her talep için tek kural kümesiyle karar; veri platformları üzerinde öznitelik tabanlı politika ve maskeleme.",
+      "sinirlar": "Veri platformu (Snowflake, Databricks vb.) entegrasyonlarına bağlı; ücretli.",
+      "ihtiyaclar": [
+        "N-K18-002",
+        "N-K18-010",
+        "N-K22-005",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-4297",
+      "ad": "OWASP API Security Top 10",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://owasp.org/API-Security/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nesne düzeyi yetki bozukluğu (BOLA), işlev düzeyi yetki bozukluğu, nesne özelliği düzeyi yetki, sınırsız kaynak tüketimi ve hassas iş akışlarına sınırsız erişim gibi API'ye özgü risk sınıflarını tanımlar; kötüye kullanım senaryosu ve negatif test kataloğu için temel sağlar.",
+      "sinirlar": "Farkındalık belgesi; doğrulama gereksinimi düzeyinde değil, ASVS ile birlikte kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K34-003",
+        "N-K34-006",
+        "N-K34-007"
+      ]
+    },
+    {
+      "id": "AR-4298",
+      "ad": "Autorize",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Quitten/Autorize",
+      "olgunluk": "olgun",
+      "ne_saglar": "Burp Suite eklentisi olarak yüksek yetkili kullanıcıyla yapılan her isteği düşük yetkili ve kimliksiz oturumla otomatik tekrarlayıp yanıtları karşılaştırır; nesne ve işlev düzeyi yetki atlatmalarını hızlı tespit eder.",
+      "sinirlar": "Yarı otomatik test aracı, Burp Suite gerektirir; CI kapısı olarak kullanımı sınırlı.",
+      "ihtiyaclar": [
+        "N-K34-003"
+      ]
+    },
+    {
+      "id": "AR-4300",
+      "ad": "Escape (iş mantığı farkındalıklı DAST)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://escape.tech/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "API ve web uygulamalarında iş akışlarını, çok adımlı süreçleri ve erişim kontrolünü test eden DAST; çok kiracılı ortamlarda IDOR gibi yetki kusurlarını ve çok adımlı saldırı zincirlerini tespit edip istismar edilebilirliği doğrular.",
+      "sinirlar": "Ticari SaaS; test ortamı ve test kimlikleri kurulmalı, üretimde koşturma riski yönetilmeli.",
+      "ihtiyaclar": [
+        "N-K34-003",
+        "N-K34-007"
+      ]
+    }
+  ]
+}

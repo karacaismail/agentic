@@ -1,0 +1,171 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-66",
+    "ad": "Veri kalitesi doğrulama ve uzlaştırma",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-66",
+      "kalip": "Sessiz veri kesilmesi ve hacim–tamlık denetiminin eksikliği",
+      "aciklama": "İngiltere Halk Sağlığı Kurumu'nun Ekim 2020 olayında laboratuvar sonuçlarının aktarıldığı eski .xls biçimi satır sınırına ulaşınca 15.841 pozitif vaka günlük raporlardan sessizce düştü ve temaslı takibi gecikti.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.theregister.com/2020/10/05/excel_england_coronavirus_contact_error/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veri sözleşmesi yalnız şema ve alan türünü denetlerse kesilmiş veya eksik yükleme geçerli sayılır.",
+        "Ajanın yazdığı dönüşüm sessizce satır düşürür; sonraki raporlar ve kararlar eksik veriye dayanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-011",
+        "N-K33-012"
+      ],
+      "ornek_araclar": [
+        "Great Expectations",
+        "Soda Core",
+        "dbt tests",
+        "Monte Carlo",
+        "Elementary",
+        "Deequ"
+      ],
+      "erken_sinyal": "Kaynak ile hedef arasındaki satır sayısı farkı; hacim anomali uyarıları.",
+      "azaltma": "Şemanın yanında hacim, tamlık, tazelik ve yetkili kaynakla uzlaştırma denetimleri; sessiz kesilmede hattı durdurmak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "The Register, 25 Eylül–2 Ekim arasındaki 15.841 vakanın raporlara girmediğini ve en olası açıklamanın 65.536 satır sınırlı eski .xls biçimi olduğunu yazıyor. Temaslı takibi de gecikti.",
+        "kaynak": [
+          "https://www.theregister.com/2020/10/05/excel_england_coronavirus_contact_error/"
+        ]
+      },
+      "id": "RK-060"
+    },
+    {
+      "yetenek_sinifi": "Y-66",
+      "kalip": "Toplu veri düzeltme betiğinin kapsamı aşması",
+      "aciklama": "Salesforce, Mayıs 2019'da dağıttığı bir veritabanı betiğinin Pardot kullanan kuruluşlarda tüm kullanıcılara tüm kayıtları görme ve değiştirme yetkisi vermesi üzerine bu kuruluşların erişimini kapattı; tam düzeltme 12 gün sürdü. Atlassian'ın 2022 olayı da yanlış kip ve yanlış kimlik listesiyle çalıştırılan bir betikten kaynaklandı.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-16"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.geekwire.com/2019/database-error-causes-widespread-ongoing-salesforce-outage-affecting-pardot-customers/",
+        "https://www.computerweekly.com/news/252464214/Salesforce-completes-Pardot-fix-after-12-days-disruption",
+        "https://www.atlassian.com/blog/atlassian-engineering/post-incident-review-april-2022-outage"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın hazırladığı toplu düzeltme betiği yanlış filtreyle üretim verisinin tamamını günceller; geri alma planı yoksa veri ve yetki bütünlüğü bozulur.",
+        "Kişisel veride yanlış toplu güncelleme KVKK kapsamında veri ihlali bildirimi gerektirebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-012",
+        "N-K33-010"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Kuru çalıştırmada etkilenen satır sayısının beklentiden sapması.",
+      "azaltma": "Kuru çalıştırma ve etki sayısı onayı; kademeli uygulama; öncesinde anlık görüntü; iki kişi onayı; uygulama sonrası uzlaştırma.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GeekWire, 17 Mayıs 2019'da bir veritabanı betiğinin Pardot kullanan veya kullanmış kuruluşlarda beklenenden geniş erişim verdiğini, SecurityWeek de bunun tüm verilere okuma-yazma ('modify all') yetkisi olduğunu yazıyor. Tam düzeltme 12 gün sürdü; Atlassian betik olayı da doğru.",
+        "kaynak": [
+          "https://www.geekwire.com/2019/database-error-causes-widespread-ongoing-salesforce-outage-affecting-pardot-customers/",
+          "https://www.computerweekly.com/news/252464214/Salesforce-completes-Pardot-fix-after-12-days-disruption",
+          "https://www.atlassian.com/blog/atlassian-engineering/post-incident-review-april-2022-outage",
+          "https://www.securityweek.com/faulty-database-script-exposed-salesforce-data-wrong-users/"
+        ]
+      },
+      "id": "RK-061"
+    },
+    {
+      "yetenek_sinifi": "Y-66",
+      "kalip": "Doğrulama çıktılarının kişisel veri örneklerini açığa çıkarması",
+      "aciklama": "Great Expectations sonuç biçimleri beklentiyi ihlal eden 20'ye kadar değeri döndürür ve bu çıktılar Data Docs'ta yayımlanabilir; değerlerin gizlenmesi için ilgili ayarların bilinçli olarak yapılandırılması gerekir.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.greatexpectations.io/docs/reference/expectations/result_format/"
+      ],
+      "yasatacagi_sorunlar": [
+        "TCKN, telefon veya IBAN gibi alanlardaki hatalı değerler doğrulama raporlarına ve bildirim kanallarına düz metin olarak düşer; geniş erişimli doküman sitesinde yayımlanır.",
+        "Yurt dışındaki gözlemlenebilirlik hizmetine örnek değer gönderilmesi yurt dışı aktarım doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-011",
+        "N-K32-001",
+        "N-K22-005"
+      ],
+      "ornek_araclar": [
+        "Great Expectations",
+        "Soda",
+        "Monte Carlo"
+      ],
+      "erken_sinyal": "Doğrulama raporlarında kişisel veri desenleri (TCKN, IBAN) taraması.",
+      "azaltma": "Kişisel veri sütunlarında değer döndürmeyi kapatmak; raporları erişim denetimli tutmak; örnekleri maskelemek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GX belgesine göre varsayılan sonuç biçimi SUMMARY ve partial_unexpected_list varsayılan olarak 20 değer içeriyor; include_unexpected_rows açılırsa 200 satıra kadar dönüyor. Bastırmak için partial_unexpected_count=0 ya da BOOLEAN_ONLY açıkça ayarlanmalı; sonuçlar Data Docs'ta yayımlanabiliyor.",
+        "kaynak": [
+          "https://docs.greatexpectations.io/docs/reference/expectations/result_format/"
+        ]
+      },
+      "id": "RK-062"
+    },
+    {
+      "yetenek_sinifi": "Y-66",
+      "kalip": "Doğrulama çerçevesinde kıran sürüm ve eski sürüm desteğinin bitmesi",
+      "aciklama": "GX Core 1.0 (Ağustos 2024) Validator iş akışını kaldıran ve Checkpoint yapılandırmasını değiştiren kıran değişikliklerle geldi; 0.18 ve önceki sürümlerin desteği 1 Ekim 2025'te bitti ve bu sürümlerle GX Cloud'da doğrulama çalıştırılamıyor.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-05"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://greatexpectations.io/blog/changes-to-know-for-gx-core-1-0/",
+        "https://greatexpectations.io/blog/retiring-gx-0-18/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüzlerce beklenti paketi ve kontrol noktası yeniden yazılmak zorunda kalır; göç döneminde veri kalitesi kapıları devre dışı bırakılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-011"
+      ],
+      "ornek_araclar": [
+        "Great Expectations"
+      ],
+      "erken_sinyal": "Kullanılan çerçeve sürümünün destek takvimi; kullanımdan kaldırma uyarıları.",
+      "azaltma": "Veri sözleşmelerini araçtan bağımsız bildirimsel biçimde tutmak; sürüm yükseltmesini planlı iş olarak kapasiteye koymak.",
+      "id": "RK-063"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 10,
+    "orta": 6,
+    "yuksek": 2
+  },
+  "sinif_bulgu_turleri": {
+    "RT-06": 3,
+    "RT-11": 3,
+    "RT-10": 2,
+    "RT-15": 1,
+    "RT-03": 1,
+    "RT-08": 1,
+    "RT-07": 1,
+    "RT-14": 1,
+    "RT-05": 1
+  }
+}

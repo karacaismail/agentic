@@ -1,0 +1,332 @@
+[
+  {
+    "yol": "docs/ADAPTER-CONTRACTS.md",
+    "ad": "Araç değiştirme sözleşmesi",
+    "neIse": "Yalnız model değil; yaşam döngüsü, çalışan, kanıt, izin ve bağlam değişimi.",
+    "sablon": "# Adaptör sözleşmesi\n- Rol / araç / sürüm / lisans / hosting:\n- Girdi ve sonuç şeması:\n- İptal ve eski yazarı durdurma:\n- Tekilleştirme, dış etki makbuzu, unknown_effect:\n- Checkpoint taşınır mı? Kaybolan durum:\n- İzin, sır, ağ ve veri sınırı:\n- Nitelendirme deneyleri ve sonuç kanıtı:\n- Aktif işler: boşalt / eski sürümde bitir / doğrulanmış aktarım\n- Geri dönüş ve kanıt dışa aktarımı:\n\nSözleşmesi ölçülmemiş adaptör: UNKNOWN. API uyumu davranış eşliği değildir.",
+    "tur": "md",
+    "zorunluluk": "Şimdi",
+    "kimYazar": "Sistem sahibi tanımlar; ajan taslak ve kanıt önerir.",
+    "neZaman": "Tasarım değişimi ve her görev kabulü öncesi.",
+    "boyut": "Kısa sürümlü sözleşme",
+    "kaynak": [
+      "UI araştırması / derin inceleme / kullanıcı hedefi"
+    ]
+  },
+  {
+    "yol": "docs/DECISION-LAYER.md",
+    "ad": "Tipli karar sınırı",
+    "neIse": "Jev/Laya ve adaylarının öneri yetkisi ve başarısızlık rotası.",
+    "sablon": "# Tipli karar katmanı\n- Aday, checkpoint, dil, inference sürümü:\n- Soru tipi / etiketler / veri kapsamı:\n- Ayrı etiketli doğrulama seti ve yanlış karar maliyeti:\n- Kalibrasyon, düşük güven ve dağılım dışı eşikler:\n- Tutarsız sorular / prompt injection negatif testleri:\n- Fallback, zaman aşımı ve maliyet limiti:\n\nModel; bütçe, izin, CI geçişi ve Done durumunu tek başına belirleyemez. Yetkili geçiş ancak korunan kanıt ve deterministik kuralla olur.",
+    "tur": "md",
+    "zorunluluk": "Şimdi",
+    "kimYazar": "Sistem sahibi tanımlar; ajan taslak ve kanıt önerir.",
+    "neZaman": "Tasarım değişimi ve her görev kabulü öncesi.",
+    "boyut": "Kısa sürümlü sözleşme",
+    "kaynak": [
+      "UI araştırması / derin inceleme / kullanıcı hedefi"
+    ]
+  },
+  {
+    "yol": "docs/OBLIGATIONS.md",
+    "ad": "Kapsam ve yükümlülük defteri",
+    "neIse": "Alt görevlere bölünürken gereksinim veya kabul ölçütü kaybolmasın.",
+    "sablon": "# Yükümlülük defteri\n| Gereksinim | Kaynak/sürüm | Parent AC | Child görev | Oracle | Negatif örnek | Kanıt SHA | Kalan boşluk |\n|---|---|---|---|---|---|---|---|\n\nİş türü: feature / refactor / docs / migration.\nHiçbir yükümlülük sahibi ve kanıt rotası olmadan düşürülemez. Tüm testlerin geçmesi eksik kapsamı kapatmaz.\n\n## Bilinmeyenleri arama\nSınır değer, zaman/tarih, yetki, tenant, veri göçü, iptal, eşzamanlılık ve bileşenler arası etkileri dene. Bulunan boşluğu göreve bağla. Bilinmeyenlerin tamamının tükendiği iddia edilmez.",
+    "tur": "md",
+    "zorunluluk": "Şimdi",
+    "kimYazar": "Sistem sahibi tanımlar; ajan taslak ve kanıt önerir.",
+    "neZaman": "Tasarım değişimi ve her görev kabulü öncesi.",
+    "boyut": "Kısa sürümlü sözleşme",
+    "kaynak": [
+      "UI araştırması / derin inceleme / kullanıcı hedefi"
+    ]
+  },
+  {
+    "yol": "docs/RELEASE-CONTRACT.md",
+    "ad": "Bütünleşik teslim sözleşmesi",
+    "neIse": "Kod, şema, olay ve artefakt kimliğini alpha kabulüne bağlar.",
+    "sablon": "# Teslim\n- Repo, trunk ve proje kimliği:\n- Commit SHA / artefakt digest / görev nesli:\n- Modül, API, şema, event sürüm vektörü:\n- Migrasyon ve veri sahibi:\n- Aynı aday için tamamlanmış zorunlu CI:\n- Sayfalama/tamlık manifesti:\n- Alpha sürüm ve sağlık makbuzu:\n- İnsan kabulü/ret kimliği:\n- Geri alma mı telafi mi; hangi veri kaybı sınırı:\n\nEski CI güncel release üzerine yazamaz. Zaman aşımı işlemin hiç olmadığı anlamına gelmez.",
+    "tur": "md",
+    "zorunluluk": "Şimdi",
+    "kimYazar": "Sistem sahibi tanımlar; ajan taslak ve kanıt önerir.",
+    "neZaman": "Tasarım değişimi ve her görev kabulü öncesi.",
+    "boyut": "Kısa sürümlü sözleşme",
+    "kaynak": [
+      "UI araştırması / derin inceleme / kullanıcı hedefi"
+    ]
+  },
+  {
+    "yol": "docs/CAPACITY.md",
+    "ad": "Kapasite ölçüm kaydı",
+    "neIse": "128 GB bilgisini ölçülebilir işçi kabul politikasına dönüştürür.",
+    "sablon": "# Kapasite\n- Host RAM / ayrılmış işletim payı / CPU / disk IOPS:\n- İş türü başına p50/p95 RAM ve süreç sayısı:\n- Model istek/token/harcama limitleri:\n- Atomik rezervasyon ve crash uzlaştırması:\n- OOM kanıtı, profil merdiveni ve tekrar tavanı:\n- İnsan çıktı inceleme kuyruğu / bekleme süresi:\n\nEkip sayısı çalışan sayısı değildir. RAM/1 GB hesabı kapasite tahmini değildir.",
+    "tur": "md",
+    "zorunluluk": "Şimdi",
+    "kimYazar": "Sistem sahibi tanımlar; ajan taslak ve kanıt önerir.",
+    "neZaman": "Tasarım değişimi ve her görev kabulü öncesi.",
+    "boyut": "Kısa sürümlü sözleşme",
+    "kaynak": [
+      "UI araştırması / derin inceleme / kullanıcı hedefi"
+    ]
+  },
+  {
+    "yol": "docs/LEARNING.md",
+    "ad": "OODA / Kaizen değişiklik kaydı",
+    "neIse": "İyileştirme önerileri kontrolsüz canlı değişikliğe dönüşmesin.",
+    "sablon": "# İyileştirme döngüsü\n1. Gözle: gerçek olay, son ilerleme, kanıt ve etki.\n2. Yorumla: kök neden hipotezi, alternatif açıklama.\n3. Karar ver: ölçülebilir küçük değişiklik ve geri dönüş.\n4. Dene: ayrı eval seti / sınırlı canary / maliyet.\n5. Sonuç: kabul, ret veya yetersiz kanıt.\n\nModel, skill, MCP veya .md sürümü değişirse ilgili kabul deneylerini tekrar çalıştır. Ajan kendi başarım ölçütünü değiştiremez. Olgunluk seviyesi takvimle değil kanıtla yükselir.",
+    "tur": "md",
+    "zorunluluk": "Şimdi",
+    "kimYazar": "Sistem sahibi tanımlar; ajan taslak ve kanıt önerir.",
+    "neZaman": "Tasarım değişimi ve her görev kabulü öncesi.",
+    "boyut": "Kısa sürümlü sözleşme",
+    "kaynak": [
+      "UI araştırması / derin inceleme / kullanıcı hedefi"
+    ]
+  },
+  {
+    "yol": "AGENTS.md",
+    "ad": "Ajan yönergesi (kök)",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Bütün ajanların okuduğu tek doğruluk kaynağı: komutlar, sınırlar, kabul bağlantıları.",
+    "kimYazar": "Platform ekibi yazar; değişiklik PR + CODEOWNERS onayıyla girer.",
+    "neZaman": "Her ajan oturumunun başında.",
+    "boyut": "~100 satır, en çok 200",
+    "kaynak": [
+      "A3",
+      "LF Agentic AI Foundation standardı"
+    ],
+    "ipucu": "CLAUDE.md'yi ayrı yazma: içine yalnız \"@AGENTS.md\" satırını koy (A3).",
+    "sablon": "# AGENTS.md\n\nBu dosya ajanlar için içindekiler tablosudur. Kısa tut: ~100 satır, en çok 200.\nYalnız standart dışı kuralları yaz; dizin ağacı ve genel bilgi yazma.\n\n## Komutlar\n- Kurulum: `make kur`\n- Test: `make test` (JUnit raporu: reports/junit.xml)\n- Lint ve tip: `make denetle`\n\n## Sınırlar\nBunlar izin ve hook ile de engellenir; buradaki satır tek başına kontrol değildir.\n- Test dosyalarını silme, atlama, zayıflatma.\n- .env, sır ve üretim verisi okuma.\n- Veritabanı göçünü yalnız migrations/ altında, geri alma testiyle ekle.\n\n## Kabul\n- Her değişiklik bir kabul ölçütü kimliğine (AC-1, AC-2 …) bağlanır.\n- \"Bitti\" tanımı: docs/KABUL.md\n\n## Daha fazlası\n- Mimari kararlar: docs/adr/\n- Alan sözlüğü: docs/SOZLUK.md\n- İşletim: docs/RUNBOOK.md\n"
+  },
+  {
+    "yol": "<alt-dizin>/AGENTS.md",
+    "ad": "Alt dizin yönergesi",
+    "zorunluluk": "Koşullu",
+    "tur": "md",
+    "neIse": "Yalnız o dizinde komut ya da kural farklıysa. En yakın dosya geçerlidir.",
+    "kimYazar": "Modülün sahibi ekip.",
+    "neZaman": "Ajan o dizinde çalışırken.",
+    "boyut": "10–30 satır",
+    "kaynak": [
+      "A3"
+    ],
+    "sablon": "# AGENTS.md (services/bordro)\n\nBu dizinde farklı olanlar:\n- Test: `make test-bordro` (altın set: ornekler/)\n- Para hesapları yalnız Decimal ile; float yasak.\n"
+  },
+  {
+    "yol": ".agents/skills/<ad>/SKILL.md",
+    "ad": "Skill (Agent Skills biçimi)",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Tekrar eden prosedür. Açılışta yalnız ad ve açıklama yüklenir, gövde gerektiğinde.",
+    "kimYazar": "Platform ekibi; ajan önerebilir, eval + insan onayıyla girer.",
+    "neZaman": "Açıklaması işe uyduğunda.",
+    "boyut": "Gövde < 5 bin token, en fazla 3 modül",
+    "kaynak": [
+      "A3 (SkillsBench, Agent Skills)",
+      "Codex SK01–SK21"
+    ],
+    "ipucu": "İlk koşuda 3–5 skill yeter. 20'yi geçme: 30'dan sonra seçim doğruluğu düşüyor (A3).",
+    "sablon": "---\nname: tdd-red\ndescription: Kabul ölçütünden başarısız bir test yazar ve beklenen nedenle kırmızı olduğunu kanıtlar. Kodlamadan önce, RED aşamasında kullan.\n---\n\n# TDD RED\n\n## Ne zaman\nKabul ölçütü kimliği (AC-x) olan her davranış için, kod yazmadan önce.\n\n## Adımlar\n1. AC'den tek bir davranış seç.\n2. Testi yalnız test dizinine EKLE; mevcut testlere dokunma.\n3. Testi koş. Rapordaki hata türü doğrulama (assertion) olmalı.\n\n## Çıktı\nTest dosyası, RED SHA'sı, rapor yolu.\n\n## Durma\nHata türü içe aktarma, sözdizimi ya da altyapıysa dur: BLOCKED_TEST.\n"
+  },
+  {
+    "yol": "docs/GOREV-FORMU.md",
+    "ad": "Görev formu",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Plane iş kalemi şablonunun kaynağı. DoR kapısı (R01) bu alanları arar.",
+    "kimYazar": "Product Owner doldurur.",
+    "neZaman": "Görev açılırken.",
+    "boyut": "1 sayfa",
+    "kaynak": [
+      "Pano A0 (görev çerçevesi)",
+      "AK-06"
+    ],
+    "sablon": "# Görev formu\n\n## Problem\nKim, hangi durumda, neyi yapamıyor?\n\n## Kullanıcı hikâyesi\n… olarak, … istiyorum, böylece …\n\n## Kabul ölçütleri\n- AC-1: Verilen … Olduğunda … O zaman … (somut değer)\n- AC-2 (olumsuz): Verilen … Olduğunda … O zaman hata: …\n\n## Risk\nyasaklı / yüksek / orta / düşük · hassas yol: evet / hayır\n\n## Neyi yapma\n- …\n\n## Ekler\nEkran görüntüsü, örnek veri, bağlantılar.\n"
+  },
+  {
+    "yol": "docs/KABUL.md",
+    "ad": "Kabul ve \"bitti\" tanımı",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Katmanlı DoD; ready_for_review ile Done'ı ayırır.",
+    "kimYazar": "PO + QA mühendisi.",
+    "neZaman": "QA, Human Test ve kabul adımlarında.",
+    "boyut": "1–2 sayfa",
+    "kaynak": [
+      "C5",
+      "Codex ACCEPTANCE"
+    ],
+    "sablon": "# Kabul ve \"bitti\" tanımı\n\n## Katmanlar\n- Hikâye: kaynak etiketli kabul ölçütü, birim ve property testleri, olumsuz yetki testi, erişilebilirlik taraması.\n- Modül: resmî örneklerin hepsi testte, mutasyon skoru eşiğin üstünde, ilgili riskler kapalı, uzman imzası var.\n- Sürüm: uçtan uca zincir çalışıyor; en az bir dönem paralel koşum farkı onaylı.\n\n## Durumlar\n- ready_for_review: kapılar aynı SHA'da yeşil, alpha duman testi geçti. Bu \"bitti\" değildir.\n- Done: insan her madde için ✓/✗ ve not yazdı, kabul etti.\n\n## İnsan test çıktısı\nGörev, koşu, önizleme SHA'sı · yapılan yolculuk · olumsuz deneme · gözlenen sonuç · kabul/ret gerekçesi.\nRastgele (monkey) test seed ve eylem kaydı taşır.\n"
+  },
+  {
+    "yol": "docs/ORACLE.md",
+    "ad": "Oracle: \"doğru\"yu kim söyler?",
+    "zorunluluk": "HRMS için şart",
+    "tur": "md",
+    "neIse": "Her yasal kuralın kaynağı, altın seti ve imzalayanı.",
+    "kimYazar": "Mali müşavir, İK hukukçusu, SGK uzmanı imzalar; ajan seti hazırlayabilir.",
+    "neZaman": "RED ve QA adımlarında; parametre değişince.",
+    "boyut": "Kural başına bir satır",
+    "kaynak": [
+      "C5",
+      "C4"
+    ],
+    "sablon": "# Oracle\n\n| Kural | Kaynak (kanun maddesi / Resmî Gazete) | Altın set | İmzalayan | Tarih |\n|---|---|---|---|---|\n| Asgari ücret 2026 | ÇSGB tablosu | ornekler/asgari-2026.json | Mali müşavir | |\n\n## Kurallar\n- Altın seti yapay zekâ hazırlayabilir; imzayı insan atar.\n- Parametre değişince yeni sürüm açılır; eski dönemler eski parametreyle hesaplanır.\n- İmzasız modül \"AI-doğrulandı / insan onayı bekliyor\" olarak işaretlenir.\n"
+  },
+  {
+    "yol": ".github/pull_request_template.md",
+    "ad": "PR şablonu",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "PR'ı göreve, kabul ölçütlerine ve kanıta bağlar.",
+    "kimYazar": "Ajan doldurur; inceleyen doğrular.",
+    "neZaman": "Her PR'da.",
+    "boyut": "20 satır",
+    "kaynak": [
+      "A3: açıklama–fark tutarlılığı",
+      "Pano B, G, C"
+    ],
+    "ipucu": "Açıklaması farkla tutarsız PR'larda kabul %28, tutarlılarda %80 (A3).",
+    "sablon": "## Ne değişti\n(Tek paragraf. Açıklama farkla tutarlı olmalı.)\n\n## Kabul ölçütleri\n- [ ] AC-1 → test: tests/…\n- [ ] AC-2 → test: tests/…\n\n## Kanıt\n- RED SHA:\n- Kapılar: (CI bağlantısı)\n- QA raporu:\n- Risk sınıfı:\n\n## Kontrol\n- [ ] Test dosyaları silinmedi, atlanmadı, zayıflatılmadı\n- [ ] Yapay zekâ ortak yazar satırı yok\n"
+  },
+  {
+    "yol": "rules/policy.yaml",
+    "ad": "Politika (sınırlar)",
+    "zorunluluk": "Şimdi",
+    "tur": "yaml",
+    "neIse": "Deneme, süre, maliyet ve risk sınırlarının tek kaynağı. Koşu başında sabitlenir (R61).",
+    "kimYazar": "PO + team lead sayıları belirler; ilk 20–30 görevden sonra ölçümle ayarlanır.",
+    "neZaman": "Her koşunun başında.",
+    "boyut": "~40 satır",
+    "kaynak": [
+      "Kullanıcı panosu: politika önerisi",
+      "STARK"
+    ],
+    "ipucu": "Panolarda fix döngüsü 6, 12, 4 ve 3+2/10 olarak geçiyor; tek sayı seçilmeli.",
+    "sablon": "version: 1.0.0            # koşu başında sabitlenir; açık koşular eski sürümle biter\nscope:\n  per_behavior:\n    primary_agent_attempts: 3\n    fallback_agent_attempts: 2   # bağımsız teşhisten sonra, farklı sağlayıcı\n  per_task:\n    failed_attempts: 10          # kod üretme + düzeltme ortak sayılır\n    active_minutes: 120          # insan bekleyişi hariç\n    cost_ceiling_usd: 25         # pilotta ölçülüp ayarlanacak\n  qa:\n    fix_rounds: 2\n  research:\n    clarification_loops: 2\n    split_attempts: 2\n  infra:\n    retries: 2\n    backoff_seconds: [10, 30]\ncounters:\n  reset_on_new_model: false\n  reset_on_new_run: false\n  reset_on_subagent: false\nrisk:\n  forbidden: stop_and_revert\n  high: human_approval\n  medium: auto\n  low: auto\ngates:\n  flaky_counts_as_pass: false\n  skip_counts_as_pass: false\n  empty_suite_counts_as_pass: false\n"
+  },
+  {
+    "yol": "docs/adr/0001-durum-sahibi.md",
+    "ad": "Mimari karar kaydı (ADR)",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Teknoloji sınırı kararları. technology-boundary ajanı önce buraya bakar.",
+    "kimYazar": "Ajan önerebilir; kabul insanda.",
+    "neZaman": "Yeni teknoloji ya da sınır kararı gerektiğinde.",
+    "boyut": "Karar başına yarım sayfa (Nygard biçimi)",
+    "kaynak": [
+      "A3",
+      "Pano: ideal kurgu"
+    ],
+    "sablon": "# 0001. Görev durumunun tek sahibi\n\n- Durum: önerildi | kabul edildi | değiştirildi (bkz. 0007)\n- Tarih: 2026-09-27\n\n## Bağlam\nÖnceki pilotta durum hem Kestra'da hem Python'da tutuldu (\"iki beyin\").\n\n## Karar\nGörev yaşam döngüsünü yalnız seçili durum sahibi yazar. Plane durumu yansıtır.\n\n## Sonuçlar\n+ Tek doğruluk kaynağı, yeniden oynatma.\n− Determinizm kuralı öğrenilmeli.\n"
+  },
+  {
+    "yol": "docs/RUNBOOK.md",
+    "ad": "İşletim: belirti → ne yapılır",
+    "zorunluluk": "Faz 1",
+    "tur": "md",
+    "neIse": "Nöbetçinin ilk bakacağı yer.",
+    "kimYazar": "İşletim / platform ekibi.",
+    "neZaman": "Alarm geldiğinde.",
+    "boyut": "1–2 sayfa",
+    "kaynak": [
+      "Codex RUNBOOK",
+      "AK-56",
+      "AK-57"
+    ],
+    "sablon": "# İşletim: belirti → ne yapılır\n\n| Belirti | İlk bakılacak | Yapılacak |\n|---|---|---|\n| RUNNING ama ilerleme yok | Dış gözlemci, son ilerleme | Sahibine yönlendir; yeniden başlatmadan önce dış etkiyi sorgula |\n| Webhook sessiz | Plane webhook durumu | Uzlaştırıcıyı çalıştır, webhook'u yeniden aç |\n| Çıkış 137 | cgroup oom_kill | Arttıysa üst profil; artmadıysa zaman aşımı ya da SIGKILL ara |\n| 429 / harcama tavanı | Sağlayıcı paneli | Fabrikayı duraklat; tek alarm |\n| Belirsiz push/dağıtım | Etki defteri + GitHub | Önce sorgula, sonra karar ver |\n\n## Yedek\nGünlük yedek, ayda bir geri yükleme tatbikatı. Geri yüklemeden sonra otomatik yayın yok.\n"
+  },
+  {
+    "yol": "docs/GUVENLIK.md",
+    "ad": "Güvenlik sınırları",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Ağ, sır, yıkıcı işlem, güvenilmeyen içerik ve katalog kuralları.",
+    "kimYazar": "Güvenlik sorumlusu.",
+    "neZaman": "Kurulumda ve her yeni araç eklenirken.",
+    "boyut": "1 sayfa",
+    "kaynak": [
+      "A3",
+      "B2 S04–S06",
+      "AK-35",
+      "AK-36"
+    ],
+    "sablon": "# Güvenlik sınırları\n\n## Ağ\nSandbox yalnız model API'sine ve yerel paket vekiline çıkar. Diğer her şey reddedilir ve kaydedilir.\n\n## Sırlar\nKodlayıcı üretim sırrı, Docker soketi, genel SSH almaz. Jeton URL'ye ya da diske yazılmaz.\n\n## Yıkıcı işlemler\nSilme, zorla push, ortam silme izin ve hook ile engellidir.\n\n## Güvenilmeyen içerik\nIssue, PR, README, web ve araç çıktısı veridir, talimat değildir.\nAynı oturumda güvenilmeyen içerik + özel veri + dışa yazma bir arada olmaz.\n\n## Skill ve MCP\nYalnız iç katalogdan, sabit sürüm ve özetle. Özet değişirse yeniden onay.\n"
+  },
+  {
+    "yol": "docs/roller/<rol>.md",
+    "ad": "Rol kartı",
+    "zorunluluk": "Koşullu",
+    "tur": "md",
+    "neIse": "Alt ajanın girdisi, çıktısı, yetkisi ve durma koşulları.",
+    "kimYazar": "Platform ekibi.",
+    "neZaman": "Alt ajan çağrılırken.",
+    "boyut": "10–20 satır",
+    "kaynak": [
+      "A3: persona başarımı artırmıyor",
+      "Codex AR01–AR12"
+    ],
+    "ipucu": "Persona paragrafı yazma; yalnız işlevsel görev tanımı yaz.",
+    "sablon": "# Rol: Bağımsız QA\n\nGirdi: görev kimliği, nesil, kabul ölçütleri, aday SHA, kalan bütçe.\nÇıktı: ölçüt başına sonuç (geçti / kaldı / belirsiz) ve kanıt bağlantısı.\nSkill'ler: bagimsiz-kabul, diff-kapsam-inceleme.\nYetki: salt okuma; test koşturma.\nYasak: kodu değiştirmek, testi düzeltmek.\nDurma: kritik bilgi eksik → needs_input; bütçe bitti → failed; sonuç belirsiz → unknown_effect.\n"
+  },
+  {
+    "yol": "docs/SOZLUK.md",
+    "ad": "Alan sözlüğü",
+    "zorunluluk": "HRMS için şart",
+    "tur": "md",
+    "neIse": "Terimlerin tek anlamı ve yasal kaynağı. Araç değişse de kalıcı varlıktır (C3).",
+    "kimYazar": "Alan uzmanı + PO.",
+    "neZaman": "Araştırma ve plan adımlarında.",
+    "boyut": "Terim başına bir satır",
+    "kaynak": [
+      "C3",
+      "C5"
+    ],
+    "sablon": "# Alan sözlüğü\n\n| Terim | Tanım | Kaynak |\n|---|---|---|\n| Brüt ücret | … | 4857 sayılı İş Kanunu md. … |\n| SGK işveren payı | … | 5510 sayılı Kanun md. … |\n| MUHSGK | … | GİB |\n"
+  },
+  {
+    "yol": "docs/katalog/SKILL-MCP-KATALOGU.md",
+    "ad": "İç skill ve MCP kataloğu",
+    "zorunluluk": "Faz 1",
+    "tur": "md",
+    "neIse": "Onaylı paketlerin sürümü, özeti, sahibi, eval sonucu ve izinleri. R66 buna bakar.",
+    "kimYazar": "Platform ekibi (System Team).",
+    "neZaman": "Skill ya da MCP yüklenmeden önce.",
+    "boyut": "Paket başına bir satır",
+    "kaynak": [
+      "A3 (10 adımlı havuz modeli)",
+      "Codex REGISTRY-POLICY"
+    ],
+    "sablon": "# İç katalog\n\n| Ad | Tür | Sürüm | Özet (sha256) | Sahibi | Eval | İzinler | Durum |\n|---|---|---|---|---|---|---|---|\n| tdd-red | skill | 0.1.0 | … | platform | 18/20 | yalnız test dizini | onaylı |\n| plane-mcp | MCP | 1.4.2 | … | platform | sözleşme testi ✓ | yorum yazma | onaylı |\n\nDurumlar: aday → karantina → inceleme → onaylı → emekli.\n"
+  },
+  {
+    "yol": "CONTRIBUTING.md",
+    "ad": "Katkı kuralları (insan + ajan)",
+    "zorunluluk": "Şimdi",
+    "tur": "md",
+    "neIse": "Git kimliği, PR ve yönerge değişikliği kuralları.",
+    "kimYazar": "Team lead.",
+    "neZaman": "İlk katkıda ve PR açarken.",
+    "boyut": "1 sayfa",
+    "kaynak": [
+      "Kişisel git politikası",
+      "A3"
+    ],
+    "sablon": "# Katkı kuralları\n\n## Git kimliği\nYeni işte yazar ve committer: <ad> <eposta> (kişisel git politikandaki kimlik).\nCommit ve PR'a yapay zekâ ortak yazarı ya da \"şununla üretildi\" satırı eklenmez.\n\n## PR\n- Her PR bir göreve ve kabul ölçütlerine bağlıdır.\n- Birleştirme kuyruğu üzerinden, hızlı ileri yöntemle.\n\n## Yönergeler\nAGENTS.md, skill ve policy.yaml değişikliği kod gibidir: PR + CODEOWNERS onayı + eval.\n"
+  },
+  {
+    "yol": ".github/CODEOWNERS",
+    "ad": "Kod sahipleri",
+    "zorunluluk": "Şimdi",
+    "tur": "diğer",
+    "neIse": "Yönerge, skill ve politika değişikliği onaysız giremez.",
+    "kimYazar": "Team lead.",
+    "neZaman": "PR açıldığında GitHub otomatik uygular.",
+    "boyut": "5–10 satır",
+    "kaynak": [
+      "A3"
+    ],
+    "sablon": "# Yönergeler ve politika platform ekibinin onayını ister\nAGENTS.md            @platform-ekibi\n.claude/skills/      @platform-ekibi\nrules/policy.yaml    @platform-ekibi\ndocs/adr/            @mimari\n"
+  }
+]

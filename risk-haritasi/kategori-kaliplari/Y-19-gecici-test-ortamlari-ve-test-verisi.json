@@ -1,0 +1,130 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-19",
+    "ad": "Geçici test ortamları ve test verisi yönetimi (sentetik/maskeli veri)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-134",
+      "yetenek_sinifi": "Y-19",
+      "kalip": "Takma adlandırılmış verinin hâlâ kişisel veri olması",
+      "aciklama": "EDPB'nin 01/2025 sayılı takma adlandırma kılavuzu, takma adlandırılmış verinin ek bilgiyle ilişkilendirilebildiği sürece kişisel veri olmaya devam ettiğini vurgular; KVKK'da da anonimleştirme ile maskeleme ayrı tutulur.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-04"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2025/guidelines-012025-pseudonymisation_en",
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Maskeli üretim kopyası 'kişisel veri değil' varsayımıyla ajan test ortamına ve yurt dışı model sağlayıcısına gönderilirse KVKK yükümlülükleri ihlal edilir.",
+        "Anahtar tablosu aynı ortamda tutulursa maskeleme geri alınabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-003",
+        "N-K06-004",
+        "N-K22-005"
+      ],
+      "ornek_araclar": [
+        "Tonic",
+        "Delphix",
+        "Microsoft Presidio",
+        "Kurum içi maskeleme betikleri"
+      ],
+      "erken_sinyal": "Test veri setlerinde tutarlı takma kimliklerin üretim kimlikleriyle eşlenebilmesi.",
+      "azaltma": "Test verisini varsayılan olarak sentetik üretme, maskeli veriyi kişisel veri sınıfında yönetme, eşleme anahtarlarını ayrı ve erişimi kısıtlı tutma."
+    },
+    {
+      "id": "RK-135",
+      "yetenek_sinifi": "Y-19",
+      "kalip": "Sentetik verinin gizlilik garantisi vermemesi",
+      "aciklama": "USENIX Security 2022'de yayımlanan çalışma, sentetik verinin ya çıkarım saldırılarını önlemediğini ya da veri yararını koruyamadığını, geleneksel anonimleştirmeden daha iyi bir gizlilik-yarar dengesi sunmadığını ve gizlilik kazancının öngörülemez olduğunu gösterdi.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2011.07018"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gerçek veriden eğitilmiş sentetik veri üreticisi, nadir kayıtları (ör. az sayıda kişinin bulunduğu birimler) neredeyse aynen üretebilir.",
+        "'Sentetik' etiketi, veri koruma incelemesinin atlanmasına gerekçe olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-003",
+        "N-K06-009"
+      ],
+      "ornek_araclar": [
+        "Gretel",
+        "SDV",
+        "Mostly AI",
+        "LLM tabanlı veri üreticileri"
+      ],
+      "erken_sinyal": "Sentetik kayıtlarla kaynak kayıtlar arasında yakın eşleşme testinde yüksek benzerlik.",
+      "azaltma": "Kural tabanlı veya şemadan üretilen sentetik veri tercih etme, gerçek veriden üretimde üyelik çıkarımı testleri ve veri koruma onayı."
+    },
+    {
+      "id": "RK-136",
+      "yetenek_sinifi": "Y-19",
+      "kalip": "Test verisinin model sağlayıcısına ve yurt dışına çıkması",
+      "aciklama": "Ajanlar test verisini okuyup hata ayıklarken bu veri istem bağlamına girer ve model sağlayıcısına gider. KVKK md. 9 (7499 sayılı Kanunla değişik) yurt dışı aktarımı yeterlilik kararı, uygun güvenceler veya arızi hallere bağlar; standart sözleşme imzadan itibaren beş iş günü içinde Kuruma bildirilmelidir.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-04"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geçici test ortamına yanlışlıkla gerçek veri kopyalanırsa ajan bu veriyi hata mesajı ve günlükleriyle birlikte yurt dışındaki modele iletir.",
+        "Hangi test verisinin hangi istemde kullanıldığı izlenmezse aktarım kapsamı raporlanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ],
+      "ornek_araclar": [
+        "Barındırılan LLM API'leri",
+        "Ephemeral ortam platformları",
+        "Test veri araçları"
+      ],
+      "erken_sinyal": "Test ortamı veritabanlarında gerçek T.C. kimlik numarası veya telefon kalıpları.",
+      "azaltma": "Test ortamlarına girişte kişisel veri taraması, gerçek veri içeren görevlerin yerel modele yönlendirilmesi, istem çıkışında maskeleme."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 26,
+    "yuksek": 3,
+    "dusuk": 63
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 7,
+    "RT-11": 6,
+    "RT-01": 5,
+    "RT-02": 4,
+    "RT-06": 4,
+    "RT-08": 4,
+    "RT-10": 3,
+    "RT-13": 3,
+    "RT-05": 3,
+    "RT-07": 3,
+    "RT-14": 2,
+    "RT-12": 1,
+    "RT-16": 1,
+    "RT-15": 1,
+    "RT-04": 1
+  }
+}

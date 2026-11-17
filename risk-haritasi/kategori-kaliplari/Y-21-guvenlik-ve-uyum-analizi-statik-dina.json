@@ -1,0 +1,166 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-21",
+    "ad": "Güvenlik ve uyum analizi (statik/dinamik analiz, bağımlılık zafiyeti, gizli bilgi taraması, lisans ve kod benzerliği taraması)",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-141",
+      "yetenek_sinifi": "Y-21",
+      "kalip": "Güvenlik tarayıcısının kendisinin ele geçirilmesi",
+      "aciklama": "Trivy ekosistemi Mart 2026'da kısa süreliğine ele geçirildi (CVE-2026-33634, kritik); bu zincir LiteLLM'in CI'ındaki Trivy taraması üzerinden PyPI sürümlerinin trojanlanmasına kadar uzandı.",
+      "risk_turleri": [
+        "RT-02"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-69fq-xp46-6x23",
+        "https://osv.dev/vulnerability/MAL-2026-2144"
+      ],
+      "yasatacagi_sorunlar": [
+        "Güvenlik taraması CI'da yüksek yetkiyle (depo yazma, paket yayınlama token'ı) çalışıyorsa tarayıcının ele geçirilmesi yayın kimliklerinin çalınmasına yol açar.",
+        "Tarayıcıya duyulan güven nedeniyle anormal davranışı geç fark edilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K18-008",
+        "N-K05-012"
+      ],
+      "ornek_araclar": [
+        "Trivy",
+        "trivy-action",
+        "Grype",
+        "Checkov"
+      ],
+      "erken_sinyal": "Tarayıcı sürümünde veya eylem etiketinde beklenmeyen değişiklik; tarama adımından dış ağ bağlantısı.",
+      "azaltma": "Tarayıcıyı ayrı, yayın yetkisi olmayan işte çalıştırma, sürüm/özet sabitleme, tarayıcı çıkış trafiğinin kısıtlanması."
+    },
+    {
+      "id": "RK-142",
+      "yetenek_sinifi": "Y-21",
+      "kalip": "Kural setinin lisans değişikliği",
+      "aciklama": "Semgrep, Aralık 2024'te Semgrep tarafından bakılan kuralları 'Semgrep Rules License v1.0' altına alarak yalnız dahili, rekabet etmeyen ve SaaS olmayan kullanıma izin verdi; buna tepki olarak Opengrep çatalı (LGPL-2.1) başlatıldı.",
+      "risk_turleri": [
+        "RT-04",
+        "RT-06"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://semgrep.dev/blog/2024/important-updates-to-semgrep-oss/",
+        "https://www.opengrep.dev/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum, ajan hattını başka kamu birimlerine hizmet olarak sunarsa hazır kural setlerinin kullanımı lisans sorunu yaratabilir.",
+        "Motor açık kaynak kalsa bile değerli kısım (kurallar) kapanınca tespit kapsamı düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K22-002",
+        "N-K16-006"
+      ],
+      "ornek_araclar": [
+        "Semgrep",
+        "Opengrep",
+        "CodeQL",
+        "SonarQube"
+      ],
+      "erken_sinyal": "Kural deposu lisans dosyasında değişiklik; topluluk sürümünden özellik çıkarılması.",
+      "azaltma": "Kural kaynaklarının lisans envanteri, kritik kuralların kurum içinde yazılıp sürümlenmesi, motor değiştirilebilir mimari."
+    },
+    {
+      "id": "RK-143",
+      "yetenek_sinifi": "Y-21",
+      "kalip": "LLM tabanlı zafiyet tespitinin gerçekçi veride zayıflığı",
+      "aciklama": "PrimeVul çalışması, mevcut zafiyet veri setlerinde düşük etiket doğruluğu ve yüksek tekrar oranı bulunduğunu, gerçekçi değerlendirmede kod dil modellerinin zafiyet tespitinde güvenilmez olduğunu gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2403.18624"
+      ],
+      "yasatacagi_sorunlar": [
+        "LLM güvenlik incelemesi deterministik SAST/SCA yerine konursa hem gerçek zafiyetler kaçar hem de yanlış pozitifler inceleme kapasitesini tüketir.",
+        "Pazarlama kıyaslamalarındaki yüksek skorlar kurum kodunda tekrarlanmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K05-012",
+        "N-K03-008"
+      ],
+      "ornek_araclar": [
+        "LLM tabanlı kod güvenlik incelemesi",
+        "Snyk DeepCode AI",
+        "GitHub Copilot Autofix",
+        "Semgrep Assistant"
+      ],
+      "erken_sinyal": "LLM incelemesinin bulduğu bulguların doğrulanma oranının düşük olması; bilinen zafiyetlerin kaçırılması.",
+      "azaltma": "Deterministik taramayı zorunlu kapı yapıp LLM'i ek katman olarak kullanma, kurum koduyla kalibrasyon seti."
+    },
+    {
+      "id": "RK-144",
+      "yetenek_sinifi": "Y-21",
+      "kalip": "Zafiyet veri kaynağının gecikmesi",
+      "aciklama": "NIST, NVD'de 2024 başından itibaren zenginleştirilmemiş CVE birikimi oluştuğunu ve artan gönderim hızı nedeniyle bu birikimi temizleyemediğini açıkladı.",
+      "risk_turleri": [
+        "RT-06",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.nist.gov/itl/nvd"
+      ],
+      "yasatacagi_sorunlar": [
+        "CPE/CVSS zenginleştirmesine dayanan tarayıcılar yeni zafiyetleri etkilenen bileşenle eşleştiremez; SBOM taraması 'temiz' görünür.",
+        "Önceliklendirme CVSS'e dayanıyorsa puansız CVE'ler sıranın sonuna düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K18-008",
+        "N-K22-007"
+      ],
+      "ornek_araclar": [
+        "NVD tabanlı tarayıcılar",
+        "OWASP Dependency-Check",
+        "Grype",
+        "Trivy"
+      ],
+      "erken_sinyal": "Tarayıcı veritabanında 'analiz bekliyor' durumundaki CVE sayısı.",
+      "azaltma": "Birden çok zafiyet kaynağı (OSV, GHSA, dağıtım bildirimleri) kullanma, KEV ve EPSS ile önceliklendirme."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 16,
+    "orta": 82,
+    "dusuk": 155,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 27,
+    "RT-11": 23,
+    "RT-14": 15,
+    "RT-01": 12,
+    "RT-10": 10,
+    "RT-02": 10,
+    "RT-03": 7,
+    "RT-04": 6,
+    "RT-07": 6,
+    "RT-06": 5,
+    "RT-12": 5,
+    "RT-16": 4,
+    "RT-15": 4,
+    "RT-13": 4,
+    "RT-05": 3,
+    "RT-09": 1
+  }
+}

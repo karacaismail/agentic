@@ -1,0 +1,213 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K19",
+    "ad": "İzlenebilirlik, gözlemlenebilirlik ve denetim",
+    "alan": "C-guvence-ve-yonetisim",
+    "amac": "Her ajan işinin kim, neyi, hangi sürümle, hangi kanıta dayanarak yaptığının sonradan eksiksiz izlenebilmesi.",
+    "kapsam": [
+      "uçtan uca iz",
+      "değiştirilemez denetim kaydı",
+      "kanıt ve artefakt saklama",
+      "yeniden üretilebilirlik",
+      "beklenti/eşik değişikliklerinin izi",
+      "saklama süreleri"
+    ],
+    "kapsam_disi": [
+      "metriklerin yorumlanması (K23)"
+    ],
+    "komsu_kumeler": [
+      "K05",
+      "K13",
+      "K18",
+      "K22",
+      "K23"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K19-001",
+      "baslik": "Uçtan uca iz",
+      "ihtiyac": "İş kalemi → koşu → ajan → araç çağrısı → model çağrısı zincirinin ortak bir kimlikle izlenmesi; istem, araç çağrısı, karar, süre ve maliyetin kaydı.",
+      "cozulecek_sorun": "Ajan kara kutu; maliyet ve kalite görünmüyor; hata kaynağı bulunamıyor.",
+      "yetenek_siniflari": [
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ortak görev kimliği tüm iz parçalarında var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-063",
+          "S-062",
+          "S-175"
+        ],
+        "not": "Üretken yapay zekâ telemetri şeması hâlâ gelişiyor; şema değişebilir."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "U-038"
+      ]
+    },
+    {
+      "id": "N-K19-002",
+      "baslik": "Değiştirilemez denetim kaydı",
+      "ihtiyac": "Kim, ne zaman, hangi model/kural/paket/istem sürümüyle ne üretti ve kim onayladı bilgisinin değiştirilemez biçimde tutulması.",
+      "cozulecek_sorun": "Sorumluluk ve adli inceleme yapılamıyor; eşik gevşetmeleri gizlenebiliyor.",
+      "yetenek_siniflari": [
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Denetim kaydı zincirinin bütünlüğü doğrulanabiliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-021",
+          "S-157",
+          "S-160"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-017",
+        "R-023"
+      ]
+    },
+    {
+      "id": "N-K19-003",
+      "baslik": "Beklenti ve eşik değişikliklerinin izi",
+      "ihtiyac": "Test, eşik, tolerans, maske ve görsel referans değişikliklerinin kim, ne zaman, neden bilgisiyle değiştirilemez biçimde kaydedilmesi.",
+      "cozulecek_sorun": "Eşik gevşetmesi sessizce yapılabiliyor.",
+      "yetenek_siniflari": [
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her beklenti değişikliğinde gerekçe ve onaylayan kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-001",
+          "S-002"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K05-005"
+      ]
+    },
+    {
+      "id": "N-K19-004",
+      "baslik": "Kanıt ve artefakt saklama",
+      "ihtiyac": "Kanıt paketleri, raporlar, loglar ve izlerin referansla erişilebilir biçimde saklanması; saklama süresinin tanımlanması.",
+      "cozulecek_sorun": "Denetimde kanıta ulaşılamıyor ya da hassas veri gereğinden uzun saklanıyor.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-36"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her artefakt türü için saklama süresi tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-006",
+          "S-063"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "N-K19-005",
+      "baslik": "Yeniden üretilebilirlik",
+      "ihtiyac": "Bir koşunun sonucunun, sabitlenen sürümler ve kayıtlı girdilerle yeniden üretilebilmesi ya da farkın açıklanabilmesi; belirlenimsizliğin çoklu koşuyla ölçülmesi.",
+      "cozulecek_sorun": "Aynı girdiye farklı çıktı; denetimde açıklanamayan fark.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-29"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Denetim örnekleminde koşular yeniden oynatılabiliyor veya fark açıklanabiliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-125",
+          "S-061"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "U-035"
+      ]
+    },
+    {
+      "id": "N-K19-006",
+      "baslik": "İnsan katkısının kaydı",
+      "ihtiyac": "Üretilen koda insan katkısının (yönlendirme, düzenleme, onay) kaydedilmesi; yazarlık bilgisinin korunması.",
+      "cozulecek_sorun": "Tamamen ajan üretimi kodun fikri mülkiyet koruması zayıf olabilir; kimin neyi yazdığı sonradan kanıtlanamıyor.",
+      "yetenek_siniflari": [
+        "Y-28"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Değişikliklerde insan katkısı türü kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-166",
+          "S-167"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "Q-031",
+        "U-016"
+      ],
+      "bagimliliklar": [
+        "N-K22-003"
+      ]
+    },
+    {
+      "id": "N-K19-007",
+      "baslik": "Program ve ekip görünürlüğü",
+      "ihtiyac": "Ajan işlerinin durumu, kuyrukları, engelleri, maliyeti ve kalite sinyallerinin ekip, ART ve portföy düzeyinde görülebilmesi.",
+      "cozulecek_sorun": "Ajan etkisi ekip içinde kalıyor; program düzeyinde karar verilemiyor.",
+      "yetenek_siniflari": [
+        "Y-39",
+        "Y-27"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Ekip, ART ve portföy görünümleri aynı veriden besleniyor."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": [
+          "S-171"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip"
+    }
+  ]
+}

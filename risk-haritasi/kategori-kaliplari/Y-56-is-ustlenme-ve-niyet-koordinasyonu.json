@@ -1,0 +1,124 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-56",
+    "ad": "İş üstlenme ve niyet koordinasyonu",
+    "grup": "Orkestrasyon ve planlama"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-56",
+      "kalip": "Paralel ajanların örtük kararlarla çelişen değişiklikler üretmesi",
+      "aciklama": "Cognition, paralel alt ajanların birbirinin örtük kararlarını görmeden çelişen sonuçlar ürettiğini raporladı. Brun ve ark. (ESEC/FSE 2011) dokuz açık kaynak projede çakışmaların sık ve kalıcı olduğunu, yalnız metin çakışması değil sonradan derleme ve test hatası olarak da ortaya çıktığını gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://cognition.ai/blog/dont-build-multi-agents",
+        "https://www.cs.ubc.ca/~rtholmes/papers/fse_2011_brun.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı ekiplerin ajanları aynı ortak modülde uyumsuz arayüz değişikliği yapar; metin çakışması olmadığı için ikisi de birleşir, entegrasyon testinde ya da üretimde kırılır.",
+        "Niyet ilanı dosya düzeyinde tutulursa aynı sözleşmenin farklı yorumlanması gibi anlamsal çakışmalar yakalanmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-005",
+        "N-K24-003",
+        "N-K27-008",
+        "N-K06-002"
+      ],
+      "ornek_araclar": [
+        "GitHub merge queue",
+        "Mergify",
+        "Graphite"
+      ],
+      "erken_sinyal": "Birleştirme sonrası kırılan derleme ve test oranı; aynı bileşene açık eşzamanlı ajan değişikliği sayısı.",
+      "azaltma": "İş başlamadan bileşen ve arayüz düzeyinde niyet ilanı; ortak alanlarda tek yazıcı kuralı; birleştirme kuyruğunda entegrasyon testi.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Brun ve ark. özeti, 3,4 milyon satırlık dokuz açık kaynak sistemde çakışmaların sık ve kalıcı olduğunu, derleme ve test hatası olarak da çıktığını söylüyor. Cognition ifadesi bir tasarım örneği olarak doğru.",
+        "kaynak": [
+          "https://cognition.ai/blog/dont-build-multi-agents",
+          "https://www.cs.ubc.ca/~rtholmes/papers/fse_2011_brun.pdf"
+        ]
+      },
+      "id": "RK-028"
+    },
+    {
+      "yetenek_sinifi": "Y-56",
+      "kalip": "Üstlenilip bırakılan işin alanı kilitlemesi",
+      "aciklama": "Açık kaynak topluluklarında 'cookie licking' olarak adlandırılan örüntüde bir görev üstlenilir ama yapılmaz; sahiplik işaretleri başkalarının katkısını caydırır ve alanı tek hata noktasına çevirir (Red Hat, 2018).",
+      "risk_turleri": [
+        "RT-17",
+        "RT-13"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.redhat.com/en/blog/dont-lick-cookie"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlar ya da kişiler geniş alanlar için niyet ilan edip yarım bırakır; diğer ekiplerin ajanları beklemeye alınır ve akış durur.",
+        "Bayat üstlenmeleri kimin düşüreceği belirsiz kaldığı için ekipler arası sürtüşme doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-005",
+        "N-K24-012"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Yaşı eşiği aşan ve ilerleme kaydı olmayan üstlenme sayısı.",
+      "azaltma": "Üstlenmelere süre sınırı ve düzenli canlılık sinyali; süresi dolan üstlenmenin otomatik düşmesi; kademeli çözüm yolu.",
+      "id": "RK-029"
+    },
+    {
+      "yetenek_sinifi": "Y-56",
+      "kalip": "Çakışma uyarılarının gürültüye dönüşmesi",
+      "aciklama": "Microsoft'un ConE aracı 234 depoda yaklaşık 26.000 PR üzerinde 775 çakışma önerisi üretti; önerilerin %70'inden fazlası yararlı bulundu, yani yaklaşık üçte biri yararsızdı. Çalışma eşzamanlı düzenlenen dosyaların hata getirme olasılığının daha yüksek olduğunu da raporladı.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-17"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2101.06542"
+      ],
+      "yasatacagi_sorunlar": [
+        "Eşik düşük tutulursa neredeyse her ajan değişikliği için çakışma uyarısı çıkar ve ekipler uyarıları yok sayar; yüksek tutulursa gerçek çakışmalar kaçar.",
+        "Çakışma uyarıları dikkat bütçesini tüketir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-005",
+        "N-K28-009",
+        "N-K24-008"
+      ],
+      "ornek_araclar": [
+        "ConE (Microsoft iç aracı)"
+      ],
+      "erken_sinyal": "Çakışma uyarılarının yararlı işaretlenme oranı; yok sayılan uyarıların ardından yaşanan birleştirme hataları.",
+      "azaltma": "Uyarı eşiklerini geri bildirimle ayarlamak; yalnız ortak sıcak noktalarda sıkı eşik; uyarı hacmini dikkat bütçesine bağlamak.",
+      "id": "RK-030"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 2,
+    "yuksek": 2,
+    "orta": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-05": 2,
+    "RT-17": 2,
+    "RT-04": 2,
+    "RT-15": 2,
+    "RT-02": 2,
+    "RT-11": 1,
+    "RT-03": 1,
+    "RT-12": 1,
+    "RT-08": 1
+  }
+}

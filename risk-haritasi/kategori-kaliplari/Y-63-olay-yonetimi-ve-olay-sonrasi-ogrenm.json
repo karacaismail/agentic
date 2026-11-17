@@ -1,0 +1,185 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-63",
+    "ad": "Olay yönetimi ve olay sonrası öğrenme deposu",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-63",
+      "kalip": "Olay yönetimi platformlarının ömür sonu ve zorunlu göç",
+      "aciklama": "Atlassian, Opsgenie'nin satışını 4 Haziran 2025'te durdurdu; 5 Nisan 2027'de erişim sona erecek ve kalan veriler silinecek. Grafana OnCall OSS 11 Mart 2025'te bakım kipine girdi ve 24 Mart 2026'da arşivlendi.",
+      "risk_turleri": [
+        "RT-05",
+        "RT-06",
+        "RT-07"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/software/opsgenie/migration",
+        "https://grafana.com/docs/oncall/latest/set-up/open-source/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Olay geçmişi, nöbet çizelgeleri ve entegrasyonlar göç sırasında kaybolur; ekipler arası olay örüntüsü analizi tarihsel veriden yoksun kalır.",
+        "Göç penceresindeki uyarı yönlendirme hataları gerçek bir olayın kaçırılmasına yol açar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K08-008",
+        "N-K08-007"
+      ],
+      "ornek_araclar": [
+        "Opsgenie",
+        "Jira Service Management",
+        "Grafana OnCall",
+        "PagerDuty",
+        "incident.io",
+        "Rootly",
+        "FireHydrant"
+      ],
+      "erken_sinyal": "Tedarikçi yol haritasında satış sonu veya bakım kipi duyurusu; API kullanımdan kaldırma notları.",
+      "azaltma": "Olay kayıtlarını tedarikçiden bağımsız, dışa aktarılabilir bir şemayla kurum deposunda tutmak; uyarı yönlendirmesini bir süre iki sistemde paralel çalıştırarak göç etmek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Atlassian sayfası satış sonu tarihini 4 Haziran 2025, erişimin bitip taşınmamış verinin silineceği tarihi 5 Nisan 2027 olarak veriyor. Grafana belgesi 11 Mart 2025 bakım kipini ve 24 Mart 2026 arşivlenmesini gösteriyor; gh api de deponun arşivli olduğunu doğruluyor.",
+        "kaynak": [
+          "https://www.atlassian.com/software/opsgenie/migration",
+          "https://grafana.com/docs/oncall/latest/set-up/open-source/"
+        ]
+      },
+      "id": "RK-050"
+    },
+    {
+      "yetenek_sinifi": "Y-63",
+      "kalip": "MTTR ve olay sayısı gibi sığ metriklerle yanlış öğrenme",
+      "aciklama": "VOID raporu, olay sürelerinin sağa çarpık dağıldığını, MTTR ile iyileşmenin güvenilir biçimde ölçülemeyeceğini, süre ile şiddetin ilişkili olmadığını ve kök neden analizinin insanların hata kabulünü azaltabildiğini raporladı.",
+      "risk_turleri": [
+        "RT-17",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.infoq.com/articles/incident-metrics-void/",
+        "https://www.verica.io/blog/mttr-is-a-misleading-metric-now-what/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Olay deposu MTTR ve olay sayısı panosuna indirgenir; ekipler olayları küçük parçalara böler ya da hiç kaydetmez.",
+        "Tek bir 'kök neden' aranırken ajan katkısı ve tasarım artefaktının etkisi görünmez kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K08-007",
+        "N-K08-008",
+        "N-K31-010"
+      ],
+      "ornek_araclar": [
+        "incident.io",
+        "Jeli",
+        "Rootly",
+        "FireHydrant"
+      ],
+      "erken_sinyal": "Olay sayısında açıklanamayan düşüş; ramak kala kayıtlarının azalması; raporlarda 'kök neden: insan hatası' oranı.",
+      "azaltma": "Katkıda bulunan faktör sınıflaması, ramak kala analizi ve öğrenme odaklı inceleme; MTTR'yi hedef yapmamak.",
+      "id": "RK-051"
+    },
+    {
+      "yetenek_sinifi": "Y-63",
+      "kalip": "Olay aracının olayla birlikte erişilemez olması",
+      "aciklama": "Atlassian'ın Nisan 2022 olayında bir betik yanlış kipte ve yanlış kimlik listesiyle çalışıp 775 müşterinin 883 sitesini sildi; kesinti bazı müşteriler için 14 güne uzadı. Meta'nın Ekim 2021 kesintisinde de iç araçlar aynı arızadan etkilendiği için teşhis ve kurtarma zorlaştı.",
+      "risk_turleri": [
+        "RT-07",
+        "RT-13"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/blog/atlassian-engineering/post-incident-review-april-2022-outage",
+        "https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Olay kaydı, nöbet ve iletişim aynı SaaS'ta veya aynı kimlik sağlayıcıda ise büyük bir kesintide kayıt tutulamaz ve doğru ekip çağrılamaz.",
+        "Olay sonrası öğrenme için gereken zaman çizelgesi eksik kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K08-008",
+        "N-K33-013"
+      ],
+      "ornek_araclar": [
+        "Jira Service Management",
+        "Statuspage",
+        "PagerDuty"
+      ],
+      "erken_sinyal": "Olay aracının kimlik, e-posta ve sohbet bağımlılıklarının ürünle ortak olması.",
+      "azaltma": "Bant dışı iletişim ve yedek çağrı yolu; olay aracının bağımlılıklarını hizmet kataloğunda işaretlemek; düzenli 'araç yok' tatbikatı.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Atlassian PIR'e göre 5 Nisan 2022'de 775 müşterinin 883 sitesi silindi ve kesinti bazı müşterilerde 14 güne uzadı. 'Yanlış kip ve yanlış kimlik listesi' ifadesi Atlassian'ın 12 Nisan güncellemesinde geçiyor. Meta'da iç araçlar da etkilendi.",
+        "kaynak": [
+          "https://www.atlassian.com/blog/atlassian-engineering/post-incident-review-april-2022-outage",
+          "https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/",
+          "https://www.atlassian.com/blog/it-teams/april-2022-outage-update"
+        ]
+      },
+      "id": "RK-052"
+    },
+    {
+      "yetenek_sinifi": "Y-63",
+      "kalip": "Olay sonrası eylem maddelerinin kapanmaması ve aynı zafiyet sınıfının tekrarı",
+      "aciklama": "ABD Siber Güvenlik İnceleme Kurulu (CSRB), 2023 Microsoft Exchange Online ihlalinin önlenebilir olduğunu, bir dizi güvenlik hatası ve yetersiz güvenlik kültüründen kaynaklandığını ve şirketin kriptografik anahtar ihlalini kendisi tespit edemeyip müşteri bildirimine dayandığını raporladı (Nisan 2024).",
+      "risk_turleri": [
+        "RT-16",
+        "RT-17"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.cisa.gov/resources-tools/resources/CSRB-Review-Summer-2023-MEO-Intrusion"
+      ],
+      "yasatacagi_sorunlar": [
+        "Zafiyetten tasarım dersine dönüş yapılmazsa aynı sınıf açık farklı ekiplerde ve ajan üretimi kodda tekrar eder.",
+        "Eylem maddeleri iş takip sistemine girer ama önceliklendirilmez; bir sonraki olayda aynı madde yeniden yazılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K34-008",
+        "N-K08-007",
+        "N-K24-014"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Açık eylem maddelerinin yaşı; tekrar eden katkıda bulunan faktör sayısı.",
+      "azaltma": "Eylem maddelerini güvenilirlik kapasite payına bağlamak; varyant analizini zorunlu kılmak; tekrar eden faktörler için program düzeyinde inceleme.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "CSRB raporu (20 Mart 2024 tarihli, Nisan 2024'te yayımlandı) ihlalin önlenebilir olduğunu, bir dizi güvenlik hatası ve yetersiz güvenlik kültüründen kaynaklandığını ve anahtar ihlalinin müşteri bildirimiyle fark edildiğini belirtiyor. CISA sayfası bot erişimine 403 veriyor.",
+        "kaynak": [
+          "https://www.cisa.gov/resources-tools/resources/CSRB-Review-Summer-2023-MEO-Intrusion",
+          "https://www.cisa.gov/sites/default/files/2025-03/CSRBReviewOfTheSummer2023MEOIntrusion508.pdf"
+        ]
+      },
+      "id": "RK-053"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 12,
+    "yuksek": 4,
+    "orta": 10
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 4,
+    "RT-16": 3,
+    "RT-14": 2,
+    "RT-03": 2,
+    "RT-15": 2,
+    "RT-05": 2,
+    "RT-12": 1,
+    "RT-07": 1,
+    "RT-10": 1,
+    "RT-06": 1,
+    "RT-17": 1,
+    "RT-11": 1
+  }
+}

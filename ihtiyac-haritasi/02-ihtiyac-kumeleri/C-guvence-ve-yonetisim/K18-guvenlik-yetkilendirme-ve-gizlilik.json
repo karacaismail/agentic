@@ -1,0 +1,461 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K18",
+    "ad": "Güvenlik, yetkilendirme ve gizlilik",
+    "alan": "C-guvence-ve-yonetisim",
+    "amac": "Hem üretilen ürünün hem de ajan hattının güvenli olması: yetki kararlarının deterministik olması, ajanların en az yetkiyle çalışması, verinin ve sırların korunması.",
+    "kapsam": [
+      "ürün yetkilendirmesi",
+      "ajan ve hat yetkileri",
+      "yıkıcı işlem denetimi",
+      "gizli bilgi yönetimi",
+      "istem enjeksiyonu ve içerik zehirlenmesi",
+      "tedarik zinciri",
+      "veri çıkışı ve kişisel veri",
+      "güvenlik taraması",
+      "acil durdurma"
+    ],
+    "kapsam_disi": [
+      "hukuki yükümlülüklerin yorumu (K22)"
+    ],
+    "komsu_kumeler": [
+      "K10",
+      "K12",
+      "K15",
+      "K19",
+      "K22"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K18-001",
+      "baslik": "Ürün yetkilendirmesinin tek karar noktasında ve deterministik olması",
+      "ihtiyac": "Ürünün 'kim, neyi, hangi koşulda yapabilir' kararının arka uçta tek karar noktasında, rol/öznitelik/ilişki/sahiplik/kaynak düzeyi modelleriyle verilmesi; ön yüz kontrolünün güvenlik sayılmaması; dil modelinin yetki kararı vermemesi; yetkisiz ve doğrudan arayüz çağrısı testleri.",
+      "cozulecek_sorun": "Yetki ön yüzde veya modelde kontrol ediliyor; bozuk erişim kontrolü en yaygın güvenlik riski.",
+      "yetenek_siniflari": [
+        "Y-24"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Korunan her uçta yetkisiz ve doğrudan çağrı testi ret dönüyor.",
+        "Yetki kararlarında dil modeli çağrısı 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-050",
+          "S-022",
+          "S-028",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-020",
+        "D-021",
+        "G-009",
+        "Q-034"
+      ]
+    },
+    {
+      "id": "N-K18-002",
+      "baslik": "Ürün yetkisi ile hat yetkisinin ayrılması",
+      "ihtiyac": "'Yetkilendirme' kavramının iki ayrı ihtiyaç olarak tanımlanması: üretilen ürünün yetki modeli ve ajan hattının kendi izinleri (kim başlatır, kim onaylar, ajan neyi yapabilir).",
+      "cozulecek_sorun": "Kaynaklarda aynı rol adı bir yerde ürün yetkisini, bir yerde ajanın çalışma zamanı izinlerini kapsıyor.",
+      "yetenek_siniflari": [
+        "Y-24",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İki kapsam ayrı ihtiyaç ve ayrı sahiplerle tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-050",
+          "S-021",
+          "S-022",
+          "S-028"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-020",
+        "G-009",
+        "Q-034"
+      ]
+    },
+    {
+      "id": "N-K18-003",
+      "baslik": "Ajan kimliği ve en az yetki",
+      "ihtiyac": "Her ajan koşusunun kısa ömürlü, göreve özel, en az yetkili kimlik bilgisiyle çalışması; yetim makine kimliklerinin envanterlenmesi ve kapatılması.",
+      "cozulecek_sorun": "Aşırı yetkili ve yetim makine kimlikleri saldırı yüzeyini büyütüyor.",
+      "yetenek_siniflari": [
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ajan kimlik bilgileri görev süresiyle sınırlı.",
+        "Kullanılmayan makine kimliği envanteri periyodik temizleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-151",
+          "S-152"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-014",
+        "G-006",
+        "H-08",
+        "U-009"
+      ]
+    },
+    {
+      "id": "N-K18-004",
+      "baslik": "Gizli bilgi yönetimi",
+      "ihtiyac": "Sırların ajan bağlamına, istemlere, kural dosyalarına, loglara ve izlere düşmemesi; sırların çalışma ortamı dışında tutulması; sır taraması (değişiklik öncesi ve geçmiş).",
+      "cozulecek_sorun": "Yapay zekâ destekli depolarda sır sızıntısı oranı daha yüksek; kötü amaçlı paketler ajan araçlarını sır aramak için kullanabiliyor.",
+      "yetenek_siniflari": [
+        "Y-25",
+        "Y-21"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Değişiklik öncesi ve geçmiş sır taraması aktif.",
+        "İz ve loglarda sır taraması yapılıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-062",
+          "S-135",
+          "S-148"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "H-08",
+        "R-009",
+        "U-020"
+      ]
+    },
+    {
+      "id": "N-K18-005",
+      "baslik": "İstem enjeksiyonuna dayanıklı tasarım",
+      "ihtiyac": "İş kalemi, yorum, doküman, bağımlılık açıklaması ve web içeriğinin güvenilmeyen girdi olarak ayrılması; önce planla sonra yürüt gibi mimari desenlerle ajanın yetkisinin kısıtlanması; yüksek riskli araç çağrılarının ayrıca onaylanması.",
+      "cozulecek_sorun": "Gizlenmiş talimatlar ajanın hedefini ele geçirebiliyor; filtreleme tek başına yetmiyor; LLM güvenlik risk listelerinde ilk sırada.",
+      "yetenek_siniflari": [
+        "Y-26",
+        "Y-18"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Dış içerik okuyan ajanların yazma ve ağ yetkileri kısıtlı.",
+        "Enjeksiyon senaryoları kırmızı takım testinde denenmiş."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-144",
+          "S-150",
+          "S-151",
+          "S-145"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-006",
+        "H-08",
+        "R-008",
+        "U-010"
+      ]
+    },
+    {
+      "id": "N-K18-006",
+      "baslik": "Model çıktısının güvenli işlenmesi",
+      "ihtiyac": "Model tarafından üretilen komut, sorgu ve yapılandırmanın çalıştırılmadan önce doğrulanması ve kısıtlanması.",
+      "cozulecek_sorun": "Model çıktısı doğrudan çalıştırılınca enjeksiyon ve yıkıcı işlem riski doğuyor.",
+      "yetenek_siniflari": [
+        "Y-26",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Üretilen komutlar izin listesi ve biçim doğrulamasından geçiyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-150"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K18-007",
+      "baslik": "Yıkıcı eylem koruması",
+      "ihtiyac": "Silme, üzerine yazma, zorla gönderme, üretim veritabanına yazma gibi geri dönüşsüz işlemlerin önce deneme çalıştırması ve açık insan izni gerektirmesi; ajana hiç verilmemesi gereken işlemlerin listelenmesi.",
+      "cozulecek_sorun": "Geri dönüşsüz hata; kaydedilmiş olaylarda ajanın dondurmaya rağmen veriyi silip yanlış rapor vermesi.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-42"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İzinsiz yıkıcı işlem 0.",
+        "Ajana kapalı işlem listesi yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-037",
+          "S-062",
+          "S-149"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "Q-024",
+        "R-022"
+      ]
+    },
+    {
+      "id": "N-K18-008",
+      "baslik": "Tedarik zinciri güvenliği",
+      "ihtiyac": "Önerilen bağımlılıkların gerçekten var olduğunun ve itibarının doğrulanması; yeni ve düşük itibarlı paketlerin onaya düşmesi; yazılım malzeme listesi ve artefakt kökeni; araç ve eklenti sunucularının onayı ve sürüm sabitlemesi; model ağırlıklarının bütünlük doğrulaması.",
+      "cozulecek_sorun": "Modeller var olmayan paket adları öneriyor ve bunların bir kısmı tekrarlanabilir biçimde aynı; saldırganlar bu adları kaydedebiliyor. Yasal raporlama yükümlülükleri yaklaşıyor.",
+      "yetenek_siniflari": [
+        "Y-41"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Yeni bağımlılık varlık/itibar kontrolünden geçmeden eklenemiyor.",
+        "Yayınlanan her pakette malzeme listesi var."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-110",
+          "S-111",
+          "S-159",
+          "S-147"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-006",
+        "H-08",
+        "R-010",
+        "R-031",
+        "U-013"
+      ]
+    },
+    {
+      "id": "N-K18-009",
+      "baslik": "Güvenlik taraması kapısı",
+      "ihtiyac": "Statik ve dinamik güvenlik analizi, altyapı kodu taraması ve bağımlılık zafiyeti taramasının deterministik kapıda koşması.",
+      "cozulecek_sorun": "Üretilen kodda güvenlik açığı oranı yüksek; yapay zekâ kullananlar daha güvensiz kod yazıp kodlarından daha emin oluyor.",
+      "yetenek_siniflari": [
+        "Y-21"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kritik/yüksek bulgu varken birleştirme yok.",
+        "Güvenlik bulgu eşikleri sayısal tanımlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-030",
+          "S-133",
+          "S-134"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-004",
+        "Q-028",
+        "R-032"
+      ],
+      "bagimliliklar": [
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "N-K18-010",
+      "baslik": "Dışarıya gidecek veri politikası",
+      "ihtiyac": "Barındırılan servislere ve dış modellere hangi veri alanlarının gidebileceğinin alan bazında yazılması; kod, iş kalemi ve kişisel verinin sınıflandırılması.",
+      "cozulecek_sorun": "Kod ve görev metni izinsiz dışarı çıkıyor; veri sınıfı bilinmeden model barındırma kararı verilemiyor.",
+      "yetenek_siniflari": [
+        "Y-36",
+        "Y-02"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Alan bazında izin listesi var ve hat tarafından uygulanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-162"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "D-002",
+        "G-027",
+        "Q-010",
+        "Q-043",
+        "R-011",
+        "U-042"
+      ],
+      "bagimliliklar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "N-K18-011",
+      "baslik": "İz ve loglarda kişisel veri ve sır maskeleme",
+      "ihtiyac": "Ajan izlerinin, istemlerin ve logların kişisel veri ve sır açısından maskelenmesi; izleme sisteminin yeni bir hassas veri deposuna dönüşmemesi.",
+      "cozulecek_sorun": "İzler kimlik numarası, e-posta ve anahtar biriktirebiliyor.",
+      "yetenek_siniflari": [
+        "Y-36",
+        "Y-27"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "İz verisinde periyodik veri kaybı önleme taraması yapılıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-162",
+          "S-135"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-009",
+        "R-011",
+        "U-018"
+      ]
+    },
+    {
+      "id": "N-K18-012",
+      "baslik": "Ajan hattına kırmızı takım testi",
+      "ihtiyac": "Canlıya almadan önce ve periyodik olarak ajan hattına saldırı simülasyonu: dolaylı istem enjeksiyonu, araç zehirlenmesi, kural dosyası arka kapısı, sır sızdırma.",
+      "cozulecek_sorun": "Bilinmeyen saldırı yolları canlıda keşfediliyor.",
+      "yetenek_siniflari": [
+        "Y-47"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Kırmızı takım bulguları kapatılmadan hat genişletilmiyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-153",
+          "S-151"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "G-006",
+        "R-008",
+        "U-010"
+      ]
+    },
+    {
+      "id": "N-K18-013",
+      "baslik": "Geliştirici makinelerindeki ajan araçlarının güvenliği",
+      "ihtiyac": "Geliştirici makinelerinde çalışan ajan araçlarının uç nokta politikasıyla sınırlanması; kötü amaçlı paketlerin bu araçları kullanmasının önlenmesi.",
+      "cozulecek_sorun": "Kötü amaçlı paketler geliştirici makinesindeki yapay zekâ komut satırı araçlarını sır aramak için kullandı.",
+      "yetenek_siniflari": [
+        "Y-25",
+        "Y-18"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Uç nokta politikası ajan araçlarının izinlerini kapsıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-148"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "iliskili": [
+        "R-033",
+        "U-012"
+      ]
+    },
+    {
+      "id": "N-K18-014",
+      "baslik": "Adına işlem yapılan taraf ile yürütücünün ayrılması ve yetki iptalinin yayılması",
+      "ihtiyac": "Devredilmiş her eylemde adına hareket edilen insanın, o an eylemi yürüten ajan veya servisin ve geçerli yetki dayanağının ayrı kaydedilmesi; bir insanın ya da ajanın yetkisi geri alındığında kuyruktaki, çalışmakta olan, alt ajana devredilmiş ve kesintiden dönen işlerin yeniden etki yaratma hakkının güncel yetki durumuna göre belirlenmesi; iptalin tüm uçlara ulaşmasının doğrulanması ve yayılım süresinde hangi davranışa izin verildiğinin tanımlı olması.",
+      "cozulecek_sorun": "Aynı servis kimliği farklı insanlar adına iş yaptığında hangi eylemin kimin yetkisine dayandığı kaybolur; üst oturum kapatıldığında bütün alt izinlerin de iptal edildiği varsayılır, oysa iptal sunucular arasında gecikmeyle yayılabilir ve ilişkili izinlerin iptali politikaya bağlıdır; eski yetki zincirinin kaydı güncel erişim hakkı gibi kullanılır.",
+      "yetenek_siniflari": [
+        "Y-25",
+        "Y-28",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip ve ajan sayısı arttıkça ortak servis kimlikleri, zincirleme devirler ve ekip değişiklikleri artar; iptal yayılımı ekipler arası bir güvenlik sınırı olur.",
+      "kabul_olcutleri": [
+        "Her ajan eyleminin kaydında adına hareket edilen taraf, yürütücü kimlik ve yetki dayanağı ayrı alanlarda.",
+        "Yetki geri alındıktan sonra bekleyen alt iş veya kesintiden dönen koşu eski izinle yeni etki oluşturamıyor (tatbikatla doğrulanmış).",
+        "İptal bildirimi başarısız olduğunda bu 'tamamlandı' sayılmıyor; iptalin doğrulanamadığı uçlar görünür.",
+        "İptal yayılım süresi boyunca izin verilen ve verilmeyen davranış yazılı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-095",
+          "S-380",
+          "S-381"
+        ],
+        "not": "Yetki değişim standardı devirde adına işlem yapılan özne ile yetki devredilen aktörü ayrı gösterir; iptal standardı iptalin sunucular arasında gecikmeyle yayılabileceğini ve ilişkili izinlerin iptalinin sunucu politikasına bağlı olduğunu belirtir. Benzer mevcut ihtiyaçlar: N-K18-003 (kısa ömürlü en az yetkili kimlik, yetim kimlik temizliği), N-K27-007 (gözetim devri). Fark: adına işlem/yürütücü ayrımı ve iptalin devam eden işlere yayılımı tanımlı değildi."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K18-003",
+        "N-K19-002"
+      ],
+      "iliskili": [
+        "G-037",
+        "Q-074",
+        "U-074"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T12; ihtiyac-kumeleri/kumeler/03_guvenli_ve_tutarli_yurutme/02_guvenlik_yetki_ve_guven.json#I10-09",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://www.rfc-editor.org/rfc/rfc8693.html",
+        "https://www.rfc-editor.org/rfc/rfc7009.html"
+      ]
+    }
+  ]
+}

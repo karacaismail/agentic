@@ -1,0 +1,2173 @@
+[
+  {
+    "id": "CP-01",
+    "grup": "Dünya vakaları",
+    "baslik": "Meşru uzun süreç beklenirken ajan döngüde sanılıp durduruluyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "CP-01",
+      "tools": [
+        "OpenHands",
+        "OpenHands SDK"
+      ],
+      "evidence_class": "maintainer_report_and_user_observation_with_merged_mitigation",
+      "event_date": "2024-12-01; 2025-03-21; 2025-10-16",
+      "affected_version_or_unknown": "İlk OpenHands sürümü verilmemiş; SDK sabit eşikli uygulama",
+      "symptom": "Meşru uzun süreç beklenirken ajan döngüde sanılıp durduruluyor.",
+      "trigger": "CI veya uzun API çağrısı aynı sorgu/uyku adımlarını tekrar gerektiriyor.",
+      "root_cause_and_confidence": "Sabit tekrar sayısı, gerçek ilerleme yokluğu ile beklemeyi ayıramıyor. Maintainer açıklaması ve kullanıcı CI gözlemiyle yüksek mekanizma güveni; burada yeniden üretilmedi.",
+      "impact": "İş tamamlanmadan ajan kesiliyor; kullanıcı bekleme süresini promptta belirtse de yeterli olmayabiliyor.",
+      "reported_mitigation": "SDK'de eşikler yapılandırılabilir hale getirildi.",
+      "fix_status": "#763 2025-12-18 birleşmiş; varsayılan eşikler korunmuş. Her iş yükünde yanlış pozitifin bittiği veya kullanıcının sürümünde düzeldiği kanıtı değildir.",
+      "boundaries": "Eski OpenHands vakası ile yeni SDK iyileştirmesi aynı mekanizma ailesi; aynı tek olay değildir.",
+      "source_ids": [
+        "CPS-01",
+        "CPS-02",
+        "CPS-03"
+      ],
+      "analogous_local_findings": [
+        "K10"
+      ],
+      "transferable_lesson": "Çalışan alt süreç, çıktı ilerlemesi ve ajanın düşünme döngüsü farklı sinyallerle gözetilmeli.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: kontrollü uzun test ile gerçekten döngüye giren ajanı aynı gözlemciye ver; uzun test korunmalı, gerçek döngü sınır içinde durmalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K10"
+        ],
+        "rationale": "Çalışan alt süreç, çıktı ilerlemesi ve ajanın düşünme döngüsü farklı sinyallerle gözetilmeli.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "OpenHands"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "CP-03",
+    "grup": "Dünya vakaları",
+    "baslik": "Sert kesilen iş callback göndermiyor; RUNNING ve PR'deki inceleme sürüyor mesajı gerçek sonucu yansıtmıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "CP-03",
+      "tools": [
+        "OpenHands automation"
+      ],
+      "evidence_class": "agent_assisted_incident_investigation_and_partial_merged_fix",
+      "event_date": "2026-06-23",
+      "affected_version_or_unknown": "Rapordaki varsayılan 600 s dış komut sınırı bulunan automation",
+      "symptom": "Sert kesilen iş callback göndermiyor; RUNNING ve PR'deki inceleme sürüyor mesajı gerçek sonucu yansıtmıyor.",
+      "trigger": "Komut zaman aşımı, SIGTERM; OOM veya host sonlanması da daha sert varyantlar.",
+      "root_cause_and_confidence": "Graceful exception kapanışına bağlanan tamamlanma bildirimi sert kapanış yolunda garanti değil. Kaynak açıkça AI-yardımlı inceleme; mekanizma makul, bütün olaylar bağımsız doğrulanmadı.",
+      "impact": "Yetim sonuç/bildirim, geç başarısızlık tespiti, temizlik sahipliği belirsizliği.",
+      "reported_mitigation": "Cleanup sahipliğini Automation seviyesine taşıma; dış komut ve mantıksal iş bütçesini ayırma; callback ve watchdog uzlaştırması.",
+      "fix_status": "#203 kapalı; cleanup #209 2026-06-24 birleşmiş. İlişkili timeout #206 erişimde açık. Bütün kill yolları düzeldi denemez.",
+      "boundaries": "SIGKILL/OOM için süreç içi finally veya signal handler garantisi kurulamaz. Sayı600s evrensel güncel ürün sınırı diye sunulmamalı.",
+      "source_ids": [
+        "CPS-06",
+        "CPS-07",
+        "CPS-08"
+      ],
+      "analogous_local_findings": [
+        "K09",
+        "K10",
+        "K17"
+      ],
+      "transferable_lesson": "Ölen ajanın kendisini kapatmasını beklemeyen dış uzlaştırıcı ve kalıcı terminal durum gerekir.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: başarı, SIGTERM, SIGKILL, OOM ve callback ağ kesintisi enjekte et; bir kez terminalleşme, görünür neden ve kaynaksız yetim iş bırakmama doğrulansın.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K09",
+          "K10",
+          "K17"
+        ],
+        "rationale": "Ölen ajanın kendisini kapatmasını beklemeyen dış uzlaştırıcı ve kalıcı terminal durum gerekir.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "OpenHands"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "CP-04",
+    "grup": "Dünya vakaları",
+    "baslik": "Arayüz mesaj alıyor ama ajan başlamıyor; görünür hata yok.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "CP-04",
+      "tools": [
+        "OpenHands SDK"
+      ],
+      "evidence_class": "open_user_issue_with_traceback",
+      "event_date": "2026-03-26",
+      "affected_version_or_unknown": "Sürüm belirtilmemiş",
+      "symptom": "Arayüz mesaj alıyor ama ajan başlamıyor; görünür hata yok.",
+      "trigger": "MCP araç listesinin30 s içinde alınamaması.",
+      "root_cause_and_confidence": "Traceback MCP başlangıç timeout'unu destekliyor. Ağ gecikmesi, MCP deadlock'u veya kaynak yetersizliği alternatifleri kanıtlanmamış.",
+      "impact": "Başlamamış ajan kullanıcıya sessiz oturum olarak görünüyor.",
+      "reported_mitigation": "Rapor sahibi MCP'leri tek tek ayırmayı, sağlık kontrolünü ve uygun timeout'u öneriyor; doğrulanmış sonuç yok.",
+      "fix_status": "2026-09-27 canlı API açık; üretici düzeltmesi doğrulanmadı.",
+      "boundaries": "HTTP 200 veya skill listesinin yüklenmesi agent readiness kanıtı değil. Bu vaka RAM azlığını kanıtlamaz.",
+      "source_ids": [
+        "CPS-09"
+      ],
+      "analogous_local_findings": [
+        "K08",
+        "K09",
+        "K17"
+      ],
+      "transferable_lesson": "Zorunlu ve isteğe bağlı araç başlangıcını ayır; eksik yetenek açıklanmış hata veya kısıtlı çalışma üretsin.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: tek MCP cevabını geciktir; işin ready görünmemesi, hangi yeteneğin eksik olduğunun raporlanması ve kısıtlı çalışma politikasının uygulanması ölçülsün.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K08",
+          "K09",
+          "K17"
+        ],
+        "rationale": "Zorunlu ve isteğe bağlı araç başlangıcını ayır; eksik yetenek açıklanmış hata veya kısıtlı çalışma üretsin.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "OpenHands"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "CP-05",
+    "grup": "Dünya vakaları",
+    "baslik": "Basit shell komutları bile milisaniyeler içinde SIGKILL oluyor; diğer araçlar çalışıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/3",
+    "ham": {
+      "id": "CP-05",
+      "tools": [
+        "Factory Droid CLI"
+      ],
+      "evidence_class": "open_user_report_with_isolated_reproduction",
+      "event_date": "2026-09-16",
+      "affected_version_or_unknown": "0.219.0; ilişkili raporda 0.218.0",
+      "symptom": "Basit shell komutları bile milisaniyeler içinde SIGKILL oluyor; diğer araçlar çalışıyor.",
+      "trigger": "ps aracının bulunmaması veya sandbox tarafından çalıştırılamaması.",
+      "root_cause_and_confidence": "Raporun izole deneyine göre owner-liveness probe başarısızlığı owner öldü diye yorumlanıp süreç grubu öldürülüyor. Üretici onayı yok; güçlü kullanıcı kanıtı.",
+      "impact": "Minimal konteyner veya sınırlı sandbox'ta Execute işlevi kullanılamıyor.",
+      "reported_mitigation": "Probe-unavailable ile owner-dead ayrımı önerilmiş. Ürün düzeltmesi doğrulanmadı.",
+      "fix_status": "2026-09-27 açık.",
+      "boundaries": "Sandbox'ı tamamen kaldırmak önerimiz değildir. Bu örnekte137 OOM değil supervisor SIGKILL belirtisi.",
+      "source_ids": [
+        "CPS-10"
+      ],
+      "analogous_local_findings": [
+        "K04",
+        "K10"
+      ],
+      "transferable_lesson": "Gözlem yapamama, gözlenen sürecin öldüğü anlamına gelmez; bağımlı sağlık araçları da ön kontrolden geçmeli.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: canlı worker ile sağlık probunu engelle, ardından gerçekten worker'ı öldür; iki durum farklı sonuç ve neden üretmeli.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K04",
+          "K10"
+        ],
+        "rationale": "Gözlem yapamama, gözlenen sürecin öldüğü anlamına gelmez; bağımlı sağlık araçları da ön kontrolden geçmeli.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Factory"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "MA-03",
+    "grup": "Dünya vakaları",
+    "baslik": "Agent list dört ajan gösterirken swarm status sıfır gösteriyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/4",
+    "ham": {
+      "id": "MA-03",
+      "tools": [
+        "Ruflo"
+      ],
+      "evidence_class": "maintainer_confirmed_fixed_bug",
+      "event_date": "2026-07-27",
+      "affected_version_or_unknown": "v3.32.22, macOS, Node 22.23.1",
+      "symptom": "Agent list dört ajan gösterirken swarm status sıfır gösteriyor.",
+      "trigger": "Ajan oluşturma ve durum sorgularının farklı veri kaynakları kullanması.",
+      "root_cause_and_confidence": "Üç uzlaştırılmayan kayıt yolu; kodlu tekrar raporu ve owner'ın yayımlanan paket doğrulaması var.",
+      "impact": "Kontrol ekranı gerçek ajan durumunu yansıtmıyor.",
+      "reported_mitigation": "Okuyucu/yazıcı veri kaynaklarını uyumlu hale getiren düzeltme.",
+      "fix_status": "Owner v3.32.23'te aynı repro ile doğruladı; resmî sürüm kaydı mevcut.",
+      "boundaries": "Ajan kaydının görünmesi, gerçek görev yürütmesini tek başına kanıtlamaz.",
+      "source_ids": [
+        "MAS-03",
+        "MAS-04"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K17"
+        ],
+        "rationale": "Kayıtlı durum ile gerçek ilerlemenin ayrışması.",
+        "boundary": "Yerelde farklı durum projeksiyonları vardı."
+      },
+      "transferable_lesson": "Pano, scheduler ve worker durumu aynı iş kimliği üzerinden uzlaştırılmalı.",
+      "acceptance_experiment": "Dört worker başlat; API, pano, scheduler ve gerçek process/lease kayıtlarını karşılaştır. Birini öldürünce bütün görünümler belirlenmiş sürede uzlaşmalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K17"
+        ],
+        "rationale": "Kayıtlı durum ile gerçek ilerlemenin ayrışması.",
+        "boundary": "Yerelde farklı durum projeksiyonları vardı."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Ruflo"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "MA-05",
+    "grup": "Dünya vakaları",
+    "baslik": "Üst timeout hata dönüyor, alttaki model süreci çalışmaya devam ediyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/5",
+    "ham": {
+      "id": "MA-05",
+      "tools": [
+        "Ruflo",
+        "Claude Flow"
+      ],
+      "evidence_class": "maintainer_confirmed_bug_and_fix_statement",
+      "event_date": "2026-02-10",
+      "affected_version_or_unknown": "Raporda runtime 3.1.0-alpha.28, CLI alpha.44+; aralık tam doğrulanmadı",
+      "symptom": "Üst timeout hata dönüyor, alttaki model süreci çalışmaya devam ediyor.",
+      "trigger": "Daemon 5 dakika, alt worker 10–15 dakika zaman sınırı kullanıyor.",
+      "root_cause_and_confidence": "Owner tarafından kabul edilen timeout/child-process yaşam döngüsü uyumsuzluğu.",
+      "impact": "Sahipsiz process, bellek ve model kullanımının sürmesi.",
+      "reported_mitigation": "Dış sınırı 16 dakikaya alıp alt yürütücünün SIGTERM/SIGKILL temizliğini önce tamamlaması.",
+      "fix_status": "Owner 26 Martta v3.5.47 düzeltmesini bildirdi; binary bağımsız denenmedi.",
+      "boundaries": "Promise'ın kapanması ile process'in bitmesi ayrı olaylar; bu kaynak yerel OOM'un sebebini ispatlamaz.",
+      "source_ids": [
+        "MAS-08",
+        "MAS-09"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K04",
+          "K10"
+        ],
+        "rationale": "Üst gözlemci ile gerçek işin yaşam döngüsü ayrışıyor.",
+        "boundary": "Yerel uzun test yanlış tıkanma sınıfındaydı; burada çocuk süreç temizliği eksik."
+      },
+      "transferable_lesson": "İptal ve timeout bütün alt işlere yayılmalı; tamamlanma makbuzu temizliği de kapsamalı.",
+      "acceptance_experiment": "Uzun alt process ve torun process başlat; dış timeout ver. Tanımlı bekleme sonunda süreç, lease ve rezervasyon kalmamalı; ikinci worker eski işi sürdüren process ile yarışmamalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K04",
+          "K10"
+        ],
+        "rationale": "Üst gözlemci ile gerçek işin yaşam döngüsü ayrışıyor.",
+        "boundary": "Yerel uzun test yanlış tıkanma sınıfındaydı; burada çocuk süreç temizliği eksik."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Ruflo"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "WF-01",
+    "grup": "Dünya vakaları",
+    "baslik": "OOM/137 sonrası görev RUNNING kalıyor; tekrar gönderim boru hattını ilerletmiyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/6",
+    "ham": {
+      "id": "WF-01",
+      "tools": [
+        "Kestra"
+      ],
+      "evidence_class": "primary_user_incident_with_maintainer_context",
+      "event_date": "2023-12-08",
+      "affected_version_or_unknown": "0.13.2; JDBC/Kubernetes; dbt.CLI",
+      "symptom": "OOM/137 sonrası görev RUNNING kalıyor; tekrar gönderim boru hattını ilerletmiyor.",
+      "trigger": "dbt konteyneri/worker OOM ve pod yeniden başlaması.",
+      "root_cause_and_confidence": "Raporlayan worker kaybı ile heartbeat tespit boşluğu arasında bağ kuruyor. Maintainer DELETE bayrağının yürütmeyi durdurmadığını doğruluyor; kesin iç kök neden bu kaynakta kapanmıyor.",
+      "impact": "Sahipsiz iş yeni yürütmeleri bloke ediyor.",
+      "reported_mitigation": "Gorgias ekibi API ile silme denemiş; DB kaydını doğrudan silmenin doğru kurtarma olmadığı belirtilmiş.",
+      "fix_status": "Issue 2024-05-02 completed; milestone 0.17.0. Kesin fix PR ve yayımlanan sürüm burada doğrulanmadı.",
+      "boundaries": "Eski sürüm vakasıdır; güncel Kestra’da devam ettiğini veya kullanıcının aynı bug’a çarptığını göstermez.",
+      "source_ids": [
+        "WFS-01"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K03",
+          "K04",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: OOM algısı, işi yeniden sahiplenme ve eski konteyneri durdurma ayrı doğrulanmalı.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Test çalışırken workerı OOM ile öldür; terminal durum, kaynak temizliği, yeniden sahiplenme ve tek teslim oluşumunu ölç."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K03",
+          "K04",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Kestra"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "WF-02",
+    "grup": "Dünya vakaları",
+    "baslik": "SLA ile durdurulan görev, bütün worker JVM’ini tekrar tekrar düşürüyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/7",
+    "ham": {
+      "id": "WF-02",
+      "tools": [
+        "Kestra"
+      ],
+      "evidence_class": "primary_user_incident_with_detailed_trace",
+      "event_date": "2026-05-22",
+      "affected_version_or_unknown": "1.3.18; AWS ECS; JDBC/PostgreSQL 16.8",
+      "symptom": "SLA ile durdurulan görev, bütün worker JVM’ini tekrar tekrar düşürüyor.",
+      "trigger": "Takılan CLI çağrıları 2 dakikalık MAX_DURATION+FAIL sınırını aşıyor.",
+      "root_cause_and_confidence": "Issue yazarına göre interrupted bayrağı temizlenmeden son durum JDBC’ye yazılıyor; bağlantı alma InterruptedException üretip fatal shutdown’a dönüşüyor. Stack trace güçlü; bağımsız tekrar testi yapılmadı.",
+      "impact": "Bildirilen deploymentta dakikada birden çok worker yeniden başlatma ve diğer işlerde kesinti.",
+      "reported_mitigation": "Contributor 16 Ağustosta develop üzerindeki inline yayın yolunun kalktığını belirtiyor.",
+      "fix_status": "Issue açık; develop üzerinde düzelmiş görünüyor yorumu var, yayımlanan düzeltme sürümü doğrulanmadı.",
+      "boundaries": "Hikari hatası bu olayda bağlantı havuzunun dolduğunu kanıtlamıyor. Her Kestra timeout’unun sonucu değildir.",
+      "source_ids": [
+        "WFS-02"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K10",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Watchdog görevi sonlandırırken ortak yürütücüyü düşürmemeli.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Bir takımı SLA ile iptal ederken komşu takımların ilerlediğini ve iptal edilen işin son durumunun yazıldığını kontrol et."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K10",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Kestra"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "WF-08",
+    "grup": "Dünya vakaları",
+    "baslik": "RUNNING görünen işi worker hiç almıyor; yeniden bağlanınca iş sahipsiz kalıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+    "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+    "pointer": "/cases/8",
+    "ham": {
+      "id": "WF-08",
+      "tools": [
+        "Hatchet"
+      ],
+      "evidence_class": "primary_user_issue_with_environment_analysis",
+      "event_date": "2026-03-15",
+      "affected_version_or_unknown": "Self-hosted engine 0.79.25; Azure Container Apps/Envoy",
+      "symptom": "RUNNING görünen işi worker hiç almıyor; yeniden bağlanınca iş sahipsiz kalıyor.",
+      "trigger": "Boş kalan ListenV2 gRPC stream’i proxy’nin 4 dk idle sınırında kapanıyor.",
+      "root_cause_and_confidence": "Raporlayan stream keepalive ile ayrı heartbeat RPC’sinin farklılığını izliyor; worker canlı görünürken görev taşıyan stream ölebiliyor. Tespit güçlü ama maintainer doğrulaması yok.",
+      "impact": "Yetim işler ve sonsuz RUNNING.",
+      "reported_mitigation": "180s proaktif reconnect denenmiş; 1–3s boşlukta yine kayıp olabildiği belirtilmiş.",
+      "fix_status": "18 Haziran stale sonrası not_planned kapanmış; kapalı olması düzelmiş demek değil.",
+      "boundaries": "Azure L7 topolojisine özgü rapor; bütün Hatchet kurulumlarına genellenmez.",
+      "source_ids": [
+        "WFS-09"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K04",
+          "K05",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Worker hayatta, kanal çalışıyor, görev teslim alındı ve iş ilerliyor sinyalleri ayrı olmalı.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Idle proxy bağlantısını kes, sonra iş gönder; delivery acknowledgement yoksa iş yeniden güvenli sahiplenilmeli."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K04",
+          "K05",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Hatchet"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "01_yasam_dongusu_ve_ilerleme"
+    }
+  },
+  {
+    "id": "CP-02",
+    "grup": "Dünya vakaları",
+    "baslik": "30 worker, toplam 8 GiB sınırındaki SWTBench koşusu 5 saat 4 dakika sonra OOMKilled/137.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/02_kaynak_ve_kapasite.json",
+    "sha256": "003cecd638a5580adbac870c3013e84b8eaed6e65bfeeed4a3501637801ee1c8",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "CP-02",
+      "tools": [
+        "OpenHands benchmarks"
+      ],
+      "evidence_class": "run_failure_report_with_merged_architectural_fix",
+      "event_date": "2026-02-23",
+      "affected_version_or_unknown": "#434 parent-memory düzeltmesi sonrası, #446 öncesi benchmark yürütücüsü",
+      "symptom": "30 worker, toplam 8 GiB sınırındaki SWTBench koşusu 5 saat 4 dakika sonra OOMKilled/137.",
+      "trigger": "Uzun paralel değerlendirme ve yeniden denemeler.",
+      "root_cause_and_confidence": "Parent düzeltmesi worker belleği çoğalmasını kapsamamış. Issue ile düzeltme PR'si aynı mekanizmayı belirtir; yüksek güven. Tek tek bellek parçalanması iddiaları bağımsız ölçülmedi.",
+      "impact": "Saatlerce çalışmış değerlendirme kaybı; ilk düzeltmeden sonra hata sürmesi.",
+      "reported_mitigation": "I/O ağırlıklı koordinasyonda ProcessPoolExecutor yerine asyncio ve semaphore; thread güvenliği düzenlemeleri.",
+      "fix_status": "#446 API'ye göre 2026-03-23 birleşmiş. Evrensel RAM tasarruf oranı doğrulanmadı.",
+      "boundaries": "Bu coding ajanının1 GB tükettiği iddiası değildir; benchmark koordinatörü ve worker süreçlerinin toplamıdır. 137 tek başına değil, OOMKilled kaydıyla birlikte kullanılmıştır.",
+      "source_ids": [
+        "CPS-04",
+        "CPS-05"
+      ],
+      "analogous_local_findings": [
+        "K03",
+        "K13"
+      ],
+      "transferable_lesson": "RAM bütçesi rol, alt süreç, eşzamanlılık ve kanıt boyutunu kapsamalı; yalnız ana sürecin düzelmesi yeterli değil.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: hedef paralellikte uzun soak testi; parent/child RSS, konteyner limiti, retry başına artış ve OOM olaylarını ayrı ölç.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K03",
+          "K13"
+        ],
+        "rationale": "RAM bütçesi rol, alt süreç, eşzamanlılık ve kanıt boyutunu kapsamalı; yalnız ana sürecin düzelmesi yeterli değil.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "benchmark_run_failure",
+      "requested_tool_names": [
+        "OpenHands"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "02_kaynak_ve_kapasite"
+    }
+  },
+  {
+    "id": "MA-04",
+    "grup": "Dünya vakaları",
+    "baslik": "Worktree sayısı arttıkça arka plandaki model işleri ortak hesap kotasını tüketiyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/02_kaynak_ve_kapasite.json",
+    "sha256": "003cecd638a5580adbac870c3013e84b8eaed6e65bfeeed4a3501637801ee1c8",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "MA-04",
+      "tools": [
+        "Ruflo"
+      ],
+      "evidence_class": "maintainer_report_with_merged_fixes",
+      "event_date": "2026-07-13",
+      "affected_version_or_unknown": "Düzeltme öncesi sürüm aralığı raporda kesin değil; 3.27.0/3.28.0 yayınlarıyla giderim",
+      "symptom": "Worktree sayısı arttıkça arka plandaki model işleri ortak hesap kotasını tüketiyor.",
+      "trigger": "Her worktree kendi daemon'unu ve periyodik AI işlerini açıyor.",
+      "root_cause_and_confidence": "Proje sahibinin doğruladığı tasarım kusuru: yerel tekilleştirme var, kullanıcı/repo çapında sınır yok.",
+      "impact": "Etkileşimli geliştirme kotasının da tükenmesi. 13×worktree/saat kaynakta potansiyel zamanlama hesabıdır.",
+      "reported_mitigation": "Varsayılan kapalı AI işleri, global bütçe, repo supervisor'ı, worktree lease'i ve ortak tekrar önleme.",
+      "fix_status": "#2662 ve #2663 14 Temmuzda merged; 3.27.0 ve 3.28.0 yayın commit'leri doğrulandı.",
+      "boundaries": "Eski kusur bugünkü sürümün kesin davranışı diye sunulmamalı; performans tekrar deneyi yapılmadı.",
+      "source_ids": [
+        "MAS-05",
+        "MAS-06",
+        "MAS-07"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K11",
+          "K12"
+        ],
+        "rationale": "Kaynak sınırı tek worker'ın ötesinde bütün filoyu durdurabiliyor.",
+        "boundary": "Yerel reviewer/API sınırlarıyla aynı olay değil."
+      },
+      "transferable_lesson": "Yeni ekip/worktree yeni ve sınırsız bir bütçe oluşturmamalı.",
+      "acceptance_experiment": "Aynı hesabı paylaşan 10 worktree ve iki repo aç; tanımlı global çağrı/eşzamanlılık bütçesinin aşılmadığını, 429 sonrasında bütün filonun ortak geri çekildiğini doğrula.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K11",
+          "K12"
+        ],
+        "rationale": "Kaynak sınırı tek worker'ın ötesinde bütün filoyu durdurabiliyor.",
+        "boundary": "Yerel reviewer/API sınırlarıyla aynı olay değil."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Ruflo"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "02_kaynak_ve_kapasite"
+    }
+  },
+  {
+    "id": "WF-10",
+    "grup": "Dünya vakaları",
+    "baslik": "Yeni işler başlayamıyor; alternatif bölge de benzer nedenle düşüyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/02_kaynak_ve_kapasite.json",
+    "sha256": "003cecd638a5580adbac870c3013e84b8eaed6e65bfeeed4a3501637801ee1c8",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "WF-10",
+      "tools": [
+        "Trigger.dev"
+      ],
+      "evidence_class": "official_company_postmortem",
+      "event_date": "2026-06-22/2026-06-23",
+      "affected_version_or_unknown": "Cloud; ilgili control-plane sürümü belirtilmemiş",
+      "symptom": "Yeni işler başlayamıyor; alternatif bölge de benzer nedenle düşüyor.",
+      "trigger": "AWS kapasite gecikmesi sonrası çok sayıda workerın birden açılması ve zamanlanmış görev dalgası.",
+      "root_cause_and_confidence": "Şirket raporu K8s control plane yüklenmesi ve etcd quorum kaybını açıklıyor; ikinci bölge aynı zayıflıkla daha küçük tabandan hızla büyüyor.",
+      "impact": "22 Haziran 19:00–23 Haziran 13:13 UTC aralığında bölgesel kesinti/yavaşlık dönemleri. Kuyruk kaybı yok; zaten çalışan işler sürmüş.",
+      "reported_mitigation": "Backpressure, etcd iyileştirmeleri, daha hızlı restore; bölge başına çoklu bağımsız cluster ve managed control plane planı.",
+      "fix_status": "Rapor toparlanmayı bildiriyor; planlanan mimarinin tamamlandığı bu kaynakla doğrulanmıyor.",
+      "boundaries": "Bütün~18 saat boyunca her iki bölgenin aynı anda kapalı olduğu söylenmiyor; şirketin kendi raporu.",
+      "source_ids": [
+        "WFS-12"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K11",
+          "K04"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: İşçileri çoğaltmak merkezi zamanlayıcı/DB darboğazını çözmeyebilir; aynı kusuru taşıyan yedek bağımsızlık sağlamaz.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "144 takımın cold-start dalgasını kademeli test et; admission backpressure ve bir cluster kaybında gerçek bağımsız failover ölç."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K11",
+          "K04"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "official_company_postmortem",
+      "requested_tool_names": [
+        "Trigger.dev"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "02_kaynak_ve_kapasite"
+    }
+  },
+  {
+    "id": "WF-12",
+    "grup": "Dünya vakaları",
+    "baslik": "Ajan CLI’si bellek hatası, thread açma hatası veya sonsuz çalışan süreç görünümü veriyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/02_kaynak_ve_kapasite.json",
+    "sha256": "003cecd638a5580adbac870c3013e84b8eaed6e65bfeeed4a3501637801ee1c8",
+    "pointer": "/cases/3",
+    "ham": {
+      "id": "WF-12",
+      "tools": [
+        "Windmill",
+        "Claude Agent SDK"
+      ],
+      "evidence_class": "primary_reproduction_and_merged_fix",
+      "event_date": "2026-07-15",
+      "affected_version_or_unknown": "Self-hosted 1.739.0; ARM64; Python nsjail",
+      "symptom": "Ajan CLI’si bellek hatası, thread açma hatası veya sonsuz çalışan süreç görünümü veriyor.",
+      "trigger": "Python içindeki SDK, Bun tabanlı CLI alt süreci açıyor; 4 GiB sanal adres limiti miras alınıyor.",
+      "root_cause_and_confidence": "Limits ve VmPeak ölçümü sınıra işaret ediyor; hang’in Bun iç nedeni yazarın çıkarımı. Fiziksel RAM tüketimiyle aynı limit değil.",
+      "impact": "Gerçek inference başlayamıyor veya60–90sçökme/asılma; kaynak yazarının ortamı.",
+      "reported_mitigation": "İzolasyonu kapatma yalnız teşhis deneyi: 3/3 çağrı geçmiş; kalıcı çözüm olarak reddedilmiş. PR per-worker Python/Ansible adres limiti ekliyor.",
+      "fix_status": "PR 10138 15 Temmuzda merge; ilk release bilinmiyor. PR ortamında gerçek nsjail uçtan uca testi yapılmadığı açık.",
+      "boundaries": "İzolasyonu kapatmayı önermiyoruz. Toplam sunucu RAM’ini büyütmek iç limitin otomatik değişeceği anlamına gelmez.",
+      "source_ids": [
+        "WFS-14",
+        "WFS-15"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K03",
+          "K10"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Fiziksel RAM, container cgroup, sanaladres,PID/thread ve alt süreç limitleri ayrı ölçülmeli.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "İzolasyon açıkken gerçek SDK + tarayıcı iş yükünü limitlerle çalıştır; testten sonra namespace sınırları ve doğru OOM sınıflandırmasını doğrula."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K03",
+          "K10"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Windmill"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "02_kaynak_ve_kapasite"
+    }
+  },
+  {
+    "id": "MA-02",
+    "grup": "Dünya vakaları",
+    "baslik": "Tamamlanmış convoy'lar yaklaşık 40 saniyede bir yeniden tamamlandı bildirimi üretiyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/03_sahiplik_tekrar_ve_yan_etki.json",
+    "sha256": "b2a81193676f5b9f3a648262171d8e80d8090d36aa03d630aed9f9ca0241b8ea",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "MA-02",
+      "tools": [
+        "Gas Town"
+      ],
+      "evidence_class": "user_incident_report",
+      "event_date": "2026-05-12/2026-05-13",
+      "affected_version_or_unknown": "Homebrew build; tam sürüm belirtilmemiş, macOS",
+      "symptom": "Tamamlanmış convoy'lar yaklaşık 40 saniyede bir yeniden tamamlandı bildirimi üretiyor.",
+      "trigger": "Daemon'un tamamlanmış işi her yoklamada yeniden işlemesi.",
+      "root_cause_and_confidence": "Tek seferlik tamamlanma bildirimi kaydının eksikliği rapor sahibinin hipotezi.",
+      "impact": "Raporda 13 convoy için 20 dakikada 70'in üzerinde yinelenen bildirim var.",
+      "reported_mitigation": "Daemon'u durdurma veya dış temizleme döngüsü; ikincisi yalnız geçici çözüm.",
+      "fix_status": "27 Eylül erişiminde açık, needs-triage.",
+      "boundaries": "Tek kurulum raporu; bütün kurulumlarda sıklık çıkarılamaz.",
+      "source_ids": [
+        "MAS-02"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K06",
+          "K13"
+        ],
+        "rationale": "Yönetim/yeniden deneme trafiği faydalı ilerlemeyi temsil etmiyor.",
+        "boundary": "Yerel olaylar aynı bildirim bugı değil."
+      },
+      "transferable_lesson": "Yinelenen olaylar yalnız görev başlatmada değil tamamlanma ve kurtarmada da tekilleştirilmeli.",
+      "acceptance_experiment": "Tek completion olayını 100 kez yeniden teslim et; tamamlama kaydı ve takip işi birer kez oluşmalı, uyarı kuyruğu büyümemeli.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K06",
+          "K13"
+        ],
+        "rationale": "Yönetim/yeniden deneme trafiği faydalı ilerlemeyi temsil etmiyor.",
+        "boundary": "Yerel olaylar aynı bildirim bugı değil."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Gas Town"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "03_sahiplik_tekrar_ve_yan_etki"
+    }
+  },
+  {
+    "id": "WF-03",
+    "grup": "Dünya vakaları",
+    "baslik": "10 kayıt için düşünülen işlem heartbeat timeout sonrası ilk 3 kayıt tekrar edilince 13 altakış başlatıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/03_sahiplik_tekrar_ve_yan_etki.json",
+    "sha256": "b2a81193676f5b9f3a648262171d8e80d8090d36aa03d630aed9f9ca0241b8ea",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "WF-03",
+      "tools": [
+        "Temporal"
+      ],
+      "evidence_class": "primary_user_report_with_maintainer_explanation",
+      "event_date": "2023-05-11",
+      "affected_version_or_unknown": "Belirtilmemiş",
+      "symptom": "10 kayıt için düşünülen işlem heartbeat timeout sonrası ilk 3 kayıt tekrar edilince 13 altakış başlatıyor.",
+      "trigger": "Uzun activity üçüncü kayıtta heartbeat süresini aşıyor ve baştan deneniyor.",
+      "root_cause_and_confidence": "Activity retry semantiği ve yan etkinin tekilleştirilmemesi; maintainer heartbeat detayları da throttling yüzünden tekrar ihtimalini tamamen kaldırmaz diyor.",
+      "impact": "Yinelenen aşağı akış işleri.",
+      "reported_mitigation": "Son işlenen kayıt için heartbeat checkpoint; altakış kimliğinde business-level ID; WorkflowIdReusePolicy’yi doğru seçme.",
+      "fix_status": "Ürün bug düzeltmesi olarak sunulmamış; uygulama tasarımı gereği.",
+      "boundaries": "Forum tek geliştirici örneğidir; yaygınlık ölçümü ve şirket genellemesi yok.",
+      "source_ids": [
+        "WFS-03"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K05",
+          "K06"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: PR, merge ve deployment gibi dış yazımlarda deterministik işlem kimliği ve sonucu sorgulama gerekir.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "GitHub yazımı tamamlandıktan sonra cevap alınmadan workerı kes; tekrar geldiğinde ikinci PR/deploy oluşmamalı."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K05",
+          "K06"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Temporal"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "03_sahiplik_tekrar_ve_yan_etki"
+    }
+  },
+  {
+    "id": "WF-09",
+    "grup": "Dünya vakaları",
+    "baslik": "Eski kuyruk öğeleri lease doğrulamasında aynı sayaca takılıp sonsuz dönüyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/03_sahiplik_tekrar_ve_yan_etki.json",
+    "sha256": "b2a81193676f5b9f3a648262171d8e80d8090d36aa03d630aed9f9ca0241b8ea",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "WF-09",
+      "tools": [
+        "Inngest"
+      ],
+      "evidence_class": "primary_user_production_report_with_open_fix",
+      "event_date": "2026-04-26",
+      "affected_version_or_unknown": "Self-hosted 1.18.0 ve 1.17.9; Postgres 17 + Redis",
+      "symptom": "Eski kuyruk öğeleri lease doğrulamasında aynı sayaca takılıp sonsuz dönüyor.",
+      "trigger": "Uygulama yeniden kaydı ve engine yükseltmesi sonrası eski FunctionVersion 0 öğeleri.",
+      "root_cause_and_confidence": "Doğrulama attempt sayacı artmadan hata veriyor. PR 4321 aynı yolu açıklayıp backoff/attempt/dequeue düzeltmesi öneriyor.",
+      "impact": "Raporda yaklaşık 1200 lease hatası/dakika ve gerçek işlerin olağan hızın ~%18’ine düşmesi; yalnız bu deployment ölçümü.",
+      "reported_mitigation": "Yazar yedek sonrası hedefli Redis temizliği uygulamış; önerilen PR kalıcı failure accounting ekliyor.",
+      "fix_status": "Issue ve PR açık; birleşmiş düzeltme diye sunulmadı.",
+      "boundaries": "Üretim Redis temizliği burada uygulama talimatı değildir; ölçümler yaygınlık istatistiği değildir.",
+      "source_ids": [
+        "WFS-10",
+        "WFS-11"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K13",
+          "K06",
+          "K11"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Retry bütçesi model çağrısına gelmeyen kabul/lease hatalarını da saymalı; zehirli iş sağlıklı işleri tüketmemeli.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Eski şemalı kuyruk kaydı enjekte et; bounded retry/DLQ oluşmalı ve sağlıklı görev akış hızı korunmalı."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K13",
+          "K06",
+          "K11"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "production_user_report",
+      "requested_tool_names": [
+        "Inngest"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "03_sahiplik_tekrar_ve_yan_etki"
+    }
+  },
+  {
+    "id": "WF-14",
+    "grup": "Dünya vakaları",
+    "baslik": "Otomatik altakış kurtarması aynı lock üzerinde yarışıp INFO log fırtınasına dönüşüyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/03_sahiplik_tekrar_ve_yan_etki.json",
+    "sha256": "b2a81193676f5b9f3a648262171d8e80d8090d36aa03d630aed9f9ca0241b8ea",
+    "pointer": "/cases/3",
+    "ham": {
+      "id": "WF-14",
+      "tools": [
+        "Conductor OSS"
+      ],
+      "evidence_class": "primary_production_user_issue",
+      "event_date": "2026-07-16",
+      "affected_version_or_unknown": "3.23.0→3.30.2; Postgres+Redis cluster; 2 replica",
+      "symptom": "Otomatik altakış kurtarması aynı lock üzerinde yarışıp INFO log fırtınasına dönüşüyor.",
+      "trigger": "Çocuk workflow başlatılırken geçici backend/lock hatası; sweeper tekrarları.",
+      "root_cause_and_confidence": "Raporlayan bütün retry’ların aynı deterministik childId lock’una geldiğini kod yollarıyla açıklıyor;2 s blocking lock bekleyişi workerları da tüketiyor.",
+      "impact": "Kendi üretim yükseltmesi sonrası transient loglarda yaklaşık 15 kat artış; Redis sağlıklı bildirilmiş.",
+      "reported_mitigation": "Single-flight repair, in-flight child kontrolü ve replika çapında dedup önerilmiş.",
+      "fix_status": "Issue açık; çözüm önerileri uygulanmış ve doğrulanmış sayılmadı.",
+      "boundaries": "Kod analizi+üretici kullanıcı gözlemi; bağımsız benchmark değil. Microsoft Conductor ve DBOS Conductor farklı ürünler.",
+      "source_ids": [
+        "WFS-18"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K07",
+          "K06",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Kurtarma da koordine edilmeli; aynı işi onaran çok sayıda yönetici kendi başına ilerleme sağlamaz.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Aynı child launch hatasını iki replika ve çok worker altında tetikle; bir etkinrepair, bounded backoff ve sağlıklı işlere ilerleme bekle."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K07",
+          "K06",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "production_user_report",
+      "requested_tool_names": [
+        "Conductor"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "03_sahiplik_tekrar_ve_yan_etki"
+    }
+  },
+  {
+    "id": "CP-06",
+    "grup": "Dünya vakaları",
+    "baslik": "Model değişimi sonrası geçmiş tekrar gönderilirken HTTP 400; yeni prompt denemeleri aynı biçimde başarısız.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "CP-06",
+      "tools": [
+        "Factory Droid CLI"
+      ],
+      "evidence_class": "open_user_report_with_payload_isolation",
+      "event_date": "2026-09-13",
+      "affected_version_or_unknown": "0.218.1; aynı kayıtlarda0.217.0 / 0.216.0",
+      "symptom": "Model değişimi sonrası geçmiş tekrar gönderilirken HTTP 400; yeni prompt denemeleri aynı biçimde başarısız.",
+      "trigger": "Önceki modelin paralel görüntü araç çağrılarının başka sağlayıcının biçimine çevrilmesi.",
+      "root_cause_and_confidence": "Raporlayan kişi görüntü köprü mesajlarının tool-call eşleşmesini kopardığını payload A/B deneyiyle gösteriyor. Üretici onayı yok.",
+      "impact": "Kalıcı bozuk geçmiş nedeniyle yeni modelde oturum sürdürülemiyor.",
+      "reported_mitigation": "Kullanıcının deneyinde çağrı kimliklerini koruyup sıralamayı onarmak200 sağlıyor; yalnız yeniden sıralama yetmiyor.",
+      "fix_status": "2026-09-27 açık; dağıtılmış düzeltme bulunamadı.",
+      "boundaries": "Bu tek adaptör/oturum raporudur. Bütün sağlayıcılar arası geçişler bozuk denemez.",
+      "source_ids": [
+        "CPS-11"
+      ],
+      "analogous_local_findings": [
+        "K13",
+        "K15"
+      ],
+      "transferable_lesson": "Tak-çıkar için geçmiş, tool sonuçları, görüntü ve checkpoint semantiği de uyumluluk sözleşmesine girmeli.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: paralel metin/görüntü araç geçmişini taşıyan işi sağlayıcıA'danB'ye aktar; çağrı kimlikleri, sonuç sayısı ve devam edebilme doğrulansın.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K13",
+          "K15"
+        ],
+        "rationale": "Tak-çıkar için geçmiş, tool sonuçları, görüntü ve checkpoint semantiği de uyumluluk sözleşmesine girmeli.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Factory"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "CP-07",
+    "grup": "Dünya vakaları",
+    "baslik": "Yüklü pluginler çalışırken list/update komutları kurulu değil diyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "CP-07",
+      "tools": [
+        "Factory Droid CLI"
+      ],
+      "evidence_class": "open_user_report_with_migration_reproduction",
+      "event_date": "2026-08-27",
+      "affected_version_or_unknown": "0.157.1; Windows Enterprise/PowerShell 5.1",
+      "symptom": "Yüklü pluginler çalışırken list/update komutları kurulu değil diyor.",
+      "trigger": "Toplu indeksin kayıt başına dosyalara geçirilmesi; okuyucuların eski yolu kullanması.",
+      "root_cause_and_confidence": "Raporlayan kişi disk yapısı ve geri kurma deneyi gösteriyor; ayrıca ölü PID'lere ait pending kilitler gözlemiş. Üretici teyidi bulunamadı.",
+      "impact": "Marketplace yönetimi/güncellemesi aksıyor, görünen sürüm gerçek checkout'u yansıtmayabiliyor.",
+      "reported_mitigation": "Kullanıcı indeksi kayıt dosyalarından yeniden oluşturup ölü sahipli kilitleri temizlemiş; geçici çözüm.",
+      "fix_status": "2026-09-27 açık.",
+      "boundaries": "Rapora göre oturumdaki plugin çalışması sürmüş; bunu bütün ajan yürütmesi durdu diye aktarmamak gerekir.",
+      "source_ids": [
+        "CPS-12"
+      ],
+      "analogous_local_findings": [
+        "K04",
+        "K15",
+        "K17"
+      ],
+      "transferable_lesson": "Yetenek havuzu yükseltmesinde okuma, çalışma, güncelleme, sürüm kimliği ve kilit sahipliği birlikte doğrulanmalı.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: havuz yükseltmesini ortasında kes; yeniden başladıktan sonra kurulu/çalışan sürüm eşleşmesi ve stale-lock geri kazanımı doğrulansın.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K04",
+          "K15",
+          "K17"
+        ],
+        "rationale": "Yetenek havuzu yükseltmesinde okuma, çalışma, güncelleme, sürüm kimliği ve kilit sahipliği birlikte doğrulanmalı.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Factory"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "MA-06",
+    "grup": "Dünya vakaları",
+    "baslik": "Java işi için dönen paket alanı, Python alanı bekleyen şemada reddediliyor; tekrarlar ve hata işleme sonrası uygulama çıkıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "MA-06",
+      "tools": [
+        "MetaGPT"
+      ],
+      "evidence_class": "stack_trace_with_collaborator_diagnosis",
+      "event_date": "2025-01-06/2025-01-07",
+      "affected_version_or_unknown": "master CLI; Qwen2.5-Coder-32B, Windows 11, Python 3.9.11",
+      "symptom": "Java işi için dönen paket alanı, Python alanı bekleyen şemada reddediliyor; tekrarlar ve hata işleme sonrası uygulama çıkıyor.",
+      "trigger": "Model çıktısının sabit veri şemasıyla uyuşmaması.",
+      "root_cause_and_confidence": "Traceback açık; collaborator format uyumsuzluğunu teşhis etmiş. Ayrı bir recovery bugının mekanizması tam doğrulanmış değil.",
+      "impact": "Rolün hatası takım çalışmasını kesiyor.",
+      "reported_mitigation": "Collaborator başka model denemeyi öneriyor.",
+      "fix_status": "45 günlük hareketsizlik nedeniyle bot kapattı; düzeltilmiş sürüm kanıtı yok.",
+      "boundaries": "Kapanış başarı değildir. Model değişimi önerisi kapsamlı iyileştirme kanıtı değildir.",
+      "source_ids": [
+        "MAS-10",
+        "MAS-11",
+        "MAS-12"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K15"
+        ],
+        "rationale": "Aşama sınırında veri sözleşmesi uyuşmazlığı.",
+        "boundary": "Yerel compaction değişikliği ile aynı hata değil."
+      },
+      "transferable_lesson": "Şema ihlali açık ve onarılabilir bir sonuç olmalı; aynı isteği körce tekrarlamak yetmez.",
+      "acceptance_experiment": "Eksik alanlı, eski sürümlü ve semantik olarak yanlış üç çıktı ver; görev sessiz başarıya geçmemeli ve recovery ilk hata kanıtını korumalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K15"
+        ],
+        "rationale": "Aşama sınırında veri sözleşmesi uyuşmazlığı.",
+        "boundary": "Yerel compaction değişikliği ile aynı hata değil."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "MetaGPT"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "MA-08",
+    "grup": "Dünya vakaları",
+    "baslik": "Protocol seçimi SDK'ya uygunsuz parametre geçiriyor; hata metni çıktıya dönüştürülünce workflow tamamlanmış görünüyor. Sessiz endpoint uzun bekleme yaratıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/3",
+    "ham": {
+      "id": "MA-08",
+      "tools": [
+        "ChatDev"
+      ],
+      "evidence_class": "user_observation_with_code_analysis",
+      "event_date": "2026-09-18",
+      "affected_version_or_unknown": "Repo commit belirtilmemiş; openai SDK 1.109.1",
+      "symptom": "Protocol seçimi SDK'ya uygunsuz parametre geçiriyor; hata metni çıktıya dönüştürülünce workflow tamamlanmış görünüyor. Sessiz endpoint uzun bekleme yaratıyor.",
+      "trigger": "Uygulama ayarının request payload'una sızması ve API yollarının deadline farkı.",
+      "root_cause_and_confidence": "Kod ve gözlem içeren kullanıcı raporu; maintainer teyidi yok.",
+      "impact": "Hatalı başarı sınıflandırması ve uzun sessiz bekleme.",
+      "reported_mitigation": "Transport ayarını payload'dan ayırmak ve API yollarına tutarlı timeout koymak öneriliyor.",
+      "fix_status": "Erişimde açık.",
+      "boundaries": "Sonsuz timeout yok: bildirilen SDK read timeout'u 600 saniye; uygulamanın 300 saniyelik sınırı bu yolda uygulanmıyor.",
+      "source_ids": [
+        "MAS-14"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K08",
+          "K10",
+          "K17"
+        ],
+        "rationale": "Hata metninin başarılı çıktı olması ve yanlış ilerleme algısı.",
+        "boundary": "Ortak hata sınıfı, ortak kod değil."
+      },
+      "transferable_lesson": "Araç tak-çıkar uyumu veri biçimi kadar timeout, iptal ve başarısızlık anlamını da taşımalı.",
+      "acceptance_experiment": "Bağlantıyı kabul edip yanıt vermeyen sahte endpoint ve TypeError üreten adapter kullan; tanımlı deadline'da başarısızlık makbuzu oluşmalı, completion kapısı geçilmemeli.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K08",
+          "K10",
+          "K17"
+        ],
+        "rationale": "Hata metninin başarılı çıktı olması ve yanlış ilerleme algısı.",
+        "boundary": "Ortak hata sınıfı, ortak kod değil."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "ChatDev"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "WF-05",
+    "grup": "Dünya vakaları",
+    "baslik": "Çocuk işler tamamlanmışken replay, No command scheduled for event ile 15 kez hata veriyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/4",
+    "ham": {
+      "id": "WF-05",
+      "tools": [
+        "Temporal"
+      ],
+      "evidence_class": "primary_user_report_with_uncertain_maintainer_diagnosis",
+      "event_date": "2023-07-02; rapor 2023-07-17",
+      "affected_version_or_unknown": "TypeScript worker 1.4.4",
+      "symptom": "Çocuk işler tamamlanmışken replay, No command scheduled for event ile 15 kez hata veriyor.",
+      "trigger": "Otuz dakikadan kısa yürütmenin history replay’i.",
+      "root_cause_and_confidence": "Bakımcı eski SDK’da bilinen nondeterminism hatalarını işaret ediyor. Kullanıcı deployment, query mutation ve karışık worker checksum ihtimallerini reddediyor. Kesin SDK bug teşhisi yok.",
+      "impact": "Parent yürütme ilerleyemiyor; başarılı çocuklar toplam teslim anlamına gelmiyor.",
+      "reported_mitigation": "1.7.4’e kadar gelen SDK düzeltmelerini almak için yükseltme önerilmiş.",
+      "fix_status": "Kullanıcı yükseltmeyi planlıyor; bu olayın son başarı teyidi forumda yok.",
+      "boundaries": "Her nondeterminism olayını kullanıcı deployment hatası veya motor bug’ı saymak yanlış. Sürüm eski.",
+      "source_ids": [
+        "WFS-05"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K15",
+          "K17"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Kod, SDK, skill ve sözleşme sürümleri kayıt altına alınmalı; devam uyumluluğu gerçek history ile sınanmalı.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Devam eden görevlerin kaydedilmiş history’sini aday SDK/kod sürümüyle replay et; farklı komut üretimi varsa yayını engelle."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K15",
+          "K17"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Temporal"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "WF-07",
+    "grup": "Dünya vakaları",
+    "baslik": "Fonksiyon dönse de serileştirilemeyen dict_items sonucu görev timeout’una kadar asılı kalıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/5",
+    "ham": {
+      "id": "WF-07",
+      "tools": [
+        "Hatchet"
+      ],
+      "evidence_class": "primary_bug_report_and_merged_fix",
+      "event_date": "2026-02-28",
+      "affected_version_or_unknown": "Python SDK 1.27.0; Cloud engine",
+      "symptom": "Fonksiyon dönse de serileştirilemeyen dict_items sonucu görev timeout’una kadar asılı kalıyor.",
+      "trigger": "Görev sonucu içinde JSON uyumsuz Python değeri.",
+      "root_cause_and_confidence": "Çıktı serileştirme hata yolunun görevi bitirememesi; birleşmiş PR bunu düzeltiyor.",
+      "impact": "Üretken ajan işlemi bitirmiş olsa bile koordinatör sonuç alamıyor.",
+      "reported_mitigation": "SDK serialization failure yolunu düzeltme.",
+      "fix_status": "PR 3125 aynı gün merge; değişiklik notu Python 1.27.2.",
+      "boundaries": "Küçük reproducer; büyük şirket kesintisi veya bug’ün güncelde sürmesi iddiası yok.",
+      "source_ids": [
+        "WFS-07",
+        "WFS-08"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K15",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Tak-çıkar adapteri yalnız doğru çıktıyla değil, serileştirme/şema hatalarıyla da terminal sonuç üretmeli.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Ajan sonucuna geçersiz tip/bozuk JSON ekle; iş belirli sürede açıklayıcı FAILED olmalı, asılı kalmamalı."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K15",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Hatchet"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "WF-13",
+    "grup": "Dünya vakaları",
+    "baslik": "Prefix’ten yeniden başlayan invocation, ctx.rand kullandığında replay uyumsuzluğu üretebiliyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+    "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+    "pointer": "/cases/6",
+    "ham": {
+      "id": "WF-13",
+      "tools": [
+        "Restate"
+      ],
+      "evidence_class": "official_engineering_fix_not_customer_incident",
+      "event_date": "2026-05-22; release 2026-06-18",
+      "affected_version_or_unknown": "1.6 restart-from-prefix;1.7.0 opt-in düzeltme",
+      "symptom": "Prefix’ten yeniden başlayan invocation, ctx.rand kullandığında replay uyumsuzluğu üretebiliyor.",
+      "trigger": "Yeni invocation ID ile eski journal prefix’inin taşınması.",
+      "root_cause_and_confidence": "Rastgele tohumun invocation ID’den türemesi yeni yürütmede farklı seri verebiliyor; maintainer seed’i kalıcılaştıranPR’ı birleştirmiş.",
+      "impact": "Kurtarma girişimi determinism/replay hatasına dönüşebilir; müşteri kesinti sayısı verilmemiş.",
+      "reported_mitigation": "1.7’de unique random seed flag’i yeni invocation’lara kalıcı tohum yazıyor.",
+      "fix_status": "PR 4750merge ; 1.7.0 release notunda opt-in. Aktifleştirme sonrası <1.7 rollback mümkün değil; eski invocation’lara backfill yok.",
+      "boundaries": "Ürün mühendisliği düzeltmesidir; doğrulanmış şirket outage öyküsü diye sayılmamalı.",
+      "source_ids": [
+        "WFS-16",
+        "WFS-17"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K15",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Motor değişimi/yenidenbaşlatma geçmiş kararları ve rastgeleliği koruyan göç sözleşmesi gerektirir.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Prefix içinde rastgelelik ve dış çağrı içeren görevi taşı; karar izi korunmalı, uyumsuz geri dönüş açıkça reddedilmeli."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K15",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "official_engineering_fix_not_customer_incident",
+      "requested_tool_names": [
+        "Restate"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "04_sozlesme_ve_evrim"
+    }
+  },
+  {
+    "id": "MA-01",
+    "grup": "Dünya vakaları",
+    "baslik": "Merge kuyruğundaki kayıtlar saatlerce bekliyor; ilgili branch işlenmeden silinebiliyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/05_koordinasyon_ve_birlestirme.json",
+    "sha256": "dff45f97d513ffbad9e74de605f14f9faf1ad2e832db2902cb7a56b76d0920aa",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "MA-01",
+      "tools": [
+        "Gas Town"
+      ],
+      "evidence_class": "contributor_report_not_independently_reproduced",
+      "event_date": "2026-01-17",
+      "affected_version_or_unknown": "Bilinmiyor",
+      "symptom": "Merge kuyruğundaki kayıtlar saatlerce bekliyor; ilgili branch işlenmeden silinebiliyor.",
+      "trigger": "MR ile branch yaşam döngülerinin ayrışması.",
+      "root_cause_and_confidence": "Katkıcı stale/orphan MR gözlemi ve eskalasyonu eksikliğini bildiriyor; bağımsız doğrulama yok.",
+      "impact": "Kuyruk birikmesi, manuel inceleme ve teslim edilmemiş iş kaybı riski.",
+      "reported_mitigation": "Branch varlığı ve MR yaşı denetimi önerilmiş.",
+      "fix_status": "2026-02-12 kapalı; düzeltme commit'i/sürümü doğrulanmadı.",
+      "boundaries": "Kapalı kayıt bugın bugün sürdüğünü veya eksiksiz çözüldüğünü ispatlamaz.",
+      "source_ids": [
+        "MAS-01"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K09",
+          "K14"
+        ],
+        "rationale": "Birleştirmeyi ilerletecek gerçek sahibin/koşulun eksik kalması.",
+        "boundary": "Aynı kod veya aynı kök neden iddiası değil."
+      },
+      "transferable_lesson": "Çıktı üretimi, kuyruğa alınma ve trunk'a kalıcı birleşme farklı kanıtlarla kapanmalı.",
+      "acceptance_experiment": "Worker bittikten sonra merger'ı durdur; branch'i silme isteğini dene. Teslim kanıtı oluşmadan temizlik reddedilmeli; yeniden açılışta tek MR yürütülmeli.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K09",
+          "K14"
+        ],
+        "rationale": "Birleştirmeyi ilerletecek gerçek sahibin/koşulun eksik kalması.",
+        "boundary": "Aynı kod veya aynı kök neden iddiası değil."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Gas Town"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "05_koordinasyon_ve_birlestirme"
+    }
+  },
+  {
+    "id": "MA-11",
+    "grup": "Dünya vakaları",
+    "baslik": "Ortak koordinasyon dosyası kilitleri tutuluyor/unutuluyor; 20 ajan yaklaşık 2–3 ajanlık işe düşüyor. Zor işler sahipsiz kalıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/05_koordinasyon_ve_birlestirme.json",
+    "sha256": "dff45f97d513ffbad9e74de605f14f9faf1ad2e832db2902cb7a56b76d0920aa",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "MA-11",
+      "tools": [
+        "Cursor araştırma harness'i"
+      ],
+      "evidence_class": "first_party_engineering_experiment",
+      "event_date": "2026-01-14/2026-02-05",
+      "affected_version_or_unknown": "İç araştırma harness'i; müşteri ürünü sürümü değil",
+      "symptom": "Ortak koordinasyon dosyası kilitleri tutuluyor/unutuluyor; 20 ajan yaklaşık 2–3 ajanlık işe düşüyor. Zor işler sahipsiz kalıyor.",
+      "trigger": "Eşit rollerin ortak dosya üzerinde kendi kendine görevlenmesi.",
+      "root_cause_and_confidence": "Deneyi yürüten mühendislerin doğrudan anlatımı; bağımsız yeniden üretim yok.",
+      "impact": "Çok işlem ve az gerçek ilerleme; ek integrator rolü de darboğaz yaratmış.",
+      "reported_mitigation": "İyimser eşzamanlılık, belirgin planlayıcı/worker sorumlulukları; gereksiz integrator'ı kaldırma.",
+      "fix_status": "Koordinasyonda ilerleme bildirilmiş; sonraki yazı devam eden sapma ve erken tamamlama sorunlarını anlatıyor.",
+      "boundaries": "Browser iç araştırma projesidir, dış kullanıcıya teslim için hedeflenmemiştir. CI geçişi ERP kabulü değildir.",
+      "source_ids": [
+        "MAS-18",
+        "MAS-19"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K07",
+          "K09",
+          "K17"
+        ],
+        "rationale": "Kilit, sahipsiz iş ve erken başarı söylemi birlikte görülebiliyor.",
+        "boundary": "Farklı harness ve görevler."
+      },
+      "transferable_lesson": "Ekip sayısına değil tamamlanan kabul birimi başına verime göre ölçekle.",
+      "acceptance_experiment": "Aynı bağımlılık grafiğinde 2/8/20 worker çalıştır; kilitte bekleme, yeniden yapılan iş ve kabul edilen değişiklik/saat eğrisini ölç. Tıkanıklıkta yeni ajan ekleme kararı bu ölçüme dayanmalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K07",
+          "K09",
+          "K17"
+        ],
+        "rationale": "Kilit, sahipsiz iş ve erken başarı söylemi birlikte görülebiliyor.",
+        "boundary": "Farklı harness ve görevler."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "first_party_engineering_experiment",
+      "requested_tool_names": [],
+      "additional_study": true,
+      "primary_cluster_id": "05_koordinasyon_ve_birlestirme"
+    }
+  },
+  {
+    "id": "MA-12",
+    "grup": "Dünya vakaları",
+    "baslik": "16 ajan Linux kernel derlemesinde aynı engeli çözüp birbirinin değişikliklerini eziyor; daha fazla ajan ilerlemeyi artırmıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/05_koordinasyon_ve_birlestirme.json",
+    "sha256": "dff45f97d513ffbad9e74de605f14f9faf1ad2e832db2902cb7a56b76d0920aa",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "MA-12",
+      "tools": [
+        "Anthropic agent teams",
+        "Claude Code",
+        "GCC"
+      ],
+      "evidence_class": "first_party_capability_benchmark",
+      "event_date": "2026-02-05",
+      "affected_version_or_unknown": "Opus 4.6 ile compiler deneyi",
+      "symptom": "16 ajan Linux kernel derlemesinde aynı engeli çözüp birbirinin değişikliklerini eziyor; daha fazla ajan ilerlemeyi artırmıyor.",
+      "trigger": "Büyük birleşik görev bağımsız test parçalarına ayrılamıyor.",
+      "root_cause_and_confidence": "Deneyi yapan araştırmacının doğrudan gözlemi.",
+      "impact": "%99 test geçişi de eksiksiz derleyici anlamına gelmemiş; ürün ve optimizasyon sınırları, regresyonlar kalmış.",
+      "reported_mitigation": "GCC referansıyla dosya altkümelerini karşılaştırmak; birlikte bozulan dosya çiftlerini delta debugging ile ayırmak.",
+      "fix_status": "Kernel hedefinde ilerleme sağlanmış; yayın derleyicinin tam ikame olmadığını açıklıyor.",
+      "boundaries": "Kontrollü yetenek benchmark'ı; üretimde HRMS/ERP teslim vakası değil.",
+      "source_ids": [
+        "MAS-20"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K14",
+          "K15",
+          "K18"
+        ],
+        "rationale": "Bağımlılık, birleşim ve oracle/gerileme sorunları.",
+        "boundary": "GCC benzeri otorite her iş kuralı alanında hazır bulunmayabilir."
+      },
+      "transferable_lesson": "Ortak entegrasyon engelini çok ajana çoğaltma; önce bağımsız kanıt üretilebilen sınırlara böl.",
+      "acceptance_experiment": "Bordro/izin/puantaj için ayrı ve birleşik fixture'lar kur; tek tek geçen ama birlikte bozulan çifti enjekte et. Referans sonuç kaynağı ve uyuşmazlık çözümü açıklanmadan DoD kapanmamalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K14",
+          "K15",
+          "K18"
+        ],
+        "rationale": "Bağımlılık, birleşim ve oracle/gerileme sorunları.",
+        "boundary": "GCC benzeri otorite her iş kuralı alanında hazır bulunmayabilir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "first_party_engineering_experiment",
+      "requested_tool_names": [],
+      "additional_study": true,
+      "primary_cluster_id": "05_koordinasyon_ve_birlestirme"
+    }
+  },
+  {
+    "id": "CP-10",
+    "grup": "Dünya vakaları",
+    "baslik": "Ajan testte ilgisiz akışlara sapıyor, asıl davranışı atlıyor veya UI yerine JavaScript ile durumu oluşturuyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+    "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "CP-10",
+      "tools": [
+        "Devin"
+      ],
+      "evidence_class": "official_internal_engineering_failure_modes",
+      "event_date": "2026-05-29 yayın; iç olay tarihleri tek tek verilmemiş",
+      "affected_version_or_unknown": "Erken test-mode sürümleri; bazı sınırlar yayın tarihinde sürüyor",
+      "symptom": "Ajan testte ilgisiz akışlara sapıyor, asıl davranışı atlıyor veya UI yerine JavaScript ile durumu oluşturuyor.",
+      "trigger": "Kaynaktan doğrulanmamış test varsayımı; karmaşık ortam; geçici UI olaylarının zamanlaması.",
+      "root_cause_and_confidence": "Üreticinin kendi mühendislik anlatımı. Sonucu sonradan başarılı diye yorumlama ve eksik kullanıcı-yolculuğu doğrulaması bildiriliyor; sıklık ölçümü yok.",
+      "impact": "Test yapılmış görünse de kullanıcının kabul davranışı kanıtlanmayabiliyor.",
+      "reported_mitigation": "Koda dayalı plan, eylem öncesi beklenen sonucu yazma, deterministik kurulum skill'leri ve kaydedilmiş test kanıtı.",
+      "fix_status": "Kaynak, zamanlama ve UI'ı programatik atlama sorunları üzerinde çalışıldığını söylüyor; tamamıyla çözülmüş değil.",
+      "boundaries": "Resmi deneyim anlatımıdır; bütün testlerin aldatıcı olduğu iddiası değildir. İş kuralı oracle'ını tek başına sağlamaz.",
+      "source_ids": [
+        "CPS-16"
+      ],
+      "analogous_local_findings": [
+        "K08",
+        "K17",
+        "K18"
+      ],
+      "transferable_lesson": "AC'nin beklenen sonucu testten önce sabitlenmeli; kullanıcı akışı, backend doğruluğu ve testin gerçekten icrası ayrı kanıtlanmalı.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: API doğruyken UI düğmesini boz; testin programatik kestirmeyle geçmemesini ve geçici bildirim için doğru zaman aralığı kanıtını iste.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K08",
+          "K17",
+          "K18"
+        ],
+        "rationale": "AC'nin beklenen sonucu testten önce sabitlenmeli; kullanıcı akışı, backend doğruluğu ve testin gerçekten icrası ayrı kanıtlanmalı.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "first_party_engineering_experiment",
+      "requested_tool_names": [
+        "Devin"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "06_dogruluk_oracle_ve_teshis"
+    }
+  },
+  {
+    "id": "CP-11",
+    "grup": "Dünya vakaları",
+    "baslik": "Tıkanan işler, karmaşık ama kullanılmayan çıktı ve çalışıyor görünen fakat etkisiz tema.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+    "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "CP-11",
+      "tools": [
+        "Devin"
+      ],
+      "evidence_class": "independent_first_hand_historical_trial",
+      "event_date": "2025-01-08 yayın; önceki yaklaşık bir aylık kullanım",
+      "affected_version_or_unknown": "Devin'in2024 sonu / 2025 başı ürünü; kesin build verilmemiş",
+      "symptom": "Tıkanan işler, karmaşık ama kullanılmayan çıktı ve çalışıyor görünen fakat etkisiz tema.",
+      "trigger": "20 farklı araştırma, entegrasyon ve mevcut repo görevi; desteklenmeyen/eksik tanımlı hedefler de var.",
+      "root_cause_and_confidence": "Answer.AI ekibinin ilk el gözlemleri; tek mekanizma değil. Örneğin tema varsayılan renklerle çalışıyor görünmüş, SSH incelemesi ilk şüpheye saplanmış.",
+      "impact": "20 görev:14 başarısız,3 başarılı,3 belirsiz; kurtarma için insan zamanı. Bu örneklemin sonucu, ürün geneli oran değildir.",
+      "reported_mitigation": "Ekip bazı işleri insan yönlendirmeli küçük adımlarla yeniden yapmış; üretici düzeltmesi bilgisi değil.",
+      "fix_status": "Tarihsel deneme;2026 sürümünü değerlendirmez.",
+      "boundaries": "Railway destek sınırı yazarın döneme ait değerlendirmesidir; güncel platform kuralı diye aktarılmadı. İki başarılı entegrasyon da raporda vardır.",
+      "source_ids": [
+        "CPS-17"
+      ],
+      "analogous_local_findings": [
+        "K09",
+        "K17",
+        "K18"
+      ],
+      "transferable_lesson": "Görsel olarak makul çıktı veya çok adım çalışması kabul kanıtı değildir; olanaksızlık tespiti ve durdurma bütçesi gereklidir.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: gerçek ERP'den temsilci küçük görev seti kur; kör insan değerlendirmesiyle AC, bakım kolaylığı ve kurtarma insan-süresini ölç, demo başarısını genelleme.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K09",
+          "K17",
+          "K18"
+        ],
+        "rationale": "Görsel olarak makul çıktı veya çok adım çalışması kabul kanıtı değildir; olanaksızlık tespiti ve durdurma bütçesi gereklidir.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "independent_historical_trial",
+      "requested_tool_names": [
+        "Devin"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "06_dogruluk_oracle_ve_teshis"
+    }
+  },
+  {
+    "id": "MA-07",
+    "grup": "Dünya vakaları",
+    "baslik": "Reviewer altı değerlendirme kuralını görüyor; düzeltici programcıya yalnız tek öncelikli yorum aktarılıyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+    "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "MA-07",
+      "tools": [
+        "ChatDev"
+      ],
+      "evidence_class": "reported_static_analysis_not_runtime_incident",
+      "event_date": "2026-07-11",
+      "affected_version_or_unknown": "chatdev1.0 dalı, Default company config",
+      "symptom": "Reviewer altı değerlendirme kuralını görüyor; düzeltici programcıya yalnız tek öncelikli yorum aktarılıyor.",
+      "trigger": "Devir prompt'u kabul kontrol listesini taşımıyor; inceleme üç turla sınırlı.",
+      "root_cause_and_confidence": "Kaynakta satırları belirtilen statik analiz; maintainer doğrulaması ve ölçülmüş üretim hatası yok.",
+      "impact": "Bildirime göre birden fazla ihlal veya regresyon nihai çıktıda kalabilir.",
+      "reported_mitigation": "Aynı kuralları düzeltme aşamasına da aktarmak öneriliyor.",
+      "fix_status": "Erişimde açık.",
+      "boundaries": "ChatDev 2.0'a otomatik genellenemez; olası davranış ile yaşanmış müşteri olayı ayrılmalı.",
+      "source_ids": [
+        "MAS-13"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K15",
+          "K18"
+        ],
+        "rationale": "Doğrulama ile onarım farklı sözleşmelere göre çalışabiliyor.",
+        "boundary": "Mimari benzerliktir."
+      },
+      "transferable_lesson": "AC/DoD kodlayıcı, reviewer ve birleştirici arasında sürümlü ortak veri olmalı.",
+      "acceptance_experiment": "Beş bağımsız ihlalli bir aday ver; üç tur doldu diye tamamlandı sayılmamalı. Kapanan ve açık kalan kriterler ayrı kanıtlanmalı.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K15",
+          "K18"
+        ],
+        "rationale": "Doğrulama ile onarım farklı sözleşmelere göre çalışabiliyor.",
+        "boundary": "Mimari benzerliktir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "static_analysis_not_runtime_incident",
+      "requested_tool_names": [
+        "ChatDev"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "06_dogruluk_oracle_ve_teshis"
+    }
+  },
+  {
+    "id": "MA-09",
+    "grup": "Dünya vakaları",
+    "baslik": "Rol/sistem tasarımı, ajanlar arası iletişim ve eksik/yanlış doğrulama farklı hata sınıfları oluşturuyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+    "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+    "pointer": "/cases/3",
+    "ham": {
+      "id": "MA-09",
+      "tools": [
+        "ChatDev",
+        "MetaGPT",
+        "MAST"
+      ],
+      "evidence_class": "original_empirical_benchmark",
+      "event_date": "2025-10-26",
+      "affected_version_or_unknown": "MAST v3'teki deney sürümleri; bugünkü dağıtımlar değil",
+      "symptom": "Rol/sistem tasarımı, ajanlar arası iletişim ve eksik/yanlış doğrulama farklı hata sınıfları oluşturuyor.",
+      "trigger": "Deneylerde görev, rol ve doğrulama sınırlarının tasarımı.",
+      "root_cause_and_confidence": "1.642 trace/7 sistem üzerine deneysel sınıflandırma; nedensel ve evrensel bir ürün başarısızlık oranı değil.",
+      "impact": "32 ProgramDev-v0 görevinde ChatDev başarı oranı tabanda %25, prompt müdahalesinde %34,4, döngülü topolojide %40,6; tam çözüm olmuyor.",
+      "reported_mitigation": "Rol prompt'ları ve doğrulama topolojisi müdahaleleri.",
+      "fix_status": "Araştırma sonucu; bir ürün düzeltmesi değil.",
+      "boundaries": "Kodlama/matematik/genel görev benchmark'ı. GitHub alpha/remote deploy/ERP kabulünü ölçmüyor.",
+      "source_ids": [
+        "MAS-15"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K08",
+          "K09",
+          "K18"
+        ],
+        "rationale": "Tıkanıklık ve yanlış doğrulama yalnız model yetersizliği olarak açıklanamıyor.",
+        "boundary": "Yerel hata oranı bu örneklemden hesaplanamaz."
+      },
+      "transferable_lesson": "Daha fazla yönetici ajanı eklemenin etkisini ölç; unvanı başarı güvencesi sayma.",
+      "acceptance_experiment": "Aynı görev kümesini tek yürütücü ve iki farklı takım topolojisiyle karşılaştır; AC kabulü, tekrar iş, token maliyeti ve doğrulama yanlışlarını ayrı ölç.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K08",
+          "K09",
+          "K18"
+        ],
+        "rationale": "Tıkanıklık ve yanlış doğrulama yalnız model yetersizliği olarak açıklanamıyor.",
+        "boundary": "Yerel hata oranı bu örneklemden hesaplanamaz."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "original_empirical_study",
+      "requested_tool_names": [],
+      "additional_study": true,
+      "primary_cluster_id": "06_dogruluk_oracle_ve_teshis"
+    }
+  },
+  {
+    "id": "MA-10",
+    "grup": "Dünya vakaları",
+    "baslik": "Hata teşhisini başka bir LLM'ye vermek sorumlu ajanı ve ilk kritik adımı güvenilir biçimde bulmayı garanti etmiyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+    "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+    "pointer": "/cases/4",
+    "ham": {
+      "id": "MA-10",
+      "tools": [
+        "Who&When",
+        "CaptainAgent",
+        "Magentic-One"
+      ],
+      "evidence_class": "peer_reviewed_failure_attribution_benchmark",
+      "event_date": "2025-07",
+      "affected_version_or_unknown": "2025 çalışma model/sistemleri",
+      "symptom": "Hata teşhisini başka bir LLM'ye vermek sorumlu ajanı ve ilk kritik adımı güvenilir biçimde bulmayı garanti etmiyor.",
+      "trigger": "Uzun, birbirini etkileyen çok ajanlı işlem kayıtları.",
+      "root_cause_and_confidence": "ICML deneyinde en iyi yöntem ajan seçiminde %53,5, hata adımında %14,2 doğruluk; 127 sistemden 184 anotasyon görevi.",
+      "impact": "Yanlış teşhis yanlış bileşeni onarabilir; bu ikinci cümle araştırmadan çıkarımdır.",
+      "reported_mitigation": "Çalışma üç teşhis yaklaşımını değerlendiriyor; genel çözüm sunmuyor.",
+      "fix_status": "Açık araştırma problemi.",
+      "boundaries": "GAIA/AssistantBench başarısız örnekleri seçilmiş; 127 şirket değildir ve genel sistem başarısızlık oranı ölçülmez.",
+      "source_ids": [
+        "MAS-16",
+        "MAS-17"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K08"
+        ],
+        "rationale": "Teşhis ajanı çıktısı ayrıca kanıtlanmalı.",
+        "boundary": "Yerelde kanıt dosyası okunamamıştı; bu çalışma algoritmik teşhis doğruluğunu ölçüyor."
+      },
+      "transferable_lesson": "Teşhis, log/trace referansı ve yeniden üretimle sınanmalı; salt ajan yorumu recovery izni olmamalı.",
+      "acceptance_experiment": "Kök nedeni bilinen 10 arızayı enjekte et; teşhis ajanının ilk neden, etki zinciri ve önerdiği onarımı gerçek hata kayıtlarıyla karşılaştır.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K08"
+        ],
+        "rationale": "Teşhis ajanı çıktısı ayrıca kanıtlanmalı.",
+        "boundary": "Yerelde kanıt dosyası okunamamıştı; bu çalışma algoritmik teşhis doğruluğunu ölçüyor."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.json",
+        "research_json_sha256": "ff8d066d98905a8b4a609445f1dc1d95aa3f065960a77ae3678cf20f01155e39",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/multiagent_systems.md",
+        "research_markdown_sha256": "c4a93d52b254520bdfb8a08ac4b022278eb7e62e43eaa02fa7b89a2625ce01ab",
+        "researcher": "global_multiagent_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "original_empirical_study",
+      "requested_tool_names": [],
+      "additional_study": true,
+      "primary_cluster_id": "06_dogruluk_oracle_ve_teshis"
+    }
+  },
+  {
+    "id": "CP-09",
+    "grup": "Dünya vakaları",
+    "baslik": "Ajan insan yardımı istiyor; ön yüz bunu genel MCP aracı gibi çiziyor ve cevap verilemiyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/07_devam_durum_ve_gozlem.json",
+    "sha256": "b1698cd4fc2dd863398f931c0221966080b552054e97972dcd45ebd9f65f693b",
+    "pointer": "/cases/0",
+    "ham": {
+      "id": "CP-09",
+      "tools": [
+        "Open SWE"
+      ],
+      "evidence_class": "historical_maintainer_issue_with_verified_merged_fix",
+      "event_date": "2025-07-23",
+      "affected_version_or_unknown": "2025-07-31 #505 öncesindeki web/graph uygulaması",
+      "symptom": "Ajan insan yardımı istiyor; ön yüz bunu genel MCP aracı gibi çiziyor ve cevap verilemiyor.",
+      "trigger": "request_human_help çağrısı.",
+      "root_cause_and_confidence": "Yardım isteği, bildirim, cevap arayüzü ve graph resume yolları eksik bağlanmış. Issue ve birleşmiş PR ile yüksek güven.",
+      "impact": "İstisnada durdurma kararı var, devamı sağlayacak kullanılabilir kanal yok.",
+      "reported_mitigation": "Özel cevap bileşeni, GitHub bildirimi ve graph resume bağlantısı eklendi.",
+      "fix_status": "#505 2025-07-31 main'e birleşmiş; eski issue canlı erişimi artık doğrulanamıyor.",
+      "boundaries": "Her görevde insan şartı anlamına gelmez; insan gerektiren istisnanın çözüm kanalı eksikliği örneği.",
+      "source_ids": [
+        "CPS-14",
+        "CPS-15"
+      ],
+      "analogous_local_findings": [
+        "K09",
+        "K16"
+      ],
+      "transferable_lesson": "Blocked durumunun sahibi, bildirimi ve devam koşulu yürütülebilir sözleşme olmalı.",
+      "acceptance_experiment": "Öneri, çalıştırılmadı: bilgi eksiği üret; yetkili cevap tek kez doğru iş/checkpoint'e ulaşmalı, eski cevap yeni işi yanlışlıkla sürdürmemeli.",
+      "local_analogy_normalized": {
+        "ids": [
+          "K09",
+          "K16"
+        ],
+        "rationale": "Blocked durumunun sahibi, bildirimi ve devam koşulu yürütülebilir sözleşme olmalı.",
+        "boundary": "Sentez eşleştirmesi; aynı kod, olay veya kök neden kanıtı değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.json",
+        "research_json_sha256": "d6deefb7ec263f1397f587392fe024506b1d0747dc645bc94cb4c91216568b4c",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/coding_platforms.md",
+        "research_markdown_sha256": "666a56ad51447b997aaedebe335ed854123239737d7d2083f91939b3c3d4918b",
+        "researcher": "global_coding_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Open SWE"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "07_devam_durum_ve_gozlem"
+    }
+  },
+  {
+    "id": "WF-04",
+    "grup": "Dünya vakaları",
+    "baslik": "Gece temizliği büyüyünce workflow sonlanıyor; ertesi gece otomatik devam etmiyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/07_devam_durum_ve_gozlem.json",
+    "sha256": "b1698cd4fc2dd863398f931c0221966080b552054e97972dcd45ebd9f65f693b",
+    "pointer": "/cases/1",
+    "ham": {
+      "id": "WF-04",
+      "tools": [
+        "Temporal"
+      ],
+      "evidence_class": "primary_user_confirmed_limit_hit",
+      "event_date": "2022-10-06",
+      "affected_version_or_unknown": "Go SDK; kesin sürüm belirtilmemiş; dönemin 50K history sınırı",
+      "symptom": "Gece temizliği büyüyünce workflow sonlanıyor; ertesi gece otomatik devam etmiyor.",
+      "trigger": "Çok sayıda 1500 kayıtlık activity çağrısının tek yürütmede birikmesi.",
+      "root_cause_and_confidence": "Destek history sınırını öneriyor; kullanıcı 50K sınırına vurduğunu teyit ediyor.",
+      "impact": "Periyodik temizliğin sürekliliği kesiliyor.",
+      "reported_mitigation": "Sınırlı parent, parçalara ayrılmış child workflow ve ContinueAsNew; o tarihte cron ile ContinueAsNew sorunu ayrıca belirtiliyor.",
+      "fix_status": "Tasarım/sınır vakası; 2022 cron sınırlamasının bugün sürdüğü ileri sürülmüyor.",
+      "boundaries": "50K burada tarihsel gözlemdir; bugünkü tüm plan ve sürümlere taşınacak evrensel limit değildir.",
+      "source_ids": [
+        "WFS-04"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K13"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: 12 × 12 takımın bütün diyalog ve denemeleri tek sonsuz yürütmeye doldurulmamalı; kanıtlar referansla saklanmalı.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Uzun görev geçmişini büyüt; eşik öncesi kontrollü devam ve artifact referanslarının sürekliliğini doğrula."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K13"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "user_or_maintainer_issue_record",
+      "requested_tool_names": [
+        "Temporal"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "07_devam_durum_ve_gozlem"
+    }
+  },
+  {
+    "id": "WF-06",
+    "grup": "Dünya vakaları",
+    "baslik": "Worker öldürülünce diğer worker sürekli timeout/NOT_FOUND ile yeniden deniyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/07_devam_durum_ve_gozlem.json",
+    "sha256": "b1698cd4fc2dd863398f931c0221966080b552054e97972dcd45ebd9f65f693b",
+    "pointer": "/cases/2",
+    "ham": {
+      "id": "WF-06",
+      "tools": [
+        "Temporal"
+      ],
+      "evidence_class": "primary_user_report_retracted_as_application_error",
+      "event_date": "2021-03-19/2021-03-24",
+      "affected_version_or_unknown": "Java SDK; kesin sürüm belirtilmemiş",
+      "symptom": "Worker öldürülünce diğer worker sürekli timeout/NOT_FOUND ile yeniden deniyor.",
+      "trigger": "Geliştiricinin kendi failover deneyi; heartbeat timeout 3s.",
+      "root_cause_and_confidence": "Maintainer örneği sorunsuz çalışıyor. Raporlayan sonunda kendi kodundaki hatayı bulduğunu ve failover’ın beklenen gibi çalıştığını söylüyor; hatalı satır açıklanmıyor.",
+      "impact": "İlk gözlem motorun kurtaramadığı izlenimini veriyor.",
+      "reported_mitigation": "Minimal örnekle uygulama hatasını ayırma.",
+      "fix_status": "Raporlayan tarafından çözüldü; motor arızası olarak sayılmamalı.",
+      "boundaries": "Kod hatasının ayrıntısı bilinmediğinden spesifik kök neden uydurulmadı.",
+      "source_ids": [
+        "WFS-06"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K18",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Benzer semptomlar farklı katmanlardan doğabilir; motor değişiminden önce küçültülmüş tekrar gerekir.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Aynı kill-and-resume deneyini üretim akışı ve yalın referans workflow üzerinde karşılaştır."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K18",
+          "K09"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "application_error_retraction_not_engine_bug",
+      "requested_tool_names": [
+        "Temporal"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "07_devam_durum_ve_gozlem"
+    }
+  },
+  {
+    "id": "WF-11",
+    "grup": "Dünya vakaları",
+    "baslik": "Dashboard ve loglar bozuluyor, yürütmeler ise çalışmaya devam ediyor.",
+    "kaynak": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/07_devam_durum_ve_gozlem.json",
+    "sha256": "b1698cd4fc2dd863398f931c0221966080b552054e97972dcd45ebd9f65f693b",
+    "pointer": "/cases/3",
+    "ham": {
+      "id": "WF-11",
+      "tools": [
+        "Trigger.dev"
+      ],
+      "evidence_class": "official_company_postmortem",
+      "event_date": "2026-06-30",
+      "affected_version_or_unknown": "ClickHouse 25.12 → 26.2; Trigger Cloud",
+      "symptom": "Dashboard ve loglar bozuluyor, yürütmeler ise çalışmaya devam ediyor.",
+      "trigger": "Otomatik DB yükseltmesi, heterojen JSON şemalarının background merge limitini aşması; okuma için yapılan ayar değişikliği sorunu yaymış.",
+      "root_cause_and_confidence": "Şirket raporu yeni sabit complexity sınırı, biriken parçalar, ağır sorgular ve belleğin ~180 GiB’ye vurduğu geri besleme zincirini açıklıyor.",
+      "impact": "Yaklaşık 6.5 saat liste/log API bozulması; execution ve kuyruğu etkilenmemiş.",
+      "reported_mitigation": "Bellek artırma geçici rahatlatmış; birleşemeyen parçaları ayırma ve servis ayarı uygulanmış. Şema sadeleştirme, read/write ayrımı ve doğrudan DB alarmları planlanmış.",
+      "fix_status": "Akut olay toparlanmış; her önlem tamamlandı iddiası yok.",
+      "boundaries": "Dashboard eksikliği işin durmuş olduğunu kanıtlamaz; bellek artırma merge uyumsuzluğunu tek başına çözmemiş.",
+      "source_ids": [
+        "WFS-13"
+      ],
+      "analogous_local_findings": {
+        "ids": [
+          "K13",
+          "K15",
+          "K17"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "transferable_lesson": "Çıkarım: Kontrol kararları yalnız analitik listeye bağlanmamalı; onarımın başka korumayı kaldırıp kaldırmadığı sınanmalı.",
+      "acceptance_experiment": {
+        "status": "not_run",
+        "proposed_test": "Gözlem deposunu devre dışı bırak; ilerleyen işi ikinci kez başlatmadan operasyonel durum kaynağından doğrula."
+      },
+      "local_analogy_normalized": {
+        "ids": [
+          "K13",
+          "K15",
+          "K17"
+        ],
+        "relation": "Benzer hata sınıfı; kullanıcının olayında aynı ürün hatası veya aynı kök neden kanıtlanmış değildir."
+      },
+      "provenance": {
+        "research_json": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.json",
+        "research_json_sha256": "a51e45ce17fd0398c11f229b48910fb836e69ffd37d5e15c9a17001d23da4a7e",
+        "research_markdown": "/Users/w6x/Documents/otomasyon coding 2/research_notes/Agentic otomasyonlarda gerçek dünya hataları/workflow_infrastructure.md",
+        "research_markdown_sha256": "a03675085f33c8d8507235cb0a3fa44ba6e52705c2d460026025910510507708",
+        "researcher": "global_workflow_incidents"
+      },
+      "acceptance_experiment_status": "not_run",
+      "locally_reproduced": false,
+      "synthesis_evidence_group": "official_company_postmortem",
+      "requested_tool_names": [
+        "Trigger.dev"
+      ],
+      "additional_study": false,
+      "primary_cluster_id": "07_devam_durum_ve_gozlem"
+    }
+  }
+]

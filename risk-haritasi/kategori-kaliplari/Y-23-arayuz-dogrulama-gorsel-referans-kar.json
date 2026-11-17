@@ -1,0 +1,159 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-23",
+    "ad": "Arayüz doğrulama (görsel referans karşılaştırma, gerçek cihaz, erişilebilirlik denetimi, algısal inceleme)",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-149",
+      "yetenek_sinifi": "Y-23",
+      "kalip": "Ortam kaynaklı sahte görsel fark",
+      "aciklama": "Playwright belgeleri, tarayıcı çiziminin ana işletim sistemi, sürüm, ayarlar, donanım, güç kaynağı ve headless kipine göre değişebileceğini, tutarlı ekran görüntüsü için testlerin referansın üretildiği ortamda çalıştırılması gerektiğini belirtir.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-13"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://playwright.dev/docs/test-snapshots"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştirici makinesinde (macOS) üretilen referanslar Linux CI'da sürekli fark verir; ekipler eşiği gevşetir ve gerçek arayüz hataları kaçar.",
+        "Ajan, farkı gidermek için referans görüntüyü günceller ve hatayı referansa gömer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-017",
+        "N-K04-010"
+      ],
+      "ornek_araclar": [
+        "Playwright",
+        "Percy",
+        "Chromatic",
+        "BackstopJS"
+      ],
+      "erken_sinyal": "Kod değişikliği olmadan görsel fark raporları; fark eşiklerinin sürekli yükseltilmesi.",
+      "azaltma": "Referans üretimi ve karşılaştırmanın aynı konteyner imajında yapılması, referans güncellemesinin insan onayına bağlanması."
+    },
+    {
+      "id": "RK-150",
+      "yetenek_sinifi": "Y-23",
+      "kalip": "Otomatik erişilebilirlik araçlarının sınırlı kapsamı",
+      "aciklama": "GOV.UK ekibi 143 erişilebilirlik engeli içeren bir sayfada 10 aracı test etti; engellerin %29'u hiçbir araç tarafından bulunamadı.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-16"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://accessibility.blog.gov.uk/2017/02/24/what-we-found-when-we-tested-tools-on-the-worlds-least-accessible-webpage/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kamu hizmeti arayüzleri yalnız otomatik araçla 'erişilebilir' onayı alırsa ekran okuyucu ve klavye kullanıcıları için engeller üretime çıkar.",
+        "Ajanın otomatik araç sonucunu tek kanıt olarak sunması uyum denetiminde yetersiz kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-019"
+      ],
+      "ornek_araclar": [
+        "axe-core",
+        "Lighthouse",
+        "Pa11y",
+        "WAVE"
+      ],
+      "erken_sinyal": "Otomatik araç temiz derken kullanıcı veya manuel denetimde bulunan engeller.",
+      "azaltma": "Otomatik tarama + ekran okuyucu ile manuel kontrol listesi, kritik akışlarda insan erişilebilirlik kabulü."
+    },
+    {
+      "id": "RK-151",
+      "yetenek_sinifi": "Y-23",
+      "kalip": "Görsel dil modellerinin ince ayrıntıyı kaçırması",
+      "aciklama": "'Vision language models are blind' çalışması, VLM'lerin çizgi kesişimi, daire örtüşmesi gibi basit görsel ayrıntıları güvenilir biçimde algılayamadığını gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2407.06581"
+      ],
+      "yasatacagi_sorunlar": [
+        "Algısal inceleme VLM'e bırakılırsa küçük hizalama, kesilme ve üst üste binme hataları 'görsel olarak uygun' raporlanır.",
+        "VLM yorumları deterministik olmadığı için aynı ekran farklı koşularda farklı değerlendirilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018",
+        "N-K04-012"
+      ],
+      "ornek_araclar": [
+        "GPT-4o/GPT-5 görsel",
+        "Claude görsel",
+        "Gemini görsel",
+        "Applitools Visual AI"
+      ],
+      "erken_sinyal": "VLM onayından geçen ekranlarda kullanıcıların bildirdiği görsel hatalar.",
+      "azaltma": "VLM'i piksel/DOM tabanlı deterministik kontrollerin arkasında ek katman olarak kullanma, kritik ekranlarda insan kabulü."
+    },
+    {
+      "id": "RK-152",
+      "yetenek_sinifi": "Y-23",
+      "kalip": "Gerçek cihaz bulutlarına veri çıkışı",
+      "aciklama": "Gerçek cihaz ve tarayıcı matrisi çoğunlukla yurt dışında barındırılan SaaS cihaz bulutlarıyla sağlanır; test sırasında uygulamanın işlediği veri ve ekran görüntüleri bu sağlayıcıda saklanır. KVKK md. 9 yurt dışı aktarım şartları bu akış için de geçerlidir.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-07"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kabul testlerinde maskeli olmayan veriyle çalışan uygulamanın ekran kayıtları yurt dışı cihaz bulutunda kalır.",
+        "Cihaz bulutu hesabı kesilirse gerçek cihaz kabul kapısı tümüyle durur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-018",
+        "N-K22-005"
+      ],
+      "ornek_araclar": [
+        "BrowserStack",
+        "Sauce Labs",
+        "LambdaTest",
+        "AWS Device Farm"
+      ],
+      "erken_sinyal": "Cihaz bulutu oturum kayıtlarında kişisel veri görünmesi.",
+      "azaltma": "Cihaz testlerinde yalnız sentetik veri, oturum kaydı saklama süresinin kısaltılması, kritik akışlar için kurum içi cihaz laboratuvarı."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 54,
+    "dusuk": 110,
+    "yuksek": 3
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 9,
+    "RT-11": 9,
+    "RT-10": 7,
+    "RT-03": 6,
+    "RT-16": 6,
+    "RT-14": 6,
+    "RT-07": 5,
+    "RT-01": 3,
+    "RT-06": 3,
+    "RT-15": 2,
+    "RT-02": 1,
+    "RT-04": 1,
+    "RT-05": 1,
+    "RT-13": 1,
+    "RT-12": 1
+  }
+}

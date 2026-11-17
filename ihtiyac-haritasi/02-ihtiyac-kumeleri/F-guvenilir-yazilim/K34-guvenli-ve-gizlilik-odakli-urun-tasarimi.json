@@ -1,0 +1,295 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K34",
+    "ad": "Güvenli ve gizlilik odaklı ürün tasarımı",
+    "alan": "F-guvenilir-yazilim",
+    "amac": "Üretilen ürünün güvenlik ve gizlilik niteliklerinin koddan önce, tasarımda ve her değişiklikte sistematik biçimde ele alınması; ajanların güvenli varsayılanlardan ve ölçülebilir güvenlik gereksinimlerinden başlaması.",
+    "kapsam": [
+      "epik ve özellik düzeyinde ürün tehdit modellemesi",
+      "değişiklik düzeyinde güvenlik ilgisi triyajı ve tehdit modeli farkı",
+      "kötüye kullanım ve suistimal senaryoları",
+      "gizlilik tehdit modellemesi ve etki değerlendirmesi tetikleyicisi",
+      "güvenli varsayılanlar ve onaylı başlangıç şablonları",
+      "kademeye göre güvenlik gereksinimi tabanı ve izlenebilirlik",
+      "yapay zekâ koduna özgü zayıflık profili",
+      "zafiyetten kök neden ve varyant analizi"
+    ],
+    "kapsam_disi": [
+      "ajan hattının güvenliği, kimlikleri ve yetkileri (K18)",
+      "güvenlik taraması kapısının işletimi (K18-009)",
+      "ürün yetkilendirme karar noktası (K18-001)",
+      "hukuki yükümlülüklerin yorumu (K22)"
+    ],
+    "komsu_kumeler": [
+      "K01",
+      "K05",
+      "K18",
+      "K21",
+      "K22"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K34-001",
+      "baslik": "Epik ve özellik düzeyinde ürün tehdit modellemesi",
+      "ihtiyac": "Kritik epik ve özelliklerde veri akışı, güven sınırları, varlıklar ve saldırı yüzeyi üzerinden yapılandırılmış tehdit modellemesi yapılması; sonuçların (tehdit, olasılık ve etki, önlem, kalan risk, sahip) sürümlü ve yaşayan bir artefakt olarak tutulması; önlemlerin kabul kriterine ve teste dönüşmesi; ajanın taslak çıkarabilmesi ama modelin güvenlik yetkinliği olan insanla birlikte tamamlanması.",
+      "cozulecek_sorun": "Güvenlik kusurlarının önemli kısmı koddan önce tasarımda oluşur ve kod taramasıyla yakalanamaz. Haritada tehdit modeli yalnız ajan hattı için boşluk olarak işaretli; üretilen ürün için yok. Dil modeliyle üretilen tehdit sınıflamalarının tutarlılığı sınırlı ve yeni risk sınıflarını kapsamada zorlanıyor.",
+      "yetenek_siniflari": [
+        "Y-64",
+        "Y-37",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "10+ ekipte ortak tehdit kütüphanesi ve ekipler arası güven sınırlarının ortak modeli gerekir.",
+      "kabul_olcutleri": [
+        "Kademe 0–1 hizmetlere dokunan her epikte güncel tehdit modeli var ve her yüksek tehdit bir önleme ve teste bağlı.",
+        "Tehdit modeli ilgili mimari değişiklikten sonra tanımlı süre içinde güncelleniyor.",
+        "Ajan taslağı ile son model arasındaki fark (insanın eklediği/çıkardığı tehditler) kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-330",
+          "S-331",
+          "S-332",
+          "S-333",
+          "S-343"
+        ],
+        "not": "Tehdit modelleme manifestosu sürekli iyileştirmeyi tek seferlik teslimata tercih eder. 220 makalelik inceleme çevik ortamda dokuz zorluk ve altı uygulama kategorisi raporlar. 2026 çalışmaları alan uyarlamalı dil modellerinin tehdit sınıflamasında tutarlı üstünlük göstermediğini ve yerleşik yöntemlerin tedarik zinciri ve insan merkezli risklerde yetersiz kaldığını bulur."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K34-002",
+      "baslik": "Değişiklik düzeyinde güvenlik ilgisi triyajı ve tehdit modeli farkı",
+      "ihtiyac": "Her değişikliğin güven sınırına, kimlik doğrulama ve oturuma, yetkilendirmeye, kriptografiye, dış girdi ayrıştırmaya, veri sınıfına, dış bağımlılığa veya ağ yüzeyine dokunup dokunmadığının deterministik sinyaller ve yapılandırılmış sorularla sınıflanması; dokunanlarda ilgili tehdit modelinin farkının üretilmesi ve güvenlik incelemesine yönlendirilmesi; dokunmayanlarda ek yük getirilmemesi.",
+      "cozulecek_sorun": "Epik düzeyi tehdit modeli ajanların günde çok sayıda küçük değişikliğine yetişemez; her değişikliğe tam modelleme ise sürdürülemez. Çevik ortamda tehdit modellemesinin temel zorluğu süreklilik ve güncelliktir.",
+      "yetenek_siniflari": [
+        "Y-64",
+        "Y-14",
+        "Y-09",
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ajan hacmi arttıkça güvenlik incelemesi darboğaz olur; triyaj bu kapasiteyi yalnız ilgili değişikliklere yönlendirir.",
+      "kabul_olcutleri": [
+        "Değişikliklerin %100'ünde güvenlik ilgisi sınıfı kayıtlı.",
+        "Güvenlik ilgili değişiklik tehdit modeli farkı veya gerekçeli 'etki yok' kaydı olmadan birleşmiyor.",
+        "Sınıflamanın kaçırdığı güvenlik ilgili değişiklik oranı olay ve incelemelerden geriye dönük ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-331",
+          "S-330"
+        ],
+        "not": "Değişiklik düzeyi fark önerisi, çevik tehdit modellemesi literatüründeki sürekli ve artımlı modelleme uygulamalarından çıkarımdır. Benzer mevcut ihtiyaç: N-K21-002; fark: K21-002 'güvenlik ve gizlilik' risk kategorisini tanımlar; kategoriyi belirleyen güvenlik ilgisi sinyallerini ve tehdit modeli farkını tanımlamaz."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K21-002"
+      ]
+    },
+    {
+      "id": "N-K34-003",
+      "baslik": "Kötüye kullanım ve suistimal senaryoları",
+      "ihtiyac": "Kabul kriteri türlerine kötüye kullanım senaryolarının eklenmesi: nesne ve işlev düzeyi yetki atlatma, iş akışı adımı atlama, numaralandırma, hız ve kaynak istismarı, fiyat/miktar manipülasyonu, yeniden oynatma; bu senaryoların ürün sahibi ve güvenlik yetkinliğiyle birlikte yazılıp teste bağlanması.",
+      "cozulecek_sorun": "Ajanlar ve testler ana akışa ve hata akışına odaklanır; saldırganın sistem kurallarını bilinçli olarak istismar ettiği iş mantığı açıkları taramayla bulunmaz. Yapay zekâ üretimi kodda doğrudan nesne referansı açıkları insan koduna göre belirgin biçimde daha sık.",
+      "yetenek_siniflari": [
+        "Y-44",
+        "Y-22",
+        "Y-24"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekipler arası ortak kötüye kullanım kalıp kütüphanesi senaryo yazımını hızlandırır.",
+      "kabul_olcutleri": [
+        "Kimlik, para, kişisel veri veya kota içeren her hikâyede en az bir kötüye kullanım senaryosu ve ona bağlı test var.",
+        "Başka kullanıcının kaynağına erişim (nesne düzeyi yetki) testleri her korunan uçta otomatik.",
+        "Kötüye kullanım senaryosu içermeyen yüksek riskli hikâye 'hazır' durumuna geçemiyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-337",
+          "S-338",
+          "S-339"
+        ],
+        "not": "Kötüye kullanım durumları güvenlik gereksinimi çıkarımı için yerleşik yöntemdir. 2025 kod güvenliği raporu yapay zekâ kodunda güvensiz doğrudan nesne referansının yaklaşık 1,91 kat daha olası olduğunu raporlar. Benzer mevcut ihtiyaç: N-K01-002; fark: K01-002'de 'yetki' kabul kriteri türü, K05-010'da yetki perspektifi var; saldırgan bakışı ve iş mantığı istismarı ayrı bir tür olarak tanımlı değil."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K01-002"
+      ]
+    },
+    {
+      "id": "N-K34-004",
+      "baslik": "Gizlilik tehdit modellemesi ve etki değerlendirmesi tetikleyicisi",
+      "ihtiyac": "Kişisel veri işleyen özelliklerde gizlilik tehditlerinin (bağlanabilirlik, tanımlanabilirlik, inkâr edilemezlik, tespit edilebilirlik, veri ifşası, farkındalıksızlık ve müdahale edilemezlik, uyumsuzluk) sistematik değerlendirilmesi; veri envanteri ve akış haritasının özellik düzeyinde güncellenmesi; veri minimizasyonu, amaçla sınırlama ve varsayılan gizliliğin tasarım gereksinimi olması; yüksek riskli işlemede etki değerlendirmesinin otomatik tetiklenmesi; üretilen kodda yeni kişisel veri alanı ya da akışı eklenmesinin tespit edilmesi.",
+      "cozulecek_sorun": "Mevcut gizlilik ihtiyaçları ajan hattının verisini (istem, iz, dış modele giden veri) korur; üretilen ürünün kullanıcı verisini nasıl işlediğini tasarımda ele almaz. Ajanlar gereğinden fazla veri toplayan, loglayan veya saklayan kodu kolayca üretebilir.",
+      "yetenek_siniflari": [
+        "Y-64",
+        "Y-36",
+        "Y-14"
+      ],
+      "zorunluluk": "kosullu",
+      "olcek_etkisi": "Ekipler arası veri paylaşımı arttıkça bağlanabilirlik riski ekip sınırlarını aşar; ortak veri envanteri gerekir.",
+      "kabul_olcutleri": [
+        "Kişisel veri işleyen her epikte gizlilik tehdit değerlendirmesi ve güncel veri akışı var.",
+        "Yeni kişisel veri alanı ekleyen değişiklik otomatik işaretleniyor ve veri envanteri güncellenmeden birleşmiyor.",
+        "Etki değerlendirmesi gerektiren işlemelerin tetikleyici kuralları yazılı ve uygulanıyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-334",
+          "S-335",
+          "S-336"
+        ],
+        "not": "Gizlilik tehdit modelleme çerçevesi yedi tehdit türünü veri akış diyagramı üzerinde sistematik değerlendirir ve güvenlik tehdit modellemesiyle paralel yürütülebilir; veri koruma mevzuatı tasarımda ve varsayılan olarak veri korumayı ister. Benzer mevcut ihtiyaç: N-K22-005; fark: K22-005, K18-010 ve K18-011 ajan hattının verisini kapsar; ürünün kendi kişisel veri tasarımı ve gizlilik tehdit modeli yok. Koşul: kişisel veri işleyen ürünler."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "N-K34-005",
+      "baslik": "Güvenli varsayılanlar ve onaylı başlangıç şablonları",
+      "ihtiyac": "Ajanların ve insanların yeni hizmet, uç nokta, veri deposu ve istemci üretirken başlangıç noktası olarak kullandığı; güvenli varsayılanları (kimlik doğrulama açık, en az yetki, şifreli iletim ve depolama, güvenli ayrıştırıcılar, çıktı kodlama, sıkı içerik politikası, güvenli oturum ayarları, gizli bilginin dışarıda tutulması) içeren onaylı şablon ve kütüphanelerin bulunması; şablondan sapmanın gerekçe gerektirmesi ve otomatik tespit edilmesi.",
+      "cozulecek_sorun": "Güvenliği her değişiklikte yeniden kurmak yerine varsayılana gömmek hata sınıflarını toptan ortadan kaldırır; ajanlar örnek aldıkları kalıbı çoğaltır, güvensiz örnekten başlarsa güvensizliği ölçekler.",
+      "yetenek_siniflari": [
+        "Y-08",
+        "Y-35",
+        "Y-21"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Çok ekipte ortak şablon, ekipler arası güvenlik tabanını eşitlemenin en ucuz yoludur.",
+      "kabul_olcutleri": [
+        "Yeni hizmet ve uç noktaların hedef oranı (ör. %95) onaylı şablondan üretiliyor.",
+        "Güvenli varsayılanı kapatan yapılandırma değişikliği yüksek risk sınıfına düşüyor.",
+        "Şablonlar sürümlü, sahipli ve güvenlik testinden geçmiş."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-341",
+          "S-343",
+          "S-339"
+        ],
+        "not": "Tasarımda ve varsayılan olarak güvenlik ilkeleri, ürünün ek adım gerektirmeden yaygın saldırılara dayanıklı gelmesini ister. 2025 raporu sözdizimi doğruluğu %95'i aşarken güvenlik geçme oranının %45–55 bandında düz kaldığını raporlar. Benzer mevcut ihtiyaç: N-K03-008; fark: K03-008 yeni teknoloji eklemeyi kısıtlar; güvenli başlangıç noktası ve varsayılanlardan sapma denetimi tanımlamaz."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K03-008"
+      ]
+    },
+    {
+      "id": "N-K34-006",
+      "baslik": "Kademeye göre güvenlik gereksinimi tabanı ve izlenebilirlik",
+      "ihtiyac": "Seviyelendirilmiş bir uygulama güvenliği doğrulama standardından kritiklik kademesine uygun seviyenin seçilmesi; her gereksinimin uygulanabilirlik kaydı ve doğrulama yöntemine (otomatik test, tarama, inceleme) bağlanması; gereksinim → test → kanıt izlenebilirliğinin kanıt paketinde yer alması.",
+      "cozulecek_sorun": "'Güvenli olsun' belirsiz bir kabul kriteridir; ajanlar ölçülebilir güvenlik gereksinimi olmadan güvenliği tutarlı uygulayamaz. Tarama kapısı (K18-009) bilinen zafiyet desenlerini yakalar, eksik güvenlik kontrolünü (ör. hesap kilitleme yok) yakalamaz.",
+      "yetenek_siniflari": [
+        "Y-44",
+        "Y-21",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekipler arası ortak taban, güvenlik düzeyinin karşılaştırılabilir olmasını sağlar.",
+      "kabul_olcutleri": [
+        "Her hizmet için seçili seviye ve uygulanabilir gereksinim listesi var.",
+        "Uygulanabilir gereksinimlerin %100'ü bir doğrulama yöntemine bağlı; doğrulanmamış gereksinim 'test edilmedi' olarak raporlanıyor.",
+        "Gereksinim tabanı standardın yeni sürümünden sonra tanımlı sürede güncelleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-342",
+          "S-343",
+          "S-344"
+        ],
+        "not": "2025'te yayımlanan doğrulama standardı yaklaşık 350 gereksinimi üç seviyede sunar; güvenli yazılım geliştirme çerçevesi gereksinimlerin tanımlanmasını ve doğrulanmasını ister, 1.2 taslağı Aralık 2025'te yayımlandı. Benzer mevcut ihtiyaç: N-K18-009; fark: K18-009 taramanın kapıda koşmasını ister; olumlu güvenlik gereksinimlerinin tanımı ve doğrulama izlenebilirliği yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "N-K34-007",
+      "baslik": "Yapay zekâ üretimi kodun zayıflık profiline göre hedefli güvenlik doğrulaması",
+      "ihtiyac": "Yapay zekâ üretimi kodda insan koduna göre daha sık görülen zayıflık sınıfları (çıktı kodlama ve betik enjeksiyonu, nesne düzeyi yetki, parola ve oturum işleme, güvensiz kriptografi, girdi doğrulama) için hedefli kural, negatif test kalıbı ve inceleme kontrol noktaları; güvenlik bulgu yoğunluğunun değişiklik kaynağına (ajan/insan/karma) göre izlenmesi ve profil değiştikçe kuralların güncellenmesi.",
+      "cozulecek_sorun": "Kod üretiminin sözdizimsel doğruluğu artarken güvenlik geçme oranları model kuşaklarından bağımsız olarak düşük kalıyor; genel tarama kapısı bu profili hedeflemiyor ve köken bazında ölçmüyor.",
+      "yetenek_siniflari": [
+        "Y-21",
+        "Y-22",
+        "Y-29"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ajan hacmi arttıkça aynı zayıf kalıp hızla çoğalır; ortak kural seti tüm ekiplere dağıtılmalıdır.",
+      "kabul_olcutleri": [
+        "Hedef zayıflık sınıflarının her biri için en az bir deterministik kontrol ve bir negatif test kalıbı var.",
+        "Güvenlik bulgu yoğunluğu köken bazında raporlanıyor.",
+        "Zayıflık profili en az altı ayda bir güncelleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-339",
+          "S-340"
+        ],
+        "not": "100+ modelin kodu üzerinde yapılan 2025 değerlendirmesinde testlerin %45'inde güvenlik kusuru, betik enjeksiyonunda yaklaşık 2,74 kat artış raporlandı; 2026 güncellemesi durumun sürdüğünü belirtiyor. Sektör raporu olduğundan yöntem sınırlılıkları dikkate alınmalı. Benzer mevcut ihtiyaç: N-K18-009; fark: K18-009 genel tarama eşiği tanımlar; yapay zekâ koduna özgü zayıflık profiline göre hedefleme ve köken bazlı ölçüm yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "N-K34-008",
+      "baslik": "Zafiyetten tasarım dersine: kök neden ve varyant analizi",
+      "ihtiyac": "Üretimde veya testte bulunan her önemli zafiyet için kök neden analizi; aynı kalıbın kod tabanının geri kalanında ve diğer ekiplerin depolarında aranması (varyant analizi); şablon, kural ve güvenlik gereksinimi tabanının güncellenmesi; zafiyet sınıfı için regresyon kontrolünün eklenmesi.",
+      "cozulecek_sorun": "Ajanlar bir kalıbı çok sayıda yere kopyalayabildiğinden tek bir zafiyet sınıfı birden çok konumda bulunur; tekil düzeltme sorunu kapatmaz.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-21",
+        "Y-63"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Varyant araması ekip depolarını aşmalıdır; 3+ ekipte ortak arama yeteneği gerekir.",
+      "kabul_olcutleri": [
+        "Kapanan yüksek ve kritik zafiyetlerin %100'ünde varyant araması kaydı var.",
+        "Zafiyet sınıfı için deterministik kontrol eklenmiş ya da neden eklenemediği yazılı.",
+        "Aynı zafiyet sınıfının tekrar oranı izleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-343",
+          "S-136"
+        ],
+        "not": "Güvenli yazılım geliştirme çerçevesi zafiyetlerin kök nedeninin analizini ve benzer zafiyetlerin aranmasını ister; kod klonlarındaki artış kalıp kopyalanmasının yaygınlaştığını gösterir. Benzer mevcut ihtiyaç: N-K08-002; fark: K08-002 kaçan hatadan regresyon testi üretir; zafiyet sınıfının kök nedenine, varyantlarına ve tasarım artefaktlarına dönüşünü tanımlamaz."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K08-002"
+      ]
+    }
+  ]
+}

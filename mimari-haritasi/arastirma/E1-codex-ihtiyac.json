@@ -1,0 +1,909 @@
+{
+  "meta": {
+    "gorev": "E1 — ihtiyaç haritası karşılaştırması (ikinci bağımsız atlas + pano PDF'leri + ara çıkarım dosyaları)",
+    "tarih": "2026-09-27",
+    "karsilastirilan": [
+      "otomasyon coding 2/ihtiyac-kumeleri/ (113 ihtiyaç, 16 küme, T01–T22, G01–G28, UU01–UU16, Q01–Q32, C01–C13, W01–W31)",
+      "otomasyon coding 2/research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json ve .md",
+      "~/Desktop/Agentic first development-first-gate.pdf ve -belirsizlikler.pdf (görüntü olarak okundu)",
+      "otomasyon coding 2/tmp/ihtiyac-analizi/, tmp/ihtiyac-tamamlama/, tmp/pdfs/ (betikle tarandı)"
+    ],
+    "yontem": "Karşılaştırma ve tarama scratchpad betikleriyle (python3 -B) yapıldı; ikinci atlas dizini yalnız okundu, orada hiçbir şey çalıştırılmadı; claude-karsilastirma/ klasörü kapsam dışı tutuldu. Dış iddialar birincil kaynaklardan (standart/rehber/makale sayfaları) doğrulandı; PDF'ler sistem aracıyla görüntüye çevrilip okundu (SHA-256 değerleri ikinci atlasınkiyle aynı).",
+    "sayilar": {
+      "yeni_ihtiyac": 7,
+      "kabul_olcutu_eklenen_mevcut_ihtiyac": 25,
+      "yeni_bilinmeyen": 8,
+      "yeni_bosluk": 3,
+      "yeni_acik_soru": 6,
+      "yeni_celiski": 2,
+      "yeni_dis_kaynak": 15,
+      "yeni_yerel_kaynak": 3,
+      "ihtiyac_toplami": "388 → 395",
+      "tmp_aday_cumle": 2484,
+      "tmp_benzersiz": 2134
+    },
+    "marka_taramasi": "Eklenen/değişen tüm metin alanları tarandı; ihtiyaç metinlerinde ürün adı yok. Kalan eşleşmeler: 'kimin', 'orkestrasyon' (yanlış pozitif), N-K25-002'deki önceden var olan çerçeve adı ve kayıt dosyası yolu. Köken alanı adı ('codex_kaynagi') görev gereği korunmuştur; metin değil alan adıdır. Kaynak bağlantıları (kaynak_url, url) köken bilgisidir."
+  },
+  "codex_fazlasi_eklenenler": [
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K01-005 (Her beklenti için zorunlu oracle alanları): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-384 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K01-talep-gorev-tanimi-ve-hazir-olma.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T18; ihtiyac-kumeleri/kumeler/04_dogruluk_ve_urun_nitelikleri/01_oracle_test_ve_kanit.json#I11-01",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://arxiv.org/abs/2609.08149"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K03-012 (Ekipler arası tüketici odaklı sözleşmeler ve kullanımdan kaldırma politikası): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-388 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K03-kod-tabani-baglami-ve-mimari-sinirlar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T09; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/02_insan_ekip_ve_yonetisim.json#I02-02",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://scrumguides.org/scrum-guide.html"
+      ]
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K04-014 Arayüz ve hata yönetimi yasak kalıp kataloğu ve mevcut ihlal tabanı",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K04-uygulama-ve-tasarim-kalitesi.json",
+      "codex_kaynagi": "tmp/ihtiyac-analizi/pdf-02.txt (kaynak dosya: Oracle-Problem/oracle-problem-v2.pdf; SHA-256 e7e2cb7e52e8… bu haritadaki S-002 ile aynı)",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K05-016 (Yapay zekâ denetçisinin sınırları ve kalibrasyonu): son 1 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T04; ihtiyac-kumeleri/kumeler/04_dogruluk_ve_urun_nitelikleri/01_oracle_test_ve_kanit.json#I11-09",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://arxiv.org/abs/2306.05685"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K05-021 (Örtük oracle katmanı): son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F09",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K05-024 (Arka uç, arayüz ve veri doğrulaması): son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F10",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K05-025 (İnsan davranış kabulü): son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F07,F08,F09,F10,F11",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": []
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K05-031 Kabul kanıtının geçerlilik bağlamı ve koşul değişince yeniden açılması",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T21; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/03_ihtiyac_ifadesi_ve_kabul.json#I03-04",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/playbook/measure/",
+        "https://www.w3.org/TR/prov-dm/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K06-003 (Birleşim sonrası yeniden doğrulama): son 1 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K06-entegrasyon-surum-kontrolu-ve-yayin.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#do_not_add_or_assume; research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.md",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K08-001 (Aşamalı geri bildirim triyajı): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-374 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K08-geri-bildirim-isletim-ve-surekli-iyilestirme.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T08; ihtiyac-kumeleri/kumeler/05_sureklilik_ve_ogrenme/02_ekonomi_olcum_ve_ogrenme.json#I16-05",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K08-006 (Olaylardan kural ve yetenek paketine geri besleme): son 1 kabul ölçütü ve kanıt kaynaklarından S-097 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K08-geri-bildirim-isletim-ve-surekli-iyilestirme.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B12",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K13-004 (Dış yan etkilerde idempotency ve uzlaştırma): son 3 kabul ölçütü ve kanıt kaynaklarından S-095, S-382 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T11; ihtiyac-kumeleri/kumeler/02_ajan_bilgi_ve_etkilesim/04_sistemler_arasi_etkilesim.json#I08-04",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://www.rfc-editor.org/rfc/rfc9110.html"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K13-005 (Bayat işçi yazımının reddi): son 1 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T10; ihtiyac-kumeleri/kumeler/03_guvenli_ve_tutarli_yurutme/01_orkestrasyon_ve_durum.json#I09-01",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K13-006 (Zaman aşımı, sinyal ve gerçek iptal): son 1 kabul ölçütü ve kanıt kaynaklarından S-097 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B10",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K14-010 Bilgi düzeltmesinin türevlere yayılması ve eski kopyadan geri dönüşün önlenmesi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K14-baglam-bilgi-erisimi-ve-bellek.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T15; ihtiyac-kumeleri/kumeler/02_ajan_bilgi_ve_etkilesim/03_bilgi_baglam_ve_bellek.json#I07-04,I07-06",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://www.w3.org/TR/prov-dm/",
+        "https://arxiv.org/abs/2507.05257",
+        "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K15-006 (Ekipler arası adil kaynak paylaşımı): son 3 kabul ölçütü ve kanıt kaynaklarından S-095, S-386 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K15-calisma-ortami-izolasyon-ve-kapasite.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T13; ihtiyac-kumeleri/kumeler/03_guvenli_ve_tutarli_yurutme/01_orkestrasyon_ve_durum.json#I09-08",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://sre.google/sre-book/handling-overload/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K16-004 (Yedekten dönüş ve kurtarma tatbikatı): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-378 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K16-ajan-platformunun-isletimi-ve-surdurulebilirligi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T16; ihtiyac-kumeleri/kumeler/05_sureklilik_ve_ogrenme/01_isletim_ve_kurtarma.json#I15-04",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K16-007 (Bozulmuş mod): son 3 kabul ölçütü ve kanıt kaynaklarından S-095, S-387 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K16-ajan-platformunun-isletimi-ve-surdurulebilirligi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T14; ihtiyac-kumeleri/kumeler/05_sureklilik_ve_ogrenme/01_isletim_ve_kurtarma.json#I15-05",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://sre.google/sre-book/addressing-cascading-failures/"
+      ]
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K16-010 Bileşen değişimi ve devreden çıkarmada iş anlamının taşınması ve açık kayıp",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K16-ajan-platformunun-isletimi-ve-surdurulebilirligi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T17; ihtiyac-kumeleri/kumeler/02_ajan_bilgi_ve_etkilesim/01_ajan_ve_model_yetenekleri.json#I05-07; ihtiyac-kumeleri/kumeler/05_sureklilik_ve_ogrenme/01_isletim_ve_kurtarma.json#I15-07",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://www.w3.org/TR/dwbp/",
+        "https://www.w3.org/TR/prov-dm/",
+        "https://airc.nist.gov/airmf-resources/playbook/manage/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K17-003 (Standart engel kaydı ve sahipliği): son 1 kabul ölçütü ve kanıt kaynaklarından S-097 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K17-insan-gozetimi-onay-ve-eskalasyon.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B05",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K17-004 (Bekleme süreleri ve eskalasyon): son 2 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K17-insan-gozetimi-onay-ve-eskalasyon.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T03; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/02_insan_ekip_ve_yonetisim.json#I02-01",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K18-014 Adına işlem yapılan taraf ile yürütücünün ayrılması ve yetki iptalinin yayılması",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K18-guvenlik-yetkilendirme-ve-gizlilik.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T12; ihtiyac-kumeleri/kumeler/03_guvenli_ve_tutarli_yurutme/02_guvenlik_yetki_ve_guven.json#I10-09",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://www.rfc-editor.org/rfc/rfc8693.html",
+        "https://www.rfc-editor.org/rfc/rfc7009.html"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K23-001 (Kurumun kendi görev seti): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-375 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T01; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/01_deger_ve_kapsam.json#I01-01",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/playbook/measure/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K23-003 (Çoklu koşu ve güven aralığı): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-385 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T20; ihtiyac-kumeleri/kumeler/04_dogruluk_ve_urun_nitelikleri/01_oracle_test_ve_kanit.json#I11-07",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://arxiv.org/abs/2406.12045"
+      ]
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K23-016 Değerlendirme örneklerinin kökeni, kullanım geçmişi ve sızıntı sınırı",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T19; ihtiyac-kumeleri/kumeler/04_dogruluk_ve_urun_nitelikleri/01_oracle_test_ve_kanit.json#I11-10",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://arxiv.org/abs/2609.08149",
+        "https://airc.nist.gov/airmf-resources/playbook/measure/"
+      ]
+    },
+    {
+      "tur": "yeni_ihtiyac",
+      "ne": "N-K23-017 İyileşme iddialarının karşılaştırılabilir ve yanlısız ölçülmesi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T02; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/01_deger_ve_kapsam.json#I01-05; ihtiyac-kumeleri/kumeler/05_sureklilik_ve_ogrenme/02_ekonomi_olcum_ve_ogrenme.json#I16-01",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://metr.org/blog/2026-02-24-uplift-update/",
+        "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+        "https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity-theres-more-to-it-than-you-think/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K25-002 (SAFe rolleriyle eşleme): son 1 kabul ölçütü ve kanıt kaynaklarından S-097 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/D-organizasyon-ve-olcek/K25-roller-yetkinlik-ve-degisim-yonetimi.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B02,B03",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K25-005 (Yapay zekâ okuryazarlığı ve eğitim): son 1 kabul ölçütü ve kanıt kaynaklarından S-095, S-374 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/D-organizasyon-ve-olcek/K25-roller-yetkinlik-ve-degisim-yonetimi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T06; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/02_insan_ekip_ve_yonetisim.json#I02-08",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+      ]
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K26-001 (Tek durum modeli ve pano eşlemesi): son 2 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/D-organizasyon-ve-olcek/K26-is-takip-sistemi-ve-is-kalemi-yasam-dongusu.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F03,F07",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K26-002 (Komutla başlatma): son 1 kabul ölçütü ve kanıt kaynaklarından S-096 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/D-organizasyon-ve-olcek/K26-is-takip-sistemi-ve-is-kalemi-yasam-dongusu.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/F05",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K27-007 (Gözetim sorumluluğunun devri ve vekâlet): son 2 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/E-insan-ajan-birlikte-calisma/K27-insanajan-is-birligi-modeli-yetki-devri-ve-is.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T05; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/02_insan_ekip_ve_yonetisim.json#I02-07",
+      "dogrulama": "kismen",
+      "kaynak_url": []
+    },
+    {
+      "tur": "kabul_olcutu_ekleme",
+      "ne": "N-K28-005 (Varsayım günlüğü ve varsayımların incelemede sunulması): son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-376 eklendi",
+      "nereye_eklendi": "ihtiyac-haritasi/02-ihtiyac-kumeleri/E-insan-ajan-birlikte-calisma/K28-ortak-baglam-yonlendirme-ve-inceleme-ergonomisi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T22; ihtiyac-kumeleri/kumeler/01_amac_ve_ortak_anlayis/03_ihtiyac_ifadesi_ve_kabul.json#I03-05",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/playbook/manage/"
+      ]
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-070 Değerlendirme kirlenmesi: başarılı örnekler kontrollü öğrenme, ortak bellek veya eski çıktılar yoluyla değerlendirme setine sızar; iç ölçüm artarken g",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU06",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-071 Ortak yanlış anlamın bağımsız görünen üretim, test ve incelemeye yayılması: aynı belirsiz örneği kodlayan, test eden ve inceleyen ajanlar aynı yanlış ",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU01",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-072 Çoklu arıza birleşimi: kesinti, geç gelen olay ve iptal aynı anda olur; tek tek tatbik edilmiş senaryolar birleşik durumda eski işin yeniden dış etki ",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU08",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-073 Geri almanın sahte güveni: önceki yazılım sürümüne dönmek, dış sistemde yapılmış işlemleri veya dönüştürülmüş veriyi geri getirmez; kod eski halindeyk",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU09",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-074 Yetki zincirinde dolaylı yükselme: tek tek izinli ve zararsız görünen erişimler birleşerek başka bağlamın verisini taşır ya da amaç dışı toplam etki ü",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU12",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-075 Risk puanının kör noktası: nadir fakat geri döndürülemez zarar, olasılık × etki ortalamasında düşük puan alır ve otomasyon düzeyi buna göre gevşer.",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU13",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-076 Belgelerde temsil edilmeyen etkilenen taraf: bakım, destek, erişilebilirlik ihtiyacı olan kullanıcı veya müşteri tarafındaki bir ihtiyaç teknik kabuld",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU15",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bilinmeyen",
+      "ne": "U-077 Bellekte gecikmiş bozulma: bir üründe doğru olan kural özetlenip ortak belleğe girer, başka ürünün kesin kuralı gibi kullanılır; düzeltilmiş bilgi esk",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/03_unknown_unknowns.json#UU05; ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T15",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bosluk",
+      "ne": "G-036 Kanıt, onay ve bilginin geçerlilik bağlamı ile geçersizleşme kuralı tanımsız",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/gap-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/01_gap_analizi.json#G10,G24,G26",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "bosluk",
+      "ne": "G-037 Yetki devri zinciri ve iptalin yayılımı tanımsız",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/gap-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/01_gap_analizi.json#G23",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "bosluk",
+      "ne": "G-038 İyileşme ve yeterlilik iddialarının ölçüm geçerliliği tanımsız",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/gap-analizi.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/01_gap_analizi.json#G12,G27; ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T02,T19",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "acik_soru",
+      "ne": "Q-071 Çalışma sisteminin yararlanıcıları ile üretilen yazılımın yararlanıcıları kimler; hangi somut kullanıcı veya iş sorunu azaltılacak ve başarı hangi baş",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/04_acik_sorular.json#Q01,Q02,Q31",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "acik_soru",
+      "ne": "Q-072 Hangi koşul değişiklikleri (model, kural/yetenek paketi, iş kuralı, yetki, dış sistem, kullanım biçimi) mevcut kabul kanıtını yeniden açar; hangi deği",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/01_gap_analizi.json#G10; ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T21",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "acik_soru",
+      "ne": "Q-073 Bilgi düzeltildiğinde veya silindiğinde türevler (özet, bellek, karar, bekleyen iş) nasıl ele alınacak; silme yükümlülüğü ile denetim için tarihsel ka",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/04_acik_sorular.json#Q12",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "acik_soru",
+      "ne": "Q-074 Bir insanın veya ajanın yetkisi geri alındığında kuyruktaki, süren, alt ajana devredilmiş ve kesintiden dönen işler ne yapmalı; kabul edilebilir iptal",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/04_acik_sorular.json#Q09; ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T12",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "acik_soru",
+      "ne": "Q-075 Hangi değişikliklerin etkisi geri alınamaz veya yalnız telafi edilebilir; bunlar için kabul edilebilir telafi nedir ve kim onaylar?",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/analiz/04_acik_sorular.json#Q26",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "acik_soru",
+      "ne": "Q-076 Ekipler üstü koordinasyon katmanı hangi durumlarda aksiyon alır ve görevler bu katmandan ekiplere nasıl dağıtılır (bağımlılık, öncelik, eşzamanlı iş s",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B05,B06",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "celiski",
+      "ne": "C-040 İnsanın olağan akıştaki rolü: ara müdahale ve eş üretim mi, yalnız girdi ve çıktı mı?",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/celiskiler.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#source_conflicts/Ara insan müdahalesi",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "celiski",
+      "ne": "C-041 'Bitti' durumu ile insan kabul testinin sırası",
+      "nereye_eklendi": "ihtiyac-haritasi/03-analizler/celiskiler.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#source_conflicts/Done zamanı",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-374 https://airc.nist.gov/airmf-resources/airmf/5-sec-core/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W09",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-375 https://airc.nist.gov/airmf-resources/playbook/measure/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W25",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-376 https://airc.nist.gov/airmf-resources/playbook/manage/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W26",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-377 https://www.w3.org/TR/prov-dm/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W22",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-378 https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W23",
+      "dogrulama": "kismen"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-379 https://arxiv.org/abs/2507.05257",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W31",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-380 https://www.rfc-editor.org/rfc/rfc8693.html",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W18",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-381 https://www.rfc-editor.org/rfc/rfc7009.html",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W19",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-382 https://www.rfc-editor.org/rfc/rfc9110.html",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W17",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-383 https://www.w3.org/TR/dwbp/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W24",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-384 https://arxiv.org/abs/2609.08149",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W29",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-385 https://arxiv.org/abs/2406.12045",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W27",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-386 https://sre.google/sre-book/handling-overload/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W20",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-387 https://sre.google/sre-book/addressing-cascading-failures/",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W21",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "dis_kaynak",
+      "ne": "S-388 https://scrumguides.org/scrum-guide.html",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/kaynaklar/02_arastirma.json#W03",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "yerel_kaynak",
+      "ne": "S-095",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/kaynak-envanteri.json",
+      "codex_kaynagi": "ihtiyac-kumeleri/",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "yerel_kaynak",
+      "ne": "S-096",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/kaynak-envanteri.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#sources/LOCAL-PDF-FIRST-GATE",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "tur": "yerel_kaynak",
+      "ne": "S-097",
+      "nereye_eklendi": "ihtiyac-haritasi/01-cerceve/kaynak-envanteri.json",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#sources/LOCAL-PDF-UNCERTAINTIES",
+      "dogrulama": "dogrulandi"
+    }
+  ],
+  "pdf_gereksinim_eslesmesi": [
+    {
+      "id": "F01",
+      "konu": "Toplu (12.000 kayıt) ve görsel kaynaklı talep girişi",
+      "bizdeki_karsilik": "N-K02-001, N-K02-003, N-K26-005",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F02",
+      "konu": "Form ile yeni talep girişi",
+      "bizdeki_karsilik": "N-K01-001, N-K01-002",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F03",
+      "konu": "Bekleme havuzu → karar → kabul/red, reddedilenler arşivi",
+      "bizdeki_karsilik": "N-K26-001",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F04",
+      "konu": "Sprint planlama, sprint backlog'u, yapılacaklar",
+      "bizdeki_karsilik": "N-K30-004, N-K30-006, N-K26-006",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F05",
+      "konu": "Geliştiricinin işi 'devam ediyor'a taşımasıyla ajanın işi kuyruğa çekmesi",
+      "bizdeki_karsilik": "N-K26-002 (+kabul), N-K13-012",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F06",
+      "konu": "Sorun var mı? → hata → insan müdahalesi → yeniden devam",
+      "bizdeki_karsilik": "N-K17-008, N-K17-003; C-040",
+      "durum": "celiski_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F07",
+      "konu": "Bitti → insan test eder",
+      "bizdeki_karsilik": "N-K05-025 (+kabul), N-K26-001 (+kabul); C-041",
+      "durum": "kabul_ve_celiski_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F08",
+      "konu": "Pozitif ve negatif testler",
+      "bizdeki_karsilik": "N-K01-004, N-K05-010, N-K05-025",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F09",
+      "konu": "Kullanıcı yolculuğu ve rastgele etkileşim (monkey) testi",
+      "bizdeki_karsilik": "N-K05-018; N-K05-021 (+kabul), N-K05-025 (+kabul)",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F10",
+      "konu": "Veritabanına yansıyor mu?",
+      "bizdeki_karsilik": "N-K05-024 (+kabul)",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "F11",
+      "konu": "'Başka?' ve bağlanmamış karar/çıktı biçimi",
+      "bizdeki_karsilik": "N-K10-003, N-K26-004, N-K27-004, N-K05-025 (+kabul)",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B01",
+      "konu": "Program katmanı ne yapar",
+      "bizdeki_karsilik": "N-K24-002, N-K25-002",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B02",
+      "konu": "Program rol kutuları",
+      "bizdeki_karsilik": "N-K25-002 (+kabul)",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B03",
+      "konu": "Ekip rol kutuları",
+      "bizdeki_karsilik": "N-K25-002 (+kabul), N-K10-005",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B04",
+      "konu": "İş takip sisteminden orkestrasyona iletim notu (araç adları)",
+      "bizdeki_karsilik": "N-K13-013, N-K12-004",
+      "durum": "vardi_arac_adi_aktarilmadi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B05",
+      "konu": "Program katmanı hangi durumlarda aksiyon alır?",
+      "bizdeki_karsilik": "N-K17-003 (+kabul), Q-076",
+      "durum": "kabul_ve_soru_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B06",
+      "konu": "Görevler program katmanından ekiplere nasıl gider?",
+      "bizdeki_karsilik": "N-K24-003, N-K31-005, N-K02-011, Q-076",
+      "durum": "soru_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B07",
+      "konu": "Ekip ne yapacak (keşif→uygulama→doğrulama→teslim)",
+      "bizdeki_karsilik": "A alanı kümeleri K01–K06",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B08",
+      "konu": "Test-önce",
+      "bizdeki_karsilik": "N-K05-001..004",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B09",
+      "konu": "Oracle problemi",
+      "bizdeki_karsilik": "N-K01-005, N-K05-008",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B10",
+      "konu": "Takılırsa devam etmesini sağlamak",
+      "bizdeki_karsilik": "N-K13-006 (+kabul), N-K04-003",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B11",
+      "konu": "Sürüm kontrolü akışı",
+      "bizdeki_karsilik": "N-K06-001..003",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B12",
+      "konu": "Hataya düşen işte sürekli iyileştirme",
+      "bizdeki_karsilik": "N-K08-006 (+kabul), N-K11-007",
+      "durum": "kabul_eklendi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B13",
+      "konu": "Ekiplerin çoğaltılması",
+      "bizdeki_karsilik": "N-K24-001, N-K15-006",
+      "durum": "vardi",
+      "pdf_dogrulama": "dogrulandi (görünür sayfa görüntüden okundu)"
+    },
+    {
+      "id": "B14",
+      "konu": "Boş şablon kutuları",
+      "bizdeki_karsilik": "karşılık gerekmez",
+      "durum": "gerekmez",
+      "pdf_dogrulama": "gerekmez"
+    }
+  ],
+  "tmp_taramasi": {
+    "betik": "scratchpad/e1/tara_tmp.py",
+    "sonuc": "Üreteç ve bütünleştirme betiklerindeki ihtiyaç metinleri nihai pakette birebir var (kapsama 1.0) ya da yalnız meta/arayüz metni; düşürülmüş taslak ihtiyaç bulunmadı. Pano metinlerinde güçlü gereklilik işaretli ve her iki haritada da düşük kapsamalı 39 + 58 aday incelendi; çoğu akademik makale parçası (pdf-04/05) veya iki haritada zaten karşılanan parçalı pano metni.",
+    "eklenen": "N-K04-014 — ikinci oracle panosundaki numaralı arayüz yasak kalıpları listesi ve mevcut ihlal sayıları (iki haritada da ihtiyaç olarak yoktu).",
+    "eklenmeyen": "Pano metnindeki ihlal sayıları başka sütunlarla iç içe geçtiğinden aktarılmadı; model kartı, araç adı ve kurulum notları marka/araç düzeyi olduğundan aktarılmadı."
+  },
+  "eklenmeyenler": [
+    {
+      "ne": "İkinci atlasın ~100 ihtiyacı (I01–I16)",
+      "neden": "Bu haritada karşılığı var (ör. I03-06→N-K02-003/N-K08-004, I09-05→N-K20-003, I10-03→N-K18-005, I14-01→N-K06-001/N-K22-004, I12-*→N-K04-010/N-K05-018/019); yalnız kabul güçlendirmeleri aktarıldı."
+    },
+    {
+      "ne": "tamamlama/02_ornek_is_sozlesmeleri.json (4 sentetik senaryo)",
+      "neden": "Gerçek kurum kanıtı değil, şemamızda karşılığı yok; olumlu/olumsuz kabul ölçütleri ilgili ihtiyaçlara aktarıldı."
+    },
+    {
+      "ne": "tamamlama/03_bilinenler_ve_acik_kanitlar.json, 04_degisim..., 05_onceki...",
+      "neden": "Paket durum ve sürüm kayıtları; ihtiyaç içeriği değil."
+    },
+    {
+      "ne": "analiz/06_kapsama_izlenebilirlik.json",
+      "neden": "Kaynak→küme eşlemesi bizde kaynak-envanteri 'katki_kumeleri' ve ihtiyaç 'kanit' alanlarıyla karşılanıyor."
+    },
+    {
+      "ne": "T07 (inceleme yükünde dikkat)",
+      "neden": "N-K28-009, N-K17-005, N-K28-010 ile karşılanmış."
+    },
+    {
+      "ne": "UU02, UU03, UU04, UU07, UU10, UU11, UU14, UU16",
+      "neden": "Bizde U-062, U-044, U-008/U-069, U-048/U-004, U-027, U-001/U-019/U-031, U-034, U-011 olarak var."
+    },
+    {
+      "ne": "G01–G28'in çoğu, Q01–Q32'nin çoğu, C01–C13",
+      "neden": "Bizde karşılığı var (ör. C01→C-001, C02→C-005/C-007, C08→C-015, C09→C-032, C11→C-026, C12→C-034, C13→C-024); yalnız karşılığı olmayanlar G-036–G-038, Q-071–Q-075 olarak eklendi."
+    },
+    {
+      "ne": "Q06 (hiçbir onayla aşılamayacak zararlar)",
+      "neden": "N-K21-004, Q-018 ve yeni Q-075 kapsıyor."
+    },
+    {
+      "ne": "W01, W02, W12, W13, W14, W16, W28, W30",
+      "neden": "Bizde zaten var (S-153, S-343, S-105, S-287, S-282, S-181, S-140, S-114)."
+    },
+    {
+      "ne": "W04–W08, W10, W11, W15",
+      "neden": "Eklenen hiçbir kayıt bunlara dayanmadı; bu çalışmada yeniden doğrulanmadı."
+    },
+    {
+      "ne": "Mimari araştırma notundaki altyapı beyanları (tek giriş sistemi, önizleme deposu ve alt alan adı, 12+ ekip profili, sunucu belleği) ve açık bağlam boşlukları GNEW01–GNEW12",
+      "neden": "Araç/altyapı düzeyi, marka içeriyor ve mimari haritaya ait; ihtiyaç düzeyi karşılıkları var (Q-005, Q-008, Q-012, Q-032, N-K17-005)."
+    },
+    {
+      "ne": "Girdi/çıktı sözleşmesi alanları (10+12+24+23 girdi, 20 çıktı alanı)",
+      "neden": "Mimari tasarım düzeyi; yalnız önizleme sürüm kimliği (N-K06-003) ve 'başka?' bulgu kaydı (N-K05-025) ihtiyaç olarak aktarıldı."
+    }
+  ],
+  "bizde_olup_codexte_olmayan": [
+    "Ekip çalışma sistemi, ekipler arası sosyo-teknik yapı ve çalışan hakları (K30–K32: çalışma anlaşmaları, psikolojik güvenlik, iş hukuku, telemetri amaç sınırı, kariyer yolu).",
+    "İnsan–ajan iş birliği ayrıntısı (K27–K29: mod kataloğu, işlev bazlı otonomi, devir paketi, yönlendirme, inceleme ergonomisi, karşılıklı öğrenme).",
+    "Ürün güvenilirlik mühendisliği (K33: kritiklik kademesi, SLI/SLO, hata bütçesi, hazırlık incelemesi, felaket kurtarma).",
+    "Güvenli ve gizlilik odaklı ürün tasarımı (K34) ile mimari uygunluk ve kod sağlığı (K35).",
+    "Model erişimi/barındırma/lisans ve hukuki uyum (K09, K22), bütçe ve sayaç anlamları (K20), risk ölçeği ve yasaklı sınıf (K21).",
+    "Ölçek senaryoları, hazırlık kapıları, 41 bekleyen karar, 70 risk, 20 varsayım, 69 PESTEL mercekli bilinmeyen, 67 yetenek sınıfı, 273 dış kaynak."
+  ],
+  "celiskiler": [
+    {
+      "konu": "İnsanın olağan akıştaki rolü",
+      "codex": "Mimari araştırma notu: insan yalnız girdi ve son çıktı; ara süreç tamamen ajan, belirsizlik 'girdi gerekli' son çıktısı olur.",
+      "biz": "İnsan eş üretici; ara karar noktaları, yönlendirme, düzeltme ve devralma (K17, K27–K28). Pano PDF'i de hata durumunda insan müdahalesi gösteriyor.",
+      "dogru_olan": "Karar kullanıcıda (D-024). Amaç tanımı ve pano bizim yönümüzü destekliyor; uzlaşma: iş türü/risk bazlı varsayılan mod — düşük riskte girdi–çıktı, yüksek risk ve belirsizlikte ara insan katkısı.",
+      "kanit": "S-096 (pano görüntüsü), S-090 (amaç), S-095; C-040"
+    },
+    {
+      "konu": "'Bitti' ile insan testinin sırası",
+      "codex": "Pano akışını aktarıp teknik başarı=incelemeye hazır, insan kabulü=bitti önerir.",
+      "biz": "İnsan kabulü olmadan yayın yok (N-K05-025); durum modeli yayına hazır/bitti ayrımı (N-K26-001).",
+      "dogru_olan": "Aynı yönde; pano sıralaması (önce bitti, sonra insan testi) düzeltilmeli. C-041 ve N-K26-001 kabul ölçütü eklendi.",
+      "kanit": "S-096; C-041"
+    },
+    {
+      "konu": "Ajan yürütme ve ajan yeteneklerinin zorunluluğu",
+      "codex": "I05-01, I05-02, I05-03 gibi ajan yürütme ihtiyaçları 'koşullu' (ajan destekli işlerde); öte yandan yetenek dosyası ajan yürütmeyi 'ajan hedefi için çekirdek' sayar.",
+      "biz": "Ajan çalışma çerçevesi ihtiyaçları zorunlu (K10).",
+      "dogru_olan": "Bizimki: kullanıcı amacı insan ve ajanların birlikte üretimini kapsıyor; ikinci atlasın kendi yetenek dosyasıyla da tutarlı olan çekirdek yorumdur.",
+      "kanit": "S-090; ikinci atlas 02_yetenek_gereklilikleri.json Y02"
+    },
+    {
+      "konu": "Risk olasılık puanı",
+      "codex": "Kanıtsız olasılık puanı üretmez.",
+      "biz": "Risk kaydı geçici 5×5 olasılık × etki puanı kullanır (D-004 bekliyor).",
+      "dogru_olan": "Puanın kalibre edilmemiş geçici tahmin olduğu etiketli olduğu sürece bizimki kullanılabilir; ortalama puanın geri döndürülemez zararı gizleme riski U-075 olarak eklendi.",
+      "kanit": "risk-kaydi.json 'aciklama'; U-075"
+    },
+    {
+      "konu": "İlk testin her zaman kırmızı olması",
+      "codex": "Her işte zorla başarısız test şartı türetmez (C02).",
+      "biz": "Yeni özellikte RED kanıt kapısı zorunlu (N-K05-002), diğer iş türlerinde tür bazlı beklenti ve RED dışı triyaj (N-K05-003/004).",
+      "dogru_olan": "Çelişki yok; bizim yapı ikinci atlasın kaygısını iş türü ayrımıyla karşılıyor.",
+      "kanit": "N-K05-002..004, C-005, C-007"
+    }
+  ],
+  "duzeltmeler": [
+    {
+      "ne": "00-indeks.json kimlik_kurallari: S aralığı 'S-101..S-179 dış kanıt' eskimişti (dış kaynaklar S-373'e kadar gidiyordu).",
+      "duzeltme": "'S-092..S-094 türev veri ve araştırma, S-095 ikinci ihtiyaç atlası, S-096..S-097 pano PDF'leri, S-101..S-388 dış kanıt' olarak güncellendi."
+    },
+    {
+      "ne": "00-sema: ihtiyaç kaydı additionalProperties=false olduğundan köken alanları yazılamıyordu.",
+      "duzeltme": "Dört opsiyonel alan eklendi: codex_kaynagi, dogrulama, kaynak_url, ice_aktarilan."
+    }
+  ],
+  "degisen_dosyalar": [
+    "ihtiyac-haritasi/00-indeks.json",
+    "ihtiyac-haritasi/00-sema/ihtiyac-haritasi.schema.json",
+    "ihtiyac-haritasi/01-cerceve/dis-kaynaklar.json",
+    "ihtiyac-haritasi/01-cerceve/kaynak-envanteri.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K01-talep-gorev-tanimi-ve-hazir-olma.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K03-kod-tabani-baglami-ve-mimari-sinirlar.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K04-uygulama-ve-tasarim-kalitesi.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K05-dogrulama-test-oracle-ve-kalite-kapilari.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K06-entegrasyon-surum-kontrolu-ve-yayin.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/A-deger-akisi/K08-geri-bildirim-isletim-ve-surekli-iyilestirme.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K13-orkestrasyon-ve-dayanikli-yurutme.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K14-baglam-bilgi-erisimi-ve-bellek.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K15-calisma-ortami-izolasyon-ve-kapasite.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/B-ajan-platformu/K16-ajan-platformunun-isletimi-ve-surdurulebilirligi.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K17-insan-gozetimi-onay-ve-eskalasyon.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K18-guvenlik-yetkilendirme-ve-gizlilik.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/C-guvence-ve-yonetisim/K23-degerlendirme-ve-olcum.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/D-organizasyon-ve-olcek/K25-roller-yetkinlik-ve-degisim-yonetimi.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/D-organizasyon-ve-olcek/K26-is-takip-sistemi-ve-is-kalemi-yasam-dongusu.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/E-insan-ajan-birlikte-calisma/K27-insanajan-is-birligi-modeli-yetki-devri-ve-is.json",
+    "ihtiyac-haritasi/02-ihtiyac-kumeleri/E-insan-ajan-birlikte-calisma/K28-ortak-baglam-yonlendirme-ve-inceleme-ergonomisi.json",
+    "ihtiyac-haritasi/03-analizler/acik-sorular.json",
+    "ihtiyac-haritasi/03-analizler/bilinmeyenler-analizi.json",
+    "ihtiyac-haritasi/03-analizler/celiskiler.json",
+    "ihtiyac-haritasi/03-analizler/cember-analizi.json",
+    "ihtiyac-haritasi/03-analizler/gap-analizi.json",
+    "ihtiyac-haritasi/04-projelendirme-girdileri/olcek-senaryolari.json",
+    "ihtiyac-haritasi/gorsel/ihtiyac-haritasi.html (uret.py ile yeniden üretildi)",
+    "mimari-haritasi/arastirma/E1-codex-ihtiyac.json",
+    "mimari-haritasi/arastirma/E1-ozet.md"
+  ]
+}

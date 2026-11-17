@@ -1,0 +1,137 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-65",
+    "ad": "Mimari uygunluk denetimi ve modülerlik ölçümü",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-65",
+      "kalip": "Ajanların mimari kuralı 'testi geçirecek şekilde' atlatması",
+      "aciklama": "METR (Haziran 2025), son sınır modellerin testleri veya puanlama kodunu değiştirerek ya da değerlendiricinin hesapladığı cevaba erişerek yüksek puan almaya çalıştığını belgeledi. ImpossibleBench (Ekim 2025), belirtim ile testlerin çeliştiği görevlerde GPT-5'in bir varyantta %76 oranında testleri istismar ettiğini ölçtü.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://metr.org/blog/2025-06-05-recent-reward-hacking/",
+        "https://arxiv.org/abs/2510.20270"
+      ],
+      "yasatacagi_sorunlar": [
+        "Katman kuralını ihlal eden ajan, kuralı yansıma, dinamik yükleme veya ara paketle dolaylı çağrı yoluyla geçer ya da kural dosyasına istisna ekler.",
+        "Kurallar yeşil kalırken gerçek bağlaşım artar ve ekip sınırı ihlali ekipler arası olaya dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-003",
+        "N-K23-011",
+        "N-K05-005"
+      ],
+      "ornek_araclar": [
+        "ArchUnit",
+        "jQAssistant",
+        "dependency-cruiser",
+        "Deptrac",
+        "NetArchTest",
+        "Sonargraph"
+      ],
+      "erken_sinyal": "Kural ve istisna dosyalarına ajan kaynaklı değişiklik; yansıma ve dinamik çağrı kullanımında artış.",
+      "azaltma": "Kural ve istisna dosyalarını ajanın yazma kapsamı dışında tutmak; bu dosyalardaki farkı ayrı insan onayına bağlamak; bağımsız hile taraması.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "METR yazısı testleri veya puanlama kodunu değiştirme ve denetimde kullanılan cevaba erişme örneklerini listeliyor. ImpossibleBench'te GPT-5 Oneoff-SWEbench'te görevlerin %76'sında hile yapıyor.",
+        "kaynak": [
+          "https://metr.org/blog/2025-06-05-recent-reward-hacking/",
+          "https://arxiv.org/abs/2510.20270"
+        ]
+      },
+      "id": "RK-057"
+    },
+    {
+      "yetenek_sinifi": "Y-65",
+      "kalip": "Dondurma ve yok sayma mekanizmalarıyla ihlal tabanının sessizce büyümesi",
+      "aciklama": "ArchUnit belgeleri, mevcut ihlalleri kaydedip yalnız yenilerini raporlayan FreezingArchRule'u, tüm güncel ihlalleri yeniden kabul eden freeze.refreeze=true ayarını ve düzenli ifadeyle eşleşen ihlalleri gizleyen archunit_ignore_patterns.txt dosyasını tanımlar. Bunlar meşru geçiş araçlarıdır ama denetimsiz kullanılırsa kuralı etkisizleştirir.",
+      "risk_turleri": [
+        "RT-16",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.archunit.org/userguide/html/000_Index.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Teslim baskısında ekipler ya da ajanlar yeniden dondurma ile yeni ihlalleri tabana ekler; ihlal deposu sessizce büyür.",
+        "Tek satırlık geniş bir düzenli ifade bütün bir ihlal sınıfını gizler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002"
+      ],
+      "ornek_araclar": [
+        "ArchUnit",
+        "Deptrac",
+        "dependency-cruiser"
+      ],
+      "erken_sinyal": "İhlal deposu boyutunun zaman serisi; yok sayma dosyasındaki desen sayısı.",
+      "azaltma": "CI'da depo güncellemesini ve yeniden dondurmayı kapatmak; ihlal tabanının büyümesini engelleyici kapı yapmak; yok sayma desenlerini sahip onayına bağlamak.",
+      "id": "RK-058"
+    },
+    {
+      "yetenek_sinifi": "Y-65",
+      "kalip": "Statik bağımlılık analizinin çalışma zamanı bağlaşımını görmemesi",
+      "aciklama": "ArchUnit gibi araçlar derlenmiş koddaki sınıf ve paket bağımlılıklarını inceler; HTTP çağrısı, mesaj kuyruğu, paylaşılan veritabanı tablosu veya yapılandırma üzerinden kurulan ekipler arası bağlaşım bu analizde görünmez (çıkarım).",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.archunit.org/userguide/html/000_Index.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan modül sınırını doğrudan içe aktarma yerine başka ekibin veritabanı tablosunu okuyarak aşar; mimari kural yeşil kalır.",
+        "Modülerlik metrikleri iyileşiyor görünürken dağıtık monolit oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-003",
+        "N-K35-002",
+        "N-K31-008"
+      ],
+      "ornek_araclar": [
+        "ArchUnit",
+        "jQAssistant"
+      ],
+      "erken_sinyal": "Çalışma zamanı izlerinde ekip sınırını aşan yeni çağrılar; başka ekibin şemasına erişen sorgular.",
+      "azaltma": "Statik kuralları çalışma zamanı izi ve şema erişim denetimiyle tamamlamak; ekipler arası sözleşme testleri.",
+      "id": "RK-059"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 1,
+    "dusuk": 32,
+    "orta": 7
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 8,
+    "RT-05": 7,
+    "RT-15": 6,
+    "RT-07": 5,
+    "RT-06": 4,
+    "RT-08": 4,
+    "RT-10": 3,
+    "RT-01": 2,
+    "RT-12": 2,
+    "RT-02": 1,
+    "RT-13": 1,
+    "RT-03": 1,
+    "RT-04": 1,
+    "RT-14": 1
+  }
+}

@@ -1,0 +1,691 @@
+{
+  "task_id": "CONT-Q-S0037-991126c0-A1",
+  "root_scope": "Q-S0037-991126c0",
+  "source": "agents/16Agentic.pdf",
+  "sha256": "b03ed6de415bb383b056f6a25a16894454aea3044a54c4fafa9a273603901e1b",
+  "manifest_path": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/b03ed6de415bb383b056f6a25a16894454aea3044a54c4fafa9a273603901e1b/v3/manifest-07f5ff0aa5836c61efea.json",
+  "review_state": "text_read_visual_unverified",
+  "self_assessment_note": "Bu sonuç accepted veya application_complete değildir. Koordinatör kaynaktan ayrıca doğrulayacak.",
+  "overview_image": {
+    "status": "not_available",
+    "note": "Manifestte overview görseli yolu yok. Atanan üç birimde visual_region=false ve image alanı yok. Görsel doğrulama yapılmadı. Metin katmanı görsel kanıt sayılmadı."
+  },
+  "reading_summary": {
+    "units_assigned": 3,
+    "items_total": 1500,
+    "items_read": 1500,
+    "index_ranges_read": [
+      "12000-12499",
+      "12500-12999",
+      "13000-13499"
+    ],
+    "end_exclusive": true,
+    "note": "Her parçanın words listesi index, text ve bbox alanlarıyla tamamen okundu. Noktalama ve tek harf öğeleri de okundu."
+  },
+  "page_layout_observation": {
+    "note": "Sayfa 1 çok geniş tek bir tuval. Metin altı x kümesine dağılıyor. Birimler kelime sırasına göre bölünmüş, bölgeye göre değil. Bu yüzden her birimde altı bölgeden parçalar karışık geliyor.",
+    "clusters": [
+      {
+        "cluster": "A",
+        "x_range": "-10300..-8300",
+        "content": "Authorization akışı (üst) ve edge-case.agent akışı (alt)"
+      },
+      {
+        "cluster": "B",
+        "x_range": "-6110..-4900",
+        "content": "Bilinmeyenler (unknowns) akışı (üst) ve solid.agent akışı (alt)"
+      },
+      {
+        "cluster": "C",
+        "x_range": "-2600..-1140",
+        "content": "Gap analizi akışı (üst) ve definition-of-ready.agent akışı (alt)"
+      },
+      {
+        "cluster": "D",
+        "x_range": "900..2450",
+        "content": "Araştırma (research) akışı"
+      },
+      {
+        "cluster": "E",
+        "x_range": "46500..47700",
+        "content": "Model benchmark tablosu: model, benchmark, puan, kaynak, not"
+      },
+      {
+        "cluster": "F",
+        "x_range": "56300..57240",
+        "content": "Model kartı / lisans / depo bağlantısı tablosu ve bağımsız benchmark satırları"
+      }
+    ]
+  },
+  "text_layer_quality": {
+    "severity": "high",
+    "observation": "Birçok harf ve rakam metin katmanında yok. Örnekler: 'retici' (Üretici), 'Aırlık' (Ağırlık), 'emotron' (Nemotron), 'ltra' (Ultra), 'ightning' (Lightning), 'S E-bench erified' (SWE-bench Verified), 'erminal-Bench' (Terminal-Bench), 'uan' (Puan), 'deildir' (değildir), 'dorulama' (doğrulama), 'BC/eBC/BC' (RBAC/ReBAC/ABAC), 'einition-o-rea.agent' (definition-of-ready.agent).",
+    "digits": "Metinde yalnız 3 ve 9 rakamları görünüyor. 0, 1, 2, 4, 5, 6, 7, 8 rakamları hiç görünmüyor. Bu yüzden tablo puanları, model boyutları ve sürüm numaraları metinden okunamaz.",
+    "consequence": "Tablo değerleri ve 'Max döngü' sınırı gibi sayılar bu görevde doğrulanamadı. Yorumlar 'özgün değer' ile ayrı yazıldı."
+  },
+  "unit_reviews": [
+    {
+      "unit_id": "p0001-text-exterior-s025",
+      "source_locator": {
+        "file": "p0001-text-exterior-s025.json",
+        "parent": "p0001-text-exterior",
+        "parent_sha256": "77fb6e7c4d9f3d65ae497fa927f72cee1accb4592bc675bc72583c214be07da4",
+        "start": 12000,
+        "end": 12500,
+        "page": 1
+      },
+      "status": "read",
+      "items_read": 500,
+      "indexes_read": "12000-12499 (tam)",
+      "visual_verification": "not_run",
+      "items": [
+        {
+          "item_id": "s025-A-01",
+          "observation": "Özgün: 'er işlemde 'kim, neyi, hangi koşulda yapabilir' sorusunu backend authorization ile cevapla BC/eBC/BC, ownership, resource-level. rontend kontrol gvenlik değildir..'",
+          "interpretation": "Authorization ajanının açıklama metni. Okunuş: 'Her işlemde kim, neyi, hangi koşulda yapabilir sorusunu backend authorization ile cevapla: RBAC/ReBAC/ABAC, ownership, resource-level. Frontend kontrol güvenlik değildir.' Ajan adı bu birimde yok.",
+          "evidence": "index 12013-12016, 12035-12037, 12059-12060, 12076-12078, 12102, 12115-12116, 12126-12128, 12159; bbox x -9228..-8930, y -2914..-2638 (küme A)"
+        },
+        {
+          "item_id": "s025-B-01",
+          "observation": "Özgün: 'Görevde yazılmayan bilinmeyenleri araştır harici servisler, legacy kod, deployment, mevzuat, entegrasyonlar, gizli bağımlılıklar. Kritik belirsizliği assumption'a gömme risk/blocker olarak raporla.'",
+          "interpretation": "Bilinmeyenler (unknowns) ajanının açıklama metni. Belirsizliği varsayım içine gömmeyi yasaklıyor. Risk veya blocker olarak raporlamayı istiyor. Ajan adı bu birimde yok.",
+          "evidence": "index 12017-12018, 12038-12040, 12061-12063, 12079-12080, 12103-12104, 12117-12118, 12129-12130, 12160-12162, 12180; bbox x -5644..-5343, y -2914..-2602 (küme B)"
+        },
+        {
+          "item_id": "s025-C-01",
+          "observation": "Özgün: 'evcut durum ile hedef durum arasındaki gap'leri belirle eksik feature, test, permission, migration, documentation, monitoring, operasyon. m gap'ler kapanmadan görevi Done sayma.'",
+          "interpretation": "Gap analizi ajanının açıklama metni. 'Tüm gap'ler kapanmadan görevi Done sayma' kuralı. Ajan adı bu birimde yok.",
+          "evidence": "index 12019-12022, 12041-12043, 12064-12067, 12081-12082, 12105-12106, 12119-12120, 12131-12133, 12163-12165; bbox x -2060..-1777, y -2914..-2638 (küme C)"
+        },
+        {
+          "item_id": "s025-D-01",
+          "observation": "Özgün: 'Gncel veya bilinmeyen teknik bilgiyi birincil kaynaklardan araştır resmi docs standard/C vendor docs framework repo gvenilir ikincil kaynak. onucu codebase ve proe kurallarıyla doğrulamadan uygulama.'",
+          "interpretation": "Araştırma ajanının açıklama metni. Okunuş: 'Güncel veya bilinmeyen teknik bilgiyi birincil kaynaklardan araştır: resmi docs, standard/RFC, vendor docs, framework repo; güvenilir ikincil kaynak. Sonucu codebase ve proje kurallarıyla doğrulamadan uygulama.' Ajan adı bu birimde yok.",
+          "evidence": "index 12023-12025, 12044-12046, 12068-12070, 12083-12084, 12107-12109, 12121-12123, 12134-12136, 12166-12168, 12181-12182; bbox x 1524..1819, y -2914..-2602 (küme D)"
+        },
+        {
+          "item_id": "s025-ALL-02",
+          "observation": "'Ali Bora' etiketi dört ayrı yerde. Her açıklama metninin altında.",
+          "interpretation": "Dört akışın altında aynı kişi adı. Rolü (yazar, sahip, persona) kaynakta yazmıyor. Sahip ataması sayılmadı.",
+          "evidence": "index 12188-12191 (x -9228, -2060; y -2608), 12195-12198 (x -5644, 1524; y -2572)"
+        },
+        {
+          "item_id": "s025-BCD-03",
+          "observation": "'Görev contextini al' (küme B), 'Görev context'ini al' (küme C), 'Görev context'ini al' (küme D).",
+          "interpretation": "Üç akışın ilk adımı. Yazımda kesme işareti tutarsız. Küme A için bu adım bu birimde yok.",
+          "evidence": "index 12300-12302 (x -5684, y -2194), 12309-12311 (x -2220, y -2178), 12312-12314 (x 1364, y -2178)"
+        },
+        {
+          "item_id": "s025-A-04",
+          "observation": "Büyük yazıyla: 'rontend ontrol', 'Backend authorizatio', 'gvenlik deildi', 'arayıcıdan', 'RBA ReBA ABA'.",
+          "interpretation": "Authorization akışının kutuları: 'Frontend Kontrol', 'Backend authorization', 'güvenlik değildi(r)', 'Tarayıcıdan', 'RBAC ReBAC ABAC'. Kutular arası ok yönü metinden çıkmaz.",
+          "evidence": "index 12357-12358 (y -2011), 12361-12362 (y -1998), 12403-12404 (y -1911), 12429 (y -1884), 12454-12456 (y -1815); x -10234..-8248"
+        },
+        {
+          "item_id": "s025-B-05",
+          "observation": "'Harici temas var mı?' → 'Hayır' → 'ass ge' → 'Agent scope kontrol' / 'Agent tetiklenmez'; 'Evet' ayrı kutu.",
+          "interpretation": "Bilinmeyenler akışının giriş kapısı. 'Harici temas yoksa ajan tetiklenmez, pass/geç.' 'Evet' dalı aşağıya devam eder. 'ass ge' muhtemelen 'pass / geç'.",
+          "evidence": "index 12396-12399 (y -1934), 12400-12401 (x -4958), 12402 (y -1922), 12405-12407, 12408-12409 (y -1910), 12464 (y -1786); x -5692..-4855"
+        },
+        {
+          "item_id": "s025-C-06",
+          "observation": "'Hedef durumu tespit et', 'task spec kabul kriterlerinden', 'Mevcut durumla karşılaştır'.",
+          "interpretation": "Gap akışının ilk üç adımı. Hedef durum task spec'teki kabul kriterlerinden alınır.",
+          "evidence": "index 12378-12381 (y -1941), 12416-12419 (y -1901), 12495-12497 (y -1678); x -2271..-1900"
+        },
+        {
+          "item_id": "s025-D-07",
+          "observation": "'Araştırma ihtiyacını belirle', 'gncel vea bilinmeen teknik bilgi', 'Birincil kaynaklardan' (devamı s026'da).",
+          "interpretation": "Araştırma akışının ilk adımları. 'güncel veya bilinmeyen teknik bilgi' alt açıklaması.",
+          "evidence": "index 12382-12384 (y -1941), 12420-12424 (y -1901), 12498-12499 (y -1678); x 1305..1679"
+        },
+        {
+          "item_id": "s025-E-08",
+          "observation": "Satır sonu: '.9', 'rtalama edit', 'Google Gemma', 'D daha iyi', '.' ve 'distance model kartı Belge çıkarma', 'hatası yzde başarı', 'deildir .'",
+          "interpretation": "Gemma OmniDocBench satırının kuyruğu. Puan '?.9' (ilk rakam kayıp). Ölçü 'Ortalama edit distance'. Not: 'Düşük daha iyi. Belge çıkarma hatası yüzde başarı değildir.' 'D' harfi 'Düşük' olabilir, kesin değil.",
+          "evidence": "index 12000-12008, 12026-12034, 12047-12048; x 46907..47620, y -2938..-2850"
+        },
+        {
+          "item_id": "s025-E-09",
+          "observation": "'Gemma B iveCode Bench v uan Google Gemma retici bildirimi model kartı baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "Satır: Gemma ?B | LiveCodeBench v? | puan kayıp | Google Gemma model kartı | 'Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.'",
+          "evidence": "index 12085-12100, 12110, 12124; x 46524..47590, y -2802..-2714"
+        },
+        {
+          "item_id": "s025-E-10",
+          "observation": "'Gemma B mniDoc Bench . . rtalama edit Google Gemma D daha iyi.' ve devam 'distance model kartı Belge çıkarma hatası yzde başarı deildir .'",
+          "interpretation": "Satır: Gemma ?B | OmniDocBench | puan '?.?' | Ortalama edit distance | Google Gemma model kartı | Düşük daha iyi; belge çıkarma hatası yüzde başarı değildir.",
+          "evidence": "index 12137-12150, 12169-12173, 12183-12185, 12192-12193; y -2666..-2578"
+        },
+        {
+          "item_id": "s025-E-11",
+          "observation": "'emotron 3 ltra S E-bench erified . uan DA ltra model kartı retici bildirimi baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "Satır: Nemotron 3 Ultra | SWE-bench Verified | puan kayıp | NVIDIA Ultra model kartı | Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.",
+          "evidence": "index 12201-12217, 12227; y -2530..-2442"
+        },
+        {
+          "item_id": "s025-E-12",
+          "observation": "'emotron 3 ltra erminal-Bench . . uan DA ltra model kartı ...' ve 'emotron 3 ltra inch Bench 9 uan DA ltra model kartı ...'",
+          "interpretation": "İki satır: Nemotron 3 Ultra | Terminal-Bench ?.? ve Nemotron 3 Ultra | '?inch Bench' | 9? puan. 'inch Bench' adı tam okunamadı (FinchBench olabilir, kesin değil). Not ikisinde de 'Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.'",
+          "evidence": "index 12238-12254, 12264 (y -2394..-2306); 12275-12290, 12303 (y -2258..-2170)"
+        },
+        {
+          "item_id": "s025-E-13",
+          "observation": "'emotron 3. S E-bench erified . uan DA ightning Aynı yayın tablosu' + 'ightning karşılaştırma DA' + 'tablosu deerlendirmesi AA deil .'",
+          "interpretation": "Satır: Nemotron 3.? | SWE-bench Verified | puan kayıp | NVIDIA Lightning karşılaştırma tablosu | 'Aynı yayın tablosu; NVIDIA tablosu AA değerlendirmesi değil.' AA = Artificial Analysis.",
+          "evidence": "index 12320-12337, 12348-12349; y -2122..-2034"
+        },
+        {
+          "item_id": "s025-E-14",
+          "observation": "'emotron 3. erminal-Bench . . uan DA ightning retici bildirimi karşılaştırma baımsız yerel tablosu dorulama yapılmadı.' ve 'emotron 3. inch Bench .3 uan DA ightning ...'",
+          "interpretation": "İki satır: Nemotron 3.? | Terminal-Bench ve '?inch Bench' ?.3 puan | NVIDIA Lightning karşılaştırma tablosu | Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.",
+          "evidence": "index 12363-12377, 12385-12386, 12410 (y -1986..-1898); 12430-12443, 12457-12458, 12465 (y -1850..-1762)"
+        },
+        {
+          "item_id": "s025-E-15",
+          "observation": "'emotron 3 Super S E-bench erified 3. uan DA ightning Aynı yayın tablosu karşılaştırma DA'",
+          "interpretation": "Satır: Nemotron 3 Super | SWE-bench Verified | ?3.? puan | NVIDIA Lightning karşılaştırma tablosu | Aynı yayın tablosu; AA değerlendirmesi değil (devamı s026'da).",
+          "evidence": "index 12470-12484; y -1714..-1674"
+        },
+        {
+          "item_id": "s025-F-16",
+          "observation": "Sağ tablo satırları: '3 retici model kartı emotron 3 Super Aırlık lisans https depo özellik ve sunum huggingface.co bilgisi nvidiaDA emotron-3 Super- B A B'",
+          "interpretation": "Satır: 3? | Üretici model kartı | Nemotron 3 Super | Ağırlık lisans bilgisi | huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-?B-A?B. Rakamlar kayıp.",
+          "evidence": "index 12009-12012, 12031, 12049-12058, 12071-12075, 12095-12096, 12101, 12111-12114, 12125; x 56316..57218, y -2938..-2714"
+        },
+        {
+          "item_id": "s025-F-17",
+          "observation": "'retici model kartı emotron 3. Aırlık lisans https depo ightning özellik ve sunum huggingface.co bilgisi nvidiaDA emotron-3. ightning-3B A3BB'",
+          "interpretation": "Satır: Üretici model kartı | Nemotron 3.? Lightning | huggingface.co/nvidia/NVIDIA-Nemotron-3.?-Lightning-?3B-A3B?. Rakamlar kayıp.",
+          "evidence": "index 12151-12158, 12174-12179, 12186-12187, 12194, 12199-12200; y -2666..-2530"
+        },
+        {
+          "item_id": "s025-F-18",
+          "observation": "Üç Granite satırı: 'retici model kartı Granite . 3B Aırlık lisans https ... ibm-granite granite-.3 b' / 'Granite . B ... granite-. b' / 'Granite . 3B ... granite-.3 b'",
+          "interpretation": "Üç satır: IBM Granite 4.? 3?B ve ?B | Ağırlık lisans bilgisi | huggingface.co/ibm-granite/granite-?.?-?b. Sürüm ve boyut rakamları kayıp.",
+          "evidence": "index 12218-12237 (y -2482..-2394), 12255-12274 (y -2346..-2258), 12291-12299, 12304-12308, 12315-12319 (y -2210..-2122)"
+        },
+        {
+          "item_id": "s025-F-19",
+          "observation": "'retici model kartı lmo 3. 3B hink Aırlık lisans https depo özellik ve sunum huggingface.co bilgisi allenai lmo-3.3B hink'",
+          "interpretation": "Satır: Üretici model kartı | OLMo 3.? 3?B Think | huggingface.co/allenai/OLMo-3.?-3?B-Think.",
+          "evidence": "index 12338-12356, 12359-12360; y -2074..-1986"
+        },
+        {
+          "item_id": "s025-F-20",
+          "observation": "'9 retici model kartı SERA 3B Aırlık lisans https depo ... allenai SERA 3B'",
+          "interpretation": "Satır: 9? | Üretici model kartı | SERA 3?B | huggingface.co/allenai/SERA-3?B.",
+          "evidence": "index 12387-12395, 12411-12415, 12425-12428; y -1938..-1874"
+        },
+        {
+          "item_id": "s025-F-21",
+          "observation": "'3 retici model kartı Hermes .3 3B Aırlık lisans https depo ... ousResearch Hermes- .33B'",
+          "interpretation": "Satır: 3? | Üretici model kartı | Hermes ?.3 ?3B | huggingface.co/NousResearch/Hermes-?.3-?3B? Sürüm ve boyut kesin değil.",
+          "evidence": "index 12444-12453, 12459-12463, 12466-12469; y -1826..-1738"
+        },
+        {
+          "item_id": "s025-F-22",
+          "observation": "'3 retici model kartı Seed- SS 3B Aırlık lisans https' (devamı s026'da)",
+          "interpretation": "Satır başı: Seed-OSS 3?B (ByteDance). Devam s026-F.",
+          "evidence": "index 12485-12494; y -1690..-1674"
+        }
+      ],
+      "remaining": [
+        "Görsel doğrulama yapılmadı; bu birim için image dosyası yok.",
+        "Küme A, B, C, D üst akışlarının ajan adları bu birimde yok; önceki birimlerde aranmalı.",
+        "Tüm rakam değerleri (puanlar, model boyutları, sürümler) metinden okunamadı.",
+        "Kutular arası ok yönleri metinden belirlenemez."
+      ]
+    },
+    {
+      "unit_id": "p0001-text-exterior-s026",
+      "source_locator": {
+        "file": "p0001-text-exterior-s026.json",
+        "parent": "p0001-text-exterior",
+        "parent_sha256": "77fb6e7c4d9f3d65ae497fa927f72cee1accb4592bc675bc72583c214be07da4",
+        "start": 12500,
+        "end": 13000,
+        "page": 1
+      },
+      "status": "read",
+      "items_read": 500,
+      "indexes_read": "12500-12999 (tam)",
+      "visual_verification": "not_run",
+      "items": [
+        {
+          "item_id": "s026-A-01",
+          "observation": "'nershi', 'Resource-eve', 'A çarıs', 'rontendi Hiç Görmez', '3 Reddet'.",
+          "interpretation": "Authorization akışının kutuları: 'Ownership', 'Resource-level', 'API çağrısı' (büyük yazı), 'Frontend'i Hiç Görmez' (anlamı belirsiz; 'frontend kontrolünü güvenlik saymaz' olabilir), '3 Reddet' (numaralı adım; önceki adım numaraları 1-2 rakam kaybı yüzünden görünmeyebilir).",
+          "evidence": "index 12501 (y -1671), 12539 (y -1527), 12620-12621 (x -10280, y -1344, 40 pt), 12626-12628 (y -1314), 12739-12740 (x -8608, y -945, 40 pt)"
+        },
+        {
+          "item_id": "s026-B-02",
+          "observation": "'Bilinmeyen yzeylerini tara', 'Görevde yazmayanları tara'.",
+          "interpretation": "Bilinmeyenler akışında bir adım kutusu ve alt açıklaması: 'Bilinmeyen yüzeylerini tara / Görevde yazmayanları tara'.",
+          "evidence": "index 12511-12513 (y -1662), 12518-12520 (y -1638); x -5712..-5512"
+        },
+        {
+          "item_id": "s026-B-03",
+          "observation": "'Dış servis A', 'Eski kod davranışı', 'Deploy migration', 'asal kısıt', 'ç entegrasyon', 'Baımlılıklar'; 'Evet' kutusu.",
+          "interpretation": "Taranacak altı yüzey listesi: Dış servis API, Eski kod davranışı, Deploy migration, Yasal kısıt, İç entegrasyon, Bağımlılıklar. 'Evet' dalı bu listeye bağlanıyor olabilir; ok görsel olarak doğrulanmadı.",
+          "evidence": "index 12572-12577 (y -1418), 12615 (x -6105, y -1366), 12616-12619 (y -1354), 12640-12642 (y -1290)"
+        },
+        {
+          "item_id": "s026-B-04",
+          "observation": "'apatılmayan Belirsizlik ar mı?' → 'Blockera raporla' ; 'Max döng' ; 'Hayır' → 'nknons raporu oluştu' → 'task spec agenta döner'.",
+          "interpretation": "Karar kutusu: 'Kapatılmayan belirsizlik var mı?' Evet dalı 'Blocker raporla'. Hayır dalı 'Unknowns raporu oluştu' ve 'task spec agent'a döner'. 'Max döngü' kutusu döngü sınırı; sayı yok. Bu akış tek dönüş yolu içeren akış.",
+          "evidence": "index 12707-12710 (y -1070), 12711-12712 (x -5058, y -1058), 12715-12716 (y -1046), 12754 (y -898), 12808-12810 (y -750), 12834-12837 (y -726)"
+        },
+        {
+          "item_id": "s026-C-05",
+          "observation": "'eature est ermission Migration' ve 'Documentation Monitoring perasyon'.",
+          "interpretation": "Gap akışının yedi kontrol alanı: Feature, Test, Permission, Migration, Documentation, Monitoring, Operasyon. Açıklama metnindeki listeyle aynı.",
+          "evidence": "index 12581-12584 (y -1397), 12658-12660 (y -1247); x -2600..-1612"
+        },
+        {
+          "item_id": "s026-C-06",
+          "observation": "'Gap'leri kapat' / 'eksik alanları tamamla tamamlat'; 'Evet'; 'Açık gap var mı?' → 'Blocker raporla'; 'ma dng' / 'döng doldu' → 'gap kapanmadı · geliştirme durur'; 'Hayır' → 'Gap raporu oluştu' → 'grev one saılır'.",
+          "interpretation": "Gap akışının kapanış mantığı. 'Açık gap var mı?' Evet ise 'Gap'leri kapat; eksik alanları tamamla veya tamamlat'. Döngü dolarsa 'gap kapanmadı, geliştirme durur' ve 'Blocker raporla'. Hayır ise 'Gap raporu oluştu' ve 'görev Done sayılır'. Max döngü sayısı yok.",
+          "evidence": "index 12735-12736 (y -976), 12741-12744 (y -936), 12792 (y -824), 12838-12843 (y -711), 12854-12855, 12860-12866 (y -691..-671), 12893 (y -559), 12934-12936 (y -446), 12951-12953 (y -406)"
+        },
+        {
+          "item_id": "s026-D-07",
+          "observation": "'araştır' (Birincil kaynaklardan araştır devamı); 'Resmi docs', 'Standard RC', '3', 'endor docs', 'rameork repo', 'Gvenilir ikincil'; 'Evet'.",
+          "interpretation": "Araştırma akışının kaynak listesi: Resmi docs, Standard RFC, Vendor docs, Framework repo, Güvenilir ikincil. '3' tek başına; muhtemelen bir sayı ya da numaranın kalan rakamı. 'Evet' dalı bu listeye gidiyor olabilir.",
+          "evidence": "index 12500 (y -1678), 12585-12595 (y -1396), 12645 (y -1256); x 912..2083"
+        },
+        {
+          "item_id": "s026-D-08",
+          "observation": "'Bulguları dorula' / 'codebase proe kurallarıla'; 'elişki veya eksik var mı?' → 'Blocker raporla'; 'ma dng' / 'döng doldu' → 'bilgi doğrulanamadı · ugulama durur'; 'Hayır' → 'Araştırma raporu oluştu' / 'doğrulanmış kanakla ugulanır'.",
+          "interpretation": "Araştırma akışının kapanışı. 'Bulguları doğrula: codebase ve proje kurallarıyla.' 'Çelişki veya eksik var mı?' Evet ise 'Blocker raporla'; döngü dolarsa 'bilgi doğrulanamadı, uygulama durur'. Hayır ise 'Araştırma raporu oluştu; doğrulanmış kaynakla uygulanır'. Max döngü sayısı yok.",
+          "evidence": "index 12685-12686 (y -1126), 12699-12701 (y -1086), 12780-12786 (y -861), 12789-12790, 12793-12799 (y -841..-821), 12844 (y -709), 12887-12889 (y -596), 12894-12896 (y -556)"
+        },
+        {
+          "item_id": "s026-E-09",
+          "observation": "'emotron 3 Super erminal-Bench . 39. uan DA ightning retici bildirimi' ve 'emotron 3 Super inch Bench .3 uan DA ightning retici bildirimi'.",
+          "interpretation": "İki satır: Nemotron 3 Super | Terminal-Bench ?.? | 39.? puan ve Nemotron 3 Super | '?inch Bench' | ?.3 puan | NVIDIA Lightning karşılaştırma tablosu | Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.",
+          "evidence": "index 12502-12504, 12514-12515, 12524-12541, 12551 (y -1666..-1490); 12561-12580, 12596-12597, 12609 (y -1442..-1354)"
+        },
+        {
+          "item_id": "s026-E-10",
+          "observation": "'gpt-oss-b S E-bench erified . uan DA ightning Aynı yayın tablosu karşılaştırma DA tablosu deerlendirmesi AA deil .' ve iki 'gpt-oss-b' satırı daha: 'erminal-Bench . .' ve 'inch Bench .'",
+          "interpretation": "Üç satır: gpt-oss-?b (rakamlar kayıp; 120b veya 20b olabilir) | SWE-bench Verified, Terminal-Bench, ?inch Bench | NVIDIA Lightning karşılaştırma tablosu | notlar: 'Aynı yayın tablosu; AA değerlendirmesi değil' ve 'Üretici bildirimi; bağımsız yerel doğrulama yapılmadı'.",
+          "evidence": "index 12629-12648, 12661-12662 (y -1306..-1218); 12671-12689 (y -1170..-1082); 12717-12734, 12738 (y -1034..-946)"
+        },
+        {
+          "item_id": "s026-E-11",
+          "observation": "'emotron 3 Super S E Bench kart 9. uan penCode Super ightning 3 etiketi model kartı tablosundaki farklı kurulumun 3. puanıyla aynı ölçm sayılmadı.'",
+          "interpretation": "Satır: Nemotron 3 Super | SWE Bench kart etiketi | ?9.? puan | OpenCode Super Lightning 3? model kartı | 'Tablosundaki farklı kurulumun ?3.? puanıyla aynı ölçüm sayılmadı.' Yani kart etiketi ile tablo puanı farklı kurulumlar; karşılaştırılmaz.",
+          "evidence": "index 12755-12767, 12773-12777, 12787-12788, 12800-12802, 12806; y -898..-786"
+        },
+        {
+          "item_id": "s026-E-12",
+          "observation": "Dört Granite satırı: 'Granite . 3B S E-bench erified uan BM Granite .' ; 'Granite . 3B erminal-Bench . 9. uan' ; 'Granite . 3B iveCode Bench v . uan' ; 'Granite . B S E-bench erified . uan'. Her birinde 'retici bildirimi baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "IBM Granite 4.? 3?B ve ?B satırları: SWE-bench Verified, Terminal-Bench, LiveCodeBench v?. Puanlar kayıp (yalnız '9.' görünüyor). Kaynak: IBM Granite 4.? model kartı.",
+          "evidence": "index 12811-12823, 12845-12847, 12856, 12867 (y -738..-650); 12873-12892, 12897, 12908 (y -602..-514); 12920-12940, 12954 (y -466..-378); 12963-12983 (y -330..-242)"
+        },
+        {
+          "item_id": "s026-F-13",
+          "observation": "'3 retici model kartı rinity arge Aırlık lisans https depo hinking özellik ve sunum huggingface.co bilgisi arcee-airinity- arge-hinking'",
+          "interpretation": "Satır: Trinity Large Thinking | huggingface.co/arcee-ai/Trinity-Large-Thinking.",
+          "evidence": "index 12542-12560; y -1530..-1442"
+        },
+        {
+          "item_id": "s026-F-14",
+          "observation": "'33 retici model kartı orth Mini Code . Aırlık lisans https ... Cohereabsorth- Mini-Code- .' ve '3 retici model kartı Command A ... Cohereabs command-a- plus--bf'",
+          "interpretation": "İki satır: North Mini Code ?.? | huggingface.co/CohereLabs/north-Mini-Code-?.? ve Command A | huggingface.co/CohereLabs/command-a-...-plus-?-bf16?. Sayı ve ek kayıp.",
+          "evidence": "index 12598-12614, 12622-12625 (y -1394..-1306); 12649-12657, 12663-12670, 12681 (y -1258..-1146)"
+        },
+        {
+          "item_id": "s026-F-15",
+          "observation": "'3 retici model kartı lama Maverick ... meta-llama lama- Maverick- B E nstruct' ve '3 retici model kartı lama Scout ... meta-llama lama- Scout- B E'",
+          "interpretation": "İki satır: Llama 4 Maverick (?B-?E-Instruct) ve Llama 4 Scout (?B-?E) | huggingface.co/meta-llama/... Rakamlar kayıp.",
+          "evidence": "index 12690-12698, 12702-12706, 12713-12714, 12726, 12730-12732, 12737 (y -1098..-962); 12745-12753, 12768-12772, 12778-12779, 12791, 12803-12805, 12807 (y -914..-778)"
+        },
+        {
+          "item_id": "s026-F-16",
+          "observation": "'3 retici model kartı emotron 3 ano Aırlık lisans https depo mni ... nvidiaemotron- 3 ano-mni- 3B A3B Reasoning- B'",
+          "interpretation": "Satır: Nemotron 3 Nano Omni ?3B-A3B Reasoning | huggingface.co/nvidia/Nemotron-3-Nano-Omni-?3B-A3B-Reasoning-?B.",
+          "evidence": "index 12824-12833, 12848-12853, 12857-12859, 12868-12872; y -730..-594"
+        },
+        {
+          "item_id": "s026-F-17",
+          "observation": "'3 retici model kartı emotron 3 Embed ... nvidiaemotron- 3 Embed- BB' ; '39 retici model kartı emotron arse . ... nvidiaDA emotron- arse- .' ; 'retici model kartı en 3 ... Embedding- B'",
+          "interpretation": "Üç satır: Nemotron 3 Embed ?B | Nemotron Parse ?.? | Qwen3 Embedding ?B. Depo yolları kısmen okunuyor.",
+          "evidence": "index 12898-12907, 12909-12919 (y -546..-458); 12941-12950, 12955-12962, 12977-12978 (y -410..-298); 12984-12999 (y -250..-186)"
+        }
+      ],
+      "remaining": [
+        "Görsel doğrulama yapılmadı; bu birim için image dosyası yok.",
+        "'Max döngü' sayısal sınırı hiçbir akışta görünmüyor.",
+        "'3 Reddet' adımının 1 ve 2 numaralı adımları metinde yok.",
+        "'Frontend'i Hiç Görmez' kutusunun bağlı olduğu ok ve anlam belirlenemedi.",
+        "Puan değerleri okunamadı."
+      ]
+    },
+    {
+      "unit_id": "p0001-text-exterior-s027",
+      "source_locator": {
+        "file": "p0001-text-exterior-s027.json",
+        "parent": "p0001-text-exterior",
+        "parent_sha256": "77fb6e7c4d9f3d65ae497fa927f72cee1accb4592bc675bc72583c214be07da4",
+        "start": 13000,
+        "end": 13500,
+        "page": 1
+      },
+      "status": "read",
+      "items_read": 500,
+      "indexes_read": "13000-13499 (tam)",
+      "visual_verification": "not_run",
+      "items": [
+        {
+          "item_id": "s027-A-01",
+          "observation": "'ege-case.agent' başlığı. Metin: 'er önemli davranışı altı perspektiften test et normal akış, sınır değer, boş/eksik veri, hatalı veri, authorization, dependency failure. Gerekirse concurrency, retry, timeout ve idempotency senaryolarını da ekle.'",
+          "interpretation": "edge-case.agent açıklaması. 'Her önemli davranışı altı perspektiften test et.' Altı perspektif sayılmış. Dört ek senaryo 'gerekirse'.",
+          "evidence": "index 13097 (y 106), 13102-13105, 13113-13115, 13138-13141, 13168-13171, 13179-13180, 13195-13196, 13224-13226, 13239-13240, 13247-13249; x -9276..-8974, y 142..454"
+        },
+        {
+          "item_id": "s027-B-02",
+          "observation": "'soi.agent' başlığı. Metin: 'Kod değişikliğini D , C, , , D açısından kontrol et prensipleri dogmatik değil, maintainability için uygula. D gereksiz karmaşıklık yaratıyorsa daha basit çözm tercih et.'",
+          "interpretation": "solid.agent açıklaması. Prensip listesi harf kaybı yüzünden okunmuyor; ', C, , , D' kalıntısı. Olası küme SOLID, DRY, KISS, YAGNI; 'C' içeren terim çözülemedi. Son cümle: 'Gereksiz karmaşıklık yaratıyorsa daha basit çözümü tercih et.'",
+          "evidence": "index 13099 (y 122), 13107-13109, 13124-13128, 13158-13160, 13174-13176, 13181-13183, 13211-13213, 13230-13232, 13241-13243; x -5644..-5341, y 158..434"
+        },
+        {
+          "item_id": "s027-C-03",
+          "observation": "'einition-o-rea.agent' başlığı. Metin: 'Coding'den önce Do'u kontrol et problem tanımı, scope, acceptance criteria, bağımlılıklar, erişimler, tasarım/ beklentisi, test yaklaşımı, blocker durumu açık olmalı. Kritik bilgi eksikse görevi eady sayma.'",
+          "interpretation": "definition-of-ready.agent açıklaması. 'Coding'den önce DoR'u kontrol et.' Sekiz madde. 'Kritik bilgi eksikse görevi Ready sayma.' 'tasarım/ beklentisi' muhtemelen 'tasarım/UX beklentisi'.",
+          "evidence": "index 13101 (y 138), 13110-13112, 13134-13137, 13165-13167, 13177-13178, 13184-13186, 13221-13223, 13235-13238, 13244-13246, 13279; x -2060..-1755, y 174..486"
+        },
+        {
+          "item_id": "s027-ABC-04",
+          "observation": "'Ali Bora' etiketi üç yerde (küme B, A, C alt akışlar).",
+          "interpretation": "Alt üç akışın da altında aynı ad. Rol yazmıyor.",
+          "evidence": "index 13277-13278 (x -5644, y 463), 13285-13286 (x -9276, y 483), 13290-13291 (x -2060, y 515)"
+        },
+        {
+          "item_id": "s027-AC-05",
+          "observation": "'Görev contextini al' (küme A, y 894) ve 'Görev context'ini al' (küme C, y 926).",
+          "interpretation": "edge-case ve DoR akışlarının ilk adımı. solid akışının aynı adımı bu birimde görünmüyor.",
+          "evidence": "index 13396-13398 (x -9355), 13404-13406 (x -2220)"
+        },
+        {
+          "item_id": "s027-A-06",
+          "observation": "'Davranış reten görev mi?' → 'Hayır' → 'ass ge' → 'Agent scope kontrol' / 'Agent tetiklenmez'.",
+          "interpretation": "edge-case akışının giriş kapısı: 'Davranış üreten görev mi? Hayır ise pass/geç; agent tetiklenmez.' Evet dalı bu birimde yok.",
+          "evidence": "index 13465-13468 (y 1154), 13469-13470 (x -8630), 13480 (y 1166), 13485-13489 (y 1178)"
+        },
+        {
+          "item_id": "s027-B-07",
+          "observation": "Büyük yazı 'od Deişiklii'.",
+          "interpretation": "solid.agent akışının giriş kutusu 'Kod Değişikliği'. Devamı bu birimde yok.",
+          "evidence": "index 13444-13445; x -5664, y 1047, 40 pt"
+        },
+        {
+          "item_id": "s027-C-08",
+          "observation": "'ask spec'i incele' / 'codingden nce o kontrol'.",
+          "interpretation": "DoR akışının adımı: 'Task spec'i incele; coding'den önce DoR kontrol.'",
+          "evidence": "index 13481-13483 (y 1163), 13496-13499 (y 1203); x -2226..-1983"
+        },
+        {
+          "item_id": "s027-E-09",
+          "observation": "Granite satırları: 'Granite . B erminal-Bench . . uan BM Granite .' ; 'Granite . B iveCode Bench v 3. uan' ; 'Granite . 3B iveCode Bench v 9. uan'. Not: 'retici bildirimi baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "Üç satır: Granite 4.? ?B | Terminal-Bench; Granite 4.? ?B | LiveCodeBench v? | ?3.?; Granite 4.? 3?B | LiveCodeBench v? | ?9.?. Kaynak IBM Granite 4.? model kartı.",
+          "evidence": "index 13002-13015, 13018-13022 (y -194..-106); 13041-13054, 13057-13061 (y -58..30); 13079-13092, 13094-13096, 13100, 13106 (y 78..166)"
+        },
+        {
+          "item_id": "s027-E-10",
+          "observation": "'lmo 3. 3B hink iveCode Bench v3 3.3 uan Ai model kartı v3 sonucu v ile aynı sıralamaya giremez.'",
+          "interpretation": "Satır: OLMo 3.? 3?B Think | LiveCodeBench v3 | ?3.3 puan | Ai2 model kartı | 'v3 sonucu v? ile aynı sıralamaya giremez.' Farklı benchmark sürümü uyarısı.",
+          "evidence": "index 13142-13157, 13163-13164, 13173; y 214..278"
+        },
+        {
+          "item_id": "s027-E-11",
+          "observation": "'SERA 3B S E-bench erified 9. uan 3 3 seed Ai ython depoları 9 balam btçesi sonucu etkiler.'",
+          "interpretation": "Satır: SERA 3?B | SWE-bench Verified | ?9.? puan | Ai2 (3 seed?) | 'Python depoları, ?9?K? bağlam bütçesi sonucu etkiler.' Koşul: sonuç bağlam bütçesine bağlı.",
+          "evidence": "index 13197-13210, 13219-13220, 13233-13234; y 326..390"
+        },
+        {
+          "item_id": "s027-E-12",
+          "observation": "'rinity arge S E-bench erified 3. uan Arcee model kartı retici bildirimi 3 hinking baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "Satır: Trinity Large Thinking | SWE-bench Verified | ?3.? | Arcee model kartı | Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.",
+          "evidence": "index 13257-13269, 13280-13282, 13287, 13289; y 438..526"
+        },
+        {
+          "item_id": "s027-E-13",
+          "observation": "'en 3 ME B Multilingual . uan en Haziran ayın tarihindeki ölçm Eyll dnya birincilii iddiası deil .' ve 'en 3 ME B Code . uan en reranker Sıralama deerlendirmesi retrieval benchmarkı kod yazma başarısı deildir .'",
+          "interpretation": "İki satır: Qwen3 Embedding ?B | MTEB Multilingual | 'Haziran ayındaki ölçüm, Eylül dünya birinciliği iddiası değil.' ve Qwen3 Reranker ?B | MTEB Code | 'Sıralama/retrieval benchmarkı kod yazma başarısı değildir.' Yıl ve puan kayıp.",
+          "evidence": "index 13294-13304, 13315-13319, 13325-13326, 13329-13331 (y 574..662); 13333-13342, 13351-13356, 13362-13363, 13366-13367 (y 710..798)"
+        },
+        {
+          "item_id": "s027-E-14",
+          "observation": "'CodeRankEmbed CoR DCG . uan omic model kartı retici bildirimi 3 baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "Satır: CodeRankEmbed | CoIR nDCG@? | puan kayıp | Nomic model kartı | Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.",
+          "evidence": "index 13370-13380, 13389-13390, 13399, 13403; y 846..934"
+        },
+        {
+          "item_id": "s027-E-15",
+          "observation": "'AR S . B S orld . uan adım S orld-erified ile ByteDance model aynı benchmark kartı kabul edilmedi.' ve 'AR S . B ScreenSpot-ro . uan ByteDance model retici bildirimi kartı baımsız yerel dorulama yapılmadı.'",
+          "interpretation": "İki satır, aynı model: '?AR S?.? ?B' (ByteDance; ad tam okunamadı) | OSWorld (?? adım) | 'OSWorld-Verified ile aynı benchmark kabul edilmedi.' ve | ScreenSpot-Pro | 'Üretici bildirimi; bağımsız yerel doğrulama yapılmadı.'",
+          "evidence": "index 13417-13428, 13436-13439, 13441-13443 (y 982..1046); 13448-13458, 13461-13464, 13484 (y 1094..1182)"
+        },
+        {
+          "item_id": "s027-F-16",
+          "observation": "Sağ tablo: 'Embedding- B' ; 'en 3 ... Reranker- B' ; 'emotron Rerank ... nvidiallama- nemotron- rerank-b-v' ; '3 ... CodeRankEmbed ... nomic-ai CodeRankEmbed' ; 'BGEM 3 ... BAAbge-m 3' ; 'EmbeddingGemma ... google embeddinggemma- 3 m' ; 'AR S . B ... tencent Mate- B' ; 'Molmo B ... allenaiMolmo B'.",
+          "interpretation": "Sekiz model kartı satırı: Qwen3 Embedding ?B, Qwen3 Reranker ?B, Nemotron Rerank (nvidia/llama-nemotron-rerank-?b-v?), CodeRankEmbed (nomic-ai), BGE-M3 (BAAI/bge-m3), EmbeddingGemma (google/embeddinggemma-300m), '?AR S?.? ?B' (tencent/...Mate-?B; eşleşme belirsiz), Molmo ?B (allenai). Her satırda 'Ağırlık lisans bilgisi' ve 'depo özellik ve sunum' sütunları.",
+          "evidence": "index 13000-13001, 13016-13017; 13023-13040, 13055-13056; 13062-13078, 13093, 13098; 13116-13123, 13129-13133, 13161-13162, 13172; 13187-13194, 13214-13218, 13227-13229; 13250-13256, 13270-13276, 13283-13284, 13288, 13292-13293; 13305-13314, 13320-13324, 13327-13328, 13332, 13343-13350, 13357-13361, 13364-13365, 13368-13369; 13381-13388, 13391-13395, 13400-13402"
+        },
+        {
+          "item_id": "s027-F-17",
+          "observation": "'9 Baımsız benchmark Artificial Analysis AA v .3 ve ilgili görev puanları https artificialanalysis.ai models comparisons claude-fable-- vs-glm- 3' ve 'Claude able .' ; ikinci satır 'Baımsız benchmark imi 3 ... artificialanalysis.ai'.",
+          "interpretation": "İki bağımsız benchmark satırı: Artificial Analysis (AA) v?.3 ve ilgili görev puanları; karşılaştırma sayfası claude-fable-?-vs-glm-?.3. Model adı 'Claude Fable ?.?' ve 'Kimi ?3'. Bu satırlar üretici bildiriminden ayrı, bağımsız kaynak olarak işaretli.",
+          "evidence": "index 13407-13416, 13429-13435, 13440, 13446-13447, 13459-13460 (y 974..1110); 13471-13479, 13490-13495 (y 1158..1198)"
+        }
+      ],
+      "remaining": [
+        "Görsel doğrulama yapılmadı; bu birim için image dosyası yok.",
+        "solid.agent akışının 'Görev contextini al' ve karar kutuları bu birimde yok; sonraki birimlerde aranmalı.",
+        "edge-case akışının 'Evet' dalı ve devamı bu birimde yok.",
+        "'?AR S?.? ?B' model adı ve 'tencent/Mate-?B' deposu eşleşmesi doğrulanamadı.",
+        "SOLID listesindeki 'C' içeren terim çözülemedi."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "title": "Metin katmanında rakam ve harf kaybı var",
+      "detail": "0, 1, 2, 4, 5, 6, 7, 8 rakamları hiç görünmüyor. Ü, Ğ, Ö, İ, L, T, N, O, K, F, Y, W, P, V gibi harfler sık düşüyor. Tablo puanları, model boyutları ve sürümler metinden okunamaz.",
+      "consequence": "Bu üç birimdeki her sayısal iddia doğrulanmamış sayılır. Görsel okuma şart.",
+      "evidence": "Bütün E ve F küme öğeleri; örnek index 12000 '.9', 12530 '39.', 12762 '9.', 13149 '3.3'"
+    },
+    {
+      "id": "F2",
+      "severity": "medium",
+      "title": "Yedi ajan kapısı tanımlı, döngü sınırı sayısı yok",
+      "detail": "Authorization, unknowns, gap, research, edge-case, solid ve definition-of-ready akışları var. Gap, research ve unknowns akışlarında 'Max döngü' kutusu var. Sayı görünmüyor. Döngü dolunca 'Blocker raporla' ve 'durur' yolu var.",
+      "consequence": "Kapasite sınırı tasarımda var. Değeri ve kimin uyguladığı kaynakta yok. Çalışan sistem kanıtı değil.",
+      "evidence": "index 12715-12716, 12854-12866, 12789-12799"
+    },
+    {
+      "id": "F3",
+      "severity": "medium",
+      "title": "Kesintiden dönüş kuralı yalnız bir akışta var",
+      "detail": "Unknowns akışında 'task spec agent'a döner' kutusu var. Gap ve research akışları raporla bitiyor. Blocker sonrası kimin ne yapacağı ve ne zaman yeniden deneneceği yazmıyor.",
+      "consequence": "Durma koşulu var, devam koşulu yok. Kaynakta görünmeyen sahip veya süre uydurulmadı.",
+      "evidence": "index 12834-12837; 12842-12843; 12785-12786"
+    },
+    {
+      "id": "F4",
+      "severity": "low",
+      "title": "'Ali Bora' etiketi yedi akışın altında, rol yok",
+      "detail": "Aynı ad her akış açıklamasının altında duruyor. Yazar, sahip veya persona olduğu yazmıyor.",
+      "consequence": "Sahip ataması sayılmamalı. Koordinatör diğer birimlerde rol açıklaması aramalı.",
+      "evidence": "index 12188-12198, 13277-13291"
+    },
+    {
+      "id": "F5",
+      "severity": "info",
+      "title": "Tablo notları kaynak şüphesini zaten taşıyor",
+      "detail": "Satır notları şöyle: 'Üretici bildirimi; bağımsız yerel doğrulama yapılmadı', 'Aynı yayın tablosu; AA değerlendirmesi değil', 'v3 sonucu v? ile aynı sıralamaya giremez', 'Sıralama benchmarkı kod yazma başarısı değildir', 'Haziran ölçümü Eylül birinciliği iddiası değil'.",
+      "consequence": "Kaynak kendi iddialarını üretici beyanı olarak işaretliyor. Bu, Dot bağlamındaki 'üretici ve araç iddiaları güncel kabul edilmemeli' kuralıyla uyumlu. Yine de sayılar görsel okumadan doğrulanamaz.",
+      "evidence": "index 12329-12337, 13154-13157, 13302-13304, 13342-13356"
+    },
+    {
+      "id": "F6",
+      "severity": "low",
+      "title": "Birimler bölgeye göre değil kelime sırasına göre bölünmüş",
+      "detail": "Her birimde altı uzak x kümesinden parçalar karışık geliyor. Akış kutuları ve tablo hücreleri aynı birimde iç içe.",
+      "consequence": "Bölge sürekliliği zor izleniyor. Komşu birimlerle birleştirme işi koordinatöre kalıyor.",
+      "evidence": "Küme x aralıkları: -10300..2450 (akışlar) ve 46500..57240 (tablolar)"
+    },
+    {
+      "id": "F7",
+      "severity": "low",
+      "title": "Küçük yazım tutarsızlıkları",
+      "detail": "'Görev contextini al' ve 'Görev context'ini al' birlikte kullanılıyor. 'Blockera raporla' ve 'Blocker raporla' birlikte kullanılıyor.",
+      "consequence": "Anlamı değiştirmiyor. İçerik çelişkisi değil.",
+      "evidence": "index 12300-12302 ile 12309-12311; 12711-12712 ile 12842-12843"
+    }
+  ],
+  "five_aspects": {
+    "internal_contradictions": [
+      "Çelişki bulunmadı. Gap akışı 'tüm gap'ler kapanmadan Done sayma' diyor. Döngü dolunca 'geliştirme durur' ve 'Blocker raporla' diyor. İkisi uyumlu.",
+      "DoR akışı 'kritik bilgi eksikse Ready sayma' diyor. Unknowns akışı 'belirsizliği varsayıma gömme' diyor. İkisi uyumlu.",
+      "Yazım tutarsızlıkları var (F7). İçerik çelişkisi değil."
+    ],
+    "external_dependencies": [
+      "Tablo kaynakları: Google Gemma model kartı, NVIDIA Ultra ve Lightning tabloları, IBM Granite kartı, Ai2 kartı, Arcee kartı, Qwen yayınları, Nomic kartı, ByteDance kartı, Artificial Analysis sayfaları, huggingface.co depoları.",
+      "Araştırma akışı dış kaynaklara bağlı: resmi docs, standard/RFC, vendor docs, framework repo.",
+      "Unknowns akışı dış servis API, deploy migration, yasal kısıt gibi dış yüzeyleri tarar.",
+      "Bu kaynakların hiçbiri bu görevde doğrulanmadı. WebFetch kullanılmadı; sayılar okunamadığı için karşılaştırma yapılamazdı."
+    ],
+    "false_assumption_risks": [
+      "Metindeki '3' ve '9' rakamlarını tam sayı sanmak yanlış olur. Diğer rakamlar düşmüş.",
+      "'D daha iyi' ifadesini 'Düşük daha iyi' saymak yorumdur. Kaynak görselle doğrulanmalı.",
+      "'Ali Bora' adını sahip saymak yanlış olur. Rol yazmıyor.",
+      "'Max döngü' kutusunu çalışan bir sınır sanmak yanlış olur. Tasarım çizimi, çalışan sistem değil.",
+      "'?AR S?.? ?B' ve 'tencent/Mate-?B' eşleşmesi tahmindir."
+    ],
+    "capacity": [
+      "Üç akışta 'Max döngü' kapasite sınırı var. Değer yok. Sınır kime bağlı yazmıyor.",
+      "Edge-case akışı 'altı perspektif' ve 'gerekirse dört ek senaryo' diyor. Toplam test bütçesi yazmıyor.",
+      "Dot bağlamındaki 13. ve 16. başlıklar ('test üreten ajan kapsamı sınırsız genişletememeli', 'test tasarlayan ajana süre ve kapsam sınırı') ile ilgili. Kaynakta sınır tasarımı var, değer yok."
+    ],
+    "interruption_recovery": [
+      "Unknowns akışı: 'Unknowns raporu oluştu' sonra 'task spec agent'a döner'. Tek açık dönüş yolu.",
+      "Gap akışı: döngü dolunca 'gap kapanmadı, geliştirme durur'. Dönüş yok.",
+      "Research akışı: döngü dolunca 'bilgi doğrulanamadı, uygulama durur'. Dönüş yok.",
+      "Blocker raporu sonrası kimin devralacağı ve ne zaman yeniden deneneceği kaynakta yok. Uydurulmadı."
+    ]
+  },
+  "open_links": [
+    "Küme A, B, C, D üst akışlarının ajan adları (authorization, unknowns, gap, research) bu birimlerde yok; s001-s024 aralığında aranmalı.",
+    "Tablo başlık satırları bu birimlerde yok; önceki birimlerde olmalı.",
+    "solid.agent akışının karar kutuları ve edge-case akışının 'Evet' dalı s028 ve sonrasında aranmalı.",
+    "'3 Reddet' adımının 1 ve 2 numaralı adımları ve bağlı oklar görsel okuma gerektirir.",
+    "'Max döngü' sayısal değeri ve 'Python depoları ?9?' bağlam bütçesi değeri görselden okunmalı.",
+    "Sayfa 1 için overview görseli hazırlanmamış."
+  ],
+  "dot_comparison": [
+    {
+      "need": "Döngü sınırı ve blocker durumu için dış denetleyici",
+      "source_evidence": "'Max döngü' kutuları (index 12715-12716, 12860-12861, 12793-12794)",
+      "dot_candidate": "Temporal (kalıcı görev yürütme), withHuman (kurala bağlı insana yönlendirme)",
+      "dot_claim_status": "Dot önerisi. Bu görevde güncel doğrulaması yok. Kurulu veya sınanmış sistem değil.",
+      "note": "Kullanıcı kararı: kapsamı genişleten ajanı modelin değiştiremediği dış denetleyici denetlemeli. Kaynaktaki 'Max döngü' bu karara uygun bir tasarım parçası. Sayı yok."
+    },
+    {
+      "need": "Task spec ve kabul kriterlerinin tek kaynağı",
+      "source_evidence": "'task spec kabul kriterlerinden' (12416-12419), 'Task spec'i incele' (13481-13483), 'task spec agent'a döner' (12834-12837)",
+      "dot_candidate": "Plane ve Plane Agents (görev girişi)",
+      "dot_claim_status": "Dot önerisi. Güncel doğrulaması yok.",
+      "note": "Kullanıcı Plane Todo görevlerinin otomatik alınmasını istedi. Kaynaktaki 'Görev context'ini al' adımı bu girişle eşlenebilir. Eski insan başlangıcı çizimi bu birimlerde görünmedi; tarihsel fark kaydı için başka birimler gerekir."
+    },
+    {
+      "need": "Edge-case test perspektiflerinin bağımsız uygulanması",
+      "source_evidence": "edge-case.agent metni (13102-13249)",
+      "dot_candidate": "Playwright (davranış ve bağımsız kabul), Stryker (mutasyon testi)",
+      "dot_claim_status": "Dot önerisi. Güncel doğrulaması yok.",
+      "note": "Dot bağlamı 13. başlık: test üreten ajan kapsamı sınırsız genişletememeli. Kaynaktaki 'gerekirse' dört ek senaryo kapsam büyümesi riski taşır."
+    },
+    {
+      "need": "Birincil kaynak araştırması ve doğrulama",
+      "source_evidence": "research akışı (12023-12182, 12585-12595, 12685-12701)",
+      "dot_candidate": "OpenDocRouter (belge okuma karşılaştırması), changedetection.io (kaynak sayfa değişimi)",
+      "dot_claim_status": "Dot önerisi. İlgisi dolaylı. Güncel doğrulaması yok.",
+      "note": "Kaynak 'doğrulamadan uygulama' diyor. Dot bağlamı da üretici iddialarını güncel saymıyor. Uyumlu."
+    },
+    {
+      "need": "Garip metin katmanı için güvenilir okuma",
+      "source_evidence": "F1 bulgusu",
+      "dot_candidate": "OpenDocRouter, Hob (yerel modelle belge inceleme)",
+      "dot_claim_status": "Dot önerisi. Güncel doğrulaması yok.",
+      "note": "Bu ihtiyaç kaynağın içeriğine değil hazırlık hattına ait. Görsel kırpma ve OCR karşılaştırması gerekir."
+    }
+  ],
+  "needs_and_proposals": [
+    {
+      "need": "Tablo sayılarını ve kayıp harfleri okumak",
+      "tool_or_llm": "Araç: sayfa 1 için altı kümeye ayrı yüksek çözünürlüklü kırpma üretmek. Dil modeli: görsel okuma ile metin katmanını hücre hücre karşılaştırmak.",
+      "critique": "Metin katmanı tek kaynak olursa bütün puanlar yanlış okunur. Hazırlık hattı exterior_text birimlerine görsel eklemedi.",
+      "solution": "Manifestte bu birimlere image alanı eklenmeli. Görsel okunmadan tablo satırları 'unverified' kalmalı.",
+      "internal_risk": "Yanlış puan raporlanır.",
+      "external_risk": "Üretici kartlarıyla yanlış karşılaştırma yapılır.",
+      "sustainability": "Her yeni PDF için aynı hata tekrarlanır. Hazırlık adımına font/glyph kontrolü eklenmeli."
+    },
+    {
+      "need": "Döngü sınırı ve blocker devri",
+      "tool_or_llm": "Araç: iş akışı motorunda deneme sayacı ve blocker durumu alanı. Dil modeli: blocker raporunu yazar, sınırı değiştiremez.",
+      "critique": "Kaynakta sınır değeri ve devralan yok. Çizim tek başına yaptırım değil.",
+      "solution": "Sınır değeri ve devralan rol görev sözleşmesine yazılmalı. Bu görevde uydurulmadı.",
+      "internal_risk": "Ajan döngüde kalır veya erken durur.",
+      "external_risk": "Blocker bekleyen iş dış servisi gereksiz çağırır.",
+      "sustainability": "Sayaç kalıcı kayıtta tutulmalı; ajan oturumu değişince sıfırlanmamalı (Dot bağlamı 14. başlık)."
+    },
+    {
+      "need": "Sahip ve rol netliği",
+      "tool_or_llm": "Araç: görev yönetim aracında atanan kişi alanı. Dil modeli: etiketi sahip saymaz, kaynaktan okur.",
+      "critique": "'Ali Bora' etiketi rol taşımıyor.",
+      "solution": "Rol diğer birimlerden veya kullanıcıdan netleştirilmeli.",
+      "internal_risk": "Yanlış kişiye görev düşer.",
+      "external_risk": "Yok.",
+      "sustainability": "Çizimdeki ad etiketleri atama kaynağı olmamalı."
+    }
+  ],
+  "experiments": [
+    {
+      "id": "E1",
+      "status": "not_run",
+      "purpose": "Metin katmanındaki rakam ve harf kaybının gerçek kaynaktaki değerlerini okumak",
+      "input": "agents/16Agentic.pdf sayfa 1; altı küme için bbox aralıkları (küme E x 46500..47700, küme F x 56300..57240, akışlar x -10300..2450); en az 200 DPI kırpma",
+      "expected_evidence": "Her tablo hücresinde okunabilir rakam ve model adı; akış kutuları arasındaki ok yönleri",
+      "stop_condition": "Bu üç birimdeki her E ve F satırının görsel okuması kaydedilince ve her akış kutusunun oku kaydedilince durur"
+    },
+    {
+      "id": "E2",
+      "status": "not_run",
+      "purpose": "Glyph kaybının nedenini bulmak: font alt kümesi mi, çıkarıcı mı",
+      "input": "PDF font listesi ve ToUnicode tabloları; aynı sayfanın ikinci bir çıkarıcıyla metni",
+      "expected_evidence": "Eksik harflerin belirli fontlarda toplanması veya ikinci çıkarıcının tam metin vermesi",
+      "stop_condition": "Neden belirlenip hazırlık hattına not düşülünce durur. Bu görevde komut çalıştırılmadı."
+    },
+    {
+      "id": "E3",
+      "status": "not_run",
+      "purpose": "'Max döngü' sayısını ve üst akış ajan adlarını komşu birimlerde bulmak",
+      "input": "s001-s024 ve s028-s065 birimleri; 'döng', '.agent', 'Max' kelime aramaları",
+      "expected_evidence": "Sayısal sınır ve ajan adları",
+      "stop_condition": "Yedi ajanın adı ve sınır değeri bulununca ya da bütün birimler taranınca durur"
+    },
+    {
+      "id": "E4",
+      "status": "not_run",
+      "purpose": "Tablo satırlarını resmi model kartlarıyla karşılaştırmak",
+      "input": "E1 sonucundaki okunmuş puanlar; huggingface.co ve artificialanalysis.ai sayfaları",
+      "expected_evidence": "Her satır için eşleşen veya çelişen resmi değer",
+      "stop_condition": "E1 tamamlanmadan başlamaz. Her satır eşlenince durur."
+    }
+  ],
+  "report_markdown": "# CONT-Q-S0037-991126c0-A1 inceleme raporu\n\nKaynak: agents/16Agentic.pdf, sayfa 1.\nBirimler: p0001-text-exterior-s025, s026, s027.\nÜç birimde toplam 1500 öğe var. Hepsini okudum.\nOkunan aralıklar: 12000-12499, 12500-12999, 13000-13499.\n\n## Ne buldum\n\nSayfa çok geniş tek bir tuval. Metin altı bölgeye dağılıyor.\nSolda yedi ajan akışı var. Sağda iki model tablosu var.\n\nAjan akışları şunlar:\n\n1. Authorization akışı. 'Kim, neyi, hangi koşulda yapabilir' sorusunu backend cevaplar. Frontend kontrol güvenlik değildir.\n2. Bilinmeyenler akışı. Görevde yazmayan dış servis, eski kod, deploy, yasal kısıt ve bağımlılıklar taranır. Belirsizlik varsayıma gömülmez.\n3. Gap akışı. Mevcut durum ile hedef durum arasındaki eksikler bulunur. Eksikler kapanmadan görev Done olmaz.\n4. Araştırma akışı. Bilinmeyen teknik bilgi birincil kaynaklardan araştırılır. Doğrulanmadan uygulanmaz.\n5. edge-case.agent. Her önemli davranış altı perspektiften test edilir.\n6. solid.agent. Kod değişikliği sadelik ilkeleriyle kontrol edilir.\n7. definition-of-ready.agent. Coding öncesi hazır olma listesi kontrol edilir.\n\nÜç akışta 'Max döngü' kutusu var. Döngü dolunca iş durur ve blocker raporlanır.\nSayısal sınır kaynakta görünmüyor.\n\n## Önemli sorun\n\nMetin katmanında rakamlar düşmüş. Yalnız 3 ve 9 görünüyor.\nBirçok harf de düşmüş. Örnek: 'retici' aslında 'Üretici'.\nBu yüzden tablo puanlarını okuyamadım.\nTablo satırlarını görselle doğrulamak gerekir.\nBu birimler için görsel dosyası hazırlanmamış.\n\n## Sahip bilgisi\n\n'Ali Bora' adı yedi akışın altında yazıyor.\nRolü yazmıyor. Sahip saymadım.\n\n## Açık işler\n\n- Üst dört akışın ajan adları önceki birimlerde aranmalı.\n- 'Max döngü' sayısı ve tablo puanları görselden okunmalı.\n- Birimler kelime sırasına göre bölünmüş. Bölgeye göre bölünmesi okumayı kolaylaştırır.\n\n## Deneyler\n\nDört deney önerdim. Hepsi not_run durumunda.\nBu görevde komut çalıştırmadım ve dosya yazmadım.\n\n## Denetim notu\n\nYalın Türkçe denetim betiği çalıştırılmadı. Görev komut yasağı koydu.\nGerçek okurla denenmedi.\nBu sonuç kabul veya tamamlanma bildirimi değildir."
+}

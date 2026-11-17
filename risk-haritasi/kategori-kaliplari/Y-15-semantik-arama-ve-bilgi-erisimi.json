@@ -1,0 +1,167 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-15",
+    "ad": "Semantik arama ve bilgi erişimi",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-119",
+      "yetenek_sinifi": "Y-15",
+      "kalip": "Çok kiracılı vektör deposunda çapraz bağlam sızıntısı",
+      "aciklama": "OWASP LLM08:2025, aynı vektör veritabanını paylaşan kullanıcı sınıfları arasında bağlam sızıntısını tanımlar. ChromaDB'de SimpleRBACAuthorizationProvider'ın kiracı, veritabanı ve koleksiyon denetimi yapmaması (CVE-2026-45831) ve kimliği doğrulanmış her kullanıcının herhangi bir veriyi okuyup silebilmesi (CVE-2026-45830) bu kalıbın somut örnekleridir.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-08"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/",
+        "https://github.com/advisories/GHSA-xph7-9rjv-w5fr",
+        "https://github.com/advisories/GHSA-2wm9-hf6c-p5cr"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler ve projeler tek vektör deposunu meta veri filtresiyle paylaşırsa bir ekibin ajanı başka projenin gizli karar kayıtlarını veya kişisel veri içeren iş kalemlerini getirebilir.",
+        "Yetki denetimi uygulama katmanında unutulursa depo kendi başına koruma sağlamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-007",
+        "N-K14-002",
+        "N-K02-003"
+      ],
+      "ornek_araclar": [
+        "ChromaDB",
+        "Qdrant",
+        "Weaviate",
+        "pgvector"
+      ],
+      "erken_sinyal": "Sorgu sonuçlarında istek sahibinin proje kapsamı dışında belge kimlikleri.",
+      "azaltma": "Hassasiyet ve proje başına fiziksel olarak ayrı koleksiyon/veritabanı, yetkinin sorgu zamanında belge ACL'siyle uygulanması, çapraz kiracı sızıntı testleri."
+    },
+    {
+      "id": "RK-120",
+      "yetenek_sinifi": "Y-15",
+      "kalip": "Kimlik doğrulamasız açık vektör veritabanları",
+      "aciklama": "Legit Security, internete açık vektör veritabanlarını taradığında yaklaşık 30 sunucuda şirket e-postaları, müşteri kişisel verisi, finansal kayıtlar ve özgeçmişler buldu. ChromaDB Python projesinde kimlik doğrulama öncesi kod enjeksiyonu (CVE-2026-45829) kritik olarak kaydedildi.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-08"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.legitsecurity.com/blog/the-risks-lurking-in-publicly-exposed-genai-development-services",
+        "https://github.com/advisories/GHSA-f4j7-r4q5-qw2c"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekiplerin deneme için kurduğu vektör veritabanı varsayılan ayarlarla açık kalırsa iş kalemi ve doküman içerikleri kimlik doğrulamasız okunabilir.",
+        "Gölge RAG kurulumları envanterde görünmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-002",
+        "N-K22-005",
+        "N-K18-011"
+      ],
+      "ornek_araclar": [
+        "ChromaDB",
+        "Qdrant",
+        "Milvus",
+        "Weaviate"
+      ],
+      "erken_sinyal": "Ağ taramasında varsayılan vektör DB portları; envanterde olmayan veritabanları.",
+      "azaltma": "Kimlik doğrulamanın zorunlu olduğu merkezî hizmet, ağ segmentasyonu, düzenli dış yüzey taraması."
+    },
+    {
+      "id": "RK-121",
+      "yetenek_sinifi": "Y-15",
+      "kalip": "RAG bilgi zehirlenmesi ve sıfır tıklamalı sızıntı",
+      "aciklama": "PoisonedRAG, bilgi tabanına az sayıda kötü amaçlı metin eklenerek hedef soruya saldırganın seçtiği cevabın ürettirilebildiğini gösterdi. Microsoft 365 Copilot'taki EchoLeak (CVE-2025-32711, CVSS 9,3) ile kullanıcı etkileşimi olmadan bilgi sızdırılabildi.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2402.07867",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-32711"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dış kaynaklı doküman veya e-postanın indekse girmesi, ajanın mimari kararları yanlış aktarmasına ya da gizli bilgiyi dış bağlantıya gömmesine yol açar.",
+        "Zehirlenmiş belge kaldırılana kadar tüm ekiplerin ajanları aynı yanlış bilgiyi kullanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-005",
+        "N-K14-002",
+        "N-K03-009"
+      ],
+      "ornek_araclar": [
+        "Microsoft 365 Copilot",
+        "LlamaIndex",
+        "LangChain RAG",
+        "Glean"
+      ],
+      "erken_sinyal": "Yeni eklenen belgelerde talimat kalıpları; belirli sorgularda ani yanıt değişimi.",
+      "azaltma": "İndekse alınacak kaynakların güven seviyesine göre sınıflandırılması, dış içeriğin ayrı indekste tutulması, belge köken meta verisi ve yanıtta kaynak gösterme."
+    },
+    {
+      "id": "RK-122",
+      "yetenek_sinifi": "Y-15",
+      "kalip": "Gömme tabanlı erişimin kuramsal sınırları",
+      "aciklama": "Google DeepMind araştırması, bir sorgu ile döndürülebilecek en iyi-k belge alt kümelerinin sayısının gömme boyutuyla sınırlı olduğunu ve bunun basit gerçekçi sorgularda bile ortaya çıktığını gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2508.21038"
+      ],
+      "yasatacagi_sorunlar": [
+        "İş kalemi anahtarı, işlev adı veya hata kodu gibi tam eşleşme gerektiren sorgularda yalnız vektör araması ilgili kaydı kaçırır; ajan ilgili kararı 'yok' sanır.",
+        "Kalite düşüşü sessizdir; ajan eksik bağlamla güvenle yanıt verir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-002",
+        "N-K02-003",
+        "N-K03-009"
+      ],
+      "ornek_araclar": [
+        "pgvector",
+        "Elasticsearch/OpenSearch kNN",
+        "Qdrant",
+        "Pinecone"
+      ],
+      "erken_sinyal": "Tam eşleşme sorgularında düşük isabet; kullanıcıların 'bulamadı' geri bildirimleri.",
+      "azaltma": "Sözcük tabanlı (BM25) ve vektör aramanın birleştirildiği hibrit arama, yeniden sıralama, kurum sorgu setiyle düzenli ölçüm."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 57,
+    "yuksek": 7,
+    "dusuk": 78,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-01": 13,
+    "RT-08": 6,
+    "RT-16": 4,
+    "RT-03": 4,
+    "RT-11": 4,
+    "RT-10": 3,
+    "RT-14": 3,
+    "RT-13": 3,
+    "RT-02": 2,
+    "RT-05": 2,
+    "RT-06": 2,
+    "RT-07": 2,
+    "RT-04": 1,
+    "RT-09": 1,
+    "RT-15": 1
+  }
+}

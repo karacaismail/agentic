@@ -1,0 +1,3060 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-36",
+    "ad": "Veri koruma (sınıflandırma, maskeleme, veri yerelliği denetimi, saklama ve silme)",
+    "grup": "Yürütme ortamı ve güvenlik",
+    "cozdugu_sorun": "Kişisel verinin istem, log ve izlere birikmesi; verinin izinsiz yurt dışına çıkması.",
+    "ne_zaman_zorunlu": "Kişisel veya regüle veri varsa."
+  },
+  "arac_sayisi": 164,
+  "tur_dagilimi": {
+    "acik-kaynak": 41,
+    "protokol-standart": 16,
+    "bulut-hizmeti": 13,
+    "ticari-saas": 50,
+    "acik-cekirdek": 6,
+    "ticari-yazilim": 21,
+    "model": 2,
+    "platform": 4,
+    "kutuphane": 11
+  },
+  "araclar": [
+    {
+      "id": "AR-0113",
+      "ad": "Guardrails AI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.guardrailsai.com/docs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğrulayıcı merkezinden (hub) alınan kurallarla LLM girdi/çıktısını doğrular, yapılandırılmış çıktı üretir, başarısızlıkta düzeltme/yeniden sorma uygular; sunucu modu vardır.",
+      "sinirlar": "Tek başına yeterli değil (kaynak); doğrulayıcı kalitesi değişken. Doğrulayıcı kalitesi hub bileşenlerine göre değişir; bazı doğrulayıcılar ek model çağrısı yapar. Hub doğrulayıcılarının bir kısmı ek model/hizmet çağrısı yapar ve gecikme ekler. Doğrulayıcı kalitesi değişken; bazı doğrulayıcılar dış API kullanır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K04-006",
+        "N-K05-012",
+        "N-K10-003",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-0150",
+      "ad": "OpenTelemetry",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://opentelemetry.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dağıtık iz, metrik ve log için açık standart ve SDK'lar; GenAI anlamsal kuralları; Collector ile maskeleme, örnekleme ve yönlendirme.",
+      "sinirlar": "Ajan/LLM anlamsal kuralları hâlâ gelişiyor; depolama ve arayüz ayrı araç ister.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K19-001",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-0196",
+      "ad": "Amazon S3 (S3 uyumlu nesne deposu)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/s3/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Nesne deposu; büyük yama, log, görüntü ve kanıt paketleri için; yaşam döngüsü kuralları ve nesne kilidi ile saklama politikası. Kaynak 'S3 uyumlu nesne deposu' öneriyor.",
+      "sinirlar": "AWS'de barındırılır; kurum içi S3 uyumlu depo ile de aynı API kullanılabilir.",
+      "ihtiyaclar": [
+        "N-K05-026",
+        "N-K13-011",
+        "N-K19-004",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-0930",
+      "ad": "Harmonic Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.harmonic.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tarayıcı eklentisi, uç nokta istemcisi ve MCP ağ geçidiyle çalışanların kullandığı üretken yapay zekâ araçlarını (kayıt dışı/gölge kullanım dahil) envanterleyen; hassas veri paylaşımında uyaran veya engelleyen platform.",
+      "sinirlar": "Çalışan izleme boyutu nedeniyle KVKK/iş hukuku değerlendirmesi ve şeffaflık gerekir.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-1106",
+      "ad": "SDV (Synthetic Data Vault)",
+      "tur": "acik-cekirdek",
+      "lisans": "BUSL-1.1",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.sdv.dev/sdv",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek tablo, çok tablolu ilişkisel ve zaman serisi veriden istatistiksel ve derin öğrenme modelleriyle sentetik veri üretir; kalite ve gizlilik metrikleri sunar.",
+      "sinirlar": "BUSL lisansı ticari kullanımda kısıt getirir; sentetik veri yine de yeniden tanımlama riski açısından değerlendirilmeli. Business Source License ticari/üretim kullanımını kısıtlar; gelişmiş özellikler ücretli SDV Enterprise'dadır.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-1107",
+      "ad": "Greenmask",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://greenmask.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL odaklı döküm/geri yükleme sırasında deterministik maskeleme, sentetik değer üretimi ve referans bütünlüğünü koruyan alt kümeleme yapar.",
+      "sinirlar": "Dönüştürücü yapılandırması şema bilgisi ister; yanlış yapılandırma veri sızdırabilir. Küçük çekirdek ekip; ilişkisel olmayan kaynak desteği sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1108",
+      "ad": "PostgreSQL Anonymizer",
+      "tur": "acik-kaynak",
+      "lisans": "PostgreSQL License",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://postgresql-anonymizer.readthedocs.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Maskeleme kurallarını SECURITY LABEL ile veritabanı şemasında tanımlayan eklenti; statik ve dinamik maskeleme, anonim döküm ve sahte veri fonksiyonları sağlar.",
+      "sinirlar": "Yalnız PostgreSQL; eklenti kurulumu yönetilen veritabanlarında kısıtlı olabilir. Yalnız PostgreSQL; dinamik maskeleme sorgu performansını etkileyebilir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1109",
+      "ad": "Tonic.ai (Structural, Fabricate, Textual)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.tonic.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Structural ile üretim veritabanlarını referans bütünlüğünü koruyarak maskeleme ve alt küme çıkarma, Fabricate ile sıfırdan sentetik veri, Textual ile yapılandırılmamış metinde kişisel veri tespiti ve sentezi.",
+      "sinirlar": "Ticari ve maliyetli; maskeleme kurallarının doğrulanması kurum sorumluluğunda. Ticari lisans; kaynak veritabanına geniş okuma erişimi gerekir.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1138",
+      "ad": "Tonic Textual",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://textual.tonic.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Serbest metin ve dosyalarda NER tabanlı kişisel veri tespiti, sansür ve gerçekçi sentetik ikame yapar; LLM eğitimi/RAG verisini ve istemleri korumak için kullanılır.",
+      "sinirlar": "Ticari; Türkçe varlık tespiti kalitesi doğrulanmalıdır.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1140",
+      "ad": "MOSTLY AI Synthetic Data SDK",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mostly-ai/mostlyai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yerelde eğitilen üretici modellerle tablo ve metin verisinden gizlilik korumalı sentetik veri üreten Python araç takımıdır; isteğe bağlı olarak ticari platforma bağlanır.",
+      "sinirlar": "Kurumsal platform ticaridir; şirket markası 'powered by Syntho' olarak değişti, kurumsal yapı izlenmeli.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1142",
+      "ad": "Synthesized",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.synthesized.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Üretime benzer test verisi için maskeleme, alt kümeleme ve sentezi YAML ile 'test verisi kodu' olarak tanımlar; CI hattına bağlanır.",
+      "sinirlar": "Ticari lisans; topluluğu küçük.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1144",
+      "ad": "Perforce Delphix",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.perforce.com/products/delphix",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri sanallaştırma ve maskeleme ile test ortamlarına hızlı, sanal, maskelenmiş veritabanı kopyaları sağlar; birden çok veritabanı motorunu destekler.",
+      "sinirlar": "Pahalı ve ağır kurumsal kurulum.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1178",
+      "ad": "Bearer CLI",
+      "tur": "acik-kaynak",
+      "lisans": "Elastic License 2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.bearer.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Güvenlik ve gizlilik odaklı SAST: kişisel/hassas veri akışlarını (loglara, üçüncü taraflara) tespit eder, OWASP/CWE kurallarıyla raporlar.",
+      "sinirlar": "ELv2 hizmet olarak sunmayı kısıtlar; desteklenen dil sayısı sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-009",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K34-004",
+        "N-K34-007"
+      ]
+    },
+    {
+      "id": "AR-1179",
+      "ad": "HoundDog.ai",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (ücretsiz sürüm)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://hounddog.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodda kişisel verinin loglara, LLM istemlerine ve üçüncü taraf SDK'lara akışını statik olarak tespit eden gizlilik odaklı tarayıcıdır; veri envanteri çıkarır.",
+      "sinirlar": "Küçük sağlayıcı; dil kapsamı ve Türkçe alan adları doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-1180",
+      "ad": "Privado",
+      "tur": "acik-cekirdek",
+      "lisans": "LGPL-3.0 (CLI) + ticari platform",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.privado.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tabanından kişisel veri akışlarını ve veri envanterini (RoPA girdisi) çıkaran statik tarayıcı; gizlilik ihlali kuralları.",
+      "sinirlar": "Açık kaynak CLI'ya son itme Kasım 2025 — bakım yavaşlamış; tam özellikler ticari platformda.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-1244",
+      "ad": "Lakera Guard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.lakera.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gerçek zamanlı API ile istem enjeksiyonu, jailbreak, veri sızıntısı ve zararlı bağlantı tespiti; RAG ve MCP içeriklerini de tarar.",
+      "sinirlar": "Check Point satın alması (2025) sonrası kurumsal odaklı; SaaS kullanımında istem sağlayıcıya gider.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-005",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1245",
+      "ad": "LLM Guard",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/protectai/llm-guard",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "İstem ve çıktı tarayıcıları (enjeksiyon, PII anonimleştirme, sır, toksisite) içeren Python araç takımıdır.",
+      "sinirlar": "Depo Temmuz 2026'da arşivlendi; bakım yok — yeni kurulumda kullanılmamalı, göç planlanmalı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1247",
+      "ad": "Amazon Bedrock Guardrails",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/bedrock/guardrails/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İçerik filtreleri, istem saldırısı tespiti, PII maskeleme, konu reddi, bağlamsal dayanak ve otomatik muhakeme kontrolleri; ApplyGuardrail API ile Bedrock dışı modellere de uygulanır.",
+      "sinirlar": "AWS kilidi; Türkçe kapsamı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1248",
+      "ad": "Google Cloud Model Armor",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/security/products/model-armor",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Model bağımsız istem/yanıt taraması: istem enjeksiyonu/jailbreak, kötü amaçlı URL, hassas veri (Sensitive Data Protection entegrasyonu) ve sorumlu yapay zekâ filtreleri.",
+      "sinirlar": "Google Cloud'a bağlı.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1253",
+      "ad": "Lasso MCP Gateway",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/lasso-security/mcp-gateway",
+      "olgunluk": "erken",
+      "ne_saglar": "Diğer MCP sunucularının önünde çalışan eklenti tabanlı ağ geçidi; araç çağrılarında PII/sır maskeleme ve MCP sunucu itibar taraması yapar.",
+      "sinirlar": "Küçük proje, son itme Ocak 2026.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-004",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1256",
+      "ad": "Prompt Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://prompt.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışan ve uygulama düzeyinde üretken yapay zekâ kullanımını görünür kılar; istem enjeksiyonu ve hassas veri sızıntısını engeller, kayıt dışı yapay zekâ kullanımını tespit eder.",
+      "sinirlar": "Ticari; uç nokta/ tarayıcı ajanı gerektirebilir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-011",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-1270",
+      "ad": "Presidio",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/data-privacy-stack/presidio",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin, görüntü ve yapılandırılmış veride NER, regex ve bağlam ile kişisel veri tespiti; maskeleme, değiştirme, şifreleme ile anonimleştirme. TCKN gibi yerel kimlikler için özel tanıyıcı eklenebilir.",
+      "sinirlar": "Microsoft'tan bağımsız topluluk projesine geçiş sürüyor; Türkçe NER kalitesi seçilen modele bağlı.",
+      "ihtiyaclar": [
+        "N-K14-007",
+        "N-K15-003",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005",
+        "N-K32-001",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-1271",
+      "ad": "GLiNER",
+      "tur": "model",
+      "lisans": "Apache-2.0 (kod); model ağırlıklarına göre değişir",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/urchade/GLiNER",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Etiket adıyla sıfır atış adlandırılmış varlık tanıma yapan hafif model; PII türlerini eğitimsiz tespit etmek ve Presidio'ya tanıyıcı olarak eklemek için kullanılır.",
+      "sinirlar": "Türkçe performansı model sürümüne bağlı; kesinlik için doğrulama seti gerekir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1272",
+      "ad": "OpenTelemetry Collector (redaction/transform işlemcileri)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/open-telemetry/opentelemetry-collector-contrib",
+      "olgunluk": "olgun",
+      "ne_saglar": "İz, log ve metrik özniteliklerini izin listesi ve regex ile maskeleyen redaction işlemcisi ile transform/filter işlemcilerini sunar; ajan izleri dışa aktarılmadan önce kişisel veri ve sır temizlenir.",
+      "sinirlar": "Kural tabanlıdır; serbest metindeki PII'yi anlamsal olarak bulmaz. Yapılandırma karmaşık; contrib bileşenlerinin olgunluk düzeyi değişken.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-004",
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1273",
+      "ad": "Google Cloud Sensitive Data Protection",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/security/products/sensitive-data-protection",
+      "olgunluk": "olgun",
+      "ne_saglar": "150+ infoType ile hassas veri keşfi ve profilleme; maskeleme, tokenizasyon, biçim korumalı şifreleme ile kimliksizleştirme API'si.",
+      "sinirlar": "Google Cloud'a bağlı; Türkiye'ye özgü tanımlayıcılar için özel infoType gerekir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1274",
+      "ad": "Microsoft Purview",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.microsoft.com/en-us/security/business/microsoft-purview",
+      "olgunluk": "olgun",
+      "ne_saglar": "DLP, hassasiyet etiketleri, veri sınıflandırma, yapay zekâ için veri güvenliği duruşu (yapay zekâ etkileşimlerinin izlenmesi), saklama ve eDiscovery.",
+      "sinirlar": "Microsoft 365/Azure ekosistemine bağlı; lisans katmanları karmaşık.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-1275",
+      "ad": "Nightfall AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.nightfall.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SaaS uygulamaları, uç noktalar ve üretken yapay zekâ istemleri için LLM tabanlı dedektörlerle PII ve sır tespiti; DLP politikaları ve iyileştirme.",
+      "sinirlar": "SaaS; taranan içerik sağlayıcıya gider.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1276",
+      "ad": "Skyflow",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.skyflow.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kişisel veriyi uygulamalardan ayırıp tokenlaştıran veri gizlilik kasası; bölgesel kasalarla veri yerelliği ve LLM istemlerinden hassas veri çıkarımı sağlar.",
+      "sinirlar": "Mimari değişiklik gerektirir; Türkiye bölgesi bilinmiyor.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1277",
+      "ad": "Protecto",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.protecto.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajan ve LLM iş akışları için bağlam korumalı maskeleme/tokenizasyon ve role göre maskesiz gösterim sunan veri kontrol katmanıdır.",
+      "sinirlar": "Genç sağlayıcı; bağımsız değerlendirme sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1278",
+      "ad": "Limina (eski Private AI)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.getlimina.ai/en",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok dilli PII tespiti, sansür ve sentetik ikame; konteyner olarak kurum içinde çalıştırılabilir.",
+      "sinirlar": "Marka Private AI'dan Limina'ya değişti; Türkçe kapsamı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1279",
+      "ad": "VERBİS (Veri Sorumluları Sicil Bilgi Sistemi)",
+      "tur": "platform",
+      "lisans": "kamu hizmeti",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://verbis.kvkk.gov.tr/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Türkiye'de veri sorumlularının işleme amaçları, veri kategorileri, alıcı grupları, saklama süreleri ve yabancı ülkelere aktarım bilgilerini kaydettiği resmî sicil sistemidir.",
+      "sinirlar": "Uyum aracı değil, yasal kayıt yükümlülüğüdür; güncelleme manueldir ve eşik/muafiyetlere tabidir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-1280",
+      "ad": "OneTrust",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.onetrust.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri envanteri ve işleme kayıtları, ilgili kişi talepleri, onay yönetimi, üçüncü taraf/alt işleyici riski ve yapay zekâ envanteri ile AB YZ Yasası değerlendirmeleri.",
+      "sinirlar": "Pahalı ve kapsamlı; KVKK şablonları kurumca uyarlanmalı.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-006",
+        "N-K22-008",
+        "N-K22-009",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-1281",
+      "ad": "Securiti",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://securiti.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri güvenliği duruşu yönetimi, gizlilik operasyonları (ilgili kişi talebi, işleme kaydı, onay), sınır ötesi veri akışı haritası ve yapay zekâ veri yönetişimi.",
+      "sinirlar": "Kurumsal ölçekte maliyetli; konektör kurulumu emek ister.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-006",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1282",
+      "ad": "BigID",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://bigid.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapılandırılmış ve yapılandırılmamış veri kaynaklarında kişisel/hassas veri keşfi, sınıflandırma, saklama/silme iş akışları ve yapay zekâ veri hazırlığı denetimi.",
+      "sinirlar": "Pahalı; tarama yükü kaynak sistemlere etki edebilir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1283",
+      "ad": "TrustArc",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://trustarc.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gizlilik uyum yönetimi: değerlendirmeler, veri envanteri, düzenleme takibi ve onay yönetimi.",
+      "sinirlar": "SaaS; Türkiye mevzuatı içeriği sınırlı olabilir.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-006",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-1284",
+      "ad": "Transcend",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://transcend.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İlgili kişi taleplerinin (erişim/silme) sistemler arasında otomasyonu, veri eşleme ve onay yönetimi; gerçek zamanlı veri yönetişim katmanı.",
+      "sinirlar": "SaaS; konektör kapsamına bağımlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1285",
+      "ad": "Fides",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/ethyca/fides",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Gizliliği kod olarak tanımlayan çerçeve: sistem/veri kategorisi bildirimleri, politika kontrolü ve ilgili kişi taleplerinin orkestrasyonu.",
+      "sinirlar": "Açık kaynak depo Ağustos 2026'da arşivlendi; yeni kurulum için uygun değil.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-009",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-1286",
+      "ad": "Fideslang",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ethyca/fideslang",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veri kategorileri, veri kullanımları ve veri sahipleri için gizlilik taksonomisi ve bildirim dilidir; alan bazında 'hangi veri nereye gidebilir' politikasının sözlüğü olarak kullanılabilir.",
+      "sinirlar": "Yalnız taksonomi; uygulayıcı motor ayrıca gerekir; ana ürün (Fides) arşivlendi.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-1287",
+      "ad": "CISO Assistant",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (+ intuitem Commercial License, enterprise dizini)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://intuitem.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Risk, uyum, denetim ve üçüncü taraf yönetimi için GRC platformu; ISO 42001, AB YZ Yasası, NIST AI RMF, GDPR, NIS2, DORA, Siber Dayanıklılık Yasası dahil 100+ çerçeve kütüphanesi ve kanıt yönetimi sunar.",
+      "sinirlar": "KVKK çerçevesi yerleşik değil (kurumca eklenmeli); enterprise özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-006",
+        "N-K22-007",
+        "N-K22-009",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-1295",
+      "ad": "Holistic AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.holisticai.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ envanteri, risk yönetimi ve düzenleme uyumu (AB YZ Yasası vb.) için yönetişim platformu.",
+      "sinirlar": "SaaS.",
+      "ihtiyaclar": [
+        "N-K22-006",
+        "N-K22-010",
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-1319",
+      "ad": "Fluent Bit",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://fluentbit.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hafif log, metrik ve iz toplayıcı/işlemci; filtrelerle alan maskeleme, zenginleştirme ve çok hedefe yönlendirme yapar.",
+      "sinirlar": "Karmaşık dönüşümler için Lua/özel filtre gerekir; kalıcı tampon ayarı yapılmazsa veri kaybı riski.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1320",
+      "ad": "Vector",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://vector.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust ile yazılmış gözlem veri hattı; VRL diliyle log/metrik dönüştürme, hassas alan temizleme ve çok hedefe gönderim sağlar.",
+      "sinirlar": "Datadog'a ait; iz (trace) desteği log/metriğe göre daha sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1324",
+      "ad": "Grafana Loki",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/loki",
+      "olgunluk": "olgun",
+      "ne_saglar": "Etiket indeksli log toplama, nesne deposunda saklama ve saklama süresi (retention) politikaları sunar.",
+      "sinirlar": "Tam metin indeksi yok; yüksek kardinaliteli etiketler performans sorunu yaratır; AGPL.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K19-004",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1542",
+      "ad": "hoop.dev",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://hoop.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veritabanı, sunucu ve API erişimini aracı (sidecar) üzerinden geçirip hassas alanları kablo üzerinde maskeleyen, yıkıcı komutları engelleyen, onay ve oturum kaydı sağlayan ajan/insan erişim ağ geçidi.",
+      "sinirlar": "Ek ağ atlaması ve işletim yükü getirir; maskeleme doğruluğu tespit kurallarına bağlıdır.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-007",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-1549",
+      "ad": "PasteGuard",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pasteguard.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM sağlayıcılarına ve kodlama ajanlarına gidecek istemlerdeki kişisel veri ve gizli bilgileri yer tutucularla maskeleyen, yanıtta geri çözen yerel öncelikli gizlilik vekil sunucusu.",
+      "sinirlar": "Tespit doğruluğu tanıyıcı kurallarına bağlıdır; Türkçe kişisel veri kalıpları ayrıca doğrulanmalıdır.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1550",
+      "ad": "Kiji Privacy Proxy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/dataiku/kiji-proxy",
+      "olgunluk": "erken",
+      "ne_saglar": "OpenAI uyumlu isteklerdeki kişisel verileri model sağlayıcısına gönderilmeden önce tespit edip maskeleyen gizlilik vekil sunucusu.",
+      "sinirlar": "Genç proje; kapsanan varlık türleri ve dil desteği sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1560",
+      "ad": "DataProfiler",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://capitalone.github.io/DataProfiler/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri setlerinden şema ve istatistik çıkaran ve derin öğrenme modeliyle kişisel/hassas varlıkları (PII) tespit eden Python kütüphanesi; veri sınıflandırma için kullanılabilir.",
+      "sinirlar": "Varlık modeli İngilizce/ABD formatları odaklıdır; Türkçe veriler için yeniden eğitim gerekebilir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-011",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1561",
+      "ad": "Databunker",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://databunker.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kişisel verileri (PII/PHI) şifreli ve tokenize olarak ayrı bir kasada tutan, rıza, saklama süresi ve 'unutulma hakkı' işlemlerini API ile yöneten kişisel veri kasası.",
+      "sinirlar": "Uygulama mimarisinin kişisel veriyi bu kasaya taşıyacak şekilde tasarlanmasını gerektirir; bazı özellikler ticari sürümdedir.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1562",
+      "ad": "Google Differential Privacy",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/google/differential-privacy",
+      "olgunluk": "olgun",
+      "ne_saglar": "C++, Go ve Java için diferansiyel gizlilikli toplama (sayım, toplam, ortalama, yüzdelik) algoritmaları ve gizlilik bütçesi muhasebesi kütüphanesi; metrik paylaşımında bireysel veriyi korur.",
+      "sinirlar": "İstatistik ve kriptografi uzmanlığı gerektirir; tek kayıt düzeyi maskeleme için değil, toplulaştırılmış çıktılar içindir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-1595",
+      "ad": "pgstream",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://xata.io/docs/opensource/pgstream",
+      "olgunluk": "gelisen",
+      "ne_saglar": "DDL değişikliklerini de taşıyan PostgreSQL mantıksal replikasyon aracı; dönüştürücülerle (transformers) sütun düzeyinde maskeleme/anonimleştirme yaparak test ortamlarına veri akıtabilir.",
+      "sinirlar": "Yalnız PostgreSQL kaynaklı; dönüşüm kuralları kurumca tanımlanmalıdır.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-1599",
+      "ad": "Synthcity",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/vanderschaarlab/synthcity",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tablo ve zaman serisi sentetik veri üretimi (GAN, VAE, difüzyon, Bayes ağları) ve gizlilik/faydalılık/adillik ölçümlerini tek çatıda sunan kütüphane.",
+      "sinirlar": "Araştırma odaklı; üretim hattı için ölçekleme ve bakım sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1695",
+      "ad": "K8sGPT",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://k8sgpt.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes kümesini yerleşik analizörlerle tarayıp hatalı kaynakları tespit eder ve LLM ile açıklama/çözüm önerisi üretir; LLM'e gönderilen nesne adlarını anonimleştirme seçeneği ve operatör modu vardır.",
+      "sinirlar": "Kubernetes'e özgü; analizörlerin kapsamı sınırlı, LLM açıklamaları yanlış olabilir.",
+      "ihtiyaclar": [
+        "N-K16-002",
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1706",
+      "ad": "Fluentd",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.fluentd.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birleşik log katmanı: yüzlerce girdi/çıktı eklentisiyle logları toplar, filtreler (ör. alan maskeleme, kayıt dönüştürme) ve depolara yönlendirir.",
+      "sinirlar": "Ruby tabanlı, yüksek hacimde Fluent Bit'e göre daha fazla kaynak tüketir; maskeleme kuralları elle yazılır.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-004"
+      ]
+    },
+    {
+      "id": "AR-1716",
+      "ad": "Confidential Containers",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://confidentialcontainers.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Pod'ları Kata Containers ile Intel TDX, AMD SEV-SNP gibi donanım güvenilir yürütme ortamlarında çalıştırıp uzaktan kanıtlama (attestation) sonrası sır dağıtır; kullanım sırasında veriyi altyapı sahibinden korur.",
+      "sinirlar": "Özel donanım ve çekirdek gerektirir; işletimi ve hata ayıklaması karmaşık, performans ek yükü var.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K15-002",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1749",
+      "ad": "Egeria",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://egeria-project.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık meta veri ve yönetişim platformu: iş sözlüğü (terimler, eşanlamlılar, tercih edilen terim ilişkileri), sınıflandırmalar, sahiplik ve meta veri değişimi için açık API'ler ve tür sistemi.",
+      "sinirlar": "Kurulumu ve kavram modeli karmaşık; küçük kurumlar için ağır.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K07-006",
+        "N-K14-009"
+      ]
+    },
+    {
+      "id": "AR-1750",
+      "ad": "Unity Catalog",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://unitycatalog.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tablolar, dosyalar, ML modelleri ve fonksiyonlar için birleşik katalog ve erişim denetimi; kayıtlı fonksiyonlar ajan araçları olarak sunulabilir, model sürümleri kaydedilir.",
+      "sinirlar": "Açık kaynak sürüm ticari Databricks sürümüne göre özellik açısından geride.",
+      "ihtiyaclar": [
+        "N-K09-012",
+        "N-K12-002",
+        "N-K14-007"
+      ]
+    },
+    {
+      "id": "AR-1757",
+      "ad": "Data Prep Kit",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://data-prep-kit.github.io/data-prep-kit/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Belge ve kod verisini LLM ince ayarı ve RAG için hazırlayan dönüşüm modülleri (tam/bulanık tekrar ayıklama, PII temizleme, dil tespiti, kod kalite filtreleri); Python, Ray ve Spark üzerinde ölçeklenir.",
+      "sinirlar": "Toplu veri hazırlığına yöneliktir; öğrenme hattının değerlendirme/yayın adımlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K11-009",
+        "N-K15-003",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-1798",
+      "ad": "Apache Atlas",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://atlas.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Meta veri yönetişimi ve veri kataloğu: iş sözlüğü (glossary) ve terim–varlık ilişkileri, sınıflandırma etiketleri (ör. PII) ve yayılımı, köken; Apache Ranger ile etiket tabanlı erişim ve maskeleme politikaları.",
+      "sinirlar": "Hadoop ekosistemi kökenli, işletimi ağır; modern veri yığınlarında entegrasyon emek ister.",
+      "ihtiyaclar": [
+        "N-K07-006",
+        "N-K18-011",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1799",
+      "ad": "Apache Ranger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://ranger.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri platformlarında (Hive, Trino, Kafka, HDFS vb.) merkezi erişim politikası, sütun maskeleme, satır filtreleme ve erişim denetim kaydı; etiket tabanlı politikalar Atlas sınıflandırmalarıyla çalışır.",
+      "sinirlar": "Büyük veri ekosistemine odaklı; uygulama düzeyi yetkilendirme için genel amaçlı değil.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-001",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-1876",
+      "ad": "W3C ODRL (Open Digital Rights Language)",
+      "tur": "protokol-standart",
+      "lisans": "W3C Document License",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.w3.org/TR/odrl-model/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İzin, yasak ve yükümlülükleri makinece okunur ifade eden kullanım politikası dili; model ve veri kullanım şartlarını veya 'hangi veri hangi sağlayıcıya gidebilir' kurallarını tanımlamaya temel.",
+      "sinirlar": "Değerlendirme motoru standardın parçası değil; uygulama araçları sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-001",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-1877",
+      "ad": "DPV (Data Privacy Vocabulary)",
+      "tur": "protokol-standart",
+      "lisans": "W3C Community Contributor License",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://w3c.github.io/dpv/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kişisel veri işleme amaçları, veri kategorileri, hukuki dayanaklar, saklama ve teknik/organizasyonel önlemler için sözlük; GDPR ve AB AI Yasası uzantıları içerir. KVKK kayıtlarını makinece okunur tutmaya uyarlanabilir.",
+      "sinirlar": "Topluluk grubu çıktısıdır, resmî W3C standardı değildir; KVKK'ya özgü uzantı yok.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1970",
+      "ad": "Amazon Macie",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/macie/",
+      "olgunluk": "olgun",
+      "ne_saglar": "S3'teki verilerde makine öğrenimi ve desen eşleme ile kişisel/hassas veri keşfi ve sınıflandırması; özel veri tanımlayıcıları ile kuruma özgü alanlar (ör. TCKN deseni) tanımlanabilir.",
+      "sinirlar": "Yalnız S3 nesneleri; log/iz akışlarında anlık maskeleme yapmaz.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K19-004",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-1997",
+      "ad": "Azure Policy",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://azure.microsoft.com/en-us/products/azure-policy",
+      "olgunluk": "olgun",
+      "ne_saglar": "Azure kaynaklarına bildirimsel politikalar (izinli bölgeler, izinli SKU'lar, zorunlu etiketler vb.) uygular; ihlali engeller veya düzeltir, uyum durumunu raporlar.",
+      "sinirlar": "Yalnız Azure Resource Manager kapsamı; uygulama düzeyi kuralları kapsamaz.",
+      "ihtiyaclar": [
+        "N-K11-003",
+        "N-K18-010",
+        "N-K21-004",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2016",
+      "ad": "Microsoft EU Data Boundary",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/privacy/eudb/eu-data-boundary-learn",
+      "olgunluk": "olgun",
+      "ne_saglar": "Azure, Microsoft 365, Dynamics ve Power Platform için müşteri verisi ve kişisel verinin AB/EFTA içinde saklanıp işlenmesini taahhüt eden program; kapsam dışı hizmetler belgelenir.",
+      "sinirlar": "Türkiye AB sınırı içinde değildir; Türkiye'den bakıldığında yine yurt dışı aktarım; bazı hizmetler kapsam dışı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2018",
+      "ad": "GitHub Enterprise Cloud with data residency",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/about-github-enterprise-cloud-with-data-residency",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod ve müşteri verisinin seçilen bölgede (AB, Avustralya, ABD, Japonya) GHE.com alt alan adında tutulduğu, Enterprise Managed Users ile yönetilen GitHub bulutu.",
+      "sinirlar": "Bazı özellikler/uygulamalar bölgede farklılık gösterebilir; Türkiye bölgesi yok.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2019",
+      "ad": "GitHub Enterprise Server",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/enterprise-server@latest/admin/overview/about-github-enterprise-server",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitHub'ın kurum veri merkezinde veya özel bulutta çalışan kurulumu; Actions, Advanced Security ve (bağlantılı) Copilot özellikleri; kurum içi veri yerelliği.",
+      "sinirlar": "Bazı bulut özellikleri (ör. ajan hizmetleri) gecikmeli veya yok; sürüm yükseltme ve işletim yükü kurumdadır.",
+      "ihtiyaclar": [
+        "N-K06-001",
+        "N-K09-009",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2028",
+      "ad": "Assured Workloads",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/security/products/assured-workloads",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri yerleşimi (ör. AB veri sınırı), personel erişim kısıtları ve anahtar yönetimi kontrollerini klasör düzeyinde zorlayan uyum paketi; izin verilen hizmet ve bölgeleri sınırlar.",
+      "sinirlar": "Türkiye için bir kontrol paketi yok; bazı hizmetler bölge kısıtıyla kullanılamaz.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2050",
+      "ad": "Oracle Data Safe",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.oracle.com/security/database-security/data-safe/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Oracle veritabanlarında hassas veri keşfi, test ortamı için veri maskeleme, kullanıcı/yetki değerlendirmesi ve etkinlik denetimi.",
+      "sinirlar": "Oracle veritabanlarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K19-004",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2051",
+      "ad": "Oracle EU Sovereign Cloud",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.oracle.eu/",
+      "olgunluk": "olgun",
+      "ne_saglar": "AB içinde, AB personeli tarafından işletilen, ticari OCI'dan ayrık egemen bulut bölgeleri (Frankfurt, Madrid).",
+      "sinirlar": "Türkiye için yine yurt dışı aktarım; hizmet kataloğu ticari bölgelerden dar olabilir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2055",
+      "ad": "IBM Guardium AI Security",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/guardium",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gölge yapay zekâ dahil model/ajan envanteri çıkarır, yanlış yapılandırmaları ve politika ihlallerini bulur, yapay zekâ uygulamalarına otomatik sızma testi uygular; watsonx.governance ile bütünleşir.",
+      "sinirlar": "IBM ekosistemi dışında entegrasyon eforu; kapsam bulut/ürün bağlayıcılarına bağlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-012",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2067",
+      "ad": "IBM Optim Test Data Management",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/optim-test-data-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretim veritabanlarından referans bütünlüğünü koruyarak alt küme çıkarma, maskeleme ve test veritabanı yenileme.",
+      "sinirlar": "Eski mimari; kurulum ve lisans ağır.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2068",
+      "ad": "SAP Generative AI Hub (SAP AI Core)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birden çok sağlayıcının modellerine (OpenAI, Anthropic, Google, Mistral, açık modeller) tek erişim; orkestrasyon hizmetiyle şablonlama, içerik filtreleme, veri maskeleme (anonimleştirme) ve grounding.",
+      "sinirlar": "SAP BTP aboneliği gerektirir; SAP dışı teslim hatlarında maliyet/karmaşıklık yüksek.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2074",
+      "ad": "Agentforce Testing Center",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://help.salesforce.com/s/articleView?id=ai.agent_testing_center.htm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM çağrılarında güvenli veri erişimi, istem içi hassas veri maskeleme, sağlayıcıda sıfır veri saklama anlaşmaları, zararlılık tespiti ve denetim izi (audit trail) sağlayan katman.",
+      "sinirlar": "Yalnız Agentforce ajanları için. Salesforce içindeki üretken yapay zekâ çağrılarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-006",
+        "N-K18-010",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K23-001",
+        "N-K23-003",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-2086",
+      "ad": "Atlassian Guard",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.atlassian.com/software/guard",
+      "olgunluk": "olgun",
+      "ne_saglar": "Atlassian Cloud için SSO/kullanıcı yaşam döngüsü, veri sınıflandırma ve veri güvenliği politikaları, denetim günlüğü ve hassas veri/sır tespiti (Guard Detect).",
+      "sinirlar": "Yalnız Atlassian Cloud ürünleri; ek lisans.",
+      "ihtiyaclar": [
+        "N-K18-004",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2101",
+      "ad": "VMware Cloud Foundation Private AI Services",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.vmware.com/products/cloud-infrastructure/vcf-private-ai-services",
+      "olgunluk": "gelisen",
+      "ne_saglar": "VCF üzerinde özel yapay zekâ: model deposu (model store), model çalışma zamanı, vektör veritabanı ve GPU paylaşımı ile kurum veri merkezinde LLM barındırma (eski Private AI Foundation with NVIDIA).",
+      "sinirlar": "VCF lisansı ve Broadcom fiyatlandırması; GPU donanım yatırımı gerekir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K09-012",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2102",
+      "ad": "Broadcom Test Data Manager",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.broadcom.com/products/software/app-dev/test-data-manager",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sentetik test verisi üretimi, alt küme çıkarma, maskeleme ve self-servis test verisi portalı; referans bütünlüğünü korur.",
+      "sinirlar": "Eski nesil kurumsal ürün; bulut yerel veri kaynaklarında sınırlı.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2108",
+      "ad": "Prisma AIRS (AI Runtime Security)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.paloaltonetworks.com/ai-security/prisma-airs",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ uygulama ve ajanları için API/ağ düzeyinde istem enjeksiyonu, hassas veri sızıntısı, zararlı URL ve araç kötüye kullanımı tespiti; model dosyası taraması (Model Security) ve AI-SPM.",
+      "sinirlar": "Lisans maliyeti; en güçlü entegrasyon Palo Alto ağ güvenliği ürünleriyle.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-010",
+        "N-K22-001"
+      ]
+    },
+    {
+      "id": "AR-2118",
+      "ad": "Datadog Sensitive Data Scanner",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/sensitive-data-scanner/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Log, iz, olay ve RUM verisinde kişisel veri ve sırları hazır/özel desenlerle alım sırasında tespit edip maskeler veya etiketler.",
+      "sinirlar": "Veri Datadog'a ulaştıktan sonra işler; kaynakta maskeleme için Observability Pipelines gerekir.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-011",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2136",
+      "ad": "2MS (Too Many Secrets)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/checkmarx/2ms",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dosya sistemi, Git, Confluence, Discord, Slack ve Paligo gibi kaynaklarda gitleaks kurallarıyla sır taraması yapan CLI; kod dışı bilgi kaynaklarındaki sızıntıları bulur.",
+      "sinirlar": "Kural seti gitleaks'e dayalı; doğrulama (aktif sır kontrolü) sınırlı.",
+      "ihtiyaclar": [
+        "N-K14-005",
+        "N-K18-004",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2177",
+      "ad": "Collibra AI Command Center (Collibra Platform)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.collibra.com/products/ai-command-center",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ kullanım senaryosu kaydı, risk/uyum değerlendirme iş akışları (AB Yapay Zekâ Yasası dahil), model–veri kökeni; platformdaki iş sözlüğü ile kanonik terim yönetimi.",
+      "sinirlar": "Lisans maliyeti yüksek; yazılım teslim hattı artefaktlarıyla entegrasyon API gerektirir.",
+      "ihtiyaclar": [
+        "N-K07-006",
+        "N-K21-007",
+        "N-K22-001",
+        "N-K22-006",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-2178",
+      "ad": "K2view Test Data Management",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.k2view.com/solutions/test-data-management-tools/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Varlık (entity) tabanlı test verisi: kaynaklar arası alt küme çıkarma, referans bütünlüğünü koruyan maskeleme, sentetik veri üretimi, sürümleme ve geri sarma.",
+      "sinirlar": "Kurulum ve varlık modelleme efor ister.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K15-003",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-2205",
+      "ad": "PlainID Policy-Based Access Control",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.plainid.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Politika tabanlı erişim denetimi (PBAC): uygulama, API, veri ve yapay zekâ (RAG/ajan) erişimi için merkezi politika yönetimi ve dağıtık yetkilendirme ajanları.",
+      "sinirlar": "SaaS kontrol düzlemi; kurum içi ajan kurulumu gerekir.",
+      "ihtiyaclar": [
+        "N-K14-007",
+        "N-K18-001",
+        "N-K18-002"
+      ]
+    },
+    {
+      "id": "AR-2212",
+      "ad": "Snowflake Cortex AI",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.snowflake.com/en/product/features/cortex/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Snowflake verisinin yanında LLM fonksiyonları, Cortex Search (hibrit arama) ve Cortex Agents; bölgeler arası çıkarımın açılıp kapatılabilmesiyle verinin hangi bölgede işleneceği denetlenir.",
+      "sinirlar": "Snowflake'e bağlı; model seçimi bölgeye göre değişir.",
+      "ihtiyaclar": [
+        "N-K09-001",
+        "N-K14-002",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-2241",
+      "ad": "VNLP",
+      "tur": "kutuphane",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/vngrs-ai/vnlp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Türkçe için cümle bölme, normalizasyon, yazım düzeltme, biçimbirim analizi, POS, bağımlılık ayrıştırma, NER ve duygu analizi sunan hafif Python kütüphanesi; NER bileşeni Türkçe kişisel veri maskeleme hattında kullanılabilir.",
+      "sinirlar": "AGPL-3.0 ağ üzerinden hizmet olarak sunulduğunda kaynak açma yükümlülüğü doğurur; son commit Eylül 2025.",
+      "ihtiyaclar": [
+        "N-K07-006",
+        "N-K09-014",
+        "N-K15-003",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2260",
+      "ad": "AWS European Sovereign Cloud",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/compliance/europe-digital-sovereignty/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AB içinde (ilk bölge Brandenburg, Almanya) diğer AWS bölgelerinden fiziksel ve mantıksal olarak ayrılmış, bağımsız işletilen bulut; Ocak 2026'da yaklaşık 90 hizmetle genel kullanıma açıldı.",
+      "sinirlar": "ABD merkezli şirket olduğundan CLOUD Act erişim riski tartışmalı; hizmet kataloğu ana bölgelerden dar.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2301",
+      "ad": "Kron PAM",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://krontech.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ayrıcalıklı erişim yönetimi, oturum kaydı, veritabanı erişim yöneticisi, dinamik veri maskeleme, AAA sunucusu ve gizli bilgi kasası; API anahtarı ve token gibi insan dışı kimlikleri yönetir.",
+      "sinirlar": "Ajanlara görev bazlı kısa ömürlü yetki modeli ürünün yeni sürüm yol haritasında; ticari.",
+      "ihtiyaclar": [
+        "N-K15-004",
+        "N-K18-003",
+        "N-K18-004",
+        "N-K18-011",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2330",
+      "ad": "Cubbit DS3",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.cubbit.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veriyi şifreleyip parçalara bölerek kullanıcının seçtiği konumlara dağıtan coğrafi dağıtık S3 uyumlu nesne depolama; DS3 Composer ile kurum içi kurulum.",
+      "sinirlar": "Dağıtık mimari gecikmeyi artırabilir; ticari.",
+      "ihtiyaclar": [
+        "N-K16-004",
+        "N-K19-004",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2342",
+      "ad": "verinice",
+      "tur": "acik-kaynak",
+      "lisans": "açık kaynak (verinice.veo: AGPL-3.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://verinice.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "BSI IT-Grundschutz, ISO 27001, GDPR, NIS2 ve TISAX için ISMS/GRC aracı; risk analizi, önlem planları ve denetim kanıtları yönetimi.",
+      "sinirlar": "İçerik Alman standartları ağırlıklı; yapay zekâya özgü risk kataloğu hazır gelmez.",
+      "ihtiyaclar": [
+        "N-K21-001",
+        "N-K21-005",
+        "N-K21-006",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2351",
+      "ad": "BSI C5 (Cloud Computing Compliance Criteria Catalogue)",
+      "tur": "protokol-standart",
+      "lisans": "ücretsiz yayın",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Cloud-Computing/Kriterienkatalog-C5/kriterienkatalog-c5_node.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut hizmet sağlayıcılarının bilgi güvenliği için bağımsız denetçi raporuna (C5 attestation) esas kriter kataloğu; veri konumu ve yetki alanı şeffaflığı gereksinimleri içerir.",
+      "sinirlar": "Sertifika değil denetim raporu; Türkiye'de düzenleyici karşılığı yok.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2352",
+      "ad": "SecNumCloud",
+      "tur": "protokol-standart",
+      "lisans": "ücretsiz yayın",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://cyber.gouv.fr/secnumcloud",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bulut sağlayıcılar için Fransız nitelendirme çerçevesi; AB dışı yasaların erişimine karşı koruma dahil yüksek güvenlik ve egemenlik gereksinimleri.",
+      "sinirlar": "Fransa'ya özgü; nitelendirilmiş sağlayıcı sayısı az (ör. Bleu 2026 ortasında henüz nitelendirilmemişti).",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2353",
+      "ad": "Gaia-X Trust Framework",
+      "tur": "protokol-standart",
+      "lisans": "açık",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.gaia-x.eu/policy-rules-committee/trust-framework/latest/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut ve veri hizmetleri için doğrulanabilir kimlik bilgileriyle makinece denetlenebilen şeffaflık, egemenlik ve uyum kuralları; Gaia-X uyum hizmetleri öz beyanları otomatik doğrular.",
+      "sinirlar": "Pazarda benimsenme sınırlı ve sürümler değişken; sağlayıcı seçimi için tek başına yeterli değil.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2358",
+      "ad": "ARX Data Anonymization Tool",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://arx.deidentifier.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "k-anonimlik, l-çeşitlilik, t-yakınlık ve farklı gizlilik modelleriyle yapılandırılmış kişisel verileri anonimleştiren ve yeniden tanımlanma riskini ölçen masaüstü aracı ve Java kütüphanesi.",
+      "sinirlar": "Tablo verisi içindir, serbest metin maskelemesi yapmaz; son commit Ekim 2025.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-011",
+        "N-K22-005",
+        "N-K23-015",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-2359",
+      "ad": "sdcMicro",
+      "tur": "kutuphane",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sdcTools/sdcMicro",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mikro veri setleri için istatistiksel ifşa kontrolü (risk ölçümü, yerel bastırma, gürültü ekleme, mikro-kümeleme) sunan R paketi ve grafik arayüzü.",
+      "sinirlar": "R ekosistemi; yazılım test verisi üretiminden çok istatistiksel anonimleştirmeye yönelik.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005",
+        "N-K23-015"
+      ]
+    },
+    {
+      "id": "AR-2361",
+      "ad": "TrustHoop",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.trusthoop.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "KVKK ve GDPR için kişisel veri işleme envanteri, VERBİS raporları, risk analizi, ilgili kişi başvuruları ve onay iş akışlarını yöneten platform.",
+      "sinirlar": "Uyum belgelendirme aracıdır; istem, iz ve loglardaki kişisel veriyi otomatik keşfetmez.",
+      "ihtiyaclar": [
+        "N-K19-004",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2362",
+      "ad": "Bilimp KVKK/GDPR Yönetimi",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.bilimp.com/kisisel-veri-kvkk-gdpr-yonetimi/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kişisel veri envanteri, gizlilik–bütünlük–erişilebilirlik parametreleriyle risk hesaplama, saklama–imha takvimleri, açık rıza ve VERBİS uyumlu raporlama.",
+      "sinirlar": "Genel iş süreçleri yazılımının modülü; teknik veri keşfi veya maskeleme yapmaz.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-2449",
+      "ad": "Data-Juicer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://datajuicer.github.io/data-juicer/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Temel modeller için veri işleme sistemi: yüzlerce operatörle filtreleme, MinHash tabanlı tekilleştirme, kalite puanlama ve kişisel bilgi temizleme gibi adımları yapılandırma dosyasıyla zincirler.",
+      "sinirlar": "Eğitim verisi odaklı; backlog kayıtlarında kullanım için özel operatör/uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-006",
+        "N-K11-009",
+        "N-K15-003"
+      ]
+    },
+    {
+      "id": "AR-2492",
+      "ad": "LoongCollector (eski iLogtail)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/alibaba/loongcollector",
+      "olgunluk": "olgun",
+      "ne_saglar": "Log, metrik ve iz toplayan hafif gözlemlenebilirlik veri toplayıcısı; işleme eklentileriyle alan ayrıştırma ve hassas veri maskeleme (desensitize) yapılabilir.",
+      "sinirlar": "Varsayılan hedefler Alibaba SLS odaklı; diğer arka uçlar için yapılandırma gerekir.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K18-011",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-2530",
+      "ad": "Archery",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/hhyo/Archery",
+      "olgunluk": "olgun",
+      "ne_saglar": "SQL denetim ve sorgu platformu: iş emri tabanlı onay akışı, SQL kural denetimi (goInception), yürütme ve geri alma, sorgu sonuçlarında veri maskeleme ve denetim kaydı.",
+      "sinirlar": "Ağırlıkla MySQL ekosistemi; arayüz Çince ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K17-002",
+        "N-K18-007",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2565",
+      "ad": "Atlan (Business Glossary)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://atlan.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri kataloğu ve yönetişim platformu: iş sözlüğü (terim, tanım, sahip, onay durumu), veri soy ağacı, sınıflandırma etiketleri ve yapay zekâ ajanları için bağlam katmanı.",
+      "sinirlar": "Veri varlıklarına odaklı; yazılım kavram sözlüğü için uyarlama gerekir, kapalı SaaS.",
+      "ihtiyaclar": [
+        "N-K07-006",
+        "N-K14-009",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-2783",
+      "ad": "DataSynthesizer",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/DataResponsibly/DataSynthesizer",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı gizlilikli Bayes ağı ile özgün tablonun istatistiksel özelliklerini koruyan sentetik veri üretir; rastgele, bağımsız ve korelasyonlu modlar sunar.",
+      "sinirlar": "Tek tablo; karmaşık ilişkisel bütünlük kısıtlarını korumaz.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2784",
+      "ad": "OpenDP SmartNoise SDK",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/opendp/smartnoise-sdk",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı gizlilik garantili SQL sorguları ve MWEM, MST, AIM gibi sentetik veri üreticileri sunan kütüphane; gizlilik bütçesiyle (epsilon) kontrollü veri paylaşımı sağlar.",
+      "sinirlar": "Gizlilik bütçesi yönetimi uzmanlık ister; fayda kaybı olabilir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-010",
+        "N-K22-005",
+        "N-K23-015",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-2785",
+      "ad": "Anonymeter",
+      "tur": "kutuphane",
+      "lisans": "Clear BSD",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/statice/anonymeter",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sentetik verinin GDPR'daki üç yeniden tanımlama riskini (tekilleştirme, bağlanabilirlik, çıkarım) saldırı simülasyonlarıyla ölçen çerçeve.",
+      "sinirlar": "Tablo verisiyle sınırlı; risk skorunun yorumlanması uzman değerlendirmesi ister.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2900",
+      "ad": "Pipelock",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pipelab.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajan ile ağ arasında duran güvenlik duvarı; HTTP, WebSocket, MCP ve A2A trafiğini (isteğe bağlı TLS kesmeyle) sır sızdırma ve enjeksiyon açısından denetler, kararları imzalı eylem makbuzlarıyla kaydeder.",
+      "sinirlar": "TLS kesme yapılandırması ve sertifika yönetimi operasyonel yük getirir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010",
+        "N-K19-002"
+      ]
+    },
+    {
+      "id": "AR-2901",
+      "ad": "Agent Vault (Infisical)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (ee/ dizini hariç)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.agent-vault.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanların gerçek kimlik bilgisi tutmadan LLM sağlayıcıları, GitHub vb. hizmetlere erişmesini sağlayan HTTP kimlik bilgisi aracısı; başlıklarda sahte değeri gerçek değerle değiştirir, çıkış filtreleme ve istek günlüğü sunar.",
+      "sinirlar": "Tüm ajan trafiği vekil üzerinden geçmeli; vekil tek hata noktasıdır.",
+      "ihtiyaclar": [
+        "N-K18-003",
+        "N-K18-004",
+        "N-K18-010"
+      ]
+    },
+    {
+      "id": "AR-2923",
+      "ad": "Ferret Scan",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ferretscan.com",
+      "olgunluk": "erken",
+      "ne_saglar": "Dosya ve akışlarda PII, sır ve hassas veriyi tespit edip maskeleyen tek ikili Go CLI, gömülü web arayüzü ve Go kütüphanesi (pkg/scan, pkg/redact).",
+      "sinirlar": "Yerel kimlik desenleri (ör. TC kimlik no) desteği doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-004",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2924",
+      "ad": "Privacy Filter (PackyCode)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/packyme/privacy-filter",
+      "olgunluk": "erken",
+      "ne_saglar": "Metin LLM'e ulaşmadan önce PII ve sırları milisaniyeler içinde çıkaran saf Go, modelsiz, tek statik ikili filtre; ağ geçidi, kütüphane veya servis olarak kullanılır.",
+      "sinirlar": "Kural tabanlı; bağlama dayalı kişisel veriyi kaçırabilir; son etkinlik Haziran 2026.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-2973",
+      "ad": "Remnic",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://remnic.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Her belleği diskte YAML ön bilgili düz Markdown dosyası olarak tutan, birçok ajan ve MCP istemcisinin paylaştığı yerel öncelikli bellek; kapsamlı bellek, köken bilgisi ve düzeltme.",
+      "sinirlar": "Tek geliştiricili; ekipler arası erişim denetimi dosya sistemine bağlı.",
+      "ihtiyaclar": [
+        "N-K14-006",
+        "N-K14-007"
+      ]
+    },
+    {
+      "id": "AR-3440",
+      "ad": "OpenMetadata MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.open-metadata.org/v2.0.x/how-to-guides/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenMetadata'nın yerleşik MCP uç noktası; arama, soy (lineage), veri kalitesi, sözlük ve yönetişim için 21 okuma/yazma aracı; hassas veri sınıflandırma etiketlerinin ajan tarafından görülmesini sağlar.",
+      "sinirlar": "OpenMetadata kurulumu ve katalog olgunluğu gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K07-006",
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3495",
+      "ad": "Data Protection Toolkit for Confluence",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1219041/data-protection-toolkit-gdpr-pii-dlp-for-confluence",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Confluence'ı hazır ve özel RegEx şablonlarıyla kişisel veri/sır açısından tarar; maskeleme, değiştirme, yorumlama ve silme talepleri için iş akışı sunar.",
+      "sinirlar": "Desen tabanlı tespit; bağlamsal kişisel veriyi kaçırabilir. Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3657",
+      "ad": "Algoritmik Etki Değerlendirmesi (AIA, Kanada)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/automated-decision-making/algorithmic-impact-assessment.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Otomatik karar sistemleri için yaklaşık 80 soruluk risk ve azaltım anketi; puana göre etki seviyesi belirler. Açık kaynak anket uygulaması kurum içinde çalıştırılıp uyarlanabilir.",
+      "sinirlar": "Kanada kamu direktifine göre tasarlanmış; AB YZ Yasası temel haklar etki değerlendirmesiyle birebir örtüşmez.",
+      "ihtiyaclar": [
+        "N-K21-002",
+        "N-K21-007",
+        "N-K22-006",
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-3658",
+      "ad": "ICO AI and data protection risk toolkit",
+      "tur": "protokol-standart",
+      "lisans": "ücretsiz doküman",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/ai-and-data-protection-risk-toolkit/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ yaşam döngüsü boyunca veri koruma risklerini ve kontrol önerilerini listeleyen elektronik tablo araç seti; etki değerlendirmesinde veri boyutunu yapılandırır.",
+      "sinirlar": "Birleşik Krallık GDPR odaklı; KVKK'ya uyarlama gerekir.",
+      "ihtiyaclar": [
+        "N-K21-002",
+        "N-K21-007",
+        "N-K22-005",
+        "N-K32-001",
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-3711",
+      "ad": "Netskope (GenAI kullanım görünürlüğü)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.netskope.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SSE/SASE platformu: bulut ve üretken yapay zekâ uygulamalarının keşfi ve risk puanı, uygulama bazlı erişim politikası ve istemlerdeki hassas veri için DLP.",
+      "sinirlar": "Trafik yönlendirme (proxy/ajan) gerektirir; TLS denetimi hukuki ve teknik yük getirir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3712",
+      "ad": "Zscaler (Generative AI koruması)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.zscaler.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sıfır güven bulut güvenliği; yapay zekâ uygulaması görünürlüğü, istem denetimi, erişim politikaları ve veri kaybı önleme.",
+      "sinirlar": "Ağ trafiğini buluta yönlendirme gerektirir; kapsamlı kurulum.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3713",
+      "ad": "Microsoft Defender for Cloud Apps",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/defender-cloud-apps/",
+      "olgunluk": "olgun",
+      "ne_saglar": "CASB: güvenlik duvarı/uç nokta loglarından bulut uygulaması (üretken yapay zekâ uygulamaları dahil) keşfi, risk kataloğu, onaylama/yasaklama ve oturum denetimi.",
+      "sinirlar": "Microsoft 365/Defender lisanslarına bağlı; tam görünürlük için uç nokta entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3714",
+      "ad": "Palo Alto Networks AI Access Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.paloaltonetworks.com/sase/ai-access-security",
+      "olgunluk": "olgun",
+      "ne_saglar": "Üretken yapay zekâ uygulaması kullanımının keşfi ve sınıflandırması, erişim kontrolü ve istemlerde veri koruma (SASE parçası).",
+      "sinirlar": "Palo Alto SASE altyapısı gerektirir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3715",
+      "ad": "Nudge Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.nudgesecurity.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Microsoft 365/Google Workspace e-posta meta verisine salt okunur API erişimiyle SaaS ve yapay zekâ uygulaması kayıtlarını keşfeder; tarayıcı eklentisi, politika uyarıları ve çalışana yönelik yönlendirmeli iyileştirme ('nudge').",
+      "sinirlar": "E-posta meta verisi erişimi geniş izin ister; yalnız kayıt izi bırakan kullanımı görür.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3716",
+      "ad": "WitnessAI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://witness.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birleşik yapay zekâ güvenliği ve yönetişimi: çalışanların yapay zekâ kullanımının görünürlüğü, niyet bazlı politika, veri koruma ve model/ajan korumaları.",
+      "sinirlar": "İstem içeriğini işleyen ağ katmanı; gizlilik etkisi yüksek.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3717",
+      "ad": "LayerX",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://layerxsecurity.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tarayıcı eklentisi tabanlı yapay zekâ kullanım denetimi: tüm SaaS ve yapay zekâ uygulaması etkileşimlerinin gerçek zamanlı görünürlüğü, üretken yapay zekâ DLP'si ve tarayıcı güvenliği; proxy gerektirmez.",
+      "sinirlar": "Yalnız tarayıcı içi kullanımı görür; IDE/CLI ajanlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3718",
+      "ad": "Reco",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.reco.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SaaS ve yapay zekâ ajanı güvenlik platformu: SaaS uygulamaları, entegrasyonlar ve yapay zekâ ajanlarının keşfi, kimlik/izin riskleri ve yapılandırma denetimi.",
+      "sinirlar": "API entegrasyonları geniş okuma yetkisi ister.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3719",
+      "ad": "Grip Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.grip.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SaaS ve yapay zekâ uygulaması kimlik risk yönetimi: gölge SaaS/yapay zekâ keşfi, erişim ve hesap yaşam döngüsü denetimi.",
+      "sinirlar": "Keşif kimlik izlerine dayanır; hesapsız kullanımı sınırlı görür.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3720",
+      "ad": "Cyberhaven",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.cyberhaven.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri soy ağacına dayalı veri güvenliği/DLP: hassas verinin yapay zekâ araçlarına kopyalanmasını izler ve engeller.",
+      "sinirlar": "Uç nokta ajanı gerektirir; kapsamlı izleme niteliği taşır.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3721",
+      "ad": "Zylo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://zylo.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SaaS harcama ve lisans yönetimi; finans/SSO/tarayıcı verisinden gölge SaaS ve yapay zekâ aboneliklerini keşfeder, kullanım ve maliyet görünürlüğü.",
+      "sinirlar": "Harcama odaklı; veri sızıntısı denetimi yapmaz.",
+      "ihtiyaclar": [
+        "N-K20-007",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3722",
+      "ad": "Torii",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.toriihq.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SaaS ve yapay zekâ uygulama yönetimi: keşif, lisans optimizasyonu, erişim iş akışları ve politika otomasyonu.",
+      "sinirlar": "Keşif kapsamı bağlanan veri kaynaklarına bağlı.",
+      "ihtiyaclar": [
+        "N-K20-007",
+        "N-K22-010",
+        "N-K25-007"
+      ]
+    },
+    {
+      "id": "AR-3724",
+      "ad": "Arcjet",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (SDK); karar servisi ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://arcjet.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Uygulama koduna gömülen SDK ile istem enjeksiyonu tespiti, ajan araç çağrısı yetkilendirmesi, hassas bilgi tespiti ve hız sınırlama; kararları kanıt olarak saklar.",
+      "sinirlar": "SDK açık kaynak ama karar servisi Arcjet bulutuna bağlı; self-host seçeneği belirtilmemiş.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-3725",
+      "ad": "Pangea AI Guard (CrowdStrike Falcon AIDR)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://pangea.cloud",
+      "olgunluk": "gelisen",
+      "ne_saglar": "API ile çağrılan istem enjeksiyonu, gizli bilgi ve kişisel veri maskeleme, zararlı içerik ve yetkisiz araç çağrısı korumaları; CrowdStrike Falcon'a 'AI Detection and Response' olarak entegre ediliyor.",
+      "sinirlar": "CrowdStrike'ın 2025'teki satın almasıyla ürün yol haritası Falcon platformuna bağlandı; bağımsız kullanım koşulları değişebilir.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-006",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3729",
+      "ad": "Cato AI Security (eski Aim Security)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.catonetworks.com/ai-security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalışanların genel yapay zekâ uygulaması kullanımını, kurum içi yapay zekâ uygulama/ajanlarını ve ajan geliştirme yaşam döngüsünü koruyan Aim teknolojisinin Cato SASE platformuna entegre hali.",
+      "sinirlar": "Ağırlıkla Cato SASE müşterilerine yönelik; bağımsız ürün olarak alınabilirliği belirsiz.",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-010",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3731",
+      "ad": "Operant AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.operant.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut ve Kubernetes çalışma zamanında yapay zekâ uygulamaları, ajanlar ve MCP trafiğini keşfeden, tespit eden ve satır içi engelleyen koruma; MCP ağ geçidi ve hassas veri maskeleme içerir.",
+      "sinirlar": "Kubernetes merkezli mimari; kurulum seçeneklerinin ayrıntısı satış görüşmesine bağlı.",
+      "ihtiyaclar": [
+        "N-K12-002",
+        "N-K18-005",
+        "N-K18-011",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3732",
+      "ad": "Knostic",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.knostic.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kullanıcıların ve kodlama ajanlarının (IDE, MCP, eklentiler) yapay zekâ kullanımına görünürlük, yönetişim ve gerçek zamanlı koruma; kurumsal asistanlarda bilmesi-gereken ilkesine göre aşırı paylaşım kontrolü.",
+      "sinirlar": "Ticari; geliştirici uç noktası kapsamı desteklenen araç listesine bağlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-013",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3808",
+      "ad": "Relyance AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.relyance.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod, veri akışları ve üçüncü taraflar üzerinden kişisel verinin nerede ve nasıl işlendiğini haritalayan; yapay zekâ özelliklerinin arkasındaki veri erişimi ve eylemleri denetleyen platform.",
+      "sinirlar": "Ticari; kod tabanına erişim izni gerektirir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3822",
+      "ad": "MineOS",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://mineos.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ yönetişimi, veri envanteri/haritalama, veri sahibi talepleri ve gizlilik operasyonlarını otomatikleştiren platform.",
+      "sinirlar": "Ticari; KVKK'ya özgü şablonlar bilinmiyor.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3823",
+      "ad": "Truyo",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://truyo.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ yönetişimi, gizlilik uyumu, rıza/tercih yönetimi ve üçüncü taraf risk değerlendirmesi sunan platform.",
+      "sinirlar": "ABD pazarı odaklı; Türkiye mevzuatı şablonu bilinmiyor.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-008",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3824",
+      "ad": "EU AI Act Compliance Checker (Future of Life Institute)",
+      "tur": "platform",
+      "lisans": "ücretsiz (kapalı kaynak)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://artificialintelligenceact.eu/assessment/eu-ai-act-compliance-checker/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bir yapay zekâ sisteminin AB Yapay Zekâ Yasası kapsamında hangi risk sınıfına ve yükümlülüklere tabi olduğunu soru-cevapla belirleyen ücretsiz etkileşimli araç.",
+      "sinirlar": "Hukuki görüş değildir; bağımsız bir kuruluşun yorumuna dayanır.",
+      "ihtiyaclar": [
+        "N-K21-007",
+        "N-K22-006",
+        "N-K32-002",
+        "N-K32-004"
+      ]
+    },
+    {
+      "id": "AR-3836",
+      "ad": "CNIL PIA yazılımı",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.cnil.fr/en/open-source-pia-software-helps-carry-out-data-protection-impact-assessment",
+      "olgunluk": "olgun",
+      "ne_saglar": "GDPR Madde 35 veri koruma etki değerlendirmesini (DPIA) adım adım yürüten açık kaynak araç; bağımsız masaüstü ve sunucu sürümleri var.",
+      "sinirlar": "GDPR odaklı; KVKK ve yapay zekâya özgü sorular için şablon uyarlaması gerekir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K21-007",
+        "N-K22-005",
+        "N-K32-001",
+        "N-K32-002",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-3841",
+      "ad": "Aurascape",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://aurascape.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Kurumdaki tüm yapay zekâ etkileşimlerine gerçek zamanlı görünürlük, niyet tabanlı kontroller ve veri koruması sağlayan yapay zekâ güvenlik platformu.",
+      "sinirlar": "Genç girişim; bağımsız değerlendirme sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3844",
+      "ad": "Osano",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.osano.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rıza yönetimi, veri sahibi talepleri, veri haritalama ve gizlilik değerlendirmesi iş akışlarını içeren gizlilik yönetim platformu.",
+      "sinirlar": "ABD/AB mevzuatı odaklı; KVKK şablonu bilinmiyor.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3845",
+      "ad": "Ketch",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.ketch.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rıza, veri sahibi talepleri, veri haritalama, yapay zekâ ve etki değerlendirmeleri için gizlilik yazılımı; rıza sinyallerini aşağı akış veri sistemlerine yayar.",
+      "sinirlar": "ABD eyalet yasaları ve GDPR odaklı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3846",
+      "ad": "Didomi",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.didomi.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web, mobil, CTV ve sunucu tarafında rıza ve tercih yönetimi platformu.",
+      "sinirlar": "Rıza/tercih odaklı; veri envanteri ve DPIA kapsamı sınırlı.",
+      "ihtiyaclar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3847",
+      "ad": "Usercentrics (Cookiebot dahil)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://usercentrics.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Web ve mobil için rıza yönetim platformu (CMP); KOBİ'ler için Cookiebot ürünüyle çerez tarama ve rıza kaydı.",
+      "sinirlar": "Rıza odaklı; iç sistemlerdeki kişisel veri akışlarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3848",
+      "ad": "Klaro",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://klaro.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kendi sunucunda barındırılabilen, açık kaynak, gizlilik dostu çerez ve rıza yöneticisi (JavaScript).",
+      "sinirlar": "Depo 2025 başından beri seyrek güncelleniyor; kurumsal rıza kaydı raporlaması sınırlı.",
+      "ihtiyaclar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3849",
+      "ad": "CookieConsent (orestbida)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cookieconsent.orestbida.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağımlılıksız, vanilla JavaScript çerez rıza eklentisi; kategori bazlı betik engelleme ve çok dilli arayüz.",
+      "sinirlar": "Yalnız istemci tarafı; rıza kayıtlarının merkezi saklanması ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3850",
+      "ad": "DataGrail",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datagrail.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Geniş entegrasyon kataloğu ve gizlilik ajanıyla sistem keşfi, veri sahibi talebi otomasyonu ve gizlilik risk izleme.",
+      "sinirlar": "ABD pazarı odaklı; ticari.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3851",
+      "ad": "Trust3 AI (Privacera)",
+      "tur": "acik-cekirdek",
+      "lisans": "ticari (Apache Ranger temelli)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://privacera.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Apache Ranger kökenli veri erişim yönetişimi: veri ve yapay zekâ platformlarında merkezi erişim politikası, maskeleme ve denetim; Trust3 AI ile yapay zekâ erişim yönetişimi.",
+      "sinirlar": "Ürün adı Trust3 AI'a geçiş sürecinde; ticari özellikler kapalı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3852",
+      "ad": "Immuta",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.immuta.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri erişimi için yetkilendirme katmanı: insan ve ajan her talep için tek kural kümesiyle karar; veri platformları üzerinde öznitelik tabanlı politika ve maskeleme.",
+      "sinirlar": "Veri platformu (Snowflake, Databricks vb.) entegrasyonlarına bağlı; ücretli.",
+      "ihtiyaclar": [
+        "N-K18-002",
+        "N-K18-010",
+        "N-K22-005",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-3853",
+      "ad": "Ohalo Data X-Ray",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ohalo.co",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapılandırılmamış verinin (dosya, e-posta, belge) keşfi ve sınıflandırması, kişisel veri tespiti ve düzeltme/silme iş akışları.",
+      "sinirlar": "Ticari; Türkçe kişisel veri tespit başarımı bilinmiyor.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3854",
+      "ad": "Varonis",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.varonis.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dosya sunucusu, SaaS ve bulutta veri keşfi/sınıflandırma, izin analizi ve davranış tabanlı tehdit tespiti; kurumsal yapay zekâ asistanlarının erişebildiği hassas veriyi daraltma.",
+      "sinirlar": "Kurulum ve lisans maliyeti yüksek.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005",
+        "N-K22-009"
+      ]
+    },
+    {
+      "id": "AR-3855",
+      "ad": "Cyera",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.cyera.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ destekli veri güvenliği duruş yönetimi (DSPM): bulut, SaaS, şirket içi ve yapay zekâ ortamlarında hassas verinin keşfi, sınıflandırması ve korunması.",
+      "sinirlar": "SaaS; tarama için veri depolarına okuma erişimi gerekir.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3856",
+      "ad": "Sentra",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://sentra.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulut veri güvenliği duruş yönetimi: hassas veri keşfi, sınıflandırma ve veri hareketi izleme.",
+      "sinirlar": "Bulut odaklı; şirket içi kapsam sınırlı.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3857",
+      "ad": "DataSunrise",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.datasunrise.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanları ve yapay zekâ için güvenlik ve uyum: dinamik/statik maskeleme, veritabanı etkinlik denetimi, hassas veri keşfi ve erişim politikası; şirket içine kurulabilir.",
+      "sinirlar": "Ticari; veritabanı vekil mimarisi performans etkisi yaratabilir.",
+      "ihtiyaclar": [
+        "N-K15-003",
+        "N-K18-011",
+        "N-K19-002",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3858",
+      "ad": "Octopii",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/redhuntlabs/Octopii",
+      "olgunluk": "erken",
+      "ne_saglar": "Görüntü, PDF ve belgelerde OCR ve desen/NLP ile kimlik kartı, pasaport, e-posta gibi kişisel verileri tarayan yapay zekâ destekli PII tarayıcı.",
+      "sinirlar": "2025 başından beri güncellenmiyor; Türkçe belge türleri için kural eklenmeli.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-3859",
+      "ad": "Piiranha",
+      "tur": "model",
+      "lisans": "CC BY-NC-ND 4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://huggingface.co/iiiorg/piiranha-v1-detect-personal-information",
+      "olgunluk": "erken",
+      "ne_saglar": "Metinde çok sayıda kişisel veri türünü token düzeyinde tespit eden DeBERTa-v3 tabanlı küçük model; log/iz maskelemesi için ön işlemci.",
+      "sinirlar": "Ticari olmayan ve türetilemez lisans; Türkçe eğitim dilleri arasında değil.",
+      "ihtiyaclar": [
+        "N-K18-010",
+        "N-K18-011"
+      ]
+    },
+    {
+      "id": "AR-3860",
+      "ad": "Kivuz",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://kivuz.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "KVKK uyum yazılımı ve ekosistemi: kişisel veri envanteri, aydınlatma/açık rıza yönetimi, çerez rızası ve kimlik güvenliği (IAM) modülleri.",
+      "sinirlar": "Türkiye pazarına özgü; yapay zekâya özgü veri akışı denetimi içermez.",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-3861",
+      "ad": "Egebilgi KVKK Uyum Yazılımı",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.egebilgi.com.tr/kvkk-yazilimi/",
+      "olgunluk": "olgun",
+      "ne_saglar": "e-imza, zaman damgası ve özet (hash) ispat zinciriyle KVKK süreç yönetimi: VERBİS kaydı, kişisel veri envanteri, aydınlatma metni, rıza ve imha süreçleri.",
+      "sinirlar": "Yerel mevzuat odaklı; yazılım teslim hattı entegrasyonu yok.",
+      "ihtiyaclar": [
+        "N-K19-002",
+        "N-K22-005",
+        "N-K22-009",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-4155",
+      "ad": "AI Fairness 360 (AIF360)",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://aif360.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri kümeleri ve modeller için kapsamlı adalet metrikleri ve önyargı azaltma algoritmaları; performans değerlendirmesi veya görev dağıtımı sonuçlarının cinsiyet ve yaş gruplarına göre farklı etki analizini yapmak için.",
+      "sinirlar": "Makine öğrenmesi modeli odaklı; değerlendirme metinlerindeki dil önyargısını doğrudan ölçmez.",
+      "ihtiyaclar": [
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-4157",
+      "ad": "Textio",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://textio.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yöneticilerin performans geri bildirimi ve hedef metinlerini yazarken anlık yönlendirme; İK iletişimindeki önyargılı dili tespit etmek üzere eğitilmiş model; değerlendirici kalibrasyonunu destekler.",
+      "sinirlar": "Kapsanan önyargı türleri ve Türkçe desteği kaynakta belirtilmedi; ABD merkezli SaaS.",
+      "ihtiyaclar": [
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-4207",
+      "ad": "OpenDP Library",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://opendp.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğrulama odaklı diferansiyel gizlilik çekirdek kütüphanesi (Rust çekirdek, Python bağlayıcı): sayım, toplam, ortalama gibi toplulaştırmalara kalibre gürültü ve gizlilik bütçesi takibi; ekip düzeyi anket ve telemetri raporlarında yeniden tanımlama riskini düşürmek için.",
+      "sinirlar": "Parametre (epsilon) seçimi uzmanlık ister; küçük ekiplerde gürültü sonuçları kullanışsız kılabilir.",
+      "ihtiyaclar": [
+        "N-K23-015",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-4215",
+      "ad": "NIST Privacy Framework",
+      "tur": "protokol-standart",
+      "lisans": "kamu yayını (NIST)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.nist.gov/privacy-framework",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gizlilik riskini Identify-P, Govern-P, Control-P, Communicate-P ve Protect-P işlevleriyle yönetmek için gönüllü çerçeve; veri envanteri ve veri işleme eşlemesi, veri minimizasyonu ve hedef profil tanımına temel olur.",
+      "sinirlar": "ABD kökenli gönüllü çerçeve; KVKK yükümlülüklerine eşlenmesi gerekir. Kurumsal çerçevedir; özellik düzeyinde tehdit analizi ve otomatik tetikleme sağlamaz.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-4216",
+      "ad": "LINDDUN",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://linddun.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağlanabilirlik, tanımlanabilirlik, inkâr edilemezlik, tespit edilebilirlik, veri ifşası, farkındalıksızlık ve uyumsuzluk kategorilerinde gizlilik tehdit modelleme çerçevesi; LINDDUN GO kart tabanlı hafif oturum, LINDDUN PRO veri akışı diyagramı üzerinde sistematik analiz sağlar.",
+      "sinirlar": "Yöntem; çıktılar kurumun tehdit modeli deposunda tutulmalı. Yöntemdir; araç desteği ve kod değişikliğinden otomatik tetikleme kurumca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K34-001",
+        "N-K34-004"
+      ]
+    },
+    {
+      "id": "AR-4217",
+      "ad": "ICO – Employment practices: monitoring workers",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment/monitoring-workers/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşyerinde çalışan izlemesinin hukuki dayanağı, ölçülülüğü, şeffaflık, etki değerlendirmesi, otomatik karar ve uzaktan çalışanların izlenmesi konularında uygulama rehberi ve kontrol listeleri; ajan telemetrisi için amaç ve ölçülülük değerlendirmesine örnek.",
+      "sinirlar": "Birleşik Krallık hukukuna göre; KVKK'ya uyarlanarak kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K31-011",
+        "N-K32-001",
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-4218",
+      "ad": "Madde 29 Çalışma Grubu Görüş 2/2017 (işyerinde veri işleme)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ec.europa.eu/newsroom/article29/items/610169",
+      "olgunluk": "olgun",
+      "ne_saglar": "İşyerinde veri işlemeye ilişkin AB görüşü: güç dengesizliği nedeniyle çalışan rızasının kural olarak geçerli dayanak olamayacağı, meşru menfaat ve ölçülülük testi, şeffaflık, uzaktan çalışma ve BT kullanım izleme senaryoları.",
+      "sinirlar": "AB hukuku görüşü; Türkiye'de doğrudan bağlayıcı değil, KVKK yorumu için yol gösterici.",
+      "ihtiyaclar": [
+        "N-K31-011",
+        "N-K32-001",
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-4219",
+      "ad": "KVKK – Üretken Yapay Zekâ ve Kişisel Verilerin Korunması Rehberi (15 Soruda)",
+      "tur": "protokol-standart",
+      "lisans": "kamu yayını",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.kvkk.gov.tr/Icerik/8547/uretken-yapay-zeka-ve-kisisel-verilerin-korunmasi-rehberi-15-soruda",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kasım 2025'te yayımlanan rehber: üretken yapay zekâ sistemlerinin yaşam döngüsü, kullanım alanları ve riskleri ile bu sistemler üzerinden yapılan kişisel veri işlemenin 6698 sayılı Kanun çerçevesinde değerlendirilmesi; veri sorumlularına öneriler.",
+      "sinirlar": "İstihdam ilişkisine ve ajan telemetrisine özgü ayrıntı sınırlı; bağlayıcı olmayan rehber.",
+      "ihtiyaclar": [
+        "N-K31-011",
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-4220",
+      "ad": "KVKK – Yapay Zekâ Alanında Kişisel Verilerin Korunmasına Dair Tavsiyeler",
+      "tur": "protokol-standart",
+      "lisans": "kamu yayını",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.kvkk.gov.tr/SharedFolderServer/CMSFiles/25a1162f-0e61-4a43-98d0-3e7d057ac31a.pdf",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ geliştirici, üretici, hizmet sağlayıcı ve karar vericilere yönelik Kurum tavsiyeleri (2021): yüksek riskli işlemede gizlilik etki değerlendirmesi ve hukuka uygunluk kararının buna dayandırılması, asgari veri kullanımı, model doğruluğunun izlenmesi, ilgili kişi haklarının korunması ve bireylerin karar süreçlerinde bağımsız hareket edebilmesi.",
+      "sinirlar": "Genel tavsiye niteliğinde; ajanlı çalışma ve çalışan izlemesine özgü değil.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002"
+      ]
+    },
+    {
+      "id": "AR-4221",
+      "ad": "KVKK – Kişisel Veri Güvenliği Rehberi (Teknik ve İdari Tedbirler)",
+      "tur": "protokol-standart",
+      "lisans": "kamu yayını",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.kvkk.gov.tr/yayinlar/veri_guvenligi_rehberi.pdf",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri sorumlularının alması gereken teknik ve idari tedbirler: yetki matrisi, erişim kayıtları ve log izleme, kişisel veri işleme envanteri, veri maskeleme, eğitim ve farkındalık; çalışan verisine bireysel erişimin rol, gerekçe ve kayıtla sınırlandırılmasına dayanak.",
+      "sinirlar": "Genel güvenlik rehberi; amaç sınırlaması tasarımını ayrıntılandırmaz.",
+      "ihtiyaclar": [
+        "N-K32-001"
+      ]
+    },
+    {
+      "id": "AR-4222",
+      "ad": "KVKK – Kişisel Verilerin Korunması Kanununa İlişkin Uygulama Rehberi",
+      "tur": "protokol-standart",
+      "lisans": "kamu yayını",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://kvkk.gov.tr/SharedFolderServer/CMSFiles/0517c528-a43d-49f5-b1eb-33dc666cb938.pdf",
+      "olgunluk": "olgun",
+      "ne_saglar": "6698 sayılı Kanun'un kavramları, işleme şartları, aydınlatma yükümlülüğü ve ilgili kişi haklarını açıklayan temel rehber; Kurul'un 18.02.2026 tarihli 2026/347 sayılı ilke kararı aydınlatma ve açık rıza metinlerinin ayrı düzenlenmesini şart koşuyor — çalışan aydınlatma metni tasarımı için.",
+      "sinirlar": "Genel rehber; istihdam ilişkisindeki rıza sorununu ayrıca hukukçu değerlendirmeli.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-003"
+      ]
+    },
+    {
+      "id": "AR-4225",
+      "ad": "Kolay İK",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://kolayik.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Türk İK yazılımı: çalışan özlük bilgileri, işe alım ve aday takibi, hazır şablonlu 360° ve yetkinlik tabanlı performans değerlendirmesi; KVKK kapsamında veri işleyen sıfatıyla hizmet ve Türkiye'deki sunucularda barındırma.",
+      "sinirlar": "Performans modülü ajan kullanım metriklerini bireysel değerlendirmeye bağlamak için kullanılmamalı; e-imzalı belge tebliği sayfada doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-003",
+        "N-K32-010"
+      ]
+    }
+  ]
+}

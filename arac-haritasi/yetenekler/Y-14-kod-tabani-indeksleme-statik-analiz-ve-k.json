@@ -1,0 +1,3684 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-14",
+    "ad": "Kod tabanı indeksleme, statik analiz ve kod grafiği",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi",
+    "cozdugu_sorun": "Ajanın ilgili kodu ve değişikliğin etki alanını bulamaması; ilişki haritasının bayatlaması.",
+    "ne_zaman_zorunlu": "Büyük veya çok depolu kod tabanında."
+  },
+  "arac_sayisi": 193,
+  "tur_dagilimi": {
+    "acik-kaynak": 126,
+    "ticari-saas": 16,
+    "protokol-standart": 5,
+    "kutuphane": 22,
+    "acik-cekirdek": 7,
+    "ticari-yazilim": 13,
+    "model": 1,
+    "cerceve": 2,
+    "bulut-hizmeti": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0060",
+      "ad": "Aider",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://aider.chat",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git'e entegre terminal eşli programlama ajanı; her değişikliği otomatik commit'ler, --message ile betik/CI kullanımı, mimar/editör iki model modu, değişiklik sonrası lint ve test komutu çalıştırıp hataları düzeltme döngüsü.",
+      "sinirlar": "Git işlemleri deterministik aktivite olmalı, Aider yalnız kod düzenleme için düşünülmeli (kaynak); son push Mayıs 2026 — bakım hızı izlenmeli. Yapılandırılmış (JSON) sonuç ve oturum API'si yok; depo etkinliği 2026'da yavaşladı (son itme Mayıs 2026).",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-004",
+        "N-K04-013",
+        "N-K10-001",
+        "N-K14-001",
+        "N-K19-006"
+      ]
+    },
+    {
+      "id": "AR-0107",
+      "ad": "Greptile",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.greptile.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Deponun tamamından graf kurarak her PR'ı sistem genelindeki etkisiyle inceleyen, tepkilerden öğrenen ve bulguyu kodlama ajanına aktaran yapay zekâ kod inceleme ajanı.",
+      "sinirlar": "Kapı değildir; kod üçüncü tarafa gider (kaynak). Öğrenme 2-3 hafta sürer; öğrenen davranış kalibrasyon setiyle düzenli ölçülmeli. Ürün odağı kod incelemesi; grafiğe doğrudan sorgu erişimi sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K04-006",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K14-001",
+        "N-K29-001",
+        "N-K29-003"
+      ]
+    },
+    {
+      "id": "AR-0118",
+      "ad": "Graphify",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://graphify.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tabanını (doküman, SQL şeması, yapılandırma ve PDF'ler dahil) sorgulanabilir bilgi grafiğine çeviren araç; yerel ve deterministik AST ayrıştırma, her kenarın açıklaması, vektör deposu gerektirmez; Claude Code, Cursor, Codex için /graphify skill'i. Kurum panolarında ilişki haritası aracı.",
+      "sinirlar": "Kaynak raporda incelenmedi; SCIP/tree-sitter tabanlı seçeneklerle karşılaştırılmalı (kaynak); Nisan 2026'da açılmış hızlı büyüyen genç proje.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K03-004",
+        "N-K14-001",
+        "N-K24-008"
+      ]
+    },
+    {
+      "id": "AR-0119",
+      "ad": "SCIP (Code Intelligence Protocol)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://scip-code.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dil bağımsız kod zekâsı indeks biçimi (sembol, tanım, referans); dil başına indeksleyicilerle deterministik bağımlılık grafiği.",
+      "sinirlar": "İndeksleyici kalitesi ve kapsamı dile göre değişir; depo Sourcegraph'tan scip-code organizasyonuna taşındı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0120",
+      "ad": "tree-sitter",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://tree-sitter.github.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Onlarca dil için artımlı, hataya dayanıklı sözdizimi ağacı ayrıştırıcı; kod indeksleme, parçalama (chunking) ve yapısal sorguların temel yapı taşı.",
+      "sinirlar": "Yalnız sözdizimi; tip ve çağrı çözümlemesi ek analiz ister. Tür çözümleme ve çapraz dosya referansı sağlamaz; dil gramerlerinin kalitesi değişken.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0130",
+      "ad": "Semgrep",
+      "tur": "acik-cekirdek",
+      "lisans": "LGPL-2.1 (Community Edition motoru); platform ticari",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://semgrep.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod benzeri desenlerle özel kural yazımı; yasak API/yöntem, negatif kapsam ihlali, test atlama işaretleri gibi kurum kurallarını 30'u aşkın dilde deterministik denetler.",
+      "sinirlar": "Community Edition'da dosyalar arası derin analiz sınırlı, gelişmiş özellikler ticari platformda. CE sürümü dosyalar arası derin veri akışı analizinden yoksun; gelişmiş özellikler ticari. Topluluk sürümünde dosyalar arası analiz yok; Semgrep kural kaydı lisansı ticari yeniden kullanımı kısıtlar.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-008",
+        "N-K04-008",
+        "N-K05-005",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K18-004",
+        "N-K18-006",
+        "N-K18-009",
+        "N-K34-002",
+        "N-K34-007",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-0131",
+      "ad": "CodeQL",
+      "tur": "ticari-yazilim",
+      "lisans": "CodeQL CLI: GitHub CodeQL şartları (açık kaynak dışı ticari kullanım GHAS lisansı ister); sorgular MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://codeql.github.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kodu sorgulanabilir veritabanına dönüştürüp anlamsal ve taint analiziyle güvenlik açığı arar; GitHub code scanning'in motorudur, özel sorgu yazılabilir.",
+      "sinirlar": "Özel depolarda ticari kullanım GitHub Advanced Security lisansı gerektirir; derleme gerektiren dillerde kurulum ağır. Ticari kapalı kaynak kullanımda lisans maliyeti; veritabanı oluşturma derleme gerektirir. Kapalı kaynak kurumsal kodda ücretli lisans gerekir; derlenen diller için derleme adımı ister.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-003",
+        "N-K05-012",
+        "N-K14-001",
+        "N-K18-006",
+        "N-K18-009",
+        "N-K34-007",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-0243",
+      "ad": "CodeRankEmbed",
+      "tur": "model",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://huggingface.co/nomic-ai/CodeRankEmbed",
+      "olgunluk": "olgun",
+      "ne_saglar": "137M parametreli kod arama gömme modeli (8K); CoIR NDCG@10 60,1; kaynakta module-relation-map ajanının ilgili kodu bulması için.",
+      "sinirlar": "Kodu çalıştırmaz ve yazmaz; yalnız ilgili dosya/fonksiyonları bulur; AST/import analiziyle doğrulanmalı (kaynak).",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0439",
+      "ad": "Auggie CLI (Augment Code)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (özel lisans)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://docs.augmentcode.com/cli/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Augment'in bağlam motorunu (gerçek zamanlı kod tabanı indeksleme) terminale taşıyan ajan; --print ile CI'da başsız çalışma ve otomatik kod incelemesi.",
+      "sinirlar": "Kapalı kaynak; indeksleme Augment bulutunda yapılır.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K05-015",
+        "N-K10-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0557",
+      "ad": "Nx",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek), ticari (Nx Cloud)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://nx.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Monorepo proje/görev grafiği çıkarır; değişiklikten etkilenen projeleri (affected) hesaplar, görevleri bağımlılık sırasına göre paralel çalıştırır ve modül sınırı kurallarını uygular.",
+      "sinirlar": "Kod/proje düzeyi bağımlılık; iş kalemi bağımlılığı değil; en güçlü JS/TS ekosisteminde. Monorepo yapısını varsayar; çoklu depo ilişkilerini sınırlı kapsar; uzak önbellek/dağıtık yürütme ticari. Proje düzeyi etki analizi (test düzeyi değil); en iyi JS/TS monorepolarda çalışır.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K05-012",
+        "N-K06-003",
+        "N-K13-007",
+        "N-K24-003",
+        "N-K24-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0558",
+      "ad": "dependency-cruiser",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sverweij/dependency-cruiser",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript modül bağımlılıklarını çıkarıp kural setiyle (yasaklı bağımlılık, döngü, yetim modül) doğrular ve grafik olarak görselleştirir.",
+      "sinirlar": "Yalnız JS/TS kod tabanları. JS/TS ekosistemiyle sınırlı; servisler arası ilişkileri kapsamaz. Yalnız JS/TS ekosistemi.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K03-004",
+        "N-K04-008",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0678",
+      "ad": "Glean (kurumsal arama)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.glean.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurum uygulamalarını izin farkındalıklı indeksleyen arama/asistan platformu; kiracıya özel uzak MCP sunucusuyla ajanlara arama ve sohbet araçları sunar.",
+      "sinirlar": "Pahalı kurumsal SaaS; indeks ve bilgi grafiği Glean altyapısında. Kurulumu ağır (Haskell ekosistemi); dil indeksleyicileri Meta'nın kullandığı dillere odaklı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-003",
+        "N-K03-009",
+        "N-K12-003",
+        "N-K14-001",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0679",
+      "ad": "Port",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.port.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Servis, ekip, sahiplik ve bağımlılıkları modelleyen iç geliştirici portalı; MCP sunucusuyla ajanlar katalog varlıklarını, sahipliği ve scorecard'ları sorgulayıp self-servis eylem tetikleyebilir.",
+      "sinirlar": "SaaS; katalog doğruluğu entegrasyonların bakımına bağlı. SaaS.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K12-003",
+        "N-K16-006",
+        "N-K16-008",
+        "N-K24-004",
+        "N-K24-008",
+        "N-K24-014",
+        "N-K31-001",
+        "N-K31-003",
+        "N-K31-006",
+        "N-K33-001",
+        "N-K33-006",
+        "N-K33-015"
+      ]
+    },
+    {
+      "id": "AR-0680",
+      "ad": "Backstage",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://backstage.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yazılım kataloğu (bileşen, API, sistem, sahip ve bağımlılık ilişkileri), TechDocs ile kodla birlikte tutulan dokümantasyon ve eklenti ekosistemi sunan geliştirici portalı çerçevesi.",
+      "sinirlar": "Kurulum ve bakım yükü yüksek (özel platform ekibi gerekir); katalog verisi elle/otomasyonla güncel tutulmalı. Kurulum, eklenti bakımı ve özelleştirme emeği yüksek.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-009",
+        "N-K07-001",
+        "N-K16-006",
+        "N-K16-008",
+        "N-K19-007",
+        "N-K24-004",
+        "N-K24-008",
+        "N-K31-001",
+        "N-K31-006",
+        "N-K32-010",
+        "N-K33-001",
+        "N-K33-006",
+        "N-K33-014",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0692",
+      "ad": "ast-grep",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ast-grep.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tree-sitter tabanlı yapısal kod arama, lint ve yeniden yazma aracı; YAML kurallarıyla anti-kalıp ve yasaklı yöntem tespiti yapılabilir.",
+      "sinirlar": "Tür bilgisi/çapraz dosya semantiği sınırlı; karmaşık kurallar test gerektirir.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0693",
+      "ad": "Comby",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://comby.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hemen her dil için sözdizimi-farkındalıklı şablonlarla yapısal arama ve değiştirme.",
+      "sinirlar": "Geliştirme yavaşladı (son push 2026-06); AST tabanlı araçlara göre kural ifadesi sınırlı.",
+      "ihtiyaclar": [
+        "N-K04-008",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0694",
+      "ad": "ArchUnit",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.archunit.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java mimari kurallarını (katman erişimi, paket bağımlılığı, döngü yasağı, adlandırma) birim testi olarak yazdırır; FreezingArchRule ile mevcut ihlalleri dondurup yalnız yenilerini kırar.",
+      "sinirlar": "Yalnız JVM; kurallar elle yazılmalı. Yalnız JVM; kuralların yazımı ve bakımı ekip disiplini ister.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-004",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K05-012",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0695",
+      "ad": "Import Linter",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://import-linter.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python paketleri için mimari sözleşmeler (katmanlar, yasak içe aktarma, bağımsızlık) tanımlayıp içe aktarma grafiğine göre doğrular.",
+      "sinirlar": "Yalnız Python içe aktarma grafiği; çalışma zamanı bağımlılıklarını görmez. Yalnız statik içe aktarmaları görür; dinamik içe aktarmayı kaçırır.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-004",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0696",
+      "ad": "Madge",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pahen/madge",
+      "olgunluk": "olgun",
+      "ne_saglar": "CommonJS/ES modülleri için bağımlılık grafiği üretir ve döngüsel bağımlılıkları tespit eder.",
+      "sinirlar": "Bakım temposu düşük (son push 2026-01); kural motoru yok.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "AR-0697",
+      "ad": "jQAssistant",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://jqassistant.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod ve derleme yapısını Neo4j grafına tarayıp Cypher sorgularıyla mimari kuralları doğrulayan ve raporlayan araç.",
+      "sinirlar": "Ağırlıklı JVM; GPL lisansı dağıtımda dikkat gerektirir; Neo4j bilgisi gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-0715",
+      "ad": "SCIP Code Intelligence Protocol",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/scip-code/scip",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tanım, referans ve sembol ilişkilerini dil bağımsız, derleyici doğruluğunda indeks dosyası olarak tutan Protobuf tabanlı biçim.",
+      "sinirlar": "Her dil için ayrı indeksleyici gerekir; indekslerin güncelliği CI'ya bağlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0716",
+      "ad": "scip-typescript",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sourcegraph/scip-typescript",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript/JavaScript projeleri için TypeScript derleyicisine dayalı SCIP indeksi üretir.",
+      "sinirlar": "Büyük monorepolarda bellek/süre maliyeti yüksek olabilir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0717",
+      "ad": "scip-java",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/scip-code/scip-java",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java, Scala ve Kotlin için derleyici eklentisiyle SCIP indeksi üretir.",
+      "sinirlar": "Derleme yapılandırmasına (Maven/Gradle) entegrasyon gerektirir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0718",
+      "ad": "scip-python",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (Pyright tabanlı)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sourcegraph/scip-python",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Pyright tür denetleyicisini kullanarak Python projeleri için SCIP indeksi üretir.",
+      "sinirlar": "Dinamik Python kodunda çözümleme kapsamı sınırlı.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0719",
+      "ad": "Language Server Index Format (LSIF)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0 / MIT (LSP spesifikasyon deposu)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/language-server-protocol/specifications/lsif/0.6.0/specification/",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Dil sunucusu bilgisini (tanım, referans, hover) önceden hesaplanmış graf olarak kalıcılaştıran indeks biçimi.",
+      "sinirlar": "Pratikte büyük ölçüde SCIP'e bırakıldı; yeni yatırım için sınırlı ekosistem.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0720",
+      "ad": "Language Server Protocol (LSP)",
+      "tur": "protokol-standart",
+      "lisans": "CC-BY-4.0 / MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/language-server-protocol/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Editör/ajan ile dil sunucuları arasında tanıma git, referans bul, tanılama, yeniden adlandırma gibi semantik işlemler için standart protokol.",
+      "sinirlar": "Canlı dil sunucusu çalıştırmayı gerektirir; çoklu depo ölçeğinde indeks yerine geçmez.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0721",
+      "ad": "multilspy",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/multilspy",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birden çok dil sunucusunu başlatıp LSP sorgularını Python'dan yapmayı sağlayan, LLM kod üretimi araştırmasından çıkan istemci kütüphanesi.",
+      "sinirlar": "Araştırma kökenli; desteklenen dil sayısı sınırlı.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0722",
+      "ad": "mcp-language-server",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/isaacphi/mcp-language-server",
+      "olgunluk": "erken",
+      "ne_saglar": "Herhangi bir LSP dil sunucusunu tanım, referans, tanılama ve yeniden adlandırma araçlarıyla MCP istemcilerine açar.",
+      "sinirlar": "Tek bakımcılı; son etkinlik 2026-03.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0723",
+      "ad": "Serena",
+      "tur": "acik-kaynak",
+      "lisans": "Serena uygulaması GPL-3.0-or-later; SolidLSP bileşeni MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://oraios.github.io/serena/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dil sunucuları üzerinden sembol düzeyinde arama ve düzenleme araçlarını MCP ile ajanlara sunan araç seti; proje belleği dosyaları da tutar.",
+      "sinirlar": "Uygulama lisansı GPL-3.0'a geçti, gömülü/dağıtık kullanımda hukuk değerlendirmesi gerekir; dil sunucusu kurulumu gerekir.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K14-001",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0724",
+      "ad": "Kythe",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kythe.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Derleyici entegrasyonuyla dil bağımsız çapraz referans grafiği üreten ekosistem.",
+      "sinirlar": "Derleme sistemi entegrasyonu zahmetli; dış topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0725",
+      "ad": "Joern",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://joern.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C/C++, Java, JavaScript, Python, Kotlin ve ikili kod için kod özellik grafiği (AST+CFG+PDG) üretip Scala tabanlı sorgu diliyle analiz sağlar.",
+      "sinirlar": "Güvenlik analizi odaklı; büyük depolarda bellek tüketimi yüksek.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-0726",
+      "ad": "Sourcegraph (Code Search, Deep Search, MCP)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://sourcegraph.com/code-search",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tüm depolarda anahtar sözcük/semantik kod arama, derleyici doğruluğunda gezinme (SCIP) ve MCP sunucusuyla ajanlara arama, tanım/referans ve Deep Search araçları sunar.",
+      "sinirlar": "Çekirdek 2024'te kapalı kaynağa geçti; MCP Enterprise plan gerektirir; lisans maliyeti yüksek.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001",
+        "N-K14-002",
+        "N-K24-003",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-0727",
+      "ad": "Zoekt",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/sourcegraph/zoekt",
+      "olgunluk": "olgun",
+      "ne_saglar": "Trigram indeksli, çok depolu hızlı kod arama motoru; regex ve sembol farkındalıklı sıralama sunar.",
+      "sinirlar": "Semantik (anlam tabanlı) arama yok; arayüzü sınırlı.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0728",
+      "ad": "Sourcebot",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek) + ee dizinleri ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.sourcebot.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Farklı kod barındırıcılarındaki depolar ve dallar üzerinde self-host kod arama, gezinme ve atıflı soru-cevap; ajanlar için MCP sunucusu.",
+      "sinirlar": "Bazı kurumsal özellikler ticari; genç ürün.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-0729",
+      "ad": "OpenGrok",
+      "tur": "acik-kaynak",
+      "lisans": "CDDL-1.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://oracle.github.io/opengrok/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok depolu kaynak kod arama ve çapraz referans motoru; tanım/sembol araması ve geçmiş gösterimi.",
+      "sinirlar": "Arayüz eski; semantik arama ve ajan entegrasyonu yok.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0732",
+      "ad": "Universal Ctags",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ctags.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "150'yi aşkın dil için sembol (fonksiyon, sınıf, değişken) etiket indeksi üretir; hafif repo haritası çıkarımında kullanılır.",
+      "sinirlar": "Referans/çağrı ilişkisi yok; yalnız tanımlar.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0734",
+      "ad": "Claude Context",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/zilliztech/claude-context",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tabanını AST tabanlı parçalayıp vektör veritabanına (Milvus/Zilliz) indeksleyen ve ajanlara MCP ile hibrit semantik kod araması sunan eklenti.",
+      "sinirlar": "Gömme sağlayıcısı ve vektör veritabanı gerektirir (varsayılan Zilliz Cloud); son etkinlik 2026-07.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-002",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0735",
+      "ad": "Probe",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://probelabs.com/probe",
+      "olgunluk": "gelisen",
+      "ne_saglar": "ripgrep hızını Tree-sitter ile birleştirip tam kod blokları döndüren, indeks gerektirmeyen yerel kod arama motoru ve MCP sunucusu.",
+      "sinirlar": "Gömme tabanlı semantik arama değil; sıralama sezgisel.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0736",
+      "ad": "Code-Graph-RAG",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/vitali87/code-graph-rag",
+      "olgunluk": "erken",
+      "ne_saglar": "Tree-sitter ile çok dilli kodu ayrıştırıp fonksiyon, sınıf, modül ve ilişkilerini Memgraph bilgi grafiğine yazar; doğal dil sorgusu ve MCP ile ajan erişimi sağlar.",
+      "sinirlar": "Topluluk projesi; Memgraph işletimi gerekir; çıkarım doğruluğu dil desteğine bağlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0737",
+      "ad": "CodeGraphContext",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/CodeGraphContext/CodeGraphContext",
+      "olgunluk": "erken",
+      "ne_saglar": "Yerel kodu graf veritabanına indeksleyip çağrı/içe aktarma ilişkilerini MCP ve CLI ile sorgulanabilir kılar.",
+      "sinirlar": "Genç topluluk projesi; büyük kurum depolarında ölçek kanıtı sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0738",
+      "ad": "GitNexus",
+      "tur": "acik-kaynak",
+      "lisans": "PolyForm Noncommercial 1.0.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/abhigyanpatwari/GitNexus",
+      "olgunluk": "erken",
+      "ne_saglar": "Kod tabanını bağımlılık, çağrı zinciri, küme ve yürütme akışlarını içeren bilgi grafiğine indeksleyip MCP araçlarıyla ajanlara etki analizi sunar.",
+      "sinirlar": "Lisans ticari kullanımı yasaklar; kurumda kullanım için ayrı lisans gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0739",
+      "ad": "Potpie",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://potpie.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodu, yapıyı, kararları ve geçmişi 'bağlam grafiği' olarak indeksleyip ajanların soru yanıtlama, değişiklik planlama ve hata ayıklama için kullanmasını sağlar.",
+      "sinirlar": "Genç ürün; grafik doğruluğu ve güncelleme süreleri kurum ölçeğinde doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-009",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0740",
+      "ad": "DeepWiki (ve DeepWiki MCP)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (genel depolar için ücretsiz)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://deepwiki.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub depoları için otomatik wiki ve mimari açıklamalar üretir; MCP sunucusu wiki yapısını/içeriğini okuma ve soru sorma araçları sunar.",
+      "sinirlar": "Genel depolar ücretsiz; özel depolar Devin hesabı gerektirir; üretilen metin doğrulanmalı. Üretilen dokümanın doğruluğu garanti değil; özel depolar Devin üzerinden indeksleme gerektirir.",
+      "ihtiyaclar": [
+        "N-K03-009",
+        "N-K07-001",
+        "N-K07-004",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0741",
+      "ad": "DeepWiki-Open",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/AsyncFuncAI/deepwiki-open",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub/GitLab/Bitbucket depoları için yerel veya bulut modellerle wiki, diyagram ve soru-cevap üreten açık kaynak DeepWiki alternatifi.",
+      "sinirlar": "Üretilen içeriğin tazeliği ve doğruluğu denetlenmeli; topluluk bakımı.",
+      "ihtiyaclar": [
+        "N-K03-009",
+        "N-K07-004",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0742",
+      "ad": "Augment Context Engine (MCP)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.augmentcode.com/context-engine",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Augment'ın semantik kod indeksini MCP ile Claude Code, Cursor, Copilot gibi diğer ajanlara açar; yerel veya GitHub üzerinden uzak (çok depolu) indeksleme.",
+      "sinirlar": "Sorgu başına token tabanlı ücret; indeks verisi Augment altyapısında.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-002",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0743",
+      "ad": "Structurizr",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://structurizr.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C4 modelini kod olarak (Structurizr DSL) tanımlayıp birden çok diyagram görünümü üreten; mimari dokümantasyon ve ADR'leri aynı çalışma alanında yayınlayan araç.",
+      "sinirlar": "İlişkiler elle modellenir, koddan otomatik çıkarılmaz; eski lite/onpremises depoları arşivlendi, yeni birleşik depoya geçildi. Eski 'lite', 'cli' ve 'onpremises' depoları 2026 başında arşivlenip tek depoda birleştirildi; mevcut kurulumlar için göç planı gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-009",
+        "N-K07-001",
+        "N-K07-003",
+        "N-K07-008",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0744",
+      "ad": "CodeCompass",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/Ericsson/CodeCompass",
+      "olgunluk": "olgun",
+      "ne_saglar": "Büyük C/C++ ve diğer dillerdeki kod tabanları için çağrı grafiği, bağımlılık ve mimari görünümler sunan kod kavrama aracı.",
+      "sinirlar": "Ağırlıklı C/C++; kurulum karmaşık; GPL.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0745",
+      "ad": "Emerge",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/glato/emerge",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birçok dil için modül bağımlılık grafiği ve metrikleri çıkarıp tarayıcı tabanlı etkileşimli görselleştirme üretir.",
+      "sinirlar": "Tek bakımcılı; kural doğrulaması yok.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-0746",
+      "ad": "Understand",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.scitools.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çok dilli statik analiz, çağrı/bağımlılık grafikleri, metrikler ve mimari görselleştirme sunan masaüstü kod kavrama aracı.",
+      "sinirlar": "Masaüstü/lisans modeli; ajan entegrasyonu sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-0802",
+      "ad": "Swimm",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://swimm.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Koda bağlı dokümanlar (kod parçacığı/sembol referansları) ve Auto-sync ile kod değiştiğinde eskiyen dokümanın tespiti; kod tabanını analiz eden AI asistan ve IDE eklentileri.",
+      "sinirlar": "Ticari; tazelik denetimi Swimm dokümanlarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-009",
+        "N-K07-001",
+        "N-K07-004",
+        "N-K14-009",
+        "N-K32-010"
+      ]
+    },
+    {
+      "id": "AR-0805",
+      "ad": "EventCatalog",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.eventcatalog.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Alan, sistem, servis, olay, akış ve şemaları belgeleyen mimari kataloğu; ADR ve işletim dokümanları eklenebilir; yerleşik AI sohbet ve MCP sunucusuyla katalog sorgulanabilir.",
+      "sinirlar": "İlişkiler çoğunlukla elle/eklentilerle beslenir; bazı özellikler ücretli planlarda olabilir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-009",
+        "N-K03-012",
+        "N-K07-003",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-0902",
+      "ad": "Context Mapper",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://contextmapper.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Alan güdümlü tasarımın sınırlı bağlamlarını, bağlam haritasını ve ortak dil (ubiquitous language) kavramlarını DSL ile modelleyip diyagram ve servis ayrıştırma önerileri üreten araç.",
+      "sinirlar": "Son sürüm Ağustos 2024; bakım temposu düşük.",
+      "ihtiyaclar": [
+        "N-K03-009",
+        "N-K07-006",
+        "N-K07-008",
+        "N-K31-006",
+        "N-K31-008",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1037",
+      "ad": "pytest-testmon",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://testmon.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kapsam verisiyle kod-test bağımlılığını tutar ve yalnız değişiklikten etkilenen pytest testlerini seçip çalıştırır (test etki analizi).",
+      "sinirlar": "Yalnız Python; dinamik bağımlılıkları kaçırabilir, birleşim öncesi tam koşunun yerini tutmamalı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-029",
+        "N-K06-003"
+      ]
+    },
+    {
+      "id": "AR-1039",
+      "ad": "Teamscale",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://teamscale.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Test boşluk analizi (değişen ama test edilmemiş kod), test etki analizi, klon tespiti, mimari uygunluk denetimi ve zaman serisi kod kalitesi metrikleri sunar.",
+      "sinirlar": "Ticari; test boşluk analizi için test kapsam izlerinin toplanması altyapı ister.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K04-008",
+        "N-K05-001",
+        "N-K05-029",
+        "N-K06-003",
+        "N-K23-014",
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-1040",
+      "ad": "Tricentis SeaLights",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.sealights.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birim, API, uçtan uca ve manuel test türleri boyunca kod değişikliği–test kapsamı eşlemesi yapar; test edilmemiş değişiklikler için kalite kapısı ve test etki analizi sunar.",
+      "sinirlar": "Ajan/enstrümantasyon gerektirir; ticari ve bulut ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-012",
+        "N-K05-014",
+        "N-K06-003"
+      ]
+    },
+    {
+      "id": "AR-1042",
+      "ad": "ESLint",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://eslint.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript için eklentili statik analiz; no-restricted-imports gibi kurallarla yasak modül/API kullanımını makinece denetler.",
+      "sinirlar": "Tip bilgisi gerektiren kurallar yavaş; yapılandırma parçalanması.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K04-008",
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "AR-1089",
+      "ad": "Code Maat",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/adamtornhill/code-maat",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git geçmişinden değişim sıklığı, mantıksal bağlaşım (birlikte değişen dosyalar), yazar dağılımı ve kod yaşı analizleri çıkarır; sıcak nokta tespitine veri sağlar.",
+      "sinirlar": "Görselleştirme yok, yorum uzmanlık ister; bakım durgun.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K23-014",
+        "N-K24-008",
+        "N-K29-006",
+        "N-K31-008",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-1090",
+      "ad": "CodeScene",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://codescene.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod Sağlığı metriği, sıcak nokta (sık değişen ve düşük sağlıklı kod), değişim bağlaşımı ve bilgi dağılımı analizleri; PR'da kod sağlığı düşüşünü kalite kapısı olarak işaretler.",
+      "sinirlar": "Ticari; metrik tanımı satıcıya özgü. Ticari.",
+      "ihtiyaclar": [
+        "N-K04-008",
+        "N-K05-012",
+        "N-K08-005",
+        "N-K23-006",
+        "N-K23-014",
+        "N-K24-008",
+        "N-K24-014",
+        "N-K29-006",
+        "N-K29-007",
+        "N-K31-007",
+        "N-K31-008",
+        "N-K35-002",
+        "N-K35-004",
+        "N-K35-005"
+      ]
+    },
+    {
+      "id": "AR-1098",
+      "ad": "NDepend",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.ndepend.com",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET kod tabanı için metrikler, CQLinq ile sorgulanabilir kurallar, teknik borç tahmini, kalite kapıları, bağımlılık grafiği ve anlık görüntüler arası trend karşılaştırması.",
+      "sinirlar": "Yalnız .NET; ticari lisans.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K04-008",
+        "N-K05-023",
+        "N-K23-014",
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-1484",
+      "ad": "Ataraxy Weave (entity-level merge driver)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ataraxy-labs.github.io/weave/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodu tree-sitter ile fonksiyon/sınıf/anahtar varlıklarına ayırıp satır yerine varlık düzeyinde birleştiren Git merge sürücüsü; paralel ajanların aynı dosyanın farklı fonksiyonlarına dokunmasından doğan sahte çakışmaları azaltır, MCP sunucusu da sunar.",
+      "sinirlar": "Genç proje; dil desteği tree-sitter gramerleriyle sınırlı, anlamsal çakışmaları (davranış) çözmez.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-002",
+        "N-K24-008",
+        "N-K31-005"
+      ]
+    },
+    {
+      "id": "AR-1485",
+      "ad": "Ataraxy sem (semantic version control)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ataraxy-labs.github.io/sem/",
+      "olgunluk": "erken",
+      "ne_saglar": "Git üzerinde varlık düzeyinde diff, blame ve etki analizi (hangi fonksiyon/sınıf değişti, kimleri etkiler) üreten CLI; 28 dili tree-sitter ile destekler.",
+      "sinirlar": "Bulut sorguları isteğe bağlıdır ancak açılırsa kod meta verisi dışarı gidebilir; proje yenidir.",
+      "ihtiyaclar": [
+        "N-K02-013",
+        "N-K03-003",
+        "N-K04-001",
+        "N-K17-006"
+      ]
+    },
+    {
+      "id": "AR-1494",
+      "ad": "Piranha",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/uber/piranha",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kullanımdan kalkmış özellik bayraklarına bağlı ölü kodu kural tabanlı (tree-sitter + kurallar grafiği) otomatik yeniden düzenlemeyle temizleyen araç; Java, Kotlin, Swift, Go, TypeScript, Python destekler.",
+      "sinirlar": "Kurallar bayrak API'sine göre yazılmalıdır; son güncelleme Nisan 2026'dadır.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K06-008",
+        "N-K23-014",
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-1516",
+      "ad": "Globstar",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://globstar.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "tree-sitter tabanlı, YAML veya Go ile özel güvenlik/kalite kontrolleri yazılıp CI'da koşturulabilen açık kaynak statik analiz araç takımı.",
+      "sinirlar": "Hazır kural kütüphanesi Semgrep'e göre küçüktür; veri akışı analizi sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K03-008",
+        "N-K05-012",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-1526",
+      "ad": "it-depends",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/it-depends",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Paketler ve depolar için tüm olası bağımlılık çözünürlüklerini kapsayan bağımlılık grafiği ve SBOM üreten, yerel (native) kütüphane bağımlılıklarını da çıkaran araç.",
+      "sinirlar": "Çözümleme yavaş olabilir; ekosistem desteği sınırlıdır.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-004",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-1650",
+      "ad": "Pants",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.pantsbuild.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "İçe aktarmalardan bağımlılık çıkarımı yapan, değişen hedeflerden etkilenenleri ('--changed-dependents') hesaplayıp yalnız onların testlerini paralel ve önbellekli çalıştıran monorepo derleme sistemi (Python, Go, Java, Shell vb.).",
+      "sinirlar": "Monorepo yapılandırması ve öğrenme eğrisi gerektirir.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "AR-1652",
+      "ad": "CodeBoarding",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.codeboarding.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Statik analiz ve LLM ile kod tabanından etkileşimli mimari diyagramları (bileşenler ve ilişkileri) üreten, değişikliklerle güncellenebilen araç.",
+      "sinirlar": "Diyagram üretimi kısmen LLM'e dayanır; doğruluk insan kontrolü gerektirir.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-001",
+        "N-K03-002",
+        "N-K07-001"
+      ]
+    },
+    {
+      "id": "AR-1653",
+      "ad": "skott",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/antoine-coulon/skott",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JavaScript/TypeScript projelerinde modül bağımlılık grafiğini çıkaran, döngüsel bağımlılıkları ve kullanılmayan dosya/bağımlılıkları bulan, grafiği görselleştiren araç.",
+      "sinirlar": "Yalnız JS/TS; tek geliştirici bakımında.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003"
+      ]
+    },
+    {
+      "id": "AR-1654",
+      "ad": "Codanna",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.codanna.sh/",
+      "olgunluk": "erken",
+      "ne_saglar": "Yerel kod zekâsı MCP sunucusu ve CLI: sembol indeksleme, çağıran/çağrılan ilişkileri, etki analizi ve anlamsal arama ile kodlama ajanlarına kesin bağlam sağlar.",
+      "sinirlar": "Genç proje; dil desteği sınırlı olabilir.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-1655",
+      "ad": "srcML",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.srcml.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "C, C++, C# ve Java kaynak kodunu yorumları ve biçimi koruyarak XML'e dönüştüren altyapı; XPath/XSLT ile kod sorgulama ve dönüşüm sağlar.",
+      "sinirlar": "Desteklenen dil sayısı sınırlıdır; araştırma odaklıdır.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-1656",
+      "ad": "Tach",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.gauge.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python projelerinde modül sınırlarını ve izinli bağımlılıkları tanımlayıp ihlalleri CI'da engelleyen, bağımlılık grafiğini görselleştiren Rust tabanlı araç.",
+      "sinirlar": "Yalnız Python; proje Gauge'dan topluluk organizasyonuna (tach-org) taşınmıştır.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-004",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1657",
+      "ad": "Deptrac",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "http://deptrac.github.io/deptrac/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP kod tabanında katmanlar arası izinli bağımlılık kurallarını tanımlayıp mimari ihlalleri raporlayan statik analiz aracı.",
+      "sinirlar": "Yalnız PHP.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-1658",
+      "ad": "Packwerk",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Shopify/packwerk",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rails monolitlerini paketlere bölüp paketler arası bağımlılık ve gizlilik sınırlarını statik olarak denetleyen araç.",
+      "sinirlar": "Yalnız Ruby/Rails; Shopify iç kullanımına göre şekillenmiştir.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K04-008",
+        "N-K24-008",
+        "N-K31-001",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1659",
+      "ad": "Konsist",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.konsist.lemonappdev.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kotlin kod tabanında adlandırma, katman ve mimari kurallarını birim testi olarak yazdıran yapısal linter; paradigmaya uyumu test kodu ile zorlar.",
+      "sinirlar": "Yalnız Kotlin.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-1660",
+      "ad": "ArchUnitNET",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/TNG/ArchUnitNET",
+      "olgunluk": "olgun",
+      "ne_saglar": ".NET için ArchUnit'in karşılığı: katman, bağımlılık ve adlandırma kurallarını C# birim testleri olarak ifade edip derlenmiş derlemeler üzerinde denetler.",
+      "sinirlar": "Yalnız .NET; kurallar elle yazılmalıdır.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K04-007",
+        "N-K04-008",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-1661",
+      "ad": "gitingest",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://gitingest.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bir Git deposunu LLM'e verilebilecek tek metin özetine (dizin ağacı + dosya içerikleri, token tahmini) dönüştüren CLI/kütüphane ve web hizmeti.",
+      "sinirlar": "Büyük depolarda bağlam penceresini hızla doldurur; seçici bağlam yerine toplu döküm üretir.",
+      "ihtiyaclar": [
+        "N-K10-009",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-1667",
+      "ad": "SeaGOAT",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://kantord.github.io/SeaGOAT/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yerel gömme modeli ve ChromaDB ile kod tabanında anlamsal ve düzenli ifade tabanlı hibrit arama yapan yerel kod arama motoru.",
+      "sinirlar": "Tek depo odaklıdır; büyük monorepolarda indeksleme yavaşlayabilir.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-1680",
+      "ad": "rust-code-analysis",
+      "tur": "kutuphane",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mozilla.github.io/rust-code-analysis/",
+      "olgunluk": "olgun",
+      "ne_saglar": "tree-sitter ile birçok dilde siklomatik/bilişsel karmaşıklık, Halstead, bakım yapılabilirlik indeksi gibi metrikleri hesaplayan kütüphane ve CLI.",
+      "sinirlar": "Bakım temposu yavaştır (son güncelleme 2026 Nisan).",
+      "ihtiyaclar": [
+        "N-K04-004",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-1737",
+      "ad": "Konveyor AI (Kai)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.konveyor.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Kural tabanlı statik analizörün (Konveyor Analyzer) göç bulgularını ve geçmiş çözülmüş örnekleri LLM'e bağlam olarak vererek uygulama modernizasyonu için kod değişikliği önerir; VS Code eklentisiyle çalışır.",
+      "sinirlar": "Göç senaryolarına (ör. Java EE'den Quarkus'a) odaklı; genel geliştirme ajanı değildir; erken aşama.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-008",
+        "N-K11-005",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-1758",
+      "ad": "JanusGraph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / CC-BY-4.0 (doküman)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://janusgraph.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Cassandra, HBase gibi depolar üzerinde çalışan dağıtık grafik veritabanı (TinkerPop/Gremlin); ekipler ve depolar arası bağımlılık grafiklerini ölçekli saklayıp sorgulamaya uygun.",
+      "sinirlar": "İşletimi ağır; küçük grafikler için gereğinden karmaşık.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-1785",
+      "ad": "FINOS CALM (Common Architecture Language Model)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://calm.finos.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Mimariyi düğümler, ilişkiler, arayüzler ve kontrollerle JSON Schema tabanlı makinece okunur modelde tanımlar; desenlere (pattern) uyumu CLI ile doğrular, dokümantasyon ve görselleştirme üretir.",
+      "sinirlar": "Genç proje; kod tabanından otomatik mimari çıkarımı sınırlı, modeller elle bakım ister.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-008",
+        "N-K03-009",
+        "N-K07-008",
+        "N-K33-014",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-1840",
+      "ad": "OWASP Noir",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://owasp-noir.github.io/noir/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birçok dil ve çerçevedeki kaynak koddan uç noktaları, parametreleri ve başlıkları çıkararak saldırı yüzeyini ve belgelenmemiş (gölge) API'leri tespit eder; ZAP/Burp'a besleme ve isteğe bağlı LLM analiziyle görevde yazmayan etkilenen uç noktaları ortaya çıkarır.",
+      "sinirlar": "Statik çıkarım, dinamik yönlendirmeleri kaçırabilir; desteklenmeyen çerçevelerde sonuç eksik.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-001",
+        "N-K05-024"
+      ]
+    },
+    {
+      "id": "AR-1906",
+      "ad": "DesigniteJava",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.designite-tools.com/products-dj",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Java kodunda mimari (döngüsel bağımlılık, yoğun modül), tasarım (God class, eksik soyutlama) ve uygulama kokularını ve nesne yönelimli metrikleri tespit eder; tasarım ilkesi denetimine ölçülebilir girdi sağlar.",
+      "sinirlar": "Yalnız Java; açık kaynak depo 2025 başından beri seyrek güncelleniyor, gelişmiş sürümler ticari.",
+      "ihtiyaclar": [
+        "N-K04-007",
+        "N-K04-008",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-1911",
+      "ad": "OpenRewrite",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (çekirdek) / Moderne Source Available (bazı tarifler)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.openrewrite.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kayıpsız anlamsal ağaç (LST) üzerinde deterministik, tarif (recipe) tabanlı toplu yeniden düzenleme, çerçeve/sürüm yükseltme ve kod stili uygulama (Java, Kotlin, JS/TS, Python kısmi); LLM yerine tekrarlanabilir dönüşüm sağlar.",
+      "sinirlar": "Bazı tarifler kaynak-erişilebilir lisanslı; çok depolu ölçek ticari Moderne platformunda.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-008",
+        "N-K16-005",
+        "N-K23-014",
+        "N-K34-008",
+        "N-K35-007"
+      ]
+    },
+    {
+      "id": "AR-1984",
+      "ad": "Amazon Neptune",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/neptune/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yönetilen graf veritabanı (Gremlin, openCypher, SPARQL) ve Neptune Analytics ile graf algoritmaları; bağımlılık ve ilişki haritalarını sorgulanabilir tutma, GraphRAG.",
+      "sinirlar": "Graf modelini koddan üretme işi ayrı araç ister; AWS'ye bağımlı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2072",
+      "ad": "SAP LeanIX",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.leanix.net/en/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurumsal mimari yönetimi: uygulama envanteri, arayüz/bağımlılık haritaları, teknoloji yaşam döngüsü ve yapay zekâ sistem envanteri ile yönetişim (AI inventory).",
+      "sinirlar": "Kod düzeyinde bağımlılık üretmez; envanter manuel/entegrasyonla beslenir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K21-007",
+        "N-K22-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2120",
+      "ad": "Datadog Software Catalog (Internal Developer Portal)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.datadoghq.com/product/software-catalog/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hizmet sahipliği, bağımlılıklar (izlerden otomatik), sürüm ve üretim olgunluğu puan kartlarını birleştiren katalog; hizmetler arası etki yüzeyi görünürlüğü.",
+      "sinirlar": "Bağımlılık bilgisi çalışma zamanı telemetrisine dayanır; statik kod bağımlılığını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-001",
+        "N-K16-008",
+        "N-K24-003",
+        "N-K33-001",
+        "N-K33-006",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-2214",
+      "ad": "Moderne",
+      "tur": "ticari-saas",
+      "lisans": "ticari (OpenRewrite çekirdeği Apache-2.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://moderne.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenRewrite'ın kayıpsız anlamsal ağaçlarıyla (LST) çok sayıda depoda tip-farkında kod arama, etki analizi ve deterministik toplu yeniden düzenleme; ajanlara MCP ile deterministik kod dönüşümü sunar.",
+      "sinirlar": "Java/JVM ekosisteminde en güçlü; diğer diller için kapsam daha dar.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K03-010",
+        "N-K14-001",
+        "N-K23-014",
+        "N-K34-008",
+        "N-K35-007"
+      ]
+    },
+    {
+      "id": "AR-2215",
+      "ad": "vFunction",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://vfunction.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari gözlemlenebilirlik: çalışma zamanı ve statik analizle alan (domain) sınırlarını, sınıf/modül bağımlılıklarını ve mimari kaymayı çıkarır; mimari teknik borcu izler ve yeniden düzenleme görevleri üretir.",
+      "sinirlar": "Java/.NET odaklı; ajan kurulumu gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K04-008",
+        "N-K23-014",
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-2264",
+      "ad": "Tabnine (Enterprise)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.tabnine.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kod tamamlama, sohbet ve ajan yetenekleri sunan kodlama asistanı; Enterprise Context Engine depo, doküman, iş kalemi ve API'lerden kurum bilgi grafiği oluşturur.",
+      "sinirlar": "Tricentis satın alması sonrası yol haritası test odaklı değişebilir; ticari.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K09-009",
+        "N-K14-001",
+        "N-K18-013",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2305",
+      "ad": "CAST Imaging",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.castsoftware.com/imaging",
+      "olgunluk": "olgun",
+      "ne_saglar": "450'den fazla dil, çerçeve ve veritabanı için çağrı ve veri erişim grafiklerini deterministik olarak çıkaran uygulama mimarisi haritalama; MCP sunucusu üzerinden kodlama ajanlarına etki analizi bağlamı verir.",
+      "sinirlar": "Ticari ve analiz kurulumu ağır; sonuçların güncelliği yeniden analiz sıklığına bağlı.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K14-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2306",
+      "ad": "Axivion Suite",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.qt.io/product/quality-assurance/axivion",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari doğrulama (hedef mimariye aykırı bağımlılıklar), klon tespiti, ölü kod, döngü tespiti ve MISRA/AUTOSAR/CERT statik analizi; her commit'te mimari sapmayı raporlar.",
+      "sinirlar": "Yalnız C, C++, C#, CUDA ve Rust; Java/Python/TypeScript kapsanmaz.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K03-010",
+        "N-K04-008",
+        "N-K23-014",
+        "N-K24-008",
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-2307",
+      "ad": "Sonargraph",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (ücretsiz Explorer sürümü)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.hello2morrow.com/products/sonargraph",
+      "olgunluk": "olgun",
+      "ne_saglar": "Mimari DSL ile katman ve bağımlılık kurallarını tanımlayıp denetleyen, döngüsel bağımlılık tespiti, yüzlerce metrik ve kalite kapısı sunan statik analiz aracı; Zügel MCP sunucusuyla kodlama ajanlarına mimari kuralları iletir.",
+      "sinirlar": "Ticari; dil desteği Java/Kotlin, C#, Python, Go, TypeScript ve C/C++ ile sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K03-010",
+        "N-K04-007",
+        "N-K23-014",
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-2407",
+      "ad": "Qoder",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://qoder.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Alibaba'nın ajan odaklı kodlama platformu: IDE ve CLI, uzun görevleri devretme (Quest), depo bilgisini otomatik wiki'ye dönüştürme ve bağlam motoru.",
+      "sinirlar": "Kapalı kaynak ve bulut modellerine bağlı; kurum içi model/özel barındırma seçenekleri belirsiz.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K07-001",
+        "N-K10-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2522",
+      "ad": "CodeFuse-Query",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/codefuse-ai/CodeFuse-Query",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodu ilişkisel veri modeline çevirip Datalog tabanlı Gödel sorgu diliyle çok dilli, büyük ölçekli kod analizi (çağrı grafiği, bağımlılık, etki alanı) yapan motor.",
+      "sinirlar": "Sorgu dili öğrenme eğrisi; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2577",
+      "ad": "NebulaGraph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://nebula-graph.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yatay ölçeklenen dağıtık graf veritabanı; ekipler, depolar, modüller ve iş kalemleri arası bağımlılık grafiğini saklayıp nGQL/openCypher ile yol ve etki sorguları yapmayı sağlar.",
+      "sinirlar": "İşletim karmaşıklığı; küçük grafikler için tek düğümlü çözümler yeterli.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2578",
+      "ad": "TuGraph DB",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://tugraph.tech",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yüksek başarımlı graf veritabanı ve yerleşik graf algoritma kütüphanesi; bağımlılık analizi ve yol hesaplarını veritabanında deterministik çalıştırır.",
+      "sinirlar": "Topluluk ve ekosistem Neo4j'e göre küçük; 2026 ortasından beri etkinlik azaldı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2605",
+      "ad": "STARTS",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor (özel 'STARTS Release License')",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/TestingResearchIllinois/starts",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Maven Java projelerinde sınıf düzeyi statik bağımlılık grafiğiyle değişiklikten etkilenen testleri seçer (statik regresyon test seçimi); CI süresini azaltır.",
+      "sinirlar": "Statik seçim yansıma (reflection) gibi durumlarda test kaçırabilir; yalnız Maven.",
+      "ihtiyaclar": [
+        "N-K05-004",
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2616",
+      "ad": "AutoCodeRover",
+      "tur": "cerceve",
+      "lisans": "Sonar Source-Available License v1.0 (OSI onaylı değil)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/AutoCodeRoverSG/auto-code-rover",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Programın soyut sözdizimi ağacı üzerinde sınıf/metot arama API'leriyle bağlam toplayıp hata yerelleştirme (spektrum tabanlı dahil) ve yama üretimi yapan GitHub sorun çözme ajanı; SpecRover ile spesifikasyon çıkarımı eklendi.",
+      "sinirlar": "Lisans 2024'te kaynak-erişilebilir modele geçti; ticari kullanım koşulları incelenmeli, 2025'ten beri güncelleme az.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K08-002",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2618",
+      "ad": "Moatless Tools",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/aorwall/moatless-tools",
+      "olgunluk": "erken",
+      "ne_saglar": "LLM'in kod tabanında düzenleme yapması için dar kapsamlı araçlar ve durum makinesi tabanlı akış sunar; düşük maliyetle SWE-bench sorunlarını çözmeyi ve ağaç araması (moatless-tree-search) deneylerini destekler.",
+      "sinirlar": "Tek geliştirici projesi; 2025 sonundan beri etkinlik düşük.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K14-001",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-2627",
+      "ad": "Panta",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/PANTA-TestAutomation/Panta",
+      "olgunluk": "erken",
+      "ne_saglar": "Statik kontrol akışı analizi ve dinamik kapsam analizini yinelemeli birleştirip LLM'i kapsanmayan yürütme yollarına yönlendiren birim test üretim tekniğinin çoğaltma paketi.",
+      "sinirlar": "Lisans beyanı yok; Defects4J/Java deney düzeninde, erken prototip.",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-010"
+      ]
+    },
+    {
+      "id": "AR-2706",
+      "ad": "Code Property Graph (Fraunhofer AISEC cpg)",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Fraunhofer-AISEC/cpg",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C/C++, Java, Go, Python, TypeScript, Ruby gibi dillerden dil bağımsız kod özellik grafiği (AST, veri/kontrol akışı, çağrı) çıkarır; Neo4j'ye aktarım ve sorgu API'si sunar.",
+      "sinirlar": "Kotlin/JVM kütüphanesi; büyük depolarda bellek kullanımı yüksek, dil ön uçlarının olgunluğu değişken.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2707",
+      "ad": "SootUp",
+      "tur": "kutuphane",
+      "lisans": "LGPL-2.1",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/soot-oss/SootUp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Soot'un yeniden tasarlanmış sürümü: Java bayt kodu/kaynak için ara temsil, çağrı grafiği ve veri akışı analizi altyapısı; tembel yükleme ve değişmez yapılarla büyük kod tabanlarını hedefler.",
+      "sinirlar": "Yalnız JVM; statik analiz uzmanlığı gerektirir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K03-004",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2708",
+      "ad": "WALA",
+      "tur": "kutuphane",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/wala/WALA",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java, JavaScript ve Android için çağrı grafiği, işaretçi analizi ve dilimleme sunan uzun soluklu statik analiz kütüphaneleri.",
+      "sinirlar": "Öğrenme eğrisi dik; modern JS/TS desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2709",
+      "ad": "Soufflé",
+      "tur": "acik-kaynak",
+      "lisans": "UPL-1.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/souffle-lang/souffle",
+      "olgunluk": "olgun",
+      "ne_saglar": "Horn yantümceleriyle statik analiz ve bağımlılık kuralları yazmak için yüksek başarımlı Datalog motoru; kurallar C++'a derlenip paralel çalışır.",
+      "sinirlar": "Analiz kurallarını yazmak Datalog uzmanlığı ister; olgu çıkarımı ayrı araçlarla yapılmalıdır.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "AR-2710",
+      "ad": "Tai-e",
+      "tur": "kutuphane",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/pascal-lab/Tai-e",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Java/Android için işaretçi analizi, çağrı grafiği, kirlilik (taint) analizi ve eklenti mimarisi sunan öğrenmesi kolay statik analiz çerçevesi.",
+      "sinirlar": "Yalnız JVM; kurumsal CI entegrasyonu hazır gelmez.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-2711",
+      "ad": "Jelly",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/cs-au-dk/jelly",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JavaScript/TypeScript için çağrı grafiği oluşturma, kütüphane kullanım örüntüsü eşleme ve bağımlılık zafiyetlerinin erişilebilirliği (vulnerability exposure) analizi yapan statik analizci.",
+      "sinirlar": "Dinamik JS özellikleri nedeniyle analiz kusursuz değil; yalnız JS/TS.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-2712",
+      "ad": "Scalpel",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/SMAT-Lab/Scalpel",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Python için çağrı grafiği, kontrol akışı grafiği, SSA, içe aktarma grafiği ve tip çıkarımı modülleri sunan statik analiz çerçevesi.",
+      "sinirlar": "2024'ten beri güncellenmiyor; yeni Python sürümlerinde uyumluluk sorunları olabilir.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2713",
+      "ad": "PyCG",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/vitsalis/PyCG",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Python için isim tabanlı yüksek hassasiyetli statik çağrı grafiği üreticisi; JSON çıktı verir.",
+      "sinirlar": "Depo arşivlendi; yeni projelerde bakımı sürdürülen alternatiflere geçilmeli.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2714",
+      "ad": "RepoGraph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ozyyshr/RepoGraph",
+      "olgunluk": "erken",
+      "ne_saglar": "Depo düzeyinde satır/tanım–referans kod grafiği kurup alt grafik getirerek SWE ajanlarına (Agentless, SWE-agent) eklenti olarak bağlam sağlayan modül.",
+      "sinirlar": "Araştırma kodu; 2025 başından beri güncellenmiyor, çok dilli destek sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2715",
+      "ad": "LocAgent",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/gersteinlab/LocAgent",
+      "olgunluk": "erken",
+      "ne_saglar": "Kod tabanını dizin, dosya, sınıf, fonksiyon ve bunlar arası ilişkilerden oluşan heterojen grafiğe dönüştürüp ajanın çok adımlı gezinmesiyle hata/özellik konumunu bulan çerçeve; Loc-Bench kıyası içerir.",
+      "sinirlar": "Python depolarına göre ayarlı; grafik oluşturma büyük depolarda maliyetli.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K05-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2716",
+      "ad": "GumTree",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/GumTreeDiff/gumtree",
+      "olgunluk": "olgun",
+      "ne_saglar": "Soyut sözdizimi ağaçları arasında taşıma, ekleme, silme ve güncelleme eylemlerini hesaplayan AST tabanlı fark (diff) aracı; değişiklik büyüklüğünü satır yerine yapısal olarak ölçmeye yarar.",
+      "sinirlar": "Dil ayrıştırıcıları için ek bileşen (tree-sitter, srcML vb.) gerekir.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-004",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-2718",
+      "ad": "CK",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/mauricioaniche/ck",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java için derleme gerektirmeden sınıf ve metot düzeyinde CK metrikleri (WMC, CBO, LCOM, RFC, DIT vb.) hesaplayan statik analiz aracı.",
+      "sinirlar": "Yalnız Java; eşik ve yorumlama kurum tarafından tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K04-008",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-2719",
+      "ad": "JDeodorant",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tsantalis/JDeodorant",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Feature Envy, God Class, Long Method, Type Checking gibi tasarım kokularını tespit edip yeniden düzenleme önerileri sunan Eclipse eklentisi.",
+      "sinirlar": "Eclipse'e bağlı ve 2025 başından beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K04-007",
+        "N-K04-008"
+      ]
+    },
+    {
+      "id": "AR-2720",
+      "ad": "Kaiaulu",
+      "tur": "kutuphane",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sailuh/kaiaulu",
+      "olgunluk": "erken",
+      "ne_saglar": "Git, e-posta listesi, Jira ve GitHub verilerini birleştirip sosyo-teknik ağlar, dosya sahipliği, mimari/sosyal kokular ve churn metrikleri üreten R paketi.",
+      "sinirlar": "R ekosistemi; küçük araştırma ekibi tarafından sürdürülüyor.",
+      "ihtiyaclar": [
+        "N-K23-014",
+        "N-K24-003",
+        "N-K24-008",
+        "N-K31-008"
+      ]
+    },
+    {
+      "id": "AR-2726",
+      "ad": "Maracas",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/alien-tools/maracas",
+      "olgunluk": "erken",
+      "ne_saglar": "Java kütüphanelerindeki kırıcı API değişikliklerini (breaking changes) tespit edip bunların istemci kodlarını nasıl etkilediğini kaynak ve bayt kodu analiziyle gösterir; PR'larda bot olarak çalışabilir.",
+      "sinirlar": "Yalnız Java; 2025 başından beri güncelleme yok.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K03-011"
+      ]
+    },
+    {
+      "id": "AR-2727",
+      "ad": "code2DFD",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/tuhh-softsec/code2DFD",
+      "olgunluk": "erken",
+      "ne_saglar": "Mikroservis kaynak kodundan (Java/Spring ağırlıklı) servisler arası veri akışı diyagramlarını ve güvenlik açıklamalarını otomatik çıkarır.",
+      "sinirlar": "Belirli teknoloji yığınlarına göre kurallı; 2024'ten beri güncellenmiyor.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2728",
+      "ad": "RepoAgent",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/OpenBMB/RepoAgent",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Depoyu AST ve çağrı ilişkileriyle analiz edip LLM ile nesne düzeyinde dokümantasyon üretir ve git değişikliklerinde yalnız etkilenen belgeleri günceller.",
+      "sinirlar": "2024 sonundan beri güncellenmiyor; Python depolarıyla sınırlı.",
+      "ihtiyaclar": [
+        "N-K07-001",
+        "N-K14-009"
+      ]
+    },
+    {
+      "id": "AR-2760",
+      "ad": "TraceBERT",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/jinfenglin/TraceBERT",
+      "olgunluk": "arsiv-terk",
+      "ne_saglar": "Issue ile commit arasındaki izlenebilirlik bağlantılarını önceden eğitilmiş BERT modelleriyle kurtaran yöntemin kodu.",
+      "sinirlar": "Lisans beyanı yok; eski model mimarisi ve proje bazlı eğitim gerektirir.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K19-003",
+        "N-K26-004"
+      ]
+    },
+    {
+      "id": "AR-2862",
+      "ad": "Greenfield",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/prime-radiant-inc/greenfield",
+      "olgunluk": "erken",
+      "ne_saglar": "Kaynak kod, doküman, SDK, çalışma zamanı davranışı ve ikililerden temiz davranışsal spesifikasyon, test vektörleri, kabul kriterleri ve tam köken izi üreten Claude Code eklentisi.",
+      "sinirlar": "Claude Code'a bağlı; üretilen kriterler insan onayı gerektirir.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K05-008"
+      ]
+    },
+    {
+      "id": "AR-2953",
+      "ad": "brain0",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Brain0-ai/brain0",
+      "olgunluk": "erken",
+      "ne_saglar": "Git ve ajan transkriptlerinden her commit'i arkasındaki ajan niyetine, fonksiyon düzeyine kadar bağlayan pasif karar grafiği; kayma tespiti, ajanın okuduklarının DLP denetimi ve iki boyutlu risk puanı.",
+      "sinirlar": "Transkriptlerin disk üzerindeki biçimine bağımlı; Temmuz 2026'da çıktı.",
+      "ihtiyaclar": [
+        "N-K18-011",
+        "N-K19-006",
+        "N-K22-003",
+        "N-K30-002",
+        "N-K31-005"
+      ]
+    },
+    {
+      "id": "AR-2963",
+      "ad": "ctx (ctxrs)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ctx.rs",
+      "olgunluk": "erken",
+      "ne_saglar": "Makinedeki kodlama ajanı geçmişini aranabilir kılar, kodu yazan oturuma 'blame' eder ve kod tabanındaki ilişkileri graf olarak çıkarır.",
+      "sinirlar": "Yerel geçmişe dayanır; ekip çapında paylaşım yok.",
+      "ihtiyaclar": [
+        "N-K14-006",
+        "N-K19-006"
+      ]
+    },
+    {
+      "id": "AR-2966",
+      "ad": "Semble",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://minish.ai/packages/semble/introduction/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Ajanlar için doğal dil sorgusuyla yalnız ilgili kod parçacıklarını döndüren hızlı kod arama kütüphanesi; grep+read'e göre çok daha az token harcar, CLI ve MCP sunucusu içerir.",
+      "sinirlar": "Anlamsal arama; bağımlılık/çağrı grafiği sunmaz.",
+      "ihtiyaclar": [
+        "N-K14-001",
+        "N-K14-002"
+      ]
+    },
+    {
+      "id": "AR-2967",
+      "ad": "cocoindex-code",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cocoindex-io/cocoindex-code",
+      "olgunluk": "erken",
+      "ne_saglar": "CocoIndex üzerine kurulu, AST tabanlı, gömülü semantik kod arama CLI'ı; sıfır yapılandırmayla kurulur ve ajanların token harcamasını azaltmayı hedefler.",
+      "sinirlar": "Arama odaklı; etki analizi için ek araç gerekir.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2968",
+      "ad": "codedb",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/justrach/codedb",
+      "olgunluk": "erken",
+      "ne_saglar": "Zig ile yazılmış, MCP üzerinden sembol, çağıran, dosya taslağı ve bağımlılık bilgisi veren kod zekâsı sunucusu; büyük depolarda ajana odaklı bağlam haritası çıkarır.",
+      "sinirlar": "Tek geliştiricili; dil kapsamı doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-2975",
+      "ad": "groma.md",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://groma.md",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodu tarayıp ilk C4 mimari haritasını çıkaran, Git'te OKF Markdown olarak saklayan ve kodlama ajanının güncel tuttuğu canlı mimari harita; GitHub Action ile PR'lara mimari diff.",
+      "sinirlar": "macOS'ta Apple Silicon gerektirir; Temmuz 2026'da çıktı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K07-008"
+      ]
+    },
+    {
+      "id": "AR-3064",
+      "ad": "JetBrains IDE MCP Server (IntelliJ yerleşik)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (IDE'ye bağlı)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.jetbrains.com/help/idea/mcp-server.html",
+      "olgunluk": "gelisen",
+      "ne_saglar": "IntelliJ tabanlı IDE'lerin içinde çalışan MCP sunucusu; dış ajanların IDE'nin proje modeli, arama, çalıştırma yapılandırmaları ve dosya işlemlerini kullanmasını sağlar.",
+      "sinirlar": "Çalışan bir IDE oturumu gerektirir; başsız CI kullanımına uygun değil.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K12-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3071",
+      "ad": "Rails MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/maquina-app/rails-mcp-server",
+      "olgunluk": "erken",
+      "ne_saglar": "Rails projelerinin rotalarını, modellerini, şemasını ve dosyalarını ajanlara MCP ile açan Ruby gem'i.",
+      "sinirlar": "Topluluk projesi; bakım tek ekibe bağlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K12-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3081",
+      "ad": "JavaParser",
+      "tur": "kutuphane",
+      "lisans": "LGPL-3.0 veya Apache-2.0 (çift lisans)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://javaparser.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java 1-25 için ayrıştırıcı ve sembol çözümlemeli sözdizimi ağacı kütüphanesi; kod grafiği ve özel statik analiz araçlarının yapı taşı.",
+      "sinirlar": "Yalnız kaynak düzeyi; derleme bağımlılıklarını çözmek için ek yapılandırma gerekir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3082",
+      "ad": "Spoon",
+      "tur": "kutuphane",
+      "lisans": "CeCILL-C",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://spoon.gforge.inria.fr/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java kaynak kodunu analiz etmek ve dönüştürmek için metaprogramlama kütüphanesi; tam tip bilgili model üzerinde sorgu ve dönüşüm sağlar.",
+      "sinirlar": "CeCILL-C lisansı kurum lisans politikasında ayrıca değerlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K14-001",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-3088",
+      "ad": "Eclipse JDT Language Server",
+      "tur": "acik-kaynak",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/eclipse-jdtls/eclipse.jdt.ls",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java için LSP uyumlu dil sunucusu; tanıma gitme, referans bulma, tip hiyerarşisi ve tanılama sağlayarak ajanlara derleyici düzeyinde kod anlayışı verir.",
+      "sinirlar": "Büyük Maven/Gradle projelerinde bellek ve açılış süresi yüksek.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K03-010",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3089",
+      "ad": "Kotlin LSP",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/Kotlin/kotlin-lsp",
+      "olgunluk": "erken",
+      "ne_saglar": "JetBrains'in resmî Kotlin dil sunucusu ve VS Code eklentisi; IntelliJ analiz motorunu LSP üzerinden ajan ve editörlere açar.",
+      "sinirlar": "Genç proje; Gradle/KMP proje desteği ve kararlılık IntelliJ düzeyinde değil.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3095",
+      "ad": "Dependency Analysis Gradle Plugin",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/autonomousapps/dependency-analysis-gradle-plugin",
+      "olgunluk": "olgun",
+      "ne_saglar": "JVM ve Android Gradle projelerinde kullanılmayan, yanlış yapılandırılmış (api/implementation) ve eksik bildirilmiş bağımlılıkları raporlar.",
+      "sinirlar": "Yalnız Gradle; çok modüllü projelerde analiz süresi eklenir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-004",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-3107",
+      "ad": "SourceKit-LSP",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/swiftlang/sourcekit-lsp",
+      "olgunluk": "olgun",
+      "ne_saglar": "Swift ve C tabanlı diller için LSP sunucusu; indeks tabanlı tanım/referans arama ve tanılama sağlayarak ajanlara derleyici düzeyinde kod bilgisi verir.",
+      "sinirlar": "Xcode proje dosyalarıyla (SwiftPM dışı) çalışmak ek yapılandırma ister.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3112",
+      "ad": "Tuist",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (istemci) + MPL-2.0 (sunucu)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://tuist.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Xcode projelerini koddan üretir; proje bağımlılık grafiği, ikili önbellekleme ve seçici test (yalnız etkilenen hedefler) ile iOS derleme/test kapasitesini düşürür.",
+      "sinirlar": "Önbellek ve analitik gibi özellikler sunucu (ücretli/kendi barındırma) ister; Xcode sürüm değişimlerine bağımlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K05-029",
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-3131",
+      "ad": "clang-tidy",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 WITH LLVM-exception",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://clang.llvm.org/extra/clang-tidy/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Clang tabanlı C/C++ lint ve statik analiz aracı; modernizasyon, hata eğilimli desen ve CERT/C++ Core Guidelines kontrollerini otomatik düzeltmelerle sunar.",
+      "sinirlar": "Derleme veritabanı (compile_commands.json) gerektirir; büyük kod tabanlarında yavaş.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K05-012",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3132",
+      "ad": "clangd",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 WITH LLVM-exception",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://clangd.llvm.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "C/C++ için LSP dil sunucusu; arka plan indeksi ile tanım/referans, çağrı hiyerarşisi ve tanılama sağlar.",
+      "sinirlar": "Doğru derleme bayrakları olmadan sonuçlar eksik kalır.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3134",
+      "ad": "include-what-you-use",
+      "tur": "acik-kaynak",
+      "lisans": "NCSA (LLVM Release License)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://include-what-you-use.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "C/C++ dosyalarındaki #include bağımlılıklarını analiz edip gereksiz/eksik başlıkları raporlayan Clang tabanlı araç.",
+      "sinirlar": "Öneriler her zaman doğru değil; eşleme dosyaları gerekir.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-3141",
+      "ad": "Coccinelle",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://coccinelle.gitlabpages.inria.fr/website/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C kodunda anlamsal yama (SmPL) diliyle desen arama ve toplu dönüşüm yapan araç; Linux çekirdeğinde API göçlerinde kullanılır.",
+      "sinirlar": "SmPL öğrenme eğrisi yüksek; C++ desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-010",
+        "N-K24-005",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-3142",
+      "ad": "scip-clang",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sourcegraph/scip-clang",
+      "olgunluk": "gelisen",
+      "ne_saglar": "C/C++ kod tabanları için SCIP biçiminde hassas kod indeksi (tanım/referans) üreten indeksleyici.",
+      "sinirlar": "Derleme veritabanı gerektirir; büyük projelerde bellek tüketimi yüksek.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K03-002",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3161",
+      "ad": "csharp-ls",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.nuget.org/packages/csharp-ls/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Roslyn tabanlı hafif C# LSP sunucusu; editör dışı ajan araçlarına tanım/referans/tanılama bilgisi sağlar.",
+      "sinirlar": "Topluluk projesi; büyük çözümlerde performans ve özellik kapsamı Microsoft'un sunucusundan geride.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3162",
+      "ad": "scip-dotnet",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sourcegraph/scip-dotnet",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Roslyn ile C# kod tabanları için SCIP hassas kod indeksi üreten indeksleyici; çapraz depo tanım/referans aramasını besler.",
+      "sinirlar": "Az yıldızlı, dar bakım ekibi; VB.NET kapsamı sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3171",
+      "ad": "go-arch-lint",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/fe3dback/go-arch-lint",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go projelerinde bileşenler arası izinli import ilişkilerini YAML'da tanımlayıp mimari ihlalleri CI'da yakalayan linter.",
+      "sinirlar": "Küçük topluluk; yalnız import düzeyinde bağımlılık.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-004",
+        "N-K03-008",
+        "N-K04-007",
+        "N-K35-001"
+      ]
+    },
+    {
+      "id": "AR-3172",
+      "ad": "gopls (ve yerleşik MCP sunucusu)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pkg.go.dev/golang.org/x/tools/gopls",
+      "olgunluk": "olgun",
+      "ne_saglar": "Resmî Go dil sunucusu; tanım/referans/çağrı hiyerarşisi ve tanılamayı LSP ile, çalışma alanı özetini ve arama araçlarını yerleşik MCP sunucusuyla ajanlara sunar.",
+      "sinirlar": "MCP özelliği görece yeni; büyük monorepolarda bellek tüketimi yüksek.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K03-003",
+        "N-K12-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3180",
+      "ad": "scip-go",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/scip-code/scip-go",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Go kod tabanları için SCIP hassas kod indeksi üreten indeksleyici; kod arama ve kod grafiği araçlarını besler.",
+      "sinirlar": "Depo yeni organizasyona taşındı; topluluk küçük.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3182",
+      "ad": "rust-analyzer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 veya MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://rust-analyzer.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust için resmî LSP derleyici ön ucu; tanım/referans, tip çıkarımı ve tanılamayı ajan ve editörlere sunar, SCIP indeksi de üretebilir.",
+      "sinirlar": "Büyük çalışma alanlarında bellek tüketimi yüksek; makro ağır kodda çözümleme eksik kalabilir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3206",
+      "ad": "Pyrefly",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://pyrefly.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust ile yazılmış hızlı Python tip denetleyicisi ve dil sunucusu; büyük kod tabanlarında artımlı tip kontrolü sağlar (Meta'nın Pyre'ın yerine geçen aracı).",
+      "sinirlar": "Genç araç; mypy/Pyright ile teşhis farkları olabilir. Eski Pyre deposu arşivlendi.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K05-012",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3207",
+      "ad": "ty",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.astral.sh/ty/",
+      "olgunluk": "erken",
+      "ne_saglar": "Astral'ın Rust ile yazdığı çok hızlı Python tip denetleyicisi ve dil sunucusu.",
+      "sinirlar": "Beta aşamasında (0.0.x); kurallar ve teşhisler değişebilir.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3208",
+      "ad": "basedpyright",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.basedpyright.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Pyright çatalı; ek tip katılığı kuralları, temel çizgi (baseline) dosyası ve Pylance'a özgü dil sunucusu özelliklerini açık kaynak olarak sunar.",
+      "sinirlar": "Topluluk çatalı; üst akış Pyright değişikliklerine bağımlı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3209",
+      "ad": "python-lsp-server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/python-lsp/python-lsp-server",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jedi tabanlı, eklentilerle genişletilebilir Python LSP sunucusu.",
+      "sinirlar": "Tip çıkarımı Pyright/Pyrefly kadar güçlü değil.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3232",
+      "ad": "Rector",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://getrector.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP kodunu kurallarla otomatik yeniden düzenleyen ve PHP/çerçeve sürüm yükseltmelerini (Symfony, Laravel, PHPUnit) deterministik yapan araç.",
+      "sinirlar": "Karmaşık dönüşümler yine test ve inceleme ister.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-001",
+        "N-K16-005",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-3237",
+      "ad": "Phpactor",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/phpactor/phpactor",
+      "olgunluk": "olgun",
+      "ne_saglar": "PHP için açık kaynak LSP sunucusu; tanım/referans, yeniden düzenleme ve tanılama sağlar.",
+      "sinirlar": "Ticari Intelephense'e göre bazı özellikler eksik.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3247",
+      "ad": "Sorbet",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://sorbet.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby için hızlı, kademeli benimsenebilen statik ve çalışma zamanı tip denetleyicisi.",
+      "sinirlar": "Tip imzaları (RBI) bakımı gerekir; metaprogramlama ağır kodda sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3251",
+      "ad": "Ruby LSP",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://shopify.github.io/ruby-lsp/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ruby için görüşlü LSP sunucusu; tanım/referans, tanılama ve Rails eklentisi sağlar.",
+      "sinirlar": "Tip bilgisi olmadan çıkarım sınırlı; Sorbet ile güçlenir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3252",
+      "ad": "scip-ruby",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/sourcegraph/scip-ruby",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sorbet tabanlı, Ruby kod tabanları için SCIP hassas kod indeksi üreten indeksleyici.",
+      "sinirlar": "Az bakımcı; Sorbet tiplerine bağlı hassasiyet.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3275",
+      "ad": "Turborepo",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://turborepo.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript monorepoları için görev grafiği, etkilenen paket filtreleme ve yerel/uzak önbellekleme sağlayan derleme sistemi.",
+      "sinirlar": "Uzak önbellek varsayılan olarak Vercel'e bağlı; kendi barındırma için API uyumlu sunucu gerekir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K06-003",
+        "N-K15-005",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-3277",
+      "ad": "Compodoc",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://compodoc.app",
+      "olgunluk": "olgun",
+      "ne_saglar": "Angular uygulamaları için modül/bileşen/servis dokümantasyonu, bağımlılık grafikleri ve doküman kapsamı raporu üreten araç.",
+      "sinirlar": "Yalnız Angular.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K07-001"
+      ]
+    },
+    {
+      "id": "AR-3297",
+      "ad": "jscodeshift",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://jscodeshift.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript kod tabanlarında sözdizimi ağacı üzerinde toplu dönüşüm (codemod) çalıştıran araç takımı.",
+      "sinirlar": "Dönüşüm yazımı AST bilgisi ister; tip bilgisi yok.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-001",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-3298",
+      "ad": "ts-morph",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://ts-morph.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript Compiler API'sini saran, tip bilgili statik analiz ve programatik kod değişikliği kütüphanesi; özel kod grafiği araçlarının yapı taşı.",
+      "sinirlar": "Büyük projelerde bellek tüketimi yüksek.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-3299",
+      "ad": "Codemod CLI",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://go.codemod.com/docs",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çok adımlı kod dönüşümlerini (ast-grep, jscodeshift vb. motorlarla) iskeletleyen, paylaşan ve çalıştıran codemod komut satırı aracı ve kayıt defteri.",
+      "sinirlar": "Kayıt/platform özellikleri SaaS; topluluk codemod'larının kalitesi değişken.",
+      "ihtiyaclar": [
+        "N-K16-005",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-3300",
+      "ad": "GritQL",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.grit.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod arama, lint ve dönüşüm için bildirimsel sorgu dili; desen tabanlı kurallarla yasak yapıları tespit edip toplu düzeltme uygular.",
+      "sinirlar": "Proje Biome organizasyonuna taşındı; uzun vadeli bakım modeli izlenmeli.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K03-010",
+        "N-K05-012",
+        "N-K24-005"
+      ]
+    },
+    {
+      "id": "AR-3301",
+      "ad": "typescript-language-server",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / MIT (dosya bazında)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.npmjs.com/package/typescript-language-server",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript'in tsserver'ını LSP'ye çeviren sunucu; editör dışı ajan araçlarına tanım/referans/tanılama sağlar.",
+      "sinirlar": "Resmî Microsoft ürünü değil; büyük monorepolarda bellek tüketimi yüksek.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3302",
+      "ad": "vtsls",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/yioneko/vtsls",
+      "olgunluk": "gelisen",
+      "ne_saglar": "VS Code'un TypeScript eklentisini LSP sunucusu olarak sarar; VS Code ile aynı TypeScript dil davranışını editör dışında sunar.",
+      "sinirlar": "Tek bakımcılı topluluk projesi.",
+      "ihtiyaclar": [
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3314",
+      "ad": "SchemaSpy",
+      "tur": "acik-kaynak",
+      "lisans": "LGPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://schemaspy.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veritabanı şemasından tablo, ilişki diyagramı ve anomali (eksik indeks, yetim tablo) raporlarını içeren HTML dokümantasyon üretir.",
+      "sinirlar": "Java ve JDBC sürücüsü gerektirir; son itme Mart 2026.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K07-001"
+      ]
+    },
+    {
+      "id": "AR-3330",
+      "ad": "terraform-ls",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/hashicorp/terraform-ls",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform için LSP sunucusu; modül/kaynak referansları, şema tabanlı doğrulama ve gezinme sağlar.",
+      "sinirlar": "OpenTofu'ya özgü sözdizimi farklarında eksik kalabilir.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3384",
+      "ad": "Nx MCP Server (Nx Console)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://nx.dev/docs/features/enhance-ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Nx çalışma alanının proje grafiğini, görev bağımlılıklarını, etkilenen projeleri ve CI hata bilgisini ajanlara sunan MCP sunucusu; deterministik bağımlılık grafiğinden etki analizi yapılmasını sağlar.",
+      "sinirlar": "Yalnız Nx kullanan (çoğunlukla JS/TS) monorepolarda anlamlı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K05-029",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3439",
+      "ad": "Neo4j MCP Servers (mcp-neo4j)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/neo4j-contrib/mcp-neo4j",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Cypher sorgu, bilgi grafiği belleği, veri modelleme ve Aura yönetimi için ayrı MCP sunucuları; ilişki haritası ve ajan belleğinin graf veritabanında tutulmasını sağlar.",
+      "sinirlar": "Neo4j Labs projesi (resmî destekli ürün değil).",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K12-003",
+        "N-K14-001",
+        "N-K14-006"
+      ]
+    },
+    {
+      "id": "AR-4002",
+      "ad": "pydeps",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://pydeps.readthedocs.io/en/latest/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python modül bağımlılık grafiğini bayt kodu analiziyle çıkarır; döngüleri gösterir, dış/iç modülleri filtreler, Graphviz veya JSON çıktısı üretir—CI'de her değişiklikten sonra harita yenilemeye uygundur.",
+      "sinirlar": "Yalnız Python; dinamik importları kaçırabilir.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K03-004"
+      ]
+    },
+    {
+      "id": "AR-4003",
+      "ad": "go-callvis",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/ondrajz/go-callvis",
+      "olgunluk": "olgun",
+      "ne_saglar": "Go programının çağrı grafiğini paket ve tip bazında gruplayıp Graphviz ile görselleştirir; etkileşimli web sunucu modu vardır.",
+      "sinirlar": "Görselleştirme odaklı; makine tüketimi için çıktı sınırlı; son commit Mart 2026.",
+      "ihtiyaclar": [
+        "N-K03-002"
+      ]
+    },
+    {
+      "id": "AR-4004",
+      "ad": "pyan (pyan3)",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Technologicat/pyan",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python için statik çağrı grafiği üreticisi; tanımlama ve kullanım ilişkilerini çıkarıp DOT/SVG/HTML olarak verir (Python 3.10–3.14).",
+      "sinirlar": "Statik analiz dinamik dağıtımı tam çözemez; GPL-2.0.",
+      "ihtiyaclar": [
+        "N-K03-002"
+      ]
+    },
+    {
+      "id": "AR-4005",
+      "ad": "jdeps",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0 (Classpath Exception)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jdeps.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "JDK ile gelen sınıf/paket/modül bağımlılık analizörü; eksik bağımlılıkları, JDK dahili API kullanımını ve modül sınırlarını raporlar, DOT çıktısı üretir—derleme sonrası bağımlılık zincirinin otomatik doğrulanmasına uygundur.",
+      "sinirlar": "Yalnız JVM bayt kodu; yansıma ile yüklenen bağımlılıkları görmez.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K03-004"
+      ]
+    },
+    {
+      "id": "AR-4006",
+      "ad": "pipdeptree",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/tox-dev/pipdeptree",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurulu Python paketlerinin bağımlılık ağacını gösterir; çakışan veya karşılanmayan sürüm gereksinimlerini ve döngüleri uyarır, `--warn fail` ile CI'de hata verir.",
+      "sinirlar": "Yalnız kurulu ortamı inceler; kaynak kod içi import bağımlılıklarını görmez.",
+      "ihtiyaclar": [
+        "N-K03-004"
+      ]
+    },
+    {
+      "id": "AR-4007",
+      "ad": "Apache Maven Enforcer Plugin",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://maven.apache.org/enforcer/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Maven derlemesinde kural zorlama: dependencyConvergence, requireUpperBoundDeps, bannedDependencies, requireReleaseDeps gibi kurallar ihlalde derlemeyi durdurur; aynı kurallar görev başında, geliştirme sırasında ve bitişte çalıştırılabilir.",
+      "sinirlar": "Yalnız Maven projeleri; çalışma zamanı bağımlılık kırılmasını değil derleme zamanı tutarlılığını denetler.",
+      "ihtiyaclar": [
+        "N-K03-004",
+        "N-K21-004"
+      ]
+    },
+    {
+      "id": "AR-4008",
+      "ad": "cargo-udeps",
+      "tur": "acik-kaynak",
+      "lisans": "MIT / Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/est31/cargo-udeps",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust projelerinde Cargo.toml'da bildirilip kullanılmayan bağımlılıkları derleme bilgisinden tespit eder.",
+      "sinirlar": "Nightly derleyici gerektirir; yalnız kullanılmayan bağımlılığa odaklanır.",
+      "ihtiyaclar": [
+        "N-K03-004"
+      ]
+    },
+    {
+      "id": "AR-4020",
+      "ad": "SDL-MCP (Symbol Delta Ledger)",
+      "tur": "acik-kaynak",
+      "lisans": "SDL-MCP Community License (iç kullanım ücretsiz, ticari dağıtım ücretli)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/GlitterKill/sdl-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Depoyu sembol grafiğine indeksleyip kodlama ajanına önce kompakt 'sembol kartları', gerektiğinde kaynak kod veren, politika merkezli bağlam bütçesi katmanı; MCP sunucusu olarak yerelde çalışır.",
+      "sinirlar": "OSI onaylı olmayan özel lisans; tek geliştirici; Node.js 24+ gerektirir.",
+      "ihtiyaclar": [
+        "N-K10-009"
+      ]
+    },
+    {
+      "id": "AR-4104",
+      "ad": "git-who",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sinclairtarget/git-who",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Dosya ağacı için 'git blame': dizin ve alt ağaç bazında kimin ne kadar ve ne zaman katkı yaptığını gösterir; alan deneyimi kanıtının bir girdisi.",
+      "sinirlar": "Commit/satır sayısı yetkinliğin kaba vekilidir; ajan katkısı ayrıştırılmazsa yanıltır.",
+      "ihtiyaclar": [
+        "N-K29-006"
+      ]
+    },
+    {
+      "id": "AR-4175",
+      "ad": "Git Truck",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://git-truck.github.io/git-truck/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Git deposunu yerelde görselleştirir: klasör ve dosya bazında kimin ne kadar değiştirdiği, sık değişen alanlar ve katkı dağılımı; tek kişiye bağımlı veya sahipsiz kalmış alanları bulmaya yardımcı olur.",
+      "sinirlar": "Kişi düzeyi görünüm üretir; yalnız sahiplik hijyeni amacıyla kullanılmalı, ekip eşlemesi yapmaz.",
+      "ihtiyaclar": [
+        "N-K31-001",
+        "N-K31-008"
+      ]
+    },
+    {
+      "id": "AR-4180",
+      "ad": "Sheriff",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/softarc-consulting/sheriff",
+      "olgunluk": "olgun",
+      "ne_saglar": "TypeScript projelerinde modül sınırlarını index.ts genel arayüzleriyle tanımlar, modüllere otomatik veya elle etiket vererek etiket tabanlı bağımlılık kurallarını ESLint üzerinden zorlar; ekip sahipliğine göre etiketleme ile ekip sınırı ihlali yakalanabilir.",
+      "sinirlar": "Yalnız TypeScript; ekip iletişim verisiyle karşılaştırma yapmaz. Yalnız TypeScript; depolar arası sınırları kapsamaz.",
+      "ihtiyaclar": [
+        "N-K31-003",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4276",
+      "ad": "Gable",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.gable.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Veri sözleşmelerini üretici kod tabanına taşır: kod düzeyinde veri akışı soy ağacıyla uygulama kodundaki değişikliklerin aşağı akış veri tüketicilerini kırıp kırmadığını çekme isteği aşamasında tespit eder.",
+      "sinirlar": "Ticari ve genç ürün; dil ve veri kaynağı kapsamı satıcı dokümanına bağlı.",
+      "ihtiyaclar": [
+        "N-K03-012",
+        "N-K33-011"
+      ]
+    },
+    {
+      "id": "AR-4285",
+      "ad": "openapi-changes",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pb33f/openapi-changes",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenAPI belgesinin iki sürümü ya da git geçmişi arasında kırıcı ve kırıcı olmayan değişiklikleri tespit edip konsol, HTML ve JSON rapor olarak sunar; CI'da kırıcı değişiklikte hattı durdurabilir.",
+      "sinirlar": "Yalnız OpenAPI; belgelenmemiş davranış değişikliklerini (sıralama, zamanlama) göremez.",
+      "ihtiyaclar": [
+        "N-K03-012"
+      ]
+    },
+    {
+      "id": "AR-4301",
+      "ad": "DryRun Security",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.dryrun.security/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çekme isteklerinde değişikliğin bağlamını analiz eden yapay zekâ tabanlı SAST ajanları; doğal dilde yazılan kod politikalarıyla (ör. yetkilendirme kontrolü, hassas veri kaydı) değişikliklerin güvenlik ilgisini ve risklerini işaretler.",
+      "sinirlar": "LLM tabanlı yorum deterministik değildir; kapı kararında deterministik kurallarla birlikte kullanılmalı, kod SaaS'a gider.",
+      "ihtiyaclar": [
+        "N-K34-002",
+        "N-K34-007"
+      ]
+    },
+    {
+      "id": "AR-4302",
+      "ad": "ZeroPath",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://zeropath.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ destekli statik analizle kimlik doğrulama atlatma, iş mantığı kusurları ve zafiyetli bağımlılıkları bulur; derlenen ve testleri geçen yama önerileriyle otomatik düzeltme çekme isteği üretir.",
+      "sinirlar": "Genç ticari ürün; bulgu kalitesi ve yanlış pozitif oranı kurum kod tabanında ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K34-003",
+        "N-K34-007",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-4304",
+      "ad": "Pixee",
+      "tur": "acik-cekirdek",
+      "lisans": "ticari (codemodder çerçevesi AGPL-3.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.pixee.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SAST ve SCA araçlarının bulgularını önceliklendirip otomatik düzeltme çekme istekleri üretir; açık kaynak codemodder çerçevesiyle aynı zafiyet kalıbının kod tabanında tekrarlı düzeltilmesine olanak tanır.",
+      "sinirlar": "Düzeltme kalitesi dil ve kurala göre değişir; varyant araması için ayrıca sorgu aracı gerekir.",
+      "ihtiyaclar": [
+        "N-K34-007",
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-4305",
+      "ad": "weggli",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/weggli-rs/weggli",
+      "olgunluk": "olgun",
+      "ne_saglar": "C ve C++ kod tabanlarında sözdizimi farkındalıklı kalıplarla hızlı semantik arama yapar; bulunan bir zafiyetin benzer varyantlarını büyük kod tabanlarında aramak için kullanılır.",
+      "sinirlar": "Yalnız C/C++; 2024'ten beri güncelleme az, veri akışı analizi yapmaz.",
+      "ihtiyaclar": [
+        "N-K34-008"
+      ]
+    },
+    {
+      "id": "AR-4330",
+      "ad": "cargo-modules",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/regexident/cargo-modules",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust crate'lerinin modül ağacını ve iç bağımlılıklarını görselleştirir, yetim dosyaları ve döngüsel bağımlılıkları (acyclic denetimi) raporlar; CI'da döngü yasağı kapısı olarak kullanılabilir.",
+      "sinirlar": "Yalnız Rust; kural dili yok, katman kuralları için ek betik gerekir.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002"
+      ]
+    },
+    {
+      "id": "AR-4331",
+      "ad": "ArchGuard",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/archguard/archguard",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod, veritabanı ve API düzeyinde mimari analiz yapan mimari yönetişim aracı: mimari uygunluk fonksiyonları ve kural denetimi, kod/test/SQL/API kokuları, hizmet haritası ve mimari metrikler sunar.",
+      "sinirlar": "Topluluk etkinliği azalmış; dağıtık mimari metrikleri tamamlanmamış.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-4333",
+      "ad": "CppDepend",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.cppdepend.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C, C++ (ve sitesine göre Java, Rust) kod tabanlarında bağımlılık grafiği ve matrisi, sorgu dili tabanlı özel kurallar, kod metrikleri, eğilim izleme ve teknik borç tahmini sunar; CI'da kural ihlaliyle kırılabilir.",
+      "sinirlar": "Ticari ve Windows ağırlıklı araç zinciri; lisans maliyeti.",
+      "ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-4337",
+      "ad": "leasot",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pgilad/leasot",
+      "olgunluk": "olgun",
+      "ne_saglar": "Birçok dilde TODO/FIXME ve özel etiketli yorumları ayrıştırıp JSON, Markdown veya tablo olarak raporlar; borç eğilimini zaman serisi olarak toplamak için girdi sağlar.",
+      "sinirlar": "Yalnız yorum tabanlı borcu görür.",
+      "ihtiyaclar": [
+        "N-K35-004"
+      ]
+    },
+    {
+      "id": "AR-4343",
+      "ad": "ld-find-code-refs (LaunchDarkly kod referansları)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://github.com/launchdarkly/ld-find-code-refs",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI'da kod tabanını tarayarak her özellik bayrağının hangi dosya ve satırlarda kullanıldığını LaunchDarkly'ye bildirir; bayrak referanslarının kaldırılmasını izleyerek terk edilmiş veya tamamen açılmış bayrakların temizliğini destekler.",
+      "sinirlar": "LaunchDarkly hesabı gerektirir; dinamik oluşturulan bayrak anahtarlarını kaçırabilir.",
+      "ihtiyaclar": [
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-4344",
+      "ad": "ts-prune",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/nadeesha/ts-prune",
+      "olgunluk": "olgun",
+      "ne_saglar": "tsconfig.json'u okuyarak TypeScript projesinde başka yerde kullanılmayan export'ları raporlar; dosyaları değiştirmeden ölü kod adaylarını CI'da listeler.",
+      "sinirlar": "Yalnız export düzeyi; bayrak arkasındaki ulaşılamayan dalları görmez.",
+      "ihtiyaclar": [
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-4345",
+      "ad": "deadcode (Go)",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://go.dev/blog/deadcode",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hızlı tip analiziyle (RTA) main paketlerinden hiç ulaşılamayan fonksiyonları raporlar; kaldırılan bayrakların ardında kalan ulaşılamayan kodun tespitine yardımcı olur.",
+      "sinirlar": "Yalnız Go ve statik ulaşılabilirlik; yansımayla çağrılan kodda yanlış pozitif olabilir.",
+      "ihtiyaclar": [
+        "N-K35-006"
+      ]
+    },
+    {
+      "id": "AR-4349",
+      "ad": "pyupgrade",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/asottile/pyupgrade",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python kodundaki eskimiş sözdizimi ve kalıpları hedef Python sürümüne göre otomatik yeniler; pre-commit kancası olarak ajan üretimi koddaki eski kalıpları da kapıda düzeltir.",
+      "sinirlar": "Yalnız dil sözdizimi; üçüncü taraf kütüphane API kaldırmalarını kapsamaz.",
+      "ihtiyaclar": [
+        "N-K35-007"
+      ]
+    },
+    {
+      "id": "AR-4350",
+      "ad": "typescript-eslint no-deprecated kuralı",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://typescript-eslint.io/rules/no-deprecated/",
+      "olgunluk": "olgun",
+      "ne_saglar": "@deprecated JSDoc etiketiyle işaretlenmiş API'lerin kullanımını tip bilgisiyle raporlayan lint kuralı; ajanların kullanımdan kaldırılmış arayüz önermesini kapıda deterministik yakalar.",
+      "sinirlar": "Yalnız @deprecated etiketi olan TS/JS API'leri; etiketlenmemiş kaldırmaları göremez.",
+      "ihtiyaclar": [
+        "N-K03-012",
+        "N-K35-007"
+      ]
+    },
+    {
+      "id": "AR-4404",
+      "ad": "Code Wiki",
+      "tur": "ticari-saas",
+      "lisans": "ticari (Google hizmeti)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://codewiki.google/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kod depoları için otomatik üretilen ve güncel tutulan dokümantasyon: kod tabanı içgörüleri, API referansları ve mimari genel bakış sunar.",
+      "sinirlar": "Üretilen dokümanın doğruluğu ayrıca doğrulanmalı; özel depo desteği, koşullar ve veri işleme doğrulanmadı.",
+      "ihtiyaclar": [
+        "N-K03-002",
+        "N-K07-001"
+      ]
+    }
+  ]
+}

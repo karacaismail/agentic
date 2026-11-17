@@ -1,0 +1,168 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-09",
+    "ad": "Kural ve politika motoru (kod olarak politika)",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-098",
+      "yetenek_sinifi": "Y-09",
+      "kalip": "Politika denetiminde açık kalma / kapalı kalma ikilemi",
+      "aciklama": "Politika motoru yol üzerinde bir karar noktasıdır: Kubernetes kabul webhook'larında failurePolicy 'Ignore' açık kalma (denetimsiz geçiş), 'Fail' ise motor erişilemezse tüm işlemlerin reddi demektir. Google Cloud'un 12 Haziran 2025 kesintisinde politika denetim ikilisi (Service Control) yeni politika kod yolundaki null işaretçi nedeniyle küresel olarak çöktü.",
+      "risk_turleri": [
+        "RT-13",
+        "RT-10"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/",
+        "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+      ],
+      "yasatacagi_sorunlar": [
+        "Politika motoru kesildiğinde açık kalma seçilirse ajanlar yasaklı eylemleri denetimsiz yapar; kapalı kalma seçilirse tüm ekiplerin hattı durur.",
+        "Yeni politika sürümündeki tek hata tüm ekiplere aynı anda yayılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-004",
+        "N-K18-007",
+        "N-K16-007",
+        "N-K11-002"
+      ],
+      "ornek_araclar": [
+        "Open Policy Agent",
+        "Kyverno",
+        "Cedar",
+        "OPA Gatekeeper"
+      ],
+      "erken_sinyal": "Politika değerlendirme gecikmesi ve hata oranında artış; failurePolicy ayarlarının envanterde 'Ignore' görünmesi.",
+      "azaltma": "Risk sınıfına göre açık/kapalı kalma kararı, politika değişikliklerinde kademeli yayın ve bayrak, politikaların birim testleri, motorun yedekli çalıştırılması."
+    },
+    {
+      "id": "RK-099",
+      "yetenek_sinifi": "Y-09",
+      "kalip": "Politika motorunda enjeksiyon ve yetki aşımı açıkları",
+      "aciklama": "Politika motorları da açık barındırır: OPA sunucusunda Data API yol enjeksiyonuyla Rego enjeksiyonu (CVE-2025-46569); Kyverno'da apiCall ile ad alanları arası yetki yükseltme (CVE-2026-22039, kritik) ve ServiceAccount token'ının dış sunuculara sızması (CVE-2026-41323).",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-6m8w-jc87-6cr7",
+        "https://github.com/advisories/GHSA-8p9x-46gm-qfx2",
+        "https://github.com/advisories/GHSA-f9g8-6ppc-pqq4"
+      ],
+      "yasatacagi_sorunlar": [
+        "Politikaları dış servis çağrısıyla zenginleştiren kurulumda politika motoru kimliği sızdırılarak küme yetkileri ele geçirilebilir.",
+        "Politika motorunun yaması gecikirse 'kod olarak politika' kapısı saldırganın kontrolüne geçer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-003",
+        "N-K18-007",
+        "N-K04-002"
+      ],
+      "ornek_araclar": [
+        "Open Policy Agent",
+        "Kyverno",
+        "OPA Gatekeeper"
+      ],
+      "erken_sinyal": "Politika motoru için yeni GHSA; politikalarda dış HTTP çağrısı kullanımı.",
+      "azaltma": "Politikalarda dış çağrıdan kaçınma, motor API'sini ağda kapatma, sürüm takibi ve hızlı yama, politika motorunun ayrı kimlikle çalışması."
+    },
+    {
+      "id": "RK-100",
+      "yetenek_sinifi": "Y-09",
+      "kalip": "Politika ekosisteminde sahiplik değişimi",
+      "aciklama": "OPA'nın kurucu bakımcıları ve Styra mühendislik ekibi Ağustos 2025'te Apple'a katıldı; Styra'nın ticari OPA ürünleri topluluğa açık kaynak olarak devredildi. Proje CNCF yönetiminde kalsa da ticari destek ve yol haritası belirsizleşti.",
+      "risk_turleri": [
+        "RT-06",
+        "RT-05"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.openpolicyagent.org/blog/note-from-teemu-tim-and-torin-to-the-open-policy-agent-community-2dbbfe494371"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ticari politika yönetim düzlemine (Styra DAS) bağlanmış bir kurulum, destek sözleşmesi olmadan kalır; kamu kurumunda destekli ürün şartı karşılanamayabilir.",
+        "Bakımcı değişimiyle sürüm hızı düşerse güvenlik yamaları gecikir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K16-005"
+      ],
+      "ornek_araclar": [
+        "Open Policy Agent",
+        "Styra DAS",
+        "Enterprise OPA",
+        "Regal"
+      ],
+      "erken_sinyal": "Proje commit ve sürüm sıklığında düşüş; ticari destek sağlayıcılarının değişmesi.",
+      "azaltma": "Politikaları standart Rego/Cedar olarak taşınabilir tutma, ticari yönetim düzlemine özel özelliklerden kaçınma, bileşen bakım durumu takibi."
+    },
+    {
+      "id": "RK-101",
+      "yetenek_sinifi": "Y-09",
+      "kalip": "Metin eşlemeli politikanın ajan tarafından dolanılması",
+      "aciklama": "Komut ve yol eşleştirmesine dayanan yasak listeleri sembolik bağlantı veya kabuk özellikleriyle dolanılabilir: Claude Code'da reddedilen yolların sembolik bağlantıyla okunması (CVE-2025-59829, CVE-2026-25724) ve ZSH clobber ile yol kısıtının aşılması (CVE-2026-24053) kayıtlıdır.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-66m2-gx93-v996",
+        "https://github.com/advisories/GHSA-4q92-rfm6-2cqx",
+        "https://github.com/advisories/GHSA-q728-gf8j-w49r"
+      ],
+      "yasatacagi_sorunlar": [
+        "Negatif kapsam ve yasaklı dizin kuralları dosya yolu metniyle yazılırsa ajan aynı dosyaya başka yoldan erişir; politika 'geçti' kaydı yanıltıcı olur.",
+        "Politikanın istemle değil kodla uygulanması amacı, eylem düzeyinde değil metin düzeyinde uygulandığı için boşa çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-003",
+        "N-K21-004",
+        "N-K18-007"
+      ],
+      "ornek_araclar": [
+        "Claude Code izin kuralları",
+        "Open Policy Agent",
+        "Cedar",
+        "Codex sandbox politikaları"
+      ],
+      "erken_sinyal": "Ajan izinde sembolik bağlantı oluşturma, yönlendirme operatörleri, alışılmadık kabuk sözdizimi.",
+      "azaltma": "Politikayı işletim sistemi yalıtımıyla (salt okunur bağlama, ayrı kullanıcı) uygulama, yolu çözümleyip kanonik biçimde değerlendirme, düzenli bypass testleri."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 63,
+    "dusuk": 135,
+    "yuksek": 6,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 20,
+    "RT-03": 18,
+    "RT-15": 16,
+    "RT-08": 15,
+    "RT-10": 14,
+    "RT-01": 14,
+    "RT-05": 12,
+    "RT-13": 11,
+    "RT-06": 9,
+    "RT-07": 9,
+    "RT-04": 6,
+    "RT-14": 6,
+    "RT-16": 6,
+    "RT-12": 5,
+    "RT-02": 3,
+    "RT-17": 2
+  }
+}

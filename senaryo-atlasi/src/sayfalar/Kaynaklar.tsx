@@ -1,0 +1,17 @@
+import {useEffect,useMemo,useState} from 'react';
+import {Accordion,Button,Code,Group,Paper,Select,Stack,Text,TextInput,Title} from '@mantine/core';
+import kanit from '../veri/kanitlar.json';
+import {indir,useSayfa,useListeOdak} from '../bilesenler/ortak';
+import {BelgeOkuyucu} from '../bilesenler/BelgeOkuyucu';
+export function Kaynaklar(){
+ const {param,git}=useSayfa();const [q,setQ]=useState(param.get('q')??'');const [tur,setTur]=useState<string|null>(null);
+ const files=useMemo(()=>kanit.dosyalar.filter(f=>(!tur||(tur==='md'?f.yol.endsWith('.md'):f.yol.endsWith('.json')))&&(f.yol+' '+f.icerik).toLocaleLowerCase('tr').includes(q.toLocaleLowerCase('tr'))),[q,tur]);
+ const f=files.find(f=>f.yol===param.get('dosya'))??files.find(f=>f.yol.endsWith('.md'))??files[0];
+ const dosya=param.get('dosya');
+ useEffect(()=>{if(dosya){setQ('');setTur(null);}},[dosya]);
+ useListeOdak(f?.yol);
+ return <Stack gap="lg"><div className="page-intro"><div><Text className="eyebrow">ARAŞTIRMA / BELGELER</Text><Title order={1}>Kaynak kütüphanesi</Title><Text c="dimmed">{kanit.dosyalar.length} gömülü belge. Başlıkta ve içerikte ara; raporları okuma görünümünde incele.</Text></div></div><div className="quiet-note">Eski raporlardaki hükümler, yazarının o tarihteki değerlendirmesidir. Senin kararın sayılmaz. Bağlı PDF’ler ve büyük katalogların tamamı bu HTML içinde değildir.</div>
+ <div className="research-layout"><aside className="research-index"><TextInput label="Belgelerde ara" placeholder="Belgede geçen bir ifade…" value={q} onChange={e=>setQ(e.target.value)}/><Select label="Belge türü" mt="sm" clearable placeholder="Tümü" data={[{value:'md',label:'Rapor · Markdown'},{value:'json',label:'Veri · JSON'}]} value={tur} onChange={setTur}/><Text size="xs" c="dimmed" mt="md" mb="xs" role="status">{files.length} belge</Text><div className="research-items">{files.map(x=><button className={`finding-index-item ${f?.yol===x.yol?'active':''}`} key={x.yol} aria-current={f?.yol===x.yol?'true':undefined} onClick={()=>git(`kaynaklar?dosya=${encodeURIComponent(x.yol)}`)}><span className="finding-index-meta">{x.yol.endsWith('.md')?'RAPOR':'JSON'}<span>{x.yol.includes('coding 2')?'Codex arşivi':'Araştırma arşivi'}</span></span><strong>{x.yol.split('/').pop()}</strong><small>{x.yol.split('/').slice(-3,-1).join(' / ')}</small></button>)}</div></aside>
+ {f?<article className="finding-detail document-detail" key={f.yol}><div className="finding-heading"><Group justify="space-between"><Text className="eyebrow">ÖZGÜN BELGE / SALT OKUNUR</Text><Button variant="default" size="xs" onClick={()=>indir(f.yol.split('/').pop()!,f.icerik,f.tur)}>Dosyayı indir</Button></Group><Title order={2}>{f.yol.split('/').pop()}</Title><Accordion variant="default"><Accordion.Item value="identity"><Accordion.Control>Dosyanın konumu ve kimliği</Accordion.Control><Accordion.Panel><div className="source-trace"><span>{f.yol}</span><code>SHA-256 {f.sha256}</code></div></Accordion.Panel></Accordion.Item></Accordion></div><BelgeOkuyucu icerik={f.icerik} yol={f.yol}/>{f.yol.endsWith('.md')&&<Accordion mt="xl"><Accordion.Item value="raw"><Accordion.Control>Markdown kaynağı</Accordion.Control><Accordion.Panel><Code block className="kod-blok">{f.icerik}</Code></Accordion.Panel></Accordion.Item></Accordion>}</article>:<Paper withBorder p="xl"><Text>Bu aramada belge bulunamadı.</Text><Button variant="light" mt="md" onClick={()=>{setQ('');setTur(null);}}>Filtreleri temizle</Button></Paper>}
+ </div></Stack>;
+}

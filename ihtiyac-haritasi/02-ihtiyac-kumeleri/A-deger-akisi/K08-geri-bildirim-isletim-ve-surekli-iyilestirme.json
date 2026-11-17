@@ -1,0 +1,252 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K08",
+    "ad": "Geri bildirim, işletim ve sürekli iyileştirme",
+    "alan": "A-deger-akisi",
+    "amac": "Yayından ve üretimden gelen her bulgunun doğru yere gitmesi ve sistemin kendini ölçülebilir biçimde iyileştirmesi.",
+    "kapsam": [
+      "aşamalı geri bildirim triyajı",
+      "kaçan hatadan regresyon testi",
+      "yetki ayrımı (test ekleme vs ürün kuralı)",
+      "kopya iş engeli",
+      "üretim etkisinin izlenmesi",
+      "olaylardan öğrenme"
+    ],
+    "kapsam_disi": [
+      "ajan platformunun kendi işletimi (K16)"
+    ],
+    "komsu_kumeler": [
+      "K05",
+      "K06",
+      "K11",
+      "K16",
+      "K23"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K08-001",
+      "baslik": "Aşamalı geri bildirim triyajı",
+      "ihtiyac": "Her ortam aşamasındaki bulgunun sınıflanması (kriter ihlali → hata; yeni istek → ürün sahibi; teknik → hata; kapsam değişimi → ürün sahibi; üretim olayı → olay sorumlusu) ve bağlantılı işe dönüşmesi.",
+      "cozulecek_sorun": "Sunum ve yayın geri bildirimi kayboluyor ya da yanlış yere gidiyor.",
+      "yetenek_siniflari": [
+        "Y-32",
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her geri bildirim sınıflanıp bir işe bağlanıyor.",
+        "Teknik kabulden sonra etkilenen taraflardan (kullanıcı, destek, bakım) gelen itiraz 'testler geçti' gerekçesiyle otomatik kapatılmıyor; itirazın hangi ihtiyaç veya kararı yeniden açtığı ve sonucu izlenebilir.",
+        "Reddedilen itirazın gerekçesi ve dayanılan kabul kaynağı bildirene görünür; itirazı değerlendirmek için ilgisiz gizli bilgi taraflara açılmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-095",
+          "S-374"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T08; ihtiyac-kumeleri/kumeler/05_sureklilik_ve_ogrenme/02_ekonomi_olcum_ve_ogrenme.json#I16-05",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+      ],
+      "ice_aktarilan": "E1 karşılaştırması: son 2 kabul ölçütü ve kanıt kaynaklarından S-095, S-374 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K08-002",
+      "baslik": "Kaçan hatadan regresyon testi",
+      "ihtiyac": "Her kaçan hatanın hatalı sürümde kırmızı, düzeltilmiş sürümde yeşil olan bir regresyon testine dönüşmesi; bağımsız doğrulamadan sonra sürümlü regresyon havuzuna eklenmesi; yeni işlerin güncel test sürümünü alması.",
+      "cozulecek_sorun": "Aynı hata tekrar ediyor.",
+      "yetenek_siniflari": [
+        "Y-22",
+        "Y-20"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kapanan hataların %100'ünde regresyon testi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-010"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K08-003",
+      "baslik": "Test ekleme ile ürün kuralı değiştirme yetkilerinin ayrılması",
+      "ihtiyac": "Test eklemenin ve ürün kuralını (kabul kriterini) değiştirmenin ayrı yetkiler olması; yeni ürün davranışının ayrı backlog işi olması; test iyileştirmenin ayrı bütçesi olması.",
+      "cozulecek_sorun": "Test yoluyla ürün kuralı değişiyor.",
+      "yetenek_siniflari": [
+        "Y-09",
+        "Y-25"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kabul kriteri değişikliği yalnız ürün sahibi rolüyle yapılabiliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-007"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K08-004",
+      "baslik": "Kopya iş engeli",
+      "ihtiyac": "Aynı hatadan kopya iş açılmaması; ilişkili bulguların tek işe bağlanması.",
+      "cozulecek_sorun": "Kopya işler kapasiteyi tüketiyor ve ölçümleri bozuyor.",
+      "yetenek_siniflari": [
+        "Y-45"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kopya hata oranı ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K08-005",
+      "baslik": "Ajan kaynaklı değişikliklerin üretim etkisinin izlenmesi",
+      "ihtiyac": "Ajan katkılı değişikliklerin değişiklik başarısızlık oranı, geri alma oranı, kurtarma süresi ve kullanıcıya kaçan kusur oranının insan değişiklikleriyle ayrı izlenebilmesi.",
+      "cozulecek_sorun": "Ajan etkisi üretimde görünmüyor; yapay zekâ benimsemesi kararlılıkla negatif ilişkili bulunmuş.",
+      "yetenek_siniflari": [
+        "Y-27",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Değişiklik kaynağı (ajan/insan/karma) üretim metriklerinde ayrıştırılabiliyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-101",
+          "S-102"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim"
+    },
+    {
+      "id": "N-K08-006",
+      "baslik": "Olaylardan kural ve yetenek paketine geri besleme",
+      "ihtiyac": "Olay ve kök neden analizlerinden çıkan derslerin kural, yetenek paketi veya test havuzuna kontrollü (değerlendirmeli ve onaylı) biçimde aktarılması.",
+      "cozulecek_sorun": "Aynı tür hata farklı ekiplerde tekrar ediyor; öğrenme ekip sınırında kalıyor.",
+      "yetenek_siniflari": [
+        "Y-40",
+        "Y-29"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Her kök neden analizinde kural/test/paket önerisi alanı var ve öneriler değerlendirmeden geçiyor.",
+        "Hata durumuna düşen her iş, hata sınıfı ve kanıtıyla iyileştirme adayı olarak kaydediliyor; iyileştirme ayrı bir iş olarak değerlendirilip onaylanıyor, çalışan görev kendi korumalarını veya kabul ölçütünü değiştirmiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-061",
+          "S-062",
+          "S-097"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K11-009"
+      ],
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B12",
+      "dogrulama": "kismen",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-097 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K08-007",
+      "baslik": "Olay sonrası öğrenmenin tasarıma dönmesi",
+      "ihtiyac": "Ürün olaylarının suçlamasız analizinden çıkan bulguların yalnız teste ve kurala değil tasarım artefaktlarına dönmesi: karar kaydı güncellemesi, yeni mimari uygunluk kuralı, hazırlık inceleme maddesi, tehdit modeli güncellemesi, SLO ve uyarı revizyonu, bağımlılık bozulmuş modu; eylem maddelerinin sahip, doğrulanabilir sonuç ve süreyle iş takip sistemine girmesi; kapanış oranının ve etkinliğinin (aynı olay sınıfının tekrarı) ölçülmesi; analiz şablonunda ajan katkısı alanı (hangi ajan değişikliği, hangi kapı veya korkuluk neden yakalamadı).",
+      "cozulecek_sorun": "Olaylardan öğrenme birçok kurumda gayriresmî ve dağınık kalıyor; eylem maddeleri kapanmıyor, aynı arıza tekrar ediyor. K08-006 dersleri yalnız kural, yetenek paketi ve test havuzuna aktarır; mimari ve işletim tasarımına dönüş tanımlı değil.",
+      "yetenek_siniflari": [
+        "Y-63",
+        "Y-37",
+        "Y-32",
+        "Y-40"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ekip sayısı arttıkça aynı ders farklı ekiplerde yeniden öğrenilir; ortak şablon ve ortak depo gerekir.",
+      "kabul_olcutleri": [
+        "Her önemli olay analizinde tasarım artefaktı etkisi alanı dolu (etki yoksa gerekçeli).",
+        "Öncelikli eylem maddelerinin hedef sürede kapanma oranı ve tekrar eden olay sınıfı oranı raporlanıyor.",
+        "Ajan katkılı olaylarda kaçırılan kapı/korkuluk kayıtlı ve ilgili kapıya iyileştirme işi açılmış."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-290",
+          "S-329",
+          "S-312",
+          "S-318"
+        ],
+        "not": "2025 vaka çalışması: yüksek güvenilirlik hedefli bir kurumda başarısızlıktan öğrenme gayriresmî, dağınık ve yaşam döngüsüne tutarsız bağlı; engeller zaman, personel değişimi, dağınık dokümantasyon. Örnek politika bütçenin %20'sini tüketen olaylar için öncelikli eylem maddesi ister. Benzer mevcut ihtiyaç: N-K08-006; fark: K08-006 geri beslemeyi kural/paket/test havuzuyla sınırlar; K08-002 regresyon testini ister. Tasarım artefaktlarına dönüş, eylem maddesi etkinliği ve ajan katkısı analizi yok."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K08-006"
+      ]
+    },
+    {
+      "id": "N-K08-008",
+      "baslik": "Ekipler arası olay örüntüsü analizi ve ortak ders havuzu",
+      "ihtiyac": "Ekiplerin olay ve ramak kala kayıtlarının ortak bir sınıflamayla (tetikleyici türü: kod, yapılandırma, veri, bağımlılık, kapasite; katkıda bulunan faktörler; değişiklik kaynağı) tutulması; ekipler arası tekrar eden örüntülerin periyodik analiz edilip ortak güvenilirlik standardına, hazırlık kontrol listesine ve kural katmanlarına aktarılması; dış kurumların yayımladığı olay raporlarından ders çıkarılması.",
+      "cozulecek_sorun": "Her ekip yalnız kendi olayından öğrenirse aynı hata sınıfı diğer ekiplerde tekrar eder; ajanlar aynı zayıf kalıbı ekipler arasında hızla çoğaltabilir.",
+      "yetenek_siniflari": [
+        "Y-63",
+        "Y-39"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "3+ ekipte örüntü ancak ortak sınıflamayla görünür; 10+ ekipte bu analiz olmadan standart güncellenemez.",
+      "kabul_olcutleri": [
+        "Olay kayıtlarının %100'ü ortak sınıflamada.",
+        "Her program artımında ekipler arası örüntü raporu inceleme ve uyarlama gündeminde.",
+        "Ramak kala kaydı oranı ve dış olay raporlarından çıkarılan eylem sayısı izleniyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-094",
+          "S-318",
+          "S-329"
+        ],
+        "not": "İşletim hazırlık incelemesi rehberi geçmiş olayları, ramak kalaları ve henüz yaşanmamış endişe verici arıza modlarını ayrı kategoriler olarak incelemeyi önerir. Benzer mevcut ihtiyaç: N-K24-009; fark: K24-009 ajan olaylarını ve değerlendirme gerilemelerini program gündemine alır; ürün olaylarının ortak sınıflaması ve ekipler arası örüntü analizi yok."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "dusuk",
+      "olcek_esigi": "3+ ekip",
+      "bagimliliklar": [
+        "N-K24-009"
+      ]
+    }
+  ]
+}

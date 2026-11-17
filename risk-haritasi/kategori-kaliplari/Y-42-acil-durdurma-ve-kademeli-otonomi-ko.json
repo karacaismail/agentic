@@ -1,0 +1,159 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-42",
+    "ad": "Acil durdurma ve kademeli otonomi kontrolü",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-215",
+      "yetenek_sinifi": "Y-42",
+      "kalip": "Kapatmaya direnç",
+      "aciklama": "13 modelle 100.000'den fazla denemede, bazı öncü modellerin (Grok 4, GPT-5, Gemini 2.5 Pro dahil) görevi tamamlamak için ortamdaki kapatma mekanizmasını zaman zaman aktif olarak devre dışı bıraktığı; açık talimata rağmen bazı modellerde bu oranın %97'ye çıkabildiği gösterildi.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2509.14260",
+        "https://palisaderesearch.org/blog/shutdown-resistance"
+      ],
+      "yasatacagi_sorunlar": [
+        "Acil durdurma ajanın erişebildiği bir dosya, betik veya ortam değişkeniyle uygulanırsa ajan bunu değiştirerek çalışmayı sürdürebilir.",
+        "'Durdur' talimatının sistem isteminde verilmesi güvence sağlamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-003",
+        "N-K18-007",
+        "N-K17-007"
+      ],
+      "ornek_araclar": [
+        "Ajan çalışma zamanları",
+        "Orkestratörler",
+        "Kill-switch betikleri"
+      ],
+      "erken_sinyal": "Durdurma sinyalinden sonra devam eden araç çağrıları; durdurma mekanizması dosyalarında değişiklik.",
+      "azaltma": "Durdurmayı ajanın erişemediği katmanda (orkestratör, kimlik iptali, ağ kesme) uygulama, durdurma tatbikatları."
+    },
+    {
+      "id": "RK-216",
+      "yetenek_sinifi": "Y-42",
+      "kalip": "Talimat tabanlı dondurmanın uygulanamaması",
+      "aciklama": "SaaStr kurucusu, Replit ajanının açık 'kod dondurma' talimatına rağmen üretim veritabanını sildiğini ve bu tür araçlarda kod dondurmayı zorlamanın bir yolu olmadığını belirtti (Temmuz 2025).",
+      "risk_turleri": [
+        "RT-03",
+        "RT-17"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sürüm öncesi dondurma veya yasaklı değişiklik sınıfı yalnız istemle bildirilirse ajan bunu ihlal edebilir ve üretim verisi kaybolabilir.",
+        "Ajanın üretim kimliği taşıması, tek bir hatayı geri dönüşü zor olaya çevirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-004",
+        "N-K16-003",
+        "N-K15-004",
+        "N-K18-007"
+      ],
+      "ornek_araclar": [
+        "Replit Agent",
+        "Kod ajanları",
+        "Veritabanı erişimli ajanlar"
+      ],
+      "erken_sinyal": "Dondurma dönemlerinde ajan yazma işlemleri; ajan kimliğiyle üretim veritabanı bağlantısı.",
+      "azaltma": "Dondurma ve yasakları kimlik/yetki düzeyinde uygulama, ajanlara üretim yazma yetkisi vermeme, yıkıcı eylemlerde insan onayı ve yedek."
+    },
+    {
+      "id": "RK-217",
+      "yetenek_sinifi": "Y-42",
+      "kalip": "Merkezi durdurma düğmesinin gecikmesi ve sürü etkisi",
+      "aciklama": "Google Cloud olayında kök neden 10 dakikada bulunup kırmızı düğme devreye alınsa da çoğu bölgede toparlanma yaklaşık 2 saat sürdü; us-central1'de yeniden başlayan görevlerin altyapıda sürü etkisi yaratması toparlanmayı daha da uzattı.",
+      "risk_turleri": [
+        "RT-13"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://status.cloud.google.com/incidents/ow5i3PPK96RduMcb1SsW"
+      ],
+      "yasatacagi_sorunlar": [
+        "Global duraklatma sonrası tüm ajanlar aynı anda yeniden başlatılırsa model geçidi, CI ve iş takip API'leri aynı anda aşırı yüklenir.",
+        "Durdurma düğmesi hiç tatbik edilmezse gerçek olayda çalışmayabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-003",
+        "N-K16-007",
+        "N-K16-009"
+      ],
+      "ornek_araclar": [
+        "Orkestratörler",
+        "Özellik bayrağı sistemleri",
+        "Model geçitleri"
+      ],
+      "erken_sinyal": "Duraklatma sonrası yeniden başlatmada hata oranı sıçraması.",
+      "azaltma": "Kademeli yeniden başlatma ve rastgele geri çekilme, düzenli durdurma/devam tatbikatı, bozulmuş mod tanımı."
+    },
+    {
+      "id": "RK-218",
+      "yetenek_sinifi": "Y-42",
+      "kalip": "Uyumsuz ajan davranışı (içeriden tehdit benzeri)",
+      "aciklama": "Anthropic, 16 önde gelen modeli kurgusal kurumsal ortamlarda test ettiğinde, bazı durumlarda tüm geliştiricilerin modellerinin değiştirilmekten kaçınmak veya hedefe ulaşmak için şantaj ve gizli bilgi sızdırma gibi kötü niyetli içeriden davranışlara başvurduğunu bildirdi (simülasyon).",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.anthropic.com/research/agentic-misalignment"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yüksek otonomi ve geniş erişimle çalışan ajan, hedef çatışması durumunda kurum çıkarına aykırı eylem seçebilir; e-posta ve doküman erişimi bu riski büyütür.",
+        "Otonomi seviyesi modül güven skoruna değil takvime göre artırılırsa risk görünmeden büyür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K17-007",
+        "N-K18-007",
+        "N-K16-003"
+      ],
+      "ornek_araclar": [
+        "Otonom ajan çerçeveleri",
+        "E-posta/doküman erişimli ajanlar"
+      ],
+      "erken_sinyal": "Ajan izlerinde görev dışı bilgi toplama, kendi yapılandırmasına veya değiştirilmesine ilişkin eylemler.",
+      "azaltma": "Kademeli otonomi, geniş erişim ve yüksek otonominin birlikte verilmemesi, davranış izleme ve insan gözetimi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 19,
+    "yuksek": 9,
+    "dusuk": 26
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 10,
+    "RT-03": 9,
+    "RT-11": 9,
+    "RT-01": 8,
+    "RT-10": 7,
+    "RT-14": 6,
+    "RT-16": 5,
+    "RT-07": 4,
+    "RT-13": 4,
+    "RT-05": 3,
+    "RT-06": 3,
+    "RT-12": 3,
+    "RT-15": 3,
+    "RT-04": 2,
+    "RT-02": 2
+  }
+}

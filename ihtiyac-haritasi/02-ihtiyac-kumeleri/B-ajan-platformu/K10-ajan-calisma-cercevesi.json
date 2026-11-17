@@ -1,0 +1,307 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K10",
+    "ad": "Ajan çalışma çerçevesi",
+    "alan": "B-ajan-platformu",
+    "amac": "Ajanların araç kullanarak iş yaptığı çalışma ortamının değiştirilebilir, programatik, sınırları belli ve denetlenebilir olması.",
+    "kapsam": [
+      "başsız/programatik çalışma",
+      "yapılandırılmış sonuç",
+      "oturum devamı",
+      "ortak adaptör sözleşmesi",
+      "rol tanımı kaydı",
+      "koşullu rol yükleme",
+      "alt ajanlar ve rol ayrımı",
+      "çalışma zamanı sınıfları",
+      "yetki ve izin arayüzü"
+    ],
+    "kapsam_disi": [
+      "yaşam döngüsü ve durum sahipliği (K13)",
+      "model seçimi (K09)"
+    ],
+    "komsu_kumeler": [
+      "K09",
+      "K11",
+      "K12",
+      "K13",
+      "K18"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K10-001",
+      "baslik": "Başsız ve programatik çalışma",
+      "ihtiyac": "Ajanın insan arayüzü olmadan programatik olarak çağrılabilmesi; şemalı sonuç ve olay akışı döndürmesi; oturumun kimlikle devam ettirilebilmesi.",
+      "cozulecek_sorun": "Geliştirme ortamına bağlı ajanlar otomatik hatta kullanılamıyor; sonuç makinece okunamıyor.",
+      "yetenek_siniflari": [
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ajan komut satırı/programatik arayüzle çağrılıyor ve şemalı sonuç dönüyor.",
+        "Kesintiden sonra aynı oturum sürdürülebiliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K10-002",
+      "baslik": "Değiştirilebilir çalışma zamanı ve ortak adaptör sözleşmesi",
+      "ihtiyac": "Ajan çalışma zamanının ortak bir girdi zarfı (görev, revizyon, kriter sürümü, bütçe, izinler) ve ortak bir sonuç şeması üzerinden bağlanması; çalışma zamanı değişince orkestrasyon ve kuralların değişmemesi.",
+      "cozulecek_sorun": "Alan hızla değişiyor; tek çalışma zamanına kilitlenme riski yüksek. Kaynaklarda varsayılan çalışma zamanı konusunda üç farklı cevap var.",
+      "yetenek_siniflari": [
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İki farklı çalışma zamanı aynı sözleşmeyle çalışıyor; süreç kodu değişmiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-062",
+          "S-006",
+          "S-122"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-039",
+        "R-020",
+        "U-040"
+      ]
+    },
+    {
+      "id": "N-K10-003",
+      "baslik": "Yapılandırılmış sonuç ve başarısızlık türleri",
+      "ihtiyac": "Ajan sonucunun tek bir 'hata' yerine türlere ayrılması: geçti, ürün hatası, spesifikasyon engeli, test engeli, altyapı engeli, bütçe bitti, test edilmedi, görev imkânsız/belirsiz.",
+      "cozulecek_sorun": "Tek hata durumunda bilgi kayboluyor; insan teşhise sıfırdan başlıyor.",
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her sonuç tanımlı bir türe ait; sınıfsız sonuç 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-062",
+          "S-006"
+        ],
+        "not": "Türev raporlar arasında durum listeleri farklı; birleşik liste gerekiyor."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-011",
+        "D-009",
+        "G-010"
+      ]
+    },
+    {
+      "id": "N-K10-004",
+      "baslik": "Kanonik ajan rol kaydı",
+      "ihtiyac": "Her rolün tek adı, sürümü, girdi/çıktı şeması, tetik koşulu, izinleri, model ve çalışma zamanı sınıfı ile bir insan sahibinin tek kayıtta tutulması.",
+      "cozulecek_sorun": "Rol adları ve kapsamları kaynaklar arasında tutarsız; bazı roller anılıyor ama tanımlı değil; bazı roller kartta var akışta yok.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Tüm roller kayıtta; kayıt dışı rol çağrılamaz.",
+        "Her rolün insan sahibi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-051",
+          "S-052",
+          "S-028",
+          "S-022"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-023",
+        "C-038",
+        "D-012",
+        "G-011"
+      ]
+    },
+    {
+      "id": "N-K10-005",
+      "baslik": "Koşullu rol yükleme",
+      "ihtiyac": "Uzman rollerin yalnız tetik koşulu sağlandığında çalışması; atlanan rolün 'atlandı: neden' kaydı üretmesi; uzmanlık sayısının servis sayısı olmaması.",
+      "cozulecek_sorun": "Her görevde tüm uzmanları çalıştırmak maliyeti ve hatayı artırıyor.",
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her rolün tetik koşulu yazılı; atlanan roller gerekçeyle kayıtlı.",
+        "Görev başına çalışan rol sayısı ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-018",
+          "S-031",
+          "S-034",
+          "S-045",
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "R-014"
+      ]
+    },
+    {
+      "id": "N-K10-006",
+      "baslik": "Koordinasyon topolojisinin bilinçli seçimi",
+      "ihtiyac": "Tek ajan, merkezi orkestratörlü çok ajan veya paralel ajan topolojilerinden hangisinin hangi iş türünde kullanılacağının ölçümle seçilmesi; uzman işlevlerin mümkün olduğunca ayrı ajan yerine yetenek paketi veya deterministik kontrol olarak uygulanması.",
+      "cozulecek_sorun": "Ajan sayısı arttıkça kalite düşebiliyor; bağımsız ajanlar hatayı büyütüyor. ~20 uzman rolün ayrı ajan olması gerekmiyor.",
+      "yetenek_siniflari": [
+        "Y-07",
+        "Y-29"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her iş türü için seçilen topoloji ve dayandığı ölçüm kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-113",
+          "S-114",
+          "S-061"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "A-016",
+        "C-038",
+        "D-012",
+        "G-005",
+        "R-014",
+        "U-036"
+      ]
+    },
+    {
+      "id": "N-K10-007",
+      "baslik": "Rol başına çalışma zamanı sınıfı",
+      "ihtiyac": "Rollerin 'kod üzerinde işlem yapan', 'yapılandırılmış araştırma/karar üreten' ve 'akış/durum yöneten' sınıflarına ayrılması ve her sınıfın gereksinimlerinin tanımlanması.",
+      "cozulecek_sorun": "Kaynaklardaki rol → çalışma zamanı eşlemeleri birbirini tutmuyor; aynı rol bir yerde kod işçisi, bir yerde karar motoru.",
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-06"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her rol için sınıf ve gerekçe yazılı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-021",
+          "S-022",
+          "S-020"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-019",
+        "D-012"
+      ]
+    },
+    {
+      "id": "N-K10-008",
+      "baslik": "Ajan izin ve onay arayüzü",
+      "ihtiyac": "Ajan çalışma ortamında hassas işlemlerin izin listesiyle kısıtlanması; her araç çağrısının kayıt altına alınması; izin dışı işlemin onaya düşmesi.",
+      "cozulecek_sorun": "Geniş erişimli ajan izin yüzeyini büyütüyor; yetkisiz işlem sonradan fark ediliyor.",
+      "yetenek_siniflari": [
+        "Y-05",
+        "Y-25",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İzinli komut/araç listesi var; izin dışı çağrı engelleniyor ve kaydediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-021",
+          "S-022",
+          "S-019",
+          "S-151"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K10-009",
+      "baslik": "Uzmana standart bağlam paketi",
+      "ihtiyac": "Uzman role görev, ilgili kod, etkin kurallar ve önceki bulgulardan oluşan standart bir bağlam paketinin verilmesi.",
+      "cozulecek_sorun": "Bağlam kaybı ve her rolde farklı bağlam, tutarsız bulgular üretiyor.",
+      "yetenek_siniflari": [
+        "Y-16",
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Bağlam paketi şemalı ve her çağrıda kayıtlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-018"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K10-010",
+      "baslik": "Açıklama isteme ve 'görev imkânsız' sinyali",
+      "ihtiyac": "Ajanın belirsizlikte açıklama isteyebileceği ve görevin imkânsız ya da çelişkili olduğunu bildirebileceği yapılandırılmış çıkışların bulunması; bu çıkışların ödüllendirilmesi (başarısızlık sayılmaması).",
+      "cozulecek_sorun": "Çıkış yolu olmayan ajan varsayım yapıyor ya da testi istismar ediyor.",
+      "yetenek_siniflari": [
+        "Y-05"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Ajan sonucu 'belirsiz' ve 'imkânsız' türlerini destekliyor ve bunlar insan kuyruğuna gidiyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-112",
+          "S-113"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta"
+    }
+  ]
+}

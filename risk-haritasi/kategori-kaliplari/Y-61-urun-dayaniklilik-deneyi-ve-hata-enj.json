@@ -1,0 +1,151 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-61",
+    "ad": "Ürün dayanıklılık deneyi ve hata enjeksiyonu",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-61",
+      "kalip": "Hata enjeksiyonu araçlarının ayrıcalıklı saldırı yüzeyi olması",
+      "aciklama": "JFrog'un 'Chaotic Deputy' bulguları (CVE-2025-59358, -59359, -59360, -59361), Chaos Mesh'in varsayılan kurulumunda kimlik doğrulamasız GraphQL hata ayıklama sunucusu ve komut enjeksiyonları nedeniyle küme içindeki bir saldırganın herhangi bir pod'da kod çalıştırıp kümeyi ele geçirebildiğini gösterdi; düzeltme 2.7.3 sürümünde geldi ve Azure Chaos Studio da etkilendi.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover/",
+        "https://github.com/advisories/GHSA-2gcv-3qpf-c5qr",
+        "https://github.com/advisories/GHSA-2gg8-85m5-8r2p"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kaos aracı üretim kümesine yüksek ayrıcalıkla kurulur; ele geçirilmiş tek bir pod tüm kümenin kontrolüne yükselir.",
+        "Ajanlara deney başlatma yetkisi verilirse istem enjeksiyonuyla 'deney' kılığında yıkıcı eylem tetiklenebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-009",
+        "N-K33-013"
+      ],
+      "ornek_araclar": [
+        "Chaos Mesh",
+        "LitmusChaos",
+        "Gremlin",
+        "AWS Fault Injection Service",
+        "Azure Chaos Studio",
+        "Steadybit"
+      ],
+      "erken_sinyal": "Kaos bileşenlerinde sürüm geriliği; kontrol düzlemi uç noktalarına ağdan erişilebilmesi.",
+      "azaltma": "Kaos kontrol düzlemini ağ düzeyinde yalıtmak ve kimlik doğrulamayı zorunlu kılmak; bileşenleri yalnız deney penceresinde kurulu tutmak; ajanların deney başlatmasını insan onayına bağlamak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "GHSA kayıtları CVE-2025-59361 (kritik) ve CVE-2025-59358 (yüksek) için düzeltmenin 2.7.3 olduğunu gösteriyor. JFrog 'Chaotic Deputy' yazısı dört CVE'yi, kümede kod çalıştırmayı ve Azure Chaos Studio'nun etkilendiğini doğruluyor.",
+        "kaynak": [
+          "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover/",
+          "https://github.com/advisories/GHSA-2gcv-3qpf-c5qr",
+          "https://github.com/advisories/GHSA-2gg8-85m5-8r2p"
+        ]
+      },
+      "id": "RK-044"
+    },
+    {
+      "yetenek_sinifi": "Y-61",
+      "kalip": "Deneyin güvenlik kilidinin kendisinin arızalı olmasıyla gerçek kesinti",
+      "aciklama": "Meta'nın Ekim 2021 kesintisinde omurga kapasitesini ölçmek için verilen rutin bakım komutu tüm omurga bağlantılarını kesti; bu tür komutları denetleyip durdurması gereken denetim aracındaki bir hata komutu durduramadı ve iç araçlar da aynı arızadan etkilendi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-13"
+      ],
+      "siddet": "kritik",
+      "olasilik": "dusuk",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Oyun günü veya kaos deneyinin durdurma koşulu (alarm, bütçe eşiği) hatalıysa deney planlanan etki alanının dışına taşar ve gerçek müşteri kesintisine döner.",
+        "Kurtarma araçları deneyin etkilediği altyapıya bağımlıysa geri dönüş gecikir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-009",
+        "N-K33-007"
+      ],
+      "ornek_araclar": [
+        "AWS Fault Injection Service",
+        "Gremlin",
+        "Chaos Mesh"
+      ],
+      "erken_sinyal": "Durdurma koşullarının hiç tetiklenmemiş veya test edilmemiş olması; deney kapsamının etiketle değil elle belirlenmesi.",
+      "azaltma": "Durdurma koşulunu deneyden önce ayrıca test etmek; küçük etki alanıyla başlayıp kademeli büyütmek; kurtarma yolunu deneyden bağımsız altyapıda tutmak.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Meta yazısı, kapasite ölçümü için verilen komutun tüm omurga bağlantılarını kestiğini ve denetim aracındaki hatanın komutu durduramadığını açıkça yazıyor. DNS kaybı iç araçları da bozdu.",
+        "kaynak": [
+          "https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/"
+        ]
+      },
+      "id": "RK-045"
+    },
+    {
+      "yetenek_sinifi": "Y-61",
+      "kalip": "Hiç denenmemiş yedek ve geri yükleme",
+      "aciklama": "GitLab'ın 31 Ocak 2017 olayında üretim veritabanı yanlışlıkla silindi; kurulu beş yedekleme ve çoğaltma yönteminin hiçbiri güvenilir çalışmıyordu ya da hiç kurulmamıştı ve yaklaşık altı saatlik veri kaybedildi.",
+      "risk_turleri": [
+        "RT-13"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların veri onarımı veya şema göçü sırasında yol açacağı veri kaybında RPO/RTO hedefleri kâğıt üzerinde kalır.",
+        "Yedekleme işleri sürüm uyumsuzluğu gibi nedenlerle sessizce başarısız olur ve kimse fark etmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-010",
+        "N-K33-012",
+        "N-K06-009"
+      ],
+      "ornek_araclar": [
+        "Velero",
+        "pgBackRest",
+        "AWS Backup"
+      ],
+      "erken_sinyal": "Son başarılı geri yükleme tatbikatının tarihi; uyarı üretmeden başarısız olan yedek işleri.",
+      "azaltma": "Düzenli otomatik geri yükleme testi; RPO/RTO hedeflerini tatbikatla doğrulamak; yedek işlerini ayrıca izlemek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Postmortem 31 Ocak 2017 olayında pg_dump yedeklerinin boş çıktığını ve 6 saatlik anlık görüntüden kurtarıldığını anlatıyor. 'Beş yöntemden hiçbiri çalışmıyordu' ifadesi GitLab'ın 1 Şubat 2017 tarihli canlı olay kaydından geliyor.",
+        "kaynak": [
+          "https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/",
+          "https://about.gitlab.com/blog/gitlab-dot-com-database-incident"
+        ]
+      },
+      "id": "RK-046"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 8,
+    "dusuk": 10,
+    "yuksek": 3
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 5,
+    "RT-08": 5,
+    "RT-14": 4,
+    "RT-13": 4,
+    "RT-11": 3,
+    "RT-05": 2,
+    "RT-16": 2,
+    "RT-15": 2,
+    "RT-01": 1,
+    "RT-10": 1,
+    "RT-04": 1,
+    "RT-07": 1
+  }
+}

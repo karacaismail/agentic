@@ -1,0 +1,345 @@
+{
+  "tarih": "2026-09-27",
+  "is_akisi_senaryolari": 19,
+  "birim_testleri": 17,
+  "entegrasyon_testleri_gercek_docker_git": 5,
+  "toplam_gecen": 41,
+  "uctan_uca": {
+    "komut": "agentic-fabrika/e2e/calistir.sh",
+    "sonuc": "UÇTAN UCA BAŞARILI",
+    "kapsam": "imzalı Plane webhook → Temporal GorevAkisi → 4 rol sandbox'ı + RED/GREEN kapıları → tek commit (karacaismail) → PR → CI → birleştirme → alpha /_surum → Human Test → akış gözcüsü görevi görüyor → Done → tamam",
+    "sahte_olanlar": [
+      "Plane API",
+      "GitHub API",
+      "model (betikli sahte ajan)"
+    ]
+  },
+  "yapilmayan": [
+    "gerçek modelle koşu (API anahtarı gerekli)",
+    "gerçek Plane/GitHub ile koşu",
+    "yük testi (12 eşzamanlı görev)"
+  ],
+  "test_envanteri_duzeltmesi": {
+    "tarih": "2026-09-27",
+    "not": "Yukarıdaki 19/17/5/41 sayıları daha önceki bir koşuya aittir. agentic-fabrika/tests altında bugün 61 test fonksiyonu tanımlı; README 57 diyor. Bu envanter salt okunarak sayıldı, testler bu inceleme sırasında çalıştırılmadı.",
+    "dosya_basina": {
+      "test_akis.py": 30,
+      "test_entegrasyon.py": 9,
+      "test_giris.py": 4,
+      "test_havuz_kaizen.py": 5,
+      "test_saf.py": 11,
+      "test_yeniden_oynatma.py": 2
+    },
+    "toplam_tanimli": 61,
+    "gecen_dogrulanmis": null,
+    "kaynak": "E4 incelemesi (arastirma/E4-codex-mimari.json)"
+  },
+  "kabul_deneyleri_onerilen": [
+    {
+      "id": "M-D01",
+      "ad": "Koşu sırasında girdi değişimi",
+      "olcut": "Form özeti değişirse yeni nesil açılır; önceki kanıt yeni girdi için geçerli sayılmaz.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D02",
+      "ad": "Etki sonrası, makbuz öncesi işçi kaybı",
+      "olcut": "Push/PR/dağıtım gönderildikten sonra işçi ölür; yeniden başlatmada ikinci etki oluşmaz, makbuz dış gerçeklikten uzlaştırılır.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "beklenen SHA ile birleştirme; PR açma ve dağıtım için makbuz yok",
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json; agentic-sistem/uygulama/evidence/qualification.json",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D03",
+      "ad": "İptal ve geç alt sonuç",
+      "olcut": "İptalden sonra yeni yetki yok; geç sonuç yeni nesli ezmez; yolda olan dış makbuz korunur.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "insan sinyali her aşamada; birleştirmeden önce Plane durumu yeniden okunur",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT14)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D04",
+      "ad": "Eşzamanlı iki dağıtıcı",
+      "olcut": "Aynı olay iki kez ve sırasız gelir; tek etkin koşu, tek yan etki; yoklama kaçan olayı kurtarır.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "gorev-<id> iş akışı kimliği + USE_EXISTING + uzlaştırıcı",
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D05",
+      "ad": "Exit 137 ile OOM ayrımı",
+      "olcut": "Elle SIGKILL edilen iş 137 döner; oom_kill artmadıysa OOM diye etiketlenmez.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": "siniflandir() kod==137'yi tek başına KaynakYetersiz sayıyor (tasarım gereği bu deney bugün başarısız olur)",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT01)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D06",
+      "ad": "memory.high/PSI baskısı",
+      "olcut": "OOM olmadan kaynak beklemesi teşhis edilir; sınırsız model yeniden denemesi yerine kabul/eşzamanlılık azaltma önerilir.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT04)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D07",
+      "ad": "Yanlış bellek çözümü",
+      "olcut": "429/retry-after ya da kilit beklemesinde bellek yükseltme veya yeni alt ajan seçilmez.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "GECICI sınıfı sessiz yeniden deneme",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT05)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D08",
+      "ad": "Anlamsal ilerleme yok",
+      "olcut": "Bol log/token/nabız üreten aynı hata döngüsü sınırlı toparlanmaya gider; sahte ilerleme süreyi uzatamaz.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "aynı hata ikinci kez → çözücü; tur sayaçları",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT12)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D09",
+      "ad": "Meşru uzun sessizlik",
+      "olcut": "Uzun ama ilerleyen derleme/test, aşama son tarihi ve kaynak kanıtıyla yanlışlıkla öldürülmez.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "15 sn nabız + adım zaman aşımı",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT13)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D10",
+      "ad": "Telemetri kaybı",
+      "olcut": "Toplayıcı erişemiyorsa durum unknown/telemetry_missing olur; sağlıklı ya da bitti sayılmaz.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT16)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D11",
+      "ad": "Temizlik ve tekrar",
+      "olcut": "Art arda denemelerde sahipsiz alt süreç/port/geçici DB/çalışma alanı/log büyümesi yok; saklanacak kanıt korunur.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "test_temizlik_yalniz_eski_kosulari_siler; açılışta sahipsiz konteyner temizliği",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT17)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D12",
+      "ad": "Kurtarma sonrası hedef korunumu",
+      "olcut": "RAM yükseltme, yeni bağlam veya taşıma aynı tanım/girdi/taban altında sonuç verir; hedefi küçültüp başarı yazamaz.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "korunan testler ve KT eşleşmesi",
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT18)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D13",
+      "ad": "İş akışı kod hatası döngüsü dıştan görülür",
+      "olcut": "İş akışı kodunda yakalanmayan hata (ör. determinizm) Workflow Task yeniden denemesine düşer; iş akışı dışındaki gözlemci WORKFLOW_TASK_FAILED'i görür ve alarm/sonlandırma üretir.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "iş akışı içi except → platform eskalasyonu; metrik + gozcu sorgusu; alarm kuralı kurulmadı (AK-57)",
+      "codex_kaynagi": "agentic-sistem/deneyler/engine-stall-probe/evidence.json",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D14",
+      "ad": "İnsan tam SHA'yı inceler",
+      "olcut": "İnsan önizlemeyi açtığında sonraki görevin ezdiği sürümü değil rapordaki commit/artefaktı değerlendirdiğini doğrulayabilir.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "/_surum 'commit'i içeriyor mu' denetimi; görev başına önizleme S2'de",
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json (C15)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D15",
+      "ad": "Yedekten dönüş ve tek koşu devamı",
+      "olcut": "Yalnız yedeğin varlığı değil; dönüş sonrası defter, Temporal, Plane ve artefakt uyumu ve dış etkiyle uzlaşmış tek koşu devamı kanıtlanır.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "betikler/yedek.sh + aylık tatbikat önerisi; tatbikat yapılmadı",
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json (C19)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D16",
+      "ad": "Yetenek geri çekme",
+      "olcut": "Geri çekilen katalog öğesi kuyruktaki, çalışan, devredilen ve yedekten dönen işlerde kullanılamaz.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/yonergeler/REGISTRY-POLICY.md",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D17",
+      "ad": "Koşu başında katalog sabit",
+      "olcut": "Paket güncellemesi çalışan koşunun yetkisini veya kabul şartını değiştirmez; çelişen .md kuralı güvenli tarafta başarısız olur.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "sha256 sabitleme ve havuz doğrula",
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json (C09)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D18",
+      "ad": "Bölme kazancı ölçümü",
+      "olcut": "Aynı tanım için seri, sıralı parçalı, paralel-2 ve ölçülmüş üst sınır: kabul edilen çıktı/saat, toplam maliyet, tepe kaynak ve kusur karşılaştırılır (M-K11'in geri dönüş ölçütü).",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/10_tikaniklik_ve_toparlanma/05_kabul_kanitlari.json (RT11)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D19",
+      "ad": "Kapasite ölçümü",
+      "olcut": "Ölçülmüş kabul edilen çıktı/gün ve kuyruk sonu gecikmesi önce/sonra; 12 ekibin 12 eşzamanlı ağır derleme olmadığı görünür.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": "KAPASITE.md ~12 görev tahmini ölçülmedi",
+      "codex_kaynagi": "agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json (C22)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D20",
+      "ad": "Açık işte motor değişimi",
+      "olcut": "Dış işlem gönderilmiş ama cevabı kaybolmuş denemede motor geçişi: eski ve yeni motor çift işlem üretemez; belirsizlik çözülmeden bitti denmez.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/13_evrilebilirlik/03_kabul_ve_sinirlar.json (ET02)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D21",
+      "ad": "Yanlış oracle düzeltmesi",
+      "olcut": "Yanlışlığı kanıtlanmış kabul referansı yeni sürümle değişir; gerekçe kayıtlı, ilgili eski kanıtlar yeniden değerlendirilir; ajan hedefi gizlice gevşetemez.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/13_evrilebilirlik/03_kabul_ve_sinirlar.json (ET08)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D22",
+      "ad": "Tedarikçi olmadan devam",
+      "olcut": "Bir bağımlılığın erişimi test ortamında kesilir; dışa aktarma ve alternatif işletim ya da kontrollü eksik çıktı mümkündür.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": null,
+      "codex_kaynagi": "agentic-sistem/data/13_evrilebilirlik/03_kabul_ve_sinirlar.json (ET09)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D23",
+      "ad": "Kurulu Plane ile webhook sözleşme testi",
+      "olcut": "Kurulu sürümün gövde biçimi (v1: event/action/activity; v2: version/event_id/workitem.*), X-Plane-Signature ham gövde HMAC-SHA256, durum UUID'si ve sayfalama gerçek Plane'de sınanır; desteklenmeyen biçim sessizce yok sayılmaz, görünür hata olur.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "v1 ayrıştırıcı + imza doğrulama birim testleri; gerçek Plane ile sınanmadı (AK-25)",
+      "codex_kaynagi": "agentic-sistem/uygulama/deploy/UBUNTU-RUNBOOK.md madde 4; agentic-sistem/uygulama/tests/test_contracts.py (test_plane_signature_uses_raw_body_and_stable_event)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D24",
+      "ad": "Webhook devre dışı kalmasının fark edilmesi",
+      "olcut": "Plane 5 ağ başarısızlığından sonra webhook'u is_active=false yapar; fabrika bunu (uzlaştırıcıyla yakalanan ama webhook'la gelmeyen olay oranı ya da webhook durumu okuması) alarm olarak görür.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": "uzlaştırıcı 5 dk'da bir kaçanları toplar; devre dışı kalma alarmı yok",
+      "codex_kaynagi": "(Codex'te yok; Plane kaynağından: makeplane/plane apps/api/plane/bgtasks/webhook_task.py)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D25",
+      "ad": "Büyük istem",
+      "olcut": "128 KiB'tan büyük istem E2BIG ile sessizce kaybolmaz; stdin/dosya kanalıyla iletilir ya da tipli hata olur.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": "claude -p \"$(cat istem)\" tek argv argümanı",
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/adapters.py (stdin JSON, 1 MB sınır)",
+      "dogrulama": "dogrulandi"
+    },
+    {
+      "id": "M-D26",
+      "ad": "Yetkisiz aktör",
+      "olcut": "Yetkili listede olmayan kullanıcının In Progress'e taşıdığı iş koşu başlatmaz; olay kayda geçer.",
+      "durum": "calistirilmadi",
+      "bizde": "yok",
+      "bizdeki_karsilik": "katılım yalnız 'ajan' etiketiyle; aktör adı kaydediliyor, yetki denetimi yok",
+      "codex_kaynagi": "agentic-sistem/uygulama/examples/project-mapping.json (authorized_actor_ids); agentic-sistem/data/09_dogrulama/01_kabul_test_katalogu.json",
+      "dogrulama": "kismen"
+    },
+    {
+      "id": "M-D27",
+      "ad": "Yeni commit kimliği ve iz denetimi",
+      "olcut": "Yayın geçidi her yeni commit'te yazar ve committer'ın kişisel kimlik olduğunu, Co-Authored-By/generated-with/oturum izi olmadığını ve korunan yollara dokunulmadığını doğrular; ihlalde yayın yok.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "kimlik yapılandırmadan, ajan commit atamaz; ayrı denetim yok",
+      "codex_kaynagi": "agentic-sistem/uygulama/tests/test_contracts.py (test_publication_policy_rejects_protected_paths_identity_force_and_prod)",
+      "dogrulama": "kismen"
+    },
+    {
+      "id": "M-D28",
+      "ad": "Çökme sonrası model çağrısı tekrarı",
+      "olcut": "Model çağrısı sırasında işçi ölür; faaliyet yeniden denemesi çağrıyı kör tekrarlamaz ya da tekrarı kök çağrı/maliyet bütçesine sayar; kök limit yeni nesilde artmaz.",
+      "durum": "calistirilmadi",
+      "bizde": "kismen",
+      "bizdeki_karsilik": "çağrı öncesi tahmini maliyet denetimi ve görev defteri toplam tavanı",
+      "codex_kaynagi": "agentic-sistem/uygulama/agentic_factory/ledger.py (reserve_call)",
+      "dogrulama": "kismen"
+    }
+  ],
+  "codex_deney_kanitlari": [
+    {
+      "ad": "Codex yerel Temporal pilotu",
+      "gosterdigi": "12 birim test + gerçek Temporal dev sunucusunda 9 senaryo: sınırlı onarım ve yeniden oynatma, tekrar kabulün tamamlanmış iş akışını yeniden koşmaması, sonsuz onarım olmaması, etki sonrası çökmede çift yazım olmaması, belirsiz etkinin kör denenmemesi, iptal öncesi/sonrası etki davranışı, işçi kapatma+yeni işçiyle devam, kabul sonrası süreç kaybından toparlanma.",
+      "gostermedigi": "Model, GitHub yazımı ve alpha dağıtımı fikstür (demo=true); sunucu/DB çökmesi, yedekten dönüş, Postgres defteri yok.",
+      "codex_kaynagi": "agentic-sistem/uygulama/evidence/qualification.json; agentic-sistem/uygulama/status.json",
+      "dogrulama": "kismen",
+      "dogrulama_notu": "Kanıt dosyası okundu; testler yeniden çalıştırılmadı (Codex dizini salt okunur)."
+    },
+    {
+      "ad": "İlerleme gözetimi politika deneyi",
+      "gosterdigi": "30 sentetik, deterministik politika testi geçti: nabız/ilerleme ayrımı, kök bütçe paylaşımı, nesil/deneme çiti, exit 137 ≠ OOM, belirsiz etki yeniden denemeyi engeller, kuyruk açlığı sınıflaması, uzun meşru derleme penceresi.",
+      "gostermedigi": "Motor, model, alt süreç, gerçek OOM yok; politika hiçbir komut icra etmez; süre/bellek değerleri test sabitidir.",
+      "codex_kaynagi": "agentic-sistem/deneyler/progress-supervisor/evidence.json; agentic-sistem/deneyler/progress-supervisor/status.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "evidence.json'daki policy.py ve test_policy.py sha256 özetleri dosyalarla eşleşti; test_policy.py'de 30 test fonksiyonu var."
+    },
+    {
+      "ad": "Motor takılma sondası",
+      "gosterdigi": "İş akışı kodunda enjekte edilmiş ValueError → WORKFLOW_TASK_FAILED, iş akışı RUNNING kaldı; gözlemci 0,417 sn'de gördü ve TERMINATED yaptı.",
+      "gostermedigi": "Gerçek ajan takılması, üretim gözlemci yalıtımı (aynı Python sürecinde async görev), dış etkinin güvenli iptali, motor karşılaştırması, eski Kestra kök nedeni.",
+      "codex_kaynagi": "agentic-sistem/deneyler/engine-stall-probe/evidence.json; history-before-stop.json; history-after-stop.json",
+      "dogrulama": "dogrulandi",
+      "dogrulama_notu": "Geçmiş dosyalarındaki olay türü sayıları evidence.json ile aynı; davranış Temporal Python hata yönetimi belgesiyle tutarlı."
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-44",
+    "ad": "Gereksinim ve iş kalemi kalite analizi (kural tabanlı + dil modeli, iki kapılı)",
+    "grup": "Gereksinim ve backlog zekâsı"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-222",
+      "yetenek_sinifi": "Y-44",
+      "kalip": "LLM'lerin belirsizliği modelleyememesi",
+      "aciklama": "AmbiEnt kıyaslaması, belirsizliği tanıma ve olası anlamları ayırmanın dil modelleri için çok zor olduğunu; GPT-4'ün ürettiği ayrıştırmaların insan değerlendirmesinde yalnız %32 oranında doğru bulunduğunu gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2304.14399"
+      ],
+      "yasatacagi_sorunlar": [
+        "İki kapılı kalite analizinde LLM kapısı belirsiz kabul kriterlerini 'net' olarak işaretler; belirsizlik koda ve yeniden işe dönüşür.",
+        "Ajanın belirsizliği kendi yorumuyla kapatması, açık sorunun sahibine gitmesini engeller."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-006",
+        "N-K01-007",
+        "N-K20-009"
+      ],
+      "ornek_araclar": [
+        "LLM tabanlı gereksinim analizörleri",
+        "Atlassian Rovo",
+        "Copilot for Jira benzerleri"
+      ],
+      "erken_sinyal": "Kalite kapısından geçen iş kalemlerinde sonradan açılan açıklama sorusu sayısı.",
+      "azaltma": "Kural tabanlı kapıyı önce çalıştırma, LLM'den tek yorum yerine olası yorumların listesini isteme, belirsizlikte insan sahibine yönlendirme."
+    },
+    {
+      "id": "RK-223",
+      "yetenek_sinifi": "Y-44",
+      "kalip": "Kural tabanlı gereksinim kokusu tespitinin dil bağımlılığı",
+      "aciklama": "Gereksinim kokusu (belirsiz sıfat, zayıf fiil, edilgen yapı) tespitine dair çalışmalar sözcük listeleri ve dile özgü dilbilgisi analizine dayanır; bu araçlar ağırlıklı olarak İngilizce ve Almanca için geliştirilmiştir. Türkçe eklemeli yapı için hazır ve doğrulanmış bir araç bulunamadı.",
+      "risk_turleri": [
+        "RT-15",
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://arxiv.org/abs/1611.08847"
+      ],
+      "yasatacagi_sorunlar": [
+        "Türkçe iş kalemlerinde kural tabanlı kapı ya çok yanlış pozitif üretir ya da hiçbir şey yakalamaz; iki kapılı modelin deterministik ayağı zayıf kalır.",
+        "İngilizce ve Türkçe karışık kayıtlarda kurallar tutarsız çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-006",
+        "N-K09-014"
+      ],
+      "ornek_araclar": [
+        "Smella benzeri kural araçları",
+        "LanguageTool",
+        "Zemberek tabanlı analiz"
+      ],
+      "erken_sinyal": "Kural kapısının Türkçe örnek setinde düşük kesinlik/duyarlılık göstermesi.",
+      "azaltma": "Kurum Türkçe gereksinim kokusu sözlüğü ve test seti, Türkçe morfoloji analizörüyle kural uyarlaması, sonuçların örneklemle ölçülmesi."
+    },
+    {
+      "id": "RK-224",
+      "yetenek_sinifi": "Y-44",
+      "kalip": "Aynı talepten iki üretimin tutarsız çıkması",
+      "aciklama": "LLM çıkarımı sıcaklık 0'da bile deterministik değildir; eval sonuçlarının güven aralığıyla raporlanması gerektiği de gösterilmiştir. Bu nedenle aynı talepten iki bağımsız spesifikasyon üretimi zorunlu alanlarda farklı sonuç verebilir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+        "https://arxiv.org/abs/2411.00640"
+      ],
+      "yasatacagi_sorunlar": [
+        "'İki bağımsız üretimde zorunlu alanlar anlamca uyumlu' kabul ölçütü sistematik olarak başarısız olabilir veya uyum ölçümü de LLM'e bırakılırsa döngüsel güven oluşur.",
+        "Tutarsızlık, spesifikasyonun belirsizliğinden mi model değişkenliğinden mi kaynaklandığı ayrılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006"
+      ],
+      "ornek_araclar": [
+        "LLM tabanlı spesifikasyon üreticileri"
+      ],
+      "erken_sinyal": "İki üretim arasında zorunlu alan uyum oranının düşmesi.",
+      "azaltma": "Tutarsızlığı belirsizlik sinyali olarak kullanma, uyumu deterministik alan karşılaştırmasıyla ölçme, k üretimli oylama."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 6,
+    "kritik": 1,
+    "orta": 43,
+    "dusuk": 46
+  },
+  "sinif_bulgu_turleri": {
+    "RT-15": 30,
+    "RT-05": 18,
+    "RT-11": 17,
+    "RT-08": 15,
+    "RT-10": 13,
+    "RT-07": 9,
+    "RT-04": 9,
+    "RT-06": 9,
+    "RT-14": 8,
+    "RT-02": 7,
+    "RT-13": 6,
+    "RT-01": 6,
+    "RT-03": 3,
+    "RT-16": 3,
+    "RT-17": 1,
+    "RT-09": 1
+  }
+}

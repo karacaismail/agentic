@@ -1,0 +1,170 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-18",
+    "ad": "İzole yürütme ortamı ve görev başına çalışma kopyası (ağ çıkışı izin listesi, dosya/süre/kaynak sınırı)",
+    "grup": "Yürütme ortamı ve güvenlik"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-130",
+      "yetenek_sinifi": "Y-18",
+      "kalip": "Konteynerlerde çekirdek paylaşımı ve kaçış",
+      "aciklama": "Konteynerler ana makine çekirdeğini paylaşır; çalışma zamanındaki bir hata ana makineye kaçış demektir. runc'ta 2024'te 'Leaky Vessels' (CVE-2024-21626), Kasım 2025'te maskelenmiş yol, /dev/console ve procfs yazma yönlendirmesi üzerinden üç ayrı kaçış açığı (CVE-2025-31133, CVE-2025-52565, CVE-2025-52881) yayımlandı.",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-xr7r-f8xq-vfvv",
+        "https://github.com/advisories/GHSA-9493-h29p-rfm2",
+        "https://github.com/advisories/GHSA-qw9x-cqr3-wc7r",
+        "https://github.com/advisories/GHSA-cgrx-mc8f-2prm"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanın güvenilmeyen kodu çalıştırdığı görev konteyneri, ana makinedeki diğer ekiplerin çalışma alanlarına ve CI sırlarına erişebilir.",
+        "Kötü amaçlı imaj veya Dockerfile ile ajan kendi sandbox'ından çıkabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-001",
+        "N-K04-002"
+      ],
+      "ornek_araclar": [
+        "Docker",
+        "runc",
+        "containerd",
+        "Kubernetes"
+      ],
+      "erken_sinyal": "Çalışma zamanı sürümünün yamasız olması; konteyner içinden /proc ve /dev üzerinde alışılmadık işlemler.",
+      "azaltma": "Güvenilmeyen kod için mikro-VM veya gVisor gibi ek yalıtım katmanı, rootless çalışma, çalışma zamanının hızlı yamalanması, görev başına tek kullanımlık düğüm."
+    },
+    {
+      "id": "RK-131",
+      "yetenek_sinifi": "Y-18",
+      "kalip": "GPU konteyner araç zinciri üzerinden kaçış",
+      "aciklama": "Wiz, NVIDIA Container Toolkit'te konteyner başlatma kancalarında LD_PRELOAD ile üç satırlık bir Dockerfile'la ana makinede root olarak kod çalıştırmaya imkân veren açığı (CVE-2025-23266, CVSS 9,0) bildirdi.",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-23266",
+        "https://www.wiz.io/blog/nvidia-ai-vulnerability-cve-2025-23266-nvidiascape"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi model sunumu ve GPU'lu ajan çalıştırıcıları paylaşılan GPU düğümlerinde çalışıyorsa bir ekibin imajı tüm düğümü ve diğer ekiplerin modellerini ele geçirebilir.",
+        "GPU sürücü/araç zinciri güncellemeleri genelde yavaş yapıldığından açık pencere uzun kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-002",
+        "N-K09-011",
+        "N-K15-007"
+      ],
+      "ornek_araclar": [
+        "NVIDIA Container Toolkit",
+        "NVIDIA GPU Operator",
+        "Kubernetes GPU düğümleri"
+      ],
+      "erken_sinyal": "GPU düğümlerinde araç zinciri sürümünün yamasız olması; kullanıcı imajlarında LD_PRELOAD tanımı.",
+      "azaltma": "GPU düğümlerinde yalnız güvenilir imajlar, kiracı başına ayrı düğüm havuzu, araç zinciri yamalarının önceliklendirilmesi."
+    },
+    {
+      "id": "RK-132",
+      "yetenek_sinifi": "Y-18",
+      "kalip": "İzinli ağ çıkışı üzerinden sızdırma",
+      "aciklama": "Johann Rehberger, Claude'un kod yorumlayıcısında izinli alan adları arasındaki api.anthropic.com üzerinden saldırganın kendi API anahtarıyla Files API'ye veri yükletilebildiğini gösterdi (Ekim 2025). Paket yöneticileri gibi 'zararsız' izinli alanlar da benzer kanal olabilir.",
+      "risk_turleri": [
+        "RT-03",
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://embracethered.com/blog/posts/2025/claude-abusing-network-access-and-anthropic-api-for-data-exfiltration/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sandbox ağ izin listesine model sağlayıcı API'si, npm/PyPI veya GitHub eklenirse istem enjeksiyonu içeren bir görev kaynak kodu bu kanallardan dışarı taşıyabilir.",
+        "İzin listesi 'alan adı' düzeyinde yönetildiği için hangi hesaba yazıldığı denetlenmez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-002",
+        "N-K18-005",
+        "N-K18-010"
+      ],
+      "ornek_araclar": [
+        "Claude Code sandbox",
+        "OpenAI Codex cloud",
+        "E2B",
+        "Daytona"
+      ],
+      "erken_sinyal": "Sandbox'tan izinli alanlara POST/PUT gibi yazma istekleri; alışılmadık yükleme hacmi.",
+      "azaltma": "İzinli alan adlarını kurum kimliğiyle kısıtlayan çıkış vekili, yazma yöntemlerinin engellenmesi, paket yüklemesinin iç aynadan yapılması."
+    },
+    {
+      "id": "RK-133",
+      "yetenek_sinifi": "Y-18",
+      "kalip": "Ajan sandbox'ının kendisinin aşılması",
+      "aciklama": "Ajan çerçevelerinin yerleşik sandbox'ları da açık barındırır: Claude Code'da git worktree yol karışıklığıyla sandbox kaçışı (CVE-2026-55607), sembolik bağlantıyla çalışma alanı dışına yazma (CVE-2026-39861), settings.json kalıcı yapılandırma enjeksiyonu (CVE-2026-25725); n8n'de computer-use kabuk sandbox'ının Linux ve Windows'ta uygulanmaması (CVE-2026-65590).",
+      "risk_turleri": [
+        "RT-01",
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-7835-87q9-rgvv",
+        "https://github.com/advisories/GHSA-vp62-r36r-9xqp",
+        "https://github.com/advisories/GHSA-ff64-7w26-62rf",
+        "https://github.com/advisories/GHSA-fpg6-x68q-5793"
+      ],
+      "yasatacagi_sorunlar": [
+        "'Sandbox açık' ayarı güvenlik ekibince yeterli kontrol sayılırsa, yamasız sürümler geliştirici makinelerinde yalıtımsız kod çalıştırır.",
+        "Sandbox'ın hangi işletim sisteminde gerçekten uygulandığı doğrulanmazsa karışık filo (macOS/Linux/Windows) farklı güvenlik düzeyinde çalışır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-013",
+        "N-K15-002",
+        "N-K15-001"
+      ],
+      "ornek_araclar": [
+        "Claude Code sandbox",
+        "OpenAI Codex sandbox",
+        "n8n computer-use",
+        "Gemini CLI sandbox"
+      ],
+      "erken_sinyal": "Çerçeve sürümü dağılımında yamasız sürümler; sandbox içinden çalışma alanı dışına dosya yazımı.",
+      "azaltma": "Yerleşik sandbox'ı tek katman saymama, dışta VM/konteyner yalıtımı, sürüm zorlaması ve düzenli kaçış testleri."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 4,
+    "yuksek": 16,
+    "orta": 43,
+    "dusuk": 104
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 36,
+    "RT-08": 19,
+    "RT-14": 12,
+    "RT-10": 11,
+    "RT-01": 10,
+    "RT-02": 7,
+    "RT-07": 6,
+    "RT-06": 5,
+    "RT-13": 5,
+    "RT-16": 4,
+    "RT-05": 4,
+    "RT-15": 3,
+    "RT-12": 3,
+    "RT-11": 2,
+    "RT-04": 2,
+    "RT-09": 1
+  }
+}

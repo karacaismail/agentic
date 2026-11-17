@@ -1,0 +1,440 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K09",
+    "ad": "Model erişimi, seçimi ve barındırma",
+    "alan": "B-ajan-platformu",
+    "amac": "Her ajan rolünün ihtiyaç duyduğu model yeteneğine, doğru koşullarda, sürdürülebilir ve ölçülebilir biçimde erişmesi.",
+    "kapsam": [
+      "rol–model ayrımı",
+      "birincil ve yedek model",
+      "yükseltme kuralları",
+      "model ailesi çeşitliliği",
+      "akıl yürütme seviyesi",
+      "uzun bağlam",
+      "çok kipli girdi",
+      "barındırma biçimi",
+      "sunum reçetesi ve şablon uyumu",
+      "kapasite",
+      "model kaydı"
+    ],
+    "kapsam_disi": [
+      "modellerin değerlendirilmesi (K23)",
+      "lisansların hukuki değerlendirmesi (K22)"
+    ],
+    "komsu_kumeler": [
+      "K10",
+      "K15",
+      "K22",
+      "K23"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K09-001",
+      "baslik": "Rol ile modelin ayrılması",
+      "ihtiyac": "Ajan rolünün (görev tanımı, araçlar, izinler) modelden ayrı tanımlanması; modelin role yalnız referans olarak bağlanması; aynı modelin birden çok rolde, aynı rolün farklı modellerle çalışabilmesi.",
+      "cozulecek_sorun": "Model ile ajan karıştırılıyor; model değişince rol tanımı da değişiyor.",
+      "yetenek_siniflari": [
+        "Y-01",
+        "Y-02"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Rol şemasında model yalnız bir referans alanı.",
+        "Model değişimi kod değişikliği gerektirmiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-025",
+          "S-016",
+          "S-028"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-035"
+      ]
+    },
+    {
+      "id": "N-K09-002",
+      "baslik": "Rol başına birincil ve yedek model",
+      "ihtiyac": "Her rol için birincil ve en az bir yedek modelin tanımlanması; sağlayıcı kesintisinde veya hız sınırında bozulmuş modda çalışma kuralı.",
+      "cozulecek_sorun": "Tek modele ya da sağlayıcıya bağımlılık; kesinti ekiplerin program hedeflerini doğrudan vuruyor.",
+      "yetenek_siniflari": [
+        "Y-02"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "10+ ekip aynı anda aynı sağlayıcıya yüklendiğinde hız sınırı ve kesinti etkisi katlanır.",
+      "kabul_olcutleri": [
+        "Tüm rollerde birincil ve yedek tanımlı.",
+        "Kesinti tatbikatında hangi rolün yedeğe geçtiği ve hangi işin beklediği biliniyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-028",
+          "S-021"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "C-031",
+        "D-017",
+        "R-006",
+        "R-036",
+        "R-038",
+        "U-030",
+        "U-040"
+      ]
+    },
+    {
+      "id": "N-K09-003",
+      "baslik": "Küçük modelden güçlü modele yükseltme kuralları",
+      "ihtiyac": "Şema hatası, çelişki veya düşük güven durumunda işin daha güçlü modele ya da planlayıcıya yükseltilmesinin kurallarla tanımlanması; yükseltme oranının izlenmesi.",
+      "cozulecek_sorun": "Küçük model karmaşık işte hata yapıyor; her işe en güçlü modeli kullanmak maliyeti patlatıyor.",
+      "yetenek_siniflari": [
+        "Y-02",
+        "Y-30"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Yükseltme tetikleyicileri yazılı ve yükseltme oranı raporlanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-028",
+          "S-029",
+          "S-123"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası",
+      "iliskili": [
+        "C-031",
+        "D-017"
+      ]
+    },
+    {
+      "id": "N-K09-004",
+      "baslik": "Karar türü × izinli model sınıfı matrisi",
+      "ihtiyac": "Birleştirme, test kapsamı, kabul gibi kritik kararların hangi model sınıflarına tek başına bırakılamayacağının tanımlanması.",
+      "cozulecek_sorun": "Küçük ve hızlı yardımcı modellerin kritik karar vermesi hatalı kabul üretiyor.",
+      "yetenek_siniflari": [
+        "Y-02",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Karar türü × model sınıfı matrisi yazılı ve hat tarafından uygulanıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-029"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K09-005",
+      "baslik": "İnceleme için model ailesi çeşitliliği",
+      "ihtiyac": "Denetçi modelin yazar modelden farklı aileden seçilmesi; aynı ailenin farklı boyutlarının çeşitlilik sayılmaması; aile bilgisinin model kaydında tutulması.",
+      "cozulecek_sorun": "Ortak kör noktalar; kendi ailesini kayırma. Kaynaktaki atamada planlama, test, ön yüz kodu ve denetimin birincil modeli aynı.",
+      "yetenek_siniflari": [
+        "Y-02",
+        "Y-07"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her incelemede en az bir inceleyici farklı ailede.",
+        "Test yazarı ile kod yazarının modeli aynıysa kayıtta görünür."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-028",
+          "S-029",
+          "S-140"
+        ],
+        "not": "Farklı aile bağımsız doğruluk garantisi değildir; yalnız bir risk azaltıcıdır."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-009",
+        "C-021",
+        "D-011"
+      ]
+    },
+    {
+      "id": "N-K09-006",
+      "baslik": "Akıl yürütme seviyesinin rol bazında ayarı ve kaydı",
+      "ihtiyac": "Düşünme/akıl yürütme seviyesinin rol ve iş türüne göre ayarlanması, her çağrıda kaydedilmesi, değerlendirmede seviyeye göre raporlanması.",
+      "cozulecek_sorun": "Aynı model farklı ayarda farklı sonuç veriyor; sonuçlar karşılaştırılamıyor.",
+      "yetenek_siniflari": [
+        "Y-01",
+        "Y-27"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her çağrıda seviye kayıtlı; değerlendirme raporları seviyeye göre ayrışıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-027",
+          "S-029"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K09-007",
+      "baslik": "Uzun bağlamı gerçekten kullanabilme",
+      "ihtiyac": "Büyük depo ve belge işlerinde uzun bağlam penceresinin gerçekten kullanılabildiğinin kendi depo boyutunda ölçülmesi; taşma stratejisi.",
+      "cozulecek_sorun": "Pencere boyutu kullanım garantisi değil; bağlam uzadıkça kalite düşüyor.",
+      "yetenek_siniflari": [
+        "Y-16",
+        "Y-29"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Kendi depo boyutunda çok belgeli erişim testi eşik üstünde.",
+        "Taşma stratejisi tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-025",
+          "S-029",
+          "S-127"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K09-008",
+      "baslik": "Çok kipli girdi işleme",
+      "ihtiyac": "Ekran görüntüsü, belge sayfası, diyagram ve kaydın modele iletilebilmesi; yerel sürümün gerçek kiplerinin kayıtta tutulması; algılama modeli bulgularının deterministik testle teyidi; diyagramdan çıkarılan gereksinimlerde görsel kontrol.",
+      "cozulecek_sorun": "Görsel ve deneyim hataları görülmüyor; diyagram okları yanlış çözümleniyor (bu çalışmanın kendi kaynaklarında da yaşandı).",
+      "yetenek_siniflari": [
+        "Y-04"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Görsel bulgular deterministik tarayıcı testiyle teyit ediliyor.",
+        "Model kaydında 'yerel kipler' alanı var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-014",
+          "S-029",
+          "S-028"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K09-009",
+      "baslik": "Barındırma biçimi kararı ve gerekçesi",
+      "ihtiyac": "Modelin kurum içinde mi, bölgesel mi, hizmet olarak mı kullanılacağının veri sınıfı, maliyet, kalite ve yasal çerçeveyle gerekçelendirilmesi; kapalı hizmet sürümü ile indirilebilir sürümün aynı ürün sayılmaması.",
+      "cozulecek_sorun": "Kaynaklar yerel barındırmaya yöneliyor ama gerekçe (gizlilik, maliyet, kamu kısıtı) yazılmamış; ölçümler hizmet sürümü ile yerel sürümü karıştırıyor.",
+      "yetenek_siniflari": [
+        "Y-03",
+        "Y-36"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Barındırma kararı veri sınıflarına göre yazılı.",
+        "Ölçümler 'hizmet' / 'yerel' etiketli."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-027",
+          "S-025",
+          "S-018",
+          "S-163",
+          "S-164"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "A-008",
+        "D-002",
+        "G-027",
+        "H-04",
+        "Q-010",
+        "Q-011",
+        "R-038",
+        "U-032",
+        "U-041"
+      ],
+      "bagimliliklar": [
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "N-K09-010",
+      "baslik": "Modele özel sunum reçetesi ve şablon uyumu",
+      "ihtiyac": "Her model için sürümlü, test edilmiş başlatma tarifi ve sağlık kontrolü; araç çağrısı ve akıl yürütme alanlarının modelin mesaj biçimine uygunluğunun (dosya okuma/yazma, kabuk, yapılandırılmış çıktı, uzun araç döngüsü, kopma sonrası devam) test edilmesi.",
+      "cozulecek_sorun": "'Uyumlu arayüz' tek başına yetmiyor; model ayağa kalkmıyor veya araç çağrılarını yanlış biçimliyor.",
+      "yetenek_siniflari": [
+        "Y-03",
+        "Y-01"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Her modelde uyumluluk test paketi geçiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-016",
+          "S-029",
+          "S-017"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-031"
+      ],
+      "bagimliliklar": [
+        "N-K09-009"
+      ]
+    },
+    {
+      "id": "N-K09-011",
+      "baslik": "Model sunum kapasitesi planı",
+      "ihtiyac": "Seçilecek model seti için bellek, çıktı hızı, eşzamanlı oturum ve gecikme hedeflerinin hesaplanması.",
+      "cozulecek_sorun": "Model boyutları çok farklı; donanım bütçesi, eşzamanlı oturum sayısı ve gecikme hedefi bilinmiyor.",
+      "yetenek_siniflari": [
+        "Y-38",
+        "Y-03"
+      ],
+      "zorunluluk": "kosullu",
+      "kabul_olcutleri": [
+        "Eşzamanlı oturum ve gecikme hedefleri yazılı; kapasite hesabı belgeli."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-029",
+          "S-018",
+          "S-019"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "Q-012",
+        "R-026",
+        "U-041"
+      ],
+      "bagimliliklar": [
+        "N-K09-009"
+      ]
+    },
+    {
+      "id": "N-K09-012",
+      "baslik": "Model kaydı",
+      "ihtiyac": "Her model için sürüm, lisans, bağlam, kipler, aile, sunum reçetesi, şablon, akıl yürütme seviyeleri, ölçüm sonuçları ve son doğrulama tarihinin tek kayıtta tutulması.",
+      "cozulecek_sorun": "Model bilgisi dağınık ve hızla eskiyor; yeni sürümler, önizlemeler ve arşivlenen projeler karar tabanını geçersizleştiriyor.",
+      "yetenek_siniflari": [
+        "Y-35",
+        "Y-02"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her modelin kaydı tam ve son doğrulama tarihi eşikten eski değil."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_ima",
+        "kaynaklar": [
+          "S-024",
+          "S-025",
+          "S-029"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "G-005"
+      ]
+    },
+    {
+      "id": "N-K09-013",
+      "baslik": "Model sürüm sabitleme ve kayma izleme",
+      "ihtiyac": "Kullanılan model sürümlerinin sabitlenmesi; sağlayıcı değişikliklerinin ve emeklilik takvimlerinin izlenmesi; sabit bir referans setinin düzenli koşturularak davranış kaymasının yakalanması.",
+      "cozulecek_sorun": "Aynı model adı altında davranış zamanla değişiyor; kalibre edilmiş sınırlar ve kurallar sessizce geçersizleşiyor.",
+      "yetenek_siniflari": [
+        "Y-43",
+        "Y-29"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Model sürümü her koşuda kayıtlı.",
+        "Referans set düzenli koşuyor ve kayma alarmı tanımlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-126",
+          "S-061"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim",
+      "iliskili": [
+        "R-005",
+        "U-001"
+      ]
+    },
+    {
+      "id": "N-K09-014",
+      "baslik": "Türkçe gereksinim ve arama kalitesi",
+      "ihtiyac": "Türkçe kabul kriterlerinin ve Türkçe arama sorgularının model ve yardımcı modellerde ayrıca ölçülmesi.",
+      "cozulecek_sorun": "Türkçe başarı hiçbir model için doğrulanmamış.",
+      "yetenek_siniflari": [
+        "Y-29",
+        "Y-04"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Türkçe görev alt kümesinde başarı ve Türkçe erişim kalitesi eşiği tanımlı ve ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-017",
+          "S-014",
+          "S-029"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "A-015",
+        "G-026",
+        "R-025"
+      ],
+      "bagimliliklar": [
+        "N-K23-009"
+      ]
+    }
+  ]
+}

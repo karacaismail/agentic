@@ -1,0 +1,2795 @@
+{
+  "sema": "ihtiyac-haritasi/cember-analizi@1",
+  "aciklama": "Çember = mevcut kaynakların (ekip tuvalleri, rol kartları, türev raporlar) kapsadığı alan.",
+  "tanimlar": {
+    "cemberin_ici_tanimli": "Kaynaklarda var ve projelendirmeye yetecek kadar tanımlı.",
+    "cemberin_icindeki_bosluklar": "Kaynaklarda var ama eksik, belirsiz, çelişkili veya sahipsiz.",
+    "cemberin_disindaki_eksikler": "Kaynaklarda hiç yok ama ana amaç için gerekli.",
+    "cembere_girmesi_gerekenler": "Dışarıdaki eksiklerden (ve kritik iç boşluklardan) kapsama alınması gerekenler, öncelik sırasıyla.",
+    "bilincli_disarida_kalanlar": "Bilinçli olarak kapsam dışı bırakılanlar."
+  },
+  "ozet": {
+    "ic_tanimli": 115,
+    "ic_bosluk": 103,
+    "dis_eksik": 177
+  },
+  "ana_bulgular": [
+    "Çemberin en güçlü olduğu yer tek bir işin doğrulanması: test-önce, RED kanıtı, test bütünlüğü, rol ayrımı ve oracle ilkeleri (K05) ayrıntılı ve ortak kabul görmüş.",
+    "Çemberin içindeki boşlukların çoğu çelişki ve sahipsizlik türünde: aynı konuda birden çok öneri var ama karar ve karar sahibi yok (bütçe, risk ölçeği, ortam, durum modeli, orkestratör).",
+    "Çemberin dışında kalanların çoğu 'ekibin ötesi': çok ekip ve SAFe koordinasyonu, ajan hattına özgü güvenlik, hukuk ve veri, ölçüm programı, platformun işletimi ve değişim yönetimi.",
+    "Teknoloji tarafında çember araç araştırmasına fazla, ölçüme az yatırım yapmış: onlarca aday incelenmiş, hiçbiri kurumun kendi işinde ölçülmemiş.",
+    "Amaç tanımı ('insanlar ve ajanlar birlikte') ile mevcut tasarım arasında temel bir fark vardı: kaynaklar insanı onaylayıcı ve istisna yöneticisi olarak konumluyor. Birlikte çalışma modeli, ekip çalışma sistemi ve güvenilirlik mühendisliği bu sürümde eklendi (yeni alanlar E ve F, genişletilmiş D)."
+  ],
+  "cemberin_ici_tanimli": [
+    {
+      "kume": "K01",
+      "ad": "Talep, görev tanımı ve hazır olma",
+      "ihtiyaclar": [
+        {
+          "id": "N-K01-004",
+          "baslik": "Ölçülebilir kabul kriterleri ve kabul/ret örnekleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-005",
+          "baslik": "Her beklenti için zorunlu oracle alanları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-006",
+          "baslik": "Hazır olma (DoR) kapısı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-007",
+          "baslik": "Sınırlı belirsizlik giderme ve açık sorunun sahibine yazılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-009",
+          "baslik": "Okunabilir davranış senaryolarının insan onayıyla kilitlenmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-010",
+          "baslik": "Kabul kriteri ve spesifikasyon sürümlemesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K02",
+      "ad": "Backlog, ayrıştırma, bağımlılık ve önceliklendirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K02-005",
+          "baslik": "Görevlerin bağımsız kümelere ayrılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-006",
+          "baslik": "Bağımlılığa dayalı sıralama",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-007",
+          "baslik": "Bağımlılık ve sıralama kararlarının deterministik hesaplanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-011",
+          "baslik": "Eşzamanlı iş sınırı ve iş çekme kuralı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-012",
+          "baslik": "Backlog boyutu ile eşzamanlılığın ayrılması",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K03",
+      "ad": "Kod tabanı bağlamı ve mimari sınırlar",
+      "ihtiyaclar": [
+        {
+          "id": "N-K03-003",
+          "baslik": "Modül düzeyinde etki analizi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-004",
+          "baslik": "Bağımlılık zincirinin üç noktada doğrulanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-006",
+          "baslik": "Ön yüz–arka uç sözleşmesinin önceden yazılması ve iki tarafta doğrulanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-010",
+          "baslik": "Kod tabanının mevcut paradigmasına uyum",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K04",
+      "ad": "Uygulama ve tasarım kalitesi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K04-001",
+          "baslik": "Davranış başına en küçük değişiklik",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K04-002",
+          "baslik": "Uygulayıcı rolünün yetki sınırları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K04-003",
+          "baslik": "Sınırlı yeniden deneme ve yaklaşım değişimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K04-004",
+          "baslik": "Tek tur yeniden düzenleme sınırı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K04-006",
+          "baslik": "Uzman rollerin kod yazmaması, bulgu üretmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K04-007",
+          "baslik": "Pragmatik tasarım ilkesi denetimi",
+          "zorunluluk": "opsiyonel"
+        },
+        {
+          "id": "N-K04-008",
+          "baslik": "Paradigmaya uygun alan modelleme ve anti-kalıp tespiti",
+          "zorunluluk": "opsiyonel"
+        }
+      ]
+    },
+    {
+      "kume": "K05",
+      "ad": "Doğrulama, test oracle ve kalite kapıları",
+      "ihtiyaclar": [
+        {
+          "id": "N-K05-001",
+          "baslik": "Test-önce disiplini ve kabul kriteri–test eşlemesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-002",
+          "baslik": "RED kanıt kapısı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-003",
+          "baslik": "RED dışı sonuçların triyajı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-004",
+          "baslik": "İş türüne göre test stratejisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-005",
+          "baslik": "Test bütünlüğünün korunması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-006",
+          "baslik": "Beklenti, üretim ve kabul rollerinin ayrılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-007",
+          "baslik": "Doğrulayıcının bağlam yalıtımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-008",
+          "baslik": "Koddan ayrı, sürümlü beklenti deposu ve totoloji yasağı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-010",
+          "baslik": "Kenar durum matrisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-011",
+          "baslik": "Metamorfik, özellik tabanlı, diferansiyel ve değişmez tabanlı doğrulama",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K05-012",
+          "baslik": "Deterministik kapıların yapay zekâ denetiminden önce koşması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-014",
+          "baslik": "'Test edilmedi' durumu ve çok boyutlu kanıt raporu",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-015",
+          "baslik": "Bağımsız inceleme: niyet–kod uyumu ve hile taraması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-017",
+          "baslik": "Arayüz doğrulama: görsel referans yönetimi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K05-018",
+          "baslik": "Gerçek cihaz kabul kapısı ve cihaz/tarayıcı matrisi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K05-019",
+          "baslik": "Erişilebilirlik doğrulaması",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K05-020",
+          "baslik": "İçerik doğruluğunun yetkili kaynakla eşlenmesi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K05-021",
+          "baslik": "Örtük oracle katmanı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-026",
+          "baslik": "Kanıt paketi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-028",
+          "baslik": "Teslim öncesi boşluk analizi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-029",
+          "baslik": "Başlangıç test sağlığı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K06",
+      "ad": "Entegrasyon, sürüm kontrolü ve yayın",
+      "ihtiyaclar": [
+        {
+          "id": "N-K06-001",
+          "baslik": "Güvenli sürüm kontrolü işlemleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K06-003",
+          "baslik": "Birleşim sonrası yeniden doğrulama",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K06-005",
+          "baslik": "Mevcut yayın hattına kanıtla devir",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K07",
+      "ad": "Dokümantasyon ve kurumsal bilgi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K07-001",
+          "baslik": "Kodla eşzamanlı dokümantasyon",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K07-002",
+          "baslik": "Dokümandaki iddiaların doğrulanması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K07-005",
+          "baslik": "Okunabilir sonuç raporu",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K08",
+      "ad": "Geri bildirim, işletim ve sürekli iyileştirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K08-001",
+          "baslik": "Aşamalı geri bildirim triyajı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K08-002",
+          "baslik": "Kaçan hatadan regresyon testi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K08-003",
+          "baslik": "Test ekleme ile ürün kuralı değiştirme yetkilerinin ayrılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K08-004",
+          "baslik": "Kopya iş engeli",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K09",
+      "ad": "Model erişimi, seçimi ve barındırma",
+      "ihtiyaclar": [
+        {
+          "id": "N-K09-001",
+          "baslik": "Rol ile modelin ayrılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-002",
+          "baslik": "Rol başına birincil ve yedek model",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-003",
+          "baslik": "Küçük modelden güçlü modele yükseltme kuralları",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K09-004",
+          "baslik": "Karar türü × izinli model sınıfı matrisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-006",
+          "baslik": "Akıl yürütme seviyesinin rol bazında ayarı ve kaydı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-007",
+          "baslik": "Uzun bağlamı gerçekten kullanabilme",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K09-008",
+          "baslik": "Çok kipli girdi işleme",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K09-010",
+          "baslik": "Modele özel sunum reçetesi ve şablon uyumu",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K10",
+      "ad": "Ajan çalışma çerçevesi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K10-001",
+          "baslik": "Başsız ve programatik çalışma",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-002",
+          "baslik": "Değiştirilebilir çalışma zamanı ve ortak adaptör sözleşmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-005",
+          "baslik": "Koşullu rol yükleme",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-008",
+          "baslik": "Ajan izin ve onay arayüzü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-009",
+          "baslik": "Uzmana standart bağlam paketi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K11",
+      "ad": "Yetenek paketleri, kurallar ve talimat yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K11-001",
+          "baslik": "Tek, sürümlü kural kaynağı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K11-006",
+          "baslik": "Koşu başında kural ve paket sürümünün sabitlenmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K11-007",
+          "baslik": "Ajanların kural ve politikayı değiştirememesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K12",
+      "ad": "Araç ve bağlam erişim protokolü, entegrasyonlar",
+      "ihtiyaclar": [
+        {
+          "id": "N-K12-001",
+          "baslik": "Tüm çalışma zamanlarına ortak araç ve bağlam protokolü",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K12-003",
+          "baslik": "Sistem bağlayıcıları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K12-005",
+          "baslik": "İnsan–ajan iletişim kanalı kritik yol dışında",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K13",
+      "ad": "Orkestrasyon ve dayanıklı yürütme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K13-001",
+          "baslik": "Tek durum sahibi ve durum sahiplik matrisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-002",
+          "baslik": "Kesintiden devam",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-003",
+          "baslik": "Günlerce insan bekleme",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-004",
+          "baslik": "Dış yan etkilerde idempotency ve uzlaştırma",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-005",
+          "baslik": "Bayat işçi yazımının reddi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-006",
+          "baslik": "Zaman aşımı, sinyal ve gerçek iptal",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-007",
+          "baslik": "Bağımsız kümelerin paralel yürütülmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-008",
+          "baslik": "Sınıflandırılmış ve sınırlı yeniden deneme",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-009",
+          "baslik": "Koşu başında bağlamın sabitlenmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-010",
+          "baslik": "Süreç kodu ve politika sürümlemesi, yeniden oynatma testi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K13-011",
+          "baslik": "Büyük artefaktların dış depoda tutulması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K13-012",
+          "baslik": "Yetkili ve tekilleştirilmiş başlatma",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K14",
+      "ad": "Bağlam, bilgi erişimi ve bellek",
+      "ihtiyaclar": [
+        {
+          "id": "N-K14-002",
+          "baslik": "Belge ve kod araması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K14-003",
+          "baslik": "Güncel dış bilgi ve kaynak hiyerarşisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K14-004",
+          "baslik": "Sürüme özgü doküman erişimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K14-005",
+          "baslik": "Dış içeriğin kalıcı bilgiye yazılmaması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K14-006",
+          "baslik": "Durum, bellek ve yetkili kaynak ayrımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K14-007",
+          "baslik": "Proje ve ekip bazında bellek izolasyonu",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K15",
+      "ad": "Çalışma ortamı, izolasyon ve kapasite",
+      "ihtiyaclar": [
+        {
+          "id": "N-K15-001",
+          "baslik": "Görev başına izole çalışma alanı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K15-002",
+          "baslik": "Yürütme yalıtımı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K16",
+      "ad": "Ajan platformunun işletimi ve sürdürülebilirliği",
+      "ihtiyaclar": [
+        {
+          "id": "N-K16-004",
+          "baslik": "Yedekten dönüş ve kurtarma tatbikatı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K16-005",
+          "baslik": "Bileşen sürümleme ve güvenli güncelleme",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K17",
+      "ad": "İnsan gözetimi, onay ve eskalasyon",
+      "ihtiyaclar": [
+        {
+          "id": "N-K17-002",
+          "baslik": "Kimlikli ve içeriğe bağlı onay",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K17-006",
+          "baslik": "Otomasyon yanlılığına karşı inceleme yüzeyi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K17-008",
+          "baslik": "Takılan işlerin insan tarafından geri alınması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K17-009",
+          "baslik": "Onaydan önce karşı gerekçe",
+          "zorunluluk": "opsiyonel"
+        }
+      ]
+    },
+    {
+      "kume": "K18",
+      "ad": "Güvenlik, yetkilendirme ve gizlilik",
+      "ihtiyaclar": [
+        {
+          "id": "N-K18-001",
+          "baslik": "Ürün yetkilendirmesinin tek karar noktasında ve deterministik olması",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K18-007",
+          "baslik": "Yıkıcı eylem koruması",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K19",
+      "ad": "İzlenebilirlik, gözlemlenebilirlik ve denetim",
+      "ihtiyaclar": [
+        {
+          "id": "N-K19-001",
+          "baslik": "Uçtan uca iz",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K19-002",
+          "baslik": "Değiştirilemez denetim kaydı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K19-003",
+          "baslik": "Beklenti ve eşik değişikliklerinin izi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K20",
+      "ad": "Bütçe, maliyet ve deneme politikası",
+      "ihtiyaclar": [
+        {
+          "id": "N-K20-002",
+          "baslik": "Sayaç anlamları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K20-003",
+          "baslik": "Sıfırlanamayan paylaşılan görev bütçesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K20-004",
+          "baslik": "Aktif süre ile insan beklemesinin ayrılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K20-008",
+          "baslik": "Toplu işler için ayrı bütçe",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K21",
+      "ad": "Risk yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K21-002",
+          "baslik": "Risk kategorileri",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K22",
+      "ad": "Uyum, hukuk ve lisans",
+      "ihtiyaclar": [
+        {
+          "id": "N-K22-004",
+          "baslik": "Değişiklik yazarlık kimliği politikası",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K23",
+      "ad": "Değerlendirme ve ölçüm",
+      "ihtiyaclar": [
+        {
+          "id": "N-K23-002",
+          "baslik": "Adil karşılaştırma koşulları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-003",
+          "baslik": "Çoklu koşu ve güven aralığı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-004",
+          "baslik": "Role özel metrikler",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-005",
+          "baslik": "Sınırların ölçümle kalibrasyonu",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K26",
+      "ad": "İş takip sistemi ve iş kalemi yaşam döngüsü",
+      "ihtiyaclar": [
+        {
+          "id": "N-K26-003",
+          "baslik": "İş takip sisteminin yetkisi sınırlı yansıma olması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K26-004",
+          "baslik": "Sonuç ve kanıtın iş kalemine yazılması",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    }
+  ],
+  "cemberin_icindeki_bosluklar": [
+    {
+      "kume": "K01",
+      "ad": "Talep, görev tanımı ve hazır olma",
+      "ihtiyaclar": [
+        {
+          "id": "N-K01-001",
+          "baslik": "Doğal dil talebinden yapılandırılmış görev spesifikasyonu",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-002",
+          "baslik": "Tek ve makinece doğrulanabilir iş kalemi şablonu",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-003",
+          "baslik": "Makinece denetlenebilir negatif kapsam",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-008",
+          "baslik": "Görevde yazmayan bilinmeyenlerin taranması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-011",
+          "baslik": "Kabul kriterini yazma ve onaylama hakkının tanımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-012",
+          "baslik": "İş türüne göre akış seçimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K01-014",
+          "baslik": "Kalite özniteliği senaryoları",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K02",
+      "ad": "Backlog, ayrıştırma, bağımlılık ve önceliklendirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K02-001",
+          "baslik": "Büyük backlog'un ortak şablona toplu dönüştürülmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-002",
+          "baslik": "Toplu dönüşümün insan gözden geçirme modeli",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K02-004",
+          "baslik": "İş hiyerarşisi ve ayrıştırma sorumluluğu",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-008",
+          "baslik": "Paralellik ile sıralama arasındaki karar sahipliği",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-009",
+          "baslik": "Değer, etki, efor ve risk tabanlı önceliklendirme modeli",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K03",
+      "ad": "Kod tabanı bağlamı ve mimari sınırlar",
+      "ihtiyaclar": [
+        {
+          "id": "N-K03-001",
+          "baslik": "Uygulama geneli ilişki ve bağımlılık haritası",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-002",
+          "baslik": "İlişki haritasının koddan üretilmesi ve güncelliği",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-005",
+          "baslik": "Görev tipine göre kural seti etkinleştirme",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-007",
+          "baslik": "Olgunluk seviyesinin belirlenmesi ve kapsamın ona göre sınırlanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-008",
+          "baslik": "Teknoloji sınırı kapısı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-009",
+          "baslik": "Mimari kararlara ajan erişimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K03-012",
+          "baslik": "Ekipler arası tüketici odaklı sözleşmeler ve kullanımdan kaldırma politikası",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K04",
+      "ad": "Uygulama ve tasarım kalitesi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K04-005",
+          "baslik": "Paralel uygulayıcıların ortak dosya çakışmasının önlenmesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K04-009",
+          "baslik": "Ölçüme dayalı performans değerlendirmesi ve performans bütçeleri",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K04-010",
+          "baslik": "Mobil öncelikli arayüz uygulaması",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K04-011",
+          "baslik": "Hata dayanıklılığı tasarımı",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K04-012",
+          "baslik": "Uluslararasılaştırma ve yerelleştirme",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K04-013",
+          "baslik": "Kodlama rolünün katalogda tanımlanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K04-014",
+          "baslik": "Arayüz ve hata yönetimi yasak kalıp kataloğu ve mevcut ihlal tabanı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K05",
+      "ad": "Doğrulama, test oracle ve kalite kapıları",
+      "ihtiyaclar": [
+        {
+          "id": "N-K05-009",
+          "baslik": "Test gücünün ölçülmesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K05-013",
+          "baslik": "Kararsız, atlanan ve boş testlerin başarı sayılmaması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K05-016",
+          "baslik": "Yapay zekâ denetçisinin sınırları ve kalibrasyonu",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K05-022",
+          "baslik": "Kusur sınıfı → doğrulayıcı ve risk → test kümesi eşlemesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-023",
+          "baslik": "Kalite eşiklerinin sayısal tanımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-024",
+          "baslik": "Arka uç, arayüz ve veri doğrulaması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-025",
+          "baslik": "İnsan davranış kabulü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-027",
+          "baslik": "Tek tamamlanma tanımı (DoD)",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K05-030",
+          "baslik": "Kritik bileşenlerde biçimsel belirtim, model denetimi ve çalışma zamanı değişmezleri",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K06",
+      "ad": "Entegrasyon, sürüm kontrolü ve yayın",
+      "ihtiyaclar": [
+        {
+          "id": "N-K06-002",
+          "baslik": "Paralel değişikliklerin birleştirilmesi ve birleştirme kuyruğu",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K06-004",
+          "baslik": "Test ortamı ile teslim ortamlarının ayrımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K06-006",
+          "baslik": "Ortam terfi zincirinin tek tanımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K06-007",
+          "baslik": "Birleştirme ve dağıtım yetkilerinin ayrılması, yayın hattının tek sahibi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K06-010",
+          "baslik": "SLO temelli otomatik kanarya ve ilerleme kararı",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K07",
+      "ad": "Dokümantasyon ve kurumsal bilgi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K07-003",
+          "baslik": "Karar kayıtlarının yaşam döngüsü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K07-006",
+          "baslik": "Terim sözlüğü ve kanonik adlandırma",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K07-007",
+          "baslik": "Kural ve talimat dili",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K07-008",
+          "baslik": "Ortak akış notasyonu",
+          "zorunluluk": "opsiyonel"
+        }
+      ]
+    },
+    {
+      "kume": "K08",
+      "ad": "Geri bildirim, işletim ve sürekli iyileştirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K08-007",
+          "baslik": "Olay sonrası öğrenmenin tasarıma dönmesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K09",
+      "ad": "Model erişimi, seçimi ve barındırma",
+      "ihtiyaclar": [
+        {
+          "id": "N-K09-005",
+          "baslik": "İnceleme için model ailesi çeşitliliği",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-009",
+          "baslik": "Barındırma biçimi kararı ve gerekçesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-011",
+          "baslik": "Model sunum kapasitesi planı",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K09-012",
+          "baslik": "Model kaydı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K09-014",
+          "baslik": "Türkçe gereksinim ve arama kalitesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K10",
+      "ad": "Ajan çalışma çerçevesi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K10-003",
+          "baslik": "Yapılandırılmış sonuç ve başarısızlık türleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-004",
+          "baslik": "Kanonik ajan rol kaydı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-007",
+          "baslik": "Rol başına çalışma zamanı sınıfı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K11",
+      "ad": "Yetenek paketleri, kurallar ve talimat yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K11-002",
+          "baslik": "Kural seçici/orkestratörün sınırları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K11-005",
+          "baslik": "Yeniden kullanılabilir yetenek paketleri",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K11-009",
+          "baslik": "Kontrollü öğrenme ve yayın",
+          "zorunluluk": "opsiyonel"
+        },
+        {
+          "id": "N-K11-010",
+          "baslik": "Ajan yapılandırma varlık türlerinin yönetimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K11-011",
+          "baslik": "Ekipler arası yöntem kalibrasyonu",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K12",
+      "ad": "Araç ve bağlam erişim protokolü, entegrasyonlar",
+      "ihtiyaclar": [
+        {
+          "id": "N-K12-004",
+          "baslik": "İş takip sistemiyle eşlemenin yönü ve yazma hakkı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K13",
+      "ad": "Orkestrasyon ve dayanıklı yürütme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K13-013",
+          "baslik": "Yaşam döngüsü sahibinin mimari kararı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K14",
+      "ad": "Bağlam, bilgi erişimi ve bellek",
+      "ihtiyaclar": [
+        {
+          "id": "N-K14-001",
+          "baslik": "Kod tabanı indeksleme ve kod grafiği",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K15",
+      "ad": "Çalışma ortamı, izolasyon ve kapasite",
+      "ihtiyaclar": [
+        {
+          "id": "N-K15-007",
+          "baslik": "Yerel deneme ortamı ile üretim çalıştırıcılarının ayrılması",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K16",
+      "ad": "Ajan platformunun işletimi ve sürdürülebilirliği",
+      "ihtiyaclar": [
+        {
+          "id": "N-K16-006",
+          "baslik": "Bileşen bakım durumu takibi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K16-009",
+          "baslik": "Arıza senaryosu tatbikatları",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K17",
+      "ad": "İnsan gözetimi, onay ve eskalasyon",
+      "ihtiyaclar": [
+        {
+          "id": "N-K17-001",
+          "baslik": "İnsan karar noktaları envanteri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K17-003",
+          "baslik": "Standart engel kaydı ve sahipliği",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K17-007",
+          "baslik": "Kademeli otonomi ve modül güven skoru",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K18",
+      "ad": "Güvenlik, yetkilendirme ve gizlilik",
+      "ihtiyaclar": [
+        {
+          "id": "N-K18-002",
+          "baslik": "Ürün yetkisi ile hat yetkisinin ayrılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-004",
+          "baslik": "Gizli bilgi yönetimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-009",
+          "baslik": "Güvenlik taraması kapısı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-010",
+          "baslik": "Dışarıya gidecek veri politikası",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K19",
+      "ad": "İzlenebilirlik, gözlemlenebilirlik ve denetim",
+      "ihtiyaclar": [
+        {
+          "id": "N-K19-004",
+          "baslik": "Kanıt ve artefakt saklama",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K20",
+      "ad": "Bütçe, maliyet ve deneme politikası",
+      "ihtiyaclar": [
+        {
+          "id": "N-K20-001",
+          "baslik": "Tek, sürümlü deneme/süre/maliyet politikası",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K20-005",
+          "baslik": "Görev başına maliyet tavanı ve birimi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K21",
+      "ad": "Risk yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K21-001",
+          "baslik": "Tek risk ölçeği tanımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K21-003",
+          "baslik": "Risk seviyesi → eylem eşlemesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K21-004",
+          "baslik": "Yasaklı değişiklik sınıfı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K21-006",
+          "baslik": "Risk aksiyon planı döngüsünün tanımı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K22",
+      "ad": "Uyum, hukuk ve lisans",
+      "ihtiyaclar": [
+        {
+          "id": "N-K22-001",
+          "baslik": "Model lisans ve kullanım şartları envanteri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K22-002",
+          "baslik": "Açık kaynak bileşen lisans uyumu",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K23",
+      "ad": "Değerlendirme ve ölçüm",
+      "ihtiyaclar": [
+        {
+          "id": "N-K23-001",
+          "baslik": "Kurumun kendi görev seti",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-009",
+          "baslik": "Türkçe yetkinlik ölçümü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-010",
+          "baslik": "Değişiklik öncesi regresyon değerlendirmesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K24",
+      "ad": "Ölçekli çevik koordinasyon",
+      "ihtiyaclar": [
+        {
+          "id": "N-K24-014",
+          "baslik": "Güvenilirlik ve borç işine kapasite payı ve planlama girdisi",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K25",
+      "ad": "Roller, yetkinlik ve değişim yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K25-001",
+          "baslik": "İnsan rol sınıfları ve karar hakları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K25-008",
+          "baslik": "Yöntem üzerinde ortak karar süreci",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K25-010",
+          "baslik": "Katkı sahiplerinin rollerinin netleşmesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K26",
+      "ad": "İş takip sistemi ve iş kalemi yaşam döngüsü",
+      "ihtiyaclar": [
+        {
+          "id": "N-K26-001",
+          "baslik": "Tek durum modeli ve pano eşlemesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K26-002",
+          "baslik": "Komutla başlatma",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K27",
+      "ad": "İnsan–ajan iş birliği modeli, yetki devri ve iş devri",
+      "ihtiyaclar": [
+        {
+          "id": "N-K27-002",
+          "baslik": "İşlev bazlı ve dinamik otonomi düzeyi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-004",
+          "baslik": "Ajandan insana yapılandırılmış devir paketi ve alıcı teyidi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K28",
+      "ad": "Ortak bağlam, yönlendirme ve inceleme ergonomisi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K28-001",
+          "baslik": "Ortak düzenlenebilir plan ve yürütme öncesi plan önizlemesi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K28-003",
+          "baslik": "Adım düzeyinde geri alma noktaları ve geri alınamazlık etiketi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-006",
+          "baslik": "İddia düzeyinde epistemik durum ve kalibre belirsizlik bildirimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-008",
+          "baslik": "Niyet–parça eşlemesi ve okuma rehberi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-013",
+          "baslik": "Yüksek riskli incelemelerde bilişsel zorlama",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K30",
+      "ad": "Ekip çalışma sistemi: anlaşmalar, ritimler ve sürekli iyileştirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K30-003",
+          "baslik": "Ajan işi için DoR/DoD uzantıları: aynı titizlik, insan yönlendirme payı ve anlama kanıtı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K33",
+      "ad": "Ürün güvenilirlik mühendisliği ve işletilebilirlik",
+      "ihtiyaclar": [
+        {
+          "id": "N-K33-004",
+          "baslik": "Hata bütçesi durumunun ajan otonomisine ve değişiklik hızına bağlanması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K33-016",
+          "baslik": "Program düzeyinde hız–istikrar dengesi karar kuralı",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K34",
+      "ad": "Güvenli ve gizlilik odaklı ürün tasarımı",
+      "ihtiyaclar": [
+        {
+          "id": "N-K34-003",
+          "baslik": "Kötüye kullanım ve suistimal senaryoları",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K35",
+      "ad": "Mimari uygunluk ve sürdürülebilir kod sağlığı",
+      "ihtiyaclar": [
+        {
+          "id": "N-K35-002",
+          "baslik": "Modülerlik ve mimari sağlık metriklerinin zaman serisi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K35-004",
+          "baslik": "Teknik borç kaydı ve yönetimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K35-005",
+          "baslik": "Yapay zekâ üretimi kodun uzun vadeli bakım kanıtı (köken kohortu)",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    }
+  ],
+  "cemberin_disindaki_eksikler": [
+    {
+      "kume": "K01",
+      "ad": "Talep, görev tanımı ve hazır olma",
+      "ihtiyaclar": [
+        {
+          "id": "N-K01-013",
+          "baslik": "Görev spesifikasyonu şemasının kendi sürümlemesi",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K02",
+      "ad": "Backlog, ayrıştırma, bağımlılık ve önceliklendirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K02-003",
+          "baslik": "Yinelenen, eskimiş ve birleşmesi gereken kayıtların tespiti",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K02-010",
+          "baslik": "İşin ajana uygunluğunun sınıflandırılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K02-013",
+          "baslik": "Görev boyutu ve küçük parti sınırı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K03",
+      "ad": "Kod tabanı bağlamı ve mimari sınırlar",
+      "ihtiyaclar": [
+        {
+          "id": "N-K03-011",
+          "baslik": "Arayüz sürümleme, geriye uyumluluk ve veri şeması evrimi",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K05",
+      "ad": "Doğrulama, test oracle ve kalite kapıları",
+      "ihtiyaclar": [
+        {
+          "id": "N-K05-031",
+          "baslik": "Kabul kanıtının geçerlilik bağlamı ve koşul değişince yeniden açılması",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K06",
+      "ad": "Entegrasyon, sürüm kontrolü ve yayın",
+      "ihtiyaclar": [
+        {
+          "id": "N-K06-008",
+          "baslik": "Geri alma, kademeli yayın ve özellik bayrağı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K06-009",
+          "baslik": "Veri şeması göçünün güvenli yürütülmesi",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K07",
+      "ad": "Dokümantasyon ve kurumsal bilgi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K07-004",
+          "baslik": "Örtük kurumsal bilginin yazıya dökülmesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K08",
+      "ad": "Geri bildirim, işletim ve sürekli iyileştirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K08-005",
+          "baslik": "Ajan kaynaklı değişikliklerin üretim etkisinin izlenmesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K08-006",
+          "baslik": "Olaylardan kural ve yetenek paketine geri besleme",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K08-008",
+          "baslik": "Ekipler arası olay örüntüsü analizi ve ortak ders havuzu",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K09",
+      "ad": "Model erişimi, seçimi ve barındırma",
+      "ihtiyaclar": [
+        {
+          "id": "N-K09-013",
+          "baslik": "Model sürüm sabitleme ve kayma izleme",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K10",
+      "ad": "Ajan çalışma çerçevesi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K10-006",
+          "baslik": "Koordinasyon topolojisinin bilinçli seçimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K10-010",
+          "baslik": "Açıklama isteme ve 'görev imkânsız' sinyali",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K11",
+      "ad": "Yetenek paketleri, kurallar ve talimat yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K11-003",
+          "baslik": "Katmanlı kural yönetimi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K11-004",
+          "baslik": "Kural ve yetenek paketi etkinliğinin ölçülmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K11-008",
+          "baslik": "Kural ve talimat dosyası bütünlüğü",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K12",
+      "ad": "Araç ve bağlam erişim protokolü, entegrasyonlar",
+      "ihtiyaclar": [
+        {
+          "id": "N-K12-002",
+          "baslik": "Onaylı araç kataloğu ve araç başına yetki",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K12-006",
+          "baslik": "Bağımsız ajan servisleri arası protokol",
+          "zorunluluk": "opsiyonel"
+        }
+      ]
+    },
+    {
+      "kume": "K14",
+      "ad": "Bağlam, bilgi erişimi ve bellek",
+      "ihtiyaclar": [
+        {
+          "id": "N-K14-008",
+          "baslik": "Bağlam penceresi bütçesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K14-009",
+          "baslik": "Bilgi tazeliği denetimi",
+          "zorunluluk": "opsiyonel"
+        },
+        {
+          "id": "N-K14-010",
+          "baslik": "Bilgi düzeltmesinin türevlere yayılması ve eski kopyadan geri dönüşün önlenmesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K15",
+      "ad": "Çalışma ortamı, izolasyon ve kapasite",
+      "ihtiyaclar": [
+        {
+          "id": "N-K15-003",
+          "baslik": "Test verisi yönetimi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K15-004",
+          "baslik": "Ajanın üretim kimliği olmaması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K15-005",
+          "baslik": "Hesaplama ve sürekli entegrasyon kapasitesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K15-006",
+          "baslik": "Ekipler arası adil kaynak paylaşımı",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K16",
+      "ad": "Ajan platformunun işletimi ve sürdürülebilirliği",
+      "ihtiyaclar": [
+        {
+          "id": "N-K16-001",
+          "baslik": "Hattın hizmet seviyesi hedefleri",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K16-002",
+          "baslik": "Hat olay yönetimi ve işletim dokümanları",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K16-003",
+          "baslik": "Global duraklatma ve acil durdurma",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K16-007",
+          "baslik": "Bozulmuş mod",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K16-008",
+          "baslik": "Platform sahipliği",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K16-010",
+          "baslik": "Bileşen değişimi ve devreden çıkarmada iş anlamının taşınması ve açık kayıp",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K17",
+      "ad": "İnsan gözetimi, onay ve eskalasyon",
+      "ihtiyaclar": [
+        {
+          "id": "N-K17-004",
+          "baslik": "Bekleme süreleri ve eskalasyon",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K17-005",
+          "baslik": "Onay ve inceleme kapasitesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K17-010",
+          "baslik": "'Değerlendiremiyorum' hakkı ve onaycı için anlamlı kontrol koşulları",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K18",
+      "ad": "Güvenlik, yetkilendirme ve gizlilik",
+      "ihtiyaclar": [
+        {
+          "id": "N-K18-003",
+          "baslik": "Ajan kimliği ve en az yetki",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-005",
+          "baslik": "İstem enjeksiyonuna dayanıklı tasarım",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-006",
+          "baslik": "Model çıktısının güvenli işlenmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-008",
+          "baslik": "Tedarik zinciri güvenliği",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K18-011",
+          "baslik": "İz ve loglarda kişisel veri ve sır maskeleme",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K18-012",
+          "baslik": "Ajan hattına kırmızı takım testi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K18-013",
+          "baslik": "Geliştirici makinelerindeki ajan araçlarının güvenliği",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K18-014",
+          "baslik": "Adına işlem yapılan taraf ile yürütücünün ayrılması ve yetki iptalinin yayılması",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K19",
+      "ad": "İzlenebilirlik, gözlemlenebilirlik ve denetim",
+      "ihtiyaclar": [
+        {
+          "id": "N-K19-005",
+          "baslik": "Yeniden üretilebilirlik",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K19-006",
+          "baslik": "İnsan katkısının kaydı",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K19-007",
+          "baslik": "Program ve ekip görünürlüğü",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K20",
+      "ad": "Bütçe, maliyet ve deneme politikası",
+      "ihtiyaclar": [
+        {
+          "id": "N-K20-006",
+          "baslik": "Uzun kuyruklu maliyet dağılımının yönetimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K20-007",
+          "baslik": "Maliyetin ekip, ART ve portföye atfı ve kotalar",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K20-009",
+          "baslik": "Spesifikasyon kalitesinin maliyet kontrolü olarak ele alınması",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K21",
+      "ad": "Risk yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K21-005",
+          "baslik": "Program risk kaydı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K21-007",
+          "baslik": "Yapay zekâ etki değerlendirmesi",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K22",
+      "ad": "Uyum, hukuk ve lisans",
+      "ihtiyaclar": [
+        {
+          "id": "N-K22-003",
+          "baslik": "Üretilen kodun fikri mülkiyeti",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K22-005",
+          "baslik": "Kişisel veri, veri yerelliği ve yurt dışı aktarım",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K22-006",
+          "baslik": "Yapay zekâ düzenlemeleri ve insan gözetimi yükümlülükleri",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K22-007",
+          "baslik": "Siber güvenlik ve ürün sorumluluğu yükümlülükleri",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K22-008",
+          "baslik": "Sağlayıcı yönetimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K22-009",
+          "baslik": "Saklama ve silme politikası",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K22-010",
+          "baslik": "Kurum yapay zekâ politikası ve yönetim sistemi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K22-011",
+          "baslik": "Dış projelerin yapay zekâ katkı politikalarına uyum",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K23",
+      "ad": "Değerlendirme ve ölçüm",
+      "ihtiyaclar": [
+        {
+          "id": "N-K23-006",
+          "baslik": "Teslim, akış ve kalite metrikleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-007",
+          "baslik": "Ajan ve ekonomi metrikleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-008",
+          "baslik": "Algılanan ile ölçülen verimlilik farkı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-011",
+          "baslik": "Hile ve ödül istismarı tespiti",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-012",
+          "baslik": "Üretim içi değerlendirme",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K23-013",
+          "baslik": "Pilot başarı ölçütleri ve yaygınlaştırma karar kuralı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-014",
+          "baslik": "Kod sağlığı ve bakım borcu izleme",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K23-015",
+          "baslik": "Çalışma sisteminin insan deneyimi boyutlarıyla ölçülmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-016",
+          "baslik": "Değerlendirme örneklerinin kökeni, kullanım geçmişi ve sızıntı sınırı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K23-017",
+          "baslik": "İyileşme iddialarının karşılaştırılabilir ve yanlısız ölçülmesi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K24",
+      "ad": "Ölçekli çevik koordinasyon",
+      "ihtiyaclar": [
+        {
+          "id": "N-K24-001",
+          "baslik": "Ekip sayısı belirsizliğine dayanıklı yapı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-002",
+          "baslik": "Portföy ve program katmanıyla hizalanma",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K24-003",
+          "baslik": "Ekipler ve depolar arası bağımlılık",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-004",
+          "baslik": "Ajan platformunun paylaşılan hizmet ve sahibi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-005",
+          "baslik": "Ajan altyapısı için etkinleştirici işler",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-006",
+          "baslik": "Program artımı planlamasına girdiler",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-007",
+          "baslik": "Ortak kurallar ile ekip-özel kuralların ayrımı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-008",
+          "baslik": "Ortak sıcak nokta dosyalarının sahipliği",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-009",
+          "baslik": "İnceleme ve uyarlama döngüsüne ajan olayları",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-010",
+          "baslik": "Ekip ekip yaygınlaştırma kriterleri",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-011",
+          "baslik": "Ekip bileşimi değişkenliğine uygun ölçüm",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-012",
+          "baslik": "PI planlamasında ajan kaynaklı ekipler arası yükün ve ara yeniden hizalama noktalarının planlanması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K24-013",
+          "baslik": "İnceleme ve uyarlamada insan tarafı bulgular ve çalışma sistemi değişiklik kararları",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K25",
+      "ad": "Roller, yetkinlik ve değişim yönetimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K25-002",
+          "baslik": "SAFe rolleriyle eşleme",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K25-003",
+          "baslik": "Yeni rol ve yetkinlik ihtiyaçları",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K25-004",
+          "baslik": "Sorumluluk matrisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K25-005",
+          "baslik": "Yapay zekâ okuryazarlığı ve eğitim",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K25-006",
+          "baslik": "Beceri körelmesine karşı önlem",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K25-007",
+          "baslik": "Güven ve benimseme",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K25-009",
+          "baslik": "Değişim iletişimi ve geri bildirim kanalı",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K26",
+      "ad": "İş takip sistemi ve iş kalemi yaşam döngüsü",
+      "ihtiyaclar": [
+        {
+          "id": "N-K26-005",
+          "baslik": "Toplu içe aktarma ve şema sürümü",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K26-006",
+          "baslik": "Sprint ve program görünürlüğü",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K27",
+      "ad": "İnsan–ajan iş birliği modeli, yetki devri ve iş devri",
+      "ihtiyaclar": [
+        {
+          "id": "N-K27-001",
+          "baslik": "İş birliği modu kataloğu ve iş türüne göre mod seçimi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-003",
+          "baslik": "İnsandan ajana görev devrinde etkileşim sözleşmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-005",
+          "baslik": "Ajanlar arası devirde belirsizlik, doğrulanmayanlar ve taahhütlerin aktarılması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-006",
+          "baslik": "Yarım kalan işin taraflar arası devralınması ve insan düzenlemelerinin korunması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-007",
+          "baslik": "Gözetim sorumluluğunun devri ve vekâlet",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K27-008",
+          "baslik": "Ortak çalışma alanında kalem sahipliği ve farkındalık",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-009",
+          "baslik": "Etkileşimli ve hat içi ajan çalışmasının eşdeğer güvencesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-010",
+          "baslik": "İnsan talimatına itiraz ve anlaşmazlık protokolü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K27-011",
+          "baslik": "Ajanlar arası anlaşmazlıkta hakemlik ve insana eskalasyon",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K28",
+      "ad": "Ortak bağlam, yönlendirme ve inceleme ergonomisi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K28-002",
+          "baslik": "Yürütme sırasında durumu koruyarak yönlendirme",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-004",
+          "baslik": "Canlı çalışma anlatısı ve gerekçeli karar günlüğü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-005",
+          "baslik": "Varsayım günlüğü ve varsayımların incelemede sunulması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-007",
+          "baslik": "İncelemeye hazır değişiklik paketleme ve inceleme bütçesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-009",
+          "baslik": "İnsan dikkat bütçesi, bildirim politikası ve gözetim kapsamı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K28-010",
+          "baslik": "Karar vermeye hazır, kendi kendine yeten insan istekleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K28-011",
+          "baslik": "Karar anında güven kalibrasyonu bilgisi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K28-012",
+          "baslik": "Aşırı ve yetersiz güvenin davranışsal ölçümü",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K28-014",
+          "baslik": "İnceleyici dikkatinin bilinen kusur yerleştirmeyle ölçülmesi",
+          "zorunluluk": "olcege_bagli"
+        }
+      ]
+    },
+    {
+      "kume": "K29",
+      "ad": "Karşılıklı öğrenme ve insan yetkinliğinin gelişimi",
+      "ihtiyaclar": [
+        {
+          "id": "N-K29-001",
+          "baslik": "İnsan düzeltmelerinin yapılandırılmış yakalanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K29-002",
+          "baslik": "Düzeltme döngüsünün insana kapatılması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K29-003",
+          "baslik": "Ajanın ekibe alıştırılması ve deneme dönemi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K29-004",
+          "baslik": "Öğrenme odaklı çalışma kipi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K29-005",
+          "baslik": "İnsanlara ayrılmış gelişim işleri ve çıraklık yolu",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K29-006",
+          "baslik": "Yetkinliğe bağlı inceleme ve onay yetkisi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K29-007",
+          "baslik": "Beceri körelmesinin iş akışı içi öncü göstergeleri",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K29-008",
+          "baslik": "İnsan–ajan birleşiminin tamamlayıcılık ölçümü",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K29-009",
+          "baslik": "Katkı kökeninin ayrıntılı kaydı ve amaca bağlı kullanımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K29-010",
+          "baslik": "Ekip düzeyinde insan–ajan çalışma anlaşması ve iş birliği retrospektifi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K29-011",
+          "baslik": "İnsan–ajan çalışma becerisinin uygulamalı kazandırılması",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K30",
+      "ad": "Ekip çalışma sistemi: anlaşmalar, ritimler ve sürekli iyileştirme",
+      "ihtiyaclar": [
+        {
+          "id": "N-K30-001",
+          "baslik": "Ekip düzeyinde yazılı ve sürümlü insan–ajan çalışma anlaşması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-002",
+          "baslik": "Yapay zekâ ve ajan katkısının açıklanması normu; açıklamanın cezalandırılmaması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-004",
+          "baslik": "Sprint kapasitesinin insan dikkat kapasitesi üzerinden planlanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-005",
+          "baslik": "Ajan geçişinde tahmin tabanının yeniden kurulması ve olasılıksal öngörü",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K30-006",
+          "baslik": "Sprint planlama ve günlük koordinasyonun insan–ajan işine uyarlanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-007",
+          "baslik": "Sprint gözden geçirmede 'nasıl üretildi' şeffaflığı ve insan paydaş kabulü",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-008",
+          "baslik": "Ajan izleri ve insan deneyimiyle beslenen suçlamasız retrospektif",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-009",
+          "baslik": "Çalışma sisteminin sürümlü bir ürün olarak yönetilmesi ve deneyle değiştirilmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K30-010",
+          "baslik": "Ajanın ekip içindeki konumu ve insanlara yönelik etkileşim sınırları",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K31",
+      "ad": "Ekipler arası iş birliği, sahiplik ve sosyo-teknik yapı",
+      "ihtiyaclar": [
+        {
+          "id": "N-K31-001",
+          "baslik": "Kod alanı sahipliği kataloğu ve ajan değişikliğinde dört rolün ayrımı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K31-002",
+          "baslik": "Hesap verebilirliğin gerçek kontrol koşuluna ve 'görev yerine getirildi' kanıtına bağlanması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K31-003",
+          "baslik": "Ekip sınırını aşan ajan değişiklikleri için protokol ve 'alanın kuralı geçerlidir' ilkesi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-004",
+          "baslik": "Ortak kural ve yetenek paketi deposuna iç kaynak katkı modeli",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-005",
+          "baslik": "Ekipler arası ajan çakışmalarının iş başlamadan tespiti ve kademeli çözüm yolu",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-006",
+          "baslik": "Ajan yeteneklerinin ekip topolojisindeki yeri ve ekipler arası etkileşim modları",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-007",
+          "baslik": "Ekip bilişsel yükünün ölçülmesi ve sorumluluk alanının buna göre ayarlanması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-008",
+          "baslik": "Sosyo-teknik uyumun izlenmesi: Conway etkisi ve ajan kaynaklı mimari kayma",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-009",
+          "baslik": "İnsan–ajan pratikleri için uygulama toplulukları ve ekipler arası bilgi akışı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-010",
+          "baslik": "Ajan kaynaklı ramak kala olaylarının ve derslerin ekipler arası suçlamasız yayılması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K31-011",
+          "baslik": "Dağıtık ve hibrit ekiplerde insan–ajan eşgüdümü ve eşzamansız devir standardı",
+          "zorunluluk": "kosullu"
+        }
+      ]
+    },
+    {
+      "kume": "K32",
+      "ad": "Çalışan hakları, iş güvencesi ve insan sürdürülebilirliği",
+      "ihtiyaclar": [
+        {
+          "id": "N-K32-001",
+          "baslik": "Ajan telemetrisi ve çalışan verisinde amaç sınırlaması, ölçülülük ve aydınlatma",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-002",
+          "baslik": "Ajan verisinin bireysel performans, terfi ve iş sonlandırma kararlarında kullanım sınırı; değerlendirmede adalet",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-003",
+          "baslik": "Ajanlı çalışmaya geçişte çalışma koşulu değişikliklerinin, iç düzenlemelerin ve çalışanın zarar sorumluluğunun iş hukukuna uygun ele alınması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-004",
+          "baslik": "Çalışan temsilcileri ve (varsa) işyeri sendika temsilcileriyle danışma süreci",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-005",
+          "baslik": "Ajanlı çalışmanın psikososyal risk değerlendirmesine ve iş yükü sınırlarına eklenmesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-006",
+          "baslik": "İş güvencesi kaygısına yönelik dürüst iletişim ve işgücü geçiş taahhütleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-007",
+          "baslik": "Psikolojik güvenliğin ölçülmesi; ajan hatasını, anlamadığını ve itirazı dile getirmenin korunması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K32-008",
+          "baslik": "Rol evrimi için kariyer basamaklarının ve rol geçiş yollarının yeniden tanımlanması",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K32-009",
+          "baslik": "Genç çalışanların gelişim yolunun korunması ve kıdemli yetiştirme hattı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K32-010",
+          "baslik": "İnsan–ajan çalışma sistemine ve kod tabanına işe alıştırma programı",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K33",
+      "ad": "Ürün güvenilirlik mühendisliği ve işletilebilirlik",
+      "ihtiyaclar": [
+        {
+          "id": "N-K33-001",
+          "baslik": "Hizmet ve bileşen kritiklik kademeleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-002",
+          "baslik": "Kullanıcı yolculuğuna dayalı SLI/SLO kataloğu",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-003",
+          "baslik": "Onaylı hata bütçesi politikası",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-005",
+          "baslik": "Yapılandırma, bayrak ve veri düzlemi değişikliklerinin güvencesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-006",
+          "baslik": "Üretime hazırlık ve işletilebilirlik incelemesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-007",
+          "baslik": "Tasarımdan gözlemlenebilirlik",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-008",
+          "baslik": "Belirti temelli ve bütçe yanma hızına dayalı uyarı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K33-009",
+          "baslik": "Ürün dayanıklılık deneyleri ve oyun günleri",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K33-010",
+          "baslik": "Ürün için geri yükleme ve felaket kurtarma hedefleri",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-011",
+          "baslik": "Veri sözleşmeleri ve üretim veri kalitesi denetimi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K33-012",
+          "baslik": "Veri onarımı ve toplu veri düzeltmesinin güvenli yürütülmesi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K33-013",
+          "baslik": "Dış hizmet ve tedarikçi bağımlılıklarının çalışma zamanı güvenilirliği",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K33-014",
+          "baslik": "Ekipler arası iç hizmet sözleşmeleri ve bağımlılık SLO bileşimi",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K33-015",
+          "baslik": "Ekipler arası ortak güvenilirlik standardı",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K33-017",
+          "baslik": "Ajan üretimi bileşenlerin işletim sahipliği ve anlaşılabilirliği",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K34",
+      "ad": "Güvenli ve gizlilik odaklı ürün tasarımı",
+      "ihtiyaclar": [
+        {
+          "id": "N-K34-001",
+          "baslik": "Epik ve özellik düzeyinde ürün tehdit modellemesi",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K34-002",
+          "baslik": "Değişiklik düzeyinde güvenlik ilgisi triyajı ve tehdit modeli farkı",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K34-004",
+          "baslik": "Gizlilik tehdit modellemesi ve etki değerlendirmesi tetikleyicisi",
+          "zorunluluk": "kosullu"
+        },
+        {
+          "id": "N-K34-005",
+          "baslik": "Güvenli varsayılanlar ve onaylı başlangıç şablonları",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K34-006",
+          "baslik": "Kademeye göre güvenlik gereksinimi tabanı ve izlenebilirlik",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K34-007",
+          "baslik": "Yapay zekâ üretimi kodun zayıflık profiline göre hedefli güvenlik doğrulaması",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K34-008",
+          "baslik": "Zafiyetten tasarım dersine: kök neden ve varyant analizi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    },
+    {
+      "kume": "K35",
+      "ad": "Mimari uygunluk ve sürdürülebilir kod sağlığı",
+      "ihtiyaclar": [
+        {
+          "id": "N-K35-001",
+          "baslik": "Çalıştırılabilir mimari kurallar (uygunluk fonksiyonları)",
+          "zorunluluk": "zorunlu"
+        },
+        {
+          "id": "N-K35-003",
+          "baslik": "Ekipler arası sınır ihlali tespiti ve ART düzeyi mimari kurallar",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K35-006",
+          "baslik": "Özellik bayrağı ve ölü kod yaşam döngüsü",
+          "zorunluluk": "olcege_bagli"
+        },
+        {
+          "id": "N-K35-007",
+          "baslik": "Ürün bağımlılıklarının sağlık ve güncellik yönetimi",
+          "zorunluluk": "zorunlu"
+        }
+      ]
+    }
+  ],
+  "cembere_girmesi_gerekenler": [
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "İnsan ve ajanın birlikte çalışma modeli (iş birliği biçimleri, iş devri, yönlendirme, güven)",
+      "ihtiyaclar": [
+        "N-K27-001",
+        "N-K27-002",
+        "N-K27-003",
+        "N-K27-004",
+        "N-K27-005",
+        "N-K27-006"
+      ],
+      "gerekce": "Amaç tanımının merkezinde; mevcut tasarım insanı yalnız onaylayıcı olarak konumluyordu."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Ekip çalışma anlaşmaları ve çok ekipli iş birliği",
+      "ihtiyaclar": [
+        "N-K30-001",
+        "N-K30-002",
+        "N-K30-003",
+        "N-K30-004",
+        "N-K30-005",
+        "N-K30-006"
+      ],
+      "gerekce": "Ekiplerin ajanlarla ve birbirleriyle nasıl çalışacağı tanımlanmadan ölçeklenemez."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Güvenilirlik mühendisliği, güvenli tasarım ve mimari uygunluk",
+      "ihtiyaclar": [
+        "N-K33-001",
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-004",
+        "N-K33-005",
+        "N-K33-006"
+      ],
+      "gerekce": "'Güvenilir yazılım' test sonucundan fazlasıdır; üretimdeki davranış ve tasarım kalitesiyle gösterilir."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Çok ekip ve SAFe yapısına dayanıklılık",
+      "ihtiyaclar": [
+        "N-K24-001",
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-004"
+      ],
+      "gerekce": "Ölçek belirsiz olduğu için yapı ilk günden çok kiracılı düşünülmezse yeniden tasarım gerekir."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "İnsan karar hakları ve rol sınıfları",
+      "ihtiyaclar": [
+        "N-K17-001",
+        "N-K17-003",
+        "N-K25-001",
+        "N-K25-002",
+        "N-K25-004"
+      ],
+      "gerekce": "Karar sahibi olmayan kapılar akışı durdurur."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Ajan hattına özgü güvenlik tehdit modeli",
+      "ihtiyaclar": [
+        "N-K18-005",
+        "N-K18-003",
+        "N-K18-004",
+        "N-K18-008",
+        "N-K18-010"
+      ],
+      "gerekce": "Güvenlik sonradan eklenemez; mimariyi belirler."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Veri sınıfı, barındırma ve hukuki çerçeve",
+      "ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-001",
+        "N-K22-003",
+        "N-K09-009"
+      ],
+      "gerekce": "Model ve barındırma kararı bunlara bağlı."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Ölçüm programı ve kurum görev seti",
+      "ihtiyaclar": [
+        "N-K23-001",
+        "N-K23-006",
+        "N-K23-007",
+        "N-K23-013"
+      ],
+      "gerekce": "Başlangıç değeri olmadan etki ölçülemez; araç seçimi görev setine dayanmalı."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Tek politika: bütçe, risk ölçeği, durum modeli, DoD",
+      "ihtiyaclar": [
+        "N-K20-001",
+        "N-K21-001",
+        "N-K26-001",
+        "N-K05-027"
+      ],
+      "gerekce": "Çelişkili tanımlar koda dökülürse ölçekte çoğalır."
+    },
+    {
+      "oncelik": "P1",
+      "zamanlama": "Planlamadan önce çembere girmeli",
+      "tema": "Ölçümün geçerliliği: seçilim, bırakılan iş, çift sayım ve değerlendirme kirlenmesi",
+      "ihtiyaclar": [
+        "N-K23-017",
+        "N-K23-016"
+      ],
+      "gerekce": "Pilot sonucu yaygınlaştırma kararının girdisidir; seçilim yanlılığı ve kirlenmiş değerlendirme bu kararı sessizce bozar. (E1 karşılaştırması, S-095)"
+    },
+    {
+      "oncelik": "P2",
+      "zamanlama": "Pilot sırasında çembere girmeli",
+      "tema": "Platform işletimi",
+      "ihtiyaclar": [
+        "N-K16-003",
+        "N-K16-002",
+        "N-K16-009",
+        "N-K16-007"
+      ],
+      "gerekce": "Pilot, arıza senaryolarının ilk tatbik edileceği yer."
+    },
+    {
+      "oncelik": "P2",
+      "zamanlama": "Pilot sırasında çembere girmeli",
+      "tema": "İnceleme kapasitesi ve kademeli otonomi",
+      "ihtiyaclar": [
+        "N-K17-005",
+        "N-K17-007",
+        "N-K02-013"
+      ],
+      "gerekce": "İlk darboğaz insan incelemesi olacak."
+    },
+    {
+      "oncelik": "P2",
+      "zamanlama": "Pilot sırasında çembere girmeli",
+      "tema": "Test gücü, kararsız testler ve hile tespiti",
+      "ihtiyaclar": [
+        "N-K05-009",
+        "N-K05-013",
+        "N-K23-011"
+      ],
+      "gerekce": "Yeşil testin anlamını korur."
+    },
+    {
+      "oncelik": "P2",
+      "zamanlama": "Pilot sırasında çembere girmeli",
+      "tema": "Kural ve paket etkinliği ölçümü",
+      "ihtiyaclar": [
+        "N-K11-004",
+        "N-K10-006"
+      ],
+      "gerekce": "20+ rol ve kural dosyasının gerçekten fayda sağladığı ölçülmeli."
+    },
+    {
+      "oncelik": "P2",
+      "zamanlama": "Pilot sırasında çembere girmeli",
+      "tema": "Geri alma ve kademeli yayın",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K08-005"
+      ],
+      "gerekce": "Üretime bağlanmadan önce gerekli."
+    },
+    {
+      "oncelik": "P2",
+      "zamanlama": "Pilot sırasında çembere girmeli",
+      "tema": "Kanıt ve bilginin geçerlilik bağlamı; yetki iptalinin yayılımı",
+      "ihtiyaclar": [
+        "N-K05-031",
+        "N-K14-010",
+        "N-K18-014"
+      ],
+      "gerekce": "Pilotta ilk model, kural ve bellek düzeltmeleri yaşanacak; eski kabulün ve eski iznin yeni koşulda sessizce sürmesi burada görünür olur. (E1 karşılaştırması, S-095)"
+    },
+    {
+      "oncelik": "P3",
+      "zamanlama": "Ölçeklenirken çembere girmeli",
+      "tema": "Ekipler arası adil kaynak ve kural katmanları",
+      "ihtiyaclar": [
+        "N-K15-006",
+        "N-K11-003",
+        "N-K24-007",
+        "N-K24-008"
+      ],
+      "gerekce": "3+ ekipte zorunlu hale gelir."
+    },
+    {
+      "oncelik": "P3",
+      "zamanlama": "Ölçeklenirken çembere girmeli",
+      "tema": "Değişim yönetimi ve beceri koruma",
+      "ihtiyaclar": [
+        "N-K25-005",
+        "N-K25-006",
+        "N-K25-007"
+      ],
+      "gerekce": "Etkisi 3–6 ay sonra görünür."
+    },
+    {
+      "oncelik": "P3",
+      "zamanlama": "Ölçeklenirken çembere girmeli",
+      "tema": "Kod sağlığı ve olaylardan öğrenme",
+      "ihtiyaclar": [
+        "N-K23-014",
+        "N-K08-006"
+      ],
+      "gerekce": "Zamanla birikir."
+    },
+    {
+      "oncelik": "P3",
+      "zamanlama": "Ölçeklenirken çembere girmeli",
+      "tema": "Bileşen değişimi ve devreden çıkarmada iş anlamının taşınması",
+      "ihtiyaclar": [
+        "N-K16-010"
+      ],
+      "gerekce": "Yaygınlaştıkça bileşen ve sağlayıcı değişimleri sıklaşır ve birden çok ekibin geçmiş kanıtını etkiler. (E1 karşılaştırması, S-095)"
+    }
+  ],
+  "bilincli_disarida_kalanlar": [
+    {
+      "konu": "Araç, ürün, model ve sağlayıcı seçimi",
+      "gerekce": "Kullanıcı talimatı: ihtiyaç belirlenecek, araç belirlenmeyecek. Seçim bu haritadaki kabul ölçütlerine göre sonra yapılır."
+    },
+    {
+      "konu": "Projelendirme: takvim, sprint/PI planı, kişi ataması, parasal bütçe tutarı",
+      "gerekce": "Kullanıcı talimatı: projelendirme yapılmayacak; bu çalışma projelendirmenin girdisidir."
+    },
+    {
+      "konu": "Geliştirilecek ürünlerin kendi işlevsel gereksinimleri",
+      "gerekce": "Bu harita ürünleri geliştiren sistemin ihtiyaçlarını kapsar, ürünlerin değil."
+    },
+    {
+      "konu": "Model eğitimi veya ince ayar",
+      "gerekce": "Kaynaklarda kalıcılık, prosedürel öğrenme ve model eğitimi ayrı tutuluyor; model eğitimi ihtiyaç olarak çıkmadı."
+    },
+    {
+      "konu": "Mevcut yayın hattının yeniden tasarımı",
+      "gerekce": "Kaynak: mevcut sürüm adayı → üretim süreci değiştirilmez; yalnız devir noktası ihtiyaçtır."
+    }
+  ]
+}

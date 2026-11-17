@@ -1,0 +1,210 @@
+{
+  "task_id": "CONT-Q-S0036-4dca8ff9-A1",
+  "source": "agents/15Agentic.pdf",
+  "sha256": "1f0aaa382ac3f951ef0af70b568b5aa620d90bef391d078ba29d42c3ed786200",
+  "manifest": "/Users/w6x/Documents/otomasyon coding/.claude-denetim/live/catalog/prepared/1f0aaa382ac3f951ef0af70b568b5aa620d90bef391d078ba29d42c3ed786200/v2/manifest-0e4051590405b5402edc.json",
+  "result_state": "partial_unverified",
+  "unit_reviews": [
+    {
+      "unit_id": "p0001-text-exterior",
+      "source_locator": "p0001-text-exterior.json, sayfa 1, mode=exterior_text, visual_region=false, 28426 kelime kaydı, 255836 satır",
+      "status": "partial",
+      "items": [
+        {
+          "item_id": "EXT-01-kapsam",
+          "observation": "Dosyada 28426 kelime kaydı var. Her kayıtta yalnız text ve bbox alanı bulunuyor. İlk kaydın y değeri -42744, son kaydın y değeri 151310. x değeri -112820'ye kadar iniyor.",
+          "interpretation": "Kayıtlar görünen sayfa alanının çok dışında kalan geniş bir tuval bölgesinden geliyor. Görünen alan yaklaşık 3360 x 3040 birimdir.",
+          "evidence": "Satır 3-9 (dizin 0, \"Agent\"). Satır 255819-255835 (dizin 28425, \"Bektemür\"). Grep sayımı 28426."
+        },
+        {
+          "item_id": "EXT-02-okuma-sirasi",
+          "observation": "Kelimeler y değerine göre sıralanmış. Aynı y bandındaki farklı sütunlardan gelen kelimeler arka arkaya diziliyor.",
+          "interpretation": "Dosyadaki sıra cümle sırası değildir. Cümleleri yeniden kurmak için bbox değerlerine göre kümeleme gerekir. Bu görevde kümeleme yapılmadı.",
+          "evidence": "Satır 70806-70977 arası: \"definition-of-ready.agent\", \"angGrap\", \"gate\", \"git-scenario.agent\", \"commit\", \"Goose\", \"penHands\" aynı bantta karışık sırada."
+        },
+        {
+          "item_id": "EXT-03-harf-kaybi",
+          "observation": "Bazı metin parçalarında belirli harfler düşmüş. Örnekler: \"iin\" (için), \"teknoloi\", \"deavantaları\", \"Haır\", \"TelegramatsApp\", \"gateayi\", \"tet-firt.agent\", \"oie-firt.agent\", \"erforane.agent\", \"deendeny-riority.agent\", \"smail\", \"etin\", \"rontend\".",
+          "interpretation": "Kayıp düzenli görünüyor. c, ç, h, j, m, p, s, w, y, z ve İ, M, F gibi harfler bazı yazı tiplerinde düşüyor. Aynı kelime başka yerde tam çıkabiliyor. Bu nedenle metin katmanı birebir alıntı için güvenilir değildir.",
+          "evidence": "Satır 67161, 74226, 74235, 74244, 70869, 70941, 71013, 72030, 72039, 72048, 156, 138. Tam yazım örneği: satır 33816 \"test-first.agent\"."
+        },
+        {
+          "item_id": "EXT-04-tekrarlanan-katman",
+          "observation": "Aynı kelime dizileri küçük bir konum farkıyla iki kez geçiyor. Örneğin \"etin Bektemür\" 16 birim kaymayla iki kez var. \"Sentetik click ile yetinme\" dizisi de iki kez geçiyor.",
+          "interpretation": "Kaynakta üst üste binmiş veya gölge kopya metin nesneleri olabilir. Sayım yapılırsa aynı not iki kez sayılabilir.",
+          "evidence": "Satır 255801-255835. Satır 251130-251292 ile 251220-251283."
+        },
+        {
+          "item_id": "EXT-05-ajan-adlari",
+          "observation": "Dış metinde birçok ajan adı geçiyor. Bunlar: main-relation-map, module.relation.map, test-first, edge-case, performance, cluster, mobile-first, rules.master, gap-analysis, dependency-priority, solid, definition-of-ready, git-scenario, maturity-level, documentation, boundary, router, frontend-backend-router, authorization, common-common (bozuk yazım), web-research.",
+          "interpretation": "Görünen sayfadaki definition-of-ready.agent akışı, daha büyük bir ajan kataloğunun parçası gibi duruyor. Ajanlar arasındaki bağlantılar bu birimde görsel olarak doğrulanamadı.",
+          "evidence": "Grep sonuçları: satır 33600, 33816, 33897, 49845, 51420, 55254, 56199, 57234, 57450, 60510, 60636, 70806, 70833, 74118, 74136, 77367, 78132, 78798, 78807, 79761, 82263."
+        },
+        {
+          "item_id": "EXT-06-dor-metin-kopyalari",
+          "observation": "\"definition-of-ready.agent\" adı dış metinde en az üç yerde geçiyor. Satır 82479-83073 çevresinde görünen yapışkan notun sözcükleri var. Bu sözcükler: \"Coding'den önce DoR'u ... kontrol et: problem tanımı, scope, acceptance criteria\".",
+          "interpretation": "Görünen sayfadaki not metni tuvalin başka bölgelerinde de bulunuyor. Bu kopyalar görünen akışla aynı sürüm mü bilinmiyor.",
+          "evidence": "Satır 70806, 71535 ile 71886 (\"definition-of-\" ve \"ready.agent\" ayrı), 82272, 82479-82497, 82884-83046."
+        },
+        {
+          "item_id": "EXT-07-gorev-akisi-parcalari",
+          "observation": "Dosyanın başında görev akışı sözcükleri var. Bunlar: \"2. task\", \"IceBox\", \"Aksiyon planı\", \"Plane örnek task\", \"Standart Süre\", \"Frontend Backend\", \"Döngü\", \"max\", \"2 defa\", \"Error\", \"Kanban status\", \"aştı mı\", \"Devam\", \"Evet\", \"Hayır\", \"Product Backlog\".",
+          "interpretation": "Tuvalde Plane görevinden başlayan bir akış var gibi görünüyor. Bu akışta döngü sınırı ve Kanban durum adımı bulunuyor. Okun yönü ve kutu sınırları metinden çıkarılamaz.",
+          "evidence": "Satır 3-210 (dizin 0-22), 381-462 (dizin 42-51), 561-570 (dizin 62-63)."
+        },
+        {
+          "item_id": "EXT-08-model-ve-arac-adlari",
+          "observation": "Model ve araç adları geçiyor. Bunlar: smolagents, LangGraph (\"angGrap\"), Goose, OpenHands (\"penHands\"), Granite, Gemma, Nemotron Ultra (\"emotron ltra\"), NVIDIA (\"IDIA\"), Apache-2.0 (\"Apace -2.\"), MCP server, Telegram ve WhatsApp gateway.",
+          "interpretation": "Tuvalde bir model ve araç karşılaştırma tablosu olabilir. Sürüm, lisans ve ücret bilgileri bu birimden doğrulanamaz.",
+          "evidence": "Satır 70788, 70797, 70878, 70887, 71589, 82101, 82137, 83100-83118, 72021-72048."
+        },
+        {
+          "item_id": "EXT-09-tdd-ve-kabul-kurallari",
+          "observation": "TDD ve kabul sözcükleri geçiyor. Bunlar: \"RED kanıtı olmadan\", \"testleri geçirecek minimum kodu geliştirir\", \"Tüm testler geçmeden görev tamamlanamaz\", \"GREEN\", \"görevi Done sayma\", \"blocker ... değildir\".",
+          "interpretation": "Kaynakta önce başarısız test kuralı ve Done koşulu yazılmış görünüyor. Cümle sınırları kesin değildir.",
+          "evidence": "Satır 71319-71355, 71742-71805, 72588-72633, 72291-72309, 71256-71274."
+        },
+        {
+          "item_id": "EXT-10-dogrulayici-model-senaryosu",
+          "observation": "Bir hata senaryosu sözcükleri var. Bunlar: \"bu testi şimdilik atla diyerek devre dışı bırakıyor\", \"Test artık çalışmıyor\", \"kimse fark etmiyor\", \"Doğrulayıcı model güncellendikten sonra\", \"9 ... 'ten ... 'e düşerse\", \"onayı vermekten geçici olarak men edilir\".",
+          "interpretation": "Kaynak, test atlama ve doğrulayıcı model sapmasını yanlış kabul riski olarak tartışıyor. Sayıların tam değeri harf kaybı nedeniyle okunamadı.",
+          "evidence": "Satır 180363-180615, 180624-180759, 180876-180921."
+        },
+        {
+          "item_id": "EXT-11-tarayici-test-kurallari",
+          "observation": "Tarayıcı testi sözcükleri geçiyor. Bunlar: \"Sentetik click ile yetinme\", \"fiziksel\", \"headless\", \"soğuk ve yavaş\", \"dokunma yolculuğu\", \"Ağ kısıtlı koşumda font\", \"sürükleme ve bırakma sıralaması\", \"gerçek cihaz kabul kapısına taşı\".",
+          "interpretation": "Kaynak sentetik tıklamayı yeterli kabul kanıtı saymıyor. Gerçek cihaz kontrolünü kabul kapısına bağlıyor.",
+          "evidence": "Satır 251130-252174."
+        },
+        {
+          "item_id": "EXT-12-guvenlik-ve-veri-sozcukleri",
+          "observation": "Güvenlik ve veri sözcükleri geçiyor. Bunlar: \"Rebac, Abac, Permission\", \"RBAC ABAC ReBAC\", \"secret\", \"migration\", \"API event contract\", \"idempotency\", \"audit\", \"Güvenlik ve Gizlilik\".",
+          "interpretation": "Tuvalde yetki modeli ve sözleşme bütünlüğü için ayrı kontrol alanları olabilir. Kontrollerin sahibi ve sırası çıkarılamadı.",
+          "evidence": "Satır 1272-1290, 1371-1434, 1479-1533."
+        },
+        {
+          "item_id": "EXT-13-not-yazari-etiketleri",
+          "observation": "Notların altında kişi adı etiketleri sık geçiyor. Görülen etiketler: \"Ali Bora\", \"smail Karaca\" (İ düşmüş), \"etin Bektemür\" (M düşmüş), \"Sefa\".",
+          "interpretation": "Bunlar notu yazan kişiyi gösteriyor olabilir. Görev sahibi veya onay yetkisi anlamı taşıdığı bu birimden çıkarılamaz.",
+          "evidence": "Satır 156-165, 309-354, 72237-72282, 180147-180183, 255801-255835."
+        }
+      ],
+      "remaining": [
+        "Yaklaşık 1100 kelime kaydı örnek olarak okundu. Kalan yaklaşık 27300 kayıt okunmadı.",
+        "Birimde görsel dosya yok. Bu nedenle hiçbir kutu, ok veya çizgi görsel olarak doğrulanmadı.",
+        "Cümle sırası bbox kümelemesi yapılmadan kurulamaz. Kümeleme yapılmadı.",
+        "Ajanlar arasındaki bağlantılar ve okların yönü bilinmiyor.",
+        "Harf kaybı olan kelimelerin doğru yazımı başka kaynakla doğrulanmadı.",
+        "Tekrarlanan metin katmanlarının hangisinin geçerli olduğu bilinmiyor.",
+        "Görünen sayfadaki overview akışı ayrı birimlere aittir. Bu birimde yalnız bağlam için okundu."
+      ]
+    }
+  ],
+  "overview_context": {
+    "read": true,
+    "note": "Overview görseli bu birimin kapsamı değildir. Yalnız bağlam için okundu. Görünen akış şöyledir: \"Görev context'ini al\", \"Task spec'i incele\", \"DoR kriterlerini tara\", 8 kriter kutusu, \"Eksik bilgiyi tamamlat\", \"Kritik bilgi eksik mi?\" (max 2 döngü). \"Evet\" geri döner. \"Hayır\" \"Ready onayı ver\" adımına gider. \"döngü doldu\" \"Blocker raporla\" adımına gider."
+  },
+  "findings": [
+    {
+      "finding_id": "F-01",
+      "kind": "yanlış_kabul_riski",
+      "summary": "Manifest complete=true diyor. Ancak dış metin biriminin görsel dosyası yok.",
+      "detail": "Sözleşmeye göre görsel okunmadıysa metin katmanı görsel kanıt sayılmaz. Bu birimdeki 28426 kelimenin hiçbiri görsel olarak doğrulanamaz. Koordinatör bu birimi hazır ve tam saymamalı.",
+      "evidence": "manifest satır 183-190: visual_region=false, image alanı yok."
+    },
+    {
+      "finding_id": "F-02",
+      "kind": "veri_kalitesi",
+      "summary": "Metin katmanında düzenli harf kaybı var.",
+      "detail": "Bazı yazı tiplerinde c, ç, h, j, m, p, s, w, y, z gibi harfler düşüyor. Ajan adları da bozuluyor. Örneğin \"performance.agent\" bir yerde \"erforane.agent\" olarak geçiyor. Ad eşleştirmesi bu metne dayanırsa ajan eksik ya da yeni ajan gibi görünebilir.",
+      "evidence": "EXT-03."
+    },
+    {
+      "finding_id": "F-03",
+      "kind": "yanlış_kabul_riski",
+      "summary": "Tekrarlanan metin katmanları sayımı şişirebilir.",
+      "detail": "Aynı not iki kez çıkıyor. İhtiyaç veya kural sayımı yapılırsa aynı madde iki kez sayılabilir.",
+      "evidence": "EXT-04."
+    },
+    {
+      "finding_id": "F-04",
+      "kind": "iç_tutarlılık_açık",
+      "summary": "DoR metninin birden fazla kopyası var.",
+      "detail": "Görünen not ile dış metindeki kopyalar aynı mı bilinmiyor. Kopyalardan biri eski sürüm olabilir. Bu birimde karşılaştırma tamamlanmadı.",
+      "evidence": "EXT-06."
+    },
+    {
+      "finding_id": "F-05",
+      "kind": "kapasite",
+      "summary": "Birim tek bir inceleme görevi için fazla büyük.",
+      "detail": "Dosyada 255836 satır var. Tek görevde tam okunamaz. Birim bbox kümelerine bölünmeli. Her küme ayrı görev olmalı.",
+      "evidence": "EXT-01."
+    },
+    {
+      "finding_id": "F-06",
+      "kind": "dış_bağımlılık",
+      "summary": "Kaynak birçok dış model ve aracı anıyor.",
+      "detail": "smolagents, LangGraph, Goose, OpenHands, Granite, Gemma ve Nemotron adları geçiyor. Sürüm, lisans ve ücret bilgileri bu görevde doğrulanmadı.",
+      "evidence": "EXT-08."
+    },
+    {
+      "finding_id": "F-07",
+      "kind": "kesintiden_dönüş",
+      "summary": "Döngü sınırı var ama dönüş kuralı görünmüyor.",
+      "detail": "Dış metinde \"Döngü\", \"max\", \"2 defa\" ve \"aştı mı\" sözcükleri var. Kesinti sonrası döngü sayacının nasıl korunduğu kaynakta görünmüyor. Bu kural uydurulmadı.",
+      "evidence": "EXT-07."
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "X-01",
+      "purpose": "Harf kaybının çıkarma aracından mı kaynaktan mı geldiğini anlamak.",
+      "input": "agents/15Agentic.pdf sayfa 1. İkinci bir PDF metin çıkarıcı.",
+      "expected_evidence": "Aynı bbox için iki araçtaki kelimelerin karşılaştırması. Bozuk kelime oranı.",
+      "stop_condition": "İkinci araç da aynı harfleri düşürürse durun. Bu durumda görsel okuma gerekir.",
+      "status": "not_run"
+    },
+    {
+      "experiment_id": "X-02",
+      "purpose": "Dış bölgeyi görsel olarak doğrulamak.",
+      "input": "Sayfanın görünür alan dışındaki tuval bölgesinden üretilmiş parça görseller.",
+      "expected_evidence": "Kutu, ok ve not sınırlarını gösteren görseller.",
+      "stop_condition": "PDF dış bölgeyi çizmiyorsa durun. O zaman özgün tasarım dosyası gerekir.",
+      "status": "not_run"
+    },
+    {
+      "experiment_id": "X-03",
+      "purpose": "Okuma sırasını kurmak ve tekrarları ayıklamak.",
+      "input": "p0001-text-exterior.json bbox değerleri.",
+      "expected_evidence": "Not başına kelime kümeleri. Tekrar eden küme listesi.",
+      "stop_condition": "Kümeler not sınırlarıyla örtüşmezse durun ve görsel okumaya geçin.",
+      "status": "not_run"
+    }
+  ],
+  "tool_recommendations": [
+    {
+      "need": "Bozuk metni doğrulamak",
+      "proposal": "İkinci bir PDF metin çıkarıcıyla karşılaştırın. Bulunmazsa görsel okuyabilen dil modeli kullanın.",
+      "dot_candidate": "OpenDocRouter. Dot bunu belge okuma modellerini karşılaştırma adayı olarak önerdi.",
+      "verification": "Dot'un önerisi bu görevde güncel kaynaktan doğrulanmadı."
+    },
+    {
+      "need": "DoR kopyalarını karşılaştırmak",
+      "proposal": "Kümelenmiş metin blokları arasında metin farkı çıkarın.",
+      "dot_candidate": "OmniDiff. Dot bunu PDF ve metin farkı için önerdi.",
+      "verification": "Dot'un önerisi bu görevde güncel kaynaktan doğrulanmadı. Fark görünümü doğruluk kanıtı değildir."
+    },
+    {
+      "need": "Kural ile test kanıtını bağlamak",
+      "proposal": "Her kuralı kaynak konumu ve test kimliğiyle kaydedin.",
+      "dot_candidate": "Provenance. Dot bunu gereksinim ve test kanıtı bağlantısı için önerdi.",
+      "verification": "Dot'un önerisi bu görevde güncel kaynaktan doğrulanmadı. Aynı adlı ürünler karışabilir."
+    }
+  ],
+  "risks": {
+    "internal": "Metin katmanında harf kaybı ve tekrar var. Bu nedenle sayım ve ad eşleştirmesi yanlış çıkabilir.",
+    "external": "Kaynakta adı geçen modellerin ve araçların sürüm ve lisans bilgisi değişmiş olabilir.",
+    "sustainability": "Birim tek görevle okunamayacak kadar büyük. Bölünmezse her görev yalnız örnek okur ve kapsam açık kalır."
+  },
+  "report_markdown": "## p0001-text-exterior incelemesi\n\nBu birimin durumu \"partial\".\n\nDosyada 28426 kelime var. Yaklaşık 1100 kelime örnek olarak okundu.\n\nBirimin görsel dosyası yok. Bu yüzden kutu ve oklar doğrulanamadı.\n\n### Ana bulgular\n\n1. Metin katmanında harf kaybı var. Örneğin \"performance.agent\" bir yerde \"erforane.agent\" olarak çıkıyor.\n2. Bazı notlar iki kez geçiyor. Sayım yapılırsa aynı not iki kez sayılabilir.\n3. Kelimeler konum sırasıyla dizilmiş. Cümleler bu sırayla okunamaz.\n4. Dış metinde 20'den fazla ajan adı var. Örneğin test-first, edge-case ve git-scenario.\n5. DoR notunun birkaç kopyası var. Kopyaların aynı sürüm olup olmadığı bilinmiyor.\n6. Kaynak test atlamayı ve doğrulayıcı model sapmasını risk olarak anlatıyor.\n\n### Önerilen sonraki adımlar\n\n1. Koordinatör birimi bbox kümelerine bölsün.\n2. Dış bölge için görsel parçalar hazırlansın.\n3. Metin ikinci bir araçla yeniden çıkarılsın.\n\nBütün deneyler not_run durumunda. Dot'un araç önerileri güncel olarak doğrulanmadı.\n\nGerçek okurla denenmedi."
+}

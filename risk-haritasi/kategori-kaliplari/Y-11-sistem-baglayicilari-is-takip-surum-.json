@@ -1,0 +1,137 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-11",
+    "ad": "Sistem bağlayıcıları (iş takip, sürüm kontrolü, sürekli entegrasyon, doküman, iletişim kanalları)",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-106",
+      "yetenek_sinifi": "Y-11",
+      "kalip": "Entegrasyon OAuth token'larının toplu çalınması",
+      "aciklama": "Google Threat Intelligence, UNC6395 grubunun Salesloft Drift entegrasyonuna ait ele geçirilmiş OAuth token'larıyla Ağustos 2025'te çok sayıda Salesforce örneğinden veri çaldığını ve Drift ile bağlantılı tüm token'ların ele geçirilmiş sayılması gerektiğini duyurdu.",
+      "risk_turleri": [
+        "RT-02",
+        "RT-16",
+        "RT-08"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan bağlayıcılarının iş takip, sürüm kontrol, doküman ve mesajlaşma sistemleri için tuttuğu uzun ömürlü token'lar tek bir entegrasyon sağlayıcısı ele geçirildiğinde topluca kullanılabilir.",
+        "Bağlayıcı token'ı hangi ajan görevinde kullanıldığını kaydetmezse sızıntının kapsamı belirlenemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-003",
+        "N-K13-012",
+        "N-K26-002",
+        "N-K18-003"
+      ],
+      "ornek_araclar": [
+        "Salesloft Drift",
+        "Zapier",
+        "n8n",
+        "Atlassian/GitHub OAuth uygulamaları"
+      ],
+      "erken_sinyal": "Bağlayıcı token'ıyla alışılmadık hacimde sorgu veya dışa aktarma; yeni IP'lerden OAuth kullanımı.",
+      "azaltma": "Bağlayıcı başına en dar kapsam, kısa ömürlü token ve düzenli rotasyon, üçüncü taraf entegrasyon envanteri ve olağan dışı erişim alarmı."
+    },
+    {
+      "id": "RK-107",
+      "yetenek_sinifi": "Y-11",
+      "kalip": "Bağlı içerik üzerinden dolaylı istem enjeksiyonuyla veri sızdırma",
+      "aciklama": "PromptArmor, Slack AI'da saldırganın herkese açık kanala yazdığı talimatla üyesi olmadığı özel kanallardaki API anahtarlarını sızdırabildiğini gösterdi (Ağustos 2024). Invariant Labs, GitHub MCP entegrasyonunda kötü amaçlı bir issue ile ajanın özel depo verisini açık depoya sızdırtılabildiğini gösterdi (Mayıs 2025).",
+      "risk_turleri": [
+        "RT-03",
+        "RT-08"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://promptarmor.substack.com/p/data-exfiltration-from-slack-ai-via",
+        "https://invariantlabs.ai/blog/mcp-github-vulnerability"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dış kullanıcıların açabildiği iş kalemleri, hizmet masası kayıtları veya açık depo issue'ları ajan için talimat kaynağına dönüşür; ajan kurum içi özel depolardan veri taşıyabilir.",
+        "Aynı ajan hem okuma hem yazma bağlayıcısına sahipse sızdırma kanalı hazırdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-003",
+        "N-K12-004",
+        "N-K18-005",
+        "N-K14-005"
+      ],
+      "ornek_araclar": [
+        "GitHub MCP",
+        "Atlassian MCP",
+        "Slack AI",
+        "Microsoft 365 Copilot"
+      ],
+      "erken_sinyal": "Ajanın görev bağlamı dışındaki depo veya kanallara erişmesi; dış kaynaklı içerikten sonra açık hedeflere yazma.",
+      "azaltma": "Görev başına tek depo/proje kapsamı, güvenilmeyen içerik okuyan ajanda dış yazma yetkisinin kaldırılması, bağlayıcı eylemlerinin izlenmesi."
+    },
+    {
+      "id": "RK-108",
+      "yetenek_sinifi": "Y-11",
+      "kalip": "API hız sınırlarının çok ekipli ajan yükünde tıkanması",
+      "aciklama": "Sürüm kontrol ve iş takip API'leri kimlik başına saatlik sınır ve ikincil (eşzamanlılık) sınırlar uygular; GitHub REST API kullanıcı adına saatte 5.000, GitHub Enterprise Cloud uygulamaları için 15.000 istek sınırı ve ayrıca ikincil sınırlar tanımlar.",
+      "risk_turleri": [
+        "RT-12"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek bir entegrasyon kimliğini paylaşan 10+ ekibin ajanları aynı saatlik kotayı tüketir; sonuç yazma ve durum güncellemeleri gecikir veya kaybolur.",
+        "Toplu backlog içe aktarma aynı kimlikle çalışırsa geliştirici ajanlarının iş okuması engellenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-003",
+        "N-K26-005",
+        "N-K26-004"
+      ],
+      "ornek_araclar": [
+        "GitHub API",
+        "GitLab API",
+        "Jira Cloud REST API",
+        "Azure DevOps REST"
+      ],
+      "erken_sinyal": "403/429 yanıtlarında ve rate-limit-remaining değerinin sıfıra yaklaşma sıklığında artış.",
+      "azaltma": "Ekip veya iş türü başına ayrı uygulama kimliği, olay tabanlı (webhook) tasarım, istek birleştirme ve önbellek, toplu işlerin gece penceresine alınması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "yuksek": 20,
+    "orta": 90,
+    "dusuk": 75,
+    "kritik": 5
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 26,
+    "RT-03": 23,
+    "RT-01": 17,
+    "RT-14": 10,
+    "RT-07": 10,
+    "RT-16": 9,
+    "RT-12": 9,
+    "RT-17": 6,
+    "RT-13": 5,
+    "RT-10": 5,
+    "RT-15": 4,
+    "RT-04": 4,
+    "RT-06": 4,
+    "RT-02": 2,
+    "RT-09": 1,
+    "RT-11": 1,
+    "RT-05": 1
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K13",
+    "ad": "Orkestrasyon ve dayanıklı yürütme",
+    "alan": "B-ajan-platformu",
+    "amac": "Uzun süren, insan bekleyen, çok adımlı ajan işlerinin kesintiye dayanıklı, tek durum sahibiyle ve tekrarlanabilir biçimde yürütülmesi.",
+    "kapsam": [
+      "tek durum sahibi",
+      "kesintiden devam",
+      "insan bekleme",
+      "sınırlı ve sınıflandırılmış yeniden deneme",
+      "paralel alt süreçler",
+      "idempotent yan etkiler",
+      "iptal ve zaman aşımı",
+      "süreç ve politika sürümleme",
+      "hata yönlendirme",
+      "koşu başında bağlam sabitleme"
+    ],
+    "kapsam_disi": [
+      "bütçe değerleri (K20)",
+      "insan kararının kendisi (K17)"
+    ],
+    "komsu_kumeler": [
+      "K10",
+      "K17",
+      "K19",
+      "K20",
+      "K26"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K13-001",
+      "baslik": "Tek durum sahibi ve durum sahiplik matrisi",
+      "ihtiyac": "Her görevin yaşam döngüsünün, sayaçlarının ve beklemelerinin tek bir durum sahibi tarafından tutulması; her durum alanının tek yazarı olması.",
+      "cozulecek_sorun": "İki motorun aynı görevi sürmesi (bölünmüş beyin); birden çok yeniden deneme sahibinin maliyeti ve yan etkiyi katlaması.",
+      "yetenek_siniflari": [
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her durum alanının tek yazarı var.",
+        "İkinci bir sistem aynı görevi başlatamıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-061",
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-018",
+        "D-001",
+        "R-021"
+      ]
+    },
+    {
+      "id": "N-K13-002",
+      "baslik": "Kesintiden devam",
+      "ihtiyac": "Süreç, işçi veya sunucu çökmesinden sonra aynı koşunun, aynı onay referanslarıyla kaldığı adımdan sürmesi; uzun ajan adımlarının sınırlı alt adımlara bölünmesi.",
+      "cozulecek_sorun": "Uzun işler kesintide kayboluyor; tek opak adım çökmede saatlerce baştan koşuyor.",
+      "yetenek_siniflari": [
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Çökme tatbikatında koşu kaldığı yerden devam ediyor ve yan etki tekrarlanmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-021",
+          "S-062",
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K13-003",
+      "baslik": "Günlerce insan bekleme",
+      "ihtiyac": "Ürün sahibi, kalite veya teknik lider kararı beklenirken koşunun kaynak tüketmeden beklemesi, cevap gelince aynı aşamadan sürmesi.",
+      "cozulecek_sorun": "Bekleme sırasında süreç kayboluyor ya da işçi meşgul kalıyor.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-31"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Bekleme sırasında servis yeniden başlasa da aynı koşu ve onay referansı sürüyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-061",
+          "S-006"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K13-004",
+      "baslik": "Dış yan etkilerde idempotency ve uzlaştırma",
+      "ihtiyac": "Değişiklik önerisi açma, birleştirme, dağıtım gibi dış yan etkilerin tekrar anahtarıyla bir kez yapılması; belirsiz durumda uzlaştırma.",
+      "cozulecek_sorun": "Yeniden deneme yüzünden ikinci değişiklik önerisi veya çift dağıtım oluşuyor; dayanıklı yürütme dış işlemin tek kez olmasını garanti etmiyor.",
+      "yetenek_siniflari": [
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İşçi yamadan sonra ölürse ikinci öneri açılmıyor (tatbikatla doğrulanmış).",
+        "Dış işlem kaydı 'istek alındı', 'işleniyor', 'etki oluştu' ve 'sonuç doğrulandı' durumlarını ayırıyor; 'işlenmek üzere kabul edildi' yanıtı iş kabulü sayılmıyor.",
+        "Zaman aşımı veya iptal isteği etkinin yokluğu olarak raporlanmıyor; aynı niyet tekrarlanmadan önce mevcut etki aranıyor.",
+        "Telafi işlemi de başarısız olursa 'ilk işlem tamamlandı, telafi bekliyor' durumu korunuyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-062",
+          "S-095",
+          "S-382"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "R-021"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T11; ihtiyac-kumeleri/kumeler/02_ajan_bilgi_ve_etkilesim/04_sistemler_arasi_etkilesim.json#I08-04",
+      "dogrulama": "kismen",
+      "kaynak_url": [
+        "https://www.rfc-editor.org/rfc/rfc9110.html"
+      ],
+      "ice_aktarilan": "E1 karşılaştırması: son 3 kabul ölçütü ve kanıt kaynaklarından S-095, S-382 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K13-005",
+      "baslik": "Bayat işçi yazımının reddi",
+      "ihtiyac": "İş sahipliğinin süreli kira ve nesil numarasıyla tutulması; süresi dolmuş işçinin çıktısının reddedilmesi.",
+      "cozulecek_sorun": "Eski işçi yeni koşunun üzerine yazıyor.",
+      "yetenek_siniflari": [
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Süresi dolmuş nesil çıktısı reddediliyor (test).",
+        "İşi devralan insan yeni kararı verdikten sonra gelen eski yürütücünün geç yanıtı kanıt olarak saklanabiliyor ancak güncel durumu değiştiremiyor; işin tamamlanması, ürün kabulü ve dış işlemin gerçekleşmesi ayrı olgular olarak gösteriliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-095"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T10; ihtiyac-kumeleri/kumeler/03_guvenli_ve_tutarli_yurutme/01_orkestrasyon_ve_durum.json#I09-01",
+      "dogrulama": "kismen",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-095 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K13-006",
+      "baslik": "Zaman aşımı, sinyal ve gerçek iptal",
+      "ihtiyac": "Uzun ajan adımları için yaşam sinyali, zaman aşımı ve yalıtılmış ortam dahil tüm alt süreçleri sonlandıran gerçek iptal.",
+      "cozulecek_sorun": "Yetim süreç ve ortamlar kaynak tüketiyor ve yan etki üretiyor.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-18"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "İptalden sonra belirli sürede hiçbir alt süreç kalmıyor.",
+        "İlerleme göstermeden dönen koşu (aynı durum, aynı çıktı veya aynı hatanın tekrarı) tespit edilip sınıflanıyor; alternatif deneme bütçeyi ve yetkiyi büyütmüyor; devam edilemiyorsa gerekçeli son çıktı üretiliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-063",
+          "S-097"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#pdf_topic_coverage/B10",
+      "dogrulama": "kismen",
+      "ice_aktarilan": "E1 karşılaştırması: son 1 kabul ölçütü ve kanıt kaynaklarından S-097 eklendi; mevcut metin değiştirilmedi."
+    },
+    {
+      "id": "N-K13-007",
+      "baslik": "Bağımsız kümelerin paralel yürütülmesi",
+      "ihtiyac": "Bağımsız kümelerin paralel alt süreçler olarak başlatılması; bağımlı adımın önkoşulu beklemesi; paralel dalların bütçeyi önceden ayırması.",
+      "cozulecek_sorun": "Paralellik ya kullanılamıyor ya da önkoşul ihlaline yol açıyor.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-13"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Önkoşul ihlali 0.",
+        "Paralel dallar ortak bütçeyi aşamıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-018",
+          "S-021"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K02-005"
+      ]
+    },
+    {
+      "id": "N-K13-008",
+      "baslik": "Sınıflandırılmış ve sınırlı yeniden deneme",
+      "ihtiyac": "Hata sınıfına göre hedef role yönlendirme (ekran → ön yüz, sunucu → arka uç, test/çalıştırma → test rolü, belirsiz beklenti → planlayıcı/ürün sahibi, altyapı → işletim); her sınıfın deneme üst sınırı; çözülemeyenin iş kalemine gerekçesiyle yazılması; altyapı hatasında kör otomatik yeniden başlatma yapılmaması.",
+      "cozulecek_sorun": "Sonsuz döngü, sahipsiz hata, yanlış role giden iş.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-09"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her hata sınıfının hedefi ve üst sınırı tanımlı.",
+        "Sınıfsız hata 0."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-018",
+          "S-006",
+          "S-007",
+          "S-021"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "bagimliliklar": [
+        "N-K20-001"
+      ]
+    },
+    {
+      "id": "N-K13-009",
+      "baslik": "Koşu başında bağlamın sabitlenmesi",
+      "ihtiyac": "Koşu başında revizyon, kabul kriteri sürümü, politika/kural/paket sürümleri, model sürümleri ve bütçenin sabitlenmesi; koşu kimliğinin iş + kriter sürümüne bağlanması.",
+      "cozulecek_sorun": "Koşu ortasında kural veya kriter kayması; sonuçların yeniden üretilememesi.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-35"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her koşu kaydında sabitlenen sürümlerin tam listesi var."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K13-010",
+      "baslik": "Süreç kodu ve politika sürümlemesi, yeniden oynatma testi",
+      "ihtiyac": "Akış tanımının ve politikaların sürümlenmesi; yeni sürüm yayınlanınca açık koşuların bozulmaması; eski geçmişlerin yeniden oynatma testinden geçmesi.",
+      "cozulecek_sorun": "Kural veya akış değişince açık koşular bozuluyor.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-35"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Yeni sürüm yayındayken eski koşular yeniden oynatma testini geçiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "olcek_esigi": "üretim"
+    },
+    {
+      "id": "N-K13-011",
+      "baslik": "Büyük artefaktların dış depoda tutulması",
+      "ihtiyac": "Kod farkı, log, rapor gibi büyük artefaktların dış depoda saklanması; süreçte yalnız referans tutulması.",
+      "cozulecek_sorun": "Süreç geçmişi ve yük sınırları aşılıyor.",
+      "yetenek_siniflari": [
+        "Y-28",
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Süreç yükü eşiği aşmıyor; artefaktlar referansla erişilebilir."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-063"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K13-012",
+      "baslik": "Yetkili ve tekilleştirilmiş başlatma",
+      "ihtiyac": "İş takip yorumu veya olaydan gelen başlatma isteğinin imza ve aktör yetkisinin doğrulanması; aynı olayın ikinci kez gelmesinde tek aktif koşu; yetkisiz isteğin gerekçeyle reddi.",
+      "cozulecek_sorun": "Aynı görev için paralel koşular; yetkisiz başlatma.",
+      "yetenek_siniflari": [
+        "Y-12",
+        "Y-25",
+        "Y-11"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Aynı olay iki koşu üretmiyor.",
+        "Yetkisiz başlatma isteklerinin %100'ü reddediliyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-006",
+          "S-062",
+          "S-030"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K13-013",
+      "baslik": "Yaşam döngüsü sahibinin mimari kararı",
+      "ihtiyac": "Yaşam döngüsünün dayanıklı iş akışı motorunda mı, tek sunuculu bir görev panosunda mı, yoksa graf tabanlı bir durum makinesinde mi tutulacağının ölçek, işletim yükü ve ekip yetkinliği ölçütleriyle karar kaydına bağlanması.",
+      "cozulecek_sorun": "Kaynaklar orkestratör konusunda çelişiyor: biri bir sıralayıcıyı 'kabul edildi' diyor, biri graf motoru öneriyor, biri dayanıklı motor; ölçek gerekçesi ölçülmemiş.",
+      "yetenek_siniflari": [
+        "Y-12"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Karar kaydı ölçütleri, alternatifleri ve geri dönüş koşulunu içeriyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-016",
+          "S-021",
+          "S-019",
+          "S-020",
+          "S-061",
+          "S-062"
+        ],
+        "not": "Bu bir araç seçimi değil, mimari sınıf kararıdır; araç seçimi bu çalışmanın kapsamı dışındadır."
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "yuksek",
+      "iliskili": [
+        "A-012",
+        "C-018",
+        "C-032",
+        "D-001",
+        "G-013"
+      ]
+    }
+  ]
+}

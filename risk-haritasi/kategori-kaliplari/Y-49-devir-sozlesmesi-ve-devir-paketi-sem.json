@@ -1,0 +1,129 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-49",
+    "ad": "Devir sözleşmesi ve devir paketi şeması",
+    "grup": "İnsan–ajan iş birliği"
+  },
+  "kaliplar": [
+    {
+      "yetenek_sinifi": "Y-49",
+      "kalip": "Ajanlar arası devirde örtük kararların, kısıtların ve bağlamın kaybolması",
+      "aciklama": "MAST sınıflaması (7 çerçeveden 1.600+ iz) çok ajanlı sistem hatalarının üç ana sınıfından birini ajanlar arası uyumsuzluk (bilgi aktarmama, diğer ajanın girdisini yok sayma, görev sapması) olarak tanımladı. Cognition, paralel alt ajanların birbirinin örtük kararlarını görmeden çelişen çıktılar ürettiğini ve yazma işinin tek iş parçacığında kalması gerektiğini raporladı.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-10"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2503.13657",
+        "https://cognition.ai/blog/dont-build-multi-agents"
+      ],
+      "yasatacagi_sorunlar": [
+        "Planlayıcı ajanın 'şu modüle dokunma' kısıtı uygulayıcı ajana özet olarak geçer ve kaybolur; ekip sınırı ihlali ancak birleştirmede fark edilir.",
+        "Gönderen ajanın doğrulamadığı varsayımlar alıcı ajanda kesin bilgiye dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K27-005",
+        "N-K27-004",
+        "N-K27-006"
+      ],
+      "ornek_araclar": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Google A2A"
+      ],
+      "erken_sinyal": "Devir sonrası yeniden sorulan soru ve yeniden yapılan iş oranı; alıcı teyidinde işaretlenen eksik alan sayısı.",
+      "azaltma": "Devir paketinde zorunlu 'doğrulanmamış', 'varsayım' ve 'yasak' alanları; tam iz bağlantısı; yazma yetkisini tek ajanda tutmak; alıcı teyidini makinece denetlemek.",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "MAST v3 özeti 7 çerçeveden 1600+ iz ve üç sınıftan birini 'inter-agent misalignment' olarak veriyor. Cognition yazısı çelişen örtük kararları çoğunlukla bir örnekle anlatıyor ve varsayılan olarak tek iş parçacıklı doğrusal ajan öneriyor; 'raporladı' ifadesi deneysel veri değil, tasarım gözlemi.",
+        "kaynak": [
+          "https://arxiv.org/abs/2503.13657",
+          "https://cognition.ai/blog/dont-build-multi-agents"
+        ]
+      },
+      "id": "RK-004"
+    },
+    {
+      "yetenek_sinifi": "Y-49",
+      "kalip": "Uzun devir paketinde ortadaki kısıtların göz ardı edilmesi",
+      "aciklama": "Liu ve ark. (TACL 2024) modellerin bağlamın ortasındaki bilgiyi başındaki veya sonundakine göre belirgin biçimde daha kötü kullandığını gösterdi. Chroma'nın 2025 raporu 18 modelde girdi uzadıkça basit görevlerde bile performansın tutarsızlaştığını buldu.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2307.03172",
+        "https://www.trychroma.com/research/context-rot"
+      ],
+      "yasatacagi_sorunlar": [
+        "'Eksiksiz' olsun diye büyütülen devir paketi alıcı ajanda daha kötü uygulanır; taahhüt ve kısıtlar sessizce düşer.",
+        "İnsan için yazılmış uzun devir notu ajana, ajan için yazılmış yapılandırılmış paket insana okunaksız gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K27-003",
+        "N-K27-004",
+        "N-K27-005"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Paket uzunluğu ile alıcı ajanın kısıt ihlali oranı arasında pozitif ilişki.",
+      "azaltma": "Paket boyut bütçesi; kritik kısıtları başa ve makinece denetlenebilir alanlara koymak; alıcıdan kısıtları geri okumasını istemek; ihlalleri deterministik kapıyla yakalamak.",
+      "id": "RK-005"
+    },
+    {
+      "yetenek_sinifi": "Y-49",
+      "kalip": "Devir şablonunun form doldurmaya, alıcı teyidinin formaliteye dönüşmesi",
+      "aciklama": "Joint Commission'ın Sentinel Event Alert 58 raporu, devirlerde gönderen ile alıcının beklenti uyumsuzluğunun ve eksik, yanlış, zamansız ya da yanlış yorumlanan bilginin hasta zararına yol açtığını belirtir. Sağlık alanındaki bu bulgu, şablon alanlarının dolu olmasının bilginin aktarıldığını garanti etmediğini gösterir.",
+      "risk_turleri": [
+        "RT-17"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "https://www.jointcommission.org/en-us/knowledge-library/newsletters/sentinel-event-alert/issue-58"
+      ],
+      "yasatacagi_sorunlar": [
+        "İnsandan ajana devir sözleşmesi alanları kopyala-yapıştırla doldurulur; ajan 'teyit ettim' der ama belirsizlikler çözülmemiştir.",
+        "Farklı saat dilimlerindeki ekiplerde yarım kalan iş devralınırken insan düzenlemeleri ve gerekçeleri kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K27-003",
+        "N-K27-006",
+        "N-K31-011",
+        "N-K27-007"
+      ],
+      "ornek_araclar": [],
+      "erken_sinyal": "Devirden sonraki ilk gün içinde açılan netleştirme sorusu ve geri alma sayısı.",
+      "azaltma": "Teyidi alıcının kendi cümleleriyle özetlediği soru-cevap biçiminde tasarlamak; devir kalitesini örneklemle denetlemek; devir sonrası hata oranını izlemek.",
+      "id": "RK-006"
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 2,
+    "dusuk": 9,
+    "yuksek": 3
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 3,
+    "RT-10": 2,
+    "RT-02": 2,
+    "RT-12": 2,
+    "RT-03": 2,
+    "RT-07": 1,
+    "RT-01": 1,
+    "RT-17": 1,
+    "RT-06": 1,
+    "RT-13": 1,
+    "RT-15": 1,
+    "RT-04": 1,
+    "RT-05": 1
+  }
+}

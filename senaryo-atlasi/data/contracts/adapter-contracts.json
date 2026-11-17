@@ -1,0 +1,60 @@
+{
+  "lifecycle": "Tek görev nesli için tek yetkili business state yazarı. Alt motor/worker kendi execution stateini tutabilir; canonical state projection ile ayrılır.",
+  "worker": {
+    "required": [
+      "task_id/generation/lease_id",
+      "base_sha/worktree_id",
+      "AC/DoD digest",
+      "tool/data capability lease",
+      "CPU/RAM/disk/process quota",
+      "bounded child spawning",
+      "structured result",
+      "semantic progress evidence distinct from heartbeat",
+      "cancel and fencing semantics",
+      "artefact digest manifest",
+      "cost/usage observation; unknown allowed"
+    ],
+    "outcomes": [
+      "ready_for_verification",
+      "needs_input",
+      "policy_blocked",
+      "resource_exhausted",
+      "failed",
+      "cancelled",
+      "unknown_effect"
+    ],
+    "qualification_matrix": [
+      "session persistence",
+      "checkpoint portability",
+      "child tree cancellation",
+      "network/file isolation",
+      "MCP scope enforcement",
+      "cost aggregation",
+      "worktree isolation",
+      "result schema",
+      "queue fairness and backpressure"
+    ],
+    "resource_note": "128 GB RAM veya 1 GB/ajan söylentisi kapasite ölçümü değildir. Test/build/browser süreçleri ve host rezervi ölçülür; exit137 tek başına OOM kanıtı değildir."
+  },
+  "verification": "AC/oracle/test yetkisi, kimlik, çalışma alanı ve veri ayrı korunur. Farklı model/sağlayıcı tek başına bağımsızlık kanıtı değildir.",
+  "effects": "Her etki türü için açık writer; intent→dispatch→receipt veya unknown→read-only reconcile. Tekilleştirme scopeu görev, nesil ve değişmez etki tanımıdır.",
+  "swap": {
+    "same_role_required": true,
+    "checks": [
+      "input/output schema",
+      "state and effect semantics",
+      "cancel/fencing",
+      "permissions and trust",
+      "version compatibility",
+      "evidence retention/data export",
+      "license/hosting constraints"
+    ],
+    "running_jobs": [
+      "drain old version",
+      "finish old jobs on old worker",
+      "explicit qualified checkpoint migration"
+    ],
+    "universal_state_transfer": false,
+    "note": "Tak-çıkar anlık ve evrensel ara-durum transferi vaadi değildir; sözleşmesi uymayan araç incompatible/unknown gösterilir."
+  }
+}

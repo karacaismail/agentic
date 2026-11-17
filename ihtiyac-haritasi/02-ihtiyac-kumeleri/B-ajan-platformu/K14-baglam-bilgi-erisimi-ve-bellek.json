@@ -1,0 +1,303 @@
+{
+  "sema": "ihtiyac-haritasi/kume@1",
+  "kume": {
+    "id": "K14",
+    "ad": "Bağlam, bilgi erişimi ve bellek",
+    "alan": "B-ajan-platformu",
+    "amac": "Ajanın doğru işi yapması için gereken bilgiye, doğru sürümüyle, kaynağı belli ve sızıntısız biçimde ulaşması.",
+    "kapsam": [
+      "kod tabanı indeksleme",
+      "semantik arama",
+      "güncel dış bilgi ve kaynak hiyerarşisi",
+      "sürüme özgü doküman",
+      "bellek ve durum ayrımı",
+      "proje izolasyonu",
+      "bağlam penceresi yönetimi",
+      "dil (Türkçe) kalitesi"
+    ],
+    "kapsam_disi": [
+      "ilişki haritasının içeriği (K03)"
+    ],
+    "komsu_kumeler": [
+      "K03",
+      "K07",
+      "K09",
+      "K12",
+      "K18"
+    ]
+  },
+  "ihtiyaclar": [
+    {
+      "id": "N-K14-001",
+      "baslik": "Kod tabanı indeksleme ve kod grafiği",
+      "ihtiyac": "Kod tabanının yapısal (sözdizimi ağacı, içe aktarma, çağrı grafiği) ve anlamsal olarak indekslenmesi; ajanın ilgili kodu bulabilmesi.",
+      "cozulecek_sorun": "Özel kod tabanlarında ajan başarısı düşüyor; depo düzeyinde kod grafiği başarıyı belirgin artırıyor.",
+      "yetenek_siniflari": [
+        "Y-14",
+        "Y-15"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Görev için ilgili dosya bulma başarısı kurum görev setinde ölçülüyor."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-051",
+          "S-028",
+          "S-141",
+          "S-139"
+        ]
+      },
+      "cember": "ic_bosluk",
+      "belirsizlik": "orta",
+      "iliskili": [
+        "G-014",
+        "Q-005",
+        "Q-006"
+      ]
+    },
+    {
+      "id": "N-K14-002",
+      "baslik": "Belge ve kod araması",
+      "ihtiyac": "Doküman, karar kaydı ve kod için çok dilli semantik arama ve yeniden sıralama; kendi derleminde erişim kalitesinin ölçülmesi.",
+      "cozulecek_sorun": "Ajan ilgili bilgiyi bulamıyor; Türkçe erişim kalitesi bilinmiyor.",
+      "yetenek_siniflari": [
+        "Y-15",
+        "Y-04"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Kendi derleminde erişim kalitesi ölçülmüş ve eşik üstünde."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-016",
+          "S-014"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası"
+    },
+    {
+      "id": "N-K14-003",
+      "baslik": "Güncel dış bilgi ve kaynak hiyerarşisi",
+      "ihtiyac": "Güncel teknik bilginin resmi doküman → standart → üretici dokümanı → çerçeve deposu → güvenilir ikincil kaynak sırasıyla araştırılması; bulguların kod tabanı ve proje kurallarıyla doğrulanmadan uygulanmaması; tarih, sürüm ve belirsizliğin yazılması.",
+      "cozulecek_sorun": "Model belleği güncel değil; doğrulanmamış bilgiyle uygulama yapılıyor.",
+      "yetenek_siniflari": [
+        "Y-17"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Her iddiada kaynak, erişim tarihi ve sürüm var.",
+        "Doğrulanmamış bulgu uygulanmıyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-033",
+          "S-028",
+          "S-062"
+        ],
+        "not": "Bir kaynakta ansiklopedik kaynak önerilirken rol kartındaki hiyerarşide bu tür yok; kavramsal ve teknik araştırma için ayrı kaynak politikası gerekebilir."
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk",
+      "iliskili": [
+        "C-022"
+      ]
+    },
+    {
+      "id": "N-K14-004",
+      "baslik": "Sürüme özgü doküman erişimi",
+      "ihtiyac": "Kullanılan kütüphane ve çerçeve sürümüne özgü resmi dokümanın ajana sunulması.",
+      "cozulecek_sorun": "Model eski sürümün arayüzüyle kod yazıyor.",
+      "yetenek_siniflari": [
+        "Y-17"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Araştırma çıktısında doküman sürümü, kullanılan bağımlılık sürümüyle eşleşiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-028"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K14-005",
+      "baslik": "Dış içeriğin kalıcı bilgiye yazılmaması",
+      "ihtiyac": "Web ve dış kaynak içeriğinin yetenek paketlerine, belleğe veya kurallara doğrudan yazılmaması; dış içeriğin güvenilmeyen girdi olarak işaretlenmesi.",
+      "cozulecek_sorun": "Zehirleme ve dolaylı istem enjeksiyonu kalıcı bilgiye taşınıyor.",
+      "yetenek_siniflari": [
+        "Y-26",
+        "Y-16"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Web kaynaklı içerik paket veya kural deposuna giremiyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-062",
+          "S-151"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K14-006",
+      "baslik": "Durum, bellek ve yetkili kaynak ayrımı",
+      "ihtiyac": "Her bilgi türü için yetkili kaynağın tanımlanması (kabul kriteri yalnız sürümlü spesifikasyondan; durum yalnız orkestrasyondan); ajan belleğinin kanonik kaynak sayılmaması.",
+      "cozulecek_sorun": "Ajan belleğindeki eski bilgi kabul kriteri veya durum yerine geçiyor.",
+      "yetenek_siniflari": [
+        "Y-16"
+      ],
+      "zorunluluk": "zorunlu",
+      "kabul_olcutleri": [
+        "Kabul kriteri yalnız sürümlü spesifikasyondan okunuyor."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "dusuk"
+    },
+    {
+      "id": "N-K14-007",
+      "baslik": "Proje ve ekip bazında bellek izolasyonu",
+      "ihtiyac": "Ajan belleğinin proje/ekip/kiracı bazında ayrılması; bellek sızıntısının ve projeler arası karışmanın ölçülmesi; bellek temizliği.",
+      "cozulecek_sorun": "Projeler arası bilgi karışıyor; bellek zehirlenmesi kalıcı hale geliyor.",
+      "yetenek_siniflari": [
+        "Y-16",
+        "Y-36"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "olcek_etkisi": "10+ ekipte çok kiracılı bellek zorunlu.",
+      "kabul_olcutleri": [
+        "Proje ayrımı testle doğrulanmış.",
+        "Bellek temizleme ve süre politikası tanımlı."
+      ],
+      "kanit": {
+        "duzey": "kaynakta_acik",
+        "kaynaklar": [
+          "S-061",
+          "S-151"
+        ]
+      },
+      "cember": "ic_tanimli",
+      "belirsizlik": "orta",
+      "olcek_esigi": "2+ ekip",
+      "iliskili": [
+        "R-013",
+        "R-034"
+      ]
+    },
+    {
+      "id": "N-K14-008",
+      "baslik": "Bağlam penceresi bütçesi",
+      "ihtiyac": "Seçici bağlam yükleme, özetleme ve önbellekleme ile görevin bağlamının sınırlandırılması; bağlam boyutunun izlenmesi.",
+      "cozulecek_sorun": "Bağlam uzadıkça kalite düşüyor; maliyetin büyük kısmı girdi token'ından geliyor.",
+      "yetenek_siniflari": [
+        "Y-16",
+        "Y-30"
+      ],
+      "zorunluluk": "olcege_bagli",
+      "kabul_olcutleri": [
+        "Görev başına bağlam boyutu izleniyor ve eşik tanımlı."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-127",
+          "S-123"
+        ]
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "olcek_esigi": "pilot sonrası",
+      "iliskili": [
+        "R-019",
+        "U-003"
+      ]
+    },
+    {
+      "id": "N-K14-009",
+      "baslik": "Bilgi tazeliği denetimi",
+      "ihtiyac": "Dokümanların ve karar kayıtlarının son doğrulama tarihinin izlenmesi; eskimiş bilginin ajana işaretli sunulması.",
+      "cozulecek_sorun": "Eskimiş doküman ajanı yanıltıyor.",
+      "yetenek_siniflari": [
+        "Y-37"
+      ],
+      "zorunluluk": "opsiyonel",
+      "kabul_olcutleri": [
+        "Eşikten eski belgeler bağlamda 'eski' işaretiyle sunuluyor."
+      ],
+      "kanit": {
+        "duzey": "cikarim",
+        "kaynaklar": []
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta"
+    },
+    {
+      "id": "N-K14-010",
+      "baslik": "Bilgi düzeltmesinin türevlere yayılması ve eski kopyadan geri dönüşün önlenmesi",
+      "ihtiyac": "Bir bilgi (iş kuralı, bellek kaydı, doküman, karar) düzeltildiğinde veya kullanımdan kaldırıldığında ona dayanan özetlerin, bellek kayıtlarının, değerlendirmelerin, kararların ve bekleyen işlerin bulunup geçerliliklerinin yeniden belirlenmesi; eski kopya, yedek veya önbellekten dönen geçersiz bilginin kendiliğinden güncel sayılmaması; ilk gözlem, önerilen genelleme, yetkili bilgi ve kabul edilmiş kuralın ayrı köken ve geçerlilikle tutulması; fiziksel silme ile denetim için korunması gereken tarihsel kaydın ayrı ele alınması.",
+      "cozulecek_sorun": "Kaynak düzeltildiği halde eski özet veya bellek kaydı yanlış davranışı üretmeye devam eder; yedekten dönüşte geri alınmış erişim veya geçersiz içerik görünmeden yeniden etkinleşir; tek başarılı işten çıkarılan alışkanlık başka alanda zorunlu kural gibi uygulanır.",
+      "yetenek_siniflari": [
+        "Y-16",
+        "Y-37",
+        "Y-28"
+      ],
+      "zorunluluk": "zorunlu",
+      "olcek_etkisi": "Ortak bellek ve ortak kural katmanı büyüdükçe bir düzeltmenin etkilediği türev sayısı ve ekip sayısı artar; türev izi olmadan düzeltme ekipler arasında tutarsız yayılır.",
+      "kabul_olcutleri": [
+        "Yanlış bir iş kuralı düzeltildiğinde ona dayanan özet, bellek kaydı ve bekleyen karar listelenebiliyor; değerlendirilmemiş türevler güncel doğru bilgi diye sunulmuyor.",
+        "Silinmiş veya kullanımdan kaldırılmış bilgi yedekten döndüğünde yeniden kullanım engeli korunuyor ya da doğrulanamadığı açıkça işaretleniyor.",
+        "Düzeltme sonrası yeni işlerde doğru bilgi kullanılıyor; düzeltmenin başka görevlerde gerileme yaratıp yaratmadığı ölçülüyor.",
+        "Denetim için saklanan tarihsel kayıt ile güncel karar için kullanılabilen bilgi ayrı işaretli."
+      ],
+      "kanit": {
+        "duzey": "arastirma",
+        "kaynaklar": [
+          "S-095",
+          "S-377",
+          "S-378",
+          "S-379"
+        ],
+        "not": "Köken modeli türeme, revizyon ve geçersizleşmeyi ayırır; ajan belleği değerlendirmesi seçici unutmayı (çelişen bilginin yönetimi) ayrı bir yeterlilik olarak ölçer; olağanüstü durum planlaması kurtarma sonrası bilinen iyi duruma dönüşü ve doğrulamayı ister. Benzer mevcut ihtiyaçlar: N-K14-006 (yetkili kaynak ayrımı), N-K14-009 (tazelik), N-K22-009 (saklama/silme). Fark: düzeltmenin türevlere yayılması ve eski kopyadan geri dönüş tanımlı değildi."
+      },
+      "cember": "dis_eksik",
+      "belirsizlik": "orta",
+      "bagimliliklar": [
+        "N-K14-006",
+        "N-K22-009"
+      ],
+      "iliskili": [
+        "G-036",
+        "Q-073",
+        "U-077"
+      ],
+      "codex_kaynagi": "ihtiyac-kumeleri/tamamlama/01_kabul_ve_kanit_guclendirmeleri.json#T15; ihtiyac-kumeleri/kumeler/02_ajan_bilgi_ve_etkilesim/03_bilgi_baglam_ve_bellek.json#I07-04,I07-06",
+      "dogrulama": "dogrulandi",
+      "kaynak_url": [
+        "https://www.w3.org/TR/prov-dm/",
+        "https://arxiv.org/abs/2507.05257",
+        "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf"
+      ]
+    }
+  ]
+}

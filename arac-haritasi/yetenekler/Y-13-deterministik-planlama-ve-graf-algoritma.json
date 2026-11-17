@@ -1,0 +1,1192 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-13",
+    "ad": "Deterministik planlama ve graf algoritmaları (bağımlılık grafiği, döngü tespiti, topolojik sıra)",
+    "grup": "Orkestrasyon ve planlama",
+    "cozdugu_sorun": "Bağımlılık ve sıralama kararlarının LLM tarafından uydurulması.",
+    "ne_zaman_zorunlu": "Paralel iş kümeleri ve çok ekip olduğunda."
+  },
+  "arac_sayisi": 59,
+  "tur_dagilimi": {
+    "acik-kaynak": 23,
+    "acik-cekirdek": 5,
+    "kutuphane": 16,
+    "cerceve": 3,
+    "ticari-saas": 7,
+    "bulut-hizmeti": 2,
+    "ticari-yazilim": 2,
+    "protokol-standart": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0009",
+      "ad": "Apache Airflow",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://airflow.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ile tanımlı DAG'ları zamanlayan ve çalıştıran orkestratör; görev bağımlılıkları, yeniden deneme, havuz/eşzamanlılık sınırları ve Airflow 3 ile Human-in-the-Loop (HITL) operatörleri sunar.",
+      "sinirlar": "Etkileşimli ajan döngüleri ve günlerce insan beklemesi için uygun değil; kaynak 'bu hat için gereksiz' diyor. Toplu veri iş akışı odaklı; olay başına düşük gecikmeli, uzun ömürlü ajan koşuları ve tek durum sahibi semantiği için dayanıklı yürütme motorları kadar uygun değil.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K13-003",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0010",
+      "ad": "Dagster",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://dagster.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Varlık (asset) odaklı veri orkestratörü; varlık bağımlılık grafiği, bölümleme, yeniden deneme ve soy (lineage) görünürlüğü sağlar.",
+      "sinirlar": "Veri hattı odaklı; etkileşimli ajan döngüsü ve insan bekleme için uygun değil (kaynak hükmü). Veri ürünleri odaklı; günlerce insan beklemesi ve ajan koşu yaşam döngüsü için birincil tasarım değil.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0011",
+      "ad": "Dagu",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://dagu.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tek ikiliyle çalışan YAML/CLI merkezli iş akışı yöneticisi: bağımlılık DAG'ı, koşul, yeniden deneme, zaman aşımı; kalıcı insan görevi (human tasks), dağıtık worker ve Agent DAG durumunun/transkriptinin kurtarılması. Kurum panolarında Dagu + OpenCode ilk tercih olarak seçilmiş.",
+      "sinirlar": "GPL-3.0 lisansı dağıtım biçimine göre değerlendirilmeli; Temporal'a karşı karşılaştırmalı arıza testi yapılmadı (kaynak); depo dagu-org'dan dagucloud'a taşındı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0121",
+      "ad": "NetworkX",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://networkx.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python graf kütüphanesi; iş kalemi bağımlılık grafiğinde döngü tespiti, topolojik sıralama, bağlı bileşenlerle bağımsız küme ayrıştırması gibi hesapları deterministik yapar — LLM yalnız yorumlama için kullanılır.",
+      "sinirlar": "Bellek içi; çok büyük graflarda performans sınırlı. Saf Python; milyonlarca düğümde yavaş (12.000 kayıtlık backlog için yeterli). Bellek içi çalışır; çok büyük graflarda performans sınırlı, kalıcı graf deposu değildir.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K02-008",
+        "N-K03-003",
+        "N-K13-007",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0420",
+      "ad": "Embabel Agent Framework",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://hub.embabel.com",
+      "olgunluk": "erken",
+      "ne_saglar": "JVM (Kotlin/Java) için hedef odaklı eylem planlama (GOAP) ile deterministik plan üreten, tipli alan nesneleriyle çalışan ajan çerçevesi.",
+      "sinirlar": "Genç proje; topluluk ve üretim referansları sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K10-003",
+        "N-K10-005"
+      ]
+    },
+    {
+      "id": "AR-0500",
+      "ad": "Task Master",
+      "tur": "acik-kaynak",
+      "lisans": "MIT (Commons Clause'lu özel metin)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tryhamster.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PRD dokümanını ayrıştırıp bağımlılıklı, karmaşıklık puanlı görev listesine çeviren; görev genişletme, 'sıradaki görev' ve durum yönetimini CLI ve MCP sunucusu üzerinden kodlama ajanlarına açan araç.",
+      "sinirlar": "Lisans metni standart MIT değil (ek kısıtlar içerir); depo etkinliği Nisan 2026'dan beri düşük. Commons Clause nedeniyle barındırılmış hizmet olarak sunulamaz (OSI onaylı değil); bağımlılık ve karmaşıklık analizi LLM tabanlıdır, deterministik değildir; son push Nisan 2026.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K02-004",
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K02-013"
+      ]
+    },
+    {
+      "id": "AR-0522",
+      "ad": "Argo Workflows",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://argoproj.github.io/workflows/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes-yerel DAG/adım iş akışı motoru; suspend şablonuyla manuel devam (onay), retryStrategy, activeDeadlineSeconds ile zaman aşımı ve artefakt deposu (S3 uyumlu) entegrasyonu sağlar.",
+      "sinirlar": "Kubernetes zorunlu; her adım bir pod olduğu için kısa adımlarda ek yük; uzun insan beklemelerinde durum CRD/arsiv yapılandırması gerektirir. Kubernetes gerektirir; uzun süreli insan bekleyen iş akışları için tasarlanmadı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-011",
+        "N-K13-013",
+        "N-K15-005",
+        "N-K23-002",
+        "N-K23-003"
+      ]
+    },
+    {
+      "id": "AR-0526",
+      "ad": "Apache DolphinScheduler",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://dolphinscheduler.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Görsel DAG tasarımlı dağıtık iş akışı zamanlayıcısı; görev bağımlılıkları, yeniden deneme, zaman aşımı alarmı ve çok kiracılı yapı sunar.",
+      "sinirlar": "Veri/ETL iş akışı odaklı; ajan koşuları için kod içi dayanıklı yürütme sunmaz.",
+      "ihtiyaclar": [
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-013"
+      ]
+    },
+    {
+      "id": "AR-0536",
+      "ad": "BullMQ",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://bullmq.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Redis tabanlı iş kuyruğu; iş kimliği/deduplication ile tekil iş, kilit süresiyle takılı (stalled) iş tespiti, eşzamanlılık ve hız sınırı, geri çekilmeli yeniden deneme ve ebeveyn-çocuk bağımlılıklı 'flow' yapıları sağlar.",
+      "sinirlar": "Dayanıklı iş akışı motoru değil; günlerce bekleme ve çok adımlı durum sahipliği uygulamada kurulmalı; Redis kalıcılık ayarlarına bağımlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K13-004",
+        "N-K13-005",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-012"
+      ]
+    },
+    {
+      "id": "AR-0545",
+      "ad": "RQ (Redis Queue)",
+      "tur": "kutuphane",
+      "lisans": "BSD-2-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://python-rq.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python için sade Redis kuyruğu; depends_on ile iş bağımlılıkları, iş zaman aşımı ve yeniden deneme sağlar.",
+      "sinirlar": "Basit model; ölçek, tekilleştirme ve uzun beklemeler için ek mühendislik gerekir.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008"
+      ]
+    },
+    {
+      "id": "AR-0547",
+      "ad": "igraph",
+      "tur": "kutuphane",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://igraph.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C çekirdekli, Python/R arayüzlü hızlı graf kütüphanesi; topolojik sıralama, bağlı bileşenler, topluluk tespiti ve yol algoritmaları sunar.",
+      "sinirlar": "GPL-2.0 lisansı dağıtılan ürünlerde kısıt getirebilir.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0548",
+      "ad": "rustworkx",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rustworkx.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust çekirdekli yüksek başarımlı Python graf kütüphanesi; topolojik/sözlüksel topolojik sıralama, döngü tespiti, DAG en uzun yol ve bileşen analizi sağlar.",
+      "sinirlar": "API NetworkX ile birebir değil; topluluk görece küçük.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K13-007",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0549",
+      "ad": "graphlib (Python standart kütüphanesi)",
+      "tur": "kutuphane",
+      "lisans": "PSF-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.python.org/3/library/graphlib.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "TopologicalSorter ile bağımlılık grafiğinden topolojik sıra üretir, döngüde CycleError fırlatır; get_ready()/done() arayüzüyle önkoşulu tamamlanan düğümleri paralel yürütmeye verir.",
+      "sinirlar": "Yalnız temel topolojik sıralama; bileşen/kritik yol analizi yok.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K13-007"
+      ]
+    },
+    {
+      "id": "AR-0550",
+      "ad": "JGraphT",
+      "tur": "kutuphane",
+      "lisans": "EPL-2.0 veya LGPL-2.1",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://jgrapht.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Java graf kütüphanesi; döngü tespiti, topolojik sıralama yineleyicisi, bağlı bileşenler ve en kısa/en uzun yol algoritmaları sunar.",
+      "sinirlar": "JVM'e özgü; görselleştirme ayrı araç gerektirir.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0551",
+      "ad": "Graphology",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://graphology.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript graf kütüphanesi; graphology-dag ile döngü kontrolü ve topolojik sıralama, bileşen ve yol algoritmaları; Sigma.js ile görselleştirmeye uygun.",
+      "sinirlar": "Büyük analitik iş yükleri için Python/Rust kütüphaneleri kadar kapsamlı değil.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0552",
+      "ad": "petgraph",
+      "tur": "kutuphane",
+      "lisans": "MIT veya Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.rs/petgraph/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Rust graf veri yapıları ve algoritmaları; toposort, yönlü döngü kontrolü, Tarjan/Kosaraju güçlü bileşenler ve yoğunlaştırma (condensation) sağlar.",
+      "sinirlar": "Yalnız Rust; üst düzey analiz/görselleştirme araçları sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007"
+      ]
+    },
+    {
+      "id": "AR-0553",
+      "ad": "Neo4j Graph Data Science",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-3.0 (topluluk), ticari (Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://neo4j.com/docs/graph-data-science/current/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Neo4j grafı üzerinde topolojik sıralama, bileşen, merkezilik ve topluluk algoritmaları çalıştırır; ekipler/depolar arası bağımlılık grafiğinin Cypher ile sorgulanıp analiz edilmesini sağlar.",
+      "sinirlar": "Enterprise özellikleri (paralellik, ölçek) ticari; ayrı graf veritabanı işletimi gerektirir.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-007",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0554",
+      "ad": "Apache AGE",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://age.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "PostgreSQL eklentisi olarak openCypher graf sorgusu; bağımlılık grafiğini ilişkisel iş kalemi verisiyle aynı veritabanında tutup değişken uzunluklu yol sorguları yapmayı sağlar.",
+      "sinirlar": "Hazır graf algoritma kütüphanesi (topolojik sıra, SCC) sınırlı; algoritmalar uygulama tarafında kurulmalı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0555",
+      "ad": "Google OR-Tools",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://developers.google.com/optimization/",
+      "olgunluk": "olgun",
+      "ne_saglar": "CP-SAT kısıt programlama, doğrusal/tamsayı programlama ve atama çözücüleri; öncelik ilişkili, kaynak/kapasite kısıtlı iş çizelgeleme ve paralellik–sıralama ödünleşimini deterministik biçimde optimize eder.",
+      "sinirlar": "Modelleme uzmanlığı gerektirir; çözüm gerekçesinin insanlara açıklanması ayrıca kurgulanmalı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-008",
+        "N-K02-009",
+        "N-K02-011",
+        "N-K13-007",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0556",
+      "ad": "Timefold Solver",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community), ticari (Enterprise)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://timefold.ai/solver",
+      "olgunluk": "olgun",
+      "ne_saglar": "OptaPlanner'ın devamı olan planlama optimizasyon çözücüsü; sert/yumuşak kısıtlarla görev atama ve çizelgeleme yapar, skoru kısıt bazında açıklar.",
+      "sinirlar": "JVM odaklı; çok iş parçacıklı çözme gibi bazı özellikler Enterprise sürümde.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-008",
+        "N-K02-009",
+        "N-K02-011",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0557",
+      "ad": "Nx",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (çekirdek), ticari (Nx Cloud)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://nx.dev/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Monorepo proje/görev grafiği çıkarır; değişiklikten etkilenen projeleri (affected) hesaplar, görevleri bağımlılık sırasına göre paralel çalıştırır ve modül sınırı kurallarını uygular.",
+      "sinirlar": "Kod/proje düzeyi bağımlılık; iş kalemi bağımlılığı değil; en güçlü JS/TS ekosisteminde. Monorepo yapısını varsayar; çoklu depo ilişkilerini sınırlı kapsar; uzak önbellek/dağıtık yürütme ticari. Proje düzeyi etki analizi (test düzeyi değil); en iyi JS/TS monorepolarda çalışır.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K05-012",
+        "N-K06-003",
+        "N-K13-007",
+        "N-K24-003",
+        "N-K24-008",
+        "N-K35-001",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0558",
+      "ad": "dependency-cruiser",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/sverweij/dependency-cruiser",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript modül bağımlılıklarını çıkarıp kural setiyle (yasaklı bağımlılık, döngü, yetim modül) doğrular ve grafik olarak görselleştirir.",
+      "sinirlar": "Yalnız JS/TS kod tabanları. JS/TS ekosistemiyle sınırlı; servisler arası ilişkileri kapsamaz. Yalnız JS/TS ekosistemi.",
+      "ihtiyaclar": [
+        "N-K01-003",
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K03-004",
+        "N-K04-008",
+        "N-K31-008",
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-003"
+      ]
+    },
+    {
+      "id": "AR-0559",
+      "ad": "Graphviz",
+      "tur": "acik-kaynak",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://graphviz.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "DOT dilinde tanımlanan bağımlılık grafiklerini katmanlı (hiyerarşik) yerleşimle görselleştirir; hesaplanan topolojik sıranın ve kritik yolun insanlara gösterimi için kullanılır.",
+      "sinirlar": "Yalnız görselleştirme; çok büyük graflarda okunabilirlik düşer.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-0561",
+      "ad": "Jira Align",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.atlassian.com/software/jira-align",
+      "olgunluk": "olgun",
+      "ne_saglar": "SAFe, LeSS, Scrum@Scale gibi ölçekli çerçeveler için kurumsal çevik planlama; portföy epikleri, PI/program artımı planlama, program panosu ve ekipler arası bağımlılıklar, WSJF, ROAM riskleri, kapasite ve hedef takibi; Jira ve Azure DevOps ile eşleşir.",
+      "sinirlar": "Pahalı ve yapılandırması karmaşık; ürün adı 'Atlassian Align' olarak yeniden markalanma sürecinde, Strategy Collection paketine bağlanıyor.",
+      "ihtiyaclar": [
+        "N-K02-009",
+        "N-K19-007",
+        "N-K21-005",
+        "N-K23-006",
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-005",
+        "N-K24-006",
+        "N-K24-009",
+        "N-K24-012",
+        "N-K24-013",
+        "N-K24-014",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0574",
+      "ad": "OpenProject",
+      "tur": "acik-cekirdek",
+      "lisans": "GPL-3.0 (Community), ticari (Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.openproject.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş paketi hiyerarşisi, öncül/ardıl ve 'blocks' ilişkileriyle otomatik zamanlama, çevik panolar, Gantt ve portföy görünümleri sunan açık kaynak proje yönetimi.",
+      "sinirlar": "Bazı pano ve kurumsal özellikler Enterprise sürümde; SAFe'e özgü PI planlama yok.",
+      "ihtiyaclar": [
+        "N-K01-002",
+        "N-K02-004",
+        "N-K02-006",
+        "N-K24-003",
+        "N-K26-001",
+        "N-K26-005",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0582",
+      "ad": "Rally Software",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.broadcom.com/products/software/value-stream-management/rally",
+      "olgunluk": "olgun",
+      "ne_saglar": "SAFe odaklı kurumsal çevik planlama: portföy öğeleri, PI planlama, ekipler arası bağımlılıklar, kapasite planlama ve teslim metrikleri.",
+      "sinirlar": "Broadcom lisanslama politikaları ve maliyet riski; yalnız SaaS.",
+      "ihtiyaclar": [
+        "N-K02-004",
+        "N-K02-009",
+        "N-K19-007",
+        "N-K21-005",
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-006",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0589",
+      "ad": "piplanning.io",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://piplanning.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SAFe PI planlama için dijital pano: ekip ve program panoları, ART'lar arası bağımlılık görselleştirme; Jira, Rally ve Azure DevOps ile gerçek zamanlı çift yönlü eşleme.",
+      "sinirlar": "PI planlama etkinliği odaklı; bağımlılıkları görselleştirir ama algoritmik analiz (döngü, kritik yol) sunmaz.",
+      "ihtiyaclar": [
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-006",
+        "N-K24-009",
+        "N-K24-012",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0590",
+      "ad": "Kendis",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://kendis.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SAFe PI planlama ve program panosu; Jira/Azure DevOps bağlantılarını bağımlılık olarak gösterir, kart türleri arası bağımlılık oluşturur ve iki yönlü eşler.",
+      "sinirlar": "Küçük satıcı; bağımlılık analizi görsel düzeyde.",
+      "ihtiyaclar": [
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-006",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0591",
+      "ad": "Easy Agile Programs",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.easyagile.com/products/programs",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira-yerel PI planlama: program panosu, ekip planlama panoları, PI hedefleri, bağımlılık haritası/raporu ve güven oylaması.",
+      "sinirlar": "Yalnız Jira ekosistemi; portföy finans/kapasite modelleme yok.",
+      "ihtiyaclar": [
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-006",
+        "N-K24-012",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-0696",
+      "ad": "Madge",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pahen/madge",
+      "olgunluk": "olgun",
+      "ne_saglar": "CommonJS/ES modülleri için bağımlılık grafiği üretir ve döngüsel bağımlılıkları tespit eder.",
+      "sinirlar": "Bakım temposu düşük (son push 2026-01); kural motoru yok.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001"
+      ]
+    },
+    {
+      "id": "AR-1465",
+      "ad": "rmToo",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://rmtoo.florath.net/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gereksinimleri düz metin dosyaları olarak Git'te tutan, bağımlılık grafiği ve öncelik/durum analizleri, LaTeX/HTML çıktıları üreten komut satırı gereksinim yönetimi aracı.",
+      "sinirlar": "Küçük ve yavaş gelişen tek geliştiricili proje; modern web arayüzü yoktur.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-005",
+        "N-K01-010",
+        "N-K01-013",
+        "N-K02-006"
+      ]
+    },
+    {
+      "id": "AR-1647",
+      "ad": "HiGHS",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://highs.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Doğrusal, karma tamsayılı ve karesel programlama problemleri için yüksek performanslı açık kaynak çözücü; kapasite kısıtlı sıralama ve kaynak paylaşımı kararlarını deterministik optimize etmekte kullanılabilir.",
+      "sinirlar": "Modelleme katmanı (PuLP, Pyomo, JuMP vb.) ile birlikte kullanılır; kısıt programlamaya uygun değildir.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K13-007",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1648",
+      "ad": "Pyomo",
+      "tur": "kutuphane",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.pyomo.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python'da cebirsel optimizasyon modelleme dili; HiGHS, CBC, Gurobi gibi çözücülerle kaynak/kapasite planlama modellerinin sürümlenebilir kod olarak yazılmasını sağlar.",
+      "sinirlar": "Optimizasyon modelleme uzmanlığı gerektirir.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K15-006",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-1649",
+      "ad": "MiniZinc",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "http://www.minizinc.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çözücüden bağımsız kısıt modelleme dili ve araç zinciri; bağımlılık, kapasite ve paralellik kısıtları altında görev çizelgeleme problemlerini deklaratif tanımlayıp birçok çözücüyle çözer.",
+      "sinirlar": "Modelleme becerisi gerektirir; büyük örneklerde çözüm süresi öngörülemez olabilir.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K02-008"
+      ]
+    },
+    {
+      "id": "AR-1650",
+      "ad": "Pants",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.pantsbuild.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "İçe aktarmalardan bağımlılık çıkarımı yapan, değişen hedeflerden etkilenenleri ('--changed-dependents') hesaplayıp yalnız onların testlerini paralel ve önbellekli çalıştıran monorepo derleme sistemi (Python, Go, Java, Shell vb.).",
+      "sinirlar": "Monorepo yapılandırması ve öğrenme eğrisi gerektirir.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-002",
+        "N-K03-003",
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "AR-1651",
+      "ad": "moon",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://moonrepo.dev/moon",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Proje grafiği, görev bağımlılıkları, etkilenen proje tespiti ve önbellekli görev çalıştırma sunan Rust tabanlı monorepo yönetim ve derleme sistemi.",
+      "sinirlar": "Proje meta verisinin moon yapılandırmasıyla tanımlanması gerekir.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-1653",
+      "ad": "skott",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/antoine-coulon/skott",
+      "olgunluk": "gelisen",
+      "ne_saglar": "JavaScript/TypeScript projelerinde modül bağımlılık grafiğini çıkaran, döngüsel bağımlılıkları ve kullanılmayan dosya/bağımlılıkları bulan, grafiği görselleştiren araç.",
+      "sinirlar": "Yalnız JS/TS; tek geliştirici bakımında.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003"
+      ]
+    },
+    {
+      "id": "AR-1758",
+      "ad": "JanusGraph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 / CC-BY-4.0 (doküman)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://janusgraph.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Cassandra, HBase gibi depolar üzerinde çalışan dağıtık grafik veritabanı (TinkerPop/Gremlin); ekipler ve depolar arası bağımlılık grafiklerini ölçekli saklayıp sorgulamaya uygun.",
+      "sinirlar": "İşletimi ağır; küçük grafikler için gereğinden karmaşık.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-1759",
+      "ad": "Apache TinkerPop",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://tinkerpop.apache.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Gremlin grafik gezinme dili ve grafik hesaplama çerçevesi; birçok grafik veritabanına ortak API ve bellek içi TinkerGraph ile bağımlılık grafiği sorguları, yol ve döngü analizleri yapılır.",
+      "sinirlar": "Topolojik sıralama gibi algoritmalar hazır kütüphane fonksiyonu değil, sorgu olarak yazılır.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-1808",
+      "ad": "Apache Hamilton",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://hamilton.apache.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Python fonksiyonlarının adlarından ve parametrelerinden otomatik DAG kuran, deterministik, birim test edilebilir ve kendini belgeleyen veri/LLM akışı çerçevesi; köken ve görselleştirme sağlar.",
+      "sinirlar": "Uzun süreli iş akışı motoru değildir; dayanıklılık için orkestratörle birlikte kullanılır.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K05-001",
+        "N-K13-010"
+      ]
+    },
+    {
+      "id": "AR-1984",
+      "ad": "Amazon Neptune",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/neptune/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yönetilen graf veritabanı (Gremlin, openCypher, SPARQL) ve Neptune Analytics ile graf algoritmaları; bağımlılık ve ilişki haritalarını sorgulanabilir tutma, GraphRAG.",
+      "sinirlar": "Graf modelini koddan üretme işi ayrı araç ister; AWS'ye bağımlı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2036",
+      "ad": "Spanner Graph",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/spanner/docs/graph/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Spanner üzerinde ISO GQL ile graf sorgusu; ilişkisel, vektör ve tam metin aramayla birleşik ölçeklenebilir bağımlılık/ilişki grafiği saklama.",
+      "sinirlar": "Topolojik sıralama gibi algoritmalar uygulama tarafında yazılmalı; maliyetli.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2577",
+      "ad": "NebulaGraph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://nebula-graph.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yatay ölçeklenen dağıtık graf veritabanı; ekipler, depolar, modüller ve iş kalemleri arası bağımlılık grafiğini saklayıp nGQL/openCypher ile yol ve etki sorguları yapmayı sağlar.",
+      "sinirlar": "İşletim karmaşıklığı; küçük grafikler için tek düğümlü çözümler yeterli.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2578",
+      "ad": "TuGraph DB",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://tugraph.tech",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yüksek başarımlı graf veritabanı ve yerleşik graf algoritma kütüphanesi; bağımlılık analizi ve yol hesaplarını veritabanında deterministik çalıştırır.",
+      "sinirlar": "Topluluk ve ekosistem Neo4j'e göre küçük; 2026 ortasından beri etkinlik azaldı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-2767",
+      "ad": "Fast Downward",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/aibasel/downward",
+      "olgunluk": "olgun",
+      "ne_saglar": "PDDL ile tanımlanan klasik planlama problemlerini sezgisel aramayla çözen alan bağımsız planlayıcı; eylem önkoşul ve etkilerinden deterministik görev sırası üretir.",
+      "sinirlar": "PDDL modelleme uzmanlığı gerektirir; GPL lisanslı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-007"
+      ]
+    },
+    {
+      "id": "AR-2768",
+      "ad": "Unified Planning Framework",
+      "tur": "kutuphane",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/aiplan4eu/unified-planning",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Planlama ve zamanlama problemlerini Python ile tanımlayıp Fast Downward, ENHSP, Tamer gibi motorlarla tek arayüzden çözmeyi sağlayan kütüphane.",
+      "sinirlar": "Planlama motorları ayrı kurulur; iş kalemi zamanlaması için modelleme gerekir.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K02-008",
+        "N-K13-007"
+      ]
+    },
+    {
+      "id": "AR-2769",
+      "ad": "Clingo (Potassco)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/potassco/clingo",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yanıt kümesi programlama (ASP) için grounder ve çözücü; bağımlılık, uygunluk ve politika kurallarını bildirimsel mantık programı olarak yazıp tüm tutarlı çözümleri ya da optimumu hesaplar.",
+      "sinirlar": "ASP paradigması ekiplere yabancı olabilir; açıklanabilir hata mesajları sınırlı.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-007",
+        "N-K21-003"
+      ]
+    },
+    {
+      "id": "AR-2837",
+      "ad": "PlanDB",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://agentfield.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "Her PR'ı göreve özgü inceleme planına dönüştürüp odaklı inceleyici ajanlar başlatan, bulguları kod kanıtına bağlayan ve sonuçları ayrıca sorgulayan ajan kod incelemesi; rutin PR'da ucuz, büyük PR'da güçlü model kullanımı önerir.",
+      "sinirlar": "Kurumsal tracker'ların yerini tutmaz; çift yönlü senkronizasyon yok. Lisans belirsiz; kıyaslama iddiaları üreticiye ait.",
+      "ihtiyaclar": [
+        "N-K02-005",
+        "N-K02-006",
+        "N-K05-015",
+        "N-K08-004",
+        "N-K09-003",
+        "N-K17-009"
+      ]
+    },
+    {
+      "id": "AR-2839",
+      "ad": "tasks-axi",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/kunchenguid/tasks-axi",
+      "olgunluk": "erken",
+      "ne_saglar": "El ile düzenlenebilir backlog.md'yi bayt-kesin gidiş-dönüşle yerinde değiştiren, bağımlılık grafiği ve 'hazır iş' sorgusu sunan, çıktı token maliyeti çok düşük ajan görev CLI'ı; uzak tracker arka uçları takılabilir.",
+      "sinirlar": "Küçük, tek geliştiricili proje.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K20-009",
+        "N-K26-005"
+      ]
+    },
+    {
+      "id": "AR-2843",
+      "ad": "issue-graph",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://issue-graph.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Bağlantılı GitHub issue ve PR'larını izleyerek işe başlamadan önce ilişkili işleri, rakip değişiklikleri ve çözülmemiş takipleri bulur; kopya işi önlemeye yardım eder.",
+      "sinirlar": "Yalnız GitHub; Jira/Azure Boards desteklemez.",
+      "ihtiyaclar": [
+        "N-K02-003",
+        "N-K08-004",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-3384",
+      "ad": "Nx MCP Server (Nx Console)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://nx.dev/docs/features/enhance-ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Nx çalışma alanının proje grafiğini, görev bağımlılıklarını, etkilenen projeleri ve CI hata bilgisini ajanlara sunan MCP sunucusu; deterministik bağımlılık grafiğinden etki analizi yapılmasını sağlar.",
+      "sinirlar": "Yalnız Nx kullanan (çoğunlukla JS/TS) monorepolarda anlamlı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-001",
+        "N-K03-003",
+        "N-K05-029",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-3478",
+      "ad": "Dependency Map for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1218391/dependency-map-for-jira-link-viewer",
+      "olgunluk": "olgun",
+      "ne_saglar": "Jira bağlantılarını/ilişkilerini projeler arası görselleştirir, sürükle-bırakla bağlantı ve alan düzenler; büyük oda (PI) planlamasında ekipler arası bağımlılık panosu olarak kullanılır.",
+      "sinirlar": "Görselleştirme aracıdır; döngü tespiti gibi deterministik analizler sınırlı. Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K03-003",
+        "N-K24-003",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-3479",
+      "ad": "Links Hierarchy for Jira",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1211022/links-hierarchy-track-work-item-dependency-and-progress",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bağlı iş kalemleri, epikler ve alt görevlerin tam hiyerarşisini ilerleme toplamıyla gösterir; JQL tabanlı bağımlılık haritası, pivot analitik ve bağımlılık matrisi sunar.",
+      "sinirlar": "Atlassian Marketplace uygulaması; Jira/Confluence lisansına ek ücret; bulut sürümünde veri uygulama sağlayıcısının altyapısında da işlenebilir.",
+      "ihtiyaclar": [
+        "N-K02-004",
+        "N-K03-003",
+        "N-K24-003",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-3511",
+      "ad": "Planforge",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.planforge.io/en",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Portföy SAFe seçeneğiyle epik, ART ve ekipleri tek araçta yönetir; ART planlama panosunda PI bağımlılık ve kilometre taşlarını sürükle-bırak ile gösterir, SAFe uyumlu ROAM matrisiyle PI risklerini etki/olasılığa göre ele alır.",
+      "sinirlar": "Kapalı kaynak SaaS; bağımlılık verisinin ajan hattına makinece aktarımı için API kapsamı ayrıca doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K02-006",
+        "N-K21-005",
+        "N-K24-002",
+        "N-K24-003",
+        "N-K24-006",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-3516",
+      "ad": "Ativo Programs",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://marketplace.atlassian.com/apps/1222186/ativo-programs-support-safe-pi-planning-dependencies",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Jira içinde SAFe PI planlama: ekipler arası bağımlılıkları program panosunda gösterir, PI hedeflerini, riskleri ve engelleri kaydeder, ekip kapasitesini izler.",
+      "sinirlar": "Bağımlılıklar Jira bağlantılarına dayanır; döngü tespiti/topolojik sıralama gibi deterministik graf hesapları için ayrı araç gerekir.",
+      "ihtiyaclar": [
+        "N-K17-003",
+        "N-K21-005",
+        "N-K24-003",
+        "N-K24-006",
+        "N-K24-012",
+        "N-K26-006"
+      ]
+    },
+    {
+      "id": "AR-4009",
+      "ad": "leidenalg",
+      "tur": "kutuphane",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/vtraag/leidenalg",
+      "olgunluk": "olgun",
+      "ne_saglar": "igraph üzerinde Leiden topluluk algoritması; toplulukların iyi bağlı olmasını garanti ederek bağımlılık/ilişki grafiğini sıkı bağlı kümelere ayırır, çözünürlük parametresiyle küme boyutu ayarlanır.",
+      "sinirlar": "Kümeler arası kenarı sıfırlamaz; bağımsızlık bağlantılı bileşen ve kesit kontrolüyle ayrıca doğrulanmalı; GPL-3.0.",
+      "ihtiyaclar": [
+        "N-K02-005"
+      ]
+    },
+    {
+      "id": "AR-4010",
+      "ad": "Infomap",
+      "tur": "kutuphane",
+      "lisans": "GPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mapequation.org/infomap/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Harita denklemine dayalı çok düzeyli ağ kümeleme; yönlü ve ağırlıklı grafiklerde hiyerarşik modüller bulur—yönlü bağımlılık grafiğinde birbirine az akış veren iş kümelerini ayırmak için.",
+      "sinirlar": "GPL-3.0; akış temelli modüller mutlak bağımsızlık garantisi değildir.",
+      "ihtiyaclar": [
+        "N-K02-005"
+      ]
+    },
+    {
+      "id": "AR-4011",
+      "ad": "NetworKit",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://networkit.github.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "C++ çekirdekli Python ağ analizi takımı; bağlantılı ve güçlü bağlı bileşenler, paralel topluluk tespiti (PLM, Leiden), merkezilik—on binlerce kayıtlık bağımlılık grafiklerinde hızlı bileşen/küme ayrıştırma.",
+      "sinirlar": "Planlama/zamanlama semantiği içermez; bölme deneme sınırı ve engel kaydı orkestratörde kurulmalı.",
+      "ihtiyaclar": [
+        "N-K02-005"
+      ]
+    },
+    {
+      "id": "AR-4202",
+      "ad": "Nexus Rehberi (Nexus Guide)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.scrum.org/resources/online-nexus-guide",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek ürün üzerinde çalışan 3-9 Scrum ekibi için çerçeve: Nexus Entegrasyon Ekibi, Nexus sprint planlama, günlük Nexus Scrum'da entegrasyon sorunları ve ekipler arası bağımlılıkların görünür kılınması, Nexus sprint retrospektifi.",
+      "sinirlar": "Daha büyük yapılar için ek ölçekleme gerekir; araç sağlamaz.",
+      "ihtiyaclar": [
+        "N-K24-012",
+        "N-K24-013",
+        "N-K31-005"
+      ]
+    }
+  ]
+}

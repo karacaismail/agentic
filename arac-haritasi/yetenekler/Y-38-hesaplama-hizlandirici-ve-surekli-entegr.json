@@ -1,0 +1,2247 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-38",
+    "ad": "Hesaplama, hızlandırıcı ve sürekli entegrasyon kapasite yönetimi",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim",
+    "cozdugu_sorun": "Ajanların artırdığı iş hacminde kuyrukların doyması; model sunucusunun yetmemesi.",
+    "ne_zaman_zorunlu": "Pilot sonrası ölçeklemede."
+  },
+  "arac_sayisi": 118,
+  "tur_dagilimi": {
+    "acik-kaynak": 79,
+    "kutuphane": 1,
+    "ticari-saas": 8,
+    "bulut-hizmeti": 10,
+    "ticari-yazilim": 5,
+    "acik-cekirdek": 12,
+    "platform": 3
+  },
+  "araclar": [
+    {
+      "id": "AR-0004",
+      "ad": "Hatchet",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://hatchet.run",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL üzerinde görev kuyruğu + dayanıklı iş akışı (DAG ve durable task) motoru; dayanıklı uyku ve olay bekleme, anahtar bazlı eşzamanlılık, hız sınırlama, işçi slot kontrolü ve OpenTelemetry ile görev geçmişi sağlar.",
+      "sinirlar": "Günlerce süren insan beklemesi ve replay davranışı pilotta sınanmalı (kaynak hükmü). Genç proje; v1 geçişinde API değişiklikleri yaşandı; ölçek tek Postgres kümesine bağlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K13-002",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-012",
+        "N-K13-013",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-0023",
+      "ad": "Celery",
+      "tur": "kutuphane",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.celeryq.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python dağıtık görev kuyruğu; chain/group/chord ile görev bileşimi, zaman sınırları, yeniden deneme ve oran sınırı sunar.",
+      "sinirlar": "Dayanıklı iş akışı motoru değildir: günlerce bekleme, replay ve olay geçmişi yok; kaynak LangGraph çekirdek seçilirse ek kurulacak işçi kuyruğu olarak anıyor. Uzun insan beklemesi ve tek durum sahibi için tasarlanmamış; teslim semantiği broker ve acks_late/görünürlük zaman aşımı ayarlarına bağlı.",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-0127",
+      "ad": "GitHub Actions (merge queue ile)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (self-hosted runner seçeneği)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.github.com/en/actions",
+      "olgunluk": "olgun",
+      "ne_saglar": "CI/CD iş akışları ve zorunlu kontroller; merge queue birleşim öncesi güncel ana dalla birleşik revizyonu yeniden test eder, sonuç SHA'ya bağlı.",
+      "sinirlar": "Jenkins de kullanılıyorsa sahiplik tek sisteme yazılmalı (kaynak); barındırılan runner'larda kod GitHub altyapısında çalışır. Barındırılan koşucu dakika maliyeti; self-host koşucu güvenliği ve izolasyonu kullanıcı sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-029",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K15-004",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0129",
+      "ad": "Jenkins",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.jenkins.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Self-host otomasyon sunucusu; pipeline-as-code, dağıtık ajanlar, geniş eklenti ekosistemi; kurumun mevcut yayın hattında anılıyor.",
+      "sinirlar": "Eklenti ekosistemi düzenli güvenlik yaması takibi ister; GitHub Actions ile birlikteyse sahiplik tek sisteme yazılmalı (kaynak). Eklenti güvenlik geçmişi ve bakım yükü yüksek.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-003",
+        "N-K06-005",
+        "N-K06-006",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0140",
+      "ad": "k6",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://grafana.com/oss/k6/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript senaryolu yük testi; eşikler (ör. p95 gecikme, hata oranı) aşılınca sıfırdan farklı çıkış koduyla CI kapısını kırar; tarayıcı modülüyle ön yüz metrikleri ölçer.",
+      "sinirlar": "AGPL-3.0; tarayıcı tarafı ölçüm sınırlı. AGPL lisansı; dağıtık büyük yük için bulut veya operatör gerekir. AGPL; dağıtık büyük testler için k6 Cloud (ticari) veya operator gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-012",
+        "N-K05-023",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K16-001"
+      ]
+    },
+    {
+      "id": "AR-0162",
+      "ad": "Prometheus",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://prometheus.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Zaman serisi metrik toplama ve uyarı sistemi; hattın kuyruk, eşzamanlılık ve SLO metrikleri için (Moltis entegrasyonunda anılıyor).",
+      "sinirlar": "Uzun süreli saklama ve yüksek kardinalite için ek bileşen gerekir. Uzun süreli saklama ve çok kiracılık için Thanos/Mimir gibi ek bileşen gerekir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K05-021",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K16-001",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-0176",
+      "ad": "Modal",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://modal.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ile tanımlanan sunucusuz GPU işleri; vLLM/SGLang gibi motorları kodla tarif edip saniye bazlı ücretle çalıştırma, toplu işler için uygun.",
+      "sinirlar": "Bulut kilidi; hatta gerek görülmedi (kaynak). Yalnız Modal bulutu; kurum içi kurulum yok.",
+      "ihtiyaclar": [
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-002",
+        "N-K15-005",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-0191",
+      "ad": "vLLM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.vllm.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PagedAttention ve sürekli toplu işlemeyle yüksek verimli OpenAI/Anthropic uyumlu LLM sunucusu; araç çağrısı ve akıl yürütme ayrıştırıcıları, nicemlenmiş model desteği, çok GPU/çok düğüm, geniş donanım yelpazesi.",
+      "sinirlar": "Bütün modeller aynı komutla açılmaz, model kartındaki resmî reçete esas alınmalı (kaynak); GPU kapasitesi ve sürüm uyumu yönetilmeli. Her model için doğru sohbet şablonu ve araç/akıl yürütme ayrıştırıcısı seçilmezse araç çağrıları bozulur; sürümler sık değişir, reçete sürümlenmeli.",
+      "ihtiyaclar": [
+        "N-K09-008",
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K16-007",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0192",
+      "ad": "SGLang",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.sglang.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "RadixAttention önek önbelleği, yapılandırılmış çıktı hızlandırma ve ayrık prefill/decode desteğiyle yüksek verimli LLM ve çok kipli model sunumu; büyük MoE modellerinde güçlü.",
+      "sinirlar": "Model başına reçete ve ayrıştırıcı uyumu doğrulanmalı (kaynak). Hızlı değişen parametre seti; model başına başlatma bayrakları ve şablon uyumu test edilmeli.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0264",
+      "ad": "Baseten",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://www.baseten.co",
+      "olgunluk": "olgun",
+      "ne_saglar": "Özel ve açık modelleri Truss paketleriyle ayrılmış GPU'larda otomatik ölçeklenen üretim uç noktası olarak dağıtma; kendi bulut hesabında (self-hosted) seçenek.",
+      "sinirlar": "Ücret GPU süresine göre; soğuk başlatma ve kapasite planlaması müşteride.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0301",
+      "ad": "NVIDIA Dynamo",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/ai-dynamo/dynamo",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çok düğümlü dağıtık çıkarım çerçevesi: ayrık prefill/decode havuzları, KV önbellek farkındalıklı yönlendirme, dinamik GPU planlama; vLLM, SGLang ve TensorRT-LLM ile çalışır; 1.0 sürümü Mart 2026'da GA.",
+      "sinirlar": "Büyük kümeler için tasarlandı; küçük kurulumlarda karmaşıklığı getirisinden fazla olabilir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-0304",
+      "ad": "KServe",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kserve.github.io/website/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes üzerinde standart InferenceService kaynağıyla LLM ve klasik modelleri dağıtma; otomatik ölçekleme, kanarya dağıtım, vLLM arka ucu ve model depolama başlatıcıları.",
+      "sinirlar": "Kubernetes/Knative işletim yükü; LLM'e özgü önek farkındalıklı yönlendirme için llm-d gibi eklenti gerekir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0305",
+      "ad": "llm-d",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/llm-d/llm-d",
+      "olgunluk": "gelisen",
+      "ne_saglar": "vLLM ve KServe üzerine önek önbelleği farkındalıklı yönlendirme, ayrık prefill/decode ve KV önbellek boşaltma ekleyen Kubernetes-yerel dağıtık çıkarım yığını.",
+      "sinirlar": "CNCF Sandbox aşamasında (Mart 2026); üretim olgunluğu henüz kanıtlanmadı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-0310",
+      "ad": "AIBrix",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/vllm-project/aibrix",
+      "olgunluk": "gelisen",
+      "ne_saglar": "vLLM kümeleri için LLM farkındalıklı yönlendirme, LoRA adaptör yönetimi, otomatik ölçekleme ve dağıtık KV önbellek bileşenleri.",
+      "sinirlar": "Kubernetes gerektirir; bileşenlerin olgunluğu farklı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-0312",
+      "ad": "vLLM Production Stack",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/vllm-project/production-stack",
+      "olgunluk": "gelisen",
+      "ne_saglar": "vLLM'in Kubernetes üzerinde Helm ile küme ölçeğinde dağıtımı için referans yığın: yönlendirici, gözlemlenebilirlik panoları ve KV önbellek entegrasyonu.",
+      "sinirlar": "Referans uygulama niteliğinde; kurumsal işletim sorumluluğu kullanıcıda.",
+      "ihtiyaclar": [
+        "N-K09-010",
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0314",
+      "ad": "GPUStack",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://gpustack.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Karışık GPU kümesini yöneten ve modelleri vLLM/SGLang ile dağıtan platform; kaynak tahmini, kullanıcı/anahtar yönetimi ve kullanım metrikleri.",
+      "sinirlar": "Küçük ekip tarafından geliştiriliyor; büyük ölçekli üretim referansı sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-0320",
+      "ad": "Ray Serve LLM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.ray.io/en/latest/serve/llm/index.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "Ray kümelerinde vLLM tabanlı çok modelli LLM sunumu, otomatik ölçekleme ve Ray Data ile toplu çıkarım (büyük backlog dönüşümü gibi işler için).",
+      "sinirlar": "Ray küme işletim bilgisi gerektirir; yönetilen sürüm Anyscale'e bağlı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-0325",
+      "ad": "Mooncake",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/kvcache-ai/Mooncake",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kimi hizmetinin KV önbellek merkezli ayrık sunum mimarisi; düğümler arası hızlı KV aktarım motoru vLLM/SGLang ile entegre.",
+      "sinirlar": "Yüksek hızlı ağ (RDMA) ve büyük küme varsayar.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0327",
+      "ad": "LLM Compressor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.vllm.ai/projects/llm-compressor/en/latest/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GPTQ, AWQ, SmoothQuant, FP8 ve seyreltme yöntemleriyle modelleri vLLM'e doğrudan yüklenebilir sıkıştırılmış biçime dönüştürme; arşivlenen AutoAWQ'nun işlevini devraldı.",
+      "sinirlar": "Nicemleme sonrası Türkçe ve araç çağrısı kalitesi ayrıca ölçülmeli; kalibrasyon verisi gerekir.",
+      "ihtiyaclar": [
+        "N-K09-010",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-0333",
+      "ad": "GuideLLM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/vllm-project/guidellm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenAI uyumlu sunucuya gerçekçi yük profilleri uygulayıp verim, gecikme (TTFT/ITL) ve SLO'ya uygun eşzamanlılık sınırlarını ölçen kapasite planlama aracı.",
+      "sinirlar": "Sentetik yük gerçek ajan trafiğini tam yansıtmaz; kurum iz verisiyle kalibre edilmeli.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0334",
+      "ad": "AIPerf",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/ai-dynamo/aiperf",
+      "olgunluk": "erken",
+      "ne_saglar": "Üretken model sunucularının verim, gecikme ve eşzamanlılık performansını ölçen kıyaslama aracı (GenAI-Perf'in halefi).",
+      "sinirlar": "Yeni proje; ölçüm senaryoları kurum iş yüküne uyarlanmalı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-0335",
+      "ad": "inference-benchmarker",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/huggingface/inference-benchmarker",
+      "olgunluk": "erken",
+      "ne_saglar": "Çıkarım sunucularına farklı yük desenleri uygulayıp token verimi ve gecikme ölçen Rust tabanlı araç.",
+      "sinirlar": "Kullanıcı tabanı küçük; raporlama sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-0376",
+      "ad": "OpenCost",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://opencost.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes iş yüklerinin (GPU dahil) ve bulut harcamalarının ad alanı, etiket ve iş yükü bazında maliyet atfı; kurum içi model sunucusu ve ajan çalıştırıcılarının maliyetini ekiplere bölmek için.",
+      "sinirlar": "LLM API token maliyetini kapsamaz; tam FinOps için ek araç gerekir. LLM API/token maliyetini kapsamaz; ayrı ölçüm gerekir.",
+      "ihtiyaclar": [
+        "N-K15-006",
+        "N-K20-005",
+        "N-K20-007",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-0377",
+      "ad": "IBM Kubecost",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (açık çekirdek OpenCost)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.apptio.com/?src=kc-com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes maliyetlerinin küme, ekip ve ad alanı bazında gerçek zamanlı görünürlüğü, bütçe, tahmin ve anomali uyarıları; kurumsal sürümde gelişmiş GPU optimizasyonu.",
+      "sinirlar": "IBM Apptio portföyüne katıldı; lisans ve ürün yol haritası IBM Cloudability ile birleşme yönünde değişebilir.",
+      "ihtiyaclar": [
+        "N-K15-006",
+        "N-K20-005",
+        "N-K20-007",
+        "N-K24-001",
+        "N-K24-006"
+      ]
+    },
+    {
+      "id": "AR-0385",
+      "ad": "OpenLIT",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openlit.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenTelemetry-yerli SDK ve ClickHouse tabanlı panelle LLM/ajan izleri, token maliyeti, GPU metrikleri, değerlendirme ve prompt yönetimi sunar; kodlama ajanlarını da izlemeyi hedefler.",
+      "sinirlar": "Küçük ekip; kurumsal ölçekte işletim referansı sınırlı. Küçük topluluk ve şirket desteği sınırlı; kurumsal SSO/denetim özellikleri olgun değil.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K09-006",
+        "N-K09-011",
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-0452",
+      "ad": "Kubernetes Agent Sandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://agent-sandbox.sigs.k8s.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te ajan çalışma zamanları için Sandbox, SandboxTemplate, SandboxClaim ve önceden ısıtılmış SandboxWarmPool CRD'leri; gVisor/Kata gibi yalıtım çalışma zamanlarını RuntimeClass ile kullanır.",
+      "sinirlar": "Yeni alt proje; API'ler değişebilir, Kubernetes işletim yetkinliği gerektirir. Genç bir SIG projesidir, API'ler alfa/beta düzeyinde; Kubernetes işletim yetkinliği ve ayrı ağ politikası (NetworkPolicy/Cilium) gerekir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-005",
+        "N-K15-007",
+        "N-K18-005"
+      ]
+    },
+    {
+      "id": "AR-0454",
+      "ad": "Modal Sandboxes",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas"
+      ],
+      "url": "https://modal.com/products/sandboxes",
+      "olgunluk": "olgun",
+      "ne_saglar": "gVisor üzerinde güvenilmeyen kod yürütme; varsayılanda gelen bağlantı yoktur, çıkış ağı tamamen engellenebilir veya CIDR izin listesiyle sınırlanabilir, CPU/bellek/süre sınırları ve GPU desteği vardır.",
+      "sinirlar": "Kapalı platform; ağ politikaları ve maliyet ölçekte dikkatle yönetilmeli. Yalnız yönetilen bulut; varsayılanda dış ağa çıkış açıktır ve açıkça kısıtlanmalıdır.",
+      "ihtiyaclar": [
+        "N-K13-006",
+        "N-K15-001",
+        "N-K15-002"
+      ]
+    },
+    {
+      "id": "AR-0522",
+      "ad": "Argo Workflows",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://argoproj.github.io/workflows/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes-yerel DAG/adım iş akışı motoru; suspend şablonuyla manuel devam (onay), retryStrategy, activeDeadlineSeconds ile zaman aşımı ve artefakt deposu (S3 uyumlu) entegrasyonu sağlar.",
+      "sinirlar": "Kubernetes zorunlu; her adım bir pod olduğu için kısa adımlarda ek yük; uzun insan beklemelerinde durum CRD/arsiv yapılandırması gerektirir. Kubernetes gerektirir; uzun süreli insan bekleyen iş akışları için tasarlanmadı.",
+      "ihtiyaclar": [
+        "N-K02-007",
+        "N-K13-003",
+        "N-K13-006",
+        "N-K13-007",
+        "N-K13-008",
+        "N-K13-011",
+        "N-K13-013",
+        "N-K15-005",
+        "N-K23-002",
+        "N-K23-003"
+      ]
+    },
+    {
+      "id": "AR-1029",
+      "ad": "Develocity",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://gradle.com/develocity/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Build Scan gözlemi, derleme ve artefakt önbelleği, test dağıtımı, öngörücü test seçimi, kararsız test tespiti; Gradle, Maven, Bazel, npm, sbt, Python; AI ajanları için MCP sunucuları.",
+      "sinirlar": "Ticari ve JVM ağırlıklı; öngörücü seçim birleşim öncesi tam koşunun yerini tutmamalı. Ticari; tam fayda için build aracı entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-012",
+        "N-K05-013",
+        "N-K05-026",
+        "N-K06-003",
+        "N-K15-005",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1038",
+      "ad": "Bazel",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://bazel.build",
+      "olgunluk": "olgun",
+      "ne_saglar": "Hermetik, içerik adresli önbellekli derleme ve test; bağımlılık grafiğinden etkilenen hedefleri sorgular, flaky_test_attempts ile kararsız testleri işaretler, uzak yürütme destekler.",
+      "sinirlar": "Benimseme ve göç maliyeti yüksek; ekip uzmanlığı gerekir. Geçiş maliyeti ve öğrenme eğrisi yüksek.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-013",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K15-005",
+        "N-K19-005"
+      ]
+    },
+    {
+      "id": "AR-1080",
+      "ad": "Grafana Pyroscope",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "saas",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/pyroscope/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürekli profil çıkarma: CPU, bellek ve kilit profillerini zaman serisi olarak saklar, sürümler arası alev grafiği karşılaştırması yapar.",
+      "sinirlar": "AGPL; depolama ve ajan işletimi gerekir. AGPL; profil verisi hacimli.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1129",
+      "ad": "Coder",
+      "tur": "acik-cekirdek",
+      "lisans": "AGPL-3.0 (+ ticari Premium)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://coder.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terraform şablonlarıyla kurum altyapısında geliştirici ve ajan çalışma alanları açar; çalışma alanı başına yaşam döngüsü, kota, denetim kaydı ve kimlik entegrasyonu sağlar.",
+      "sinirlar": "AGPL lisansı ve bazı yönetişim özelliklerinin ücretli olması; Kubernetes/Terraform işletim bilgisi gerekir.",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K15-001",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1135",
+      "ad": "vCluster",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (+ ticari vCluster Platform)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.vcluster.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tek bir Kubernetes kümesinde kiracı başına ayrı kontrol düzlemli sanal kümeler oluşturur; görev/ekip başına geçici tam Kubernetes ortamı ve kota sağlar.",
+      "sinirlar": "Çalışan düğümler varsayılanda paylaşılır, tam izolasyon için ek yapılandırma gerekir; bazı özellikler ücretli platformdadır.",
+      "ihtiyaclar": [
+        "N-K06-004",
+        "N-K15-001",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1325",
+      "ad": "Grafana Mimir",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://grafana.com/oss/mimir/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yatay ölçeklenen, çok kiracılı, uzun süreli Prometheus uyumlu metrik deposu; ekip/ART bazında kiracı ayrımı.",
+      "sinirlar": "AGPL; mikroservis mimarisi işletim uzmanlığı ister.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-001",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1327",
+      "ad": "VictoriaMetrics",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (bazı özellikler kurumsal)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://victoriametrics.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus uyumlu yüksek performanslı zaman serisi veritabanı; kümeli sürümde çok kiracılık.",
+      "sinirlar": "Bazı özellikler (ör. downsampling, gelişmiş güvenlik) kurumsal sürümde.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-001",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1335",
+      "ad": "Coroot",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Enterprise ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://coroot.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF ile kod değişikliksiz gözlem, servis haritası, SLO tabanlı uyarı ve kök neden analizi; kaynak/maliyet görünümü.",
+      "sinirlar": "Bazı özellikler (ör. AI destekli RCA) Enterprise sürümde.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K15-005",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K33-002",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-1385",
+      "ad": "Zuul",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://zuul-ci.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Spekülatif birleştirme ile kapılama: kuyruktaki değişiklikleri önündekilerle birlikte paralel test eder; Depends-On ile çok depolu bağımlı değişiklikleri birlikte doğrular; Gerrit, GitHub, GitLab ile çalışır.",
+      "sinirlar": "Kurulum ve işletim karmaşık (Nodepool, Ansible tabanlı işler).",
+      "ihtiyaclar": [
+        "N-K04-005",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K24-003",
+        "N-K24-008"
+      ]
+    },
+    {
+      "id": "AR-1387",
+      "ad": "Trunk Merge Queue",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://trunk.io/merge-queue",
+      "olgunluk": "olgun",
+      "ne_saglar": "Etkilenen hedeflere göre paralel kuyruk şeritleri, akıllı batching, kuyruk sağlık metrikleri; ayrıca kararsız test tespiti.",
+      "sinirlar": "SaaS kontrol düzlemi; müşteri AWS'inde veri düzlemi seçeneği geliştirme aşamasında.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K06-002",
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1390",
+      "ad": "Buildkite",
+      "tur": "ticari-saas",
+      "lisans": "ticari (agent MIT)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://buildkite.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SaaS kontrol düzlemi ve kendi altyapınızda koşan ajanlar; Kubernetes ajan yığınıyla otomatik ölçekleme, kuyruk bazlı kapasite ayırma; test analitiği.",
+      "sinirlar": "Kontrol düzlemi SaaS; ticari.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1391",
+      "ad": "CircleCI",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://circleci.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Barındırılan CI, test bölme ve paralellik, self-host koşucular ve CircleCI Server.",
+      "sinirlar": "Ticari; Server sürümü özellikleri SaaS'ın gerisinde olabilir.",
+      "ihtiyaclar": [
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1399",
+      "ad": "BuildBuddy",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (enterprise/ ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://buildbuddy.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bazel için uzak önbellek, uzak yürütme, derleme olay görüntüleyici ve test geçmişi.",
+      "sinirlar": "Uzak yürütme ve kurumsal özellikler ticari.",
+      "ihtiyaclar": [
+        "N-K05-013",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1400",
+      "ad": "NativeLink",
+      "tur": "acik-cekirdek",
+      "lisans": "FSL-1.1-Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://nativelink.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Rust ile yazılmış uzak önbellek ve uzak yürütme sunucusu (Bazel, Buck2 vb. REv2 istemcileri).",
+      "sinirlar": "FSL OSI onaylı değil (iki yıl sonra Apache-2.0).",
+      "ihtiyaclar": [
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1401",
+      "ad": "Buildbarn",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/buildbarn",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bazel Remote Execution API için uzak yürütme ve depolama bileşenleri; kurum içi derleme kapasitesi havuzu.",
+      "sinirlar": "İşletim bilgisi gerektirir; UI sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1402",
+      "ad": "Nx Cloud",
+      "tur": "ticari-saas",
+      "lisans": "ticari (Nx çekirdeği MIT)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://nx.dev/ci/intro/ci-with-nx",
+      "olgunluk": "olgun",
+      "ne_saglar": "Monorepo için uzak önbellek, dağıtılmış görev yürütme ve etkilenen proje analizi.",
+      "sinirlar": "Nx kullanan depolara özgü.",
+      "ihtiyaclar": [
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1403",
+      "ad": "Depot",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://depot.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Hızlı barındırılan GitHub Actions koşucuları ve kalıcı önbellekli konteyner derlemeleri.",
+      "sinirlar": "SaaS; veri yerleşimi sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1404",
+      "ad": "Blacksmith",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.blacksmith.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Actions için yönetilen yüksek performanslı koşucular ve önbellek.",
+      "sinirlar": "SaaS; yalnız GitHub Actions.",
+      "ihtiyaclar": [
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1405",
+      "ad": "Actions Runner Controller (ARC)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/actions/actions-runner-controller",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes'te runner scale set ile iş talebine göre geçici self-host GitHub Actions koşucularını ölçekler; ekip bazlı koşucu grupları.",
+      "sinirlar": "Yalnız GitHub Actions; konteyner modu/DinD güvenlik ayarları dikkat ister.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1406",
+      "ad": "terraform-aws-github-runner",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github-aws-runners.github.io/terraform-aws-github-runner/",
+      "olgunluk": "olgun",
+      "ne_saglar": "AWS Lambda ve EC2 (spot dahil) ile geçici self-host GitHub Actions koşucularını otomatik ölçekleyen Terraform modülü.",
+      "sinirlar": "AWS'ye özgü; eski philips-labs deposu arşivlendi, yeni org kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1407",
+      "ad": "RunsOn",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (CloudFormation varlıkları MIT)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://runs-on.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kendi AWS hesabınızda geçici EC2 (GPU dahil) GitHub Actions koşucuları; sabit yıllık lisans, altyapı maliyeti AWS faturasında.",
+      "sinirlar": "Sunucu/ajan ticari lisanslı; AWS'ye özgü.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1408",
+      "ad": "GitLab Runner (fleeting autoscaler)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.gitlab.com/runner/",
+      "olgunluk": "olgun",
+      "ne_saglar": "GitLab işleri için Docker/Kubernetes/instance executor'ları; fleeting eklentileriyle bulutta otomatik ölçeklenen koşucu filoları.",
+      "sinirlar": "Yalnız GitLab CI.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1409",
+      "ad": "KEDA",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://keda.sh",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kuyruk uzunluğu, Prometheus metriği vb. olaylara göre iş yüklerini ve Job'ları sıfıra kadar ölçekler; ajan işçi havuzlarını aktif yüke göre boyutlandırır.",
+      "sinirlar": "Kubernetes gerektirir; ölçekleme politikası dikkatli ayarlanmalı.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1410",
+      "ad": "Karpenter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://karpenter.sh",
+      "olgunluk": "olgun",
+      "ne_saglar": "Bekleyen pod'lara göre hızlı düğüm sağlama; spot, GPU ve karışık örnek tipleriyle maliyet odaklı kapasite.",
+      "sinirlar": "Sağlayıcı desteği (AWS, Azure) sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1411",
+      "ad": "Kubernetes Cluster Autoscaler",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/kubernetes/autoscaler",
+      "olgunluk": "olgun",
+      "ne_saglar": "Düğüm grubu tabanlı küme ölçekleme; çok sayıda bulut sağlayıcıyı destekler.",
+      "sinirlar": "Karpenter'a göre daha yavaş ve düğüm grubu tanımına bağlı.",
+      "ihtiyaclar": [
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1412",
+      "ad": "Kueue",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kueue.sigs.k8s.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes iş kuyruğu: ClusterQueue/LocalQueue kotaları, cohort içinde ödünç alma, adil paylaşım ve önalım; stopPolicy (Hold/HoldAndDrain) ile bir kuyruğun yeni iş kabulünü anında dondurma.",
+      "sinirlar": "Batch/Job odaklı; uzun ömürlü servisler için değil.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K16-003",
+        "N-K20-007",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1413",
+      "ad": "Volcano",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://volcano.sh",
+      "olgunluk": "olgun",
+      "ne_saglar": "Toplu ve AI iş yükleri için gang scheduling, kuyruklar ve adil paylaşım.",
+      "sinirlar": "Kueue ile örtüşen kapsam; yerleşik zamanlayıcıyı değiştirir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1414",
+      "ad": "NVIDIA DCGM Exporter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/NVIDIA/dcgm-exporter",
+      "olgunluk": "olgun",
+      "ne_saglar": "GPU kullanımı, bellek, sıcaklık ve hata metriklerini Prometheus'a aktarır; model sunucu kapasite planlamasının veri kaynağı.",
+      "sinirlar": "Yalnız NVIDIA GPU'lar.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1450",
+      "ad": "Kubecost",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Helm chart); ürün ticari katmanlı",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.kubecost.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenCost üzerine maliyet tahsisi, bütçe uyarıları ve tasarruf önerileri.",
+      "sinirlar": "IBM'e ait; ücretsiz katman sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-006",
+        "N-K20-005",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-1506",
+      "ad": "Komiser",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/mlabouardy/komiser",
+      "olgunluk": "gelisen",
+      "ne_saglar": "AWS, Azure, GCP ve diğer bulutlardaki kaynakları envanterleyip maliyet, etiket ve kullanılmayan kaynak analizi yapan açık kaynak bulut varlık yöneticisi.",
+      "sinirlar": "Bakım temposu dalgalı; LLM token maliyetini değil altyapı maliyetini izler.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K20-006",
+        "N-K20-007"
+      ]
+    },
+    {
+      "id": "AR-1623",
+      "ad": "KubeAI",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.kubeai.org",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes üzerinde vLLM/Ollama/Infinity sunucularını OpenAI uyumlu API arkasında, istek tabanlı otomatik ölçekleme (sıfıra dahil) ve önek önbelleği farkındalıklı yük dengeleme ile işleten operatör.",
+      "sinirlar": "Kubernetes ve GPU düğümleri gerektirir; topluluk küçüktür.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-1675",
+      "ad": "GARM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/cloudbase/garm",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub Actions ve Gitea Actions için geçici (ephemeral) self-host CI çalıştırıcı havuzlarını OpenStack, LXD, Kubernetes ve bulut sağlayıcılarında yöneten runner yöneticisi.",
+      "sinirlar": "Topluluk küçük; sağlayıcı eklentileri ayrı bakımdadır.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1681",
+      "ad": "git-sizer",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/github/git-sizer",
+      "olgunluk": "olgun",
+      "ne_saglar": "Git deposunun boyut metriklerini (en büyük blob/ağaç, geçmiş derinliği, referans sayısı) ölçüp performans sorunu yaratabilecek aşımları uyaran araç.",
+      "sinirlar": "Kod kalitesini değil depo sağlığını ölçer.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-1698",
+      "ad": "KAITO (Kubernetes AI Toolchain Operator)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://kaito-project.github.io/kaito/docs/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Açık ağırlıklı modeller için GPU düğümü sağlama, vLLM tabanlı sunum yapılandırması, ince ayar ve RAG iş yüklerini Workspace kaynağı üzerinden otomatikleştiren Kubernetes operatörü; hazır model ön ayarları içerir.",
+      "sinirlar": "Düğüm otomatik sağlama en iyi Azure/AKS ile çalışır; desteklenen model ön ayarları sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-1699",
+      "ad": "HAMi",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://project-hami.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te GPU ve diğer hızlandırıcıları bellek/çekirdek dilimleriyle paylaştırıp sanallaştıran ara katman; pod başına GPU belleği ve hesaplama kotası uygular.",
+      "sinirlar": "Sürücü düzeyinde kanca kullanır; bazı iş yüklerinde performans izolasyonu donanım MIG'i kadar güçlü değildir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1700",
+      "ad": "KAI Scheduler",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/kai-scheduler/KAI-Scheduler",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ iş yükleri için hiyerarşik kuyruklar, kota, adil paylaşım, önalım ve GPU paylaşımı sunan Kubernetes zamanlayıcısı; ekipler arası GPU kapasitesini politika ile böler.",
+      "sinirlar": "Kubernetes'e özgü; özellikle GPU iş yüklerine odaklı, genel CI kapasitesi için tasarlanmamış.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-1701",
+      "ad": "Armada",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://armadaproject.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Birden çok Kubernetes kümesine yayılan yüksek hacimli toplu işler için kuyruk, öncelik ve adil paylaşım uygulayan zamanlama sistemi; milyonlarca işi kuyrukta tutabilir.",
+      "sinirlar": "Toplu iş odaklı; kurulum ve işletimi (Pulsar, PostgreSQL bağımlılıkları) karmaşık.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-1702",
+      "ad": "Apache YuniKorn",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://yunikorn.apache.org",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes için hiyerarşik kuyruk, kaynak kotası, adil paylaşım ve çete (gang) zamanlaması sunan toplu iş zamanlayıcısı; ekip bazında kaynak sınırları tanımlanır.",
+      "sinirlar": "Veri/ML toplu işlerine odaklı; ajan görevi düzeyinde bütçe kavramı yoktur.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-1703",
+      "ad": "Kepler",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://sustainable-computing.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes pod/konteyner ve süreç düzeyinde enerji tüketimini donanım sayaçları ve modellerle tahmin edip Prometheus metriği olarak sunar; yerel model sunumunun enerji maliyetini görünür kılar.",
+      "sinirlar": "Sanal makinelerde ve bazı GPU'larda değerler tahmine dayalıdır; doğrudan parasal maliyet vermez.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K20-006",
+        "N-K23-007"
+      ]
+    },
+    {
+      "id": "AR-1730",
+      "ad": "Capsule",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://projectcapsule.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te 'Tenant' kavramıyla ekip başına ad alanı gruplama, kaynak kotası, ağ ve depolama sınırları, izinli kayıt politikaları uygulayan çok kiracılık çerçevesi; ekip sayısı değiştikçe kiracı eklemek bildirimsel.",
+      "sinirlar": "Ad alanı düzeyinde yalıtım sağlar; güçlü güvenlik yalıtımı için ayrı küme/vCluster gerekebilir.",
+      "ihtiyaclar": [
+        "N-K14-007",
+        "N-K15-006",
+        "N-K24-001"
+      ]
+    },
+    {
+      "id": "AR-1745",
+      "ad": "KWOK (Kubernetes WithOut Kubelet)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://kwok.sigs.k8s.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Gerçek kubelet olmadan binlerce sahte düğüm ve pod'u simüle ederek zamanlayıcı, denetleyici ve kapasite/ölçek senaryolarını düşük maliyetle test etmeyi sağlar.",
+      "sinirlar": "Gerçek iş yükü çalıştırmaz; yalnız kontrol düzlemi davranışını sınar.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-009"
+      ]
+    },
+    {
+      "id": "AR-1826",
+      "ad": "Ray",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://ray.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python dağıtık hesaplama motoru: görev/aktör modeli, GPU/CPU kaynak zamanlama, toplu çıkarım (Ray Data) ve otomatik ölçekleme; KubeRay ile Kubernetes'te toplu değerlendirme ve backlog dönüşüm işleri için.",
+      "sinirlar": "Küme işletimi ve hata ayıklaması karmaşık; bellek yönetimi dikkat ister.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-1832",
+      "ad": "MLPerf Inference",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mlcommons.org/benchmarks/inference-datacenter/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Donanım ve sunum yazılımı yığınlarının çıkarım performansını (LLM dahil) standart senaryolarla (sunucu, çevrim dışı) ölçen kıyaslama ve referans uygulamalar; sonuçlar kamuya açık.",
+      "sinirlar": "Kurumun kendi iş yükünü temsil etmeyebilir; çalıştırması uzmanlık ister.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-1938",
+      "ad": "Kubeflow Trainer",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.kubeflow.org/docs/components/trainer/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes'te dağıtık model eğitimi ve LLM ince ayarı (PyTorch, DeepSpeed, JAX vb.) için TrainJob API'si ve Python SDK'sı; hazır eğitim çalışma zamanları ve GPU zamanlamasıyla kontrollü öğrenme hattının eğitim adımını yürütür.",
+      "sinirlar": "Değerlendirme ve yayın kapıları kapsam dışı; GPU kapasitesi ve Kubernetes işletimi gerektirir.",
+      "ihtiyaclar": [
+        "N-K11-009",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-1965",
+      "ad": "AWS CodeBuild",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/codebuild/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Talep üzerine ölçeklenen yönetilen derleme/test çalıştırıcısı; GitHub Actions, GitLab ve Buildkite için geçici (ephemeral) barındırılan çalıştırıcı olarak kullanılabilir, VPC içinde yalıtılmış çalışır.",
+      "sinirlar": "Soğuk başlatma süresi ve dakika bazlı maliyet; GPU ve özel görüntü seçenekleri bölgeye göre değişir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K05-029",
+        "N-K15-005",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-1999",
+      "ad": "Azure App Testing (Azure Load Testing + Playwright Workspaces)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/app-testing/",
+      "olgunluk": "olgun",
+      "ne_saglar": "JMeter/Locust/Playwright betikleriyle çok bölgeli yük testi ve Playwright testlerini bulut tarayıcılarda paralel koşturma; CI/CD entegrasyonu ve performans eşik kriterleriyle geçti/kaldı.",
+      "sinirlar": "Gerçek mobil cihaz sağlamaz; sanal kullanıcı saati/tarayıcı dakikası bazlı ücret.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-018",
+        "N-K05-024",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2003",
+      "ad": "Managed DevOps Pools",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Azure Pipelines için yönetilen, otomatik ölçeklenen, VNet'e alınabilen ajan havuzları; bekleyen iş kuyruğuna göre ölçekleme ve durum bilgisiz (stateless) çalıştırıcılar.",
+      "sinirlar": "Yalnız Azure Pipelines; GitHub Actions için ayrı çözüm gerekir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2025",
+      "ad": "Google Cloud Build",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/build",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sunucusuz CI: konteyner adımlarıyla derleme/test, özel havuzlarla VPC içi yalıtılmış çalıştırıcılar ve SLSA düzey 3 köken (provenance) üretimi.",
+      "sinirlar": "Karmaşık hat görselleştirmesi zayıf; Google Cloud'a bağlı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K15-005",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-2039",
+      "ad": "Gemini Cloud Assist",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/products/gemini/cloud-assist",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Google Cloud ortamında sorun giderme (investigations), maliyet optimizasyonu önerileri ve mimari tasarım yardımı sunan yapay zekâ işletim asistanı.",
+      "sinirlar": "Yalnız Google Cloud kaynakları; öneriler insan onayı gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K16-002",
+        "N-K20-006"
+      ]
+    },
+    {
+      "id": "AR-2058",
+      "ad": "IBM Turbonomic",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.ibm.com/products/turbonomic",
+      "olgunluk": "olgun",
+      "ne_saglar": "Uygulama performansı talebine göre işlem, bellek ve GPU kaynaklarını (Kubernetes, sanal makine, bulut) otomatik boyutlandırma ve yerleştirme kararları üretir.",
+      "sinirlar": "Kararların otomatik uygulanması güven ve kademeli devreye alma ister.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2255",
+      "ad": "Ubicloud",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.ubicloud.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çıplak metal sunucular üzerinde VM, blok depolama, özel ağ, yönetilen PostgreSQL, Kubernetes ve GitHub Actions çalıştırıcıları sunan açık kaynak IaaS; kendi donanımınıza kurulabilir.",
+      "sinirlar": "Genç proje; yönetilen hizmet dışında kurumsal destek seçenekleri sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2256",
+      "ad": "Türk Telekom GPU'lu Sunucu Hizmetleri (GPUaaS)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://kurumsal.turktelekom.com.tr/bilisim-teknolojileri/veri-merkezi-ve-bulut/sanallastirma-cozumleri/gpulu-sunucu-hizmetleri",
+      "olgunluk": "olgun",
+      "ne_saglar": "Türk Telekom veri merkezlerinde GPU'lu sanal sunucu (GPUaaS) ve özel ekran kartlı fiziksel sunucu kiralama; yapay zekâ eğitimi ve model sunumu iş yükleri için.",
+      "sinirlar": "Hazır LLM API'si değil, altyapı hizmeti; vLLM gibi sunum katmanı kurumca işletilmeli.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2257",
+      "ad": "Turkcell Bulut Servisleri (Private Cloud)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://www.turkcell.com.tr/kurumsal/dijital-is-servisleri/bulut-servisleri",
+      "olgunluk": "olgun",
+      "ne_saglar": "Turkcell veri merkezlerinde özel bulut, sanal sunucu ve yönetilen servisler; Turkcell Bulut üzerinde SAS analitik/yapay zekâ ortamı ve çoklu bulut erişimi de sunuluyor.",
+      "sinirlar": "Yönetilen LLM hizmetinin kapsamı kamuya açık belgelerde net değil; GPU kapasitesi teklif bazlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K15-005",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2261",
+      "ad": "Sovereign Cloud Stack (SCS)",
+      "tur": "platform",
+      "lisans": "açık kaynak (bileşen bazında)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://sovereigncloudstack.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "OpenStack ve Kubernetes (Cluster API) tabanlı, sertifikalandırılabilir açık standartlar ve modüler yazılım yığını; IaaS ve KaaS sağlayıcılarını birlikte çalışabilirlik ve bağımsızlık açısından sertifikalandırır.",
+      "sinirlar": "Sertifikalı sağlayıcılar ağırlıkla Almanya'da; kurum içi kurulum ciddi OpenStack/Kubernetes işletim yetkinliği gerektirir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K22-008"
+      ]
+    },
+    {
+      "id": "AR-2262",
+      "ad": "Red Hat OpenShift AI",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.redhat.com/en/products/ai/openshift-ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenShift üzerinde model sunumu (KServe/vLLM), model kaydı, boru hatları, dağıtık eğitim, GPU paylaşımı ve değerlendirme bileşenlerini bir arada sunan MLOps/LLMOps platformu; bağlantısız (disconnected) kurulumu destekler.",
+      "sinirlar": "OpenShift aboneliği gerektirir, maliyetli ve karmaşık; bileşenlerin çoğu açık kaynak projelerin paketlenmiş hâli.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K09-012",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2263",
+      "ad": "SUSE AI Factory",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.suse.com/products/ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SUSE Linux ve Rancher Kubernetes üzerinde doğrulanmış açık kaynak bileşenlerle özel kurumsal yapay zekâ altyapısı kuran platform; hazır şablonlar, GitOps ve NVIDIA seçeneği sunar.",
+      "sinirlar": "Ürün adı ve paketleme sık değişiyor; bileşen düzeyi ayrıntılar ürün sayfasında sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K22-005"
+      ]
+    },
+    {
+      "id": "AR-2271",
+      "ad": "ClearML",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://clear.ml",
+      "olgunluk": "olgun",
+      "ne_saglar": "Deney takibi, veri sürümleme, iş kuyruğu ve GPU zamanlama, model kaydı ve sunum içeren MLOps platformu; tekrar üretilebilir koşular ve ekipler arası kaynak kuyrukları sağlar.",
+      "sinirlar": "Gelişmiş RBAC ve GPU bölme gibi özellikler ticari sürümde.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006",
+        "N-K19-005",
+        "N-K23-003"
+      ]
+    },
+    {
+      "id": "AR-2276",
+      "ad": "TeamCity On-Premises",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (sınırlı ücretsiz katman)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.jetbrains.com/teamcity/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kurum içinde çalışan CI/CD sunucusu; kararsız (flaky) test tespiti, test geçmişi, derleme zinciri bağımlılıkları, ajan havuzları ve Kotlin DSL ile sürümlü yapılandırma sunar.",
+      "sinirlar": "Lisans ajan sayısına göre ücretlendirilir; eklenti ekosistemi Jenkins'ten dar.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K05-013",
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2277",
+      "ad": "Semaphore (Community/Enterprise Edition)",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (ee/ dizini hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://semaphore.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "2025'te açık kaynaklanan CI/CD platformu; Kubernetes üzerinde self-host kurulum, paralel iş hatları, terfi (promotion) adımları ve test raporları sağlar.",
+      "sinirlar": "Self-host sürüm yeni ve topluluğu küçük; bazı kurumsal özellikler EE lisansında.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-003",
+        "N-K06-006",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2279",
+      "ad": "Buildbot",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://buildbot.net",
+      "olgunluk": "olgun",
+      "ne_saglar": "Python ile tanımlanan, çok platformlu dağıtık derleme/test çalıştırıcılarını yöneten esnek CI çerçevesi.",
+      "sinirlar": "Yapılandırma kod ağırlıklı, öğrenme eğrisi yüksek; hazır entegrasyonlar sınırlı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K15-005",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2294",
+      "ad": "Dragonfly",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://d7y.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "P2P tabanlı dosya, konteyner imajı ve model ağırlığı dağıtım sistemi; büyük model dosyalarının küme içinde önbellekli ve hızlı dağıtımını sağlar.",
+      "sinirlar": "Ek bileşenler (manager, scheduler, seed) işletim yükü getirir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-2295",
+      "ad": "Spegel",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://spegel.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes düğümleri arasında konteyner imajlarını paylaşan durumsuz, küme içi OCI aynası; dış kayıt defteri kesintilerinde imaj çekmelerini sürdürür.",
+      "sinirlar": "Yalnız düğümlerde bulunan imajları paylaşır, kalıcı ayna deposu değildir.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K18-008"
+      ]
+    },
+    {
+      "id": "AR-2327",
+      "ad": "Zabbix",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.zabbix.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sunucu, ağ, GPU ve uygulama metriklerini toplayan; tetikleyici/eskalasyon kuralları ve SLA raporları sunan kurumsal izleme sistemi.",
+      "sinirlar": "Dağıtık iz ve LLM gözlemlenebilirliği sağlamaz; yapılandırma karmaşıklaşabilir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K16-001",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-2367",
+      "ad": "Proxmox VE",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.proxmox.com/en/",
+      "olgunluk": "olgun",
+      "ne_saglar": "KVM sanal makineleri ve LXC kapsayıcılarını küme, yedekleme ve yazılım tanımlı depolamayla yöneten sanallaştırma platformu; ajan yalıtım VM'leri ve CI çalıştırıcıları için kurum içi altyapı.",
+      "sinirlar": "Kurumsal destek abonelikle; bulut yerel otomasyon Kubernetes'e göre sınırlı.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2368",
+      "ad": "OpenNebula",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://opennebula.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "VM, kapsayıcı ve Kubernetes iş yüklerini veri merkezi ve uçta yöneten hafif bulut platformu; çok kiracılı kotalar ve GPU paylaşımı.",
+      "sinirlar": "Topluluğu OpenStack'e göre küçük; bazı kurumsal eklentiler abonelikle.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2369",
+      "ad": "Kubermatic Kubernetes Platform",
+      "tur": "acik-cekirdek",
+      "lisans": "açık çekirdek (bazı bileşenler ticari)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://www.kubermatic.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Farklı altyapılarda (kurum içi, bulut, uç) çok sayıda Kubernetes kümesini merkezi olarak oluşturan ve yöneten platform.",
+      "sinirlar": "Açık çekirdek; bazı özellikler kurumsal sürümde.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2370",
+      "ad": "Gardener",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://gardener.cloud",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kubernetes kümelerini Kubernetes ile yöneten (garden/seed/shoot modeli) çok bulutlu küme yönetim sistemi; Avrupa bulut sağlayıcılarının yönetilen Kubernetes altyapısında kullanılır.",
+      "sinirlar": "Mimari karmaşık; küçük kurulumlar için ağır.",
+      "ihtiyaclar": [
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2371",
+      "ad": "RKE2",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.rke2.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Güvenlik odaklı (CIS sıkılaştırma, FIPS seçenekleri) Kubernetes dağıtımı; resmî internetsiz (air-gap) kurulum yöntemi belgelenmiştir.",
+      "sinirlar": "Rancher ekosistemine bağlı destek; tek başına ajan yalıtımı sağlamaz.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2423",
+      "ad": "vLLM Ascend",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/vllm-project/vllm-ascend",
+      "olgunluk": "gelisen",
+      "ne_saglar": "vLLM için Huawei Ascend NPU donanım eklentisi; vLLM'in API ve özelliklerini Ascend üzerinde çalıştırarak NVIDIA dışı model sunumu sağlar.",
+      "sinirlar": "Yalnız Ascend donanımı için anlamlı; özellik paritesi vLLM ana dalının gerisinde kalabilir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-2434",
+      "ad": "3FS (Fire-Flyer File System)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/deepseek-ai/3FS",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ eğitim ve çıkarım (ör. KV önbellek boşaltma, veri yükleme) iş yükleri için SSD+RDMA üzerinde yüksek bant genişlikli dağıtık dosya sistemi.",
+      "sinirlar": "RDMA ağ ve NVMe gerektirir; küçük kümeler için aşırı karmaşık.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2435",
+      "ad": "Koordinator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://koordinator.sh",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes için QoS tabanlı birlikte yerleşim (co-location) zamanlayıcısı: servis ve toplu işleri aynı düğümlerde öncelik/kaynak sınıflarıyla çalıştırır, GPU ve elastik kota destekler.",
+      "sinirlar": "Kurulumu ve ayarı uzmanlık ister; standart Kubernetes zamanlayıcısını genişletir.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2436",
+      "ad": "Karmada",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://karmada.io",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çoklu bulut/çoklu küme Kubernetes orkestrasyonu: tek API ile iş yüklerini kümelere yayma, yük devri ve politika tabanlı yerleşim.",
+      "sinirlar": "Çok kümeli işletim karmaşıklığı; tek küme ortamlarında gereksiz.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K15-005",
+        "N-K16-007"
+      ]
+    },
+    {
+      "id": "AR-2437",
+      "ad": "Backend.AI",
+      "tur": "acik-cekirdek",
+      "lisans": "LGPL-3.0 (çekirdek) + ticari kurumsal sürüm",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://www.backend.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Konteyner tabanlı hesaplama kümesi platformu: kesirli GPU paylaşımı, kaynak grupları ve kotalar, oturum/iş zamanlama ve model sunum uç noktaları.",
+      "sinirlar": "Bazı yönetim ve sanallaştırma özellikleri kurumsal sürümde; topluluk görece küçük.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2438",
+      "ad": "dstack",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://dstack.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Bulutlar, Kubernetes ve şirket içi sunucular üzerinde GPU iş yüklerini (eğitim, çıkarım servisi, geliştirme ortamı) tek YAML ile tanımlayan orkestrasyon katmanı; filo ve kota yönetimi.",
+      "sinirlar": "Kubernetes'e alternatif/katman; mevcut platform ekibinin iş akışlarıyla uyumu değerlendirilmeli.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2439",
+      "ad": "SkyPilot",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://skypilot.ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yapay zekâ iş yüklerini 20+ bulut ve Kubernetes kümesi üzerinde en uygun/erişilebilir kaynakta çalıştıran, kuyruk ve otomatik kurtarma sağlayan hesaplama katmanı.",
+      "sinirlar": "Maliyet ve kota yönetimi kısmen; kurumsal çok kiracılık için ek yapılandırma gerekir.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2460",
+      "ad": "EvalScope",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://modelscope.github.io/evalscope/",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM/VLM değerlendirme ve başarım stres testi çerçevesi: hazır kıyas setleri ve özel veri seti, arena/hakem modu, RAG değerlendirmesi ve OpenAI uyumlu uç noktalara karşı verim/gecikme ölçümü.",
+      "sinirlar": "Hazır setler Çince/İngilizce ağırlıklı; kurum görev setini ve Türkçe setleri kullanıcı eklemeli.",
+      "ihtiyaclar": [
+        "N-K09-011",
+        "N-K23-001",
+        "N-K23-002",
+        "N-K23-003",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-2516",
+      "ad": "BlueKing CI (bk-ci, 蓝盾)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://bk.tencent.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "Tencent'in sürekli entegrasyon platformu: görsel boru hattı, derleme makinesi havuzları, kalite kırmızı çizgisi (quality gate) ve eklenti pazarı.",
+      "sinirlar": "Kurulum BlueKing tabanına bağlı ve karmaşık; dokümantasyon Çince ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K06-005",
+        "N-K15-005",
+        "N-K15-007"
+      ]
+    },
+    {
+      "id": "AR-2803",
+      "ad": "Vidur",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/vidur",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LLM çıkarım sistemlerini (model, paralellik, toplu işleme ve zamanlayıcı yapılandırmaları) GPU'da gerçek koşu yapmadan yüksek doğrulukla simüle eden ve en ucuz yapılandırmayı arayan (Vidur-Search) kapasite planlama çerçevesi.",
+      "sinirlar": "Profil verisi desteklenen model/GPU çiftleriyle sınırlı; yeni donanım için profil çıkarmak gerekir.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2927",
+      "ad": "Cube Sandbox",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0 (üçüncü taraf bileşenler hariç)",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://cubesandbox.com",
+      "olgunluk": "erken",
+      "ne_saglar": "RustVMM ve KVM üzerinde donanım yalıtımlı, E2B SDK uyumlu, 60 ms altında açılan ve düşük bellek ek yükü olan sandbox hizmeti; tek düğümden çok düğümlü kümeye ölçeklenir.",
+      "sinirlar": "Nisan 2026'da açıldı; KVM erişimli donanım gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2935",
+      "ad": "OpenKruise Agents",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://openkruise.io/kruiseagents/introduction",
+      "olgunluk": "erken",
+      "ne_saglar": "Kubernetes'te ajan iş yükleri için operatör ve en iyi uygulamalar: araç kullanımı için yalıtılmış ortamlar, kalıcı çalışma alanları ve sandbox yaşam döngüsünün düşük maliyetli yönetimi.",
+      "sinirlar": "CNCF alt projesi ancak henüz genç.",
+      "ihtiyaclar": [
+        "N-K15-001",
+        "N-K15-005",
+        "N-K15-006"
+      ]
+    },
+    {
+      "id": "AR-2936",
+      "ad": "k7 (Katakate)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.katakate.org",
+      "olgunluk": "erken",
+      "ne_saglar": "Kata, Firecracker, QEMU ve K3s üzerinde güvenilmeyen kod için hafif VM sandbox'larını ölçekli oluşturma ve yönetme altyapısı; CLI, API ve Python SDK.",
+      "sinirlar": "Kubernetes ve depolama (Longhorn) işletimi gerektirir.",
+      "ihtiyaclar": [
+        "N-K15-002",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2938",
+      "ad": "forkd",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/deeplethe/forkd",
+      "olgunluk": "erken",
+      "ne_saglar": "Firecracker tabanlı; ısıtılmış ebeveyn anlık görüntüsünden copy-on-write ile yüzlerce mikro-VM'i milisaniyeler içinde çatallayan, ajan paralelleştirmesi (fan-out) için sandbox çalışma zamanı.",
+      "sinirlar": "KVM gerekli; genç proje.",
+      "ihtiyaclar": [
+        "N-K13-007",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-2998",
+      "ad": "SMG (model yönlendirme ağ geçidi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://lightseek.org/smg",
+      "olgunluk": "erken",
+      "ne_saglar": "vLLM, TensorRT-LLM gibi self-host motorlar ve bulut sağlayıcılar arasında trafiği dengeleyen, işçi yaşam döngüsünü merkezileştiren Rust ile yazılmış motordan bağımsız model yönlendirme ağ geçidi; OpenAI, Anthropic Messages ve Gemini API kapsamı.",
+      "sinirlar": "Büyük ölçekli dağıtımlar için tasarlandı; işletim karmaşıklığı yüksek.",
+      "ihtiyaclar": [
+        "N-K09-002",
+        "N-K09-010",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-3002",
+      "ad": "Mesh LLM",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "http://meshllm.cloud/",
+      "olgunluk": "erken",
+      "ne_saglar": "Birden çok makinenin GPU ve belleğini havuzlayıp tek OpenAI uyumlu API sunan dağıtık çıkarım; modelin yerelde, bir eşte veya aşamalara bölünerek çalışmasına otomatik karar verir.",
+      "sinirlar": "Genel (paylaşılan) havuz modu veri gizliliği riski taşır; kurumda yalnız özel mesh kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-011"
+      ]
+    },
+    {
+      "id": "AR-3003",
+      "ad": "SubmitQueue (Uber)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/uber/submitqueue",
+      "olgunluk": "erken",
+      "ne_saglar": "Değişiklikleri tek tek doğrulamak yerine spekülatif olarak yeniden temellendirip birlikte doğrulayan, büyük monorepolarda ana dalı sürekli yeşil tutan yüksek başarımlı birleştirme kuyruğu.",
+      "sinirlar": "Ocak 2026'da açık kaynaklandı; kurulum ve CI entegrasyonu emek ister.",
+      "ihtiyaclar": [
+        "N-K06-002",
+        "N-K06-003"
+      ]
+    },
+    {
+      "id": "AR-3112",
+      "ad": "Tuist",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (istemci) + MPL-2.0 (sunucu)",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://tuist.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Xcode projelerini koddan üretir; proje bağımlılık grafiği, ikili önbellekleme ve seçici test (yalnız etkilenen hedefler) ile iOS derleme/test kapasitesini düşürür.",
+      "sinirlar": "Önbellek ve analitik gibi özellikler sunucu (ücretli/kendi barındırma) ister; Xcode sürüm değişimlerine bağımlı.",
+      "ihtiyaclar": [
+        "N-K03-001",
+        "N-K05-029",
+        "N-K06-003",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-3126",
+      "ad": "EAS (Expo Application Services)",
+      "tur": "ticari-saas",
+      "lisans": "ticari (eas-cli MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.expo.dev/eas/",
+      "olgunluk": "olgun",
+      "ne_saglar": "React Native/Expo uygulamaları için bulut derleme, mağaza gönderimi ve kanal tabanlı kademeli OTA güncelleme (EAS Update) hizmeti.",
+      "sinirlar": "Bulut hizmeti ve kullanım bazlı ücretlendirme; derleme verisi Expo altyapısında işlenir.",
+      "ihtiyaclar": [
+        "N-K06-005",
+        "N-K06-006",
+        "N-K06-008",
+        "N-K15-005"
+      ]
+    },
+    {
+      "id": "AR-3275",
+      "ad": "Turborepo",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://turborepo.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "JavaScript/TypeScript monorepoları için görev grafiği, etkilenen paket filtreleme ve yerel/uzak önbellekleme sağlayan derleme sistemi.",
+      "sinirlar": "Uzak önbellek varsayılan olarak Vercel'e bağlı; kendi barındırma için API uyumlu sunucu gerekir.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K06-003",
+        "N-K15-005",
+        "N-K24-003"
+      ]
+    },
+    {
+      "id": "AR-4037",
+      "ad": "Slurm",
+      "tur": "acik-kaynak",
+      "lisans": "GPL-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://slurm.schedmd.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "İş yükü yöneticisi; hesap ve QOS bazlı kaynak limitleri (GrpTRESMins gibi toplam kaynak-dakika bütçesi, MaxWall, eşzamanlı iş sınırı) ile bütçesi biten hesabın yeni işlerini engeller; ayrıntılı muhasebe (sacct) tutar. Toplu işlerin zorunlu bütçe girdisiyle ve aşımda durmayla yürütülmesinin olgun örneği.",
+      "sinirlar": "HPC odaklı; parasal/token maliyeti yerine hesaplama kaynağı sayar.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K20-008"
+      ]
+    },
+    {
+      "id": "AR-4038",
+      "ad": "HTCondor",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://htcondor.org/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüksek verimli toplu iş yöneticisi; muhasebe grupları ve grup kotaları, adil paylaşım, iş başına kaynak istekleri ve DAGMan ile bağımlı toplu iş akışları sunar.",
+      "sinirlar": "Parasal bütçe kavramı yok; kota hesaplama kaynağı üzerinden.",
+      "ihtiyaclar": [
+        "N-K02-012",
+        "N-K20-008"
+      ]
+    }
+  ]
+}

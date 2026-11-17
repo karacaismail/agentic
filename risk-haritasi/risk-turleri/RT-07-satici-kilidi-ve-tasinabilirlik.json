@@ -1,0 +1,4551 @@
+{
+  "sema": "risk-haritasi/risk-turu@1",
+  "risk_turu": {
+    "id": "RT-07",
+    "ad": "Satıcı kilidi ve taşınabilirlik",
+    "tanim": "Yalnız SaaS, özel format, dışa aktarma zorluğu, çıkış maliyeti."
+  },
+  "ozet": {
+    "bulgu": 113,
+    "siddet": {
+      "yuksek": 15,
+      "orta": 92,
+      "dusuk": 6
+    },
+    "arac": 112,
+    "kategori_kalibi": 11,
+    "olay": 22,
+    "senaryo": 8,
+    "otomatik_sinyalli_arac": 866
+  },
+  "en_cok_etkilenen_ihtiyaclar": [
+    [
+      "N-K22-008",
+      19
+    ],
+    [
+      "N-K22-005",
+      11
+    ],
+    [
+      "N-K13-013",
+      10
+    ],
+    [
+      "N-K16-008",
+      8
+    ],
+    [
+      "N-K16-006",
+      7
+    ],
+    [
+      "N-K10-002",
+      6
+    ],
+    [
+      "N-K22-009",
+      6
+    ],
+    [
+      "N-K16-005",
+      6
+    ],
+    [
+      "N-K12-003",
+      5
+    ],
+    [
+      "N-K09-009",
+      5
+    ],
+    [
+      "N-K20-007",
+      4
+    ],
+    [
+      "N-K15-001",
+      4
+    ],
+    [
+      "N-K19-002",
+      4
+    ],
+    [
+      "N-K12-002",
+      4
+    ],
+    [
+      "N-K16-007",
+      3
+    ],
+    [
+      "N-K26-005",
+      3
+    ],
+    [
+      "N-K01-002",
+      3
+    ],
+    [
+      "N-K18-010",
+      3
+    ],
+    [
+      "N-K26-006",
+      3
+    ],
+    [
+      "N-K02-001",
+      3
+    ],
+    [
+      "N-K18-008",
+      3
+    ],
+    [
+      "N-K05-026",
+      3
+    ],
+    [
+      "N-K13-006",
+      2
+    ],
+    [
+      "N-K26-001",
+      2
+    ],
+    [
+      "N-K12-001",
+      2
+    ]
+  ],
+  "bulgular": [
+    {
+      "arac_id": "AR-0033",
+      "arac": "LangGraph",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Kalıcı/ölçekli dağıtım LangSmith Deployment'a, self-host ise Enterprise'a bağlı",
+      "aciklama": "LangChain fiyat sayfasına göre kendi VPC'nizde (self-hosted/hybrid) dağıtım yalnız Enterprise planında; bulut seçenekleri yalnız ABD veya AB bölgesi; çalışma zamanı vCPU-saat ve bellek-saat üzerinden LCU birimiyle ücretleniyor, izler 14 gün (uzatılmış 400 gün) saklanıyor. Kaynak kod MIT olsa da heartbeat, zamanlayıcı, kuyruk gibi işletim bileşenlerini kurum kendi kurmalı ya da ücretli platformu kullanmalı.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.langchain.com/pricing",
+        "https://docs.langchain.com/oss/python/langgraph/persistence"
+      ],
+      "yasatacagi_sorunlar": [
+        "Türkiye'de barındırma zorunluluğu varsa yönetilen platform kullanılamaz; Enterprise lisansı olmadan günlerce süren insan-bekleme akışları için kalıcı işçi ve checkpoint altyapısını kurum işletmek zorunda kalır.",
+        "İz (trace) verisi LangSmith bulutuna gönderilirse istem ve kod parçaları ABD/AB'de 14-400 gün saklanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-003",
+        "N-K13-006",
+        "N-K22-005",
+        "N-K16-008",
+        "N-K20-007"
+      ],
+      "erken_sinyal": "Pilotta LANGSMITH_TRACING'in varsayılan açık bırakılması; Enterprise teklifinde yerinde kurulum için ek ücret kalemleri.",
+      "azaltma": "Açık kaynak çekirdeği kendi Postgres checkpointer'ı ile işletin, iz verisini kurum içi OTel toplayıcıya yönlendirin; yönetilen platformu yalnız anonimleştirilmiş veriyle kullanın.",
+      "id": "BL-00089",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Fiyat sayfası: self-hosted/hybrid yalnız Enterprise, bulut US veya EU, çalışma zamanı 0.045 LCU/vCPU-saat ve 0.006 LCU/GiB-saat, izler 14 gün (uzatılmış 400 gün). LangGraph deposu MIT; işletim bileşenleri kısmı çıkarım.",
+        "kaynak": [
+          "https://www.langchain.com/pricing",
+          "https://github.com/langchain-ai/langgraph"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0174",
+      "arac": "E2B",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Üretimde self-host/BYOC yalnız Enterprise; açık kaynak paket 'değerlendirme amaçlı'",
+      "aciklama": "Fiyat sayfasına göre özel dağıtım (BYOC) yalnız Enterprise planında (aylık asgari 3.000 $); runtime deposundaki tek makine/Terraform paketi README'de 'değerlendirme paketi, üretim dağıtım deseni değil' olarak tanımlanıyor.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://e2b.dev/pricing",
+        "https://github.com/e2b-dev/runtime"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kod ve sırların yurt dışındaki yönetilen sandbox'a çıkmaması gerekiyorsa kurum ya Enterprise sözleşmesi imzalamalı ya da Firecracker tabanlı karmaşık altyapıyı kendisi üretime taşımalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-002",
+        "N-K22-005",
+        "N-K16-008",
+        "N-K15-001"
+      ],
+      "erken_sinyal": "Teklif sürecinde BYOC şartları; self-host denemesinde üretim eksikleri.",
+      "azaltma": "Veri sınıflandırmasına göre yalnız anonim/kamu kodu için yönetilen hizmet; hassas kod için yerinde sandbox alternatifi.",
+      "id": "BL-00461",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Fiyat sayfası BYOC'yi Enterprise'a bağlıyor ve 'A $3,000 monthly minimum applies to Enterprise usage' diyor; runtime README'si GCP Terraform/Kubernetes paketini 'an evaluation package, not a production deployment pattern' olarak tanımlıyor (runtime Apache-2.0).",
+        "kaynak": [
+          "https://e2b.dev/pricing",
+          "https://github.com/e2b-dev/runtime"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0458",
+      "arac": "Amazon Bedrock AgentCore",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Runtime, Memory, Gateway, Identity ve Policy AWS'ye özgü",
+      "aciklama": "Platform çerçeveden bağımsız olsa da çalışma zamanı, bellek, kimlik, politika ve kayıt bileşenleri AWS API'lerine bağlı; araç haritası da AWS kilidini belirtiyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan rol kaydı, bellek ve araç kataloğu AgentCore'a kurulursa başka buluta ya da kurum içine taşımak büyük yeniden iş gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-002",
+        "N-K10-004",
+        "N-K12-006"
+      ],
+      "erken_sinyal": "Kurum kodunda AgentCore'a özgü API çağrılarının artması.",
+      "azaltma": "Ajan tanımlarını ve araç sözleşmelerini açık protokollerle (MCP, A2A) kurum katmanında tutmak.",
+      "id": "BL-00765",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belge platformun çerçeve ve modelden bağımsız olduğunu söylüyor; Runtime/Memory/Gateway/Identity ise AWS yönetilen hizmetleri. Kilitlenme çıkarımı makul.",
+        "kaynak": [
+          "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0511",
+      "arac": "Durable Task Scheduler",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "Yalnız Azure yönetilen arka uç; bağlantısız ortam desteği yok",
+      "aciklama": "Durable Task Scheduler Azure'da çalışan yönetilen bir arka uçtur; depolama sağlayıcıları karşılaştırmasında 'Azure connectivity required' olarak işaretlidir ve sağlayıcılar arası veri taşıma mümkün değildir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/durable-task/common/durable-task-storage-providers",
+        "https://learn.microsoft.com/en-us/azure/durable-task/scheduler/durable-task-scheduler"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi veya hava boşluklu ortamda çalıştırılamaz; Azure bağlantısı kesilince orkestrasyonlar durur.",
+        "Türkiye'de Azure bölgesi olmadığından durum yurt dışında tutulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K22-005",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Bağlantı kesintisinde iş öğesi akışının durması.",
+      "azaltma": "Kurum içi gereksinim varsa MSSQL arka ucu; çıkış planı.",
+      "id": "BL-00805",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Depolama sağlayıcıları tablosunda DTS için 'Azure connectivity required' yazıyor ve sağlayıcılar arası veri taşıma desteklenmiyor.",
+        "kaynak": [
+          "https://learn.microsoft.com/en-us/azure/durable-task/common/durable-task-storage-providers"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0524",
+      "arac": "Flyte",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "Flyte 2'nin açık kaynak arka ucu yok; üretim için Union.ai",
+      "aciklama": "Depo README'sine göre Flyte 2 genel kullanıma açıldı ancak açık kaynak arka ucu 'yakında' durumunda; üretim için ticari Union.ai platformu öneriliyor. Flyte 1 master dalında bakımda.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/flyteorg/flyte"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yeni Flyte 2 SDK'sıyla yazılan akışlar kurum içinde çalıştırılamaz; ya ticari platforma ya da bakım modundaki Flyte 1'e mahkûm kalınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K22-008",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "OSS arka uç duyurusunun gecikmesi.",
+      "azaltma": "Flyte'ı yalnız Flyte 1 ile ve çıkış planıyla değerlendirmek.",
+      "id": "BL-00839",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "main README: 'The open source backend for Flyte 2 is coming soon'; üretim arka ucu Union.ai'de. Master dalı README'si Flyte 1.x için.",
+        "kaynak": [
+          "https://github.com/flyteorg/flyte"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0560",
+      "arac": "Jira (Jira Software / Jira Cloud)",
+      "gorev": "R-G09",
+      "tur": "RT-07",
+      "baslik": "Data Center ömür sonu: kurum içi Jira yolu 2029'da kapanıyor, buluta zorlanma",
+      "aciklama": "Atlassian yeni Data Center aboneliği satışını 30 Mart 2026'da bitirdi. Mevcut müşteriler 30 Mart 2028'e kadar genişleyebiliyor. 28 Mart 2029'da abonelikler bitiyor ve kurulumlar salt okunur oluyor. Devlet müşterileri için sunulan Atlassian Government Cloud ABD FedRAMP odaklı.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/licensing/data-center-end-of-life"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi barındırma zorunluluğu olan kurum, 2026 sonrası yeni Jira DC lisansı alamaz. Mevcut kurulum 2029'da salt okunur olur ve 12.000 kayıtlık backlog ile tüm iş akışı geçmişi göç ettirilmek zorunda kalır.",
+        "Ajan entegrasyonları DC REST API'sine göre yazılırsa bulut göçünde yeniden yazılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-001",
+        "N-K26-005",
+        "N-K22-005",
+        "N-K13-013",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Yenileme teklifinde koltuk genişletme reddi; Atlassian'dan göç kampanyası yazışmaları.",
+      "azaltma": "Yeni kurulumda Jira DC'yi seçmeyin; ya AB bölgeli Cloud için KVKK değerlendirmesi yapın ya da kurum içi alternatif iş takip aracı seçip durum modelini araçtan bağımsız tanımlayın.",
+      "id": "BL-00880",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Resmî DC ömür sonu sayfası tüm tarihleri doğruluyor: yeni müşteri satışı 30 Mart 2026, mevcut müşteri genişlemesi 30 Mart 2028, ömür sonu ve salt okunur geçiş 28 Mart 2029; Government Cloud ABD FedRAMP Moderate. Üç yıllık geçiş süresi ve istisnai uzatılmış bakım seçeneği olduğundan şiddet 'yuksek' daha uygun.",
+        "kaynak": [
+          "https://www.atlassian.com/licensing/data-center-end-of-life"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0563",
+      "arac": "Jira Product Discovery",
+      "gorev": "R-G09",
+      "tur": "RT-07",
+      "baslik": "Yalnız bulut: kurum içi seçenek yok",
+      "aciklama": "Jira Product Discovery yalnız Atlassian Cloud'da sunuluyor. Data Center ömür sonu kararıyla birlikte kurum içi alternatifi de bulunmuyor.",
+      "tarih": "2026",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/software/jira/product-discovery",
+        "https://www.atlassian.com/licensing/data-center-end-of-life"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi zorunluluk varsa talep/fikir toplama ve önceliklendirme bu araçla yapılamaz; ürün keşfi verisi Jira DC'den kopuk kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-003",
+        "N-K02-009",
+        "N-K22-005"
+      ],
+      "erken_sinyal": "BT güvenlik değerlendirmesinde bulut onayı alınamaması.",
+      "azaltma": "Önceliklendirme modelini araçtan bağımsız (alan ve formül olarak) tanımlayın; kurum içi alternatifle pilot yapın.",
+      "id": "BL-00891",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "JPD yalnız Cloud'da sunuluyor, Server veya DC sürümü yok. DC ömür sonu 28 Mart 2029, destek azaltımı 30 Mart 2026'da başlıyor. Yalnız Jira DC ile teslim entegrasyonu mevcut; bu kurum içi JPD anlamına gelmiyor.",
+        "kaynak": [
+          "https://www.atlassian.com/software/jira/product-discovery",
+          "https://www.atlassian.com/licensing/data-center-end-of-life",
+          "https://community.atlassian.com/forums/Jira-Product-Discovery-questions/Jira-Software-Data-Center-not-supported/qaq-p/2530102",
+          "https://community.atlassian.com/forums/Jira-Product-Discovery-articles/Jira-Product-Discovery-integration-with-Jira-Data-Center-is-live/ba-p/3141317"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0582",
+      "arac": "Rally Software",
+      "gorev": "R-G09",
+      "tur": "RT-07",
+      "baslik": "Kurum içi Rally Anywhere'de webhook, MCP ve YZ yok",
+      "aciklama": "Rally Anywhere (Kubernetes üzerinde kurum içi sürüm) SaaS'taki Webhooks, MCP Server, AI Capabilities, Release Planning, Dashboard ve Nested Stories özelliklerini içermez; portföy öğesi akış durumları da henüz gelmedi. Ayrıca Broadcom API'leri bir yıllık kullanımdan kaldırma süresinin ardından sonlandırabilir.",
+      "tarih": "2026-08",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/rally-anywhere/rally-anywhere-versus-saas.html",
+        "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/rally-anywhere/rally-anywhere-release-notes.html",
+        "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/reference/rally-web-services-api/api-deprecation.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "KVKK nedeniyle kurum içi sürüm seçilirse ajan hattı webhook olmadan yoklamayla çalışır; gecikme ve API yükü artar.",
+        "MCP sunucusu olmadığından ajan erişim katmanı kurum içinde ayrıca yazılmalıdır.",
+        "SaaS ile Anywhere arasındaki özellik farkı, geçişte süreçleri kırar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-001",
+        "N-K12-003",
+        "N-K26-002",
+        "N-K26-004",
+        "N-K16-007"
+      ],
+      "erken_sinyal": "Anywhere sürüm notlarında SaaS özelliklerinin gecikmesi; API yanıtlarında 'Deprecated' uyarıları.",
+      "azaltma": "Anywhere seçilecekse olay akışını veritabanı ya da yoklama tabanlı bir köprüyle tasarlayın; WSAPI sürümünü sabitleyip kullanımdan kaldırma uyarılarını izleyin.",
+      "id": "BL-00920",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Karşılaştırma sayfası Webhooks, Dashboard, Release Planning, Nested Stories, MCP Server ve YZ özelliklerinin Rally Anywhere'de olmadığını, portföy akış durumlarının henüz gelmediğini doğruluyor. Rally Anywhere Helm ile Kubernetes'e kuruluyor; en son sürüm 1.7, 13 Ağustos 2026. API politikası bir yıllık kullanımdan kaldırma süresinden sonra sonlandırma hakkı tanıyor.",
+        "kaynak": [
+          "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/rally-anywhere/rally-anywhere-versus-saas.html",
+          "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/rally-anywhere/rally-anywhere-release-notes.html",
+          "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/rally-anywhere/rally-anywhere-architecture.html",
+          "https://techdocs.broadcom.com/us/en/ca-enterprise-software/valueops/rally/rally-help/reference/rally-web-services-api/api-deprecation.html"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0682",
+      "arac": "Atlassian Compass",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yalnız Atlassian Cloud; kurum içi seçenek yok",
+      "aciklama": "Compass fiyat sayfasına göre ürün 'yalnız Cloud'da' sunuluyor; self-managed ya da Data Center sürümü yok. Atlassian DC ürünlerinin yeni satışı 2026-03-30'da durdu.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/software/compass/pricing",
+        "https://www.atlassian.com/licensing/data-center-end-of-life"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kamu veya kritik altyapı gereği kurum içi kalmak zorunda olan kurum, bileşen kataloğu ve sıcak nokta sahipliğini Compass'ta tutamaz.",
+        "Katalog Compass'a bağlanırsa Atlassian dışına çıkış maliyeti yüksek olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-001",
+        "N-K16-008",
+        "N-K22-005"
+      ],
+      "erken_sinyal": "Hukuk görüşünde Atlassian Cloud'un onaylanmaması.",
+      "azaltma": "Bileşen kataloğunu açık bir biçimde (ör. Backstage catalog-info.yaml) depolarda tutup Compass'ı yalnız görünüm katmanı olarak kullanın.",
+      "id": "BL-01020",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Fiyat sayfası: 'Compass is only available on Cloud', DC seçeneği yok. DC yeni satışı 2026-03-30'da yalnız yeni müşteriler için durdu (mevcut müşteriler 2028-03-30'a kadar alabiliyor).",
+        "kaynak": [
+          "https://www.atlassian.com/software/compass/pricing",
+          "https://www.atlassian.com/licensing/data-center-end-of-life"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2086",
+      "arac": "Atlassian Guard",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Yalnız Cloud; Data Center 28 Mart 2029'da ömrünü tamamlıyor",
+      "aciklama": "Atlassian Guard yalnız bulut ürünleri içindir (Data Center için Crowd). Atlassian, yeni müşterilere Data Center satışını 30 Mart 2026'da durdurdu; 28 Mart 2029'da Data Center ürünleri salt okunur hale gelecek.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/software/guard/pricing",
+        "https://www.atlassian.com/licensing/data-center-end-of-life"
+      ],
+      "yasatacagi_sorunlar": [
+        "Jira/Confluence'ı kurum içinde tutan kurum Guard'ı kullanamaz; 2029'a kadar buluta geçmek zorunda kalır ve backlog/iş kalemi verisi yurt dışına taşınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-009",
+        "N-K19-002",
+        "N-K18-004"
+      ],
+      "erken_sinyal": "Atlassian yol haritası duyuruları; Data Center yenileme teklifleri.",
+      "azaltma": "2029 öncesi hedef mimari kararı; veri yerelliği şartı olan projeler için alternatif iş takip sistemi değerlendirmesi.",
+      "id": "BL-01831",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Guard yalnız bulut içindir (Data Center için Crowd). Yeni müşterilere DC satışı 30 Mart 2026'da durdu, DC ürünleri 28 Mart 2029'da salt okunur olacak.",
+        "kaynak": [
+          "https://www.atlassian.com/software/guard/pricing",
+          "https://www.atlassian.com/licensing/data-center-end-of-life"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3518",
+      "arac": "SoftComply Risk Manager Plus",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Güncel sürüm yalnız Jira Cloud; Data Center yolu 2029'da kapanıyor",
+      "aciklama": "Uygulamanın Cloud hattındaki son sürüm 11.113.0 (2026-09-16); Data Center hattı ayrı sürdürülüyor (son DC sürümü 3.1.3, 2026-08-03). Atlassian, yeni DC aboneliği satışını 2026-03-30'da durdurdu; DC abonelikleri ve ilişkili Marketplace uygulamaları 2029-03-28'de sona erecek ve ürünler salt-okur olacak. DC kullananlar 2029'dan önce Cloud'a geçiş planlamalı.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://marketplace.atlassian.com/apps/1219692/softcomply-risk-manager-plus-for-advanced-risk-management",
+        "https://www.atlassian.com/licensing/data-center-end-of-life"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veriyi kurum içinde tutmak için Jira Data Center kullanan kamu kurumu bu uygulamayı self-host kullanamaz ya da 2029'da kaybeder; risk yönetimi Cloud'a geçişe bağlanır.",
+        "Cloud'a geçişte risk verisinin taşınması ve KVKK değerlendirmesi ayrı iş yükü doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-005",
+        "N-K22-005",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Kurumun Jira dağıtım stratejisinin netleşmemesi; DC sürümü için güncelleme gelmemesi.",
+      "azaltma": "Jira dağıtım kararı (Cloud, Government Cloud, alternatif) verilmeden risk aracına bağlanmayın. Veri modelini araçtan bağımsız tanımlayın.",
+      "id": "BL-02193",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "11.113.0 (2026-09-16) yalnız Cloud ve Atlassian tarihleri (satış sonu 2026-03-30, EOL 2029-03-28, salt-okur) doğru; ancak Marketplace'te ayrı bir Data Center sürüm hattı hâlâ güncelleniyor (3.1.3, 2026-08-03, DC uyumlu). 'Güncel sürüm yalnız Cloud' ifadesi DC desteğinin bittiği izlenimi veriyor.",
+        "kaynak": [
+          "https://marketplace.atlassian.com/rest/2/addons/com-softcomply-riskmanager-plus/versions",
+          "https://www.atlassian.com/licensing/data-center-end-of-life"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3700",
+      "arac": "ScriptRunner for Jira",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Data Center ömür sonu ve Cloud'a geçişte betiklerin baştan yazılması",
+      "aciklama": "Atlassian 2026-03-30'da yeni müşterilere Data Center aboneliği ve Marketplace DC uygulaması satışını durdurdu; mevcut DC müşterileri 2028-03-30'a kadar satın alma ve genişletme yapabiliyor. DC ürünleri ve bağlı Marketplace uygulamaları 2029-03-28'de sona erip salt okunur hâle geliyor. ScriptRunner belgesine göre Cloud sürümü Server/DC ile aynı özellik setine sahip değil; betikler Java API yerine REST ile çalışmak zorunda olduğundan yeniden yazılmalı.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.atlassian.com/licensing/data-center-end-of-life",
+        "https://docs.adaptavist.com/sr4jc/latest/scriptrunner-migration-to-cloud"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun durum modeli, hazır olma kapısı ve alan doğrulama betikleri Cloud'a geçişte yeniden yazılır ve test edilir; bazı işlevlerin Cloud karşılığı yoktur.",
+        "Geçiş takvimi program artımı planlarıyla çakışır ve iş takip sisteminde kesinti riski doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K26-001",
+        "N-K01-002",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "Özellik eşleme tablosunda karşılığı olmayan betik sayısı.",
+      "azaltma": "Betik envanterini şimdiden çıkarın. Kural mantığını mümkün olduğunca Jira yerel otomasyonu veya harici servise taşıyın.",
+      "id": "BL-02289",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Tarihler doğru, ancak 2026-03-30'da yalnız yeni müşterilere DC abonelik ve Marketplace DC uygulaması satışı durdu; mevcut DC müşterileri 2028-03-30'a kadar yeni abonelik, uygulama ve genişletme alabiliyor. ScriptRunner Cloud'un aynı özellik setine sahip olmadığı ve REST zorunluluğu belgede doğrulandı.",
+        "kaynak": [
+          "https://www.atlassian.com/licensing/data-center-end-of-life",
+          "https://docs.adaptavist.com/sr4jc/latest/scriptrunner-migration-to-cloud"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0151",
+      "arac": "LangSmith",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "Self-host yalnız Enterprise eklentisi; lisans doğrulaması için dışarıya bağlantı zorunlu",
+      "aciklama": "Belgeye göre self-hosted LangSmith 'Enterprise planına eklenti'. Kurulum Kubernetes, ClickHouse, PostgreSQL, Redis ve blob depolama gerektiriyor. Egress belgesine göre lisans doğrulaması ve kullanım raporlaması için beacon.langchain.com'a çıkış zorunlu; hiç çıkış olmadan çalışmak için ayrı bir 'offline (air-gapped)' lisansı gerekiyor ve bu kipte Engine çalışmıyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.langchain.com/langsmith/self-hosted",
+        "https://docs.langchain.com/langsmith/self-host-egress"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kritik altyapı ağında dışarıya çıkış yasaksa standart self-host lisansı çalışmaz; özel air-gapped lisans pazarlığı satın alma sürecini uzatır.",
+        "Kurum içi kurulumda ClickHouse, PostgreSQL, Redis ve Kubernetes işletimi, yedekleme ve sürüm yükseltme sorumluluğu platform ekibine düşer.",
+        "Kod kapalı ve iz şeması LangSmith'e özgü olduğu için çıkışta geçmiş izlerin taşınması ayrı bir proje gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-008",
+        "N-K18-010",
+        "N-K16-008",
+        "N-K16-004"
+      ],
+      "erken_sinyal": "Güvenlik duvarı loglarında beacon.langchain.com istekleri reddedilir; lisans doğrulama hatası nedeniyle servis uyarı verir.",
+      "azaltma": "Sözleşme öncesinde air-gapped lisans koşullarını ve fiyatını yazılı alın. İzleri aynı anda OTel ile kurum içi bir depoya da gönderin (çift gönderim).",
+      "id": "BL-00385",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belge self-hosted'ı 'Enterprise planına eklenti' diye tanımlıyor; beacon.langchain.com çıkışı zorunlu, hiç çıkış için offline (air-gapped) lisans gerekiyor ve offline kipte Engine çalışmıyor.",
+        "kaynak": [
+          "https://docs.langchain.com/langsmith/self-hosted",
+          "https://docs.langchain.com/langsmith/self-host-egress"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0597",
+      "arac": "Planview Viz",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "Veri toplama Planview Hub'a bağlı; yalnız SaaS ve özel Flow Framework modeli",
+      "aciklama": "Viz (eski Tasktop Viz) veri toplamak için Planview Hub entegrasyonuna dayanıyor ve SaaS olarak sunuluyor. Metrikler Flow Framework'ün kendi modeline göre hesaplanıyor.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.planview.com/products-solutions/products/viz/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Viz'i bırakmak Hub entegrasyonlarını da bırakmak demek; akış metriklerinin geçmişi başka araca aynı tanımlarla taşınamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-007",
+        "N-K24-009",
+        "N-K26-006"
+      ],
+      "erken_sinyal": "Planview'ın paketleme veya ürün yol haritası değişikliği.",
+      "azaltma": "Ham iş takip verisini kurumda ayrıca saklamak; metrik tanımlarını satıcıdan bağımsız belgelemek.",
+      "id": "BL-00935",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Viz sayfası SaaS'ı ve Flow Framework'ü doğruluyor. Hub bağımlılığı sayfada açıkça yazmıyor, ancak iş ortağı Merito'nun sayfası Viz'in Planview Hub üzerinden veri topladığını belirtiyor (ikincil kaynak).",
+        "kaynak": [
+          "https://www.planview.com/products-solutions/products/viz/",
+          "https://www.merito.com/vendors/planview/value-stream-management"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0660",
+      "arac": "Atlassian Rovo MCP Server (uzak)",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yalnız Atlassian Cloud; Data Center kullananlar resmî olmayan sunuculara yöneliyor",
+      "aciklama": "Resmî depo, sunucuyu 'Atlassian Cloud siteniz' için bulut tabanlı bir köprü olarak tanımlıyor. Data Center kullanan ekiplerin başvurduğu topluluk sunucusu mcp-atlassian'da 2026'da 30'dan fazla CVE yayımlandı. Örneğin CVE-2026-77244 (CVSS 10.0): HTTP taşımasında kullanıcı kimliği olmayan istekler operatör kimlik bilgilerine düşüyordu. CVE-2026-27825 (9.0): ek indirme aracıyla keyfi dosya yazılabiliyordu.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/atlassian/atlassian-mcp-server",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-77244",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-27825"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum Jira/Confluence Data Center kullanıyorsa resmî sunucu kullanılamaz. Ekipler gölge BT olarak topluluk sunucusunu kurarsa kimliksiz erişim ve dosya sistemi açıklarına maruz kalır.",
+        "Cloud'a geçiş, veri yerleşimi ve KVKK açısından ayrı bir karar gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-003",
+        "N-K22-005",
+        "N-K18-013",
+        "N-K12-002"
+      ],
+      "erken_sinyal": "Geliştirici makinelerinde mcp-atlassian kurulumları; onaylı araç kataloğu dışında MCP bağlantıları.",
+      "azaltma": "Onaylı MCP kataloğu yayımlayın. Data Center için topluluk sunucusu kullanılacaksa en az 0.22.0 sürümü, stdio kipi ve salt-okuma ayarını zorunlu kılın.",
+      "id": "BL-00992",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Resmî README 'Atlassian Cloud siteniz' için bulut tabanlı köprü diyor. sooperset/mcp-atlassian deposunda 35 adet CVE-2026 bildirimi var; CVE-2026-77244 (GHSA-wrhw-j3f9-8vc6, critical, CVSS 10, env kimlik bilgilerine düşme) ve CVE-2026-27825 (GHSA-xjgw-4wvw-rgm4, CNA 9.0 / NVD 8.0, keyfi dosya yazma) doğru.",
+        "kaynak": [
+          "https://github.com/atlassian/atlassian-mcp-server",
+          "https://github.com/advisories/GHSA-wrhw-j3f9-8vc6",
+          "https://github.com/sooperset/mcp-atlassian/security/advisories",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-27825"
+        ]
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-27825",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        },
+        {
+          "kimlik": "CVE-2026-77244",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        },
+        {
+          "kimlik": "GHSA-wrhw-j3f9-8vc6",
+          "kayit": "kontrol-edilmedi",
+          "ad_eslesmesi": null
+        },
+        {
+          "kimlik": "GHSA-xjgw-4wvw-rgm4",
+          "kayit": "kontrol-edilmedi",
+          "ad_eslesmesi": null
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0015",
+      "arac": "AWS Step Functions",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "AWS'ye kilitli ASL DSL ve kurum içi kurulum yokluğu",
+      "aciklama": "İş akışları Amazon States Language (JSON) ile tanımlanır ve yalnız AWS'de çalışır; yerel geliştirme ve yeniden oynatma deneyimi sınırlıdır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://aws.amazon.com/step-functions/",
+        "https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Başka bir motora geçişte tüm akış tanımları yeniden yazılır; çıkış maliyeti yüksektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Akış tanımlarında AWS'ye özgü hizmet entegrasyonlarının artması.",
+      "azaltma": "Ajan mantığını motor bağımsız kodda tutup Step Functions'ı ince orkestrasyon katmanı olarak kullanmak.",
+      "id": "BL-00051",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0016",
+      "arac": "Azure Durable Functions",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "Depolama arka ucu değiştirilemez; Netherite desteği bitiyor",
+      "aciklama": "Belgelere göre bir depolama sağlayıcısından diğerine veri taşımak mümkün değildir; yeni sağlayıcı için yeni uygulama gerekir. Netherite arka ucu için Durable Functions desteği 31 Mart 2028'de sona eriyor ve Microsoft yönetilen Durable Task Scheduler'ı öneriyor.",
+      "tarih": "2028-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/durable-task/common/durable-task-storage-providers"
+      ],
+      "yasatacagi_sorunlar": [
+        "Arka uç değişimi uçuştaki uzun beklemeli koşuların boşaltılmasını ve paralel uygulama işletimini gerektirir.",
+        "Önerilen arka uç Azure'a bağlı yönetilen hizmet olduğundan kilitlenme artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K16-005",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Kullanılan arka uç için destek sonu duyurusu.",
+      "azaltma": "Kurum içi gereksinim varsa MSSQL arka ucunu seçmek (bağlantısız ortam destekli); arka uç seçimini mimari karar kaydına yazmak.",
+      "id": "BL-00055",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0100",
+      "arac": "Kiro",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Açık kaynak Amazon Q Developer CLI kapalı kaynak Kiro CLI ile değiştirildi",
+      "aciklama": "aws/amazon-q-developer-cli deposu artık aktif bakım almıyor ve yalnız kritik güvenlik düzeltmeleri alıyor; README'ye göre Amazon Q Developer CLI 'kapalı kaynak bir ürün olan' Kiro CLI olarak sunuluyor.",
+      "tarih": "2025-11",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/aws/amazon-q-developer-cli"
+      ],
+      "yasatacagi_sorunlar": [
+        "Q CLI üzerine kurulan başsız otomasyonlar, kaynak kodu denetlenemeyen yeni bir ikiliye taşınmak zorunda kalır; kurum içi güvenlik incelemesi yeniden yapılmalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Ürün duyurularında yeniden adlandırma; eski CLI deposunda bakım bildirimi.",
+      "azaltma": "Ajan çalışma zamanını ortak adaptör sözleşmesi arkasında soyutlayın; kapalı kaynak CLI için ek güvenlik değerlendirmesi yapın.",
+      "id": "BL-00241",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0100",
+      "arac": "Kiro",
+      "gorev": "R-G10",
+      "tur": "RT-07",
+      "baslik": "Kapalı kaynak ve AWS'ye bağlı; kendi modelini getirme yok",
+      "aciklama": "Kiro kapalı kaynaklı; en çok oy alan açık talepler arasında Bedrock ile kendi modelini getirme (#34) ve kendi API anahtarını kullanma (#695) var.",
+      "tarih": "2025-07",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/kirodotdev/Kiro/issues/34",
+        "https://github.com/kirodotdev/Kiro/issues/695"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum onaylı model ya da yurt içi barındırılan model kullanılamaz; spesifikasyon iş akışı IDE'ye bağlı kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-002",
+        "N-K01-001"
+      ],
+      "erken_sinyal": "BYOM taleplerinin kapanmaması.",
+      "azaltma": "Spesifikasyon biçimini araçtan bağımsız Markdown olarak tutun; çıkış yolunu baştan planlayın.",
+      "id": "BL-00242",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0117",
+      "arac": "Context7",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Kapalı arka uç ve SaaS bağımlılığı",
+      "aciklama": "Depodaki kod yalnız MCP sunucusu; API arka ucu, ayrıştırma ve tarama motorları özel ve açık değil. Yüksek hız sınırı için API anahtarı gerekiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/upstash/context7"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içinde barındırılamaz; hizmet kesintisi veya fiyat değişikliğinde ajanların güncel belge erişimi kesilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-003",
+        "N-K12-003"
+      ],
+      "erken_sinyal": "Hız sınırı hataları; ücretli plana yönlendirme.",
+      "azaltma": "Kritik kütüphanelerin belgelerini kurum içinde aynalayın.",
+      "id": "BL-00291",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0125",
+      "arac": "Oso",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Güncel yol Oso Cloud (SaaS): yetki verisi ve her karar dış hizmete bağlı",
+      "aciklama": "Kütüphanenin yerini Oso Cloud alıyor. Cloud modelinde yetki verisi ve kararlar Oso altyapısında tutulur; Hybrid modelde yerel fallback düğümü, Self-Hosted modelde ise tüm yığın kurum altyapısında çalışır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/osohq/oso",
+        "https://www.osohq.com"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ürün yetkilendirmesinin tek karar noktası yurt dışındaki bir SaaS'a bağlanır; hizmet kesintisinde kurum uygulamaları yetki kararı veremez, kullanıcı-rol verisi KVKK kapsamında yurt dışına çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-001",
+        "N-K10-008"
+      ],
+      "erken_sinyal": "Yetki kararlarında gecikme; SaaS kesinti bildirimleri.",
+      "azaltma": "Kurum içinde çalışan açık motorlar tercih etmek; SaaS kullanılacaksa önbellek ve kapalı-kal politikası.",
+      "id": "BL-00311",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Oso resmî belgesi üç dağıtım modeli sunuyor: Cloud, Hybrid (yerel fallback) ve Self-Hosted. 'Yalnız SaaS' yanlış; bağımlılık yalnız Cloud modelinde geçerli.",
+        "kaynak": [
+          "https://www.osohq.com/docs/deploy/deployment-models.md",
+          "https://github.com/osohq/oso"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0176",
+      "arac": "Modal",
+      "gorev": "R-G01",
+      "tur": "RT-07",
+      "baslik": "Yalnız Modal bulutu; kod Modal'a özgü SDK ile yazılıyor",
+      "aciklama": "Modal kurum içi kurulum sunmuyor; iş tanımları Modal Python SDK dekoratörleriyle yapılıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://modal.com/docs"
+      ],
+      "yasatacagi_sorunlar": [
+        "Toplu işler Modal'a özgü kodla yazılırsa kurum içi GPU'ya veya başka buluta taşımak yeniden yazım gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009",
+        "N-K20-008"
+      ],
+      "erken_sinyal": "Modal'a özgü kod miktarının artması.",
+      "azaltma": "Sunum motorunu konteynerde tanımlayıp Modal'ı yalnız çalıştırma katmanı olarak kullanma.",
+      "id": "BL-00470",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0454",
+      "arac": "Modal Sandboxes",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Kapalı platform ve kullanım bazlı maliyet",
+      "aciklama": "Hizmet yalnız yönetilen bulut olarak sunulur; API ve imaj tanımı Modal'a özgüdür (araç haritası ve belgeler).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://modal.com/docs/guide/sandboxes"
+      ],
+      "yasatacagi_sorunlar": [
+        "Görev başına sandbox'ı Modal API'sine bağlayan orkestrasyon kodu başka altyapıya taşınırken yeniden yazılmalıdır; ölçekte maliyet öngörülemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-001",
+        "N-K13-006"
+      ],
+      "erken_sinyal": "Kod tabanında Modal'a özgü çağrıların yayılması.",
+      "azaltma": "Sandbox erişimini ortak bir adaptör arayüzü arkasına almak.",
+      "id": "BL-00757",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0455",
+      "arac": "Runloop Devboxes",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Kapalı devbox API'si ve anlık görüntü biçimi",
+      "aciklama": "SDK MIT lisanslı ancak hizmet kapalı; devbox, blueprint ve snapshot kavramları sağlayıcıya özgü.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/runloopai/api-client-python",
+        "https://docs.runloop.ai/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan değerlendirme koşuları bu API'ye bağlanırsa başka sandbox'a geçiş yeniden iş gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-001",
+        "N-K23-002"
+      ],
+      "erken_sinyal": "Kodda Runloop'a özgü çağrıların yayılması.",
+      "azaltma": "Sandbox erişimini adaptör katmanında soyutlamak.",
+      "id": "BL-00760",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0512",
+      "arac": "Google Cloud Workflows",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "GCP'ye özgü YAML/JSON DSL",
+      "aciklama": "İş akışları GCP'ye özgü sözdizimiyle yazılır; ifade gücü kod tabanlı motorlara göre sınırlıdır ve kurum içi çalıştırılamaz.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://cloud.google.com/workflows/docs/overview"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sağlayıcı değişiminde tüm akışlar yeniden yazılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013"
+      ],
+      "erken_sinyal": "Akış tanımlarında GCP bağlayıcılarının yoğunlaşması.",
+      "azaltma": "İş mantığını hizmetlerde tutup akışı ince tutmak.",
+      "id": "BL-00810",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0528",
+      "arac": "Azure Logic Apps",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Azure'a özgü iş akışı tanımı ve bağlayıcı ekosistemi",
+      "aciklama": "İş akışları Azure'a özgü Workflow Definition Language ve Microsoft yönetilen bağlayıcılarıyla tanımlanıyor. Consumption ile Standard arasında bile bağlantı ve yeniden oluşturma davranışları farklı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/logic-apps/manage-logic-apps-with-azure-portal"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onay ve eskalasyon mantığı Logic Apps'e gömülürse başka bir iş akışı motoruna taşımak yeniden yazım gerektirir.",
+        "Ajan hattının durum sahibi (N-K13-001) Logic Apps olursa kilitlenme artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Kritik iş mantığının iş akışı tanımlarında birikmesi.",
+      "azaltma": "Karar mantığını ayrı servislerde tutup Logic Apps'i yalnız bildirim ve bağlayıcı katmanı olarak kullanın.",
+      "id": "BL-00848",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0831",
+      "arac": "RQA Quality Studio",
+      "gorev": "R-G10",
+      "tur": "RT-07",
+      "baslik": "Jira ve Azure DevOps bağlayıcısı yok",
+      "aciklama": "Ürün sayfası entegrasyonları DOORS (9.x ve Next), Windchill, Polarion, Teamcenter, Word ve Excel 've diğerleri' olarak sayıyor; Jira veya Azure DevOps için yerleşik bir bağlayıcı sayfada belirtilmiyor. Üreticinin RAT tarayıcı eklentisi Jira ile, OSLC bağlayıcısı OSLC uyumlu araçlarla çalışıyor; RQA'nın çevik iş takip sistemlerine doğrudan bağlanıp bağlanamadığı üreticiye teyit ettirilmeli.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.reusecompany.com/rqa-quality-studio"
+      ],
+      "yasatacagi_sorunlar": [
+        "12.000 kayıtlık Jira backlog'u için dışa aktar-analiz et-geri yükle döngüsü gerekir; toplu dönüşüm ve DoR kapısı otomatikleşemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K01-005"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "API/Excel köprüsünü pilotta maliyetlendirin.",
+      "id": "BL-01147",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Sayfa entegrasyonları 'among others' diye sayıyor, liste tam değil. Üreticinin RAT tarayıcı eklentisi Jira ile, OSLC bağlayıcısı OSLC uyumlu araçlarla çalışıyor; doğrudan Jira/Azure DevOps bağlayıcısının olmadığı kanıtlanamadı.",
+        "kaynak": [
+          "https://www.reusecompany.com/rqa-quality-studio",
+          "https://www.reusecompany.com/rat-authoring-tools",
+          "https://www.reusecompany.com/connectors/systems-engineering-for-oslc"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0832",
+      "arac": "QVscribe",
+      "gorev": "R-G10",
+      "tur": "RT-07",
+      "baslik": "Jira/Azure DevOps entegrasyonu yok",
+      "aciklama": "QVscribe'ın hazır entegrasyonları Word, Excel, Jama Connect, DOORS Next ve Polarion; Jira/Azure DevOps için hazır entegrasyon yok, satıcı özel arayüz öneriyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://qracorp.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çevik backlog'un toplu kalite denetimi elle aktarım gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K01-005"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "Excel köprüsünün maliyetini hesaplayın.",
+      "id": "BL-01150",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Site ve 'Other' entegrasyon sayfası yalnız Word/Excel, Polarion, Jama ve DOORS Next'i sayıyor; Jira/ADO yok. Ancak satıcı başka platformlar için arayüz kurulabileceğini söylüyor ve Word/Excel üzerinden geçici çözüm mümkün.",
+        "kaynak": [
+          "https://qracorp.com/",
+          "https://qracorp.com/qvscribe-other/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0833",
+      "arac": "Copilot4DevOps",
+      "gorev": "R-G10",
+      "tur": "RT-07",
+      "baslik": "Yalnız Azure DevOps; kurum içi sunucu desteği belirsiz",
+      "aciklama": "Harita, aracın yalnız Azure DevOps ekosisteminde çalıştığını ve Azure DevOps Server desteğinin belirtilmediğini kaydediyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.modernrequirements.com/copilot4devops/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Jira kullanan ekipler kapsam dışı kalır; kurum içi Azure DevOps Server'da çalışmıyorsa bulut zorunlu olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-001",
+        "N-K05-028"
+      ],
+      "erken_sinyal": "Kurum içi kurulumda özelliklerin devre dışı kalması.",
+      "azaltma": "Kurum içi uyumluluğu pilotla doğrulayın.",
+      "id": "BL-01154",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0924",
+      "arac": "Jellyfish DevEx",
+      "gorev": "R-G08",
+      "tur": "RT-07",
+      "baslik": "DevEx modülü Jellyfish platformuna bağlı",
+      "aciklama": "DevEx modülü ayrı kullanılamıyor; Jellyfish platformuna bağlı (araç haritası notu).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://jellyfish.co/platform/devex/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yalnız anket için tüm mühendislik zekâsı platformunu lisanslamak ve entegre etmek gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008"
+      ],
+      "erken_sinyal": "Paket teklifinde zorunlu modüller.",
+      "azaltma": "Yalnız anket ihtiyacı için hafif alternatifleri değerlendirmek.",
+      "id": "BL-01220",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1090",
+      "arac": "CodeScene",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Kod Sağlığı metriği satıcıya özgü; geçmiş taşınamıyor",
+      "aciklama": "Code Health, CodeScene'e özgü bileşik bir metrik. Sıcak nokta ve değişim bağlaşımı analizleri satıcının modeline dayanıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://codescene.com/product/code-health"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kalite eşikleri ve bakım borcu trendleri başka araca taşınamaz; satıcı değişirse tarihsel kıyas kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-014",
+        "N-K23-006"
+      ],
+      "erken_sinyal": "Satıcı sözleşmesinin yenileme maliyetinin artması.",
+      "azaltma": "Kapı kararlarını açık metriklerle (karmaşıklık, kopya oranı) destekle; ham analiz çıktısını dışa aktar.",
+      "id": "BL-01311",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1099",
+      "arac": "OpenAI Evals",
+      "gorev": "R-G08",
+      "tur": "RT-07",
+      "baslik": "OpenAI API odaklı tasarım ve Git-LFS bağımlılığı",
+      "aciklama": "Çalıştırma için OPENAI_API_KEY gerekiyor; kayıt defteri Git-LFS'te tutuluyor.",
+      "tarih": "2024-12",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/openai/evals#readme"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi barındırılan açık modellerle adil karşılaştırma için ek adaptör yazmak gerekir; LFS erişimi kapalı ağda ek aynalama ister."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-002"
+      ],
+      "erken_sinyal": "Adaptör hataları.",
+      "azaltma": "Sağlayıcı bağımsız bir değerlendirme çerçevesi kullanmak.",
+      "id": "BL-01317",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1160",
+      "arac": "Snyk",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "SaaS kilidi ve geliştirici başı fiyatlandırma",
+      "aciklama": "Snyk yalnız SaaS olarak sunulur (araç haritası); kural motoru, bulgu geçmişi ve politikalar platforma bağlıdır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.snyk.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sağlayıcı değiştirildiğinde bulgu geçmişi, istisnalar ve politikalar taşınamaz; yeniden kalibrasyon gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-002",
+        "N-K18-008"
+      ],
+      "erken_sinyal": "Yenileme görüşmelerinde fiyat artışı.",
+      "azaltma": "Bulguları SARIF gibi açık biçimlerde kurum deposunda arşivlemek.",
+      "id": "BL-01346",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1210",
+      "arac": "Policy in Amazon Bedrock AgentCore",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Uygulama noktası AWS'ye bağlı; Türkiye bölgesi yok",
+      "aciklama": "Cedar açık bir dil olsa da uygulama noktası AgentCore Gateway'dir; hizmet AWS bölgelerinde (AB dahil) sunulur, Türkiye'de yoktur.",
+      "tarih": "2026-03",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agentcore-regions.html",
+        "https://aws.amazon.com/about-aws/whats-new/2026/03/policy-amazon-bedrock-agentcore-generally-available/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Politika denetimi yalnız AWS'de çalışan ajanlar için geçerli olur; kurum içi ajanlar için ikinci bir politika motoru gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-008",
+        "N-K18-005"
+      ],
+      "erken_sinyal": "Hibrit ajan mimarisinde politika farkları.",
+      "azaltma": "Politikaları Cedar olarak kurum deposunda tutup gerekirse kurum içi Cedar motoruyla da uygulamak.",
+      "id": "BL-01395",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1247",
+      "arac": "Amazon Bedrock Guardrails",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "AWS kilidi ve kullanım bazlı ücret",
+      "aciklama": "Politika tanımları ve API AWS'ye özgüdür; ücret metin birimi başına işlenir (araç haritası).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://aws.amazon.com/bedrock/guardrails/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tüm ajan trafiğine uygulandığında maliyet trafikle doğrusal artar; başka buluta geçişte politikalar yeniden yazılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-006"
+      ],
+      "erken_sinyal": "Guardrail maliyet kaleminde artış.",
+      "azaltma": "Politika niyetini sağlayıcıdan bağımsız biçimde belgelemek.",
+      "id": "BL-01407",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1261",
+      "arac": "Giskard",
+      "gorev": "R-G08",
+      "tur": "RT-07",
+      "baslik": "Sürekli kırmızı takım ve izleme ticari Hub'da",
+      "aciklama": "Gelişmiş kırmızı takım, kurumsal iş birliği ve sürekli izleme ticari Giskard Hub ürününde; açık kaynak sürüm tek seferlik tarama ve kontrol kütüphanesi sunuyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.giskard.ai/",
+        "https://github.com/Giskard-AI/giskard-oss#readme"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sürekli kırmızı takım ihtiyacı için ya ticari SaaS'a (yurt dışı veri) geçmek ya da orkestrasyonu kurum içinde yazmak gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-012"
+      ],
+      "erken_sinyal": "Açık kaynak sürümde istenen özelliklerin 'Hub' yönlendirmesi.",
+      "azaltma": "Açık kaynak tarayıcıyı zamanlanmış CI işiyle çalıştırmak; sonuçları kurum iz deposunda saklamak.",
+      "id": "BL-01410",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1274",
+      "arac": "Microsoft Purview",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "M365/Azure ekosistemine ve karmaşık lisans katmanlarına bağlılık",
+      "aciklama": "Kullanıcı başı lisans (E3/E5/A5/F5/G5) ile kullandıkça öde modeli birlikte işliyor; bazı çözümler önce kullanıcı başı lisansı şart koşuyor. Katalog kaydı üçüncü taraf LLM kapsamının sınırlı olduğunu belirtiyor.",
+      "tarih": "2026-06",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/purview/purview-billing-models"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum M365 dışında (ör. kurum içi LLM, farklı ajan çalışma zamanları) yoğun çalışıyorsa kapsama boşluğu kalır ve iki ayrı yönetişim aracı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-010",
+        "N-K18-010"
+      ],
+      "erken_sinyal": "Desteklenmeyen yapay zekâ uygulamaları listesinin uzaması.",
+      "azaltma": "Ajan platformunda kendi veri çıkış politikasını ayrıca uygulamak.",
+      "id": "BL-01419",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1913",
+      "arac": "Dependabot",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Yalnızca GitHub'a bağlı",
+      "aciklama": "Envanter, aracın GitHub'a bağlı olduğunu ve çekirdek kütüphanenin resmî olarak ayrı bir self-host ürün olmadığını söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/dependabot/dependabot-core"
+      ],
+      "yasatacagi_sorunlar": [
+        "GitHub dışındaki depolar için ikinci bir güncelleme aracı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-005"
+      ],
+      "erken_sinyal": "GitHub dışı depoların varlığı.",
+      "azaltma": "SCM'den bağımsız bir güncelleme aracını değerlendirin.",
+      "id": "BL-01652",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1957",
+      "arac": "Amazon Bedrock AgentCore Identity",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Ajan kimliği modeli AWS'ye özgü",
+      "aciklama": "Ajan kimlikleri AgentCore iş yükü kimlikleri olarak uygulanır; AWS dışı çalışma zamanlarında kullanımı sınırlı (araç haritası).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/identity.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi ve bulut ajanları için iki ayrı kimlik modeli yönetmek zorunda kalınır; en az yetki ilkesi tutarsızlaşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-003",
+        "N-K15-004"
+      ],
+      "erken_sinyal": "Farklı ortamlarda farklı ajan kimlik şemaları.",
+      "azaltma": "Kurum kimlik sağlayıcısını (OIDC) ana kaynak tutup AgentCore'u federasyonla bağlamak.",
+      "id": "BL-01668",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1973",
+      "arac": "Amazon CloudWatch Application Signals ve GenAI Observability",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "ADOT SDK'ya bağımlılık ve kararsız GenAI anlamsal kuralları",
+      "aciklama": "AgentCore ajan gözlemi için ADOT Collector desteklenmiyor; ADOT SDK veya Lambda katmanı zorunlu. Birleşik span hedefi için aws-opentelemetry-distro>=0.18.0 (Haziran 2026) gerekiyor ve distro hâlâ 0.x sürümünde (v0.20.0, Eylül 2026). OpenTelemetry GenAI anlamsal kuralları 'Development' durumunda ve içerik öznitelikleri opt-in.",
+      "tarih": "2026-06",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability-configure.html",
+        "https://github.com/aws-observability/aws-otel-python-instrumentation/releases",
+        "https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-spans.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi veya çok bulutlu ajanlar standart OTel Collector hattıyla GenAI panosuna bağlanamaz; AWS'ye özgü distro ile kod düzeyinde kilitlenme oluşur.",
+        "GenAI öznitelik adları değiştikçe panolar, sorgular ve maliyet raporları kırılır; ADOT sürüm yükseltmeleri zorunlu hâle gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-001",
+        "N-K16-005",
+        "N-K08-005"
+      ],
+      "erken_sinyal": "ADOT sürüm notlarında öznitelik adı değişiklikleri, GenAI panosunda boş grafikler.",
+      "azaltma": "Ajan kodunu satıcıdan bağımsız OTel SDK ile enstrümante edip ihracatçıyı yapılandırmayla seçin; GenAI kural sürümünü sabitleyip dönüşümü Collector'da yapın.",
+      "id": "BL-01698",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1984",
+      "arac": "Amazon Neptune",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yönetilen ve AWS'ye özgü graf; Türkiye bölgesi yok",
+      "aciklama": "Neptune yalnız AWS'de yönetilen hizmet olarak sunuluyor. Düğüm kimlikleri dize ve Neptune'a özgü uzantılar içeriyor. AWS bölge listesinde Türkiye yok.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/neptune/latest/userguide/feature-opencypher-compliance.html",
+        "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uygulama geneli ilişki haritası Neptune'a özgü uzantılarla kurulursa başka bir graf veritabanına taşınma pahalıdır.",
+        "Kaynak kod meta verisi ve ekip bağımlılıkları yurt dışında tutulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-001",
+        "N-K22-005",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Neptune'a özgü uzantıların (özel kimlik, sorgu ipuçları) sorgularda yaygınlaşması.",
+      "azaltma": "Standart openCypher alt kümesinde kalın. Grafiği kaynak koddan yeniden üretilebilir tutun ki taşıma yeniden yükleme olsun.",
+      "id": "BL-01705",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1995",
+      "arac": "Microsoft Defender for Cloud (DevOps güvenliği ve AI-SPM)",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "En derin kapsam Azure'da",
+      "aciklama": "Çoklu bulut desteklense de en derin kapsam Azure iş yüklerinde (araç haritası).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/defender-for-cloud/ai-security-posture"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi ve AWS'deki ajan iş yükleri için AI-SPM görünürlüğü eksik kalır; yanlış 'tam kapsam' algısı oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K22-007"
+      ],
+      "erken_sinyal": "Envanterde görünmeyen ajan iş yükleri.",
+      "azaltma": "Envanteri kurum içi kaynaklarla mutabakat etmek.",
+      "id": "BL-01724",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2024",
+      "arac": "Google Cloud Deploy",
+      "gorev": "R-G09",
+      "tur": "RT-07",
+      "baslik": "Google Cloud hedeflerine bağımlılık ve ek hizmet maliyetleri",
+      "aciklama": "Cloud Deploy yerleşik olarak GKE, Cloud Run ve GKE Enterprise hedeflerini destekler; diğer ortamlar için özel hedef yazmak gerekir. İlk aktif çok hedefli pipeline ücretsiz, sonrakiler ayda 5 USD; render/dağıtım işleri Cloud Build olarak ayrıca ücretlenir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://cloud.google.com/deploy/pricing",
+        "https://cloud.google.com/deploy/docs/overview"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun kendi veri merkezindeki Kubernetes/VM ortamları için özel hedef ve bakım yükü oluşur; hat tanımı Google Cloud'a kilitlenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-005",
+        "N-K20-007"
+      ],
+      "erken_sinyal": "Özel hedef türü sayısının artması; Cloud Build maliyetinin pipeline maliyetini aşması.",
+      "azaltma": "Ortam terfi tanımını araçtan bağımsız (ör. Skaffold/Kustomize) tutun; özel hedefleri ortak bir platform ekibine verin.",
+      "id": "BL-01772",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2025",
+      "arac": "Google Cloud Build",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Google Cloud'a kilitlenme; hat görselleştirmesi zayıf",
+      "aciklama": "Envanter, karmaşık hat görselleştirmesinin zayıf olduğunu ve aracın Google Cloud'a bağlı olduğunu söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://cloud.google.com/build"
+      ],
+      "yasatacagi_sorunlar": [
+        "cloudbuild.yaml tanımları başka bir CI'ya elle taşınmak zorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Hat sayısının artmasıyla izlenebilirliğin zorlaşması.",
+      "azaltma": "Derleme adımlarını konteyner ve betik olarak CI'dan bağımsız tutun.",
+      "id": "BL-01776",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2027",
+      "arac": "Binary Authorization",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yalnız Google Cloud platformlarında (GKE, Cloud Run, Distributed Cloud) çalışıyor",
+      "aciklama": "Desteklenen platformlar GKE, Cloud Run, Cloud Service Mesh ve Google Distributed Cloud. GKE'de küme başına saatlik 0,01613 $ (ayda yaklaşık 12 $) ücret var; faturalama hesabı başına ayda 12 $ ücretsiz kredi tanınıyor. Cloud Run'da ücretsiz.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.cloud.google.com/binary-authorization/docs/overview",
+        "https://cloud.google.com/binary-authorization/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun kurum içi Kubernetes, AWS ya da Azure kümeleri kapsam dışı kalır; tedarik zinciri kapısı platforma göre farklı araçlarla kurulur.",
+        "Attestor, KMS anahtarları ve Container Analysis notları Google'a özgü; taşıma yeniden kurulum demektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-008",
+        "N-K06-005",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Google Cloud dışı kümelerde imza doğrulamasının bulunmaması.",
+      "azaltma": "İmzalama standardını (Sigstore/SLSA) platformdan bağımsız seçin. Kubernetes kabul denetimini diğer kümelerde de aynı politikayla uygulayın.",
+      "id": "BL-01783",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2074",
+      "arac": "Agentforce Testing Center",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Yalnız Agentforce ajanlarını test eder",
+      "aciklama": "Araç Salesforce içindeki Agentforce ajanlarıyla sınırlı; kurumun kendi ajan hattını (kod ajanları, CI) değerlendiremez.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developer.salesforce.com/docs/ai/agentforce/guide/agent-dx-test.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum görev seti ve değişiklik öncesi regresyon değerlendirmesi ihtiyacı bu araçla karşılanamaz; ikinci bir değerlendirme sistemi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-001",
+        "N-K23-010",
+        "N-K23-003"
+      ],
+      "erken_sinyal": "Test kapsamı dışında kalan ajan sayısı.",
+      "azaltma": "Yalnız Salesforce üzerindeki ajanlar için kullanmak; genel değerlendirme için bağımsız çerçeve.",
+      "id": "BL-01811",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Testing Center, Salesforce Setup > Agentforce altında org içindeki Agentforce ajanlarını test ediyor (kanıt sayfası 403, bağımsız kaynaklarla doğrulandı). Bu bir kapsam sınırı; orta daha uygun.",
+        "kaynak": [
+          "https://help.salesforce.com/s/articleView?language=en_US&id=ai.agent_testing_center.htm",
+          "https://www.salesforce.com/news/press-releases/2024/11/20/agentforce-testing-center-announcement/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2125",
+      "arac": "Dynatrace Site Reliability Guardian",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Guardian tanımları platforma bağımlı",
+      "aciklama": "Hedefler DQL ve Grail veri modeliyle yazılıyor ve Dynatrace dışına taşınamıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.dynatrace.com/docs/deliver/site-reliability-guardian"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gözlemlenebilirlik sağlayıcısı değişirse bütün sürüm kapısı mantığı yeniden yazılmak zorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-023"
+      ],
+      "erken_sinyal": "Eşik ve hedef tanımları yalnızca Dynatrace arayüzünde tutuluyor, depoda yok.",
+      "azaltma": "Eşikleri araçtan bağımsız ve sürümlü bir dosyada tutun; guardian'ları koddan (Monaco veya Terraform) üretin.",
+      "id": "BL-01865",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2186",
+      "arac": "Modern Requirements4DevOps",
+      "gorev": "R-G10",
+      "tur": "RT-07",
+      "baslik": "Azure DevOps'a bağlı ek lisans",
+      "aciklama": "Ürün Azure DevOps içinde çalışır ve ek lisans gerektirir (harita).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.modernrequirements.com/products/modern-requirements4devops/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Jira kullanan ekipler kapsama giremez; iş takip sistemi değişirse gereksinim belgeleri ve taban çizgileri taşınamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-010",
+        "N-K26-005"
+      ],
+      "erken_sinyal": "Farklı iş takip sistemlerini kullanan ekiplerin dışarıda kalması.",
+      "azaltma": "Gereksinimleri ReqIF/Markdown olarak düzenli dışa aktarın.",
+      "id": "BL-01910",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2433",
+      "arac": "Baidu AI Cloud Qianfan (千帆)",
+      "gorev": "R-G08",
+      "tur": "RT-07",
+      "baslik": "Platforma bağlı uygulama ve dağıtım",
+      "aciklama": "AppBuilder web konsolunda yayımlanan uygulamalar, bilgi tabanları ve appbuilder_bce_deploy aracı Baidu Cloud'a dağıtım için tasarlanmış.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/baidubce/app-builder"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bu platformda kurulan ajan ve değerlendirme akışları başka bir buluta taşınamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-009"
+      ],
+      "erken_sinyal": "Konsolda tanımlı iş akışı sayısının artması.",
+      "azaltma": "Mantığı taşınabilir kodda tutmak.",
+      "id": "BL-02007",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2560",
+      "arac": "Kissflow",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "Kapalı SaaS; kurum içi kurulum yok",
+      "aciklama": "Yalnız SaaS; yazılım teslim hattı entegrasyonları API ile kurulmalı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://kissflow.com"
+      ],
+      "yasatacagi_sorunlar": [
+        "Satıcı fiyat veya ürün değişikliğinde süreçleri taşımak yeniden geliştirme gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kritik süreçlerin platformda yoğunlaşması.",
+      "azaltma": "Süreç tanımlarını ve kararları dışa aktarılabilir biçimde tutmak.",
+      "id": "BL-02051",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3362",
+      "arac": "PagerDuty MCP Server (Remote)",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yerel açık kaynak sunucu arşivlendi; yalnız barındırılan uzak sunucu kaldı",
+      "aciklama": "PagerDuty'nin yerel MCP deposu 2026-09'da 'deprecated ve read-only' olarak arşivlendi; geliştirme barındırılan uzak sunucuya taşındı. Yerel sürüm varsayılanda yalnız okuma araçlarını açıyor, yazma için --enable-write-tools gerekiyordu.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/PagerDuty/pagerduty-mcp-server",
+        "https://support.pagerduty.com/main/docs/pagerduty-mcp-server"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ağ yalıtımı gereken ortamlarda kendi barındırdığı MCP'yi kullanan ekipler güvenlik yamalarından mahrum kalır ya da uzak sunucuya geçmek zorunda kalır.",
+        "Yerel sürümün 'varsayılan salt-okuma' güvencesi uzak sunucuda aynı biçimde bulunmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006",
+        "N-K12-003",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Arşivlenmiş PyPI paketinin kullanımda olması; bağımlılık taramasında bakımsız paket uyarısı.",
+      "azaltma": "Arşivlenen yerel sürümü kullanan kurulumları envantere alıp kaldırın. Uzak sunucuya geçişte yetkiyi OAuth kapsamlarıyla daraltın.",
+      "id": "BL-02148",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Depo archived=true; README 'deprecated and now read-only' diyor, geliştirme barındırılan uzak sunucuya taşınmış (son commit 2026-09-04, 'docs: mark repo as deprecated and read-only'); yerel sürümde varsayılan salt-okuma ve --enable-write-tools README'de doğrulandı. Uzak sunucuya geçiş kolay bir yapılandırma değişikliği olduğundan etki orta düzeyde.",
+        "kaynak": [
+          "https://github.com/PagerDuty/pagerduty-mcp-server",
+          "https://api.github.com/repos/PagerDuty/pagerduty-mcp-server/commits",
+          "https://support.pagerduty.com/main/docs/pagerduty-mcp-server"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3389",
+      "arac": "Roadie Tech Insights",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yalnız SaaS ve ücretli eklenti",
+      "aciklama": "Fiyat karşılaştırmasına göre tüm planlarda self-host seçeneği yok (yalnız SaaS). Belgeye göre Tech Insights ücretli bir eklenti ve satış ekibiyle etkinleştiriliyor. Özel RBAC Growth planında.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://roadie.io/pricing/",
+        "https://roadie.io/docs/tech-insights/introduction/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Olgunluk ve yaygınlaştırma kriterleri (N-K24-010) Roadie'ye özgü kontrol ve puan kartlarında tanımlanırsa çıkışta yeniden yazılır.",
+        "Kurum içi zorunluluk olan ortamlarda kullanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K03-007",
+        "N-K24-010",
+        "N-K19-007"
+      ],
+      "erken_sinyal": "Kontrol tanımlarının dışa aktarılamaması.",
+      "azaltma": "Kontrol mantığını depo içinde kod olarak tutun. Roadie'yi görselleştirme katmanı olarak konumlandırın.",
+      "id": "BL-02157",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3402",
+      "arac": "TestMu AI (LambdaTest) MCP Server",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Yalnız barındırılan MCP; depoda kaynak kod yok",
+      "aciklama": "Resmî depo yalnız kurulum kılavuzu. README'ye göre sunucu https://mcp.lambdatest.com/mcp adresinde yönetilen bir hizmet olarak çalışıyor ve kurulacak ya da self-host edilecek bir şey yok.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/LambdaTest/mcp-server-guide"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanların kullandığı araç tanımları satıcı tarafından habersiz değiştirilebilir (araç zehirlenmesi yüzeyi). Kurum kodu denetleyemez ya da sürüme sabitleyemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-002",
+        "N-K12-003",
+        "N-K12-001"
+      ],
+      "erken_sinyal": "Araç listesinin ya da açıklamalarının habersiz değişmesi.",
+      "azaltma": "MCP araç tanımlarının özetini (hash) izleyen bir ağ geçidi kullan. Değişikliği onaya bağla.",
+      "id": "BL-02166",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3407",
+      "arac": "mabl MCP Server",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yalnız barındırılan, kapalı kaynak; araç listesi sabitlenemiyor",
+      "aciklama": "README'ye göre sunucu mcp.mabl.com adresinde yönetilen uzak hizmet olarak çalışıyor; kurulacak ya da self-host edilecek bir şey yok. GitHub deposu yalnız belge ve kayıt bilgisi içeriyor (2026-06'da açıldı). Araç listesi her sürümde yeniden üretiliyor ve 'zamanla değişiyor'.",
+      "tarih": "2026-06",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/mablhq/mabl-mcp-server",
+        "https://github.com/mablhq/mabl-mcp-server/blob/main/docs/TOOLS.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Araç adları ya da parametreleri haber verilmeden değiştiğinde ajan kural paketleri ve test akışları kırılır; sürüm sabitleme mümkün değil.",
+        "Ağ yalıtımlı ortamlarda kullanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-002",
+        "N-K11-006",
+        "N-K16-005"
+      ],
+      "erken_sinyal": "tools/list çıktısında haftalık fark.",
+      "azaltma": "Araç listesini günlük çekip farkları izleyin. Ajan istemlerinde araç adlarını sabit kodlamaktan kaçının.",
+      "id": "BL-02173",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3602",
+      "arac": "Retool",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "Tescilli uygulama formatı ve self-host'un kurumsal planda olması",
+      "aciklama": "Retool uygulamaları satıcıya özgü formatta tutulur; araç analizine göre self-host kurumsal planda sunulur.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://retool.com/",
+        "https://retool.com/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onay ve inceleme yüzeyleri Retool'a bağımlı kalır; çıkışta yeniden geliştirme gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K17-006"
+      ],
+      "erken_sinyal": "Kritik süreçlerin Retool uygulamalarında yoğunlaşması.",
+      "azaltma": "İş mantığını API katmanında tutup Retool'u ince arayüz olarak kullanmak.",
+      "id": "BL-02253",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3605",
+      "arac": "C1 (eski ConductorOne)",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Kapalı bağlayıcılar ve SaaS kilidi",
+      "aciklama": "Entegrasyonlar sağlayıcı bağlayıcıları ve C1 Bridge üzerinden; kurum içi dağıtım belgelenmemiş.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.c1.ai/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onay zinciri ve süreli erişim kuralları başka araca taşınırken yeniden kurulmalıdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K17-002"
+      ],
+      "erken_sinyal": "Özel bağlayıcı sayısı.",
+      "azaltma": "Politikaları kod olarak kurum deposunda tutmak.",
+      "id": "BL-02260",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3929",
+      "arac": "AWS Organizations Service Control Policies (SCP)",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Yalnız AWS'ye özgü; çok bulutlu ve kurum içi kaynakları kapsamaz",
+      "aciklama": "SCP'ler yalnız AWS Organizations üye hesaplarındaki IAM kullanıcı ve rollerini kapsar. Azure, GCP, kurum içi Kubernetes ya da SaaS araçlarındaki ajan eylemleri için eşdeğer koruma sağlamaz.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum hibrit ya da çok bulutluysa yasaklı değişiklik sınıfları her platformda ayrı dille (SCP, Azure Policy, OPA) tanımlanır ve tutarsızlık doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-004",
+        "N-K11-001",
+        "N-K11-003"
+      ],
+      "erken_sinyal": "Aynı kuralın farklı platformlarda farklı sürümleri.",
+      "azaltma": "Yasaklı değişiklik sınıflarını platformdan bağımsız tek bir kaynakta tanımlayıp SCP ve diğer politika dillerine üretin.",
+      "id": "BL-02317",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3982",
+      "arac": "Datafold",
+      "gorev": "R-G13",
+      "tur": "RT-07",
+      "baslik": "Açık kaynak data-diff arşivlendi; yalnız ticari ürün kaldı",
+      "aciklama": "datafold/data-diff deposu arşivlenmiş (son push 2024-05-17). Kurum içi ücretsiz alternatif kalmadı; Dedicated Cloud kurulumu Kubernetes, Temporal ve Zalando Postgres Operator gerektiriyor.",
+      "tarih": "2024-05",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/datafold/data-diff",
+        "https://docs.datafold.com/datafold-deployment/datafold-deployment-options"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veri karşılaştırma hattı yalnız ticari SaaS'a veya ağır bir kurum içi kuruluma bağımlı hale gelir; sözleşme sona ererse karşılaştırma yeteneği kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-011",
+        "N-K33-012"
+      ],
+      "erken_sinyal": "Yenileme görüşmesinde alternatif yokluğu.",
+      "azaltma": "Karşılaştırma kurallarını ve sonuçlarını araçtan bağımsız saklayın; kritik mutabakatlar için SQL tabanlı basit bir karşılaştırma yeteneğini kurum içinde tutun.",
+      "id": "BL-02324",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4234",
+      "arac": "Hatica",
+      "gorev": "R-G12",
+      "tur": "RT-07",
+      "baslik": "Dışa aktarma Business, API yalnız Enterprise katmanında",
+      "aciklama": "Ücretsiz katman 1 aylık geçmiş; dışa aktarma Business (üye başı 29 USD/ay) ve üstünde, ürün API'si yalnız Enterprise'da; SSO Pro (19 USD) ve üstünde.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.hatica.io/pricing/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Alt katmanda kalınırsa metrik geçmişi dışa aktarılamaz; kapanma riskiyle birleştiğinde veri kaybı olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-015",
+        "N-K30-006"
+      ],
+      "erken_sinyal": "Seçilen katmanda dışa aktarma düğmesinin olmaması.",
+      "azaltma": "En az dışa aktarma içeren katmanı seçin; aylık yedek alın.",
+      "id": "BL-02439",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4239",
+      "arac": "Grafana SLO",
+      "gorev": "R-G13",
+      "tur": "RT-07",
+      "baslik": "Yalnız Grafana Cloud özelliği",
+      "aciklama": "Grafana SLO bir Grafana Cloud özelliği; self-host açık kaynak Grafana'da aynı biçimde yok. SLO'lar Grafana SLO API'si ve Terraform sağlayıcısıyla kod olarak yönetilebiliyor, ancak biçim Grafana'ya özgü.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://grafana.com/docs/grafana-cloud/observe-and-act/alert-and-measure-reliability/slo/",
+        "https://grafana.com/docs/grafana-cloud/observe-and-act/alert-and-measure-reliability/slo/set-up/terraform/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Veri yerelliği nedeniyle ileride self-host'a dönülmek istenirse SLO tanımları, uyarı kuralları ve panolar yeniden kurulmalı.",
+        "Hata bütçesi politikası tek bir SaaS'a bağlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-003"
+      ],
+      "erken_sinyal": "Kurum politikasında self-host zorunluluğu tartışması.",
+      "azaltma": "SLO tanımlarını sağlayıcıdan bağımsız bir kaynak biçiminde tutup Terraform ile uygulayın; kayıt kurallarının açık Prometheus karşılıklarını belgeleyin.",
+      "id": "BL-02447",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4264",
+      "arac": "Antithesis",
+      "gorev": "R-G13",
+      "tur": "RT-07",
+      "baslik": "Özel hipervizör ve yalnız SaaS; doğrulamalar koda gömülüyor",
+      "aciklama": "Deterministik ortam sağlayıcının özel hipervizöründe çalışıyor; kurum içi kurulum seçeneği yok. Her zaman/bazen doğrulamaları Antithesis SDK'ları (Go, Java, Python, Rust, C/C++, .NET, TypeScript) ile uygulama koduna ekleniyor; Jepsen bile Antithesis'e özgü bir entegrasyon kütüphanesi tutuyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://antithesis.com/docs/introduction/welcome/",
+        "https://github.com/jepsen-io/jepsen/tree/main/antithesis"
+      ],
+      "yasatacagi_sorunlar": [
+        "Birkaç yıl içinde yüzlerce doğrulama ve iş yükü sağlayıcıya özgü API'lerle yazılırsa sağlayıcı değiştirmek test varlığının büyük kısmını yeniden yazmayı gerektirir.",
+        "Sağlayıcı fiyat artırırsa pazarlık gücü düşer, çünkü eşdeğer deterministik hipervizör alternatifi sınırlıdır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-030",
+        "N-K33-009"
+      ],
+      "erken_sinyal": "Doğrulama çağrılarının uygulama kodunda yaygınlaşması; yenileme görüşmesinde fiyat artışı.",
+      "azaltma": "Doğrulamaları kurum içi ince bir soyutlama katmanı üzerinden çağırın; iş yükü betiklerini sağlayıcıdan bağımsız tutun.",
+      "id": "BL-02461",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4333",
+      "arac": "CppDepend",
+      "gorev": "R-G13",
+      "tur": "RT-07",
+      "baslik": "Lisans bitince araç çalışmıyor",
+      "aciklama": "Satın alma sayfası aracın yalnız lisans bitiş tarihine kadar çalıştığını söylüyor; yenileme temel fiyatın %80'i. Metrik eğilimleri ve teknik borç geçmişi aracın kendi biçiminde tutuluyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.cppdepend.com/purchase"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bütçe kesintisinde lisans yenilenmezse CI'daki mimari kural kapıları ve modülerlik metriklerinin zaman serisi (N-K35-002) bir gün içinde durur.",
+        "Geçmiş eğilim verisi başka bir araca taşınamazsa teknik borç kaydı kopar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K35-001",
+        "N-K35-002",
+        "N-K35-004"
+      ],
+      "erken_sinyal": "Lisans bitiş uyarıları; CI'da lisans hatasıyla başarısız olan işler.",
+      "azaltma": "Metrik ve kural sonuçlarını CI'da açık biçimde (CSV/JSON) dışa aktarıp kurum deposunda saklayın; yenileme tarihini bütçe takvimine bağlayın.",
+      "id": "BL-02484",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0031",
+      "arac": "OpenAI Agents SDK",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Barındırılan araçlar ve Responses API'ye bağımlılık",
+      "aciklama": "Web arama, dosya arama, kod yorumlayıcı gibi barındırılan araçlar ve oturum özellikleri OpenAI Responses API'ye dayanıyor; diğer sağlayıcılarla kullanımda bu özellikler taşınamıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://openai.github.io/openai-agents-python/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Model/sağlayıcı değişikliği gerektiğinde (maliyet, veri yerelliği) barındırılan araçlara dayalı roller yeniden yazılmalı."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-001",
+        "N-K10-002",
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Rol tanımlarında OpenAI'ye özgü araç kullanımının artması.",
+      "azaltma": "Araçları MCP veya kurum içi fonksiyonlar olarak tanımlayın; sağlayıcıya özgü barındırılan araçları sınırlı tutun.",
+      "id": "BL-00081",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0038",
+      "arac": "CrewAI",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Kurumsal özellikler ticari AMP platformunda",
+      "aciklama": "Çekirdek MIT; izleme, dağıtım ve yönetim özellikleri ticari CrewAI AMP ürününde.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.crewai.com"
+      ],
+      "yasatacagi_sorunlar": [
+        "Üretim işletimi için ticari platforma yönelme baskısı; self-host kurumsal kontrolleri kendin kur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-008",
+        "N-K19-001"
+      ],
+      "erken_sinyal": "Özellik taleplerinin AMP'ye yönlendirilmesi.",
+      "azaltma": "Gözlemlenebilirliği OTel ile kurum içinde kurun.",
+      "id": "BL-00099",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0074",
+      "arac": "Amp",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Kapalı lisans ve bulutta saklanan thread'ler",
+      "aciklama": "npm paketi 'SEE LICENSE IN LICENSE.md' ile dağıtılıyor; kılavuza göre etkileşimler (thread) kaydedilip paylaşılabiliyor ve Amp sunucularında tutuluyor; kurumsal tarafta 'Minimal Data Retention' seçeneği anılıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.npmjs.com/package/@sourcegraph/amp",
+        "https://ampcode.com/manual"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kod içeren sohbet geçmişi satıcı bulutunda birikir; paylaşım ayarı yanlış yapılırsa kurum dışına açılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-005",
+        "N-K22-009",
+        "N-K18-010"
+      ],
+      "erken_sinyal": "Thread görünürlük ayarları.",
+      "azaltma": "Kurumsal planda minimum saklama ve paylaşım kısıtını zorunlu kılın.",
+      "id": "BL-00203",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0102",
+      "arac": "Tessl",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Kayıt defteri ve spesifikasyon hizmetinin SaaS olması",
+      "aciklama": "Tessl kayıt defteri ve değerlendirme/puanlama hizmetleri satıcı bulutunda; kurum içi barındırma seçeneği belgelerde bulunamadı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://tessl.io/registry",
+        "https://tessl.io/enterprise/security-and-governance"
+      ],
+      "yasatacagi_sorunlar": [
+        "Spesifikasyonlar ve özel skill'ler satıcıya yüklenirse kurum dışına bilgi çıkar ve çıkış maliyeti oluşur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K11-001",
+        "N-K22-010"
+      ],
+      "erken_sinyal": "Özel skill'lerin yalnız Tessl'de tutulması; dışa aktarma yolunun olmaması.",
+      "azaltma": "Skill'leri git'te tek kaynak olarak tutun; Tessl'i yalnız dağıtım aynası gibi kullanın.",
+      "id": "BL-00254",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0189",
+      "arac": "OpenRouter",
+      "gorev": "R-G01",
+      "tur": "RT-07",
+      "baslik": "Yalnız SaaS; aracı kesintisi tüm modellere erişimi etkiler",
+      "aciklama": "OpenRouter yalnız barındırılan hizmet olarak sunuluyor; self-host seçeneği yok. Yedekleme sağlayıcılar arasında yapılıyor ancak OpenRouter'ın kendisi tek nokta.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://openrouter.ai/docs/features/provider-routing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bozulmuş mod tasarımında OpenRouter tek geçitse, kesintide tüm rollerin model erişimi aynı anda düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-007",
+        "N-K09-002"
+      ],
+      "erken_sinyal": "OpenRouter durum sayfasında olay; yüksek 5xx oranı.",
+      "azaltma": "Kritik rollerde doğrudan sağlayıcıya veya kurum içi modele ikinci yol tanımlama.",
+      "id": "BL-00494",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0196",
+      "arac": "Amazon S3 (S3 uyumlu nesne deposu)",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "S3 API'si yaygın ama güvenlik ve saklama özellikleri AWS'ye özgü",
+      "aciklama": "Temel nesne API'si birçok kurum içi üründe var. IAM politikaları, Object Lock anlamları, olay bildirimleri ve şifreleme seçenekleri ise AWS'ye özgü ve S3 uyumlu ürünlerde farklı uygulanıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://aws.amazon.com/s3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "AWS'den kurum içi S3 uyumlu depoya geçişte saklama ve yetki politikaları birebir taşınamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-008",
+        "N-K13-011"
+      ],
+      "erken_sinyal": "Kurum içi depoda Object Lock uyumluluk testinin başarısız olması.",
+      "azaltma": "Uygulamanın yalnız temel S3 API'sini kullanmasını sağlamak; saklama kurallarını araçtan bağımsız belgelemek.",
+      "id": "BL-00514",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0252",
+      "arac": "OpenAI API",
+      "gorev": "R-G01",
+      "tur": "RT-07",
+      "baslik": "Durum tutan Responses API ve sağlayıcıya özgü araçlar taşınabilirliği azaltıyor",
+      "aciklama": "Responses/Chat Completions'ta store parametresiyle uygulama durumu sağlayıcıda tutulabiliyor; ZDR belgesine göre bazı uç nokta ve yetenekler ZDR uygun değil ve uygulama durumunu saklamaya devam edebiliyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://developers.openai.com/api/docs/guides/your-data"
+      ],
+      "yasatacagi_sorunlar": [
+        "Konuşma/iş durumu sağlayıcıda tutulursa hem veri saklama politikası delinir hem başka sağlayıcıya geçiş zorlaşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-002",
+        "N-K22-009"
+      ],
+      "erken_sinyal": "Kodda store=true veya durum tutan uç nokta kullanımı.",
+      "azaltma": "Durumu kurum tarafında tutma; yalnız durumsuz çağrılar ve ZDR uygun uç noktalar.",
+      "id": "BL-00661",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0295",
+      "arac": "MLflow (Model Registry ve AI Gateway)",
+      "gorev": "R-G01",
+      "tur": "RT-07",
+      "baslik": "Geçit özellikleri sınırlı; yönetilen sürüm Databricks'e bağlı",
+      "aciklama": "Kaynağa göre MLflow AI Gateway'de bütçe/kota yönetimi adanmış LLM geçitlerine göre zayıf; yönetilen MLflow büyük ölçüde Databricks üzerinden sunuluyor. Geçit tek başına ekip bazlı kota için yeterli olmayabilir.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://mlflow.org/docs/latest/genai/governance/ai-gateway/",
+        "https://github.com/mlflow/mlflow"
+      ],
+      "yasatacagi_sorunlar": [
+        "Maliyet kotası için ikinci bir geçit gerekirse iki geçit arasında anahtar, log ve politika tekrar eder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K20-007",
+        "N-K09-012"
+      ],
+      "erken_sinyal": "Pilotta kota/bütçe gereksinimlerinin karşılanamaması.",
+      "azaltma": "MLflow'u kayıt defteri ve izleme için, ayrı bir geçidi bütçe için konumlandıran net sorumluluk ayrımı.",
+      "id": "BL-00684",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0353",
+      "arac": "Unstructured",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Açık kaynak kütüphane ile ticari platform arasındaki özellik farkı",
+      "aciklama": "Gelişmiş ayrıştırma stratejileri ve ölçekli işleme ticari Unstructured platformunda; açık kaynak kütüphane sınırlı kalabilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.unstructured.io"
+      ],
+      "yasatacagi_sorunlar": [
+        "Türkçe taranmış belgelerde kalite gerekirse SaaS'a geçme baskısı doğar ve belgeler yurt dışına çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-008",
+        "N-K09-014"
+      ],
+      "erken_sinyal": "Açık kaynak sürümde ayrıştırma kalitesinin yetersiz kalması.",
+      "azaltma": "Türkçe belge örnekleriyle kalite testi; SaaS kullanımında veri işleme sözleşmesi.",
+      "id": "BL-00688",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0468",
+      "arac": "BAML",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Özel DSL ve kod üretimine bağımlılık",
+      "aciklama": "BAML fonksiyon ve tip tanımlarını kendi dilinde yazdırıp istemci kodu üretiyor; bu biçim başka araçlara doğrudan taşınamıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://boundaryml.com/explore",
+        "https://github.com/BoundaryML/baml"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekipler için yeni dil öğrenme maliyeti; çıkışta tüm istem ve şemaların yeniden yazılması."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-013",
+        "N-K25-003"
+      ],
+      "erken_sinyal": "BAML dosyalarının sayısının hızla artması.",
+      "azaltma": "BAML kullanımını dar bir katmanla sınırlayın.",
+      "id": "BL-00774",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0518",
+      "arac": "Camunda 8",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Zeebe'ye özgü BPMN uzantıları ve bağlayıcılar",
+      "aciklama": "BPMN standart olsa da Zeebe'ye özgü uzantılar, bağlayıcılar ve FEEL ifadeleri başka motora taşınırken yeniden yazım gerektirir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://camunda.com/platform/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Lisans nedeniyle motor değiştirmek gerektiğinde süreç tanımları ve iş kodu yeniden yazılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-010"
+      ],
+      "erken_sinyal": "Süreç modellerinde zeebe: ad alanlı öğelerin artması.",
+      "azaltma": "Süreç mantığını ince tutun, iş kurallarını motor dışı servislerde yazın.",
+      "id": "BL-00823",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0557",
+      "arac": "Nx",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Uzak önbellek ve dağıtık yürütmenin ticari Nx Cloud'a bağlı olması",
+      "aciklama": "Çekirdek MIT olsa da uzak önbellek ve dağıtık görev yürütme Nx Cloud (SaaS) veya ücretli self-host seçenekleriyle sunuluyor; önbellek artefaktları derleme çıktısı içerir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://nx.dev/features/explore-graph",
+        "https://github.com/nrwl/nx"
+      ],
+      "yasatacagi_sorunlar": [
+        "Nx Cloud kullanılırsa derleme çıktıları ve kaynak türevleri kurum dışına çıkar; KVKK ve ticari sır değerlendirmesi gerekir.",
+        "Self-host önbellek seçilirse CVE-2026-71476 gibi açıklar kurumun işletim yüküne eklenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-007",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Nx Cloud faturasında artış; önbellek artefaktlarının dış uca yüklendiğinin ağ kayıtlarında görülmesi.",
+      "azaltma": "Önbelleği kurum içi depolamada tutun ve önbellek içeriğini imzalayın/doğrulayın.",
+      "id": "BL-00875",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "CVE-2026-71476",
+          "kayit": "var",
+          "ad_eslesmesi": false
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0566",
+      "arac": "Linear",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "SaaS kilidi ve kurumsal süreç özelleştirmesinin sınırlı olması",
+      "aciklama": "Linear self-host sunmaz; iş akışı durumları ve SAFe portföy katmanı için özelleştirme sınırlıdır; çıkış API/CSV dışa aktarma ile yapılır.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://linear.app/docs/issue-relations"
+      ],
+      "yasatacagi_sorunlar": [
+        "SAFe portföy/program katmanı ile ekip panoları arasında tek durum modeli kurmak için ek araç gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-002",
+        "N-K26-006"
+      ],
+      "erken_sinyal": "Portföy raporlarının Linear dışında elle birleştirilmesi.",
+      "azaltma": "İş takip sistemini yetkisi sınırlı yansıma olarak tasarlayın; durum sahibi başka bileşen olsun.",
+      "id": "BL-00897",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0616",
+      "arac": "PagerDuty",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "Yalnız SaaS; eskalasyon modeli ve geçmiş dışarı taşınamıyor",
+      "aciklama": "Hizmet, eskalasyon politikaları, çizelgeler ve olay geçmişi PagerDuty'nin kendi modelinde tutuluyor. Bölge değişikliği bile yeni hesap ve yeniden kurulum gerektirebiliyor. Kurum içi seçenek yok.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://support.pagerduty.com/main/docs/service-regions",
+        "https://support.pagerduty.com/main/docs/escalation-policies"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kamu veya kritik altyapı kapsamında yerli barındırma zorunluluğu doğarsa, nöbet ve eskalasyon yapısı sıfırdan başka araca taşınmak zorunda kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-002",
+        "N-K17-004",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Kamu tedarik şartnamesinde yurt içi barındırma maddesi çıkması.",
+      "azaltma": "Eskalasyon politikalarını Terraform ile kod olarak tutmak; olay kayıtlarını düzenli olarak kurum içindeki bir arşive dökmek.",
+      "id": "BL-00964",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0679",
+      "arac": "Port",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Katalog modeli ve otomasyonların Port'a özgü olması",
+      "aciklama": "Blueprint veri modeli, scorecard ve self-service eylemleri Port'a özgü; çıkışta Backstage gibi bir araca yeniden modelleme gerekir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.port.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Paylaşılan hizmet olarak ajan platformunun sahiplik verisi tek satıcıya bağlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-004",
+        "N-K16-008"
+      ],
+      "erken_sinyal": "Katalog verisinin yalnız Port API'siyle erişilebilir olması.",
+      "azaltma": "Katalogu koddan (git) üretin, Port'u yansıma olarak kullanın.",
+      "id": "BL-01011",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0825",
+      "arac": "Jama Connect (Jama Connect Advisor dahil)",
+      "gorev": "R-G03",
+      "tur": "RT-07",
+      "baslik": "Gereksinim modeli ve izlenebilirliğin platforma kilitlenmesi",
+      "aciklama": "İlişki kuralları, inceleme kayıtları ve izlenebilirlik matrisi Jama'nın veri modelinde tutulur.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.jamasoftware.com/platform/jama-connect/features/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Onay ve kabul kriteri sürüm geçmişi başka araca taşınırken kanıt zinciri kopar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-010",
+        "N-K01-011",
+        "N-K19-003"
+      ],
+      "erken_sinyal": "Dışa aktarmada inceleme/onay kayıtlarının eksik gelmesi.",
+      "azaltma": "Kritik onay ve sürüm kayıtlarını ayrıca kurumun kanıt deposunda tutun.",
+      "id": "BL-01135",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0826",
+      "arac": "IBM Engineering Requirements Management DOORS Next",
+      "gorev": "R-G10",
+      "tur": "RT-07",
+      "baslik": "ELM ekosistemi kilidi",
+      "aciklama": "Sistem mühendisliği odaklı; çevik iş takip sistemiyle entegrasyon ve dışa aktarım ek iş ister (harita).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.ibm.com/products/requirements-management"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gereksinim tabanı IBM'e özgü modelde kalır; çıkış maliyeti yüksek."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-002",
+        "N-K26-005"
+      ],
+      "erken_sinyal": "—",
+      "azaltma": "ReqIF ile düzenli dışa aktarım.",
+      "id": "BL-01141",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0950",
+      "arac": "Cypress",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Satıcı, test çalıştırıcısı üzerinden rakip bulut panellerini engelledi",
+      "aciklama": "Cypress, v13'ten itibaren Sorry-Cypress ve Currents gibi üçüncü taraf kayıt ve paralelleştirme hizmetlerini tespit edip engelledi. Böylece Cypress Cloud dışındaki seçenekler kapatıldı.",
+      "tarih": "2023-10",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.cypress.io/blog/update-defense-intellectual-property",
+        "https://currents.dev/posts/v13-blocking"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum kararsız test analitiği ve paralelleştirme için ücretli Cypress Cloud'a mecbur kalır. Satıcı ileride başka entegrasyonları da kısıtlayabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-013",
+        "N-K22-008",
+        "N-K15-005"
+      ],
+      "erken_sinyal": "Çalıştırıcıda yeni 'desteklenmeyen üçüncü taraf' uyarıları.",
+      "azaltma": "Paralelleştirme ve raporlamayı JUnit XML gibi açık çıktılarla kendin kur. Yeni projelerde çok satıcılı alternatifleri değerlendir.",
+      "id": "BL-01231",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0974",
+      "arac": "TestMu AI (eski adıyla LambdaTest)",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Özel YAML ve platforma özgü yürütme ile kilitlenme",
+      "aciklama": "HyperExecute YAML'ı, SmartUI ve KaneAI gibi özellikler platforma özgü.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.testmuai.com/real-device-cloud/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Satıcı değiştirmek, orkestrasyon ve görsel referans setinin yeniden kurulmasını gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-017",
+        "N-K05-018"
+      ],
+      "erken_sinyal": "Platforma özgü yapılandırma dosyalarının çoğalması.",
+      "azaltma": "Testleri standart WebDriver ve Playwright API'leriyle yaz; platforma özgü katmanı ince tut.",
+      "id": "BL-01237",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1033",
+      "arac": "Currents",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Çerçeve satıcısına bağımlılık: Cypress engellemesi emsali",
+      "aciklama": "Cypress 2023'te Currents gibi üçüncü taraf kayıt hizmetlerini engelledi; Currents Cypress 13+ desteğini bıraktı ve Playwright'a yöneldi.",
+      "tarih": "2023-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://currents.dev/posts/v13-blocking"
+      ],
+      "yasatacagi_sorunlar": [
+        "Test çerçevesi satıcısı benzer bir kısıt getirirse raporlama ve kanıt katmanı bir anda çalışmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-014",
+        "N-K05-026"
+      ],
+      "erken_sinyal": "Çerçeve satıcısının kullanım koşullarında değişiklik.",
+      "azaltma": "Sonuçları açık formatta (JUnit XML, Playwright trace) kurum deposunda da saklayın.",
+      "id": "BL-01284",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1174",
+      "arac": "GitHub Advanced Security (Secret Protection, Code Security)",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Uyarılar, istisnalar ve push koruma kayıtları GitHub'a bağlı",
+      "aciklama": "Kod tarama uyarıları, bastırma gerekçeleri ve push korumasını atlatma kayıtları GitHub platformuna özgü.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.github.com/en/code-security"
+      ],
+      "yasatacagi_sorunlar": [
+        "Başka bir kod barındırma platformuna geçişte güvenlik karar geçmişi ve denetim izi kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-002",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Denetim sırasında geçmiş istisna gerekçelerine ulaşılamaması.",
+      "azaltma": "Uyarı ve istisna kayıtlarını API ile düzenli olarak dışa aktar.",
+      "id": "BL-01368",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1315",
+      "arac": "Datadog LLM Observability",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "Datadog ekosistemine kilitlenme; saklama kısa ve siteye bağlı",
+      "aciklama": "Varsayılan saklama 15 gün; daha uzun saklama daha yüksek birim fiyatla geliyor. Veri siteye bağlı ve siteler arasında paylaşılamıyor. Otomatik enstrümantasyon ddtrace SDK'sına dayanıyor. Hafifletici etken: belge, OTel GenAI anlamsal kuralları v1.37+ uyumlu span'lerin de kabul edildiğini söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.datadoghq.com/pricing/list/",
+        "https://docs.datadoghq.com/llm_observability/instrumentation/auto_instrumentation/",
+        "https://docs.datadoghq.com/getting_started/site/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Denetim ve yeniden üretilebilirlik için gereken aylar ya da yıllar süren iz geçmişi Datadog'da tutulamaz. Ayrı arşiv hattı kurulmazsa değerlendirme ve olay incelemesi için geçmiş kaybolur.",
+        "ddtrace'e özgü enstrümantasyonla başlanırsa, başka bir araca geçişte tüm ajan servislerinin yeniden enstrümante edilmesi gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-004",
+        "N-K19-005",
+        "N-K22-008",
+        "N-K22-009"
+      ],
+      "erken_sinyal": "15 günden eski bir olay için iz aranır ve bulunamaz.",
+      "azaltma": "Enstrümantasyonu OTel GenAI kurallarıyla yapıp Collector'da çift gönderim uygulayın; uzun süreli kopyayı kurum içinde tutun.",
+      "id": "BL-01455",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1347",
+      "arac": "Google Cloud Storage Bucket Lock",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "Hesabın iyi durumda tutulması zorunlu; çıkışta çift maliyet",
+      "aciklama": "Belge, uyumluluğun sürmesi için Google Cloud hesabının etkin ve iyi durumda tutulması gerektiğini, hesabı kapatmadan önce verinin başka uyumlu bir hizmete taşınması gerektiğini yazıyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.cloud.google.com/storage/docs/bucket-lock"
+      ],
+      "yasatacagi_sorunlar": [
+        "Sağlayıcı değiştirilirse kilitli veri silinemediği için süre dolana kadar iki yerde saklanır ve maliyet ikiye katlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-008",
+        "N-K20-001"
+      ],
+      "erken_sinyal": "Sağlayıcı değişikliği kararı.",
+      "azaltma": "Saklama sürelerini kısa dilimlere bölmek; uzun süreli arşivi sağlayıcıdan bağımsız biçimde tutmak.",
+      "id": "BL-01485",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1349",
+      "arac": "Azure Confidential Ledger",
+      "gorev": "R-G07",
+      "tur": "RT-07",
+      "baslik": "Azure'a özgü hizmet ve Intel SGX donanım bağımlılığı",
+      "aciklama": "Hizmet Confidential Consortium Framework üzerinde, Intel SGX enclave'lerinde çalışıyor. Makbuz doğrulama ve API'ler Azure'a özgü.",
+      "tarih": "2026-04",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/azure/confidential-ledger/overview"
+      ],
+      "yasatacagi_sorunlar": [
+        "Başka buluta veya kurum içine taşınırken kayıtların doğrulanabilirliğini korumak için ayrı bir göç tasarımı gerekir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-008",
+        "N-K19-002"
+      ],
+      "erken_sinyal": "Hizmetin SKU veya donanım değişikliği duyurusu.",
+      "azaltma": "Makbuzları ve özetleri sağlayıcıdan bağımsız biçimde arşivlemek.",
+      "id": "BL-01492",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1425",
+      "arac": "Nobl9",
+      "gorev": "R-G13",
+      "tur": "RT-07",
+      "baslik": "Nobl9 YAML biçimi hâlâ v1alpha; OpenSLO ile taşınabilirlik kısmi",
+      "aciklama": "Nobl9 Go SDK'sındaki manifest sürümü 'v1alpha' paketinde tutuluyor. OpenSLO içe aktarımı destekleniyor, ancak bileşik SLO, bütçe ayarlamaları, replay ve uyarı politikaları gibi Nobl9'a özgü nesnelerin açık bir standarda birebir karşılığı yok.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/nobl9/nobl9-go/tree/main/manifest",
+        "https://github.com/OpenSLO/OpenSLO"
+      ],
+      "yasatacagi_sorunlar": [
+        "SLO-as-code deposu Nobl9 nesne modeline göre büyürse sağlayıcı değiştirmek, tüm SLO ve uyarı tanımlarının yeniden yazılması demektir.",
+        "Alfa API sürümündeki alan değişiklikleri CI'daki sloctl/Terraform uygulamalarını kırabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-014"
+      ],
+      "erken_sinyal": "sloctl veya Terraform sağlayıcısı sürüm notlarında kırıcı değişiklik; depodaki YAML'larda Nobl9'a özgü alan oranının artması.",
+      "azaltma": "SLO tanımlarının kaynağını OpenSLO'ya yakın, sağlayıcıdan bağımsız bir biçimde tutup Nobl9'a dönüştürerek uygulayın; dışa aktarma ve veri dışa aktarımını düzenli test edin.",
+      "id": "BL-01534",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1600",
+      "arac": "Garden",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Ekip ve önbellek özellikleri ticari Garden Cloud'da",
+      "aciklama": "Araç haritası ekip/önbellek özelliklerinin bir kısmının ticari Garden Cloud'da olduğunu kaydediyor; ticari hizmetin geleceği belirsiz (çıkarım).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/garden-io/garden"
+      ],
+      "yasatacagi_sorunlar": [
+        "Garden Cloud'a bağlı önbellek ve ekip panoları kapanırsa CI süreleri uzar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-029",
+        "N-K15-001"
+      ],
+      "erken_sinyal": "Garden Cloud erişim hataları.",
+      "azaltma": "Açık kaynak modla çalışabilirliği test etmek.",
+      "id": "BL-01622",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1961",
+      "arac": "Amazon Bedrock AgentCore Evaluations",
+      "gorev": "R-G08",
+      "tur": "RT-07",
+      "baslik": "Çerçeve ve AWS bağımlılığı",
+      "aciklama": "Resmî entegrasyonlar Strands ve LangGraph odaklı; diğer çerçeveler için enstrümantasyon kullanıcıya kalıyor ve değerlendirici tanımları AWS kaynaklarına (ARN) bağlı.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı kodlama ajanı kullanan ekipler için ayrı entegrasyon; AWS dışına taşınmada değerlendirici mantığı yeniden yazılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-010"
+      ],
+      "erken_sinyal": "Desteklenmeyen çerçeve talepleri.",
+      "azaltma": "Değerlendirme ölçütlerini araçtan bağımsız biçimde tanımlamak.",
+      "id": "BL-01671",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1962",
+      "arac": "Amazon Inspector",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "AWS iş yüklerine odaklı; çok bulutlu ya da kurum içi kapsam sınırlı",
+      "aciklama": "Inspector EC2, ECR, Lambda ve bağlı kod depolarını tarıyor. Kurum içi ve diğer bulutlardaki iş yükleri kapsam dışında kalıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hibrit hatta güvenlik tarama kapısı parçalı kalır ve bulgular farklı konsollara dağılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K22-007"
+      ],
+      "erken_sinyal": "Kapsam dışı iş yükü sayısı.",
+      "azaltma": "Ortak bir bulgu biçimine (SARIF, OCSF) dönüştürüp merkezde topla.",
+      "id": "BL-01674",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2043",
+      "arac": "Wiz Code",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Asıl değer Wiz bulut platformuyla birlikte geliyor",
+      "aciklama": "Code-to-cloud bağlamı, Wiz'in bulut güvenlik grafiğiyle birlikte kullanıldığında anlam kazanıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.wiz.io/lp/wiz-code"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yalnız kod taraması için alınırsa değer sınırlı kalır; tam platform ise kilitlenmeyi artırır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-009",
+        "N-K20-007"
+      ],
+      "erken_sinyal": "Ek modül satın alma baskısı.",
+      "azaltma": "Değerlendirmeyi kurumun gerçek bulut yapısıyla yap.",
+      "id": "BL-01796",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2069",
+      "arac": "SAP Cloud ALM",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "SAP ekosistemine kilitlenme",
+      "aciklama": "Süreç, test ve dağıtım yönetimi SAP'nin veri modeline bağlı.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://support.sap.com/en/alm/sap-cloud-alm.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "SAP dışı ekipler için ikinci bir ALM aracı gerekir ve izlenebilirlik bölünür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K01-002",
+        "N-K26-006"
+      ],
+      "erken_sinyal": "SAP dışı ekiplerin ayrı araçlarda kalması.",
+      "azaltma": "SAP projelerine özel kullan; program düzeyinde ortak izlenebilirlik katmanı kur.",
+      "id": "BL-01803",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2103",
+      "arac": "Cisco AI Defense",
+      "gorev": "R-G05",
+      "tur": "RT-07",
+      "baslik": "Cisco ekosistemine bağımlılık ve opak lisans katmanları",
+      "aciklama": "Üç katman (Validation Essentials, Runtime Essentials, Advantage) sunuluyor, fiyat açıklanmıyor; ürün Cisco güvenlik ekosistemiyle en iyi çalışıyor (araç haritası).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.cisco.com/c/en/us/products/collateral/security/ai-defense/ai-defense-ds.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Cisco ağ/güvenlik altyapısı olmayan kurumda entegrasyon ek maliyet ve iş getirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K12-002"
+      ],
+      "erken_sinyal": "Teklifte ek Cisco bileşenleri şartı.",
+      "azaltma": "Katman kapsamını yazılı netleştirmek.",
+      "id": "BL-01843",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2143",
+      "arac": "Tricentis qTest",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Test varlıklarının özel veri modelinde tutulması",
+      "aciklama": "Test senaryoları, çalıştırmalar ve kanıtlar qTest'in veri modelinde saklanıyor. Aracı değiştirmek dışa aktarma ve dönüştürme gerektirir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.tricentis.com/products/unified-test-management-qtest"
+      ],
+      "yasatacagi_sorunlar": [
+        "Araç değişikliğinde yıllarca biriken kanıt geçmişi (N-K05-026) eksik taşınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-026",
+        "N-K05-025"
+      ],
+      "erken_sinyal": "Dışa aktarma formatının eklerden veya geçmişten yoksun olması.",
+      "azaltma": "Kanıtları ayrıca araçtan bağımsız bir artefakt deposunda saklayın, dışa aktarma provasını yılda bir yapın.",
+      "id": "BL-01879",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2185",
+      "arac": "mabl",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Testler satıcıya özgü biçimde tutuluyor",
+      "aciklama": "Low-code testler mabl'ın veri modelinde saklanıyor. Başka bir araca taşımak yeniden yazma gerektirebilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.mabl.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Araç değişikliğinde test varlıkları kaybolur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-024"
+      ],
+      "erken_sinyal": "Dışa aktarma seçeneğinin sınırlı olması.",
+      "azaltma": "Kritik akışlar için kod tabanlı testleri depoda tutun.",
+      "id": "BL-01906",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2307",
+      "arac": "Sonargraph",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Özel mimari DSL'i ve otomatik yenilenen takım aboneliği",
+      "aciklama": "Sonargraph mimari kuralları kendi DSL'i ve Groovy tabanlı betik motoruyla tanımlıyor. Takım lisansları, yenileme tarihinden en az iki hafta önce iptal edilmedikçe otomatik yenilenen abonelikler.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.hello2morrow.com/products/sonargraph",
+        "https://www.hello2morrow.com/products/sonargraph/team_licenses"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek durum modeli ve bağımlılık sıralama kuralları Sonargraph DSL'inde yazılırsa başka araca taşımak yeniden yazım gerektirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K02-007",
+        "N-K03-010",
+        "N-K04-007"
+      ],
+      "erken_sinyal": "Kural sayısının artması ve DSL'e özgü yapıların yaygınlaşması.",
+      "azaltma": "Kritik kuralları kod içi testlerle (ArchUnit vb.) çiftleyin. Aboneliğin iptal tarihlerini takvimleyin.",
+      "id": "BL-01967",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2322",
+      "arac": "Axon Framework ve Axon Server",
+      "gorev": "R-G04",
+      "tur": "RT-07",
+      "baslik": "Axon Server'ın açık kaynak deposu erişilemez durumda",
+      "aciklama": "AxonIQ organizasyonunda eski 'axon-server-se' deposu artık erişilebilir değil (404); sunucu platform aboneliği modeline bağlanmış görünüyor.",
+      "tarih": "2026",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/AxonIQ",
+        "https://www.axoniq.io/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Olay deposu sunucusu kapalı/ticari bileşene bağımlı kalır; çıkış maliyeti yüksek."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K13-013",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Sunucu lisans koşullarında değişiklik.",
+      "azaltma": "Olay deposunu Postgres gibi açık alternatiflerle kurma seçeneğini değerlendirmek.",
+      "id": "BL-01978",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2558",
+      "arac": "Lark Approval (Feishu 审批)",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Onay akışları ve geçmişi platforma kilitli",
+      "aciklama": "Onay şablonları, iş akışları ve geçmiş Lark'ın veri modelinde tutuluyor; kurum içi alternatife geçişte yeniden kurulum gerekiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.larksuite.com/en_us/product/approval"
+      ],
+      "yasatacagi_sorunlar": [
+        "Jeopolitik ya da ticari nedenle çıkış gerektiğinde onay geçmişi ve denetim izi taşınamayabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K17-001",
+        "N-K19-002"
+      ],
+      "erken_sinyal": "Dışa aktarma biçimlerinin sınırlı olması.",
+      "azaltma": "Onay olaylarını gerçek zamanlı olarak kurumun kendi denetim deposuna kopyalayın.",
+      "id": "BL-02047",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3406",
+      "arac": "Cypress Cloud MCP",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Satıcının ekosistemi sıkı denetlemesi",
+      "aciklama": "Cypress 2023'te Currents ve Sorry-Cypress gibi üçüncü taraf kayıt hizmetlerini engelledi; Currents Cypress 13+ desteğini bıraktı.",
+      "tarih": "2023-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://currents.dev/posts/v13-blocking"
+      ],
+      "yasatacagi_sorunlar": [
+        "Cypress Cloud dışındaki bir raporlama katmanına geçmek sonradan engellenebilir; kilitlenme artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-026"
+      ],
+      "erken_sinyal": "Cypress'in kullanım koşullarında veya istemcisinde yeni kısıtlar.",
+      "azaltma": "Test sonuçlarını açık formatta (JUnit XML) ayrıca üretin.",
+      "id": "BL-02168",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3512",
+      "arac": "Miro (PI planlama ve ROAM şablonları)",
+      "gorev": "R-G03b",
+      "tur": "RT-07",
+      "baslik": "Pano içeriği yapılandırılmamış; iş takip sistemiyle kalıcı tutarlılık zor",
+      "aciklama": "ROAM ve program panoları serbest biçimli görsel nesnelerdir. Risk ve bağımlılık verisi yapılandırılmış kayıtlara (Jira vb.) ayrıca eşitlenmedikçe makinece izlenemez.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://miro.com/templates/safe-roam-board/",
+        "https://miro.com/agile/pi-planning/what-is-pi-planning/"
+      ],
+      "yasatacagi_sorunlar": [
+        "PI sonrası ROAM kararları panoda kalır, risk kaydına geçmez; 'program risk kaydı' ve 'risk aksiyon döngüsü' kopar.",
+        "Panoya bağımlı süreç, Miro'dan çıkışta bilgi kaybı demektir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-005",
+        "N-K24-003",
+        "N-K21-006"
+      ],
+      "erken_sinyal": "Panodaki risk kartları ile risk kaydındaki kayıtların sayıca uyuşmaması.",
+      "azaltma": "ROAM kararlarını panodan iş takip sistemine aktaran bir adımı PI kapanışına ekleyin. Panoyu kaynak değil görselleştirme olarak kullanın.",
+      "id": "BL-02190",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3588",
+      "arac": "Datadog Experiments (eski Eppo)",
+      "gorev": "R-G08",
+      "tur": "RT-07",
+      "baslik": "Datadog paketlemesine bağımlılık",
+      "aciklama": "Ürün Datadog platformunun parçası olunca fiyatlama ve erişim Datadog sözleşmesine bağlanıyor; Datadog kullanmayan kurumlar için ek platform bağımlılığı doğar.",
+      "tarih": "2025-05",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.datadoghq.com/blog/datadog-acquires-eppo/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Deney aracı için gözlemlenebilirlik platformu değişikliği zorunlu hale gelebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-013"
+      ],
+      "erken_sinyal": "Yenilemede Datadog paketlerine yönlendirme.",
+      "azaltma": "Açık kaynak deney motoru alternatifini yedek plan olarak tutmak.",
+      "id": "BL-02235",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3610",
+      "arac": "OpsLevel",
+      "gorev": "R-G12",
+      "tur": "RT-07",
+      "baslik": "Dışa aktarma sınırlı: CSV 25.000 kayıt ve yalnız destekleyen tablolarda",
+      "aciklama": "Belgelere göre CSV dışa aktarma arayüzdeki bazı tablolarla sınırlı ve 25.000 kayıt üst sınırı var; daha büyük veri için filtreyle parça parça alma öneriliyor. opslevel.yml ile depo içinde yapılandırma tutma seçeneği kısmi taşınabilirlik sağlıyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.opslevel.com/docs/exporting-data",
+        "https://docs.opslevel.com/docs/opslevel-yml"
+      ],
+      "yasatacagi_sorunlar": [
+        "Puan kartı geçmişi, kontrol sonuçları ve kampanya durumları çıkışta eksiksiz taşınamaz; sağlayıcı değişirse sahiplik ve olgunluk geçmişi yeniden kurulur.",
+        "Sahiplik kataloğunun tek doğru kaynağı SaaS'ta kalırsa 'hangi modül kimin' sorusu sağlayıcıya bağımlı olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-001",
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Katalog verisinin yalnız arayüzde güncellenmesi, depo içi yapılandırma dosyalarının boş kalması.",
+      "azaltma": "Sahiplik verisini depo içi dosyada (opslevel.yml veya eşdeğeri) tek kaynak olarak tutun; API ile düzenli tam yedek alın.",
+      "id": "BL-02263",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4174",
+      "arac": "Rely.io",
+      "gorev": "R-G12",
+      "tur": "RT-07",
+      "baslik": "Fiyat şeffaf değil; dışa aktarma yeteneği belgelenmemiş",
+      "aciklama": "Genel web sitesine erişilemiyor ve belgelerde katalog verisinin toplu dışa aktarılmasına ilişkin bir sayfa bulunmuyor; veri ayrıştırma sayfası da dışa aktarmayı ele almıyor. Product Hunt yorumlarında sınırlı fiyat şeffaflığı dile getiriliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.rely.io/security-and-compliance/data-segregation-strategy",
+        "https://www.producthunt.com/products/rely-io-2/reviews"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çıkışta sahiplik ve bağımlılık grafiği REST API ile elle kopyalanmak zorunda kalınır; kapanma senaryosunda bu bile mümkün olmayabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K31-001",
+        "N-K24-014"
+      ],
+      "erken_sinyal": "Pilotta tam dışa aktarma denemesinin yapılamaması.",
+      "azaltma": "Pilotun kabul ölçütüne tam veri dışa aktarma testini koyun.",
+      "id": "BL-02406",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4232",
+      "arac": "Range",
+      "gorev": "R-G12",
+      "tur": "RT-07",
+      "baslik": "Özel dışa aktarma ve silme planı yalnız Enterprise'da",
+      "aciklama": "Pro kullanıcı başı aylık 8 USD; 'özel veri silme ve dışa aktarma planları' yalnız Enterprise'da; ücretsiz katmanda 30 günlük kontrol geçmişi.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.range.co/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Enterprise dışında çıkışta toplantı notları ve kontrol geçmişi toplu taşınamayabilir; KVKK silme taleplerinde tedarikçiye bağımlı kalınır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K30-006",
+        "N-K31-011",
+        "N-K22-009"
+      ],
+      "erken_sinyal": "Dışa aktarma talebinin destek bileti gerektirmesi.",
+      "azaltma": "Sözleşmeye dışa aktarma ve silme SLA'sı yazdırın.",
+      "id": "BL-02435",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4406",
+      "arac": "Insomnia",
+      "gorev": "D17-api",
+      "tur": "RT-07",
+      "baslik": "Hesapsız yalnız Scratch Pad; Git Sync ücretli planda",
+      "aciklama": "README'ye göre Insomnia hesapsız yalnız yerel Scratch Pad ile kullanılabiliyor; ürünün çoğu özelliği hesap istiyor. Depolama seçenekleri Local Vault (tamamen yerel), Git Sync ve Cloud Sync (isteğe bağlı uçtan uca şifreli). Git Sync, SSO (SAML, OIDC) ve sınırsız ortak çalışma ücretli planlarda.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Kong/insomnia#account--subscriptions",
+        "https://insomnia.rest/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip koleksiyonlarını git'te paylaşmak ücretli plana bağlanır; hesap politikası değişirse erişim etkilenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-008",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Plan ya da hesap koşullarında değişiklik duyurusu.",
+      "azaltma": "Belgelenen seçenek: Local Vault ile tamamen yerel depolama.",
+      "id": "BL-02530",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README 28.09.2026'da okundu.",
+        "kaynak": [
+          "https://github.com/Kong/insomnia#account--subscriptions",
+          "https://insomnia.rest/pricing"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4408",
+      "arac": "Apidog",
+      "gorev": "D17-api",
+      "tur": "RT-07",
+      "baslik": "Kaynak kapalı; kurum içi kurulum ve AB veri bölgesi ayrı seçenek",
+      "aciklama": "apidog-cli npm paketinin lisansı UNLICENSED. Belgeler kurum içi kurulumu (Apidog On-premises) ve verinin Avrupa'da tutulduğu Apidog Europe'u ayrı seçenekler olarak anlatıyor. npm'de apidog-mcp-server 0.0.17 (Aralık 2025) sürümünde.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.apidog.com/",
+        "https://www.npmjs.com/package/apidog-cli"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tasarım, test ve doküman aynı kapalı üründe toplanırsa başka araca geçiş maliyeti artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-008",
+        "N-K22-005"
+      ],
+      "erken_sinyal": "Fiyat ya da bölge koşullarında değişiklik.",
+      "azaltma": "Belgelenen seçenekler: kurum içi kurulum, Apidog Europe.",
+      "id": "BL-02534",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belgeler ve npm kayıt API'si 28.09.2026'da okundu.",
+        "kaynak": [
+          "https://docs.apidog.com/",
+          "https://www.npmjs.com/package/apidog-cli"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4225",
+      "arac": "Kolay İK",
+      "gorev": "R-G11",
+      "tur": "RT-07",
+      "baslik": "SaaS bağımlılığı ve çıkış maliyeti",
+      "aciklama": "Tek sağlayıcılı bir SaaS; fiyat çalışan sayısına göre belirleniyor. REST API var ama tam dışa aktarma ve çıkış koşulları kamuya açık değil.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "dusuk",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://kolayik.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Özlük ve performans geçmişi başka sisteme taşınırken veri biçimi ve süre sorunu çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-008",
+        "N-K22-009"
+      ],
+      "erken_sinyal": "Sözleşmede dışa aktarma biçimi ve süresinin tanımsız olması.",
+      "azaltma": "Sözleşmeye dışa aktarma biçimi, süresi ve silme teyidi maddesi eklemek.",
+      "id": "BL-02431",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0040",
+      "arac": "Google Agent Development Kit (ADK)",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Gemini/Vertex AI ekosistemine yönelim",
+      "aciklama": "ADK model agnostik olarak tanıtılsa da dağıtım (Agent Engine, Cloud Run, GKE) ve bazı özellikler Google Cloud ile en iyi çalışıyor; CVE bildirimi de Cloud Run/GKE dağıtımlarını anıyor.",
+      "tarih": "2026-04",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-rg7c-g689-fr3x",
+        "https://adk.dev"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yerinde çalışacak hat için Google Cloud'a özgü dağıtım kolaylıklarından vazgeçilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009",
+        "N-K10-002"
+      ],
+      "erken_sinyal": "Tasarımda Google Cloud servislerine bağımlılığın artması.",
+      "azaltma": "Model ve dağıtım katmanını soyutlayın.",
+      "id": "BL-00108",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      },
+      "zafiyet_kimlik_kontrolu": [
+        {
+          "kimlik": "GHSA-rg7c-g689-fr3x",
+          "kayit": "var",
+          "ad_eslesmesi": true
+        }
+      ]
+    },
+    {
+      "arac_id": "AR-0041",
+      "arac": "Strands Agents",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "AWS/Bedrock ekosistemine yönelim",
+      "aciklama": "README Bedrock, Anthropic, OpenAI ve Gemini'yi birinci sınıf sağlayıcı olarak sayıyor; AWS kaynaklı proje olarak dağıtım örnekleri ve AgentCore entegrasyonları AWS odaklı.",
+      "tarih": "2026-09",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/strands-agents/harness-sdk#readme"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yerinde barındırmada AWS'ye özgü kolaylıklardan yararlanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Mimari kararlar.",
+      "azaltma": "Sağlayıcı katmanını soyutlayın.",
+      "id": "BL-00111",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0051",
+      "arac": "Vercel AI SDK",
+      "gorev": "R-G02",
+      "tur": "RT-07",
+      "baslik": "Vercel platform hizmetlerine yönelim",
+      "aciklama": "SDK açık kaynak (Apache-2.0) ancak AI Gateway, gözlemlenebilirlik ve dağıtım gibi tamamlayıcı özellikler Vercel platformuna yöneliyor.",
+      "tarih": "2026-09",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://ai-sdk.dev",
+        "https://github.com/vercel/ai/blob/main/LICENSE"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yerinde barındırmada bazı kolaylıklar kullanılamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009"
+      ],
+      "erken_sinyal": "Mimari kararlar.",
+      "azaltma": "Sağlayıcı katmanını kendi ağ geçidinizle yönetin.",
+      "id": "BL-00134",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1039",
+      "arac": "Teamscale",
+      "gorev": "R-G06",
+      "tur": "RT-07",
+      "baslik": "Küçük satıcıya ve özel metriklere bağımlılık",
+      "aciklama": "Teamscale, CQSE GmbH'nin ticari ürünü. Test boşluk ve mimari uygunluk analizleri ürüne özgü.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://teamscale.com"
+      ],
+      "yasatacagi_sorunlar": [
+        "Satıcı değişirse test boşluğu geçmişi ve mimari kurallar taşınamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-014",
+        "N-K22-008"
+      ],
+      "erken_sinyal": "Sözleşme yenileme koşullarında sert değişiklik.",
+      "azaltma": "Kapsam ve mimari kuralları açık biçimlerde de sakla.",
+      "id": "BL-01298",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1589",
+      "arac": "Redocly CLI",
+      "gorev": "R-G06b",
+      "tur": "RT-07",
+      "baslik": "Bazı özellikler ticari Redocly platformunda",
+      "aciklama": "Envanter, bazı doküman ve portal özelliklerinin ticari platformda olduğunu yazıyor.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://redocly.com/docs/cli/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Doküman portalı ihtiyacı ticari lisansa bağlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K07-001"
+      ],
+      "erken_sinyal": "CLI'da olmayan portal özelliklerinin talep edilmesi.",
+      "azaltma": "Açık kaynak lint ve bundle yeteneklerini temel alın.",
+      "id": "BL-01615",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4054",
+      "arac": "SpecStory",
+      "gorev": "R-G11",
+      "tur": "RT-07",
+      "baslik": "IDE eklentileri kapalı kaynak; ekip özellikleri bulutta",
+      "aciklama": "CLI açık kaynak, fakat Cursor ve VS Code/Copilot eklentileri kapalı kaynak. Ekipler arası arama, paylaşım ve sohbet SpecStory Cloud'da.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/specstoryai/getspecstory/blob/dev/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip özellikleri kullanılmak istenirse bulut ürününe bağımlılık ve yurt dışı aktarım kaçınılmaz olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K16-006"
+      ],
+      "erken_sinyal": "Ekiplerin bulut ekip planı talep etmesi.",
+      "azaltma": "Yalnız yerel mod ve açık kaynak CLI ile sınırlamak.",
+      "id": "BL-02343",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    }
+  ],
+  "kategori_kaliplari": [
+    "RK-050",
+    "RK-052",
+    "RK-081",
+    "RK-088",
+    "RK-117",
+    "RK-118",
+    "RK-152",
+    "RK-155",
+    "RK-166",
+    "RK-182",
+    "RK-232"
+  ],
+  "olaylar": [
+    "EV-003",
+    "EV-027",
+    "EV-030",
+    "EV-033",
+    "EV-071",
+    "EV-098",
+    "EV-101",
+    "EV-108",
+    "EV-119",
+    "EV-126",
+    "EV-127",
+    "EV-164",
+    "EV-170",
+    "EV-171",
+    "EV-173",
+    "EV-188",
+    "EV-211",
+    "EV-222",
+    "EV-237",
+    "EV-253",
+    "EV-308",
+    "EV-313"
+  ],
+  "senaryolar": [
+    "SS-033",
+    "SS-082",
+    "SS-085",
+    "SS-086",
+    "SS-090",
+    "SS-091",
+    "SS-092",
+    "SS-107"
+  ],
+  "otomatik_sinyalli_araclar": [
+    "AR-0015",
+    "AR-0017",
+    "AR-0021",
+    "AR-0022",
+    "AR-0069",
+    "AR-0071",
+    "AR-0072",
+    "AR-0076",
+    "AR-0105",
+    "AR-0115",
+    "AR-0117",
+    "AR-0128",
+    "AR-0147",
+    "AR-0158",
+    "AR-0163",
+    "AR-0176",
+    "AR-0177",
+    "AR-0189",
+    "AR-0193",
+    "AR-0196",
+    "AR-0198",
+    "AR-0249",
+    "AR-0250",
+    "AR-0251",
+    "AR-0252",
+    "AR-0253",
+    "AR-0254",
+    "AR-0255",
+    "AR-0256",
+    "AR-0257",
+    "AR-0258",
+    "AR-0259",
+    "AR-0260",
+    "AR-0261",
+    "AR-0262",
+    "AR-0263",
+    "AR-0264",
+    "AR-0265",
+    "AR-0266",
+    "AR-0268",
+    "AR-0269",
+    "AR-0270",
+    "AR-0271",
+    "AR-0273",
+    "AR-0274",
+    "AR-0275",
+    "AR-0276",
+    "AR-0277",
+    "AR-0286",
+    "AR-0287",
+    "AR-0288",
+    "AR-0289",
+    "AR-0290",
+    "AR-0357",
+    "AR-0358",
+    "AR-0359",
+    "AR-0365",
+    "AR-0366",
+    "AR-0375",
+    "AR-0379",
+    "AR-0380",
+    "AR-0394",
+    "AR-0435",
+    "AR-0453",
+    "AR-0454",
+    "AR-0455",
+    "AR-0456",
+    "AR-0458",
+    "AR-0459",
+    "AR-0460",
+    "AR-0461",
+    "AR-0477",
+    "AR-0478",
+    "AR-0479",
+    "AR-0488",
+    "AR-0491",
+    "AR-0492",
+    "AR-0493",
+    "AR-0494",
+    "AR-0495",
+    "AR-0496",
+    "AR-0511",
+    "AR-0512",
+    "AR-0528",
+    "AR-0534",
+    "AR-0562",
+    "AR-0563",
+    "AR-0565",
+    "AR-0566",
+    "AR-0571",
+    "AR-0572",
+    "AR-0573",
+    "AR-0582",
+    "AR-0584",
+    "AR-0585",
+    "AR-0586",
+    "AR-0587",
+    "AR-0588",
+    "AR-0589",
+    "AR-0590",
+    "AR-0591",
+    "AR-0593",
+    "AR-0594",
+    "AR-0595",
+    "AR-0596",
+    "AR-0597",
+    "AR-0599",
+    "AR-0600",
+    "AR-0601",
+    "AR-0602",
+    "AR-0603",
+    "AR-0604",
+    "AR-0605",
+    "AR-0606",
+    "AR-0609",
+    "AR-0611",
+    "AR-0614",
+    "AR-0615",
+    "AR-0616",
+    "AR-0617",
+    "AR-0618",
+    "AR-0621",
+    "AR-0636",
+    "AR-0638",
+    "AR-0651",
+    "AR-0652",
+    "AR-0653",
+    "AR-0654",
+    "AR-0655",
+    "AR-0660",
+    "AR-0663",
+    "AR-0665",
+    "AR-0668",
+    "AR-0673",
+    "AR-0674",
+    "AR-0675",
+    "AR-0679",
+    "AR-0681",
+    "AR-0682",
+    "AR-0705",
+    "AR-0706",
+    "AR-0713",
+    "AR-0714",
+    "AR-0740",
+    "AR-0756",
+    "AR-0757",
+    "AR-0764",
+    "AR-0765",
+    "AR-0766",
+    "AR-0770",
+    "AR-0783",
+    "AR-0784",
+    "AR-0787",
+    "AR-0789",
+    "AR-0790",
+    "AR-0791",
+    "AR-0792",
+    "AR-0793",
+    "AR-0794",
+    "AR-0803",
+    "AR-0804",
+    "AR-0821",
+    "AR-0822",
+    "AR-0823",
+    "AR-0832",
+    "AR-0833",
+    "AR-0876",
+    "AR-0877",
+    "AR-0878",
+    "AR-0879",
+    "AR-0880",
+    "AR-0894",
+    "AR-0895",
+    "AR-0896",
+    "AR-0905",
+    "AR-0908",
+    "AR-0909",
+    "AR-0910",
+    "AR-0911",
+    "AR-0912",
+    "AR-0913",
+    "AR-0914",
+    "AR-0915",
+    "AR-0916",
+    "AR-0917",
+    "AR-0918",
+    "AR-0922",
+    "AR-0923",
+    "AR-0924",
+    "AR-0925",
+    "AR-0926",
+    "AR-0927",
+    "AR-0930",
+    "AR-0931",
+    "AR-0932",
+    "AR-0933",
+    "AR-0934",
+    "AR-0959",
+    "AR-0960",
+    "AR-0964",
+    "AR-0965",
+    "AR-0972",
+    "AR-0973",
+    "AR-0974",
+    "AR-0975",
+    "AR-0976",
+    "AR-0978",
+    "AR-0979",
+    "AR-1027",
+    "AR-1028",
+    "AR-1030",
+    "AR-1031",
+    "AR-1032",
+    "AR-1033",
+    "AR-1034",
+    "AR-1040",
+    "AR-1078",
+    "AR-1091",
+    "AR-1126",
+    "AR-1131",
+    "AR-1132",
+    "AR-1139",
+    "AR-1143",
+    "AR-1150",
+    "AR-1160",
+    "AR-1161",
+    "AR-1162",
+    "AR-1174",
+    "AR-1181",
+    "AR-1195",
+    "AR-1196",
+    "AR-1204",
+    "AR-1209",
+    "AR-1210",
+    "AR-1229",
+    "AR-1231",
+    "AR-1233",
+    "AR-1234",
+    "AR-1235",
+    "AR-1236",
+    "AR-1237",
+    "AR-1238",
+    "AR-1239",
+    "AR-1246",
+    "AR-1247",
+    "AR-1248",
+    "AR-1257",
+    "AR-1267",
+    "AR-1273",
+    "AR-1274",
+    "AR-1275",
+    "AR-1276",
+    "AR-1279",
+    "AR-1280",
+    "AR-1283",
+    "AR-1284",
+    "AR-1293",
+    "AR-1295",
+    "AR-1296",
+    "AR-1297",
+    "AR-1313",
+    "AR-1315",
+    "AR-1338",
+    "AR-1346",
+    "AR-1347",
+    "AR-1348",
+    "AR-1349",
+    "AR-1350",
+    "AR-1386",
+    "AR-1387",
+    "AR-1388",
+    "AR-1403",
+    "AR-1404",
+    "AR-1421",
+    "AR-1425",
+    "AR-1428",
+    "AR-1429",
+    "AR-1435",
+    "AR-1436",
+    "AR-1437",
+    "AR-1782",
+    "AR-1815",
+    "AR-1819",
+    "AR-1820",
+    "AR-1888",
+    "AR-1900",
+    "AR-1913",
+    "AR-1954",
+    "AR-1955",
+    "AR-1956",
+    "AR-1957",
+    "AR-1958",
+    "AR-1959",
+    "AR-1960",
+    "AR-1961",
+    "AR-1962",
+    "AR-1964",
+    "AR-1965",
+    "AR-1966",
+    "AR-1967",
+    "AR-1968",
+    "AR-1969",
+    "AR-1970",
+    "AR-1971",
+    "AR-1972",
+    "AR-1973",
+    "AR-1974",
+    "AR-1975",
+    "AR-1976",
+    "AR-1977",
+    "AR-1978",
+    "AR-1979",
+    "AR-1980",
+    "AR-1981",
+    "AR-1982",
+    "AR-1983",
+    "AR-1984",
+    "AR-1985",
+    "AR-1986",
+    "AR-1989",
+    "AR-1990",
+    "AR-1995",
+    "AR-1996",
+    "AR-1997",
+    "AR-1998",
+    "AR-1999",
+    "AR-2000",
+    "AR-2001",
+    "AR-2002",
+    "AR-2003",
+    "AR-2004",
+    "AR-2005",
+    "AR-2010",
+    "AR-2011",
+    "AR-2012",
+    "AR-2013",
+    "AR-2015",
+    "AR-2016",
+    "AR-2017",
+    "AR-2018",
+    "AR-2020",
+    "AR-2022",
+    "AR-2023",
+    "AR-2024",
+    "AR-2025",
+    "AR-2026",
+    "AR-2027",
+    "AR-2028",
+    "AR-2029",
+    "AR-2030",
+    "AR-2031",
+    "AR-2032",
+    "AR-2033",
+    "AR-2034",
+    "AR-2035",
+    "AR-2036",
+    "AR-2037",
+    "AR-2039",
+    "AR-2040",
+    "AR-2041",
+    "AR-2042",
+    "AR-2043",
+    "AR-2044",
+    "AR-2045",
+    "AR-2046",
+    "AR-2048",
+    "AR-2049",
+    "AR-2050",
+    "AR-2051",
+    "AR-2057",
+    "AR-2066",
+    "AR-2068",
+    "AR-2069",
+    "AR-2070",
+    "AR-2071",
+    "AR-2072",
+    "AR-2073",
+    "AR-2074",
+    "AR-2076",
+    "AR-2077",
+    "AR-2078",
+    "AR-2080",
+    "AR-2082",
+    "AR-2084",
+    "AR-2086",
+    "AR-2099",
+    "AR-2103",
+    "AR-2106",
+    "AR-2109",
+    "AR-2110",
+    "AR-2111",
+    "AR-2113",
+    "AR-2114",
+    "AR-2115",
+    "AR-2116",
+    "AR-2117",
+    "AR-2118",
+    "AR-2119",
+    "AR-2120",
+    "AR-2121",
+    "AR-2122",
+    "AR-2123",
+    "AR-2125",
+    "AR-2126",
+    "AR-2129",
+    "AR-2130",
+    "AR-2131",
+    "AR-2132",
+    "AR-2135",
+    "AR-2137",
+    "AR-2138",
+    "AR-2139",
+    "AR-2140",
+    "AR-2144",
+    "AR-2151",
+    "AR-2152",
+    "AR-2153",
+    "AR-2161",
+    "AR-2162",
+    "AR-2170",
+    "AR-2171",
+    "AR-2172",
+    "AR-2175",
+    "AR-2176",
+    "AR-2177",
+    "AR-2185",
+    "AR-2189",
+    "AR-2191",
+    "AR-2193",
+    "AR-2194",
+    "AR-2200",
+    "AR-2201",
+    "AR-2202",
+    "AR-2206",
+    "AR-2208",
+    "AR-2209",
+    "AR-2210",
+    "AR-2211",
+    "AR-2212",
+    "AR-2216",
+    "AR-2218",
+    "AR-2220",
+    "AR-2221",
+    "AR-2222",
+    "AR-2223",
+    "AR-2224",
+    "AR-2225",
+    "AR-2253",
+    "AR-2254",
+    "AR-2256",
+    "AR-2257",
+    "AR-2258",
+    "AR-2260",
+    "AR-2331",
+    "AR-2336",
+    "AR-2346",
+    "AR-2347",
+    "AR-2348",
+    "AR-2357",
+    "AR-2363",
+    "AR-2431",
+    "AR-2432",
+    "AR-2433",
+    "AR-2487",
+    "AR-2496",
+    "AR-2497",
+    "AR-2498",
+    "AR-2533",
+    "AR-2534",
+    "AR-2535",
+    "AR-2550",
+    "AR-2551",
+    "AR-2552",
+    "AR-2557",
+    "AR-2558",
+    "AR-2560",
+    "AR-2563",
+    "AR-2564",
+    "AR-2565",
+    "AR-2573",
+    "AR-2575",
+    "AR-2576",
+    "AR-2586",
+    "AR-2587",
+    "AR-2588",
+    "AR-2589",
+    "AR-2590",
+    "AR-2591",
+    "AR-2779",
+    "AR-2786",
+    "AR-2787",
+    "AR-3015",
+    "AR-3016",
+    "AR-3017",
+    "AR-3018",
+    "AR-3019",
+    "AR-3022",
+    "AR-3024",
+    "AR-3056",
+    "AR-3063",
+    "AR-3126",
+    "AR-3241",
+    "AR-3347",
+    "AR-3348",
+    "AR-3353",
+    "AR-3356",
+    "AR-3357",
+    "AR-3358",
+    "AR-3362",
+    "AR-3365",
+    "AR-3368",
+    "AR-3369",
+    "AR-3370",
+    "AR-3371",
+    "AR-3372",
+    "AR-3373",
+    "AR-3374",
+    "AR-3376",
+    "AR-3381",
+    "AR-3387",
+    "AR-3389",
+    "AR-3397",
+    "AR-3402",
+    "AR-3406",
+    "AR-3407",
+    "AR-3409",
+    "AR-3413",
+    "AR-3417",
+    "AR-3421",
+    "AR-3424",
+    "AR-3429",
+    "AR-3433",
+    "AR-3442",
+    "AR-3464",
+    "AR-3465",
+    "AR-3466",
+    "AR-3467",
+    "AR-3469",
+    "AR-3473",
+    "AR-3475",
+    "AR-3477",
+    "AR-3481",
+    "AR-3490",
+    "AR-3493",
+    "AR-3506",
+    "AR-3510",
+    "AR-3511",
+    "AR-3512",
+    "AR-3513",
+    "AR-3514",
+    "AR-3515",
+    "AR-3516",
+    "AR-3522",
+    "AR-3526",
+    "AR-3527",
+    "AR-3528",
+    "AR-3530",
+    "AR-3531",
+    "AR-3533",
+    "AR-3534",
+    "AR-3535",
+    "AR-3536",
+    "AR-3537",
+    "AR-3538",
+    "AR-3539",
+    "AR-3540",
+    "AR-3541",
+    "AR-3542",
+    "AR-3543",
+    "AR-3545",
+    "AR-3546",
+    "AR-3547",
+    "AR-3548",
+    "AR-3549",
+    "AR-3552",
+    "AR-3553",
+    "AR-3554",
+    "AR-3555",
+    "AR-3556",
+    "AR-3557",
+    "AR-3560",
+    "AR-3561",
+    "AR-3562",
+    "AR-3563",
+    "AR-3564",
+    "AR-3565",
+    "AR-3566",
+    "AR-3567",
+    "AR-3568",
+    "AR-3569",
+    "AR-3570",
+    "AR-3571",
+    "AR-3572",
+    "AR-3573",
+    "AR-3574",
+    "AR-3578",
+    "AR-3579",
+    "AR-3580",
+    "AR-3581",
+    "AR-3582",
+    "AR-3583",
+    "AR-3585",
+    "AR-3586",
+    "AR-3588",
+    "AR-3589",
+    "AR-3590",
+    "AR-3593",
+    "AR-3596",
+    "AR-3597",
+    "AR-3598",
+    "AR-3604",
+    "AR-3605",
+    "AR-3606",
+    "AR-3607",
+    "AR-3609",
+    "AR-3610",
+    "AR-3611",
+    "AR-3612",
+    "AR-3613",
+    "AR-3619",
+    "AR-3620",
+    "AR-3621",
+    "AR-3622",
+    "AR-3623",
+    "AR-3624",
+    "AR-3625",
+    "AR-3627",
+    "AR-3628",
+    "AR-3629",
+    "AR-3630",
+    "AR-3631",
+    "AR-3632",
+    "AR-3633",
+    "AR-3634",
+    "AR-3635",
+    "AR-3636",
+    "AR-3637",
+    "AR-3638",
+    "AR-3639",
+    "AR-3640",
+    "AR-3641",
+    "AR-3643",
+    "AR-3644",
+    "AR-3645",
+    "AR-3646",
+    "AR-3648",
+    "AR-3651",
+    "AR-3652",
+    "AR-3659",
+    "AR-3660",
+    "AR-3661",
+    "AR-3662",
+    "AR-3663",
+    "AR-3664",
+    "AR-3665",
+    "AR-3666",
+    "AR-3667",
+    "AR-3668",
+    "AR-3669",
+    "AR-3670",
+    "AR-3671",
+    "AR-3673",
+    "AR-3679",
+    "AR-3681",
+    "AR-3682",
+    "AR-3683",
+    "AR-3684",
+    "AR-3685",
+    "AR-3686",
+    "AR-3688",
+    "AR-3692",
+    "AR-3693",
+    "AR-3694",
+    "AR-3696",
+    "AR-3697",
+    "AR-3704",
+    "AR-3707",
+    "AR-3708",
+    "AR-3709",
+    "AR-3710",
+    "AR-3711",
+    "AR-3712",
+    "AR-3713",
+    "AR-3714",
+    "AR-3715",
+    "AR-3717",
+    "AR-3718",
+    "AR-3719",
+    "AR-3720",
+    "AR-3721",
+    "AR-3722",
+    "AR-3724",
+    "AR-3725",
+    "AR-3726",
+    "AR-3727",
+    "AR-3728",
+    "AR-3729",
+    "AR-3730",
+    "AR-3732",
+    "AR-3733",
+    "AR-3737",
+    "AR-3738",
+    "AR-3739",
+    "AR-3740",
+    "AR-3741",
+    "AR-3742",
+    "AR-3743",
+    "AR-3750",
+    "AR-3801",
+    "AR-3803",
+    "AR-3804",
+    "AR-3807",
+    "AR-3808",
+    "AR-3809",
+    "AR-3810",
+    "AR-3811",
+    "AR-3816",
+    "AR-3817",
+    "AR-3818",
+    "AR-3819",
+    "AR-3820",
+    "AR-3821",
+    "AR-3822",
+    "AR-3823",
+    "AR-3824",
+    "AR-3825",
+    "AR-3834",
+    "AR-3841",
+    "AR-3842",
+    "AR-3843",
+    "AR-3844",
+    "AR-3845",
+    "AR-3846",
+    "AR-3847",
+    "AR-3850",
+    "AR-3855",
+    "AR-3856",
+    "AR-3860",
+    "AR-3862",
+    "AR-3863",
+    "AR-3868",
+    "AR-3869",
+    "AR-3870",
+    "AR-3872",
+    "AR-3873",
+    "AR-3874",
+    "AR-3875",
+    "AR-3876",
+    "AR-3877",
+    "AR-3879",
+    "AR-3880",
+    "AR-3881",
+    "AR-3882",
+    "AR-3889",
+    "AR-3890",
+    "AR-3894",
+    "AR-3895",
+    "AR-3899",
+    "AR-3905",
+    "AR-3912",
+    "AR-3913",
+    "AR-3929",
+    "AR-3930",
+    "AR-3948",
+    "AR-3949",
+    "AR-3966",
+    "AR-3980",
+    "AR-3982",
+    "AR-3993",
+    "AR-4022",
+    "AR-4027",
+    "AR-4028",
+    "AR-4029",
+    "AR-4030",
+    "AR-4031",
+    "AR-4032",
+    "AR-4033",
+    "AR-4034",
+    "AR-4039",
+    "AR-4042",
+    "AR-4050",
+    "AR-4052",
+    "AR-4085",
+    "AR-4095",
+    "AR-4099",
+    "AR-4100",
+    "AR-4101",
+    "AR-4103",
+    "AR-4105",
+    "AR-4106",
+    "AR-4107",
+    "AR-4108",
+    "AR-4111",
+    "AR-4113",
+    "AR-4115",
+    "AR-4116",
+    "AR-4117",
+    "AR-4118",
+    "AR-4125",
+    "AR-4126",
+    "AR-4127",
+    "AR-4128",
+    "AR-4129",
+    "AR-4130",
+    "AR-4132",
+    "AR-4133",
+    "AR-4134",
+    "AR-4135",
+    "AR-4139",
+    "AR-4148",
+    "AR-4149",
+    "AR-4150",
+    "AR-4151",
+    "AR-4152",
+    "AR-4154",
+    "AR-4157",
+    "AR-4159",
+    "AR-4160",
+    "AR-4161",
+    "AR-4162",
+    "AR-4163",
+    "AR-4164",
+    "AR-4165",
+    "AR-4166",
+    "AR-4167",
+    "AR-4170",
+    "AR-4174",
+    "AR-4191",
+    "AR-4192",
+    "AR-4196",
+    "AR-4212",
+    "AR-4213",
+    "AR-4214",
+    "AR-4225",
+    "AR-4228",
+    "AR-4230",
+    "AR-4231",
+    "AR-4232",
+    "AR-4233",
+    "AR-4234",
+    "AR-4235",
+    "AR-4239",
+    "AR-4240",
+    "AR-4241",
+    "AR-4247",
+    "AR-4248",
+    "AR-4254",
+    "AR-4257",
+    "AR-4258",
+    "AR-4264",
+    "AR-4268",
+    "AR-4276",
+    "AR-4277",
+    "AR-4278",
+    "AR-4280",
+    "AR-4286",
+    "AR-4288",
+    "AR-4295",
+    "AR-4296",
+    "AR-4300",
+    "AR-4301",
+    "AR-4302",
+    "AR-4303",
+    "AR-4332",
+    "AR-4336",
+    "AR-4361"
+  ]
+}

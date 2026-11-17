@@ -1,0 +1,171 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-03",
+    "ad": "Model barındırma ve sunum altyapısı",
+    "grup": "Model erişimi ve ekonomisi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-074",
+      "yetenek_sinifi": "Y-03",
+      "kalip": "Kimlik doğrulamasız model sunum uç noktaları",
+      "aciklama": "Yerel model sunucuları varsayılan olarak kimlik doğrulama sunmaz. Wiz, Ollama'da yol geçişiyle uzaktan kod çalıştırma (CVE-2024-37032) bildirirken internete açık 1.000'den fazla örnek buldu; Aralık 2025'te model yönetimi işlemlerinde kimlik doğrulama eksikliği kritik olarak kaydedildi (CVE-2025-63389).",
+      "risk_turleri": [
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.wiz.io/blog/probllama-ollama-vulnerability-cve-2024-37032",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37032",
+        "https://github.com/advisories/GHSA-f6mr-38g8-39rg"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekiplerin geliştirici makinesinde veya GPU sunucusunda açtığı model sunucusu iç ağdaki herkes tarafından model silme/yükleme ve kod çalıştırma için kullanılabilir.",
+        "'Veri dışarı çıkmasın' diye kurulan yerel model, kimlik doğrulamasız olduğu için yeni bir iç sızıntı noktası olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-009",
+        "N-K09-010",
+        "N-K22-005",
+        "N-K18-013"
+      ],
+      "ornek_araclar": [
+        "Ollama",
+        "llama.cpp server",
+        "LocalAI",
+        "LM Studio"
+      ],
+      "erken_sinyal": "Ağ taramasında 11434 gibi varsayılan portların açık görülmesi; model listesinde tanımsız modeller.",
+      "azaltma": "Model sunucusunu yalnız kimlik doğrulamalı ters vekil arkasında çalıştırma, varsayılan portları kapatma, envanter taraması ve sürüm takibi."
+    },
+    {
+      "id": "RK-075",
+      "yetenek_sinifi": "Y-03",
+      "kalip": "Model dosyası üzerinden kod çalıştırma",
+      "aciklama": "Model ağırlık dosyaları yürütülebilir içerik taşıyabilir. JFrog, Hugging Face'te yüklendiğinde pickle üzerinden ters kabuk açan modeller buldu; OWASP LLM03:2025 üçüncü taraf model ve LoRA adaptörlerini tedarik zinciri riski olarak listeler; Ollama'nın GGUF yükleyicisinde yığın taşması okuma açığı (CVE-2026-7482) bildirildi.",
+      "risk_turleri": [
+        "RT-02",
+        "RT-01"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/",
+        "https://genai.owasp.org/llmrisk/llm032025-supply-chain/",
+        "https://github.com/advisories/GHSA-x8qc-fggm-mpqg"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurum içi barındırma için indirilen açık ağırlıklı bir model veya ince ayar adaptörü GPU sunucusunda kod çalıştırarak model sunum altyapısını ele geçirebilir.",
+        "Model kaydında köken bilgisi tutulmazsa hangi modelin nereden geldiği denetimde gösterilemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-012",
+        "N-K18-008",
+        "N-K22-001"
+      ],
+      "ornek_araclar": [
+        "Hugging Face Hub",
+        "Ollama",
+        "vLLM",
+        "Text Generation Inference"
+      ],
+      "erken_sinyal": "Güvenli olmayan serileştirme biçiminde (pickle) model indirilmesi; model yüklemesi sırasında beklenmeyen süreç veya ağ bağlantısı.",
+      "azaltma": "Yalnız safetensors gibi yürütülemez biçimlerin kabulü, iç model aynası ve tarama, model özetinin model kaydına yazılması, sunucuda ağ çıkışının kapatılması."
+    },
+    {
+      "id": "RK-076",
+      "yetenek_sinifi": "Y-03",
+      "kalip": "Sunum motorunda çok kullanıcılı sızıntı ve DoS yoğunluğu",
+      "aciklama": "Yüksek başarımlı sunum motorları hızlı gelişir ve yeni girdi türleriyle saldırı yüzeyi büyür. vLLM için 2026'da kullanıcılar arası veri sızıntısı (CVE-2026-73558), kimlik doğrulamasız ses sıkıştırma bombası DoS'u (CVE-2026-57173) ve yapılandırılmış çıktı regex'inde zaman aşımı olmayan ReDoS (CVE-2026-55574) gibi bildirimler yayımlandı.",
+      "risk_turleri": [
+        "RT-01",
+        "RT-12"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/advisories/GHSA-7m6h-x95x-82q5",
+        "https://github.com/advisories/GHSA-hcwq-8wjf-3gcr",
+        "https://github.com/advisories/GHSA-rwxx-mrjm-wc2m"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tek bir sunum kümesini paylaşan ekipler arasında istem/yanıt karışması KVKK ihlali doğurabilir.",
+        "Tek bir hatalı veya kötü niyetli istek tüm ekiplerin kullandığı model sunucusunu kilitleyerek hattı durdurabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-011",
+        "N-K09-010",
+        "N-K22-005",
+        "N-K15-006"
+      ],
+      "ornek_araclar": [
+        "vLLM",
+        "SGLang",
+        "Text Generation Inference",
+        "NVIDIA Triton"
+      ],
+      "erken_sinyal": "Sunum motoru deposunda sık GHSA; GPU belleği veya işçi süreçlerinde ani çökme; farklı ekip isteklerinde tutarsız yanıt.",
+      "azaltma": "Ekip veya hassasiyet sınıfı başına ayrı sunum örnekleri, istek boyutu ve süre sınırları, önünde kimlik doğrulamalı geçit, düzenli sürüm yükseltme penceresi."
+    },
+    {
+      "id": "RK-077",
+      "yetenek_sinifi": "Y-03",
+      "kalip": "Açık ağırlıklı model lisans ve kullanım politikası kısıtları",
+      "aciklama": "Açık ağırlıklı modeller çoğunlukla OSI lisansı değil, özel topluluk lisansı ve kabul edilebilir kullanım politikasıyla gelir. Örneğin Llama 3.2 kullanım politikası çok kipli modellerdeki hakların AB'de yerleşik kişi ve şirketlere verilmediğini belirtir.",
+      "risk_turleri": [
+        "RT-04"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/USE_POLICY.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kurumun AB'de iştiraki veya ortak projesi varsa aynı modelin orada kullanımı lisans ihlali olabilir; model değişimi yeniden kalibrasyon gerektirir.",
+        "Model lisans envanteri tutulmazsa kamu ihalesi veya denetimde kullanım hakkı kanıtlanamaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-001",
+        "N-K09-009",
+        "N-K09-012"
+      ],
+      "ornek_araclar": [
+        "Llama",
+        "Gemma",
+        "Qwen",
+        "Mistral"
+      ],
+      "erken_sinyal": "Model kartında özel lisans veya kullanım politikası bağlantısı; lisans sürümünün model sürümüyle değişmesi.",
+      "azaltma": "Model kaydında lisans ve kullanım şartı alanlarının zorunlu tutulması, hukuk onayı olmadan modelin üretim rolüne alınmaması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 87,
+    "kritik": 3,
+    "yuksek": 17,
+    "orta": 71
+  },
+  "sinif_bulgu_turleri": {
+    "RT-15": 33,
+    "RT-11": 27,
+    "RT-12": 20,
+    "RT-04": 19,
+    "RT-05": 11,
+    "RT-02": 10,
+    "RT-09": 9,
+    "RT-10": 8,
+    "RT-03": 8,
+    "RT-01": 3,
+    "RT-13": 3,
+    "RT-08": 1,
+    "RT-07": 1,
+    "RT-14": 1,
+    "RT-16": 1
+  }
+}

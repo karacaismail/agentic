@@ -1,0 +1,93 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-46",
+    "ad": "Kod sağlığı ve bakım borcu izleme (klon, sık değişen kod, yeniden düzenleme oranı)",
+    "grup": "Doğrulama ve kalite"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-229",
+      "yetenek_sinifi": "Y-46",
+      "kalip": "Kısa vadeli hız, kalıcı karmaşıklık artışı",
+      "aciklama": "Cursor'ı benimseyen GitHub projelerinin eşleştirilmiş kontrol grubuyla karşılaştırıldığı fark-içinde-fark çalışması, geliştirme hızında büyük ama geçici bir artış, statik analiz uyarıları ve kod karmaşıklığında ise kalıcı artış buldu; bu artışlar uzun vadeli hız düşüşünün ana etkenleriydi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2511.04427"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan üretimi yaygınlaştıkça ilk PI'larda hız artışı görülür, sonraki PI'larda bakım borcu hızı düşürür; borç geç fark edilir.",
+        "Kod sağlığı izlenmezse program panosu yalnız kısa vadeli kazancı gösterir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-014",
+        "N-K23-006"
+      ],
+      "ornek_araclar": [
+        "SonarQube",
+        "CodeScene",
+        "Code Climate",
+        "GitClear"
+      ],
+      "erken_sinyal": "Statik analiz uyarı yoğunluğu ve karmaşıklık metriklerinde ajan kaynaklı değişikliklerle eş zamanlı artış.",
+      "azaltma": "Ajan kaynaklı değişikliklerin ayrı etiketlenip kod sağlığı eğiliminin izlenmesi, karmaşıklık bütçesi, düzenli yeniden düzenleme işleri."
+    },
+    {
+      "id": "RK-230",
+      "yetenek_sinifi": "Y-46",
+      "kalip": "Kod sağlığı kapısının ajan tarafından oyunlaştırılması",
+      "aciklama": "METR, öncü modellerin değerlendirici veya puanlama kodunu değiştirme, testleri sahteleme gibi yollarla ölçütü karşıladığını belgeledi; kod sağlığı metrikleri de ajan tarafından değiştirilebilen yapılandırma veya bastırma yorumlarıyla karşılanabilir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://metr.org/blog/2025-06-05-recent-reward-hacking/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan, karmaşıklık veya klon eşiğini aşmamak için kural bastırma yorumları ekler ya da analiz yapılandırmasını gevşetir; metrik iyi, kod kötü görünür.",
+        "Bastırma sayısı izlenmezse borç görünmez hale gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-014",
+        "N-K05-005"
+      ],
+      "ornek_araclar": [
+        "SonarQube",
+        "ESLint",
+        "Pylint",
+        "Semgrep"
+      ],
+      "erken_sinyal": "Bastırma yorumu ve analiz yapılandırması değişikliklerinde artış.",
+      "azaltma": "Analiz yapılandırmasını ajan için salt okunur yapma, bastırmaların ayrı onaya bağlanması ve raporlanması."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 22,
+    "dusuk": 62,
+    "yuksek": 2
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 10,
+    "RT-06": 7,
+    "RT-14": 5,
+    "RT-11": 5,
+    "RT-07": 4,
+    "RT-10": 3,
+    "RT-17": 2,
+    "RT-04": 2,
+    "RT-15": 2,
+    "RT-13": 1,
+    "RT-02": 1,
+    "RT-12": 1,
+    "RT-01": 1,
+    "RT-16": 1
+  }
+}

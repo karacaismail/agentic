@@ -1,0 +1,133 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-28",
+    "ad": "Değiştirilemez denetim kaydı ve kanıt/artefakt deposu",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-168",
+      "yetenek_sinifi": "Y-28",
+      "kalip": "'Değiştirilemez' kaydın yönetici tarafından aşılabilmesi",
+      "aciklama": "S3 Object Lock'un governance kipinde özel izne (s3:BypassGovernanceRetention) sahip kullanıcılar kilidi aşabilir; yalnız compliance kipinde kök kullanıcı dahil kimse sürümü silemez veya değiştiremez.",
+      "risk_turleri": [
+        "RT-16"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+      ],
+      "yasatacagi_sorunlar": [
+        "Denetim kaydı 'WORM' diye governance kipinde tutulursa geniş yetkili bir yönetici veya ele geçirilmiş hat kimliği kanıtı silebilir; denetimde değiştirilemezlik kanıtlanamaz.",
+        "Compliance kipi yanlış süreyle açılırsa hatalı veya kişisel veri içeren kayıt da silinemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-002",
+        "N-K19-004",
+        "N-K16-004"
+      ],
+      "ornek_araclar": [
+        "Amazon S3 Object Lock",
+        "MinIO object locking",
+        "Azure immutable blob",
+        "immudb"
+      ],
+      "erken_sinyal": "Kilitleme kipinin envanterde governance olması; bypass izni taşıyan rol sayısı.",
+      "azaltma": "Denetim kaydında compliance kipi veya ayrı hesap/kiracıda saklama, bütünlük için zincirlenmiş özet, bypass izninin kaldırılması."
+    },
+    {
+      "id": "RK-169",
+      "yetenek_sinifi": "Y-28",
+      "kalip": "Silinemez kayıt ile silme hakkı çatışması",
+      "aciklama": "EDPB'nin 02/2025 sayılı blokzincir kılavuzu, değiştirilemez kayıtlarda kişisel veri işlemenin silme ve düzeltme haklarıyla çatışabileceğini, kişisel verinin doğrudan zincire yazılmasından kaçınılması gerektiğini vurgular. KVKK md. 7 de kişisel verinin silinmesini düzenler.",
+      "risk_turleri": [
+        "RT-08",
+        "RT-04"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.edpb.europa.eu/system/files/2025-04/edpb_guidelines_202502_blockchain_en.pdf",
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6698&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan istemleri, onaylayan kişinin adı ve iş kalemi içeriği değiştirilemez kayda doğrudan yazılırsa silme talepleri teknik olarak karşılanamaz.",
+        "Saklama süresi dolan kanıtlar silinemediği için veri minimizasyonu ihlal edilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-009",
+        "N-K19-002",
+        "N-K19-004",
+        "N-K19-006"
+      ],
+      "ornek_araclar": [
+        "immudb",
+        "Amazon QLDB türevleri",
+        "Hyperledger Fabric",
+        "Rekor"
+      ],
+      "erken_sinyal": "Denetim kaydı şemasında serbest metin veya kişisel veri alanları.",
+      "azaltma": "Değiştirilemez kayda yalnız özet ve takma kimlik yazma, içeriği silinebilir ayrı depoda tutma (kripto-silme), saklama politikasının kayıt tasarımına dahil edilmesi."
+    },
+    {
+      "id": "RK-170",
+      "yetenek_sinifi": "Y-28",
+      "kalip": "Açık şeffaflık günlüğüne kişisel veri yazılması",
+      "aciklama": "Sigstore/cosign, anahtarsız imzalamada kimlik doğrulanan hesabın e-posta adresinin herkese açık şeffaflık günlüklerine kalıcı ve silinemez biçimde yazılacağını açıkça bildirir.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/sigstore/cosign/blob/main/cmd/cosign/cli/sign/privacy/privacy.go"
+      ],
+      "yasatacagi_sorunlar": [
+        "Artefakt imzası geliştiricilerin kurum e-postasıyla genel Rekor örneğinde yapılırsa çalışan kimlikleri ve yayın zamanları kamuya açık ve silinemez olur.",
+        "Kamu kurumunda iç sistem adları ve yayın ritmi dışarıdan izlenebilir hale gelir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-007",
+        "N-K19-006",
+        "N-K22-004"
+      ],
+      "ornek_araclar": [
+        "Sigstore cosign",
+        "Rekor",
+        "Fulcio",
+        "GitHub artifact attestations"
+      ],
+      "erken_sinyal": "İmza kayıtlarında kişisel e-posta adresleri; genel şeffaflık günlüğüne yazım.",
+      "azaltma": "Kurum içi Sigstore örneği veya hizmet hesabı kimliğiyle imzalama, genel günlüğe yazım politikası."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 99,
+    "dusuk": 173,
+    "kritik": 2,
+    "yuksek": 23
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 37,
+    "RT-01": 24,
+    "RT-14": 23,
+    "RT-15": 22,
+    "RT-06": 17,
+    "RT-16": 15,
+    "RT-13": 15,
+    "RT-11": 14,
+    "RT-05": 13,
+    "RT-07": 13,
+    "RT-03": 12,
+    "RT-10": 12,
+    "RT-04": 10,
+    "RT-12": 7,
+    "RT-17": 7,
+    "RT-02": 7
+  }
+}

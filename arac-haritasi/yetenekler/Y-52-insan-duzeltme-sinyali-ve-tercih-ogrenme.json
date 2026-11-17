@@ -1,0 +1,292 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-52",
+    "ad": "İnsan düzeltme sinyali ve tercih öğrenme",
+    "grup": "Değerlendirme ve öğrenme",
+    "cozdugu_sorun": "Günlük insan düzeltmelerinin sınıflanmadan kaybolması; aynı düzeltmenin tekrar tekrar yapılması; öğrenmenin insana görünmemesi.",
+    "ne_zaman_zorunlu": "Pilot başında yakalama; yaygınlaştırmada otomatik tekrar tespiti ve döngü kapatma."
+  },
+  "arac_sayisi": 12,
+  "tur_dagilimi": {
+    "ticari-saas": 4,
+    "acik-cekirdek": 3,
+    "acik-kaynak": 4,
+    "protokol-standart": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0105",
+      "ad": "CodeRabbit",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.coderabbit.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "PR'larda bağlam farkındalıklı otomatik kod incelemesi, IDE ve CLI ile commit öncesi inceleme, yol bazlı özel talimatlar, statik analiz/güvenlik taraması entegrasyonu; GitHub, GitLab, Azure DevOps, Bitbucket desteği.",
+      "sinirlar": "Kapı değildir, kararı deterministik kontroller ve QA verir; kod üçüncü tarafa gider (kaynak). Denetçi model ailesi seçimi kısıtlı olabilir; yanlış pozitifler ve gürültü ekip ayarı gerektirir. SaaS; yanlış pozitif/negatif oranı kurum verisiyle ölçülmeli.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-005",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K17-006",
+        "N-K28-008",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0107",
+      "ad": "Greptile",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.greptile.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Deponun tamamından graf kurarak her PR'ı sistem genelindeki etkisiyle inceleyen, tepkilerden öğrenen ve bulguyu kodlama ajanına aktaran yapay zekâ kod inceleme ajanı.",
+      "sinirlar": "Kapı değildir; kod üçüncü tarafa gider (kaynak). Öğrenme 2-3 hafta sürer; öğrenen davranış kalibrasyon setiyle düzenli ölçülmeli. Ürün odağı kod incelemesi; grafiğe doğrudan sorgu erişimi sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-003",
+        "N-K04-006",
+        "N-K05-012",
+        "N-K05-015",
+        "N-K05-016",
+        "N-K09-005",
+        "N-K14-001",
+        "N-K29-001",
+        "N-K29-003"
+      ]
+    },
+    {
+      "id": "AR-0149",
+      "ad": "Langfuse",
+      "tur": "acik-cekirdek",
+      "lisans": "MIT (ee dizinleri hariç)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://langfuse.com",
+      "olgunluk": "olgun",
+      "ne_saglar": "LLM/ajan çağrılarını iz ve span olarak kaydeder (istem, araç çağrısı, süre, token, maliyet); prompt yönetimi ve sürümleme, veri setleri, LLM-yargıç ve insan etiketiyle değerlendirme sunar; OpenTelemetry ile veri alabilir.",
+      "sinirlar": "İzler hassas veri deposuna dönüşebilir, maskeleme gerekir; bazı kurumsal özellikler ee lisansında; telif sahibi artık ClickHouse, Inc. Bazı kurumsal özellikler ticari lisanslı; lisans metnine göre telif ClickHouse, Inc.'e geçmiş, yol haritası izlenmeli. Kurumsal özellikler ayrı lisanslı; hakem kalibrasyonu kullanıcıya bırakılır. Ocak 2026'da ClickHouse satın aldı (MIT çekirdeğin korunacağı taahhüt edildi); bazı kurumsal özellikler ee lisansında; self-host kurulum ClickHouse, Postgres, Redis ve n",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K08-005",
+        "N-K09-006",
+        "N-K11-009",
+        "N-K18-011",
+        "N-K19-001",
+        "N-K19-007",
+        "N-K20-006",
+        "N-K20-007",
+        "N-K23-005",
+        "N-K23-007",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K24-001",
+        "N-K28-004",
+        "N-K29-001",
+        "N-K30-008"
+      ]
+    },
+    {
+      "id": "AR-0151",
+      "ad": "LangSmith",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.langchain.com/langsmith",
+      "olgunluk": "olgun",
+      "ne_saglar": "Çerçeveden bağımsız izleme (Python/TS/Go/Java SDK, OTel desteği), üretim izlemede maliyet/gecikme, kümeleme ile örüntü tespiti, veri setleri ve deney tabanlı değerlendirme sunar.",
+      "sinirlar": "Kapalı kaynak SaaS (kaynak); self-host kurumsal lisansla. Kapalı kaynak; self-host ve BYOC kurumsal lisans gerektirir.",
+      "ihtiyaclar": [
+        "N-K19-001",
+        "N-K20-006",
+        "N-K23-003",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K28-011",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0152",
+      "ad": "Arize Phoenix",
+      "tur": "acik-cekirdek",
+      "lisans": "Elastic License 2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://arize.com/docs/phoenix",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry/OpenInference tabanlı LLM ve ajan izleme, iz üzerinde LLM-yargıç değerlendirmeleri, veri setleri ve deney karşılaştırması sağlar.",
+      "sinirlar": "Elastic License 2.0 (OSI açık kaynak değil; yönetilen hizmet olarak sunma kısıtı) — katalogdaki 'açık kaynak' ifadesi düzeltilmeli. Elastic License 2.0 yönetilen hizmet olarak sunmayı kısıtlar. ELv2 OSI onaylı açık kaynak değildir (yönetilen hizmet olarak sunma yasak); ölçekli kurumsal özellikler ticari Arize AX ürünündedir.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K09-006",
+        "N-K19-001",
+        "N-K23-003",
+        "N-K23-007",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0157",
+      "ad": "Braintrust",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://www.braintrust.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Veri setleriyle deneyler, LLM/kod/insan skorlayıcıları, üretim izlerinden tek tıkla değerlendirme seti oluşturma ve 'Loop' ajanıyla prompt/skorlayıcı iyileştirme önerileri sunar.",
+      "sinirlar": "Kapalı SaaS; Promptfoo ile örtüşür (kaynak). SaaS ve ticari; veri barındırma koşulları doğrulanmalı. Kontrol düzlemi SaaS; hibrit modda yalnız Brainstore veri düzlemi kendi altyapınızda çalışır.",
+      "ihtiyaclar": [
+        "N-K05-016",
+        "N-K11-009",
+        "N-K19-001",
+        "N-K23-003",
+        "N-K23-005",
+        "N-K23-010",
+        "N-K23-012",
+        "N-K29-001",
+        "N-K29-008"
+      ]
+    },
+    {
+      "id": "AR-0873",
+      "ad": "Argilla",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/argilla-io/argilla",
+      "olgunluk": "olgun",
+      "ne_saglar": "Alan uzmanlarının model önerilerini (etiket, eşleşme, sınıf, yeniden yazım) gözden geçirip düzelttiği işbirlikçi veri etiketleme ve geri bildirim aracı; toplu dönüşümde örneklem/risk tabanlı insan inceleme kuyruğu kurmaya uygundur.",
+      "sinirlar": "İş takip sistemine doğrudan bağlanmaz; entegrasyon kodu gerekir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-002",
+        "N-K02-003",
+        "N-K02-010",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-0874",
+      "ad": "Label Studio",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Community) / ticari (Enterprise)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://github.com/HumanSignal/label-studio",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metin sınıflandırma, eşleşme ve serbest yanıt dahil çok tipli etiketleme arayüzü; ML arka ucuyla ön-etiketleme ve etkin öğrenme; sınıflandırıcı eğitim verisi ve insan inceleme örneklemi için.",
+      "sinirlar": "Gelişmiş rol/erişim ve denetim özellikleri ticari Enterprise sürümündedir.",
+      "ihtiyaclar": [
+        "N-K01-012",
+        "N-K02-002",
+        "N-K02-010",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-2945",
+      "ad": "CHAP (Collaborative Human-Agent Protocol)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://chap.brightbeam.works/",
+      "olgunluk": "erken",
+      "ne_saglar": "Onay, geçersiz kılma, devir ve eskalasyonları MCP ve A2A üzerinde ortak, denetlenebilir bir biçime sokan açık protokol; insanın düzenlemesi diff, gerekçe ve etiketle yapılandırılmış kayıt olur.",
+      "sinirlar": "Mayıs 2026'da çıktı; benimsenme düşük.",
+      "ihtiyaclar": [
+        "N-K05-025",
+        "N-K17-002",
+        "N-K19-006",
+        "N-K27-004",
+        "N-K27-007",
+        "N-K29-001"
+      ]
+    },
+    {
+      "id": "AR-2971",
+      "ad": "Agentic Context Engine (ACE)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.kayba.ai",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanın hatalarını yansıtıp kalıcı bir 'oyun kitabı' güncelleyen öğrenme döngüsü ekleyen açık kaynak motor; barındırılan Kayba ürünü tam döngüyü yönetir.",
+      "sinirlar": "Otomatik öğrenilen dersler insan onayı olmadan yayılırsa yanlış ders öğrenme riski.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K11-009",
+        "N-K29-001",
+        "N-K29-002"
+      ]
+    },
+    {
+      "id": "AR-4056",
+      "ad": "claude-reflect",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/BayramAnnakov/claude-reflect",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code kancalarıyla kullanıcı düzeltmelerini, olumlu geri bildirimleri ve tercihleri otomatik olarak kuyruğa alır; /reflect komutuyla insan gözden geçirmesinden sonra CLAUDE.md ve AGENTS.md dosyalarına kural olarak işler.",
+      "sinirlar": "Tek kullanıcı ve yerel; neden sınıflaması, koşu/parça bağlantısı ve ekip düzeyi raporlama yok; Claude Code'a bağlı.",
+      "ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-002",
+        "N-K29-003"
+      ]
+    },
+    {
+      "id": "AR-4057",
+      "ad": "Awesome Reviewers",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://awesomereviewers.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "246 üretim deposunun gerçek kod inceleme tartışmalarından damıtılmış yaklaşık 5.400 inceleme talimatı; ajan sistem istemine, skill'e ya da inceleme düzeneğine eklenebilir, anahtarsız API ile programatik erişim. Ekip yorumlarından konvansiyon adayı çıkarma yöntemine örnek.",
+      "sinirlar": "Talimatlar başka projelerin konvansiyonlarından türetilmiştir; kurum ekibine uyarlanıp değerlendirmeyle doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-003"
+      ]
+    }
+  ]
+}

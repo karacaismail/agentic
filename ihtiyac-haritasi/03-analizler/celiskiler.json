@@ -1,0 +1,984 @@
+{
+  "sema": "ihtiyac-haritasi/celiskiler@1",
+  "aciklama": "Kaynaklar arasında veya kaynak içinde birbiriyle çelişen ifadeler. Her çelişki, kapatılması için gereken karar türüyle ve ilgili ihtiyaçlarla eşlenmiştir.",
+  "celiskiler": [
+    {
+      "id": "C-001",
+      "konu": "Deneme ve döngü sınırları",
+      "taraf_a": {
+        "ifade": "Davranış başına 3+2 deneme, görev başına 10 başarısızlık.",
+        "kaynaklar": [
+          "S-006"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Davranış başına 3+3=6, görev başına 12; düzeltme ajanı 6 döngü, deterministik kapı 4 deneme; ana süreçte 'max 12' döngüsü.",
+        "kaynaklar": [
+          "S-007",
+          "S-013",
+          "S-030",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "etkisi": "Aynı panodan farklı sayılar okunuyor; çelişkili sınırlar koda dökülürse binlerce işe kopyalanır.",
+      "kapatmak_icin_gereken": "Sayaç türlerinin ve değerlerinin tek politikada kararlaştırılması; ilk görevlerden sonra kalibrasyon.",
+      "ilgili_ihtiyaclar": [
+        "N-K20-001",
+        "N-K20-002",
+        "N-K21-006"
+      ],
+      "bekleyen_karar": "D-003"
+    },
+    {
+      "id": "C-002",
+      "konu": "Testlerin koştuğu ortam",
+      "taraf_a": {
+        "ifade": "Tüm testler geliştirme ortamında koşar; üst ortamlar test ortamı değildir.",
+        "kaynaklar": [
+          "S-006",
+          "S-007"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Kapı 4: gösterim ortamında insan testi; panodan 'insan test' kutusu.",
+        "kaynaklar": [
+          "S-010",
+          "S-013",
+          "S-030"
+        ]
+      },
+      "etkisi": "İnsan kabul testinin yeri belirsiz; ortam sorumlulukları karışıyor.",
+      "kapatmak_icin_gereken": "Otomatik testler ile insan kabulünün ortamlarının ayrı ayrı tanımlanması.",
+      "ilgili_ihtiyaclar": [
+        "N-K06-004",
+        "N-K05-025"
+      ],
+      "bekleyen_karar": "D-005"
+    },
+    {
+      "id": "C-003",
+      "konu": "Ortam terfi zinciri",
+      "taraf_a": {
+        "ifade": "Erken erişim → beta → sürüm adayı → üretim.",
+        "kaynaklar": [
+          "S-006",
+          "S-007"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Hazırlık → kanarya → üretim; 'alpha sınırında' notu.",
+        "kaynaklar": [
+          "S-010",
+          "S-013"
+        ]
+      },
+      "etkisi": "Yayın ve geri bildirim triyajı farklı aşamalara bağlanıyor.",
+      "kapatmak_icin_gereken": "Tek ortam zinciri ve geçiş ölçütleri.",
+      "ilgili_ihtiyaclar": [
+        "N-K06-006"
+      ],
+      "bekleyen_karar": "D-005"
+    },
+    {
+      "id": "C-004",
+      "konu": "RED testini kim yazar",
+      "taraf_a": {
+        "ifade": "Kodlama ajanı RED testini önce yazar.",
+        "kaynaklar": [
+          "S-006"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Test ajanı beklentiyi, kodlama ajanı kodu üretir.",
+        "kaynaklar": [
+          "S-007",
+          "S-008",
+          "S-009",
+          "S-010",
+          "S-013",
+          "S-018",
+          "S-052"
+        ]
+      },
+      "etkisi": "Rol ayrımı ilkesi bozulabilir.",
+      "kapatmak_icin_gereken": "Test yazan rolün kararlaştırılması (rol ayrımı ilkesine göre).",
+      "ilgili_ihtiyaclar": [
+        "N-K05-006",
+        "N-K05-002"
+      ],
+      "bekleyen_karar": "D-006"
+    },
+    {
+      "id": "C-005",
+      "konu": "RED gelmediğinde",
+      "taraf_a": {
+        "ifade": "Erken yeşilde davranış zaten varsa kanıtla geçilir.",
+        "kaynaklar": [
+          "S-007",
+          "S-018"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Kırmızı değilse test bozuktur; yeniden düzenlemede ise yeşil beklenir.",
+        "kaynaklar": [
+          "S-010",
+          "S-013",
+          "S-009"
+        ]
+      },
+      "etkisi": "Zayıf testler 'davranış zaten var' diye geçebilir ya da doğru testler reddedilebilir.",
+      "kapatmak_icin_gereken": "İş türüne göre beklenen ilk sonuç ve erken yeşil için test gücü denetimi.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-003",
+        "N-K05-004"
+      ],
+      "bekleyen_karar": "D-006"
+    },
+    {
+      "id": "C-006",
+      "konu": "Test-önce kapsamı",
+      "taraf_a": {
+        "ifade": "Her iş test-önce akışından geçer; RED kanıtı olmadan kodlama yok.",
+        "kaynaklar": [
+          "S-013",
+          "S-052",
+          "S-030"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Her iş yeni test istemez; 'TDD uygun mu?' kararı var.",
+        "kaynaklar": [
+          "S-008"
+        ]
+      },
+      "etkisi": "Kod dışı ve davranış değiştirmeyen işler zorla aynı akışa sokuluyor ya da tersine kaçak yol açılıyor.",
+      "kapatmak_icin_gereken": "İş türü × akış tablosu.",
+      "ilgili_ihtiyaclar": [
+        "N-K01-012"
+      ],
+      "bekleyen_karar": "D-020"
+    },
+    {
+      "id": "C-007",
+      "konu": "Test-önce katılığı",
+      "taraf_a": {
+        "ifade": "Mümkün olan yerlerde önce başarısız test.",
+        "kaynaklar": [
+          "S-048"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "RED kanıtı olmadan kodlama ajanı çalışamaz (mutlak).",
+        "kaynaklar": [
+          "S-052"
+        ]
+      },
+      "etkisi": "İstisnaların kapsamı belirsiz.",
+      "kapatmak_icin_gereken": "Katılık düzeyinin ve istisna listesinin kararlaştırılması.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-002"
+      ],
+      "bekleyen_karar": "D-006"
+    },
+    {
+      "id": "C-008",
+      "konu": "Deterministik kapının akıştaki yeri",
+      "taraf_a": {
+        "ifade": "Test-önce ve ana test sürecinden sonra.",
+        "kaynaklar": [
+          "S-009"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Kalite kapısından önce / her yeşil denemede / yapay zekâ kodlamadan sonra.",
+        "kaynaklar": [
+          "S-013",
+          "S-007",
+          "S-030",
+          "S-062",
+          "S-061"
+        ]
+      },
+      "etkisi": "Aynı kontrol farklı aşamada koşunca bütçe ve sonuç farklılaşıyor.",
+      "kapatmak_icin_gereken": "Kapının tek konumu.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-012"
+      ]
+    },
+    {
+      "id": "C-009",
+      "konu": "Kabul kriterinin kaynağı",
+      "taraf_a": {
+        "ifade": "Görev oluşmadan önce belirlenir / ürün sahibinden gelir.",
+        "kaynaklar": [
+          "S-053",
+          "S-006"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Plan onayından sonra çıkarılır / planlayıcı ajan tamamlanma koşulunu yazar; DoR rolü kriter uyduramaz.",
+        "kaynaklar": [
+          "S-009",
+          "S-018",
+          "S-036"
+        ]
+      },
+      "etkisi": "Oracle'ın sahibi belirsizleşiyor.",
+      "kapatmak_icin_gereken": "Kriteri yazma ve onaylama hakkının tanımı.",
+      "ilgili_ihtiyaclar": [
+        "N-K01-011"
+      ]
+    },
+    {
+      "id": "C-010",
+      "konu": "Risk modeli",
+      "taraf_a": {
+        "ifade": "3 seviye (olasılık ve etki için düşük/orta/yüksek).",
+        "kaynaklar": [
+          "S-053"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "4 seviye (düşük/orta geçer, yüksek/yasaklı onay) / 5 seviye (yasaklı, yüksek, orta, düşük, yok; düşük de aksiyon döngüsüne gider).",
+        "kaynaklar": [
+          "S-013",
+          "S-030"
+        ]
+      },
+      "etkisi": "Aynı değişiklik farklı akışta farklı otomasyon düzeyine düşüyor; risk adımının yeri de farklı.",
+      "kapatmak_icin_gereken": "Tek ölçek ve seviye → eylem eşlemesi.",
+      "ilgili_ihtiyaclar": [
+        "N-K21-001",
+        "N-K21-003"
+      ],
+      "bekleyen_karar": "D-004"
+    },
+    {
+      "id": "C-011",
+      "konu": "Durum modeli",
+      "taraf_a": {
+        "ifade": "Pano 5 sütun: backlog, sürüyor, kalite, hata, bitti.",
+        "kaynaklar": [
+          "S-030",
+          "S-054"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Akışlar 8+ durum kullanıyor; türev raporlarda iki farklı durum listesi var; biri bütçe bitişine 'hata', diğeri ayrı tür diyor.",
+        "kaynaklar": [
+          "S-006",
+          "S-007",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "etkisi": "'Neden durdu' görünmüyor; aynı durum farklı adlandırılıyor.",
+      "kapatmak_icin_gereken": "Tek birleşik durum listesi ve pano eşlemesi.",
+      "ilgili_ihtiyaclar": [
+        "N-K26-001",
+        "N-K10-003"
+      ],
+      "bekleyen_karar": "D-009"
+    },
+    {
+      "id": "C-012",
+      "konu": "İş kalemi şablonu",
+      "taraf_a": {
+        "ifade": "9 bölüm; kabul kriteri ve DoD ayrı kart.",
+        "kaynaklar": [
+          "S-053"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Persona kartı eklenmiş; kabul kriteri kartının alt başlığı DoD; yer tutucu listesi farklı sırada.",
+        "kaynaklar": [
+          "S-054"
+        ]
+      },
+      "etkisi": "Kabul kriteri ile DoD karışıyor.",
+      "kapatmak_icin_gereken": "Tek şema.",
+      "ilgili_ihtiyaclar": [
+        "N-K01-002"
+      ]
+    },
+    {
+      "id": "C-013",
+      "konu": "Başlatma komutu adı",
+      "taraf_a": {
+        "ifade": "Bir akışta bir komut adı.",
+        "kaynaklar": [
+          "S-006"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Diğer akışta farklı komut adı.",
+        "kaynaklar": [
+          "S-030"
+        ]
+      },
+      "etkisi": "Entegrasyon ve eğitim tutarsızlığı.",
+      "kapatmak_icin_gereken": "Tek komut biçimi.",
+      "ilgili_ihtiyaclar": [
+        "N-K26-002"
+      ]
+    },
+    {
+      "id": "C-014",
+      "konu": "Renk anlamları",
+      "taraf_a": {
+        "ifade": "Yeşil = insan, mor = ajan.",
+        "kaynaklar": [
+          "S-010",
+          "S-013"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Yeşil = kontrol ajanı veya 'doğrulandı'; mor = sunum/yayın.",
+        "kaynaklar": [
+          "S-008",
+          "S-006"
+        ]
+      },
+      "etkisi": "Akışlar yanlış okunuyor.",
+      "kapatmak_icin_gereken": "Ortak notasyon.",
+      "ilgili_ihtiyaclar": [
+        "N-K07-008"
+      ]
+    },
+    {
+      "id": "C-015",
+      "konu": "Bilinmeyen ve boşluk analizinin çerçevesi",
+      "taraf_a": {
+        "ifade": "Bilinmeyenler 'dış çevre analizi' ile, boşluk analizi 'iç çevre analizi' ile eşleştirilmiş.",
+        "kaynaklar": [
+          "S-030"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Yaygın kullanımda makro dış çevre analizi dış çevreyi; güçlü/zayıf–fırsat/tehdit analizi hem iç hem dış çevreyi kapsar; etiketler ters görünüyor.",
+        "kaynaklar": [
+          "S-091"
+        ]
+      },
+      "etkisi": "Analiz yanlış merceklerle yapılırsa dış kaynaklı bilinmeyenler kaçar.",
+      "kapatmak_icin_gereken": "Bilinmeyenler analizinde hem iç hem dış mercek kullanılması (bkz. bilinmeyenler-analizi.json).",
+      "ilgili_ihtiyaclar": [
+        "N-K01-008"
+      ]
+    },
+    {
+      "id": "C-016",
+      "konu": "Olgunluk seviyeleri",
+      "taraf_a": {
+        "ifade": "Deneme/MVP/üretim veya PoC/MVP/üretim.",
+        "kaynaklar": [
+          "S-018",
+          "S-028"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "PoC/MVP/PMF/Kurumsal.",
+        "kaynaklar": [
+          "S-039",
+          "S-022"
+        ]
+      },
+      "etkisi": "Seviye dışı kapsam kararı tutarsız.",
+      "kapatmak_icin_gereken": "Tek seviye seti ve ölçütleri.",
+      "ilgili_ihtiyaclar": [
+        "N-K03-007"
+      ],
+      "bekleyen_karar": "D-008"
+    },
+    {
+      "id": "C-017",
+      "konu": "Görev tipleri",
+      "taraf_a": {
+        "ifade": "Ön yüz / arka uç / ikisi.",
+        "kaynaklar": [
+          "S-018",
+          "S-028"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Ön yüz / arka uç / tam yığın / veritabanı / altyapı / ortak; kartta arka uç kural seti 'güvenlik/veri/arayüz', akışta 'veri' yok.",
+        "kaynaklar": [
+          "S-042",
+          "S-022"
+        ]
+      },
+      "etkisi": "Kural seti etkinleştirmesi eksik.",
+      "kapatmak_icin_gereken": "Tek tip seti ve dolu kural setleri.",
+      "ilgili_ihtiyaclar": [
+        "N-K03-005"
+      ],
+      "bekleyen_karar": "D-007"
+    },
+    {
+      "id": "C-018",
+      "konu": "Orkestratör",
+      "taraf_a": {
+        "ifade": "Bir iş akışı sıralayıcısının seçimi 'kabul edildi'.",
+        "kaynaklar": [
+          "S-016",
+          "S-018"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Graf tabanlı durum motoru + merkezi kontrol paneli öneriliyor; başka altyapılar sunuluyor; soru hâlâ açık; türev raporlarda dayanıklı iş akışı motoru öneriliyor; biri 4 eşzamanlı koşu için daha hafif çözümün yeteceğini söylüyor.",
+        "kaynaklar": [
+          "S-021",
+          "S-019",
+          "S-020",
+          "S-061",
+          "S-062"
+        ]
+      },
+      "etkisi": "Yaşam döngüsü sahibi belirsiz; iki durum sahibi riski.",
+      "kapatmak_icin_gereken": "Mimari sınıf kararı ve ölçütleri.",
+      "ilgili_ihtiyaclar": [
+        "N-K13-013",
+        "N-K13-001"
+      ],
+      "bekleyen_karar": "D-001"
+    },
+    {
+      "id": "C-019",
+      "konu": "Rol → çalışma zamanı eşlemesi",
+      "taraf_a": {
+        "ifade": "Bir tuvaldeki eşleme (ör. yetkilendirme = kod işçisi).",
+        "kaynaklar": [
+          "S-021"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Diğer tuvaldeki eşleme (ör. yetkilendirme = LLM değil, deterministik motor); aynı tuval kendi içinde de çelişiyor.",
+        "kaynaklar": [
+          "S-022"
+        ]
+      },
+      "etkisi": "Aynı rolün gereksinimleri farklı tanımlanıyor.",
+      "kapatmak_icin_gereken": "Rol başına çalışma zamanı sınıfı.",
+      "ilgili_ihtiyaclar": [
+        "N-K10-007"
+      ],
+      "bekleyen_karar": "D-012"
+    },
+    {
+      "id": "C-020",
+      "konu": "Yetkilendirmenin kapsamı",
+      "taraf_a": {
+        "ifade": "Ürün yetkisini inceleyen bir LLM rolü.",
+        "kaynaklar": [
+          "S-018",
+          "S-028",
+          "S-050"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "'LLM değil, motor' / ajanın kendi işlem yetkilerinin kısıtlanması.",
+        "kaynaklar": [
+          "S-022",
+          "S-021"
+        ]
+      },
+      "etkisi": "Ürün yetkisi ile hat yetkisi karışıyor.",
+      "kapatmak_icin_gereken": "İki ayrı ihtiyaç ve sahip.",
+      "ilgili_ihtiyaclar": [
+        "N-K18-002",
+        "N-K18-001"
+      ],
+      "bekleyen_karar": "D-021"
+    },
+    {
+      "id": "C-021",
+      "konu": "Bağımsızlık ilkesi ile model ataması",
+      "taraf_a": {
+        "ifade": "İnceleme yazardan farklı model ailesinden yapılmalı.",
+        "kaynaklar": [
+          "S-028",
+          "S-062"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Planlama, test yazımı, ön yüz kodu ve denetimin birincil modeli aynı; farklı aile bağımsız doğruluk garantisi değil.",
+        "kaynaklar": [
+          "S-028",
+          "S-061"
+        ]
+      },
+      "etkisi": "Test ve kod aynı modelden çıkınca ortak kör nokta.",
+      "kapatmak_icin_gereken": "Model ailesi politikası.",
+      "ilgili_ihtiyaclar": [
+        "N-K09-005",
+        "N-K05-016"
+      ],
+      "bekleyen_karar": "D-011"
+    },
+    {
+      "id": "C-022",
+      "konu": "Araştırma kaynak politikası",
+      "taraf_a": {
+        "ifade": "Resmi doküman → standart → üretici → çerçeve deposu → güvenilir ikincil.",
+        "kaynaklar": [
+          "S-033"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Kavramsal araştırmada ansiklopedik kaynak öner (sohbet modeli yerine).",
+        "kaynaklar": [
+          "S-052"
+        ]
+      },
+      "etkisi": "Kaynak türü tutarsız.",
+      "kapatmak_icin_gereken": "Teknik ve kavramsal araştırma için ayrı kaynak politikası.",
+      "ilgili_ihtiyaclar": [
+        "N-K14-003"
+      ]
+    },
+    {
+      "id": "C-023",
+      "konu": "Rol kartları ile akışların uyumu",
+      "taraf_a": {
+        "ifade": "20 rol kartı.",
+        "kaynaklar": [
+          "S-051"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Akışlarda kartı olmayan roller (araştırma, spesifikasyon, test, kodlama, kalite) ve akışı olmayan kart (uygulama geneli ilişki haritası).",
+        "kaynaklar": [
+          "S-052",
+          "S-041",
+          "S-018"
+        ]
+      },
+      "etkisi": "Sahipsiz işler ve tanımsız roller.",
+      "kapatmak_icin_gereken": "Kanonik rol kaydı.",
+      "ilgili_ihtiyaclar": [
+        "N-K10-004",
+        "N-K04-013"
+      ]
+    },
+    {
+      "id": "C-024",
+      "konu": "Akış görsellerinde kopyalama hataları",
+      "taraf_a": {
+        "ifade": "Test-önce rolünün akış görseli başka bir rolün kopyası; tasarım ilkesi akışında beş ilke aynı etiketle yazılmış.",
+        "kaynaklar": [
+          "S-048",
+          "S-035"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Asıl kural metinleri başka yerde (tam tuvalde).",
+        "kaynaklar": [
+          "S-052"
+        ]
+      },
+      "etkisi": "Kaynaktan otomatik okuma yanlış ihtiyaç üretebilir.",
+      "kapatmak_icin_gereken": "Kaynak tuvallerin düzeltilmesi veya düzeltilmiş kanonik akış.",
+      "ilgili_ihtiyaclar": [
+        "N-K25-008",
+        "N-K05-001",
+        "N-K04-007"
+      ]
+    },
+    {
+      "id": "C-025",
+      "konu": "Paralellik ile sıralama",
+      "taraf_a": {
+        "ifade": "Her küme birbirinden bağımsız başlayabilir.",
+        "kaynaklar": [
+          "S-044",
+          "S-030"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Önce temel, sonra bağımlılık, sonra tüketici.",
+        "kaynaklar": [
+          "S-049"
+        ]
+      },
+      "etkisi": "Kimin karar vereceği belirsiz.",
+      "kapatmak_icin_gereken": "Karar kuralı ve sahibi.",
+      "ilgili_ihtiyaclar": [
+        "N-K02-008"
+      ]
+    },
+    {
+      "id": "C-026",
+      "konu": "Boşluk analizinin bitti yetkisi",
+      "taraf_a": {
+        "ifade": "Tüm boşluklar kapanınca görev bitti sayılır.",
+        "kaynaklar": [
+          "S-032"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Boşluk analizi tek başına bitti yapamaz.",
+        "kaynaklar": [
+          "S-018",
+          "S-028"
+        ]
+      },
+      "etkisi": "Bitti kapısının sahibi belirsiz; diğer rollerin çıktısı yeniden denetleniyor.",
+      "kapatmak_icin_gereken": "Tek DoD ve sahibi.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-027",
+        "N-K05-028"
+      ],
+      "bekleyen_karar": "D-022"
+    },
+    {
+      "id": "C-027",
+      "konu": "Görsel onayın geçerliliği",
+      "taraf_a": {
+        "ifade": "Onay testinde referans bir kez onaylanır.",
+        "kaynaklar": [
+          "S-001"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Periyodik sıfırlama / ortam değişince geçersizleştirme / bir kez verilen onay her bağlamda geçerli değil.",
+        "kaynaklar": [
+          "S-001",
+          "S-003"
+        ]
+      },
+      "etkisi": "Referans yenileme politikası yok; kimin tetikleyeceği belirsiz.",
+      "kapatmak_icin_gereken": "Referans yaşam döngüsü politikası.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "C-028",
+      "konu": "Arayüz ölçüleri",
+      "taraf_a": {
+        "ifade": "Mutlak piksel eşiği.",
+        "kaynaklar": [
+          "S-001"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Mutlak piksel değil, oran aralığı; genişlik aralıkları kaynaklar arasında farklı.",
+        "kaynaklar": [
+          "S-001",
+          "S-003"
+        ]
+      },
+      "etkisi": "Mobil kabul ölçütleri tutarsız.",
+      "kapatmak_icin_gereken": "Desteklenen genişlik aralığı ve ölçü türü kararı.",
+      "ilgili_ihtiyaclar": [
+        "N-K04-010",
+        "N-K05-017"
+      ]
+    },
+    {
+      "id": "C-029",
+      "konu": "Yapay zekânın görsel yargısı",
+      "taraf_a": {
+        "ifade": "Kör doğrulayıcı dengeli görünüp görünmediğini modele sorar; çoklu deneme ve konsensüs doğruluğu artırır.",
+        "kaynaklar": [
+          "S-001"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Yapay zekâ bütünsel kompozisyonu göremez; görsel yargı otomatik kalite hükmü değildir; konsensüs yanlış alarm yükünü artırabilir.",
+        "kaynaklar": [
+          "S-001",
+          "S-003"
+        ]
+      },
+      "etkisi": "Görsel kalite kararının kime ait olduğu belirsiz.",
+      "kapatmak_icin_gereken": "Kusur sınıfı → doğrulayıcı matrisi.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-016",
+        "N-K05-022"
+      ],
+      "bekleyen_karar": "D-011"
+    },
+    {
+      "id": "C-030",
+      "konu": "Test gücü ölçümünün zorunluluğu",
+      "taraf_a": {
+        "ifade": "Değişen modüllerde mutasyon testi zorunlu.",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Seçici / kalite sayfasında yok.",
+        "kaynaklar": [
+          "S-063",
+          "S-061"
+        ]
+      },
+      "etkisi": "Test gücü kapısı tutarsız.",
+      "kapatmak_icin_gereken": "Kapsam ve eşik kararı.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-009"
+      ],
+      "bekleyen_karar": "D-010"
+    },
+    {
+      "id": "C-031",
+      "konu": "Model yönlendirme katmanı",
+      "taraf_a": {
+        "ifade": "Aday (yönlendirme + maliyet tavanı).",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Kanıtlanmış ihtiyaç yoksa ekleme.",
+        "kaynaklar": [
+          "S-061",
+          "S-063"
+        ]
+      },
+      "etkisi": "Mimari karmaşıklık kararı ölçüme bağlı.",
+      "kapatmak_icin_gereken": "Ölçüme dayalı karar.",
+      "ilgili_ihtiyaclar": [
+        "N-K09-002",
+        "N-K09-003"
+      ],
+      "bekleyen_karar": "D-017"
+    },
+    {
+      "id": "C-032",
+      "konu": "Ölçek gerekçesi",
+      "taraf_a": {
+        "ifade": "Dayanıklı iş akışı motoru 12.000 kayıtlık backlog ile gerekçelendiriliyor.",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Backlog boyutu eşzamanlılık değildir; kapasite ölçülen aktif yükle kararlaştırılmalı.",
+        "kaynaklar": [
+          "S-061"
+        ]
+      },
+      "etkisi": "Altyapı büyük veya küçük tasarlanabilir.",
+      "kapatmak_icin_gereken": "Ölçülmüş aktif yük.",
+      "ilgili_ihtiyaclar": [
+        "N-K02-012",
+        "N-K13-013"
+      ],
+      "bekleyen_karar": "D-001"
+    },
+    {
+      "id": "C-033",
+      "konu": "Yayın hattının sahibi",
+      "taraf_a": {
+        "ifade": "Alpha'yı bir otomasyon sistemi yayınlar.",
+        "kaynaklar": [
+          "S-006"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Sürüm adayı → üretim başka bir otomasyon sistemiyle.",
+        "kaynaklar": [
+          "S-006",
+          "S-062"
+        ]
+      },
+      "etkisi": "İki sahip.",
+      "kapatmak_icin_gereken": "Tek sahip.",
+      "ilgili_ihtiyaclar": [
+        "N-K06-007"
+      ],
+      "bekleyen_karar": "D-016"
+    },
+    {
+      "id": "C-034",
+      "konu": "Bilinmeyen tarama rolünün tetik koşulu",
+      "taraf_a": {
+        "ifade": "Rol yalnız 'harici temas varsa' tetiklenir.",
+        "kaynaklar": [
+          "S-031"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Taradığı yüzeylerin bir kısmı iç (eski kod, iç entegrasyon, gizli bağımlılık).",
+        "kaynaklar": [
+          "S-031"
+        ]
+      },
+      "etkisi": "Harici teması olmayan işte iç bilinmeyenler taranmıyor.",
+      "kapatmak_icin_gereken": "Tetik koşulunun genişletilmesi.",
+      "ilgili_ihtiyaclar": [
+        "N-K01-008"
+      ]
+    },
+    {
+      "id": "C-035",
+      "konu": "Bir modelin hem planlayıcı hem kodlayıcı olması",
+      "taraf_a": {
+        "ifade": "Aynı model planlayıcı ve ön yüz kodlayıcısı olarak atanmış.",
+        "kaynaklar": [
+          "S-028"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Aynı modelin kodlama liderliği varsayılmamalı; bağımsız terminal puanı üretici bildiriminden çok düşük.",
+        "kaynaklar": [
+          "S-029",
+          "S-026"
+        ]
+      },
+      "etkisi": "Rol başına ölçüm yapılmadan atama.",
+      "kapatmak_icin_gereken": "Role göre ölçüm.",
+      "ilgili_ihtiyaclar": [
+        "N-K23-004",
+        "N-K09-001"
+      ]
+    },
+    {
+      "id": "C-036",
+      "konu": "Takvim",
+      "taraf_a": {
+        "ifade": "Faz süreleri haftalık olarak veriliyor.",
+        "kaynaklar": [
+          "S-062"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Ekip ve depo bilinmeden takvim garanti edilemez; takvim verilmiyor.",
+        "kaynaklar": [
+          "S-061",
+          "S-063"
+        ]
+      },
+      "etkisi": "Bu çalışmada takvim bilinçli olarak kapsam dışıdır.",
+      "kapatmak_icin_gereken": "Projelendirme aşamasında ele alınacak.",
+      "ilgili_ihtiyaclar": []
+    },
+    {
+      "id": "C-037",
+      "konu": "Yazı boyutu kuralı",
+      "taraf_a": {
+        "ifade": "'Standarda göre yazı 24px' notu.",
+        "kaynaklar": [
+          "S-001"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Standartta böyle bir zorunluluk yok; büyük metnin kontrast eşiğiyle karıştırılmış olabilir.",
+        "kaynaklar": [
+          "S-003"
+        ]
+      },
+      "etkisi": "Yanlış erişilebilirlik ölçütü.",
+      "kapatmak_icin_gereken": "Standart ölçütlerin doğrudan kaynağından alınması.",
+      "ilgili_ihtiyaclar": [
+        "N-K05-019"
+      ]
+    },
+    {
+      "id": "C-038",
+      "konu": "Rol sayısı",
+      "taraf_a": {
+        "ifade": "20 uzmanlık → pilotta 4 rol, 5 rol grubu.",
+        "kaynaklar": [
+          "S-061"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "21 ajan/akış rolü; 26 rol + 1 araç.",
+        "kaynaklar": [
+          "S-062",
+          "S-028"
+        ]
+      },
+      "etkisi": "Kapsam ve maliyet farklı tahmin ediliyor.",
+      "kapatmak_icin_gereken": "Topoloji ve rol kaydı kararı.",
+      "ilgili_ihtiyaclar": [
+        "N-K10-004",
+        "N-K10-006"
+      ],
+      "bekleyen_karar": "D-012"
+    },
+    {
+      "id": "C-039",
+      "konu": "Ajan platformu varsayılan çalışanı",
+      "taraf_a": {
+        "ifade": "Öğrenen kişisel ajan çalışma zamanı varsayılan çalışan.",
+        "kaynaklar": [
+          "S-063"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Dayanıklı süreç + değiştirilebilir kodlama çalışanı; ya da başsız terminal ajanı birincil, öğrenen çalışma zamanı opsiyonel.",
+        "kaynaklar": [
+          "S-061",
+          "S-062"
+        ]
+      },
+      "etkisi": "Üç rapor üç farklı cevap veriyor.",
+      "kapatmak_icin_gereken": "Adaptör sözleşmesiyle çalışanın değiştirilebilir tutulması; seçim ölçümle.",
+      "ilgili_ihtiyaclar": [
+        "N-K10-002"
+      ]
+    },
+    {
+      "id": "C-040",
+      "konu": "İnsanın olağan akıştaki rolü: ara müdahale ve eş üretim mi, yalnız girdi ve çıktı mı?",
+      "taraf_a": {
+        "ifade": "İlk kapı panosunda hata durumunda 'insan müdahale eder' ve iş yeniden 'devam ediyor' durumuna döner; kullanıcının amaç tanımı insanları yalnız onaylayıcı değil eş üretici olarak konumlar (K27–K29 bu tanıma dayanır).",
+        "kaynaklar": [
+          "S-096",
+          "S-090"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "İkinci atlasın mimari araştırma notunda kaydedilen daha yeni kullanıcı beyanı: insan görevi form üzerinden tanımlar ve son çıktıyı kontrol eder; olağan ara süreç tamamen ajanlarla yürür, belirsizlik 'girdi gerekli' son çıktısına dönüşür.",
+        "kaynaklar": [
+          "S-095"
+        ]
+      },
+      "etkisi": "İnsan karar noktaları envanteri (N-K17-001), yürütme sırasında yönlendirme (N-K28-002), plan önizlemesi (N-K28-001) ve takılan işin insanca geri alınması (N-K17-008) olağan akışta mı yoksa yalnız istisna yolunda mı yer alacak belirsizleşir.",
+      "kapatmak_icin_gereken": "İş türü ve risk sınıfına göre varsayılan iş birliği modunun kullanıcıyla netleştirilmesi: düşük riskli işte 'girdi–çıktı' modu, yüksek riskli veya belirsiz işte ara insan katkısı; her iki durumda da insanın eş üretici rolünün (yönlendirme, düzeltme, devralma) korunması.",
+      "ilgili_ihtiyaclar": [
+        "N-K27-001",
+        "N-K27-002",
+        "N-K17-001",
+        "N-K17-008",
+        "N-K28-001",
+        "N-K28-002"
+      ],
+      "bekleyen_karar": "D-024",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#source_conflicts/Ara insan müdahalesi",
+      "dogrulama": "kismen"
+    },
+    {
+      "id": "C-041",
+      "konu": "'Bitti' durumu ile insan kabul testinin sırası",
+      "taraf_a": {
+        "ifade": "İlk kapı panosunda iş önce 'bitti' olur, ardından insan pozitif/negatif test, kullanıcı yolculuğu, rastgele etkileşim ve veritabanına yansıma kontrolü yapar.",
+        "kaynaklar": [
+          "S-096"
+        ]
+      },
+      "taraf_b": {
+        "ifade": "Haritada insan kabulü olmadan yayın yoktur (N-K05-025) ve durum modeli 'yayına hazır' ile 'bitti'yi ayırır (N-K26-001); teknik başarı iş kabulü sayılmamalıdır.",
+        "kaynaklar": [
+          "S-006",
+          "S-062"
+        ]
+      },
+      "etkisi": "Otomatik 'bitti', insan testi yapılmadan iş kabulü gibi raporlanabilir; ret durumunda işin hangi duruma döneceği belirsizleşir.",
+      "kapatmak_icin_gereken": "Teknik tamamlanma (incelemeye hazır) ile insan kabulünün (bitti) ayrı durumlar olarak durum modeline ve pano eşlemesine yazılması.",
+      "ilgili_ihtiyaclar": [
+        "N-K26-001",
+        "N-K05-025"
+      ],
+      "bekleyen_karar": "D-009",
+      "codex_kaynagi": "research_notes/Plane tabanlı otonom yazılım sistemi/pdf_requirements.json#source_conflicts/Done zamanı",
+      "dogrulama": "dogrulandi"
+    }
+  ]
+}

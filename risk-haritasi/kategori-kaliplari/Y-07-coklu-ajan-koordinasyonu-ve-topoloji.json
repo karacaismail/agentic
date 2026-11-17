@@ -1,0 +1,168 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-07",
+    "ad": "Çoklu ajan koordinasyonu ve topoloji seçimi",
+    "grup": "Ajan çalışma çerçevesi ve koordinasyon"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-090",
+      "yetenek_sinifi": "Y-07",
+      "kalip": "Tasarım kaynaklı çoklu ajan başarısızlıkları",
+      "aciklama": "7 çoklu ajan çerçevesinden 1.600'den fazla izin incelendiği MAST çalışması, 14 başarısızlık kipini sistem tasarımı, ajanlar arası uyumsuzluk ve görev doğrulama başlıklarında topladı; kıyaslamalarda çoklu ajanın kazanımı çoğu zaman küçüktür. Cognition da bağlam paylaşılmayan alt ajan mimarisini kırılgan olarak nitelendirdi.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-10"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2503.13657",
+        "https://cognition.ai/blog/dont-build-multi-agents"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kodlayan, test yazan ve denetleyen ajanlar arasında görev yorumu ayrışır; parçalar tek tek geçer ama birleşik sonuç kabul kriterini karşılamaz.",
+        "Rol sayısı arttıkça hata kaynağını bulmak için gereken iz analizi ekip kapasitesini aşar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-006",
+        "N-K04-006",
+        "N-K05-006",
+        "N-K12-006"
+      ],
+      "ornek_araclar": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK"
+      ],
+      "erken_sinyal": "Rol el değiştirmelerinde tekrar eden açıklama istekleri; alt görev çıktılarının birleşimde çelişmesi.",
+      "azaltma": "Topolojiyi eval ile seçme, en az rol sayısıyla başlama, rol devirlerinde yapılandırılmış sözleşme ve paylaşılan görev spesifikasyonu."
+    },
+    {
+      "id": "RK-091",
+      "yetenek_sinifi": "Y-07",
+      "kalip": "Çoklu ajanda token maliyetinin katlanması",
+      "aciklama": "Anthropic kendi verisinde ajanların sohbetten yaklaşık 4 kat, çoklu ajan sistemlerinin ise yaklaşık 15 kat fazla token kullandığını ve ekonomik olabilmesi için görev değerinin yüksek olması gerektiğini belirtti.",
+      "risk_turleri": [
+        "RT-14",
+        "RT-12"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.anthropic.com/engineering/multi-agent-research-system"
+      ],
+      "yasatacagi_sorunlar": [
+        "Her iş kalemi için ayrı uzman ajan zinciri kurulursa 12.000 kayıtlık backlog'da maliyet tahmini katlarca sapar.",
+        "Çoklu ajanın katkısı ölçülmeden yaygınlaştırılırsa bütçe düşük değerli işlere harcanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K10-006",
+        "N-K20-005",
+        "N-K20-006",
+        "N-K23-007"
+      ],
+      "ornek_araclar": [
+        "LangGraph",
+        "CrewAI",
+        "Claude Agent SDK alt ajanları",
+        "AutoGen"
+      ],
+      "erken_sinyal": "Görev başına token ve alt ajan sayısının dağılımında uzun kuyruk.",
+      "azaltma": "Topoloji başına maliyet/başarı ölçümü, görev başına token tavanı, alt ajan sayısının politika ile sınırlanması."
+    },
+    {
+      "id": "RK-092",
+      "yetenek_sinifi": "Y-07",
+      "kalip": "Ajandan ajana istem enjeksiyonunun yayılması",
+      "aciklama": "Prompt Infection çalışması, kötü amaçlı istemin birbirine bağlı ajanlar arasında virüs gibi kendini kopyalayarak veri hırsızlığı ve sistem çapında bozulma yaratabildiğini gösterdi; OWASP LLM06 de ele geçirilmiş eş ajanı aşırı yetki kaynağı sayar.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2410.07283",
+        "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Dış içeriği okuyan araştırma ajanının çıktısı, kod yazan ve birleştirme yetkisi olan ajana talimat olarak geçer; tek enjeksiyon tüm zinciri ele geçirir.",
+        "Ajanlar arası mesajlar denetim kaydına yazılmıyorsa yayılım sonradan izlenemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K12-006",
+        "N-K18-005",
+        "N-K05-007"
+      ],
+      "ornek_araclar": [
+        "A2A protokolü uygulamaları",
+        "LangGraph",
+        "CrewAI",
+        "AutoGen"
+      ],
+      "erken_sinyal": "Ajanlar arası mesajlarda talimat kalıpları, görev dışı araç çağrıları.",
+      "azaltma": "Ajanlar arası iletişimi yapılandırılmış veri ile sınırlama, güvenilmeyen içerik etiketleme, yüksek yetkili ajanların dış içerik okumaması."
+    },
+    {
+      "id": "RK-093",
+      "yetenek_sinifi": "Y-07",
+      "kalip": "Aynı model ailesinden denetçinin ilişkili hataları",
+      "aciklama": "Model benzerliği çalışması, LLM hakemlerinin kendisine benzer modelleri kayırdığını ve yetenek arttıkça model hatalarının birbirine daha çok benzediğini, yani ilişkili başarısızlık riskinin büyüdüğünü gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2502.04313"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kodu yazan ve inceleyen ajan aynı model ailesindeyse aynı kör noktayı paylaşır; bağımsız inceleme kapısı fiilen tek göze iner.",
+        "İnceleme onay oranları yüksek görünür ama kaçan hata sınıfları sistematik olarak aynı kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-005",
+        "N-K05-015",
+        "N-K05-016"
+      ],
+      "ornek_araclar": [
+        "LLM-as-judge incelemeciler",
+        "CodeRabbit",
+        "GitHub Copilot code review",
+        "Claude Code review"
+      ],
+      "erken_sinyal": "Farklı model ailesiyle yapılan örnek incelemede, aynı aile incelemesinin kaçırdığı bulguların sistematik çıkması.",
+      "azaltma": "İncelemede farklı model ailesi zorunluluğu, deterministik kapıların önce çalışması, denetçi–üretici benzerliğinin ölçülmesi."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "kritik": 4,
+    "yuksek": 6,
+    "orta": 74,
+    "dusuk": 66
+  },
+  "sinif_bulgu_turleri": {
+    "RT-03": 25,
+    "RT-10": 20,
+    "RT-08": 15,
+    "RT-01": 13,
+    "RT-06": 9,
+    "RT-14": 8,
+    "RT-04": 6,
+    "RT-07": 6,
+    "RT-05": 6,
+    "RT-16": 5,
+    "RT-13": 5,
+    "RT-02": 4,
+    "RT-15": 4,
+    "RT-11": 4,
+    "RT-09": 1,
+    "RT-12": 1
+  }
+}

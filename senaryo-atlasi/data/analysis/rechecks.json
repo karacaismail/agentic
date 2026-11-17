@@ -1,0 +1,84 @@
+{
+  "scope": "82 gömülü kayıt üzerinden sentez; 5 özgün yerel aralık ve 3 dış kaynak tekrar okundu. Güncel servis/alpha/araç uygunluğu test edilmedi.",
+  "local": [
+    {
+      "source_id": "S11",
+      "path": "/Users/w6x/Developer/software-factory/experiments/runner-environment-20260915/README.md",
+      "line_start": 8,
+      "line_end": 23,
+      "sha256": "28e02c94d1963b61da0a752ef53e891e34cc552f9fa36f007244dd829db06c86",
+      "prior_hash_matches": true,
+      "excerpt": "1. **Tarayıcı container'ı bellek sınırında öldürülüyor.** Splitter (UI-11)\n   adayının 51 testlik birleşik regresyonu 4,3 saniyede boş çıktıyla\n   `TDD_BROWSER_REPORT_MISSING` veriyordu; container çıkış kodu 137; Colima VM\n   kernel günlüğü: `Memory cgroup out of memory: Killed process … (headless_shell)`\n   / `(MainThread)`. 2 GB sınırla aynı aday 3/3 PASS; örneklenen tepe bellek\n   887–942 MiB (2–3 testte ~600 MiB → test başına ~6 MiB birikim). UI-10 aynı\n   imza; UI-05 aynı sınır altında \"page.goto: Page crashed\" (renderer çökmesi).\n2. **Tip çalıştırıcısı projenin ambient bildirimlerini derlemiyordu.**\n   `runtime/type-tests/driver.cjs` yalnız seçili testleri kök dosya alıyor,\n   `types:[]` kullanıyordu; projenin `src/vite-env.d.ts` (`/// <reference\n   types=\"vite/client\" />`) dosyası derlemeye girmiyordu. Paylaşımlı\n   `registry.ts` (`import.meta.glob`) içeren her tip testi\n   `TDD_TYPE_COMPILER_ERROR` (TS2339) ile stage hatasına dönüşüyordu (Team 2).\n3. **Biçimsiz TDD isteği stage'i düşürüyordu.** Team 3'ün `revise_test` isteği\n   seçili test dosyasıyla birebir olmayan değişiklik seti taşıdı;\n   `TDD_TEST_REVISION_PATH` `StopJob` olarak worker'a kadar çıktı ve iş ERROR",
+      "checked": "2026-09-27",
+      "kind": "historical_experiment_report"
+    },
+    {
+      "source_id": "S14",
+      "path": "/Users/w6x/Developer/software-factory/experiments/foundation-repair-20260915/README.md",
+      "line_start": 507,
+      "line_end": 513,
+      "sha256": "6231540cc244ce9c5ebefe22fdb240c3f09a74eb366d88ec567298f215c062ce",
+      "prior_hash_matches": true,
+      "excerpt": "## Step 10ag (installed 2026-09-18 01:19 UTC): bounded review history, context bound is a failure, yield backoff, dependency-pending lane\nMeasured 2026-09-18 00:56 UTC after 13 idle hours (76 merged, 1 blocked): (1) Team 5 / UI-48 — the reviewer's TDD context rendered five historical runs of the thrice-recalled package (93k characters of receipts) → `fit_context` CONTEXT_CAPACITY_UNSUPPORTED on every claim; `defer_failure` matched 'CAPACITY' and yielded PACKAGE_CAPACITY_WAIT; the scheduler re-admitted the team every ~10 s: 4,762 CLAIM/RETRY events, one model call. (2) Team 1 / UI-54 — examples.tsx imports ../empty/Empty (UI-44, same team, merged 08:24, after the candidate failed at 02:22); the candidate (green root + UI-54 only) failed as vite 'Failed to resolve import' → TDD_BROWSER_INFRASTRUCTURE with NEEDS_TRIAGE; `_refresh_lane` never retries blocks that carry a handoff → root waited COMPONENT_DELIVERY_BLOCKED_WAIT since 12:47.\n- factory_delivery_coordinator `_bound_history`: two most recent historical runs detailed, older ones summarized (run id, completion digest, cycle count, test paths), revision diffs cut at 6000 chars, rendered history ≤ 40k; every run is still hash-validated (tampering still stops before the provider). UI-48 context: 93k → ~22k.\n- factory_autonomy_delivery `defer_failure`: only `<NAME>_CAPACITY[_WAIT|_UNAVAILABLE]` messages are waits (account/provider/package/port); CONTEXT_CAPACITY_UNSUPPORTED and INVALID_RUNTIME_CAPACITY_POLICY fail the stage visibly.\n- factory_scheduler `_repeated_yield_backoff`: a child that yielded the same PACKAGE_CAPACITY_WAIT checkpoint digest 4× within 15 min is re-admitted 2 min after its last yield (waiting=PACKAGE_CAPACITY_BACKOFF).\n- factory_component_delivery `classify_dependency`/`_missing_dependency`: an ERROR candidate regression whose artifact says `Failed to resolve import \"<relative>\" from \"<own file>\"` and whose resolved module lies in another package's write_paths gets handoff status DEPENDENCY_PENDING (+dependency_plan_id/package_id, missing_module); `_eligible` counts such a row once the dependency's delivery is MERGED (current evidence) and `_refresh_lane` releases it once (owner_events component-dependency-release). deploy10ag.py `reclassify` applied it to the live UI-54 row (dependency UI-44, module …/components/empty/Empty).\n- Tests +7 (review context 3, worker integration 1 parametrized, scheduler 1, component delivery 2); regression baseline 502 passed, 2 known + 3 test_blockage_checkpoint_database failures that also fail on the untouched live tree (BLOCKAGE_FINALIZE_RECOVERY_REQUIRED), 1 pre-existing test_package_review_tdd_context failure (double `_release_pulse` in accept).",
+      "checked": "2026-09-27",
+      "kind": "historical_experiment_journal"
+    },
+    {
+      "source_id": "S14",
+      "path": "/Users/w6x/Developer/software-factory/experiments/foundation-repair-20260915/README.md",
+      "line_start": 536,
+      "line_end": 542,
+      "sha256": "6231540cc244ce9c5ebefe22fdb240c3f09a74eb366d88ec567298f215c062ce",
+      "prior_hash_matches": true,
+      "excerpt": "## Step 10al (installed 2026-09-18 10:13 UTC): controller execution of a submitted request is not agent idleness\n07:21–10:09: the root's integration suite grew from 570 s to ~70 minutes (the public barrel now publishes all 73 components, so every browser test loads a much larger bundle). `tdd.poll()` executes the submitted request inside the agent-call loop with `protocol_guard` as the harness guard, and `ProgressWatchdog` counts only new controller test receipts as progress — so each request killed its own agent call at the 600 s idle bound (AGENT_PROGRESS_STALLED), the stage failed, recovery restarted it, and on the third occurrence recovery hit RECOVERY_RETRY_BOUND and the root sat in ERROR with no repairer.\n- factory_worker: the loop marks the controller-execution window around `tdd.poll()`.\n- factory_progress `controller_busy` + `_now`: both the idle and the absolute call timers freeze for exactly that window, and `summary()` reports `controller_execution_seconds`. Controller-side hangs remain bounded by the harness's per-run timeouts and the stage lease, not by this idle timer.\n- Tests +4 (test_progress 3, test_worker_progress 1). Regression: 527 passed with the 2 known baseline failures.\n- Root resumed (receipt 0ed5bb87…); hold off 10:13.\n- Open capacity item: the browser runner executes its 50-test batches sequentially (one container at a time) while the VM sits near 19% CPU; parallel batches would cut the ~70 minute suite several-fold, but the runner digest is qualification-covered, so it needs a real-container requalification.",
+      "checked": "2026-09-27",
+      "kind": "historical_experiment_journal"
+    },
+    {
+      "source_id": "S06",
+      "path": "/Users/w6x/Developer/software-factory/docs/handoffs/2026-09-15-claude/DEVIR-RAPORU.md",
+      "line_start": 93,
+      "line_end": 109,
+      "sha256": "df2405d5bab45d9f986c66b8eec7673c5893001009bebb5a5d56210a25660a60",
+      "prior_hash_matches": true,
+      "excerpt": "### P0-3 — Teşhis agent'ının görevi ile erişimi çelişiyor\n\n**Doğrudan kanıt:** bakım çağrısı `51cf5584-674f-4ef1-8ed5-705f0ec79a1d` COMPLETED; çıktı “INCIDENT.json okunamadı, yerel dosya okuma aracı yok, komut çalıştırmak yasak” diyor. Maintenance request SUCCESS ve blockage `step=diagnosed`; ancak gerçek hata teşhis edilmemiş.\n\nOlay dosyası: [INCIDENT.json](/Users/w6x/Developer/software-factory/projects/.impediments/2f4281a4-32be-5634-a442-6abbbb9cd266/diagnosis/INCIDENT.json). SHA256: `9bec9b91fdf553677e3458302ac3d67a734ccdf47bc082d3caada544fe090279`.\n\n[Teşhis prompt'u](/Users/w6x/Developer/software-factory/factory_blockage_worker.py:315) dosyayı okumayı istiyor, komut çalıştırmayı yasaklıyor. [Model girdisi](/Users/w6x/Developer/software-factory/factory_maintenance.py:409) dosyanın kendisini değil talimatı iletiyor. [Codex SDK adaptörü](/Users/w6x/Developer/software-factory/runtime/sdk/codex.mjs:70) özel dosya okuyucu sağlamıyor; proje dokümanı otomatik yükleme de kapalı.\n\n**Gereken:** boyutu sınırlı ve sırlardan temizlenmiş olay içeriğini yapılandırılmış girdiye eklemek veya yalnız ilgili salt okunur dosyayı okuyabilen araç sağlamak. Bunun için geniş yazma/shell yetkisi açmak gerekmiyor. “Dosyayı okuyamadım” çıktısı teşhis başarısı değil, `NEEDS_EVIDENCE` gibi ayrı bir sonuç olmalı. Kabul testi gerçek kullanılan SDK/hesap yolunda dosyadaki bilinen kanıtın okunabildiğini göstermeli.\n\n### P0-4 — Yönetim kaydı ile gerçek onarım arasında eksik yürütme adımı\n\nPush/pull gözlem, sorumlu ataması ve eskalasyon var. Fakat profilsiz teşhisten yeni onarımın hazırlanması → bağımsız doğrulanması → uygulanması → eski işin güvenli devamı zinciri genel olarak tamamlanmış değil.\n\n`record_repair_observation` bir ART kaydı yazar; **worker başlatmaz**. Risk OWNED, kayıt SENT, çağrı COMPLETED veya handoff COMPLETE tek başına onarım/ürün başarısı değildir. [factory_art_runtime.py:63](/Users/w6x/Developer/software-factory/factory_art_runtime.py:63), [factory_blockage_worker.py:469](/Users/w6x/Developer/software-factory/factory_blockage_worker.py:469), [onarım yapılandırması](/Users/w6x/Developer/software-factory/config/self-repair.json).\n\n**Gereken:** RTE'nin kararı, belirli yürütücüye ve makinece doğrulanabilir çıktıya bağlanmalı. Mevcut açık vaka korunmalı; yeni isimle aynı işi açıp bütçe veya deneme sınırı aşılmamalı. Teşhis için gelen model cevabı, uygulanabilir onarım profili olarak kendiliğinden kabul edilmemeli.",
+      "checked": "2026-09-27",
+      "kind": "historical_handoff"
+    },
+    {
+      "source_id": "S20",
+      "path": "/Users/w6x/.claude/projects/-Users-w6x-Library-Application-Support-Claude-scratch-workspaces-df1f8649-21c5-41c8-b9ec-a76cc4374a33-19ed567c-f1a5-419d-a6c4-969331743397-scratch-2026-09-15-95eef1/937c0fea-2f31-4179-b800-431ad0f8843e.jsonl",
+      "line_start": 1573,
+      "line_end": 1573,
+      "sha256": "6d5aef7e6f4161969c5cd4717179ac1ec3caedf54dd914e306cd6ef5c0d3fcc5",
+      "prior_hash_matches": true,
+      "excerpt": "[206336.538407] Memory cgroup out of memory: Killed process 1117907 (MainThread) total-vm:11454408kB, anon-rss:288916kB, file-rss:69248kB, shmem-rss:0kB, UID:501 pgtables:2688kB oom_score_adj:0\n[206336.538778] Memory cgroup out of memory: Killed process 1118229 (headless_shell) total-vm:50719640kB, anon-rss:16140kB, file-rss:53464kB, shmem-rss:13392kB, UID:501 pgtables:524kB oom_score_adj:200",
+      "checked": "2026-09-27",
+      "kind": "transcript_tool_result",
+      "boundary": "Aynı tool_result içinde yinelenen satırlar tekilleştirildi; satır sayısı bağımsız olay sayısı değildir."
+    }
+  ],
+  "web": [
+    {
+      "record_id": "CP-01",
+      "url": "https://github.com/OpenHands/software-agent-sdk/issues/762",
+      "checked": "2026-09-27",
+      "finding": "Sabit stuck eşikleri meşru bekleme/tekrarları kesebiliyor; eşik yapılandırma önerisi.",
+      "boundary": "Issue metni okundu; yerel tekrar deneyi yapılmadı."
+    },
+    {
+      "record_id": "CP-05",
+      "url": "https://github.com/Factory-AI/factory/issues/33",
+      "checked": "2026-09-27",
+      "finding": "Kullanıcı raporu: ps yokken liveness kontrolü SIGKILL üretiyor.",
+      "boundary": "Yazarın mekanizma açıklaması; maintainer tarafından doğrulanmış genel ürün kusuru diye sayılmadı."
+    },
+    {
+      "record_id": "WF-06",
+      "url": "https://community.temporal.io/t/workflow-not-recovered-after-crash/1770",
+      "checked": "2026-09-27",
+      "finding": "Yazar 24 Mart 2021 son mesajında kendi kod hatasını kabul ediyor.",
+      "boundary": "Başlıktaki ürün kusuru izlenimi son mesajla düzeltilmeli."
+    }
+  ]
+}

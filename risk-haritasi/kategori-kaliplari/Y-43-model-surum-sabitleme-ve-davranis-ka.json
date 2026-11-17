@@ -1,0 +1,131 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-43",
+    "ad": "Model sürüm sabitleme ve davranış kayması izleme",
+    "grup": "Model erişimi ve ekonomisi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-219",
+      "yetenek_sinifi": "Y-43",
+      "kalip": "Sürüm adı aynı kalırken davranış kayması",
+      "aciklama": "Stanford/Berkeley çalışması, GPT-3.5 ve GPT-4'ün Mart ve Haziran 2023 sürümleri arasında aynı görevlerde davranışın belirgin değiştiğini gösterdi; Anthropic'in 2025 olay analizi de model değişmeden altyapı hatalarının çıktı kalitesini bozabildiğini ortaya koydu.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-11"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2307.09009",
+        "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues"
+      ],
+      "yasatacagi_sorunlar": [
+        "Hakem kalibrasyonu, eşikler ve maliyet tahminleri 'sabitlenmiş' model adına bağlanır ama davranış değişir; regresyon ancak üretimde fark edilir.",
+        "Takma ad (alias) kullanan yapılandırmalar farkında olmadan yeni sürüme geçer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-013",
+        "N-K23-010",
+        "N-K09-012"
+      ],
+      "ornek_araclar": [
+        "OpenAI API",
+        "Anthropic API",
+        "Google Gemini API",
+        "Azure OpenAI"
+      ],
+      "erken_sinyal": "Sabit eval setinde model adı değişmeden skor değişimi.",
+      "azaltma": "Tarihli tam model kimliği kullanımı, sürekli kanarya eval, model kaydında sürüm ve uç nokta bilgisi."
+    },
+    {
+      "id": "RK-220",
+      "yetenek_sinifi": "Y-43",
+      "kalip": "Model emekliliği ve kısa göç penceresi",
+      "aciklama": "Anthropic, herkese açık modeller için emeklilikten en az 60 gün önce bildirim verdiğini belirtir; örneğin Claude 2, 2.1 ve Sonnet 3 21 Temmuz 2025'te, Claude 3 Opus 5 Ocak 2026'da emekliye ayrıldı. OpenAI de kullanımdan kaldırılan modelleri ayrı bir sayfada duyurur.",
+      "risk_turleri": [
+        "RT-10",
+        "RT-06"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.anthropic.com/en/docs/about-claude/model-deprecations",
+        "https://platform.openai.com/docs/deprecations"
+      ],
+      "yasatacagi_sorunlar": [
+        "60 günlük pencere, 10+ ekibin rol bazlı kalibrasyonunu, eval regresyonunu ve kamu onay süreçlerini tamamlamaya yetmeyebilir.",
+        "Emekli modele bağlı yapılandırmalar emeklilik günü hattı durdurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-013",
+        "N-K16-005",
+        "N-K09-012",
+        "N-K22-008"
+      ],
+      "ornek_araclar": [
+        "Anthropic API",
+        "OpenAI API",
+        "Google Vertex AI",
+        "Amazon Bedrock"
+      ],
+      "erken_sinyal": "Sağlayıcıdan kullanımdan kaldırma bildirimi; model kaydında emeklilik tarihi yaklaşan roller.",
+      "azaltma": "Model kaydında emeklilik tarihlerinin izlenmesi, yedek modelin önceden kalibre edilmesi, sağlayıcı sözleşmesinde asgari destek süresi."
+    },
+    {
+      "id": "RK-221",
+      "yetenek_sinifi": "Y-43",
+      "kalip": "Sabit modelde bile yeniden üretilemezlik",
+      "aciklama": "Thinking Machines, sıcaklık 0'da bile LLM çıkarımının sunucu yükü ve toplu işleme boyutuna bağlı olarak deterministik olmadığını ve bunun kayan nokta toplama sırası ile toplu işlem değişmezliği eksikliğinden kaynaklandığını gösterdi.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Denetimde bir ajan kararının aynı model ve istemle yeniden üretilmesi istendiğinde farklı sonuç çıkar; yeniden üretilebilirlik iddiası karşılanamaz.",
+        "Kayma izleme, doğal değişkenliği gerçek kaymadan ayıramaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K19-005",
+        "N-K09-013",
+        "N-K23-003"
+      ],
+      "ornek_araclar": [
+        "Barındırılan LLM API'leri",
+        "vLLM",
+        "SGLang"
+      ],
+      "erken_sinyal": "Aynı girdiyle tekrarlanan çağrılarda çıktı farkı oranı.",
+      "azaltma": "Kararın kendisini ve gerekçesini kayda almak, yeniden üretilebilirliği dağılım düzeyinde tanımlamak, kendi barındırılan sunumda toplu işlem değişmez çekirdekler."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "orta": 9,
+    "yuksek": 7,
+    "kritik": 1,
+    "dusuk": 10
+  },
+  "sinif_bulgu_turleri": {
+    "RT-08": 11,
+    "RT-11": 10,
+    "RT-10": 9,
+    "RT-16": 5,
+    "RT-14": 5,
+    "RT-01": 5,
+    "RT-03": 4,
+    "RT-06": 3,
+    "RT-04": 2,
+    "RT-07": 2,
+    "RT-02": 2,
+    "RT-15": 1,
+    "RT-05": 1
+  }
+}

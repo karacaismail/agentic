@@ -1,0 +1,167 @@
+{
+  "sema": "risk-haritasi/kategori@1",
+  "yetenek_sinifi": {
+    "id": "Y-04",
+    "ad": "Yardımcı modeller (gömme, yeniden sıralama, belge çözümleme, çok kipli algılama, bilgisayar kullanımı)",
+    "grup": "Model erişimi ve ekonomisi"
+  },
+  "kaliplar": [
+    {
+      "id": "RK-078",
+      "yetenek_sinifi": "Y-04",
+      "kalip": "Gömme vektörlerinden metnin geri elde edilmesi",
+      "aciklama": "Gömme vektörleri anonim değildir: vec2text çalışması 32 token'lık girdilerin %92'sini birebir geri kurabildiğini ve klinik notlardan tam adları çıkarabildiğini gösterdi. OWASP LLM08:2025 de gömme tersine çevirme saldırısını listeler.",
+      "risk_turleri": [
+        "RT-08"
+      ],
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2310.06816",
+        "https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/"
+      ],
+      "yasatacagi_sorunlar": [
+        "İş kalemi ve doküman gömmeleri 'kişisel veri içermez' varsayımıyla yurt dışındaki bir vektör hizmetine konursa KVKK md. 9 kapsamında aktarım yapılmış olur.",
+        "Silme talebinde gömmeler unutulursa kişisel veri sistemde kalmaya devam eder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K14-002",
+        "N-K22-005",
+        "N-K22-009",
+        "N-K14-007"
+      ],
+      "ornek_araclar": [
+        "OpenAI Embeddings",
+        "Cohere Embed",
+        "Voyage AI",
+        "BGE-M3"
+      ],
+      "erken_sinyal": "Veri sınıflandırmasında gömme deposunun 'kişisel veri yok' olarak işaretlenmesi.",
+      "azaltma": "Gömme deposunu kaynak metinle aynı veri sınıfında tutma, yerel gömme modeli, silme akışına gömmelerin dahil edilmesi."
+    },
+    {
+      "id": "RK-079",
+      "yetenek_sinifi": "Y-04",
+      "kalip": "Bilgisayar/tarayıcı kullanan ajanlarda görsel içerikten istem enjeksiyonu",
+      "aciklama": "Ekran ve web sayfası okuyan ajanlar sayfadaki gizli talimatlara açıktır. Anthropic, Claude for Chrome için 123 test vakasında korumasız %23,6 saldırı başarı oranı ölçtü ve önlemlerle %11,2'ye indirdi; EIA çalışması web ajanlarında ortam enjeksiyonuyla kişisel veri sızdırılabildiğini gösterdi.",
+      "risk_turleri": [
+        "RT-03"
+      ],
+      "siddet": "kritik",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.anthropic.com/news/claude-for-chrome",
+        "https://arxiv.org/abs/2409.11295"
+      ],
+      "yasatacagi_sorunlar": [
+        "Arayüz doğrulama veya gerçek cihaz testinde tarayıcı ajanı, test edilen sayfadaki veya üçüncü taraf içerikteki gizli talimatla oturum açık iç sistemlerde işlem yapabilir.",
+        "Önlemlerle bile kalan kalıcı saldırı başarı oranı, yüksek riskli eylemlerde insan onayı olmadan çalıştırmayı kabul edilemez kılar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-008",
+        "N-K18-005",
+        "N-K05-018"
+      ],
+      "ornek_araclar": [
+        "Claude Computer Use",
+        "OpenAI Operator/CUA",
+        "Browser Use",
+        "Playwright MCP"
+      ],
+      "erken_sinyal": "Ajan eylem izinde görev dışı alan adlarına gezinme veya form doldurma.",
+      "azaltma": "Tarayıcı ajanını ayrı, oturumsuz profil ve izinli alan adı listesiyle çalıştırma; yazma/gönderme eylemlerinde insan onayı; üretim hesaplarıyla kullanmama."
+    },
+    {
+      "id": "RK-080",
+      "yetenek_sinifi": "Y-04",
+      "kalip": "Belge çözümleme ve görsel algıda halüsinasyon",
+      "aciklama": "PDF, tablo, formül ve diyagram çözümlemede farklı yöntemlerin başarımı belge türüne göre büyük fark gösterir (OmniDocBench); görsel dil modelleri basit görsel ayrıntıları bile güvenilir biçimde metne dökemeyebilir.",
+      "risk_turleri": [
+        "RT-11"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://arxiv.org/abs/2412.07626",
+        "https://arxiv.org/abs/2407.06581"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekran görüntüsü veya diyagramdan üretilen gereksinim metni sessizce yanlış olabilir; bu hata spesifikasyon kalitesi kapısından geçerek yanlış koda dönüşür.",
+        "Taranmış kamu belgelerindeki tablolar yanlış hizalanırsa kabul kriterleri bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-008",
+        "N-K14-002",
+        "N-K01-001"
+      ],
+      "ornek_araclar": [
+        "Docling",
+        "Unstructured",
+        "Azure Document Intelligence",
+        "Marker"
+      ],
+      "erken_sinyal": "Çözümlenen metinle kaynak belge arasında rastgele örneklemde uyumsuzluk; tablo satır/sütun sayısı farkları.",
+      "azaltma": "Kritik belgelerde insan örnek denetimi, çıktı ile kaynak arasında otomatik tutarlılık kontrolleri, belge türüne göre ayrı çözümleyici ve kalite ölçümü."
+    },
+    {
+      "id": "RK-081",
+      "yetenek_sinifi": "Y-04",
+      "kalip": "Türkçe arama kalitesinin kanıtlanmamış olması ve gömme modeline kilitlenme",
+      "aciklama": "Çok dilli kıyaslamalar (MMTEB) geniş dil kapsamı sunsa da kurum alanına ve Türkçe teknik metne özgü başarımı göstermez; gömme modeli değiştiğinde tüm dizinin yeniden üretilmesi gerekir.",
+      "risk_turleri": [
+        "RT-11",
+        "RT-15",
+        "RT-07"
+      ],
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://arxiv.org/abs/2502.13595"
+      ],
+      "yasatacagi_sorunlar": [
+        "Türkçe iş kalemlerinde eşanlamlı ve ekli sözcükler nedeniyle yinelenen kayıt ve ilgili karar kaydı bulunamaz.",
+        "Gömme modeli sağlayıcısı modeli emekliye ayırırsa milyonlarca parçanın yeniden gömülmesi maliyet ve kesinti yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K09-014",
+        "N-K14-002",
+        "N-K23-009"
+      ],
+      "ornek_araclar": [
+        "OpenAI Embeddings",
+        "Cohere Embed",
+        "multilingual-e5",
+        "BGE-M3"
+      ],
+      "erken_sinyal": "Kurum içi Türkçe sorgu setinde isabet oranının kıyaslama puanından belirgin düşük çıkması.",
+      "azaltma": "Kurum Türkçe arama test seti, hibrit (sözcük + vektör) arama, gömme modeli sürümünün dizin meta verisine yazılması ve yeniden dizinleme planı."
+    }
+  ],
+  "sinif_arac_risk_dagilimi": {
+    "dusuk": 63,
+    "orta": 62,
+    "yuksek": 9,
+    "kritik": 1
+  },
+  "sinif_bulgu_turleri": {
+    "RT-11": 13,
+    "RT-15": 11,
+    "RT-04": 10,
+    "RT-12": 7,
+    "RT-05": 5,
+    "RT-01": 5,
+    "RT-02": 4,
+    "RT-08": 4,
+    "RT-13": 3,
+    "RT-10": 3,
+    "RT-03": 2,
+    "RT-09": 2,
+    "RT-14": 2,
+    "RT-07": 2,
+    "RT-06": 1
+  }
+}

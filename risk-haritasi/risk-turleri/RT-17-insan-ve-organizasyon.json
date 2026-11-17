@@ -1,0 +1,2044 @@
+{
+  "sema": "risk-haritasi/risk-turu@1",
+  "risk_turu": {
+    "id": "RT-17",
+    "ad": "İnsan ve organizasyon",
+    "tanim": "Aşırı güven, beceri körelmesi, gölge kullanım, çalışan izleme hukuku, benimseme zorluğu."
+  },
+  "ozet": {
+    "bulgu": 53,
+    "siddet": {
+      "yuksek": 33,
+      "orta": 18,
+      "dusuk": 2
+    },
+    "arac": 53,
+    "kategori_kalibi": 43,
+    "olay": 37,
+    "senaryo": 30,
+    "otomatik_sinyalli_arac": 0
+  },
+  "en_cok_etkilenen_ihtiyaclar": [
+    [
+      "N-K32-001",
+      21
+    ],
+    [
+      "N-K32-002",
+      19
+    ],
+    [
+      "N-K25-007",
+      18
+    ],
+    [
+      "N-K23-008",
+      11
+    ],
+    [
+      "N-K24-011",
+      9
+    ],
+    [
+      "N-K32-007",
+      8
+    ],
+    [
+      "N-K32-005",
+      5
+    ],
+    [
+      "N-K30-002",
+      5
+    ],
+    [
+      "N-K25-006",
+      5
+    ],
+    [
+      "N-K25-005",
+      4
+    ],
+    [
+      "N-K25-003",
+      4
+    ],
+    [
+      "N-K22-005",
+      3
+    ],
+    [
+      "N-K32-004",
+      3
+    ],
+    [
+      "N-K23-015",
+      3
+    ],
+    [
+      "N-K18-011",
+      2
+    ],
+    [
+      "N-K29-006",
+      2
+    ],
+    [
+      "N-K17-006",
+      2
+    ],
+    [
+      "N-K18-010",
+      2
+    ],
+    [
+      "N-K08-005",
+      2
+    ],
+    [
+      "N-K25-009",
+      2
+    ],
+    [
+      "N-K24-010",
+      2
+    ],
+    [
+      "N-K32-008",
+      2
+    ],
+    [
+      "N-K22-009",
+      1
+    ],
+    [
+      "N-K18-004",
+      1
+    ],
+    [
+      "N-K22-010",
+      1
+    ]
+  ],
+  "bulgular": [
+    {
+      "arac_id": "AR-0375",
+      "arac": "Claude Usage & Cost Admin API (ve Claude Code Analytics API)",
+      "gorev": "R-G07",
+      "tur": "RT-17",
+      "baslik": "Claude Code Analytics API kişi başı e-posta ve verimlilik verisi veriyor; saklama süresi belirsiz",
+      "aciklama": "Her kayıt bir kullanıcının günlük oturum, eklenen ve silinen satır, commit, PR, araç kabul/ret ve tahmini maliyet verisini e-posta adresiyle birlikte içeriyor. Belge 'belirli bir silme süresi yok' diyor.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kişi bazlı satır ve kabul oranı verileri performans değerlendirmesinde kullanılırsa KVKK md.4 ölçülülük ve md.7 saklama-imha yükümlülükleriyle çatışır.",
+        "Sağlayıcı tarafında süresiz saklama, kurumun imha politikasıyla uyumlu değil."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K22-009",
+        "N-K22-005",
+        "N-K23-008",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Kişi bazlı sıralama panolarının oluşması.",
+      "azaltma": "Veriyi alırken kişi kimliğini takma adla değiştirip ekip düzeyinde birleştirmek; aydınlatma metni hazırlamak.",
+      "id": "BL-00695",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kayıtlar e-posta, oturum, satır, commit, PR, araç kabul/ret ve maliyet içeriyor. SSS'de 'There is no specified deletion period' yazıyor.",
+        "kaynak": [
+          "https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2547",
+      "arac": "Postman",
+      "gorev": "R-G03b",
+      "tur": "RT-17",
+      "baslik": "Kamuya açık çalışma alanlarından yaygın sır sızıntısı",
+      "aciklama": "CloudSEK'in 23 Aralık 2024'te yayımladığı yıl süren araştırmaya göre 30.000'den fazla kamuya açık Postman çalışma alanı API anahtarı, erişim belirteci, iş verisi ve müşteri kişisel verisi sızdırıyordu. Başlıca nedenler yanlış paylaşım, zayıf erişim denetimi ve düz metin saklama.",
+      "tarih": "2024-12",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "ikincil",
+      "kanit_url": [
+        "http://web.archive.org/web/20260914154303/https://www.cloudsek.com/blog/postman-data-leaks-the-hidden-risks-lurking-in-your-workspaces"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir geliştiricinin kişisel ücretsiz hesabında oluşturduğu çalışma alanını yanlışlıkla 'public' yapması, kurumun üretim API anahtarlarını internete açar.",
+        "Gölge hesaplar (kurumsal alan adı dışında) denetim dışında kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-004",
+        "N-K25-005",
+        "N-K18-011"
+      ],
+      "erken_sinyal": "Kurum alan adıyla ilişkili açık çalışma alanlarının dış taramada bulunması.",
+      "azaltma": "Domain capture/verification ile kurum hesaplarını merkezileştirin. Kamuya açık çalışma alanı oluşturmayı kapatın. Postman için sır taraması yapın ve düzenli dış tarama çalıştırın.",
+      "id": "BL-02042",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Arşivlenen CloudSEK yazısı (23 Aralık 2024, Ayush Panwar) 'year-long investigation' ile 30.000'den fazla kamuya açık çalışma alanının belirteç, API anahtarı, iş verisi ve müşteri kişisel verisi sızdırdığını doğruluyor. Nedenler olarak yanlış erişim denetimi, kazara paylaşım ve düz metin saklama sayılıyor.",
+        "kaynak": [
+          "http://web.archive.org/web/20260914154303/https://www.cloudsek.com/blog/postman-data-leaks-the-hidden-risks-lurking-in-your-workspaces"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3552",
+      "arac": "Uplevel",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Takvim ve sohbet araçlarından veri toplama",
+      "aciklama": "Güvenlik sayfasına göre Uplevel iş takip ve kaynak kod yanında takvim ve sohbet araçlarına OAuth, kişisel erişim token'ı veya servis hesabıyla bağlanıyor.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://uplevelteam.com/security",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Toplantı ve mesajlaşma metadata'sından 'odak süresi' çıkarımı, çalışan iletişiminin izlenmesi olarak algılanır; KVKK ölçülülük ilkesi ve iş hukuku itirazı doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K25-007",
+        "N-K24-011"
+      ],
+      "erken_sinyal": "Sohbet/takvim entegrasyonu için kapsamlı OAuth izin talepleri.",
+      "azaltma": "Takvim/sohbet entegrasyonlarını kapatmak veya yalnız toplu metadata; çalışan temsilcileriyle mutabakat.",
+      "id": "BL-02208",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Güvenlik sayfası iş takip, kaynak kod, takvim ve sohbet araçlarına OAuth, kişisel erişim token'ı veya servis hesabıyla bağlandığını yazıyor. Aynı sayfaya göre sohbet mesaj içeriği saklanmıyor (yalnız karakter sayısı), takvim açıklama/konum/bağlantıları ve kod diff'leri siliniyor.",
+        "kaynak": [
+          "https://uplevelteam.com/security",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3590",
+      "arac": "Aviator Team Reviews (eski FlexReview)",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Kişi bazında 'AT RISK' etiketi ve inceleme metriklerinin performans değerlendirmesine sızması",
+      "aciklama": "Team Reviews (eski FlexReview) ürün sayfası, ekip üyesi bazında yazılan ve incelemeye atanan PR sayısını, SLO durumunu ('MEETING' / 'AT RISK') ve inceleme yükünü ('BALANCED' / 'HIGH') gösteren örnek bir pano sunuyor. Sayfa ayrıca geliştirici × dosya bazında alan uzmanlığı skorunu ve ilk incelemeye kadar geçen süre takibini tanıtıyor. Bu kişi bazlı etiketlerin performans değerlendirmesine sızması bir çıkarımdır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.aviator.co/team-reviews"
+      ],
+      "yasatacagi_sorunlar": [
+        "'AT RISK' etiketi ve kişi bazlı hız verisi yöneticilerin bireysel değerlendirmesine girerse iş hukuku ve KVKK ölçülülük ilkesi açısından uyuşmazlık çıkar.",
+        "İnceleyiciler SLO'yu tutturmak için hızlı ve yüzeysel onaya yönelir; ajan kodunda otomasyon yanlılığı artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-002",
+        "N-K32-001",
+        "N-K29-006",
+        "N-K17-006"
+      ],
+      "erken_sinyal": "SLO uyum raporlarının kişi bazında performans toplantılarında kullanılması.",
+      "azaltma": "Kişi bazlı görünümü yalnız yük dengelemeye ayırmak; aydınlatma, çalışan temsilcileriyle danışma ve toplu raporlama.",
+      "id": "BL-02241",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Sayfa ekip üyesi bazında örnek pano, geliştirici × dosya uzmanlık skoru ve ilk inceleme süresi takibini doğruluyor; /flexreview adresi /team-reviews'a yönleniyor. 'MEETING BALANCE' diye bir etiket yok: 'MEETING/AT RISK' SLO sütunu, 'BALANCED/HIGH' ise yük sütunu. Performans değerlendirmesine sızma bir çıkarım.",
+        "kaynak": [
+          "https://www.aviator.co/team-reviews",
+          "https://www.aviator.co/flexreview"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3711",
+      "arac": "Netskope (GenAI kullanım görünürlüğü)",
+      "gorev": "R-G05",
+      "tur": "RT-17",
+      "baslik": "Yapay zekâ istemlerinin yakalanması çalışan izlemesi niteliğinde",
+      "aciklama": "Gölge yapay zekâ keşfi ve istem DLP'si çalışan davranışını izler; araç haritası KVKK md.4 ölçülülük, md.10 aydınlatma, VERBİS güncellemesi ve istem içeriğinde özel nitelikli veri riskini not ediyor (çıkarım).",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.netskope.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "İstemlerin tam içeriği kaydedilirse çalışanların sağlık, sendika gibi özel nitelikli verileri de toplanır; aydınlatma yapılmadan kullanım idari yaptırım ve iş hukuku uyuşmazlığı doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K18-010",
+        "N-K22-010",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Politika tanımında tam istem kaydının açık olması; çalışan şikâyetleri.",
+      "azaltma": "Amaç sınırlı politika, aydınlatma metni, içerik yerine meta veri kaydı, kişisel cihaz hariç tutma.",
+      "id": "BL-02304",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Netskope GenAI App Security, DLP ve AI Guardrails sunuyor; istem yakalamanın KVKK kapsamında çalışan izlemesi sayılması makul bir hukuki çıkarım.",
+        "kaynak": [
+          "https://www.netskope.com/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4148",
+      "arac": "Multitudes",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Yöneticiler doğrudan raporlarının bireysel görünümünü görüyor; mesai dışı iş kişi bazında",
+      "aciklama": "Roller belgesine göre yöneticiler doğrudan raporlarını ekleyip onların bire bir (1:1) görünümlerini görebiliyor; bireysel görünümü kapatıp yalnız ekip toplamı bırakan bir ayar belgelenmemiş. 'Out-of-hours work' metriği commit zaman damgalarından kişi bazında hesaplanıyor (varsayılan hafta içi 08-18). Veri etiği ilkeleri şeffaflık vaat ediyor ama performans değerlendirmesinde kullanmama taahhüdü içermiyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.multitudes.com/configuration-and-setup/permissions-and-roles",
+        "https://docs.multitudes.com/metrics-and-definitions/people-metrics/wellbeing/out-of-hours-work",
+        "https://www.multitudes.com/our-data-ethics-principles"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mesai dışı commit verisi kişi bazında yöneticiye görünür olur; 4857 sayılı Kanun kapsamındaki fazla çalışma ve performans süreçlerinde amaç dışı kullanılabilir, KVKK ölçülülük ilkesi zorlanır.",
+        "Bireysel YZ etki verisi terfi/işten çıkarma kararlarına sızarsa N-K32-002 ihlal edilir; çalışan temsilcileriyle danışma (N-K32-004) olmadan devreye alınırsa itiraz doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K32-004",
+        "N-K32-005",
+        "N-K30-004"
+      ],
+      "erken_sinyal": "Bireysel 1:1 görünümlerinin performans toplantısı notlarında geçmesi.",
+      "azaltma": "Yönetici rolünü dar tutun; kullanım amacını iç düzenleme ve aydınlatmayla sınırlayın; yalnız ekip düzeyi panoları paylaşın; devreye almadan önce çalışan temsilcileriyle danışın.",
+      "id": "BL-02381",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Roller tablosunda Manager 'Add direct reports & view their 1:1s' yetkisine sahip; Out-of-Hours Work commit sayısından, varsayılan 08-18 Pzt-Cum ile hesaplanıyor; etik ilkelerde performans değerlendirmesinde kullanmama taahhüdü yok.",
+        "kaynak": [
+          "https://docs.multitudes.com/configuration-and-setup/permissions-and-roles",
+          "https://docs.multitudes.com/metrics-and-definitions/people-metrics/wellbeing/out-of-hours-work",
+          "https://www.multitudes.com/our-data-ethics-principles"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4232",
+      "arac": "Range",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Kontroller (ve ruh hâli) varsayılan olarak tüm çalışma alanına açık; gizli kontrol ücretli",
+      "aciklama": "Yardım belgesi yayımlanan bir kontrolün, çalışma alanına erişimi olan herkes tarafından kişinin profilinde görülebildiğini; yalnız tek bir kilitli ekiple paylaşılan gizli kontrollerin ücretli planlarda olduğunu söylüyor. Kontroller 'ne yapıldığı'nın yanında 'nasıl hissedildiği'ni de paylaşmak için tasarlanmış.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "yuksek",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.range.co/help/article/who-can-see-my-check-ins",
+        "https://www.range.co/help/article/mood-check-ins"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çalışanın ruh hâli ve günlük iş özeti kurum genelinde kişi adıyla görünür; iyi oluş verisi toplulaştırılmadan paylaşılır, psikolojik güvenlik azalır.",
+        "Ruh hâli kayıtları sağlık verisine yaklaşan hassas bilgi içerebilir; KVKK md. 6 riski doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-005",
+        "N-K30-006"
+      ],
+      "erken_sinyal": "Ruh hâli alanının boş bırakılma oranının artması.",
+      "azaltma": "Ruh hâli alanını kapatın; gizli kontrolleri zorunlu kılın; iyi oluşu ayrı, toplulaştırılmış bir anketle ölçün.",
+      "id": "BL-02433",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Yardım makalesi yayımlanan Check-in'in çalışma alanına erişimi olan herkesçe profilde görülebildiğini, Private Check-in'in tek kilitli ekiple ve yalnız ücretli planlarda olduğunu; mood makalesi 'nasıl hissedildiği'nin paylaşıldığını söylüyor.",
+        "kaynak": [
+          "https://www.range.co/help/article/who-can-see-my-check-ins",
+          "https://www.range.co/help/article/mood-check-ins"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0601",
+      "arac": "LinearB",
+      "gorev": "R-G09",
+      "tur": "RT-17",
+      "baslik": "Bireysel geliştirici metrikleri ve 'koçluk': performans değerlendirmesine dönüşme riski",
+      "aciklama": "Fiyat sayfasına göre Enterprise planda bireysel geliştirici metrikleri ve geliştirici koçluğu var. Gizlilik politikası; Git ve proje araçlarındaki isimleri, e-postaları ve kullanıcı etkinliği meta verisini işlediğini söylüyor. KVKK'da çalışan verisinin ölçülülük ve amaç sınırlaması şartları olduğu için bu verinin performans değerlendirmesinde kullanılması hukuki risktir; bu değerlendirme bir çıkarımdır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://linearb.io/pricing",
+        "https://linearb.io/privacy-policy",
+        "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kişi bazlı 'cycle time' ve PR sayıları bireysel değerlendirmede kullanılırsa KVKK ölçülülük ihlali ve iş hukuku uyuşmazlığı doğabilir.",
+        "Ajanların açtığı PR'lar insan metriklerine karışırsa bireysel karşılaştırmalar anlamsızlaşır ve haksız sonuç üretir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-011",
+        "N-K25-007",
+        "N-K23-008",
+        "N-K08-005"
+      ],
+      "erken_sinyal": "Yönetici panolarında kişi bazlı sıralama; ekiplerde metrik oynatma (PR bölme, boş commit).",
+      "azaltma": "Kişi düzeyi raporları kapatın; ajan PR'larını ayrı etiketle ayırın; çalışan temsilcileriyle yazılı metrik kullanım politikası yapın.",
+      "id": "BL-00940",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Fiyat karşılaştırma tablosunda 'Developer coaching' (üretkenlik KPI'larının paylaşılan görünürlüğü) yalnız Enterprise'da işaretli; Enterprise ayrıca 'Developer productivity insights' içeriyor. 'Bireysel geliştirici metrikleri' ifadesi sayfada birebir geçmiyor. Gizlilik politikası Git ve proje araçlarındaki ad, e-posta ve kullanıcı etkinliği meta verisini işlediğini söylüyor; KVKK değerlendirmesi açıkça çıkarım olarak işaretlenmiş ve makul.",
+        "kaynak": [
+          "https://linearb.io/pricing",
+          "https://linearb.io/privacy-policy",
+          "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0603",
+      "arac": "Swarmia",
+      "gorev": "R-G09",
+      "tur": "RT-17",
+      "baslik": "Kişi düzeyinde iş günlüğü, İK izin verisi ve YZ aracı kullanımı: çalışan izleme riski",
+      "aciklama": "Swarmia'nın iş günlüğü (work log) her geliştirici etkinliğini (commit, PR, inceleme, iş tamamlama) gösterir. 'AI cost' ekranı YZ belirteç kullanımını ekip ve kişi bazında gösterir. Kapalı betadaki Timesheets, her geliştirici için günlük saatleri otomatik üretir. İK sistemlerinden (BambooHR, HiBob, Merge.dev üzerinden Workday vb.) izin verisi çekilerek 'geliştirici efor' metrikleri hesaplanır. KVKK'nın ölçülülük ve amaç sınırlaması ilkeleri nedeniyle bu verinin performans değerlendirmesine dönüşmesi hukuki risk taşır; bu değerlendirme bir çıkarımdır.",
+      "tarih": "2026-06",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://help.swarmia.com/features/focus/analyzing-the-activity-patterns-on-work-log.md",
+        "https://help.swarmia.com/features/ai-tools/ai-cost.md",
+        "https://help.swarmia.com/features/capitalize-software-development-costs/timesheets.md",
+        "https://help.swarmia.com/settings/integrations/hr-systems.md",
+        "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yöneticiler iş günlüğü ve YZ aracı kullanım verisini bireysel performans değerlendirmesinde kullanırsa, KVKK md. 4 ölçülülük ilkesi ihlal edilebilir ve iş hukuku uyuşmazlıkları çıkabilir.",
+        "İzin ve hastalık verisinin (özel nitelikli veri olabilir) metrik aracına akması ek hukuki dayanak gerektirir.",
+        "Ölçüldüğünü hisseden ekipler metriği oynatır (küçük PR bölme gibi); DORA verisi güvenilmez olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-011",
+        "N-K25-007",
+        "N-K23-008",
+        "N-K22-005",
+        "N-K25-009"
+      ],
+      "erken_sinyal": "Metrik ekran görüntülerinin performans toplantılarında kullanılması; çalışan temsilcilerinden şikâyet; PR boyutlarında ani değişim.",
+      "azaltma": "Kişi düzeyi görünümleri kapatıp ekip düzeyine sınırlayın; İK entegrasyonunu kullanmayın ya da takma adlı yapın; KVKK aydınlatma metni ve çalışan temsilcileriyle yazılı kullanım politikası hazırlayın.",
+      "id": "BL-00943",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belgeler doğruluyor: work log geliştirici etkinliklerini ve izin durumunu gösteriyor, AI cost ekranı belirteç kullanımını ekip ve kişi bazında veriyor (CSV dışa aktarımı var), Timesheets kapalı betada her geliştirici için günlük saat üretiyor. İK entegrasyonu (BambooHR, HiBob, Merge.dev/Workday) izin verisini efor metriklerine katıyor. KVKK riski bulguda doğru biçimde çıkarım olarak işaretlenmiş.",
+        "kaynak": [
+          "https://help.swarmia.com/features/focus/analyzing-the-activity-patterns-on-work-log.md",
+          "https://help.swarmia.com/features/ai-tools/ai-cost.md",
+          "https://help.swarmia.com/features/capitalize-software-development-costs/timesheets.md",
+          "https://help.swarmia.com/settings/integrations/hr-systems.md",
+          "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0604",
+      "arac": "DX",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Geliştirici düzeyinde ölçümün çalışan izlemeye dönüşmesi",
+      "aciklama": "DX; anket, deneyim örneklemesi, geliştirici makinesindeki daemon ile commit/PR düzeyinde AI kod içgörüleri ve Ar-Ge aktifleştirme modülleriyle kişi ve ekip verisini birleştiriyor. Bu veri kişi bazlı performans değerlendirmesinde kullanılırsa KVKK md.4 ölçülülük ve amaçla sınırlılık ilkeleri açısından risk doğar. AB YZ Yasası Ek III-4(b) yüksek risk sınıfı ancak bu değerlendirme bir YZ sistemiyle yapılır ve sonuç AB'de kullanılırsa gündeme gelir.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://getdx.com/security/",
+        "https://artificialintelligenceact.eu/annex/3/",
+        "https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yapay zekâ kullanım oranı yöneticilerce bireysel performans göstergesi olarak okunursa çalışanlar metriği oynatır (Goodhart) ve güven kaybı olur.",
+        "Aydınlatma metni ve açık hukuki dayanak olmadan anket + sistem verisi birleştirmesi KVKK şikâyetine konu olabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K25-007",
+        "N-K24-011"
+      ],
+      "erken_sinyal": "Yönetici panolarında kişi adıyla sıralama talepleri; anket katılımında düşüş.",
+      "azaltma": "Yalnız ekip düzeyi toplulaştırma ve asgari grup büyüklüğü; ölçüm amacını ve kullanım yasağını (bireysel değerlendirme dışı) politika ile yazmak; çalışan temsilcileriyle paylaşmak.",
+      "id": "BL-00947",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "DX modülleri (Experience Sampling, R&D Capitalization, commit/PR düzeyinde AI Code Insights daemon'u) doğrulandı; Ek III-4(b) metni performans ve davranış izleme/değerlendirmeyi kapsıyor. Ancak AB YZ Yasası yüksek risk sınıfı verinin kullanımıyla değil, bu amaçla kullanılan bir YZ sistemiyle doğar ve Türk kuruluşuna ancak çıktı AB'de kullanılırsa uygulanır; iddia bu koşulları atlıyor.",
+        "kaynak": [
+          "https://getdx.com/security/",
+          "https://docs.getdx.com/ai-code-insights/overview/",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0607",
+      "arac": "Faros AI",
+      "gorev": "R-G07",
+      "tur": "RT-17",
+      "baslik": "Kişi bazlı yapay zekâ kullanım ve verimlilik metrikleri çalışan izlemeye dönüşebilir",
+      "aciklama": "Platform, kodlama ajanlarının token harcamasını ve maliyetini çıktı etkisiyle ilişkilendiriyor; ajanlar, harness'ler ve mühendislik sistemlerindeki her oturumu, commit'i ve PR'ı tek modelde birleştiriyor. Bu birleştirme kişi düzeyinde izlemeye elverişli (çıkarım).",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.faros.ai/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kişi bazlı verimlilik panoları performans değerlendirmesinde kullanılırsa KVKK md.4 ölçülülük ilkesi ve md.10 aydınlatma yükümlülüğü ihlal edilebilir; iş hukuku uyuşmazlığı çıkar.",
+        "Ekipler metrikleri oyunlaştırır; algılanan ve ölçülen verimlilik farkı ölçümü bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K24-011",
+        "N-K25-007",
+        "N-K22-005"
+      ],
+      "erken_sinyal": "Yöneticilerin kişi bazlı sıralama raporu istemesi.",
+      "azaltma": "Yalnız ekip düzeyinde birleştirilmiş metrik kullanmak; aydınlatma metni hazırlamak ve veri koruma etki değerlendirmesi yapmak.",
+      "id": "BL-00952",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Ana sayfa token harcamasını çıktı ve maliyetle ilişkilendirdiğini, 'her oturum, commit ve PR'ı' birleştirdiğini söylüyor; '60'tan fazla veri kaynağı' ifadesi güncel sayfada bulunamadı. Kişi düzeyi izleme çıkarım.",
+        "kaynak": [
+          "https://www.faros.ai/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0681",
+      "arac": "Cortex",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Mühendislik metrikleri kişi bazında gruplanabiliyor; Copilot kullananlara otomatik etiket",
+      "aciklama": "Eng Intelligence Data Explorer metrikleri 'birey, varlık, PR veya sahip' bazında filtreleyip gruplayabiliyor ve yazar filtresi sunuyor; erişim 'View Dev Metrics' iznine bağlı. AI Impact panosu son 7 günde Copilot kullanan her ekip üyesine otomatik 'AI Usage' kullanıcı etiketi ekliyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.cortex.io/improve/eng-intelligence/data-explorer",
+        "https://docs.cortex.io/improve/eng-intelligence/dashboards/ai-impact"
+      ],
+      "yasatacagi_sorunlar": [
+        "Portal kurulunca yöneticiler kişi başı PR süresi ve YZ kullanım etiketiyle bireysel karşılaştırma yapabilir; N-K32-002 kapsamındaki 'ajan verisi bireysel performansta kullanılmaz' taahhüdü teknik olarak korunmaz.",
+        "YZ kullanmayanların etiketsiz kalması gölge baskı yaratır; açıklama normunu zedeler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K23-015",
+        "N-K30-002"
+      ],
+      "erken_sinyal": "'View Dev Metrics' izninin satır yöneticilerine verilmesi; kişi bazlı ekran görüntülerinin toplantılarda kullanılması.",
+      "azaltma": "'View Dev Metrics' iznini yalnız platform ekibine verin; panoları ekip düzeyinde sabitleyin; AI Usage etiketini kapatın veya görünürlüğünü sınırlayın.",
+      "id": "BL-01018",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Data Explorer'da 'individual, entity, PR, owner' gruplama, yazar filtresi ve View Dev Metrics izni; AI Impact panosunda son 7 günde Copilot'ta aktif üyeye otomatik 'AI Usage' etiketi belgede birebir var.",
+        "kaynak": [
+          "https://docs.cortex.io/improve/eng-intelligence/data-explorer",
+          "https://docs.cortex.io/improve/eng-intelligence/dashboards/ai-impact"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0924",
+      "arac": "Jellyfish DevEx",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Platformda kişi yönetimi ve yazılım aktifleştirme modülleri",
+      "aciklama": "Jellyfish platformu DevEx anketlerinin yanında 'People Management', 'Software Capitalization' (Ar-Ge maliyetinin mühendis zamanına dağıtılması), yapay zekâ etkisi ve satıcı karşılaştırma modülleri içeriyor; anket verisi sistem verisiyle birleştirildiğinde kişi düzeyi izleme riski doğar.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jellyfish.co/platform/devex/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "DevEx anket yanıtları iş hacmi verisiyle ilişkilendirilirse anonimlik algısı bozulur ve anket güvenilirliği düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Anket katılımında düşüş; kişi bazlı rapor talepleri.",
+      "azaltma": "Anketleri sistem verisinden ayrı, asgari grup büyüklüğüyle raporlamak.",
+      "id": "BL-01219",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Jellyfish menüsünde People Management, Software Capitalization, AI Impact ve Vendor Comparison var; DevEx sayfası anketleri DORA/SPACE ve sistem metrikleriyle birleştirip performans değerlendirdiğini söylüyor. Kişi düzeyi izleme riski çıkarım.",
+        "kaynak": [
+          "https://jellyfish.co/platform/devex/",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2176",
+      "arac": "Secure Code Warrior",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Geliştirici 'Trust Score' ile commit düzeyinde risk ilişkilendirmesi",
+      "aciklama": "Trust Agent: AI ürünü; yapay zekâ aracı/model kullanımını, MCP etkinliğini, commit metadata'sını, geliştirici Trust Score®'unu ve zafiyet kıyaslarını ilişkilendirdiğini belirtiyor. Bu, bireysel geliştiricinin güvenlik puanlamasıdır.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.securecodewarrior.com/product/trust-agent-ai",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kişi bazlı güven puanı, kod inceleme yetkisi veya terfi kararına bağlanırsa KVKK ve iş hukuku itirazları doğar; puan eğitim tamamlama oyununa dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-006",
+        "N-K25-003",
+        "N-K25-005"
+      ],
+      "erken_sinyal": "Trust Score'un yetki/rol kararlarında kullanılması.",
+      "azaltma": "Puanı yalnız gelişim ve eğitim ataması için kullanmak; yazılı amaç sınırlaması ve çalışan bilgilendirmesi.",
+      "id": "BL-01898",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Ürün sayfası 'AI tool and model usage, MCP activity, commit metadata, developer Trust Score® and vulnerability benchmarks' ilişkilendirmesini ve Trust Score'a göre hedefli eğitim tetiklemeyi açıkça yazıyor; puan geliştirici bazlı.",
+        "kaynak": [
+          "https://www.securecodewarrior.com/product/trust-agent-ai",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2333",
+      "arac": "Oobeya",
+      "gorev": "R-G07",
+      "tur": "RT-17",
+      "baslik": "Kişi ve ekip bazlı verimlilik ile yapay zekâ asistanı etkisi ölçümü çalışan izlemeye kayabilir",
+      "aciklama": "Platform DORA/SPACE metrikleri ve Copilot, Cursor, Claude gibi araçların etkisini ölçüyor. Katalog kaydı metriklerin ekip karşılaştırması için kötüye kullanılabileceğini belirtiyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.oobeya.io"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kişi bazlı panolar performans değerlendirmesine girerse KVKK md.4 ve md.10 yükümlülükleri ve iş hukuku riski doğar.",
+        "Ekipler arası karşılaştırma, ekip bileşimi farklarını görmezden gelip yanlış sonuç üretir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K24-011",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Kişi bazlı sıralama raporu talepleri.",
+      "azaltma": "Kişi bazlı görünümü kapatmak; yalnız ekip ve akış düzeyi metrik kullanmak.",
+      "id": "BL-01982",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Çıkarım; site geliştirici verimliliği ölçümünü ve Copilot/Cursor/Claude etkisini izlediğini doğruluyor. Kişi bazlı gözetim riski makul ama sitede açıkça belirtilmiyor.",
+        "kaynak": [
+          "https://www.oobeya.io"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2563",
+      "arac": "Findy Team+",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Bireysel geri bildirim ve işe alım amaçlı kullanım",
+      "aciklama": "Satıcının müşteri örneklerinde 'mühendis organizasyonunda bireysel değerlendirme (個人の振り返り)' ve işe alım markalaşması için veri kullanımı öne çıkarılıyor. Kişi bazlı metrikler performans değerlendirmesine bağlanırsa KVKK ölçülülük ilkesi ve AB YZ Yasası Ek III-4 riskleri doğar.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://jp.findy-team.io/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "PR sayısı ve çevrim süresi gibi metrikler kişi bazında karşılaştırılırsa yapay zekâ ile şişirilmiş PR'lar ödüllendirilir, kalite düşer ve çalışan güveni zedelenir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K25-007",
+        "N-K24-010"
+      ],
+      "erken_sinyal": "Yöneticilerin kişi bazlı rapor talep etmesi.",
+      "azaltma": "Yalnız ekip düzeyi görünüm; kullanım amacını yazılı politikayla sınırlamak.",
+      "id": "BL-02053",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Sitede müşteri örneği olarak 'エンジニア組織における個人の振り返り' ve '採用ブランディング' kullanım sahnesi var; meta açıklama 'チーム・個人の両面から' ölçüm diyor. İşe alım kullanımı kurum düzeyinde piyasa karşılaştırması, aday değerlendirmesi değil.",
+        "kaynak": [
+          "https://jp.findy-team.io/",
+          "https://findy-team.io/",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2810",
+      "arac": "Entire CLI",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Oturum kayıtlarının bireysel izleme ve değerlendirmeye sızması",
+      "aciklama": "Checkpoint'ler her commit'in arkasındaki tam oturumu (istemler, hatalar, token kullanımı, dokunulan dosyalar) kişiyle ilişkilendiriyor; recap ve dispatch komutları ajan işini özetliyor. Bu kayıtlar amaç sınırlaması olmadan yöneticilerce bireysel performans kanıtı olarak kullanılabilir.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/entireio/cli/blob/main/README.md",
+        "https://github.com/entireio/cli/blob/main/docs/security-and-privacy.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Geliştiricinin deneme-yanılma istemleri ve hataları performans görüşmesine kanıt olarak getirilirse KVKK ölçülülük ilkesi ve iş hukuku açısından uyuşmazlık çıkar.",
+        "Çalışanlar ajan kullanımını gizlemeye ya da kaydı kapatmaya yönelir; köken kaydı boşluklu kalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K30-002",
+        "N-K32-007"
+      ],
+      "erken_sinyal": "Yöneticilerin checkpoint özetlerini bireysel değerlendirmede istemesi; geliştiricilerin 'entire disable' kullanımında artış.",
+      "azaltma": "Yazılı amaç sınırlaması politikası, rol bazlı erişim ve çalışan temsilcileriyle danışma; bireysel kullanım metriklerini değerlendirme süreçlerinden ayırmak.",
+      "id": "BL-02085",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README istem, dokunulan dosya ve token kullanımının her commit'le kaydedildiğini, recap/dispatch/activity/experts komutlarını ve blame --long'da yazar tablosunu doğruluyor. İzleme riski belgelenmiş bir çıkarım.",
+        "kaynak": [
+          "https://github.com/entireio/cli/blob/main/README.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2953",
+      "arac": "brain0",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Commit başına istem bağlantısı bireysel izlemeye dönüşebilir",
+      "aciklama": "Araç her commit'i arkasındaki istem ve oturuma, satırı yazan niyete kadar bağlıyor ve 'accountability report' üretiyor. Ham istem saklanmıyor ama model üretimi özetler tutuluyor; özet önbelleği ~/.cache/brain0 altında şifresiz, TypeScript arayüzü şifresiz yük deposunu okuyor. Uzak LLM seçilirse karartılmış bağlam Anthropic/OpenAI'a gider.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/Brain0-ai/brain0/blob/main/docs/security.md",
+        "https://github.com/Brain0-ai/brain0#readme",
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip düzeyinde toplanan istem özetleri ve 'kim hangi niyetle yazdı' raporu performans ve disiplin süreçlerinde kullanılırsa K32 amaç sınırlaması ihlal edilir; açıklama normu (N-K30-002) cezalandırıcıya döner.",
+        "Şifresiz özet önbelleği bulut yedeklemesine giderse çalışan istem içerikleri kurum dışına çıkar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K30-002",
+        "N-K18-011"
+      ],
+      "erken_sinyal": "Yöneticilerin brain0 raporunu bireysel değerlendirme toplantısına getirmesi.",
+      "azaltma": "Kullanımı amaç sınırlı bir iç düzenlemeye bağlayın; bireysel rapor erişimini kişinin kendisiyle sınırlayın; özet önbelleğini kapatın veya şifreli alana taşıyın; uzak LLM'i kapalı tutun.",
+      "id": "BL-02095",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README commit'i ajan niyetine bağlamayı ve 'accountability report'u doğruluyor. Ham istemler saklanmıyor, yalnız özetler var. ~/.cache/brain0 özet önbelleği ve TS arayüzünün okuduğu yük deposu şifresiz. Uzak LLM seçilirse karartılmış bağlam Anthropic/OpenAI'a gidiyor.",
+        "kaynak": [
+          "https://github.com/Brain0-ai/brain0/blob/main/docs/security.md",
+          "https://github.com/Brain0-ai/brain0/blob/main/README.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3006",
+      "arac": "Git AI (git-ai)",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Katkıcı bazında '% AI' ve token maliyeti ölçümü",
+      "aciklama": "README'ye göre Teams sürümü '% AI' ve token maliyetini PR, depo, ekip ve katkıcı düzeyinde ölçüyor; her kod parçasının arkasındaki istemi saklıyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://github.com/git-ai-project/git-ai/blob/main/README.md",
+        "https://usegitai.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Katkıcı bazındaki % AI ve token maliyeti panoları bireysel verimlilik sıralamasına dönüşürse çalışanlar ajan kullanımını gizler; açıklama normu çöker.",
+        "Kişi-istem eşlemesi KVKK ölçülülük ilkesi ve iş hukuku açısından çalışan izleme sayılabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K29-009",
+        "N-K32-002",
+        "N-K30-002",
+        "N-K32-001"
+      ],
+      "erken_sinyal": "Katkıcı bazlı raporların performans görüşmelerinde istenmesi.",
+      "azaltma": "Katkıcı düzeyi raporları kapatmak ya da takma adlandırmak; amaç sınırlaması politikası ve çalışan temsilcileriyle danışma.",
+      "id": "BL-02099",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "README Teams için '% AI' ve token maliyetinin PR, Repo, Team ve Contributor düzeyinde ölçüldüğünü ve güvenli istem deposu olduğunu yazıyor.",
+        "kaynak": [
+          "https://github.com/git-ai-project/git-ai/blob/main/README.md"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3551",
+      "arac": "Waydev",
+      "gorev": "R-G07",
+      "tur": "RT-17",
+      "baslik": "Kişi bazlı raporlar çalışan izleme hukukuna takılır",
+      "aciklama": "Waydev kişi bazlı performans raporları sunuyor. Çalışan izleme niteliğindeki bu işleme KVKK md.5 kapsamında hukuki dayanak, md.4 ölçülülük ilkesine uyum ve md.10 aydınlatma yükümlülüğü gerektirir (çıkarım).",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://waydev.co/"
+      ],
+      "yasatacagi_sorunlar": [
+        "PR inceleme süresi ve iş dağılımı raporları kişi performansına bağlanırsa iş uyuşmazlığı ve KVKK şikâyeti riski doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-008",
+        "N-K24-011",
+        "N-K25-007",
+        "N-K17-005"
+      ],
+      "erken_sinyal": "Yöneticilerin kişi bazlı rapor kullanması.",
+      "azaltma": "Ekip düzeyinde birleştirmek; aydınlatma metni ve etki değerlendirmesi hazırlamak.",
+      "id": "BL-02205",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Sitede kişi bazlı performans raporlaması var; hukuki risk çıkarımı makul. Ancak madde atfı hatalı: işlemenin hukuki dayanağı KVKK md.5; md.4 genel ilkeler, md.10 aydınlatma yükümlülüğü.",
+        "kaynak": [
+          "https://waydev.co/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3553",
+      "arac": "Span",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Ücret verisi ve ajan oturumlarının iş kalemine bağlanması",
+      "aciklama": "Span, ücret ve token harcamasını proje ve iş türüne eşlediğini ve ajan izlerini iş kalemleri, PR'lar ve üretim sonuçlarıyla ilişkilendirdiğini belirtiyor. Satıcı raporların 'kişiler değil depo ve ekipler hakkında' olduğunu ve oturumların mühendise ait olduğunu söylüyor; ancak toplama kişi düzeyinde başlıyor.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.span.app/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Maaş verisinin yurt dışındaki bir SaaS'a verilmesi KVKK kapsamında ek hukuki dayanak ve aydınlatma gerektirir; İK ve sendika itirazı doğabilir.",
+        "Ajan oturumlarından kişi bazlı maliyet/etkinlik çıkarımı yapılırsa çalışan izleme niteliği kazanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K23-007",
+        "N-K20-007",
+        "N-K08-005"
+      ],
+      "erken_sinyal": "Kişi bazlı rapor veya ücret verisi entegrasyonu talebi.",
+      "azaltma": "Ücret yerine rol bazlı standart maliyet katsayısı; yalnız ekip düzeyi raporlama.",
+      "id": "BL-02213",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Span sitesi 'wages and token spend'i proje ve iş türüne eşlediğini, izleri bilet, PR ve üretim sonuçlarına bağladığını, raporların 'repos and teams, never people' olduğunu ve oturumların mühendise ait olduğunu belirtiyor; izler geliştirici makinesinde kişi bazında toplanıyor.",
+        "kaynak": [
+          "https://www.span.app/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3566",
+      "arac": "Larridin",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Çalışan düzeyi yapay zekâ benimseme ve 'akıcılık' ölçümü",
+      "aciklama": "Ürün yapay zekâ benimseme oranı ve ekip yetkinliği (fluency) ölçüyor; kişi bazına indiğinde çalışan izleme niteliği kazanır.",
+      "tarih": "2026-09",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://larridin.com/ai-fluency/",
+        "https://larridin.com/ai-adoption/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "'Akıcılık' puanı düşük çalışanlar baskı altına girer; KVKK ölçülülük ilkesi ihlal edilebilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-007",
+        "N-K24-010"
+      ],
+      "erken_sinyal": "Kişi bazlı akıcılık raporu talepleri.",
+      "azaltma": "Yalnız ekip düzeyi; aydınlatma metni.",
+      "id": "BL-02217",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "AI Fluency/Adoption sayfaları iş gücünü departman, araç ve haftaya göre benimseme aşamalarına ayırdığını, power user sayılarını ve 'kim benimsiyor, kim zorlanıyor' görünürlüğünü tanıtıyor; Router sayfası mühendis adıyla oturum satırları gösteriyor. Kişi bazında kullanım AB YZ Yasası Ek III 4(b) kapsamına yaklaşabilir; bu bir çıkarım.",
+        "kaynak": [
+          "https://larridin.com/ai-fluency/",
+          "https://larridin.com/ai-adoption/",
+          "https://larridin.com/router/",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-3569",
+      "arac": "Microsoft Viva Glint",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Anketler anonim değil 'gizli'; bazı anket türleri kimlikli; eşikler programa göre ayarlanabilir",
+      "aciklama": "Microsoft Glint anketlerinin demografik analiz ve programlar arası izleme için anonim olmadığını, bazı anketlerin yanıtları doğrudan kişiye atfettiğini açıkça yazıyor. Varsayılan eşik puanlarda 5, yorumlarda 10 yanıt; kuruluşlar eşikleri program bazında yapılandırabiliyor.",
+      "tarih": "2026-05",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/viva/glint/setup/anonymous-confidential",
+        "https://learn.microsoft.com/en-us/viva/glint/setup/copilot-privacy"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çalışanlar 'anonim' sanıp ajan dönüşümüne dair kaygılarını yazarsa, kimlikli bir program veya düşük eşikle bu yanıtlar kişiye bağlanabilir; güven ve benimseme ölçümü (N-K25-007) bozulur.",
+        "Programlar arası birleştirme, farklı anketlerden gelen yanıtları aynı çalışanda toplar; amaç sınırlaması zorlaşır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-007",
+        "N-K32-001",
+        "N-K32-002",
+        "N-K25-007"
+      ],
+      "erken_sinyal": "Yeni programda eşiklerin varsayılanın altına çekilmesi; kimlikli anket türünün seçilmesi.",
+      "azaltma": "Anket türünü ve eşikleri iç düzenlemeyle sabitleyin (en az 5/10, filtreli görünümde 10/20); aydınlatmada 'gizli, anonim değil' ifadesini açıkça kullanın.",
+      "id": "BL-02221",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Sayfa (güncelleme 2026-05-06) anketlerin 'confidential but not anonymous' olduğunu ve bazılarının kimlikli olduğunu yazıyor. Varsayılan eşik puanda 5, yorumda 10 yanıt; eşikler program bazında ayarlanabiliyor.",
+        "kaynak": [
+          "https://learn.microsoft.com/en-us/viva/glint/setup/anonymous-confidential",
+          "https://learn.microsoft.com/en-us/viva/glint/setup/copilot-privacy"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4099",
+      "arac": "Reclaim.ai",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Workforce Analytics ile bireysel mesai dışı çalışma ve odak raporları",
+      "aciklama": "Workforce Analytics şirket, departman, ekip ve birey düzeyinde raporlar sunuyor: toplantı yükü, odak süresi ve oturum uzunluğu, takvim parçalanması, serbest, seyahat ve mola süresi. Sayfada ayrı bir 'mesai dışı çalışma' metriği yok, yalnız genel bir 'work-life balance' ifadesi geçiyor. Reclaim bu sinyallerin bireysel performans değerlendirmesi için kullanılmadığını söylüyor. Bireysel raporların yöneticilere açık olması ise bir çıkarımdır.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://reclaim.ai/features/workforce-analytics"
+      ],
+      "yasatacagi_sorunlar": [
+        "Mesai dışı çalışma ve odak süresi verisi bireysel performans ya da disiplin gerekçesi olarak kullanılırsa iş hukuku ve KVKK ölçülülük ilkesi açısından uyuşmazlık çıkar.",
+        "Çalışanlar odak bloklarını 'gösteriş' için doldurur; dikkat verisi anlamını yitirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K32-005"
+      ],
+      "erken_sinyal": "Yönetici panellerinde kişi bazlı raporların açılması.",
+      "azaltma": "Bireysel raporları kapatıp yalnız toplu (anonim) düzeyde kullanmak; aydınlatma ve çalışan temsilcileriyle danışma.",
+      "id": "BL-02363",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "Şirket, departman, ekip ve birey düzeyinde raporlar, odak süresi, toplantı yükü ve parçalanma doğru. 'Mesai dışı çalışma' metriği sayfada açıkça yok; Reclaim sinyallerin bireysel performans değerlendirmesi için olmadığını söylüyor. Bireysel raporların yöneticiye görünmesi çıkarım.",
+        "kaynak": [
+          "https://reclaim.ai/features/workforce-analytics"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4105",
+      "arac": "Pluralsight Skills (Skill IQ / Role IQ)",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Role IQ'nun 'terfi hazırlığı' ölçüsü olarak konumlanması",
+      "aciklama": "Ürün sayfası Role IQ'yu 'rol ustalığını ve terfi hazırlığını ölçmek' için öneriyor; beceri envanteri analitiği tüm iş planlarında yöneticilere sunuluyor. Sayfada performans ya da işe alım kararlarında kullanıma ilişkin bir uyarı yok.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.pluralsight.com/product/skill-iq"
+      ],
+      "yasatacagi_sorunlar": [
+        "Uyarlamalı test puanları terfi ve inceleme yetkisi kararlarında kullanılırsa, ölçüm geçerliliği ve eşit davranma açısından iş hukuku uyuşmazlığı doğar.",
+        "Çalışanlar testleri gelişim aracı değil sınav olarak görür; öğrenme davranışı bozulur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-002",
+        "N-K29-006",
+        "N-K32-008"
+      ],
+      "erken_sinyal": "İK süreçlerinde Skill IQ/Role IQ puanlarının terfi kriterine yazılması.",
+      "azaltma": "Puanları yalnız bireyin kendisi ve gelişim planı için kullanmak; yönetici görünürlüğünü toplu düzeyle sınırlamak.",
+      "id": "BL-02366",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Sayfa Role IQ ile 'role mastery and promotion readiness' ölçüldüğünü ve beceri envanteri analitiğinin tüm iş planlarında sunulduğunu yazıyor; performans veya işe alım kullanımına dair bir uyarı yok.",
+        "kaynak": [
+          "https://www.pluralsight.com/product/skill-iq"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4106",
+      "arac": "Degreed",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Beceri puanlarının terfi ve iç fırsat kararlarında otomatik kullanımı",
+      "aciklama": "Degreed 3 Mart 2026'daki LENS duyurusunda becerilerin otomasyonlarda koşul olarak kullanılabileceğini açıkladı; amaç doğru kişiye öğrenme, iş akışı ve fırsat tetiklemek. Aynı duyuruda beceri verisi toplayan Maestro Skills Check-In de tanıtıldı. Career Mobility beceri profillerini iç fırsat (gig, proje, rol) eşleştirmesinde kullanıyor. Terfi kararlarında otomatik kullanım ise duyuruda yer almıyor.",
+      "tarih": "2026-03",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://degreed.com/experience/newsroom/new-solutions-for-accelerating-ai-fluency-and-leadership-transformation/",
+        "https://www.businesswire.com/news/home/20260303589713/en/Degreed-Introduces-New-Solutions-for-Accelerating-AI-Fluency-and-Leadership-Transformation-at-LENS-2026"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanla çalışma becerisi puanları terfi ya da iç fırsat kararlarında otomatik koşul olursa, KVKK md.11 uyarınca münhasıran otomatik işlemeye itiraz hakkı ve iş hukuku uyuşmazlıkları doğar.",
+        "Öz beyana ve yapay zekâ çıkarımına dayalı puanlar bireyler arasında haksız fark yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-002",
+        "N-K32-008",
+        "N-K29-011"
+      ],
+      "erken_sinyal": "İK süreçlerinde beceri puanına bağlı otomatik kural tanımlanması.",
+      "azaltma": "Beceri verisini yalnız gelişim önerisi için kullanmak; karar süreçlerinde insan değerlendirmesini zorunlu kılmak; aydınlatma.",
+      "id": "BL-02370",
+      "dogrulama_turu": {
+        "karar": "kismen",
+        "not": "3 Mart 2026 LENS duyurusu becerilerin otomasyon koşulu olarak kullanılmasını ve Maestro Skills Check-In'i doğruluyor; Career Mobility de beceriye dayalı fırsat eşleştirmesi yapıyor. Ama duyuruda terfi kararı yok, amaç öğrenme, iş akışı ve fırsat tetiklemek. Businesswire 403 verdi.",
+        "kaynak": [
+          "https://degreed.com/experience/newsroom/new-solutions-for-accelerating-ai-fluency-and-leadership-transformation/",
+          "https://degreed.com/experience/blog/introducing-degreed-career-mobility/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4108",
+      "arac": "MentorcliQ",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Özel nitelikli veri ve algoritmik eşleştirmede adalet",
+      "aciklama": "MentorcliQ 2023'te ERG yönetim yazılımı Diverst'i satın aldı; çalışan kaynak grubu üyeliği din, etnik köken gibi özel nitelikli verileri dolaylı olarak ortaya koyabilir. Algoritmik mentor eşleştirmesi, gelişim fırsatlarının dağıtımını etkiler.",
+      "tarih": "2023-12",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.finsmes.com/2023/12/mentorcliq-acquires-diverst.html",
+        "https://www.mentorcliq.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "ERG üyeliği ya da profil alanları KVKK md.6 kapsamında özel nitelikli veri sayılabilir; açık rıza olmadan işlenmesi ihlal olur.",
+        "Eşleştirme algoritması genç çalışanları belirli kıdemlilere yığarsa gelişim yolu adaletsizleşir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-009",
+        "N-K32-002",
+        "N-K32-001"
+      ],
+      "erken_sinyal": "Profil formlarında demografik alanların zorunlu hâle gelmesi.",
+      "azaltma": "Özel nitelikli alanları kapatmak; eşleştirme sonuçlarını dağılım açısından denetlemek.",
+      "id": "BL-02374",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "MentorcliQ Diverst'i 6 Aralık 2023'te satın aldı (finsmes curl'e 403 verdi, arama sonuçları ve PRWeb duyurusu doğruluyor). Özel nitelikli veri ve eşleştirme adaleti kısmı çıkarım.",
+        "kaynak": [
+          "https://www.prweb.com/releases/mentorcliq-acquires-diverst-a-leader-in-erg-software-to-bring-together-employee-mentoring-and-erg-management-in-a-premier-dei-solution-301997715.html",
+          "https://www.finsmes.com/2023/12/mentorcliq-acquires-diverst.html",
+          "https://www.mentorcliq.com/security-compliance"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4133",
+      "arac": "TeamMood",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Anonimlik yalnız arayüzde: yanıtlar yazara bağlı tutuluyor, sağlayıcı riskli durumda kimliği İK ile paylaşabiliyor; eşik 3",
+      "aciklama": "Yardım merkezine göre ruh hâli ve yorumlar sistemde yazarlarına bağlı; arayüz ve API'de anonim gösteriliyor. TeamMood çalışanları moderasyon/destek için kimliğe erişebiliyor ve 'riskli davranış' tespitinde kimliği şirketin İK'sıyla paylaşabileceğini söylüyor. Bir birime filtre uygulamak için varsayılan eşik 3 kişi ve talep üzerine değiştirilebiliyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://help.teammood.com/en/articles/496534-about-anonymity",
+        "https://help.teammood.com/en/articles/1933243-teams-sub-teams-tags-categorization-segmentation-and-anonymity"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çalışanlara 'anonim' diye sunulursa gerçekte takma adlı veri işlenir; aydınlatma yanıltıcı olur ve KVKK açısından kişisel veri işleme hükümleri tam uygulanır.",
+        "3 kişilik eşik küçük alt ekiplerde ruh hâlini kişiye indirger; psikolojik güvenlik ölçümü (N-K32-007) çarpılır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-007",
+        "N-K32-005",
+        "N-K32-001"
+      ],
+      "erken_sinyal": "Alt ekip filtrelerinin 3-4 kişilik birimlere açılması.",
+      "azaltma": "Aydınlatmada 'takma adlı' ifadesini kullanın; eşiği en az 5'e çıkarttırın; kimlik paylaşımı koşullarını sözleşmeyle sınırlayın.",
+      "id": "BL-02378",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Yardım makalesi yanıtların sistemde yazara bağlı olduğunu, riskli davranışta kimliğin İK ile paylaşılabileceğini; filtre makalesi varsayılan eşiğin 3 olup talep üzerine değiştirilebildiğini açıkça söylüyor.",
+        "kaynak": [
+          "https://help.teammood.com/en/articles/496534-about-anonymity",
+          "https://help.teammood.com/en/articles/1933243-teams-sub-teams-tags-categorization-segmentation-and-anonymity"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4149",
+      "arac": "Perceptyx",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "'Gizli' anket türünde yanıtlar İK kimliğine bağlı; eşik müşteri ayarı",
+      "aciklama": "Perceptyx gizli anketlerde yanıtların İK sistemi bağlantısıyla çalışana bağlandığını, raporların tipik olarak 5 ve üzeri gruplarda toplandığını söylüyor; anonim anketlerde bile çok sayıda demografik alanın tek kişiye daraltabileceğini kendisi belirtiyor. Eşik yapılandırmaya bağlı.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://blog.perceptyx.com/anonymous-or-confidential-an-employee-survey-guide-for-leaders",
+        "https://go.perceptyx.com/faq"
+      ],
+      "yasatacagi_sorunlar": [
+        "Gizli anket seçilirse sağlayıcı ve yetkili yöneticiler teknik olarak yanıtı kişiye bağlayabilir; ajan dönüşümüne ilişkin eleştiriler iş güvencesi kaygısıyla bastırılır.",
+        "Eşik düşürülürse küçük ekiplerde bireysel yanıt çıkarımı mümkün olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-007",
+        "N-K32-001",
+        "N-K32-002",
+        "N-K32-006"
+      ],
+      "erken_sinyal": "Yönetici panolarında 5'in altındaki grupların görünmesi; filtre kombinasyonlarıyla küçük gruplara inilmesi.",
+      "azaltma": "Psikolojik güvenlik anketlerini anonim türde yürütün; eşiği sözleşmeyle en az 5 (tercihen 8-10) sabitleyin; demografik filtreleri sınırlayın.",
+      "id": "BL-02384",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Blog gizli anketlerde HRIS bağlantısıyla e-posta/çalışan kimliğinin bağlandığını, raporlamanın tipik olarak 5+ grupta yapıldığını ve demografik ayrıntıların tek kişiye daraltabileceğini söylüyor. Not: SSS sayfası asgari grup büyüklüğünü 4 olarak veriyor.",
+        "kaynak": [
+          "https://blog.perceptyx.com/anonymous-or-confidential-an-employee-survey-guide-for-leaders",
+          "https://go.perceptyx.com/faq"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4166",
+      "arac": "Donut",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Indigo ile iş aracı etkinliği ve birebir görüşme transkriptlerinin toplanması",
+      "aciklama": "Gizlilik politikasına göre Indigo; GitHub, Linear, Jira ve Slack entegrasyonlarından etkinlik verisi, birebir görüşmelerin transkriptleri ve yapay zekâ özetleri topluyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.donut.com/privacy/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Birebir görüşme transkriptleri ve iş aracı etkinliği yapay zekâ özetine dönüşüp yöneticiye sunulursa performans kararlarına sızar.",
+        "Çalışan temsilcileriyle danışılmadan devreye alınması iş hukuku uyuşmazlığı ve güven kaybı doğurur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K32-004",
+        "N-K32-007"
+      ],
+      "erken_sinyal": "Donut yönetim panelinde Indigo ya da iş aracı entegrasyonlarının açılması.",
+      "azaltma": "Yalnız işe alıştırma ve tanışma modüllerini kullanmak; Indigo ve iş aracı entegrasyonlarını sözleşmeyle kapsam dışı bırakmak.",
+      "id": "BL-02390",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Gizlilik politikası Indigo için GitHub, Linear, Jira, Slack ve transkript sağlayıcılarından (ör. Recall.ai) etkinlik verisi ile 1:1 transkriptleri ve YZ özetlerinin toplandığını söylüyor.",
+        "kaynak": [
+          "https://www.donut.com/privacy/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4182",
+      "arac": "GitLive",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Anlık çevrimiçi durum ve etkinlik grafiği bireysel izlemeye açık",
+      "aciklama": "Belgeler ekip üyelerinin çevrimiçi/çevrimdışı durumunu, etkinlik grafiğini ve düzenlenen dosyaları gösterdiğini; gizlemenin kullanıcı başına 'Offline Mode', 'Hide Activity Graph' ve 'Hide Working Changes' ayarlarıyla yapıldığını belirtiyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.git.live/docs/privacy/",
+        "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yöneticiler etkinlik grafiğini çalışma saati ve 'klavye başında olma' göstergesi olarak kullanırsa amaç dışı çalışan izlemesi doğar; KVKK ölçülülük ilkesi ve K32 taahhütleri ihlal edilir.",
+        "Gizleme kişiye bırakıldığı için kimin görünür kaldığı tutarsızlaşır; gizleyenler 'saklıyor' gibi algılanabilir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K31-005"
+      ],
+      "erken_sinyal": "Etkinlik grafiği ekran görüntülerinin yönetim raporlarında görülmesi.",
+      "azaltma": "Kurum düzeyinde etkinlik grafiğini varsayılan kapalı tutun; kullanım amacını yazılı aydınlatmayla sınırlandırın.",
+      "id": "BL-02417",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Gizlilik belgesi çevrimiçi durum, etkinlik grafiği ve çalışma kopyası değişikliklerinin görünür olduğunu ve kullanıcı başına Offline Mode/Hide activity graph/Hide working copy changes ayarlarıyla gizlendiğini gösteriyor.",
+        "kaynak": [
+          "https://docs.git.live/docs/privacy/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4191",
+      "arac": "Polinode",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Pasif ağ analizi her e-posta/mesaj/görüşme için kişi adlı satır tutuyor (To/Cc/Bcc dahil)",
+      "aciklama": "Pasif veri belgesi e-posta meta verisinin To, Cc ve Bcc kırılımıyla, toplantıların düzenleyici ve katılımcı listesiyle, günün saati alanlarıyla toplandığını ve dışa aktarmada 'etkileşim olayı başına bir satır' (e-posta, sohbet mesajı, kanal gönderisi, arama) tutulduğunu gösteriyor; ad anonimleştirme veya karma seçeneği belgelenmemiş; veri günlük yenileniyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.polinode.com/guide/passiveData.html",
+        "https://www.polinode.com/product/passive-organizational-network-analysis-integrations"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çalışanların kiminle, ne zaman ve ne sıklıkla yazıştığı (gizli alıcılar dahil) kişi adıyla toplanır; haberleşme meta verisinin bu ölçekte işlenmesi KVKK ölçülülük ilkesi ve haberleşmenin gizliliği açısından ağır risk taşır.",
+        "Sendika temsilcileri, İK şikâyetleri veya hukuk birimiyle yazışma örüntüleri görünür hale gelir; çalışan temsilcileriyle danışılmadan başlatılırsa iş ilişkisinde güven krizi doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K32-004",
+        "N-K31-008"
+      ],
+      "erken_sinyal": "M365 kiracısında Polinode uygulamasına kiracı genelinde yönetici onayı istenmesi.",
+      "azaltma": "Pasif entegrasyonu kullanmayın ya da yalnız ekip düzeyine toplulaştırılmış, adları karmalanmış ve süreli veriyle, çalışan temsilcileriyle danışarak ve etki değerlendirmesi yaparak kullanın; ilişki anketini (aktif veri) tercih edin.",
+      "id": "BL-02419",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Belge To/Cc/Bcc kırılımını, toplantı düzenleyici ve katılımcılarını, saat alanlarını, 'interaction event başına bir satır' dışa aktarımı ve günlük çekimi doğruluyor; anonimleştirme/karma seçeneği görülmedi. Yalnız meta veri toplanıyor (içerik yok) ve kapsam müşteri ayarlı; kritik abartılı.",
+        "kaynak": [
+          "https://docs.polinode.com/guide/passiveData.html",
+          "https://www.polinode.com/product/passive-organizational-network-analysis-integrations"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4234",
+      "arac": "Hatica",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Kişi bazında odak süresi, toplantı dökümü ve mesai dışı toplantı görünürlüğü",
+      "aciklama": "Hatica ekip üyelerinin odak süresini (maker time), katıldıkları toplantı türlerinin dökümünü ve mesai dışı toplantı saatlerini ('quiet days') gösteriyor; Slack/e-posta üzerinden otomatik eşzamansız stand-up topluyor.",
+      "tarih": "",
+      "siddet": "yuksek",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.hatica.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Takvim ve iletişim verisinden kişi bazlı üretkenlik profili çıkar; iyi oluş amacıyla alınan veri performans izlemesine kayar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-002",
+        "N-K32-005"
+      ],
+      "erken_sinyal": "Kişi bazlı odak süresi raporlarının yöneticilere düzenli gönderilmesi.",
+      "azaltma": "Yalnız ekip toplamlarını raporlayın; takvim verisini amaç sınırlı ve süreli tutun.",
+      "id": "BL-02438",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Ana sayfa Maker time (odak süresi), toplantı türü dökümü/ısı haritası, 'Quiet days' (iş günlerinde mesai dışı toplantı saatleri) ve Slack/e-posta ile otomatik async stand-up özelliklerini gösteriyor.",
+        "kaynak": [
+          "https://www.hatica.io/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1385",
+      "arac": "Zuul",
+      "gorev": "R-G06b",
+      "tur": "RT-17",
+      "baslik": "Uzmanlık kıtlığı",
+      "aciklama": "Zuul ağırlıkla OpenStack/OpenDev topluluğunda kullanılıyor ve Türkiye'de uzman bulmak zor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://zuul-ci.org/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bir veya iki kişiye bağlı kalan birleştirme altyapısı kişi ayrılınca işletilemez olur."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K06-002",
+        "N-K24-008"
+      ],
+      "erken_sinyal": "Operasyon bilgisinin tek kişide toplanması.",
+      "azaltma": "Runbook yazın, en az üç kişiyi eğitin.",
+      "id": "BL-01505",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-1455",
+      "arac": "Serenity/JS",
+      "gorev": "R-G06b",
+      "tur": "RT-17",
+      "baslik": "Screenplay kalıbının öğrenme eğrisi",
+      "aciklama": "Envanter, Screenplay kalıbı nedeniyle öğrenme eğrisinin yüksek olduğunu söylüyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "yuksek",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://serenity-js.org"
+      ],
+      "yasatacagi_sorunlar": [
+        "Farklı ekipler kalıbı farklı yorumlar; ajanların ürettiği testler tutarsız soyutlamalar içerir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K05-024",
+        "N-K01-009"
+      ],
+      "erken_sinyal": "Kod incelemelerinde soyutlama tartışmalarının artması.",
+      "azaltma": "Ortak görev ve soru kütüphanesi ile şablonlar oluşturun.",
+      "id": "BL-01565",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0846",
+      "arac": "EARS (Easy Approach to Requirements Syntax)",
+      "gorev": "R-G10",
+      "tur": "RT-17",
+      "baslik": "Karma dilli spesifikasyonun benimsenme maliyeti",
+      "aciklama": "İngilizce anahtar sözcüklü şablonlar Türkçe konuşan ürün sahipleri ve iş analistleri için yeni bir yazım disiplini gerektirir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://alistairmavin.com/ears/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ürün sahipleri yazımı ajana bırakır, kendileri yalnız onaylar; gereksinim sahipliği ve anlama derinliği azalır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-005",
+        "N-K25-007",
+        "N-K01-011"
+      ],
+      "erken_sinyal": "Onay sürelerinin kısalıp yeniden açılan kalemlerin artması.",
+      "azaltma": "Kısa Türkçe EARS eğitimi ve örnek kataloğu; onaylayan kişinin kabul kriterini kendi cümlesiyle özetlemesini isteyin.",
+      "id": "BL-01165",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0917",
+      "arac": "Workera",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Yapay zekâ koçluk ve beceri puanlarının İK kararlarına etkisi",
+      "aciklama": "Kişisel gelişim koçluğu ve beceri açığı tespiti bireysel düzeyde; İK kararlarına bağlanırsa AB YZ Yasası Ek III-4 kapsamında yüksek risk.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.workera.ai/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Beceri puanları terfi/atama kararlarında kullanılırsa itiraz ve şeffaflık yükümlülükleri doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-003",
+        "N-K25-006"
+      ],
+      "erken_sinyal": "İK süreçlerinde puan kullanımı.",
+      "azaltma": "Puanları gelişim amaçlı sınırlamak.",
+      "id": "BL-01214",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-0928",
+      "arac": "LimeSurvey",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Anonimleştirilmiş yanıtlarda bile yönetici tek tek yanıtları görür; asgari grup eşiği yok",
+      "aciklama": "Belgelere göre 'anonymized responses' açıkken yanıt ile katılımcı bağlanamaz ve tarih damgaları 1980-01-01'e ayarlanır; ancak yöneticiler her yanıtı tek tek görebilir. Ürün, ticari dinleme platformlarındaki gibi zorunlu asgari grup raporlama eşiği uygulamaz (çıkarım: istatistik ekranlarında böyle bir ayar belgelenmemiş).",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://www.limesurvey.org/manual/Participant_settings"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ekip adı, rol ve kıdem gibi demografik sorular eklenirse küçük ekiplerde yönetici tek tek yanıtları kişiye bağlayabilir; psikolojik güvenlik ölçümü (N-K32-007) güvenilmez olur.",
+        "Anonimleştirme kapalı başlatılırsa token tablosu üzerinden yanıtlar doğrudan kişiye bağlanır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-007",
+        "N-K23-015",
+        "N-K32-001"
+      ],
+      "erken_sinyal": "Anket yöneticisi rolünün yöneticilere verilmesi; demografik soru sayısının artması.",
+      "azaltma": "Anketleri bağımsız bir birimde yönetin; anonimleştirmeyi zorunlu tutun; raporları dışarıda en az 5 kişilik gruplarla üretin; demografik soruları daraltın.",
+      "id": "BL-01223",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Kılavuz anonimleştirmede katılımcı bağının koptuğunu, tarihlerin 1980-01-01 00:00'a ayarlandığını ve her yanıtın yine tek tek görülebildiğini söylüyor. Eşik yokluğu çıkarım; ürün tek tek yanıtları gösterse de katılımcı bağı kopuk, sorun süreçle aşılabilir.",
+        "kaynak": [
+          "https://www.limesurvey.org/manual/Participant_settings"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-1428",
+      "arac": "Rootly",
+      "gorev": "R-G13",
+      "tur": "RT-17",
+      "baslik": "Toplantı kayıt botu çalışan izleme ve KVKK aydınlatma yükümlülüğü doğuruyor",
+      "aciklama": "Essentials katmanında 'AI Scribe Meeting Bot' olay toplantılarına katılıp kayıt ve özet üretiyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://rootly.com/pricing"
+      ],
+      "yasatacagi_sorunlar": [
+        "Olay toplantılarındaki ses ve konuşma içerikleri çalışan kişisel verisidir; aydınlatma, hukuki dayanak ve saklama süresi belirlenmeden kullanılırsa KVKK ve iş hukuku ihlali riski doğar.",
+        "Kayıtların suçlamasız kültürü zayıflatması ve çalışanların toplantıda açık konuşmaktan kaçınması."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K08-007",
+        "N-K31-010"
+      ],
+      "erken_sinyal": "Çalışan temsilcilerinden veya hukuk biriminden itiraz; toplantılarda botun habersiz görünmesi.",
+      "azaltma": "Botu varsayılan kapalı tutun; açılacaksa aydınlatma metni, saklama süresi ve erişim kısıtını önceden belirleyin.",
+      "id": "BL-01540",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2015",
+      "arac": "Microsoft Copilot Dashboard (Viva Insights)",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Yöneticilere ekip düzeyi görünüm ve İK filtreleri",
+      "aciklama": "Yöneticiler kendi ekiplerine özgü benimseme ve etki içgörülerini görüyor; İK filtreleri ve grup karşılaştırması var. Gizlilik için asgari grup büyüklüğü uygulanıyor.",
+      "tarih": "2026-08",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://learn.microsoft.com/en-us/viva/insights/org-team-insights/copilot-dashboard",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Küçük ekiplerde grup filtreleriyle bireye yakın çıkarım yapılabilir; benimseme oranı performans baskısına dönüşür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-007",
+        "N-K24-011"
+      ],
+      "erken_sinyal": "Yöneticilerin alt grup kırılımı talepleri.",
+      "azaltma": "Asgari grup büyüklüğünü yükseltmek; panoyu yalnız toplu raporlama için kullanma politikası.",
+      "id": "BL-01751",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2023",
+      "arac": "GitHub Copilot usage metrics (API ve pano)",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Kullanıcı düzeyinde rapor",
+      "aciklama": "Kurumsal kullanıcı raporu, son 28 gün için bireysel etkileşim istatistiklerini ve özellik kullanım desenlerini kullanıcı bazında veriyor.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://docs.github.com/en/rest/copilot/copilot-usage-metrics",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Bireysel kullanım verisi performans değerlendirmesinde kullanılırsa KVKK ölçülülük ilkesi ve çalışan güveni ihlal edilir; geliştiriciler aracı gereksiz kullanarak metriği şişirir."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-007",
+        "N-K24-011"
+      ],
+      "erken_sinyal": "Kişi bazlı rapor talepleri.",
+      "azaltma": "Kullanıcı düzeyi rapora erişimi dar role vermek; amaç sınırlama politikası; toplu raporlama.",
+      "id": "BL-01764",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "REST belgesi kurumsal ve kuruluş düzeyinde 1 günlük ve 28 günlük 'users usage metrics' raporlarının bireysel kullanıcı etkileşim istatistiklerini ve özellik kullanım desenlerini kullanıcı bazında verdiğini doğruluyor. Uç noktalar kurumsal 'Copilot usage metrics' politikası açıkken çalışıyor; bu yönetilebilir bir çalışan izleme riski olduğundan şiddet orta daha uygun.",
+        "kaynak": [
+          "https://docs.github.com/en/rest/copilot/copilot-usage-metrics",
+          "https://artificialintelligenceact.eu/annex/3/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-2196",
+      "arac": "Harness AI DLC Insights (eski Software Engineering Insights)",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Geliştirici düzeyi yapay zekâ kabul ve çevrim süresi metrikleri",
+      "aciklama": "Ürün yapay zekâ asistanı benimseme ve kabul oranı ile çevrim süresi değişimini ekip ve kişi düzeyinde gösterebiliyor; performans değerlendirmesine taşınırsa çalışan izleme riski oluşur.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.harness.io/products/ai-dlc-insights",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Kabul oranı hedefe dönüşürse geliştiriciler önerileri gözden geçirmeden kabul eder; kalite düşer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-007",
+        "N-K23-008"
+      ],
+      "erken_sinyal": "Kabul oranının hedef olarak konması.",
+      "azaltma": "Kabul oranını hedef değil gözlem metriği olarak kullanmak.",
+      "id": "BL-01928",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2757",
+      "arac": "GPT2SP",
+      "gorev": "R-G10",
+      "tur": "RT-17",
+      "baslik": "Tahmin edilen puanın ekip tahmini yerine geçmesi",
+      "aciklama": "Otomatik hikâye puanı ekip içi tahmin tartışmasının yerini alırsa aşırı güven ve bireysel performans ölçümü olarak kullanım riski doğar.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/awsm-research/gpt2sp"
+      ],
+      "yasatacagi_sorunlar": [
+        "Puanlar çalışan performans değerlendirmesinde kullanılırsa iş hukuku ve çalışan izleme sorunları doğar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-007",
+        "N-K25-006"
+      ],
+      "erken_sinyal": "Planlama toplantılarında tahmin tartışmasının kaybolması.",
+      "azaltma": "Tahmini yalnız öneri olarak gösterin; bireysel değerlendirmede kullanmayı yasaklayın.",
+      "id": "BL-02076",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3008",
+      "arac": "Agent Blame",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Satır bazında AI işaretlerinin bireysel karşılaştırmaya dönüşmesi",
+      "aciklama": "Araç, PR'larda AI tarafından yazılan satırları ve araç bazında dağılımı gösteriyor. Bu görünüm, geliştiriciler arası 'AI oranı' karşılaştırmasına dönüşebilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/mesa-dot-dev/agentblame"
+      ],
+      "yasatacagi_sorunlar": [
+        "AI oranı bireysel değerlendirmede kullanılırsa çalışanlar ajan kullanımını gizler; açıklama normu çöker."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-002",
+        "N-K30-002"
+      ],
+      "erken_sinyal": "Yöneticilerin kişi bazında AI oranı raporu istemesi.",
+      "azaltma": "Köken verisinin yalnız inceleme odağı için kullanılacağını yazılı politikayla sınırlamak.",
+      "id": "BL-02105",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3512",
+      "arac": "Miro (PI planlama ve ROAM şablonları)",
+      "gorev": "R-G03b",
+      "tur": "RT-17",
+      "baslik": "Herkese açık, oturum açmadan düzenlenebilen pano paylaşımı",
+      "aciklama": "Starter planından itibaren 'Visitor editing' özelliğiyle panolar herkese açık paylaşılıp oturum açmadan düzenlenebiliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://miro.com/pricing/"
+      ],
+      "yasatacagi_sorunlar": [
+        "PI planlama panosu 'bağlantıya sahip herkes düzenleyebilir' ayarıyla paylaşılırsa program riskleri, bağımlılıklar ve yol haritası dışarı sızar; içerik izinsiz değiştirilebilir.",
+        "10+ ekibin kendi panolarını açtığı ortamda paylaşım ayarları merkezî denetlenemez."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K21-005",
+        "N-K25-009",
+        "N-K18-010"
+      ],
+      "erken_sinyal": "Herkese açık bağlantılı panoların sayısı; alan adı dışı ziyaretçi düzenlemeleri.",
+      "azaltma": "Yönetici ayarlarıyla herkese açık paylaşımı ve ziyaretçi düzenlemeyi kapatın. Kurumsal alan adı yakalama (domain control) kullanın.",
+      "id": "BL-02192",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3593",
+      "arac": "Reviewable",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Dosya bazında 'kim neyi inceledi' verisinin bireysel değerlendirmeye sızması",
+      "aciklama": "Reviewable, her dosyada kimin neyi incelediğini ve tartışmaların durumunu ayrıntılı tutuyor. Amaç sınırlaması olmazsa bu veri, inceleyicinin hızı ve özeni için bireysel ölçüye dönüşebilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://docs.reviewable.io/"
+      ],
+      "yasatacagi_sorunlar": [
+        "İnceleme özeni bireysel performans ölçüsü olarak kullanılırsa inceleyiciler 'işaretle geç' davranışına yönelir; ajan kodunda otomasyon yanlılığı artar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-002",
+        "N-K32-001",
+        "N-K17-006"
+      ],
+      "erken_sinyal": "İnceleme istatistiklerinin kişi bazında raporlanmaya başlaması.",
+      "azaltma": "İnceleme verisini yalnız süreç iyileştirmede kullanma kuralı ve aydınlatma metni.",
+      "id": "BL-02249",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3640",
+      "arac": "Immersive Labs",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Kişi bazlı beceri puanlarının İK kararlarına taşınması",
+      "aciklama": "Platform role göre kıyaslama ve raporlama sunuyor; beceri kanıtı raporları bireysel düzeyde. Bu veriler terfi/performans kararlarında kullanılırsa AB YZ Yasası Ek III-4 ve KVKK ölçülülük ilkesi açısından risk doğar.",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://www.immersivelabs.com/",
+        "https://artificialintelligenceact.eu/annex/3/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Tatbikat puanları bireysel performans göstergesine dönüşürse çalışanlar tatbikatlardan kaçınır ya da puanı optimize eder."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-005",
+        "N-K25-006"
+      ],
+      "erken_sinyal": "Yöneticilerin kişi bazlı sıralama istemesi.",
+      "azaltma": "Raporları gelişim amacıyla sınırlamak; yalnız ekip düzeyi karşılaştırma.",
+      "id": "BL-02271",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-3652",
+      "arac": "Progression",
+      "gorev": "R-G08",
+      "tur": "RT-17",
+      "baslik": "Yetkinlik matrislerinin terfi kararlarına bağlanması",
+      "aciklama": "Beceri değerlendirmeleri ve gelişim planları terfi/ücret kararlarında kullanıldığında şeffaflık ve itiraz süreçleri gerekir; ajanlı iş akışına özgü yetkinlikler kurumca eklenmeli (araç haritası notu).",
+      "tarih": "2026-09",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://progression.co/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Yapay zekâ ile çalışma yetkinliğinin belirsiz tanımı, terfi kararlarında tutarsızlık yaratır."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-001",
+        "N-K25-003",
+        "N-K25-006"
+      ],
+      "erken_sinyal": "Değerlendirme itirazlarının artması.",
+      "azaltma": "Yetkinlik tanımlarını gözlemlenebilir davranışlarla yazmak.",
+      "id": "BL-02278",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4054",
+      "arac": "SpecStory",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Paylaşılan konuşma geçmişiyle istem düzeyinde izleme",
+      "aciklama": "Ekip paylaşımı ve çok bilgisayarlı arama, kimin hangi istemi verdiğini görünür kılıyor. Bu veri bireysel değerlendirmede kullanılabilir.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/specstoryai/getspecstory/blob/dev/README.md"
+      ],
+      "yasatacagi_sorunlar": [
+        "Çalışanlar istemlerinin okunacağını bildiği için ajana 'anlamadım' demekten ve deneme yapmaktan kaçınır; psikolojik güvenlik zayıflar."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-001",
+        "N-K32-007"
+      ],
+      "erken_sinyal": "Paylaşılan geçmişte istem sayısının düşmesi.",
+      "azaltma": "Paylaşımı gönüllü ve amaç sınırlı tutmak; yönetici erişimini kısıtlamak.",
+      "id": "BL-02342",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-4150",
+      "arac": "Effectory",
+      "gorev": "R-G12",
+      "tur": "RT-17",
+      "baslik": "Küçük ekiplerde eşik sınırında raporlama ve açık uçlu yanıtların metin olarak gösterilmesi",
+      "aciklama": "Grup skorları en az 5 katılımcıda raporlanıyor (artırılabilir, 5'in altına inemez) ve fark saldırısına karşı kurallar var; ancak 3-4 katılımcılı gruplar 'sınırlı içgörü' alıyor ve raporlanan grupların açık uçlu yanıtları tek tek gösteriliyor.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "birincil",
+      "kanit_url": [
+        "https://support.effectory.com/hc/en-us/articles/15742250218141-Confidentiality-and-the-number-of-respondents",
+        "https://support.effectory.com/hc/en-us/articles/16341335119645-Confidentiality-and-answers-to-open-ended-questions"
+      ],
+      "yasatacagi_sorunlar": [
+        "5-9 kişilik scrum ekiplerinde ekip düzeyi sonuçlar eşiğe yakın kalır; Türkçe açık uçlu yorumlar üslup ve bağlamdan yazarını ele verir, psikolojik güvenlik ölçümü (N-K32-007) çarpılır.",
+        "Ajanlı çalışmaya eleştiri içeren yorumlar yazarı tahmin edilerek cezalandırılırsa anket güvenilirliği kalıcı zarar görür."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-007",
+        "N-K23-015",
+        "N-K32-001"
+      ],
+      "erken_sinyal": "Katılım oranının ikinci dönemden itibaren düşmesi; yorum sayısının azalması.",
+      "azaltma": "Eşiği 8-10'a yükseltin; açık uçlu yanıtları ART düzeyinde toplayın; raporlama yetkisini İK dışı yöneticilere daraltın.",
+      "id": "BL-02387",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Destek makaleleri asgari 5 katılımcı (artırılabilir, 5'in altına inemez), fark kuralları, 3+ yanıtlıda 'limited insights' ve raporlanan gruplarda açık uçlu yanıtların tek tek gösterildiğini doğruluyor. Güçlü korumalar var; şiddet abartılı.",
+        "kaynak": [
+          "https://support.effectory.com/hc/en-us/articles/15742250218141-Confidentiality-and-the-number-of-respondents",
+          "https://support.effectory.com/hc/en-us/articles/16341335119645-Confidentiality-and-answers-to-open-ended-questions"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-4225",
+      "arac": "Kolay İK",
+      "gorev": "R-G11",
+      "tur": "RT-17",
+      "baslik": "Performans modülüne ajan kullanım metriklerinin bağlanması",
+      "aciklama": "Ürünün 360° ve yetkinlik tabanlı performans değerlendirme şablonları var. Ajan kullanım ya da katkı kökeni metrikleri bu modüle aktarılırsa bireysel değerlendirmeye doğrudan girer.",
+      "tarih": "",
+      "siddet": "orta",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://kolayik.com/"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajan kullanım oranı ya da AI katkı yüzdesi performans puanına dönüşürse, KVKK amaç sınırlaması ve iş hukuku (çalışma koşulu değişikliği, eşit davranma) açısından uyuşmazlık doğar.",
+        "Çalışanlar değerlendirmeye yansıyacağını bildikleri için ajan hatalarını ve anlamadıklarını gizler."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K32-002",
+        "N-K32-003",
+        "N-K32-001"
+      ],
+      "erken_sinyal": "Performans şablonlarına 'AI kullanımı' gibi yetkinlik maddeleri eklenmesi.",
+      "azaltma": "Ajan telemetrisini İK sistemine aktarmayı yazılı politikayla yasaklamak; çalışan temsilcileriyle danışma.",
+      "id": "BL-02430",
+      "dogrulama_turu": {
+        "karar": "dogrulandi",
+        "not": "Ana sayfa hedef/yetkinlik tabanlı ve 360° performans değerlendirmesini doğruluyor. Risk müşterinin ajan metriklerini bu modüle bağlamasına koşullu bir çıkarım; şiddet abartılı.",
+        "kaynak": [
+          "https://kolayik.com/"
+        ]
+      }
+    },
+    {
+      "arac_id": "AR-0698",
+      "arac": "CUE",
+      "gorev": "R-G03b",
+      "tur": "RT-17",
+      "baslik": "Niş dil: ekip yetkinliği ve LLM desteği sınırlı",
+      "aciklama": "CUE'nun kendine özgü birleştirme (unification) semantiği ve deneysel söz dizimi (try, aliasv2, shortcircuit) yaygın bilinmiyor. Söz diziminin sık değişmesi LLM'lerin eğitim verisindeki örnekleri eskitiyor.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://github.com/cue-lang/cue/releases/tag/v0.17.0"
+      ],
+      "yasatacagi_sorunlar": [
+        "Ajanlar eski söz dizimiyle CUE üretir ve kural dosyaları doğrulamada başarısız olur.",
+        "Scrum ekiplerinde CUE bilen az kişi olacağı için kural değişiklikleri darboğaza girer."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K25-003",
+        "N-K07-007"
+      ],
+      "erken_sinyal": "Ajan üretimi CUE dosyalarında sık sözdizimi hatası.",
+      "azaltma": "Kısa bir iç CUE stil rehberi ve örnek şema kütüphanesi hazırlayın. Ajan bağlamına sabitlenen sürümün belgelerini ekleyin.",
+      "id": "BL-01050",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    },
+    {
+      "arac_id": "AR-2221",
+      "arac": "AWS Well-Architected Tool (Generative AI Lens dahil)",
+      "gorev": "R-G03b",
+      "tur": "RT-17",
+      "baslik": "Kontrol listesi kültürü ve tek seferlik kullanım",
+      "aciklama": "Araç ücretsiz ve manuel. Kilometre taşları ve iyileştirme planları kullanıcı güncellemesine bağlı.",
+      "tarih": "",
+      "siddet": "dusuk",
+      "olasilik": "orta",
+      "dogrulama": "cikarim",
+      "kanit_url": [
+        "https://aws.amazon.com/well-architected-tool/faqs/"
+      ],
+      "yasatacagi_sorunlar": [
+        "İncelemeler PI başında bir kez doldurulup güncellenmez; etkinleştirici işler (N-K24-005) backlog'a akmaz."
+      ],
+      "etkilenen_ihtiyaclar": [
+        "N-K24-005",
+        "N-K24-006"
+      ],
+      "erken_sinyal": "Kilometre taşı tarihlerinin eskimesi.",
+      "azaltma": "İyileştirme planı maddelerini otomatik olarak backlog'a aktaran bir entegrasyon kurun. PI planlamasına girdi yapın.",
+      "id": "BL-01956",
+      "dogrulama_turu": {
+        "karar": "yapilmadi",
+        "not": "Orta/düşük şiddetli bulgular ikinci ajan doğrulamasına alınmadı; varsa CVE/GHSA kimlikleri otomatik kontrol edildi."
+      }
+    }
+  ],
+  "kategori_kaliplari": [
+    "RK-001",
+    "RK-003",
+    "RK-006",
+    "RK-007",
+    "RK-008",
+    "RK-009",
+    "RK-010",
+    "RK-011",
+    "RK-012",
+    "RK-013",
+    "RK-014",
+    "RK-016",
+    "RK-017",
+    "RK-018",
+    "RK-019",
+    "RK-020",
+    "RK-021",
+    "RK-022",
+    "RK-026",
+    "RK-027",
+    "RK-029",
+    "RK-030",
+    "RK-031",
+    "RK-033",
+    "RK-034",
+    "RK-035",
+    "RK-036",
+    "RK-037",
+    "RK-043",
+    "RK-051",
+    "RK-053",
+    "RK-054",
+    "RK-056",
+    "RK-066",
+    "RK-087",
+    "RK-179",
+    "RK-180",
+    "RK-197",
+    "RK-205",
+    "RK-206",
+    "RK-207",
+    "RK-216",
+    "RK-227"
+  ],
+  "olaylar": [
+    "EV-001",
+    "EV-002",
+    "EV-004",
+    "EV-006",
+    "EV-007",
+    "EV-013",
+    "EV-029",
+    "EV-046",
+    "EV-049",
+    "EV-053",
+    "EV-082",
+    "EV-086",
+    "EV-093",
+    "EV-103",
+    "EV-120",
+    "EV-121",
+    "EV-130",
+    "EV-136",
+    "EV-137",
+    "EV-138",
+    "EV-139",
+    "EV-152",
+    "EV-153",
+    "EV-155",
+    "EV-156",
+    "EV-178",
+    "EV-185",
+    "EV-192",
+    "EV-218",
+    "EV-219",
+    "EV-220",
+    "EV-230",
+    "EV-231",
+    "EV-246",
+    "EV-255",
+    "EV-273",
+    "EV-304"
+  ],
+  "senaryolar": [
+    "SS-001",
+    "SS-002",
+    "SS-003",
+    "SS-004",
+    "SS-005",
+    "SS-006",
+    "SS-007",
+    "SS-008",
+    "SS-009",
+    "SS-011",
+    "SS-012",
+    "SS-013",
+    "SS-014",
+    "SS-015",
+    "SS-016",
+    "SS-017",
+    "SS-018",
+    "SS-023",
+    "SS-054",
+    "SS-064",
+    "SS-065",
+    "SS-073",
+    "SS-077",
+    "SS-078",
+    "SS-099",
+    "SS-111",
+    "SS-112",
+    "SS-113",
+    "SS-114",
+    "SS-115"
+  ],
+  "otomatik_sinyalli_araclar": []
+}

@@ -1,0 +1,2155 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-08",
+    "ad": "Yeniden kullanılabilir yetenek paketleri (skill) ve ajan talimat dosyaları",
+    "grup": "Bağlam, bilgi, kurallar ve araç erişimi",
+    "cozdugu_sorun": "Aynı prosedürün her görevde yeniden anlatılması; kurum bilgisinin ajana taşınamaması.",
+    "ne_zaman_zorunlu": "Tekrarlayan iş türleri oluştuğunda."
+  },
+  "arac_sayisi": 109,
+  "tur_dagilimi": {
+    "cerceve": 4,
+    "ticari-yazilim": 4,
+    "acik-kaynak": 78,
+    "ticari-saas": 7,
+    "protokol-standart": 9,
+    "platform": 5,
+    "bulut-hizmeti": 1,
+    "kutuphane": 1
+  },
+  "araclar": [
+    {
+      "id": "AR-0032",
+      "ad": "Claude Agent SDK",
+      "tur": "cerceve",
+      "lisans": "MIT (SDK); Claude Code çalışma zamanı Anthropic ticari şartları",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://code.claude.com/docs/en/agent-sdk/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Claude Code'un ajan döngüsünü Python/TypeScript kütüphanesi olarak sunar: araç kullanımı, izin geri çağrıları (araç onayı), kancalar, alt ajanlar, MCP, oturum devamı (resume) ve JSON şemalı yapılandırılmış çıktı.",
+      "sinirlar": "Anthropic modellerine bağlı; kod bağlamı sağlayıcıya gider. Yalnız Claude modelleriyle (Anthropic API, Bedrock, Vertex, Foundry) çalışır; kullanım Anthropic ticari şartlarına tabidir ve farklı model ailesi gerektiren denetçi rolü için tek başına yetmez.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K04-013",
+        "N-K05-007",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-007",
+        "N-K10-008",
+        "N-K10-009",
+        "N-K10-010",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0034",
+      "ad": "LangChain Deep Agents",
+      "tur": "cerceve",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://docs.langchain.com/oss/python/deepagents/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "LangGraph üzerine kurulu 'bataryası dahil' ajan koşum çerçevesi: planlama (todo) aracı, sanal/dosya sistemi arka ucu, bağlamı yalıtılmış alt ajan başlatma ve bağlam yönetimi.",
+      "sinirlar": "Kodlama işini zaten Claude Code / OpenHands gibi çalıştırıcılar yapıyorsa ikinci çalıştırıcı katmanı gereksiz (kaynak). Sınırları model değil araç/sandbox katmanında uygulamayı varsayar ('LLM'e güven' modeli); yetki sınırlarının ayrıca kurulması gerekir.",
+      "ihtiyaclar": [
+        "N-K04-006",
+        "N-K05-007",
+        "N-K10-001",
+        "N-K10-006",
+        "N-K10-009",
+        "N-K11-005",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0054",
+      "ad": "Claude Code",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari (Anthropic şartları; kaynak kapalı)",
+      "barindirma": [
+        "bulut-yonetilen",
+        "yerel"
+      ],
+      "url": "https://code.claude.com/docs/en/overview",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terminal kodlama ajanı; -p başsız mod, json/stream-json çıktı, --resume ile oturum devamı, izin modları ve araç izin/ret listeleri, kancalar, alt ajanlar, ajan takımları ve işletim sistemi düzeyinde sandbox sağlar.",
+      "sinirlar": "Kapalı kaynak; Anthropic modellerine bağlı; kod bağlamı sağlayıcıya gider. Kapalı kaynak; yalnız Claude modelleri; izin kuralları yanlış yapılandırılırsa yıkıcı komut riski sürer.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K05-007",
+        "N-K10-001",
+        "N-K10-003",
+        "N-K10-005",
+        "N-K10-006",
+        "N-K10-007",
+        "N-K10-008",
+        "N-K10-009",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K14-008",
+        "N-K15-002",
+        "N-K18-013",
+        "N-K28-001",
+        "N-K28-002",
+        "N-K28-003",
+        "N-K29-004"
+      ]
+    },
+    {
+      "id": "AR-0058",
+      "ad": "goose",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://goose-docs.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "CLI, masaüstü ve API ile çalışan genişletilebilir genel amaçlı ajan; MCP uzantıları, yeniden kullanılabilir reçeteler, çok model sağlayıcı. Nisan 2026'da AAIF'e taşındı; kaynakta unknown-unknowns ve dokümantasyon ajanı alternatifi.",
+      "sinirlar": "Yerel/masaüstü kullanım odaklı; başsız hat entegrasyonu pilotta sınanmalı; goose.ai (GooseAI) ile karıştırılmamalı (kaynak). Genel amaçlı ajan; kodlama özelinde kalite kapıları ve sandbox kullanıcıya bırakılır.",
+      "ihtiyaclar": [
+        "N-K01-008",
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-004",
+        "N-K10-008",
+        "N-K11-005",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-0059",
+      "ad": "OpenCode",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://opencode.ai",
+      "olgunluk": "olgun",
+      "ne_saglar": "Terminal odaklı açık kaynak kodlama ajanı: ajan başına istem, model ve araç izni tanımı; yerel model servislerine özel sağlayıcı (baseURL); çok sağlayıcı. Kurum panolarında Dagu + OpenCode ajan çalıştırıcı olarak seçilmiş ve adil karşılaştırmada sabit çalıştırıcı olarak öneriliyor.",
+      "sinirlar": "Yerel modellerde API uyumluluğu yetmez; tool_calls ve reasoning alanlarının model biçimine uygunluğu model başına doğrulanmalı (kaynak); depo sst/opencode'dan anomalyco/opencode'a taşındı. Hızlı gelişim temposu; kurumsal destek ve güvenlik denetimi kurumun sorumluluğunda.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K09-001",
+        "N-K09-010",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-004",
+        "N-K10-007",
+        "N-K10-008",
+        "N-K23-002"
+      ]
+    },
+    {
+      "id": "AR-0067",
+      "ad": "Continue",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://continue.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Açık kaynak kodlama ajanı; IDE eklentileri ve 'cn' CLI ile başsız çalıştırma, ekip kural/yapılandırma paylaşımı ve PR'larda ajan kontrolleri.",
+      "sinirlar": "Katalog IDE içi kullanımı nedeniyle başsız hatta uygun görmüyor; CLI yüzeyi pilotta doğrulanmalı. Ürün odağı sık değişti; hub/bulut özellikleri ticari.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K05-012",
+        "N-K10-001",
+        "N-K11-005",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-0078",
+      "ad": "Hermes Agent",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://hermes-agent.nousresearch.com/docs/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Deneyimden skill (prosedür dosyası) üreten ve kullandıkça iyileştiren, kalıcı bellek ve oturumlar arası tam metin aramalı ajan çalışma zamanı; 7 terminal arka ucu (yerel, Docker, SSH, Singularity, Modal, Daytona, Vercel Sandbox), paralel alt ajan, cron, çoklu kanal. v0.12.0 Kanban: SQLite (WAL) görev panosu, kira + heartbeat ile sahiplenme ve bayat işi geri alma, parent bağımlılığı, profil başına eşzamanlılık sınırı.",
+      "sinirlar": "Model ağırlığı eğitmez, skill dosyası yazar; skill'ler sessizce değişirse tekrarlanabilirlik bozulur, dış içerik skill'e sızarsa zehirlenme riski; tek kullanıcı tasarımı; Kanban tek host ve 'güvenilir yerel kullanıcı' tehdit modeli, olay geçmişinden replay yok (kaynak).",
+      "ihtiyaclar": [
+        "N-K02-011",
+        "N-K08-006",
+        "N-K10-001",
+        "N-K11-005",
+        "N-K11-009",
+        "N-K13-005",
+        "N-K13-007",
+        "N-K13-013",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0079",
+      "ad": "Letta (Letta Code)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.letta.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kalıcı kimliği ve kendi belleğini düzenleyen durum tutan ajanlar (eski MemGPT); güncel harness Letta Code: yerel/bulut çalışma, git tabanlı sürümlü bellek (MemFS/Context Repositories), skill, modlar, izinler ve arka planda bellek birleştirme.",
+      "sinirlar": "Kodlama hattının çekirdeği değil, bellek sunucusu ayrıca işletilir; ajanın bellek incelemesi insan onayı değildir; V1 sunucu geçmişi arşiv dalında (kaynak). Bellek odaklıdır; kodlama ajanı sandbox ve izin modeli ayrıca kurulmalı. Kendi ajan çalışma zamanını varsayar; başka çerçevelere gömmek sınırlı.",
+      "ihtiyaclar": [
+        "N-K09-007",
+        "N-K10-001",
+        "N-K11-005",
+        "N-K14-006",
+        "N-K14-007",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0099",
+      "ad": "GitHub Spec Kit",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.github.com/spec-kit/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Specify CLI ile depoya spesifikasyon güdümlü geliştirme iskeleti kurar; ilke (constitution) → specify → plan → tasks → implement adımlarını 30+ kodlama ajanı için komut ve şablon olarak sağlar; tüm artefaktlar sürüm kontrolünde düz Markdown olarak kalır.",
+      "sinirlar": "Bir süreç iskeleti; kapı ve bütçe getirmez (kaynak). Belge üretir; spesifikasyon sürümleme onayı ve kabul testinin bağımsız doğrulanması hattın geri kalanına kalır. Şablon/komut düzeyinde kalır; onay kilidi, sürüm sabitleme ve zorlayıcı kapı sağlamaz. Şablon/istem seti düzeyindedir; spesifikasyon şemasını makinece doğrulayan kapı ya da iş takip sistemiyle çift yönlü senkron sunmaz, çıktı kalitesi kullanılan modele bağlıdır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K01-003",
+        "N-K01-004",
+        "N-K01-006",
+        "N-K01-010",
+        "N-K01-013",
+        "N-K02-004",
+        "N-K05-001",
+        "N-K05-028",
+        "N-K11-001",
+        "N-K11-005",
+        "N-K11-010",
+        "N-K28-001",
+        "N-K28-008"
+      ]
+    },
+    {
+      "id": "AR-0101",
+      "ad": "BMAD-METHOD",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Analist, ürün yöneticisi, mimar, scrum ustası, geliştirici, QA gibi uzman rol ajanlarıyla PRD → mimari → hikâye parçalama → uygulama akışı tanımlayan açık yöntem ve ajan/iş akışı paketi; işin büyüklüğüne göre planlama derinliğini ayarlar.",
+      "sinirlar": "Kurumun kendi kural ve ajan setiyle örtüşür; ikisi birlikte yürütülmemeli (kaynak). İstem/şablon tabanlı yöntemdir; rol sayısı arttıkça ölçümsüz karmaşıklık riski. Yöntem ve istem paketi düzeyindedir; kurumsal onay, sürüm kilidi ve denetim kaydı sağlamaz, rol ajanı çıktılarının doğrulanması kullanıcıya kalır.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-010",
+        "N-K01-012",
+        "N-K02-004",
+        "N-K10-004",
+        "N-K10-006",
+        "N-K11-005",
+        "N-K25-001",
+        "N-K25-003"
+      ]
+    },
+    {
+      "id": "AR-0102",
+      "ad": "Tessl",
+      "tur": "ticari-saas",
+      "lisans": "ticari (ücretsiz katman var)",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://tessl.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Spesifikasyonları kod tabanında ajanların uzun süreli belleği olarak tutan SDD çerçevesi ile popüler kütüphaneler için kullanım spesifikasyonu ve değerlendirilmiş yetenek paketlerini barındıran kayıt/paket yöneticisi sunar.",
+      "sinirlar": "Ticari; kaynak Tessl'i 'spesifikasyonu birincil kaynak sayan' erken yaklaşım olarak anıyordu, güncel ürün skill/bağlam platformuna dönmüş. Framework uzun süredir kapalı/özel betada; genel kullanılabilirlik, fiyat ve self-host seçeneği belirsiz.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-010",
+        "N-K07-004",
+        "N-K11-004",
+        "N-K11-005",
+        "N-K11-008",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0103",
+      "ad": "OpenSpec",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openspec.dev/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Her değişiklik için ayrı klasörde öneri (proposal), spesifikasyon farkı, tasarım ve görev listesi üreten hafif SDD katmanı; insan ve ajan kod yazılmadan önce aynı planı gözden geçirir, onaylanan spesifikasyonlar git'te tek doğruluk kaynağında birleşir.",
+      "sinirlar": "Olgunluk ve ekip alışkanlığı açısından erken (kaynak). Süreç disiplini ekibe bağlı; otomatik kalite kapısı sağlamaz. İnsan onayı ve sürüm kilidi git/PR süreçlerine bağlı; kurumsal şema doğrulaması yok. Paylaşımlı 'Stores' özelliği beta; kabul kriterlerinin ölçülebilirliğini denetleyen kural motoru ve kimlikli onay kaydı yoktur.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-006",
+        "N-K01-009",
+        "N-K01-010",
+        "N-K01-013",
+        "N-K02-004",
+        "N-K05-001",
+        "N-K05-028",
+        "N-K11-001",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0104",
+      "ad": "mattpocock/skills (tdd skill)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mattpocock/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için yeniden kullanılabilir skill koleksiyonu; kaynak panoda test-first ajanı için 'mattpocock/tdd' skill'i anılıyor.",
+      "sinirlar": "Bireysel geliştiricinin koleksiyonu; kurumda kullanılmadan önce sürüm, bütünlük ve onay sürecinden geçirilmeli.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-0184",
+      "ad": "AGENTS.md",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://agents.md",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Depo kökünde ve alt dizinlerde kodlama ajanlarına yönelik talimat dosyası için ortak Markdown biçimi; en yakın dosyanın önceliği ile monorepo içinde katmanlı talimat sağlar.",
+      "sinirlar": "Biçim serbest; içerik doğrulaması, bütünlük ve gizli talimat taraması ayrıca gerekir. Şema/doğrulama ve zorlayıcılık yoktur, ajanın uyması garanti değildir; 'alt katman yalnız sıkılaştırır' kuralını ve sahip/sürüm meta verisini kendisi sağlamaz.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K07-004",
+        "N-K11-001",
+        "N-K11-003",
+        "N-K11-010",
+        "N-K24-007",
+        "N-K29-003",
+        "N-K29-010"
+      ]
+    },
+    {
+      "id": "AR-0187",
+      "ad": "Agent Skills (SKILL.md spesifikasyonu)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://agentskills.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "YAML ön bilgili SKILL.md, betik ve kaynak dosyalarından oluşan yeniden kullanılabilir yetenek paketi biçimi; önce ad/açıklama, gerektiğinde tam içerik yüklenen kademeli bağlam yükleme modeli.",
+      "sinirlar": "Paket içeriğinin bütünlüğü, sürümü ve onayı kurumun sorumluluğu. Paket imzası, bağımlılık/sürüm sabitleme ve izin beyanı sınırlı; dışarıdan alınan paketler betik çalıştırabildiği için tedarik zinciri riski taşır.",
+      "ihtiyaclar": [
+        "N-K03-005",
+        "N-K08-006",
+        "N-K10-009",
+        "N-K11-005",
+        "N-K11-010",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-0499",
+      "ad": "Agent OS",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://buildermethods.com/agent-os",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kod tabanındaki standartları keşfedip ajan talimatlarına enjekte eden ve spesifikasyon şekillendirme/yazma komutları sunan standart ve istem paketi; Claude Code, Cursor ve benzeri ajanlarla çalışır.",
+      "sinirlar": "Tek yazar ağırlıklı; kurumsal kural yönetimi ve sürüm sabitleme sınırlı. Tek ekip/geliştirici ölçeğinde yöntem paketi; merkezi yönetişim, sürüm kilidi ve doğrulama kapısı yoktur.",
+      "ihtiyaclar": [
+        "N-K01-001",
+        "N-K01-002",
+        "N-K02-004",
+        "N-K03-010",
+        "N-K07-004",
+        "N-K11-001",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0633",
+      "ad": "Anthropic Skills deposu",
+      "tur": "acik-kaynak",
+      "lisans": "Karma: çoğu Apache-2.0; docx/pdf/pptx/xlsx skill'leri kaynak-erişilebilir",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/anthropics/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Agent Skills biçiminde referans ve örnek yetenek paketleri (belge üretimi, test, tasarım vb.); kurum içi paket yazımında şablon olarak kullanılabilir.",
+      "sinirlar": "Belge skill'leri açık kaynak değildir; örnekler kurum prosedürlerine uyarlanmadan doğrudan kullanılmamalı.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0634",
+      "ad": "Claude Code eklenti pazarları (plugin marketplace)",
+      "tur": "platform",
+      "lisans": "Apache-2.0 (resmî dizin deposu); Claude Code ticari",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://code.claude.com/docs/en/plugin-marketplaces",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Skill, komut, alt ajan, hook ve MCP sunucu tanımlarını eklenti olarak paketleyip bir git deposundan 'pazar' olarak dağıtmayı sağlar; kurum kendi özel pazarını kurabilir.",
+      "sinirlar": "Claude Code'a özgüdür; diğer ajan çalışma zamanlarına taşınabilirlik sınırlı; üçüncü taraf eklentiler kod çalıştırabilir.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-008",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0635",
+      "ad": "skills CLI ve skills.sh dizini",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://skills.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "GitHub, GitLab, Azure Repos veya yerel yoldan Agent Skills paketlerini 70+ kodlama ajanına kuran CLI ve kurulum sayılarıyla genel dizin; dizinde güvenlik denetimi (audit) bölümü bulunur.",
+      "sinirlar": "Genel dizindeki paketlerin kalitesi ve güvenliği değişken; kurumsal onay/sürüm sabitleme süreci ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-008",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-0636",
+      "ad": "Tessl Registry",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://tessl.io/registry",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kütüphane, API ve iş akışlarının doğru kullanımını öğreten skill'leri sürümleyip dağıtan paket yöneticisi; kalite puanı, güvenlik taraması ve skill'in ajan performansına etkisini ölçen değerlendirme sunar.",
+      "sinirlar": "Ticari SaaS; self-host bilgisi yok; ölçüm metodolojisi kurumun kendi görev setinin yerini tutmaz.",
+      "ihtiyaclar": [
+        "N-K11-004",
+        "N-K11-005",
+        "N-K11-008",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-0637",
+      "ad": "ClawHub",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://clawhub.ai/",
+      "olgunluk": "erken",
+      "ne_saglar": "SKILL.md tabanlı skill'lerin sürümlenerek yayımlandığı, vektör arama ve moderasyon kancaları içeren genel kayıt; SKILL.md'de beyan edilen gereksinimleri gerçek davranışla karşılaştıran güvenlik analizi yapar.",
+      "sinirlar": "OpenClaw ekosistemine odaklı açık topluluk kaydı; kötü amaçlı veya düşük kaliteli paket riski yüksek, kurumsal kullanımda yalnız ayna/izin listesi ile.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-008"
+      ]
+    },
+    {
+      "id": "AR-0638",
+      "ad": "SkillsMP",
+      "tur": "ticari-saas",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://skillsmp.com/",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code, Codex ve diğer ajanlar için genel depolardan toplanan Agent Skills paketlerini arama/keşif amacıyla listeleyen dizin.",
+      "sinirlar": "Toplayıcı dizindir; içerik doğrulaması, sürüm sabitleme ve kaynak onayı sağlamaz; işletmeci ve koşullar belirsiz.",
+      "ihtiyaclar": [
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-0639",
+      "ad": "Gemini CLI Extensions",
+      "tur": "platform",
+      "lisans": "Apache-2.0 (Gemini CLI)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://geminicli.com/extensions/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "MCP sunucularını, bağlam dosyalarını (GEMINI.md) ve özel komutları tek bir eklenti paketinde birleştiren biçim ve eklenti galerisi.",
+      "sinirlar": "Gemini CLI'ye özgü paket biçimi; diğer çalışma zamanlarına taşınabilirlik sınırlı.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K12-001"
+      ]
+    },
+    {
+      "id": "AR-0640",
+      "ad": "Cursor Rules (.cursor/rules)",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://docs.cursor.com/context/rules",
+      "olgunluk": "olgun",
+      "ne_saglar": "Dosya glob kalıbına, açıklamaya veya elle çağrıya göre etkinleşen, sürüm kontrolünde tutulan kural dosyaları; görev/dosya tipine göre kural seti etkinleştirmeye örnek model.",
+      "sinirlar": "Yalnız Cursor editörü içinde uygulanır; kural etkinliği ölçümü ve zorlayıcı denetim yoktur.",
+      "ihtiyaclar": [
+        "N-K03-005",
+        "N-K11-001"
+      ]
+    },
+    {
+      "id": "AR-0641",
+      "ad": "Rulesync",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/dyoshikawa/rulesync",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tek kaynaktaki kural, komut, alt ajan, skill ve MCP tanımlarından Claude Code, Cursor, Copilot, Codex gibi araçların yapılandırma dosyalarını üreten CLI.",
+      "sinirlar": "Tek bakımcılı topluluk projesi; katman önceliği ve politika denetimi sağlamaz, yalnız dönüştürür.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-010",
+        "N-K24-007",
+        "N-K29-003"
+      ]
+    },
+    {
+      "id": "AR-0642",
+      "ad": "Ruler",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/intellectronica/ruler",
+      "olgunluk": "erken",
+      "ne_saglar": "Merkezi .ruler dizinindeki talimatları ve MCP ayarlarını birden fazla kodlama ajanının kendi dosya biçimlerine dağıtan CLI.",
+      "sinirlar": "Kendini 'beta araştırma önizlemesi' olarak tanımlıyor; kurumsal destek yok.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-1520",
+      "ad": "Mantis (google/mantis)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/google/mantis",
+      "olgunluk": "erken",
+      "ne_saglar": "Yapay zekâ kodlama ajanlarının zafiyetleri bulması, yeniden üretmesi ve yamalaması için yetenek (skill) seti ve ADK referans düzeneği; bulguyu yeniden üretici testle kanıtlamaya odaklanır.",
+      "sinirlar": "Otonom üretilen kodu çalıştırır; yalnız izole ortamda kullanılmalı, bulgular insan uzmanca doğrulanmalıdır (proje uyarısı).",
+      "ihtiyaclar": [
+        "N-K08-002",
+        "N-K18-009",
+        "N-K18-012"
+      ]
+    },
+    {
+      "id": "AR-1638",
+      "ad": "APM (Agent Package Manager)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/apm/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Yapay zekâ ajanlarının talimat, skill, istem, eklenti ve MCP bağımlılıklarını apm.yml manifestiyle tanımlayıp geçişli bağımlılık çözümü ve kilit dosyasıyla tekrarlanabilir kuran; kurum politikasıyla izin verilenleri denetleyen paket yöneticisi (Copilot, Claude Code, Codex, Cursor vb.).",
+      "sinirlar": "Yeni ve hızla değişen proje; paket kaynaklarının güvenilirliği kurumca denetlenmelidir.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-005",
+        "N-K11-006",
+        "N-K11-008",
+        "N-K11-010",
+        "N-K16-005"
+      ]
+    },
+    {
+      "id": "AR-1639",
+      "ad": "OpenSkills",
+      "tur": "acik-kaynak",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/numman-ali/openskills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Anthropic SKILL.md biçimindeki yetenek paketlerini Claude Code dışındaki ajanlara (Cursor, Codex, Aider vb.) yükleyen evrensel skill yükleyici CLI.",
+      "sinirlar": "Topluluk projesi; lisans GitHub'da NOASSERTION görünür, son güncelleme Ocak 2026.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-1640",
+      "ad": "Superpowers",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/obra/superpowers",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için beyin fırtınası, plan yazma, TDD, sistematik hata ayıklama ve kod inceleme gibi disiplinli iş akışlarını paketleyen yetenek (skill) kütüphanesi ve eklenti.",
+      "sinirlar": "İş akışları görüş bildirir niteliktedir; kurum yöntemine uyarlama ve etkinlik ölçümü gerekir.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K05-001",
+        "N-K07-004",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-1674",
+      "ad": "pg-aiguide",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://github.com/timescale/pg-aiguide",
+      "olgunluk": "gelisen",
+      "ne_saglar": "PostgreSQL sürümüne özgü resmî dokümantasyon araması ve en iyi uygulama yeteneklerini MCP sunucusu ve Claude eklentisi olarak sunan araç.",
+      "sinirlar": "Yalnız PostgreSQL alanı; barındırılan sürümü dış hizmete bağlıdır.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-1737",
+      "ad": "Konveyor AI (Kai)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://www.konveyor.io",
+      "olgunluk": "erken",
+      "ne_saglar": "Kural tabanlı statik analizörün (Konveyor Analyzer) göç bulgularını ve geçmiş çözülmüş örnekleri LLM'e bağlam olarak vererek uygulama modernizasyonu için kod değişikliği önerir; VS Code eklentisiyle çalışır.",
+      "sinirlar": "Göç senaryolarına (ör. Java EE'den Quarkus'a) odaklı; genel geliştirme ajanı değildir; erken aşama.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-008",
+        "N-K11-005",
+        "N-K14-001"
+      ]
+    },
+    {
+      "id": "AR-1790",
+      "ad": "Eclipse Theia (Theia AI)",
+      "tur": "cerceve",
+      "lisans": "EPL-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://theia-ide.org/docs/theia_ai/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Masaüstü ve bulut IDE çerçevesi; Theia AI ile kuruma özel ajanlar, istem şablonları, araç (MCP) entegrasyonu ve LLM sağlayıcısı seçimi kullanıcı denetiminde IDE'ye gömülür; istem ve yanıtlar görünür.",
+      "sinirlar": "Hazır ürün değil çerçeve; özel IDE geliştirmek emek ister.",
+      "ihtiyaclar": [
+        "N-K10-008",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-1884",
+      "ad": "BCP 14 (RFC 2119 / RFC 8174 anahtar sözcükleri)",
+      "tur": "protokol-standart",
+      "lisans": "IETF Trust",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.rfc-editor.org/info/bcp14",
+      "olgunluk": "olgun",
+      "ne_saglar": "MUST, SHOULD, MAY gibi anahtar sözcüklerin normatif anlamını tanımlar (yalnız büyük harfle yazıldığında); ajan talimat dosyalarında ve gereksinimlerde zorunluluk derecesini belirsizlikten arındıran kural dili.",
+      "sinirlar": "İngilizce anahtar sözcüklere dayanır; Türkçe karşılıklar kurumca tanımlanmalı.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K07-007"
+      ]
+    },
+    {
+      "id": "AR-1920",
+      "ad": "Kratix",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://kratix.io",
+      "olgunluk": "gelisen",
+      "ne_saglar": "'Promise' soyutlamasıyla platform ekibinin self-servis hizmetler (ör. ajan çalışma alanı, model uç noktası) tanımlayıp birden çok kümeye sunduğu Kubernetes tabanlı platform çerçevesi; paylaşılan ajan platformunun sahiplik modeline uygun.",
+      "sinirlar": "Kubernetes ve GitOps bilgisi ister; ticari destek tek şirkette.",
+      "ihtiyaclar": [
+        "N-K16-008",
+        "N-K24-004",
+        "N-K24-005",
+        "N-K34-005"
+      ]
+    },
+    {
+      "id": "AR-1978",
+      "ad": "Amazon Bedrock Prompt Management",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://aws.amazon.com/bedrock/prompt-management/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İstemleri değişkenli şablon olarak sürümlü saklar, sürüm karşılaştırması ve model/çıkarım parametreleriyle birlikte yayımlamayı sağlar.",
+      "sinirlar": "Bedrock'a bağlı; ajan kural dosyaları (AGENTS.md vb.) için genel bir depo değildir.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-006",
+        "N-K13-009",
+        "N-K16-005"
+      ]
+    },
+    {
+      "id": "AR-2063",
+      "ad": "IBM Bob",
+      "tur": "ticari-yazilim",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://bob.ibm.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kurumsal yapay zekâ kodlama ortağı (IDE): planlama, çok dosyalı ajanlı değişiklik, modernizasyon (Java, IBM Z/COBOL, IBM i) ve rol/mod tabanlı çalışma; watsonx Code Assistant'ın halefi, Nisan 2026'da GA.",
+      "sinirlar": "Yeni ürün; bağımsız karşılaştırmalı başarım verisi sınırlı.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K04-013",
+        "N-K10-005",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-2372",
+      "ad": "Coze Studio",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/coze-dev/coze-studio",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Coze platformunun açık kaynak çekirdeği: görsel iş akışı düzenleyicisi, eklenti/araç kaydı, bilgi tabanı ve ajan oluşturma-yayınlama araçlarını tek arayüzde sunar; API ile ajan çağrılabilir.",
+      "sinirlar": "Ticari Coze'daki bazı özellikler açık sürümde yok; mikro servis mimarisi (Go/TS) işletim yükü getirir, kodlama ajanı değil genel iş ajanı platformudur.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-004",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-2408",
+      "ad": "CodeBuddy (IDE, eklenti ve CodeBuddy Code CLI)",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://www.codebuddy.ai",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Tencent'in kodlama asistanı; CodeBuddy Code CLI'si başsız (-p) çalışma, Plan modu, ACP, Skills ve '@tencent-ai/agent-sdk' ile programatik gömme sağlar.",
+      "sinirlar": "Kapalı kaynak; model ve veri akışı Tencent Cloud'a bağlı, kurum içi barındırma seçenekleri belirsiz.",
+      "ihtiyaclar": [
+        "N-K04-013",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2464",
+      "ad": "AgentBench",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/THUDM/AgentBench",
+      "olgunluk": "olgun",
+      "ne_saglar": "Depo düzeyi bağlam dosyalarının (AGENTS.md vb.) kodlama ajanlarının başarı ve maliyetine etkisini 138 gerçek Python görevinde ölçen kıyas ve yeni veri seti üretme betikleri.",
+      "sinirlar": "2023 kökenli ortamlar; güncel kodlama ajanı senaryolarını tam temsil etmez. Python ve niş depolarla sınırlı; kurumun kendi kural dosyaları için yeni örnekler üretmek gerekir.",
+      "ihtiyaclar": [
+        "N-K07-007",
+        "N-K10-006",
+        "N-K11-004",
+        "N-K11-005",
+        "N-K23-002",
+        "N-K23-004"
+      ]
+    },
+    {
+      "id": "AR-2657",
+      "ad": "SkillsBench",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/benchflow-ai/skillsbench",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanların yetenek paketlerini (talimat, betik ve kaynak klasörleri) ne kadar etkili kullandığını ve paketlerin başarıya katkısını gym tarzı görevlerle ölçen kıyas.",
+      "sinirlar": "Hızla değişen topluluk projesi; sonuçlar model ve ajan sürümüne çok duyarlı.",
+      "ihtiyaclar": [
+        "N-K08-006",
+        "N-K11-004",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2697",
+      "ad": "SAMMO",
+      "tur": "kutuphane",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/sammo",
+      "olgunluk": "erken",
+      "ne_saglar": "İstemleri yapılandırılmış program olarak ele alıp bileşen düzeyinde (talimat, örnek, biçim) çok amaçlı (doğruluk ve token maliyeti) optimizasyon yapan kütüphane.",
+      "sinirlar": "2025 ortasından beri güncellenmiyor; araştırma kütüphanesi.",
+      "ihtiyaclar": [
+        "N-K11-009",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-2698",
+      "ad": "Agent Workflow Memory (AWM)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/zorazrw/agent-workflow-memory",
+      "olgunluk": "erken",
+      "ne_saglar": "Başarılı ajan yörüngelerinden yeniden kullanılabilir iş akışlarını çıkarıp belleğe ekleyerek sonraki görevlerde yönlendirme sağlar (çevrimdışı ve çevrimiçi mod).",
+      "sinirlar": "Web ajanı kıyaslarında gösterildi; yanlış çıkarılan iş akışlarının denetimi için insan onayı gerekir.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K08-006",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2807",
+      "ad": "Agents CLI (Google)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "yerel"
+      ],
+      "url": "https://google.github.io/agents-cli/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama asistanlarına Google Cloud Gemini Enterprise Agent Platform üzerinde ajan oluşturma, değerlendirme, dağıtma ve yönetme için komutlar ve yetenek paketleri (skill) ekler.",
+      "sinirlar": "Google Cloud'a bağımlıdır; değerlendirme ve dağıtım akışları GCP hizmetlerini varsayar.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K11-005",
+        "N-K23-010"
+      ]
+    },
+    {
+      "id": "AR-2811",
+      "ad": "Observal",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://observal.io/",
+      "olgunluk": "erken",
+      "ne_saglar": "Kodlama ajanı eklentileri (ajan, skill, MCP) için self-host onaylı kayıt: gönderimleri inceleme/onaylama, sürüm farkları, her harness için yapılandırma üretimi ve telemetri kancalarıyla oturum izlerini toplama.",
+      "sinirlar": "Mart 2026'da çıktı; kayıt ve telemetri tek serviste birleşik, kurumsal SSO/yetki olgunluğu doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K11-010",
+        "N-K12-002",
+        "N-K16-006",
+        "N-K19-001",
+        "N-K24-004"
+      ]
+    },
+    {
+      "id": "AR-2813",
+      "ad": "Microsoft Agent Skills (microsoft/skills)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/skills/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Azure SDK'ları ve Microsoft Foundry için 175+ ajan skill'i, özel ajanlar, AGENTS.md şablonları ve MCP yapılandırmaları; ajanın güncel SDK kalıplarını kullanmasına yardım eder.",
+      "sinirlar": "Azure/Foundry odaklıdır ve proje kendini 'yapım aşamasında' olarak tanımlar.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-2814",
+      "ad": "OpenGAP (Git Agent Protocol)",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://gitagent.sh",
+      "olgunluk": "erken",
+      "ne_saglar": "Git-yerel, çerçeveden bağımsız ajan tanımlama standardı ve referans CLI; bir depo klonlandığında ajan tanımı, talimatları ve skill'leri sürüm kontrollü olarak gelir.",
+      "sinirlar": "Tek topluluk tarafından sürülen standarttır; paket adı birkaç kez değişti, geniş benimsenme yok.",
+      "ihtiyaclar": [
+        "N-K10-002",
+        "N-K10-004",
+        "N-K11-001",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-2815",
+      "ad": "Agent Skills Discovery RFC (.well-known)",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/cloudflare/agent-skills-discovery-rfc",
+      "olgunluk": "erken",
+      "ne_saglar": "Skill'lerin RFC 8615 .well-known URI yolu altında yayımlanması ve keşfedilmesi için taslak mekanizma; kurum içi onaylı skill kataloğu yayımlamaya zemin sağlar.",
+      "sinirlar": "Taslak (v0.2, Ocak 2026); istemci desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K12-002"
+      ]
+    },
+    {
+      "id": "AR-2823",
+      "ad": "eve (Vercel)",
+      "tur": "cerceve",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "bulut-yonetilen",
+        "self-host"
+      ],
+      "url": "https://eve.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Ajanı dosya sistemi konvansiyonlarıyla (agent/ dizini, araçlar, skill'ler, yapılandırma) tanımlayan açık ajan çerçevesi; projeleri incelemeyi ve genişletmeyi kolaylaştırır.",
+      "sinirlar": "Haziran 2026'da çıktı; Vercel ekosistemine yakın konumlanır.",
+      "ihtiyaclar": [
+        "N-K10-001",
+        "N-K10-004",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2849",
+      "ad": "Warden (Sentry)",
+      "tur": "ticari-yazilim",
+      "lisans": "FSL-1.1-ALv2 (kaynak erişilebilir; 2 yıl sonra Apache-2.0)",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://warden.sentry.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Mevcut .agents/skills veya .claude/skills skill'leriyle kodu yerelde (CLI) veya her PR'da (GitHub Action) inceleyen ajanlar; bulgular satır içi PR yorumu ve Checks olarak raporlanır.",
+      "sinirlar": "Functional Source License rakip ürün kullanımını kısıtlar; GitHub odaklı.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K07-005",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2874",
+      "ad": "Accessibility Agents",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/Community-Access/accessibility-agents",
+      "olgunluk": "erken",
+      "ne_saglar": "WCAG 2.2 AA'yı ajanlı kodlamada uygulatan skill paketi; kullanıcıya dönük dosyalarda erişilebilirlik incelemesi bitmeden düzenlemeyi engeller ve raporları yapılandırılmış bulgulardan üretir.",
+      "sinirlar": "LLM tabanlı inceleme; axe-core gibi deterministik araçlarla birlikte kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K05-022"
+      ]
+    },
+    {
+      "id": "AR-2882",
+      "ad": "Gherkin Guidelines for AI",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/AutomationPanda/gherkin-guidelines-for-ai",
+      "olgunluk": "erken",
+      "ne_saglar": "İyi Gherkin senaryoları yazma yönergeleri; ajan veya skill bağlamı olarak verilerek kabul kriteri senaryolarının tutarlı ve okunabilir üretilmesini sağlar, üslup seçimleri düzenlenebilir.",
+      "sinirlar": "Yalnız yönerge dokümanıdır; otomatik denetim yapmaz.",
+      "ihtiyaclar": [
+        "N-K01-004",
+        "N-K01-009",
+        "N-K07-007"
+      ]
+    },
+    {
+      "id": "AR-2909",
+      "ad": "Project CodeGuard",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://project-codeguard.org/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanlarının üretim ve inceleme akışına güvenli-varsayılan pratikleri (ör. girdi doğrulama) gömen, modelden bağımsız güvenlik skill çerçevesi ve kural seti.",
+      "sinirlar": "Kurallar yönlendirme sağlar; deterministik tarayıcıların yerine geçmez.",
+      "ihtiyaclar": [
+        "N-K03-008",
+        "N-K11-005",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-2979",
+      "ad": "PromptScript",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://getpromptscript.dev/",
+      "olgunluk": "erken",
+      "ne_saglar": "Talimat, skill, ajan, MCP sunucusu, kanca, iş akışı ve politikaları bir kez .prs dilinde tanımlayıp 50 AI kodlama platformu için yerel yapılandırmaya derleyen dil ve derleyici ('kod olarak ajan platformu yapılandırması').",
+      "sinirlar": "Tek geliştiricili; hedef platformlar değiştikçe derleyici bakımı gerekir.",
+      "ihtiyaclar": [
+        "N-K07-007",
+        "N-K11-001",
+        "N-K11-003",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-2980",
+      "ad": "OpenPackage",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://openpackage.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Kural, komut, alt ajan, skill ve MCP yapılandırmalarını her platform için tek komutla kurma, kaldırma ve paketleme sağlayan kodlama ajanı yapılandırma paket yöneticisi.",
+      "sinirlar": "Son etkinlik Mayıs 2026.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-006",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-2981",
+      "ad": "asm (agent-skill-manager)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://luongnv.com/asm",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code, Codex, Cursor ve 18 araçta skill kurma, arama, denetleme ve düzenleme için ajanların da kullanabildiği betiklenebilir CLI.",
+      "sinirlar": "Tek geliştiricili.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-2982",
+      "ad": "sx (skill sharing)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sleuth-io.github.io/sx/",
+      "olgunluk": "erken",
+      "ne_saglar": "Ekip skill'lerini senkronize edilen bir klasörde (Dropbox, Google Drive, OneDrive) sürümlü 'kasa' olarak tutup her AI aracına dağıtan uygulama ve CLI.",
+      "sinirlar": "Erişim denetimi dosya paylaşım hizmetine bağlı; kurumsal onay akışı yok.",
+      "ihtiyaclar": [
+        "N-K11-001",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2983",
+      "ad": "Skill Conductor",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/smixs/skill-conductor",
+      "olgunluk": "erken",
+      "ne_saglar": "Skill'ler için tasarım → yapım → test → değerlendirme → paketleme yaşam döngüsü; eşik-kör, farklı model ailesiyle kalibre edilmiş ikili puanlama (BinEval) ile skill etkinliğini ölçer.",
+      "sinirlar": "Tek geliştiricili.",
+      "ihtiyaclar": [
+        "N-K11-004",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-2984",
+      "ad": "Yao Meta Skill",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/yaojingang/yao-meta-skill",
+      "olgunluk": "erken",
+      "ne_saglar": "Yeniden kullanılabilir skill'leri oluşturan, değerlendiren, paketleyen ve yöneten meta skill; platformdan bağımsız Skill IR ve hedef derleyicilerle sürüm yaşam döngüsünü açıklaştırır.",
+      "sinirlar": "Tek geliştiricili; son etkinlik Ağustos 2026.",
+      "ihtiyaclar": [
+        "N-K11-004",
+        "N-K11-009",
+        "N-K11-010"
+      ]
+    },
+    {
+      "id": "AR-2989",
+      "ad": "Claude Skills for GRC",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sushegaad.github.io/Claude-Skills-Governance-Risk-and-Compliance/",
+      "olgunluk": "erken",
+      "ne_saglar": "ISO 27001, SOC 2, GDPR, NIST CSF, ISO/IEC 42001, ISO 27701, DORA gibi çerçeveler için uyum rehberliği veren Claude skill koleksiyonu; 180 test vakasıyla değerlendirilmiş.",
+      "sinirlar": "Rehberlik üretir, hukuki görüş değildir; KVKK'ya özgü içerik yok.",
+      "ihtiyaclar": [
+        "N-K21-007",
+        "N-K22-006",
+        "N-K22-010"
+      ]
+    },
+    {
+      "id": "AR-2993",
+      "ad": "AI Literacy Superpowers",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://habitat-thinking.github.io/ai-literacy-superpowers/",
+      "olgunluk": "erken",
+      "ne_saglar": "AI Literacy çerçevesi için Claude Code ve Copilot CLI eklenti pazarı: harness mühendisliği, okuryazar programlama, CUPID kod incelemesi, bileşik öğrenme ve insanın kod tabanını anlamasını korumaya yönelik 'diagnostic-legibility' ajanı.",
+      "sinirlar": "Metodoloji ağırlıklı; kazanımlar ölçülmemiş.",
+      "ihtiyaclar": [
+        "N-K04-007",
+        "N-K25-005",
+        "N-K25-006",
+        "N-K29-004",
+        "N-K29-007"
+      ]
+    },
+    {
+      "id": "AR-2994",
+      "ad": "OwnYourCode",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://ownyourcode.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "AI'yi kodlayıcı değil mentor yapan Claude Code iş akışı: AI yönlendirir, sorgular ve inceler, kodu geliştirici yazar; kıdem profiline göre öğretim tarzı değişir.",
+      "sinirlar": "Bireysel öğrenme odaklı; ekip ölçümü yok.",
+      "ihtiyaclar": [
+        "N-K25-005",
+        "N-K25-006"
+      ]
+    },
+    {
+      "id": "AR-3011",
+      "ad": "Turkish Native",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/oguzhankayan/turkish-native",
+      "olgunluk": "erken",
+      "ne_saglar": "AI üretimi ve yerelleştirilmiş Türkçe metinlerdeki çeviri kokusunu gideren, cümleyi anlamdan yeniden kuran açık kaynak ajan skill'i.",
+      "sinirlar": "Eylül 2026'da çıktı; etkisi ölçülmemiş.",
+      "ihtiyaclar": [
+        "N-K07-006",
+        "N-K09-014"
+      ]
+    },
+    {
+      "id": "AR-3054",
+      "ad": "Angular CLI MCP Server",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://angular.dev/ai/mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Angular CLI içine gömülü MCP sunucusu; ajanlara güncel Angular dokümanı araması, en iyi uygulama talimatları ve proje/çalışma alanı bilgisi verir.",
+      "sinirlar": "Angular'a özgü; bazı araçlar deneysel bayrak arkasında.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K07-007",
+        "N-K12-001",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3055",
+      "ad": "Svelte MCP ve AI araçları",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "saas",
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://svelte.dev/docs/mcp/overview",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Resmî Svelte dokümanından bağlam çeken ve üretilen Svelte kodunu statik analizle düzelten (autofixer) MCP sunucusu; talimat, skill ve alt ajanlarla birlikte gelir.",
+      "sinirlar": "Svelte/SvelteKit'e özgü; uzak kurulum Svelte'in barındırdığı uç noktayı kullanır.",
+      "ihtiyaclar": [
+        "N-K05-012",
+        "N-K07-007",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3059",
+      "ad": "Laravel Boost",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/laravel/boost",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Laravel projeleri için MCP sunucusu ve ajan talimat paketi; sürüme özgü doküman araması, veritabanı şeması/log/rota incelemesi ve Laravel kılavuz dosyaları sağlar.",
+      "sinirlar": "Yerel geliştirme için tasarlandı; üretim veritabanına bağlanmamalı.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K07-007",
+        "N-K11-005",
+        "N-K14-001",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3355",
+      "ad": "Dynatrace MCP Server (Remote) ve Dynatrace for AI",
+      "tur": "ticari-saas",
+      "lisans": "ticari (skills deposu Apache-2.0)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://docs.dynatrace.com/docs/dynatrace-intelligence/dynatrace-mcp",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Platform içindeki MCP ağ geçidi üzerinden DQL üretme/açıklama, problem inceleme, Kubernetes olay analizi ve zaman serisi tahmini araçları sunar; dynatrace-for-ai deposu aynı iş için Agent Skills paketleri, Managed sürüm için ayrı yerel MCP sunucusu sağlar.",
+      "sinirlar": "Uzak sunucu CIMD/dinamik istemci kaydını desteklemez; gizli OAuth istemcisi veya bearer token ve MCP gateway izinleri gerekir; eski yerel sunucu kullanımdan kaldırıldı.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K08-005",
+        "N-K11-005",
+        "N-K12-001",
+        "N-K12-003",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3392",
+      "ad": "LaunchDarkly Agent Skills (ai-tooling)",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/launchdarkly/ai-tooling",
+      "olgunluk": "erken",
+      "ne_saglar": "Bayrak arama, bir değişikliğin bayrak arkasında yayınlanıp yayınlanmaması gerektiğine dair salt okunur tavsiye, eskimiş bayrak keşfi ve kod tabanı kalıbına uygun bayrak oluşturma gibi Agent Skills oyun kitapları.",
+      "sinirlar": "Depoda açık lisans beyanı yok; skill içeriği sürekli değişiyor.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K11-005",
+        "N-K16-006"
+      ]
+    },
+    {
+      "id": "AR-3413",
+      "ad": "Katalon True Platform MCP ve True Skills",
+      "tur": "ticari-saas",
+      "lisans": "ticari (skills MIT)",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://katalon.com/katalon-mcp",
+      "olgunluk": "erken",
+      "ne_saglar": "Katalon platformunda test tasarlama, yapay zekâ ile çalıştırma, rapor yükleme ve yayın hazırlığı değerlendirmesi için uzak MCP sunucusu; test yaşam döngüsünü kapsayan 18 ajan-bağımsız skill ile birlikte gelir.",
+      "sinirlar": "Katalon aboneliği gerekir; yeni ürün.",
+      "ihtiyaclar": [
+        "N-K05-001",
+        "N-K05-014",
+        "N-K05-026",
+        "N-K05-027",
+        "N-K12-003"
+      ]
+    },
+    {
+      "id": "AR-3443",
+      "ad": "Trail of Bits Skills",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-SA-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/trailofbits/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Güvenlik araştırması, zafiyet tespiti, denetim ve test (fuzz, özellik tabanlı test, statik analiz) iş akışlarını paketleyen Claude Code eklenti pazarı; Codex de yükleyebilir.",
+      "sinirlar": "CC-BY-SA lisansı türev içerikte paylaşım koşulu getirir. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K05-011",
+        "N-K05-015",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3444",
+      "ad": "Sentry Skills (getsentry/skills)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/getsentry/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Sentry mühendislerinin kullandığı kod inceleme, commit/PR yazımı gibi geliştirme skill'leri ve alt ajanları; Claude Code eklentisi olarak kurulur. Sentry kurulum/hata ayıklama için ayrıca sentry-for-ai deposu var.",
+      "sinirlar": "Sentry'nin iç süreçlerine göre yazılmış; kurum konvansiyonuna uyarlanmalı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K06-001",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3445",
+      "ad": "OpenAI Plugins (Codex skill ve eklenti kataloğu)",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/openai/plugins",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Codex için resmî skill ve eklenti örnekleri kataloğu; eski openai/skills deposunun (sistem, küratörlü ve deneysel skill'ler) halefi.",
+      "sinirlar": "openai/skills kullanımdan kaldırıldı; yeni depoda lisans beyanı yok. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K11-010",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3446",
+      "ad": "Awesome GitHub Copilot",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/github/awesome-copilot",
+      "olgunluk": "olgun",
+      "ne_saglar": "Copilot için özel ajanlar, talimatlar, skill'ler, hook'lar, iş akışları ve eklentilerden oluşan GitHub'ın yönettiği topluluk koleksiyonu; web sitesi, llms.txt ve MCP sunucusu ile aranabilir.",
+      "sinirlar": "Topluluk katkılı; kalite ve güvenlik gözden geçirmesi kurumca yapılmalı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K11-010",
+        "N-K12-002",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3447",
+      "ad": "HashiCorp Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "MPL-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/hashicorp/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Terraform (16) ve Packer (4) için yaşam döngüsü durumu belirtilmiş skill'ler ve Claude Code eklenti paketleri; altyapı kodunun konvansiyona uygun üretimine yardımcı olur.",
+      "sinirlar": "Yalnız HashiCorp ürünleri. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K03-010",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3448",
+      "ad": "Grafana Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/grafana/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Grafana, Prometheus, Loki, Tempo, Pyroscope ve k6 ile çalışmak için Agent Skills paketleri; npx skills veya Claude Code ile kurulur.",
+      "sinirlar": "LGTM yığını dışında değeri sınırlı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K16-002"
+      ]
+    },
+    {
+      "id": "AR-3449",
+      "ad": "Datadog Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/datadog-labs/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Datadog CLI (pup), monitör, log, APM, dokümantasyon araması ve ajan gözlemlenebilirliği (deney, eval kök neden analizi) için skill'ler; Claude Code, Codex, Gemini CLI, Cursor vb. ile uyumlu.",
+      "sinirlar": "Datadog hesabı gerekir. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K16-002",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3450",
+      "ad": "Elastic Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/elastic/agent-skills",
+      "olgunluk": "erken",
+      "ne_saglar": "Elasticsearch, Kibana, Elastic Observability ve Elastic Security ile doğru çalışmayı öğreten resmî skill kütüphanesi.",
+      "sinirlar": "Teknik önizleme aşamasında. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3451",
+      "ad": "Semgrep Skills",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş (NOASSERTION)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/semgrep/skills",
+      "olgunluk": "erken",
+      "ne_saglar": "OWASP Top 10, altyapı güvenliği ve 15+ dilde güvenli kodlama yönergelerini içeren code-security skill'i başta olmak üzere Semgrep'in ajan skill'leri.",
+      "sinirlar": "Beta; açık kaynak içerikten dönüştürülerek üretilmiş. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K18-009"
+      ]
+    },
+    {
+      "id": "AR-3452",
+      "ad": "SonarQube Agent Plugins",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş (NOASSERTION)",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/SonarSource/sonarqube-agent-plugins",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SonarQube CLI ve SonarQube MCP Server'ı ajan döngüsüne bağlayan eklenti: kurulum komutu, kalite/sır kontrolü hook'ları ve metrik (test kapsamı vb.) sorgulama komutları.",
+      "sinirlar": "SonarQube hesabı, CLI ve konteyner çalışma zamanı gerekir.",
+      "ihtiyaclar": [
+        "N-K04-007",
+        "N-K05-012",
+        "N-K11-005",
+        "N-K18-004",
+        "N-K23-014"
+      ]
+    },
+    {
+      "id": "AR-3453",
+      "ad": "Pulumi Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/pulumi/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Altyapı göçü, sır yönetimi ve kod dönüştürme gibi Pulumi iş akışları için dört eklenti grubunda Agent Skills.",
+      "sinirlar": "Pulumi dışı IaC için değeri yok. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K18-004"
+      ]
+    },
+    {
+      "id": "AR-3454",
+      "ad": "Agent Plugins for AWS",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/awslabs/agent-plugins",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code, Codex ve Cursor için AWS mimarisi, dağıtım, kod inceleme ve işletim skill'leri ile MCP yapılandırmalarını paketleyen eklentiler.",
+      "sinirlar": "AWS, halefi olarak Agent Toolkit for AWS'yi duyurdu; bu depo geçiş sürecinde. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K05-015",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3455",
+      "ad": "Azure Skills Plugin",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/microsoft/azure-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Azure hazırlık/doğrulama/dağıtım, tanılama, uyum, maliyet, kota ve RBAC senaryoları için küratörlü skill'ler ile MCP sunucu yapılandırmalarını tek eklentide sunar.",
+      "sinirlar": "Azure odaklı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004",
+        "N-K20-005"
+      ]
+    },
+    {
+      "id": "AR-3456",
+      "ad": "Azure Agent Skills (MicrosoftDocs)",
+      "tur": "acik-kaynak",
+      "lisans": "CC-BY-4.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/MicrosoftDocs/Agent-Skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Microsoft Learn ekibinin Azure geliştirme için küratörlü Agent Skills koleksiyonu; Claude Code, Gemini CLI, Codex, Copilot, Cursor ile kullanılabilir.",
+      "sinirlar": "Azure dışı değer sınırlı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-003",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3457",
+      "ad": "Google Agent Skills (google/skills)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/google/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Google Cloud ve diğer Google teknolojileri için Agent Skills (kimlik doğrulama tarifleri vb.); Gemini API için ayrı gemini-skills deposu var.",
+      "sinirlar": "Google ekosistemine özgü. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3458",
+      "ad": "MongoDB Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mongodb/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Resmî MongoDB skill'lerini Atlas uzak MCP sunucusu (OAuth) ya da self-managed kurulumlar için yerel MongoDB MCP sunucusuyla paketleyen mongodb-atlas ve mongodb eklentileri; Claude, Cursor, Codex ve Copilot pazarlarında.",
+      "sinirlar": "MongoDB'ye özgü. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3459",
+      "ad": "Supabase Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/supabase/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Supabase ile çalışan ajanlar için supabase ve supabase-postgres-best-practices gibi resmî skill'ler; 18+ ajanla uyumlu, npx skills ile kurulur.",
+      "sinirlar": "Supabase'e özgü. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K06-009",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3460",
+      "ad": "Vercel Agent Skills",
+      "tur": "acik-kaynak",
+      "lisans": "lisans belirtilmemiş",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/vercel-labs/agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Vercel projeleri için maliyet/performans denetimi (vercel-optimize) gibi skill'ler ve React/Next.js en iyi uygulama paketleri.",
+      "sinirlar": "Depoda lisans beyanı yok; Vercel/Next.js odaklı. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3461",
+      "ad": "Cloudflare Skills",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cloudflare/skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Workers, Durable Objects, Agents SDK gibi Cloudflare platformunda geliştirmeyi öğreten resmî skill'ler.",
+      "sinirlar": "Cloudflare'e özgü. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K07-004",
+        "N-K11-005",
+        "N-K14-004"
+      ]
+    },
+    {
+      "id": "AR-3462",
+      "ad": "Awesome Agent Skills (VoltAgent)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Resmî geliştirme ekiplerinden ve topluluktan 1000+ agent skill'ini derleyen dizin; satıcı yayını skill'lerin keşfi için başlangıç noktası.",
+      "sinirlar": "Yalnız dizin; listelenen skill'lerin güvenliği doğrulanmaz. Dışarıdan alınan skill paketleri görünmez karakter/gizli talimat ve kaynak doğrulamasından geçirilmeden kullanılmamalı (N-K11-008); içerik sık değişir, sürüm sabitlenmeli.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-010",
+        "N-K12-002"
+      ]
+    },
+    {
+      "id": "AR-3463",
+      "ad": "Claude Code Templates (aitmpl)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/davila7/claude-code-templates",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code için ajan, komut, ayar, hook, MCP ve skill şablonlarını CLI ile kuran ve oturum izleme/analitik arayüzü sunan topluluk aracı ve web kataloğu.",
+      "sinirlar": "Topluluk projesi; şablonların kaynağı ve güvenliği kurumca incelenmeli.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K11-010",
+        "N-K19-001"
+      ]
+    },
+    {
+      "id": "AR-3467",
+      "ad": "Claude Marketplace (Connectors ve Plugins dizini)",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://claude.com/marketplace/connectors-plugins",
+      "olgunluk": "gelisen",
+      "ne_saglar": "850+ uzak MCP bağlayıcısını ve 340+ eklentiyi kataloglayan dizin; bir kısmı 'Anthropic verified' rozeti taşır; kategori ve popülerliğe göre gezilir.",
+      "sinirlar": "Doğrulama rozeti tüm öğelerde yok; kurum onaylı katalog yerine geçmez, yönetici izin listesiyle birlikte kullanılmalı.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K12-001",
+        "N-K12-002"
+      ]
+    },
+    {
+      "id": "AR-3468",
+      "ad": "Kiro Powers",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://kiro.dev/docs/powers/",
+      "olgunluk": "erken",
+      "ne_saglar": "MCP araçlarını, Agent Skills'i ve bilgi dosyalarını tek pakette birleştiren, anahtar sözcükle ihtiyaç anında yüklenen (bağlam tasarrufu) Kiro eklentileri; Stripe, Supabase, AWS gibi ortakların paketleri tek tıkla kurulur.",
+      "sinirlar": "Kiro IDE/CLI'ye özgü paket biçimi.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K12-002",
+        "N-K14-008"
+      ]
+    },
+    {
+      "id": "AR-3469",
+      "ad": "Cursor Marketplace",
+      "tur": "platform",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://cursor.com/marketplace",
+      "olgunluk": "erken",
+      "ne_saglar": "MCP sunucuları, skill, kural, komut, alt ajan ve hook'ları paketleyen Cursor eklentileri pazarı; kurumsal planda özel pazar ve takım yönetişimi kontrolleri.",
+      "sinirlar": "Cursor'a özgü; üçüncü taraf eklentilerin incelemesi kuruma kalır.",
+      "ihtiyaclar": [
+        "N-K11-005",
+        "N-K12-002",
+        "N-K18-013"
+      ]
+    },
+    {
+      "id": "AR-3554",
+      "ad": "Sleuth",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.sleuth.io/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "İki ürün: Sleuth DORA (dağıtım izleme ve DORA metrikleri) ve Sleuth Skills (ajan yetenek paketlerini ve MCP sunucularını birden çok araca dağıtan, onay akışı ve denetim izi tutan kontrol düzlemi).",
+      "sinirlar": "Skills ürünü yeni; odak son dönemde ajan yönetişimine kaydı, DORA ürününün yol haritası izlenmeli.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K11-001",
+        "N-K11-005",
+        "N-K11-010",
+        "N-K23-006",
+        "N-K33-016"
+      ]
+    },
+    {
+      "id": "AR-3920",
+      "ad": "Claude Night Market",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/athola/claude-night-market",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code için eklenti pazarı: TDD zorlama kancaları, spesifikasyon güdümlü geliştirme (brainstorm-specify-plan-execute akışı), kod inceleme ve git/PR iş akışı eklentileri; eklentiler tek tek kurulabilir.",
+      "sinirlar": "Yalnız Claude Code; topluluk projesi, kurumsal destek yok; kancalar kullanıcı yetkisiyle çalıştığından yetki sınırı ayrıca kurulmalı.",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K05-002",
+        "N-K05-028"
+      ]
+    },
+    {
+      "id": "AR-3962",
+      "ad": "Model Citizen",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://model-citizen.dev",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code ve Codex için kural, yetenek, rol ve 'duruş'ları tek yerde tanımlayıp her iki çalışma zamanına senkronlayan, kancalarla zorlayan katman: roller model adı yerine yetenek sınıfı ister, rol başına model–akıl yürütme çabası–yumuşak bütçe tablosu, kodu görmemiş taze bağlamlı inceleyici ajan, araç çıktısını talimat değil veri sayan kanca ve hook kararlarının günlüğü.",
+      "sinirlar": "Eylül 2026'da yayımlandı (çok erken), yalnız iki çalışma zamanı; bütçe sert değil yumuşak.",
+      "ihtiyaclar": [
+        "N-K05-007",
+        "N-K09-004",
+        "N-K09-006",
+        "N-K10-007",
+        "N-K11-002",
+        "N-K14-005"
+      ]
+    },
+    {
+      "id": "AR-3965",
+      "ad": "Ring (LerianStudio)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/LerianStudio/ring",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Claude Code eklenti pazarı olarak 76 yetenek ve 33 uzman ajan (Go/TS arka uç, ön uç, BFF, DevOps, SRE, arka uç QA, ön uç QA—erişilebilirlik/görsel/E2E); görev tipine göre uzman ajan ve zorunlu kontrol listeleri, TDD ve sistematik hata ayıklama akışlarını yetenek olarak zorlar.",
+      "sinirlar": "Lerian'ın iç ihtiyaçlarına göre şekillenir; yalnız Claude Code; tetik koşulları ve kural içerikleri kuruma göre yeniden yazılmalı.",
+      "ihtiyaclar": [
+        "N-K03-005",
+        "N-K05-027",
+        "N-K10-005"
+      ]
+    },
+    {
+      "id": "AR-4015",
+      "ad": "Dotprompt",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://google.github.io/dotprompt/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Çalıştırılabilir istem şablonu biçimi: YAML ön bilgisinde model, yapılandırma, girdi ve çıktı şemaları, Handlebars gövde; birden çok dilde çalışma zamanı. Uzmana verilen bağlam paketini şemalı, sürümlenebilir dosya olarak tanımlamaya uygundur.",
+      "sinirlar": "Genkit ekosistemi dışında araç desteği sınırlı.",
+      "ihtiyaclar": [
+        "N-K10-009",
+        "N-K11-006",
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-4016",
+      "ad": "Prompty",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://prompty.ai/",
+      "olgunluk": "gelisen",
+      "ne_saglar": ".prompty dosyasında model yapılandırması, girdi şeması/örnekleri ve şablonu bir arada tutan istem varlık biçimi; VS Code eklentisi, Python ve C# çalışma zamanları ve izleme ile gelir.",
+      "sinirlar": "Ekosistem ağırlıkla Microsoft araçları; bağlam içeriğinin (kod, kurallar) seçimi ayrı mekanizma ister.",
+      "ihtiyaclar": [
+        "N-K10-009",
+        "N-K13-009"
+      ]
+    },
+    {
+      "id": "AR-4017",
+      "ad": "POML (Prompt Orchestration Markup Language)",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://microsoft.github.io/poml/",
+      "olgunluk": "erken",
+      "ne_saglar": "Rol, görev, örnek, belge/tablo gömme gibi bileşenlerle yapılandırılmış istem yazmak için işaretleme dili; içerik ile biçimi ayırır, şablonlama, VS Code eklentisi ve SDK içerir—standart bağlam paketinin bileşenlerini adlandırılmış öğeler olarak tanımlamaya uygundur.",
+      "sinirlar": "Son commit Ocak 2026; ekosistem erken.",
+      "ihtiyaclar": [
+        "N-K10-009"
+      ]
+    },
+    {
+      "id": "AR-4056",
+      "ad": "claude-reflect",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/BayramAnnakov/claude-reflect",
+      "olgunluk": "erken",
+      "ne_saglar": "Claude Code kancalarıyla kullanıcı düzeltmelerini, olumlu geri bildirimleri ve tercihleri otomatik olarak kuyruğa alır; /reflect komutuyla insan gözden geçirmesinden sonra CLAUDE.md ve AGENTS.md dosyalarına kural olarak işler.",
+      "sinirlar": "Tek kullanıcı ve yerel; neden sınıflaması, koşu/parça bağlantısı ve ekip düzeyi raporlama yok; Claude Code'a bağlı.",
+      "ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-002",
+        "N-K29-003"
+      ]
+    },
+    {
+      "id": "AR-4057",
+      "ad": "Awesome Reviewers",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "saas",
+        "yerel"
+      ],
+      "url": "https://awesomereviewers.com/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "246 üretim deposunun gerçek kod inceleme tartışmalarından damıtılmış yaklaşık 5.400 inceleme talimatı; ajan sistem istemine, skill'e ya da inceleme düzeneğine eklenebilir, anahtarsız API ile programatik erişim. Ekip yorumlarından konvansiyon adayı çıkarma yöntemine örnek.",
+      "sinirlar": "Talimatlar başka projelerin konvansiyonlarından türetilmiştir; kurum ekibine uyarlanıp değerlendirmeyle doğrulanmalı.",
+      "ihtiyaclar": [
+        "N-K29-001",
+        "N-K29-003"
+      ]
+    },
+    {
+      "id": "AR-4059",
+      "ad": "Agent Toolkit (session-handoff skill)",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/softaworks/agent-toolkit",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kodlama ajanları için skill koleksiyonu; session-handoff skill'i bağlamı, alınan kararları ve güncel durumu içeren yapılandırılmış devir belgesi üretir ve yeni bir ajanın işi kaldığı yerden sürdürmesini sağlar.",
+      "sinirlar": "Şema topluluk önerisidir; zorunlu alan denetimi ve alıcı teyidi yok.",
+      "ihtiyaclar": [
+        "N-K27-004",
+        "N-K27-006"
+      ]
+    },
+    {
+      "id": "AR-4193",
+      "ad": "Copier",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://copier.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Proje şablonlarını ekip depolarına uygulayan ve şablonun yeni sürümünü 'copier update' ile üç yönlü birleştirerek aktaran araç; her depoda hangi şablon sürümünün uygulandığı yanıt dosyasında kayıtlıdır — ortak çekirdekten türeyen ekip çalışma anlaşmalarını ve DoR/DoD'yi sürümlü dağıtmak ve hangi ekibin hangi sürümde olduğunu görmek için.",
+      "sinirlar": "Metin birleştirme çakışmaları insan çözümü ister; anlamsal tutarlılık denetimi yapmaz. Şablon tasarımı ve çakışma çözümü disiplin ister.",
+      "ihtiyaclar": [
+        "N-K30-001",
+        "N-K30-009",
+        "N-K34-005"
+      ]
+    },
+    {
+      "id": "AR-4318",
+      "ad": "Cookiecutter",
+      "tur": "acik-kaynak",
+      "lisans": "BSD-3-Clause",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/cookiecutter/cookiecutter",
+      "olgunluk": "olgun",
+      "ne_saglar": "Proje şablonlarından değişken doldurarak yeni proje üretir; güvenli varsayılanları içeren onaylı hizmet ve istemci şablonlarının hem insanlar hem ajanlar tarafından aynı biçimde kullanılmasını sağlar.",
+      "sinirlar": "Üretim sonrası şablondan sapmayı kendisi izlemez (cruft gibi ek araç gerekir).",
+      "ihtiyaclar": [
+        "N-K34-005"
+      ]
+    },
+    {
+      "id": "AR-4319",
+      "ad": "Projen",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/projen/projen",
+      "olgunluk": "olgun",
+      "ne_saglar": "Proje yapılandırma dosyalarını (derleme, CI, lint, bağımlılık, lisans) kodla tanımlanan proje tipinden sentezler; üretilen dosyaları elle değiştirilmemek üzere yönetir, böylece merkezî varsayılanlar tüm depolara tutarlı yayılır.",
+      "sinirlar": "Ağırlıklı TypeScript/JS, Python ve Java proje tipleri; öğrenme eğrisi var.",
+      "ihtiyaclar": [
+        "N-K34-005"
+      ]
+    },
+    {
+      "id": "AR-4400",
+      "ad": "ACCESSIBILITY.md",
+      "tur": "protokol-standart",
+      "lisans": "MIT",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://mgifford.github.io/ACCESSIBILITY.md",
+      "olgunluk": "erken",
+      "ne_saglar": "AGENTS.md ile hizalı, depoya konan açık biçim; kodlama ajanlarını erişilebilirlik beklentileri ve doğrulama adımları konusunda yönlendiren talimat dosyası.",
+      "sinirlar": "Küçük topluluk önerisi (≈74 yıldız); standartlaşmış değil; talimat uyumu ayrıca test edilmeli.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-4401",
+      "ad": "accessibility-skills",
+      "tur": "acik-kaynak",
+      "lisans": "AGPL-3.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://github.com/mgifford/accessibility-skills",
+      "olgunluk": "erken",
+      "ne_saglar": "ACCESSIBILITY.md içeriğini yansıtan, erişilebilirlik incelemesi ve elle test adımları için hazır Claude Skill (SKILL.md) koleksiyonu.",
+      "sinirlar": "Küçük proje (≈49 yıldız); AGPL-3.0 kurum içi dağıtım koşulları değerlendirilmeli; skill etkinliği ölçülmeden yaygınlaştırılmamalı.",
+      "ihtiyaclar": [
+        "N-K05-019",
+        "N-K11-005"
+      ]
+    },
+    {
+      "id": "AR-4405",
+      "ad": "Pi",
+      "tur": "acik-kaynak",
+      "lisans": "MIT",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://pi.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Terminal kodlama ajanı ve ajan araç takımı: etkileşimli arayüz; print, JSON olay akışı ve RPC (stdin/stdout JSONL) kipleriyle başsız çalışma; TypeScript SDK; çok sağlayıcılı LLM katmanı (pi-ai); ağaç yapılı JSONL oturumlar, çalışma sırasında yönlendirme mesajları ve otomatik bağlam sıkıştırma; Agent Skills uyumlu skill'ler, AGENTS.md/CLAUDE.md bağlam dosyaları, istem şablonları ve TypeScript eklentileri (araç, komut, olay kancası; tool_call kancasıyla araç engelleme). OpenClaw bu bileşenler üzerine kurulu.",
+      "sinirlar": "Yerleşik izin sistemi ve sandbox yok: başlatan kullanıcının yetkileriyle çalışır, her araç çağrısından önce onay istemez; yalıtım için Docker, Docker Sandboxes, OpenShell ve Gondolin belgelenmiş. MCP desteği bilinçli olarak yok. Sürüm 1.0'ın altında (0.87.1), çok hızlı sürüm temposu. Mayıs 2026'da depo earendil-works'e taşındı, npm paketi @earendil-works kapsamına geçti; eski @mariozechner paketi 0.73.1'de kaldı ve yamasız. Haziran 2026'da 4 CVE (1 yüksek).",
+      "ihtiyaclar": [
+        "N-K04-001",
+        "N-K04-013",
+        "N-K09-001",
+        "N-K09-010",
+        "N-K10-001",
+        "N-K10-002",
+        "N-K10-003",
+        "N-K10-007",
+        "N-K10-009",
+        "N-K11-005",
+        "N-K14-008",
+        "N-K28-002"
+      ]
+    }
+  ]
+}

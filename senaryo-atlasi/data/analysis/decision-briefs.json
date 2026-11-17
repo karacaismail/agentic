@@ -1,0 +1,1055 @@
+[
+  {
+    "id": "B01",
+    "title": "1 GB sınırı tarayıcı testini öldürdü; ajan kapasitesi ölçülmedi.",
+    "theme": "Kaynak ve ilerleme",
+    "evidence_kind": "Yerel deney + kernel kaydı",
+    "record_ids": [
+      "K03",
+      "CP-05"
+    ],
+    "observation": "15 Eylül deneyinde 51 testlik birleşik koşu yaklaşık 4,3 saniyede, rapor üretmeden 137 ile bitti. Kernel kaydında cgroup OOM var. Aynı aday 2 GB ile 3/3 geçti; örneklenen tepe 887–942 MiB.",
+    "interpretation": "Bu olayda darboğaz tarayıcı test konteyneriydi. 137 kodunun tek başına OOM anlamına gelmemesi için kernel kanıtı ayırıcıdır.",
+    "boundary": "Bu ölçüm, bir LLM ajanının 1 GB tükettiğini veya 128 GB sunucunun 128 ajan çalıştıracağını göstermez. Örneklenmiş tepe anlık tepeyi kaçırabilir; daha büyük test setinde 2 GB da yetersiz kalmış.",
+    "decision_question": "Test yükü büyüdüğünde kapasiteyi nasıl yöneteceksin?",
+    "options": [
+      {
+        "label": "Sınırı ölçerek büyüt",
+        "tradeoff": "Bir işi hızla kurtarabilir; host toplam bütçesi ayrıca sınırlandırılır."
+      },
+      {
+        "label": "Testleri partilere böl",
+        "tradeoff": "Tepe bellek düşebilir; kurulum tekrarı ve toplam süre artabilir."
+      },
+      {
+        "label": "İkisini yük profiline göre birleştir",
+        "tradeoff": "Daha fazla seçenek verir; kabul deneyi ve zamanlayıcı karmaşıklığı artar."
+      }
+    ],
+    "missing_measurement": "Aynı commit ve test setini farklı parti/eşzamanlılık ayarlarında çalıştır; cgroup tepe bellek, OOM sayısı, süre ve host toplamını kaydet. Bu atlas bu deneyi çalıştırmadı.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K03",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+        "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+        "pointer": "/findings/2"
+      },
+      {
+        "record_id": "CP-05",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+        "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+        "pointer": "/cases/3"
+      }
+    ]
+  },
+  {
+    "id": "B02",
+    "title": "İlerleyen test, 600 saniyelik “ajan sessiz” kuralına takıldı.",
+    "theme": "Kaynak ve ilerleme",
+    "evidence_kind": "Tarihli deney günlüğü",
+    "record_ids": [
+      "K10",
+      "CP-01"
+    ],
+    "observation": "18 Eylül günlüğünde bütünleşik test süresi 570 saniyeden yaklaşık 70 dakikaya çıkıyor. Gözetleyici yalnız yeni test makbuzunu ilerleme saydığı için 600 saniyede çağrıyı öldürüyor; üç tekrar sonrası kurtarma sınırına ulaşılıyor.",
+    "interpretation": "Ajan sessizliği, alt sürecin ilerlemesi ve görevin toplam süresi aynı saatle izlenmiş. Başka orkestratöre geçmek bu sinyal ayrımını kendiliğinden sağlamaz.",
+    "boundary": "Bu bulgu bütün timeout’ları kaldırmayı desteklemez. OpenHands SDK kaydı benzer mekanizma ailesidir; aynı olay veya kod değildir.",
+    "decision_question": "Uzun süren geçerli iş ile kilitlenmeyi hangi sinyalle ayıracaksın?",
+    "options": [
+      {
+        "label": "Aşama bazlı süre ve ilerleme",
+        "tradeoff": "Test/derleme için ayrı sinyal gerekir; yanlış kesmeleri azaltmayı hedefler."
+      },
+      {
+        "label": "Tek uzun üst süre",
+        "tradeoff": "Kurulumu daha basittir; gerçek kilit daha geç fark edilir."
+      }
+    ],
+    "missing_measurement": "Aynı gözetleyicide bilerek uzun süren test, gerçek sonsuz döngü ve ölü alt süreç dene; her biri için tespit ve kurtarma süresini ayrı kaydet.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K10",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+        "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+        "pointer": "/findings/2"
+      },
+      {
+        "record_id": "CP-01",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/01_yasam_dongusu_ve_ilerleme.json",
+        "sha256": "a2efee0901e1070d191bd9ea7655e83cd5ed649ed990ae19e05194c631baf615",
+        "pointer": "/cases/0"
+      }
+    ]
+  },
+  {
+    "id": "B03",
+    "title": "4.762 kuyruk olayı yalnız bir model çağrısı üretti.",
+    "theme": "Kaynak ve ilerleme",
+    "evidence_kind": "Tarihli deney günlüğü",
+    "record_ids": [
+      "K13"
+    ],
+    "observation": "18 Eylül 00:56 kaydı: 93 bin karakterlik inceleme geçmişi CONTEXT_CAPACITY_UNSUPPORTED üretiyor. CAPACITY metni kapasite beklemesi sayılıyor; yaklaşık 10 saniyelik yeniden kabul döngüsünde 4.762 CLAIM/RETRY olayı, yalnız bir model çağrısı var.",
+    "interpretation": "Kuyruğun hareket etmesi işin ilerlediği anlamına gelmiyor. Hata sınıflandırması, bağlam boyutu ve tekrar kabul koşulu aynı tıkanmayı büyütmüş.",
+    "boundary": "4.762 sayısı ajan, bitmiş görev veya model çağrısı sayısı değildir. Tarihli rapor güncel sistemin hâlâ böyle olduğunu kanıtlamaz.",
+    "decision_question": "Bağlam sınırına gelen işi hangi yoldan sürdüreceksin?",
+    "options": [
+      {
+        "label": "Özet + değişmez kanıt referansı",
+        "tradeoff": "Girdi küçülür; özetin kaybettiği yükümlülükleri kontrol etmek gerekir."
+      },
+      {
+        "label": "Daha geniş bağlamlı çalışan",
+        "tradeoff": "Özetleme azalabilir; maliyet ve model uyumluluğu ölçülmelidir."
+      },
+      {
+        "label": "İşi bağımsız alt parçalara ayır",
+        "tradeoff": "Bağlam küçülebilir; entegrasyon ve ana kabul ölçütlerini koruma yükü getirir."
+      }
+    ],
+    "missing_measurement": "Aynı hata ve değişmeyen girdi altında tekrar sayısını sınırla; değişen bağlam digest’i olmadan yeniden kabulü gözle. Kanıt eksilmesi testi de ekle.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K13",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+        "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+        "pointer": "/findings/2"
+      }
+    ]
+  },
+  {
+    "id": "B04",
+    "title": "Teşhis ajanı dosyayı okuyamadı; çağrı yine başarılı sayıldı.",
+    "theme": "Yetki ve kurtarma",
+    "evidence_kind": "Tarihli devir raporu",
+    "record_ids": [
+      "K08",
+      "MA-08"
+    ],
+    "observation": "15 Eylül devir kaydı, INCIDENT.json okunamadığını söyleyen çıktıya rağmen bakım isteğinin SUCCESS ve engelin diagnosed olduğunu aktarıyor. Prompt dosyayı istiyor; içerik girdide yok, okuma aracı yok, shell yasak.",
+    "interpretation": "Tamamlama durumu yalnız çağrının bittiğini bildirmiş. Teşhis kanıtı ve araç erişimi ayrıca doğrulanmamış.",
+    "boundary": "Bu, modelin isteksiz olduğunu veya tüm shell yetkilerinin açılması gerektiğini göstermez. Kaynak bir tarihî rapordur; aynı çağrı yeniden çalıştırılmadı.",
+    "decision_question": "Teşhis rolüne olay verisini nasıl ulaştıracaksın?",
+    "options": [
+      {
+        "label": "Temizlenmiş içerik girdiye ekle",
+        "tradeoff": "Az yetkiyle çalışır; boyut ve veri tazeliği yönetilir."
+      },
+      {
+        "label": "Dar kapsamlı salt okunur araç",
+        "tradeoff": "Güncel kanıtı okuyabilir; dosya kapsamı ve erişim kaydı gerekir."
+      }
+    ],
+    "missing_measurement": "Bilinen işareti içeren olay dosyası ver; okunduğuna dair doğrulanabilir alan bekle. Erişim yoksa sonuç NEEDS_EVIDENCE olmalı; diagnosed olmamalı.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+        "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+        "pointer": "/findings/0"
+      },
+      {
+        "record_id": "MA-08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+        "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+        "pointer": "/cases/3"
+      }
+    ]
+  },
+  {
+    "id": "B05",
+    "title": "Engel kaydı ve rol ataması, onarım çalışanını başlatmadı.",
+    "theme": "Yetki ve kurtarma",
+    "evidence_kind": "Tarihî akış kaydı",
+    "record_ids": [
+      "K09",
+      "K16",
+      "DK-08"
+    ],
+    "observation": "Yerel kayıtlarda NEEDS_TRIAGE, NO_QUALIFIED_REPAIR_PROFILE ve PARALLEL_CHILDREN_PENDING beklemeleri var. Devir raporunda record_repair_observation kaydının worker başlatmadığı açıkça belirtiliyor.",
+    "interpretation": "Bir “Scrum Master” rolü tanımlamak yetmez: hangi olayın hangi yetkili yürütücüyü başlatacağı ve aynı göreve nasıl dönüleceği ayrı sözleşmedir.",
+    "boundary": "Yetki belirsizliği nedeniyle bilinçli duran K16, her durumda yazılım hatası sayılmaz. Bilinmeyen her arızanın insansız çözülebileceğine dair kanıt yok.",
+    "decision_question": "Havuzda uygun onarım yeteneği yoksa ne olacak?",
+    "options": [
+      {
+        "label": "Önceden sınanmış onarım profilleri",
+        "tradeoff": "Öngörülebilir kapsam; yeni arızalar terminal engelli çıktı üretebilir."
+      },
+      {
+        "label": "Yalıtılmış yetenek hazırlama hattı",
+        "tradeoff": "Yeni onarım üretilebilir; nitelendirme, yetki ve bütçe sınırı gerekir."
+      },
+      {
+        "label": "Kanıtlı engelli teslim",
+        "tradeoff": "Sistem tahminle ilerlemez; insanın çıktı incelemesinde karar vermesi gerekir."
+      }
+    ],
+    "missing_measurement": "Hiçbir onarım profiline uymayan arıza ver. Sahibi, bütçesi, zaman sınırı ve son çıktısı olan tek bir kurtarma vakası oluştuğunu göster.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K09",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/03_teshis_ve_kurtarma.json",
+        "sha256": "fb6eebc8b42d1e53616cfabdc99079445b30fc7e40a69c155946e0e387af4eb7",
+        "pointer": "/findings/1"
+      },
+      {
+        "record_id": "K16",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+        "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+        "pointer": "/findings/0"
+      },
+      {
+        "record_id": "DK-08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/27"
+      }
+    ]
+  },
+  {
+    "id": "B06",
+    "title": "Uyku kaynaklı lease kaybı ile durum geçişi hatası ayrı olaylar.",
+    "theme": "Yetki ve kurtarma",
+    "evidence_kind": "Tarihî deneyler",
+    "record_ids": [
+      "K04",
+      "K05"
+    ],
+    "observation": "K04: Mac uyku döneminde 120 saniyelik heartbeat boşluğu, lease kaybı ve UNKNOWN slotlar var. K05: VERIFIED geçişinin aynı saniyesinde, yalnız CLAIMED/IMPLEMENTED kabul eden yenileme kontrolü sahipliği düşürüyor.",
+    "interpretation": "Her iki olay “lease lost” görünse de biri zaman/bağlantı, diğeri durum makinesi tutarlılığı sorunu. Aynı otomatik yeniden başlatma reçetesi ikisine eşit kanıt sağlamaz.",
+    "boundary": "Mac uyku bulgusu Ubuntu sunucunun uyuduğunu göstermez. Lease uzatmak eski ve yeni çalışanın aynı anda yazması riskini tek başına çözmez.",
+    "decision_question": "Sahipliği kaybeden iş nasıl geri alınacak?",
+    "options": [
+      {
+        "label": "Kısa lease + fencing",
+        "tradeoff": "Hızlı devralma; eski yazarı durduran nesil kimliği gerekir."
+      },
+      {
+        "label": "Uzun lease + uzlaştırma",
+        "tradeoff": "Kısa kopmalara tolerans; gerçek kayıpta daha uzun bekleme."
+      }
+    ],
+    "missing_measurement": "Uyku/bağlantı kesilmesi ile VERIFIED durum geçişini ayrı test et. Eski çalışan geri döndüğünde yazısının reddedildiğini kanıtla.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K04",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/01_kurulum_ve_kaynak.json",
+        "sha256": "baa82831a2b6ee08d7fa82595158c7dc328190de20bf4bbee5dde4ca531c1911",
+        "pointer": "/findings/3"
+      },
+      {
+        "record_id": "K05",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/02_sahiplik_ve_kalici_durum.json",
+        "sha256": "8a86379df5bba4d3635b1823bb89ff2c8fb5e726c6a6a23a2fae75d14be2b5c4",
+        "pointer": "/findings/0"
+      }
+    ]
+  },
+  {
+    "id": "B07",
+    "title": "Daha fazla worker, ortak hesap kotasını genişletmiyor.",
+    "theme": "Kaynak ve ilerleme",
+    "evidence_kind": "Yerel ve dış raporlar",
+    "record_ids": [
+      "K11",
+      "K12",
+      "MA-04",
+      "DP-11"
+    ],
+    "observation": "Yerel reviewer rotasında kota dolarken bazı IMPLEMENTED işler tekrar alınmış, PENDING işler beklemiş. Ayrı prototip incelemesinde süreç içindeki RAM/WIP sayacının worker sayısıyla çoğalabildiği görülmüş.",
+    "interpretation": "Ekip sayısı, süreç sayısı, test kapasitesi ve model sağlayıcısının ortak kotası farklı kaynaklardır. 12×12 rol şeması eşzamanlı çalışma kapasitesi değildir.",
+    "boundary": "DP-11 statik prototip bulgusudur; canlı sunucu ölçümü değildir. Bu veri belirli bir maksimum ekip veya insan sayısı vermez.",
+    "decision_question": "Eşzamanlılığı hangi kaynak sınırlarına bağlayacaksın?",
+    "options": [
+      {
+        "label": "Merkezî bütçe ve adil kuyruk",
+        "tradeoff": "Ortak limitler görünür; denetleyicinin dayanıklılığı gerekir."
+      },
+      {
+        "label": "Ayrılmış kaynak havuzları",
+        "tradeoff": "İzolasyon kolaylaşır; kullanılmayan kapasite başka havuza aktarılamayabilir."
+      }
+    ],
+    "missing_measurement": "Worker sayısını artırırken toplam RAM, API kota tüketimi ve en uzun görev bekleme süresini ölç; aynı üst limitin çoğalmadığını doğrula.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K11",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+        "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+        "pointer": "/findings/0"
+      },
+      {
+        "record_id": "K12",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/04_kapasite_ve_buyume.json",
+        "sha256": "224d6bcb0d38d05a1c84c28a4f0aadf14c7809417339c80a7441f73fae523962",
+        "pointer": "/findings/1"
+      },
+      {
+        "record_id": "MA-04",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/02_kaynak_ve_kapasite.json",
+        "sha256": "003cecd638a5580adbac870c3013e84b8eaed6e65bfeeed4a3501637801ee1c8",
+        "pointer": "/cases/1"
+      },
+      {
+        "record_id": "DP-11",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/10"
+      }
+    ]
+  },
+  {
+    "id": "B08",
+    "title": "Worktree’de biten iş, bağımlılığı gelince kendiliğinden ilerlemedi.",
+    "theme": "Bütünleştirme ve teslim",
+    "evidence_kind": "Tarihli deney günlüğü",
+    "record_ids": [
+      "K14",
+      "MA-01"
+    ],
+    "observation": "UI-54, başka paketten Empty bileşenini bekliyor. Bağımlılık daha sonra birleşse de handoff taşıyan blok yeniden denenmiyor; kök iş COMPONENT_DELIVERY_BLOCKED_WAIT durumunda kalıyor.",
+    "interpretation": "Yalıtılmış dallar çakışmayı azaltabilir. Bağımlılık yayımlandığında tüketiciyi uyandırma ve güncel tabana göre yeniden doğrulama ayrı mekanizmalardır.",
+    "boundary": "Bu olay worktree’nin gereksiz olduğunu göstermez. Dış merge kuyruğu vakası yerel olayın bağımsız tekrar deneyi değildir.",
+    "decision_question": "Bağımlı paketler hangi anda yeniden doğrulanacak?",
+    "options": [
+      {
+        "label": "Birleşim olayında seçici yeniden deneme",
+        "tradeoff": "Daha az iş tekrar eder; bağımlılık haritasının doğruluğuna bağlıdır."
+      },
+      {
+        "label": "Periyodik bütünleşik yeniden deneme",
+        "tradeoff": "Kaçan olayları yakalayabilir; daha fazla test maliyeti ve gecikme getirir."
+      }
+    ],
+    "missing_measurement": "Önce tüketiciyi, sonra bağımlılığı teslim et; tek uyandırma, güncel taban ve eski kanıtın kullanılmaması koşullarını kontrol et.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K14",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+        "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+        "pointer": "/findings/0"
+      },
+      {
+        "record_id": "MA-01",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/05_koordinasyon_ve_birlestirme.json",
+        "sha256": "dff45f97d513ffbad9e74de605f14f9faf1ad2e832db2902cb7a56b76d0920aa",
+        "pointer": "/cases/0"
+      }
+    ]
+  },
+  {
+    "id": "B09",
+    "title": "Yeşil test sayısı, eksiksiz kabul ölçütü kapsamı değil.",
+    "theme": "Doğruluk ve kabul",
+    "evidence_kind": "Statik inceleme + tasarım karşı örneği",
+    "record_ids": [
+      "DP-08",
+      "DK-01",
+      "K18",
+      "CP-10"
+    ],
+    "observation": "Prototipte kabul ölçütü sayıları eşleşirken yinelenen kimliklerin eksik üst yükümlülükleri saklayabildiği yol saptanmış. Yerel kayıtta atlanan test ve ortam hatasının ürün RED’iyle karışması da var.",
+    "interpretation": "“90/90 geçti” ancak hangi sürümde hangi yükümlülüğün hangi bağımsız kanıtla sınandığı biliniyorsa anlamlıdır. Ajanın yazdığı test, ajanla aynı yanlış varsayımı paylaşabilir.",
+    "boundary": "DP-08 statik bir kod yoludur; bu projede üretilmiş bordronun yanlış hesaplandığına dair canlı olay değildir. Tüm bilinmeyenlerin keşfedildiği ispatlanamaz.",
+    "decision_question": "Tamamlandı kararının dayanağı ne olacak?",
+    "options": [
+      {
+        "label": "AC → benzersiz kanıt matrisi",
+        "tradeoff": "Eksik/yinelenen kapsam görünür; alan kabul verisi hazırlanmalıdır."
+      },
+      {
+        "label": "Matrise bağımsız alan örnekleri ekle",
+        "tradeoff": "Ortak yanlış varsayımı sınar; beklenen sonuçların sahipliği gerekir."
+      },
+      {
+        "label": "Risk odaklı keşif testleri ekle",
+        "tradeoff": "Önceden yazılmamış akışları araştırır; sınırsız doğruluk garantisi vermez."
+      }
+    ],
+    "missing_measurement": "Bir AC’yi eksilt, diğerini iki kez yaz, bir testi skip et ve yanlış ama tutarlı bordro örneği ekle; toplam sayı değişmese bile kabulün durduğunu göster.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DP-08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/7"
+      },
+      {
+        "record_id": "DK-01",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/20"
+      },
+      {
+        "record_id": "K18",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+        "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+        "pointer": "/findings/2"
+      },
+      {
+        "record_id": "CP-10",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+        "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+        "pointer": "/cases/0"
+      }
+    ]
+  },
+  {
+    "id": "B10",
+    "title": "İnceleme sonrası değişen kod, eski onayla ilerleyebiliyor.",
+    "theme": "Doğruluk ve kabul",
+    "evidence_kind": "Statik prototip incelemesi",
+    "record_ids": [
+      "DP-03",
+      "DP-09"
+    ],
+    "observation": "Sabit prototip incelemesi, CI/entegrasyon onarımı yeni kod ürettikten sonra önceki bağımsız incelemenin kullanılabildiğini gösteriyor. Korunan dosya kontrolünden sonra test kodunun çalışma ağacını değiştirebildiği yol da var.",
+    "interpretation": "İnceleme bir görev adına değil belirli içerik kimliğine bağlanmalı. Test koşturan işlem de çalışma ağacını değiştirebilir.",
+    "boundary": "Kod yolu gözlemi çalışma zamanında sömürü veya teslim hatası yaşandığı anlamına gelmez; bu tur prototip çalıştırılmadı.",
+    "decision_question": "Onay hangi değişiklikte geçersizleşecek?",
+    "options": [
+      {
+        "label": "Her içerik değişiminde tüm inceleme",
+        "tradeoff": "Basit geçerlilik kuralı; süre/maliyet artar."
+      },
+      {
+        "label": "Değişen alan + etki alanını tekrar incele",
+        "tradeoff": "Daha az tekrar; etki haritasının eksikliği ayrı risk olur."
+      }
+    ],
+    "missing_measurement": "Onaydan sonra kaynak dosyayı ve ardından test sırasında korunan dosyayı değiştir. Eski commit/digest’e ait kanıtın teslimi açmadığını doğrula.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DP-03",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/2"
+      },
+      {
+        "record_id": "DP-09",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/8"
+      }
+    ]
+  },
+  {
+    "id": "B11",
+    "title": "Merge sırası ile alpha’ya dağıtım sırası aynı değil.",
+    "theme": "Bütünleştirme ve teslim",
+    "evidence_kind": "Statik prototip incelemesi",
+    "record_ids": [
+      "DP-10",
+      "DK-02"
+    ],
+    "observation": "İncelenen akışta A sonra B birleşebiliyor; B’nin CI’ı önce bitip dağıtıldıktan sonra A’nın yavaş CI’ı eski sürümü alpha’ya taşıyabiliyor. Çoklu repo/veri sürümü için kabul birimi ayrıca açık.",
+    "interpretation": "Trunk tabanlı çalışma tek başına ortam sürüm sırasını korumaz. Commit, build artifact ve etkin ortam sürümü birlikte izlenmelidir.",
+    "boundary": "Bu kayıt alpha.example.com üzerinde gözlenmiş geri sürümleme değildir. Birden çok repo kullanmak zorunlu bir karar olarak çıkarılamaz.",
+    "decision_question": "Alpha ortamını nasıl güncelleyeceksin?",
+    "options": [
+      {
+        "label": "Proje başına sıralı teslim kuyruğu",
+        "tradeoff": "Sıra basitleşir; uzun CI diğer teslimleri bekletir."
+      },
+      {
+        "label": "Paralel CI + güncel hedef karşılaştırması",
+        "tradeoff": "CI paralel kalır; dağıtım anında atomik sürüm kontrolü gerekir."
+      }
+    ],
+    "missing_measurement": "A’nın CI’ını geciktir; B’den sonra A bitsin. Ortamın B’den A’ya izinsiz gerilemediğini ve ekranın gerçek artifact kimliğini gösterdiğini doğrula.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DP-10",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/9"
+      },
+      {
+        "record_id": "DK-02",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/21"
+      }
+    ]
+  },
+  {
+    "id": "B12",
+    "title": "Sağlık kapısı, kendi onarımını da engelleyebiliyor.",
+    "theme": "Bütünleştirme ve teslim",
+    "evidence_kind": "Statik prototip incelemesi",
+    "record_ids": [
+      "DP-02"
+    ],
+    "observation": "Prototipte geri alma/onarım yolu, alpha sağlıklı olana kadar bekleyen aynı merge kapısına giriyor. Alpha yalnız bu onarımla düzelecekse koşul kendi çözümünü durduruyor.",
+    "interpretation": "Yeni özellik, onarım ve geri alma aynı politika kapsamına sokulmuş. Onarım istisnasının yazılı olması çağrı yolunda uygulandığını göstermiyor.",
+    "boundary": "Bu, tüm sağlık/test kontrollerini atlama gerekçesi değildir. Kaynak canlı kesinti kaydı değil statik karşı yoldur.",
+    "decision_question": "Sağlıksız alpha nasıl onarılacak?",
+    "options": [
+      {
+        "label": "Ayrı yetkili onarım yolu",
+        "tradeoff": "Kilit çözülür; hangi artifact ve etki için yetkili olduğu dar tanımlanır."
+      },
+      {
+        "label": "Son doğrulanmış artifacta dönüş",
+        "tradeoff": "Kod geri dönüşü hızlı olabilir; veri migration’ı ayrıca ele alınmalıdır."
+      }
+    ],
+    "missing_measurement": "Alpha sağlıksızken sıradan özelliği beklet; aynı hatayı düzelten doğrulanmış onarımı yürüt. Yanlış hedefe yapılan onarım denemesini reddet.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DP-02",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/1"
+      }
+    ]
+  },
+  {
+    "id": "B13",
+    "title": "Kalıcı workflow, dış etkinin tek kez oluşmasını garanti etmiyor.",
+    "theme": "Yetki ve kurtarma",
+    "evidence_kind": "Dış vaka + statik inceleme",
+    "record_ids": [
+      "WF-03",
+      "DP-12"
+    ],
+    "observation": "Temporal forum vakasında 10 işlem beklenirken heartbeat timeout sonrası ilk 3 işlem yeniden başlayıp toplam 13 altakış doğuruyor. Prototip incelemesi de activity tekrarında aynı dış etkinin uzlaştırılmadığını işaretliyor.",
+    "interpretation": "Durable history işin nereden sürdürüleceğini kaydeder; dış API çağrısının gerçekten gerçekleşip gerçekleşmediğini ayrıca çözmek gerekir.",
+    "boundary": "Bu, tüm Temporal işlerinin çift çalıştığı veya bir ürünün bunu otomatik olarak her entegrasyonda çözdüğü anlamına gelmez.",
+    "decision_question": "Yanıtı kaybolan GitHub/dağıtım çağrısında ne yapılacak?",
+    "options": [
+      {
+        "label": "Etki kimliğiyle uzlaştır, sonra dene",
+        "tradeoff": "Çift etkiyi sınırlamayı hedefler; hedef API’dan durum okunabilmelidir."
+      },
+      {
+        "label": "Belirsiz etkiyi engelli çıktıya taşı",
+        "tradeoff": "Tahminle tekrar yapılmaz; bazı işler insan incelemesi bekler."
+      }
+    ],
+    "missing_measurement": "Dış işlem başarılı olduktan hemen sonra yanıtı düşür. Yeniden denemede yeni PR/dağıtım/maliyet kaydı üretilmeden mevcut etkinin bulunduğunu doğrula.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "WF-03",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/03_sahiplik_tekrar_ve_yan_etki.json",
+        "sha256": "b2a81193676f5b9f3a648262171d8e80d8090d36aa03d630aed9f9ca0241b8ea",
+        "pointer": "/cases/1"
+      },
+      {
+        "record_id": "DP-12",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/11"
+      }
+    ]
+  },
+  {
+    "id": "B14",
+    "title": "İnsan reddi, botun daha yeni zaman damgası yüzünden kaybolabiliyor.",
+    "theme": "Yetki ve kurtarma",
+    "evidence_kind": "Statik prototip incelemesi",
+    "record_ids": [
+      "DP-07",
+      "K16",
+      "DK-03"
+    ],
+    "observation": "İncelenen prototip yolunda botun durum yazımı, eşzamanlı insan reddinden daha yeni görünüyor; reddetme eski olay kabul edilip atılabiliyor. Yerel K16’da ortak aktör kimliği kurtarma yetkisini belirsizleştirmiş.",
+    "interpretation": "Aktör, komut türü ve görev sürümü olmadan yalnız zamana göre sıralama insan niyetini korumuyor.",
+    "boundary": "Prototipteki olasılık kullanıcının gerçek reddinin kaybolduğu kanıtı değildir. Her eski olayın kabul edilmesi de güvenli bir sonuç değildir.",
+    "decision_question": "İnsan iptali/reddi için hangi öncelik geçerli olacak?",
+    "options": [
+      {
+        "label": "Sürümlü niyet + ayrı bot kimliği",
+        "tradeoff": "Niyet ayırt edilir; olay şeması ve çakışma kuralı gerekir."
+      },
+      {
+        "label": "Çelişkili niyette dur ve raporla",
+        "tradeoff": "Yanlış devamı azaltır; çıktı inceleme yükü artabilir."
+      }
+    ],
+    "missing_measurement": "Bot durumu ile insan reddini ters sırada ve tekrar ederek gönder; reddin yutulmadığını, iptalden sonra yeni dış etki açılmadığını sınayarak karar ver.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DP-07",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/6"
+      },
+      {
+        "record_id": "K16",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+        "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+        "pointer": "/findings/0"
+      },
+      {
+        "record_id": "DK-03",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/22"
+      }
+    ]
+  },
+  {
+    "id": "B15",
+    "title": "Tak-çıkar; geçmiş, kanıt ve yetki de taşınırsa anlamlı.",
+    "theme": "Uyarlanabilirlik",
+    "evidence_kind": "Dış rapor + statik inceleme",
+    "record_ids": [
+      "CP-06",
+      "CP-07",
+      "DP-04",
+      "DK-07"
+    ],
+    "observation": "Droid kullanıcı raporunda model değişince eski konuşma şeması HTTP 400 üretiyor; ayrı kayıtta pluginler çalıştığı hâlde list/update görünmüyor. Prototipte workflow politika snapshot’ı alırken activity canlı yapılandırmayı okuyabiliyor.",
+    "interpretation": "API adresi değiştirmek, çalışan işin durumu ve kanıt semantiği korunuyor demek değildir. Geçmiş şeması, politika sürümü ve yetki sözleşmesi de geçiş kapsamındadır.",
+    "boundary": "Bu kayıtlar tüm adaylar arasında sıcak geçiş yapılabildiğini veya yapılamadığını kanıtlamaz. Açık API tek başına taşınabilirlik ölçüsü değil.",
+    "decision_question": "Çalışan işler sırasında bileşen nasıl değişecek?",
+    "options": [
+      {
+        "label": "Yeni işler yeni adaptöre; eskiler tamamlasın",
+        "tradeoff": "Göç karmaşıklığı azalır; iki sürüm geçici birlikte işletilir."
+      },
+      {
+        "label": "Kontrollü duraklat ve dönüştür",
+        "tradeoff": "Geçiş daha hızlı olabilir; checkpoint ve kanıt dönüştürme testleri gerekir."
+      }
+    ],
+    "missing_measurement": "Aynı görev sözleşmesini iki adaptörde çalıştır; iptal, checkpoint, test makbuzu, maliyet ve terminal durum alanlarının kayıpsız karşılığını ölç.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "CP-06",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+        "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+        "pointer": "/cases/0"
+      },
+      {
+        "record_id": "CP-07",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/04_sozlesme_ve_evrim.json",
+        "sha256": "2e6ee8174e2f2c63b06a95dc9647ee0a63bc2c925aa78c0135ebbbe0d74d7529",
+        "pointer": "/cases/1"
+      },
+      {
+        "record_id": "DP-04",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/3"
+      },
+      {
+        "record_id": "DK-07",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/26"
+      }
+    ]
+  },
+  {
+    "id": "B16",
+    "title": "Skill dosyasının varlığı, yüklenebilir ve yetkili olması değil.",
+    "theme": "Uyarlanabilirlik",
+    "evidence_kind": "Belge ve paket incelemesi",
+    "record_ids": [
+      "DE-07",
+      "DK-08"
+    ],
+    "observation": "İncelemede 21 etkin olmayan SKILL taslağı sayılmış; doğrudan okunan iki örnekte name alanı ile klasör adı uyuşmuyor. Katalogda bulunmaları çalışan sisteme yüklendikleri anlamına gelmiyor.",
+    "interpretation": "Havuzdan edinme, şema doğrulama, sürüm sabitleme, izin denetimi ve deneme çalıştırması ayrı adımlardır.",
+    "boundary": "21 şablonun hepsinin bozuk olduğu ya da canlı ajanları durdurduğu gösterilmedi. “20–30 skill sınırı” için bağımsız ölçüm bulunmadı.",
+    "decision_question": "Havuzdan gelen yetenek ne zaman kullanılabilir olacak?",
+    "options": [
+      {
+        "label": "Önceden nitelendirilmiş katalog",
+        "tradeoff": "Öngörülebilir; yeni ihtiyaç için katalog güncellemesi gerekir."
+      },
+      {
+        "label": "Talep anında yalıtılmış nitelendirme",
+        "tradeoff": "Yeni yeteneğe daha hızlı erişim; tedarik ve izin kontrolü karmaşıklaşır."
+      }
+    ],
+    "missing_measurement": "Adı hatalı, sürümü değişmiş, aşırı izin isteyen ve testte kalan dört skill paketi dene; hiçbiri onaylı kayıt gibi görünmemeli.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DE-07",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/18"
+      },
+      {
+        "record_id": "DK-08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/27"
+      }
+    ]
+  },
+  {
+    "id": "B17",
+    "title": "“Temporal kurtaramadı” vakası, yazarı tarafından geri çekilmiş.",
+    "theme": "Kanıtın sınırı",
+    "evidence_kind": "Birincil kaynak düzeltmesi",
+    "record_ids": [
+      "WF-06"
+    ],
+    "observation": "Forum yazarı 24 Mart 2021’de nedenin kendi kodundaki hata olduğunu ve örneğin beklendiği gibi çalıştığını açıklıyor. Son mesaj bu tur birincil kaynaktan tekrar okundu.",
+    "interpretation": "İlk şikâyet başlığıyla ürün kusuru yazmak yanlış olur. İlk belirti ve son düzeltme aynı kayıt zincirinde tutulmalı.",
+    "boundary": "Bu tek düzeltme Temporal’ın her senaryoda sorunsuz olduğunu da kanıtlamaz. Başka olaylara genellenemez.",
+    "decision_question": "Araç karşılaştırmasında hangi kanıtı geçerli sayacaksın?",
+    "options": [
+      {
+        "label": "Sonuç ve sürümüyle olay kaydı",
+        "tradeoff": "Düzeltme korunur; her kaynak için kapanış takibi gerekir."
+      },
+      {
+        "label": "Yeniden üretilmiş vakalarla daralt",
+        "tradeoff": "Nedene güven artar; henüz tekrarlanamayan riskler ayrı listede kalır."
+      }
+    ],
+    "missing_measurement": "Karşılaştırma tablosunda geri çekilmiş bu iddianın “ürün hatası sayısı”na eklenmediğini kontrol et.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "WF-06",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/07_devam_durum_ve_gozlem.json",
+        "sha256": "b1698cd4fc2dd863398f931c0221966080b552054e97972dcd45ebd9f65f693b",
+        "pointer": "/cases/2"
+      }
+    ]
+  },
+  {
+    "id": "B18",
+    "title": "Webhook 5xx davranışının bir bölümü hâlâ kanıtlanmamış.",
+    "theme": "Kanıtın sınırı",
+    "evidence_kind": "Düzeltilmiş arşiv incelemesi",
+    "record_ids": [
+      "DE-01",
+      "DE-02"
+    ],
+    "observation": "Arşivli Plane yolunda HTTP 5xx yanıtı ile ağ istisnası farklı işleniyor. Ancak kullanılan pinned_fetch uygulaması elde olmadığı için son 5xx davranışının tamamı çıkarılamıyor; kurulu sürümün canlı payload’ı da okunmamış.",
+    "interpretation": "“Beş hatada kapanır, 5xx yeniden denenmez” ifadesi kurulu sisteme kesin hüküm olarak taşınamaz. Eksik bağımlılık, nedensel zincirde açık bir halkadır.",
+    "boundary": "Bu inceleme hiçbir retry olmadığını veya kurulu Plane sürümünün aynı olduğunu kanıtlamaz.",
+    "decision_question": "Görev kabulünü webhook’a ne kadar bağlayacaksın?",
+    "options": [
+      {
+        "label": "Webhook + dönemsel uzlaştırma",
+        "tradeoff": "Kaçan olayları yakalayabilir; durum sürümü ve tekrar önleme gerekir."
+      },
+      {
+        "label": "Yalnız webhook, teslim garantisi sınanmış",
+        "tradeoff": "Daha az tarama; kayıp olay deneyinden geçmesi gerekir."
+      }
+    ],
+    "missing_measurement": "Kurulu sürümde 500, 429, bağlantı kopması ve yinelenen olay üret; retry sayısı, gecikmesi ve kaçan görevleri geri kazanma davranışını kaydet.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DE-01",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/12"
+      },
+      {
+        "record_id": "DE-02",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/13"
+      }
+    ]
+  },
+  {
+    "id": "B19",
+    "title": "Kaynak sayısı, risk araştırmasının tamamlandığını göstermiyor.",
+    "theme": "Kanıtın sınırı",
+    "evidence_kind": "Kaynak tarama denetimi",
+    "record_ids": [
+      "DE-06",
+      "DE-08"
+    ],
+    "observation": "Önceki 130/722 danışma kaydı sayıları için başarılı sayfalama manifesti yok. 403/429 erişim hataları ve kopya belgeler ayrıca ayrılmalı; byte eşitliği anlamsal kapsama kanıtı değil.",
+    "interpretation": "Bir raporun başka raporu tekrar etmesi yeni bağımsız olay değildir. Sayfa sayısı/araç sayısı güvenilirlik puanına çevrilemez.",
+    "boundary": "Bu bulgu bütün araştırmanın geçersiz olduğunu söylemez. Eksik tarama ölçüsü varken “tüm sorunlar kapsandı” sonucu çıkarılamaz.",
+    "decision_question": "Karar vermeden önce hangi araştırma açığı kapanmalı?",
+    "options": [
+      {
+        "label": "Seçtiğin adaylar için sürüm odaklı tarama",
+        "tradeoff": "Daha dar ama izlenebilir kapsam; diğer adaylar açık kalır."
+      },
+      {
+        "label": "Tüm katalog için kapsam manifesti",
+        "tradeoff": "Karşılaştırma genişler; tarama ve güncellik yükü büyür."
+      }
+    ],
+    "missing_measurement": "Her sorgu için tarih, sürüm aralığı, sayfa/cursor, başarı/hata ve sonlandırma nedenini kaydet. Erişilemeyen kaynağı sıfır bulgu sayma.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DE-06",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/17"
+      },
+      {
+        "record_id": "DE-08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/19"
+      }
+    ]
+  },
+  {
+    "id": "B20",
+    "title": "“Bitti” tek durum değil: yürütme, kanıt ve insan kabulü farklı.",
+    "theme": "Doğruluk ve kabul",
+    "evidence_kind": "Yerel geçmiş + tasarım boşluğu",
+    "record_ids": [
+      "K15",
+      "K17",
+      "DE-03",
+      "DK-07"
+    ],
+    "observation": "Yerel belgelerde RUNNING, COMPLETED, VERIFIED ve MERGED farklı nesnelere ait. 18 Eylül toparlanma raporuna karşı 25 Eylül kök işte ERROR/review ve NOT_TESTED görünümü var; uzaktaki alpha kabulü doğrulanmamış.",
+    "interpretation": "İşin kapanması, testin geçmesi, kodun birleşmesi, doğru sürümün yayında olması ve insanın kabulü ayrı kanıt gerektirir.",
+    "boundary": "17 Eylül “kurulum bitti” ifadesi tüm ürünün teslim edildiği iddiası diye yeniden yazılamaz. 25 Eylül snapshot’ı tüm tarih boyunca hiçbir şey çalışmadı demek değildir.",
+    "decision_question": "Tek ekranda hangi bitiş durumlarını görmek istiyorsun?",
+    "options": [
+      {
+        "label": "Ayrı yürütme / kanıt / kabul durumu",
+        "tradeoff": "Anlam açık kalır; tek renkli “done”dan daha fazla bilgi gösterir."
+      },
+      {
+        "label": "Bir özet durum + zorunlu alt kanıtlar",
+        "tradeoff": "İlk bakış basittir; ayrıntıların kaybolmaması gerekir."
+      }
+    ],
+    "missing_measurement": "Kod MERGED iken alpha yanlış sürüm, test PASS iken kabul bekliyor ve iş ERROR iken geri alma tamam senaryolarını ayrı göster.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "K15",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/05_entegrasyon_ve_sozlesmeler.json",
+        "sha256": "728be4a513f154309a6d4ba3e6713d235c51a985e9239f630c89139c770431a5",
+        "pointer": "/findings/1"
+      },
+      {
+        "record_id": "K17",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/kestra-gecmis-incelemesi/bulgular/06_girdi_ve_teslim_siniri.json",
+        "sha256": "0abc98a3b296951583a0d37061c056f14a6b318c00a42f2a5f69fb0cdf202615",
+        "pointer": "/findings/1"
+      },
+      {
+        "record_id": "DE-03",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/14"
+      },
+      {
+        "record_id": "DK-07",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/26"
+      }
+    ]
+  },
+  {
+    "id": "B21",
+    "title": "Karar modeli, teslimin doğru olduğuna tek başına tanıklık edemez.",
+    "theme": "Doğruluk ve kabul",
+    "evidence_kind": "Tasarım çıkarımı",
+    "record_ids": [
+      "MA-10",
+      "DK-04",
+      "DP-08"
+    ],
+    "observation": "Dış hata atfetme araştırması, LLM’ye teşhis yaptırmanın ilk kritik hatayı güvenilir biçimde bulmayı garanti etmediğini raporluyor. Prototipte kabul sayısı eşleşmesi de gerçek yükümlülük kapsamını kaçırabiliyor.",
+    "interpretation": "Jev/Laya benzeri tipli karar katmanı yönlendirmeye aday olabilir; test sonucu, yetki ve artifact kimliği için ayrıca doğrulanabilir kurallar gerekir. Bu ayrım araç ismine bağlı değildir.",
+    "boundary": "Bu kaynaklar Jev veya Laya’nın senin görevlerinde ölçülmüş doğruluk oranı değildir. Paylaşılan benchmark yüzdeleri bu sistemin kabul eşiğine çevrilemez.",
+    "decision_question": "Öğrenilmiş kararın rolünü nerede sınırlayacaksın?",
+    "options": [
+      {
+        "label": "Yalnız yönlendirme/öncelik adayı",
+        "tradeoff": "Operasyonel fayda sınanır; nihai geçişler kanıta bağlanır."
+      },
+      {
+        "label": "Gölge modda karşılaştır",
+        "tradeoff": "Gerçek sonucu değiştirmez; faydayı ölçmek için etiketli veri gerekir."
+      },
+      {
+        "label": "Şimdilik sabit kurallar",
+        "tradeoff": "Başlangıç daha izlenebilir; yeni örüntüleri elle tarif etmek gerekir."
+      }
+    ],
+    "missing_measurement": "Etiketli görev örneklerinde yanlış kabul, yanlış engel, kararsızlık ve kalibrasyonu ayrı ölç; sürüm bazında izlemeyi önceden tanımla.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "MA-10",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/dunya-vakalari/kumeler/06_dogruluk_oracle_ve_teshis.json",
+        "sha256": "92776b8216733dfa6ad71dc7864ef0aaab300ef1f7f6430c33cc07aec9c862e8",
+        "pointer": "/cases/4"
+      },
+      {
+        "record_id": "DK-04",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/23"
+      },
+      {
+        "record_id": "DP-08",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/7"
+      }
+    ]
+  },
+  {
+    "id": "B22",
+    "title": "Proje katılımı ve işletim işleri, gizli insan emeği olabilir.",
+    "theme": "Uyarlanabilirlik",
+    "evidence_kind": "Tasarım boşluğu",
+    "record_ids": [
+      "DK-05",
+      "DK-04"
+    ],
+    "observation": "Derin incelemede repo ilk kurulumu, sır rotasyonu, veri migration’ı ve erişim onarımı için task içi otonomiden ayrı bir sınır ihtiyacı kaydedilmiş. Bunların insansız işlediğine dair uçtan uca kabul kaydı yok.",
+    "interpretation": "İnsanın yalnız girdi ve çıktıyı görmesi hedefi, her görevin hangi hazır proje sözleşmesine dayandığı belirtilmeden ölçülemez.",
+    "boundary": "Bu bir yaşanmış olay sayımı değil tasarım boşluğudur. İnsan başına sunucu sayısı hesaplayacak iş hacmi veya inceleme süresi ölçümü bulunmuyor.",
+    "decision_question": "İlk MVP hangi işleri kapsayacak?",
+    "options": [
+      {
+        "label": "Hazır proje profili içinde özellik geliştirme",
+        "tradeoff": "Daha dar ölçüm alanı; onboarding dışarıda açıkça gösterilir."
+      },
+      {
+        "label": "Onboarding ve bakım da kapsamda",
+        "tradeoff": "Daha geniş otonomi; ek yetki, test ve işletim sözleşmeleri gerekir."
+      }
+    ],
+    "missing_measurement": "Bir görevin girişinden çıktısına kadar insan müdahalesi günlüğü tut; görev tanımı/kabul, onboarding ve arıza müdahalesini ayrı say.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DK-05",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/24"
+      },
+      {
+        "record_id": "DK-04",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/23"
+      }
+    ]
+  },
+  {
+    "id": "B23",
+    "title": "Koruma aracının kurulmuş olması, kapının doğru kapandığını göstermiyor.",
+    "theme": "Doğruluk ve kabul",
+    "evidence_kind": "Statik prototip incelemesi",
+    "record_ids": [
+      "DP-01"
+    ],
+    "observation": "İncelenen shell yolunda gizli bilgi tarayıcısı sıfır dışı çıkınca “|| echo” kolu başarılı bitiyor; sonuç taramanın geçtiği gibi kayda girebiliyor.",
+    "interpretation": "Araç varlığı, araç bulgusu ve taramanın çalışamaması farklı sonuçlardır. Son komutun exit 0 olması bu ayrımı kaybediyor.",
+    "boundary": "Statik bulgu gerçek sır sızıntısı yaşandığını göstermez. Doğru bağlı bağımsız CI kapısı sonraki aşamada engellemiş olabilir.",
+    "decision_question": "Tarama sonucunu nasıl temsil edeceksin?",
+    "options": [
+      {
+        "label": "Temiz / bulgu / çalışmadı tipleri",
+        "tradeoff": "Neden görünür; sonuç şeması ve çağıran taraf uyumu gerekir."
+      },
+      {
+        "label": "Zorunlu araç için başarısızlıkta kapalı geçit",
+        "tradeoff": "Yayın durur; geçici altyapı hatasında kurtarma yolu gerekir."
+      }
+    ],
+    "missing_measurement": "Sahte test sırrı, eksik tarayıcı ve çalışma hatasını ayrı dene. Üçü de temiz tarama olarak kaydedilmemeli.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DP-01",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/0"
+      }
+    ]
+  },
+  {
+    "id": "B24",
+    "title": "Kabul kanıtı; kod, veri ve dış girdinin sürümüne bağlı.",
+    "theme": "Bütünleştirme ve teslim",
+    "evidence_kind": "Tasarım boşluğu",
+    "record_ids": [
+      "DK-02",
+      "DK-06"
+    ],
+    "observation": "Derin inceleme, bir URL’nin değişmez içerik kimliği olmadığını ve çoklu repo/veri şemasıyla oluşan alpha sürümünün tek commit’e indirgenemediğini kaydediyor.",
+    "interpretation": "HRMS gibi üründe aynı kod, farklı kural tablosu veya veri şemasıyla farklı sonuç üretebilir. Dış girdi değiştiğinde önceki test kanıtının geçerliliği yeniden değerlendirilir.",
+    "boundary": "Bu, çoklu repo veya belirli ERP seçmen gerektiği sonucu değildir. Bordro mevzuatının güncelliği bu teknik incelemede doğrulanmadı.",
+    "decision_question": "Teslim paketinin kimliği neleri içerecek?",
+    "options": [
+      {
+        "label": "Kod + bağımlılık + test veri kimliği",
+        "tradeoff": "Tek proje için başlangıç olabilir; dış kural kaynağı ayrıca sürümlenir."
+      },
+      {
+        "label": "Ürün sürüm vektörü",
+        "tradeoff": "Birden fazla repo/şema/konfigürasyon birlikte izlenir; manifest yönetimi gerekir."
+      }
+    ],
+    "missing_measurement": "Kod aynı kalırken kural verisini veya şemayı değiştir; eski kabul paketinin yeni ürün durumunu yanlışlıkla onaylamadığını dene.",
+    "qualification": "not_run",
+    "default_decision": null,
+    "sources": [
+      {
+        "record_id": "DK-02",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/21"
+      },
+      {
+        "record_id": "DK-06",
+        "path": "/Users/w6x/Documents/otomasyon coding 2/agentic-sistem/data/15_derin_inceleme/01_kacirilan_bulgular.json",
+        "sha256": "5182883b0d53d0a27291e3793ba646778f73149564246b6bae9e7bd658767be1",
+        "pointer": "/records/25"
+      }
+    ]
+  }
+]

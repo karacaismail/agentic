@@ -1,0 +1,406 @@
+{
+  "sema": "arac-haritasi/yetenek@1",
+  "yetenek_sinifi": {
+    "id": "Y-60",
+    "ad": "SLO ve hata bütçesi yönetimi",
+    "grup": "Gözlemlenebilirlik, denetim ve işletim",
+    "cozdugu_sorun": "Kullanıcı odaklı SLI tanımı, SLO kaydı, bütçe hesabı, yanma hızı uyarısı ve bütçe durumunun politika motoruna ve yayın kararına sinyal olarak verilememesi.",
+    "ne_zaman_zorunlu": "Ajan değişiklikleri üretime aktığında ve kademe 0–1 hizmetler için ilk günden."
+  },
+  "arac_sayisi": 20,
+  "tur_dagilimi": {
+    "acik-cekirdek": 1,
+    "ticari-saas": 6,
+    "acik-kaynak": 9,
+    "protokol-standart": 2,
+    "bulut-hizmeti": 2
+  },
+  "araclar": [
+    {
+      "id": "AR-1335",
+      "ad": "Coroot",
+      "tur": "acik-cekirdek",
+      "lisans": "Apache-2.0 (Enterprise ticari)",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://coroot.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "eBPF ile kod değişikliksiz gözlem, servis haritası, SLO tabanlı uyarı ve kök neden analizi; kaynak/maliyet görünümü.",
+      "sinirlar": "Bazı özellikler (ör. AI destekli RCA) Enterprise sürümde.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K15-005",
+        "N-K16-001",
+        "N-K16-002",
+        "N-K33-002",
+        "N-K33-013"
+      ]
+    },
+    {
+      "id": "AR-1338",
+      "ad": "Honeycomb",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.honeycomb.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Yüksek kardinaliteli olay/iz analitiği ve SLO; OpenTelemetry ile veri alımı.",
+      "sinirlar": "Yalnız SaaS; hacme bağlı maliyet.",
+      "ihtiyaclar": [
+        "N-K05-021",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K33-002",
+        "N-K33-007",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1417",
+      "ad": "Argo Rollouts",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://argo-rollouts.readthedocs.io/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kanarya ve mavi-yeşil dağıtım; AnalysisTemplate ile Prometheus/Datadog vb. metriklere göre otomatik terfi, iptal (abort) ve geri alma.",
+      "sinirlar": "Kubernetes'e özgü; ağırlıklı trafik bölme için servis ağı veya ingress entegrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K06-006",
+        "N-K06-008",
+        "N-K06-010",
+        "N-K08-005",
+        "N-K16-003",
+        "N-K33-005"
+      ]
+    },
+    {
+      "id": "AR-1418",
+      "ad": "Flagger",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://docs.flagger.app/main",
+      "olgunluk": "olgun",
+      "ne_saglar": "Istio, Linkerd, Gateway API vb. ile otomatik kanarya, A/B ve mavi-yeşil; metrik eşiği aşılınca otomatik geri alma.",
+      "sinirlar": "Kubernetes'e özgü; metrik sağlayıcı ve ağ katmanı gerektirir.",
+      "ihtiyaclar": [
+        "N-K06-008",
+        "N-K06-010",
+        "N-K08-005"
+      ]
+    },
+    {
+      "id": "AR-1422",
+      "ad": "OpenSLO",
+      "tur": "protokol-standart",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://www.openslo.com",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SLO, SLI ve hata bütçesi politikalarını YAML ile sağlayıcıdan bağımsız tanımlama şartnamesi.",
+      "sinirlar": "Araçlar arasında destek düzeyi değişken.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-1423",
+      "ad": "Sloth",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://sloth.dev",
+      "olgunluk": "olgun",
+      "ne_saglar": "Basit SLO tanımından Prometheus kayıt kuralları ve çok pencereli burn-rate uyarıları üretir; OpenSLO girdisini destekler.",
+      "sinirlar": "Prometheus'a özgü; tek bakımcı ağırlıklı.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K16-002",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1424",
+      "ad": "Pyrra",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://demo.pyrra.dev",
+      "olgunluk": "gelisen",
+      "ne_saglar": "SLO'ları Kubernetes CRD/yapılandırmayla tanımlayıp Prometheus kuralları ve hata bütçesi panosu üretir.",
+      "sinirlar": "Prometheus'a özgü; küçük topluluk.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-1425",
+      "ad": "Nobl9",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://www.nobl9.com/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SLO yönetimi, hata bütçesi uyarıları, bileşik SLO ve yönetici raporları; OpenSLO/Terraform ile SLO-as-code.",
+      "sinirlar": "Ticari SaaS.",
+      "ihtiyaclar": [
+        "N-K16-001",
+        "N-K19-007",
+        "N-K24-014",
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-004",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-1973",
+      "ad": "Amazon CloudWatch Application Signals ve GenAI Observability",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Monitoring-Sections.html",
+      "olgunluk": "olgun",
+      "ne_saglar": "OpenTelemetry tabanlı otomatik enstrümantasyonla uygulama SLO'ları, hizmet haritası ve dağıtık iz; AgentCore/Bedrock ajanları için oturum, iz ve token metriklerini gösteren GenAI gözlemlenebilirlik panosu.",
+      "sinirlar": "AWS dışı iş yüklerinde tam değer için ek toplayıcı gerekir; yüksek hacimli izlerde maliyet artar.",
+      "ihtiyaclar": [
+        "N-K08-005",
+        "N-K16-001",
+        "N-K19-001",
+        "N-K23-012",
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-2125",
+      "ad": "Dynatrace Site Reliability Guardian",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.dynatrace.com/docs/deliver/site-reliability-guardian",
+      "olgunluk": "olgun",
+      "ne_saglar": "Sürüm doğrulaması için SLO/hedef tabanlı otomatik kalite kapısı: performans, güvenlik ve iş metriklerini dağıtım sonrası değerlendirip geçti/uyarı/kaldı kararı verir, hattı durdurur.",
+      "sinirlar": "Dynatrace verisine bağlı; eşiklerin kalibrasyonu gerekir.",
+      "ihtiyaclar": [
+        "N-K04-009",
+        "N-K05-023",
+        "N-K06-003",
+        "N-K06-008",
+        "N-K06-010",
+        "N-K33-003"
+      ]
+    },
+    {
+      "id": "AR-2128",
+      "ad": "Keptn (Lifecycle Toolkit)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://keptn.sh/",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Kubernetes dağıtımlarına dağıtım öncesi/sonrası görev ve değerlendirme (kalite kapısı) ekler, OpenTelemetry iz ve DORA metriklerini üretir.",
+      "sinirlar": "Eski Keptn v1 arşivlendi; Lifecycle Toolkit aktif ama topluluğu küçüldü.",
+      "ihtiyaclar": [
+        "N-K06-003",
+        "N-K06-005",
+        "N-K06-010",
+        "N-K23-006"
+      ]
+    },
+    {
+      "id": "AR-4236",
+      "ad": "Google SLO Generator",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/google/slo-generator",
+      "olgunluk": "olgun",
+      "ne_saglar": "YAML ile sürümlü tanımlanan SLO'lar için Cloud Monitoring, Prometheus, Datadog, Dynatrace, Elasticsearch gibi arka uçlardan SLI, SLO, hata bütçesi ve yanma hızını hesaplar; sonuçları BigQuery, Cloud Monitoring, Prometheus gibi hedeflere aktarır; CLI, API ya da zamanlanmış iş olarak çalışır.",
+      "sinirlar": "Yalnız hesaplama ve dışa aktarım yapar; uyarı yönlendirme, onay akışı ve politika uygulaması ayrı araç gerektirir.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-008",
+        "N-K33-014"
+      ]
+    },
+    {
+      "id": "AR-4237",
+      "ad": "slo-exporter",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/seznam/slo-exporter",
+      "olgunluk": "gelisen",
+      "ne_saglar": "Log dosyaları, Envoy erişim logları, Kafka ve Prometheus gibi olay kaynaklarından gelen olayları SLO sınıflarına ve alanlarına etiketleyip standart SLI/SLO metrikleri üretir ve Prometheus'a sunar; çoklu pencereli yanma hızı uyarı kurallarına veri sağlar.",
+      "sinirlar": "Tek kurum kökenli, küçük topluluklu proje; SLO kataloğu, onay ve politika katmanı içermez.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4238",
+      "ad": "Pint (Prometheus kural denetleyicisi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host",
+        "yerel"
+      ],
+      "url": "https://github.com/cloudflare/pint",
+      "olgunluk": "olgun",
+      "ne_saglar": "Prometheus uyarı ve kayıt kurallarını CI'da veya sürekli modda canlı Prometheus'a karşı denetler: sorgunun gerçekten seri döndürüp döndürmediği, eksik etiket/anotasyon (ör. runbook bağlantısı zorunluluğu), sözdizimi ve maliyetli sorgu gibi sorunları raporlar; uyarı standardını talimat yerine deterministik kapıya çevirir.",
+      "sinirlar": "Yalnız Prometheus uyumlu kural dosyaları; bir uyarının belirti temelli mi neden temelli mi olduğunu anlamsal olarak değerlendirmez.",
+      "ihtiyaclar": [
+        "N-K33-007",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4239",
+      "ad": "Grafana SLO",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://grafana.com/docs/grafana-cloud/observe-and-act/alert-and-measure-reliability/slo/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Grafana Cloud içinde SLI sorgusu, hedef ve zaman penceresiyle SLO tanımlamayı; hata bütçesi panolarını ve hızlı/yavaş yanma uyarı kurallarını otomatik üretmeyi sağlar; SLO'lar API ve Terraform sağlayıcısıyla kod olarak yönetilebilir.",
+      "sinirlar": "Grafana Cloud'a bağlı özellik; açık kaynak Grafana'nın self-host kurulumunda aynı biçimde bulunmaz.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4240",
+      "ad": "Datadog Service Level Objectives",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas"
+      ],
+      "url": "https://docs.datadoghq.com/service_level_objectives/",
+      "olgunluk": "olgun",
+      "ne_saglar": "Metrik, monitör veya zaman dilimi tabanlı SLO'lar, hata bütçesi hesabı, yanma hızı ve bütçe uyarıları ile SLO durum raporları sunar; SLO'lar API/Terraform ile tanımlanabilir.",
+      "sinirlar": "Datadog'a bağlı SaaS; maliyet telemetri hacmiyle artar, SLO tanımlarının taşınabilirliği sınırlı.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4241",
+      "ad": "Google Cloud Service Monitoring (SLO izleme)",
+      "tur": "bulut-hizmeti",
+      "lisans": "ticari",
+      "barindirma": [
+        "bulut-yonetilen"
+      ],
+      "url": "https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring",
+      "olgunluk": "olgun",
+      "ne_saglar": "Google Cloud Observability içinde hizmetler için istek veya pencere tabanlı SLI/SLO tanımı, hata bütçesi takibi ve yanma hızına dayalı uyarı politikaları sağlar.",
+      "sinirlar": "Google Cloud metriklerine odaklı; çoklu bulut ve şirket içi hizmetlerde ek entegrasyon gerekir.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-008"
+      ]
+    },
+    {
+      "id": "AR-4242",
+      "ad": "Harness Service Reliability Management",
+      "tur": "ticari-saas",
+      "lisans": "ticari",
+      "barindirma": [
+        "saas",
+        "self-host"
+      ],
+      "url": "https://developer.harness.io/service-reliability-management",
+      "olgunluk": "olgun",
+      "ne_saglar": "İzlenen hizmetler için SLO ve hata bütçesi takibi, dağıtım/olay/bayrak gibi değişiklik olaylarını sağlık metrikleriyle ilişkilendiren değişiklik etkisi analizi, SLO notları ve bakım penceresi planlaması sunar.",
+      "sinirlar": "Harness platformuna bağlı ticari modül; bütçe durumunu ajan otonomisine bağlamak özel entegrasyon ister.",
+      "ihtiyaclar": [
+        "N-K33-002",
+        "N-K33-016"
+      ]
+    },
+    {
+      "id": "AR-4244",
+      "ad": "Google SRE kitapları (Site Reliability Engineering ve The Site Reliability Workbook)",
+      "tur": "protokol-standart",
+      "lisans": "bilinmiyor",
+      "barindirma": [
+        "yerel"
+      ],
+      "url": "https://sre.google/books/",
+      "olgunluk": "olgun",
+      "ne_saglar": "SLO tanımı, örnek hata bütçesi politikası, çoklu pencere/çoklu yanma hızı uyarı yöntemi, suçlamasız olay sonrası analiz kültürü ve üretime hazırlık/lansman kontrol listeleri için ücretsiz çevrim içi başvuru kaynakları.",
+      "sinirlar": "Araç değil yöntem rehberi; kurumun kademe, onay ve ajan otonomisi kurallarına uyarlanması gerekir.",
+      "ihtiyaclar": [
+        "N-K08-007",
+        "N-K33-002",
+        "N-K33-003",
+        "N-K33-006",
+        "N-K33-008",
+        "N-K33-015"
+      ]
+    },
+    {
+      "id": "AR-4245",
+      "ad": "Kayenta (otomatik kanarya analizi)",
+      "tur": "acik-kaynak",
+      "lisans": "Apache-2.0",
+      "barindirma": [
+        "self-host"
+      ],
+      "url": "https://github.com/spinnaker/spinnaker/tree/main/kayenta",
+      "olgunluk": "olgun",
+      "ne_saglar": "Kanarya ile kontrol grubunun metriklerini (Prometheus, Datadog, Stackdriver, New Relic vb.) istatistiksel olarak karşılaştırıp puan ve geç/kal kararı üretir; Spinnaker hattına ya da Argo Rollouts analiz sağlayıcısı olarak bağlanabilir.",
+      "sinirlar": "Ayrı depo Aralık 2025'te arşivlendi, bakım Spinnaker monoreposunda sürüyor; kurulumu ve metrik yapılandırması ağır.",
+      "ihtiyaclar": [
+        "N-K06-010"
+      ]
+    }
+  ]
+}
